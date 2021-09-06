@@ -42,11 +42,12 @@ function PlatForm({
                       name="product"
                       value={"platform"}
                       className="card-input-element"
+                      checked={platform == "ebay"}
                       onChange={(e) => handleChangePlatform("ebay")}
                     />
                     <div
                       className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == "ebay" ? " border border-primary" : ""}
+                    ${platform == "ebay" ? " " : ""}
                     
                     `}
                     >
@@ -67,60 +68,20 @@ function PlatForm({
                     </div>
                   </label>
                 </div>
+
                 <div className="col-md-6 col-4 mt-md-3 px-0 px-md-2">
-                  <label className="h-100">
-                    <input
-                      type="radio"
-                      name="product"
-                      value={"platform"}
-                      className="card-input-element"
-                      onChange={(e) => handleChangePlatform("amazon")}
-                    />
-                    <div
-                      className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == "amazon" ? " border border-primary" : ""}
-                    
-                    `}
-                    >
-                      <div className="mt-md-2 mb-md-4 mb-md-5">
-                        <img
-                          src={amazon_logo}
-                          className="w-res-100"
-                          alt="ebay logo"
-                        />
-                      </div>
-                      <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">Marketplace</div>
-                        <div className="panel-body">
-                          It gives your products great exposure due to the high
-                          number of visitors. Optimise your titles and item
-                          information to increase sells.
-                        </div>
-                        <div>
-                          {values.platform ? (
-                            <i className="font-weight-bold">
-                              *you need to be self-employed to sell on Amazon.
-                            </i>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-                <div className="col-md-12 col-4 mt-md-3 px-0 px-md-3">
                   <label className="h-md-100">
                     <input
                       type="radio"
                       name="product"
                       value={"platform"}
+                      checked={platform == "shopify"}
                       className="card-input-element"
                       onChange={(e) => handleChangePlatform("shopify")}
                     />
                     <div
                       className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == "shopify" ? " border border-primary" : ""}
+                    ${platform == "shopify" ? "" : ""}
                     
                     `}
                     >
@@ -141,7 +102,45 @@ function PlatForm({
                     </div>
                   </label>
                 </div>
-
+                <div className="col-md-12 col-4 mt-md-3 px-0 px-md-3">
+                  <label className="h-100">
+                    <input
+                      type="radio"
+                      name="product"
+                      value={"platform"}
+                      checked={platform == "amazon"}
+                      className="card-input-element"
+                      onChange={(e) => handleChangePlatform("amazon")}
+                    />
+                    <div
+                      className={`panel panel-default panel-platform card-input shade-card br-8 h-100
+                    ${platform == "amazon" ? "" : ""}
+                    
+                    `}
+                    >
+                      <div className="mt-md-2 mb-md-4 mb-md-5">
+                        <img
+                          src={amazon_logo}
+                          className="w-res-100"
+                          alt="ebay logo"
+                        />
+                      </div>
+                      <div className="d-md-block d-none">
+                        <div className=" font-weight-bold">Marketplace</div>
+                        <div className="panel-body">
+                          It gives your products great exposure due to the high
+                          number of visitors. Optimise your titles and item
+                          information to increase sells.
+                        </div>
+                        <div>
+                          <i className="font-weight-bold">
+                            *you need to be self-employed to sell on Amazon.
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </div>
                 <div className="row d-flex d-md-none mt-2 text-center h-resp-65">
                   {values.platform == "ebay" ? (
                     <div className="m-auto px-5">
@@ -163,7 +162,7 @@ function PlatForm({
                         build and promote your store.
                       </div>
                     </div>
-                  ) : (
+                  ) : values.platform == "amazon" ? (
                     <div className="m-auto px-5">
                       <div className=" font-weight-bold h6 mb-0">
                         Marketplace
@@ -177,6 +176,8 @@ function PlatForm({
                         *you need to be self-employed to sell on Amazon.
                       </i>
                     </div>
+                  ) : (
+                    ""
                   )}
                 </div>
                 <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right">

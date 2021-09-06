@@ -72,11 +72,12 @@ function AccountConnect({
                           name="product"
                           className="card-input-element"
                           value={"api"}
+                          checked={api == "easy"}
                           onChange={(e) => handleChangeApi("easy")}
                         />
                         <div
                           className={`panel panel-default  card-input shade-card br-8 my-1
-                    ${api == "easy" ? " border border-primary" : ""}
+                    ${api == "easy" ? "" : ""}
                     
                     `}
                         >
@@ -109,12 +110,13 @@ function AccountConnect({
                       name="product"
                       className="card-input-element"
                       value={"api"}
+                      checked={api == "advance"}
                       onChange={(e) => handleChangeApi("advance")}
                     />
 
                     <div
                       className={`panel panel-default  card-input shade-card br-8 my-1
-                    ${api == "advance" ? " border border-primary" : ""}
+                    ${api == "advance" ? "" : ""}
                     
                     `}
                     >
@@ -140,6 +142,7 @@ function AccountConnect({
                             value={"ext"}
                             type="radio"
                             name="extension"
+                            checked={extension == "computer"}
                             onChange={(e) => handleChangeExtension("computer")}
                             className="w-fit mr-2"
                           />
@@ -164,6 +167,7 @@ function AccountConnect({
                             value={"ext"}
                             type="radio"
                             name="extension"
+                            checked={extension == "servers"}
                             className="w-fit mr-2"
                             onChange={(e) => handleChangeExtension("servers")}
                           />
