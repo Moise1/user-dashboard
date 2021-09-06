@@ -2,7 +2,7 @@ import { Menu, Button } from "antd";
 import { Progress } from "antd";
 import HeaderDropDownItem from "../SmallComponents/HeaderDropDownItem";
 import plus from "../../assets/plus.svg";
-
+import { Link, NavLink } from "react-router-dom";
 export default function DropDownMenu() {
   return (
     <Menu className="shade">
@@ -28,14 +28,17 @@ export default function DropDownMenu() {
           <HeaderDropDownItem />
 
           <div className="col-md-12 mb-2 pl-2">
-            <div className="bg-lighter br-15 py-1 w-fit d-flex align-items-center">
+            <Link
+              className="bg-lighter br-15 py-1 w-fit d-flex align-items-center"
+              to="/newchannel"
+            >
               <div className="d-blue lh-1 pl-1 font-weight-bold px-2 small">
                 Add new channel
               </div>
               <Button className="border-0 bg-trans pl-2 pr-1 py-0 lh-1 h-100">
                 <img src={plus} height="18" alt="" />
               </Button>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

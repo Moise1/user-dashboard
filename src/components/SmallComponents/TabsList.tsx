@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import TabButton from "./TabButton";
-
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+setTranslations({ en });
+setDefaultLanguage("en");
 export default function TabsList() {
   const [active, setActive] = useState(1);
   const onChangeTab = (number: number) => {

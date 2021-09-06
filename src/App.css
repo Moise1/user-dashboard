@@ -7,6 +7,32 @@ body {
 .bg-lighter {
   background-color: #f0f2f5;
 }
+
+label {
+  width: 100%;
+}
+
+.card-input-element {
+  display: none;
+}
+
+.card-input {
+  margin: 10px;
+  padding: 15px 13px;
+}
+
+.card-input:hover {
+  cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+  box-shadow: 0 0 1px 1px #39418b;
+}
+
+.card-input-flag:checked + .card-input {
+  box-shadow: 0 0 1px 4px #39418b85;
+}
+
 .invert {
   filter: invert(1);
 }
@@ -33,6 +59,9 @@ body {
 .border-primary {
   border-color: #262e80 !important;
 }
+.bg-input-light {
+  background-color: #f2f8ff;
+}
 .bg-blue {
   background-color: #5e84db;
 }
@@ -42,8 +71,18 @@ body {
 .bg-d-blue {
   background-color: #262e80;
 }
+button:focus {
+  outline: none !important;
+}
 .purple {
   color: #9694ff;
+}
+
+.d-purple {
+  color: #6a74de;
+}
+.bg-d-purple {
+  background-color: #6a74de;
 }
 .bg-purple {
   background-color: #9694ff;
@@ -89,6 +128,15 @@ button {
 }
 .w-fit {
   width: fit-content;
+}
+.btn-disbaled {
+  opacity: 0.3;
+}
+.shade-Channel {
+  box-shadow: 1px 1px 10px 4px #00000014 !important;
+}
+.shade-card {
+  box-shadow: 1px 1px 6px 2px #00000017;
 }
 .shade {
   box-shadow: 1px 1px 10px 4px #00000036 !important;
@@ -140,7 +188,52 @@ table {
 .drop-down {
   width: 23vw;
 }
+.h-80vh {
+  height: 80vh;
+}
+.h-15p {
+  height: 15px;
+}
+@media (min-width: 1025px) {
+  .text-xl-center {
+    text-align: center;
+  }
+  .MuiContainer-maxWidthLg {
+    height: 100vh !important;
+    align-items: center;
+    display: flex !important;
+  }
+}
+@media (max-width: 1025px) {
+  .h-resp-65 {
+    min-height: 65vh !important;
+  }
+}
 @media (max-width: 600px) {
+  .filter-white {
+    filter: brightness(0) invert(1);
+  }
+  .text-sm-white {
+    color: white !important;
+  }
+  .bg-sm-purple {
+    background: #5e69db !important;
+  }
+  .sale-tag {
+    position: absolute;
+    bottom: -4%;
+    width: fit-content;
+    left: 23%;
+  }
+  .w-res-100 {
+    width: 100%;
+  }
+  .panel-platform {
+    height: 50px !important;
+  }
+  .MuiContainer-root {
+    padding: 0 !important;
+  }
   .drop-down {
     width: 60vw;
   }
@@ -149,5 +242,13 @@ table {
   }
   .ant-layout-content {
     padding: 10px !important;
+  }
+}
+@media (min-width: 766px) {
+  .text-md-left {
+    text-align: left !important;
+  }
+  .h-md-100 {
+    height: 100%;
   }
 }

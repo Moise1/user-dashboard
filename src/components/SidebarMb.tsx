@@ -17,23 +17,8 @@ function SidebarMb(props: any) {
               <Nav.Link href="#home">Dashboard</Nav.Link>
               <Nav.Link href="#link">Catalog</Nav.Link>
               <Nav.Link href="#link">List now</Nav.Link>
-              <Nav.Link href="#link">Listings</Nav.Link>
+              <Nav.Link href="/home">Listings</Nav.Link>
               <Nav.Link href="#link">Settings</Nav.Link>
-              {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  Setting 1
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Setting 2
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Setting 3
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown> */}
               <Nav.Link href="#link">Services</Nav.Link>
               <Nav.Link href="#link">Help</Nav.Link>
             </Nav>
