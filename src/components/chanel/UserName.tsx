@@ -29,7 +29,7 @@ function UserName({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar step={step} platform={platform} />
             </div>
-            <div className="col-lg-8 shade-Channel bg-white br-8 mt-3">
+            <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
               <button
                 onClick={Previous}
                 type="submit"
@@ -96,7 +96,7 @@ function UserName({
                     </div>
                   </div>
                 </div>
-                <div className="mx-auto mt-auto pt-2 mb-3 text-md-center text-right w-100 align-items-end d-flex">
+                <div className="mx-auto next-fix mt-auto pt-2 mb-3 text-md-center text-right w-100 align-items-end d-flex">
                   <button
                     onClick={Continue}
                     type="submit"
@@ -107,7 +107,7 @@ function UserName({
                   >
                     <div className="d-flex align-items-center">
                       <span className="font-weight-bold">Next</span>
-                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
+                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-md-1"></i>
                     </div>
                   </button>
                 </div>

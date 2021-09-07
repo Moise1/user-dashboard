@@ -36,7 +36,7 @@ function StoreLocation({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar step={step} platform={platform} />
             </div>
-            <div className="col-xl-8 shade-Channel bg-white br-8 mt-2">
+            <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2 pt-1">
               <button
                 onClick={Previous}
                 type="submit"
@@ -47,7 +47,7 @@ function StoreLocation({
                   Previous step
                 </div>
               </button>
-              <div className="row mx-auto px-lg-5 px-md-3 h-100 h-resp-65">
+              <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
                 <div className="text-center col-10 mt-2 mx-auto">
                   <h5 className="font-weight-bold">
                     Where is your store based?
@@ -263,12 +263,12 @@ function StoreLocation({
                   </label>
                 </div>
                 <div className="col-12"></div>
-                <div className="text-danger w-100 text-center small d-block d-md-none">
-                  {values.storeLocation == ""
-                    ? "  *Please select a country in order to proceed"
-                    : ""}
-                </div>
-                <div className="mx-md-auto ml-auto mt-md-4 text-center">
+                <div className="mx-md-auto ml-auto mt-md-4 text-right text-md-center w-100 next-fix">
+                  <div className="text-danger w-100 text-center small d-block d-md-none">
+                    {values.storeLocation == ""
+                      ? "  *Please select a country in order to proceed"
+                      : ""}
+                  </div>
                   <button
                     onClick={Continue}
                     type="submit"
@@ -285,11 +285,11 @@ function StoreLocation({
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
-                </div>
-                <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
-                  {values.storeLocation == ""
-                    ? "  *Please select a country in order to proceed"
-                    : ""}
+                  <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
+                    {values.storeLocation == ""
+                      ? "  *Please select a country in order to proceed"
+                      : ""}
+                  </div>
                 </div>
               </div>
             </div>

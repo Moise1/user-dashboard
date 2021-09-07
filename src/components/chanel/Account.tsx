@@ -36,7 +36,7 @@ function Account({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar platform={platform} step={step} />
             </div>
-            <div className="col-xl-8 shade-Channel bg-white br-8 mt-2">
+            <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2">
               <button
                 onClick={Previous}
                 type="submit"
@@ -149,7 +149,7 @@ function Account({
                   </a>
                 </div>
                 <div className="border-bottom mt-2 mb-lg-5  col-11 col-md-9 mx-auto"></div>
-                <div className="mx-md-auto ml-auto mt-5 pt-lg-5 mb-2 text-center">
+                <div className="mx-md-auto ml-auto mt-5 pt-lg-5 mb-2 text-right text-md-center w-100 next-fix">
                   <button
                     onClick={Continue}
                     type="submit"

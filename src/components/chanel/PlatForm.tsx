@@ -28,14 +28,14 @@ function PlatForm({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar step={step} />
             </div>
-            <div className="col-xl-8 mt-2 pt-1 shade-Channel bg-white br-8">
+            <div className="col-xl-8 mt-2 pt-1 shade-Channel mb-no-shade bg-white br-8">
               <div className="row mx-auto px-lg-4 px-md-3">
                 <div className="text-center col-12">
                   <h5 className="font-weight-bold mb-0">
                     Where would you like to sell
                   </h5>
                 </div>
-                <div className="col-md-6 col-4 mt-md-3 px-0 px-md-2">
+                <div className="col-md-6 col-4 mt-md-1 px-0 px-md-2">
                   <label className="h-md-100">
                     <input
                       type="radio"
@@ -51,7 +51,7 @@ function PlatForm({
                     
                     `}
                     >
-                      <div className="mt-md-2 mb-md-5 mb-md-2">
+                      <div className="mt-md-2 mb-md-2">
                         <img
                           src={ebay_logo}
                           className="w-res-100"
@@ -69,7 +69,7 @@ function PlatForm({
                   </label>
                 </div>
 
-                <div className="col-md-6 col-4 mt-md-3 px-0 px-md-2">
+                <div className="col-md-6 col-4 mt-md-1 px-0 px-md-2">
                   <label className="h-md-100">
                     <input
                       type="radio"
@@ -85,7 +85,7 @@ function PlatForm({
                     
                     `}
                     >
-                      <div className="mt-md-2 mb-md-5 mb-md-2">
+                      <div className="mt-md-2 mb-md-2">
                         <img
                           src={shopify_logo}
                           className="w-res-100"
@@ -102,7 +102,7 @@ function PlatForm({
                     </div>
                   </label>
                 </div>
-                <div className="col-md-12 col-4 mt-md-3 px-0 px-md-3">
+                <div className="col-md-12 col-4 mt-md-2 px-0 px-md-2">
                   <label className="h-100">
                     <input
                       type="radio"
@@ -118,7 +118,7 @@ function PlatForm({
                     
                     `}
                     >
-                      <div className="mt-md-2 mb-md-4 mb-md-5">
+                      <div className="mt-md-2 mb-md-4">
                         <img
                           src={amazon_logo}
                           className="w-res-100"
@@ -180,8 +180,8 @@ function PlatForm({
                     ""
                   )}
                 </div>
-                <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right">
-                  <div className="text-danger small text-center">
+                <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right w-100 next-fix">
+                  <div className="text-danger small text-center d-md-none d-block">
                     {values.platform == ""
                       ? "*Please select a platform on which you’d like to sell in order to proceed."
                       : ""}
@@ -202,6 +202,11 @@ function PlatForm({
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
+                  <div className="text-danger small text-center d-none d-md-block">
+                    {values.platform == ""
+                      ? "*Please select a platform on which you’d like to sell in order to proceed."
+                      : ""}
+                  </div>
                 </div>
               </div>
             </div>

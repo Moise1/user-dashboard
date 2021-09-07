@@ -39,7 +39,7 @@ function ChooseList({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar platform={platform} step={step} />
             </div>
-            <div className="col-lg-8 shade-Channel bg-white br-8 mt-3">
+            <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 pb-xl-5">
               <button
                 onClick={Previous}
                 type="submit"
@@ -52,10 +52,12 @@ function ChooseList({
               </button>
               <div className="row mx-auto px-lg-5 px-md-3">
                 <div className="text-center mx-auto col-md-6 px-0 px-md-2">
-                  <h5 className="font-weight-bold">Choose a way to list</h5>
+                  <h5 className="font-weight-bold mb-0">
+                    Choose a way to list
+                  </h5>
                 </div>
 
-                <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2 mb-md-0">
+                <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2">
                   <label className="mb-0 h-100">
                     <input
                       type="radio"
@@ -65,7 +67,7 @@ function ChooseList({
                       onChange={(e) => handleChangeList("catalog")}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-2 
+                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0
                       ${
                         list == "catalog"
                           ? "border border-primary bg-sm-purple"
@@ -103,7 +105,7 @@ function ChooseList({
                     </div>
                   </label>
                 </div>
-                <div className="col-md-10 mx-auto col-6  px-md-3 px-0 mb-2 mb-md-0">
+                <div className="col-md-10 mx-auto col-6  px-md-3 px-0 mb-2">
                   <label className="mb-0 h-100">
                     <input
                       type="radio"
@@ -113,7 +115,7 @@ function ChooseList({
                       onChange={(e) => handleChangeList("manual")}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-2 
+                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 
                       ${
                         list == "manual"
                           ? "border border-primary bg-sm-purple"
@@ -151,7 +153,7 @@ function ChooseList({
                     </div>
                   </label>
                 </div>
-                <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2 mb-md-0">
+                <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2">
                   <label className="mb-0 h-100">
                     <input
                       type="radio"
@@ -161,7 +163,7 @@ function ChooseList({
                       onChange={(e) => handleChangeList("bulk")}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-2 
+                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0 
                       ${
                         list == "bulk"
                           ? "border border-primary bg-sm-purple"
@@ -201,7 +203,7 @@ function ChooseList({
                 </div>
                 {platform == "ebay" ? (
                   <>
-                    <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2 mb-md-0">
+                    <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2">
                       <label className="mb-0 h-100">
                         <input
                           type="radio"
@@ -211,7 +213,7 @@ function ChooseList({
                           onChange={(e) => handleChangeList("we")}
                         />
                         <div
-                          className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-2 
+                          className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1
                       ${
                         list == "we" ? "border border-primary bg-sm-purple" : ""
                       }
@@ -254,10 +256,10 @@ function ChooseList({
                 ) : (
                   ""
                 )}
-                <div className="mx-auto text-md-center text-right col-12 mt-2">
+                <div className="mx-auto text-md-center text-right col-12 mt-2 next-fix">
                   <div className="d-block d-md-none text-center w-100">
                     <div
-                      className={`text-danger w-100 my-5 py-5 text-center font-weight-bold ${
+                      className={`text-danger w-100 text-center font-weight-bold ${
                         values.list == "" ? "" : "d-none"
                       } `}
                     >
@@ -300,14 +302,14 @@ function ChooseList({
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
-                </div>
-                <div className="d-md-block d-none w-100 text-center">
-                  <div
-                    className={` text-danger w-100 text-center mb-2 font-weight-bold ${
-                      values.list == "" ? "" : "d-none"
-                    } `}
-                  >
-                    *Please choose a way to list.
+                  <div className="d-md-block d-none w-100 text-center lh-1">
+                    <div
+                      className={` text-danger w-100 text-center font-weight-bold ${
+                        values.list == "" ? "" : "d-none"
+                      } `}
+                    >
+                      *Please choose a way to list.
+                    </div>
                   </div>
                 </div>
               </div>

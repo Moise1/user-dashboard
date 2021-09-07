@@ -194,6 +194,11 @@ table {
 .h-15p {
   height: 15px;
 }
+.next-fix {
+  position: fixed;
+  bottom: 4%;
+  right: 14%;
+}
 @media (min-width: 1025px) {
   .text-xl-center {
     text-align: center;
@@ -207,6 +212,19 @@ table {
 @media (max-width: 1025px) {
   .h-resp-65 {
     min-height: 65vh !important;
+  }
+}
+@media (max-width: 768px) {
+  .mb-no-shade {
+    box-shadow: none !important;
+  }
+  .next-fix {
+    position: fixed;
+    bottom: 1%;
+    right: 3%;
+  }
+  .text-mb-right {
+    text-align: right !important;
   }
 }
 @media (max-width: 600px) {

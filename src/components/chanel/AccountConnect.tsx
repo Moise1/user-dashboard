@@ -35,7 +35,7 @@ function AccountConnect({
             <div className="col-12 my-2 d-block d-xl-none px-0">
               <MbProgressBar step={step} platform={platform} />
             </div>
-            <div className="col-xl-8 shade-Channel bg-white br-8 mt-3">
+            <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
               <button
                 onClick={Previous}
                 type="submit"
@@ -201,7 +201,7 @@ function AccountConnect({
                     </div>
                   </label>
                 </div>
-                <div className="mx-auto text-xl-center text-right col-12">
+                <div className="mx-auto text-xl-center text-right text-md-center col-12 next-fix">
                   <div className="d-block d-md-none w-100 text-center">
                     <div
                       className={` mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
@@ -239,23 +239,23 @@ function AccountConnect({
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
-                </div>
-                <div className="d-md-block d-none w-100 text-center">
-                  <div
-                    className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
-                      values.api == "" ? "" : "d-none"
-                    } `}
-                  >
-                    <i>*Please select a way to connect</i>
-                  </div>
-                  <div
-                    className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
-                      values.api == "advance" && values.extension == ""
-                        ? ""
-                        : "d-none"
-                    } `}
-                  >
-                    <i>*Select how the extension should be running</i>
+                  <div className="d-md-block d-none w-100 text-center">
+                    <div
+                      className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
+                        values.api == "" ? "" : "d-none"
+                      } `}
+                    >
+                      <i>*Please select a way to connect</i>
+                    </div>
+                    <div
+                      className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
+                        values.api == "advance" && values.extension == ""
+                          ? ""
+                          : "d-none"
+                      } `}
+                    >
+                      <i>*Select how the extension should be running</i>
+                    </div>
                   </div>
                 </div>
               </div>
