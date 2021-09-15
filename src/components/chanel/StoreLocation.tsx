@@ -11,6 +11,15 @@ import us_flag from "../../assets/channel/flags/US.png";
 import back_icon from "../../assets/channel/flags/back.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+import Previousstep from "../SmallComponents/Previousstep";
+setTranslations({ en });
+setDefaultLanguage("en");
 function StoreLocation({
   nextStep,
   handleChangeLocation,
@@ -28,6 +37,7 @@ function StoreLocation({
     e.preventDefault();
     prevStep();
   };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -37,29 +47,18 @@ function StoreLocation({
               <MbProgressBar step={step} platform={platform} />
             </div>
             <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2 pt-1">
-              <button
-                onClick={Previous}
-                type="submit"
-                className="bg-trans border-0 text-left lh-1"
-              >
-                <img src={back_icon} height="30" alt="previous_icon" />
-                <div className="d-purple font-weight-bold small d-xl-block d-none">
-                  Previous step
-                </div>
-              </button>
+              <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
                 <div className="text-center col-10 mt-2 mx-auto">
-                  <h5 className="font-weight-bold">
-                    Where is your store based?
-                  </h5>
+                  <h5 className="font-weight-bold">{t("bar2")}?</h5>
                 </div>
                 <div className="text-center col-12 col-md-10 mx-auto">
                   <h6 className="">
                     {platform == "ebay"
-                      ? "No worries! With the Ebay Global shipping program you will be able to sell everywhere, we need to know the country your Ebay account is registered in."
+                      ? t("storebay")
                       : platform == "amazon"
-                      ? "No worries! You can request to sell in other countries, we need to know the one your account is registered in."
-                      : "No worries! you can create different stores linked to different countries. We need to manage them separately as some suppliers have different prices and shipping times for each country."}
+                      ? t("storamz")
+                      : t("storshp")}
                   </h6>
                 </div>
                 <div
@@ -281,14 +280,12 @@ function StoreLocation({
                     }`}
                   >
                     <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">Next</span>
+                      <span className="font-weight-bold">{t("nxt")}</span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
                   <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
-                    {values.storeLocation == ""
-                      ? "  *Please select a country in order to proceed"
-                      : ""}
+                    {values.storeLocation == "" ? t("strchck") : ""}
                   </div>
                 </div>
               </div>

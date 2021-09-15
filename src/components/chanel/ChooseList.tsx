@@ -8,6 +8,15 @@ import back_icon from "../../assets/channel/flags/back.png";
 import ProgressBar from "./ProgressBar";
 import { useHistory } from "react-router-dom";
 import MbProgressBar from "./MbProgressBar";
+import Previousstep from "../SmallComponents/Previousstep";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+setTranslations({ en });
+setDefaultLanguage("en");
 function ChooseList({
   nextStep,
   handleChangeList,
@@ -31,6 +40,7 @@ function ChooseList({
     e.preventDefault();
     prevStep();
   };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -40,21 +50,10 @@ function ChooseList({
               <MbProgressBar platform={platform} step={step} />
             </div>
             <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 pb-xl-5">
-              <button
-                onClick={Previous}
-                type="submit"
-                className="bg-trans border-0 text-left lh-1"
-              >
-                <img src={back_icon} height="30" alt="previous_icon" />
-                <div className="d-purple font-weight-bold small d-none d-md-block">
-                  Previous step
-                </div>
-              </button>
+              <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">
                 <div className="text-center mx-auto col-md-6 px-0 px-md-2">
-                  <h5 className="font-weight-bold mb-0">
-                    Choose a way to list
-                  </h5>
+                  <h5 className="font-weight-bold mb-0">{t("step5h")}</h5>
                 </div>
 
                 <div className="col-md-10 mx-auto col-6 px-md-3 px-0 mb-2">
@@ -91,11 +90,10 @@ function ChooseList({
                               list == "catalog" ? "text-sm-white" : ""
                             }`}
                           >
-                            Catalog
+                            {t("cata")}
                           </h5>
                           <div className="lh-1 d-md-block d-none">
-                            Choose your favourite supplier and we recommend
-                            products for you.
+                            {t("catapara")}
                           </div>
                         </div>
                         <div className="text-right d-md-block d-none">
@@ -139,11 +137,10 @@ function ChooseList({
                               list == "manual" ? "text-sm-white" : ""
                             }`}
                           >
-                            Manual listing
+                            {t("manual")}
                           </h5>
                           <div className="lh-1 d-md-block d-none">
-                            Use our browser extension to add listings directly
-                            from the source.
+                            {t("manualpara")}
                           </div>
                         </div>
                         <div className="text-right d-md-block d-none">
@@ -187,11 +184,10 @@ function ChooseList({
                               list == "bulk" ? "text-sm-white" : ""
                             }`}
                           >
-                            Bulk listing
+                            {t("bulk")}
                           </h5>
                           <div className="lh-1 d-md-block d-none">
-                            List as many items as you want by adding urls from
-                            different sources.
+                            {t("bulkpara")}
                           </div>
                         </div>
                         <div className="text-right d-md-block d-none">
@@ -235,14 +231,13 @@ function ChooseList({
                                   list == "we" ? "text-sm-white" : ""
                                 }`}
                               >
-                                We list for you
+                                {t("welist")}
                               </h5>
                               <div className="lh-1 d-md-block d-none">
-                                No idea what to list? We will pick the best
-                                selling items for you!
+                                {t("welistpara")}
                               </div>
                               <button className="bg-success border-0 text-white br-8 mt-2 sale-tag">
-                                For only £9.99
+                                {t("btnlist")}
                               </button>
                             </div>
                             <div className="text-right d-md-block d-none">
@@ -263,7 +258,7 @@ function ChooseList({
                         values.list == "" ? "" : "d-none"
                       } `}
                     >
-                      *Please choose a way to list.
+                      {t("listcheck")}
                     </div>
                   </div>
                   <div className="d-block d-md-none">
@@ -283,10 +278,7 @@ function ChooseList({
                           ? "We List for you"
                           : ""}
                       </h5>
-                      <div>
-                        Choose your favourite supplier and we recommend products
-                        for you.
-                      </div>
+                      <div>{t("favsupp")}</div>
                     </div>
                   </div>
                   <button
@@ -298,7 +290,7 @@ function ChooseList({
                     } `}
                   >
                     <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">Fininsh</span>
+                      <span className="font-weight-bold">{t("fininsh")} </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
@@ -308,7 +300,7 @@ function ChooseList({
                         values.list == "" ? "" : "d-none"
                       } `}
                     >
-                      *Please choose a way to list.
+                      {t("listcheck")}
                     </div>
                   </div>
                 </div>

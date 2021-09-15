@@ -4,6 +4,15 @@ import Input from "@material-ui/core/Input";
 import back_icon from "../../assets/channel/flags/back.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+import Previousstep from "../SmallComponents/Previousstep";
+setTranslations({ en });
+setDefaultLanguage("en");
 function UserName({
   nextStep,
   handleChangeUser,
@@ -21,6 +30,7 @@ function UserName({
     e.preventDefault();
     prevStep();
   };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -30,38 +40,29 @@ function UserName({
               <MbProgressBar step={step} platform={platform} />
             </div>
             <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
-              <button
-                onClick={Previous}
-                type="submit"
-                className="bg-trans border-0 text-left lh-1"
-              >
-                <img src={back_icon} height="30" alt="previous_icon" />
-                <div className="d-purple font-weight-bold small d-md-block d-none">
-                  Previous step
-                </div>
-              </button>
+              <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3 h-80vh">
                 <div className="text-center mx-auto col-md-6 mt-2 px-0 px-md-2">
                   <h5 className="font-weight-bold mb-0">
-                    What is your{" "}
+                    {t("whatsur")}
                     {platform == "ebay"
                       ? " EBay "
                       : platform == "amazon"
                       ? " Amazon "
                       : " Shopify "}
-                    username?
+                    {t("username")}?
                   </h5>
                 </div>
                 <div className="text-center col-12 col-md-8 mx-auto">
                   <div>
-                    Please make sure that you enter your{" "}
+                    {t("makesure")}
                     {platform == "ebay"
                       ? " EBay "
                       : platform == "amazon"
                       ? " Amazon "
                       : " Shopify "}{" "}
-                    <span className="font-weight-bold">UserName</span> and not
-                    your email address or store name.
+                    <span className="font-weight-bold">{t("username")} </span>{" "}
+                    {t("notur")}
                   </div>
                   <div>
                     <input
@@ -85,13 +86,13 @@ function UserName({
                     `}
                     >
                       <i>
-                        *Please fill in your{" "}
+                        {t("fill")}
                         {platform == "ebay"
                           ? " EBay "
                           : platform == "amazon"
                           ? " Amazon "
                           : " Shopify "}{" "}
-                        username
+                        {t("username")}
                       </i>
                     </div>
                   </div>

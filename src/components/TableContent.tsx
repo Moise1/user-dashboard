@@ -3,8 +3,21 @@ import React from "react";
 import img from "../assets/icon.png";
 import SmallTabs from "./SmallComponents/SmallTabs";
 import { columns } from "../data";
+import type { t } from "react-multi-lang";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  withTranslation,
+} from "react-multi-lang";
+import en from "../translation.json";
+setTranslations({ en });
+setDefaultLanguage("en");
 const data: any = [];
+
 const windowwidth = window.innerWidth;
+type Props = {
+  t: t;
+};
 
 console.log(windowwidth);
 for (let i = 0; i < 46; i++) {
@@ -38,13 +51,13 @@ class TableContent extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
   };
-
   onSelectChange = (selectedRowKeys: any) => {
     this.setState({ selectedRowKeys });
     console.log(selectedRowKeys.length);
     const selected = selectedRowKeys.length;
   };
   render() {
+    const { t } = this.props;
     const { selectedRowKeys } = this.state;
     const rowSelection = {
       selectedRowKeys,
@@ -97,7 +110,7 @@ class TableContent extends React.Component {
                   {selectedRowKeys.length ? (
                     <SmallTabs
                       title={`Edit ${selectedRowKeys.length} ${
-                        windowwidth < 900 ? "" : "Listings"
+                        windowwidth < 900 ? "" : t("acnt")
                       } `}
                       last={false}
                     />
@@ -142,4 +155,4 @@ class TableContent extends React.Component {
   }
 }
 
-export default TableContent;
+export default withTranslation(TableContent);

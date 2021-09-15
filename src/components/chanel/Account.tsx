@@ -11,6 +11,15 @@ import us_flag from "../../assets/channel/flags/US.png";
 import back_icon from "../../assets/channel/flags/back.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+import Previousstep from "../SmallComponents/Previousstep";
+setTranslations({ en });
+setDefaultLanguage("en");
 function Account({
   nextStep,
   handleChange,
@@ -28,6 +37,7 @@ function Account({
     e.preventDefault();
     prevStep();
   };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -37,33 +47,17 @@ function Account({
               <MbProgressBar platform={platform} step={step} />
             </div>
             <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2">
-              <button
-                onClick={Previous}
-                type="submit"
-                className="bg-trans border-0 text-left lh-1"
-              >
-                <img src={back_icon} height="30" alt="previous_icon" />
-                <div className="d-purple font-weight-bold small d-md-block d-none">
-                  Previous step
-                </div>
-              </button>
+              <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">
                 <div className="text-center mx-auto col-10 mt-2">
                   <h5 className="font-weight-bold">
                     {platform == "ebay"
-                      ? " Do you have an eBay account?"
+                      ? t("doyou") + " eBay " + t("acnt") + "?"
                       : platform == "amazon"
-                      ? "Are you an Amazon seller?"
-                      : "Do you have a Shopify store?"}
+                      ? t("amzseller")
+                      : t("shpstor")}
                   </h5>
-                  {platform == "amazon" ? (
-                    <i>
-                      * You need to have the Amazon Business seller program, not
-                      just sell on Amazon.
-                    </i>
-                  ) : (
-                    ""
-                  )}
+                  {platform == "amazon" ? <i>{t("acntchk")}</i> : ""}
                 </div>
                 <div className="text-left col-12 col-md-10 mx-auto">
                   {/* {platform !== "shopify" ? (
@@ -77,28 +71,25 @@ function Account({
                   )} */}
                   <h6 className="font-weight-bold w-100">
                     {platform == "ebay"
-                      ? " No eBay account? We will happily show you How to get started!"
+                      ? t("noebay")
                       : platform == "amazon"
-                      ? "No Amazon seller yet? We will happily show you how to get started!"
-                      : "No Shopify store yet? We will happily show you how to get started!"}
+                      ? t("noamz")
+                      : t("noshop")}
                   </h6>
                 </div>
                 <div className="text-left col-12 col-md-10 mx-auto">
                   <div className="">
                     {platform == "ebay" ? (
-                      " Before you start selling, you’ll need an eBay account. If you don’t already have one, you’ll need to register. You can choose between a personal or business account."
+                      t("ebayacntslct")
                     ) : platform == "amazon" ? (
-                      "What is the Amazon Business seller program? The Amazon Business seller program is a free upgrade to the Professional Selling plan allowing sellers to cater to the specific requirements of business customers by providing features optimized for business-to-business transactions"
+                      t("amznacntslct")
                     ) : (
                       <>
-                        Navigate to the{" "}
-                        <span className="sky">Shopify website</span> and click
-                        on Start free trial. Fill in your desired email address,
-                        password and store name.
+                        {t("nvgt")}
+                        <span className="sky">{t("shpweb")}</span>{" "}
+                        {t("shppara1")}
                         <span className="mt-3"></span>
-                        Remember, you’re going to need to choose a unique name
-                        for your store, otherwise Shopify won’t allow you to
-                        purchase the domain.
+                        {t("shppara2")}
                       </>
                     )}
                   </div>
@@ -106,44 +97,30 @@ function Account({
                 <div className="text-left col-12 col-md-10 mx-auto my-2">
                   <div className="">
                     {platform == "ebay" ? (
-                      <>
-                        If you plan to sell casually, like selling items you no
-                        longer need or want, a personal account is the best
-                        option. Pick a business account if you want to sell
-                        large quantities, or have items that you’ve made or
-                        bought to resell.
-                      </>
+                      <>{t("ebay1")}</>
                     ) : platform == "shopify" ? (
-                      "To get started, we set up a dedicated page that will show you all you need to Know in order to set up the Shopify account and store."
+                      t("shppara3")
                     ) : (
-                      "To get started, we set up a dedicated page that will show you all you need to Know in order to set up the Amazon account and the business seller program."
+                      t("amznpara1")
                     )}
                   </div>
                 </div>
                 <div className="text-left col-12 col-md-10 mx-auto">
                   <div className="">
-                    {platform == "ebay" ? (
-                      <>
-                        To get started, we set up a dedicated page that will
-                        show you all you need to Know in order to set up the
-                        Amazon account and the business seller program.
-                      </>
-                    ) : (
-                      ""
-                    )}
+                    {platform == "amazon" ? <>{t("amznpara2")}</> : ""}
                   </div>
                 </div>
                 <div className="text-left col-12 col-md-10 mx-auto">
                   <a>
                     <div className="d-flex align-items-center d-blue">
                       <span className="font-weight-bold">
-                        How to become an
+                        {t("howtobcm")}
                         {platform == "ebay"
                           ? " eBay "
                           : platform == "amazon"
                           ? " Amazon "
                           : " Shopify "}
-                        seller
+                        {t("seller")}
                       </span>
                     </div>
                   </a>
@@ -158,10 +135,10 @@ function Account({
                     <div className="d-flex align-items-center">
                       <span className="font-weight-bold">
                         {platform == "ebay"
-                          ? " Yes, I do have an eBay account "
+                          ? t("haveebayacnt")
                           : platform == "amazon"
-                          ? " Yes I’m a seller on Amazon "
-                          : " How to become an Shopify seller "}
+                          ? t("haveamznacnt")
+                          : t("haveshopacnt")}
                       </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>

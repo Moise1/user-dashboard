@@ -6,6 +6,14 @@ import shopify_logo from "../../assets/channel/shopify-2.png";
 import amazon_logo from "../../assets/channel/amazon-2.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
+setTranslations({ en });
+setDefaultLanguage("en");
 function PlatForm({
   nextStep,
   handleChange,
@@ -20,6 +28,7 @@ function PlatForm({
   };
 
   const [count, setCount] = useState(0);
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -31,9 +40,7 @@ function PlatForm({
             <div className="col-xl-8 mt-2 pt-1 shade-Channel mb-no-shade bg-white br-8">
               <div className="row mx-auto px-lg-4 px-md-3">
                 <div className="text-center col-12">
-                  <h5 className="font-weight-bold mb-0">
-                    Where would you like to sell
-                  </h5>
+                  <h5 className="font-weight-bold mb-0">{t("liketosell")}</h5>
                 </div>
                 <div className="col-md-6 col-4 mt-md-1 px-0 px-md-2">
                   <label className="h-md-100">
@@ -59,11 +66,8 @@ function PlatForm({
                         />
                       </div>
                       <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">Marketplace</div>
-                        <div className="panel-body">
-                          It lets you sell products from any category. Update
-                          your listing information and sell anything you wish.
-                        </div>
+                        <div className=" font-weight-bold">{t("mrktplc")}</div>
+                        <div className="panel-body">{t("ebayslctd")}</div>
                       </div>
                     </div>
                   </label>
@@ -93,11 +97,8 @@ function PlatForm({
                         />
                       </div>
                       <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">Your own store</div>
-                        <div className="panel-body">
-                          It provides a range of e-commerce tools to help you
-                          build and promote your store.
-                        </div>
+                        <div className=" font-weight-bold">{t("onwstore")}</div>
+                        <div className="panel-body">{t("shopslctd")}</div>
                       </div>
                     </div>
                   </label>
@@ -126,16 +127,10 @@ function PlatForm({
                         />
                       </div>
                       <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">Marketplace</div>
-                        <div className="panel-body">
-                          It gives your products great exposure due to the high
-                          number of visitors. Optimise your titles and item
-                          information to increase sells.
-                        </div>
+                        <div className=" font-weight-bold">{t("mrktplc")}</div>
+                        <div className="panel-body">{t("amzsltcd")}</div>
                         <div>
-                          <i className="font-weight-bold">
-                            *you need to be self-employed to sell on Amazon.
-                          </i>
+                          <i className="font-weight-bold">{t("amzsub")}</i>
                         </div>
                       </div>
                     </div>
@@ -145,36 +140,24 @@ function PlatForm({
                   {values.platform == "ebay" ? (
                     <div className="m-auto px-5">
                       <div className=" font-weight-bold h6 mb-0">
-                        Marketplace
+                        {t("mrktplc")}
                       </div>
-                      <div className="panel-body px-2">
-                        It lets you sell products from any category. Update your
-                        listing information and sell anything you wish.
-                      </div>
+                      <div className="panel-body px-2">{t("ebayslctd")}</div>
                     </div>
                   ) : values.platform == "shopify" ? (
                     <div className="m-auto px-5">
                       <div className=" font-weight-bold h6 mb-0">
-                        Your own store
+                        {t("onwstore")}
                       </div>
-                      <div className="panel-body px-2">
-                        It provides a range of e-commerce tools to help you
-                        build and promote your store.
-                      </div>
+                      <div className="panel-body px-2">{t("shopslctd")}</div>
                     </div>
                   ) : values.platform == "amazon" ? (
                     <div className="m-auto px-5">
                       <div className=" font-weight-bold h6 mb-0">
-                        Marketplace
+                        {t("mrktplc")}
                       </div>
-                      <div className="panel-body px-2">
-                        It gives your products great exposure due to the high
-                        number of visitors. Optimise your titles and item
-                        information to increase sells.
-                      </div>
-                      <i className="font-weight-bold">
-                        *you need to be self-employed to sell on Amazon.
-                      </i>
+                      <div className="panel-body px-2">{t("amzsltcd")}</div>
+                      <i className="font-weight-bold">{t("amzsub")}</i>
                     </div>
                   ) : (
                     ""
@@ -182,9 +165,7 @@ function PlatForm({
                 </div>
                 <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right w-100 next-fix">
                   <div className="text-danger small text-center d-md-none d-block">
-                    {values.platform == ""
-                      ? "*Please select a platform on which you’d like to sell in order to proceed."
-                      : ""}
+                    {values.platform == "" ? t("platchck") : ""}
                   </div>
                   <button
                     onClick={Continue}
@@ -198,14 +179,12 @@ function PlatForm({
                     }`}
                   >
                     <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">Next</span>
+                      <span className="font-weight-bold">{t("nxt")} </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
                   </button>
                   <div className="text-danger small text-center d-none d-md-block">
-                    {values.platform == ""
-                      ? "*Please select a platform on which you’d like to sell in order to proceed."
-                      : ""}
+                    {values.platform == "" ? t("platchck") : ""}
                   </div>
                 </div>
               </div>
