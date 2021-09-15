@@ -4,10 +4,11 @@ import flag from "../assets/flag-round-500.svg";
 import amazon from "../assets/amazon-icon-1.svg";
 import { Dropdown, Button, Space } from "antd";
 import DropDownMenu from "./SmallComponents/DropDownMenu";
+import styles from "./Topbar.module.css";
 
-export default function Notifications(props: any) {
+export default function Tobbar(props: any) {
   return (
-    <div className="row mx-auto pt-4 align-items-center">
+    <div className={`row mx-auto align-items-center ${styles.Topbar_height}`}>
       <h5 className="mb-0 d-blue font-weight-bold d-none d-md-block">
         {props.title}
       </h5>
