@@ -209,7 +209,7 @@ table {
     display: flex !important;
   }
 }
-@media (max-width: 1025px) {
+@media (max-width: 1370px) {
   .h-resp-65 {
     min-height: 65vh !important;
   }

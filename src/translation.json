@@ -105,5 +105,12 @@
   "btnlist": " For only £9.99",
   "listcheck": "  *Please choose a way to list.",
   "fininsh": "Fininsh",
-  "favsupp": "  Choose your favourite supplier and we recommend products for you."
+  "favsupp": "  Choose your favourite supplier and we recommend products for you.",
+  "Source":"Source",
+  "Title":"Title",
+  "Sell":"Sell",
+  "Cost":"Cost",
+  "Profile":"Profile",
+  "Markup":"Markup",
+  "Stock":"Stock"
 }

@@ -6,6 +6,7 @@ import shopify_logo from "../../assets/channel/shopify-2.png";
 import amazon_logo from "../../assets/channel/amazon-2.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import ButtonComp from './component/ButttonCom'
 import {
   setTranslations,
   setDefaultLanguage,
@@ -167,7 +168,8 @@ function PlatForm({
                   <div className="text-danger small text-center d-md-none d-block">
                     {values.platform == "" ? t("platchck") : ""}
                   </div>
-                  <button
+                  <ButtonComp onClick={Continue}  disabled={values.platform == ""} title={t("nxt")} />
+                  {/* <button
                     onClick={Continue}
                     type="submit"
                     disabled={values.platform == ""}
@@ -182,7 +184,7 @@ function PlatForm({
                       <span className="font-weight-bold">{t("nxt")} </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
-                  </button>
+                  </button> */}
                   <div className="text-danger small text-center d-none d-md-block">
                     {values.platform == "" ? t("platchck") : ""}
                   </div>

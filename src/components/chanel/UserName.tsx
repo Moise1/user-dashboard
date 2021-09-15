@@ -4,6 +4,7 @@ import Input from "@material-ui/core/Input";
 import back_icon from "../../assets/channel/flags/back.png";
 import ProgressBar from "./ProgressBar";
 import MbProgressBar from "./MbProgressBar";
+import ButtonComp from './component/ButttonCom'
 import {
   setTranslations,
   setDefaultLanguage,
@@ -98,7 +99,8 @@ function UserName({
                   </div>
                 </div>
                 <div className="mx-auto next-fix mt-auto pt-2 mb-3 text-md-center text-right w-100 align-items-end d-flex">
-                  <button
+                  <ButtonComp onClick={Continue}  title={"Next"} disabled={values.user == ""} />
+                  {/* <button
                     onClick={Continue}
                     type="submit"
                     disabled={values.user == ""}
@@ -110,7 +112,7 @@ function UserName({
                       <span className="font-weight-bold">Next</span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-md-1"></i>
                     </div>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

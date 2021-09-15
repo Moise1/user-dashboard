@@ -13,6 +13,7 @@ import {
 } from "react-multi-lang";
 import en from "../../translation.json";
 import Previousstep from "../SmallComponents/Previousstep";
+import ButttonCom from "./component/ButttonCom";
 setTranslations({ en });
 setDefaultLanguage("en");
 function AccountConnect({
@@ -203,7 +204,11 @@ function AccountConnect({
                       <i> {t("howextrun")}</i>
                     </div>
                   </div>
-                  <button
+                  <ButttonCom title={"Next"} onClick={Continue} disabled={
+                      values.api == "" ||
+                      (values.api == "advance" && values.extension == "")
+                    } />
+                  {/* <button
                     onClick={Continue}
                     type="submit"
                     disabled={
@@ -221,7 +226,7 @@ function AccountConnect({
                       <span className="font-weight-bold">Next</span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>
-                  </button>
+                  </button> */}
                   <div className="d-md-block d-none w-100 text-center">
                     <div
                       className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
