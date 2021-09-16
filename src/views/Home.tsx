@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <Topbar title={"Listings"} />
 
-      <Layout className={`bg-white ${styles.Layout_heigh}`}>
+      <Layout className={`bg-white ${styles.Layout_height}`}>
         <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
           <Sidebar
             staticvalue={staticValue}
