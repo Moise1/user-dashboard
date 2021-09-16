@@ -18,7 +18,7 @@ export default function Tobbar(props: any) {
       <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
         <div className="d-flex w-100 hgr-progress align-items-center p-lg-2 p-1 w-100">
           <div className="d-flex align-items-center">
-            <h4 className="mb-0">Quota:</h4>{" "}
+            <h4 className="mb-0 ">Quota:</h4>{" "}
             <p className="ms-1 mb-0">45% (12/13)</p>{" "}
             <div>
               <Progress
