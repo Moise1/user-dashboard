@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 body {
   font-weight: 500;
+  font-family: "Poppins", sans-serif;
 }
 .blue {
   color: #5e84db;
@@ -269,4 +271,9 @@ table {
   .h-md-100 {
     height: 100%;
   }
+}
+
+/* MAIN CSS */
+.hgr-progress .ant-progress {
+  width: 200px !important;
 }

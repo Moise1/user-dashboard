@@ -1,3 +1,4 @@
+import { Progress } from "antd";
 import React from "react";
 import ring_icon from "../assets/notification.svg";
 import flag from "../assets/flag-round-500.svg";
@@ -5,15 +6,32 @@ import amazon from "../assets/amazon-icon-1.svg";
 import { Dropdown, Button, Space } from "antd";
 import DropDownMenu from "./SmallComponents/DropDownMenu";
 import styles from "./Topbar.module.css";
-
+import Logo from "../assets/channel/list/logo.png";
 export default function Tobbar(props: any) {
   return (
-    <div className={`row mx-auto align-items-center ${styles.Topbar_height}`}>
-      <h5 className="mb-0 d-blue font-weight-bold d-none d-md-block">
-        {props.title}
+    <div
+      className={`d-flex mx-auto justify-content-between align-items-center ${styles.Topbar_height}`}
+    >
+      <h5 className="mb-0 d-blue font-weight-bold d-none d-lg-block">
+        <img src={Logo} alt="logo" />
       </h5>
-      <div className="col-lg-5 col-md-8 ml-auto px-0 bg-white rounded mt-2 mt-lg-0">
-        <div className="d-flex align-items-center p-lg-2 p-1 w-100">
+      <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
+        <div className="d-flex w-100 hgr-progress align-items-center p-lg-2 p-1 w-100">
+          <div className="d-flex align-items-center">
+            <h4 className="mb-0">Quota:</h4>{" "}
+            <p className="ms-1 mb-0">45% (12/13)</p>{" "}
+            <div>
+              <Progress
+                percent={40}
+                showInfo={false}
+                strokeWidth={12}
+                strokeColor={{
+                  "0%": "#262E80",
+                  "100%": "#262E80",
+                }}
+              />
+            </div>
+          </div>
           <img src={ring_icon} height="20" className="" alt="" />
           <div className="mx-2 mr-mg-3 d-blue lh-1">
             {" "}
