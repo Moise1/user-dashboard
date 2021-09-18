@@ -15,6 +15,13 @@
   font-size: var(--font-14);
 }
 
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  color: var(--color-fff) !important;
+  font-size: var(--font-18) !important;
+  font-weight: 800 !important ;
+  background-color: var(--color-5e69db) !important ;
+}
+
 .c-262e80 {
   color: var(--color-262E80);
 }
