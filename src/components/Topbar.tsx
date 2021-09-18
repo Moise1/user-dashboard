@@ -1,28 +1,32 @@
 import { Progress } from "antd";
 import React from "react";
 import ring_icon from "../assets/notification.svg";
+import bellIcon from "../assets/bellIcon.svg";
 import flag from "../assets/flag-round-500.svg";
 import amazon from "../assets/amazon-icon-1.svg";
 import { Dropdown, Button, Space } from "antd";
 import DropDownMenu from "./SmallComponents/DropDownMenu";
 import styles from "./Topbar.module.css";
+import "../Common.css";
 import Logo from "../assets/channel/list/logo.png";
+import dropicon from "../assets/dropicon.svg";
+
 export default function Tobbar(props: any) {
   return (
     <div
-      className={`d-flex mx-auto justify-content-between align-items-center ${styles.Topbar_height}`}
+      className={`d-flex mx-auto justify-content-between ff-used align-items-center ${styles.Topbar_height}`}
     >
-      <h5 className="mb-0 d-blue font-weight-bold d-none d-lg-block">
+      <div className="mx-3">
         <img src={Logo} alt="logo" />
-      </h5>
+      </div>
       <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
         <div className="d-flex w-100 hgr-progress align-items-center p-lg-2 p-1 w-100">
           <div className="d-flex align-items-center">
-            <h4 className="mb-0 ">Quota:</h4>{" "}
-            <p className="ms-1 mb-0">45% (12/13)</p>{" "}
+            <h4 className="mb-0 quota-head ff-used ">Quota:</h4>{" "}
+            <p className=" ml-2 quota-price ff-used mb-0">45% (12/13)</p>{" "}
             <div>
               <Progress
-                percent={40}
+                percent={50}
                 showInfo={false}
                 strokeWidth={12}
                 strokeColor={{
@@ -31,31 +35,45 @@ export default function Tobbar(props: any) {
                 }}
               />
             </div>
+            <button
+              type="button"
+              className="btn ff-used py-1px Update-btn rounded-pill "
+            >
+              Update
+            </button>
           </div>
-          <img src={ring_icon} height="20" className="" alt="" />
+          <img src={bellIcon} height="28" className="ml-5 mr-2" alt="" />
           <div className="mx-2 mr-mg-3 d-blue lh-1">
             {" "}
-            <span className="font-weight-bold">2</span>
-            <span className="d-none d-md-inline pl-1">notifications </span>
+            <span className="d-none fs-18 fw-bold d-md-inline pl-1">
+              {" "}
+              2 notifications{" "}
+            </span>
           </div>
           <div className="d-blue mr-2 mr-md-3 lh-1">
             <i className="fas fa-circle yellow"></i>
-            <span className="font-weight-bold"> 12</span>
-            <span className="d-none d-md-inline pl-1">Tokens </span>
+            <span className="fs-18 fw-bold"> 1232</span>
+            <span className="d-none fs-18 fw-bold d-md-inline  pl-1">
+              Tokens{" "}
+            </span>
           </div>
-          <div className="d-blue mr-3 lh-1 font-weight-bold">Linked store</div>
-          <img src={flag} className="mx-2 lh-1" height="20" alt="" />
-          <img src={amazon} className="mx-2 lh-1" height="20" alt="" />
-          <div className="ml-auto">
-            <Space direction="vertical">
-              <Space wrap>
-                <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
-                  <Button>
-                    <i className="fas fa-ellipsis-v"></i>
-                  </Button>
-                </Dropdown>
+          <div className="d-flex  lav_button_shadow py-2 align-items-center ">
+            <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">
+              Lavivatienda
+            </div>
+            <img src={flag} className="lh-1" height="20" alt="" />
+            <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
+            <div className="ml-5">
+              <Space direction="vertical">
+                <Space wrap>
+                  <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
+                    <Button>
+                      <img className="lh-1  my-auto" src={dropicon} alt="" />
+                    </Button>
+                  </Dropdown>
+                </Space>
               </Space>
-            </Space>
+            </div>
           </div>
         </div>
       </div>

@@ -1,14 +1,15 @@
 export const columns = [
   {
-    title: "",
+    title: "Select all",
     dataIndex: "img",
     key: "img",
   },
-  // {
-  //   title: "item no.",
-  //   dataIndex: "item",
-  //   key: "item",
-  // },
+  {
+    title: "item no.",
+    dataIndex: "item",
+    key: "item",
+  },
+
   {
     title: "Source",
     dataIndex: "src",
@@ -30,7 +31,7 @@ export const columns = [
     key: "cost",
   },
   {
-    title: "Profile",
+    title: "Profit",
     dataIndex: "profile",
     key: "profile",
   },
@@ -44,9 +45,9 @@ export const columns = [
     dataIndex: "stock",
     key: "stock",
   },
-  // {
-  //   title: "Created on",
-  //   dataIndex: "created",
-  //   key: "created",
-  // },
+  {
+    title: "Created on",
+    dataIndex: "created",
+    key: "created",
+  },
 ];

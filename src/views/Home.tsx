@@ -43,10 +43,10 @@ export default function Home() {
             <SidebarMb />
           </div>
           <HeaderLayout>
+            <TabsList />
             <div className="d-md-block d-none">
               <SearchBar />
             </div>
-            <TabsList />
             <div className="my-2 d-block d-md-none">
               <SearchBar />
             </div>

@@ -15,7 +15,7 @@ export default function TabsList() {
   };
   const windowwidth = window.innerWidth;
   return (
-    <div className="row mx-auto my-3 d-blue align-items-center bg-white br-8 p-2">
+    <div className="row mx-auto my-3 d-blue align-items-center bg-white br-8 p-3">
       <TabButton
         onChangeTab={() => onChangeTab(1)}
         index={1}
@@ -34,12 +34,6 @@ export default function TabsList() {
         index={3}
         active={active}
         title={`Terminated  ${windowwidth < 900 ? "" : "Listings"} `}
-      />
-      <TabButton
-        onChangeTab={() => onChangeTab(4)}
-        index={4}
-        active={active}
-        title={`Imported  ${windowwidth < 900 ? "" : "Listings"} `}
       />
     </div>
   );

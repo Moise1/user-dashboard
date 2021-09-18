@@ -1,3 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
 :root {
   --color-262E80: #262e80;
+  --color-fff: #fff;
+  --color-000: #000;
+  --color-5e69db: #5e69db;
+  /* font size */
+  --font-18: 18px;
+  --font-16: 16px;
+}
+
+.c-262e80 {
+  color: var(--color-262E80);
+}
+
+.ff-used {
+  font-family: "Poppins";
+}
+
+.quota-head {
+  font-size: var(--font-18);
+  color: var(--color-262E80);
+  font-weight: bold;
+}
+
+.quota-price {
+  font-size: var(--font-16);
+  font-weight: normal;
+  color: var(--color-262E80);
+}
+.Update-btn {
+  background-color: var(--color-262E80);
+  font-size: var(--font-18);
+  font-weight: bold;
+  color: var(--color-fff);
+}
+
+.Update-btn:hover {
+  color: var(--color-fff) !important;
+  background-color: var(--color-262E80);
+  opacity: 0.8;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.bg-c4c4c4 {
+  background: #c4c4c4;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.h-62 {
+  height: 60px !important ;
+}
+
+.search_placeholder::placeholder {
+  font-size: var(--font-18);
+  color: var(--color-000);
+  font-weight: 500;
+  opacity: 0.2;
+}
+
+.search_placeholder {
+  font-size: var(--font-18);
+  color: var(--color-000);
+  font-weight: 500;
+}
+
+.input-focus-none:focus {
+  outline: unset !important;
+  box-shadow: unset !important;
+}
+
+.bg-5e69db {
+  background-color: var(--color-5e69db);
+}
+
+.foucs-none:focus {
+  outline: unset !important;
+  box-shadow: unset !important;
+}
+
+.br-10 {
+  border-radius: 10px !important ;
 }
