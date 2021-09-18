@@ -11,7 +11,9 @@ import SearchBar from "../components/SmallComponents/SearchBar";
 import Topbar from "../components/Topbar";
 import SidebarMb from "../components/SidebarMb";
 import SidbarCover from "../components/SidbarCover";
+import PendingDataContent from "../components/PendingDataContent";
 import styles from "./Home.module.css";
+import TerminatedDataContent from "../components/TerminatedDataContent";
 
 export default function Home() {
   const [collapse, setCollapse] = useState(true);
@@ -51,8 +53,11 @@ export default function Home() {
               <SearchBar />
             </div>
           </HeaderLayout>
+
           <ContentLayout>
             <TableContent />
+            <PendingDataContent />
+            <TerminatedDataContent />
           </ContentLayout>
         </Layout>
       </Layout>
