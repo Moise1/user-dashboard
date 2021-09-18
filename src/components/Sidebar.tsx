@@ -15,6 +15,13 @@ import {
   useTranslation,
 } from "react-multi-lang";
 import en from "../translation.json";
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+} from "@ant-design/icons";
+const { SubMenu } = Menu;
+
 setTranslations({ en });
 setDefaultLanguage("en");
 const { Sider } = Layout;
@@ -102,9 +109,35 @@ export default function Sidebar(props: Props) {
             {t("ls")}
           </button>
         </Menu.Item>
-        <Menu.Item key="5" icon={<img src={settings} height={20} alt="" />}>
+        <SubMenu
+          key="sub3"
+          icon={<img src={settings} height={20} alt="" />}
+          title="Settings"
+        >
+          {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
+          <Menu.Item key="9">
+            <li>Channel</li>
+          </Menu.Item>
+          <Menu.Item key="10">
+            <li>Sources</li>
+          </Menu.Item>
+          <Menu.Item key="11">
+            <li> Pricing Rules</li>
+          </Menu.Item>
+          <Menu.Item key="13">
+            <li> Browser Extensions</li>
+          </Menu.Item>
+          <Menu.Item key="14">
+            <li> VA Profiles</li>
+          </Menu.Item>
+          <Menu.Item key="15">
+            {" "}
+            <li>Templates</li>
+          </Menu.Item>
+        </SubMenu>
+        {/* <Menu.Item key="5" icon={<img src={settings} height={20} alt="" />}>
           {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="6" icon={<img src={services} height={20} alt="" />}>
           {t("srvc")} <i className="fas fa-sort-down text-dark ml-2"></i>
         </Menu.Item>

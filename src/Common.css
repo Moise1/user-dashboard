@@ -152,3 +152,9 @@
 .fw-700 {
   font-weight: 700;
 }
+.bg-light-blue {
+  background: rgba(94, 132, 219, 0.05);
+}
+/* .ant-menu-submenu-title ul {
+  background-color: red;
+} */
