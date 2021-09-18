@@ -32,7 +32,7 @@ export default function DropDownMenu() {
                   className="input-group-text br-10 bg-white"
                   id="inputGroup-sizing-sm"
                 >
-                  <img src={search_icon} height="20" alt="" />
+                  <img src={search_icon} height="15" alt="" />
                 </button>
               </div>
             </div>
@@ -45,8 +45,10 @@ export default function DropDownMenu() {
           </div>
           <HeaderDropDownItem />
           <HeaderDropDownItem />
+          <HeaderDropDownItem />
 
           <div className="col-md-12 mb-2 pl-2">
+            ...
             <Link
               className="bg-lighter br-15 py-1 w-fit d-flex align-items-center"
               to="/newchannel"
