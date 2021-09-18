@@ -101,3 +101,59 @@
 .br-10 {
   border-radius: 10px !important ;
 }
+
+/* DROPDOWN CSS  */
+.add-new-channel-drop {
+  width: 180.58px;
+  height: 19.81px;
+  background: #fff;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16));
+}
+.nav-dropdown .ant-menu {
+  background: transparent !important;
+  margin-left: 400px;
+  width: 304px;
+}
+.nav-dropdown .drop-down {
+  background: #fbfbfb !important;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16)) !important;
+  border-radius: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  width: 304px;
+}
+.drop-search-input {
+  border-radius: 10px;
+  background: #fff;
+  border: 0;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16));
+}
+.drop-search-input input {
+  font-size: 13px !important;
+  color: rgba(0, 0, 0, 0.322) !important;
+}
+
+.add-new-channel-drop {
+  width: 70%;
+  background: #fff;
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16));
+  border-radius: 10px;
+  padding: 12.5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-new-channel-drop p {
+  font-size: 11px;
+  display: inline-block;
+  color: #000;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.bg-light-blue {
+  background: rgba(94, 132, 219, 0.05);
+}
+/* .ant-menu-submenu-title ul {
+  background-color: red;
+} */
