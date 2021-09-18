@@ -95,10 +95,10 @@ function TableContent() {
   return (
     <React.Fragment>
       <div className="bg-white rounded">
-        <div className="row mx-auto p-1 align-items-center">
+        <div className="row mx-auto  align-items-center">
           {selectedRowKeys.length ? (
             <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
-              <div className="row d-blue">
+              <div className="row">
                 {selectedRowKeys.length ? (
                   <SmallTabs
                     title={`Edit ${selectedRowKeys.length} ${
