@@ -52,8 +52,11 @@ export default function Sidebar(props: Props) {
     >
       <div className="logo" />
       <Menu theme="light" mode="inline" defaultSelectedKeys={["4"]}>
-        <Menu.Item key="0" icon={<img src={logo} height={30} alt="" />}>
-          <span className="font-weight-bold d-blue">{t("HGR")}</span>
+        <Menu.Item
+          key="0"
+          icon={<img src={logo} className="d-none" height={30} alt="" />}
+        >
+          {/* <span className="font-weight-bold  d-blue">{t("HGR")}</span> */}
         </Menu.Item>
         <div
           className="text-white position-absolute"
@@ -88,22 +91,61 @@ export default function Sidebar(props: Props) {
               </div>
             </>
           )}
-        </div>
-        <Menu.Item key="1" icon={<img src={dashboard} height={20} alt="" />}>
+        </div>{" "}
+        <Menu.Item
+          key="1"
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          icon={
+            <img
+              className="active-white-svg"
+              src={dashboard}
+              height={20}
+              alt=""
+            />
+          }
+        >
           {t("ds")}
         </Menu.Item>
-        <Menu.Item key="2" icon={<img src={catalog} height={20} alt="" />}>
-          {t("cat")}
+        <Menu.Item
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          key="2"
+          icon={
+            <img
+              className="active-white-svg"
+              src={catalog}
+              height={20}
+              alt=""
+            />
+          }
+        >
+          <span className="sidebar_element">{t("cat")}</span>
         </Menu.Item>
-        <Menu.Item key="3" icon={<img src={listnow} height={20} alt="" />}>
+        <Menu.Item
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          key="3"
+          icon={
+            <img
+              className="active-white-svg"
+              src={listnow}
+              height={20}
+              alt=""
+            />
+          }
+        >
           {t("ln")}
         </Menu.Item>
         <Menu.Item
           key="4"
-          icon={<i onClick={routeChange} className="fas fa-list d-blue"></i>}
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          icon={
+            <i
+              onClick={routeChange}
+              className="fas active-white-svg fa-list d-blue"
+            ></i>
+          }
         >
           <button
-            className="bg-trans p-0 border-0"
+            className="bg-trans  border-0"
             onClick={() => history.push("/home")}
           >
             {t("ls")}
@@ -111,7 +153,15 @@ export default function Sidebar(props: Props) {
         </Menu.Item>
         <SubMenu
           key="sub3"
-          icon={<img src={settings} height={20} alt="" />}
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          icon={
+            <img
+              className="active-white-svg"
+              src={settings}
+              height={20}
+              alt=""
+            />
+          }
           title="Settings"
         >
           {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
@@ -138,10 +188,27 @@ export default function Sidebar(props: Props) {
         {/* <Menu.Item key="5" icon={<img src={settings} height={20} alt="" />}>
           {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i>
         </Menu.Item> */}
-        <Menu.Item key="6" icon={<img src={services} height={20} alt="" />}>
+        <Menu.Item
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          key="6"
+          icon={
+            <img
+              className="active-white-svg"
+              src={services}
+              height={20}
+              alt=""
+            />
+          }
+        >
           {t("srvc")} <i className="fas fa-sort-down text-dark ml-2"></i>
         </Menu.Item>
-        <Menu.Item key="7" icon={<img src={help} height={20} alt="" />}>
+        <Menu.Item
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          key="7"
+          icon={
+            <img className="active-white-svg" src={help} height={20} alt="" />
+          }
+        >
           {t("hlp")} <i className="fas fa-sort-down text-dark ml-4 pl-1"></i>
         </Menu.Item>
       </Menu>

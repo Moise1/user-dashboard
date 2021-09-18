@@ -56,8 +56,8 @@ export default function Home() {
 
           <ContentLayout>
             <TableContent />
-            <PendingDataContent />
-            <TerminatedDataContent />
+            {/* <PendingDataContent />
+            <TerminatedDataContent /> */}
           </ContentLayout>
         </Layout>
       </Layout>
