@@ -3,26 +3,45 @@ import { Progress } from "antd";
 import HeaderDropDownItem from "../SmallComponents/HeaderDropDownItem";
 import plus from "../../assets/plus.svg";
 import { Link, NavLink } from "react-router-dom";
+import search_icon from "../../assets/search.svg";
 export default function DropDownMenu() {
   return (
-    <Menu className="shade">
+    <Menu className="drop-down_effect">
       <div className="drop-down">
         <div className="row mx-auto my-2 align-items-center">
           <div className="col-12">
-            <Progress
+            {/* <Progress
               percent={40}
               showInfo={false}
               strokeColor={{
                 "0%": "#87d068",
                 "100%": "#87d068",
               }}
-            />
+            /> */}
+
+            <div className="input-group br-10 my-2 input-group-sm border  rounded pr-1 bg-white">
+              <input
+                type="text"
+                className="form-control input-focus-none search_placeholder br-10  border-0"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Search..."
+              />
+              <div className="input-group-prepend">
+                <button
+                  className="input-group-text br-10 bg-white"
+                  id="inputGroup-sizing-sm"
+                >
+                  <img src={search_icon} height="20" alt="" />
+                </button>
+              </div>
+            </div>
           </div>
           <div className="col-md-12">
-            <div className="d-flex my-1">
+            {/* <div className="d-flex my-1">
               <span className="d-blue small mb-3 mt-2">Quota:45%(12/30)</span>
               <span className="text-success ml-auto small">Upgrade</span>
-            </div>
+            </div> */}
           </div>
           <HeaderDropDownItem />
           <HeaderDropDownItem />
