@@ -196,3 +196,24 @@
     opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
   content: "";
 }
+.z-10 {
+  z-index: 10;
+}
+.ant-table-selection-extra {
+  z-index: 0;
+}
+.ant-layout-sider:hover {
+  flex: 0 0 260px !important;
+  max-width: 260px !important;
+  min-width: 260px !important;
+  width: 260px !important;
+}
+
+@media (min-width: 1400px) {
+  .ant-layout-sider:hover {
+    flex: 0 0 367px !important;
+    max-width: 367px !important;
+    min-width: 367px !important;
+    width: 367px !important;
+  }
+}

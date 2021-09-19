@@ -45,7 +45,7 @@ export default function Sidebar(props: Props) {
   return (
     <Sider
       theme="light"
-      className="h-100 border-right border"
+      className="h-100 border-right border z-10"
       trigger={null}
       collapsible
       collapsed={collapsed}
@@ -188,7 +188,34 @@ export default function Sidebar(props: Props) {
         {/* <Menu.Item key="5" icon={<img src={settings} height={20} alt="" />}>
           {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i>
         </Menu.Item> */}
-        <Menu.Item
+        {/* SERVICES  */}
+        <SubMenu
+          key="sub4"
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          icon={
+            <img
+              className="active-white-svg"
+              src={services}
+              height={20}
+              alt=""
+            />
+          }
+          title="Services"
+        >
+          {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
+
+          <Menu.Item key="13">
+            <li> Browser Extensions</li>
+          </Menu.Item>
+          <Menu.Item key="14">
+            <li> VA Profiles</li>
+          </Menu.Item>
+          <Menu.Item key="15">
+            {" "}
+            <li>Templates</li>
+          </Menu.Item>
+        </SubMenu>
+        {/* <Menu.Item
           style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
           key="6"
           icon={
@@ -201,8 +228,24 @@ export default function Sidebar(props: Props) {
           }
         >
           {t("srvc")} <i className="fas fa-sort-down text-dark ml-2"></i>
-        </Menu.Item>
-        <Menu.Item
+        </Menu.Item> */}
+        <SubMenu
+          key="sub5"
+          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+          icon={
+            <img className="active-white-svg" src={help} height={20} alt="" />
+          }
+          title="Help"
+        >
+          {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
+          <Menu.Item key="9">
+            <li>Channel</li>
+          </Menu.Item>
+          <Menu.Item key="10">
+            <li>Sources</li>
+          </Menu.Item>
+        </SubMenu>
+        {/* <Menu.Item
           style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
           key="7"
           icon={
@@ -210,7 +253,7 @@ export default function Sidebar(props: Props) {
           }
         >
           {t("hlp")} <i className="fas fa-sort-down text-dark ml-4 pl-1"></i>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </Sider>
   );
