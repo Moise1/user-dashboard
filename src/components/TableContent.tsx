@@ -147,11 +147,15 @@ function TableContent() {
           ) : (
             ""
           )}
-          <div className="col-auto">
-            <span className="active-items-num d-inline-block pr-3">
-              26 active
-            </span>
-          </div>
+          {selectedRowKeys.length ? (
+            <div className="col-auto">
+              <span className="active-items-num d-inline-block pr-3">
+                26 active
+              </span>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <Table
           rowSelection={rowSelection}
