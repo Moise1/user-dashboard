@@ -95,7 +95,7 @@ function TableContent() {
   return (
     <React.Fragment>
       <div className="bg-white rounded">
-        <div className="row mx-auto  align-items-center">
+        <div className="row mx-auto  align-items-center justify-content-between">
           {selectedRowKeys.length ? (
             <div className="col-lg-6 col-md-8 mb-3">
               <div className="d-flex justify-content-around mt-2 mr-3 bg-f2f8ff br-15 p-2">
@@ -147,6 +147,11 @@ function TableContent() {
           ) : (
             ""
           )}
+          <div className="col-auto">
+            <span className="active-items-num d-inline-block pr-3">
+              26 active
+            </span>
+          </div>
         </div>
         <Table
           rowSelection={rowSelection}

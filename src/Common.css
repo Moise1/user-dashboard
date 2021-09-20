@@ -237,7 +237,26 @@
 }
 .logout-icon {
   padding-right: 15px;
+  padding-bottom: 15px;
   font-weight: normal;
   font-size: 16px;
   color: #ef6092;
+  cursor: pointer;
+}
+.active-items-num {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+}
+.advance-search-hover {
+  transition: 0.3s ease;
+}
+.advance-search-hover:hover {
+  background: #b0aeae;
+}
+.view-columns-hover {
+  transition: 0.3s ease;
+}
+.view-columns-hover:hover {
+  background-color: #7572f7;
 }
