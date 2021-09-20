@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/../githooks/pre-commit-hook.sh"
+
+# npm test
