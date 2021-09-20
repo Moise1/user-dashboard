@@ -21,33 +21,19 @@ export const columns = [
     key: "title",
   },
   {
-    title: "Sell",
-    dataIndex: "sell",
-    key: "sell",
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
   },
-  {
-    title: "Cost",
-    dataIndex: "cost",
-    key: "cost",
-  },
-  {
-    title: "Profit",
-    dataIndex: "profile",
-    key: "profile",
-  },
-  {
-    title: "Markup",
-    dataIndex: "markup",
-    key: "markup",
-  },
-  {
-    title: "Stock",
-    dataIndex: "stock",
-    key: "stock",
-  },
+
   {
     title: "Created on",
     dataIndex: "created",
     key: "created",
+  },
+  {
+    title: "Created by",
+    dataIndex: "createdby",
+    key: "nonu",
   },
 ];

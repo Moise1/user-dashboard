@@ -30,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -59,5 +61,13 @@
       "post-merge": "./githooks/post-merge-hook.sh",
       "pre-commit": "./githooks/pre-commit-hook.sh"
     }
+  },
+  "optionalDependencies": {
+    "fsevents": "^2"
+  },
+  "resolutions": {
+    "**/fsevents": "^2",
+    "webpack-dev-server/chokidar": "^3",
+    "webpack-dev-server/webpack-log/uuid": "^7"
   }
 }

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31710.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "hgrweb", "hgrweb.esproj", "{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98030C64-17B7-4235-A59A-F15D7968CA13}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.git\hooks\pre-commit = .git\hooks\pre-commit
+		githooks\pre-commit-hook.sh = githooks\pre-commit-hook.sh
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18BEEB9F-6558-408C-86B6-5EA884A1A3C0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3083319-2D6F-4598-95CF-086C78E6E26D}
+	EndGlobalSection
+EndGlobal

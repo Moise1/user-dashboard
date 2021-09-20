@@ -16,7 +16,7 @@ export default function TabsList() {
   const windowwidth = window.innerWidth;
   const t = useTranslation();
   return (
-    <div className="row mx-auto my-3 d-blue align-items-center bg-white br-8 p-2">
+    <div className="row mx-auto mt-3 mb-2 d-blue align-items-center bg-white br-8 p-3">
       <TabButton
         onChangeTab={() => onChangeTab(1)}
         index={1}
