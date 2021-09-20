@@ -97,36 +97,48 @@ function TableContent() {
       <div className="bg-white rounded">
         <div className="row mx-auto  align-items-center">
           {selectedRowKeys.length ? (
-            <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
-              <div className="row">
+            <div className="col-lg-6 col-md-8 mb-3">
+              <div className="d-flex justify-content-around mt-2 mr-3 bg-f2f8ff br-15 p-2">
                 {selectedRowKeys.length ? (
-                  <SmallTabs
-                    title={`Edit ${selectedRowKeys.length} ${
-                      windowwidth < 900 ? "" : "Listings"
-                    } `}
-                    last={false}
-                  />
+                  // <SmallTabs
+                  //   title={`Edit ${selectedRowKeys.length} ${
+                  //     windowwidth < 900 ? "" : "Listings"
+                  //   } `}
+                  //   last={false}
+                  // />
+                  <div className="listing-tabs">
+                    Edit <span>{selectedRowKeys.length}</span> Listings
+                  </div>
                 ) : (
                   ""
                 )}
+                <span className="border-left-tab"></span>
                 {selectedRowKeys.length ? (
-                  <SmallTabs
-                    title={`Copy ${selectedRowKeys.length} ${
-                      windowwidth < 900 ? "" : "Listings"
-                    } `}
-                    border={true}
-                    last={false}
-                  />
+                  // <SmallTabs
+                  //   title={`Copy ${selectedRowKeys.length} ${
+                  //     windowwidth < 900 ? "" : "Listings"
+                  //   } `}
+                  //   border={true}
+                  //   last={false}
+                  // />
+                  <div className="listing-tabs">
+                    Copy <span>{selectedRowKeys.length}</span> Listings
+                  </div>
                 ) : (
                   ""
                 )}
+                <span className="border-left-tab"></span>
+
                 {selectedRowKeys.length ? (
-                  <SmallTabs
-                    title={`Optimize ${selectedRowKeys.length} ${
-                      windowwidth < 900 ? "" : "Listings"
-                    } `}
-                    last={false}
-                  />
+                  // <SmallTabs
+                  //   title={`Optimize ${selectedRowKeys.length} ${
+                  //     windowwidth < 900 ? "" : "Listings"
+                  //   } `}
+                  //   last={false}
+                  // />
+                  <div className="listing-tabs">
+                    Optimize <span>{selectedRowKeys.length}</span> Listings
+                  </div>
                 ) : (
                   ""
                 )}

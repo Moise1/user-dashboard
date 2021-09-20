@@ -217,3 +217,27 @@
     width: 367px !important;
   }
 }
+.listing-tabs span {
+  font-weight: 700;
+  font-size: 16px;
+  color: #262e80;
+}
+.listing-tabs {
+  font-weight: 400;
+  font-size: 16px;
+  color: #262e80;
+}
+.bg-f2f8ff {
+  background: #f2f8ff;
+}
+.border-left-tab {
+  width: 1.5px;
+  display: inline-block;
+  background-color: #262e80;
+}
+.logout-icon {
+  padding-right: 15px;
+  font-weight: normal;
+  font-size: 16px;
+  color: #ef6092;
+}
