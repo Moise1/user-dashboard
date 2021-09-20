@@ -5,6 +5,8 @@ import doticon from "../assets/doticon.svg";
 import editicon from "../assets/editicon.svg";
 import SmallTabs from "./SmallComponents/SmallTabs";
 import { columns } from "../components/SmallComponents/PendindData";
+import { tableData } from "./TableData";
+
 const data: any = [];
 const windowwidth = window.innerWidth;
 

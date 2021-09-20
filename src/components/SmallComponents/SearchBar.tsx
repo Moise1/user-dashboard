@@ -13,7 +13,7 @@ const suffix = (
     }}
   />
 );
-const onSearch = () => console.log();
+
 export default function SearchBar() {
   return (
     <div className="row justify-content-between pl-3 py-lg-3 mt-md-3 mt-lg-1">
