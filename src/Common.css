@@ -202,7 +202,7 @@
 .ant-table-selection-extra {
   z-index: 0;
 }
-.ant-layout-sider:hover {
+/* .ant-layout-sider:hover {
   flex: 0 0 260px !important;
   max-width: 260px !important;
   min-width: 260px !important;
@@ -216,7 +216,7 @@
     min-width: 367px !important;
     width: 367px !important;
   }
-}
+} */
 .listing-tabs span {
   font-weight: 700;
   font-size: 16px;

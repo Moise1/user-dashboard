@@ -268,8 +268,8 @@ export default function Sidebar(props: Props) {
                 id="Group_84"
                 data-name="Group 84"
                 xmlns="http://www.w3.org/2000/svg"
-                width="31.622"
-                height="31.622"
+                width="26"
+                height="26"
                 viewBox="0 0 31.622 31.622"
               >
                 <path
