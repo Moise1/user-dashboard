@@ -263,3 +263,12 @@
 .z-0 {
   z-index: 0;
 }
+.ant-pagination.ant-table-pagination {
+  display: none !important;
+}
+.pagination-number {
+  display: inline-block;
+  font-size: 18px;
+  color: #262e80;
+  cursor: pointer;
+}

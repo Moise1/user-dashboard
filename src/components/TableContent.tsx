@@ -5,6 +5,7 @@ import doticon from "../assets/doticon.svg";
 import editicon from "../assets/editicon.svg";
 import SmallTabs from "./SmallComponents/SmallTabs";
 import { columns } from "../data";
+import PaginationTable from "./PaginationTable";
 const data: any = [];
 const windowwidth = window.innerWidth;
 
@@ -162,6 +163,8 @@ function TableContent() {
           columns={columns}
           dataSource={data}
         />
+
+        <PaginationTable />
       </div>
     </React.Fragment>
   );
