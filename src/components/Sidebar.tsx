@@ -147,7 +147,7 @@ export default function Sidebar(props: Props) {
               }
             >
               <button
-                className="bg-trans  border-0"
+                className="bg-trans fw-700  border-0"
                 onClick={() => history.push("/home")}
               >
                 {t("ls")}
@@ -262,7 +262,7 @@ export default function Sidebar(props: Props) {
           {t("hlp")} <i className="fas fa-sort-down text-dark ml-4 pl-1"></i>
         </Menu.Item> */}
           </Menu>
-          <div className="logout-icon d-flex justify-content-end align-items-center">
+          <div className="logout-icon d-flex justify-content-end align-items-center z-10">
             <span className="mx-2">
               <svg
                 id="Group_84"

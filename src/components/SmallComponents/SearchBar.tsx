@@ -18,7 +18,7 @@ export default function SearchBar() {
   return (
     <div className="row justify-content-between pl-3 py-lg-3 mt-md-3 mt-lg-1">
       <div className="col-md-7 pl-lg-0 lh-1 px-0">
-        <div className="input-group br-10 input-group-sm border  rounded px-3 bg-white">
+        <div className="input-group br-10 input-group-sm border  rounded px-3 bg-white z-0">
           <input
             type="text"
             className="form-control input-focus-none search_placeholder br-10 h-62 border-0"

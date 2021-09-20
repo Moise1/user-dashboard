@@ -236,8 +236,8 @@
   background-color: #262e80;
 }
 .logout-icon {
-  padding-right: 15px;
-  padding-bottom: 15px;
+  padding-right: 17px;
+  padding-bottom: 17px;
   font-weight: normal;
   font-size: 16px;
   color: #ef6092;
@@ -259,4 +259,7 @@
 }
 .view-columns-hover:hover {
   background-color: #7572f7;
+}
+.z-0 {
+  z-index: 0;
 }
