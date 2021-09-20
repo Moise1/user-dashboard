@@ -23,6 +23,7 @@ import {
   ListingsIcon,
   ServiceIcon,
   SettingsIcon,
+  CircleDotIcon,
 } from "../components/common/Icons";
 import {
   UserOutlined,
@@ -177,23 +178,59 @@ export default function Sidebar(props: Props) {
             >
               {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
               <Menu.Item key="9">
-                <li>Channel</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Channel
+                </li>
               </Menu.Item>
               <Menu.Item key="10">
-                <li>Sources</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Sources
+                </li>
               </Menu.Item>
               <Menu.Item key="11">
-                <li> Pricing Rules</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Pricing Rules
+                </li>
               </Menu.Item>
               <Menu.Item key="13">
-                <li> Browser Extensions</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Browser Extensions
+                </li>
               </Menu.Item>
               <Menu.Item key="14">
-                <li> VA Profiles</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  VA Profiles
+                </li>
               </Menu.Item>
               <Menu.Item key="15">
                 {" "}
-                <li>Templates</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Templates
+                </li>
               </Menu.Item>
             </SubMenu>
             {/* <Menu.Item key="5" icon={<img src={settings} height={20} alt="" />}>
@@ -216,14 +253,31 @@ export default function Sidebar(props: Props) {
               {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
 
               <Menu.Item key="13">
-                <li> Browser Extensions</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  VA Profiles
+                </li>
               </Menu.Item>
               <Menu.Item key="14">
-                <li> VA Profiles</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  VA Profiles
+                </li>
               </Menu.Item>
               <Menu.Item key="15">
-                {" "}
-                <li>Templates</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  VA Profiles
+                </li>
               </Menu.Item>
             </SubMenu>
             {/* <Menu.Item
@@ -255,10 +309,22 @@ export default function Sidebar(props: Props) {
             >
               {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
               <Menu.Item key="9">
-                <li>Channel</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  Templates
+                </li>
               </Menu.Item>
               <Menu.Item key="10">
-                <li>Sources</li>
+                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+                  {" "}
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>{" "}
+                  VA Profiles
+                </li>
               </Menu.Item>
             </SubMenu>
             {/* <Menu.Item

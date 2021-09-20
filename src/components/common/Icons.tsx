@@ -541,3 +541,25 @@ export const HelpIcon = () => {
     </>
   );
 };
+
+export const CircleDotIcon = () => {
+  return (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="7"
+        height="7"
+        viewBox="0 0 7 7"
+      >
+        <circle
+          id="Ellipse_49"
+          data-name="Ellipse 49"
+          cx="3.5"
+          cy="3.5"
+          r="3.5"
+          fill="#b1b1b1"
+        />
+      </svg>
+    </>
+  );
+};
