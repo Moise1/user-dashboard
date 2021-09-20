@@ -16,6 +16,15 @@ import {
 } from "react-multi-lang";
 import en from "../translation.json";
 import {
+  DashBoardIcon,
+  LeftArrowIcon,
+  CatalogIcon,
+  ListNowIcon,
+  ListingsIcon,
+  ServiceIcon,
+  SettingsIcon,
+} from "../components/common/Icons";
+import {
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
@@ -76,7 +85,7 @@ export default function Sidebar(props: Props) {
                     {staticvalue ? (
                       <i
                         onClick={togglestatic}
-                        className="fas fa-chevron-left text-dark bg-light rounded p-1 mt-1"
+                        className="fas fa-chevron-left text-dark bg-light rounded p-1 mt-1 active-left-icon"
                       ></i>
                     ) : (
                       <button className="btn border-0 btn-light p-1">
@@ -263,7 +272,7 @@ export default function Sidebar(props: Props) {
         </Menu.Item> */}
           </Menu>
           <div className="logout-icon d-flex justify-content-end align-items-center z-10">
-            <span className="mx-2">
+            <span className="mx-2 ">
               <svg
                 id="Group_84"
                 data-name="Group 84"
@@ -302,7 +311,8 @@ export default function Sidebar(props: Props) {
                 />
               </svg>
             </span>
-            Logout
+
+            <span className="d-none-icon">Logout</span>
           </div>
         </div>
       </Sider>
