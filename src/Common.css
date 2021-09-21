@@ -88,6 +88,10 @@ body {
 .ant-menu-item.ant-menu-item-active:hover .catalog-icon line {
   stroke: white;
 }
+
+.ant-menu-item .ant-menu-title-content {
+  margin: 0 !important;
+}
 /* HOVER LIST ITEMS  */
 /* .ant-menu-item:hover {
   color: var(--color-fff) !important;
@@ -421,10 +425,10 @@ body {
 }
 
 .ant-menu-item .ant-menu-title-content {
-  padding-left: 18px;
+  padding-left: 26px;
 }
 .ant-menu-submenu-title .ant-menu-title-content {
-  padding-left: 18px;
+  padding-left: 26px;
 }
 .ant-menu.ant-menu-sub {
   padding-top: 10px;

@@ -164,7 +164,7 @@ export default function Sidebar(props: Props) {
               }
             >
               <button
-                className="bg-trans fw-700  border-0"
+                className="bg-trans fw-700 p-0  border-0"
                 onClick={() => history.push("/home")}
               >
                 {t("ls")}

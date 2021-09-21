@@ -2,7 +2,7 @@ export const DashBoardIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg mr-2 dashboard-icon"
+        className="active-white-svg dashboard-icon"
         id="Group_1"
         data-name="Group 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ export const CatalogIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg mr-2 catalog-icon"
+        className="active-white-svg catalog-icon"
         id="Group_2"
         data-name="Group 2"
         xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@ export const ListNowIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg mr-2 list-now-icon"
+        className="active-white-svg list-now-icon"
         id="Group_3"
         data-name="Group 3"
         xmlns="http://www.w3.org/2000/svg"
@@ -318,11 +318,11 @@ export const SettingsIcon = () => {
   return (
     <>
       <svg
+        className="bi bi-sliders active-white-svg setting-icon mr-1"
         xmlns="http://www.w3.org/2000/svg "
         width="16"
         height="16"
         fill="currentColor"
-        className="bi bi-sliders active-white-svg setting-icon mr-2"
         viewBox="0 0 16 16"
       >
         <path
@@ -338,7 +338,7 @@ export const ServiceIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg  mr-2"
+        className="active-white-svg"
         id="Group_93"
         data-name="Group 93"
         xmlns="http://www.w3.org/2000/svg"
@@ -385,7 +385,7 @@ export const HelpIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg  mr-2 help-icon"
+        className="active-white-svg help-icon"
         id="Group_94"
         data-name="Group 94"
         xmlns="http://www.w3.org/2000/svg"
