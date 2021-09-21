@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import { useTranslation } from 'react-multi-lang';
 
 import img from '../assets/icon.png';
 import doticon from '../assets/doticon.svg';
@@ -54,7 +54,6 @@ function TableContent() {
   const onSelectChange = (selectedRowKeys: any) => {
     setSelectedRowKeys(selectedRowKeys);
     console.log(selectedRowKeys.length);
-    const selected = selectedRowKeys.length;
   };
   const rowSelection = {
     selectedRowKeys,
@@ -172,7 +171,6 @@ function TableContentold() {
   const t = useTranslation();
   const onSelectChange = (selectedRowKeys: any) => {
     setSelectRowKeys(selectedRowKeys);
-    const selected = selectedRowKeys.length;
   };
 
   useEffect(() => {
@@ -327,5 +325,5 @@ function TableContentold() {
   );
 }
 
-export default TableContentold;
+export default TableContent;
 export { TableContentold };

@@ -5,7 +5,6 @@ import img from '../assets/icon.png';
 import { columns } from '../components/SmallComponents/PendindData';
 
 const data: any = [];
-const windowwidth = window.innerWidth;
 
 for (let i = 0; i < 26; i++) {
   data.push({
@@ -33,7 +32,6 @@ function PendingDataContent() {
   const onSelectChange = (selectedRowKeys: any) => {
     setSelectedRowKeys(selectedRowKeys);
     console.log(selectedRowKeys.length);
-    const selected = selectedRowKeys.length;
   };
   const rowSelection = {
     selectedRowKeys,
@@ -77,16 +75,10 @@ function PendingDataContent() {
     <React.Fragment>
       <div className="bg-white rounded">
         <div className="row mx-auto  align-items-center">
-          {selectedRowKeys.length ? (
+          {selectedRowKeys.length && (
             <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
               <div className="row justify-content-around mt-2">
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Edit ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Edit <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -94,13 +86,6 @@ function PendingDataContent() {
                   ''
                 )}
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Copy ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   border={true}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Copy <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -108,12 +93,6 @@ function PendingDataContent() {
                   ''
                 )}
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Optimize ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Optimize <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -122,8 +101,6 @@ function PendingDataContent() {
                 )}
               </div>
             </div>
-          ) : (
-            ''
           )}
         </div>
         <Table rowSelection={rowSelection} columns={columns} dataSource={data} />

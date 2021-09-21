@@ -24,7 +24,7 @@ function AccountConnect({
   extension
 }: any) {
   // eslint-disable-next-line no-unused-vars
-  const [enable, setEnable] = useState(false);
+  const [enable, _setEnable] = useState(false); // ignored setEnable
   const Continue = (e: any) => {
     e.preventDefault();
     nextStep();

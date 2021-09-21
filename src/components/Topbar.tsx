@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Progress } from 'antd';
-import ring_icon from '../assets/notification.svg';
+//import ring_icon from '../assets/notification.svg';
 import bellIcon from '../assets/bellIcon.svg';
 import flag from '../assets/flag-round-500.svg';
 import amazon from '../assets/amazon-icon-1.svg';

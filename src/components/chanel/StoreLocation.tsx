@@ -1,4 +1,4 @@
-import React, { Props } from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
 
 import aus_flag from '../../assets/channel/flags/AU.png';
@@ -8,7 +8,7 @@ import fr_flag from '../../assets/channel/flags/FR.png';
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
-import back_icon from '../../assets/channel/flags/back.png';
+//import back_icon from '../../assets/channel/flags/back.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';
@@ -18,7 +18,66 @@ import Previousstep from '../SmallComponents/Previousstep';
 import Flag, { FlagProps } from './component/Flag';
 setTranslations({ en });
 setDefaultLanguage('en');
-function StoreLocation({ nextStep, handleChangeLocation, values, platform, step, flag, prevStep }: any) {
+
+export interface StoreLocationProps {
+  nextStep: () => void;
+  prevStep: () => void;
+  platform: platformType;
+  step: number;
+  handleChangeLocation: (newLocation: string) => void;
+  values: any;
+  /*
+   { nextStep, handleChangeLocation, values, platform, step, flag, prevStep }
+   */
+}
+
+const flags: FlagProps[] = [
+  {
+    name: 'Australia',
+    path: aus_flag,
+    platform: 'ebay',
+    slug: 'australia'
+  },
+  {
+    name: 'Germany',
+    path: ger_flag,
+    platform: 'ebay',
+    slug: 'germany'
+  },
+  {
+    name: 'Spain',
+    path: sp_flag,
+    platform: 'amazon',
+    slug: 'spain'
+  },
+  {
+    name: 'France',
+    path: fr_flag,
+    platform: 'ebay',
+    slug: 'france'
+  },
+  {
+    name: 'Italy',
+    path: it_flag,
+    platform: 'ebay',
+    slug: 'italy'
+  },
+  {
+    name: 'United Kingdom',
+    path: uk_flag,
+    platform: 'amazon',
+    slug: 'uk'
+  },
+  {
+    name: 'United States of America',
+    path: us_flag,
+    platform: 'amazon',
+    slug: 'us'
+  }
+];
+
+function StoreLocation(props: StoreLocationProps) {
+  const { nextStep, prevStep, platform, step, handleChangeLocation, values } = props;
   const Continue = (e: any) => {
     e.preventDefault();
     nextStep();
@@ -27,50 +86,7 @@ function StoreLocation({ nextStep, handleChangeLocation, values, platform, step,
     e.preventDefault();
     prevStep();
   };
-  const flags: FlagProps[] = [
-    {
-      name: 'Australia',
-      path: aus_flag,
-      platform: 'ebay',
-      slug: 'australia'
-    },
-    {
-      name: 'Germany',
-      path: ger_flag,
-      platform: 'ebay',
-      slug: 'germany'
-    },
-    {
-      name: 'Spain',
-      path: sp_flag,
-      platform: 'amazon',
-      slug: 'spain'
-    },
-    {
-      name: 'France',
-      path: fr_flag,
-      platform: 'ebay',
-      slug: 'france'
-    },
-    {
-      name: 'Italy',
-      path: it_flag,
-      platform: 'ebay',
-      slug: 'italy'
-    },
-    {
-      name: 'United Kingdom',
-      path: uk_flag,
-      platform: 'amazon',
-      slug: 'uk'
-    },
-    {
-      name: 'United States of America',
-      path: us_flag,
-      platform: 'amazon',
-      slug: 'us'
-    }
-  ];
+
   const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
@@ -92,239 +108,26 @@ function StoreLocation({ nextStep, handleChangeLocation, values, platform, step,
                   </h6>
                 </div>
                 {flags.map((i) => (
-                  <Flag
-                    platform={platform}
-                    currentPlatform={i.platform}
-                    // handleChangeLocation={i.slug}
-                    flag={i.path}
-                    name={i.name}
-                    location={values.storeLocation}
-                    handleChangeLocation={handleChangeLocation}
-                  />
+                  <React.Fragment key={i}>
+                    <Flag
+                      platform={platform}
+                      currentPlatform={i.platform}
+                      // handleChangeLocation={i.slug}
+                      flag={i.path}
+                      name={i.name}
+                      location={values.storeLocation}
+                      handleChangeLocation={handleChangeLocation}
+                    />
+                  </React.Fragment>
                 ))}
-                {/* 
-                <div
-                  className={`col-4 mb-2 ${
-                    platform == "amazon" ? "d-none" : ""
-                  }`}
-                >
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value={"storelocation"}
-                      onChange={(e) => handleChangeLocation("australia")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={aus_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "australia" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">Australia</div>
-                  </label>
-                </div> */}
-                {/* <div
-                  className={`col-4 mb-2 ${
-                    platform == "amazon" ? "d-none" : ""
-                  }`}
-                >
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value={"storelocation"}
-                      onChange={(e) => handleChangeLocation("germany")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={ger_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "germany" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">Germany</div>
-                  </label>
-                </div>
-                <div className="col-4 mb-2">
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value=""
-                      onChange={(e) => handleChangeLocation("spain")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={sp_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "spain" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">Spain</div>
-                  </label>
-                </div>
-                <div
-                  className={`col-4 mb-2 ${
-                    platform == "amazon" ? "d-none" : ""
-                  }`}
-                >
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value=""
-                      onChange={(e) => handleChangeLocation("france")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={fr_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "france" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">France</div>
-                  </label>
-                </div>
-                <div
-                  className={`col-4 mb-2 ${
-                    platform == "amazon" ? "d-none" : ""
-                  }`}
-                >
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value=""
-                      onChange={(e) => handleChangeLocation("italy")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={it_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "italy" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">Italy</div>
-                  </label>
-                </div>
-                <div className="col-4 mb-2">
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value=""
-                      onChange={(e) => handleChangeLocation("uk")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={uk_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "uk" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">United Kingdom</div>
-                  </label>
-                </div>
-                <div className="col-4 mb-2">
-                  <label className="">
-                    <input
-                      type="radio"
-                      name="product"
-                      className="card-input-flag d-none"
-                      value=""
-                      onChange={(e) => handleChangeLocation("us")}
-                    />
-                    <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
-                      <img
-                        src={us_flag}
-                        height="80"
-                        width="80"
-                        className={`  ${
-                          values.storeLocation == "us" ||
-                          values.storeLocation == ""
-                            ? ""
-                            : "btn-disbaled"
-                        }`}
-                        alt="flag"
-                      />
-                    </div>
-                    <div className="panel-body text-center">
-                      United States of America
-                    </div>
-                  </label>
-                </div> */}
+
                 <div className="col-12"></div>
                 <div className="mx-md-auto ml-auto mt-md-4 text-right text-md-center w-100 next-fix">
                   <div className="text-danger w-100 text-center small d-block d-md-none">
                     {values.storeLocation == '' ? '  *Please select a country in order to proceed' : ''}
                   </div>
                   <ButtonComp onClick={Continue} title={t('nxt')} disabled={values.storeLocation == ''} />
-                  {/* <button
-                    onClick={Continue}
-                    type="submit"
-                    disabled={values.storeLocation == ""}
-                    className={`border-0 bg-trans mx-auto 
-                    ${
-                      values.storeLocation !== ""
-                        ? "d-blue"
-                        : "btn-disbaled text-grey"
-                    }`}
-                  >
-                    <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">{t("nxt")}</span>
-                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
-                    </div>
-                  </button> */}
+
                   <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
                     {values.storeLocation == '' ? t('strchck') : ''}
                   </div>

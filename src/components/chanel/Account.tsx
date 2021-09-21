@@ -8,7 +8,19 @@ import en from '../../translation.json';
 import Previousstep from '../SmallComponents/Previousstep';
 setTranslations({ en });
 setDefaultLanguage('en');
-function Account({ nextStep, handleChange, values, step, flag, prevStep, platform }: any) {
+
+interface props {
+  nextStep: () => void;
+  handleChange: () => void;
+  values: any;
+  step: number;
+  flag: string;
+  prevStep: () => void;
+  platform: platformType;
+}
+function Account(props: props) {
+  const { nextStep, step, prevStep, platform } = props;
+
   const Continue = (e: any) => {
     e.preventDefault();
     nextStep();
@@ -17,6 +29,7 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
     e.preventDefault();
     prevStep();
   };
+
   const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
@@ -34,8 +47,8 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
                     {platform == 'ebay'
                       ? t('doyou') + ' eBay ' + t('acnt') + '?'
                       : platform == 'amazon'
-                      ? t('amzseller')
-                      : t('shpstor')}
+                        ? t('amzseller')
+                        : t('shpstor')}
                   </h5>
                   {platform == 'amazon' ? <i>{t('acntchk')}</i> : ''}
                 </div>
@@ -96,8 +109,8 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
                         {platform == 'ebay'
                           ? t('haveebayacnt')
                           : platform == 'amazon'
-                          ? t('haveamznacnt')
-                          : t('haveshopacnt')}
+                            ? t('haveamznacnt')
+                            : t('haveshopacnt')}
                       </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>

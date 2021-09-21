@@ -33,7 +33,8 @@ if haschanged "package-lock.json"; then
 fi
 
 
-yarn prettier
+yarn lint
+git add .
 
 #warn "caca"
 #TXT=$(warn "package-lock.json") && runOnChange package-lock.json "$TEXT"

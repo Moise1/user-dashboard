@@ -1,6 +1,7 @@
 import React from 'react';
 import progress_done from '../../assets/channel/greenbar.png';
 import progress_remain from '../../assets/channel/greybar.png';
+
 //import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
 //import en from '../../translation.json'
 //setTranslations({ en })

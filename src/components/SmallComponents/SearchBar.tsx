@@ -1,21 +1,10 @@
 import React from 'react';
 import list_saerch from '../../assets/list_search.jpg';
 import column_img from '../../assets/columnimg.svg';
-import { Input, Space } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
 import search_icon from '../../assets/search.svg';
 import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
 import en from '../../translation.json';
 
-const { Search } = Input;
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#1890ff'
-    }}
-  />
-);
 let everLoaded = false;
 if (!everLoaded) {
   console.log('First time i ever loaded!');
@@ -43,12 +32,6 @@ export default function SearchBar() {
             </button>
           </div>
         </div>
-        {/* <Search
-          placeholder="Search..."
-          className="border-0 rounded bg-white h-100"
-          allowClear
-          style={{ width: "90%" }}
-        /> */}
       </div>
       <div className="col-md-5   my-md-0 lh-1  d-md-block d-none">
         <div className="d-flex w-100 justify-content-end ">

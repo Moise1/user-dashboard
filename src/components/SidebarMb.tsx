@@ -2,8 +2,12 @@ import React from 'react';
 import logo from '../assets/logo.svg';
 import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
 import en from '../translation.json';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-function SidebarMb(props: any) {
+import { Navbar, Container, Nav } from 'react-bootstrap';
+interface props {
+  _ignored?: number;
+}
+
+function SidebarMb(_: props) {
   setTranslations({ en });
   setDefaultLanguage('en');
   const t = useTranslation();

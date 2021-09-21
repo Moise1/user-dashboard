@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import Input from '@material-ui/core/Input';
-import back_icon from '../../assets/channel/flags/back.png';
+//import Input from '@material-ui/core/Input';
+//import back_icon from '../../assets/channel/flags/back.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';
@@ -55,8 +55,8 @@ function UserName({ nextStep, handleChangeUser, values, step, prevStep, platform
                         platform == 'ebay'
                           ? ' EBay username'
                           : platform == 'amazon'
-                          ? ' Amazon username'
-                          : ' Shopify username'
+                            ? ' Amazon username'
+                            : ' Shopify username'
                       }
                       onChange={(e) => handleChangeUser(e.target.value)}
                     />

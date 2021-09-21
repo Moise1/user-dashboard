@@ -29,10 +29,10 @@ export default function Sidebar(props: Props) {
   const history = useHistory();
 
   const routeChange = () => {
-    const path = 'newPath';
+    // const path = 'newPath';
     history.push('/home');
   };
-  const { collapsed, toggle, staticvalue, togglestatic } = props;
+  const { collapsed, staticvalue, togglestatic } = props;
   const t = useTranslation();
 
   return (

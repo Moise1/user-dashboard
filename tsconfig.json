@@ -24,9 +24,9 @@
     "types": []
   },
   "include": [
-    "src/**/*.{ts,tsx,js,jsx,png}"
+    "src"
   ],
-  "exclude": [
+  "xexclude": [
     "node_modules",
     "./node_modules",
     "./node_modules/*/*.d.ts",

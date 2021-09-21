@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { Table } from 'antd';
 import img from '../assets/icon.png';
-import SmallTabs from './SmallComponents/SmallTabs';
 import { columns } from './SmallComponents/TerminatedData';
 const data: any = [];
 const windowwidth = window.innerWidth;
@@ -30,7 +29,6 @@ function TerminatedDataContent() {
   const onSelectChange = (selectedRowKeys: any) => {
     setSelectedRowKeys(selectedRowKeys);
     console.log(selectedRowKeys.length);
-    const selected = selectedRowKeys.length;
   };
   const rowSelection = {
     selectedRowKeys,

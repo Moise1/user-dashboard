@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
 
 import ebay_logo from '../../assets/channel/ebay.png';
@@ -8,16 +8,25 @@ import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';
 import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+
 import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
-function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, values, step }: any) {
+
+export interface props {
+  nextStep: () => void;
+  handleChangePlatform: (newPlatform: platformType) => void;
+  platform: platformType;
+  values: any;
+  step: number;
+}
+function PlatForm(props: props) {
+  const { nextStep, handleChangePlatform, platform, values, step } = props;
+
   const Continue = (e: any) => {
     e.preventDefault();
     nextStep();
   };
-
-  const [count, setCount] = useState(0);
   const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
@@ -40,7 +49,7 @@ function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, valu
                       value={'platform'}
                       className="card-input-element"
                       checked={platform == 'ebay'}
-                      onChange={(e) => handleChangePlatform('ebay')}
+                      onChange={() => handleChangePlatform('ebay')}
                     />
                     <div
                       className={`panel panel-default panel-platform card-input shade-card br-8 h-100
@@ -67,7 +76,7 @@ function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, valu
                       value={'platform'}
                       checked={platform == 'shopify'}
                       className="card-input-element"
-                      onChange={(e) => handleChangePlatform('shopify')}
+                      onChange={() => handleChangePlatform('shopify')}
                     />
                     <div
                       className={`panel panel-default panel-platform card-input shade-card br-8 h-100
@@ -93,7 +102,7 @@ function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, valu
                       value={'platform'}
                       checked={platform == 'amazon'}
                       className="card-input-element"
-                      onChange={(e) => handleChangePlatform('amazon')}
+                      onChange={() => handleChangePlatform('amazon')}
                     />
                     <div
                       className={`panel panel-default panel-platform card-input shade-card br-8 h-100

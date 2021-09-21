@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { Menu, Button } from 'antd';
-import { Progress } from 'antd';
+import { Menu } from 'antd';
 import { useTranslation } from 'react-multi-lang';
 import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem';
-import plus from '../../assets/plus.svg';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import search_icon from '../../assets/search.svg';
 export default function DropDownMenu() {
   const t = useTranslation();
@@ -54,7 +52,7 @@ export default function DropDownMenu() {
           <div className="col-md-12 mb-2 pl-2">
             <Link to="/newchannel">
               <div className="add-new-channel-drop">
-                <p className="mb-0">Add new channel</p>
+                <p className="mb-0">{t('AddNewChannel')}</p>
                 <svg
                   id="Group_78"
                   data-name="Group 78"
@@ -106,11 +104,6 @@ export default function DropDownMenu() {
           </div>
         </div>
       </div>
-      {/* <Menu.Item className="p-0 bg-trans">
-        <div className="d-flex py-2 pr-2 pr-lg-4 mx-auto text-right text-danger align-items-center small">
-          <i className="fas fa-sign-out-alt pr-1 ml-auto"></i> {t("lgout")}
-        </div>
-      </Menu.Item> */}
     </Menu>
   );
 }

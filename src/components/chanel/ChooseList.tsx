@@ -13,17 +13,29 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
-function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platform, list }: any) {
+
+interface props {
+  nextStep: () => void;
+  handleChangeList: (key: string) => void;
+  values: props;
+  step: () => void;
+  prevStep: () => void;
+  platform: platformType;
+  list: string;
+}
+
+function ChooseList(props: props) {
   const history = useHistory();
 
+  const { handleChangeList, values, step, prevStep, platform, list } = props;
   const handleRoute = () => {
     history.push('/home');
   };
 
-  const Continue = (e: any) => {
-    e.preventDefault();
-    nextStep();
-  };
+  //const Continue = (e: any) => {
+  //  e.preventDefault();
+  //  nextStep();
+  //};
   const Previous = (e: any) => {
     e.preventDefault();
     prevStep();
@@ -51,7 +63,7 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                       name="product"
                       className="card-input-element"
                       value={'catalog'}
-                      onChange={(e) => handleChangeList('catalog')}
+                      onChange={() => handleChangeList('catalog')}
                     />
                     <div
                       className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0
@@ -86,7 +98,7 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                       name="product"
                       className="card-input-element"
                       value={'Manual'}
-                      onChange={(e) => handleChangeList('manual')}
+                      onChange={() => handleChangeList('manual')}
                     />
                     <div
                       className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 
@@ -121,7 +133,7 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                       name="product"
                       className="card-input-element"
                       value={'bulk'}
-                      onChange={(e) => handleChangeList('bulk')}
+                      onChange={() => handleChangeList('bulk')}
                     />
                     <div
                       className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0 
@@ -158,7 +170,7 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                           name="product"
                           className="card-input-element"
                           value={'we'}
-                          onChange={(e) => handleChangeList('we')}
+                          onChange={() => handleChangeList('we')}
                         />
                         <div
                           className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1
@@ -209,12 +221,12 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                         {list == 'catalog'
                           ? ' Catalog Listing'
                           : list == 'manual'
-                          ? ' Manual Listing'
-                          : list == 'bulk'
-                          ? 'Manual Listing'
-                          : list == 'we'
-                          ? 'We List for you'
-                          : ''}
+                            ? ' Manual Listing'
+                            : list == 'bulk'
+                              ? 'Manual Listing'
+                              : list == 'we'
+                                ? 'We List for you'
+                                : ''}
                       </h5>
                       <div>{t('favsupp')}</div>
                     </div>

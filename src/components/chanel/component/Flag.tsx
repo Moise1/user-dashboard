@@ -8,7 +8,7 @@ export interface FlagProps {
   slug?: string;
   flag?: string;
   location?: string;
-  handleChangeLocation?: (newLoc: string) => void;
+  handleChangeLocation?: (newLocationName: string) => void;
   currentPlatform?: platformType;
 }
 
@@ -27,7 +27,7 @@ export default function Flag(props: FlagProps) {
           name="product"
           className="card-input-flag d-none"
           value={'storelocation'}
-          onChange={(e) => handleChangeLocation?.(name)}
+          onChange={() => handleChangeLocation?.(name)}
         />
         <div className="panel panel-default mx-auto w-fit m-0 p-0 card-input rounded-circle">
           <img
