@@ -1,0 +1,19 @@
+﻿:root {
+    --color-262E80: #262e80;
+    --color-fff: #fff;
+    --color-000: #000;
+    --color-5e69db: #5e69db;
+    /* --- named colours --- */
+    --active-bg: #5e69db;
+    --bgInputLight: #f2f8ff;
+    --bgBlue: #5e84db;
+    --dBlue: #262e80;
+    /* font size */
+    /*--font-large: 18px;
+    --font-medium: 16px;
+    --font-small: 14px;*/
+
+    --font-large: 18px;
+    --font-medium: 16px;
+    --font-small: 14px;
+}

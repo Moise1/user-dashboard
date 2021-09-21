@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+@import '_variables.css';
+
 body {
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
@@ -62,10 +64,10 @@ label {
   border-color: #262e80 !important;
 }
 .bg-input-light {
-  background-color: #f2f8ff;
+  background-color: var(--bgInputLight);
 }
 .bg-blue {
-  background-color: #5e84db;
+  background-color: var(--bgBlue);
 }
 .d-blue {
   color: #262e80;
@@ -181,7 +183,7 @@ table {
 
 .ant-table-tbody > tr > td:nth-child(8) {
   color: rgb(101, 173, 101) !important;
-  font-size: 18px;
+  font-size: var(--font-large);
   font-weight: 500;
 }
 
@@ -190,16 +192,16 @@ table {
 .ant-table-tbody > tr > td:nth-child(9),
 .ant-table-tbody > tr > td:nth-child(10),
 .ant-table-tbody > tr > td:nth-child(11) {
-  color: #262e80 !important;
-  font-size: 18px;
-  font-weight: 500;
+    color: #262e80 !important;
+    font-size: var(--font-large);
+    font-weight: 500;
 }
 
 .ant-table-tbody > tr > td:nth-child(3),
 .ant-table-tbody > tr > td:nth-child(4) {
-  color: #5763de !important;
-  font-size: 18px;
-  font-weight: 500;
+    color: #5763de !important;
+    font-size: var(--font-large);
+    font-weight: 500;
 }
 /* .ant-table-tbody > tr > td:nth-child(4) {
   text-decoration: underline;
@@ -319,14 +321,14 @@ table {
 }
 
 .ant-table-thead > tr > th {
-  position: relative;
-  color: var(--color-262E80) !important ;
-  font-weight: bold !important ;
-  font-size: 18px !important;
-  text-align: left;
-  background: unset !important ;
-  /* border-bottom: 1px solid #f0f0f0; */
-  /* transition: background 0.3s ease; */
+    position: relative;
+    color: var(--color-262E80) !important;
+    font-weight: bold !important;
+    font-size: var(--font-large) !important;
+    text-align: left;
+    background: unset !important;
+    /* border-bottom: 1px solid #f0f0f0; */
+    /* transition: background 0.3s ease; */
 }
 
 .ant-table-thead > tr > th,

@@ -29,7 +29,6 @@ export default function Sidebar(props: Props) {
   const history = useHistory();
 
   const routeChange = () => {
-    // const path = 'newPath';
     history.push('/home');
   };
   const { collapsed, staticvalue, togglestatic } = props;
@@ -52,9 +51,7 @@ export default function Sidebar(props: Props) {
                 zIndex: 999999
               }}
             >
-              {collapsed ? (
-                ''
-              ) : (
+              {!!collapsed && (
                 <>
                   <div className="ml-auto float-right m-2">
                     {staticvalue ? (
@@ -204,20 +201,6 @@ export default function Sidebar(props: Props) {
                 </li>
               </Menu.Item>
             </SubMenu>
-            {/* <Menu.Item
-          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
-          key="6"
-          icon={
-            <img
-              className="active-white-svg"
-              src={services}
-              height={20}
-              alt=""
-            />
-          }
-        >
-          {t("srvc")} <i className="fas fa-sort-down text-dark ml-2"></i>
-        </Menu.Item> */}
             <SubMenu
               key="sub5"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
@@ -244,15 +227,6 @@ export default function Sidebar(props: Props) {
                 </li>
               </Menu.Item>
             </SubMenu>
-            {/* <Menu.Item
-          style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
-          key="7"
-          icon={
-            <img className="active-white-svg" src={help} height={20} alt="" />
-          }
-        >
-          {t("hlp")} <i className="fas fa-sort-down text-dark ml-4 pl-1"></i>
-        </Menu.Item> */}
           </Menu>
           <div className="logout-icon d-flex justify-content-end align-items-center z-10">
             <span className="mx-2 ">
@@ -289,12 +263,6 @@ export default function Sidebar(props: Props) {
                 />
               </svg>
             </span>
-            {/*
-                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                   */}
-
             <span className="d-none-icon">Logout</span>
           </div>
         </div>

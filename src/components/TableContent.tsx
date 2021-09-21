@@ -9,12 +9,9 @@ import SmallTabs from './SmallComponents/SmallTabs';
 import { columns } from '../data';
 import PaginationTable from './PaginationTable';
 
-console.log(useTranslation);
-
 const data: any = [];
 const windowwidth = window.innerWidth;
 
-console.log(windowwidth);
 for (let i = 0; i < 26; i++) {
   data.push({
     key: i,
@@ -101,12 +98,6 @@ function TableContent() {
             <div className="col-lg-6 col-md-8 mb-3">
               <div className="d-flex justify-content-around mt-2 mr-3 bg-f2f8ff br-15 p-2">
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Edit ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Edit <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -115,13 +106,6 @@ function TableContent() {
                 )}
                 <span className="border-left-tab"></span>
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Copy ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   border={true}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Copy <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -131,12 +115,6 @@ function TableContent() {
                 <span className="border-left-tab"></span>
 
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Optimize ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
                   <div className="listing-tabs">
                     Optimize <span>{selectedRowKeys.length}</span> Listings
                   </div>

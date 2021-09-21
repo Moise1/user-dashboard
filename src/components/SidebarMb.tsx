@@ -6,10 +6,10 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 interface props {
   _ignored?: number;
 }
+setTranslations({ en });
+setDefaultLanguage('en');
 
 function SidebarMb(_: props) {
-  setTranslations({ en });
-  setDefaultLanguage('en');
   const t = useTranslation();
   return (
     <div>
@@ -22,13 +22,13 @@ function SidebarMb(_: props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto w-fit">
-              <Nav.Link href="#home"> {t('ds')}</Nav.Link>
-              <Nav.Link href="#link"> {t('cat')}</Nav.Link>
-              <Nav.Link href="#link"> {t('ln')}</Nav.Link>
-              <Nav.Link href="/home"> {t('ls')}</Nav.Link>
+              <Nav.Link href="#home">{t('ds')}</Nav.Link>
+              <Nav.Link href="#link">{t('cat')}</Nav.Link>
+              <Nav.Link href="#link">{t('ln')}</Nav.Link>
+              <Nav.Link href="/home">{t('ls')}</Nav.Link>
               <Nav.Link href="#link">{t('set')}</Nav.Link>
-              <Nav.Link href="#link"> {t('srvc')}</Nav.Link>
-              <Nav.Link href="#link"> {t('hlp')}</Nav.Link>
+              <Nav.Link href="#link">{t('srvc')}</Nav.Link>
+              <Nav.Link href="#link">{t('hlp')}</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

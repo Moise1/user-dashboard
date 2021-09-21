@@ -3,7 +3,7 @@
     <ProjectGuid>18beeb9f-6558-408c-86b6-5ea884a1a3c0</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <StartupCommand>set BROWSER=none&amp;&amp;npm start</StartupCommand>
+    <StartupCommand>set BROWSER=none&amp;&amp;yarn start</StartupCommand>
     <JavaScriptTestRoot>src\</JavaScriptTestRoot>
     <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
   </PropertyGroup>

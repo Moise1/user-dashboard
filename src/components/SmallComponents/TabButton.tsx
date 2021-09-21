@@ -13,7 +13,7 @@ export default function TabButton(props: Props) {
       <button
         onClick={onChangeTab}
         className={`btn px-lg-3 px-2 ${
-          active == index ? 'bg-5e69db py-2 foucs-none fs-18 fw-bold text-white' : 'bg-trans fs-18 fw-bold c-262e80'
+          active == index ? 'activeButton  py-2 focus-none fs-18 fw-bold text-white' : 'bg-trans fs-18 fw-bold c-262e80'
         } border-0 br-8 py-1`}
       >
         {title}

@@ -1,24 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-:root {
-  --color-262E80: #262e80;
-  --color-fff: #fff;
-  --color-000: #000;
-  --color-5e69db: #5e69db;
-  /* font size */
-  --font-18: 18px;
-  --font-16: 16px;
-  --font-14: 14px;
-}
+@import '_variables.css';
 
 .fs-14 {
-  font-size: var(--font-14);
+  font-size: var(--font-small);
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  color: var(--color-fff) !important;
-  /* font-size: var(--font-18) !important; */
-  background-color: var(--color-5e69db) !important ;
+    color: var(--color-fff) !important;
+    /* font-size: var(--font-18) !important; */
+    background-color: var(--active-bg) !important;
 }
 .ant-menu-submenu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   /* font-size: var(--font-18) !important; */
@@ -28,12 +19,12 @@
 /* .ant-menu-item:hover {
   color: var(--color-fff) !important;
   font-size: var(--font-18) !important;
-  background-color: var(--color-5e69db) !important ;
+  background-color: var(--active-bg) !important ;
 } */
 /* .ant-menu-submenu-title:hover {
   color: var(--color-fff) !important;
   font-size: var(--font-18) !important;
-  background-color: var(--color-5e69db) !important ;
+  background-color: var(--active-bg) !important ;
 }
 .ant-menu-submenu-title:hover path circle {
   stroke: white !important;
@@ -61,13 +52,13 @@
 }
 
 .quota-head {
-  font-size: var(--font-18);
+  font-size: var(--font-large);
   color: var(--color-262E80);
   font-weight: bold;
 }
 
 .quota-price {
-  font-size: var(--font-16);
+  font-size: var(--font-medium);
   font-weight: normal;
   color: var(--color-262E80);
 }
@@ -126,11 +117,11 @@
   box-shadow: unset !important;
 }
 
-.bg-5e69db {
-  background-color: var(--color-5e69db);
+.activeButton {
+    background-color: var(--active-bg);
 }
 
-.foucs-none:focus {
+.focus-none:focus {
   outline: unset !important;
   box-shadow: unset !important;
 }
