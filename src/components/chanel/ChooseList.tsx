@@ -14,11 +14,22 @@ import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
 
+
+
+export interface chooseListValues {
+  platform: platformType;
+  storeLocation: string;
+  api: string;
+  user: string;
+  list: string;
+  extension: string;
+}
+
 interface props {
   nextStep: () => void;
   handleChangeList: (key: string) => void;
-  values: props;
-  step: () => void;
+  values: chooseListValues;
+  step: number;
   prevStep: () => void;
   platform: platformType;
   list: string;

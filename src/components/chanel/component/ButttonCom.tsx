@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function ButttonCom(props: any) {
+interface props {
+  title: string;
+  onClick: (_:unknown) => void;
+  disabled: boolean;
+}
+
+export default function ButttonCom(props: props) {
   const { title, onClick, disabled } = props;
 
   return (

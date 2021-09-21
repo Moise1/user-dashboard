@@ -11,16 +11,16 @@ setDefaultLanguage('en');
 
 interface props {
   nextStep: () => void;
-  handleChange: () => void;
-  values: any;
   step: number;
-  flag: string;
   prevStep: () => void;
   platform: platformType;
+
+
+  handleChangeApi: (newApi: string) => void;
 }
 function Account(props: props) {
   const { nextStep, step, prevStep, platform } = props;
-
+  //_handleChangeApi = handleChangeApi
   const Continue = (e: any) => {
     e.preventDefault();
     nextStep();
@@ -53,15 +53,6 @@ function Account(props: props) {
                   {platform == 'amazon' ? <i>{t('acntchk')}</i> : ''}
                 </div>
                 <div className="text-left col-12 col-md-10 mx-auto">
-                  {/* {platform !== "shopify" ? (
-                    ""
-                  ) : (
-                    <div className="w-100 text-center">
-                      <button className="h6 my-3 bg-d-purple br-8 text-white btn py-2 px-3 mx-auto">
-                        Yes, I’m a seller on Shopify
-                      </button>
-                    </div>
-                  )} */}
                   <h6 className="font-weight-bold w-100">
                     {platform == 'ebay' ? t('noebay') : platform == 'amazon' ? t('noamz') : t('noshop')}
                   </h6>

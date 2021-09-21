@@ -6,6 +6,8 @@
 
 changedFiles="$(git diff-tree -r --name-status --no-commit-id ORIG_HEAD HEAD)"
 
+changedFilesNoStatus="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
 printf "$changedFiles\n"
 
 runOnChange() {
@@ -32,9 +34,9 @@ if haschanged "package-lock.json"; then
     exit 1;
 fi
 
-
+npx tsc
 yarn lint
-git add .
+git add $changedFilesNoStatus
 
 #warn "caca"
 #TXT=$(warn "package-lock.json") && runOnChange package-lock.json "$TEXT"

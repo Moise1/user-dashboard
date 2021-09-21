@@ -108,7 +108,7 @@ function StoreLocation(props: StoreLocationProps) {
                   </h6>
                 </div>
                 {flags.map((i) => (
-                  <React.Fragment key={i}>
+                  <React.Fragment key={i.name}>
                     <Flag
                       platform={platform}
                       currentPlatform={i.platform}

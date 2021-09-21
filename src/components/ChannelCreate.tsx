@@ -1,14 +1,14 @@
 import React from 'react';
 import Account from './chanel/Account';
 import AccountConnect from './chanel/AccountConnect';
-import ChooseList from './chanel/ChooseList';
+import ChooseList, { chooseListValues } from './chanel/ChooseList';
 import PlatForm from './chanel/PlatForm';
 import StoreLocation from './chanel/StoreLocation';
 import UserName from './chanel/UserName';
 
 interface state {
   step: number;
-  platform: string;
+  platform: platformType;
   storeLocation: string;
   flag: string;
   location: string;
@@ -18,12 +18,16 @@ interface state {
   list: string;
 }
 
-class ChannelCreate extends React.Component<unknown, state> {
-  constructor(props) {
+interface props {
+  _ignored?: boolean;
+}
+
+class ChannelCreate extends React.Component<props, state> {
+  constructor(props: any) {
     super(props);
     this.state = {
       step: 1,
-      platform: '',
+      platform: 'ebay',
       storeLocation: '',
       flag: '',
       location: '',
@@ -42,11 +46,11 @@ class ChannelCreate extends React.Component<unknown, state> {
     const { step } = this.state;
     this.setState({ step: step + 1 });
   };
-  handleChange = (input: any) => (e: any) => {
-    const nv = { [input]: e.target.value };
-    this.setState({ ...nv });
+  handleChange = (input: keyof state) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const ns = { ...this.state, [input]: e.target.value };
+    this.setState(ns);
   };
-  handleChangePlatform = (value: string) => {
+  handleChangePlatform = (value: platformType) => {
     this.setState({ platform: value });
   };
   handleChangeLocation = (value: string) => {
@@ -67,15 +71,14 @@ class ChannelCreate extends React.Component<unknown, state> {
 
   render() {
     const { step, platform, storeLocation, api, user, list, extension } = this.state;
-    const values = { platform, storeLocation, api, user, list, extension };
+    const values: chooseListValues = { platform, storeLocation, api, user, list, extension };
 
     switch (step) {
     case 1:
       return (
         <PlatForm
-          platform={this.state.platform}
+          platform={this.state.platform || 'ebay'}
           nextStep={this.nextStep}
-          handleChange={this.handleChange}
           values={values}
           step={step}
           handleChangePlatform={this.handleChangePlatform}
@@ -98,8 +101,7 @@ class ChannelCreate extends React.Component<unknown, state> {
           platform={this.state.platform}
           nextStep={this.nextStep}
           prevStep={this.prevStep}
-          // handleChangeApi={this.handleChangeApi}
-          values={values}
+          handleChangeApi={this.handleChangeApi}
           step={step}
         />
       );
