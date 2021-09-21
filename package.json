@@ -20,7 +20,7 @@
     "react-multi-lang": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
+    "typescript": "^4.4.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -28,14 +28,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install && npx husky-init",
-    "postinstall": "husky install && npx husky-init"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "npx eslint --fix src/**/*.{ts,tsx,js}",
+    "prettier": "npx prettier -w src/**/*.{ts,tsx,js,css,html}",
+    "xprepare": "husky install && npx husky-init",
+    "xpostinstall": "husky install && npx husky-init"
   },
   "browserslist": {
     "production": [
@@ -50,14 +46,20 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.8",
-    "husky": "^7.0.0",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.4.1",
+    "@testing-library/dom": "7.31.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@testing-library/dom": "7.31.2"
+    "@types/react-router-dom": "^5.1.8",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.3",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1"
   },
   "husky": {
     "hooks": {

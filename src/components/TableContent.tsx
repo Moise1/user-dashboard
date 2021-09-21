@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { Table } from "antd";
-import { setTranslations, setDefaultLanguage, useTranslation } from "react-multi-lang";
+import React, { useState, useEffect } from 'react'
+import { Table } from 'antd'
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
 
-import img from "../assets/icon.png";
-import doticon from "../assets/doticon.svg";
-import editicon from "../assets/editicon.svg";
-import SmallTabs from "./SmallComponents/SmallTabs";
-import { columns } from "../data";
-import PaginationTable from "./PaginationTable";
+import img from '../assets/icon.png'
+import doticon from '../assets/doticon.svg'
+import editicon from '../assets/editicon.svg'
+import SmallTabs from './SmallComponents/SmallTabs'
+import { columns } from '../data'
+import PaginationTable from './PaginationTable'
 
+console.log(useTranslation)
 
+const data: any = []
+const windowwidth = window.innerWidth
 
-
-console.log(useTranslation);
-
-
-const data: any = [];
-const windowwidth = window.innerWidth;
-
-
-console.log(windowwidth);
+console.log(windowwidth)
 for (let i = 0; i < 26; i++) {
   data.push({
     key: i,
 
     img: <img src={img} height={30} alt="" />,
     item: 1234546789,
-    src: "Amazon",
+    src: 'Amazon',
     title: (
       <div className="w-title align-items-center my-auto ">
-        {" "}
-        <p className="mb-0">Title of the product</p>{" "}
+        {' '}
+        <p className="mb-0">Title of the product</p>{' '}
       </div>
     ),
     sell: 30.4,
@@ -48,19 +43,19 @@ for (let i = 0; i < 26; i++) {
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>
-    ),
-  });
+    )
+  })
 }
 
 function TableContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectedRowKeys(selectedRowKeys);
-    console.log(selectedRowKeys.length);
-    const selected = selectedRowKeys.length;
-  };
+    setSelectedRowKeys(selectedRowKeys)
+    console.log(selectedRowKeys.length)
+    const selected = selectedRowKeys.length
+  }
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -69,39 +64,35 @@ function TableContent() {
       Table.SELECTION_INVERT,
       Table.SELECTION_NONE,
       {
-        key: "odd",
-        text: "Select Odd Row",
+        key: 'odd',
+        text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return false;
-              }
-              return true;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return false
             }
-          );
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
+            return true
+          })
+          setSelectedRowKeys(newSelectedRowKeys)
+        }
       },
       {
-        key: "even",
-        text: "Select Even Row",
+        key: 'even',
+        text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return true;
-              }
-              return false;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return true
             }
-          );
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
-      },
-    ],
-  };
+            return false
+          })
+          setSelectedRowKeys(newSelectedRowKeys)
+        }
+      }
+    ]
+  }
 
   return (
     <React.Fragment>
@@ -121,7 +112,7 @@ function TableContent() {
                     Edit <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
                 <span className="border-left-tab"></span>
                 {selectedRowKeys.length ? (
@@ -136,7 +127,7 @@ function TableContent() {
                     Copy <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
                 <span className="border-left-tab"></span>
 
@@ -151,61 +142,51 @@ function TableContent() {
                     Optimize <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
           {selectedRowKeys.length ? (
             <div className="col-auto">
-              <span className="active-items-num d-inline-block pr-3">
-                26 active
-              </span>
+              <span className="active-items-num d-inline-block pr-3">26 active</span>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
-        <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data}
-        />
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
 
         <PaginationTable />
       </div>
     </React.Fragment>
-  );
+  )
 }
 
 function TableContentold() {
-  const [selectedRowKeys, setSelectRowKeys] = useState([]);
-  const [data1, setData] = useState([]);
+  const [selectedRowKeys, setSelectRowKeys] = useState([])
+  const [data1, setData] = useState([])
 
-  const t = useTranslation();
+  const t = useTranslation()
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectRowKeys(selectedRowKeys);
-    const selected = selectedRowKeys.length;
-  };
+    setSelectRowKeys(selectedRowKeys)
+    const selected = selectedRowKeys.length
+  }
 
   useEffect(() => {
-    const data: any = [];
+    const data: any = []
     for (let i = 0; i < 46; i++) {
       data.push({
         key: i,
         img: <img src={img} height={30} alt="" />,
         // item: 1234546789,
-        src: "Amazon",
+        src: 'Amazon',
         title: (
           <div className="w-title">
-            {" "}
-            <u>
-              {t(
-                "Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesua ff"
-              )}
-            </u>{" "}
+            {' '}
+            <u>{t('Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesua ff')}</u>{' '}
           </div>
         ),
         sell: 30.4,
@@ -216,11 +197,11 @@ function TableContentold() {
           <div className="pl-1">
             <i className="d-green far fa-check-circle"></i> 2
           </div>
-        ),
-      });
+        )
+      })
     }
-    setData(data);
-  }, []);
+    setData(data)
+  }, [])
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -229,82 +210,78 @@ function TableContentold() {
       Table.SELECTION_INVERT,
       Table.SELECTION_NONE,
       {
-        key: "odd",
-        text: "Select Odd Row",
+        key: 'odd',
+        text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return false;
-              }
-              return true;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return false
             }
-          );
-          setSelectRowKeys(newSelectedRowKeys);
-        },
+            return true
+          })
+          setSelectRowKeys(newSelectedRowKeys)
+        }
       },
       {
-        key: "even",
-        text: "Select Even Row",
+        key: 'even',
+        text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return true;
-              }
-              return false;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return true
             }
-          );
-          setSelectRowKeys(newSelectedRowKeys);
-        },
-      },
-    ],
-  };
+            return false
+          })
+          setSelectRowKeys(newSelectedRowKeys)
+        }
+      }
+    ]
+  }
 
   const columns = [
     {
-      title: "",
-      dataIndex: "img",
-      key: "img",
+      title: '',
+      dataIndex: 'img',
+      key: 'img'
     },
     {
-      title: `${t("Source")}`,
-      dataIndex: "src",
-      key: "src",
+      title: `${t('Source')}`,
+      dataIndex: 'src',
+      key: 'src'
     },
     {
-      title: `${t("Title")}`,
-      dataIndex: "title",
-      key: "title",
+      title: `${t('Title')}`,
+      dataIndex: 'title',
+      key: 'title'
     },
     {
-      title: `${t("Sell")}`,
-      dataIndex: "sell",
-      key: "sell",
+      title: `${t('Sell')}`,
+      dataIndex: 'sell',
+      key: 'sell'
     },
     {
-      title: `${t("Cost")}`,
-      dataIndex: "cost",
-      key: "cost",
+      title: `${t('Cost')}`,
+      dataIndex: 'cost',
+      key: 'cost'
     },
     {
-      title: `${t("Profile")}`,
-      dataIndex: "profile",
-      key: "profile",
+      title: `${t('Profile')}`,
+      dataIndex: 'profile',
+      key: 'profile'
     },
     {
-      title: `${t("Markup")}`,
-      dataIndex: "markup",
-      key: "markup",
+      title: `${t('Markup')}`,
+      dataIndex: 'markup',
+      key: 'markup'
     },
     {
-      title: `${t("Stock")}`,
-      dataIndex: "stock",
-      key: "stock",
-    },
-  ];
+      title: `${t('Stock')}`,
+      dataIndex: 'stock',
+      key: 'stock'
+    }
+  ]
 
   return (
     <React.Fragment>
@@ -315,47 +292,40 @@ function TableContentold() {
               <div className="row d-blue">
                 {selectedRowKeys.length ? (
                   <SmallTabs
-                    title={`${t("edt")} ${selectedRowKeys.length} ${windowwidth < 900 ? "" : t("acnt")
-                      } `}
+                    title={`${t('edt')} ${selectedRowKeys.length} ${windowwidth < 900 ? '' : t('acnt')} `}
                     last={false}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
                 {selectedRowKeys.length ? (
                   <SmallTabs
-                    title={`${t("copy")}  ${selectedRowKeys.length} ${windowwidth < 900 ? "" : t("ls")
-                      } `}
+                    title={`${t('copy')}  ${selectedRowKeys.length} ${windowwidth < 900 ? '' : t('ls')} `}
                     border={true}
                     last={false}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
                 {selectedRowKeys.length ? (
                   <SmallTabs
-                    title={`${t("opt")} ${selectedRowKeys.length} ${windowwidth < 900 ? "" : t("ls")
-                      } `}
+                    title={`${t('opt')} ${selectedRowKeys.length} ${windowwidth < 900 ? '' : t('ls')} `}
                     last={false}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
-        <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data1}
-        />
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data1} />
       </div>
     </React.Fragment>
-  );
+  )
 }
 
-export default TableContentold;
-export { TableContentold };
+export default TableContentold
+export { TableContentold }

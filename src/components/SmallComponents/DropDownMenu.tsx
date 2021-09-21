@@ -1,12 +1,14 @@
-import { Menu, Button } from "antd";
-import { Progress } from "antd";
-import { useTranslation } from "react-multi-lang";
-import HeaderDropDownItem from "../SmallComponents/HeaderDropDownItem";
-import plus from "../../assets/plus.svg";
-import { Link, NavLink } from "react-router-dom";
-import search_icon from "../../assets/search.svg";
+import React from 'react'
+
+import { Menu, Button } from 'antd'
+import { Progress } from 'antd'
+import { useTranslation } from 'react-multi-lang'
+import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem'
+import plus from '../../assets/plus.svg'
+import { Link, NavLink } from 'react-router-dom'
+import search_icon from '../../assets/search.svg'
 export default function DropDownMenu() {
-  const t = useTranslation();
+  const t = useTranslation()
   return (
     <Menu className="drop-down_effect nav-dropdown">
       <div className="drop-down">
@@ -30,10 +32,7 @@ export default function DropDownMenu() {
                 placeholder="Search..."
               />
               <div className="input-group-prepend">
-                <button
-                  className="input-group-text br-10 bg-white"
-                  id="inputGroup-sizing-sm"
-                >
+                <button className="input-group-text br-10 bg-white" id="inputGroup-sizing-sm">
                   <img src={search_icon} height="15" alt="" />
                 </button>
               </div>
@@ -64,12 +63,7 @@ export default function DropDownMenu() {
                   height="16.903"
                   viewBox="0 0 16.903 16.903"
                 >
-                  <path
-                    id="Path_65"
-                    data-name="Path 65"
-                    d="M0,0H16.9V16.9H0Z"
-                    fill="none"
-                  />
+                  <path id="Path_65" data-name="Path 65" d="M0,0H16.9V16.9H0Z" fill="none" />
                   <ellipse
                     id="Ellipse_33"
                     data-name="Ellipse 33"
@@ -80,9 +74,9 @@ export default function DropDownMenu() {
                     transform="translate(1.434 1.036)"
                     fill="none"
                     stroke="#535353"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                   />
                   <line
                     id="Line_35"
@@ -91,9 +85,9 @@ export default function DropDownMenu() {
                     transform="translate(4.93 8.027)"
                     fill="none"
                     stroke="#535353"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                   />
                   <line
                     id="Line_36"
@@ -102,9 +96,9 @@ export default function DropDownMenu() {
                     transform="translate(8.425 4.532)"
                     fill="none"
                     stroke="#535353"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                   />
                 </svg>
               </div>
@@ -118,5 +112,5 @@ export default function DropDownMenu() {
         </div>
       </Menu.Item> */}
     </Menu>
-  );
+  )
 }

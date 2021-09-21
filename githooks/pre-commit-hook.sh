@@ -32,6 +32,9 @@ if haschanged "package-lock.json"; then
     exit 1;
 fi
 
+
+yarn prettier
+
 #warn "caca"
 #TXT=$(warn "package-lock.json") && runOnChange package-lock.json "$TEXT"
 #TXT=$(warn "yarn-lock.json") && runOnChange yarn-lock.json "$TEXT"

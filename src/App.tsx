@@ -1,31 +1,25 @@
-import "./App.css";
-import "antd/dist/antd.css";
-import React from "react";
-import Home from "./views/Home";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-import ChannelCreate from "./components/ChannelCreate";
+import './App.css'
+import 'antd/dist/antd.css'
+import React from 'react'
+import Home from './views/Home'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import ChannelCreate from './components/ChannelCreate'
 class App extends React.Component {
   state = {
     collapsed: true,
-    staticvalue: false,
+    staticvalue: false
   };
 
   toggle = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
-    });
+      collapsed: !this.state.collapsed
+    })
   };
 
   togglestatic = () => {
     this.setState({
-      staticvalue: !this.state.staticvalue,
-    });
+      staticvalue: !this.state.staticvalue
+    })
   };
 
   render() {
@@ -44,14 +38,14 @@ class App extends React.Component {
                   <>
                     <ChannelCreate />
                   </>
-                );
+                )
               }}
             />
           </Switch>
         </Router>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,35 +1,34 @@
-import { useState } from "react";
-import { Layout } from "antd";
+import * as React from 'react'
 
-import TableContent from "../components/TableContent";
-import ContentLayout from "../components/ContentLayout";
-import HeaderLayout from "../components/HeaderLayout";
-import Sidebar from "../components/Sidebar";
-import ToggleButton from "../components/ToggleButton";
-import TabsList from "../components/SmallComponents/TabsList";
-import SearchBar from "../components/SmallComponents/SearchBar";
-import Topbar from "../components/Topbar";
-import SidebarMb from "../components/SidebarMb";
-import SidbarCover from "../components/SidbarCover";
-import PendingDataContent from "../components/PendingDataContent";
-import styles from "./Home.module.css";
-import TerminatedDataContent from "../components/TerminatedDataContent";
+import { useState } from 'react'
+import { Layout } from 'antd'
+
+import TableContent from '../components/TableContent'
+import ContentLayout from '../components/ContentLayout'
+import HeaderLayout from '../components/HeaderLayout'
+import Sidebar from '../components/Sidebar'
+import TabsList from '../components/SmallComponents/TabsList'
+import SearchBar from '../components/SmallComponents/SearchBar'
+import Topbar from '../components/Topbar'
+import SidebarMb from '../components/SidebarMb'
+import SidbarCover from '../components/SidbarCover'
+import styles from './Home.module.css'
 
 export default function Home() {
-  const [collapse, setCollapse] = useState(true);
-  const [staticValue, setStaticValue] = useState(false);
+  const [collapse, setCollapse] = useState(true)
+  const [staticValue, setStaticValue] = useState(false)
 
   const toggleCollapse = () => {
-    setCollapse(!collapse);
-  };
+    setCollapse(!collapse)
+  }
 
   const toggleStaticValue = () => {
-    setStaticValue(!staticValue);
-  };
+    setStaticValue(!staticValue)
+  }
 
   return (
     <>
-      <Topbar title={"Listings"} />
+      <Topbar title={'Listings'} />
 
       <Layout className={`bg-white ${styles.Layout_height}`}>
         <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
@@ -62,5 +61,5 @@ export default function Home() {
         </Layout>
       </Layout>
     </>
-  );
+  )
 }

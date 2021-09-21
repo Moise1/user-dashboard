@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react'
 
 export default function SidbarCover(myProps: any) {
-  const { staticValue, setCollapse, children } = myProps;
+  const { staticValue, setCollapse, children } = myProps
   return (
     <div
       onMouseEnter={() => {
         if (!staticValue) {
-          setCollapse(false);
-          return;
+          setCollapse(false)
+          return
         }
       }}
       onMouseLeave={() => {
         if (!staticValue) {
-          setCollapse(true);
-          return;
+          setCollapse(true)
+          return
         }
       }}
-      className={`d-none d-lg-block ${!staticValue ? "w-sidebar-toggle" : ""}`}
+      className={`d-none d-lg-block ${!staticValue ? 'w-sidebar-toggle' : ''}`}
     >
       {children}
     </div>
-  );
+  )
 }

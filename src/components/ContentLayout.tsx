@@ -1,7 +1,7 @@
-import React from "react";
-import { Layout } from "antd";
+import React from 'react'
+import { Layout } from 'antd'
 
-const { Content } = Layout;
+const { Content } = Layout
 interface Props {
   children: React.ReactNode;
 }
@@ -11,10 +11,10 @@ export default function ContentLayout(props: Props) {
       className="site-layout-background"
       style={{
         padding: 24,
-        minHeight: 280,
+        minHeight: 280
       }}
     >
       {props.children}
     </Content>
-  );
+  )
 }

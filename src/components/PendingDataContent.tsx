@@ -1,43 +1,40 @@
-import { Table } from "antd";
-import React, { useState } from "react";
-import img from "../assets/icon.png";
-import doticon from "../assets/doticon.svg";
-import editicon from "../assets/editicon.svg";
-import SmallTabs from "./SmallComponents/SmallTabs";
-import { columns } from "../components/SmallComponents/PendindData";
-import { tableData } from "./TableData";
+import React, { useState } from 'react'
 
-const data: any = [];
-const windowwidth = window.innerWidth;
+import { Table } from 'antd'
+import img from '../assets/icon.png'
+import { columns } from '../components/SmallComponents/PendindData'
+
+const data: any = []
+const windowwidth = window.innerWidth
 
 for (let i = 0; i < 26; i++) {
   data.push({
     key: i,
     img: <img src={img} height={30} alt="" />,
     item: 1234546789,
-    src: "Amazon",
+    src: 'Amazon',
     title: (
       <div className="w-title align-items-center my-auto ">
-        {" "}
-        <p className="mb-0">Title of the product</p>{" "}
+        {' '}
+        <p className="mb-0">Title of the product</p>{' '}
       </div>
     ),
 
-    status: <div style={{ color: "#7d7d7d" }}>Listing on Amazon</div>,
+    status: <div style={{ color: '#7d7d7d' }}>Listing on Amazon</div>,
     created: <div>13/07/2021 12:56</div>,
-    createdby: <div style={{ color: "#262e80" }}>Nametest</div>,
-  });
+    createdby: <div style={{ color: '#262e80' }}>Nametest</div>
+  })
 }
 
 function PendingDataContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectedRowKeys(selectedRowKeys);
-    console.log(selectedRowKeys.length);
-    const selected = selectedRowKeys.length;
-  };
+    setSelectedRowKeys(selectedRowKeys)
+    console.log(selectedRowKeys.length)
+    const selected = selectedRowKeys.length
+  }
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -46,39 +43,35 @@ function PendingDataContent() {
       Table.SELECTION_INVERT,
       Table.SELECTION_NONE,
       {
-        key: "odd",
-        text: "Select Odd Row",
+        key: 'odd',
+        text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return false;
-              }
-              return true;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return false
             }
-          );
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
+            return true
+          })
+          setSelectedRowKeys(newSelectedRowKeys)
+        }
       },
       {
-        key: "even",
-        text: "Select Even Row",
+        key: 'even',
+        text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter(
-            (key: any, index: any) => {
-              if (index % 2 !== 0) {
-                return true;
-              }
-              return false;
+          let newSelectedRowKeys = []
+          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+            if (index % 2 !== 0) {
+              return true
             }
-          );
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
-      },
-    ],
-  };
+            return false
+          })
+          setSelectedRowKeys(newSelectedRowKeys)
+        }
+      }
+    ]
+  }
 
   return (
     <React.Fragment>
@@ -98,7 +91,7 @@ function PendingDataContent() {
                     Edit <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
                 {selectedRowKeys.length ? (
                   // <SmallTabs
@@ -112,7 +105,7 @@ function PendingDataContent() {
                     Copy <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
                 {selectedRowKeys.length ? (
                   // <SmallTabs
@@ -125,22 +118,18 @@ function PendingDataContent() {
                     Optimize <span>{selectedRowKeys.length}</span> Listings
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
-        <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data}
-        />
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
       </div>
     </React.Fragment>
-  );
+  )
 }
 
-export default PendingDataContent;
+export default PendingDataContent
