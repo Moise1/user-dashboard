@@ -95,7 +95,7 @@ function TableContent() {
 
   return (
     <React.Fragment>
-      <div className="bg-white rounded">
+      <div className="bg-white br-10">
         <div className="row mx-auto  align-items-center justify-content-between">
           {selectedRowKeys.length ? (
             <div className="col-lg-6 col-md-8 mb-3">

@@ -2,11 +2,12 @@ export const DashBoardIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg mr-2 dashboard-icon"
         id="Group_1"
         data-name="Group 1"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path
@@ -65,7 +66,7 @@ export const LeftArrowIcon = () => {
         id="Group_82"
         data-name="Group 82"
         xmlns="http://www.w3.org/2000/svg"
-        width="18.959"
+        width="18.959 "
         height="18.959"
         viewBox="0 0 18.959 18.959"
       >
@@ -95,11 +96,12 @@ export const CatalogIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg mr-2 catalog-icon"
         id="Group_2"
         data-name="Group 2"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path
@@ -171,11 +173,12 @@ export const ListNowIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg mr-2 list-now-icon"
         id="Group_3"
         data-name="Group 3"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path
@@ -227,11 +230,12 @@ export const ListingsIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg listing-icon"
         id="Group_92"
         data-name="Group 92"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path
@@ -290,7 +294,7 @@ export const ListingsIcon = () => {
           y2="0.013"
           transform="translate(6.271 15.052)"
           fill="none"
-          stroke="#fff"
+          stroke="#262e80"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -301,7 +305,7 @@ export const ListingsIcon = () => {
           y2="0.013"
           transform="translate(6.271 22.577)"
           fill="none"
-          stroke="#fff"
+          stroke="#262e80"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
@@ -314,124 +318,16 @@ export const SettingsIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg mr-2"
-        id="Group_95"
-        data-name="Group 95"
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 30.103 30.103"
+        xmlns="http://www.w3.org/2000/svg "
+        width="16"
+        height="16"
+        fill="currentColor"
+        className="bi bi-sliders active-white-svg setting-icon mr-2"
+        viewBox="0 0 16 16"
       >
         <path
-          id="Path_11"
-          data-name="Path 11"
-          d="M0,0H30.1V30.1H0Z"
-          fill="none"
-        />
-        <circle
-          id="Ellipse_3"
-          data-name="Ellipse 3"
-          cx="2.5"
-          cy="2.5"
-          r="2.5"
-          transform="translate(15 4.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_12"
-          data-name="Line 12"
-          x2="10"
-          transform="translate(5 7.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_13"
-          data-name="Line 13"
-          x2="5"
-          transform="translate(20 7.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <circle
-          id="Ellipse_4"
-          data-name="Ellipse 4"
-          cx="2.5"
-          cy="2.5"
-          r="2.5"
-          transform="translate(8 12.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_14"
-          data-name="Line 14"
-          x2="3"
-          transform="translate(5 14.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_15"
-          data-name="Line 15"
-          x2="12"
-          transform="translate(13 14.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <circle
-          id="Ellipse_5"
-          data-name="Ellipse 5"
-          cx="2.5"
-          cy="2.5"
-          r="2.5"
-          transform="translate(19 19.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_16"
-          data-name="Line 16"
-          x2="14"
-          transform="translate(5 22.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-        <line
-          id="Line_17"
-          data-name="Line 17"
-          x2="1"
-          transform="translate(24 22.783)"
-          fill="none"
-          stroke="#262e80"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          fill-rule="evenodd"
+          d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
         />
       </svg>
     </>
@@ -442,11 +338,12 @@ export const ServiceIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg  mr-2"
         id="Group_93"
         data-name="Group 93"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path
@@ -488,11 +385,12 @@ export const HelpIcon = () => {
   return (
     <>
       <svg
+        className="active-white-svg  mr-2 help-icon"
         id="Group_94"
         data-name="Group 94"
         xmlns="http://www.w3.org/2000/svg"
-        width="30.103"
-        height="30.103"
+        width="20"
+        height="20"
         viewBox="0 0 30.103 30.103"
       >
         <path

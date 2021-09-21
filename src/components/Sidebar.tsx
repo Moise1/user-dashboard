@@ -24,6 +24,7 @@ import {
   ServiceIcon,
   SettingsIcon,
   CircleDotIcon,
+  HelpIcon,
 } from "../components/common/Icons";
 import {
   UserOutlined,
@@ -108,12 +109,13 @@ export default function Sidebar(props: Props) {
               key="1"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={
-                <img
-                  className="active-white-svg"
-                  src={dashboard}
-                  height={20}
-                  alt=""
-                />
+                // <img
+                //   className="active-white-svg"
+                //   src={dashboard}
+                //   height={20}
+                //   alt=""
+                // />
+                <DashBoardIcon />
               }
             >
               {t("ds")}
@@ -122,12 +124,13 @@ export default function Sidebar(props: Props) {
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               key="2"
               icon={
-                <img
-                  className="active-white-svg"
-                  src={catalog}
-                  height={20}
-                  alt=""
-                />
+                // <img
+                //   className="active-white-svg"
+                //   src={catalog}
+                //   height={20}
+                //   alt=""
+                // />
+                <CatalogIcon />
               }
             >
               <span className="sidebar_element">{t("cat")}</span>
@@ -136,12 +139,13 @@ export default function Sidebar(props: Props) {
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               key="3"
               icon={
-                <img
-                  className="active-white-svg"
-                  src={listnow}
-                  height={20}
-                  alt=""
-                />
+                // <img
+                //   className="active-white-svg"
+                //   src={listnow}
+                //   height={20}
+                //   alt=""
+                // />
+                <ListNowIcon />
               }
             >
               {t("ln")}
@@ -150,10 +154,13 @@ export default function Sidebar(props: Props) {
               key="4"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={
-                <i
-                  onClick={routeChange}
-                  className="fas active-white-svg fa-list d-blue"
-                ></i>
+                // <i
+                //   onClick={routeChange}
+                //   className="fas active-white-svg fa-list d-blue"
+                // ></i>
+                <span onClick={routeChange}>
+                  <ListingsIcon />
+                </span>
               }
             >
               <button
@@ -163,17 +170,11 @@ export default function Sidebar(props: Props) {
                 {t("ls")}
               </button>
             </Menu.Item>
+            {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               key="sub3"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
-              icon={
-                <img
-                  className="active-white-svg"
-                  src={settings}
-                  height={20}
-                  alt=""
-                />
-              }
+              icon={<SettingsIcon />}
               title="Settings"
             >
               {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}
@@ -223,7 +224,6 @@ export default function Sidebar(props: Props) {
                 </li>
               </Menu.Item>
               <Menu.Item key="15">
-                {" "}
                 <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
                   {" "}
                   <span className="mr-3">
@@ -241,12 +241,13 @@ export default function Sidebar(props: Props) {
               key="sub4"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={
-                <img
-                  className="active-white-svg"
-                  src={services}
-                  height={20}
-                  alt=""
-                />
+                // <img
+                //   className="active-white-svg"
+                //   src={services}
+                //   height={20}
+                //   alt=""
+                // />
+                <ServiceIcon />
               }
               title="Services"
             >
@@ -297,14 +298,7 @@ export default function Sidebar(props: Props) {
             <SubMenu
               key="sub5"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
-              icon={
-                <img
-                  className="active-white-svg"
-                  src={help}
-                  height={20}
-                  alt=""
-                />
-              }
+              icon={<HelpIcon />}
               title="Help"
             >
               {/* {t("set")} <i className="fas fa-sort-down text-dark ml-2"></i> */}

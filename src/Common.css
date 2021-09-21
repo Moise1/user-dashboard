@@ -11,20 +11,84 @@
   --font-14: 14px;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+}
 .fs-14 {
   font-size: var(--font-14);
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   color: var(--color-fff) !important;
-  /* font-size: var(--font-18) !important; */
   background-color: var(--color-5e69db) !important ;
 }
-.ant-menu-submenu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  /* font-size: var(--font-18) !important; */
+/* .ant-menu-submenu:not(.ant-menu-horizontal) .ant-menu-item-selected:hover {
   background-color: transparent !important;
   color: black !important;
+} */
+.ant-menu-item.ant-menu-item-active:hover {
+  color: var(--color-fff) !important;
+  background-color: var(--color-5e69db) !important;
 }
+.ant-menu-submenu.ant-menu-submenu-active:hover {
+  color: var(--color-fff) !important;
+  background-color: var(--color-5e69db) !important;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-arrow {
+  color: var(--color-fff) !important;
+}
+
+.ant-menu-submenu.ant-menu-submenu-active:hover
+  .ant-menu-submenu-title
+  .ant-menu-title-content {
+  color: var(--color-fff) !important;
+}
+.ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
+  color: unset !important;
+  background-color: unset !important;
+}
+/* HOVER SVG  */
+
+.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
+  stroke: white;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
+  stroke: white;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover svg #Path_10 {
+  stroke: white;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon ellipse {
+  stroke: white;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .setting-icon path {
+  fill: white;
+}
+
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon #Path_13 {
+  stroke: white;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon line {
+  stroke: white;
+}
+.ant-menu-item.ant-menu-item-active:hover .list-now-icon circle {
+  stroke: white;
+}
+.ant-menu-item.ant-menu-item-active:hover .list-now-icon line {
+  stroke: white;
+}
+.ant-menu-item.ant-menu-item-active:hover .dashboard-icon rect {
+  stroke: white;
+}
+.ant-menu-item.ant-menu-item-active:hover .listing-icon line {
+  stroke: white;
+}
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_6,
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_5,
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon line {
+  stroke: white;
+}
+/* HOVER LIST ITEMS  */
 /* .ant-menu-item:hover {
   color: var(--color-fff) !important;
   font-size: var(--font-18) !important;
@@ -233,16 +297,22 @@
   max-width: 260px !important;
   min-width: 260px !important;
   width: 260px !important;
-}
+} */
 
 @media (min-width: 1400px) {
-  .ant-layout-sider:hover {
+  /* .ant-layout-sider:hover {
     flex: 0 0 367px !important;
     max-width: 367px !important;
     min-width: 367px !important;
     width: 367px !important;
-  }
-} */
+  } */
+  /* .w-sidebar-toggle .ant-layout-sider {
+    flex: 0 0 367px !important;
+    max-width: 367px !important;
+    min-width: 367px !important;
+    width: 367px !important;
+  } */
+}
 .listing-tabs span {
   font-weight: 700;
   font-size: 16px;
@@ -351,12 +421,33 @@
 }
 
 .ant-menu-item .ant-menu-title-content {
-  padding-left: 10px;
+  padding-left: 18px;
 }
 .ant-menu-submenu-title .ant-menu-title-content {
-  padding-left: 10px;
+  padding-left: 18px;
 }
 .ant-menu.ant-menu-sub {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.nav-shadow {
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+}
+.header-box-shadow {
+  box-shadow: 0px 3px 6px rgba(35, 56, 193, 0.16);
+}
+
+.position-stickey {
+  position: sticky;
+}
+.top-0 {
+  top: 0;
+}
+.z-100 {
+  z-index: 100;
+}
+@media (min-width: 1400px) {
+  .w-xxl-251px {
+    width: 251px;
+  }
 }
