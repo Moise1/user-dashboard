@@ -34,8 +34,8 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
                     {platform == 'ebay'
                       ? t('doyou') + ' eBay ' + t('acnt') + '?'
                       : platform == 'amazon'
-                        ? t('amzseller')
-                        : t('shpstor')}
+                      ? t('amzseller')
+                      : t('shpstor')}
                   </h5>
                   {platform == 'amazon' ? <i>{t('acntchk')}</i> : ''}
                 </div>
@@ -96,8 +96,8 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
                         {platform == 'ebay'
                           ? t('haveebayacnt')
                           : platform == 'amazon'
-                            ? t('haveamznacnt')
-                            : t('haveshopacnt')}
+                          ? t('haveamznacnt')
+                          : t('haveshopacnt')}
                       </span>
                       <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                     </div>

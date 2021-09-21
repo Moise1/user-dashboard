@@ -55,8 +55,8 @@ function UserName({ nextStep, handleChangeUser, values, step, prevStep, platform
                         platform == 'ebay'
                           ? ' EBay username'
                           : platform == 'amazon'
-                            ? ' Amazon username'
-                            : ' Shopify username'
+                          ? ' Amazon username'
+                          : ' Shopify username'
                       }
                       onChange={(e) => handleChangeUser(e.target.value)}
                     />

@@ -53,79 +53,79 @@ class ChannelCreate extends Component {
     const values = { platform, storeLocation, api, user, list, extension };
 
     switch (step) {
-    case 1:
-      return (
-        <PlatForm
-          platform={this.state.platform}
-          nextStep={this.nextStep}
-          handleChange={this.handleChange}
-          values={values}
-          step={step}
-          handleChangePlatform={this.handleChangePlatform}
-        />
-      );
-    case 2:
-      return (
-        <StoreLocation
-          platform={this.state.platform}
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          values={values}
-          step={step}
-          handleChangeLocation={this.handleChangeLocation}
-        />
-      );
-    case 3:
-      return (
-        <Account
-          platform={this.state.platform}
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          // handleChangeApi={this.handleChangeApi}
-          values={values}
-          step={step}
-        />
-      );
-    case 4:
-      return (
-        <AccountConnect
-          api={this.state.api}
-          extension={this.state.extension}
-          platform={this.state.platform}
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChangeApi={this.handleChangeApi}
-          handleChangeExtension={this.handleChangeExtension}
-          values={values}
-          step={step}
-        />
-      );
-    case 5:
-      return (
-        <UserName
-          platform={this.state.platform}
-          user={this.state.user}
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChangeUser={this.handleChangeUser}
-          values={values}
-          step={step}
-        />
-      );
-    case 6:
-      return (
-        <ChooseList
-          platform={this.state.platform}
-          nextStep={this.nextStep}
-          prevStep={this.prevStep}
-          handleChangeList={this.handleChangeList}
-          values={values}
-          list={list}
-          step={step}
-        />
-      );
+      case 1:
+        return (
+          <PlatForm
+            platform={this.state.platform}
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+            step={step}
+            handleChangePlatform={this.handleChangePlatform}
+          />
+        );
+      case 2:
+        return (
+          <StoreLocation
+            platform={this.state.platform}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            values={values}
+            step={step}
+            handleChangeLocation={this.handleChangeLocation}
+          />
+        );
+      case 3:
+        return (
+          <Account
+            platform={this.state.platform}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            // handleChangeApi={this.handleChangeApi}
+            values={values}
+            step={step}
+          />
+        );
+      case 4:
+        return (
+          <AccountConnect
+            api={this.state.api}
+            extension={this.state.extension}
+            platform={this.state.platform}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChangeApi={this.handleChangeApi}
+            handleChangeExtension={this.handleChangeExtension}
+            values={values}
+            step={step}
+          />
+        );
+      case 5:
+        return (
+          <UserName
+            platform={this.state.platform}
+            user={this.state.user}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChangeUser={this.handleChangeUser}
+            values={values}
+            step={step}
+          />
+        );
+      case 6:
+        return (
+          <ChooseList
+            platform={this.state.platform}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChangeList={this.handleChangeList}
+            values={values}
+            list={list}
+            step={step}
+          />
+        );
       // never forget the default case, otherwise VS code would be mad!
-    default:
+      default:
       // do nothing
     }
   }

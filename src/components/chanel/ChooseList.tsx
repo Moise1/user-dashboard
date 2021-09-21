@@ -209,12 +209,12 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
                         {list == 'catalog'
                           ? ' Catalog Listing'
                           : list == 'manual'
-                            ? ' Manual Listing'
-                            : list == 'bulk'
-                              ? 'Manual Listing'
-                              : list == 'we'
-                                ? 'We List for you'
-                                : ''}
+                          ? ' Manual Listing'
+                          : list == 'bulk'
+                          ? 'Manual Listing'
+                          : list == 'we'
+                          ? 'We List for you'
+                          : ''}
                       </h5>
                       <div>{t('favsupp')}</div>
                     </div>

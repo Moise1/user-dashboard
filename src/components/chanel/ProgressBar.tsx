@@ -37,10 +37,10 @@ function ProgressBar(props: any) {
             {props.platform == 'ebay'
               ? ' Ebay '
               : props.platform == 'amazon'
-                ? ' Amazon '
-                : props.platform == 'shopify'
-                  ? ' Shopify '
-                  : 'Ebay '}
+              ? ' Amazon '
+              : props.platform == 'shopify'
+              ? ' Shopify '
+              : 'Ebay '}
             {t('acnt')}
           </div>
         </div>
