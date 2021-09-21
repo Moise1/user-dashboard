@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { Container } from '@material-ui/core'
+import React, { useState } from 'react';
+import { Container } from '@material-ui/core';
 //import Checkbox from '@material-ui/core/Checkbox'
 //import FormGroup from '@material-ui/core/FormGroup'
 //import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import ProgressBar from './ProgressBar'
-import MbProgressBar from './MbProgressBar'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-import Previousstep from '../SmallComponents/Previousstep'
-import ButttonCom from './component/ButttonCom'
-setTranslations({ en })
-setDefaultLanguage('en')
+import ProgressBar from './ProgressBar';
+import MbProgressBar from './MbProgressBar';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+import Previousstep from '../SmallComponents/Previousstep';
+import ButttonCom from './component/ButttonCom';
+setTranslations({ en });
+setDefaultLanguage('en');
 function AccountConnect({
   nextStep,
   handleChangeApi,
@@ -24,17 +24,17 @@ function AccountConnect({
   extension
 }: any) {
   // eslint-disable-next-line no-unused-vars
-  const [enable, setEnable] = useState(false)
+  const [enable, setEnable] = useState(false);
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
   const Previous = (e: any) => {
-    e.preventDefault()
-    prevStep()
-  }
-  const t = useTranslation()
-  console.log(enable, 'value for extension')
+    e.preventDefault();
+    prevStep();
+  };
+  const t = useTranslation();
+  console.log(enable, 'value for extension');
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -229,7 +229,7 @@ function AccountConnect({
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default AccountConnect
+export default AccountConnect;

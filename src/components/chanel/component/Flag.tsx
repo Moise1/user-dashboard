@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export interface FlagProps {
   name: string;
@@ -13,8 +13,8 @@ export interface FlagProps {
 }
 
 export default function Flag(props: FlagProps) {
-  const { platform, currentPlatform, handleChangeLocation, flag, name, location } = props
-  console.log(platform, 'newplatform')
+  const { platform, currentPlatform, handleChangeLocation, flag, name, location } = props;
+  console.log(platform, 'newplatform');
   return (
     <div
       className={`col-4 mb-2 ${
@@ -41,5 +41,5 @@ export default function Flag(props: FlagProps) {
         <div className="panel-body text-center">{name}</div>
       </label>
     </div>
-  )
+  );
 }

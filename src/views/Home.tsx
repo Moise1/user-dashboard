@@ -1,30 +1,30 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { useState } from 'react'
-import { Layout } from 'antd'
+import { useState } from 'react';
+import { Layout } from 'antd';
 
-import TableContent from '../components/TableContent'
-import ContentLayout from '../components/ContentLayout'
-import HeaderLayout from '../components/HeaderLayout'
-import Sidebar from '../components/Sidebar'
-import TabsList from '../components/SmallComponents/TabsList'
-import SearchBar from '../components/SmallComponents/SearchBar'
-import Topbar from '../components/Topbar'
-import SidebarMb from '../components/SidebarMb'
-import SidbarCover from '../components/SidbarCover'
-import styles from './Home.module.css'
+import TableContent from '../components/TableContent';
+import ContentLayout from '../components/ContentLayout';
+import HeaderLayout from '../components/HeaderLayout';
+import Sidebar from '../components/Sidebar';
+import TabsList from '../components/SmallComponents/TabsList';
+import SearchBar from '../components/SmallComponents/SearchBar';
+import Topbar from '../components/Topbar';
+import SidebarMb from '../components/SidebarMb';
+import SidbarCover from '../components/SidbarCover';
+import styles from './Home.module.css';
 
 export default function Home() {
-  const [collapse, setCollapse] = useState(true)
-  const [staticValue, setStaticValue] = useState(false)
+  const [collapse, setCollapse] = useState(true);
+  const [staticValue, setStaticValue] = useState(false);
 
   const toggleCollapse = () => {
-    setCollapse(!collapse)
-  }
+    setCollapse(!collapse);
+  };
 
   const toggleStaticValue = () => {
-    setStaticValue(!staticValue)
-  }
+    setStaticValue(!staticValue);
+  };
 
   return (
     <>
@@ -61,5 +61,5 @@ export default function Home() {
         </Layout>
       </Layout>
     </>
-  )
+  );
 }

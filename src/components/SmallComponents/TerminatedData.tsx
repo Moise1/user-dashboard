@@ -19,4 +19,4 @@ export const columns = [
     dataIndex: 'title',
     key: 'title'
   }
-]
+];

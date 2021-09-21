@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const DashBoardIcon = () => {
   return (
@@ -53,8 +53,8 @@ export const DashBoardIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 export const LeftArrowIcon = () => {
   return (
     <>
@@ -80,8 +80,8 @@ export const LeftArrowIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 
 export const CatalogIcon = () => {
   return (
@@ -152,8 +152,8 @@ export const CatalogIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 export const ListNowIcon = () => {
   return (
     <>
@@ -203,8 +203,8 @@ export const ListNowIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 export const ListingsIcon = () => {
   return (
     <>
@@ -285,8 +285,8 @@ export const ListingsIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 export const SettingsIcon = () => {
   return (
     <>
@@ -407,8 +407,8 @@ export const SettingsIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 
 export const ServiceIcon = () => {
   return (
@@ -448,8 +448,8 @@ export const ServiceIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 
 export const HelpIcon = () => {
   return (
@@ -501,8 +501,8 @@ export const HelpIcon = () => {
         />
       </svg>
     </>
-  )
-}
+  );
+};
 
 export const CircleDotIcon = () => {
   return (
@@ -511,5 +511,5 @@ export const CircleDotIcon = () => {
         <circle id="Ellipse_49" data-name="Ellipse 49" cx="3.5" cy="3.5" r="3.5" fill="#b1b1b1" />
       </svg>
     </>
-  )
-}
+  );
+};

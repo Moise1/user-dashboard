@@ -1,12 +1,12 @@
-import React from 'react'
-import logo from '../assets/logo.svg'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../translation.json'
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import React from 'react';
+import logo from '../assets/logo.svg';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../translation.json';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 function SidebarMb(props: any) {
-  setTranslations({ en })
-  setDefaultLanguage('en')
-  const t = useTranslation()
+  setTranslations({ en });
+  setDefaultLanguage('en');
+  const t = useTranslation();
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -30,7 +30,7 @@ function SidebarMb(props: any) {
         </Container>
       </Navbar>
     </div>
-  )
+  );
 }
 
-export default SidebarMb
+export default SidebarMb;

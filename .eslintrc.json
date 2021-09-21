@@ -27,7 +27,7 @@
     "quotes": ["error","single",{ "avoidEscape": true }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "semi": [ "error", "never" ],
+    "semi": [ "error", "always" ],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"]
   },

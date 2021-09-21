@@ -50,4 +50,4 @@ export const columns = [
     dataIndex: 'created',
     key: 'created'
   }
-]
+];

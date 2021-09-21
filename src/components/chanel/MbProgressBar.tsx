@@ -1,6 +1,6 @@
-import React from 'react'
-import progress_done from '../../assets/channel/greenbar.png'
-import progress_remain from '../../assets/channel/greybar.png'
+import React from 'react';
+import progress_done from '../../assets/channel/greenbar.png';
+import progress_remain from '../../assets/channel/greybar.png';
 //import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
 //import en from '../../translation.json'
 //setTranslations({ en })
@@ -13,7 +13,7 @@ export interface MbProgressBarProps {
 
 function MbProgressBar(props: any) {
   // const t = useTranslation()
-  console.log(props.step, 'this is step')
+  console.log(props.step, 'this is step');
   return (
     <div className="row mx-auto tex-center m-auto">
       <div className="col px-1">
@@ -35,7 +35,7 @@ function MbProgressBar(props: any) {
         <img className="w-100 h-15p" src={` ${props.step > 5 ? progress_done : progress_remain} `} alt="bar-icon" />
       </div>
     </div>
-  )
+  );
 }
 
-export default MbProgressBar
+export default MbProgressBar;

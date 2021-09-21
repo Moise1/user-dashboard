@@ -1,32 +1,32 @@
-import React, { Props } from 'react'
-import { Container } from '@material-ui/core'
+import React, { Props } from 'react';
+import { Container } from '@material-ui/core';
 
-import aus_flag from '../../assets/channel/flags/AU.png'
-import ger_flag from '../../assets/channel/flags/DE.png'
-import sp_flag from '../../assets/channel/flags/ES.png'
-import fr_flag from '../../assets/channel/flags/FR.png'
-import it_flag from '../../assets/channel/flags/IT.png'
-import uk_flag from '../../assets/channel/flags/UK.png'
-import us_flag from '../../assets/channel/flags/US.png'
-import back_icon from '../../assets/channel/flags/back.png'
-import ProgressBar from './ProgressBar'
-import MbProgressBar from './MbProgressBar'
-import ButtonComp from './component/ButttonCom'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-import Previousstep from '../SmallComponents/Previousstep'
-import Flag, { FlagProps } from './component/Flag'
-setTranslations({ en })
-setDefaultLanguage('en')
+import aus_flag from '../../assets/channel/flags/AU.png';
+import ger_flag from '../../assets/channel/flags/DE.png';
+import sp_flag from '../../assets/channel/flags/ES.png';
+import fr_flag from '../../assets/channel/flags/FR.png';
+import it_flag from '../../assets/channel/flags/IT.png';
+import uk_flag from '../../assets/channel/flags/UK.png';
+import us_flag from '../../assets/channel/flags/US.png';
+import back_icon from '../../assets/channel/flags/back.png';
+import ProgressBar from './ProgressBar';
+import MbProgressBar from './MbProgressBar';
+import ButtonComp from './component/ButttonCom';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+import Previousstep from '../SmallComponents/Previousstep';
+import Flag, { FlagProps } from './component/Flag';
+setTranslations({ en });
+setDefaultLanguage('en');
 function StoreLocation({ nextStep, handleChangeLocation, values, platform, step, flag, prevStep }: any) {
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
   const Previous = (e: any) => {
-    e.preventDefault()
-    prevStep()
-  }
+    e.preventDefault();
+    prevStep();
+  };
   const flags: FlagProps[] = [
     {
       name: 'Australia',
@@ -70,8 +70,8 @@ function StoreLocation({ nextStep, handleChangeLocation, values, platform, step,
       platform: 'amazon',
       slug: 'us'
     }
-  ]
-  const t = useTranslation()
+  ];
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -338,7 +338,7 @@ function StoreLocation({ nextStep, handleChangeLocation, values, platform, step,
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default StoreLocation
+export default StoreLocation;

@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-import logo from '../assets/logo.svg'
-import dashboard from '../assets/dashboard.svg'
-import catalog from '../assets/catalog.svg'
-import listnow from '../assets/plus.svg'
-import settings from '../assets/settings.svg'
-import services from '../assets/services.svg'
-import help from '../assets/help.svg'
-import { Layout, Menu } from 'antd'
-import pin_icon from '../assets/pin.svg'
-import { useHistory } from 'react-router-dom'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../translation.json'
-import { CircleDotIcon } from '../components/common/Icons'
-const { SubMenu } = Menu
+import logo from '../assets/logo.svg';
+import dashboard from '../assets/dashboard.svg';
+import catalog from '../assets/catalog.svg';
+import listnow from '../assets/plus.svg';
+import settings from '../assets/settings.svg';
+import services from '../assets/services.svg';
+import help from '../assets/help.svg';
+import { Layout, Menu } from 'antd';
+import pin_icon from '../assets/pin.svg';
+import { useHistory } from 'react-router-dom';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../translation.json';
+import { CircleDotIcon } from '../components/common/Icons';
+const { SubMenu } = Menu;
 
-setTranslations({ en })
-setDefaultLanguage('en')
-const { Sider } = Layout
+setTranslations({ en });
+setDefaultLanguage('en');
+const { Sider } = Layout;
 interface Props {
   collapsed: boolean;
   toggle: () => void;
@@ -26,14 +26,14 @@ interface Props {
 }
 
 export default function Sidebar(props: Props) {
-  const history = useHistory()
+  const history = useHistory();
 
   const routeChange = () => {
-    const path = 'newPath'
-    history.push('/home')
-  }
-  const { collapsed, toggle, staticvalue, togglestatic } = props
-  const t = useTranslation()
+    const path = 'newPath';
+    history.push('/home');
+  };
+  const { collapsed, toggle, staticvalue, togglestatic } = props;
+  const t = useTranslation();
 
   return (
     <>
@@ -300,5 +300,5 @@ export default function Sidebar(props: Props) {
         </div>
       </Sider>
     </>
-  )
+  );
 }

@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import { Table } from 'antd'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
+import React, { useState, useEffect } from 'react';
+import { Table } from 'antd';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
 
-import img from '../assets/icon.png'
-import doticon from '../assets/doticon.svg'
-import editicon from '../assets/editicon.svg'
-import SmallTabs from './SmallComponents/SmallTabs'
-import { columns } from '../data'
-import PaginationTable from './PaginationTable'
+import img from '../assets/icon.png';
+import doticon from '../assets/doticon.svg';
+import editicon from '../assets/editicon.svg';
+import SmallTabs from './SmallComponents/SmallTabs';
+import { columns } from '../data';
+import PaginationTable from './PaginationTable';
 
-console.log(useTranslation)
+console.log(useTranslation);
 
-const data: any = []
-const windowwidth = window.innerWidth
+const data: any = [];
+const windowwidth = window.innerWidth;
 
-console.log(windowwidth)
+console.log(windowwidth);
 for (let i = 0; i < 26; i++) {
   data.push({
     key: i,
@@ -44,18 +44,18 @@ for (let i = 0; i < 26; i++) {
         <img className="ml-3" src={doticon} />
       </div>
     )
-  })
+  });
 }
 
 function TableContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectedRowKeys(selectedRowKeys)
-    console.log(selectedRowKeys.length)
-    const selected = selectedRowKeys.length
-  }
+    setSelectedRowKeys(selectedRowKeys);
+    console.log(selectedRowKeys.length);
+    const selected = selectedRowKeys.length;
+  };
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -67,32 +67,32 @@ function TableContent() {
         key: 'odd',
         text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return false
+              return false;
             }
-            return true
-          })
-          setSelectedRowKeys(newSelectedRowKeys)
+            return true;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
         }
       },
       {
         key: 'even',
         text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return true
+              return true;
             }
-            return false
-          })
-          setSelectedRowKeys(newSelectedRowKeys)
+            return false;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
         }
       }
     ]
-  }
+  };
 
   return (
     <React.Fragment>
@@ -162,21 +162,21 @@ function TableContent() {
         <PaginationTable />
       </div>
     </React.Fragment>
-  )
+  );
 }
 
 function TableContentold() {
-  const [selectedRowKeys, setSelectRowKeys] = useState([])
-  const [data1, setData] = useState([])
+  const [selectedRowKeys, setSelectRowKeys] = useState([]);
+  const [data1, setData] = useState([]);
 
-  const t = useTranslation()
+  const t = useTranslation();
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectRowKeys(selectedRowKeys)
-    const selected = selectedRowKeys.length
-  }
+    setSelectRowKeys(selectedRowKeys);
+    const selected = selectedRowKeys.length;
+  };
 
   useEffect(() => {
-    const data: any = []
+    const data: any = [];
     for (let i = 0; i < 46; i++) {
       data.push({
         key: i,
@@ -198,10 +198,10 @@ function TableContentold() {
             <i className="d-green far fa-check-circle"></i> 2
           </div>
         )
-      })
+      });
     }
-    setData(data)
-  }, [])
+    setData(data);
+  }, []);
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -213,32 +213,32 @@ function TableContentold() {
         key: 'odd',
         text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return false
+              return false;
             }
-            return true
-          })
-          setSelectRowKeys(newSelectedRowKeys)
+            return true;
+          });
+          setSelectRowKeys(newSelectedRowKeys);
         }
       },
       {
         key: 'even',
         text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return true
+              return true;
             }
-            return false
-          })
-          setSelectRowKeys(newSelectedRowKeys)
+            return false;
+          });
+          setSelectRowKeys(newSelectedRowKeys);
         }
       }
     ]
-  }
+  };
 
   const columns = [
     {
@@ -281,7 +281,7 @@ function TableContentold() {
       dataIndex: 'stock',
       key: 'stock'
     }
-  ]
+  ];
 
   return (
     <React.Fragment>
@@ -324,8 +324,8 @@ function TableContentold() {
         <Table rowSelection={rowSelection} columns={columns} dataSource={data1} />
       </div>
     </React.Fragment>
-  )
+  );
 }
 
-export default TableContentold
-export { TableContentold }
+export default TableContentold;
+export { TableContentold };

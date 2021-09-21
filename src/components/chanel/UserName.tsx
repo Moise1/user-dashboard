@@ -1,25 +1,25 @@
-import React from 'react'
-import { Container } from '@material-ui/core'
-import Input from '@material-ui/core/Input'
-import back_icon from '../../assets/channel/flags/back.png'
-import ProgressBar from './ProgressBar'
-import MbProgressBar from './MbProgressBar'
-import ButtonComp from './component/ButttonCom'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-import Previousstep from '../SmallComponents/Previousstep'
-setTranslations({ en })
-setDefaultLanguage('en')
+import React from 'react';
+import { Container } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import back_icon from '../../assets/channel/flags/back.png';
+import ProgressBar from './ProgressBar';
+import MbProgressBar from './MbProgressBar';
+import ButtonComp from './component/ButttonCom';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+import Previousstep from '../SmallComponents/Previousstep';
+setTranslations({ en });
+setDefaultLanguage('en');
 function UserName({ nextStep, handleChangeUser, values, step, prevStep, platform, user }: any) {
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
   const Previous = (e: any) => {
-    e.preventDefault()
-    prevStep()
-  }
-  const t = useTranslation()
+    e.preventDefault();
+    prevStep();
+  };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -98,7 +98,7 @@ function UserName({ nextStep, handleChangeUser, values, step, prevStep, platform
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default UserName
+export default UserName;

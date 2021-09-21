@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { Container } from '@material-ui/core'
+import React, { useState } from 'react';
+import { Container } from '@material-ui/core';
 
-import ebay_logo from '../../assets/channel/ebay.png'
-import shopify_logo from '../../assets/channel/shopify-2.png'
-import amazon_logo from '../../assets/channel/amazon-2.png'
-import ProgressBar from './ProgressBar'
-import MbProgressBar from './MbProgressBar'
-import ButtonComp from './component/ButttonCom'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-setTranslations({ en })
-setDefaultLanguage('en')
+import ebay_logo from '../../assets/channel/ebay.png';
+import shopify_logo from '../../assets/channel/shopify-2.png';
+import amazon_logo from '../../assets/channel/amazon-2.png';
+import ProgressBar from './ProgressBar';
+import MbProgressBar from './MbProgressBar';
+import ButtonComp from './component/ButttonCom';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+setTranslations({ en });
+setDefaultLanguage('en');
 function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, values, step }: any) {
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
 
-  const [count, setCount] = useState(0)
-  const t = useTranslation()
+  const [count, setCount] = useState(0);
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -169,7 +169,7 @@ function PlatForm({ nextStep, handleChange, handleChangePlatform, platform, valu
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default PlatForm
+export default PlatForm;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { Table } from 'antd'
-import img from '../assets/icon.png'
-import { columns } from '../components/SmallComponents/PendindData'
+import { Table } from 'antd';
+import img from '../assets/icon.png';
+import { columns } from '../components/SmallComponents/PendindData';
 
-const data: any = []
-const windowwidth = window.innerWidth
+const data: any = [];
+const windowwidth = window.innerWidth;
 
 for (let i = 0; i < 26; i++) {
   data.push({
@@ -23,18 +23,18 @@ for (let i = 0; i < 26; i++) {
     status: <div style={{ color: '#7d7d7d' }}>Listing on Amazon</div>,
     created: <div>13/07/2021 12:56</div>,
     createdby: <div style={{ color: '#262e80' }}>Nametest</div>
-  })
+  });
 }
 
 function PendingDataContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (selectedRowKeys: any) => {
-    setSelectedRowKeys(selectedRowKeys)
-    console.log(selectedRowKeys.length)
-    const selected = selectedRowKeys.length
-  }
+    setSelectedRowKeys(selectedRowKeys);
+    console.log(selectedRowKeys.length);
+    const selected = selectedRowKeys.length;
+  };
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -46,32 +46,32 @@ function PendingDataContent() {
         key: 'odd',
         text: 'Select Odd Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return false
+              return false;
             }
-            return true
-          })
-          setSelectedRowKeys(newSelectedRowKeys)
+            return true;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
         }
       },
       {
         key: 'even',
         text: 'Select Even Row',
         onSelect: (changableRowKeys: any) => {
-          let newSelectedRowKeys = []
+          let newSelectedRowKeys = [];
           newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
             if (index % 2 !== 0) {
-              return true
+              return true;
             }
-            return false
-          })
-          setSelectedRowKeys(newSelectedRowKeys)
+            return false;
+          });
+          setSelectedRowKeys(newSelectedRowKeys);
         }
       }
     ]
-  }
+  };
 
   return (
     <React.Fragment>
@@ -129,7 +129,7 @@ function PendingDataContent() {
         <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
       </div>
     </React.Fragment>
-  )
+  );
 }
 
-export default PendingDataContent
+export default PendingDataContent;

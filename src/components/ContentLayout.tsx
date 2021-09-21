@@ -1,7 +1,7 @@
-import React from 'react'
-import { Layout } from 'antd'
+import React from 'react';
+import { Layout } from 'antd';
 
-const { Content } = Layout
+const { Content } = Layout;
 interface Props {
   children: React.ReactNode;
 }
@@ -16,5 +16,5 @@ export default function ContentLayout(props: Props) {
     >
       {props.children}
     </Content>
-  )
+  );
 }

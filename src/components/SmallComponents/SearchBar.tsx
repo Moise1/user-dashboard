@@ -1,13 +1,13 @@
-import React from 'react'
-import list_saerch from '../../assets/list_search.jpg'
-import column_img from '../../assets/columnimg.svg'
-import { Input, Space } from 'antd'
-import { AudioOutlined } from '@ant-design/icons'
-import search_icon from '../../assets/search.svg'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
+import React from 'react';
+import list_saerch from '../../assets/list_search.jpg';
+import column_img from '../../assets/columnimg.svg';
+import { Input, Space } from 'antd';
+import { AudioOutlined } from '@ant-design/icons';
+import search_icon from '../../assets/search.svg';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
 
-const { Search } = Input
+const { Search } = Input;
 const suffix = (
   <AudioOutlined
     style={{
@@ -15,17 +15,17 @@ const suffix = (
       color: '#1890ff'
     }}
   />
-)
-let everLoaded = false
+);
+let everLoaded = false;
 if (!everLoaded) {
-  console.log('First time i ever loaded!')
-  setTranslations({ en })
-  setDefaultLanguage('en')
-  everLoaded = true
+  console.log('First time i ever loaded!');
+  setTranslations({ en });
+  setDefaultLanguage('en');
+  everLoaded = true;
 }
 
 export default function SearchBar() {
-  const t = useTranslation()
+  const t = useTranslation();
   return (
     <div className="row justify-content-between pl-3 py-lg-2">
       <div className="col-md-7 pl-lg-0 lh-1 px-0">
@@ -62,5 +62,5 @@ export default function SearchBar() {
         </div>
       </div>
     </div>
-  )
+  );
 }

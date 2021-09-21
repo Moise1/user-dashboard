@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import img from '../assets/icon.png'
+import img from '../assets/icon.png';
 
 export const tableData = [
   {
@@ -408,4 +408,4 @@ export const tableData = [
     created: <div>13/07/2021 12:56</div>,
     createdby: <div style={{ color: '#262e80' }}>Nametest</div>
   }
-]
+];

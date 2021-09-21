@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import { Menu, Button } from 'antd'
-import { Progress } from 'antd'
-import { useTranslation } from 'react-multi-lang'
-import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem'
-import plus from '../../assets/plus.svg'
-import { Link, NavLink } from 'react-router-dom'
-import search_icon from '../../assets/search.svg'
+import { Menu, Button } from 'antd';
+import { Progress } from 'antd';
+import { useTranslation } from 'react-multi-lang';
+import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem';
+import plus from '../../assets/plus.svg';
+import { Link, NavLink } from 'react-router-dom';
+import search_icon from '../../assets/search.svg';
 export default function DropDownMenu() {
-  const t = useTranslation()
+  const t = useTranslation();
   return (
     <Menu className="drop-down_effect nav-dropdown">
       <div className="drop-down">
@@ -112,5 +112,5 @@ export default function DropDownMenu() {
         </div>
       </Menu.Item> */}
     </Menu>
-  )
+  );
 }

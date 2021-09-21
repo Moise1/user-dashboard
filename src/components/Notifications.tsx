@@ -1,15 +1,15 @@
-import React from 'react'
-import ring_icon from '../assets/notification.svg'
-import flag from '../assets/flag-round-500.svg'
-import amazon from '../assets/amazon-icon-1.svg'
-import { Dropdown, Button, Space } from 'antd'
-import DropDownMenu from './SmallComponents/DropDownMenu'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../translation.json'
-setTranslations({ en })
-setDefaultLanguage('en')
+import React from 'react';
+import ring_icon from '../assets/notification.svg';
+import flag from '../assets/flag-round-500.svg';
+import amazon from '../assets/amazon-icon-1.svg';
+import { Dropdown, Button, Space } from 'antd';
+import DropDownMenu from './SmallComponents/DropDownMenu';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../translation.json';
+setTranslations({ en });
+setDefaultLanguage('en');
 export default function Notifications(props: any) {
-  const t = useTranslation()
+  const t = useTranslation();
   return (
     <div className="row mx-auto pt-4 align-items-center">
       <h5 className="mb-0 d-blue font-weight-bold d-none d-md-block">{props.title}</h5>
@@ -44,5 +44,5 @@ export default function Notifications(props: any) {
       </div>
       <h5 className="mb-0 d-blue font-weight-bold d-md-none mt-3 d-block">{props.title}</h5>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import Account from './chanel/Account'
-import AccountConnect from './chanel/AccountConnect'
-import ChooseList from './chanel/ChooseList'
-import PlatForm from './chanel/PlatForm'
-import StoreLocation from './chanel/StoreLocation'
-import UserName from './chanel/UserName'
+import React, { Component } from 'react';
+import Account from './chanel/Account';
+import AccountConnect from './chanel/AccountConnect';
+import ChooseList from './chanel/ChooseList';
+import PlatForm from './chanel/PlatForm';
+import StoreLocation from './chanel/StoreLocation';
+import UserName from './chanel/UserName';
 
 class ChannelCreate extends Component {
   state = {
@@ -19,38 +19,38 @@ class ChannelCreate extends Component {
     list: ''
   };
   prevStep = () => {
-    const { step } = this.state
-    this.setState({ step: step - 1 })
+    const { step } = this.state;
+    this.setState({ step: step - 1 });
   };
   nextStep = () => {
-    const { step } = this.state
-    this.setState({ step: step + 1 })
+    const { step } = this.state;
+    this.setState({ step: step + 1 });
   };
   handleChange = (input: any) => (e: any) => {
-    this.setState({ [input]: e.target.value })
+    this.setState({ [input]: e.target.value });
   };
   handleChangePlatform = (value: any) => {
-    this.setState({ platform: value })
+    this.setState({ platform: value });
   };
   handleChangeLocation = (value: any) => {
-    this.setState({ storeLocation: value })
+    this.setState({ storeLocation: value });
   };
   handleChangeApi = (value: any) => {
-    this.setState({ api: value })
+    this.setState({ api: value });
   };
   handleChangeExtension = (value: any) => {
-    this.setState({ extension: value })
+    this.setState({ extension: value });
   };
   handleChangeUser = (value: any) => {
-    this.setState({ user: value })
+    this.setState({ user: value });
   };
   handleChangeList = (value: any) => {
-    this.setState({ list: value })
+    this.setState({ list: value });
   };
 
   render() {
-    const { step, platform, storeLocation, api, user, list, extension } = this.state
-    const values = { platform, storeLocation, api, user, list, extension }
+    const { step, platform, storeLocation, api, user, list, extension } = this.state;
+    const values = { platform, storeLocation, api, user, list, extension };
 
     switch (step) {
     case 1:
@@ -63,7 +63,7 @@ class ChannelCreate extends Component {
           step={step}
           handleChangePlatform={this.handleChangePlatform}
         />
-      )
+      );
     case 2:
       return (
         <StoreLocation
@@ -74,7 +74,7 @@ class ChannelCreate extends Component {
           step={step}
           handleChangeLocation={this.handleChangeLocation}
         />
-      )
+      );
     case 3:
       return (
         <Account
@@ -85,7 +85,7 @@ class ChannelCreate extends Component {
           values={values}
           step={step}
         />
-      )
+      );
     case 4:
       return (
         <AccountConnect
@@ -99,7 +99,7 @@ class ChannelCreate extends Component {
           values={values}
           step={step}
         />
-      )
+      );
     case 5:
       return (
         <UserName
@@ -111,7 +111,7 @@ class ChannelCreate extends Component {
           values={values}
           step={step}
         />
-      )
+      );
     case 6:
       return (
         <ChooseList
@@ -123,7 +123,7 @@ class ChannelCreate extends Component {
           list={list}
           step={step}
         />
-      )
+      );
       // never forget the default case, otherwise VS code would be mad!
     default:
       // do nothing
@@ -131,4 +131,4 @@ class ChannelCreate extends Component {
   }
 }
 
-export default ChannelCreate
+export default ChannelCreate;

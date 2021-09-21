@@ -1,34 +1,34 @@
-import React from 'react'
-import { Container } from '@material-ui/core'
-import catalog_icon from '../../assets/channel/list/Group 2.png'
-import manual_icon from '../../assets/channel/list/Group 147.png'
-import bulk_icon from '../../assets/channel/list/Group 4.png'
-import we_icon from '../../assets/channel/list/Group 148.png'
+import React from 'react';
+import { Container } from '@material-ui/core';
+import catalog_icon from '../../assets/channel/list/Group 2.png';
+import manual_icon from '../../assets/channel/list/Group 147.png';
+import bulk_icon from '../../assets/channel/list/Group 4.png';
+import we_icon from '../../assets/channel/list/Group 148.png';
 //import back_icon from '../../assets/channel/flags/back.png'
-import ProgressBar from './ProgressBar'
-import { useHistory } from 'react-router-dom'
-import MbProgressBar from './MbProgressBar'
-import Previousstep from '../SmallComponents/Previousstep'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-setTranslations({ en })
-setDefaultLanguage('en')
+import ProgressBar from './ProgressBar';
+import { useHistory } from 'react-router-dom';
+import MbProgressBar from './MbProgressBar';
+import Previousstep from '../SmallComponents/Previousstep';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+setTranslations({ en });
+setDefaultLanguage('en');
 function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platform, list }: any) {
-  const history = useHistory()
+  const history = useHistory();
 
   const handleRoute = () => {
-    history.push('/home')
-  }
+    history.push('/home');
+  };
 
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
   const Previous = (e: any) => {
-    e.preventDefault()
-    prevStep()
-  }
-  const t = useTranslation()
+    e.preventDefault();
+    prevStep();
+  };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -249,7 +249,7 @@ function ChooseList({ nextStep, handleChangeList, values, step, prevStep, platfo
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default ChooseList
+export default ChooseList;

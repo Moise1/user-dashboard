@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-import { Progress } from 'antd'
-import ring_icon from '../assets/notification.svg'
-import bellIcon from '../assets/bellIcon.svg'
-import flag from '../assets/flag-round-500.svg'
-import amazon from '../assets/amazon-icon-1.svg'
-import { Dropdown, Button, Space } from 'antd'
-import DropDownMenu from './SmallComponents/DropDownMenu'
-import styles from './Topbar.module.css'
-import '../Common.css'
-import Logo from '../assets/channel/list/logo.png'
-import dropicon from '../assets/dropicon.svg'
+import { Progress } from 'antd';
+import ring_icon from '../assets/notification.svg';
+import bellIcon from '../assets/bellIcon.svg';
+import flag from '../assets/flag-round-500.svg';
+import amazon from '../assets/amazon-icon-1.svg';
+import { Dropdown, Button, Space } from 'antd';
+import DropDownMenu from './SmallComponents/DropDownMenu';
+import styles from './Topbar.module.css';
+import '../Common.css';
+import Logo from '../assets/channel/list/logo.png';
+import dropicon from '../assets/dropicon.svg';
 
 export default function Tobbar(props: any) {
   return (
@@ -70,5 +70,5 @@ export default function Tobbar(props: any) {
         <h5 className="mb-0 d-blue font-weight-bold d-md-none mt-3 d-block">{props.title}</h5>
       </div>
     </>
-  )
+  );
 }

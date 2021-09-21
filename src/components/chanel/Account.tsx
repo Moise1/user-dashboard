@@ -1,23 +1,23 @@
-import React from 'react'
-import { Container } from '@material-ui/core'
+import React from 'react';
+import { Container } from '@material-ui/core';
 
-import ProgressBar from './ProgressBar'
-import MbProgressBar from './MbProgressBar'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-import Previousstep from '../SmallComponents/Previousstep'
-setTranslations({ en })
-setDefaultLanguage('en')
+import ProgressBar from './ProgressBar';
+import MbProgressBar from './MbProgressBar';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+import Previousstep from '../SmallComponents/Previousstep';
+setTranslations({ en });
+setDefaultLanguage('en');
 function Account({ nextStep, handleChange, values, step, flag, prevStep, platform }: any) {
   const Continue = (e: any) => {
-    e.preventDefault()
-    nextStep()
-  }
+    e.preventDefault();
+    nextStep();
+  };
   const Previous = (e: any) => {
-    e.preventDefault()
-    prevStep()
-  }
-  const t = useTranslation()
+    e.preventDefault();
+    prevStep();
+  };
+  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
@@ -112,7 +112,7 @@ function Account({ nextStep, handleChange, values, step, flag, prevStep, platfor
         </form>
       </div>
     </Container>
-  )
+  );
 }
 
-export default Account
+export default Account;

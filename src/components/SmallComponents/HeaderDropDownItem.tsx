@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import flag from '../../assets/flag-round-500.svg'
-import amazon from '../../assets/amazon-icon-1.svg'
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang'
-import en from '../../translation.json'
-setTranslations({ en })
-setDefaultLanguage('en')
+import flag from '../../assets/flag-round-500.svg';
+import amazon from '../../assets/amazon-icon-1.svg';
+import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
+import en from '../../translation.json';
+setTranslations({ en });
+setDefaultLanguage('en');
 export default function HeaderDropDownItem() {
-  const t = useTranslation()
+  const t = useTranslation();
   return (
     <div className="col-md-12 my-2 mx-auto mb-2">
       <div className="d-flex aligh-items-center">
@@ -16,5 +16,5 @@ export default function HeaderDropDownItem() {
         <img src={amazon} className="pt-1 lh-1" height="20" alt="" />
       </div>
     </div>
-  )
+  );
 }
