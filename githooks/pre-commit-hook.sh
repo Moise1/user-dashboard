@@ -35,6 +35,7 @@ if haschanged "package-lock.json"; then
 fi
 
 npx tsc
+yarn prettier
 yarn lint
 git add $changedFilesNoStatus
 

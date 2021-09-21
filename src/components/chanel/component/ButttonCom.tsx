@@ -2,7 +2,7 @@ import React from 'react';
 
 interface props {
   title: string;
-  onClick: (_:unknown) => void;
+  onClick: (_: unknown) => void;
   disabled: boolean;
 }
 

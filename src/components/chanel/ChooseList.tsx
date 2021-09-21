@@ -14,8 +14,6 @@ import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
 
-
-
 export interface chooseListValues {
   platform: platformType;
   storeLocation: string;

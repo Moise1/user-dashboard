@@ -15,7 +15,6 @@ interface props {
   prevStep: () => void;
   platform: platformType;
 
-
   handleChangeApi: (newApi: string) => void;
 }
 function Account(props: props) {
