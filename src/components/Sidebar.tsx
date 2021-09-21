@@ -51,7 +51,7 @@ export default function Sidebar(props: Props) {
                 zIndex: 999999
               }}
             >
-              {!!collapsed && (
+              {!collapsed && (
                 <>
                   <div className="ml-auto float-right m-2">
                     {staticvalue ? (
@@ -60,7 +60,7 @@ export default function Sidebar(props: Props) {
                         className="fas fa-chevron-left text-dark bg-light rounded p-1 mt-1 active-left-icon"
                       ></i>
                     ) : (
-                      <button className="btn border-0 btn-light p-1">
+                      <button className="btn border-0 btn-light p-1 pinButton">
                         <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
                       </button>
                     )}

@@ -2,45 +2,12 @@
 
 @import '_variables.css';
 
+.pinButton {
+  background-color: var(--bgPage) !important;
+}
+
 .fs-14 {
   font-size: var(--font-small);
-}
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    color: var(--color-fff) !important;
-    /* font-size: var(--font-18) !important; */
-    background-color: var(--active-bg) !important;
-}
-.ant-menu-submenu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  /* font-size: var(--font-18) !important; */
-  background-color: transparent !important;
-  color: black !important;
-}
-/* .ant-menu-item:hover {
-  color: var(--color-fff) !important;
-  font-size: var(--font-18) !important;
-  background-color: var(--active-bg) !important ;
-} */
-/* .ant-menu-submenu-title:hover {
-  color: var(--color-fff) !important;
-  font-size: var(--font-18) !important;
-  background-color: var(--active-bg) !important ;
-}
-.ant-menu-submenu-title:hover path circle {
-  stroke: white !important;
-} */
-
-/* .ant-layout-sider-collapsed
-  .ant-menu:not(.ant-menu-horizontal)
-  .ant-menu-item-selected {
-  width: 30px;
-  min-width: 30px;
-  margin: auto;
-  border-radius: 10px;
-} */
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .active-white-svg {
-  filter: brightness(100);
 }
 
 .c-262e80 {
@@ -92,7 +59,7 @@
 }
 
 .h-62 {
-  height: 60px !important ;
+  height: 60px !important;
 }
 
 .search_placeholder::placeholder {
@@ -118,7 +85,7 @@
 }
 
 .activeButton {
-    background-color: var(--active-bg);
+  background-color: var(--active-bg);
 }
 
 .focus-none:focus {
@@ -127,7 +94,7 @@
 }
 
 .br-10 {
-  border-radius: 10px !important ;
+  border-radius: 10px !important;
 }
 
 /* DROPDOWN CSS  */
@@ -236,12 +203,12 @@
 .listing-tabs span {
   font-weight: 700;
   font-size: 16px;
-  color: #262e80;
+  color: var(--dBlue);
 }
 .listing-tabs {
   font-weight: 400;
   font-size: 16px;
-  color: #262e80;
+  color: var(--dBlue);
 }
 .bg-f2f8ff {
   background: #f2f8ff;
@@ -249,16 +216,17 @@
 .border-left-tab {
   width: 1.5px;
   display: inline-block;
-  background-color: #262e80;
+  background-color: var(--dBlue);
 }
 .logout-icon {
   padding-right: 17px;
   padding-bottom: 17px;
   font-weight: normal;
   font-size: 16px;
-  color: #ef6092;
+  color: var(--logIconColor);
   cursor: pointer;
 }
+
 .logout-icon:hover span {
   color: #f12b70;
 }
@@ -293,7 +261,7 @@
 .pagination-number {
   display: inline-block;
   font-size: 18px;
-  color: #262e80;
+  color: var(--dBlue);
   cursor: pointer;
   font-weight: 400;
   width: 25px;
@@ -333,7 +301,6 @@
 }
 .ant-menu-item.ant-menu-item-only-child {
   height: 25px !important;
-
   line-height: 25px !important;
 }
 .ant-menu.ant-menu-sub {

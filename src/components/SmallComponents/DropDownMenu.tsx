@@ -12,15 +12,6 @@ export default function DropDownMenu() {
       <div className="drop-down">
         <div className="row mx-auto my-2 align-items-center">
           <div className="col-12">
-            {/* <Progress
-              percent={40}
-              showInfo={false}
-              strokeColor={{
-                "0%": "#87d068",
-                "100%": "#87d068",
-              }}
-            /> */}
-
             <div className="input-group drop-search-input  br-10 my-2 input-group-sm border  rounded pr-1 bg-white">
               <input
                 type="text"
@@ -36,12 +27,7 @@ export default function DropDownMenu() {
               </div>
             </div>
           </div>
-          <div className="col-md-12">
-            {/* <div className="d-flex my-1">
-              <span className="d-blue small mb-3 mt-2">Quota:45%(12/30)</span>
-              <span className="text-success ml-auto small">Upgrade</span>
-            </div> */}
-          </div>
+          <div className="col-md-12"></div>
           <HeaderDropDownItem />
           <HeaderDropDownItem />
           <HeaderDropDownItem />

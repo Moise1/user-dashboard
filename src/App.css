@@ -61,7 +61,7 @@ label {
   -o-border-radius: 15px !important;
 }
 .border-primary {
-  border-color: #262e80 !important;
+  border-color: var(--borderPrimary) !important;
 }
 .bg-input-light {
   background-color: var(--bgInputLight);
@@ -70,7 +70,7 @@ label {
   background-color: var(--bgBlue);
 }
 .d-blue {
-  color: #262e80;
+  color: var(--dBlue);
 }
 .bg-d-blue {
   background-color: #262e80;
@@ -158,7 +158,7 @@ table {
   overflow-x: scroll;
 }
 .ant-table-thead > tr > th {
-  color: #262e80 !important;
+  color: var(--txtHighlight) !important;
   font-weight: bold !important;
   font-size: 17px;
 }
@@ -166,10 +166,10 @@ table {
   font-weight: 500 !important;
 }
 .ant-table-tbody > tr > td:nth-child(2) {
-  color: #262e80 !important;
+  color: var(--txtHighlight) !important;
 }
 .ant-table-tbody > tr > td:nth-child(2) {
-  color: #262e80 !important;
+  color: var(--txtHighlight) !important;
 }
 .w-title {
   white-space: nowrap;
@@ -192,16 +192,16 @@ table {
 .ant-table-tbody > tr > td:nth-child(9),
 .ant-table-tbody > tr > td:nth-child(10),
 .ant-table-tbody > tr > td:nth-child(11) {
-    color: #262e80 !important;
-    font-size: var(--font-large);
-    font-weight: 500;
+  color: var(--txtHighlight) !important;
+  font-size: var(--font-large);
+  font-weight: 500;
 }
 
 .ant-table-tbody > tr > td:nth-child(3),
 .ant-table-tbody > tr > td:nth-child(4) {
-    color: #5763de !important;
-    font-size: var(--font-large);
-    font-weight: 500;
+  color: #5763de !important;
+  font-size: var(--font-large);
+  font-weight: 500;
 }
 /* .ant-table-tbody > tr > td:nth-child(4) {
   text-decoration: underline;
@@ -321,14 +321,14 @@ table {
 }
 
 .ant-table-thead > tr > th {
-    position: relative;
-    color: var(--color-262E80) !important;
-    font-weight: bold !important;
-    font-size: var(--font-large) !important;
-    text-align: left;
-    background: unset !important;
-    /* border-bottom: 1px solid #f0f0f0; */
-    /* transition: background 0.3s ease; */
+  position: relative;
+  color: var(--txtHighlight) !important;
+  font-weight: bold !important;
+  font-size: var(--font-large) !important;
+  text-align: left;
+  background: unset !important;
+  /* border-bottom: 1px solid #f0f0f0; */
+  /* transition: background 0.3s ease; */
 }
 
 .ant-table-thead > tr > th,

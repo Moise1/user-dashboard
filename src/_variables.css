@@ -1,19 +1,124 @@
 ﻿:root {
-    --color-262E80: #262e80;
-    --color-fff: #fff;
-    --color-000: #000;
-    --color-5e69db: #5e69db;
-    /* --- named colours --- */
-    --active-bg: #5e69db;
-    --bgInputLight: #f2f8ff;
-    --bgBlue: #5e84db;
-    --dBlue: #262e80;
-    /* font size */
-    /*--font-large: 18px;
-    --font-medium: 16px;
-    --font-small: 14px;*/
+  --color-262E80: #262e80;
+  --color-fff: #fff;
+  --color-000: #000;
+  --color-5e69db: #5e69db;
+  /* --- named colours --- */
+  --txtBaseColor: #000;
+  --active-bg: #5e69db;
+  --bgInputLight: #f2f8ff;
+  --bgBlue: #5e84db;
+  --bgPage: #fff;
+  --bgPage2: rgb(240, 242, 245);
+  --bgLighter: var(--bgPage);
+  --dBlue: #262e80;
+  --logIconColor: #ef6092;
+  --iconColor: #ef6092;
+  --navLinkColor: #000;
+  --inputColor: #000;
+  --inputBg: #fff;
+  --placeholderColor: #000;
+  --bgHighlight: #fff;
+  --tableBg: #fff;
+  --txtHighlight: #262e80;
 
-    --font-large: 18px;
-    --font-medium: 16px;
-    --font-small: 14px;
+  --borderColor: rgb(222, 226, 230);
+  --borderPrimary: var(--txtHighlight);
+  /* -- font sizes --- */
+  --font-large: 18px;
+  --font-medium: 16px;
+  --font-small: 14px;
+  --ignoreme: #000;
+
+  /* -- Overrides / temporary / dark theme --- */
+
+  /*--font-large: 12px;
+    --font-medium: 10px;
+    --font-small: 8px;
+    --bgPage: #333;
+    --bgPage2: #222;
+    --borderColor: #111; 
+    --tableBg: #333;
+    --bgLighter: var(--bgPage2);
+    --bgHighlight: #555;
+    --navLinkColor: #e5e112;
+    --inputColor: #ccc;
+    --inputBg: #333;
+    --placeholderColor: #fff;
+    --svgColorFilter: invert(.3) sepia(1) saturate(5) hue-rotate(175deg);
+    --color-fff: #333;
+    --txtBaseColor: #ccc;
+    --txtHighlight: #e5e112;
+    --color-262E80: #ccc;
+    --dBlue: #212121; */
+}
+
+/****** Overrides of ant stuff ********/
+
+body {
+  color: var(--txtBaseColor) !important;
+  background-color: var(--bgPage) !important;
+}
+/* override of ant stuff */
+
+.bg-white {
+  background-color: var(--bgHighlight) !important;
+}
+.input-group,
+.input-group-text {
+  background-color: var(--inputBg) !important;
+  border-color: var(--borderColor) !important;
+}
+input {
+  background-color: var(--inputBg) !important;
+  color: var(--inputColor);
+}
+::placeholder {
+  color: var(--placeholderColor) !important;
+}
+
+.border,
+.ant-menu-vertical {
+  border-color: var(--borderColor) !important;
+}
+.ant-layout {
+  background-color: var(--bgPage2) !important;
+}
+.ant-table {
+  background-color: var(--tableBg) !important;
+  border-color: var(--borderColor) !important;
+}
+.ant-table-thead {
+  background-color: var(--bgLighter) !important;
+  border-bottom-color: var(--borderColor) !important;
+}
+.ant-table-cell {
+  background-color: var(--bgPage) !important;
+  border-color: var(--borderColor) !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  color: var(--color-fff) !important;
+  font-size: var(--font-18) !important;
+  background-color: var(--active-bg) !important;
+}
+.ant-table-cell {
+  background-color: var(--bgPage) !important;
+  border-color: var(--borderColor) !important;
+}
+.ant-menu,
+.ant-layout-sider {
+  background-color: var(--bgPage) !important;
+}
+.ant-menu-title-content {
+  color: var(--navLinkColor);
+}
+.ant-menu-icon,
+.ant-menu-item img,
+.menu-item img,
+.pinButton img {
+  color: var(--iconColor);
+  filter: var(--svgColorFilter);
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .active-white-svg {
+  filter: brightness(100);
 }

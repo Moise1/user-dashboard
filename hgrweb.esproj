@@ -15,6 +15,7 @@
     <Script Remove=".husky\**" />
     <Script Remove=".vscode\**" />
     <Script Remove=".vs\**" />
+    <Script Remove="build\**" />
     <Script Remove="githooks\**" />
   </ItemGroup>
   <ItemGroup>
