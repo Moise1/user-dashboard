@@ -33,7 +33,7 @@ for (let i = 0; i < 26; i++) {
       </div>
     ),
     created: (
-      <div>
+      <div className="d-flex justify-content-between">
         13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
