@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 body {
   font-weight: 500;
   font-family: "Poppins", sans-serif;
@@ -41,7 +41,6 @@ label {
 .w-sidebar-toggle {
   width: 80px;
   z-index: 1;
-  /* height: 100vh; */
   overflow-x: visible;
 }
 .br-8 {
@@ -201,9 +200,7 @@ table {
   font-size: 18px;
   font-weight: 500;
 }
-/* .ant-table-tbody > tr > td:nth-child(4) {
-  text-decoration: underline;
-} */
+
 .drop-down {
   width: 23vw;
 }
@@ -290,7 +287,6 @@ table {
   }
 }
 
-/* MAIN CSS */
 .hgr-progress .ant-progress {
   width: 370px !important;
   margin-left: 30px;
@@ -325,8 +321,6 @@ table {
   font-size: 18px !important;
   text-align: left;
   background: unset !important ;
-  /* border-bottom: 1px solid #f0f0f0; */
-  /* transition: background 0.3s ease; */
 }
 
 .ant-table-thead > tr > th,
@@ -337,9 +331,4 @@ table {
   padding: 11px 16px !important ;
   overflow-wrap: break-word;
 }
-
-/* .drop-down_effect {
-  background: #fbfbfb !important ;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16)) !important ;
-  border-radius: 10px;
-} */
+ */
