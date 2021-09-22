@@ -11,7 +11,6 @@ import Previousstep from '../SmallComponents/Previousstep';
 setTranslations({ en });
 setDefaultLanguage('en');
 
-
 interface values {
   user: string;
 }

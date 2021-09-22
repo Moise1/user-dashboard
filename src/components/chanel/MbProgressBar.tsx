@@ -9,10 +9,10 @@ import progress_remain from '../../assets/channel/greybar.png';
 
 export interface MbProgressBarProps {
   step: number;
-  platform: platformType;
+  platform?: platformType;
 }
 
-function MbProgressBar(props: any) {
+function MbProgressBar(props: MbProgressBarProps) {
   // const t = useTranslation()
   console.log(props.step, 'this is step');
   return (

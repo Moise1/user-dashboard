@@ -14,7 +14,7 @@ setTranslations({ en });
 setDefaultLanguage('en');
 
 export interface values {
-  platform?: platformType
+  platform?: platformType;
 }
 export interface props {
   nextStep: () => void;
@@ -26,7 +26,7 @@ export interface props {
 function PlatForm(props: props) {
   const { nextStep, handleChangePlatform, platform, values, step } = props;
 
-  const Continue = (e: any) => {
+  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };

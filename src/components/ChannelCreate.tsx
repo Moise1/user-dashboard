@@ -23,7 +23,7 @@ interface props {
 }
 
 class ChannelCreate extends React.Component<props, state> {
-  constructor(props: any) {
+  constructor(props: props) {
     super(props);
     this.state = {
       step: 1,

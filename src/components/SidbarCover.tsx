@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function SidbarCover(myProps: any) {
+interface props {
+  staticValue: boolean;
+  setCollapse: (value: boolean) => void;
+  children?: JSX.Element | JSX.Element[];
+}
+
+export default function SidbarCover(myProps: props) {
   const { staticValue, setCollapse, children } = myProps;
   return (
     <div

@@ -4,7 +4,21 @@ import { Table } from 'antd';
 import img from '../assets/icon.png';
 import { columns } from '../components/SmallComponents/PendindData';
 
-const data: any = [];
+interface iData {
+  key: number;
+  item: number;
+  src: srcType;
+
+  img: JSX.Element;
+  title: JSX.Element;
+  status: JSX.Element;
+  created: JSX.Element;
+  createdBy: JSX.Element;
+}
+
+type dataKeyType = string | number;
+
+const data: iData[] = [];
 
 for (let i = 0; i < 26; i++) {
   data.push({
@@ -21,15 +35,15 @@ for (let i = 0; i < 26; i++) {
 
     status: <div style={{ color: '#7d7d7d' }}>Listing on Amazon</div>,
     created: <div>13/07/2021 12:56</div>,
-    createdby: <div style={{ color: '#262e80' }}>Nametest</div>
+    createdBy: <div style={{ color: '#262e80' }}>Nametest</div>
   });
 }
 
 function PendingDataContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<dataKeyType[]>([]);
 
-  const onSelectChange = (selectedRowKeys: any) => {
+  const onSelectChange = (selectedRowKeys: dataKeyType[]) => {
     setSelectedRowKeys(selectedRowKeys);
     console.log(selectedRowKeys.length);
   };
@@ -43,9 +57,9 @@ function PendingDataContent() {
       {
         key: 'odd',
         text: 'Select Odd Row',
-        onSelect: (changableRowKeys: any) => {
+        onSelect: (changableRowKeys: dataKeyType[]) => {
           let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
             if (index % 2 !== 0) {
               return false;
             }
@@ -57,9 +71,9 @@ function PendingDataContent() {
       {
         key: 'even',
         text: 'Select Even Row',
-        onSelect: (changableRowKeys: any) => {
+        onSelect: (changableRowKeys: dataKeyType[]) => {
           let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
             if (index % 2 !== 0) {
               return true;
             }

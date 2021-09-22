@@ -3,10 +3,23 @@ import React, { useState } from 'react';
 import { Table } from 'antd';
 import img from '../assets/icon.png';
 import { columns } from './SmallComponents/TerminatedData';
-const data: any = [];
-const windowwidth = window.innerWidth;
 
+const windowwidth = window.innerWidth;
 console.log(windowwidth);
+
+interface iData {
+  key: number;
+  item: number;
+
+  img: JSX.Element;
+  title: JSX.Element;
+  created: JSX.Element;
+}
+
+type dataKeyType = string | number;
+
+const data: iData[] = [];
+
 for (let i = 0; i < 26; i++) {
   data.push({
     key: i,
@@ -24,9 +37,9 @@ for (let i = 0; i < 26; i++) {
 
 function TerminatedDataContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<dataKeyType[]>([]);
 
-  const onSelectChange = (selectedRowKeys: any) => {
+  const onSelectChange = (selectedRowKeys: dataKeyType[]) => {
     setSelectedRowKeys(selectedRowKeys);
     console.log(selectedRowKeys.length);
   };
@@ -40,9 +53,9 @@ function TerminatedDataContent() {
       {
         key: 'odd',
         text: 'Select Odd Row',
-        onSelect: (changableRowKeys: any) => {
+        onSelect: (changableRowKeys: dataKeyType[]) => {
           let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
             if (index % 2 !== 0) {
               return false;
             }
@@ -54,9 +67,9 @@ function TerminatedDataContent() {
       {
         key: 'even',
         text: 'Select Even Row',
-        onSelect: (changableRowKeys: any) => {
+        onSelect: (changableRowKeys: dataKeyType[]) => {
           let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: any, index: any) => {
+          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
             if (index % 2 !== 0) {
               return true;
             }

@@ -19,13 +19,16 @@ import Flag, { FlagProps } from './component/Flag';
 setTranslations({ en });
 setDefaultLanguage('en');
 
+interface values {
+  storeLocation: string;
+}
 export interface StoreLocationProps {
   nextStep: () => void;
   prevStep: () => void;
   platform: platformType;
   step: number;
   handleChangeLocation: (newLocation: string) => void;
-  values: any;
+  values: values;
   /*
    { nextStep, handleChangeLocation, values, platform, step, flag, prevStep }
    */
@@ -78,11 +81,11 @@ const flags: FlagProps[] = [
 
 function StoreLocation(props: StoreLocationProps) {
   const { nextStep, prevStep, platform, step, handleChangeLocation, values } = props;
-  const Continue = (e: any) => {
+  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };
-  const Previous = (e: any) => {
+  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
   };

@@ -4,7 +4,11 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
-function Previousstep(props: any) {
+
+interface props {
+  Previous: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+function Previousstep(props: props) {
   const t = useTranslation();
   return (
     <button onClick={props.Previous} type="submit" className="bg-trans border-0 text-left lh-1">

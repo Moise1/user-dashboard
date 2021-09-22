@@ -12,24 +12,32 @@ import Previousstep from '../SmallComponents/Previousstep';
 import ButttonCom from './component/ButttonCom';
 setTranslations({ en });
 setDefaultLanguage('en');
-function AccountConnect({
-  nextStep,
-  handleChangeApi,
-  values,
-  step,
-  prevStep,
-  platform,
-  api,
-  handleChangeExtension,
-  extension
-}: any) {
+
+interface values {
+  extension: string;
+  api: string;
+}
+interface props {
+  nextStep: () => void;
+  handleChangeApi: (newApi: string) => void;
+  values: values;
+  step: number;
+  prevStep: () => void;
+  platform: platformType;
+  api: string;
+  handleChangeExtension: (newExtension: string) => void;
+  extension: string;
+}
+
+function AccountConnect(props: props) {
   // eslint-disable-next-line no-unused-vars
+  const { nextStep, handleChangeApi, values, step, prevStep, platform, api, handleChangeExtension, extension } = props;
   const [enable, _setEnable] = useState(false); // ignored setEnable
-  const Continue = (e: any) => {
+  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };
-  const Previous = (e: any) => {
+  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
   };

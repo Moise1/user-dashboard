@@ -7,7 +7,13 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
-function ProgressBar(props: any) {
+
+interface props {
+  step: number;
+  platform: platformType;
+}
+
+function ProgressBar(props: props) {
   const t = useTranslation();
   console.log(props.platform, 'sidebar');
   return (

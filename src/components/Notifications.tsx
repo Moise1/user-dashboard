@@ -8,7 +8,10 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
-export default function Notifications(props: any) {
+interface props {
+  title: string;
+}
+export default function Notifications(props: props) {
   const t = useTranslation();
   return (
     <div className="row mx-auto pt-4 align-items-center">

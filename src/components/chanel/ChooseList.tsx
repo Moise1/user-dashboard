@@ -45,7 +45,7 @@ function ChooseList(props: props) {
   //  e.preventDefault();
   //  nextStep();
   //};
-  const Previous = (e: any) => {
+  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
   };
