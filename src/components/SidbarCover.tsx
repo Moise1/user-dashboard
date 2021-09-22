@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function SidbarCover(myProps: any) {
   const { staticValue, setCollapse, children } = myProps;
   return (

@@ -1,20 +1,20 @@
 import React from "react";
-import logo from "../assets/logo.svg";
-import dashboard from "../assets/dashboard.svg";
-import catalog from "../assets/catalog.svg";
-import listnow from "../assets/plus.svg";
-import settings from "../assets/settings.svg";
-import services from "../assets/services.svg";
-import help from "../assets/help.svg";
+import logo from "../../assets/logo.svg";
+import dashboard from "../../assets/dashboard.svg";
+import catalog from "../../assets/catalog.svg";
+import listnow from "../../assets/plus.svg";
+import settings from "../../assets/settings.svg";
+import services from "../../assets/services.svg";
+import help from "../../assets/help.svg";
 import { Layout, Menu } from "antd";
-import pin_icon from "../assets/pin.svg";
+import pin_icon from "../../assets/pin.svg";
 import { useHistory } from "react-router-dom";
 import {
   setTranslations,
   setDefaultLanguage,
   useTranslation,
 } from "react-multi-lang";
-import en from "../translation.json";
+import en from "../../translation.json";
 import {
   DashBoardIcon,
   LeftArrowIcon,
@@ -26,12 +26,13 @@ import {
   CircleDotIcon,
   HelpIcon,
   LogOutIcon,
-} from "../components/common/Icons";
+} from "../common/Icons";
 import {
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
+import MenuListItem from "./MenuListItem";
 const { SubMenu } = Menu;
 
 setTranslations({ en });
@@ -52,6 +53,15 @@ export default function Sidebar(props: Props) {
   };
   const { collapsed, toggle, staticvalue, togglestatic } = props;
   const t = useTranslation();
+
+  const listArray = [
+    { key: 9, listName: "Channel" },
+    { key: 10, listName: "Sources" },
+    { key: 11, listName: "Pricing Rules" },
+    { key: 12, listName: "Browser Extensions" },
+    { key: 13, listName: "VA Profile" },
+    { key: 14, listName: "Templates" },
+  ];
 
   return (
     <>
@@ -105,6 +115,7 @@ export default function Sidebar(props: Props) {
                 </>
               )}
             </div>{" "}
+            <div className="pt-3"></div>
             <Menu.Item
               key="1"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}

@@ -4,7 +4,7 @@ import { Layout } from "antd";
 import TableContent from "../components/TableContent";
 import ContentLayout from "../components/ContentLayout";
 import HeaderLayout from "../components/HeaderLayout";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/sidebar/Sidebar";
 import ToggleButton from "../components/ToggleButton";
 import TabsList from "../components/SmallComponents/TabsList";
 import SearchBar from "../components/SmallComponents/SearchBar";

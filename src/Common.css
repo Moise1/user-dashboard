@@ -4,8 +4,12 @@
 :root {
   --color-dark-violet: #262e80;
   --color-primary: #5e69db;
+  --color-5763de: #5763de;
+  --color-9694ff: #9694ff;
+  --color-6a74de: #6a74de;
   --color-white: #fff;
-  --color-000: #000;
+  --color-black: #000;
+  --color-black: #000;
   --color-light-violet: #f7f9fd;
   --color-light-pink: #ef6092;
   --color-dark-pink: #f12b70;
@@ -183,18 +187,18 @@ body {
 
 .search_placeholder::placeholder {
   font-size: var(--font-18);
-  color: var(--color-000);
+  color: var(--color-black);
   font-weight: 500;
   opacity: 0.2;
 }
 
 .c-000 {
-  color: var(--color-000);
+  color: var(--color-black);
 }
 
 .search_placeholder {
   font-size: var(--font-18);
-  color: var(--color-000);
+  color: var(--color-black);
   font-weight: 500;
 }
 
@@ -260,7 +264,7 @@ body {
 .add-new-channel-drop p {
   font-size: 11px;
   display: inline-block;
-  color: #000;
+  color: var(--color-black);
 }
 .fw-700 {
   font-weight: 700;
@@ -545,17 +549,17 @@ button:focus {
   outline: none !important;
 }
 .purple {
-  color: #9694ff;
+  color: var(--color-9694ff);
 }
 
 .d-purple {
-  color: #6a74de;
+  color: var(--color-6a74de);
 }
 .bg-d-purple {
-  background-color: #6a74de;
+  background-color: var(--color-6a74de);
 }
 .bg-purple {
-  background-color: #9694ff;
+  background-color: var(--color-9694ff);
 }
 .pink {
   color: var(--color-light-pink);
@@ -665,7 +669,7 @@ table {
 
 .ant-table-tbody > tr > td:nth-child(3),
 .ant-table-tbody > tr > td:nth-child(4) {
-  color: #5763de !important;
+  color: var(--color-5763de) !important;
   font-size: 18px;
   font-weight: 500;
 }
