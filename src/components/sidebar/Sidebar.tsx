@@ -63,6 +63,12 @@ export default function Sidebar(props: Props) {
     { key: 14, listName: "Templates" },
   ];
 
+  const servicelistArray = [
+    { key: 111, listName: "Channel" },
+    { key: 112, listName: "Sources" },
+    { key: 113, listName: "Pricing Rules" },
+  ];
+
   return (
     <>
       <Sider
@@ -75,12 +81,12 @@ export default function Sidebar(props: Props) {
         <div className="logo" />
         <div className="d-flex flex-column justify-content-between h-100">
           <Menu theme="light" mode="inline" defaultSelectedKeys={["4"]}>
-            <Menu.Item
+            {/* <Menu.Item
               key="0"
               icon={<img src={logo} className="d-none" height={30} alt="" />}
             >
-              {/* <span className="font-weight-bold  d-blue">{t("HGR")}</span> */}
-            </Menu.Item>
+              <span className="font-weight-bold  d-blue">{t("HGR")}</span>
+            </Menu.Item> */}
             <div
               className="text-white position-absolute"
               style={{
@@ -115,7 +121,7 @@ export default function Sidebar(props: Props) {
                 </>
               )}
             </div>{" "}
-            <div className="pt-3"></div>
+            <div className="pt-5"></div>
             <Menu.Item
               key="1"
               style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
@@ -160,54 +166,11 @@ export default function Sidebar(props: Props) {
               icon={<SettingsIcon />}
               title="Settings"
             >
-              <Menu.Item key="9">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Channel
-                </li>
-              </Menu.Item>
-              <Menu.Item key="10">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Sources
-                </li>
-              </Menu.Item>
-              <Menu.Item key="11">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Pricing Rules
-                </li>
-              </Menu.Item>
-              <Menu.Item key="13">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Browser Extensions
-                </li>
-              </Menu.Item>
-              <Menu.Item key="14">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  VA Profiles
-                </li>
-              </Menu.Item>
-              <Menu.Item key="15">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Templates
-                </li>
-              </Menu.Item>
+              {listArray.map((obj) => (
+                <Menu.Item key={obj.key}>
+                  <MenuListItem listName={obj.listName} />
+                </Menu.Item>
+              ))}
             </SubMenu>
             {/* SERVICES  */}
             <SubMenu
@@ -216,30 +179,11 @@ export default function Sidebar(props: Props) {
               icon={<ServiceIcon />}
               title="Services"
             >
-              <Menu.Item key="13">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  VA Profiles
-                </li>
-              </Menu.Item>
-              <Menu.Item key="14">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  VA Profiles
-                </li>
-              </Menu.Item>
-              <Menu.Item key="15">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  VA Profiles
-                </li>
-              </Menu.Item>
+              {servicelistArray.map((obj) => (
+                <Menu.Item key={obj.key}>
+                  <MenuListItem listName={obj.listName} />
+                </Menu.Item>
+              ))}
             </SubMenu>
             <SubMenu
               key="sub5"
@@ -247,22 +191,11 @@ export default function Sidebar(props: Props) {
               icon={<HelpIcon />}
               title="Help"
             >
-              <Menu.Item key="9">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Templates
-                </li>
-              </Menu.Item>
-              <Menu.Item key="10">
-                <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  VA Profiles
-                </li>
-              </Menu.Item>
+              {servicelistArray.map((obj) => (
+                <Menu.Item key={obj.key}>
+                  <MenuListItem listName={obj.listName} />
+                </Menu.Item>
+              ))}
             </SubMenu>
           </Menu>
           <div className="logout-icon d-flex justify-content-end align-items-center z-10">

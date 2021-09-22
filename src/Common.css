@@ -4,9 +4,9 @@
 :root {
   --color-dark-violet: #262e80;
   --color-primary: #5e69db;
-  --color-5763de: #5763de;
-  --color-9694ff: #9694ff;
-  --color-6a74de: #6a74de;
+  --color-violet-shade-1: #5763de;
+  --color-violet-shade-2: #9694ff;
+  --color-violet-shade-3: #6a74de;
   --color-white: #fff;
   --color-black: #000;
   --color-black: #000;
@@ -104,6 +104,11 @@ body {
 
 .ant-menu-item .ant-menu-title-content {
   margin: 0 !important;
+}
+
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+  background-color: unset !important;
+  color: black !important;
 }
 /* HOVER LIST ITEMS  */
 /* .ant-menu-item:hover {
@@ -549,17 +554,17 @@ button:focus {
   outline: none !important;
 }
 .purple {
-  color: var(--color-9694ff);
+  color: var(--color-violet-shade-2);
 }
 
 .d-purple {
-  color: var(--color-6a74de);
+  color: var(--color-violet-shade-3);
 }
 .bg-d-purple {
-  background-color: var(--color-6a74de);
+  background-color: var(--color-violet-shade-3);
 }
 .bg-purple {
-  background-color: var(--color-9694ff);
+  background-color: var(--color-violet-shade-2);
 }
 .pink {
   color: var(--color-light-pink);
@@ -669,7 +674,7 @@ table {
 
 .ant-table-tbody > tr > td:nth-child(3),
 .ant-table-tbody > tr > td:nth-child(4) {
-  color: var(--color-5763de) !important;
+  color: var(--color-violet-shade-1) !important;
   font-size: 18px;
   font-weight: 500;
 }
@@ -810,3 +815,29 @@ table {
   overflow-wrap: break-word;
 }
 /* APP CSS  */
+.ant-menu-item:active,
+.ant-menu-submenu-title:active {
+  background: transparent;
+}
+.ant-menu-item.ant-menu-item-only-child {
+  padding-left: 10px !important;
+}
+
+/* .ant-layout-sider.ant-layout-sider-light {
+  width: 260px !important;
+  flex: 0 0 260px !important;
+  max-width: 260px !important;
+  min-width: 260px !important;
+}
+.w-sidebar-toggle .ant-layout-sider.ant-layout-sider-light {
+  width: 80px !important;
+  flex: 0 0 80px !important;
+  max-width: 80px !important;
+  min-width: 80px !important;
+}
+.ant-layout-sider:hover .ant-layout-sider.ant-layout-sider-light {
+  width: 260px !important;
+  flex: 0 0 260px !important;
+  max-width: 260px !important;
+  min-width: 260px !important;
+} */

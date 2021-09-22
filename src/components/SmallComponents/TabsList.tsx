@@ -20,20 +20,20 @@ export default function TabsList() {
         onChangeTab={() => onChangeTab(1)}
         index={1}
         active={active}
-        title={`Active  ${windowwidth < 900 ? "" : "Listings"} `}
+        title={`Active  Listings`}
       />
 
       <TabButton
         onChangeTab={() => onChangeTab(2)}
         index={2}
         active={active}
-        title={`Pending  ${windowwidth < 900 ? "" : "Listings"} `}
+        title={`Pending Listings`}
       />
       <TabButton
         onChangeTab={() => onChangeTab(3)}
         index={3}
         active={active}
-        title={`Terminated  ${windowwidth < 900 ? "" : "Listings"} `}
+        title={`Terminated Listings `}
       />
     </div>
   );
