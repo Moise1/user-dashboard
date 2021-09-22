@@ -32,7 +32,8 @@
     "lint_err": "npx eslint --quiet src/**/*.{ts,tsx,js}",
     "prettier": "npx prettier -w src/**/*.{ts,tsx,js,css,html}",
     "xprepare": "husky install && npx husky-init",
-    "xpostinstall": "husky install && npx husky-init"
+    "xpostinstall": "husky install && npx husky-init",
+    "xcheck": "npx tsc && yarn prettier && yarn lint"
   },
   "browserslist": {
     "production": [

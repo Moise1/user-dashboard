@@ -50,7 +50,7 @@ for (let i = 0; i < 26; i++) {
       </div>
     ),
     created: (
-      <div>
+      <div className="d-flex justify-content-between">
         13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
@@ -111,7 +111,7 @@ function TableContent() {
 
   return (
     <React.Fragment>
-      <div className="bg-white rounded">
+      <div className="bg-white br-10">
         <div className="row mx-auto  align-items-center justify-content-between">
           {selectedRowKeys.length ? (
             <div className="col-lg-6 col-md-8 mb-3">

@@ -6,13 +6,29 @@ import { Layout } from 'antd';
 import TableContent from '../components/TableContent';
 import ContentLayout from '../components/ContentLayout';
 import HeaderLayout from '../components/HeaderLayout';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar/Sidebar';
 import TabsList from '../components/SmallComponents/TabsList';
 import SearchBar from '../components/SmallComponents/SearchBar';
 import Topbar from '../components/Topbar';
 import SidebarMb from '../components/SidebarMb';
 import SidbarCover from '../components/SidbarCover';
 import styles from './Home.module.css';
+
+/*
+ *import TableContent from "../components/TableContent";
+import ContentLayout from "../components/ContentLayout";
+import HeaderLayout from "../components/HeaderLayout";
+import Sidebar from "../components/sidebar/Sidebar";
+import ToggleButton from "../components/ToggleButton";
+import TabsList from "../components/SmallComponents/TabsList";
+import SearchBar from "../components/SmallComponents/SearchBar";
+import Topbar from "../components/Topbar";
+import SidebarMb from "../components/SidebarMb";
+import SidbarCover from "../components/SidbarCover";
+import PendingDataContent from "../components/PendingDataContent";
+import styles from "./Home.module.css";
+import TerminatedDataContent from "../components/TerminatedDataContent";
+ * */
 
 export default function Home() {
   const [collapse, setCollapse] = useState(true);

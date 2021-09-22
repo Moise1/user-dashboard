@@ -5,6 +5,8 @@ import { useTranslation } from 'react-multi-lang';
 import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem';
 import { Link } from 'react-router-dom';
 import search_icon from '../../assets/search.svg';
+import { PlusIcon } from '../common/Icons';
+
 export default function DropDownMenu() {
   const t = useTranslation();
   return (
@@ -39,52 +41,7 @@ export default function DropDownMenu() {
             <Link to="/newchannel">
               <div className="add-new-channel-drop">
                 <p className="mb-0">{t('AddNewChannel')}</p>
-                <svg
-                  id="Group_78"
-                  data-name="Group 78"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16.903"
-                  height="16.903"
-                  viewBox="0 0 16.903 16.903"
-                >
-                  <path id="Path_65" data-name="Path 65" d="M0,0H16.9V16.9H0Z" fill="none" />
-                  <ellipse
-                    id="Ellipse_33"
-                    data-name="Ellipse 33"
-                    cx="6.99"
-                    cy="6.99"
-                    rx="6.99"
-                    ry="6.99"
-                    transform="translate(1.434 1.036)"
-                    fill="none"
-                    stroke="#535353"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                  <line
-                    id="Line_35"
-                    data-name="Line 35"
-                    x2="6.99"
-                    transform="translate(4.93 8.027)"
-                    fill="none"
-                    stroke="#535353"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                  <line
-                    id="Line_36"
-                    data-name="Line 36"
-                    y2="6.99"
-                    transform="translate(8.425 4.532)"
-                    fill="none"
-                    stroke="#535353"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                </svg>
+                <PlusIcon />
               </div>
             </Link>
           </div>
