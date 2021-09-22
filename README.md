@@ -1,3 +1,5 @@
+## Build status: [![Yarn, Tsc + Lint](https://github.com/HustleGotReal/hgrweb/actions/workflows/yarnBuild.yml/badge.svg)](https://github.com/HustleGotReal/hgrweb/actions/workflows/yarnBuild.yml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
