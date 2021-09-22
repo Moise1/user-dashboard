@@ -12,7 +12,11 @@ import '../Common.css';
 import Logo from '../assets/channel/list/logo.png';
 import dropicon from '../assets/dropicon.svg';
 
-export default function Tobbar(props: any) {
+interface props {
+  title: string;
+}
+
+export default function Tobbar(props: props) {
   return (
     <>
       <div className={`d-flex mx-auto justify-content-between ff-used align-items-center ${styles.Topbar_height}`}>

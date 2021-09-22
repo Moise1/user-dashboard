@@ -20,11 +20,11 @@ interface props {
 function Account(props: props) {
   const { nextStep, step, prevStep, platform } = props;
   //_handleChangeApi = handleChangeApi
-  const Continue = (e: any) => {
+  const Continue = (e: React.MouseEvent) => {
     e.preventDefault();
     nextStep();
   };
-  const Previous = (e: any) => {
+  const Previous = (e: React.MouseEvent) => {
     e.preventDefault();
     prevStep();
   };

@@ -10,12 +10,32 @@ import en from '../../translation.json';
 import Previousstep from '../SmallComponents/Previousstep';
 setTranslations({ en });
 setDefaultLanguage('en');
-function UserName({ nextStep, handleChangeUser, values, step, prevStep, platform, user }: any) {
-  const Continue = (e: any) => {
+
+
+interface values {
+  user: string;
+}
+interface props {
+  nextStep: () => void;
+  step: number;
+  prevStep: () => void;
+  user: string;
+  values: values;
+  platform: platformType;
+  handleChangeUser: (newUser: string) => void;
+  /*
+   { nextStep, handleChangeUser, values, step, prevStep, platform, user }: any
+   */
+}
+
+function UserName(props: props) {
+  const { nextStep, handleChangeUser, values, step, prevStep, platform, user } = props;
+
+  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };
-  const Previous = (e: any) => {
+  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
   };

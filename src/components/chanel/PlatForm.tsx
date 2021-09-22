@@ -13,11 +13,14 @@ import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
 
+export interface values {
+  platform?: platformType
+}
 export interface props {
   nextStep: () => void;
   handleChangePlatform: (newPlatform: platformType) => void;
   platform: platformType;
-  values: any;
+  values: values;
   step: number;
 }
 function PlatForm(props: props) {
@@ -146,27 +149,11 @@ function PlatForm(props: props) {
                 </div>
                 <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right w-100 next-fix">
                   <div className="text-danger small text-center d-md-none d-block">
-                    {values.platform == '' ? t('platchck') : ''}
+                    {!values.platform ? t('platchck') : ''}
                   </div>
-                  <ButtonComp onClick={Continue} disabled={values.platform == ''} title={t('nxt')} />
-                  {/* <button
-                    onClick={Continue}
-                    type="submit"
-                    disabled={values.platform == ""}
-                    className={`border-0 bg-trans mx-auto 
-                    ${
-                      values.platform !== ""
-                        ? "d-blue"
-                        : "btn-disbaled text-grey"
-                    }`}
-                  >
-                    <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">{t("nxt")} </span>
-                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
-                    </div>
-                  </button> */}
+                  <ButtonComp onClick={Continue} disabled={!values.platform} title={t('nxt')} />
                   <div className="text-danger small text-center d-none d-md-block">
-                    {values.platform == '' ? t('platchck') : ''}
+                    {!values.platform ? t('platchck') : ''}
                   </div>
                 </div>
               </div>
