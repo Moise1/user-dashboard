@@ -10,23 +10,22 @@ import { PlusIcon } from '../common/Icons';
 export default function DropDownMenu() {
   const t = useTranslation();
   return (
-    <Menu className="drop-down_effect nav-dropdown">
-      <div className="drop-down">
+    <Menu className="drop-down_effect nav-dropdown border-0">
+    <div>
+        <div className="drop-down ">
         <div className="row mx-auto my-2 align-items-center">
           <div className="col-12">
             <div className="input-group drop-search-input  br-10 my-2 input-group-sm border  rounded pr-1 bg-white">
               <input
                 type="text"
-                className="form-control input-focus-none search_placeholder br-10  border-0"
+                className="form-control input-focus-none search_placeholder br-10 p-0 border-0"
                 aria-label="Small"
                 aria-describedby="inputGroup-sizing-sm"
                 placeholder="Search..."
               />
-              <div className="input-group-prepend">
-                <button className="input-group-text br-10 bg-white" id="inputGroup-sizing-sm">
-                  <img src={search_icon} height="15" alt="" />
-                </button>
-              </div>
+              <span className="search-icon-input ">
+                 <img src={search_icon} height="12" alt="" />
+              </span>
             </div>
           </div>
           <div className="col-md-12"></div>
@@ -47,6 +46,7 @@ export default function DropDownMenu() {
           </div>
         </div>
       </div>
+    </div>
     </Menu>
   );
 }

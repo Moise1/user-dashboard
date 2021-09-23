@@ -73,7 +73,7 @@ export default function Tobbar(props: props) {
               <span className="fs-18 fw-bold mx-1"> 1232</span>
               <span className="d-none fs-18 fw-bold d-md-inline ">Tokens </span>
             </div>
-            <div className="d-flex  lav_button_shadow py-2 align-items-center ">
+            <div className="d-flex  lav_button_shadow py-2 align-items-center w-xxxl-304">
               <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
               <img src={flag} className="lh-1" height="20" alt="" />
               <img src={amazon} className="mx-3 lh-1" height="20" alt="" />

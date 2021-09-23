@@ -9,6 +9,7 @@ import HeaderLayout from '../components/HeaderLayout';
 import Sidebar from '../components/sidebar/Sidebar';
 import TabsList from '../components/SmallComponents/TabsList';
 import SearchBar from '../components/SmallComponents/SearchBar';
+import DropDownMenu from '../components/SmallComponents/DropDownMenu';
 import Topbar from '../components/Topbar';
 import SidebarMb from '../components/SidebarMb';
 import SidbarCover from '../components/SidbarCover';
@@ -45,7 +46,7 @@ export default function Home() {
   return (
     <>
       <Topbar title={'Listings'} />
-
+{/* <DropDownMenu /> */}
       <Layout className={`bg-white ${styles.Layout_height}`}>
         <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
           <Sidebar

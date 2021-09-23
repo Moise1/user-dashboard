@@ -251,22 +251,30 @@ body {
 .nav-dropdown .ant-menu {
   background: transparent !important;
   margin-left: 400px;
-  width: 279.1px;
+  width: 277.8px;
+}
+.w-304 {
+  width: 304px;
 }
 .nav-dropdown .drop-down {
   background: #fbfbfb !important;
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16)) !important;
   border-radius: 0px 0px 10px 10px;
-
   padding-top: 1px;
   padding-bottom: 1px;
-  width: 279.1px;
+width: 277.8px;
 }
 .drop-search-input {
+  padding: 5px 6px;
   border-radius: 10px;
   background: var(--color-white);
   border: 0;
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16));
+box-shadow: inset 2px 2px 10px  rgba(0, 0, 0, 0.1);
+}
+.search-icon-input {
+  position: absolute;
+  right: 12px;
+  top: 12px;
 }
 .drop-search-input input {
   font-size: 13px !important;
@@ -889,6 +897,9 @@ table {
   outline: 0;
   box-shadow: none
 }
+.overflow-visible {
+  overflow: visible;
+}
 /* .ant-menu-root::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
@@ -918,10 +929,17 @@ table {
 }
 
 @media (min-width: 1600px) {
+  .w-xxxl-304 {
+    width: 304px;
+  }
   .nav-dropdown .ant-menu {
-    width: 292.2px;
+    width: 304.2px;
   }
   .nav-dropdown .drop-down {
-    width: 292.2px;
+    width: 304.2px;
   }
+  .drop-down {
+  right: -9px !important;
+  position: absolute;
+}
 }
