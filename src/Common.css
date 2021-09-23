@@ -309,8 +309,12 @@ body {
 
 .lav_button_shadow {
   border-radius: 10px;
-  background: var(--color-white);
+  background: #fbfbfb;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+.lav_button_shadow .ant-btn {
+  background: #fbfbfb !important;
+  box-shadow: none;
 }
 
 .ant-menu-vertical .ant-menu-item::after,
