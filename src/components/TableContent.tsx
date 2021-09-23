@@ -117,16 +117,20 @@ function TableContent() {
             <div className="col-lg-6 col-md-8 mb-3">
               <div className="d-flex justify-content-around mt-2 mr-3 bg-f2f8ff br-15 p-2">
                 {selectedRowKeys.length ? (
-                  <div className="listing-tabs">
-                    Edit <span>{selectedRowKeys.length}</span> Listings
+                  <div className="listing-tabs d-flex align-items-center justify-content-center">
+                    <button className="btn foucs-none py-1 ">
+                      Edit <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''
                 )}
                 <span className="border-left-tab"></span>
                 {selectedRowKeys.length ? (
-                  <div className="listing-tabs">
-                    Copy <span>{selectedRowKeys.length}</span> Listings
+                  <div className="listing-tabs d-flex align-items-center justify-content-center">
+                    <button className="btn foucs-none py-1">
+                      Copy <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''
@@ -134,8 +138,10 @@ function TableContent() {
                 <span className="border-left-tab"></span>
 
                 {selectedRowKeys.length ? (
-                  <div className="listing-tabs">
-                    Optimize <span>{selectedRowKeys.length}</span> Listings
+                     <div className="listing-tabs d-flex align-items-center justify-content-center">
+                    <button className="btn foucs-none py-1">
+                      Optimize <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''

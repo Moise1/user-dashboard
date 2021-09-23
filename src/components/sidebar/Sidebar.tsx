@@ -1,25 +1,42 @@
-import React from 'react';
-
-import { Layout, Menu } from 'antd';
-import pin_icon from '../../assets/pin.svg';
-import { useHistory } from 'react-router-dom';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
+import React from "react";
+import logo from "../../assets/logo.svg";
+import dashboard from "../../assets/dashboard.svg";
+import catalog from "../../assets/catalog.svg";
+import listnow from "../../assets/plus.svg";
+import settings from "../../assets/settings.svg";
+import services from "../../assets/services.svg";
+import help from "../../assets/help.svg";
+import { Layout, Menu } from "antd";
+import pin_icon from "../../assets/pin.svg";
+import { useHistory } from "react-router-dom";
+import {
+  setTranslations,
+  setDefaultLanguage,
+  useTranslation,
+} from "react-multi-lang";
+import en from "../../translation.json";
 import {
   DashBoardIcon,
+  LeftArrowIcon,
   CatalogIcon,
   ListNowIcon,
   ListingsIcon,
   ServiceIcon,
   SettingsIcon,
+  CircleDotIcon,
   HelpIcon,
-  LogOutIcon
-} from '../common/Icons';
-import MenuListItem from './MenuListItem';
+  LogOutIcon,
+} from "../common/Icons";
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+} from "@ant-design/icons";
+import MenuListItem from "./MenuListItem";
 const { SubMenu } = Menu;
 
 setTranslations({ en });
-setDefaultLanguage('en');
+setDefaultLanguage("en");
 const { Sider } = Layout;
 interface Props {
   collapsed: boolean;
@@ -32,86 +49,121 @@ export default function Sidebar(props: Props) {
   const history = useHistory();
 
   const routeChange = () => {
-    history.push('/home');
+    history.push("/home");
   };
-  const { collapsed, staticvalue, togglestatic } = props;
+  const { collapsed, toggle, staticvalue, togglestatic } = props;
   const t = useTranslation();
 
   const listArray = [
-    { key: 9, listName: 'Channel' },
-    { key: 10, listName: 'Sources' },
-    { key: 11, listName: 'Pricing Rules' },
-    { key: 12, listName: 'Browser Extensions' },
-    { key: 13, listName: 'VA Profile' },
-    { key: 14, listName: 'Templates' }
+    { key: 9, listName: "Channel" },
+    { key: 10, listName: "Sources" },
+    { key: 11, listName: "Pricing Rules" },
+    { key: 12, listName: "Browser Extensions" },
+    { key: 13, listName: "VA Profile" },
+    { key: 14, listName: "Templates" },
   ];
 
   const servicelistArray = [
-    { key: 111, listName: 'Channel' },
-    { key: 112, listName: 'Sources' },
-    { key: 113, listName: 'Pricing Rules' }
+    { key: 111, listName: "Channel" },
+    { key: 112, listName: "Sources" },
+    { key: 113, listName: "Pricing Rules" },
   ];
 
   return (
     <>
-      <Sider theme="light" className="h-100 border-right border z-10" trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        theme="light"
+        className="h-100 border-right border z-10"
+        trigger={null}
+        collapsible
+        width="367"
+        collapsed={collapsed}
+      >
         <div className="logo" />
         <div className="d-flex flex-column justify-content-between h-100">
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={["4"]}>
+            {/* <Menu.Item
+              key="0"
+              icon={<img src={logo} className="d-none" height={30} alt="" />}
+            >
+              <span className="font-weight-bold  d-blue">{t("HGR")}</span>
+            </Menu.Item> */}
             <div
               className="text-white position-absolute"
               style={{
-                top: '0%',
-                right: '3%',
-                zIndex: 999999
+                top: "0%",
+                right: "3%",
+                zIndex: 999999,
               }}
             >
               {collapsed ? (
-                ''
+                ""
               ) : (
                 <>
                   <div className="ml-auto float-right m-2">
                     {staticvalue ? (
                       <i
                         onClick={togglestatic}
-                        className="fas fa-chevron-left text-dark bg-light rounded p-1 mt-1 active-left-icon"
+                        className="fas fa-chevron-left text-dark bg-light  p-1 mt-1 active-left-icon arrow-icon-sidebar"
                       ></i>
                     ) : (
-                      <button className="btn border-0 btn-light p-1">
-                        <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
+                      <button className="mt-1 btn border-0 btn-light br-8 p-1 h-30_02 w-30_02 d-flex justify-content-center align-items-center">
+                        <img
+                          onClick={togglestatic}
+                          className=""
+                          src={pin_icon}
+                          height={20}
+                          width={20}
+                          alt=""
+                        />
                       </button>
                     )}
                   </div>
                 </>
               )}
-            </div>{' '}
+            </div>{" "}
             <div className="pt-5"></div>
-            <Menu.Item key="1" style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
-              {t('ds')}
+            <Menu.Item
+              key="1"
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+              icon={<DashBoardIcon />}
+            >
+              {t("ds")}
             </Menu.Item>
-            <Menu.Item style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
-              <span className="sidebar_element">{t('cat')}</span>
+            <Menu.Item
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+              key="2"
+              icon={<CatalogIcon />}
+            >
+              <span className="sidebar_element">{t("cat")}</span>
             </Menu.Item>
-            <Menu.Item style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} key="3" icon={<ListNowIcon />}>
-              {t('ln')}
+            <Menu.Item
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
+              key="3"
+              icon={<ListNowIcon />}
+            >
+              {t("ln")}
             </Menu.Item>
             <Menu.Item
               key="4"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={
                 <span onClick={routeChange}>
                   <ListingsIcon />
                 </span>
               }
             >
-              <button className="bg-trans fw-700 p-0  border-0" onClick={() => history.push('/home')}>
-                {t('ls')}
+              <button
+                className="bg-trans fw-400 p-0  border-0 listing-btn"
+                onClick={() => history.push("/home")}
+              >
+                {t("ls")}
               </button>
             </Menu.Item>
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               key="sub3"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={<SettingsIcon />}
               title="Settings"
             >
@@ -124,7 +176,7 @@ export default function Sidebar(props: Props) {
             {/* SERVICES  */}
             <SubMenu
               key="sub4"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={<ServiceIcon />}
               title="Services"
             >
@@ -136,7 +188,7 @@ export default function Sidebar(props: Props) {
             </SubMenu>
             <SubMenu
               key="sub5"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ color: "#000", fontSize: "18px", fontWeight: "bold" }}
               icon={<HelpIcon />}
               title="Help"
             >

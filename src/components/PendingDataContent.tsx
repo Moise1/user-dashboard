@@ -94,21 +94,27 @@ function PendingDataContent() {
               <div className="row justify-content-around mt-2">
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">
-                    Edit <span>{selectedRowKeys.length}</span> Listings
+                    <button className="btn">
+                      Edit <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''
                 )}
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">
-                    Copy <span>{selectedRowKeys.length}</span> Listings
+                    <button className="btn">
+                      Copy <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''
                 )}
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">
-                    Optimize <span>{selectedRowKeys.length}</span> Listings
+                  <button className="btn">
+                      Optimize <span>{selectedRowKeys.length}</span> Listings
+                    </button>
                   </div>
                 ) : (
                   ''

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const DashBoardIcon = () => {
   return (
     <>
@@ -12,7 +10,12 @@ export const DashBoardIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_2" data-name="Path 2" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_2"
+          data-name="Path 2"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <rect
           id="Rectangle_2"
           data-name="Rectangle 2"
@@ -22,9 +25,9 @@ export const DashBoardIcon = () => {
           transform="translate(5 5)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <rect
           id="Rectangle_3"
@@ -35,9 +38,9 @@ export const DashBoardIcon = () => {
           transform="translate(5 16)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <rect
           id="Rectangle_4"
@@ -48,9 +51,9 @@ export const DashBoardIcon = () => {
           transform="translate(18 5)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -67,7 +70,12 @@ export const LeftArrowIcon = () => {
         height="18.959"
         viewBox="0 0 18.959 18.959"
       >
-        <path id="Path_70" data-name="Path 70" d="M0,0H18.959V18.959H0Z" fill="none" />
+        <path
+          id="Path_70"
+          data-name="Path 70"
+          d="M0,0H18.959V18.959H0Z"
+          fill="none"
+        />
         <path
           id="Path_71"
           data-name="Path 71"
@@ -75,9 +83,9 @@ export const LeftArrowIcon = () => {
           transform="translate(-1.891 -1.26)"
           fill="none"
           stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
         />
       </svg>
     </>
@@ -96,7 +104,12 @@ export const CatalogIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_4" data-name="Path 4" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_4"
+          data-name="Path 4"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <path
           id="Path_5"
           data-name="Path 5"
@@ -104,9 +117,9 @@ export const CatalogIcon = () => {
           transform="translate(0.763 4.525)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <path
           id="Path_6"
@@ -115,9 +128,9 @@ export const CatalogIcon = () => {
           transform="translate(0.763 1.219)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_1"
@@ -126,9 +139,9 @@ export const CatalogIcon = () => {
           transform="translate(4 7.44)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_2"
@@ -137,9 +150,9 @@ export const CatalogIcon = () => {
           transform="translate(15 7.44)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_3"
@@ -148,9 +161,9 @@ export const CatalogIcon = () => {
           transform="translate(26 7.44)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -168,7 +181,12 @@ export const ListNowIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_7" data-name="Path 7" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_7"
+          data-name="Path 7"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <circle
           id="Ellipse_1"
           data-name="Ellipse 1"
@@ -178,9 +196,9 @@ export const ListNowIcon = () => {
           transform="translate(4 3.651)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_4"
@@ -189,9 +207,9 @@ export const ListNowIcon = () => {
           transform="translate(11 14.651)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_5"
@@ -200,9 +218,9 @@ export const ListNowIcon = () => {
           transform="translate(15 10.651)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -220,7 +238,12 @@ export const ListingsIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_8" data-name="Path 8" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_8"
+          data-name="Path 8"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <line
           id="Line_6"
           data-name="Line 6"
@@ -228,9 +251,9 @@ export const ListingsIcon = () => {
           transform="translate(11 7.67)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_7"
@@ -239,9 +262,9 @@ export const ListingsIcon = () => {
           transform="translate(11 14.67)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_8"
@@ -250,9 +273,9 @@ export const ListingsIcon = () => {
           transform="translate(11 22.67)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_9"
@@ -261,9 +284,9 @@ export const ListingsIcon = () => {
           transform="translate(6.271 7.526)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_10"
@@ -272,9 +295,9 @@ export const ListingsIcon = () => {
           transform="translate(6.271 15.052)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_11"
@@ -283,9 +306,9 @@ export const ListingsIcon = () => {
           transform="translate(6.271 22.577)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -299,17 +322,12 @@ export const SettingsIcon = () => {
         xmlns="http://www.w3.org/2000/svg "
         width="16"
         height="16"
-        fill="currentColor"
+        fill="#262e80"
         viewBox="0 0 16 16"
       >
         <path
-          fillRule="evenodd"
+          fill-rule="evenodd"
           d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
-          fill="none"
-          stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
         />
       </svg>
     </>
@@ -328,7 +346,12 @@ export const ServiceIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_9" data-name="Path 9" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_9"
+          data-name="Path 9"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <path
           id="Path_10"
           data-name="Path 10"
@@ -336,9 +359,9 @@ export const ServiceIcon = () => {
           transform="translate(0.763 0.763)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <circle
           id="Ellipse_2"
@@ -349,9 +372,9 @@ export const ServiceIcon = () => {
           transform="translate(11 11.226)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -370,7 +393,12 @@ export const HelpIcon = () => {
         height="20"
         viewBox="0 0 30.103 30.103"
       >
-        <path id="Path_12" data-name="Path 12" d="M0,0H30.1V30.1H0Z" fill="none" />
+        <path
+          id="Path_12"
+          data-name="Path 12"
+          d="M0,0H30.1V30.1H0Z"
+          fill="none"
+        />
         <ellipse
           id="Ellipse_6"
           data-name="Ellipse 6"
@@ -381,9 +409,9 @@ export const HelpIcon = () => {
           transform="translate(4 3.34)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <line
           id="Line_18"
@@ -392,9 +420,9 @@ export const HelpIcon = () => {
           transform="translate(15.052 21.323)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <path
           id="Path_13"
@@ -403,9 +431,9 @@ export const HelpIcon = () => {
           transform="translate(2.543 1.773)"
           fill="none"
           stroke="#262e80"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>
@@ -415,8 +443,20 @@ export const HelpIcon = () => {
 export const CircleDotIcon = () => {
   return (
     <>
-      <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7">
-        <circle id="Ellipse_49" data-name="Ellipse 49" cx="3.5" cy="3.5" r="3.5" fill="#b1b1b1" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="7"
+        height="7"
+        viewBox="0 0 7 7"
+      >
+        <circle
+          id="Ellipse_49"
+          data-name="Ellipse 49"
+          cx="3.5"
+          cy="3.5"
+          r="3.5"
+          fill="#b1b1b1"
+        />
       </svg>
     </>
   );
@@ -432,7 +472,12 @@ export const PlusIcon = () => {
         height="16.903"
         viewBox="0 0 16.903 16.903"
       >
-        <path id="Path_65" data-name="Path 65" d="M0,0H16.9V16.9H0Z" fill="none" />
+        <path
+          id="Path_65"
+          data-name="Path 65"
+          d="M0,0H16.9V16.9H0Z"
+          fill="none"
+        />
         <ellipse
           id="Ellipse_33"
           data-name="Ellipse 33"
@@ -443,9 +488,9 @@ export const PlusIcon = () => {
           transform="translate(1.434 1.036)"
           fill="none"
           stroke="#535353"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
         />
         <line
           id="Line_35"
@@ -454,9 +499,9 @@ export const PlusIcon = () => {
           transform="translate(4.93 8.027)"
           fill="none"
           stroke="#535353"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
         />
         <line
           id="Line_36"
@@ -465,9 +510,9 @@ export const PlusIcon = () => {
           transform="translate(8.425 4.532)"
           fill="none"
           stroke="#535353"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
         />
       </svg>
     </>
@@ -484,7 +529,12 @@ export const LogOutIcon = () => {
         height="26"
         viewBox="0 0 31.622 31.622"
       >
-        <path id="Path_17" data-name="Path 17" d="M0,0H31.622V31.622H0Z" fill="none" />
+        <path
+          id="Path_17"
+          data-name="Path 17"
+          d="M0,0H31.622V31.622H0Z"
+          fill="none"
+        />
         <path
           id="Path_18"
           data-name="Path 18"
@@ -492,9 +542,9 @@ export const LogOutIcon = () => {
           transform="translate(0.953 1.27)"
           fill="none"
           stroke="#ef6092"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
         <path
           id="Path_19"
@@ -503,9 +553,9 @@ export const LogOutIcon = () => {
           transform="translate(2.223 2.858)"
           fill="none"
           stroke="#ef6092"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
         />
       </svg>
     </>

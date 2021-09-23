@@ -24,7 +24,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="overflow-hidden h-100vh">
         <Router>
           <Switch>
             <Route exact path="/">
@@ -43,7 +43,7 @@ class App extends React.Component {
             />
           </Switch>
         </Router>
-      </React.Fragment>
+      </div>
     );
   }
 }
