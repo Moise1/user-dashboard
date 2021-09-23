@@ -42,9 +42,10 @@
     "no-unused-vars": "off",
     "no-use-before-define": "off",
     "quotes": ["error","single",{ "avoidEscape": true }],
-    "react/jsx-uses-react": "error",
+    "react/jsx-uses-react": "off",
     "react/jsx-uses-vars": "error",
-    "semi": [ "error", "always" ]
+    "semi": [ "error", "always" ],
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "import/parsers": {
