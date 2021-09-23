@@ -6,49 +6,38 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
-  "plugins": [
-    "import",
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["import", "react", "@typescript-eslint"],
 
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["plugin:@typescript-eslint/recommended", "eslint:recommended", "plugin:react/recommended"],
 
-  "ignorePatterns": [ "**/*.js", "**/*.svg", "**/*.css", "**/*.d.ts" ],
-
-
+  "ignorePatterns": ["**/*.js", "**/*.svg", "**/*.css", "**/*.d.ts"],
 
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": [ "error" ],
+    "@typescript-eslint/no-explicit-any": ["error"],
     "@typescript-eslint/no-parameter-properties": "off",
-    "@typescript-eslint/no-unused-vars": ["error",{"argsIgnorePattern": "^_","varsIgnorePattern": "^_"}],
-    "@typescript-eslint/no-use-before-define": [ "error" ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-use-before-define": ["error"],
     "no-undef": "off",
     "import/no-unresolved": "error",
-    "indent": [ "error", 2 ],
-    "linebreak-style": [ "error", "windows" ],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "windows"],
     "no-unused-vars": "off",
     "no-use-before-define": "off",
-    "quotes": ["error","single",{ "avoidEscape": true }],
+    "quotes": ["error", "single", { "avoidEscape": true }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "semi": [ "error", "always" ]
+    "semi": ["error", "always"]
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [ ".ts", ".tsx" ]
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       "typescript": {
@@ -62,11 +51,10 @@
       "version": "detect",
       "flowVersion": "0.53",
       "prettierBackup": {
-        "extends": [ "plugin:@typescript-eslint/recommended" ],
-        "plugins": [ "prettier" ],
-        "rules": { "prettier/prettier": [ "error" ] }
+        "extends": ["plugin:@typescript-eslint/recommended"],
+        "plugins": ["prettier"],
+        "rules": { "prettier/prettier": ["error"] }
       }
-
     }
   }
 }

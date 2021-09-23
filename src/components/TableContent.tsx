@@ -138,7 +138,7 @@ function TableContent() {
                 <span className="border-left-tab"></span>
 
                 {selectedRowKeys.length ? (
-                     <div className="listing-tabs d-flex align-items-center justify-content-center">
+                  <div className="listing-tabs d-flex align-items-center justify-content-center">
                     <button className="btn foucs-none py-1">
                       Optimize <span>{selectedRowKeys.length}</span> Listings
                     </button>
