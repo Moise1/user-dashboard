@@ -112,7 +112,7 @@ function PendingDataContent() {
                 )}
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">
-                  <button className="btn">
+                    <button className="btn">
                       Optimize <span>{selectedRowKeys.length}</span> Listings
                     </button>
                   </div>

@@ -6,13 +6,13 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../../translation.json';
 import {
   DashBoardIcon,
+  CatalogIcon,
   ListNowIcon,
   ListingsIcon,
   ServiceIcon,
   SettingsIcon,
   HelpIcon,
-  LogOutIcon,
-  CatalogIcon
+  LogOutIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 const { SubMenu } = Menu;
