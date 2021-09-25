@@ -83,6 +83,145 @@ export const LeftArrowIcon = () => {
     </>
   );
 };
+export const EditIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_42"
+        data-name="Group 42"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_34" data-name="Path 34" d="M0,0H24V24H0Z" fill="none" />
+        <circle
+          id="Ellipse_12"
+          data-name="Ellipse 12"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 11)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_13"
+          data-name="Ellipse 13"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 18)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_14"
+          data-name="Ellipse 14"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 4)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const DotIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_41"
+        data-name="Group 41"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_31" data-name="Path 31" d="M0,0H24V24H0Z" fill="none" />
+        <path
+          id="Path_32"
+          data-name="Path 32"
+          d="M9,7H6A2,2,0,0,0,4,9v9a2,2,0,0,0,2,2h9a2,2,0,0,0,2-2V15"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_33"
+          data-name="Path 33"
+          d="M9,15h3l8.5-8.5a2.121,2.121,0,0,0-3-3L9,12v3"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_24"
+          data-name="Line 24"
+          x2="3"
+          y2="3"
+          transform="translate(16 5)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const TickIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_13"
+        data-name="Group 13"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_26" data-name="Path 26" d="M0,0H24V24H0Z" fill="none" />
+        <circle
+          id="Ellipse_9"
+          data-name="Ellipse 9"
+          cx="9"
+          cy="9"
+          r="9"
+          transform="translate(3 3)"
+          fill="none"
+          stroke="#228B22"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_27"
+          data-name="Path 27"
+          d="M9,12l2,2,4-4"
+          fill="none"
+          stroke="#228B22"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
 
 export const CatalogIcon = () => {
   return (

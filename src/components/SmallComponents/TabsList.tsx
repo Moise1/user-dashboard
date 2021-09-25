@@ -12,26 +12,28 @@ export default function TabsList() {
   const windowwidth = window.innerWidth;
   const t = useTranslation();
   return (
-    <div className="row mx-auto mt-3 mb-2 d-blue align-items-center bg-white br-8 p-3 header-box-shadow">
-      <TabButton
-        onChangeTab={() => onChangeTab(1)}
-        index={1}
-        active={active}
-        title={`${t('ac')}  ${windowwidth < 900 ? null : t('ls')} `}
-      />
+    <div className="px-1">
+      <div className="row mx-auto mt-3 mb-2 d-blue align-items-center bg-white br-8 p-3 header-box-shadow">
+        <TabButton
+          onChangeTab={() => onChangeTab(1)}
+          index={1}
+          active={active}
+          title={`${t('ac')}  ${windowwidth < 900 ? null : t('ls')} `}
+        />
 
-      <TabButton
-        onChangeTab={() => onChangeTab(2)}
-        index={2}
-        active={active}
-        title={`${t('pen')}  ${windowwidth < 900 ? '' : t('ls')} `}
-      />
-      <TabButton
-        onChangeTab={() => onChangeTab(3)}
-        index={3}
-        active={active}
-        title={`${t('ter')}   ${windowwidth < 900 ? '' : t('ls')} `}
-      />
+        <TabButton
+          onChangeTab={() => onChangeTab(2)}
+          index={2}
+          active={active}
+          title={`${t('pen')}  ${windowwidth < 900 ? '' : t('ls')} `}
+        />
+        <TabButton
+          onChangeTab={() => onChangeTab(3)}
+          index={3}
+          active={active}
+          title={`${t('ter')}   ${windowwidth < 900 ? '' : t('ls')} `}
+        />
+      </div>
     </div>
   );
 }

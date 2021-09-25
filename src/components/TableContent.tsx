@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Table } from 'antd';
+import React from 'react';
+// import { Table } from 'antd';
 // import { useTranslation } from 'react-multi-lang';
 
 import img from '../assets/icon.png';
 import doticon from '../assets/doticon.svg';
 import editicon from '../assets/editicon.svg';
-import { columns } from '../data';
-import PaginationTable from './PaginationTable';
-import { TableRowSelection } from 'antd/lib/table/interface';
+// import { columns } from '../data';
+// import PaginationTable from './PaginationTable';
+// import { TableRowSelection } from 'antd/lib/table/interface';
+import ListingTable from './table/ListingTable';
 
 type dataKeyType = string | number;
 
@@ -61,57 +62,58 @@ for (let i = 0; i < 26; i++) {
 
 function TableContent() {
   // Check here to configure the default column
-  const [selectedRowKeys, setSelectedRowKeys] = useState<dataKeyType[]>([]);
+  // const [selectedRowKeys, setSelectedRowKeys] = useState<dataKeyType[]>([]);
 
-  const onSelectChange = (selectedRowKeys: dataKeyType | dataKeyType[], _selectedRows: iData[]) => {
-    if (Array.isArray(selectedRowKeys)) {
-      setSelectedRowKeys(selectedRowKeys);
-      console.log(selectedRowKeys.length);
-    } else {
-      setSelectedRowKeys([selectedRowKeys]);
-    }
-  };
-  const rowSelection: TableRowSelection<iData> = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-    selections: [
-      Table.SELECTION_ALL,
-      Table.SELECTION_INVERT,
-      Table.SELECTION_NONE,
-      {
-        key: 'odd',
-        text: 'Select Odd Row',
-        onSelect: (changableRowKeys: dataKeyType[]) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
-            if (index % 2 !== 0) {
-              return false;
-            }
-            return true;
-          });
-          setSelectedRowKeys(newSelectedRowKeys);
-        }
-      },
-      {
-        key: 'even',
-        text: 'Select Even Row',
-        onSelect: (changableRowKeys: dataKeyType[]) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
-            if (index % 2 !== 0) {
-              return true;
-            }
-            return false;
-          });
-          setSelectedRowKeys(newSelectedRowKeys);
-        }
-      }
-    ]
-  };
+  // const onSelectChange = (selectedRowKeys: dataKeyType | dataKeyType[], _selectedRows: iData[]) => {
+  //   if (Array.isArray(selectedRowKeys)) {
+  //     setSelectedRowKeys(selectedRowKeys);
+  //     console.log(selectedRowKeys.length);
+  //   } else {
+  //     setSelectedRowKeys([selectedRowKeys]);
+  //   }
+  // };
+  // const rowSelection: TableRowSelection<iData> = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange,
+  //   selections: [
+  //     Table.SELECTION_ALL,
+  //     Table.SELECTION_INVERT,
+  //     Table.SELECTION_NONE,
+  //     {
+  //       key: 'odd',
+  //       text: 'Select Odd Row',
+  //       onSelect: (changableRowKeys: dataKeyType[]) => {
+  //         let newSelectedRowKeys = [];
+  //         newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
+  //           if (index % 2 !== 0) {
+  //             return false;
+  //           }
+  //           return true;
+  //         });
+  //         setSelectedRowKeys(newSelectedRowKeys);
+  //       }
+  //     },
+  //     {
+  //       key: 'even',
+  //       text: 'Select Even Row',
+  //       onSelect: (changableRowKeys: dataKeyType[]) => {
+  //         let newSelectedRowKeys = [];
+  //         newSelectedRowKeys = changableRowKeys.filter((key: dataKeyType, index: number) => {
+  //           if (index % 2 !== 0) {
+  //             return true;
+  //           }
+  //           return false;
+  //         });
+  //         setSelectedRowKeys(newSelectedRowKeys);
+  //       }
+  //     }
+  //   ]
+  // };
 
   return (
-    <React.Fragment>
-      <div className="bg-white br-10">
+    <>
+      <ListingTable />
+      {/* <div className="bg-white br-10">
         <div className="row mx-auto  align-items-center justify-content-between">
           {selectedRowKeys.length ? (
             <div className="col-lg-6 col-md-8 mb-3">
@@ -162,8 +164,8 @@ function TableContent() {
         <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
 
         <PaginationTable />
-      </div>
-    </React.Fragment>
+      </div> */}
+    </>
   );
 }
 
