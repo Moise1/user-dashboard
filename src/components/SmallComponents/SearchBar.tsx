@@ -15,10 +15,13 @@ if (!everLoaded) {
 
 export default function SearchBar() {
   const t = useTranslation();
+  // pl-lg-0 lh-1 px-0 pl-3 py-lg-2
+
+  //my-md-0 lh-1
   return (
     <div className="px-1">
-      <div className="row justify-content-between pl-3 py-lg-2">
-        <div className="col-md-7 pl-lg-0 lh-1 px-0">
+      <div className="row justify-content-between ">
+        <div className="col-md-6 col-sm-12">
           <div className="input-group br-10 input-group-sm  rounded px-3 bg-white z-0">
             <input
               type="text"
@@ -34,8 +37,8 @@ export default function SearchBar() {
             </div>
           </div>
         </div>
-        <div className="col-md-5   my-md-0 lh-1  d-md-block d-none">
-          <div className="d-flex w-100 justify-content-end ">
+        <div className="col-md-6 col-sm-8 d-md-block d-none">
+          <div className="d-flex w-100 justify-content-end searchBarButtonContainer">
             <button className="btn w-xxl-251px fs-18 fw-bold bg-c4c4c4  p-3  text-white border-0 br-8 advance-search-hover">
               <img src={list_saerch} className="invert mr-3 " height="26" alt="" />
               {t('AdvancedSearch')}

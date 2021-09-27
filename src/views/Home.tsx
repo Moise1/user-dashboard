@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <>
-      <Topbar title={'Listings'} />
+      <Topbar />
       {/* <DropDownMenu /> */}
       <Layout className={`bg-white ${styles.Layout_height}`}>
         <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>

@@ -29,16 +29,11 @@ import Logo from "../assets/channel/list/logo.png";
 import dropicon from "../assets/dropicon.svg";
  * */
 
-interface props {
-  title: string;
-}
-
-export default function Tobbar(props: props) {
+//position-stickey top-0 z-100 nav-shadow bg-white d-flex mx-auto justify-content-between ff-used align-items-center
+export default function Topbar() {
   return (
     <>
-      <div
-        className={`position-stickey top-0 z-100 nav-shadow bg-white d-flex mx-auto justify-content-between ff-used align-items-center ${styles.Topbar_height}`}
-      >
+      <div className={`TopBar ${styles.Topbar_height}`}>
         <div className="mx-3">
           <img src={Logo} alt="logo" />
         </div>
@@ -77,21 +72,19 @@ export default function Tobbar(props: props) {
               <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
               <img src={flag} className="lh-1" height="20" alt="" />
               <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
-              <div className="ml-5">
-                <Space direction="vertical">
-                  <Space wrap>
-                    <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
-                      <Button>
-                        <img className="lh-1  my-auto" src={dropicon} alt="" />
-                      </Button>
-                    </Dropdown>
-                  </Space>
+
+              <Space direction="vertical">
+                <Space wrap>
+                  <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
+                    <Button>
+                      <img className="lh-1  my-auto" src={dropicon} alt="" />
+                    </Button>
+                  </Dropdown>
                 </Space>
-              </div>
+              </Space>
             </div>
           </div>
         </div>
-        <h5 className="mb-0 d-blue font-weight-bold d-md-none mt-3 d-block">{props.title}</h5>
       </div>
     </>
   );

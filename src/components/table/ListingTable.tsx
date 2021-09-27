@@ -1,143 +1,41 @@
-import tableimg from '../../assets/table-image.png';
+//import tableimg from '../../assets/table-image.png';
 // import tickimg from '../assets/tableImg/tick.svg';
 // import editimg from '../assets/tableImg/editicon.svg';
 // import dotsicon from '../assets/tableImg/dotsicon.svg';
 import { Form } from 'react-bootstrap';
 import { useState } from 'react';
-import { TickIcon, DotIcon, EditIcon } from '../../components/common/Icons';
+import { ListingTableRow } from './ListingTableRow';
 
-const tabledata = [
-  {
-    id: 1,
-    selectall: tableimg,
+export interface rowData {
+  id: number;
+  selectall: string;
+  itemNo: string;
+  source: srcType;
+  title: string;
+  sell: currency;
+  cost: currency;
+  profit: number;
+  markup: percent;
+  stock: number;
+  createdOn: Date | string;
+}
+
+const tabledata: rowData[] = [...Array(10).keys()].map((id) => {
+  return {
+    id: id,
+    selectall: `https://picsum.photos/seed/${id + 1}/33/33`, // tableimg,
     itemNo: '1234567',
     source: 'Amazon',
     title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
+    sell: Math.round((Math.random() * 1000000 + 1000) / 100) / 100,
+    cost: Math.round((Math.random() * 1000000 + 1000) / 100) / 100,
+    profit: Math.round((Math.random() * 1000000 + 1000) / 100) / 100,
     markup: '30%',
-    stock: '2',
+    stock: 2,
     createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 2,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 3,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 4,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 5,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 6,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 6,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 8,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 9,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  },
-  {
-    id: 10,
-    selectall: tableimg,
-    itemNo: '1234567',
-    source: 'Amazon',
-    title: 'Title of the product',
-    sell: 30.67,
-    cost: 23.59,
-    profit: 3.09,
-    markup: '30%',
-    stock: '2',
-    createdOn: '13/07/2021 12:56'
-  }
-];
+  };
+});
+
 export default function ListingTable() {
   const [showActive, setShowActive] = useState(true);
   return (
@@ -217,61 +115,9 @@ export default function ListingTable() {
           </div>
           <div className="table-body ml-4 d-flex">
             <div className="">
-              {tabledata.map((key) => {
-                return (
-                  <>
-                    <div className="d-flex border-bottom-body my-3 ">
-                      <div className="min-width-170 d-flex">
-                        <div className="form-group form-check">
-                          <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
-                          <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-                            <img src={key.selectall} alt="" />
-                          </label>
-                        </div>
-                      </div>
-                      <div className="min-width-170">
-                        <p className="table-body-style">{key.itemNo}</p>
-                      </div>
-                      <div className="min-width-170">
-                        <p className="table-body-style">{key.source}</p>
-                      </div>
-                      <div className="min-width-230">
-                        <p className="table-body-title">{key.title}</p>
-                      </div>
-                      <div className="min-width-150">
-                        <p className="table-body-sell">{key.sell}</p>
-                      </div>
-                      <div className="min-width-150">
-                        <p className="table-body-sell">{key.cost}</p>
-                      </div>
-                      <div className="min-width-150">
-                        <p className="table-body-profit">{key.profit}</p>
-                      </div>
-                      <div className="min-width-150">
-                        <p className="table-body-sell">{key.markup}</p>
-                      </div>
-                      <div className="min-width-150">
-                        <p className="table-body-sell">
-                          {' '}
-                          <span className="mr-1">
-                            <TickIcon />
-                          </span>
-                          {key.stock}
-                        </p>
-                      </div>
-                      <div className="min-width-250">
-                        <p className="table-body-sell">
-                          {key.createdOn}{' '}
-                          <span className="mx-3">
-                            <DotIcon />
-                          </span>{' '}
-                          <EditIcon />
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
+              {tabledata.map((key) => (
+                <ListingTableRow key={key.id} data={key} />
+              ))}
             </div>
           </div>
         </div>

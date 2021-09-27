@@ -4,8 +4,27 @@ import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi
 import en from '../../translation.json';
 setTranslations({ en });
 setDefaultLanguage('en');
+let hasAddedCallback = false;
 export default function TabsList() {
   const [active, setActive] = useState(1);
+
+  const [_dimensions, setDimensions] = React.useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  });
+  React.useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      });
+    }
+    if (!hasAddedCallback) {
+      window.addEventListener('resize', handleResize);
+      hasAddedCallback = true;
+    }
+  });
+
   const onChangeTab = (number: number) => {
     setActive(number);
   };
@@ -18,7 +37,7 @@ export default function TabsList() {
           onChangeTab={() => onChangeTab(1)}
           index={1}
           active={active}
-          title={`${t('ac')}  ${windowwidth < 900 ? null : t('ls')} `}
+          title={`${t('ac')}  ${windowwidth < 900 ? '' : t('ls')} `}
         />
 
         <TabButton
