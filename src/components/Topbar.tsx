@@ -34,7 +34,7 @@ export default function Topbar() {
   return (
     <>
       <div className={`TopBar ${styles.Topbar_height}`}>
-        <div className="mx-3">
+        <div className="ml-3 ">
           <img src={Logo} alt="logo" />
         </div>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
@@ -57,12 +57,12 @@ export default function Topbar() {
                 Update
               </button>
             </div>
-            <img src={bellIcon} height="28" className="ml-5" alt="" />
+            <img src={bellIcon} height="28" className="ml-3 ml-sm-5" alt="" />
             <div className="d-blue lh-1">
               {' '}
               <span className="d-none fs-18 fw-bold d-md-inline ml-3"> 2 notifications </span>
             </div>
-            <div className="d-blue mx-3 lh-1">
+            <div className="d-blue mx-0  mx-sm-3 lh-1">
               {/* <i className="fas fa-circle yellow"></i> */}
               <img src={coinIcon} alt="coinIcon" />
               <span className="fs-18 fw-bold mx-1"> 1232</span>

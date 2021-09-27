@@ -86,7 +86,7 @@ export default function Sidebar(props: Props) {
                     {staticvalue ? (
                       <i
                         onClick={togglestatic}
-                        className="fas fa-chevron-left text-dark bg-light  p-1 mt-1 active-left-icon arrow-icon-sidebar"
+                        className="fas fa-chevron-left text-dark bg-light  p-1 mt-1 active-left-icon arrow-icon-sidebar cursor-pointer"
                       ></i>
                     ) : (
                       <button className="mt-1 btn border-0 btn-light br-8 p-1 h-30_02 w-30_02 d-flex justify-content-center align-items-center">

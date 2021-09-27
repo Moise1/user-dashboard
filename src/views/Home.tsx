@@ -35,10 +35,17 @@ export default function Home() {
 
   const toggleCollapse = () => {
     setCollapse(!collapse);
+    console.log(collapse, 'collapse');
   };
 
   const toggleStaticValue = () => {
+    console.log(staticValue, 'staticValue');
     setStaticValue(!staticValue);
+    if (staticValue) {
+      setTimeout(() => {
+        setCollapse(true);
+      }, 500);
+    }
   };
 
   return (
