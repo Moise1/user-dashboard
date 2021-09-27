@@ -119,7 +119,6 @@ input {
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   color: var(--color-fff) !important;
-  font-size: var(--font-18) !important;
   background-color: var(--active-bg) !important;
 }
 .ant-table-cell {
