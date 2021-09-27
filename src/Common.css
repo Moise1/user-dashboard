@@ -283,7 +283,7 @@ body {
   border-radius: 0px 0px 10px 10px;
   padding-top: 1px;
   padding-bottom: 1px;
-  width: 277.8px;
+  width: 244.56px;
 }
 .drop-search-input {
   padding: 5px 6px;
@@ -774,9 +774,9 @@ table {
 /* .ant-table-tbody > tr > td:nth-child(4) {
   text-decoration: underline;
 } */
-.drop-down {
+/* .drop-down {
   width: 23vw;
-}
+} */
 
 .h-80vh {
   height: 80vh;
