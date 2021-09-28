@@ -1,13 +1,11 @@
-import React from 'react';
 import { Menu } from 'antd';
-import { useTranslation } from 'react-multi-lang';
 import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem';
 import { Link } from 'react-router-dom';
 import search_icon from '../../assets/search.svg';
 import { PlusIcon } from '../common/Icons';
+import { t } from '../../global/transShim';
 
 export default function DropDownMenu() {
-  const t = useTranslation();
   return (
     <Menu className="drop-down_effect nav-dropdown border-0">
       <div>

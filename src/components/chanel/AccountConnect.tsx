@@ -6,12 +6,10 @@ import { Container } from '@material-ui/core';
 
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
+import { t } from '../../global/transShim';
+
 import Previousstep from '../SmallComponents/Previousstep';
 import ButttonCom from './component/ButttonCom';
-setTranslations({ en });
-setDefaultLanguage('en');
 
 interface values {
   extension: string;
@@ -41,7 +39,6 @@ function AccountConnect(props: props) {
     e.preventDefault();
     prevStep();
   };
-  const t = useTranslation();
   console.log(enable, 'value for extension');
   return (
     <Container component="main" maxWidth="lg">

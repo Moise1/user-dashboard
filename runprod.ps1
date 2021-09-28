@@ -3,7 +3,7 @@ $imgName = "hustlegotreal/tools:hgrweb-test"
 $error.clear()
 try { 
     $env:DOCKER_BUILDKIT=0;
-    docker build . -f .\dockerfile.prod -o tty -t $imgName
+    docker build . -f .\production.dockerfile -o tty -t $imgName
  }
 catch { "Error occured" }
 if (!$error) { 

@@ -5,6 +5,7 @@
 import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { ListingTableRow } from './ListingTableRow';
+import { t } from '../../global/transShim';
 
 export interface rowData {
   id: number;
@@ -32,7 +33,7 @@ const tabledata: rowData[] = [...Array(10).keys()].map((id) => {
     profit: Math.round((Math.random() * 1000000 + 1000) / 100) / 100,
     markup: '30%',
     stock: 2,
-    createdOn: '13/07/2021 12:56'
+    createdOn: new Date(Math.random() * 10000000000 + 1500000000000)
   };
 });
 
@@ -46,9 +47,7 @@ export default function ListingTable() {
         ) : (
           <div className="pt-3">
             <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-              <span className="check-click-text  pr-3 border-left-dark-voilet">
-                Edit <span className="fw-600">5</span> listings
-              </span>
+              <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings', { num: 5 })}</span>
               <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
                 {' '}
                 Copy <span className="fw-600">5</span> listings{' '}
@@ -71,46 +70,33 @@ export default function ListingTable() {
                   label="Select all"
                 />
               </Form.Group>
-              {/* <div className="input-blue-check">
-                <input
-                  type="checkbox"
-                  id="select-all-check"
-                  name="fruit-4"
-                  value="Select all"
-                  onClick={() => {
-                    setShowActive(!showActive);
-                  }}
-                />
-                <label htmlFor="select-all-check">Select ally</label>
-              </div> */}
             </div>
             <div className="min-width-170">
-              <p className="table-head">Item no.</p>
+              <p className="table-head">{t('Listings.Column.Item no.')}</p>
             </div>
             <div className="min-width-170">
-              <p className="table-head"> Source</p>
+              <p className="table-head">{t('Listings.Column.Source')}</p>
             </div>
             <div className="min-width-230">
-              <p className="table-head">Title</p>
+              <p className="table-head">{t('Listings.Column.Title')}</p>
             </div>
             <div className="min-width-150">
-              {' '}
-              <p className="table-head">Sell</p>
+              <p className="table-head">{t('Listings.Column.Sell')}</p>
             </div>
             <div className="min-width-150">
-              <p className="table-head">Cost</p>
+              <p className="table-head">{t('Listings.Column.Cost')}</p>
             </div>
             <div className="min-width-150">
-              <p className="table-head">Profit</p>
+              <p className="table-head">{t('Listings.Column.Profit')}</p>
             </div>
             <div className="min-width-150">
-              <p className="table-head">Markup</p>
+              <p className="table-head">{t('Listings.Column.Markup')}</p>
             </div>
             <div className="min-width-150">
-              <p className="table-head">Stock</p>
+              <p className="table-head">{t('Listings.Column.Stock')}</p>
             </div>
             <div className="min-width-250">
-              <p className="table-head">Created on</p>
+              <p className="table-head">{t('Listings.Column.Created on')}</p>
             </div>
           </div>
           <div className="table-body ml-4 d-flex">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CircleDotIcon } from '../common/Icons';
 interface props {
   listName: string;

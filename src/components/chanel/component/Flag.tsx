@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface FlagProps {
   name: string;
   platform: platformType;

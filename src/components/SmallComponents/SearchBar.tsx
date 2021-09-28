@@ -1,20 +1,9 @@
-import React from 'react';
 import list_saerch from '../../assets/list_search.jpg';
 import column_img from '../../assets/columnimg.svg';
 import search_icon from '../../assets/search.svg';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
-
-let everLoaded = false;
-if (!everLoaded) {
-  console.log('First time i ever loaded!');
-  setTranslations({ en });
-  setDefaultLanguage('en');
-  everLoaded = true;
-}
+import { t } from '../../global/transShim';
 
 export default function SearchBar() {
-  const t = useTranslation();
   // pl-lg-0 lh-1 px-0 pl-3 py-lg-2
 
   //my-md-0 lh-1

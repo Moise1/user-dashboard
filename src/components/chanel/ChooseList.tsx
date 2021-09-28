@@ -9,10 +9,7 @@ import ProgressBar from './ProgressBar';
 import { useHistory } from 'react-router-dom';
 import MbProgressBar from './MbProgressBar';
 import Previousstep from '../SmallComponents/Previousstep';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
-setTranslations({ en });
-setDefaultLanguage('en');
+import { t } from '../../global/transShim';
 
 export interface chooseListValues {
   platform: platformType;
@@ -49,7 +46,6 @@ function ChooseList(props: props) {
     e.preventDefault();
     prevStep();
   };
-  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>

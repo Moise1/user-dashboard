@@ -1,3 +1,4 @@
+import { FormattedDate, FormattedTime, FormattedNumber } from 'react-intl';
 import { DotIcon, EditIcon, TickIcon } from '../common/Icons';
 import { rowData } from './ListingTable';
 
@@ -27,13 +28,19 @@ export function ListingTableRow(props: props) {
           <p className="table-body-title">{key.title}</p>
         </div>
         <div className="min-width-150">
-          <p className="table-body-sell">{key.sell.toFixed(2)}</p>
+          <p className="table-body-sell">
+            <FormattedNumber value={key.sell} style="currency" currency="EUR" />
+          </p>
         </div>
         <div className="min-width-150">
-          <p className="table-body-sell">{key.cost.toFixed(2)}</p>
+          <p className="table-body-sell">
+            <FormattedNumber value={key.cost} style="currency" currency="EUR" />
+          </p>
         </div>
         <div className="min-width-150">
-          <p className="table-body-profit">{key.profit.toFixed(2)}</p>
+          <p className="table-body-profit">
+            <FormattedNumber value={key.profit} style="currency" currency="EUR" />
+          </p>
         </div>
         <div className="min-width-150">
           <p className="table-body-sell">{key.markup}</p>
@@ -49,10 +56,10 @@ export function ListingTableRow(props: props) {
         </div>
         <div className="min-width-250">
           <p className="table-body-sell">
-            {key.createdOn}{' '}
+            <FormattedDate value={key.createdOn} /> <FormattedTime value={key.createdOn} />
             <span className="mx-3">
               <DotIcon />
-            </span>{' '}
+            </span>
             <EditIcon />
           </p>
         </div>

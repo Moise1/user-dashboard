@@ -1,0 +1,20 @@
+{
+  "AddNewChannel": "Añadir canal de venta",
+  "ActiveListings": "Productos Activos",
+  "ActiveListingsShort": "Activos",
+  "PendingListings": "Productos Pendientes",
+  "PendingListingsShort": "Pendientes",
+  "TerminatedListings": "Productos Terminados",
+  "TerminatedListingsShort": "Terminados",
+
+
+  "Listings.Column.Item no.": "Item #",
+  "Listings.Column.Source": "Fuente",
+  "Listings.Column.Title": "Titulo",
+  "Listings.Column.Sell": "Venta",
+  "Listings.Column.Cost": "Coste",
+  "Listings.Column.Profit": "Ganancia",
+  "Listings.Column.Markup": "Markup",
+  "Listings.Column.Stock": "Stock",
+  "Listings.Column.Created on": "Creado en"
+}

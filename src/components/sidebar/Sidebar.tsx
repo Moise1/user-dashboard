@@ -2,8 +2,8 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
+import { t } from '../../global/transShim';
+
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -17,8 +17,6 @@ import {
 import MenuListItem from './MenuListItem';
 const { SubMenu } = Menu;
 
-setTranslations({ en });
-setDefaultLanguage('en');
 const { Sider } = Layout;
 interface Props {
   collapsed: boolean;
@@ -34,7 +32,6 @@ export default function Sidebar(props: Props) {
     history.push('/home');
   };
   const { collapsed, staticvalue, togglestatic } = props;
-  const t = useTranslation();
 
   const listArray = [
     { key: 9, listName: 'Channel' },

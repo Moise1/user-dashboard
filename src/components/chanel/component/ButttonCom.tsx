@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface props {
   title: string;
   onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void;

@@ -7,11 +7,7 @@ import amazon_logo from '../../assets/channel/amazon-2.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-
-import en from '../../translation.json';
-setTranslations({ en });
-setDefaultLanguage('en');
+import { t } from '../../global/transShim';
 
 export interface values {
   platform?: platformType;
@@ -30,7 +26,6 @@ function PlatForm(props: props) {
     e.preventDefault();
     nextStep();
   };
-  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>

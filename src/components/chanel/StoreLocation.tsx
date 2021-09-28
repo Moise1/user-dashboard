@@ -12,12 +12,9 @@ import us_flag from '../../assets/channel/flags/US.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
+import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
 import Flag, { FlagProps } from './component/Flag';
-setTranslations({ en });
-setDefaultLanguage('en');
 
 interface values {
   storeLocation: string;
@@ -90,7 +87,6 @@ function StoreLocation(props: StoreLocationProps) {
     prevStep();
   };
 
-  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>

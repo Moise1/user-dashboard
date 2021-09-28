@@ -4,15 +4,12 @@ import flag from '../assets/flag-round-500.svg';
 import amazon from '../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Space } from 'antd';
 import DropDownMenu from './SmallComponents/DropDownMenu';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../translation.json';
-setTranslations({ en });
-setDefaultLanguage('en');
+import { t } from '../global/transShim';
+
 interface props {
   title: string;
 }
 export default function Notifications(props: props) {
-  const t = useTranslation();
   return (
     <div className="row mx-auto pt-4 align-items-center">
       <h5 className="mb-0 d-blue font-weight-bold d-none d-md-block">{props.title}</h5>

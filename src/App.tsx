@@ -4,6 +4,7 @@ import React from 'react';
 import Home from './views/Home';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
+
 class App extends React.Component {
   state = {
     collapsed: true,

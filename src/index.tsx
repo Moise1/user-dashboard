@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { IntlProvider } from 'react-intl';
+import locale_en from './translations/en.json';
+import locale_es from './translations/es.json';
+
+const locales: Record<string, Record<string, string>> = {
+  en: locale_en as unknown as Record<string, string>,
+  es: locale_es as unknown as Record<string, string>
+};
+
+const language = 'en'; //navigator.language.split(/[-_]/)[0];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <IntlProvider locale={language} messages={locales[language]}>
+      <App />
+    </IntlProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -6,7 +6,7 @@ ENV NODE_ENV=production
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn install --frozen-lockfile --silent
-RUN yarn add react-scripts@4.0.3 --global --silent
+RUN yarn global add react-scripts@4.0.3 --silent
 COPY . ./
 RUN yarn build
 

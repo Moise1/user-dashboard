@@ -1,13 +1,11 @@
-import React from 'react';
 import { Container } from '@material-ui/core';
 
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
-import { setTranslations, setDefaultLanguage, useTranslation } from 'react-multi-lang';
-import en from '../../translation.json';
+
+import { t } from '../../global/transShim';
+
 import Previousstep from '../SmallComponents/Previousstep';
-setTranslations({ en });
-setDefaultLanguage('en');
 
 interface props {
   nextStep: () => void;
@@ -29,7 +27,6 @@ function Account(props: props) {
     prevStep();
   };
 
-  const t = useTranslation();
   return (
     <Container component="main" maxWidth="lg">
       <div>
