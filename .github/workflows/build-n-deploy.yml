@@ -1,0 +1,80 @@
+name: Dockerize & push to cluster
+
+on:
+  workflow_dispatch:
+    
+  push:
+    branches: [ master ]  
+    tags:
+      - '*.*.*'
+      - 'v*.*.*'
+
+jobs:
+  checkout-build-dockerize-and-redeploy:
+    runs-on: self-hosted 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          #submodules: true
+          #lfs: true
+          clean: true
+      - name: Check initial folder
+        run: |
+          echo "Checked out code"
+          ls -la
+          echo $PWD
+      
+      - name: Extract Git Branch information
+        id: branch_name
+        run: |
+          MBRANCH=${GITHUB_REF#refs/*/}
+          BRANCH=${MBRANCH#feature/}
+          echo $BRANCH;
+          if ["$BRANCH" == "develop"]; then BRANCH="$(BRANCH)$(date +%s)"; fi
+          echo ::set-output name=SOURCE_NAME::$BRANCH
+          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+          echo SOURCE_NAME $SOURCE_NAME $BRANCH ~ALSO~ SOURCE_TAG $SOURCE_TAG ${GITHUB_REF#refs/tags/}
+
+      - name: Build and tag docker file
+        run: |
+          docker build --file ./production.dockerfile --tag hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} .
+
+      - uses: azure/docker-login@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push docker image to dockerhub
+        run: |
+          # echo "${INPUT_USERNAME}" | docker login -u ${INPUT_PASSWORD} --password-stdin ${INPUT_REGISTRY}
+          docker push hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}
+
+      - name: Generate patch command
+        id: patch_cmd
+        run: |
+          CMD='{"spec": {"template": {"spec": {"containers": [{"name":"bulkapi","image": "hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}"}] }}}}'
+          echo Going to execute : $CMD
+          echo ::set-output name=K8sPATCH::$CMD
+    
+      - name: Update version in Cluster
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.KUBECONFIG }} 
+          version: v1.19.8
+          command: "patch deployment/hgrweb -n live --patch '${{ steps.patch_cmd.outputs.K8sPATCH}}'"
+          
+      - name: Redeploy
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.KUBECONFIG }}
+          version: v1.19.8
+          command: "rollout restart deployments/hgrweb -n live"
+    
+      - name: Verify Deployment
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.KUBECONFIG }}
+          version: v1.19.8
+          command: "rollout status deployment hgrweb -n live"
