@@ -51,6 +51,8 @@ jobs:
           # echo "${INPUT_USERNAME}" | docker login -u ${INPUT_PASSWORD} --password-stdin ${INPUT_REGISTRY}
           echo $DOCKER_CONFIG;
           ls -la $DOCKER_CONFIG;
+          cat $DOCKER_CONFIG/config.json;
+
           docker push hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}
 
       - name: Generate patch command
