@@ -49,6 +49,7 @@ jobs:
       - name: Push docker image to dockerhub
         run: |
           # echo "${INPUT_USERNAME}" | docker login -u ${INPUT_PASSWORD} --password-stdin ${INPUT_REGISTRY}
+          echo $DOCKER_CONFIG 
           docker push hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}
 
       - name: Generate patch command
