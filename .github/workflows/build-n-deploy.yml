@@ -58,7 +58,7 @@ jobs:
       - name: Generate patch command
         id: patch_cmd
         run: |
-          CMD='{"spec": {"template": {"spec": {"containers": [{"name":"bulkapi","image": "hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}"}] }}}}'
+          CMD='{"spec": {"template": {"spec": {"containers": [{"name":"web","image": "hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }}"}] }}}}'
           echo Going to execute : $CMD
           echo ::set-output name=K8sPATCH::$CMD
     
