@@ -2,6 +2,7 @@
 .env
 .git
 .gitignore
+.github
 .vs
 .vscode
 docker-compose.yml
