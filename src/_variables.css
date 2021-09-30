@@ -75,7 +75,7 @@
 }
 
 /****** Overrides of ant stuff ********/
-
+/*#region Ant */
 body {
   color: var(--txtBaseColor) !important;
   background-color: var(--bgPage) !important;
@@ -223,3 +223,36 @@ input {
   background-color: unset !important;
   color: black !important;
 }
+/*#endregion */
+
+.table-header > div {
+  font-size: var(--font-18);
+  color: var(--color-dark-violet);
+  font-weight: bold;
+  margin: 0 0 1em 0;
+}
+.listingTableRow {
+  display: flex;
+  align-items:flex-start;
+  justify-items:stretch;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+  grid-column-gap: 9px;
+  /*flex-direction: column;*/
+}
+.listingTableRow > div {
+  flex-grow: 1;
+  flex-shrink: 0;
+  /* flex-basis: 0%; */
+  flex-basis: 0;
+  text-overflow: 'ellipsis';
+  overflow: hidden;
+}
+
+.listingTableRow > div(:nth-child(2)) {
+  flex-grow:1;
+}
+
+.svgIcon { display: inline-block; }
+.tickIcon { width:30px; height:30px }

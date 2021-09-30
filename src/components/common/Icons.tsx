@@ -190,9 +190,11 @@ export const TickIcon = () => {
         id="Group_13"
         data-name="Group 13"
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        width="100%"
+        height="100%"
         viewBox="0 0 24 24"
+        className="svgIcon tickIcon" 
+        preserveAspectRatio="slice"      
       >
         <path id="Path_26" data-name="Path 26" d="M0,0H24V24H0Z" fill="none" />
         <circle

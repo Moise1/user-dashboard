@@ -33,7 +33,7 @@ const tabledata: rowData[] = [...Array(10).keys()].map((id) => {
     profit: Math.round((Math.random() * 1000000 + 1000) / 100) / 100,
     markup: '30%',
     stock: 2,
-    createdOn: new Date(Math.random() * 10000000000 + 1500000000000)
+    createdOn: new Date(Math.random() * 100000000000 + 1500000000000)
   };
 });
 
@@ -59,8 +59,8 @@ export default function ListingTable() {
           </div>
         )}
         <div className="overflow-x-auto pt-4">
-          <div className="d-flex table-head border-bottom-body ml-4 ">
-            <div className="min-width-170 d-flex">
+          <div className="d-flex table-head border-bottom-body ml-4 table-header listingTableRow">
+            <div className="d-flex">
               <Form.Group className="select-custom" controlId="formBasicCheckbox">
                 <Form.Check
                   onClick={() => {
@@ -71,40 +71,39 @@ export default function ListingTable() {
                 />
               </Form.Group>
             </div>
-            <div className="min-width-170">
-              <p className="table-head">{t('Listings.Column.Item no.')}</p>
+            <div>
+              {t('Listings.Column.Item no.')}
             </div>
-            <div className="min-width-170">
-              <p className="table-head">{t('Listings.Column.Source')}</p>
+            <div>
+              {t('Listings.Column.Source')}
             </div>
-            <div className="min-width-230">
-              <p className="table-head">{t('Listings.Column.Title')}</p>
+            <div>
+              {t('Listings.Column.Title')}
             </div>
-            <div className="min-width-150">
-              <p className="table-head">{t('Listings.Column.Sell')}</p>
+            <div>
+              {t('Listings.Column.Sell')}
             </div>
-            <div className="min-width-150">
-              <p className="table-head">{t('Listings.Column.Cost')}</p>
+            <div>
+              {t('Listings.Column.Cost')}
             </div>
-            <div className="min-width-150">
-              <p className="table-head">{t('Listings.Column.Profit')}</p>
+            <div>
+              {t('Listings.Column.Profit')}
             </div>
-            <div className="min-width-150">
-              <p className="table-head">{t('Listings.Column.Markup')}</p>
+            <div>
+              {t('Listings.Column.Markup')}
             </div>
-            <div className="min-width-150">
-              <p className="table-head">{t('Listings.Column.Stock')}</p>
+            <div>
+              {t('Listings.Column.Stock')}
             </div>
-            <div className="min-width-250">
-              <p className="table-head">{t('Listings.Column.Created on')}</p>
+            <div>
+              {t('Listings.Column.Created on')}
             </div>
+            <div>&nbsp;</div>
           </div>
-          <div className="table-body ml-4 d-flex">
-            <div className="">
-              {tabledata.map((key) => (
-                <ListingTableRow key={key.id} data={key} />
-              ))}
-            </div>
+          <div className="table-body ml-4">
+            {tabledata.map((key) => (
+              <ListingTableRow key={key.id} data={key} />
+            ))}
           </div>
         </div>
         <div className="d-flex flex-column flex-sm-row mx-4 justify-content-start justify-content-sm-between align-items-start align-items-sm-center py-3">

@@ -6,6 +6,6 @@ try {
  }
 catch { "Error occured" }
 if (!$error) { 
-    Write-Host "Running on port 1337 - https://localhost:1337"
-    docker run -it --rm -p 1337:80 $imgName
+    Write-Host "Running on port 3000 - https://localhost:3000"
+    docker run -it --rm -p 3000:3000 $imgName
  }

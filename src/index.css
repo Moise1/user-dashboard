@@ -1,4 +1,6 @@
 @import '_variables.css';
+@import '_variables.medium.css';
+@import '_variables.small.css';
 
 body {
   margin: 0;
