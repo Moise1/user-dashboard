@@ -8,13 +8,13 @@ export default function SearchBar() {
 
   //my-md-0 lh-1
   return (
-    <div className="px-1">
+    <div className="px-1 searchBar">
       <div className="row justify-content-between ">
         <div className="col-md-6 col-sm-12">
           <div className="input-group br-10 input-group-sm  rounded px-3 bg-white z-0">
             <input
               type="text"
-              className="form-control input-focus-none search_placeholder br-10 h-62 border-0"
+              className="form-control input-focus-none search_placeholder br-10 border-0"
               aria-label="Small"
               aria-describedby="inputGroup-sizing-sm"
               placeholder={t('search')}
