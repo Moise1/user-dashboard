@@ -74,10 +74,24 @@
     height: 20px;
     margin-left: 0 !important;
   }
-  .tickIcon {
+
+  .listingTableRow img {
+    display: none;
+  }
+
+  .listingTableRow svg {
     width: 16px;
     height: 16px;
   }
+
+
+
+  .searchBar img{
+    width: 12px;
+    height: 12px;
+  }
+
+
 
   /* this is the Active/pending/terminated nav bar */
   .p-3.header-box-shadow {

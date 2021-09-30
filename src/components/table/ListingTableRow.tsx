@@ -14,7 +14,7 @@ export function ListingTableRow(props: props) {
           <div className="form-group form-check">
             <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
             <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-              <img src={key.selectall} className="img-responsive img-fluid" alt="" />
+              <img src={key.selectall} className="img-fluid" alt="" />
             </label>
           </div>
         </div>
