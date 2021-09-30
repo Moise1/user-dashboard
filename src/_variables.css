@@ -233,8 +233,8 @@ input {
 }
 .listingTableRow {
   display: flex;
-  align-items:flex-start;
-  justify-items:stretch;
+  align-items: flex-start;
+  justify-items: stretch;
   justify-content: space-evenly;
   align-items: center;
   align-content: stretch;
@@ -251,8 +251,13 @@ input {
 }
 
 .listingTableRow > div(:nth-child(2)) {
-  flex-grow:1;
+  flex-grow: 1;
 }
 
-.svgIcon { display: inline-block; }
-.tickIcon { width:30px; height:30px }
+.svgIcon {
+  display: inline-block;
+}
+.tickIcon {
+  width: 30px;
+  height: 30px;
+}

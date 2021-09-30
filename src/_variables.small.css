@@ -1,5 +1,4 @@
-﻿
-@media (max-width: 700px) {
+﻿@media (max-width: 700px) {
   :root {
     --color-262E80: #262e80;
     --color-fff: #fff;
@@ -23,7 +22,7 @@
     --bgHighlight: #fff;
     --tableBg: #fff;
     --txtHighlight: #262e80;
-  
+
     --borderColor: rgb(222, 226, 230);
     --borderPrimary: var(--txtHighlight);
     /* -- font sizes --- */
@@ -31,7 +30,7 @@
     --font-medium: 9px;
     --font-small: 7px;
     --ignoreme: #000;
-  
+
     --color-dark-violet: #262e80;
     --color-primary: #5e69db;
     --color-violet-shade-1: #5763de;
@@ -44,14 +43,14 @@
     --color-dark-pink: #f12b70;
     --color-dark-green: #228b22;
     --color-light-green: #5ac35a;
-  
+
     /* FONT VARIALBES */
     --font-18: var(--font-large);
     --font-16: var(--font-medium);
     --font-14: var(--font-small);
-  
+
     /* -- Overrides / temporary / dark theme --- */
-  
+
     /* --bgPage: #333;
       --bgPage2: #222;
       --borderColor: #111; 
@@ -69,19 +68,27 @@
       --color-262E80: #ccc;
       --dBlue: #212121;  */
   }
-  
+
   .listingTableRow label {
-    width:20px;
-    height:20px;
+    width: 20px;
+    height: 20px;
     margin-left: 0 !important;
   }
-  .tickIcon { width:16px; height:16px }
+  .tickIcon {
+    width: 16px;
+    height: 16px;
+  }
 
   /* this is the Active/pending/terminated nav bar */
-  .p-3.header-box-shadow { padding: 0 !important;}
+  .p-3.header-box-shadow {
+    padding: 0 !important;
+  }
 
   /* this is the container for the search bar*/
-  .input-group.br-10.input-group-sm.rounded.px-3.bg-white.z-0 {  padding: 0 1rem 0 1rem  !important;}
-  input.search_placeholder { padding:0 !important; }
-  
+  .input-group.br-10.input-group-sm.rounded.px-3.bg-white.z-0 {
+    padding: 0 1rem 0 1rem !important;
+  }
+  input.search_placeholder {
+    padding: 0 !important;
+  }
 }

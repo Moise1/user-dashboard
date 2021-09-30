@@ -71,33 +71,15 @@ export default function ListingTable() {
                 />
               </Form.Group>
             </div>
-            <div>
-              {t('Listings.Column.Item no.')}
-            </div>
-            <div>
-              {t('Listings.Column.Source')}
-            </div>
-            <div>
-              {t('Listings.Column.Title')}
-            </div>
-            <div>
-              {t('Listings.Column.Sell')}
-            </div>
-            <div>
-              {t('Listings.Column.Cost')}
-            </div>
-            <div>
-              {t('Listings.Column.Profit')}
-            </div>
-            <div>
-              {t('Listings.Column.Markup')}
-            </div>
-            <div>
-              {t('Listings.Column.Stock')}
-            </div>
-            <div>
-              {t('Listings.Column.Created on')}
-            </div>
+            <div>{t('Listings.Column.Item no.')}</div>
+            <div>{t('Listings.Column.Source')}</div>
+            <div>{t('Listings.Column.Title')}</div>
+            <div>{t('Listings.Column.Sell')}</div>
+            <div>{t('Listings.Column.Cost')}</div>
+            <div>{t('Listings.Column.Profit')}</div>
+            <div>{t('Listings.Column.Markup')}</div>
+            <div>{t('Listings.Column.Stock')}</div>
+            <div>{t('Listings.Column.Created on')}</div>
             <div>&nbsp;</div>
           </div>
           <div className="table-body ml-4">

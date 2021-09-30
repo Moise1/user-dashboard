@@ -1,5 +1,4 @@
-﻿
-@media (max-width: 1400px) {
+﻿@media (max-width: 1400px) {
   :root {
     --color-262E80: #262e80;
     --color-fff: #fff;
@@ -23,7 +22,7 @@
     --bgHighlight: #fff;
     --tableBg: #fff;
     --txtHighlight: #262e80;
-  
+
     --borderColor: rgb(222, 226, 230);
     --borderPrimary: var(--txtHighlight);
     /* -- font sizes --- */
@@ -31,7 +30,7 @@
     --font-medium: 12px;
     --font-small: 10px;
     --ignoreme: #000;
-  
+
     --color-dark-violet: #262e80;
     --color-primary: #5e69db;
     --color-violet-shade-1: #5763de;
@@ -44,14 +43,14 @@
     --color-dark-pink: #f12b70;
     --color-dark-green: #228b22;
     --color-light-green: #5ac35a;
-  
+
     /* FONT VARIALBES */
     --font-18: var(--font-large);
     --font-16: var(--font-medium);
     --font-14: var(--font-small);
-  
+
     /* -- Overrides / temporary / dark theme --- */
-  
+
     /* --bgPage: #333;
       --bgPage2: #222;
       --borderColor: #111; 
@@ -69,12 +68,14 @@
       --color-262E80: #ccc;
       --dBlue: #212121;  */
   }
-  
+
   .listingTableRow label {
-    width:24px;
-    height:24px;
+    width: 24px;
+    height: 24px;
     margin-left: 5px !important;
   }
-  .tickIcon { width:24px; height:24px }
-
+  .tickIcon {
+    width: 24px;
+    height: 24px;
+  }
 }
