@@ -21,18 +21,18 @@ export function ListingTableRow(props: props) {
         <div>
           <p className="table-body-style">{key.itemNo}</p>
         </div>
-        <div>
+        <div className="d-none d-md-block">
           <p className="table-body-style">{key.source}</p>
         </div>
         <div>
           <p className="table-body-title">{key.title}</p>
         </div>
-        <div>
+        <div className="d-none d-md-block">
           <p className="table-body-sell">
             <FormattedNumber value={key.sell} style="currency" currency="EUR" />
           </p>
         </div>
-        <div>
+        <div className="d-none d-md-block">
           <p className="table-body-sell">
             <FormattedNumber value={key.cost} style="currency" currency="EUR" />
           </p>
@@ -42,7 +42,7 @@ export function ListingTableRow(props: props) {
             <FormattedNumber value={key.profit} style="currency" currency="EUR" />
           </p>
         </div>
-        <div>
+        <div className="d-none d-md-block">
           <p className="table-body-sell">{key.markup}</p>
         </div>
         <div>
@@ -54,7 +54,7 @@ export function ListingTableRow(props: props) {
             {key.stock}
           </p>
         </div>
-        <div>
+        <div className="d-none d-md-block">
           <p className="table-body-sell">
             <FormattedDate value={key.createdOn} /> <FormattedTime value={key.createdOn} />
           </p>

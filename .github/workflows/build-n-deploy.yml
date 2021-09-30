@@ -32,8 +32,7 @@ jobs:
           BRANCH=${MBRANCH#feature/}
           echo "$BRANCH";
           if ["$BRANCH" == "develop"]; then BRANCH="$(BRANCH)$(date +%s)"; fi
-          GITSHORTSHA=$(git rev-parse --short HEAD);
-          BRANCH=${"$BRANCH-$GITSHORTSHA"}
+          echo ::set-output name=BRANCH::$BRANCH-${GITHUB_SHA::8}
 
           echo ::set-output name=SOURCE_NAME::$BRANCH
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
