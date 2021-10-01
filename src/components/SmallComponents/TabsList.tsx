@@ -41,7 +41,7 @@ export default function TabsList() {
           onChangeTab={() => onChangeTab(2)}
           index={2}
           active={active}
-          title={`${windowwidth < 900 ? t('PendingListingsShort') : t('ActiveListings')}`}
+          title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`}
         />
         <TabButton
           onChangeTab={() => onChangeTab(3)}

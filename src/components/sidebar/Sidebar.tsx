@@ -25,6 +25,17 @@ interface Props {
   togglestatic: () => void;
 }
 
+async function putDarkTheme() {
+  //import( '../../_variables.dark.css');
+
+  //alert('called!');
+  const link = document.createElement('link');
+  link.type = 'text/css';
+  link.rel = 'stylesheet';
+  link.href = './_variables.dark.css';
+  document.head.appendChild(link);
+}
+
 export default function Sidebar(props: Props) {
   const history = useHistory();
 
@@ -39,7 +50,8 @@ export default function Sidebar(props: Props) {
     { key: 11, listName: 'Pricing Rules' },
     { key: 12, listName: 'Browser Extensions' },
     { key: 13, listName: 'VA Profile' },
-    { key: 14, listName: 'Templates' }
+    { key: 14, listName: 'Templates' },
+    { key: 15, listName: 'Dark Theme', onClick: () => putDarkTheme() }
   ];
 
   const servicelistArray = [
@@ -52,10 +64,9 @@ export default function Sidebar(props: Props) {
     <>
       <Sider
         theme="light"
-        className="h-100 border-right border z-10"
+        className="h-100 border-right border z-10 sidebarInitial"
         trigger={null}
         collapsible
-        width="367"
         collapsed={collapsed}
       >
         <div className="logo" />
@@ -95,18 +106,18 @@ export default function Sidebar(props: Props) {
               )}
             </div>{' '}
             <div className="pt-5"></div>
-            <Menu.Item key="1" style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
+            <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
               {t('ds')}
             </Menu.Item>
-            <Menu.Item style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
+            <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
               <span className="sidebar_element">{t('cat')}</span>
             </Menu.Item>
-            <Menu.Item style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }} key="3" icon={<ListNowIcon />}>
+            <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="3" icon={<ListNowIcon />}>
               {t('ln')}
             </Menu.Item>
             <Menu.Item
               key="4"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
                 <span onClick={routeChange}>
                   <ListingsIcon />
@@ -126,7 +137,7 @@ export default function Sidebar(props: Props) {
             >
               {listArray.map((obj) => (
                 <Menu.Item key={obj.key}>
-                  <MenuListItem listName={obj.listName} />
+                  <MenuListItem listName={obj.listName} onClick={obj.onClick} />
                 </Menu.Item>
               ))}
             </SubMenu>

@@ -47,13 +47,13 @@ export default function ListingTable() {
         ) : (
           <div className="pt-3">
             <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-              <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings', { num: 5 })}</span>
+              <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
               <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
                 {' '}
                 Copy <span className="fw-600">5</span> listings{' '}
               </span>
               <span className="check-click-text">
-                Optimse <span className="fw-600">5</span> titles
+                Optimise <span className="fw-600">5</span> titles
               </span>
             </span>
           </div>

@@ -1,12 +1,15 @@
+import React from 'react';
 import { CircleDotIcon } from '../common/Icons';
 interface props {
   listName: string;
+  onClick?: () => void;
 }
 
-const MenuListItem = ({ listName }: props) => {
+const MenuListItem = (props: props) => {
+  const { listName, onClick } = props;
   return (
     <>
-      <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25">
+      <li className="list-unstyled list-items-hover fw-400 m-0 h-25 leading-25" onClick={onClick}>
         <span className="mr-3">
           <CircleDotIcon />
         </span>
