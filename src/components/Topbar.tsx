@@ -38,7 +38,7 @@ export default function Topbar() {
           <img src={Logo} alt="logo" />
         </div>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
-          <div className="d-flex w-100 hgr-progress align-items-center p-lg-2 p-1 w-100">
+          <div className="d-flex hgr-progress p-1 TopBarItems">
             <div className="d-flex align-items-center">
               <h4 className="mb-0 quota-head ff-used ">Quota:</h4>{' '}
               <p className=" ml-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
@@ -57,7 +57,7 @@ export default function Topbar() {
                 Update
               </button>
             </div>
-            <img src={bellIcon} height="28" className="ml-3 ml-sm-5" alt="" />
+            <img src={bellIcon} alt="" />
             <div className="d-blue lh-1">
               {' '}
               <span className="d-none fs-18 fw-bold d-md-inline ml-3"> 2 notifications </span>
@@ -68,21 +68,20 @@ export default function Topbar() {
               <span className="fs-18 fw-bold mx-1"> 1232</span>
               <span className="d-none fs-18 fw-bold d-md-inline ">Tokens </span>
             </div>
-            <div className="d-flex justify-content-between lav_button_shadow py-2 align-items-center w-xxxl-304">
-              <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
-              <img src={flag} className="lh-1" height="20" alt="" />
-              <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
-
-              <Space direction="vertical">
-                <Space wrap>
-                  <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
+            <Space direction="vertical">
+              <div className="ant-space-item d-flex">
+                <Dropdown overlay={<DropDownMenu />} placement="bottomLeft" trigger={['click']}>
+                  <div className="storeSelector d-flex lav_button_shadow">
+                    <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
+                    <img src={flag} className="lh-1" height="20" alt="" />
+                    <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
                     <Button>
                       <img className="lh-1  my-auto" src={dropicon} alt="" />
                     </Button>
-                  </Dropdown>
-                </Space>
-              </Space>
-            </div>
+                  </div>
+                </Dropdown>
+              </div>
+            </Space>
           </div>
         </div>
       </div>

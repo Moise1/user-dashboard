@@ -8,10 +8,10 @@ export default function SearchBar() {
 
   //my-md-0 lh-1
   return (
-    <div className="px-1 searchBar">
+    <div className="px-1">
       <div className="row justify-content-between ">
         <div className="col-md-6 col-sm-12">
-          <div className="input-group br-10 input-group-sm  rounded px-3 bg-white z-0">
+          <div className="input-group br-10 input-group-sm rounded px-3 bg-white z-0 searchBar">
             <input
               type="text"
               className="form-control input-focus-none search_placeholder br-10 border-0"
