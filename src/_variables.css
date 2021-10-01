@@ -225,6 +225,19 @@ input {
 }
 /*#endregion */
 
+
+.storeSelector{
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--paddingStoreSelector) ;
+}
+
+.TopBarItems{
+align-items: center;
+  width: 100%;
+}
+
+
 .table-header > div {
   font-size: var(--font-18);
   color: var(--color-dark-violet);
@@ -250,7 +263,7 @@ input {
   overflow: hidden;
 }
 
-.listingTableRow > div(:nth-child(2)) {
+.listingTableRow > div:nth-child(2) {
   flex-grow: 1;
 }
 
@@ -261,3 +274,5 @@ input {
   width: 30px;
   height: 30px;
 }
+
+

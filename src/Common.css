@@ -150,7 +150,8 @@ body {
   background-color: var(--bgHighlight) !important;
 }
 
-@media (max-width: 900px) {
+
+@media (max-width: 1180px) {
   /* .hgr-progress > * {
     display: flex;
     box-sizing:content-box;
@@ -169,6 +170,7 @@ body {
     display: none;
   }
 }
+
 
 .searchBarButtonContainer button {
   white-space: nowrap;
@@ -221,8 +223,11 @@ body {
 }
 
 
-.searchBar input{
+
+.searchBar{
   height: 62px;
+  align-items: center;
+  border-radius: 10px !important 
 }
 
 .search_placeholder::placeholder {
@@ -256,9 +261,6 @@ body {
   box-shadow: unset !important;
 }
 
-.br-10 {
-  border-radius: 10px !important ;
-}
 
 /* DROPDOWN CSS  */
 .add-new-channel-drop {

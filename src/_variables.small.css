@@ -1,5 +1,7 @@
 ﻿@media (max-width: 700px) {
   :root {
+    --paddingStoreSelector:1px;
+
     --color-262E80: #262e80;
     --color-fff: #fff;
     --color-000: #000;
@@ -69,6 +71,28 @@
       --dBlue: #212121;  */
   }
 
+  /* this is the store selector */
+  
+  .storeSelector{
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--paddingStoreSelector); 
+    width: 140px;
+    margin: 5px;
+  }
+
+  .storeSelector img{
+    height: 12px !important;
+    width: 12px !important;
+  }
+
+  .TopBarItems img{
+    height: 18px;
+    width: 18px;
+    }
+
+
+
   .listingTableRow label {
     width: 20px;
     height: 20px;
@@ -92,7 +116,7 @@
   }
 
 
-
+  
   /* this is the Active/pending/terminated nav bar */
   .p-3.header-box-shadow {
     padding: 0 !important;
