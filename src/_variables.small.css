@@ -1,6 +1,9 @@
 ﻿@media (max-width: 700px) {
   :root {
     --paddingStoreSelector: 1px;
+    --logoHeight:42px;
+    --logoWidth:40px;
+    --topBarHeight:60px;
 
     --color-262E80: #262e80;
     --color-fff: #fff;
@@ -82,13 +85,26 @@
   }
 
   .storeSelector img {
-    height: 12px !important;
-    width: 12px !important;
+    height: 16px !important;
+    width: 16px !important;
+  }
+
+  .TopBar {
+    height: var(--topBarHeight);
   }
 
   .TopBarItems > div > img {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .logoHGR{
+    height: var(--logoHeight);
+    width: var(--logoWidth);
+  }
+
+  #Group_41{
+    display: none;
   }
 
   .listingTableRow label {
@@ -104,6 +120,11 @@
   .listingTableRow svg {
     width: 16px;
     height: 16px;
+  }
+
+
+  .searchBar {
+    height: 30px !important;
   }
 
   .searchBar img {

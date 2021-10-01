@@ -1,4 +1,7 @@
 ﻿:root {
+  --logoHeight:62px;
+  --logoWidth:60px;
+  --topBarHeight:90px;
   --color-262E80: #262e80;
   --color-fff: #fff;
   --color-000: #000;
@@ -225,6 +228,11 @@ input {
 }
 /*#endregion */
 
+
+.TopBar {
+  height: var(--topBarHeight);
+}
+
 .storeSelector {
   justify-content: space-between;
   align-items: center;
@@ -234,6 +242,11 @@ input {
 .TopBarItems {
   align-items: center;
   width: 100%;
+}
+
+.logoHGR{
+  height: var(--logoHeight);
+  width: var(--logoWidth);
 }
 
 .table-header > div {

@@ -10,7 +10,7 @@ import { Dropdown, Button, Space } from 'antd';
 import DropDownMenu from './SmallComponents/DropDownMenu';
 import styles from './Topbar.module.css';
 import '../Common.css';
-import Logo from '../assets/channel/list/logo.png';
+import Logo from '../assets//logoHGR.png';
 import dropicon from '../assets/dropicon.svg';
 
 /*
@@ -33,9 +33,9 @@ import dropicon from "../assets/dropicon.svg";
 export default function Topbar() {
   return (
     <>
-      <div className={`TopBar ${styles.Topbar_height}`}>
+      <div className={`TopBar ${styles}`}>
         <div className="ml-3 ">
-          <img src={Logo} alt="logo" />
+          <img className="logoHGR" src={Logo} alt="logo" />
         </div>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-1 TopBarItems">
