@@ -71,15 +71,16 @@ export default function Topbar() {
             <Space direction="vertical">
               <Space wrap>
                 <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
-
-                  <div className="storeSelector d-flex lav_button_shadow">
-                    <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
-                    <img src={flag} className="lh-1" height="20" alt="" />
-                    <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
-                  </div>
-                  <Button>
-                    <img className="lh-1  my-auto" src={dropicon} alt="" />
-                  </Button>
+                  <React.Fragment>
+                    <div className="storeSelector d-flex lav_button_shadow">
+                      <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
+                      <img src={flag} className="lh-1" height="20" alt="" />
+                      <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
+                    </div>
+                    <Button>
+                      <img className="lh-1  my-auto" src={dropicon} alt="" />
+                    </Button>
+                  </React.Fragment>
                 </Dropdown>
               </Space>
             </Space>

@@ -150,7 +150,6 @@ body {
   background-color: var(--bgHighlight) !important;
 }
 
-
 @media (max-width: 1180px) {
   /* .hgr-progress > * {
     display: flex;
@@ -170,7 +169,6 @@ body {
     display: none;
   }
 }
-
 
 .searchBarButtonContainer button {
   white-space: nowrap;
@@ -222,12 +220,10 @@ body {
   font-weight: bold;
 }
 
-
-
-.searchBar{
+.searchBar {
   height: 62px;
   align-items: center;
-  border-radius: 10px !important 
+  border-radius: 10px !important;
 }
 
 .search_placeholder::placeholder {
@@ -260,7 +256,6 @@ body {
   outline: unset !important;
   box-shadow: unset !important;
 }
-
 
 /* DROPDOWN CSS  */
 .add-new-channel-drop {

@@ -225,18 +225,16 @@ input {
 }
 /*#endregion */
 
-
-.storeSelector{
+.storeSelector {
   justify-content: space-between;
   align-items: center;
-  padding: var(--paddingStoreSelector) ;
+  padding: var(--paddingStoreSelector);
 }
 
-.TopBarItems{
-align-items: center;
+.TopBarItems {
+  align-items: center;
   width: 100%;
 }
-
 
 .table-header > div {
   font-size: var(--font-18);
@@ -274,5 +272,3 @@ align-items: center;
   width: 30px;
   height: 30px;
 }
-
-
