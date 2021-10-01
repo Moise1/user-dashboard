@@ -1,9 +1,9 @@
 ﻿@media (max-width: 700px) {
   :root {
     --paddingStoreSelector: 1px;
-    --logoHeight:42px;
-    --logoWidth:40px;
-    --topBarHeight:60px;
+    --logoHeight: 42px;
+    --logoWidth: 40px;
+    --topBarHeight: 60px;
 
     --color-262E80: #262e80;
     --color-fff: #fff;
@@ -98,12 +98,12 @@
     width: 20px;
   }
 
-  .logoHGR{
+  .logoHGR {
     height: var(--logoHeight);
     width: var(--logoWidth);
   }
 
-  #Group_41{
+  #Group_41 {
     display: none;
   }
 
@@ -121,7 +121,6 @@
     width: 16px;
     height: 16px;
   }
-
 
   .searchBar {
     height: 30px !important;

@@ -222,7 +222,7 @@ body {
 }
 
 .searchBar {
-  height:var(--searchbarHeight);
+  height: var(--searchbarHeight);
   align-items: center;
   border-radius: 10px !important;
 }
