@@ -69,7 +69,7 @@ export default function Topbar() {
               <span className="d-none fs-18 fw-bold d-md-inline ">Tokens </span>
             </div>
             <Space direction="vertical">
-              <Space wrap>
+              <div className="ant-space-item d-flex">
                 <Dropdown overlay={<DropDownMenu />} placement="bottomLeft">
                   <React.Fragment>
                     <div className="storeSelector d-flex lav_button_shadow">
@@ -82,7 +82,7 @@ export default function Topbar() {
                     </Button>
                   </React.Fragment>
                 </Dropdown>
-              </Space>
+              </div>
             </Space>
           </div>
         </div>
