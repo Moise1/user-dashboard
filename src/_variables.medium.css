@@ -1,12 +1,10 @@
 ﻿@media (max-width: 1400px) {
   :root {
-   
     /* -- font sizes --- */
     --font-large: 14px;
     --font-medium: 12px;
     --font-small: 10px;
     --ignoreme: #000;
-
   }
 
   .listingTableRow label {

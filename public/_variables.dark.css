@@ -1,5 +1,9 @@
-﻿:root {
-  
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@200&display=swap');
+:root {
+   --mainFontFamily: 'Yaldevi', sans-serif;
+
+
    --bgPage: #333;
     --bgPage2: #222;
     --borderColor: #111; 
@@ -23,7 +27,7 @@
   --box-shadow-color: #111;
   --color-primary: #555;
   --color-dark-green: #30c630; /* profit */
-  --color-violet-shade-1: #3841a4;
+  --color-violet-shade-1: #1890ff;
 
   
   --color-violet-shade-2: #9694ff;

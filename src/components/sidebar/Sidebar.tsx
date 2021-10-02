@@ -65,6 +65,12 @@ export default function Sidebar(props: Props) {
     { key: 113, listName: 'Pricing Rules' }
   ];
 
+  const helplistArray = [
+    { key: 511, listName: 'Channel' },
+    { key: 512, listName: 'Sources' },
+    { key: 513, listName: 'Pricing Rules' }
+  ];
+
   return (
     <>
       <Sider
@@ -165,7 +171,7 @@ export default function Sidebar(props: Props) {
               icon={<HelpIcon />}
               title="Help"
             >
-              {servicelistArray.map((obj) => (
+              {helplistArray.map((obj) => (
                 <Menu.Item key={obj.key}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
