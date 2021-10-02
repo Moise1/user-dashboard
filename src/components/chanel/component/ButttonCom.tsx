@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 interface props {
-  title: string;
+  title: string | ReactNode;
   onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void;
   disabled: boolean;
 }

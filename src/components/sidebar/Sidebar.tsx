@@ -50,25 +50,25 @@ export default function Sidebar(props: Props) {
   const { collapsed, staticvalue, togglestatic } = props;
 
   const listArray = [
-    { key: 9, listName: 'Channel' },
-    { key: 10, listName: 'Sources' },
-    { key: 11, listName: 'Pricing Rules' },
-    { key: 12, listName: 'Browser Extensions' },
-    { key: 13, listName: 'VA Profile' },
-    { key: 14, listName: 'Templates' },
-    { key: 15, listName: 'Toggle Dark Theme', onClick: () => toggleDarkTheme() }
+    { key: 9, listName: t('Menu.Channel') },
+    { key: 10, listName: t('Menu.Sources') },
+    { key: 11, listName: t('Menu.PricingRules') },
+    { key: 12, listName: t('Menu.BrowserExtensions') },
+    { key: 13, listName: t('Menu.VAProfile') },
+    { key: 14, listName: t('Menu.Templates') },
+    { key: 15, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
   ];
 
   const servicelistArray = [
-    { key: 111, listName: 'Channel' },
-    { key: 112, listName: 'Sources' },
-    { key: 113, listName: 'Pricing Rules' }
+    { key: 111, listName: t('Menu.Channel') },
+    { key: 112, listName: t('Menu.Sources') },
+    { key: 113, listName: t('Menu.PricingRules') }
   ];
 
   const helplistArray = [
-    { key: 511, listName: 'Channel' },
-    { key: 512, listName: 'Sources' },
-    { key: 513, listName: 'Pricing Rules' }
+    { key: 511, listName: t('Menu.Channel') },
+    { key: 512, listName: t('Menu.Sources') },
+    { key: 513, listName: t('Menu.PricingRules') }
   ];
 
   return (
@@ -118,13 +118,13 @@ export default function Sidebar(props: Props) {
             </div>{' '}
             <div className="pt-5"></div>
             <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
-              {t('ds')}
+              {t('Menu.Dashboard')}
             </Menu.Item>
             <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
-              <span className="sidebar_element">{t('cat')}</span>
+              <span className="sidebar_element">{t('Menu.Catalog')}</span>
             </Menu.Item>
             <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="3" icon={<ListNowIcon />}>
-              {t('ln')}
+              {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
               key="4"
@@ -136,7 +136,7 @@ export default function Sidebar(props: Props) {
               }
             >
               <button className="bg-trans fw-400 p-0  border-0 listing-btn" onClick={() => history.push('/home')}>
-                {t('ls')}
+                {t('Menu.Listings')}
               </button>
             </Menu.Item>
             {/* SETTINGS LIST ITEMS .  */}
@@ -144,7 +144,7 @@ export default function Sidebar(props: Props) {
               key="sub3"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
-              title="Settings"
+              title={t('Menu.Settings')}
             >
               {listArray.map((obj) => (
                 <Menu.Item key={obj.key}>
@@ -157,7 +157,7 @@ export default function Sidebar(props: Props) {
               key="sub4"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<ServiceIcon />}
-              title="Services"
+              title={t('Menu.Services')}
             >
               {servicelistArray.map((obj) => (
                 <Menu.Item key={obj.key}>
@@ -169,7 +169,7 @@ export default function Sidebar(props: Props) {
               key="sub5"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<HelpIcon />}
-              title="Help"
+              title={t('Menu.Help')}
             >
               {helplistArray.map((obj) => (
                 <Menu.Item key={obj.key}>
@@ -183,7 +183,7 @@ export default function Sidebar(props: Props) {
               <LogOutIcon />
             </span>
 
-            <span className="d-none-icon">Logout</span>
+            <span className="d-none-icon"> {t('Menu.Logout')}</span>
           </div>
         </div>
       </Sider>

@@ -2,10 +2,14 @@ import list_saerch from '../../assets/list_search.jpg';
 import column_img from '../../assets/columnimg.svg';
 import search_icon from '../../assets/search.svg';
 import { t } from '../../global/transShim';
+import RDS from 'react-dom/server';
+import { ReactElement } from 'react';
 
 export default function SearchBar() {
   // pl-lg-0 lh-1 px-0 pl-3 py-lg-2
 
+  const searchComponent = t('search');
+  const tSearchString = RDS.renderToString(searchComponent as ReactElement);
   //my-md-0 lh-1
   return (
     <div className="px-1">
@@ -17,7 +21,7 @@ export default function SearchBar() {
               className="form-control input-focus-none search_placeholder br-10 border-0"
               aria-label="Small"
               aria-describedby="inputGroup-sizing-sm"
-              placeholder={t('search')}
+              placeholder={tSearchString}
             />
             <div className="input-group-prepend">
               <button className="input-group-text br-10 bg-white" id="inputGroup-sizing-sm">

@@ -52,6 +52,8 @@
   --color-dark-green: #228b22;
   --color-light-green: #5ac35a;
 
+  --errorTxt: #ff0000;
+
   /* FONT VARIALBES */
   --font-18: var(--font-large);
   --font-16: var(--font-medium);

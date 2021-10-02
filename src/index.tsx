@@ -12,7 +12,13 @@ const locales: Record<string, Record<string, string>> = {
   es: locale_es as unknown as Record<string, string>
 };
 
-const language = 'en'; //navigator.language.split(/[-_]/)[0];
+let language = navigator.language.split(/[-_]/)[0];
+
+if (Object.keys(locales).indexOf(language) == -1) {
+  //fallback to english if we dont support their language
+  console.log(`locale information not found for ${language}, falling back to 'en'.`);
+  language = 'en';
+}
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1111,3 +1111,14 @@ table {
     position: absolute;
   }
 }
+.missingTranslation {
+  color: var(--errorTxt);
+  font-size: var(--font-small);
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  10% {
+    opacity: 0;
+  }
+}

@@ -1,7 +1,7 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { CircleDotIcon } from '../common/Icons';
 interface props {
-  listName: string;
+  listName: string | ReactNode;
   onClick?: () => void;
 }
 
