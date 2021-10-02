@@ -11,6 +11,7 @@
     --inputColor: #ccc;
     --inputBg: #333;
     --placeholderColor: #fff;
+    --iconColor: #ccc;
     --svgColorFilter: invert(.3) sepia(1) saturate(5) hue-rotate(175deg);
     --color-fff: #333;
     --txtBaseColor: #ccc;
@@ -18,8 +19,6 @@
     --color-262E80: #ccc;
     --dBlue: #212121;  
 
-
-    
   --color-dark-violet: #777;
   --box-shadow-color: #111;
   --color-primary: #555;
@@ -36,10 +35,7 @@
   --color-dark-pink: #f12b70;
   
   --color-light-green: #5ac35a;
-
-
   --searchbarHeight: 42px;
-
 }
 
 .bg-c4c4c4 {
@@ -53,3 +49,5 @@
 .searchBar {
   box-shadow: 0px 3px 6px var(--box-shadow-color);
 }
+
+.tickIcon > * { stroke: var(--color-dark-green); }

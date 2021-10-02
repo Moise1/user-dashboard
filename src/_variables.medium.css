@@ -1,72 +1,12 @@
 ﻿@media (max-width: 1400px) {
   :root {
-    --color-262E80: #262e80;
-    --color-fff: #fff;
-    --color-000: #000;
-    --color-5e69db: #5e69db;
-    /* --- named colours --- */
-    --txtBaseColor: #000;
-    --active-bg: #5e69db;
-    --bgInputLight: #f2f8ff;
-    --bgBlue: #5e84db;
-    --bgPage: #fff;
-    --bgPage2: rgb(240, 242, 245);
-    --bgLighter: var(--bgPage);
-    --dBlue: #262e80;
-    --logIconColor: #ef6092;
-    --iconColor: #ef6092;
-    --navLinkColor: #000;
-    --inputColor: #000;
-    --inputBg: #fff;
-    --placeholderColor: #000;
-    --bgHighlight: #fff;
-    --tableBg: #fff;
-    --txtHighlight: #262e80;
-
-    --borderColor: rgb(222, 226, 230);
-    --borderPrimary: var(--txtHighlight);
+   
     /* -- font sizes --- */
     --font-large: 14px;
     --font-medium: 12px;
     --font-small: 10px;
     --ignoreme: #000;
 
-    --color-dark-violet: #262e80;
-    --color-primary: #5e69db;
-    --color-violet-shade-1: #5763de;
-    --color-violet-shade-2: #9694ff;
-    --color-violet-shade-3: #6a74de;
-    --color-white: #fff;
-    --color-black: #000;
-    --color-light-violet: #f7f9fd;
-    --color-light-pink: #ef6092;
-    --color-dark-pink: #f12b70;
-    --color-dark-green: #228b22;
-    --color-light-green: #5ac35a;
-
-    /* FONT VARIALBES */
-    --font-18: var(--font-large);
-    --font-16: var(--font-medium);
-    --font-14: var(--font-small);
-
-    /* -- Overrides / temporary / dark theme --- */
-
-    /* --bgPage: #333;
-      --bgPage2: #222;
-      --borderColor: #111; 
-      --tableBg: #333;
-      --bgLighter: var(--bgPage2);
-      --bgHighlight: #555;
-      --navLinkColor: #e5e112;
-      --inputColor: #ccc;
-      --inputBg: #333;
-      --placeholderColor: #fff;
-      --svgColorFilter: invert(.3) sepia(1) saturate(5) hue-rotate(175deg);
-      --color-fff: #333;
-      --txtBaseColor: #ccc;
-      --txtHighlight: #e5e112;
-      --color-262E80: #ccc;
-      --dBlue: #212121;  */
   }
 
   .listingTableRow label {

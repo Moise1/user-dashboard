@@ -16,7 +16,7 @@
   --bgLighter: var(--bgPage);
   --dBlue: #262e80;
   --logIconColor: #ef6092;
-  --iconColor: #ef6092;
+  --iconColor: #262e80;
   --navLinkColor: #000;
   --navLinkColorHover: #000;
   --inputColor: #000;
@@ -132,6 +132,7 @@ input {
 .menu-item img,
 .pinButton img {
   color: var(--iconColor);
+  stroke: var(--iconColor);
   filter: var(--svgColorFilter);
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .active-white-svg {
@@ -271,9 +272,28 @@ input {
 
 .svgIcon {
   display: inline-block;
-  filter: var(--svgColorFilter);
+  /* filter: var(--svgColorFilter); */
 }
 .tickIcon {
   width: 30px;
   height: 30px;
+}
+.tickIcon > * {
+  stroke: var(--color-dark-green);
+}
+
+/*
+li.ant-menu-item svg circle, li.ant-menu-item svg line, li.ant-menu-item svg rect
+*/
+svg > rect,
+svg > ellipse,
+svg > circle,
+svg > line,
+svg > path {
+  /* filter:(--svgColorFilter) !important;
+  color: var(--iconColor); */
+  stroke: var(--iconColor);
+}
+svg > path:first-child {
+  display: none;
 }

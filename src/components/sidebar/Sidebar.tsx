@@ -25,15 +25,20 @@ interface Props {
   togglestatic: () => void;
 }
 
-async function putDarkTheme() {
-  //import( '../../_variables.dark.css');
-
-  //alert('called!');
-  const link = document.createElement('link');
-  link.type = 'text/css';
-  link.rel = 'stylesheet';
-  link.href = './_variables.dark.css';
-  document.head.appendChild(link);
+let darkApplied = false;
+async function toggleDarkTheme() {
+  if (darkApplied) {
+    const element = document.getElementById('darkThemeLink');
+    element?.parentElement?.removeChild(element);
+  } else {
+    const link = document.createElement('link');
+    link.type = 'text/css';
+    link.id = 'darkThemeLink';
+    link.rel = 'stylesheet';
+    link.href = './_variables.dark.css';
+    document.head.appendChild(link);
+  }
+  darkApplied = !darkApplied;
 }
 
 export default function Sidebar(props: Props) {
@@ -51,7 +56,7 @@ export default function Sidebar(props: Props) {
     { key: 12, listName: 'Browser Extensions' },
     { key: 13, listName: 'VA Profile' },
     { key: 14, listName: 'Templates' },
-    { key: 15, listName: 'Dark Theme', onClick: () => putDarkTheme() }
+    { key: 15, listName: 'Toggle Dark Theme', onClick: () => toggleDarkTheme() }
   ];
 
   const servicelistArray = [
