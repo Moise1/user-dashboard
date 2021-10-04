@@ -16,6 +16,9 @@
     --inputBg: #333;
     --placeholderColor: #fff;
     --iconColor: #ccc;
+    --iconHoverColor: var(--color-dark-pink);
+
+
     --svgColorFilter: invert(.3) sepia(1) saturate(5) hue-rotate(175deg);
     --color-fff: #333;
     --txtBaseColor: #ccc;
@@ -40,6 +43,13 @@
   
   --color-light-green: #5ac35a;
   --searchbarHeight: 42px;
+
+  --navLinkActive: var(--color-white);
+  --subnavLinkHover: var(--color-light-pink);
+  --subnavLinkActive: var(--color-light-pink);
+
+  --siderWidth: 45px;
+  --expandedSiderWidth: 250px;
 }
 
 .bg-c4c4c4 {

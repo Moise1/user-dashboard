@@ -79,6 +79,8 @@ export default function Sidebar(props: Props) {
         trigger={null}
         collapsible
         collapsed={collapsed}
+        width="var(--expandedSiderWidth)"
+        collapsedWidth="var(--siderWidth)"
       >
         <div className="logo" />
         <div className="d-flex flex-column justify-content-between h-100">
@@ -135,7 +137,7 @@ export default function Sidebar(props: Props) {
                 </span>
               }
             >
-              <button className="bg-trans fw-400 p-0  border-0 listing-btn" onClick={() => history.push('/home')}>
+              <button className="bg-trans p-0 border-0 listing-btn" onClick={() => history.push('/home')}>
                 {t('Menu.Listings')}
               </button>
             </Menu.Item>

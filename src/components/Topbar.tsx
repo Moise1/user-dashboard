@@ -8,7 +8,6 @@ import flag from '../assets/flag-round-500.svg';
 import amazon from '../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Space } from 'antd';
 import DropDownMenu from './SmallComponents/DropDownMenu';
-import styles from './Topbar.module.css';
 import '../Common.css';
 import Logo from '../assets//logoHGR.png';
 import dropicon from '../assets/dropicon.svg';
@@ -34,7 +33,7 @@ import dropicon from "../assets/dropicon.svg";
 export default function Topbar() {
   return (
     <>
-      <div className={`TopBar ${styles}`}>
+      <div className="TopBar">
         <div className="ml-3 ">
           <img className="logoHGR" src={Logo} alt="logo" />
         </div>

@@ -22,6 +22,7 @@
   --dBlue: #262e80;
   --logIconColor: #ef6092;
   --iconColor: #262e80;
+  --iconHoverColor: #fff;
   --navLinkColor: #000;
   --navLinkColorHover: #000;
   --inputColor: #000;
@@ -54,13 +55,18 @@
 
   --errorTxt: #ff0000;
 
+  --navLinkActive: var(--color-white);
+  --subnavLinkHover: var(--color-violet-shade-3);
+  --subnavLinkActive: var(--color-violet-shade-3);
+
   /* FONT VARIALBES */
   --font-18: var(--font-large);
   --font-16: var(--font-medium);
   --font-14: var(--font-small);
 
   --searchbarHeight: 58px;
-  --siderWidth: 40px;
+  --siderWidth: 80px;
+  --expandedSiderWidth: 250px;
   --box-shadow-color: rgba(35, 56, 193, 0.16);
 }
 
@@ -150,82 +156,30 @@ input {
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  color: var(--color-white) !important;
+  color: var(--navLinkActive) !important;
   background-color: var(--color-primary) !important;
 }
-/* .ant-menu-submenu:not(.ant-menu-horizontal) .ant-menu-item-selected:hover {
-  background-color: transparent !important;
-  color: black !important;
-} */
+
 .ant-menu-item.ant-menu-item-active:hover {
-  color: var(--color-white) !important;
+  color: var(--navLinkActive) !important;
   background-color: var(--color-primary) !important;
 }
 .ant-menu-submenu.ant-menu-submenu-active:hover {
-  color: var(--color-white) !important;
+  color: var(--navLinkActive) !important;
   background-color: var(--color-primary) !important;
 }
 .ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-arrow {
-  color: var(--color-white) !important;
+  color: var(--subnavLinkActive) !important;
 }
 
 .ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-title .ant-menu-title-content {
-  color: var(--color-white) !important;
+  color: var(--subnavLinkActive) !important;
 }
-.ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
+/* .ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
   color: unset !important;
   background-color: unset !important;
-}
-/* HOVER SVG  */
+} */
 
-.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover svg #Path_10 {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon ellipse {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .setting-icon path {
-  fill: var(--color-white);
-}
-
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon #Path_13 {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .list-now-icon circle {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .list-now-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .dashboard-icon rect {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .listing-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_6,
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_5,
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon line {
-  stroke: var(--color-white);
-}
-
-.ant-menu-item .ant-menu-title-content {
-  margin: 0 !important;
-}
-
-.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
-  background-color: unset !important;
-  color: black !important;
-}
 /*#endregion */
 
 .TopBar {
@@ -297,6 +251,11 @@ svg > * {
   color: var(--iconColor); */
   stroke: var(--iconColor);
 }
+
+svg:hover > *, .svgIcon:hover > * {
+  stroke: var(--iconHoverColor);
+}
+
 svg > path:first-child {
   display: none;
 }
