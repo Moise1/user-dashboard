@@ -12,7 +12,8 @@ import {
   ServiceIcon,
   SettingsIcon,
   HelpIcon,
-  LogOutIcon
+  LogOutIcon,
+  OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 const { SubMenu } = Menu;
@@ -129,6 +130,7 @@ export default function Sidebar(props: Props) {
               {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
+              onClick={() => history.push('/listings')}
               key="4"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
@@ -140,6 +142,19 @@ export default function Sidebar(props: Props) {
               <button className="bg-trans p-0 border-0 listing-btn" onClick={() => history.push('/home')}>
                 {t('Menu.Listings')}
               </button>
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => history.push('/orders')}
+              key="5"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={
+                <span>
+                  <OrdersIcon />
+                </span>
+              }
+              title={t('Menu.Orders')}
+            >
+              Orders
             </Menu.Item>
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu

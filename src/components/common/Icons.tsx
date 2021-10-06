@@ -451,6 +451,71 @@ export const SettingsIcon = () => {
     </>
   );
 };
+export const OrdersIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_290"
+        data-name="Group 290"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        className="orders-icon-sidebar"
+        viewBox="0 0 29.789 29.789"
+      >
+        <path id="Path_281" data-name="Path 281" d="M0,0H29.789V29.789H0Z" fill="none" />
+        <circle
+          id="Ellipse_114"
+          data-name="Ellipse 114"
+          cx="2.5"
+          cy="2.5"
+          r="2.5"
+          transform="translate(5 21)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <circle
+          id="Ellipse_115"
+          data-name="Ellipse 115"
+          cx="2.5"
+          cy="2.5"
+          r="2.5"
+          transform="translate(19 21)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          id="Path_282"
+          data-name="Path 282"
+          d="M20.136,20.377H6.482V3H4"
+          transform="translate(0.965 0.724)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          id="Path_283"
+          data-name="Path 283"
+          d="M6,5,23.377,6.241,22.136,14.93H6"
+          transform="translate(1.447 1.206)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+    </>
+  );
+};
 
 export const ServiceIcon = () => {
   return (
