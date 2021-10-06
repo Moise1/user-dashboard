@@ -56,6 +56,35 @@ export const DashBoardIcon = () => {
     </>
   );
 };
+
+export const LeftBackArrowIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_289"
+        data-name="Group 289"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30.73"
+        height="30.73"
+        viewBox="0 0 30.73 30.73"
+      >
+        <path id="Path_70" data-name="Path 70" d="M0,0H30.73V30.73H0Z" fill="none" />
+        <path
+          id="Path_71"
+          data-name="Path 71"
+          d="M16.683,6,9,13.683l7.683,7.683"
+          transform="translate(2.524 1.683)"
+          fill="none"
+          stroke="#262e80"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
+        />
+      </svg>
+    </>
+  );
+};
+
 export const LeftArrowIcon = () => {
   return (
     <>
@@ -451,6 +480,194 @@ export const SettingsIcon = () => {
     </>
   );
 };
+export const ProcessOrderIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="25.174" height="25.174" viewBox="0 0 25.174 25.174">
+        <g id="Group_291" data-name="Group 291" transform="translate(1.174 1.174)">
+          <path id="Path_286" data-name="Path 286" d="M0,0H24V24H0Z" fill="none" />
+          <path
+            id="Path_287"
+            data-name="Path 287"
+            d="M16.3,5H17a2,2,0,0,1,2,2V17a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V7A2,2,0,0,1,7,5h5L9.18,2.18m0,5.64L12,5"
+            transform="translate(-4.971 12) rotate(-45)"
+            fill="none"
+            stroke="#fff"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </g>
+      </svg>
+    </>
+  );
+};
+export const HandStopOrderIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_292"
+        data-name="Group 292"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_288" data-name="Path 288" d="M0,0H24V24H0Z" fill="none" />
+        <path
+          id="Path_289"
+          data-name="Path 289"
+          d="M8,13V5.5a1.5,1.5,0,1,1,3,0V12"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_290"
+          data-name="Path 290"
+          d="M11,5.5v-2a1.5,1.5,0,0,1,3,0V12"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_291"
+          data-name="Path 291"
+          d="M14,5.5a1.5,1.5,0,1,1,3,0V12"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_292"
+          data-name="Path 292"
+          d="M17,7.5a1.5,1.5,0,1,1,3,0V16a6,6,0,0,1-6,6H12.208A6,6,0,0,1,7.2,19.3L7,19q-.468-.719-3.286-5.728A1.5,1.5,0,0,1,4.25,11.25a1.867,1.867,0,0,1,2.28.28L8,13"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const DustbinDeleteOrderIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_293"
+        data-name="Group 293"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_293" data-name="Path 293" d="M0,0H24V24H0Z" fill="none" />
+        <line
+          id="Line_171"
+          data-name="Line 171"
+          x2="16"
+          transform="translate(4 7)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_172"
+          data-name="Line 172"
+          y2="6"
+          transform="translate(10 11)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_173"
+          data-name="Line 173"
+          y2="6"
+          transform="translate(14 11)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_294"
+          data-name="Path 294"
+          d="M5,7,6,19a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2L19,7"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_295"
+          data-name="Path 295"
+          d="M9,7V4a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1V7"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const DispatchedOrderIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_308"
+        data-name="Group 308"
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        viewBox="0 0 26 26"
+      >
+        <path id="Path_26" data-name="Path 26" d="M0,0H26V26H0Z" fill="none" />
+        <circle
+          id="Ellipse_9"
+          data-name="Ellipse 9"
+          cx="9.912"
+          cy="9.912"
+          r="9.912"
+          transform="translate(2.87 2.87)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_27"
+          data-name="Path 27"
+          d="M9,12.189l2.189,2.189L15.566,10"
+          transform="translate(0.717 0.811)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+
 export const OrdersIcon = () => {
   return (
     <>

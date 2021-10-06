@@ -126,7 +126,12 @@ export default function Sidebar(props: Props) {
             <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
               <span className="sidebar_element">{t('Menu.Catalog')}</span>
             </Menu.Item>
-            <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="3" icon={<ListNowIcon />}>
+            <Menu.Item
+              onClick={() => history.push('/sources')}
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              key="3"
+              icon={<ListNowIcon />}
+            >
               {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
@@ -158,6 +163,7 @@ export default function Sidebar(props: Props) {
             </Menu.Item>
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
+              // onClick={() => history.push('/orders')}
               key="sub3"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}

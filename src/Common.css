@@ -1133,9 +1133,135 @@ table {
 }
 .ant-menu-item.ant-menu-item-selected .orders-icon-sidebar circle,
 .ant-menu-item.ant-menu-item-selected .orders-icon-sidebar path {
-  stroke: white;
+  stroke: var(--bgPage);
 }
 .ant-menu-item.ant-menu-item-active .orders-icon-sidebar circle,
 .ant-menu-item.ant-menu-item-active .orders-icon-sidebar path {
+  stroke: var(--bgPage);
+}
+
+/* ORDERS STYLE  */
+.advance-search-purple-button {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-violet-shade-2);
+  color: var(--color-white);
+  border-radius: 8px;
+  padding: 10px 40px;
+  width: 350px;
+  height: 58px;
+  transition: 0.3s ease;
+}
+.advance-search-purple-button:hover {
+  background-color: var(--color-violet-shade-3);
+  color: var(--color-white);
+}
+
+.process-5-order-btn {
+  background-color: var(--bgBlue);
+  height: 43px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.process-5-order-btn:hover {
+  background-color: #3a66ce;
+  color: var(--bgPage);
+}
+.stop-5-order-btn {
+  background-color: var(--color-light-orange);
+  height: 43px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: 16px;
+  font-weight: bold;
+}
+.stop-5-order-btn:hover {
+  background-color: #df9c4f;
+  color: var(--bgPage);
+}
+
+.delete-5-order-btn {
+  background-color: var(--bg-dark-pink);
+  height: 43px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.delete-5-order-btn:hover {
+  background-color: #c20648;
+  color: var(--bgPage);
+}
+
+.mark-dispatch-btn {
+  background-color: #228b22;
+  height: 43px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mark-dispatch-btn:hover {
+  background-color: #198319;
+  color: var(--bgPage);
+}
+
+/* .mark-dispatch-btn:hover circle,
+.mark-dispatch-btn:hover path {
   stroke: white;
+} */
+
+.orders-table-main {
+  background-color: var(--bgPage);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+}
+
+.back-to-supplier-heading {
+  color: #262e80;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.beta-bg {
+  background-color: var(--bgPage);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.beta-bg h2 {
+  color: var(--bgBlue);
+  font-weight: bold;
+  font-size: 29px;
+}
+
+.beta-bg span {
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--color-grey);
+}
+.bg-light-blue {
+  background-color: var(--bg-light-skyblue);
+}
+.auto-ordering-heading-text {
+  font-weight: bold;
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+}
+.auto-ordering-heading-text span {
+  color: #5e84db;
 }
