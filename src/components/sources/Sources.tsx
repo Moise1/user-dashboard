@@ -3,6 +3,7 @@ import React from 'react';
 import { DispatchedOrderIcon, LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
 import Select from 'react-select';
+import AccountsInput from './AccountsInput';
 // import { Menu } from 'antd';
 // import search_icon from '../../assets/search.svg';
 // import HeaderDropDownItem from '../SmallComponents/HeaderDropDownItem';
@@ -78,7 +79,17 @@ const Sources = () => {
                 <span>Toggle button</span>
               </div>
 
-              <div>Account configuration: Select or add account</div>
+              <h2 className="acc-config-text">
+                Account configuration: <span>Select or add account</span>{' '}
+              </h2>
+
+              <div className="row">
+                <div className="col-7">
+                  <Select options={options} defaultValue={options[0]} />
+                </div>
+              </div>
+
+              <AccountsInput />
             </div>
             <div className="d-flex flex-column">
               <button className="btn save-changes-btn mb-3">

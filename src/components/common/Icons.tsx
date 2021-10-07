@@ -1,5 +1,77 @@
 import React from 'react';
 
+export const DustbinPinkIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_307"
+        data-name="Group 307"
+        xmlns="http://www.w3.org/2000/svg"
+        width="21.564"
+        height="21.564"
+        viewBox="0 0 21.564 21.564"
+      >
+        <path id="Path_293" data-name="Path 293" d="M0,0H21.564V21.564H0Z" fill="none" />
+        <line
+          id="Line_171"
+          data-name="Line 171"
+          x2="14.608"
+          transform="translate(3.303 5.749)"
+          fill="none"
+          stroke="#dd0a54"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_172"
+          data-name="Line 172"
+          y2="4.565"
+          transform="translate(8.781 10.314)"
+          fill="none"
+          stroke="#dd0a54"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_173"
+          data-name="Line 173"
+          y2="4.565"
+          transform="translate(12.433 10.314)"
+          fill="none"
+          stroke="#dd0a54"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_294"
+          data-name="Path 294"
+          d="M5,7l.9,10.782a1.8,1.8,0,0,0,1.8,1.8h7.188a1.8,1.8,0,0,0,1.8-1.8L17.579,7"
+          transform="translate(-0.507 -0.71)"
+          fill="none"
+          stroke="#dd0a54"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_295"
+          data-name="Path 295"
+          d="M9,6.594V3.9A.9.9,0,0,1,9.9,3h3.594a.9.9,0,0,1,.9.9v2.7"
+          transform="translate(-0.913 -0.304)"
+          fill="none"
+          stroke="#dd0a54"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+
 export const DashBoardIcon = () => {
   return (
     <>
