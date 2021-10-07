@@ -1221,6 +1221,58 @@ table {
   stroke: white;
 } */
 
+/* table css */
+
+.order-table-head {
+  color: var(--color-dark-violet);
+  white-space: nowrap;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  font-size: var(--font-large) !important;
+}
+
+.order-table {
+  background-color: var(--color-fff);
+  border-bottom: 1px solid #dedede !important;
+}
+
+.order-table-body {
+  white-space: nowrap;
+}
+
+.obj-sale-body {
+  color: var(--color-violet-shade-1);
+  font-size: var(--font-large) !important;
+  font-weight: normal;
+}
+
+.obj-sale-title {
+  color: var(--avery-bg);
+  font-size: var(--font-small);
+  font-weight: 500;
+}
+
+.obj-sale-qty {
+  color: var(--color-dark-violet);
+  font-size: var(--font-large) !important;
+  font-weight: normal;
+}
+.obj-sale-cost {
+  color: var(--color-dark-violet);
+  font-size: var(--font-large) !important;
+  font-weight: bold;
+}
+
+.obj-profit-text {
+  font-size: var(--font-large);
+  font-weight: normal;
+  color: var(--color-dark-green);
+}
+
+/* table css ends here */
+
 .orders-table-main {
   background-color: var(--bgPage);
   padding: 1.5rem;
