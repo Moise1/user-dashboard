@@ -1622,13 +1622,12 @@ table {
   opacity: 1;
   color: var(--color-white);
   font-size: 12px;
-  padding: 5px;
 }
 .width-80 {
   width: 80%;
 }
 .shop-address {
-  font-size: 18px;
+  font-size: var(--font-18);
   color: #000;
   font-weight: 700;
 }
@@ -1643,7 +1642,7 @@ table {
   opacity: 1;
 }
 .sale-head {
-  font-size: 18px;
+  font-size: var(--font-18);
   color: #000;
   font-weight: 700;
 }
@@ -1659,6 +1658,7 @@ table {
   background-color: #f2f8ff !important;
 
   border-radius: 10px;
+  border: none;
 }
 .w-82 {
   width: 82px;
@@ -1673,6 +1673,9 @@ table {
   border-bottom: none !important;
 }
 .modal-head-box {
+  padding-right: 0px;
+}
+.pr-0 {
   padding-right: 0px;
 }
 .edit-btnn {
@@ -1716,3 +1719,7 @@ table {
     width: 190px;
   }
 }
+.h-27 {
+  height: 27px;
+}
+/* MODAL CSS END */ ;

@@ -13,6 +13,7 @@ import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import OrderDetails from './components/modals/OrderDetails';
+import AddressModal from './components/modals/AddressModal';
 
 const App = () => {
   // const [collapsed, setCollapsed] = useState(true);
@@ -82,6 +83,7 @@ const App = () => {
             <Route path="/sources" component={Sources} />
             <Route path="/newchannel" component={ChannelCreate} />
             <Route path="/modal" component={OrderDetails} />
+            <Route path="/modal2" component={AddressModal} />
 
             {/* <Route path="/orders" component={Orders} /> */}
           </Switch>

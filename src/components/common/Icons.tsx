@@ -1026,3 +1026,92 @@ export const UpdonwIcon = () => {
     </>
   );
 };
+
+export const IconEdit = () => {
+  return (
+    <>
+      <svg
+        id="Group_41"
+        data-name="Group 41"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_31" data-name="Path 31" d="M0,0H24V24H0Z" fill="none" />
+        <path
+          id="Path_32"
+          data-name="Path 32"
+          d="M9,7H6A2,2,0,0,0,4,9v9a2,2,0,0,0,2,2h9a2,2,0,0,0,2-2V15"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_33"
+          data-name="Path 33"
+          d="M9,15h3l8.5-8.5a2.121,2.121,0,0,0-3-3L9,12v3"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <line
+          id="Line_24"
+          data-name="Line 24"
+          x2="3"
+          y2="3"
+          transform="translate(16 5)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const AoIconHead = () => {
+  return (
+    <>
+      <svg
+        id="Group_308"
+        data-name="Group 308"
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        viewBox="0 0 26 26"
+      >
+        <path id="Path_26" data-name="Path 26" d="M0,0H26V26H0Z" fill="none" />
+        <circle
+          id="Ellipse_9"
+          data-name="Ellipse 9"
+          cx="9.912"
+          cy="9.912"
+          r="9.912"
+          transform="translate(2.87 2.87)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_27"
+          data-name="Path 27"
+          d="M9,12.189l2.189,2.189L15.566,10"
+          transform="translate(0.717 0.811)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
