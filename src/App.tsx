@@ -12,6 +12,7 @@ import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
+import OrderDetails from './components/modals/OrderDetails';
 
 const App = () => {
   // const [collapsed, setCollapsed] = useState(true);
@@ -80,6 +81,8 @@ const App = () => {
             <Route path="/orders" component={Orders} />
             <Route path="/sources" component={Sources} />
             <Route path="/newchannel" component={ChannelCreate} />
+            <Route path="/modal" component={OrderDetails} />
+
             {/* <Route path="/orders" component={Orders} /> */}
           </Switch>
         </Layout>
