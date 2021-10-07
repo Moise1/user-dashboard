@@ -1249,6 +1249,22 @@ table {
   font-weight: normal;
 }
 
+.obj-state-text {
+  color: var(--color-fff);
+  font-size: var(--font-small);
+  font-weight: bold;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.table td,
+.table th {
+  vertical-align: unset !important;
+}
+
 .obj-sale-title {
   color: var(--avery-bg);
   font-size: var(--font-small);
@@ -1270,6 +1286,22 @@ table {
   font-size: var(--font-large);
   font-weight: normal;
   color: var(--color-dark-green);
+}
+
+.bg-dark-pink {
+  background-color: var(--bg-dark-pink);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-color-light-orange {
+  background-color: var(--color-light-orange);
+}
+
+.bg-color-dark-green {
+  background-color: var(--color-dark-green);
 }
 
 /* table css ends here */
