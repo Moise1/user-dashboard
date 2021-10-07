@@ -6,11 +6,13 @@
     --topBarHeight: 60px;
 
     /* -- font sizes --- */
-    --font-xl: 18px;
-    --sub-heading: 16px;
+    --text-heading: 16px;
+    --font-xl: 14px;
+    --sub-heading: 14px;
     --font-large: 12px;
     --font-medium: 12px;
     --font-small: 8px;
+    --font-extra-small: 10px;
 
     /* FONT VARIALBES */
     --font-18: var(--font-large);
@@ -67,7 +69,7 @@
   }
 
   .searchBar {
-    height: 30px !important;
+    height: 42px !important;
   }
 
   .searchBar img {

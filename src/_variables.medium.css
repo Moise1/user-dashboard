@@ -1,7 +1,10 @@
 ﻿@media (max-width: 1400px) {
   :root {
     /* -- font sizes --- */
+    --text-heading: 22px;
+    --font-xl: 18px;
     --font-large: 14px;
+    --sub-heading: 16px;
     --font-medium: 12px;
     --font-small: 10px;
     --ignoreme: #000;

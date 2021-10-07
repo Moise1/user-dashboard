@@ -14,14 +14,14 @@ const AccountsInput = () => {
           </div>
         </div>
         <div className="col-12">
-          <div className="d-flex flex-column flex-sm-row">
+          <div className="d-flex">
             <div className="acc-input-parent">
               <label className="account-label-style" htmlFor="">
                 Amazon login
               </label>
               <input className="amazonlogin-input-style" type="text" placeholder="dadaccount@gmail.com" />
             </div>
-            <div className="width-207 ml-0 ml-sm-5">
+            <div className="width-207 ml-3 ml-sm-5">
               <label className="account-label-style" htmlFor="">
                 Amazon password
               </label>
@@ -47,7 +47,7 @@ const AccountsInput = () => {
             <input className="account-input-style" type="text" placeholder="(555) 555-5555" />
           </div>
         </div>
-        <div className="col-12 my-5">
+        <div className="col-12 my-4 my-sm-5">
           <div className="d-flex">
             <div className="enable-disable-para ">
               <p>Enable/Disable Auto-ordering</p>
