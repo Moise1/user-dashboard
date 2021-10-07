@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchWithButton from '../common/SearchWithButton';
+import OrderTable from './OrderTable';
 import OrderTypeButtons from './OrderTypeButtons';
 
 const Orders = () => {
@@ -10,6 +11,7 @@ const Orders = () => {
         <div className="orders-table-main">
           <OrderTypeButtons />
         </div>
+        <OrderTable />
       </div>
     </>
   );
