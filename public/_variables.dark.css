@@ -1,30 +1,27 @@
-﻿
-@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@200&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@200&display=swap');
 :root {
-   --mainFontFamily: 'Yaldevi', sans-serif;
+  --mainFontFamily: 'Yaldevi', sans-serif;
 
+  --bgPage: #333;
+  --bgPage2: #222;
+  --borderColor: #111;
+  --tableBg: #333;
+  --bgLighter: var(--bgPage2);
+  --bgHighlight: #333;
+  --navLinkColor: #777;
+  --navLinkColorHover: #999;
+  --inputColor: #ccc;
+  --inputBg: #333;
+  --placeholderColor: #fff;
+  --iconColor: #ccc;
+  --iconHoverColor: var(--color-dark-pink);
 
-   --bgPage: #333;
-    --bgPage2: #222;
-    --borderColor: #111; 
-    --tableBg: #333;
-    --bgLighter: var(--bgPage2);
-    --bgHighlight: #333;
-    --navLinkColor: #777;
-    --navLinkColorHover: #999;
-    --inputColor: #ccc;
-    --inputBg: #333;
-    --placeholderColor: #fff;
-    --iconColor: #ccc;
-    --iconHoverColor: var(--color-dark-pink);
-
-
-    --svgColorFilter: invert(.3) sepia(1) saturate(5) hue-rotate(175deg);
-    --color-fff: #333;
-    --txtBaseColor: #ccc;
-    --txtHighlight: #e5e112;
-    --color-262E80: #ccc;
-    --dBlue: #212121;  
+  --svgColorFilter: invert(0.3) sepia(1) saturate(5) hue-rotate(175deg);
+  --color-fff: #333;
+  --txtBaseColor: #ccc;
+  --txtHighlight: #e5e112;
+  --color-262E80: #ccc;
+  --dBlue: #212121;
 
   --color-dark-violet: #777;
   --box-shadow-color: #111;
@@ -32,7 +29,6 @@
   --color-dark-green: #30c630; /* profit */
   --color-violet-shade-1: #1890ff;
 
-  
   --color-violet-shade-2: #9694ff;
   --color-violet-shade-3: #6a74de;
   --color-white: #fff;
@@ -40,7 +36,7 @@
   --color-light-violet: #f7f9fd;
   --color-light-pink: #ef6092;
   --color-dark-pink: #f12b70;
-  
+
   --color-light-green: #5ac35a;
   --searchbarHeight: 42px;
 
@@ -64,4 +60,6 @@
   box-shadow: 0px 3px 6px var(--box-shadow-color);
 }
 
-.tickIcon > * { stroke: var(--color-dark-green); }
+.tickIcon > * {
+  stroke: var(--color-dark-green);
+}

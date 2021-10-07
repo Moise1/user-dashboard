@@ -1144,6 +1144,7 @@ table {
 .advance-search-purple-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: var(--color-violet-shade-2);
   color: var(--color-white);
   border-radius: 8px;
@@ -1201,7 +1202,7 @@ table {
 }
 
 .mark-dispatch-btn {
-  background-color: #228b22;
+  background-color: var(--color-dark-green);
   height: 43px;
   padding: 10px 40px;
   border-radius: 10px;
@@ -1265,3 +1266,50 @@ table {
 .auto-ordering-heading-text span {
   color: #5e84db;
 }
+.auto-ordering-section {
+  background-color: var(--bgPage);
+  border-radius: 10px;
+  padding: 25px;
+}
+.reset-to-default-btn {
+  background-color: var(--color-grey-shade-1);
+  color: var(--bgPage);
+  width: 217px;
+  height: 59px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.reset-to-default-btn:hover {
+  background-color: #b0aeae;
+  color: var(--bgPage);
+}
+.save-changes-btn {
+  background-color: var(--color-dark-green);
+  color: var(--bgPage);
+  width: 217px;
+  height: 59px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+.save-changes-btn:hover {
+  background-color: var(--color-light-green);
+  color: var(--bgPage);
+}
+
+.enable-disable-para p {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 0px;
+}
+.enable-disable-para span {
+  font-weight: 400;
+  font-size: 12px;
+  color: #000;
+  opacity: 0.4;
+}
+/* TOGGLE  */
