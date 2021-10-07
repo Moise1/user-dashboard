@@ -6,9 +6,11 @@
     --topBarHeight: 60px;
 
     /* -- font sizes --- */
-    --font-large: 11px;
-    --font-medium: 9px;
-    --font-small: 7px;
+    --font-xl: 18px;
+    --sub-heading: 16px;
+    --font-large: 12px;
+    --font-medium: 12px;
+    --font-small: 8px;
 
     /* FONT VARIALBES */
     --font-18: var(--font-large);

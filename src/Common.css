@@ -1164,7 +1164,7 @@ table {
   padding: 10px 40px;
   border-radius: 10px;
   color: var(--bgPage);
-  font-size: 16px;
+  font-size: var(--font-medium);
   font-weight: bold;
 }
 
@@ -1178,7 +1178,7 @@ table {
   padding: 10px 40px;
   border-radius: 10px;
   color: var(--bgPage);
-  font-size: 16px;
+  font-size: var(--font-medium);
   font-weight: bold;
 }
 .stop-5-order-btn:hover {
@@ -1192,7 +1192,7 @@ table {
   padding: 10px 40px;
   border-radius: 10px;
   color: var(--bgPage);
-  font-size: 16px;
+  font-size: var(--font-medium);
   font-weight: bold;
 }
 
@@ -1207,7 +1207,7 @@ table {
   padding: 10px 40px;
   border-radius: 10px;
   color: var(--bgPage);
-  font-size: 16px;
+  font-size: var(--font-medium);
   font-weight: bold;
 }
 
@@ -1230,7 +1230,7 @@ table {
 
 .back-to-supplier-heading {
   color: #262e80;
-  font-size: 18px;
+  font-size: var(--font-large);
   font-weight: bold;
   cursor: pointer;
 }
@@ -1251,7 +1251,7 @@ table {
 
 .beta-bg span {
   font-weight: 400;
-  font-size: 20px;
+  font-size: var(--font-xl);
   color: var(--color-grey);
 }
 .bg-light-blue {
@@ -1259,10 +1259,11 @@ table {
 }
 .auto-ordering-heading-text {
   font-weight: bold;
-  font-size: 24px;
+  font-size: var(--sub-heading);
   color: black;
   font-weight: bold;
 }
+
 .auto-ordering-heading-text span {
   color: #5e84db;
 }
@@ -1276,7 +1277,7 @@ table {
   color: var(--bgPage);
   width: 217px;
   height: 59px;
-  font-size: 18px;
+  font-size: var(--font-large);
   border-radius: 8px;
   font-weight: bold;
 }
@@ -1290,7 +1291,7 @@ table {
   color: var(--bgPage);
   width: 217px;
   height: 59px;
-  font-size: 18px;
+  font-size: var(--font-large);
   border-radius: 8px;
   font-weight: bold;
   transition: 0.3s ease;
@@ -1302,44 +1303,76 @@ table {
 
 .enable-disable-para p {
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--font-large);
   color: var(--color-black);
   margin-bottom: 0px;
 }
 .enable-disable-para span {
   font-weight: 400;
-  font-size: 12px;
+  font-size: var(--font-extra-small);
   color: var(--color-black);
   opacity: 0.4;
 }
 .acc-config-text {
   font-weight: bold;
-  font-size: 20px;
+  font-size: var(--font-xl);
   color: var(--color-black);
 }
 
 .acc-config-text span {
-  font-weight: bold;
-  font-size: 20px;
   color: var(--bgBlue);
+}
+
+.amazonlogin-input-style {
+  padding: 9px 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  background-color: var(--bgInputLight) !important;
+  border: 0;
+  outline: none;
+  font-weight: bold;
+  font-size: var(--font-medium);
+  color: rgba(0, 0, 0, 0.247) !important;
+}
+
+.amazonlogin-input-style::placeholder {
+  color: rgba(0, 0, 0, 0.247) !important;
+}
+.otp-code-input-styles {
+  padding: 9px 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  background-color: var(--bgInputLight) !important;
+  border: 0;
+  outline: none;
+  font-weight: 400;
+  font-size: var(--font-medium);
+  color: var(--txtHighlight);
+}
+
+.otp-code-input-styles::placeholder {
+  color: var(--txtHighlight) !important;
 }
 
 .account-input-style {
   padding: 9px 12px;
-  width: 207px;
+  width: 100%;
   height: 42px;
   border-radius: 10px;
-  background-color: #f2f8ff !important;
+  background-color: var(--bgInputLight) !important;
   border: 0;
   outline: none;
   font-weight: bold;
-  font-size: 16px;
-  color: #000;
+  font-size: var(--font-medium);
+  color: var(--txtBaseColor);
 }
+
 .account-label-style {
   font-weight: bold;
-  font-size: 16px;
-  color: #000;
+  font-size: var(--font-medium);
+  color: var(--txtBaseColor);
   margin-bottom: 15px;
   margin-top: 15px;
 }
@@ -1347,3 +1380,113 @@ table {
 .account-input-style:focus-visible {
   outline: none;
 }
+
+.remove-account-div {
+  cursor: pointer;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 204px;
+  height: 31px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: var(--font-large);
+  text-align: left;
+  color: #dd0a54;
+  background: #fff1f1;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.remove-account-div:hover {
+  background: #fae9e9;
+}
+
+.dark-pink-para {
+  font-weight: 400;
+  font-size: 12px;
+  color: #dd0a54;
+  max-width: 370px;
+}
+.obtain-code-otp {
+  font-weight: 500;
+  font-size: var(--font-small);
+  color: #5e69db;
+}
+
+@media (min-width: 576px) {
+  .acc-input-parent {
+    width: 255px;
+  }
+  .width-466 {
+    width: 466px;
+  }
+  .width-207 {
+    width: 207px;
+  }
+}
+/* TOGGLE  ICON STYLE */
+
+.switch-toggle {
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  width: 50px;
+}
+
+.switch-toggle input {
+  display: none;
+}
+
+.slider-toggle {
+  background-color: #c4c4c4;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider-toggle:before {
+  background-color: white;
+  top: 50%;
+  content: '';
+  height: 26px;
+  left: 3px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+  transform: translateY(-50%);
+}
+
+.input-toggle-switch:checked + .slider-toggle {
+  background: #5e69db;
+}
+
+.input-toggle-switch:checked + .slider-toggle:before {
+  transform: translate(18px, -50%);
+  background-color: white;
+}
+
+.slider-toggle.round {
+  border-radius: 34px;
+}
+
+.slider-toggle.round:before {
+  border-radius: 50%;
+}
+
+.custom-switch .custom-control-label::after {
+  background-color: #212529 !important;
+}
+.custom-control-label::before {
+  background-color: #adb5bd !important;
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem transparent !important;
+  border-color: transparent !important;
+}
+
+/* TOGGLE  ICON STYLE */
