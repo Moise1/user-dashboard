@@ -2,7 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
-import { AoIconHead, IconEdit } from '../common/Icons';
+import { AoIconHead, IconArrowModal, IconEdit } from '../common/Icons';
+import AddressModal from './AddressModal';
 
 const OrderDetails = () => {
   const [show, setShow] = useState(false);
@@ -24,14 +25,13 @@ const OrderDetails = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            <div className="d-flex ">
-              <div className="head-part-one mr-5">Order Details</div>
-              <div className="head-part-second h-27 px-2 d-flex align-items-center">
-                <span>
-                  <AoIconHead />
-                </span>
-                <span className="px-3 pt-1  ">AO Enabled</span>
-              </div>
+            <div className="d-flex flex-sm-row  flex-column  ">
+              <h1 className="head-part-one mr-5">Order Details</h1>
+              <button className="head-part-second align-items-center   d-flex ">
+                <AoIconHead />
+
+                <span className="px-2 ">AO Enabled</span>
+              </button>
             </div>
           </Modal.Title>
         </Modal.Header>
@@ -94,7 +94,7 @@ const OrderDetails = () => {
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                       <div className="w-82">
-                        <h1 className="sale-head">Sold</h1>
+                        <h1 className="sold-head">Sold</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                     </div>
@@ -112,33 +112,39 @@ const OrderDetails = () => {
             </div>
             <div className="row justify-content-between">
               <div className="col-12 col-xl-5 pr-0 ">
-                <h1 className="sale-head mt-4 ">Source URL</h1>
-                <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                <h1 className="source-url mt-4 ">Source URL</h1>
+                <Form.Control id="source-urls" type="text" placeholder="" />
               </div>
               <div className="col-12 col-xl-6 d-flex pr-0">
                 <div className="row">
-                  <div className="col-6 col-md-4 col-xl-2"></div>
-                  <div className="col-6 col-md-4 col-xl-2">
+                  <div className="col-4  col-xl-1"></div>
+                  <div className="col-4  col-xl-2">
                     <h1 className="sale-head mt-4">Sell</h1>
-                    <Form.Control className="modal-inputs" type="text" placeholder="€40.00" />
+                    <Form.Control className="modal-inputs w-76" type="text" placeholder="€40.00" />
                   </div>
-                  <div className="col-6 col-md-4 col-xl-2">
+                  <div className="col-4  col-xl-2">
                     <h1 className="sale-head mt-4">Cost</h1>
-                    <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                    <Form.Control className="modal-inputs w-76" type="text" placeholder="123" />
                   </div>
-                  <div className="col-6 col-md-4 col-xl-2">
+                  <div className="col-4  col-xl-2">
                     <h1 className="sale-head mt-4">Fees</h1>
-                    <Form.Control className="modal-inputs" type="text" placeholder="€34.99" />
+                    <Form.Control className="modal-inputs w-76" type="text" placeholder="€34.99" />
                   </div>
-                  <div className="col-6 col-md-4 col-xl-2">
+                  <div className="col-4  col-xl-2">
                     <h1 className="sale-head mt-4">Profit</h1>
-                    <Form.Control className="modal-inputs" type="text" placeholder="€1.00" />
+                    <Form.Control className="modal-inputs w-76" type="text" placeholder="€1.00" />
                   </div>
-                  <div className="col-6 col-md-4 col-xl-2">
+                  <div className="col-4  col-xl-2">
                     <h1 className="sale-head mt-4">margin</h1>
-                    <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                    <Form.Control className="modal-inputs w-76" type="text" placeholder="123" />
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col mt-5 d-flex align-items-center">
+                <IconArrowModal />
+                <AddressModal />
               </div>
             </div>
           </div>
