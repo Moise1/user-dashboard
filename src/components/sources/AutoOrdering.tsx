@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 const AutoOrdering = () => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -12,13 +12,13 @@ const AutoOrdering = () => {
   };
   console.log(checked, 'state');
 
-  const options = [
-    { value: 'Select supplier', label: 'Select supplier', isDisabled: true },
-    { value: 'Amazon', label: 'Amazon' },
-    { value: 'Flipcart', label: 'Flipcart' },
-    { value: 'Ali Express', label: 'Ali Express' }
-  ];
-  
+  // const options = [
+  //   { value: 'Select supplier', label: 'Select supplier', isDisabled: true },
+  //   { value: 'Amazon', label: 'Amazon' },
+  //   { value: 'Flipcart', label: 'Flipcart' },
+  //   { value: 'Ali Express', label: 'Ali Express' }
+  // ];
+
   return (
     <>
       <div className="d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
@@ -41,11 +41,11 @@ const AutoOrdering = () => {
             Account configuration: <span> Dad account</span>{' '}
           </h2>
 
-          <div className="row my-2">
+          {/* <div className="row my-2">
             <div className="col-7">
               <Select options={options} defaultValue={options[0]} />
             </div>
-          </div>
+          </div> */}
 
           <AccountsInput />
         </div>
