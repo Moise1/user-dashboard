@@ -1,15 +1,15 @@
 import React from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
 import AutoOrdering from './AutoOrdering';
 
 const Sources = () => {
   // const [supplier, setSupplier] = useState<string>();
 
-  const options = ['one', 'two', 'three'];
-  const defaultOption = options[0];
+  // const options = ['one', 'two', 'three'];
+  // const defaultOption = options[0];
 
   // const onSelect = (event: ChangeEvent<HTMLInputElement>): void => {
   //   setSupplier(event.target.value);
@@ -47,12 +47,12 @@ const Sources = () => {
           </h2>
           <div className="row">
             <div className="col-12 col-sm-4 col-xl-3 supplier-dropdown">
-              <Dropdown
+              {/* <Dropdown
                 // onChange={selectChange}
                 value={defaultOption}
                 options={options}
                 placeholder="Select an option"
-              />
+              /> */}
               {/* <select onChange={selectChange}>
                 <option selected disabled>
                   Choose one
