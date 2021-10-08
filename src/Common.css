@@ -1610,6 +1610,90 @@ table {
   border-color: transparent !important;
 }
 
+/* REACT SELECT */
+.css-1s2u09g-control {
+  width: 219.47px;
+  height: 62px;
+  border-radius: 8px !important;
+  background: #fff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border: 0;
+  border-color: transparent;
+}
+
+.react-search-with-select-parent {
+  width: 219.47px;
+  height: 62px;
+  border-radius: 8px !important;
+  background: #fff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border: 0;
+}
+.react-search-with-select-parent .select-dropdown-shows {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 12px;
+}
+
+.shows-search-drop-list {
+  width: 219.47px;
+  border-radius: 8px !important;
+  background: #fff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  padding: 12px;
+}
+
+.react-list-data-here {
+  margin-top: 12px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.react-list-data-here::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.react-list-data-here::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 8px;
+}
+.react-list-data-here::-webkit-scrollbar {
+  width: 5px;
+}
+
+.react-list-data-here li {
+  list-style-type: none;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 12px 0;
+  cursor: pointer;
+  z-index: 11;
+}
+.react-list-data-here li:hover {
+  background-color: rgba (255, 255, 255, 0.418);
+}
+.drop-list-search-input {
+  width: 100%;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid #707070;
+  opacity: 0.29;
+}
+
+.drop-list-search-input input {
+  border: 0;
+  outline: none;
+}
+
+.drop-list-search-input .search-icon-input-box {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+}
+
 /* TOGGLE  ICON STYLE */
 
 .head-part-one {
@@ -1617,7 +1701,7 @@ table {
   font-size: 24px;
 }
 .head-part-second {
-  background: #228b22 0% 0% no-repeat padding-box;
+  background: #228b22;
   border-radius: 10px;
   opacity: 1;
   color: var(--color-white);
@@ -1637,7 +1721,7 @@ table {
   color: rgba(62, 62, 62, 0.44);
 }
 .ship-bill-box {
-  background: rgba(250, 252, 255, 1) 0% 0% no-repeat padding-box;
+  background: rgba(250, 252, 255, 1);
   border-radius: 8px;
   opacity: 1;
 }

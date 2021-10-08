@@ -1,15 +1,24 @@
 import React from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import AutoOrdering from './AutoOrdering';
+import SearchSelect from './SearchSelect';
+
+// interface IProps {
+//   showOrdering: boolean;
+//   // setShowOrdering?: (value: boolean | (prevVar: boolean) => boolean) => void;
+
+//   setShowOrdering: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+// }
 
 const Sources = () => {
+  // const [showOrdering, setShowOrdering] = useState<boolean>();
   // const [supplier, setSupplier] = useState<string>();
 
-  const options = ['one', 'two', 'three'];
-  const defaultOption = options[0];
+  // const options = ['one', 'two', 'three'];
+  // const defaultOption = options[0];
 
   // const onSelect = (event: ChangeEvent<HTMLInputElement>): void => {
   //   setSupplier(event.target.value);
@@ -20,7 +29,7 @@ const Sources = () => {
   //   console.log(value);
   //   //  setSelectedOption(value);
   // };
-  // console.log(supplier, setSupplier);
+  // console.log(showOrdering, 'showOrdering');
 
   return (
     <>
@@ -45,15 +54,14 @@ const Sources = () => {
           <h2 className="auto-ordering-heading-text mb-3 ">
             Autoordering supplier configuration: <span>select a supplier from the list</span>
           </h2>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-12 col-sm-4 col-xl-3 supplier-dropdown">
-              <Dropdown
+               <Dropdown
                 // onChange={selectChange}
                 value={defaultOption}
                 options={options}
                 placeholder="Select an option"
-              />
-              {/* <select onChange={selectChange}>
+              />  <select onChange={selectChange}>
                 <option selected disabled>
                   Choose one
                 </option>
@@ -62,8 +70,11 @@ const Sources = () => {
                 <option value="green">Green</option>
                 <option value="yellow">Yellow</option>
                 <option value="kindacode.com">Kindacode.com</option>
-              </select> */}
+              </select> 
             </div>
+          </div> */}
+          <div className="supplier-dropdown">
+            <SearchSelect />
           </div>
 
           <AutoOrdering />
