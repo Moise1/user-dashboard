@@ -1200,3 +1200,30 @@ export const AoIconHead = () => {
     </>
   );
 };
+export const IconArrowModal = () => {
+  return (
+    <>
+      <svg
+        id="Group_289"
+        data-name="Group 289"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30.73"
+        height="30.73"
+        viewBox="0 0 30.73 30.73"
+      >
+        <path id="Path_70" data-name="Path 70" d="M0,0H30.73V30.73H0Z" fill="none" />
+        <path
+          id="Path_71"
+          data-name="Path 71"
+          d="M16.683,6,9,13.683l7.683,7.683"
+          transform="translate(2.524 1.683)"
+          fill="none"
+          stroke="#262E80"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
+        />
+      </svg>
+    </>
+  );
+};
