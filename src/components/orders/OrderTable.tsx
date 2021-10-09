@@ -1,6 +1,6 @@
 import React from 'react';
 import { UpdonwIcon } from '../common/Icons';
-import OrderData from './OrderData';
+import OrderData from '../common/OrderData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
