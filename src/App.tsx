@@ -14,6 +14,7 @@ import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import OrderDetails from './components/modals/OrderDetails';
 import AddressModal from './components/modals/AddressModal';
+import OrderStateProgressModal from './components/modals/OrderStateProgressModal';
 
 const App = () => {
   // const [collapsed, setCollapsed] = useState(true);
@@ -84,6 +85,7 @@ const App = () => {
             <Route path="/newchannel" component={ChannelCreate} />
             <Route path="/modal" component={OrderDetails} />
             <Route path="/modal2" component={AddressModal} />
+            <Route path="/progress-bar" component={OrderStateProgressModal} />
 
             {/* <Route path="/orders" component={Orders} /> */}
           </Switch>

@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
+import { PersonWithPlusIcon } from '../common/Icons';
 
-const SearchSelect = () => {
+const AddAccountsSelect = () => {
   const arrayLists = [
-    { value: 'Amazon', id: 101 },
-    { value: 'Others', id: 102 },
-    { value: 'Ali Expreess', id: 103 },
-    { value: 'First', id: 104 },
-    { value: 'Second', id: 105 },
-    { value: 'Costo', id: 105 },
-    { value: 'Nikola', id: 105 },
-    { value: 'Tesla', id: 105 },
-    { value: 'Amaozoamsd', id: 105 },
-    { value: 'Third', id: 106 }
+    { value: 'account222@gmail.com', id: 101 },
+    { value: 'account222@gmail.com', id: 102 },
+    { value: 'account222@gmail.com', id: 103 },
+    { value: 'account222@gmail.com', id: 104 },
+    { value: 'account222@gmail.com', id: 105 },
+    { value: 'account222@gmail.com', id: 105 },
+    { value: 'account222@gmail.com', id: 105 },
+    { value: 'account222@gmail.com', id: 105 },
+    { value: 'account222@gmail.com', id: 105 },
+    { value: 'Thiraccount222@gmail.com', id: 106 }
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
@@ -26,10 +27,9 @@ const SearchSelect = () => {
     //   setShowOrdering(true);
     // }
   };
-
   return (
     <>
-      <div className="react-search-with-select-parent">
+      <div className="react-search-with-select-parent w-348_54">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           <h5>{whatSelect}</h5>
           <span>
@@ -43,6 +43,13 @@ const SearchSelect = () => {
               <input type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." />
               <span className="search-icon-input-box">
                 <img src={search_icon} height="12" alt="search_icon" />
+              </span>
+            </div>
+
+            <div className="d-flex aling-items-center  mt-2">
+              <span className="add-acccounnt-span"> Add account</span>
+              <span className="ml-2">
+                <PersonWithPlusIcon />
               </span>
             </div>
 
@@ -62,4 +69,4 @@ const SearchSelect = () => {
   );
 };
 
-export default SearchSelect;
+export default AddAccountsSelect;

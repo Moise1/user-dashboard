@@ -1621,26 +1621,41 @@ table {
   border-color: transparent;
 }
 
+.w-348_54 {
+  width: 348.54px !important;
+}
 .react-search-with-select-parent {
   width: 219.47px;
   height: 62px;
   border-radius: 8px !important;
   background: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  position: relative;
   border: 0;
 }
 .react-search-with-select-parent .select-dropdown-shows {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  height: 100%;
   padding: 6px 12px;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
 .shows-search-drop-list {
-  width: 219.47px;
   border-radius: 8px !important;
-  background: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   padding: 12px;
+  background-color: white;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
 }
 
 .react-list-data-here {
@@ -1690,11 +1705,56 @@ table {
 
 .drop-list-search-input .search-icon-input-box {
   position: absolute;
-  top: 6px;
-  right: 12px;
+  top: 18px;
+  right: 25px;
 }
 
+.add-acccounnt-span {
+  font-weight: 600;
+  font-size: 18px;
+  color: #5e84db;
+  cursor: pointer;
+  display: inline-block;
+}
 /* TOGGLE  ICON STYLE */
+
+.ao-enabled-button {
+  background-color: #228b22;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.h-blue-line {
+  margin: 7px 0;
+  width: 1.5px;
+  height: 60px;
+  background-color: rgba(22, 73, 151, 0.98);
+}
+.order-step-heading h4 {
+  font-weight: 600;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.98);
+}
+
+.order-step-heading p {
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.98);
+  opacity: 0.48;
+}
+.order-step-heading span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.98);
+}
+
+/* ORDER STATE PROGRESS  */
 
 .head-part-one {
   color: var(--color-dark-violet);

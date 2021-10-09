@@ -128,6 +128,91 @@ export const DashBoardIcon = () => {
     </>
   );
 };
+export const PersonWithPlusIcon = () => {
+  return (
+    <>
+      <svg id="person_add_black_24dp" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path id="Path_318" data-name="Path 318" d="M0,0H24V24H0Z" fill="none" />
+        <path
+          id="Path_319"
+          data-name="Path 319"
+          d="M15,12a4,4,0,1,0-4-4A4,4,0,0,0,15,12Zm0-6a2,2,0,1,1-2,2A2.006,2.006,0,0,1,15,6Zm0,8c-2.67,0-8,1.34-8,4v2H23V18C23,15.34,17.67,14,15,14ZM9,18c.22-.72,3.31-2,6-2s5.8,1.29,6,2ZM6,15V12H9V10H6V7H4v3H1v2H4v3Z"
+          fill="#5e84db"
+        />
+      </svg>
+    </>
+  );
+};
+
+export const RoundCircleCycleIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <g id="Group_345" data-name="Group 345" transform="translate(-1051 -408)">
+          <g id="added-icon" transform="translate(6)">
+            <path
+              id="Path_312"
+              data-name="Path 312"
+              d="M20,0A20,20,0,1,1,0,20,20,20,0,0,1,20,0Z"
+              transform="translate(1045 408)"
+              fill="#0700c6"
+              opacity="0.055"
+            />
+          </g>
+          <g id="Group_325" data-name="Group 325" transform="translate(1059 416.5)">
+            <path id="Path_309" data-name="Path 309" d="M0,0H24V24H0Z" fill="none" />
+            <circle
+              id="Ellipse_119"
+              data-name="Ellipse 119"
+              cx="2"
+              cy="2"
+              r="2"
+              transform="translate(4 17)"
+              fill="none"
+              stroke="#262e80"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <circle
+              id="Ellipse_120"
+              data-name="Ellipse 120"
+              cx="2"
+              cy="2"
+              r="2"
+              transform="translate(15 17)"
+              fill="none"
+              stroke="#262e80"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              id="Path_310"
+              data-name="Path 310"
+              d="M17,17H6V3H4"
+              fill="none"
+              stroke="#262e80"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              id="Path_311"
+              data-name="Path 311"
+              d="M6,5,20,6l-1,7H6"
+              fill="none"
+              stroke="#262e80"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </g>
+        </g>
+      </svg>
+    </>
+  );
+};
 
 export const LeftBackArrowIcon = () => {
   return (

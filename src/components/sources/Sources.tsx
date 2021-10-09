@@ -14,7 +14,7 @@ import SearchSelect from './SearchSelect';
 // }
 
 const Sources = () => {
-  // const [showOrdering, setShowOrdering] = useState<boolean>();
+  // const [showOrdering, setShowOrdering] = useState<boolean>(false);
   // const [supplier, setSupplier] = useState<string>();
 
   // const options = ['one', 'two', 'three'];

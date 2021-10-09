@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
+import AddAccountsSelect from './AddAccountsSelect';
 // import Select from 'react-select';
 
 const AutoOrdering = () => {
@@ -41,6 +42,7 @@ const AutoOrdering = () => {
             Account configuration: <span> Dad account</span>{' '}
           </h2>
 
+          <AddAccountsSelect />
           {/* <div className="row my-2">
             <div className="col-7">
               <Select options={options} defaultValue={options[0]} />
