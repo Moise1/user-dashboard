@@ -1761,8 +1761,8 @@ table {
 
 .h-blue-line {
   margin: 7px 0;
-  width: 1.5px;
-  height: 60px;
+  width: 1.8px;
+  height: 70px;
   background-color: rgba(22, 73, 151, 0.98);
 }
 .order-step-heading h4 {
@@ -1782,6 +1782,13 @@ table {
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.98);
+}
+
+.bg-InputLight {
+  background-color: var(--bgInputLight);
+}
+.br-10 {
+  border-radius: 10px;
 }
 
 /* ORDER STATE PROGRESS  */
