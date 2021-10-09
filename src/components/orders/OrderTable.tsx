@@ -8,7 +8,7 @@ import DispatchIcon from '../../assets/dispatchedicon.svg';
 
 function OrderTable() {
   return (
-    <div className="table-responsive">
+    <div className="table-responsive table-order-responsive">
       <table className="table order-table">
         <thead className="order-table-head">
           <tr>

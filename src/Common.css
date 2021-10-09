@@ -1159,6 +1159,22 @@ table {
   color: var(--color-white);
 }
 
+/* new media query */
+
+@media (min-width: 1200px) and (max-width: 1250px) {
+  .process-5-order-btn {
+    padding: 6px 15px !important ;
+  }
+}
+
+@media (min-width: 992.9px) {
+  .table-order-responsive {
+    width: calc(100vw - 120px) !important ;
+  }
+}
+
+/* ends here */
+
 .process-5-order-btn {
   background-color: var(--bgBlue);
   height: 43px;
@@ -1239,6 +1255,20 @@ table {
   border-bottom: 1px solid #dedede !important;
 }
 
+@media (min-width: 576px) and (max-width: 768px) {
+  .advance-search-purple-button {
+    height: 50px !important ;
+    width: 285px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .advance-search-purple-button {
+    height: 50px !important ;
+    width: 100% !important;
+    padding: 10px 30px !important;
+  }
+}
 .order-table-body {
   white-space: nowrap;
 }
