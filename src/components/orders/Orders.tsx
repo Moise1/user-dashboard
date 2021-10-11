@@ -1,9 +1,15 @@
 import React from 'react';
+
 import SearchWithButton from '../common/SearchWithButton';
 import OrderTable from './OrderTable';
 import OrderTypeButtons from './OrderTypeButtons';
 
-const Orders = () => {
+interface props {
+  staticValue: boolean;
+}
+
+const Orders = (myProps: props) => {
+  const { staticValue } = myProps;
   return (
     <>
       <div className="d-flex flex-column w-100 p-3">
@@ -11,7 +17,7 @@ const Orders = () => {
         <div className="orders-table-main">
           <OrderTypeButtons />
         </div>
-        <OrderTable />
+        <OrderTable tableValue={staticValue} />
       </div>
     </>
   );

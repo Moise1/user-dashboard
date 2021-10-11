@@ -6,9 +6,15 @@ import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 
-function OrderTable() {
+interface props {
+  tableValue: boolean;
+}
+
+function OrderTable(myProps: props) {
+  const { tableValue } = myProps;
   return (
-    <div className="table-responsive table-order-responsive">
+    // <div className="table-responsive table-order-responsive">
+    <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
         <thead className="order-table-head">
           <tr>

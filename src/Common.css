@@ -1169,6 +1169,10 @@ table {
 
 @media (min-width: 992.9px) {
   .table-order-responsive {
+    width: calc(100vw - 290px) !important ;
+  }
+
+  .table-with-open-sidebar {
     width: calc(100vw - 120px) !important ;
   }
 }

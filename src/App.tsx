@@ -81,7 +81,7 @@ const App = () => {
             </Route>
             <Route path="/home" component={Home} />
             <Route path="/listings" component={Listings} />
-            <Route path="/orders" component={Orders} />
+            <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
             <Route path="/sources" component={Sources} />
             <Route path="/newchannel" component={ChannelCreate} />
             <Route path="/modal" component={OrderDetails} />
