@@ -12,7 +12,7 @@ const Orders = (myProps: props) => {
   const { staticValue } = myProps;
   return (
     <>
-      <div className="d-flex flex-column w-100 p-3">
+      <div className="d-flex flex-column w-100 p-3 ant-layout">
         <SearchWithButton />
         <div className="orders-table-main">
           <OrderTypeButtons />

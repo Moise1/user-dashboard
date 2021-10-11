@@ -54,25 +54,7 @@ const Sources = () => {
           <h2 className="auto-ordering-heading-text mb-3 ">
             Autoordering supplier configuration: <span>select a supplier from the list</span>
           </h2>
-          {/* <div className="row">
-            <div className="col-12 col-sm-4 col-xl-3 supplier-dropdown">
-               <Dropdown
-                // onChange={selectChange}
-                value={defaultOption}
-                options={options}
-                placeholder="Select an option"
-              />  <select onChange={selectChange}>
-                <option selected disabled>
-                  Choose one
-                </option>
-                <option value="blue">Blue</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="yellow">Yellow</option>
-                <option value="kindacode.com">Kindacode.com</option>
-              </select> 
-            </div>
-          </div> */}
+
           <div className="supplier-dropdown">
             <SearchSelect />
           </div>

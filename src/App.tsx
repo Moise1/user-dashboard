@@ -16,6 +16,7 @@ import OrderDetails from './components/modals/OrderDetails';
 import AddressModal from './components/modals/AddressModal';
 import OrderStateProgressModal from './components/modals/OrderStateProgressModal';
 import OrderStateModal from './components/modals/OrderStateModal';
+import SettingSourceConfig from './components/sources/SettingSourceConfig';
 
 const App = () => {
   // const [collapsed, setCollapsed] = useState(true);
@@ -83,6 +84,7 @@ const App = () => {
             <Route path="/listings" component={Listings} />
             <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
             <Route path="/sources" component={Sources} />
+            <Route path="/sources-setting" component={() => <SettingSourceConfig staticValue={staticValue} />} />
             <Route path="/newchannel" component={ChannelCreate} />
             <Route path="/modal" component={OrderDetails} />
             <Route path="/modal2" component={AddressModal} />

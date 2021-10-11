@@ -59,7 +59,7 @@ function OrderTable(myProps: props) {
           return (
             <tbody className="order-table-body" key={obj.id}>
               <tr>
-                <td className="">
+                <td>
                   <img src={obj.img} alt="" />
                 </td>
                 <td className="obj-sale-body  ">{obj.sale}</td>
