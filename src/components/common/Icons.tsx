@@ -1,5 +1,51 @@
 import React from 'react';
 
+export const CrossModalIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="43.659" height="43.659" viewBox="0 0 43.659 43.659">
+        <g id="Group_204" data-name="Group 204" transform="translate(0 21.829) rotate(-45)">
+          <path id="Path_195" data-name="Path 195" d="M0,0H30.872V30.872H0Z" fill="none" />
+          <circle
+            id="Ellipse_103"
+            data-name="Ellipse 103"
+            cx="11.577"
+            cy="11.577"
+            r="11.577"
+            transform="translate(3.859 3.859)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            id="Line_78"
+            data-name="Line 78"
+            x2="7.718"
+            transform="translate(11.577 15.436)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            id="Line_79"
+            data-name="Line 79"
+            y2="7.718"
+            transform="translate(15.436 11.577)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </g>
+      </svg>
+    </>
+  );
+};
 export const DustbinPinkIcon = () => {
   return (
     <>
