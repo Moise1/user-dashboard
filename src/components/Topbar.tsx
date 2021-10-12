@@ -29,14 +29,25 @@ import Logo from "../assets/channel/list/logo.png";
 import dropicon from "../assets/dropicon.svg";
  * */
 
-//position-stickey top-0 z-100 nav-shadow bg-white d-flex mx-auto justify-content-between ff-used align-items-center
+// interface Props {
+//   sethandleMobileSidebar: () => void;
+// }
+
 export default function Topbar() {
+  // const { sethandleMobileSidebar } = props;
+
   return (
     <>
       <div className="TopBar">
-        <div className="ml-3 ">
-          <img className="logoHGR" src={Logo} alt="logo" />
+        <div className="ml-3 d-flex align-items-center">
+          <div className="hamburger-mobile d-lg-none">
+            <span className="first"></span>
+            <span className="second"></span>
+            <span className="thrid"></span>
+          </div>
+          <img className="logoHGR ml-3" src={Logo} alt="logo" />
         </div>
+
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-1 TopBarItems">
             <div className="d-flex align-items-center">

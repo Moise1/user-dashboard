@@ -2349,3 +2349,24 @@ table {
 .w-15per {
   width: 15%;
 }
+
+/* HAMBURGER */
+.hamburger-mobile {
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 7px;
+  background-color: #5e69db;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hamburger-mobile .second {
+  margin: 5px 0;
+}
+.hamburger-mobile span {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background-color: white;
+}
