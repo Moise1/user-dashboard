@@ -14,7 +14,9 @@ const SettingSourceConfig = (myProps: props) => {
   return (
     <>
       <div className="setting-source-config-wrapper ant-layout">
-        <p>All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel</p>
+        <p className="all-the-setting-text">
+          All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel
+        </p>
 
         <div className="row">
           <div className="col-12 col-md-6">
@@ -28,7 +30,9 @@ const SettingSourceConfig = (myProps: props) => {
             onClick={() => history.push('/sources-setting')}
           >
             Configure Autoordering (Beta)
-            <OrdersIcon />{' '}
+            <span>
+              <OrdersIcon />{' '}
+            </span>
           </button>
           <button className="btn config-supply-btn ml-0 ml-md-3">Configure suppliers</button>
         </div>

@@ -1846,6 +1846,9 @@ table {
   background: #517feb;
   color: var(--color-white);
 }
+.config-auto-ordering-beta-btn svg > * {
+  stroke: white;
+}
 
 .config-supply-btn {
   width: 195px;
@@ -2270,5 +2273,11 @@ table {
 }
 .order-three-dots-dropdown .process-order-icon #Path_287 {
   stroke: var(--iconColor) !important;
+}
+
+.all-the-setting-text {
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
 }
 /* ORDER SVG COLOR  */
