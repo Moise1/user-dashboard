@@ -11,6 +11,7 @@ import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
+import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 
 interface props {
@@ -80,19 +81,20 @@ function OrderTable(myProps: props) {
                 <td className="obj-sale-cost  ">{obj.margin}</td>
                 <td className="obj-sale-qty   ">{obj.orderOn}</td>
                 <td className="">
-                  <span
-                    className={`${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
+                  <button
+                    className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'bg-primary' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
                       obj.state === 'Paused' ? 'bg-color-light-orange' : ''
-                    }  obj-state-text `}
+                    } ${obj.state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''} obj-state-text `}
                   >
                     {obj.state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
                     {obj.state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
                     {obj.state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
                     {obj.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
+                    {obj.state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
                     {obj.state}
-                  </span>{' '}
+                  </button>{' '}
                 </td>
                 <td className="order-three-dots-dropdown">
                   <Dropdown>

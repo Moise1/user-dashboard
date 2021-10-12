@@ -179,7 +179,7 @@ const OrderData = [
     profit: '€1.00',
     margin: '-',
     orderOn: '13/07/12:56',
-    state: 'Error'
+    state: 'AO Disabled'
   },
   {
     id: 1,
