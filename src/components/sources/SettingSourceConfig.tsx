@@ -2,12 +2,14 @@ import React from 'react';
 import SearchInput from '../SmallComponents/SearchInput';
 import { OrdersIcon } from '../common/Icons';
 import SourcesTable from './SourcesTable';
+import { useHistory } from 'react-router-dom';
 
 interface props {
   staticValue: boolean;
 }
 const SettingSourceConfig = (myProps: props) => {
   const { staticValue } = myProps;
+  const history = useHistory();
 
   return (
     <>
@@ -21,7 +23,10 @@ const SettingSourceConfig = (myProps: props) => {
         </div>
 
         <div className="d-flex flex-column flex-md-row justify-content-end pb-4">
-          <button className="btn config-auto-ordering-beta-btn  my-3 my-md-0">
+          <button
+            className="btn config-auto-ordering-beta-btn  my-3 my-md-0"
+            onClick={() => history.push('/sources-setting')}
+          >
             Configure Autoordering (Beta)
             <OrdersIcon />{' '}
           </button>

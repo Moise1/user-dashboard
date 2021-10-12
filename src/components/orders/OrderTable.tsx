@@ -5,6 +5,7 @@ import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
+import { Dropdown } from 'react-bootstrap';
 
 interface props {
   tableValue: boolean;
@@ -86,6 +87,64 @@ function OrderTable(myProps: props) {
                     {obj.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
                     {obj.state}
                   </span>{' '}
+                </td>
+                <td className="order-three-dots-dropdown">
+                  <Dropdown>
+                    <Dropdown.Toggle id="dropdown-basic">
+                      <svg
+                        id="Group_44"
+                        data-name="Group 44"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path id="Path_34" data-name="Path 34" d="M0,0H24V24H0Z" fill="none" />
+                        <circle
+                          id="Ellipse_12"
+                          data-name="Ellipse 12"
+                          cx="1"
+                          cy="1"
+                          r="1"
+                          transform="translate(11 11)"
+                          stroke="#000"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                        />
+                        <circle
+                          id="Ellipse_13"
+                          data-name="Ellipse 13"
+                          cx="1"
+                          cy="1"
+                          r="1"
+                          transform="translate(11 18)"
+                          stroke="#000"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                        />
+                        <circle
+                          id="Ellipse_14"
+                          data-name="Ellipse 14"
+                          cx="1"
+                          cy="1"
+                          r="1"
+                          transform="translate(11 4)"
+                          stroke="#000"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </td>
               </tr>
             </tbody>

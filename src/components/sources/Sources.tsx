@@ -5,6 +5,7 @@ import SearchWithButton from '../common/SearchWithButton';
 // import 'react-dropdown/style.css';
 import AutoOrdering from './AutoOrdering';
 import SearchSelect from './SearchSelect';
+import { useHistory } from 'react-router-dom';
 
 // interface IProps {
 //   showOrdering: boolean;
@@ -30,6 +31,7 @@ const Sources = () => {
   //   //  setSelectedOption(value);
   // };
   // console.log(showOrdering, 'showOrdering');
+  const history = useHistory();
 
   return (
     <>
@@ -37,7 +39,7 @@ const Sources = () => {
         <SearchWithButton />
 
         <div className="d-flex flex-column flex-sm-row mt-2 mt-sm-4">
-          <h2 className="back-to-supplier-heading d-flex align-items-center">
+          <h2 className="back-to-supplier-heading d-flex align-items-center" onClick={() => history.goBack()}>
             <span>
               <LeftBackArrowIcon />
             </span>

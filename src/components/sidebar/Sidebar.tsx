@@ -13,7 +13,8 @@ import {
   SettingsIcon,
   HelpIcon,
   LogOutIcon,
-  OrdersIcon
+  OrdersIcon,
+  CircleDotIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 const { SubMenu } = Menu;
@@ -51,8 +52,6 @@ export default function Sidebar(props: Props) {
   const { collapsed, staticvalue, togglestatic } = props;
 
   const listArray = [
-    { key: 9, listName: t('Menu.Channel') },
-    { key: 10, listName: t('Menu.Sources') },
     { key: 11, listName: t('Menu.PricingRules') },
     { key: 12, listName: t('Menu.BrowserExtensions') },
     { key: 13, listName: t('Menu.VAProfile') },
@@ -169,6 +168,26 @@ export default function Sidebar(props: Props) {
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
+              <Menu.Item key="9">
+                <li className="list-unstyled list-items-hover m-0 h-25 leading-25">
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>
+                  Channel
+                </li>
+              </Menu.Item>
+              <Menu.Item key="10">
+                <li
+                  className="list-unstyled list-items-hover m-0 h-25 leading-25"
+                  onClick={() => history.push('/sources')}
+                >
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>
+                  Sources
+                </li>
+              </Menu.Item>
+
               {listArray.map((obj) => (
                 <Menu.Item key={obj.key}>
                   <MenuListItem listName={obj.listName} onClick={obj.onClick} />
