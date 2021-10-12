@@ -30,11 +30,12 @@ import dropicon from "../assets/dropicon.svg";
  * */
 
 // interface Props {
-//   sethandleMobileSidebar: () => void;
+//   handleMobile : boolean;
+//   sethandleMobile: () => void;
 // }
 
 export default function Topbar() {
-  // const { sethandleMobileSidebar } = props;
+  // const { handleMobile, sethandleMobile } = props;
 
   return (
     <>

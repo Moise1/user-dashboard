@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 
-const SearchSelect = () => {
+interface props {
+  // setShowOrdering: Function;
+  setShowOrdering: (arg0: boolean) => void;
+}
+
+const SearchSelect = (myProps: props) => {
+  const { setShowOrdering } = myProps;
+
   const arrayLists = [
     { value: 'Amazon', id: 101 },
     { value: 'Others', id: 102 },
     { value: 'Ali Expreess', id: 103 },
     { value: 'First', id: 104 },
     { value: 'Second', id: 105 },
-    { value: 'Costo', id: 105 },
-    { value: 'Nikola', id: 105 },
-    { value: 'Tesla', id: 105 },
-    { value: 'Amaozoamsd', id: 105 },
-    { value: 'Third', id: 106 }
+    { value: 'Costo', id: 106 },
+    { value: 'Nikola', id: 107 },
+    { value: 'Tesla', id: 108 },
+    { value: 'Amaozoamsd', id: 109 },
+    { value: 'Third', id: 110 }
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
@@ -22,9 +29,9 @@ const SearchSelect = () => {
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
     setShowDropDown(false);
-    // if (whatSelect !== 'Select Supplier') {
-    //   setShowOrdering(true);
-    // }
+    if (whatSelect !== 'Select Supplier') {
+      setShowOrdering(true);
+    }
   };
 
   return (

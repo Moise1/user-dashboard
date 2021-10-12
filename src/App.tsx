@@ -48,6 +48,7 @@ const App = () => {
   //   };
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
+  // const [handleMobile, sethandleMobile] = useState(false);
 
   const toggleCollapse = () => {
     setCollapse(!collapse);
@@ -63,6 +64,7 @@ const App = () => {
       }, 500);
     }
   };
+
   return (
     <div className="overflow-hidden h-100vh">
       <Router>

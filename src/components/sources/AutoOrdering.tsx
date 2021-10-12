@@ -11,14 +11,8 @@ const AutoOrdering = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setChecked(event.target.checked);
   };
-  console.log(checked, 'state');
 
-  // const options = [
-  //   { value: 'Select supplier', label: 'Select supplier', isDisabled: true },
-  //   { value: 'Amazon', label: 'Amazon' },
-  //   { value: 'Flipcart', label: 'Flipcart' },
-  //   { value: 'Ali Express', label: 'Ali Express' }
-  // ];
+  console.log(checked, 'state');
 
   return (
     <>

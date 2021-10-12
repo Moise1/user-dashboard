@@ -26,15 +26,7 @@ const OrderTable = (myProps: props) => {
   const [ModalThird, setModalThird] = useState(false);
   const [show, setShow] = useState(false);
 
-  // const [GoToModel, setGoToModel] = useState('Stop Order');
-
-  // const handlechangemodel = () => {
-
-  //   setGoToModel();
-  // };
-
   return (
-    // <div className="table-responsive table-order-responsive">
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
         <thead className="order-table-head">

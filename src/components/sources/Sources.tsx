@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
 // import Dropdown from 'react-dropdown';
@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 // }
 
 const Sources = () => {
-  // const [showOrdering, setShowOrdering] = useState<boolean>(false);
+  const [showOrdering, setShowOrdering] = useState<boolean>(false);
   // const [supplier, setSupplier] = useState<string>();
 
   // const options = ['one', 'two', 'three'];
@@ -30,7 +30,7 @@ const Sources = () => {
   //   console.log(value);
   //   //  setSelectedOption(value);
   // };
-  // console.log(showOrdering, 'showOrdering');
+  console.log(showOrdering, 'showOrdering');
   const history = useHistory();
 
   return (
@@ -58,10 +58,10 @@ const Sources = () => {
           </h2>
 
           <div className="supplier-dropdown">
-            <SearchSelect />
+            <SearchSelect setShowOrdering={setShowOrdering} />
           </div>
 
-          <AutoOrdering />
+          {showOrdering ? <AutoOrdering /> : ''}
         </div>
       </div>
     </>
