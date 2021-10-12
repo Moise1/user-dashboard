@@ -624,10 +624,18 @@ label {
   .w-sidebar-toggle {
     width: 0;
   }
+  .ant-layout-sider {
+    position: fixed;
+  }
   .w-sidebar-toggle .ant-layout-sider {
     min-width: 0px !important;
     max-width: 0px !important;
     width: 0px !important;
+  }
+  .mobile-sidebar-on.w-sidebar-toggle .ant-layout-sider {
+    min-width: 80px !important;
+    max-width: 80px !important;
+    width: 80px !important;
   }
 }
 .br-8 {

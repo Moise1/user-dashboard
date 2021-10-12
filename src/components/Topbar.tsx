@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Progress } from 'antd';
-//import ring_icon from '../assets/notification.svg';
 import coinIcon from '../assets/tokenCoin.png';
 import bellIcon from '../assets/bellIcon.svg';
 import flag from '../assets/flag-round-500.svg';
@@ -13,35 +11,20 @@ import Logo from '../assets//logoHGR.png';
 import dropicon from '../assets/dropicon.svg';
 import { t } from 'src/global/transShim';
 
-/*
- *import { Progress } from "antd";
-import React from "react";
+interface Props {
+  handleMobile: boolean;
+  sethandleMobile: (arg0: boolean) => void;
+}
 
-import ring_icon from "../assets/notification.svg";
-import bellIcon from "../assets/bellIcon.svg";
-import flag from "../assets/flag-round-500.svg";
-import amazon from "../assets/amazon-icon-1.svg";
-import { Dropdown, Button, Space } from "antd";
-import DropDownMenu from "./SmallComponents/DropDownMenu";
-import styles from "./Topbar.module.css";
-import "../Common.css";
-import Logo from "../assets/channel/list/logo.png";
-import dropicon from "../assets/dropicon.svg";
- * */
-
-// interface Props {
-//   handleMobile : boolean;
-//   sethandleMobile: () => void;
-// }
-
-export default function Topbar() {
-  // const { handleMobile, sethandleMobile } = props;
+export default function Topbar(props: Props) {
+  const { handleMobile, sethandleMobile } = props;
+  console.log(handleMobile, 'handleMobile');
 
   return (
     <>
       <div className="TopBar">
         <div className="ml-3 d-flex align-items-center">
-          <div className="hamburger-mobile d-lg-none">
+          <div className="hamburger-mobile d-lg-none" onClick={() => sethandleMobile(!handleMobile)}>
             <span className="first"></span>
             <span className="second"></span>
             <span className="thrid"></span>

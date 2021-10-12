@@ -48,7 +48,7 @@ const App = () => {
   //   };
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
-  // const [handleMobile, sethandleMobile] = useState(false);
+  const [handleMobile, sethandleMobile] = useState(false);
 
   const toggleCollapse = () => {
     setCollapse(!collapse);
@@ -68,9 +68,9 @@ const App = () => {
   return (
     <div className="overflow-hidden h-100vh">
       <Router>
-        <Topbar />
+        <Topbar sethandleMobile={sethandleMobile} handleMobile={handleMobile} />
         <Layout className="bg-white layout_height">
-          <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
+          <SidbarCover handleMobile={handleMobile} staticValue={staticValue} setCollapse={setCollapse}>
             <Sidebar
               staticvalue={staticValue}
               togglestatic={toggleStaticValue}
