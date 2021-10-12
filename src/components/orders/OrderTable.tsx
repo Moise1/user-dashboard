@@ -82,6 +82,7 @@ function OrderTable(myProps: props) {
                 <td className="obj-sale-qty   ">{obj.orderOn}</td>
                 <td className="">
                   <button
+                    // onClick={() => history.push("/")}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'bg-primary' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
