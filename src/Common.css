@@ -1162,6 +1162,12 @@ table {
     opacity: 0;
   }
 }
+.orders-icon-sidebar > * {
+  stroke: var(--iconColor);
+}
+.setting-icon > path:first-child {
+  display: block;
+}
 .ant-menu-item.ant-menu-item-selected .orders-icon-sidebar circle,
 .ant-menu-item.ant-menu-item-selected .orders-icon-sidebar path {
   stroke: var(--bgPage);
@@ -2260,7 +2266,7 @@ table {
   stroke: var(--iconColor);
 }
 .order-three-dots-dropdown .process-order-icon g {
-  stroke: white !important;
+  stroke: var(--bgPage) !important;
 }
 .order-three-dots-dropdown .process-order-icon #Path_287 {
   stroke: var(--iconColor) !important;
