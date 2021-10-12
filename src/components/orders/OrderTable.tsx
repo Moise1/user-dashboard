@@ -14,6 +14,7 @@ import DispatchIcon from '../../assets/dispatchedicon.svg';
 import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
+import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 
 // import { useState } from 'react';
 interface props {
@@ -23,6 +24,7 @@ interface props {
 const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
   const [ModalThird, setModalThird] = useState(false);
+  const [show, setShow] = useState(false);
 
   // const [GoToModel, setGoToModel] = useState('Stop Order');
 
@@ -166,8 +168,10 @@ const OrderTable = (myProps: props) => {
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
-                        <HandStopOrderIcon />
-                        <span className="ml-2">Stop order</span>
+                        <span onClick={() => setShow(true)}>
+                          <HandStopOrderIcon />
+                          <span className="ml-2">Stop order</span>
+                        </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
@@ -188,6 +192,7 @@ const OrderTable = (myProps: props) => {
         })}
       </table>
       <OrderStateModal ModalThird={ModalThird} setModalThird={setModalThird} />
+      <OrderStateProgressModal show={show} setShow={setShow} />
     </div>
   );
 };

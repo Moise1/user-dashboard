@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Modal, ProgressBar } from 'react-bootstrap';
+import React from 'react';
+import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   AoIconHead,
   CrossModalIcon,
@@ -12,15 +12,21 @@ import {
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import OrderDetails from '../modals/OrderDetails';
 
-const OrderStateProgressModal = () => {
-  const [show, setShow] = useState(false);
+interface Props {
+  show: boolean;
+  setShow: (value: boolean) => void;
+}
+
+const OrderStateProgressModal = (props: Props) => {
+  const { show, setShow } = props;
   const now = 60;
+
   return (
     <>
       <div className="order-state-progress-modal">
-        <Button variant="primary" onClick={() => setShow(true)}>
+        {/* <Button variant="primary" onClick={() => setShow(true)}>
           Custom Width Modal
-        </Button>
+        </Button> */}
 
         <Modal
           className="modal-page"
