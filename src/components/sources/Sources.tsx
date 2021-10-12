@@ -1,8 +1,5 @@
-import React from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
-// import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 import AutoOrdering from './AutoOrdering';
 import SearchSelect from './SearchSelect';
 
