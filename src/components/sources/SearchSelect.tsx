@@ -3,7 +3,6 @@ import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 
 interface props {
-  // setShowOrdering: Function;
   setShowOrdering: (arg0: boolean) => void;
 }
 
@@ -25,6 +24,8 @@ const SearchSelect = (myProps: props) => {
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
+  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const [filteredSearchData, filteredSearchDataArray] = useState<Array<string>>([]);
 
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
@@ -33,6 +34,17 @@ const SearchSelect = (myProps: props) => {
     setShowOrdering(true);
     // }
   };
+  console.log(filteredSearchDataArray);
+  const handleSearch = (value: string) => {
+    console.log(value, 'value');
+    console.log(arrayLists, 'arrayLists');
+    setInputSearchValue(inputSearchValue);
+    console.log(inputSearchValue, 'inputSearchValue');
+
+    // const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
+    // filteredSearchDataArray(filteredSearch);
+  };
+  console.log(filteredSearchData, 'filteredSearch');
 
   return (
     <>
@@ -47,7 +59,13 @@ const SearchSelect = (myProps: props) => {
         {showDropDown ? (
           <div className="shows-search-drop-list">
             <div className="drop-list-search-input">
-              <input type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." />
+              <input
+                onChange={(e) => handleSearch(e.target.value)}
+                type="text"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Search..."
+              />
               <span className="search-icon-input-box">
                 <img src={search_icon} height="12" alt="search_icon" />
               </span>
