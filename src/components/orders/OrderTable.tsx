@@ -1,5 +1,11 @@
 import React from 'react';
-import { UpdonwIcon } from '../common/Icons';
+import {
+  UpdonwIcon,
+  DustbinDeleteOrderIcon,
+  DispatchedOrderIcon,
+  HandStopOrderIcon,
+  ProcessOrderIcon
+} from '../common/Icons';
 import OrderData from '../common/OrderData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
@@ -140,10 +146,25 @@ function OrderTable(myProps: props) {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item>Process order</Dropdown.Item>
-                      <Dropdown.Item>Stop order</Dropdown.Item>
-                      <Dropdown.Item>Mark as dispatched</Dropdown.Item>
-                      <Dropdown.Item>Delete order</Dropdown.Item>
+                      <Dropdown.Item>
+                        <ProcessOrderIcon />
+                        <span className="ml-2">Process order</span>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        {' '}
+                        <HandStopOrderIcon />
+                        <span className="ml-2">Stop order</span>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        {' '}
+                        <DispatchedOrderIcon />
+                        <span className="ml-2">Mark as dispatched</span>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        {' '}
+                        <DustbinDeleteOrderIcon />
+                        <span className="ml-2">Delete order</span>
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </td>

@@ -686,7 +686,13 @@ export const SettingsIcon = () => {
 export const ProcessOrderIcon = () => {
   return (
     <>
-      <svg xmlns="http://www.w3.org/2000/svg" width="25.174" height="25.174" viewBox="0 0 25.174 25.174">
+      <svg
+        className="process-order-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="25.174"
+        height="25.174"
+        viewBox="0 0 25.174 25.174"
+      >
         <g id="Group_291" data-name="Group 291" transform="translate(1.174 1.174)">
           <path id="Path_286" data-name="Path 286" d="M0,0H24V24H0Z" fill="none" />
           <path

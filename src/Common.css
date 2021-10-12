@@ -2211,6 +2211,8 @@ table {
 .ao-enabled-button:focus {
   box-shadow: none;
 }
+
+/* ORDER SVG COLOR  */
 .order-three-dots-dropdown .dropdown-menu {
   width: 190px;
   height: 155px;
@@ -2219,7 +2221,7 @@ table {
   box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.16);
 }
 .order-three-dots-dropdown .btn-primary {
-  background-color: white;
+  background-color: white !important;
 }
 .order-three-dots-dropdown .dropdown-toggle::after {
   display: inline-block;
@@ -2231,3 +2233,36 @@ table {
   border-bottom: 0;
   border-left: 0 solid transparent;
 }
+
+.order-three-dots-dropdown .dropdown-item {
+  padding: 0 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #3b3b3b;
+  margin-bottom: 10px;
+}
+
+.show > .btn-primary.dropdown-toggle {
+  background-color: transparent;
+}
+.order-three-dots-dropdown .btn-primary.focus,
+.order-three-dots-dropdown .btn-primary:focus {
+  box-shadow: none !important;
+}
+
+/* 
+.order-three-dots-dropdown svg:hover path,
+.order-three-dots-dropdown svg:hover circle {
+  stroke: black !important;
+} */
+
+.order-three-dots-dropdown svg > * {
+  stroke: var(--iconColor);
+}
+.order-three-dots-dropdown .process-order-icon g {
+  stroke: white !important;
+}
+.order-three-dots-dropdown .process-order-icon #Path_287 {
+  stroke: var(--iconColor) !important;
+}
+/* ORDER SVG COLOR  */
