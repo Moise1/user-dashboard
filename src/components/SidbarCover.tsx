@@ -22,7 +22,7 @@ export default function SidbarCover(myProps: props) {
           return;
         }
       }}
-      className={`d-none d-lg-block ${!staticValue ? 'w-sidebar-toggle' : ''}`}
+      className={`${!staticValue ? 'w-sidebar-toggle' : ''}`}
     >
       {children}
     </div>

@@ -69,11 +69,32 @@ function SourcesTable(myProps: props) {
                   </td>
                   <td className="obj-sale-cost  ">{obj.template}</td>
                   <td className="shipping-policy-text white-space-pre-wrap">{obj.shippingPolicy}</td>
+                  {/* <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="top"
+                    data-bs-content="Top popover"
+                  >
+                    Popover on top
+                  </button>
 
-                  <td className="">
+                  <span
+                    className="d-inline-block"
+                    tabIndex={0}
+                    data-bs-toggle="popover"
+                    data-bs-trigger="hover focus"
+                    data-bs-content="Disabled popover"
+                  >
+                    <button className="btn btn-primary" type="button" disabled>
+                      Disabled button
+                    </button>
+                  </span> */}
+                  <td className="w-15per">
                     <button
                       onClick={() => (obj.autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
-                      className={`${obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
+                      className={` ${obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
                         obj.autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                       } ${obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
                     >

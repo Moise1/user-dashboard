@@ -619,6 +619,17 @@ label {
   /* height: 100vh; */
   overflow-x: visible;
 }
+
+@media (max-width: 991.98px) {
+  .w-sidebar-toggle {
+    width: 0;
+  }
+  .w-sidebar-toggle .ant-layout-sider {
+    min-width: 0px !important;
+    max-width: 0px !important;
+    width: 0px !important;
+  }
+}
 .br-8 {
   border-radius: 8px !important;
   -webkit-border-radius: 8px !important;
@@ -2293,3 +2304,48 @@ table {
   color: #000;
 }
 /* ORDER SVG COLOR  */
+
+/* POP OVER  */
+
+.popover__wrapper {
+  position: relative;
+  display: inline-block;
+}
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0, 10px);
+  background-color: #bfbfbf;
+  width: 97px !important;
+  /* height: 31px; */
+  left: 130px;
+
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: auto;
+}
+.popover__content:before {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  right: calc(50% - 10px);
+  top: -8px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #bfbfbf transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+.popover__wrapper:hover .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -20px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+.popover__message {
+  text-align: center;
+}
+.w-15per {
+  width: 15%;
+}
