@@ -2,7 +2,7 @@ import React from 'react';
 import { sourceData } from './SourceData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
-import PasuedIcon from '../../assets/pasuedicon.svg';
+// import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
@@ -73,18 +73,15 @@ function SourcesTable(myProps: props) {
                   <td className="">
                     <button
                       onClick={() => (obj.autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
-                      className={`${obj.autoOrdering === 'Disabled' ? 'table-disable-button' : ''} ${
+                      className={`${obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
                         obj.autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
-                      } ${obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} ${
-                        obj.autoOrdering === 'Paused' ? 'bg-color-light-orange' : ''
-                      }  obj-autoOrdering-text `}
+                      } ${obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
                     >
                       {obj.autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
                       {obj.autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
                       {obj.autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                      {obj.autoOrdering === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
                       {obj.autoOrdering}
-                    </button>{' '}
+                    </button>
                   </td>
                 </tr>
               </tbody>
