@@ -1195,7 +1195,7 @@ table {
 .process-5-order-btn {
   background-color: var(--bgBlue);
   height: 43px;
-  padding: 10px 40px;
+  padding: 10px 15px;
   border-radius: 10px;
   color: var(--bgPage);
   font-size: var(--font-medium);
@@ -1223,7 +1223,7 @@ table {
 .delete-5-order-btn {
   background-color: var(--bg-dark-pink);
   height: 43px;
-  padding: 10px 40px;
+  padding: 10px 15px;
   border-radius: 10px;
   color: var(--bgPage);
   font-size: var(--font-medium);
@@ -1238,7 +1238,7 @@ table {
 .mark-dispatch-btn {
   background-color: var(--color-dark-green);
   height: 43px;
-  padding: 10px 40px;
+  padding: 10px 15px;
   border-radius: 10px;
   color: var(--bgPage);
   font-size: var(--font-medium);
@@ -2021,7 +2021,7 @@ table {
 }
 
 .amazon-order-ss {
-  width: 497px;
+  width: 566px;
   height: 414px;
 }
 
@@ -2093,7 +2093,7 @@ table {
 }
 .btnn-in-model:focus {
   border: 0px solid transparent;
-  box-shadow: 0px 0px transparent;
+  box-shadow: none;
 }
 
 .middle-part-autoordering {
@@ -2136,6 +2136,9 @@ table {
   .auto-ordering-section {
     border-radius: 0;
     padding: 15px;
+  }
+  .react-search-with-select-parent {
+    max-width: 290.47px;
   }
   .advance-search-purple-button {
     padding: 10px 40px;
@@ -2188,4 +2191,23 @@ table {
     width: 100%;
   }
 }
-/* MODAL CSS END */ ;
+/* MODAL CSS END */
+/* RAVI-SIR-CSS */
+.save-changes-btn:focus {
+  box-shadow: none;
+}
+.reset-to-default-btn:focus {
+  box-shadow: none;
+}
+.modal-second-inputs .form-control:focus {
+  box-shadow: none;
+}
+.stop-5-order-btn:focus {
+  box-shadow: none;
+}
+.delete-5-order-btn:focus {
+  box-shadow: none;
+}
+.ao-enabled-button:focus {
+  box-shadow: none;
+}
