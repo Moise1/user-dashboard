@@ -2294,6 +2294,9 @@ table {
   box-shadow: none !important;
 }
 
+.order-three-dots-dropdown .dropdown-item:active {
+  background-color: transparent;
+}
 /* 
 .order-three-dots-dropdown svg:hover path,
 .order-three-dots-dropdown svg:hover circle {

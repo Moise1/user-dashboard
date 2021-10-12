@@ -1,17 +1,22 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { AoIconHead, CrossModalIcon } from '../common/Icons';
 
-const OrderStateModal = () => {
-  const [ModalThird, setModalThird] = useState(false);
+interface Props {
+  ModalThird: boolean;
+  setModalThird: (value: boolean) => void;
+}
+
+const OrderStateModal = (props: Props) => {
+  const { ModalThird, setModalThird } = props;
+
   return (
     <>
-      <div>
+      {/* <div>
         <Button variant="primary" onClick={() => setModalThird(true)}>
           Custom Width Modal
         </Button>
-      </div>
+      </div> */}
 
       <Modal
         show={ModalThird}

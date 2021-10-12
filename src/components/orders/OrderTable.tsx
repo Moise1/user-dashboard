@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   UpdonwIcon,
   DustbinDeleteOrderIcon,
@@ -13,6 +13,7 @@ import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
+import OrderStateModal from '../modals/OrderStateModal';
 
 interface props {
   tableValue: boolean;
@@ -20,6 +21,8 @@ interface props {
 
 function OrderTable(myProps: props) {
   const { tableValue } = myProps;
+  const [ModalThird, setModalThird] = useState(false);
+
   return (
     // <div className="table-responsive table-order-responsive">
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
@@ -82,7 +85,7 @@ function OrderTable(myProps: props) {
                 <td className="obj-sale-qty   ">{obj.orderOn}</td>
                 <td className="">
                   <button
-                    // onClick={() => history.push("/")}
+                    onClick={() => (obj.state === 'AO Disabled' ? setModalThird(true) : null)}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'bg-primary' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
@@ -176,6 +179,7 @@ function OrderTable(myProps: props) {
           );
         })}
       </table>
+      <OrderStateModal ModalThird={ModalThird} setModalThird={setModalThird} />
     </div>
   );
 }
