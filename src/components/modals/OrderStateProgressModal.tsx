@@ -10,6 +10,7 @@ import {
   RoundCircleCycleIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
+import OrderDetails from '../modals/OrderDetails';
 
 const OrderStateProgressModal = () => {
   const [show, setShow] = useState(false);
@@ -120,8 +121,8 @@ const OrderStateProgressModal = () => {
 
               <div className="row">
                 <div className="col-12 d-flex flex-column flex-lg-row justify-content-between ">
-                  <span>
-                    Order details{' '}
+                  <span className="d-flex mt-4">
+                    <OrderDetails />
                     <span>
                       <svg
                         id="Group_345"

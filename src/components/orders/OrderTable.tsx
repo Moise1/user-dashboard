@@ -15,13 +15,21 @@ import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 
+// import { useState } from 'react';
 interface props {
   tableValue: boolean;
 }
 
-function OrderTable(myProps: props) {
+const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
   const [ModalThird, setModalThird] = useState(false);
+
+  // const [GoToModel, setGoToModel] = useState('Stop Order');
+
+  // const handlechangemodel = () => {
+
+  //   setGoToModel();
+  // };
 
   return (
     // <div className="table-responsive table-order-responsive">
@@ -182,6 +190,6 @@ function OrderTable(myProps: props) {
       <OrderStateModal ModalThird={ModalThird} setModalThird={setModalThird} />
     </div>
   );
-}
+};
 
 export default OrderTable;

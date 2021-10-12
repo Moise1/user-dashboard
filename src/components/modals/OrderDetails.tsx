@@ -10,8 +10,8 @@ const OrderDetails = () => {
 
   return (
     <div className=" modal-first ">
-      <Button variant="primary" onClick={() => setShow(true)}>
-        Custom Width Modal
+      <Button className="order-details-model-btnn" variant="" onClick={() => setShow(true)}>
+        Order Details
       </Button>
 
       <Modal

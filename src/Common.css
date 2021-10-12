@@ -2257,11 +2257,14 @@ table {
 .view-columns-hover:focus {
   box-shadow: none;
 }
+.order-details-model-btnn:focus {
+  box-shadow: none;
+}
 .order-three-dots-dropdown .dropdown-menu {
   width: 190px;
   height: 155px;
   border-radius: 0px 0px 15px 15px;
-  background: #fff;
+  background: var(--bgPage);
   box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.16);
 }
 .order-three-dots-dropdown .btn-primary {
