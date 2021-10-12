@@ -6,13 +6,23 @@ import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 import { Dropdown } from 'react-bootstrap';
-
+// import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 interface props {
   tableValue: boolean;
 }
 
-function OrderTable(myProps: props) {
+const OrderTable = (myProps: props) => {
+  const history = useHistory();
   const { tableValue } = myProps;
+
+  // const [GoToModel, setGoToModel] = useState('Stop Order');
+
+  // const handlechangemodel = () => {
+
+  //   setGoToModel();
+  // };
+
   return (
     // <div className="table-responsive table-order-responsive">
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
@@ -141,7 +151,7 @@ function OrderTable(myProps: props) {
 
                     <Dropdown.Menu>
                       <Dropdown.Item>Process order</Dropdown.Item>
-                      <Dropdown.Item>Stop order</Dropdown.Item>
+                      <Dropdown.Item onClick={() => history.push('/progress-bar')}>GoToModel</Dropdown.Item>
                       <Dropdown.Item>Mark as dispatched</Dropdown.Item>
                       <Dropdown.Item>Delete order</Dropdown.Item>
                     </Dropdown.Menu>
@@ -154,6 +164,6 @@ function OrderTable(myProps: props) {
       </table>
     </div>
   );
-}
+};
 
 export default OrderTable;
