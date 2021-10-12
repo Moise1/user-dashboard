@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { IconEdit } from '../common/Icons';
+import { CrossModalIcon, IconEdit } from '../common/Icons';
 
 const AddressModal = () => {
   const [modals, setModals] = useState(false);
@@ -23,6 +23,9 @@ const AddressModal = () => {
         <Modal.Header className="modal-second-head px-2" closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
             <IconEdit />
+            <span className="cursor-pointer cross-round-iconModal" onClick={() => setModals(false)}>
+              <CrossModalIcon />
+            </span>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
