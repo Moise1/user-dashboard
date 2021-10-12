@@ -29,9 +29,9 @@ const SearchSelect = (myProps: props) => {
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
     setShowDropDown(false);
-    if (whatSelect !== 'Select Supplier') {
-      setShowOrdering(true);
-    }
+    // if (whatSelect !== 'Select Supplier') {
+    setShowOrdering(true);
+    // }
   };
 
   return (
