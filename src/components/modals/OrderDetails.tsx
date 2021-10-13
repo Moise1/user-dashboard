@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { AoIconHead, CrossModalIcon, IconArrowModal, IconEdit } from '../common/Icons';
 import AddressModal from './AddressModal';
@@ -10,9 +10,9 @@ const OrderDetails = () => {
 
   return (
     <div className=" modal-first ">
-      <Button className="order-details-model-btnn" variant="" onClick={() => setShow(true)}>
+      <div className="order-details-model-btnn order-details-back-text cursor-pointer" onClick={() => setShow(true)}>
         Order Details
-      </Button>
+      </div>
 
       <Modal
         className="modal-page"

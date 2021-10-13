@@ -1609,7 +1609,7 @@ table {
 /* TOGGLE  ICON STYLE */
 
 .ao-enabled-button {
-  background-color: #228b22;
+  background-color: var(--color-dark-green);
   display: flex;
   align-items: center;
   height: 32px;
@@ -1789,7 +1789,7 @@ table {
   font-size: 24px;
 }
 .head-part-second {
-  background: #228b22;
+  background: var(--color-dark-green);
   border-radius: 10px;
   opacity: 1;
   color: var(--color-white);
@@ -1901,7 +1901,12 @@ table {
   /* background-color: var(--color-dark-green); */
   width: 436px;
   border-radius: 9.5px;
-  background: linear-gradient(#228b22 0%, #228b22 15.85%, #3aa23a 67.04%, #228b22 100%);
+  background: linear-gradient(
+    var(--color-dark-green) 0%,
+    var(--color-dark-green) 15.85%,
+    #3aa23a 67.04%,
+    var(--color-dark-green) 100%
+  );
 }
 
 .progress-order .progress {
@@ -1924,6 +1929,7 @@ table {
   font-weight: 400;
   font-size: 16px;
   color: rgba(22, 73, 151, 0.98);
+  cursor: pointer;
 }
 .modal-second-inputs .form-control {
   background-color: #f2f8ff !important;
@@ -1938,11 +1944,16 @@ table {
   font-weight: 500;
 }
 
+.disabled-btn {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .save-btnn-modal {
   padding: 10px;
-  background: #228b22;
+  background: var(--color-dark-green);
   border-radius: 10px;
-  border: 2px solid #228b22 !important;
+  border: 2px solid var(--color-dark-green) !important;
   opacity: 1;
   color: var(--bgHighlight);
   font-size: var(--font-18);
@@ -1951,8 +1962,8 @@ table {
 
 .save-btnn-modal:hover {
   background-color: transparent;
-  color: #228b22;
-  border: 2px solid #228b22 !important;
+  color: var(--color-dark-green);
+  border: 2px solid var(--color-dark-green) !important;
 }
 
 .modal-second-head {

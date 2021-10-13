@@ -1,15 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import { CrossModalIcon, IconEdit } from '../common/Icons';
 
 const AddressModal = () => {
   const [modals, setModals] = useState(false);
   return (
     <div>
-      <Button className="btnn-in-model" variant="primary" onClick={() => setModals(true)}>
+      <div className="btnn-in-model order-details-back-text cursor-pointer" onClick={() => setModals(true)}>
         <span>Order State Process</span>
-      </Button>
+      </div>
 
       <Modal
         className="full-model"
