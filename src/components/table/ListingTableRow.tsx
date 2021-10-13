@@ -59,7 +59,7 @@ export function ListingTableRow(props: props) {
             <FormattedDate value={key.createdOn} /> <FormattedTime value={key.createdOn} />
           </p>
         </div>
-        <div>
+        <div className="d-flex">
           <span className="mx-3  ">
             <DotIcon />
           </span>

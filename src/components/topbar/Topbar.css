@@ -13,8 +13,8 @@
 /* HAMBURGER */
 .hamburger-mobile {
   cursor: pointer;
-  border-radius: 7px;
-  padding: 7px;
+  border-radius: 8px;
+  padding: 12px;
   background-color: var(--color-primary);
   display: flex;
   flex-direction: column;

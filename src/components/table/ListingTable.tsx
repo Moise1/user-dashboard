@@ -45,17 +45,24 @@ export default function ListingTable() {
         {showActive ? (
           ''
         ) : (
-          <div className="pt-3">
-            <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-              <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
-              <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
-                {' '}
-                Copy <span className="fw-600">5</span> listings{' '}
+          <div className="d-flex justify-content-between">
+            <div className="pt-3">
+              <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
+                <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
+                <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
+                  {' '}
+                  Copy <span className="fw-600">5</span> listings{' '}
+                </span>
+                <span className="check-click-text">
+                  Optimise <span className="fw-600">5</span> titles
+                </span>
               </span>
-              <span className="check-click-text">
-                Optimise <span className="fw-600">5</span> titles
-              </span>
-            </span>
+            </div>
+
+            <div className="p-3">
+              {' '}
+              <p className="active-text-black">26 active</p>
+            </div>
           </div>
         )}
         <div className="overflow-x-auto pt-4">
