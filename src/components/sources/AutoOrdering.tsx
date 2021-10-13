@@ -2,10 +2,15 @@ import React, { useState, ChangeEvent } from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
-// import Select from 'react-select';
 
-const AutoOrdering = () => {
+interface props {
+  whatSelect: string;
+}
+
+const AutoOrdering = (myProps: props) => {
   const [checked, setChecked] = useState<boolean>(false);
+  const { whatSelect } = myProps;
+
   // FOR GET VALUE OF TOGGLE SWITCH
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -43,7 +48,7 @@ const AutoOrdering = () => {
             </div>
           </div> */}
 
-          <AccountsInput />
+          <AccountsInput whatSelect={whatSelect} />
         </div>
         <div className="d-flex flex-row flex-sm-column">
           <button className="btn save-changes-btn mb-0 mb-sm-3">

@@ -4,10 +4,12 @@ import search_icon from '../../assets/search.svg';
 
 interface props {
   setShowOrdering: (arg0: boolean) => void;
+  setWhatSelect: (arg0: string) => void;
+  whatSelect: string;
 }
 
 const SearchSelect = (myProps: props) => {
-  const { setShowOrdering } = myProps;
+  const { setShowOrdering, setWhatSelect, whatSelect } = myProps;
 
   const arrayLists = [
     { value: 'Amazon', id: 101 },
@@ -24,7 +26,6 @@ const SearchSelect = (myProps: props) => {
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [supplierData, setSupplierData] = useState(arrayLists);
-  const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
 
   const handleSelectValue = (value: string) => {

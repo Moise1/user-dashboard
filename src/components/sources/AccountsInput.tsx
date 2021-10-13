@@ -1,7 +1,13 @@
 import React from 'react';
 import { DustbinPinkIcon } from '../common/Icons';
 
-const AccountsInput = () => {
+interface props {
+  whatSelect: string;
+}
+
+const AccountsInput = (myProps: props) => {
+  const { whatSelect } = myProps;
+
   return (
     <>
       <div className="row">
@@ -17,13 +23,13 @@ const AccountsInput = () => {
           <div className="d-flex">
             <div className="acc-input-parent">
               <label className="account-label-style" htmlFor="">
-                Amazon login
+                {whatSelect} login
               </label>
               <input className="amazonlogin-input-style" type="text" placeholder="dadaccount@gmail.com" />
             </div>
             <div className="width-207 ml-3 ml-sm-5">
               <label className="account-label-style" htmlFor="">
-                Amazon password
+                {whatSelect} password
               </label>
               <input className="account-input-style" type="text" placeholder="3456344" />
             </div>

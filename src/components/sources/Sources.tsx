@@ -16,6 +16,8 @@ import { useHistory } from 'react-router-dom';
 
 const Sources = () => {
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
+  const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
+
   // const [supplier, setSupplier] = useState<string>();
 
   // const options = ['one', 'two', 'three'];
@@ -58,10 +60,10 @@ const Sources = () => {
           </h2>
 
           <div className="supplier-dropdown">
-            <SearchSelect setShowOrdering={setShowOrdering} />
+            <SearchSelect whatSelect={whatSelect} setWhatSelect={setWhatSelect} setShowOrdering={setShowOrdering} />
           </div>
 
-          {showOrdering ? <AutoOrdering /> : ''}
+          {showOrdering ? <AutoOrdering whatSelect={whatSelect} /> : ''}
         </div>
       </div>
     </>
