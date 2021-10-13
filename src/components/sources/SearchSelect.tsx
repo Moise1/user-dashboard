@@ -23,28 +23,21 @@ const SearchSelect = (myProps: props) => {
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
+  const [supplierData, setSupplierData] = useState(arrayLists);
   const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
-  const [filteredSearchData, filteredSearchDataArray] = useState<Array<string>>([]);
 
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
     setShowDropDown(false);
-    // if (whatSelect !== 'Select Supplier') {
     setShowOrdering(true);
-    // }
   };
-  console.log(filteredSearchDataArray);
-  const handleSearch = (value: string) => {
-    console.log(value, 'value');
-    console.log(arrayLists, 'arrayLists');
-    setInputSearchValue(inputSearchValue);
-    console.log(inputSearchValue, 'inputSearchValue');
 
-    // const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
-    // filteredSearchDataArray(filteredSearch);
+  const handleSearch = (value: string) => {
+    setInputSearchValue(inputSearchValue);
+    const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
+    setSupplierData(filteredSearch);
   };
-  console.log(filteredSearchData, 'filteredSearch');
 
   return (
     <>
@@ -72,7 +65,7 @@ const SearchSelect = (myProps: props) => {
             </div>
 
             <div className="react-list-data-here">
-              {arrayLists.map((list) => (
+              {supplierData.map((list) => (
                 <li key={list.id} onClick={() => handleSelectValue(list.value)}>
                   {list.value}
                 </li>

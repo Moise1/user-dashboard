@@ -6,26 +6,31 @@ import { PersonWithPlusIcon } from '../common/Icons';
 const AddAccountsSelect = () => {
   const arrayLists = [
     { value: 'account222@gmail.com', id: 101 },
-    { value: 'account222@gmail.com', id: 102 },
-    { value: 'account222@gmail.com', id: 103 },
-    { value: 'account222@gmail.com', id: 104 },
-    { value: 'account222@gmail.com', id: 105 },
-    { value: 'account222@gmail.com', id: 106 },
+    { value: 'hello@gmail.com', id: 102 },
+    { value: 'srk@gmail.com', id: 103 },
+    { value: 'joanaount222@gmail.com', id: 104 },
+    { value: 'whatsapp222@gmail.com', id: 105 },
+    { value: 'good@gmail.com', id: 106 },
     { value: 'account222@gmail.com', id: 107 },
-    { value: 'account222@gmail.com', id: 108 },
-    { value: 'account222@gmail.com', id: 109 },
+    { value: 'div@gmail.com', id: 108 },
+    { value: 'span@gmail.com', id: 109 },
     { value: 'Thiraccount222@gmail.com', id: 110 }
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
+  const [supplierData, setSupplierData] = useState(arrayLists);
+  const [inputSearchValue, setInputSearchValue] = useState<string>('');
 
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
     setShowDropDown(false);
-    // if (whatSelect !== 'Select Supplier') {
-    //   setShowOrdering(true);
-    // }
+  };
+
+  const handleSearch = (value: string) => {
+    setInputSearchValue(inputSearchValue);
+    const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
+    setSupplierData(filteredSearch);
   };
   return (
     <>
@@ -40,7 +45,13 @@ const AddAccountsSelect = () => {
         {showDropDown ? (
           <div className="shows-search-drop-list">
             <div className="drop-list-search-input">
-              <input type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." />
+              <input
+                onChange={(e) => handleSearch(e.target.value)}
+                type="text"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+                placeholder="Search..."
+              />
               <span className="search-icon-input-box">
                 <img src={search_icon} height="12" alt="search_icon" />
               </span>
@@ -54,7 +65,7 @@ const AddAccountsSelect = () => {
             </div>
 
             <div className="react-list-data-here">
-              {arrayLists.map((list) => (
+              {supplierData.map((list) => (
                 <li key={list.id} onClick={() => handleSelectValue(list.value)}>
                   {list.value}
                 </li>
