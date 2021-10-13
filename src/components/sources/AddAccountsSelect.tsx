@@ -5,16 +5,16 @@ import { PersonWithPlusIcon } from '../common/Icons';
 
 const AddAccountsSelect = () => {
   const arrayLists = [
-    { value: 'account222@gmail.com', id: 101 },
-    { value: 'hello@gmail.com', id: 102 },
-    { value: 'srk@gmail.com', id: 103 },
-    { value: 'joanaount222@gmail.com', id: 104 },
-    { value: 'whatsapp222@gmail.com', id: 105 },
-    { value: 'good@gmail.com', id: 106 },
-    { value: 'account222@gmail.com', id: 107 },
-    { value: 'div@gmail.com', id: 108 },
-    { value: 'span@gmail.com', id: 109 },
-    { value: 'Thiraccount222@gmail.com', id: 110 }
+    { value: 'account222@gmail.com', id: 101, status: 'active' },
+    { value: 'hello@gmail.com', id: 102, status: 'active' },
+    { value: 'srk@gmail.com', id: 103, status: 'active' },
+    { value: 'joanaount222@gmail.com', id: 104, status: 'active' },
+    { value: 'whatsapp222@gmail.com', id: 105, status: 'active' },
+    { value: 'good@gmail.com', id: 106, status: 'active' },
+    { value: 'account222@gmail.com', id: 107, status: 'active' },
+    { value: 'div@gmail.com', id: 108, status: 'active' },
+    { value: 'span@gmail.com', id: 109, status: 'active' },
+    { value: 'Jenny Amazon account', id: 110, status: 'disabled' }
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
@@ -68,7 +68,11 @@ const AddAccountsSelect = () => {
 
             <div className="react-list-data-here">
               {supplierData.map((list) => (
-                <li key={list.id} onClick={() => handleSelectValue(list.value)}>
+                <li
+                  className={`${list.status === 'disabled' ? 'disabled-btn' : ''}`}
+                  key={list.id}
+                  onClick={() => handleSelectValue(list.value)}
+                >
                   {list.value}
                 </li>
               ))}

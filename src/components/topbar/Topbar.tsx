@@ -12,19 +12,17 @@ import { t } from 'src/global/transShim';
 import './Topbar.css';
 
 interface Props {
-  handleMobile: boolean;
-  sethandleMobile: (arg0: boolean) => void;
+  handleSidebarMobile: () => void;
 }
 
 export default function Topbar(props: Props) {
-  const { handleMobile, sethandleMobile } = props;
-  console.log(handleMobile, 'handleMobile');
+  const { handleSidebarMobile } = props;
 
   return (
     <>
       <div className="TopBar">
         <div className="ml-3 d-flex align-items-center">
-          <div className="hamburger-mobile d-lg-none" onClick={() => sethandleMobile(!handleMobile)}>
+          <div className="hamburger-mobile d-lg-none" onClick={() => handleSidebarMobile()}>
             <span className="first"></span>
             <span className="second"></span>
             <span className="thrid"></span>

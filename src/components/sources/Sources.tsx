@@ -40,7 +40,7 @@ const Sources = () => {
 
         <div className="d-flex flex-column flex-sm-row mt-2 mt-sm-4">
           <h2 className="back-to-supplier-heading d-flex align-items-center" onClick={() => history.goBack()}>
-            <span>
+            <span className="left-back-arrow-svg">
               <LeftBackArrowIcon />
             </span>
             Back to suppliers overview

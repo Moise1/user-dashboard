@@ -2,13 +2,13 @@ import React from 'react';
 
 interface props {
   staticValue: boolean;
-  handleMobile: boolean;
+  // handleMobile: boolean;
   setCollapse: (value: boolean) => void;
   children?: JSX.Element | JSX.Element[];
 }
 
 export default function SidbarCover(myProps: props) {
-  const { staticValue, setCollapse, children, handleMobile } = myProps;
+  const { staticValue, setCollapse, children } = myProps;
   return (
     <div
       onMouseEnter={() => {
@@ -23,7 +23,7 @@ export default function SidbarCover(myProps: props) {
           return;
         }
       }}
-      className={`${!staticValue ? `${handleMobile ? 'mobile-sidebar-on' : ''} w-sidebar-toggle` : ''}`}
+      className={`${!staticValue ? 'w-sidebar-toggle' : ''}`}
     >
       {children}
     </div>
