@@ -96,17 +96,22 @@ function SourcesTable(myProps: props) {
                     </button>
                   </span> */}
                   <td className="w-15per">
-                    <button
-                      onClick={() => (obj.autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
-                      className={` ${obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
-                        obj.autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
-                      } ${obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
-                    >
-                      {obj.autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-                      {obj.autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-                      {obj.autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                      {obj.autoOrdering}
-                    </button>
+                    <div className="popover__wrapper">
+                      <button
+                        onClick={() => (obj.autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
+                        className={` popover__title  ${
+                          obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''
+                        } ${obj.autoOrdering === 'Enabled' ? 'table-enabled-button' : ''} ${
+                          obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''
+                        } `}
+                      >
+                        {obj.autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
+                        {obj.autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
+                        {obj.autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
+                        {obj.autoOrdering}
+                      </button>
+                      <div className="popover__content">Configure</div>
+                    </div>
                   </td>
                 </tr>
               </tbody>
