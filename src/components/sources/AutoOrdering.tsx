@@ -18,10 +18,10 @@ const AutoOrdering = () => {
     <>
       <div className="d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
         <div className="d-flex flex-column">
-          <div className="d-flex my-0 my-lg-5">
+          <div className="d-flex my-0 my-lg-5 ">
             <div className="enable-disable-para ">
               <p>Enable/Disable Auto-ordering</p>
-              <span>Disabling auto-ordering will require you to manually process new orders.</span>
+              <span className="mr-5">Disabling auto-ordering will require you to manually process new orders.</span>
             </div>
 
             <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
@@ -32,7 +32,7 @@ const AutoOrdering = () => {
             </div>
           </div>
 
-          <h2 className="acc-config-text">
+          <h2 className="acc-config-text py-3">
             Account configuration: <span> Dad account</span>{' '}
           </h2>
 

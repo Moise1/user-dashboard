@@ -49,7 +49,7 @@ const AccountsInput = () => {
         </div>
         <div className="col-12 my-4 my-sm-5">
           <div className="d-flex">
-            <div className="enable-disable-para ">
+            <div className="enable-disable-para rmr-5">
               <p>Enable/Disable Auto-ordering</p>
               <span>Disabling auto-ordering will require you to manually process new orders.</span>
             </div>
