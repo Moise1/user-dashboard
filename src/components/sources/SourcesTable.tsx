@@ -17,7 +17,11 @@ function SourcesTable(myProps: props) {
 
   return (
     <>
-      <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
+      <div
+        className={`primary-scrollbar ${
+          tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'
+        } table-responsive  `}
+      >
         <table className="table source-table">
           <thead className="source-table-head">
             <tr>

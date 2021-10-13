@@ -2401,3 +2401,19 @@ table {
   height: 2px;
   background-color: white;
 }
+
+.primary-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.primary-scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.primary-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #5e69db;
+  outline: 1px solid #5e69db;
+  border-radius: 6px;
+}
