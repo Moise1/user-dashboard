@@ -1990,7 +1990,7 @@ table {
 }
 .sale-head {
   font-size: var(--font-18);
-  color: #000;
+  color: var(--txtBaseColor);
   font-weight: 700;
 }
 .sold-head {
@@ -2000,7 +2000,7 @@ table {
 }
 .channel-item {
   font-size: var(--font-18);
-  color: #000;
+  color: var(--txtBaseColor);
 }
 .modals-inputs .form-control:focus {
   box-shadow: none !important;
@@ -2008,7 +2008,7 @@ table {
 }
 .source-url {
   font-size: var(--font-18);
-  color: #000;
+  color: var(--txtBaseColor);
   font-weight: 700;
 }
 
