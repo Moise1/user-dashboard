@@ -1,15 +1,15 @@
 import React from 'react';
 import { Progress } from 'antd';
-import coinIcon from '../assets/tokenCoin.png';
-import bellIcon from '../assets/bellIcon.svg';
-import flag from '../assets/flag-round-500.svg';
-import amazon from '../assets/amazon-icon-1.svg';
+import coinIcon from '../../assets/tokenCoin.png';
+import bellIcon from '../../assets/bellIcon.svg';
+import flag from '../../assets/flag-round-500.svg';
+import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Space } from 'antd';
-import DropDownMenu from './SmallComponents/DropDownMenu';
-import '../Common.css';
-import Logo from '../assets//logoHGR.png';
-import dropicon from '../assets/dropicon.svg';
+import DropDownMenu from '../SmallComponents/DropDownMenu';
+import Logo from '../../assets//logoHGR.png';
+import dropicon from '../../assets/dropicon.svg';
 import { t } from 'src/global/transShim';
+import './Topbar.css';
 
 interface Props {
   handleMobile: boolean;

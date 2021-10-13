@@ -79,7 +79,7 @@ export default function ListingTable() {
             <div>{t('Listings.Column.Profit')}</div>
             <div className="d-none d-md-block">{t('Listings.Column.Markup')}</div>
             <div>{t('Listings.Column.Stock')}</div>
-            <div className="d-none d-md-block">{t('Listings.Column.Created on')}</div>
+            <div className="">{t('Listings.Column.Created on')}</div>
             <div>&nbsp;</div>
           </div>
           <div className="table-body ml-4">
@@ -88,7 +88,7 @@ export default function ListingTable() {
             ))}
           </div>
         </div>
-        <div className="d-flex flex-column flex-sm-row mx-4 justify-content-start justify-content-sm-between align-items-start align-items-sm-center py-3">
+        <div className="d-flex  mx-4  justify-content-between align-items-start align-items-sm-center py-3">
           <div className="d-flex align-items-center ">
             <p className="table-body-sell border-left-dark-voilet w-50px pr-3 mb-0">50</p>
             <p className="table-body-sell border-left-dark-voilet w-50px px-3 mb-0">100</p>

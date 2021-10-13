@@ -5,7 +5,7 @@ import Home from './views/Home';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
 // import Orders from './components/orders/Orders';
-import Topbar from './components/Topbar';
+import Topbar from './components/topbar/Topbar';
 import SidbarCover from './components/SidbarCover';
 import Sidebar from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
@@ -17,6 +17,7 @@ import AddressModal from './components/modals/AddressModal';
 import OrderStateProgressModal from './components/modals/OrderStateProgressModal';
 import OrderStateModal from './components/modals/OrderStateModal';
 import SettingSourceConfig from './components/sources/SettingSourceConfig';
+import './Common.css';
 
 const App = () => {
   // const [collapsed, setCollapsed] = useState(true);

@@ -14,7 +14,7 @@ export function ListingTableRow(props: props) {
           <div className="form-group form-check">
             <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
             <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-              <img src={key.selectall} className="img-fluid" alt="" />
+              <img src={key.selectall} alt="" />
             </label>
           </div>
         </div>
@@ -54,16 +54,18 @@ export function ListingTableRow(props: props) {
             {key.stock}
           </p>
         </div>
-        <div className="d-none d-md-block">
+        <div className="">
           <p className="table-body-sell">
             <FormattedDate value={key.createdOn} /> <FormattedTime value={key.createdOn} />
           </p>
         </div>
         <div>
-          <span className="mx-3">
+          <span className="mx-3  ">
             <DotIcon />
           </span>
-          <EditIcon />
+          <span className="d-none d-md-block">
+            <EditIcon />
+          </span>
         </div>
       </div>
     </>

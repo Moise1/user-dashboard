@@ -7,103 +7,6 @@ body {
   font-size: var(--font-14);
 }
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  color: var(--color-white) !important;
-  background-color: var(--color-primary) !important;
-}
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .ant-menu-title-content {
-  font-weight: bold;
-  color: var(--navLinkActive);
-}
-.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child .ant-menu-title-content {
-  color: var(--subnavLinkActive);
-  font-weight: 500;
-}
-.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child .ant-menu-title-content:hover {
-  color: var(--subnavLinkHover);
-  font-weight: 500;
-}
-
-.ant-menu-item.ant-menu-item-active:hover {
-  color: var(--color-white) !important;
-  background-color: var(--color-primary) !important;
-}
-.ant-menu-item.ant-menu-item-active:hover .ant-menu-title-content {
-  font-weight: bold;
-  color: var(--color-white) !important;
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover {
-  color: var(--color-white) !important;
-  background-color: var(--color-primary) !important;
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-arrow {
-  color: var(--color-white) !important;
-}
-.ant-menu-item.ant-menu-item-active:hover .listing-btn {
-  font-weight: 700 !important;
-}
-
-.ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-title .ant-menu-title-content {
-  color: var(--color-white) !important;
-}
-.ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
-  color: unset !important;
-  background-color: unset !important;
-}
-/* .ant-menu-item.ant-menu-item-only-child .ant-menu-title-content {
-  color: black !important;
-} */
-
-/* HOVER SVG  */
-
-.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover svg #Path_10 {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon ellipse {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .setting-icon path {
-  fill: var(--color-white);
-}
-
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon #Path_13 {
-  stroke: var(--color-white);
-}
-.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .list-now-icon circle {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .list-now-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .dashboard-icon rect {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .listing-icon line {
-  stroke: var(--color-white);
-}
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_6,
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_5,
-.ant-menu-item.ant-menu-item-active:hover .catalog-icon line {
-  stroke: var(--color-white);
-}
-
-.ant-menu-item .ant-menu-title-content {
-  margin: 0 !important;
-}
-
-.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
-  background-color: unset !important;
-  color: black !important;
-}
 /* HOVER LIST ITEMS  */
 /* .ant-menu-item:hover {
   color: var(--color-white) !important;
@@ -128,49 +31,12 @@ body {
   border-radius: 10px;
 } */
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .active-white-svg {
-  filter: brightness(100);
-}
-
 .c-262e80 {
   color: var(--color-dark-violet);
 }
 
 .ff-used {
   font-family: var(--mainFontFamily);
-}
-
-.TopBar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  font-family: var(--mainFontFamily);
-  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
-  background-color: var(--bgHighlight) !important;
-}
-
-@media (max-width: 1180px) {
-  /* .hgr-progress > * {
-    display: flex;
-    box-sizing:content-box;
-  } */
-
-  .TopBar {
-    justify-content: none !important;
-  }
-  .hgr-progress > :nth-child(-n + 1),
-  .hgr-progress > :nth-child(3) {
-    position: absolute;
-    left: -10000px;
-  }
-
-  .quota-head {
-    display: none;
-  }
 }
 
 .searchBarButtonContainer button {
@@ -181,30 +47,6 @@ body {
   .searchBarButtonContainer button {
     font-size: 0.85rem !important;
   }
-}
-
-.quota-head {
-  font-size: var(--font-18);
-  color: var(--color-dark-violet);
-  font-weight: bold;
-}
-
-.quota-price {
-  font-size: var(--font-16);
-  font-weight: normal;
-  color: var(--color-dark-violet);
-}
-.Update-btn {
-  background-color: var(--color-dark-violet);
-  font-size: var(--font-18);
-  font-weight: bold;
-  color: var(--color-white);
-}
-
-.Update-btn:hover {
-  color: var(--color-white) !important;
-  background-color: var(--color-dark-violet);
-  opacity: 0.8;
 }
 
 .fs-18 {
@@ -364,27 +206,7 @@ body {
 .ant-table-selection-extra {
   z-index: 0;
 }
-/* .ant-layout-sider:hover {
-  flex: 0 0 260px !important;
-  max-width: 260px !important;
-  min-width: 260px !important;
-  width: 260px !important;
-} */
 
-@media (min-width: 1400px) {
-  /* .ant-layout-sider:hover {
-    flex: 0 0 367px !important;
-    max-width: 367px !important;
-    min-width: 367px !important;
-    width: 367px !important;
-  } */
-  /* .w-sidebar-toggle .ant-layout-sider {
-    flex: 0 0 367px !important;
-    max-width: 367px !important;
-    min-width: 367px !important;
-    width: 367px !important;
-  } */
-}
 .listing-tabs span {
   font-weight: 700;
   font-size: 16px;
@@ -2407,27 +2229,6 @@ table {
 }
 .w-12per {
   width: 12%;
-}
-
-/* HAMBURGER */
-.hamburger-mobile {
-  cursor: pointer;
-  border-radius: 7px;
-  padding: 7px;
-  background-color: var(--color-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.hamburger-mobile .second {
-  margin: 5px 0;
-}
-.hamburger-mobile span {
-  display: inline-block;
-  width: 20px;
-  height: 2px;
-  background-color: var(--bgHighlight);
 }
 
 .primary-scrollbar::-webkit-scrollbar {

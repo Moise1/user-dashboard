@@ -49,9 +49,9 @@
     width: var(--logoWidth);
   }
 
-  #Group_41 {
+  /* #Group_41 {
     display: none;
-  }
+  } */
 
   .listingTableRow label {
     width: 20px;
@@ -59,9 +59,9 @@
     margin-left: 0 !important;
   }
 
-  .listingTableRow img {
+  /* .listingTableRow img {
     display: none;
-  }
+  } */
 
   .listingTableRow svg {
     width: 16px;

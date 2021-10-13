@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
-
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -17,6 +16,8 @@ import {
   CircleDotIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
+import './Sidebar.css';
+
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;

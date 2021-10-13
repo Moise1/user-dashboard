@@ -1,0 +1,97 @@
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  color: var(--color-white) !important;
+  background-color: var(--color-primary) !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .ant-menu-title-content {
+  font-weight: bold;
+  color: var(--navLinkActive);
+}
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child .ant-menu-title-content {
+  color: var(--subnavLinkActive);
+  font-weight: 500;
+}
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child .ant-menu-title-content:hover {
+  color: var(--subnavLinkHover);
+  font-weight: 500;
+}
+
+.ant-menu-item.ant-menu-item-active:hover {
+  color: var(--color-white) !important;
+  background-color: var(--color-primary) !important;
+}
+.ant-menu-item.ant-menu-item-active:hover .ant-menu-title-content {
+  font-weight: bold;
+  color: var(--color-white) !important;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover {
+  color: var(--color-white) !important;
+  background-color: var(--color-primary) !important;
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-arrow {
+  color: var(--color-white) !important;
+}
+.ant-menu-item.ant-menu-item-active:hover .listing-btn {
+  font-weight: 700 !important;
+}
+
+.ant-menu-submenu.ant-menu-submenu-active:hover .ant-menu-submenu-title .ant-menu-title-content {
+  color: var(--color-white) !important;
+}
+.ant-menu-item.ant-menu-item-active.ant-menu-item-only-child:hover {
+  color: unset !important;
+  background-color: unset !important;
+}
+
+/* HOVER SVG  */
+
+.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover svg #Path_10 {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon ellipse {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .setting-icon path {
+  fill: var(--color-white);
+}
+
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon #Path_13 {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .help-icon line {
+  stroke: var(--color-white);
+}
+.ant-menu-item.ant-menu-item-active:hover .list-now-icon circle {
+  stroke: var(--color-white);
+}
+.ant-menu-item.ant-menu-item-active:hover .list-now-icon line {
+  stroke: var(--color-white);
+}
+.ant-menu-item.ant-menu-item-active:hover .dashboard-icon rect {
+  stroke: var(--color-white);
+}
+.ant-menu-item.ant-menu-item-active:hover .listing-icon line {
+  stroke: var(--color-white);
+}
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_6,
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon #Path_5,
+.ant-menu-item.ant-menu-item-active:hover .catalog-icon line {
+  stroke: var(--color-white);
+}
+
+.ant-menu-item .ant-menu-title-content {
+  margin: 0 !important;
+}
+
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+  background-color: unset !important;
+  color: black !important;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .active-white-svg {
+  filter: brightness(100);
+}
