@@ -34,6 +34,8 @@ const AddAccountsSelect = () => {
   };
   return (
     <>
+      {showDropDown ? <div onClick={() => setShowDropDown(false)} className="overlay-select"></div> : ''}
+
       <div className="react-search-with-select-parent w-348_54">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           <h5>{whatSelect}</h5>

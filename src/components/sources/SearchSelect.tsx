@@ -41,6 +41,7 @@ const SearchSelect = (myProps: props) => {
 
   return (
     <>
+      {showDropDown ? <div onClick={() => setShowDropDown(false)} className="overlay-select"></div> : ''}
       <div className="react-search-with-select-parent">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           <h5>{whatSelect}</h5>

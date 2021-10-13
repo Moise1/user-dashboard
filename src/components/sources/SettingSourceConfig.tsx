@@ -30,7 +30,7 @@ const SettingSourceConfig = (myProps: props) => {
             onClick={() => history.push('/sources-setting')}
           >
             Configure Autoordering (Beta)
-            <span>
+            <span className="mx-1">
               <OrdersIcon />{' '}
             </span>
           </button>
