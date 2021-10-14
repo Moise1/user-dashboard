@@ -1,23 +1,39 @@
 import React from 'react';
-import { useState } from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { AoIconHead, CrossModalIcon, IconArrowModal, IconEdit } from '../common/Icons';
 import AddressModal from './AddressModal';
 
-const OrderDetails = () => {
-  const [show, setShow] = useState(false);
+interface Props {
+  addressModalShow: boolean;
+  orderDetailsModalShow: boolean;
+  setAddressModalShow: (value: boolean) => void;
+  setOrderDetailsModalShow: (value: boolean) => void;
+  handleCloseAllModals: () => void;
+}
+
+const OrderDetailsModal = (props: Props) => {
+  const {
+    setAddressModalShow,
+    addressModalShow,
+    setOrderDetailsModalShow,
+    orderDetailsModalShow,
+    handleCloseAllModals
+  } = props;
 
   return (
-    <div className=" modal-first ">
-      <div className="order-details-model-btnn order-details-back-text cursor-pointer" onClick={() => setShow(true)}>
+    <div className="modal-first ">
+      <div
+        className="order-details-model-btnn order-details-back-text cursor-pointer"
+        onClick={() => setOrderDetailsModalShow(true)}
+      >
         Order Details
       </div>
 
       <Modal
         className="modal-page"
-        show={show}
-        onHide={() => setShow(false)}
+        show={orderDetailsModalShow}
+        onHide={() => setOrderDetailsModalShow(false)}
         size="xl"
         centered
         dialogClassName="modal-90w"
@@ -32,7 +48,7 @@ const OrderDetails = () => {
 
                 <span className="px-2 ">AO Enabled</span>
               </button>
-              <span className="cursor-pointer cross-round-iconModal" onClick={() => setShow(false)}>
+              <span className="cursor-pointer cross-round-iconModal" onClick={() => setOrderDetailsModalShow(false)}>
                 <CrossModalIcon />
               </span>
             </div>
@@ -147,7 +163,11 @@ const OrderDetails = () => {
             <div className="row">
               <div className="col mt-5 d-flex align-items-center">
                 <IconArrowModal />
-                <AddressModal />
+                <AddressModal
+                  handleCloseAllModals={handleCloseAllModals}
+                  addressModalShow={addressModalShow}
+                  setAddressModalShow={setAddressModalShow}
+                />
               </div>
             </div>
           </div>
@@ -157,4 +177,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default OrderDetailsModal;

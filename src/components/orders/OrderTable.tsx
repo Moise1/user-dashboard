@@ -23,10 +23,20 @@ interface props {
 
 const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
-  const [ModalThird, setModalThird] = useState(false);
+  const [AoDisabledModal, setAoDisabledModal] = useState(false);
   const [orderProgress, setOrderProgress] = useState(3);
   const [show, setShow] = useState(false);
+
+  const [addressModalShow, setAddressModalShow] = useState(false);
+  const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
+
   console.log(setOrderProgress);
+
+  const handleCloseAllModals = () => {
+    setAddressModalShow(false);
+    setOrderDetailsModalShow(false);
+    setShow(false);
+  };
   return (
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
@@ -76,11 +86,11 @@ const OrderTable = (myProps: props) => {
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body  ">{obj.sale}</td>
-                <td className="obj-sale-body  ">{obj.source}</td>
-                <td className="obj-sale-title   ">{obj.title}</td>
-                <td className="obj-sale-qty   ">{obj.qty}</td>
-                <td className="obj-sale-qty   ">{obj.sold}</td>
+                <td className="obj-sale-body">{obj.sale}</td>
+                <td className="obj-sale-body">{obj.source}</td>
+                <td className="obj-sale-title">{obj.title}</td>
+                <td className="obj-sale-qty">{obj.qty}</td>
+                <td className="obj-sale-qty">{obj.sold}</td>
                 <td className="obj-sale-cost  ">{obj.cost}</td>
                 <td className="obj-sale-qty  ">{obj.fees}</td>
                 <td className="obj-profit-text  ">{obj.profit}</td>
@@ -88,7 +98,7 @@ const OrderTable = (myProps: props) => {
                 <td className="obj-sale-qty   ">{obj.orderOn}</td>
                 <td className="">
                   <button
-                    onClick={() => (obj.state === 'AO Disabled' ? setModalThird(true) : null)}
+                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : null)}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'bg-primary' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
@@ -184,8 +194,17 @@ const OrderTable = (myProps: props) => {
           );
         })}
       </table>
-      <OrderStateModal ModalThird={ModalThird} setModalThird={setModalThird} />
-      <OrderStateProgressModal orderProgress={orderProgress} show={show} setShow={setShow} />
+      <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
+      <OrderStateProgressModal
+        addressModalShow={addressModalShow}
+        setAddressModalShow={setAddressModalShow}
+        setOrderDetailsModalShow={setOrderDetailsModalShow}
+        orderDetailsModalShow={orderDetailsModalShow}
+        orderProgress={orderProgress}
+        show={show}
+        setShow={setShow}
+        handleCloseAllModals={handleCloseAllModals}
+      />
     </div>
   );
 };

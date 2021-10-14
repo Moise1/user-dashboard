@@ -12,8 +12,6 @@ import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
-import OrderDetails from './components/modals/OrderDetails';
-import AddressModal from './components/modals/AddressModal';
 import OrderStateModal from './components/modals/OrderStateModal';
 import SettingSourceConfig from './components/sources/SettingSourceConfig';
 import './Common.css';
@@ -105,8 +103,6 @@ const App = () => {
             <Route path="/sources-setting" component={Sources} />
             <Route path="/sources" component={() => <SettingSourceConfig staticValue={staticValue} />} />
             <Route path="/newchannel" component={ChannelCreate} />
-            <Route path="/modal" component={OrderDetails} />
-            <Route path="/modal2" component={AddressModal} />
             <Route path="/modal3" component={OrderStateModal} />
 
             {/* <Route path="/orders" component={Orders} /> */}

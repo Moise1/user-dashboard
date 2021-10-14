@@ -1,29 +1,35 @@
 import React from 'react';
-import { useState } from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import { CrossModalIcon, IconEdit } from '../common/Icons';
 
-const AddressModal = () => {
-  const [modals, setModals] = useState(false);
+interface Props {
+  addressModalShow: boolean;
+  setAddressModalShow: (value: boolean) => void;
+  handleCloseAllModals: () => void;
+}
+
+const AddressModal = (props: Props) => {
+  const { setAddressModalShow, addressModalShow, handleCloseAllModals } = props;
+
   return (
     <div>
-      <div className="btnn-in-model order-details-back-text cursor-pointer" onClick={() => setModals(true)}>
+      <div className="btnn-in-model order-details-back-text cursor-pointer" onClick={() => setAddressModalShow(true)}>
         <span>Order State Process</span>
       </div>
 
       <Modal
         className="full-model"
-        show={modals}
+        show={addressModalShow}
         size="lg"
         centered
-        onHide={() => setModals(false)}
+        onHide={() => setAddressModalShow(false)}
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Header className="modal-second-head px-2" closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
             <IconEdit />
-            <span className="cursor-pointer cross-round-iconModal" onClick={() => setModals(false)}>
+            <span className="cursor-pointer cross-round-iconModal" onClick={() => setAddressModalShow(false)}>
               <CrossModalIcon />
             </span>
           </Modal.Title>
@@ -51,7 +57,9 @@ const AddressModal = () => {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-end">
-              <button className="save-btnn-modal px-5">Save</button>
+              <button className="save-btnn-modal px-5" onClick={() => handleCloseAllModals()}>
+                Save
+              </button>
             </div>
           </div>
         </Modal.Body>

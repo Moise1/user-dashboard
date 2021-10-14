@@ -13,25 +13,36 @@ import {
   RoundCircleCycleIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
-import OrderDetails from '../modals/OrderDetails';
+import OrderDetailsModal from './OrderDetailsModal';
 
 interface Props {
   orderProgress: number;
+  addressModalShow: boolean;
+  setAddressModalShow: (value: boolean) => void;
   show: boolean;
   setShow: (value: boolean) => void;
+  orderDetailsModalShow: boolean;
+  setOrderDetailsModalShow: (value: boolean) => void;
+  handleCloseAllModals: () => void;
 }
 
 const OrderStateProgressModal = (props: Props) => {
-  const { show, setShow, orderProgress } = props;
+  const {
+    show,
+    setShow,
+    orderProgress,
+    setAddressModalShow,
+    addressModalShow,
+    orderDetailsModalShow,
+    setOrderDetailsModalShow,
+    handleCloseAllModals
+  } = props;
+
   const now = 60;
   console.log(orderProgress);
   return (
     <>
       <div className="order-state-progress-modal">
-        {/* <Button variant="primary" onClick={() => setShow(true)}>
-          Custom Width Modal
-        </Button> */}
-
         <Modal
           className="modal-page"
           show={show}
@@ -162,7 +173,13 @@ const OrderStateProgressModal = (props: Props) => {
               <div className="row">
                 <div className="col-12 d-flex flex-column flex-lg-row justify-content-between ">
                   <span className="d-flex mt-4">
-                    <OrderDetails />
+                    <OrderDetailsModal
+                      setOrderDetailsModalShow={setOrderDetailsModalShow}
+                      orderDetailsModalShow={orderDetailsModalShow}
+                      addressModalShow={addressModalShow}
+                      setAddressModalShow={setAddressModalShow}
+                      handleCloseAllModals={handleCloseAllModals}
+                    />
                     <span>
                       <svg
                         id="Group_345"

@@ -3,24 +3,18 @@ import { Modal } from 'react-bootstrap';
 import { AoIconHead, CrossModalIcon } from '../common/Icons';
 
 interface Props {
-  ModalThird: boolean;
-  setModalThird: (value: boolean) => void;
+  AoDisabledModal: boolean;
+  setAoDisabledModal: (value: boolean) => void;
 }
 
 const OrderStateModal = (props: Props) => {
-  const { ModalThird, setModalThird } = props;
+  const { AoDisabledModal, setAoDisabledModal } = props;
 
   return (
     <>
-      {/* <div>
-        <Button variant="primary" onClick={() => setModalThird(true)}>
-          Custom Width Modal
-        </Button>
-      </div> */}
-
       <Modal
-        show={ModalThird}
-        onHide={() => setModalThird(false)}
+        show={AoDisabledModal}
+        onHide={() => setAoDisabledModal(false)}
         size="xl"
         centered
         dialogClassName="modal-90w"
@@ -39,7 +33,7 @@ const OrderStateModal = (props: Props) => {
                 </button>
               </div>
 
-              <span className="cursor-pointer cross-round-iconModal" onClick={() => setModalThird(false)}>
+              <span className="cursor-pointer cross-round-iconModal" onClick={() => setAoDisabledModal(false)}>
                 <CrossModalIcon />
               </span>
             </div>
