@@ -5,6 +5,7 @@ import { PersonWithPlusIcon } from '../common/Icons';
 import { Popover } from 'antd';
 
 const AddAccountsSelect = () => {
+  // ACCOUNT LISTS ARRAY
   const arrayLists = [
     { value: 'account222@gmail.com', id: 101, status: 'active' },
     { value: 'hello@gmail.com', id: 102, status: 'active' },
@@ -18,6 +19,7 @@ const AddAccountsSelect = () => {
     { value: 'Jenny Amazon account', id: 110, status: 'disabled' }
   ];
 
+  // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [showAccountInput, setShowAccountInput] = useState<boolean>();
   const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
@@ -25,29 +27,29 @@ const AddAccountsSelect = () => {
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
   const [AddAccountValue, setAddAccountValue] = useState<string>('');
 
+  // FOR HANDLE SELECT VALUE
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
     setShowDropDown(false);
   };
 
+  // FUNCTION TO FILTER ON INPUT SEARCH
   const handleSearch = (value: string) => {
     setInputSearchValue(inputSearchValue);
     const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
     setSupplierData(filteredSearch);
   };
 
+  // HANDLE NEW ACCOUNT ADDED
   const handleAccountPushToList = () => {
     setShowAccountInput(false);
     const id = Math.random() * 1023812031111;
-
     const newAccount = { value: AddAccountValue, id: id, status: 'active' };
     console.log(newAccount, 'newAccount');
     supplierData.unshift(newAccount);
-    // supplierData.splice(0, 0, newAccount);
+    console.log(AddAccountValue);
     console.log(arrayLists, 'arrayLists');
   };
-
-  console.log(AddAccountValue);
 
   return (
     <>

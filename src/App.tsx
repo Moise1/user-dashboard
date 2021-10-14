@@ -12,7 +12,6 @@ import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
-import OrderStateModal from './components/modals/OrderStateModal';
 import SettingSourceConfig from './components/sources/SettingSourceConfig';
 import './Common.css';
 
@@ -46,7 +45,6 @@ const App = () => {
   //   };
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
-  // const [handleMobile, sethandleMobile] = useState(false);
 
   const toggleCollapse = () => {
     setCollapse(!collapse);
@@ -103,9 +101,6 @@ const App = () => {
             <Route path="/sources-setting" component={Sources} />
             <Route path="/sources" component={() => <SettingSourceConfig staticValue={staticValue} />} />
             <Route path="/newchannel" component={ChannelCreate} />
-            <Route path="/modal3" component={OrderStateModal} />
-
-            {/* <Route path="/orders" component={Orders} /> */}
           </Switch>
         </Layout>
       </Router>

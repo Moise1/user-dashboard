@@ -1,9 +1,8 @@
 import React from 'react';
-
 import SearchWithButton from '../common/SearchWithButton';
 import OrderTable from './OrderTable';
 import OrderTypeButtons from './OrderTypeButtons';
-
+import './Order.css';
 interface props {
   staticValue: boolean;
 }

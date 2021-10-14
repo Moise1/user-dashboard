@@ -6,7 +6,7 @@ import SearchWithButton from '../common/SearchWithButton';
 import AutoOrdering from './AutoOrdering';
 import SearchSelect from './SearchSelect';
 import { useHistory } from 'react-router-dom';
-
+import './Sources.css';
 // interface IProps {
 //   showOrdering: boolean;
 //   // setShowOrdering?: (value: boolean | (prevVar: boolean) => boolean) => void;

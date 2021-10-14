@@ -1,5 +1,57 @@
 import React from 'react';
 
+export const ThreeDotsColumnIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_44"
+        data-name="Group 44"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_34" data-name="Path 34" d="M0,0H24V24H0Z" fill="none" />
+        <circle
+          id="Ellipse_12"
+          data-name="Ellipse 12"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 11)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_13"
+          data-name="Ellipse 13"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 18)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_14"
+          data-name="Ellipse 14"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 4)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
 export const CrossModalIcon = () => {
   return (
     <>
@@ -46,6 +98,7 @@ export const CrossModalIcon = () => {
     </>
   );
 };
+
 export const DustbinPinkIcon = () => {
   return (
     <>
