@@ -1785,6 +1785,28 @@ table {
   cursor: pointer;
   display: inline-block;
 }
+.add-account-input-inselect {
+  width: 100%;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: var(--bgHighlight);
+  border: 2px solid #70707052;
+  /* opacity: 0.29; */
+  position: relative;
+  margin: 12px 0;
+}
+
+.add-account-input-inselect input {
+  border: 0;
+  outline: none;
+}
+
+.add-account-input-inselect .plus-icon-add {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
 
 /* TOGGLE  ICON STYLE */
 
