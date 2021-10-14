@@ -190,6 +190,46 @@ export const PersonWithPlusIcon = () => {
   );
 };
 
+export const OrderProcessRoundedIcon = () => {
+  return (
+    <>
+      <svg
+        className="rotating"
+        id="Group_203"
+        data-name="Group 203"
+        xmlns="http://www.w3.org/2000/svg"
+        width="19"
+        height="19"
+        viewBox="0 0 19 19"
+      >
+        <path id="Path_192" data-name="Path 192" d="M0,0H19V19H0Z" fill="none" />
+        <path
+          id="Path_193"
+          data-name="Path 193"
+          d="M16.667,9.545A6.412,6.412,0,0,0,4.4,7.961M4,4.795V7.961H7.167"
+          transform="translate(-0.833 -0.836)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          id="Path_194"
+          data-name="Path 194"
+          d="M4,13a6.413,6.413,0,0,0,12.271,1.583m.4,3.167V14.583H13.5"
+          transform="translate(-0.833 -2.708)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+    </>
+  );
+};
+
 export const RoundCircleCycleIcon = () => {
   return (
     <>
@@ -215,7 +255,7 @@ export const RoundCircleCycleIcon = () => {
               r="2"
               transform="translate(4 17)"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -228,7 +268,7 @@ export const RoundCircleCycleIcon = () => {
               r="2"
               transform="translate(15 17)"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -238,7 +278,7 @@ export const RoundCircleCycleIcon = () => {
               data-name="Path 310"
               d="M17,17H6V3H4"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -248,7 +288,7 @@ export const RoundCircleCycleIcon = () => {
               data-name="Path 311"
               d="M6,5,20,6l-1,7H6"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -260,6 +300,107 @@ export const RoundCircleCycleIcon = () => {
   );
 };
 
+export const OrderCheckoutIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <g id="added-icon" transform="translate(-1045 -408)">
+          <circle
+            id="Ellipse_3"
+            data-name="Ellipse 3"
+            cx="20"
+            cy="20"
+            r="20"
+            transform="translate(1045 408)"
+            fill="rgba(22,73,151,0.98)"
+            opacity="0.05"
+          />
+          <g id="Group_324" data-name="Group 324" transform="translate(1053 416.5)">
+            <path id="Path_308" data-name="Path 308" d="M0,0H24V24H0Z" fill="none" />
+            <rect
+              id="Rectangle_344"
+              data-name="Rectangle 344"
+              width="18"
+              height="14"
+              rx="3"
+              transform="translate(3 5)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_187"
+              data-name="Line 187"
+              x2="18"
+              transform="translate(3 10)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_188"
+              data-name="Line 188"
+              x2="0.01"
+              transform="translate(7 15)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_189"
+              data-name="Line 189"
+              x2="2"
+              transform="translate(11 15)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </g>
+        </g>
+      </svg>
+    </>
+  );
+};
+export const LastStepOrderIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <g id="Group_345" data-name="Group 345" transform="translate(-356 -548.5)">
+          <g id="added-icon" transform="translate(-689 140.5)">
+            <circle
+              id="Ellipse_3"
+              data-name="Ellipse 3"
+              cx="20"
+              cy="20"
+              r="20"
+              transform="translate(1045 408)"
+              fill="#164997"
+              opacity="0.05"
+            />
+          </g>
+          <g id="check_circle_black_24dp" transform="translate(360.637 553.563)">
+            <path id="Path_314" data-name="Path 314" d="M0,0H30.863V30.863H0Z" fill="none" />
+            <path
+              id="Path_315"
+              data-name="Path 315"
+              d="M14.86,2a12.86,12.86,0,1,0,12.86,12.86A12.864,12.864,0,0,0,14.86,2Zm0,23.147A10.288,10.288,0,1,1,25.147,14.86,10.3,10.3,0,0,1,14.86,25.147Zm5.9-15.972L12.288,17.65,8.957,14.332,7.144,16.146l5.144,5.144L22.576,11Z"
+              transform="translate(0.572 0.572)"
+              fill="rgba(112,112,112,0.37)"
+            />
+          </g>
+        </g>
+      </svg>
+    </>
+  );
+};
 export const LeftBackArrowIcon = () => {
   return (
     <>

@@ -14,7 +14,6 @@ import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import OrderDetails from './components/modals/OrderDetails';
 import AddressModal from './components/modals/AddressModal';
-import OrderStateProgressModal from './components/modals/OrderStateProgressModal';
 import OrderStateModal from './components/modals/OrderStateModal';
 import SettingSourceConfig from './components/sources/SettingSourceConfig';
 import './Common.css';
@@ -109,8 +108,6 @@ const App = () => {
             <Route path="/modal" component={OrderDetails} />
             <Route path="/modal2" component={AddressModal} />
             <Route path="/modal3" component={OrderStateModal} />
-
-            <Route path="/progress-bar" component={OrderStateProgressModal} />
 
             {/* <Route path="/orders" component={Orders} /> */}
           </Switch>

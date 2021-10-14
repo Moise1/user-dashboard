@@ -263,10 +263,10 @@ svg > * {
   /* stroke: var(--iconColor); */
 }
 
-svg:hover > *,
+/* svg:hover > *,
 .svgIcon:hover > * {
   stroke: var(--iconHoverColor);
-}
+} */
 
 svg > path:first-child {
   display: none;

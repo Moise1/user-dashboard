@@ -6,6 +6,9 @@ import {
   DispatchedOrderIcon,
   DustbinDeleteOrderIcon,
   HandStopOrderIcon,
+  LastStepOrderIcon,
+  OrderCheckoutIcon,
+  OrderProcessRoundedIcon,
   ProcessOrderIcon,
   RoundCircleCycleIcon
 } from '../common/Icons';
@@ -13,14 +16,15 @@ import amazonOrder from '../../assets/amazon-order-ss.png';
 import OrderDetails from '../modals/OrderDetails';
 
 interface Props {
+  orderProgress: number;
   show: boolean;
   setShow: (value: boolean) => void;
 }
 
 const OrderStateProgressModal = (props: Props) => {
-  const { show, setShow } = props;
+  const { show, setShow, orderProgress } = props;
   const now = 60;
-
+  console.log(orderProgress);
   return (
     <>
       <div className="order-state-progress-modal">
@@ -66,15 +70,24 @@ const OrderStateProgressModal = (props: Props) => {
                     {/* START ORDER  */}
                     <div className="d-flex">
                       <span className="d-flex flex-column align-items-center">
-                        <span>
+                        <span className={`${orderProgress <= 3 ? 'start-order-active-svg' : ''}`}>
                           <RoundCircleCycleIcon />
                         </span>
 
-                        <span className="h-blue-line"></span>
+                        <span className={`${orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}></span>
                       </span>
 
                       <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                        <h4 className="mb-1">Start order</h4>
+                        <h4 className="mb-1">
+                          Start order
+                          {orderProgress === 1 ? (
+                            <span className="ml-2">
+                              <OrderProcessRoundedIcon />
+                            </span>
+                          ) : (
+                            ''
+                          )}
+                        </h4>
                         <p className="mb-0">Sep 1, 2021 4:43 pm</p>
                         <span>Order was selected for purchase</span>
                       </div>
@@ -82,15 +95,27 @@ const OrderStateProgressModal = (props: Props) => {
                     {/* CHECKOUT  */}
                     <div className="d-flex">
                       <span className="d-flex flex-column align-items-center">
-                        <span>
-                          <RoundCircleCycleIcon />
+                        <span className={`${orderProgress > 1 && orderProgress <= 3 ? 'order-checkout-icon' : ''}`}>
+                          <OrderCheckoutIcon />
                         </span>
 
-                        <span className="h-blue-line"></span>
+                        <span
+                          className={`${orderProgress > 1 && orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}
+                        ></span>
                       </span>
 
                       <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                        <h4 className="mb-1"> Checkout</h4>
+                        <h4 className="mb-1">
+                          {' '}
+                          Checkout{' '}
+                          {orderProgress === 2 ? (
+                            <span className="ml-2">
+                              <OrderProcessRoundedIcon />
+                            </span>
+                          ) : (
+                            ''
+                          )}
+                        </h4>
                         <p className="mb-0">Sep 1, 2021 4:43 pm</p>
                         <span>Order was selected for purchase</span>
                       </div>
@@ -98,13 +123,22 @@ const OrderStateProgressModal = (props: Props) => {
                     {/* LAST STEP  */}
                     <div className="d-flex">
                       <span className="d-flex flex-column align-items-center">
-                        <span>
-                          <RoundCircleCycleIcon />
+                        <span className={`${orderProgress === 3 ? 'last-step-order-icon' : ''}`}>
+                          <LastStepOrderIcon />
                         </span>
                       </span>
 
                       <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                        <h4 className="mb-1">Last steps</h4>
+                        <h4 className="mb-1">
+                          Last steps
+                          {orderProgress === 3 ? (
+                            <span className="ml-2">
+                              <OrderProcessRoundedIcon />
+                            </span>
+                          ) : (
+                            ''
+                          )}
+                        </h4>
                         <p className="mb-0">Sep 1, 2021 4:43 pm</p>
                       </div>
                     </div>

@@ -24,8 +24,9 @@ interface props {
 const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
   const [ModalThird, setModalThird] = useState(false);
+  const [orderProgress, setOrderProgress] = useState(3);
   const [show, setShow] = useState(false);
-
+  console.log(setOrderProgress);
   return (
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
@@ -184,7 +185,7 @@ const OrderTable = (myProps: props) => {
         })}
       </table>
       <OrderStateModal ModalThird={ModalThird} setModalThird={setModalThird} />
-      <OrderStateProgressModal show={show} setShow={setShow} />
+      <OrderStateProgressModal orderProgress={orderProgress} show={show} setShow={setShow} />
     </div>
   );
 };
