@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 import { PersonWithPlusIcon } from '../common/Icons';
+import { Popover } from 'antd';
 
 const AddAccountsSelect = () => {
   const arrayLists = [
@@ -98,7 +99,20 @@ const AddAccountsSelect = () => {
                   key={list.id}
                   onClick={() => handleSelectValue(list.value)}
                 >
-                  {list.value}
+                  {list.status === 'disabled' ? (
+                    <Popover
+                      placement="right"
+                      content={
+                        <div className="pop-over-content">
+                          <p className="mb-0"> Disabled</p>
+                        </div>
+                      }
+                    >
+                      {list.value}
+                    </Popover>
+                  ) : (
+                    list.value
+                  )}
                 </li>
               ))}
             </div>

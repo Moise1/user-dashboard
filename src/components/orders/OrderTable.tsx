@@ -24,7 +24,7 @@ interface props {
 const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
-  const [orderProgress, setOrderProgress] = useState(3);
+  const [orderProgress, setOrderProgress] = useState(2);
   const [show, setShow] = useState(false);
 
   const [addressModalShow, setAddressModalShow] = useState(false);

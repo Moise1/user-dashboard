@@ -30,11 +30,12 @@ export default function Topbar(props: Props) {
           <img className="logoHGR ml-3" src={Logo} alt="logo" />
         </div>
         <p className=" ml-2 quota-price ff-used mb-0 d-md-none">45% (12/13)</p>{' '}
+        <button className="upgrde-btn-topbar d-md-none">Upgrade</button>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-1 TopBarItems">
             <div className="d-flex align-items-center">
               <h4 className="mb-0 quota-head ff-used "> {t('Topbar.Quota')}:</h4>{' '}
-              <p className=" ml-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
+              <p className=" ml-1 ml-md-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
               <div>
                 <Progress
                   percent={50}
@@ -55,7 +56,7 @@ export default function Topbar(props: Props) {
               {' '}
               <span className="d-none fs-18 fw-bold d-md-inline ml-3">{t('Topbar.Notifications', { count: 2 })}</span>
             </div>
-            <div className="d-blue mx-0  mx-sm-3 lh-1">
+            <div className="d-blue d-flex align-items-center mx-0  mx-sm-3 lh-1">
               {/* <i className="fas fa-circle yellow"></i> */}
               <img src={coinIcon} alt="coinIcon" />
               <span className="fs-18 fw-bold mx-1">1232</span>

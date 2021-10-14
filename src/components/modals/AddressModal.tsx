@@ -13,7 +13,7 @@ const AddressModal = (props: Props) => {
 
   return (
     <div>
-      <div className="col-1 pl-0 d-flex align-items-center  cursor-pointer" onClick={() => setAddressModalShow(true)}>
+      <div className="col-1 pl-0 d-flex align-items-center cursor-pointer" onClick={() => setAddressModalShow(true)}>
         <span>
           <IconEdit />
         </span>
