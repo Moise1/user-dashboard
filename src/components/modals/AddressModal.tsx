@@ -13,10 +13,12 @@ const AddressModal = (props: Props) => {
 
   return (
     <div>
-      <div className="btnn-in-model order-details-back-text cursor-pointer" onClick={() => setAddressModalShow(true)}>
-        <span>Order State Process</span>
+      <div className="col-1 pl-0 d-flex align-items-center  cursor-pointer" onClick={() => setAddressModalShow(true)}>
+        <span>
+          <IconEdit />
+        </span>
+        <span className="edit-btnn">Edit</span>
       </div>
-
       <Modal
         className="full-model"
         show={addressModalShow}

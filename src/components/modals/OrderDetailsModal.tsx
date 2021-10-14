@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
-import { AoIconHead, CrossModalIcon, IconArrowModal, IconEdit } from '../common/Icons';
+import { AoIconHead, CrossModalIcon, IconArrowModal } from '../common/Icons';
 import AddressModal from './AddressModal';
 
 interface Props {
@@ -57,29 +57,31 @@ const OrderDetailsModal = (props: Props) => {
         <Modal.Body>
           <div className="p-4 modals-inputs">
             <div className="row justify-content-between">
-              <div className="col-12 col-xl-5 modal-head-box pr-0 ">
-                <div className="row flex-colimn flex-sm-row ship-bill-box pb-3">
-                  <div className="col-2 d-flex">
-                    <span>
-                      <IconEdit />
-                    </span>
-                    <span className="edit-btnn mt-1">Edit</span>
-                  </div>
-                  <div className="col-12 col-md-5 pt-4 pr-0  ">
-                    <h1 className="shop-address ">Shipping address</h1>
-                    <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                    <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                    <p className="content-shop-address mb-0">US</p>
-                  </div>
-                  <div className="col-12 col-md-5 pt-4  ">
-                    <h1 className="shop-address">Billing address</h1>
-                    <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                    <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                    <p className="content-shop-address mb-0">US</p>
+              <div className="col-12 col-xl-5 modal-head-box">
+                <div className="row ">
+                  <div className="ship-bill-box d-flex flex-column flex-sm-row  py-3 px-2">
+                    <AddressModal
+                      handleCloseAllModals={handleCloseAllModals}
+                      addressModalShow={addressModalShow}
+                      setAddressModalShow={setAddressModalShow}
+                    />
+
+                    <div className="col-12 col-md-5 px-0 pt-4 pb-3">
+                      <h1 className="shop-address ">Shipping address</h1>
+                      <p className="content-shop-address mb-0">156 Harvest Ln,</p>
+                      <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
+                      <p className="content-shop-address mb-0">US</p>
+                    </div>
+                    <div className="col-12 col-md-6 pt-4 pb-3">
+                      <h1 className="shop-address">Billing address</h1>
+                      <p className="content-shop-address mb-0">156 Harvest Ln,</p>
+                      <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
+                      <p className="content-shop-address mb-0">US</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="row mt-5 ">
+                <div className="row mt-5">
                   <div className="col-12 col-md-6 pr-0">
                     <h1 className="sale-head">Sale</h1>
                     <Form.Control className="modal-inputs" type="text" placeholder="123" />
@@ -163,11 +165,13 @@ const OrderDetailsModal = (props: Props) => {
             <div className="row">
               <div className="col mt-5 d-flex align-items-center">
                 <IconArrowModal />
-                <AddressModal
-                  handleCloseAllModals={handleCloseAllModals}
-                  addressModalShow={addressModalShow}
-                  setAddressModalShow={setAddressModalShow}
-                />
+
+                <div
+                  className="btnn-in-model order-details-back-text cursor-pointer"
+                  onClick={() => setAddressModalShow(true)}
+                >
+                  <span>Order State Process</span>
+                </div>
               </div>
             </div>
           </div>
