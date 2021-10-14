@@ -27,7 +27,7 @@ export default function Topbar(props: Props) {
             <span className="second"></span>
             <span className="thrid"></span>
           </div>
-          <img className="logoHGR ml-3" src={Logo} alt="logo" />
+          <img className="logoHGR ml-2 ml-md-3" src={Logo} alt="logo" />
         </div>
         <p className=" ml-2 quota-price ff-used mb-0 d-md-none">45% (12/13)</p>{' '}
         <button className="upgrde-btn-topbar d-md-none">Upgrade</button>
@@ -51,7 +51,7 @@ export default function Topbar(props: Props) {
                 {t('Topbar.Update')}
               </button>
             </div>
-            <img src={bellIcon} alt="" />
+            <img className="bell-icoon-topbar" src={bellIcon} alt="" />
             <div className="d-blue lh-1">
               {' '}
               <span className="d-none fs-18 fw-bold d-md-inline ml-3">{t('Topbar.Notifications', { count: 2 })}</span>

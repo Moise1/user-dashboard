@@ -81,3 +81,9 @@
   background: #262e80;
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
 }
+@media (max-width: 576.98px) {
+  .bell-icoon-topbar {
+    width: 20px;
+    height: 20px;
+  }
+}
