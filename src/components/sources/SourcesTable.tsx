@@ -44,18 +44,28 @@ function SourcesTable(myProps: props) {
                 <span className="mr-2"> Shipping Policy </span>
               </th>
               <th>
-                <span className="mr-2"> Auto ordering </span>
+                <Popover
+                  placement="right"
+                  content={
+                    <div className="pop-over-content">
+                      <p className="mb-0">Beta</p>
+                    </div>
+                  }
+                >
+                  <span className="mr-2"> Auto ordering </span>
+                </Popover>
               </th>
             </tr>
           </thead>
 
           {sourceData.map((obj) => {
+            const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
             return (
-              <tbody className="order-table-body" key={obj.id}>
+              <tbody className="order-table-body" key={id}>
                 <tr>
-                  <td className="obj-sale-body  ">{obj.provider}</td>
-                  <td className="obj-sale-body  ">{obj.markup}</td>
-                  <td className="obj-sale-title   ">{obj.decreaseLimit}</td>
+                  <td className="obj-sale-body  ">{provider}</td>
+                  <td className="obj-sale-body  ">{markup}</td>
+                  <td className="obj-sale-title   ">{decreaseLimit}</td>
                   <td className="obj-sale-qty   ">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
@@ -67,49 +77,28 @@ function SourcesTable(myProps: props) {
                   <td className="obj-sale-qty   ">
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-cost  ">{obj.template}</td>
-                  <td className="w-12per shipping-policy-text white-space-pre-wrap">{obj.shippingPolicy}</td>
-                  {/* <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-container="body"
-                    data-bs-toggle="popover"
-                    data-bs-placement="top"
-                    data-bs-content="Top popover"
-                  >
-                    Popover on top
-                  </button>
+                  <td className="obj-sale-cost  ">{template}</td>
+                  <td className="w-12per shipping-policy-text white-space-pre-wrap">{shippingPolicy}</td>
 
-                  <span
-                    className="d-inline-block"
-                    tabIndex={0}
-                    data-bs-toggle="popover"
-                    data-bs-trigger="hover focus"
-                    data-bs-content="Disabled popover"
-                  >
-                    <button className="btn btn-primary" type="button" disabled>
-                      Disabled button
-                    </button>
-                  </span> */}
                   <td className="w-15per">
                     <Popover
                       placement="right"
                       content={
                         <div className="pop-over-content">
-                          <p className="mb-0">Configure</p>
+                          <p className="mb-0">{autoOrdering === 'Coming Soon' ? 'Not ready' : 'Configure'}</p>
                         </div>
                       }
                     >
                       <button
-                        onClick={() => (obj.autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
-                        className={`  ${obj.autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
-                          obj.autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
-                        } ${obj.autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
+                        onClick={() => (autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
+                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
+                          autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
+                        } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
                       >
-                        {obj.autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-                        {obj.autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-                        {obj.autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                        {obj.autoOrdering}
+                        {autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
+                        {autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
+                        {autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
+                        {autoOrdering}
                       </button>
                     </Popover>
                   </td>

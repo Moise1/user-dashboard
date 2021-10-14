@@ -10,15 +10,17 @@ export function ListingTableRow(props: props) {
   return (
     <>
       <div className="listingTableRow border-bottom-body my-3 ">
-        <div className="d-flex align-items-center">
-          <div className="form-group form-check">
+        <div className="d-flex  align-items-center justify-content-center justify-content-md-start">
+          <div className="form-group form-check d-flex  d-md-block align-items-center justify-content-center">
             <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
             <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-              <img src={key.selectall} alt="" />
+              <img className="d-none d-md-block" src={key.selectall} alt="" />
             </label>
           </div>
         </div>
         <div>
+          <img className="d-md-none" src={key.selectall} alt="" />
+
           <p className="table-body-style">{key.itemNo}</p>
         </div>
         <div className="d-none d-md-block">

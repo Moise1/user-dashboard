@@ -2,7 +2,6 @@
 // import tickimg from '../assets/tableImg/tick.svg';
 // import editimg from '../assets/tableImg/editicon.svg';
 // import dotsicon from '../assets/tableImg/dotsicon.svg';
-import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { ListingTableRow } from './ListingTableRow';
 import { t } from '../../global/transShim';
@@ -47,7 +46,7 @@ export default function ListingTable() {
         ) : (
           <div className="d-flex justify-content-between">
             <div className="pt-3">
-              <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
+              <span className="py-1 px-2 p-sm-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
                 <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
                 <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
                   {' '}
@@ -59,24 +58,29 @@ export default function ListingTable() {
               </span>
             </div>
 
-            <div className="p-3">
+            <div className="py-3 pr-1">
               {' '}
               <p className="active-text-black">26 active</p>
             </div>
           </div>
         )}
         <div className="overflow-x-auto pt-4">
-          <div className="d-flex table-head border-bottom-body ml-4 table-header listingTableRow">
-            <div className="d-flex">
-              <Form.Group className="select-custom" controlId="formBasicCheckbox">
-                <Form.Check
-                  onClick={() => {
-                    setShowActive(!showActive);
-                  }}
-                  type="checkbox"
-                  label="Select all"
-                />
-              </Form.Group>
+          <div className="d-flex table-head border-bottom-body ml-3 table-header listingTableRow">
+            <div className="d-flex align-items-center">
+              <input
+                onClick={() => {
+                  setShowActive(!showActive);
+                }}
+                type="checkbox"
+                id="select-all"
+              />
+
+              <label className="d-none d-md-block" htmlFor="select-all">
+                Select all
+              </label>
+              {/* <Form.Group className="select-custom" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Select all" />
+              </Form.Group> */}
             </div>
             <div>{t('Listings.Column.Item no.')}</div>
             <div className="d-none d-md-block">{t('Listings.Column.Source')}</div>
@@ -89,7 +93,7 @@ export default function ListingTable() {
             <div className="">{t('Listings.Column.Created on')}</div>
             <div>&nbsp;</div>
           </div>
-          <div className="table-body ml-4">
+          <div className="table-body ml-3">
             {tabledata.map((key) => (
               <ListingTableRow key={key.id} data={key} />
             ))}
