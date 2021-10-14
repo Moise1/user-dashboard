@@ -1071,12 +1071,6 @@ table {
   }
 }
 
-@media (max-width: 576px) {
-  .box-width {
-    width: 100%;
-  }
-}
-
 /* new media query */
 @media (min-width: 1600px) {
   .w-xxxl-304 {
@@ -2593,4 +2587,14 @@ table {
 }
 .last-step-order-icon #Path_315 {
   fill: #262e80;
+}
+@media (max-width: 576px) {
+  .box-width {
+    width: 100%;
+  }
+  .orders-table-main {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+  }
 }
