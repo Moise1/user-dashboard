@@ -66,7 +66,7 @@ export default function Topbar(props: Props) {
               <div className="ant-space-item d-flex">
                 <Dropdown overlay={<DropDownMenu />} placement="bottomLeft" trigger={['click']}>
                   <div className="storeSelector d-flex lav_button_shadow">
-                    <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold">Lavivatienda</div>
+                    <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold d-none d-sm-block">Lavivatienda</div>
                     <img src={flag} className="lh-1" height="20" alt="" />
                     <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
                     <Button>

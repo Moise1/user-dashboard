@@ -96,3 +96,9 @@
     height: 43px !important;
   }
 }
+
+@media (max-width: 576px) {
+  .storeSelector {
+    width: unset;
+  }
+}
