@@ -13,7 +13,6 @@ import {
   RoundCircleCycleIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
-import OrderDetailsModal from './OrderDetailsModal';
 
 interface Props {
   orderProgress: number;
@@ -27,19 +26,11 @@ interface Props {
 }
 
 const OrderStateProgressModal = (props: Props) => {
-  const {
-    show,
-    setShow,
-    orderProgress,
-    setAddressModalShow,
-    addressModalShow,
-    orderDetailsModalShow,
-    setOrderDetailsModalShow,
-    handleCloseAllModals
-  } = props;
+  const { show, setShow, orderProgress, setOrderDetailsModalShow } = props;
 
   const now = 60;
   console.log(orderProgress);
+
   return (
     <>
       <div className="order-state-progress-modal">
@@ -173,13 +164,15 @@ const OrderStateProgressModal = (props: Props) => {
               <div className="row">
                 <div className="col-12 d-flex flex-column flex-lg-row justify-content-between ">
                   <span className="d-flex mt-4">
-                    <OrderDetailsModal
-                      setOrderDetailsModalShow={setOrderDetailsModalShow}
-                      orderDetailsModalShow={orderDetailsModalShow}
-                      addressModalShow={addressModalShow}
-                      setAddressModalShow={setAddressModalShow}
-                      handleCloseAllModals={handleCloseAllModals}
-                    />
+                    <div
+                      className="order-details-model-btnn order-details-back-text cursor-pointer"
+                      onClick={() => {
+                        setOrderDetailsModalShow(true);
+                        setShow(false);
+                      }}
+                    >
+                      Order Details
+                    </div>
                     <span>
                       <svg
                         id="Group_345"

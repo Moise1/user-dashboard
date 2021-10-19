@@ -16,6 +16,7 @@ import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
+import OrderDetailsModal from '../modals/OrderDetailsModal';
 
 // import { useState } from 'react';
 interface props {
@@ -25,7 +26,7 @@ interface props {
 const OrderTable = (myProps: props) => {
   const { tableValue } = myProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
-  const [orderProgress, setOrderProgress] = useState(2);
+  const [orderProgress, setOrderProgress] = useState(1);
   const [show, setShow] = useState(false);
 
   const [addressModalShow, setAddressModalShow] = useState(false);
@@ -160,6 +161,15 @@ const OrderTable = (myProps: props) => {
         show={show}
         setShow={setShow}
         handleCloseAllModals={handleCloseAllModals}
+      />
+
+      <OrderDetailsModal
+        setOrderDetailsModalShow={setOrderDetailsModalShow}
+        orderDetailsModalShow={orderDetailsModalShow}
+        addressModalShow={addressModalShow}
+        setAddressModalShow={setAddressModalShow}
+        handleCloseAllModals={handleCloseAllModals}
+        setShow={setShow}
       />
     </div>
   );

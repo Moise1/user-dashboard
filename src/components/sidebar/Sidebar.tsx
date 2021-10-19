@@ -72,6 +72,33 @@ export default function Sidebar(props: Props) {
     { key: 513, listName: t('Menu.PricingRules') }
   ];
 
+  const windowwidth = window.innerWidth;
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleSourcesSidebarClose = () => {
+    history.push('/sources');
+
+    // IF TOGGLE BUTTON SHOW ON TOP BAR, ONLY THEN CLOSE SIDEBAR OR IN MOBILE
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleOrdersSidebar = () => {
+    history.push('/orders');
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleCloseLlistingSidebar = () => {
+    history.push('/listings');
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+
+  console.log(windowwidth);
   return (
     <>
       <Sider
@@ -135,7 +162,7 @@ export default function Sidebar(props: Props) {
               {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
-              onClick={() => history.push('/listings')}
+              onClick={() => handleCloseLlistingSidebar()}
               key="4"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
@@ -149,7 +176,7 @@ export default function Sidebar(props: Props) {
               </button>
             </Menu.Item>
             <Menu.Item
-              onClick={() => history.push('/orders')}
+              onClick={() => handleOrdersSidebar()}
               key="5"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
@@ -180,7 +207,7 @@ export default function Sidebar(props: Props) {
               <Menu.Item key="10">
                 <li
                   className="list-unstyled list-items-hover m-0 h-25 leading-25"
-                  onClick={() => history.push('/sources')}
+                  onClick={() => handleSourcesSidebarClose()}
                 >
                   <span className="mr-3">
                     <CircleDotIcon />

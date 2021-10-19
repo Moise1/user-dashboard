@@ -48,12 +48,9 @@ const App = () => {
 
   const toggleCollapse = () => {
     setCollapse(!collapse);
-    console.log(collapse, 'collapse');
   };
 
   const toggleStaticValue = () => {
-    console.log(staticValue, 'staticValue');
-
     setStaticValue(!staticValue);
     if (staticValue) {
       setTimeout(() => {
@@ -61,6 +58,7 @@ const App = () => {
       }, 500);
     }
   };
+
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapse(!collapse);
