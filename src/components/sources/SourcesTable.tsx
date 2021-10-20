@@ -6,6 +6,7 @@ import { Popover } from 'antd';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
+import { t } from '../../global/transShim';
 
 interface props {
   tableValue: boolean;
@@ -21,38 +22,38 @@ function SourcesTable(myProps: props) {
         <table className="table source-table">
           <thead className="source-table-head">
             <tr>
-              <th>Provider</th>
+              <th> {t('SourceTable.Provider')}</th>
               <th>
-                <span className="mr-2"> Markup </span>{' '}
+                <span className="mr-2"> {t('SourceTable.Markup')} </span>{' '}
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> Monitor Stock </span>
+                <span className="mr-2"> {t('SourceTable.MonitorStock')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> Monitor Price </span>
+                <span className="mr-2">{t('SourceTable.MonitorPrice')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> Price Decrease </span>
+                <span className="mr-2"> {t('SourceTable.PriceDecrease')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> Decrease Limit % </span>
+                <span className="mr-2"> {t('SourceTable.DecreaseLimit')} </span>
               </th>
               <th>
-                <span className="mr-2"> Template </span>
+                <span className="mr-2"> {t('SourceTable.Template')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> Shipping Policy </span>
+                <span className="mr-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
               <th>
                 <Popover
                   placement="right"
                   content={
                     <div className="pop-over-content">
-                      <p className="mb-0">Beta</p>
+                      <p className="mb-0"> {t('SourceTable.Beta')}</p>
                     </div>
                   }
                 >
-                  <span className="mr-2"> Auto ordering </span>
+                  <span className="mr-2"> {t('SourceTable.AutoOrdering')} </span>
                 </Popover>
               </th>
             </tr>

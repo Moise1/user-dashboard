@@ -3,6 +3,7 @@ import SearchInput from '../SmallComponents/SearchInput';
 import { OrdersIcon } from '../common/Icons';
 import SourcesTable from './SourcesTable';
 import { useHistory } from 'react-router-dom';
+import { t } from '../../global/transShim';
 
 interface props {
   staticValue: boolean;
@@ -29,12 +30,13 @@ const SettingSourceConfig = (myProps: props) => {
             className="btn config-auto-ordering-beta-btn  my-3 my-md-0"
             onClick={() => history.push('/sources-setting')}
           >
-            Configure Autoordering (Beta)
+            {t('SourceConfigInputs.ConfigureAutoordering')}
+
             <span className="mx-1">
               <OrdersIcon />{' '}
             </span>
           </button>
-          <button className="btn config-supply-btn ml-0 ml-md-3">Configure suppliers</button>
+          <button className="btn config-supply-btn ml-0 ml-md-3"> {t('SourceConfigInputs.ConfigureSuppliers')}</button>
         </div>
 
         <SourcesTable tableValue={staticValue} />

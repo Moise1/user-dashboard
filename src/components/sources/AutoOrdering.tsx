@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
+import { t } from '../../global/transShim';
 
 interface props {
   whatSelect: string;
@@ -25,7 +26,7 @@ const AutoOrdering = (myProps: props) => {
         <div className="d-flex flex-column">
           <div className="d-flex my-0 my-lg-5 ">
             <div className="enable-disable-para ">
-              <p>Enable/Disable Auto-ordering</p>
+              <p>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</p>
               <span className="mr-5">Disabling auto-ordering will require you to manually process new orders.</span>
             </div>
 
@@ -38,24 +39,19 @@ const AutoOrdering = (myProps: props) => {
           </div>
 
           <h2 className="acc-config-text py-3">
-            Account configuration: <span> Dad account</span>{' '}
+            {t('SourceConfigInputs.AccountConfiguration')} : <span> {t('SourceConfigInputs.DadAccount')}</span>{' '}
           </h2>
 
           <AddAccountsSelect />
-          {/* <div className="row my-2">
-            <div className="col-7">
-              <Select options={options} defaultValue={options[0]} />
-            </div>
-          </div> */}
 
           <AccountsInput whatSelect={whatSelect} />
         </div>
         <div className="d-flex flex-row flex-sm-column">
           <button className="btn save-changes-btn mb-0 mb-sm-3">
             <DispatchedOrderIcon />
-            <span className="ml-2">Save changes</span>
+            <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
           </button>
-          <button className="ml-3 ml-sm-0 btn reset-to-default-btn">Reset to default</button>
+          <button className="ml-3 ml-sm-0 btn reset-to-default-btn"> {t('SourceConfigInputs.ResetToDefault')}</button>
         </div>
       </div>
     </>

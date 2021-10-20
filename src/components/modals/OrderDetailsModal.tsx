@@ -33,7 +33,7 @@ const OrderDetailsModal = (props: Props) => {
         className="modal-page"
         show={orderDetailsModalShow}
         onHide={() => setOrderDetailsModalShow(false)}
-        size="xl"
+        size={`${addressModalShow ? 'lg' : 'xl'}`}
         centered
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
@@ -64,7 +64,7 @@ const OrderDetailsModal = (props: Props) => {
           </Modal.Header>
         )}
 
-        <Modal.Body>
+        <Modal.Body className={`${addressModalShow ? 'p-0' : ''}`}>
           {addressModalShow ? (
             <AddressModal handleCloseAllModals={handleCloseAllModals} setAddressModalShow={setAddressModalShow} />
           ) : (
