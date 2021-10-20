@@ -17,6 +17,7 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
+import { t } from '../../global/transShim';
 
 // import { useState } from 'react';
 interface props {
@@ -46,37 +47,40 @@ const OrderTable = (myProps: props) => {
           <tr>
             <th>Img</th>
             <th className="order-th-none">
-              <span className="mr-2"> Sale </span> <UpdonwIcon />{' '}
+              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />{' '}
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> Source </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> Title </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> QTY </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdonwIcon />
             </th>
             <th>
-              <span className="mr-2"> Sold </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdonwIcon />
             </th>
             <th>
-              <span className="mr-2"> Cost </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdonwIcon />
             </th>
             <th>
-              <span className="mr-2"> Fees </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> Profit </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdonwIcon />
             </th>
             <th>
-              <span className="mr-2"> Margin </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> Ordered on </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> State </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.State')} </span> <UpdonwIcon />
+            </th>
+            <th>
+              <span className="mr-2"> &nbsp; </span>
             </th>
           </tr>
         </thead>
@@ -124,24 +128,24 @@ const OrderTable = (myProps: props) => {
                     <Dropdown.Menu>
                       <Dropdown.Item>
                         <ProcessOrderIcon />
-                        <span className="ml-2">Process order</span>
+                        <span className="ml-2"> {t('OrderTable.ProcessOrder')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <span onClick={() => setShow(true)}>
                           <HandStopOrderIcon />
-                          <span className="ml-2">Stop order</span>
+                          <span className="ml-2"> {t('OrderTable.StopOrder')} </span>
                         </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <DispatchedOrderIcon />
-                        <span className="ml-2">Mark as dispatched</span>
+                        <span className="ml-2"> {t('OrderTable.MarkAsDispatched')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <DustbinDeleteOrderIcon />
-                        <span className="ml-2">Delete order</span>
+                        <span className="ml-2">{t('OrderTable.DeleteOrder')} </span>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

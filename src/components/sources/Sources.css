@@ -261,6 +261,7 @@
   pointer-events: none;
   z-index: 10;
 }
+
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {
