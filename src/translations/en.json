@@ -62,6 +62,10 @@
   "OrderDetails.StopOrder": "Stop order",
   "OrderDetails.MarkAsDispatched": "Mark as dispatched",
   "OrderDetails.DeleteOrder": "Delete order",
+  "OrderDetails.StartOrder": "Start order",
+  "OrderDetails.AOEnabled": "AO Enabled",
+  "OrderDetails.HISTORY": "HISTORY",
+  "OrderDetails.viewFullLog": "view full log",
 
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
@@ -69,6 +73,11 @@
   "OrderTable.Cost": "Cost",
   "OrderTable.OrderedOn": "Ordered on",
   "OrderTable.State": "State",
+
+  "OrderButtons.ProcessOrders": "Process orders",
+  "OrderButtons.StopOrders": "Stop orders",
+  "OrderButtons.MarkAsDispatched": "Mark as dispatched",
+  "OrderButtons.DeleteOrders": "Delete orders",
 
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",

@@ -128,24 +128,24 @@ const OrderTable = (myProps: props) => {
                     <Dropdown.Menu>
                       <Dropdown.Item>
                         <ProcessOrderIcon />
-                        <span className="ml-2"> {t('OrderTable.ProcessOrder')}</span>
+                        <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <span onClick={() => setShow(true)}>
                           <HandStopOrderIcon />
-                          <span className="ml-2"> {t('OrderTable.StopOrder')} </span>
+                          <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
                         </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <DispatchedOrderIcon />
-                        <span className="ml-2"> {t('OrderTable.MarkAsDispatched')}</span>
+                        <span className="ml-2"> {t('OrderDetails.MarkAsDispatched')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         {' '}
                         <DustbinDeleteOrderIcon />
-                        <span className="ml-2">{t('OrderTable.DeleteOrder')} </span>
+                        <span className="ml-2">{t('OrderDetails.DeleteOrder')} </span>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

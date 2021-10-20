@@ -13,6 +13,7 @@ import {
   RoundCircleCycleIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
+import { t } from '../../global/transShim';
 
 interface Props {
   orderProgress: number;
@@ -47,12 +48,12 @@ const OrderStateProgressModal = (props: Props) => {
             <div className="p-0 p-lg-3">
               <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex flex-column flex-lg-row">
-                  <h2 className="head-part-one mr-5">Order state progress</h2>
+                  <h2 className="head-part-one mr-5"> {t('OrderDetails.OrderStateProcess')}</h2>
                   <button className="btn ao-enabled-button">
                     <span>
                       <AoIconHead />
                     </span>
-                    <span className="px-3">AO Enabled</span>
+                    <span className="px-3"> {t('OrderDetails.AOEnabled')}</span>
                   </button>
                 </div>
 
@@ -64,8 +65,8 @@ const OrderStateProgressModal = (props: Props) => {
               <div className="row flex-column flex-lg-row my-4">
                 <div className="col-12 col-lg-5">
                   <div className="d-flex justify-content-between pb-3">
-                    <span className="history-text">HISTORY</span>
-                    <span className="view-full-vlog-text">view full log</span>{' '}
+                    <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
+                    <span className="view-full-vlog-text">{t('OrderDetails.viewFullLog')}</span>{' '}
                   </div>
 
                   <div className="time-line-here">
@@ -81,7 +82,7 @@ const OrderStateProgressModal = (props: Props) => {
 
                       <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                         <h4 className="mb-1">
-                          Start order
+                          {t('OrderDetails.StartOrder')}
                           {orderProgress === 1 ? (
                             <span className="ml-2">
                               <OrderProcessRoundedIcon />
@@ -201,22 +202,22 @@ const OrderStateProgressModal = (props: Props) => {
                     <div className="d-flex flex-column flex-lg-row width-100">
                       <button className=" disabled-btn btn process-5-order-btn mr-0 mr-lg-3">
                         <ProcessOrderIcon />
-                        <span className="ml-2">Process Orders</span>
+                        <span className="ml-2">{t('OrderButtons.ProcessOrders')}</span>
                       </button>
                       <button className="btn stop-5-order-btn mt-3 mt-lg-0">
                         <HandStopOrderIcon />
-                        <span className="ml-2"> Stop Orders</span>
+                        <span className="ml-2"> {t('OrderButtons.StopOrders')} </span>
                       </button>
                     </div>
 
                     <div className="d-flex flex-column flex-lg-row justify-content-between mt-3 width-100">
                       <button className="btn delete-5-order-btn mr-0 mr-lg-3">
                         <DustbinDeleteOrderIcon />
-                        <span className="ml-2">Delete Orders</span>
+                        <span className="ml-2"> {t('OrderButtons.DeleteOrders')}</span>
                       </button>
                       <button className=" disabled-btn btn mark-dispatch-btn mt-3 mt-lg-0">
                         <DispatchedOrderIcon />
-                        <span className="ml-2">Mark as dispatched</span>
+                        <span className="ml-2"> {t('OrderButtons.MarkAsDispatched')}</span>
                       </button>
                     </div>
                   </div>
