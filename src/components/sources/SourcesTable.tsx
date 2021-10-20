@@ -25,22 +25,22 @@ function SourcesTable(myProps: props) {
               <th>
                 <span className="mr-2"> Markup </span>{' '}
               </th>
-              <th>
+              <th className="source-th-none">
                 <span className="mr-2"> Monitor Stock </span>
               </th>
-              <th>
+              <th className="source-th-none">
                 <span className="mr-2"> Monitor Price </span>
               </th>
-              <th>
+              <th className="source-th-none">
                 <span className="mr-2"> Price Decrease </span>
               </th>
-              <th>
+              <th className="source-th-none">
                 <span className="mr-2"> Decrease Limit % </span>
               </th>
               <th>
                 <span className="mr-2"> Template </span>
               </th>
-              <th>
+              <th className="source-th-none">
                 <span className="mr-2"> Shipping Policy </span>
               </th>
               <th>
@@ -63,14 +63,14 @@ function SourcesTable(myProps: props) {
             return (
               <tbody className="order-table-body" key={id}>
                 <tr>
-                  <td className="obj-sale-body  ">{provider}</td>
-                  <td className="obj-sale-body  ">{markup}</td>
-                  <td className="obj-sale-title   ">{decreaseLimit}</td>
-                  <td className="obj-sale-qty   ">
+                  <td className="obj-sale-body">{provider}</td>
+                  <td className="obj-sale-body  source-td-none">{markup}</td>
+                  <td className="obj-sale-title source-td-none">{decreaseLimit}</td>
+                  <td className="obj-sale-qty source-td-none">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty   ">
+                  <td className="obj-sale-qty  source-td-none  ">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
@@ -80,7 +80,7 @@ function SourcesTable(myProps: props) {
                   <td className="obj-sale-cost  ">{template}</td>
                   <td className="w-12per shipping-policy-text white-space-pre-wrap">{shippingPolicy}</td>
 
-                  <td className="w-15per">
+                  <td className="w-15per  source-td-none">
                     <Popover
                       placement="right"
                       content={

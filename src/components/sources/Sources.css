@@ -246,6 +246,15 @@
 }
 
 /* MEDIA QUERY  */
+
+@media (max-width: 768px) {
+  .source-table .source-th-none {
+    display: none !important;
+  }
+  .source-table .source-td-none {
+    display: none !important;
+  }
+}
 @media (max-width: 575.98px) {
   .w-348_54 {
     width: 290px !important;
