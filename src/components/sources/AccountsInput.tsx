@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DustbinPinkIcon } from '../common/Icons';
+import { t } from '../../global/transShim';
 
 interface props {
   whatSelect: string;
@@ -18,7 +19,7 @@ const AccountsInput = (myProps: props) => {
           <div className="col-12">
             <div className="width-207">
               <label className="account-label-style" htmlFor="">
-                Alias
+                {t('SourceConfigInputs.Alias')}
               </label>
               <input disabled={DisableAccount} className="account-input-style" type="text" placeholder="Dad Account" />
             </div>
@@ -27,7 +28,7 @@ const AccountsInput = (myProps: props) => {
             <div className="d-flex">
               <div className="acc-input-parent">
                 <label className="account-label-style" htmlFor="">
-                  {whatSelect} login
+                  {whatSelect} {t('SourceConfigInputs.login')}
                 </label>
                 <input
                   disabled={DisableAccount}
@@ -38,7 +39,7 @@ const AccountsInput = (myProps: props) => {
               </div>
               <div className="width-207 ml-3 ml-sm-5">
                 <label className="account-label-style" htmlFor="">
-                  {whatSelect} password
+                  {whatSelect} {t('SourceConfigInputs.password')}
                 </label>
                 <input disabled={DisableAccount} className="account-input-style" type="text" placeholder="3456344" />
               </div>
@@ -62,7 +63,7 @@ const AccountsInput = (myProps: props) => {
           <div className="col-12">
             <div className="width-207">
               <label className="account-label-style" htmlFor="">
-                Phone number
+                {t('SourceConfigInputs.PhoneNumber')}
               </label>
               <input
                 disabled={DisableAccount}
@@ -78,7 +79,7 @@ const AccountsInput = (myProps: props) => {
         <div className="col-12 my-4 my-sm-5">
           <div className="d-flex">
             <div className="enable-disable-para mr-4">
-              <p>Disable Account</p>
+              <p>{t('SourceConfigInputs.DisableAccount')}</p>
               <span>If you deactivate this account, orders will be placed through the activated accounts.</span>
             </div>
 
@@ -87,8 +88,6 @@ const AccountsInput = (myProps: props) => {
                 <input
                   className="input-toggle-switch"
                   onChange={() => setDisableAccount(!DisableAccount)}
-                  // checked={status === undefined ? false : status}
-                  // checked={isActive}
                   type="checkbox"
                   id="checkbox-1"
                 />
@@ -100,7 +99,7 @@ const AccountsInput = (myProps: props) => {
         <div className="col-12">
           <p className="remove-account-div">
             {' '}
-            <DustbinPinkIcon /> <div className="ml-2">Remove account</div>
+            <DustbinPinkIcon /> <div className="ml-2"> {t('SourceConfigInputs.RemoveAccount')}</div>
           </p>
           <p className="dark-pink-para mt-3">
             If you delete this account, you will have to set it up again and no payments will be made through this

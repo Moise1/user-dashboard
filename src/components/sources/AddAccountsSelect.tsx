@@ -3,6 +3,7 @@ import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 import { PersonWithPlusIcon } from '../common/Icons';
 import { Popover } from 'antd';
+import { t } from '../../global/transShim';
 
 const AddAccountsSelect = () => {
   // ACCOUNT LISTS ARRAY
@@ -45,7 +46,6 @@ const AddAccountsSelect = () => {
     setShowAccountInput(false);
     const id = Math.random() * 1023812031111;
     const newAccount = { value: AddAccountValue, id: id, status: 'active' };
-    console.log(newAccount, 'newAccount');
     supplierData.unshift(newAccount);
     console.log(AddAccountValue);
     console.log(arrayLists, 'arrayLists');
@@ -87,7 +87,7 @@ const AddAccountsSelect = () => {
               </div>
             ) : (
               <div className="d-flex aling-items-center  mt-2" onClick={() => setShowAccountInput(true)}>
-                <span className="add-acccounnt-span"> Add account</span>
+                <span className="add-acccounnt-span"> {t('SourceConfigInputs.AddAccount')}</span>
                 <span className="ml-2">
                   <PersonWithPlusIcon />
                 </span>
@@ -106,7 +106,7 @@ const AddAccountsSelect = () => {
                       placement="right"
                       content={
                         <div className="pop-over-content">
-                          <p className="mb-0"> Disabled</p>
+                          <p className="mb-0"> {t('SourceConfigInputs.Disabled')}</p>
                         </div>
                       }
                     >
