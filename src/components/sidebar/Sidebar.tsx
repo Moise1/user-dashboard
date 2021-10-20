@@ -103,7 +103,7 @@ export default function Sidebar(props: Props) {
     <>
       <Sider
         theme="light"
-        className="h-100 border-right border z-10 sidebarInitial ant-sidebar-aside"
+        className="h-100 border-right border z-1 sidebarInitial ant-sidebar-aside"
         trigger={null}
         collapsible
         collapsed={collapsed}

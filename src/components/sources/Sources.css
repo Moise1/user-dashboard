@@ -250,7 +250,7 @@
   color: rgba(0, 0, 0, 0.247) !important;
 }
 
-.overlay-dsiable-account::before {
+.overlay-dsiable-account::after {
   position: absolute;
   content: '';
   width: 100%;
@@ -259,7 +259,7 @@
   left: 0;
   top: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 2;
 }
 
 /* MEDIA QUERY  */

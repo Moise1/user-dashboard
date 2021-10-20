@@ -6,6 +6,9 @@ body {
 .fs-14 {
   font-size: var(--font-14);
 }
+.z-1 {
+  z-index: 1;
+}
 
 /* HOVER LIST ITEMS  */
 /* .ant-menu-item:hover {
@@ -493,7 +496,7 @@ label {
 
 .w-sidebar-toggle {
   width: var(--siderWidth);
-  z-index: 1;
+  z-index: 10;
   /* height: 100vh; */
   overflow-x: visible;
 }
