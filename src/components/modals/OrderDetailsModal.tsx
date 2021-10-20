@@ -65,7 +65,7 @@ const OrderDetailsModal = (props: Props) => {
 
         <Modal.Body>
           {addressModalShow ? (
-            <AddressModal handleCloseAllModals={handleCloseAllModals} />
+            <AddressModal handleCloseAllModals={handleCloseAllModals} setAddressModalShow={setAddressModalShow} />
           ) : (
             <div className="p-4 modals-inputs">
               <div className="row justify-content-between">
@@ -182,10 +182,7 @@ const OrderDetailsModal = (props: Props) => {
                 <div className="col mt-5 d-flex align-items-center">
                   <IconArrowModal />
 
-                  <div
-                    className="btnn-in-model order-details-back-text cursor-pointer"
-                    onClick={() => setAddressModalShow(true)}
-                  >
+                  <div className="btnn-in-model order-details-back-text cursor-pointer">
                     <span>Order State Process</span>
                   </div>
                 </div>

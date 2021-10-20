@@ -3,12 +3,12 @@ import { Form } from 'react-bootstrap';
 import { CrossModalIcon, IconEdit } from '../common/Icons';
 
 interface Props {
-  // setAddressModalShow: (value: boolean) => void;
+  setAddressModalShow: (value: boolean) => void;
   handleCloseAllModals: () => void;
 }
 
 const AddressModal = (props: Props) => {
-  const { handleCloseAllModals } = props;
+  const { handleCloseAllModals, setAddressModalShow } = props;
 
   return (
     <>
@@ -17,7 +17,7 @@ const AddressModal = (props: Props) => {
           <div className="col-7">
             <div className="pb-2 d-flex justify-content-between">
               <IconEdit />
-              <span className="cursor-pointer">
+              <span className="cursor-pointer" onClick={() => setAddressModalShow(false)}>
                 <CrossModalIcon />
               </span>
             </div>

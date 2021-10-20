@@ -45,16 +45,16 @@ const OrderTable = (myProps: props) => {
         <thead className="order-table-head">
           <tr>
             <th>Img</th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> Sale </span> <UpdonwIcon />{' '}
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> Source </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> Title </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> QTY </span> <UpdonwIcon />
             </th>
             <th>
@@ -66,16 +66,16 @@ const OrderTable = (myProps: props) => {
             <th>
               <span className="mr-2"> Fees </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> Profit </span> <UpdonwIcon />
             </th>
             <th>
               <span className="mr-2"> Margin </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> Ordered on </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> State </span> <UpdonwIcon />
             </th>
           </tr>
@@ -88,17 +88,17 @@ const OrderTable = (myProps: props) => {
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body">{obj.sale}</td>
-                <td className="obj-sale-body">{obj.source}</td>
-                <td className="obj-sale-title">{obj.title}</td>
-                <td className="obj-sale-qty">{obj.qty}</td>
-                <td className="obj-sale-qty">{obj.sold}</td>
+                <td className="obj-sale-body order-td-none">{obj.sale}</td>
+                <td className="obj-sale-body order-td-none">{obj.source}</td>
+                <td className="obj-sale-title order-td-none">{obj.title}</td>
+                <td className="obj-sale-qty order-td-none">{obj.qty}</td>
+                <td className="obj-sale-qty order-td-none">{obj.sold}</td>
                 <td className="obj-sale-cost  ">{obj.cost}</td>
                 <td className="obj-sale-qty  ">{obj.fees}</td>
-                <td className="obj-profit-text  ">{obj.profit}</td>
-                <td className="obj-sale-cost  ">{obj.margin}</td>
+                <td className="obj-profit-text order-td-none">{obj.profit}</td>
+                <td className="obj-sale-cost order-td-none ">{obj.margin}</td>
                 <td className="obj-sale-qty   ">{obj.orderOn}</td>
-                <td className="">
+                <td className="order-td-none">
                   <button
                     onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : null)}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
