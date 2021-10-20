@@ -37,27 +37,32 @@ const OrderDetailsModal = (props: Props) => {
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            <div className="d-flex flex-sm-row  flex-column  ">
-              <h1 className="head-part-one mr-5">Order Details</h1>
-              <button className="head-part-second align-items-center   d-flex ">
-                <AoIconHead />
+        {addressModalShow ? (
+          ''
+        ) : (
+          <Modal.Header closeButton>
+            <Modal.Title id="example-custom-modal-styling-title">
+              <div className="d-flex flex-sm-row  flex-column  ">
+                <h1 className="head-part-one mr-5">Order Details</h1>
+                <button className="head-part-second align-items-center   d-flex ">
+                  <AoIconHead />
 
-                <span className="px-2 ">AO Enabled</span>
-              </button>
-              <span
-                className="cursor-pointer cross-round-iconModal"
-                onClick={() => {
-                  setAddressModalShow(false);
-                  setOrderDetailsModalShow(false);
-                }}
-              >
-                <CrossModalIcon />
-              </span>
-            </div>
-          </Modal.Title>
-        </Modal.Header>
+                  <span className="px-2 ">AO Enabled</span>
+                </button>
+                <span
+                  className="cursor-pointer cross-round-iconModal"
+                  onClick={() => {
+                    setAddressModalShow(false);
+                    setOrderDetailsModalShow(false);
+                  }}
+                >
+                  <CrossModalIcon />
+                </span>
+              </div>
+            </Modal.Title>
+          </Modal.Header>
+        )}
+
         <Modal.Body>
           {addressModalShow ? (
             <AddressModal handleCloseAllModals={handleCloseAllModals} />
@@ -68,7 +73,7 @@ const OrderDetailsModal = (props: Props) => {
                   <div className="row ">
                     <div className="ship-bill-box d-flex flex-column flex-sm-row  py-3 px-2">
                       <div
-                        className="col-1 pl-0 d-flex align-items-center cursor-pointer"
+                        className="col-2 pl-0 d-flex align-items-center cursor-pointer"
                         onClick={() => setAddressModalShow(true)}
                       >
                         <span>

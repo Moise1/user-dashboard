@@ -1696,7 +1696,9 @@ table {
   border-radius: 8px;
   opacity: 1;
 }
-
+.bg-light-skyBlue {
+  background: rgba(250, 252, 255, 1);
+}
 .sale-head {
   font-size: var(--font-18);
   color: var(--txtBaseColor);
@@ -1916,8 +1918,6 @@ table {
 }
 
 @media (max-width: 575.98px) {
- 
-
   .advance-search-purple-button {
     padding: 10px 40px;
     width: 280px;
