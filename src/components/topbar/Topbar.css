@@ -1,0 +1,89 @@
+.TopBar {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  font-family: var(--mainFontFamily);
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+  background-color: var(--bgHighlight) !important;
+}
+/* HAMBURGER */
+.hamburger-mobile {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hamburger-mobile .second {
+  margin: 5px 0;
+}
+.hamburger-mobile span {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--bgHighlight);
+}
+
+.quota-head {
+  font-size: var(--font-18);
+  color: var(--color-dark-violet);
+  font-weight: bold;
+}
+
+.quota-price {
+  font-size: var(--font-16);
+  font-weight: normal;
+  color: var(--color-dark-violet);
+  white-space: nowrap;
+}
+.Update-btn {
+  background-color: var(--color-dark-violet);
+  font-size: var(--font-18);
+  font-weight: bold;
+  color: var(--color-white);
+}
+
+.Update-btn:hover {
+  color: var(--color-white) !important;
+  background-color: var(--color-dark-violet);
+  opacity: 0.8;
+}
+
+@media (max-width: 1180px) {
+  .TopBar {
+    justify-content: none !important;
+  }
+  .hgr-progress > :nth-child(-n + 1),
+  .hgr-progress > :nth-child(3) {
+    position: absolute;
+    left: -10000px;
+  }
+
+  .quota-head {
+    display: none;
+  }
+}
+
+.upgrde-btn-topbar {
+  font-weight: 600;
+  font-size: 8px;
+  color: #fff;
+  width: 44.58px;
+  height: 13.78px;
+  border-radius: 20px;
+  background: #262e80;
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+}
+@media (max-width: 576.98px) {
+  .bell-icoon-topbar {
+    width: 20px;
+    height: 20px;
+  }
+}

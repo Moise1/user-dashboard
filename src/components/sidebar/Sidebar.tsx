@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
-
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -13,9 +12,12 @@ import {
   SettingsIcon,
   HelpIcon,
   LogOutIcon,
-  OrdersIcon
+  OrdersIcon,
+  CircleDotIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
+import './Sidebar.css';
+
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
@@ -51,8 +53,6 @@ export default function Sidebar(props: Props) {
   const { collapsed, staticvalue, togglestatic } = props;
 
   const listArray = [
-    { key: 9, listName: t('Menu.Channel') },
-    { key: 10, listName: t('Menu.Sources') },
     { key: 11, listName: t('Menu.PricingRules') },
     { key: 12, listName: t('Menu.BrowserExtensions') },
     { key: 13, listName: t('Menu.VAProfile') },
@@ -72,11 +72,38 @@ export default function Sidebar(props: Props) {
     { key: 513, listName: t('Menu.PricingRules') }
   ];
 
+  const windowwidth = window.innerWidth;
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleSourcesSidebarClose = () => {
+    history.push('/sources');
+
+    // IF TOGGLE BUTTON SHOW ON TOP BAR, ONLY THEN CLOSE SIDEBAR OR IN MOBILE
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleOrdersSidebar = () => {
+    history.push('/orders');
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
+  const handleCloseLlistingSidebar = () => {
+    history.push('/listings');
+    if (windowwidth < 992) {
+      togglestatic();
+    }
+  };
+
+  console.log(windowwidth);
   return (
     <>
       <Sider
         theme="light"
-        className="h-100 border-right border z-10 sidebarInitial"
+        className="h-100 border-right border z-10 sidebarInitial ant-sidebar-aside"
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -135,7 +162,7 @@ export default function Sidebar(props: Props) {
               {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
-              onClick={() => history.push('/listings')}
+              onClick={() => handleCloseLlistingSidebar()}
               key="4"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
@@ -149,7 +176,7 @@ export default function Sidebar(props: Props) {
               </button>
             </Menu.Item>
             <Menu.Item
-              onClick={() => history.push('/orders')}
+              onClick={() => handleOrdersSidebar()}
               key="5"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={
@@ -169,6 +196,26 @@ export default function Sidebar(props: Props) {
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
+              <Menu.Item key="9">
+                <li className="list-unstyled list-items-hover m-0 h-25 leading-25">
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>
+                  Channel
+                </li>
+              </Menu.Item>
+              <Menu.Item key="10">
+                <li
+                  className="list-unstyled list-items-hover m-0 h-25 leading-25"
+                  onClick={() => handleSourcesSidebarClose()}
+                >
+                  <span className="mr-3">
+                    <CircleDotIcon />
+                  </span>
+                  Sources
+                </li>
+              </Menu.Item>
+
               {listArray.map((obj) => (
                 <Menu.Item key={obj.key}>
                   <MenuListItem listName={obj.listName} onClick={obj.onClick} />

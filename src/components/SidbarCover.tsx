@@ -2,6 +2,7 @@ import React from 'react';
 
 interface props {
   staticValue: boolean;
+  // handleMobile: boolean;
   setCollapse: (value: boolean) => void;
   children?: JSX.Element | JSX.Element[];
 }
@@ -22,7 +23,7 @@ export default function SidbarCover(myProps: props) {
           return;
         }
       }}
-      className={`d-none d-lg-block ${!staticValue ? 'w-sidebar-toggle' : ''}`}
+      className={`${!staticValue ? 'w-sidebar-toggle' : ''}`}
     >
       {children}
     </div>

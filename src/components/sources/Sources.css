@@ -1,0 +1,304 @@
+.back-to-supplier-heading {
+  color: var(--color-dark-violet);
+  font-size: var(--font-large);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.beta-bg {
+  background-color: var(--bgPage);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.beta-bg h2 {
+  color: var(--bgBlue);
+  font-weight: bold;
+  font-size: var(--text-heading);
+}
+
+.beta-bg span {
+  font-weight: 400;
+  font-size: var(--font-xl);
+  color: var(--color-grey);
+}
+
+.auto-ordering-section {
+  background-color: var(--bgPage);
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.auto-ordering-heading-text {
+  font-weight: bold;
+  font-size: var(--sub-heading);
+  color: black;
+  font-weight: bold;
+}
+
+.auto-ordering-heading-text span {
+  color: var(--bgBlue);
+}
+
+/* DROPDOWN STYLE  */
+
+.supplier-dropdown .Dropdown-control {
+  width: 219.47px;
+  height: 62px;
+  border-radius: 8px;
+  background: var(--bgHighlight);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border: 0;
+}
+
+.supplier-dropdown .Dropdown-arrow {
+  border-color: #000 transparent transparent;
+  border-width: 8px 5px 3px;
+}
+
+.supplier-dropdown .is-open .Dropdown-arrow {
+  border-color: transparent transparent #000;
+  border-width: 3px 5px 8px;
+}
+
+.supplier-dropdown .Dropdown-arrow {
+  margin-top: 10px;
+}
+
+.supplier-dropdown .Dropdown-placeholder.is-selected {
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+  margin-top: 10px;
+}
+
+.supplier-dropdown .Dropdown-menu {
+  width: 219.47px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border: 0;
+  border-radius: 8px;
+}
+
+/* SELECT SOURCES STYLES  */
+
+.add-account-select-parent {
+  width: 348.54px !important;
+}
+
+.react-search-with-select-parent {
+  width: 219.47px;
+  height: 62px;
+  border-radius: 8px !important;
+  background: var(--bgHighlight);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  position: relative;
+  border: 0;
+  /* z-index: 10; */
+}
+
+.react-search-with-select-parent .select-dropdown-shows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 6px 12px;
+  overflow: hidden;
+  background-color: var(--bgHighlight);
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+.react-search-with-select-parent .select-dropdown-shows h5 {
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+}
+
+.shows-search-drop-list {
+  border-radius: 8px !important;
+  /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
+  -webkit-box-shadow: 0px 5px 10px -6px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 5px 10px -6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 5px 10px -6px rgba(0, 0, 0, 0.16);
+
+  padding: 12px;
+  background-color: var(--bgHighlight);
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  top: 50px;
+}
+
+.react-list-data-here {
+  margin-top: 12px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.react-list-data-here::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.react-list-data-here::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 8px;
+}
+
+.react-list-data-here::-webkit-scrollbar {
+  width: 5px;
+}
+
+.react-list-data-here li {
+  list-style-type: none;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 12px 0;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.react-list-data-here li:hover {
+  background-color: rgba (255, 255, 255, 0.418);
+}
+
+.drop-list-search-input {
+  width: 100%;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: var(--bgHighlight);
+  border: 2px solid #707070;
+  opacity: 0.29;
+}
+
+.drop-list-search-input input {
+  border: 0;
+  outline: none;
+}
+
+.drop-list-search-input .search-icon-input-box {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+}
+
+.add-acccounnt-span {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--bgBlue);
+  cursor: pointer;
+  display: inline-block;
+}
+.add-account-input-inselect {
+  width: 100%;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: var(--bgHighlight);
+  border: 2px solid #70707052;
+  /* opacity: 0.29; */
+  position: relative;
+  margin: 12px 0;
+}
+
+.add-account-input-inselect input {
+  border: 0;
+  outline: none;
+}
+
+.add-account-input-inselect .plus-icon-add {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.account-label-style {
+  font-weight: bold;
+  font-size: var(--font-medium);
+  color: var(--txtBaseColor);
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.account-input-style:focus-visible {
+  outline: none;
+}
+
+.acc-input-parent {
+  width: 255px;
+}
+
+.amazonlogin-input-style {
+  padding: 9px 12px;
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  background-color: var(--bgInputLight) !important;
+  border: 0;
+  outline: none;
+  font-weight: bold;
+  font-size: var(--font-medium);
+  color: rgba(0, 0, 0, 0.247) !important;
+}
+
+.amazonlogin-input-style::placeholder {
+  color: rgba(0, 0, 0, 0.247) !important;
+}
+
+.overlay-dsiable-account::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* MEDIA QUERY  */
+
+@media (max-width: 768px) {
+  .source-table .source-th-none {
+    display: none !important;
+  }
+  .source-table .source-td-none {
+    display: none !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .w-348_54 {
+    width: 290px !important;
+  }
+  .auto-ordering-section {
+    border-radius: 0;
+    padding: 15px;
+  }
+
+  .acc-input-parent {
+    width: 235px;
+  }
+
+  .react-search-with-select-parent .select-dropdown-shows h5 {
+    font-size: 14px;
+  }
+  .react-search-with-select-parent {
+    width: 180px;
+    height: 50px;
+  }
+
+  .react-list-data-here li {
+    font-size: 14px;
+    margin: 8px 0;
+  }
+  .add-account-select-parent {
+    width: 230px !important;
+    height: 50px;
+  }
+}

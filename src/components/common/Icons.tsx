@@ -1,5 +1,104 @@
 import React from 'react';
 
+export const ThreeDotsColumnIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_44"
+        data-name="Group 44"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path id="Path_34" data-name="Path 34" d="M0,0H24V24H0Z" fill="none" />
+        <circle
+          id="Ellipse_12"
+          data-name="Ellipse 12"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 11)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_13"
+          data-name="Ellipse 13"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 18)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <circle
+          id="Ellipse_14"
+          data-name="Ellipse 14"
+          cx="1"
+          cy="1"
+          r="1"
+          transform="translate(11 4)"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const CrossModalIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="43.659" height="43.659" viewBox="0 0 43.659 43.659">
+        <g id="Group_204" data-name="Group 204" transform="translate(0 21.829) rotate(-45)">
+          <path id="Path_195" data-name="Path 195" d="M0,0H30.872V30.872H0Z" fill="none" />
+          <circle
+            id="Ellipse_103"
+            data-name="Ellipse 103"
+            cx="11.577"
+            cy="11.577"
+            r="11.577"
+            transform="translate(3.859 3.859)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            id="Line_78"
+            data-name="Line 78"
+            x2="7.718"
+            transform="translate(11.577 15.436)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <line
+            id="Line_79"
+            data-name="Line 79"
+            y2="7.718"
+            transform="translate(15.436 11.577)"
+            fill="none"
+            stroke="#000"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </g>
+      </svg>
+    </>
+  );
+};
+
 export const DustbinPinkIcon = () => {
   return (
     <>
@@ -144,6 +243,46 @@ export const PersonWithPlusIcon = () => {
   );
 };
 
+export const OrderProcessRoundedIcon = () => {
+  return (
+    <>
+      <svg
+        className="rotating"
+        id="Group_203"
+        data-name="Group 203"
+        xmlns="http://www.w3.org/2000/svg"
+        width="19"
+        height="19"
+        viewBox="0 0 19 19"
+      >
+        <path id="Path_192" data-name="Path 192" d="M0,0H19V19H0Z" fill="none" />
+        <path
+          id="Path_193"
+          data-name="Path 193"
+          d="M16.667,9.545A6.412,6.412,0,0,0,4.4,7.961M4,4.795V7.961H7.167"
+          transform="translate(-0.833 -0.836)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          id="Path_194"
+          data-name="Path 194"
+          d="M4,13a6.413,6.413,0,0,0,12.271,1.583m.4,3.167V14.583H13.5"
+          transform="translate(-0.833 -2.708)"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+    </>
+  );
+};
+
 export const RoundCircleCycleIcon = () => {
   return (
     <>
@@ -169,7 +308,7 @@ export const RoundCircleCycleIcon = () => {
               r="2"
               transform="translate(4 17)"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -182,7 +321,7 @@ export const RoundCircleCycleIcon = () => {
               r="2"
               transform="translate(15 17)"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -192,7 +331,7 @@ export const RoundCircleCycleIcon = () => {
               data-name="Path 310"
               d="M17,17H6V3H4"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -202,7 +341,7 @@ export const RoundCircleCycleIcon = () => {
               data-name="Path 311"
               d="M6,5,20,6l-1,7H6"
               fill="none"
-              stroke="#262e80"
+              stroke="rgba(112,112,112,0.37)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="1.5"
@@ -214,6 +353,107 @@ export const RoundCircleCycleIcon = () => {
   );
 };
 
+export const OrderCheckoutIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <g id="added-icon" transform="translate(-1045 -408)">
+          <circle
+            id="Ellipse_3"
+            data-name="Ellipse 3"
+            cx="20"
+            cy="20"
+            r="20"
+            transform="translate(1045 408)"
+            fill="rgba(22,73,151,0.98)"
+            opacity="0.05"
+          />
+          <g id="Group_324" data-name="Group 324" transform="translate(1053 416.5)">
+            <path id="Path_308" data-name="Path 308" d="M0,0H24V24H0Z" fill="none" />
+            <rect
+              id="Rectangle_344"
+              data-name="Rectangle 344"
+              width="18"
+              height="14"
+              rx="3"
+              transform="translate(3 5)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_187"
+              data-name="Line 187"
+              x2="18"
+              transform="translate(3 10)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_188"
+              data-name="Line 188"
+              x2="0.01"
+              transform="translate(7 15)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <line
+              id="Line_189"
+              data-name="Line 189"
+              x2="2"
+              transform="translate(11 15)"
+              fill="none"
+              stroke="rgba(112,112,112,0.37)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </g>
+        </g>
+      </svg>
+    </>
+  );
+};
+export const LastStepOrderIcon = () => {
+  return (
+    <>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <g id="Group_345" data-name="Group 345" transform="translate(-356 -548.5)">
+          <g id="added-icon" transform="translate(-689 140.5)">
+            <circle
+              id="Ellipse_3"
+              data-name="Ellipse 3"
+              cx="20"
+              cy="20"
+              r="20"
+              transform="translate(1045 408)"
+              fill="#164997"
+              opacity="0.05"
+            />
+          </g>
+          <g id="check_circle_black_24dp" transform="translate(360.637 553.563)">
+            <path id="Path_314" data-name="Path 314" d="M0,0H30.863V30.863H0Z" fill="none" />
+            <path
+              id="Path_315"
+              data-name="Path 315"
+              d="M14.86,2a12.86,12.86,0,1,0,12.86,12.86A12.864,12.864,0,0,0,14.86,2Zm0,23.147A10.288,10.288,0,1,1,25.147,14.86,10.3,10.3,0,0,1,14.86,25.147Zm5.9-15.972L12.288,17.65,8.957,14.332,7.144,16.146l5.144,5.144L22.576,11Z"
+              transform="translate(0.572 0.572)"
+              fill="rgba(112,112,112,0.37)"
+            />
+          </g>
+        </g>
+      </svg>
+    </>
+  );
+};
 export const LeftBackArrowIcon = () => {
   return (
     <>
@@ -640,7 +880,13 @@ export const SettingsIcon = () => {
 export const ProcessOrderIcon = () => {
   return (
     <>
-      <svg xmlns="http://www.w3.org/2000/svg" width="25.174" height="25.174" viewBox="0 0 25.174 25.174">
+      <svg
+        className="process-order-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="25.174"
+        height="25.174"
+        viewBox="0 0 25.174 25.174"
+      >
         <g id="Group_291" data-name="Group 291" transform="translate(1.174 1.174)">
           <path id="Path_286" data-name="Path 286" d="M0,0H24V24H0Z" fill="none" />
           <path
@@ -1195,6 +1441,33 @@ export const AoIconHead = () => {
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
+export const IconArrowModal = () => {
+  return (
+    <>
+      <svg
+        id="Group_289"
+        data-name="Group 289"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30.73"
+        height="30.73"
+        viewBox="0 0 30.73 30.73"
+      >
+        <path id="Path_70" data-name="Path 70" d="M0,0H30.73V30.73H0Z" fill="none" />
+        <path
+          id="Path_71"
+          data-name="Path 71"
+          d="M16.683,6,9,13.683l7.683,7.683"
+          transform="translate(2.524 1.683)"
+          fill="none"
+          stroke="#262E80"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="3"
         />
       </svg>
     </>

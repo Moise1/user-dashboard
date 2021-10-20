@@ -2,7 +2,6 @@
 // import tickimg from '../assets/tableImg/tick.svg';
 // import editimg from '../assets/tableImg/editicon.svg';
 // import dotsicon from '../assets/tableImg/dotsicon.svg';
-import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { ListingTableRow } from './ListingTableRow';
 import { t } from '../../global/transShim';
@@ -45,31 +44,43 @@ export default function ListingTable() {
         {showActive ? (
           ''
         ) : (
-          <div className="pt-3">
-            <span className="p-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-              <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
-              <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
-                {' '}
-                Copy <span className="fw-600">5</span> listings{' '}
+          <div className="d-flex justify-content-between">
+            <div className="pt-3">
+              <span className="py-1 px-2 p-sm-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
+                <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
+                <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
+                  {' '}
+                  Copy <span className="fw-600">5</span> listings{' '}
+                </span>
+                <span className="check-click-text">
+                  Optimise <span className="fw-600">5</span> titles
+                </span>
               </span>
-              <span className="check-click-text">
-                Optimise <span className="fw-600">5</span> titles
-              </span>
-            </span>
+            </div>
+
+            <div className="py-3 pr-1">
+              {' '}
+              <p className="active-text-black">26 active</p>
+            </div>
           </div>
         )}
         <div className="overflow-x-auto pt-4">
-          <div className="d-flex table-head border-bottom-body ml-4 table-header listingTableRow">
-            <div className="d-flex">
-              <Form.Group className="select-custom" controlId="formBasicCheckbox">
-                <Form.Check
-                  onClick={() => {
-                    setShowActive(!showActive);
-                  }}
-                  type="checkbox"
-                  label="Select all"
-                />
-              </Form.Group>
+          <div className="d-flex table-head border-bottom-body ml-3 table-header listingTableRow">
+            <div className="d-flex align-items-center">
+              <input
+                onClick={() => {
+                  setShowActive(!showActive);
+                }}
+                type="checkbox"
+                id="select-all"
+              />
+
+              <label className="d-none d-md-block" htmlFor="select-all">
+                Select all
+              </label>
+              {/* <Form.Group className="select-custom" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Select all" />
+              </Form.Group> */}
             </div>
             <div>{t('Listings.Column.Item no.')}</div>
             <div className="d-none d-md-block">{t('Listings.Column.Source')}</div>
@@ -79,16 +90,16 @@ export default function ListingTable() {
             <div>{t('Listings.Column.Profit')}</div>
             <div className="d-none d-md-block">{t('Listings.Column.Markup')}</div>
             <div>{t('Listings.Column.Stock')}</div>
-            <div className="d-none d-md-block">{t('Listings.Column.Created on')}</div>
+            <div className="">{t('Listings.Column.Created on')}</div>
             <div>&nbsp;</div>
           </div>
-          <div className="table-body ml-4">
+          <div className="table-body ml-3">
             {tabledata.map((key) => (
               <ListingTableRow key={key.id} data={key} />
             ))}
           </div>
         </div>
-        <div className="d-flex flex-column flex-sm-row mx-4 justify-content-start justify-content-sm-between align-items-start align-items-sm-center py-3">
+        <div className="d-flex  mx-4  justify-content-between align-items-start align-items-sm-center py-3">
           <div className="d-flex align-items-center ">
             <p className="table-body-sell border-left-dark-voilet w-50px pr-3 mb-0">50</p>
             <p className="table-body-sell border-left-dark-voilet w-50px px-3 mb-0">100</p>

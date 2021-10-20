@@ -2,32 +2,31 @@ import React, { useState, ChangeEvent } from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
-// import Select from 'react-select';
 
-const AutoOrdering = () => {
+interface props {
+  whatSelect: string;
+}
+
+const AutoOrdering = (myProps: props) => {
   const [checked, setChecked] = useState<boolean>(false);
+  const { whatSelect } = myProps;
+
   // FOR GET VALUE OF TOGGLE SWITCH
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setChecked(event.target.checked);
   };
-  console.log(checked, 'state');
 
-  // const options = [
-  //   { value: 'Select supplier', label: 'Select supplier', isDisabled: true },
-  //   { value: 'Amazon', label: 'Amazon' },
-  //   { value: 'Flipcart', label: 'Flipcart' },
-  //   { value: 'Ali Express', label: 'Ali Express' }
-  // ];
+  console.log(checked, 'state');
 
   return (
     <>
       <div className="d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
         <div className="d-flex flex-column">
-          <div className="d-flex my-0 my-lg-5">
+          <div className="d-flex my-0 my-lg-5 ">
             <div className="enable-disable-para ">
               <p>Enable/Disable Auto-ordering</p>
-              <span>Disabling auto-ordering will require you to manually process new orders.</span>
+              <span className="mr-5">Disabling auto-ordering will require you to manually process new orders.</span>
             </div>
 
             <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
@@ -38,7 +37,7 @@ const AutoOrdering = () => {
             </div>
           </div>
 
-          <h2 className="acc-config-text">
+          <h2 className="acc-config-text py-3">
             Account configuration: <span> Dad account</span>{' '}
           </h2>
 
@@ -49,7 +48,7 @@ const AutoOrdering = () => {
             </div>
           </div> */}
 
-          <AccountsInput />
+          <AccountsInput whatSelect={whatSelect} />
         </div>
         <div className="d-flex flex-row flex-sm-column">
           <button className="btn save-changes-btn mb-0 mb-sm-3">

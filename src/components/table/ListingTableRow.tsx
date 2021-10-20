@@ -10,15 +10,17 @@ export function ListingTableRow(props: props) {
   return (
     <>
       <div className="listingTableRow border-bottom-body my-3 ">
-        <div className="d-flex align-items-center">
-          <div className="form-group form-check">
+        <div className="d-flex  align-items-center justify-content-center justify-content-md-start">
+          <div className="form-group form-check d-flex  d-md-block align-items-center justify-content-center">
             <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
             <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-              <img src={key.selectall} className="img-fluid" alt="" />
+              <img className="d-none d-md-block" src={key.selectall} alt="" />
             </label>
           </div>
         </div>
         <div>
+          <img className="d-md-none" src={key.selectall} alt="" />
+
           <p className="table-body-style">{key.itemNo}</p>
         </div>
         <div className="d-none d-md-block">
@@ -54,16 +56,18 @@ export function ListingTableRow(props: props) {
             {key.stock}
           </p>
         </div>
-        <div className="d-none d-md-block">
+        <div className="">
           <p className="table-body-sell">
             <FormattedDate value={key.createdOn} /> <FormattedTime value={key.createdOn} />
           </p>
         </div>
-        <div>
-          <span className="mx-3">
+        <div className="d-flex">
+          <span className="mx-3  ">
             <DotIcon />
           </span>
-          <EditIcon />
+          <span className="d-none d-md-block">
+            <EditIcon />
+          </span>
         </div>
       </div>
     </>

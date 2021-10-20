@@ -9,8 +9,8 @@
     --text-heading: 16px;
     --font-xl: 14px;
     --sub-heading: 14px;
-    --font-large: 12px;
-    --font-medium: 12px;
+    --font-large: 10px;
+    --font-medium: 8px;
     --font-small: 8px;
     --font-extra-small: 10px;
 
@@ -49,9 +49,9 @@
     width: var(--logoWidth);
   }
 
-  #Group_41 {
+  /* #Group_41 {
     display: none;
-  }
+  } */
 
   .listingTableRow label {
     width: 20px;
@@ -59,9 +59,9 @@
     margin-left: 0 !important;
   }
 
-  .listingTableRow img {
+  /* .listingTableRow img {
     display: none;
-  }
+  } */
 
   .listingTableRow svg {
     width: 16px;
@@ -69,7 +69,7 @@
   }
 
   .searchBar {
-    height: 42px !important;
+    height: 50px !important;
   }
 
   .searchBar img {
@@ -88,5 +88,17 @@
   }
   input.search_placeholder {
     padding: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    height: 43px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .storeSelector {
+    width: unset;
   }
 }
