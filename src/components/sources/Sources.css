@@ -111,6 +111,11 @@
   cursor: pointer;
   transition: all 300ms ease;
 }
+.react-search-with-select-parent .select-dropdown-shows h5 {
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+}
 
 .shows-search-drop-list {
   border-radius: 8px !important;
@@ -245,6 +250,17 @@
   color: rgba(0, 0, 0, 0.247) !important;
 }
 
+.overlay-dsiable-account::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 10;
+}
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {
@@ -272,6 +288,16 @@
     font-size: 14px;
   }
   .react-search-with-select-parent {
-    width: 230.47px;
+    width: 180px;
+    height: 50px;
+  }
+
+  .react-list-data-here li {
+    font-size: 14px;
+    margin: 8px 0;
+  }
+  .add-account-select-parent {
+    width: 230px !important;
+    height: 50px;
   }
 }

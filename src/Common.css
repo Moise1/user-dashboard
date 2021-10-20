@@ -1301,6 +1301,8 @@ table {
 }
 
 .enable-disable-para span {
+  display: inline-block;
+  max-width: 364px;
   font-weight: 400;
   font-size: var(--font-extra-small);
   color: var(--color-black);
