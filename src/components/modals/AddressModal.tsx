@@ -12,17 +12,17 @@ const AddressModal = (props: Props) => {
 
   return (
     <>
-      <div className="">
+      <div className="ship-bill-box">
         <div className="row justify-content-between">
-          <div className="col-7">
-            <div className="pb-2 d-flex justify-content-between">
+          <div className="col-10">
+            <div className="p-3 d-flex justify-content-between">
               <IconEdit />
               <span className="cursor-pointer" onClick={() => setAddressModalShow(false)}>
                 <CrossModalIcon />
               </span>
             </div>
-            <div className="ship-bill-box">
-              <div className="d-flex justify-content-between p-3">
+            <div className="">
+              <div className="d-flex flex-column flex-lg-row justify-content-between p-3">
                 {/* SHIPPING ADDRESSS  */}
                 <div className="col-12 col-lg-5">
                   <div className="modal-second-inputs  ">
@@ -51,7 +51,7 @@ const AddressModal = (props: Props) => {
         </div>
 
         <div className="row">
-          <div className="col-7 d-flex justify-content-end mt-3">
+          <div className="col-10 d-flex justify-content-end my-3">
             <button className="save-btnn-modal px-5" onClick={() => handleCloseAllModals()}>
               Save
             </button>
