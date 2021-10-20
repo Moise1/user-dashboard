@@ -12,31 +12,40 @@ const AddressModal = (props: Props) => {
 
   return (
     <>
-      <div className="ship-bill-box">
-        <div className="row justify-content-between">
-          <div className="col-10">
-            <div className="p-3 d-flex justify-content-between">
+      <div className="ship-bill-box p-3">
+        {/* MODAL HEADER  */}
+        <div className="row">
+          <div className="col-12">
+            <div className="d-flex justify-content-between">
               <IconEdit />
               <span className="cursor-pointer" onClick={() => setAddressModalShow(false)}>
                 <CrossModalIcon />
               </span>
             </div>
-            <div className="">
-              <div className="d-flex flex-column flex-lg-row justify-content-between p-3">
-                {/* SHIPPING ADDRESSS  */}
-                <div className="col-12 col-lg-5">
-                  <div className="modal-second-inputs  ">
-                    <h1 className="shop-address ">Shipping address</h1>
-                    <p className="modal-second-input-heads pt-3">Street address</p>
-                    <Form.Control className="modal-inputs" type="text" placeholder="" />
-                    <p className="modal-second-input-heads pt-3">City</p>
-                    <Form.Control className="modal-inputs" type="text" placeholder="" />
-                    <p className="modal-second-input-heads pt-3">Postal code/state</p>
-                    <Form.Control className="modal-inputs" type="text" placeholder="" />
-                  </div>
+          </div>
+        </div>
+
+        {/* MIDDLE PART WITH INPUTS  */}
+
+        <div className="row">
+          <div className="col-10">
+            <div className="row">
+              {/* SHIPPING ADDRESSS  */}
+              <div className="col-lg-5">
+                <div className="modal-second-inputs  ">
+                  <h1 className="shop-address ">Shipping address</h1>
+                  <p className="modal-second-input-heads pt-3">Street address</p>
+                  <Form.Control className="modal-inputs" type="text" placeholder="" />
+                  <p className="modal-second-input-heads pt-3">City</p>
+                  <Form.Control className="modal-inputs" type="text" placeholder="" />
+                  <p className="modal-second-input-heads pt-3">Postal code/state</p>
+                  <Form.Control className="modal-inputs" type="text" placeholder="" />
                 </div>
-                {/* BILLING ADDRESSS  */}
-                <div className="col-12 col-lg-5 mt-4 mt-lg-0 modal-second-inputs">
+              </div>
+
+              {/* BILLING ADDRESSS  */}
+              <div className="col-lg-5">
+                <div className="mt-4 mt-lg-0 modal-second-inputs">
                   <h1 className="shop-address ">Billing address</h1>
                   <p className="modal-second-input-heads pt-3">Street address</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
@@ -50,8 +59,10 @@ const AddressModal = (props: Props) => {
           </div>
         </div>
 
+        {/* END PART SAVE BUTTON  */}
+
         <div className="row">
-          <div className="col-10 d-flex justify-content-end my-3">
+          <div className="col-12 d-flex justify-content-end">
             <button className="save-btnn-modal px-5" onClick={() => handleCloseAllModals()}>
               Save
             </button>
