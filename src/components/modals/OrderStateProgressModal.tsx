@@ -10,7 +10,8 @@ import {
   OrderCheckoutIcon,
   OrderProcessRoundedIcon,
   ProcessOrderIcon,
-  RoundCircleCycleIcon
+  RoundCircleCycleIcon,
+  LeftBackArrowIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import { t } from '../../global/transShim';
@@ -163,7 +164,7 @@ const OrderStateProgressModal = (props: Props) => {
 
               <div className="row">
                 <div className="col-12 d-flex flex-column flex-lg-row justify-content-between ">
-                  <span className="d-flex mt-4">
+                  <span className="d-flex align-items-center mt-4 mb-3 mb-lg-0">
                     <div
                       className="order-details-model-btnn order-details-back-text cursor-pointer"
                       onClick={() => {
@@ -173,37 +174,17 @@ const OrderStateProgressModal = (props: Props) => {
                     >
                       {t('OrderDetails.OrderDetails')}
                     </div>
-                    <span>
-                      <svg
-                        id="Group_345"
-                        data-name="Group 345"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="30.73"
-                        height="30.73"
-                        viewBox="0 0 30.73 30.73"
-                      >
-                        <path id="Path_70" data-name="Path 70" d="M30.73,0H0V30.73H30.73Z" fill="none" />
-                        <path
-                          id="Path_71"
-                          data-name="Path 71"
-                          d="M9,6l7.683,7.683L9,21.365"
-                          transform="translate(2.524 1.683)"
-                          fill="none"
-                          stroke="#262e80"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="3"
-                        />
-                      </svg>
-                    </span>{' '}
+                    <span className="rotate-180-arrow">
+                      <LeftBackArrowIcon />
+                    </span>
                   </span>
                   <div className="d-flex align-items-end flex-column">
                     <div className="d-flex flex-column flex-lg-row width-100">
-                      <button className=" disabled-btn btn process-5-order-btn mr-0 mr-lg-3">
+                      <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-3">
                         <ProcessOrderIcon />
                         <span className="ml-2">{t('OrderButtons.ProcessOrders')}</span>
                       </button>
-                      <button className="btn stop-5-order-btn mt-3 mt-lg-0">
+                      <button className="btn stop-order-btn-style  mt-3 mt-lg-0">
                         <HandStopOrderIcon />
                         <span className="ml-2"> {t('OrderButtons.StopOrders')} </span>
                       </button>
