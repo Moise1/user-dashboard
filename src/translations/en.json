@@ -113,6 +113,9 @@
   "OrderButtons.StopOrders": "Stop orders",
   "OrderButtons.MarkAsDispatched": "Mark as dispatched",
   "OrderButtons.DeleteOrders": "Delete orders",
+  "OrderButtons.Process5Orders": "Process 5 Orders",
+  "OrderButtons.Stop5Orders": "Stop 5 Orders",
+  "OrderButtons.Delete5Orders": "Delete 5 Orders",
 
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",

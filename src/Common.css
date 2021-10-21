@@ -179,16 +179,6 @@ body {
   background: rgba(94, 132, 219, 0.05);
 }
 
-/* .ant-menu-submenu-title ul {
-  background-color: red;
-} */
-
-/* .sidebar_element {
-  color: var(--color-dark-violet);
-  font-size: var(--font-18);
-  font-weight: bold;
-} */
-
 .lav_button_shadow {
   border-radius: 10px;
   background: var(--bgWhiteLightColor);
@@ -2140,7 +2130,7 @@ table {
   height: 249px;
 }
 .left-back-arrow-svg svg:hover path {
-  stroke: #262e80;
+  stroke: var(--dBlue);
 }
 
 .source-url-input {
