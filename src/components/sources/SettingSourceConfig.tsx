@@ -8,6 +8,7 @@ import { t } from '../../global/transShim';
 interface props {
   staticValue: boolean;
 }
+
 const SettingSourceConfig = (myProps: props) => {
   const { staticValue } = myProps;
   const history = useHistory();

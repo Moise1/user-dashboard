@@ -1,37 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
 import AutoOrdering from './AutoOrdering';
 import SearchSelect from './SearchSelect';
 import { useHistory } from 'react-router-dom';
 import './Sources.css';
-// interface IProps {
-//   showOrdering: boolean;
-//   // setShowOrdering?: (value: boolean | (prevVar: boolean) => boolean) => void;
+import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 
-//   setShowOrdering: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-// }
+type ContextType = {
+  supplierValue: string;
+  setSupplierValue: (arg0: string) => void;
+};
 
 const Sources = () => {
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
-  const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
+  const { supplierValue } = React.useContext(SelectSupplierContext) as ContextType;
+  const [whatSelect, setWhatSelect] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
 
-  // const [supplier, setSupplier] = useState<string>();
-
-  // const options = ['one', 'two', 'three'];
-  // const defaultOption = options[0];
-
-  // const onSelect = (event: ChangeEvent<HTMLInputElement>): void => {
-  //   setSupplier(event.target.value);
-  // };
-
-  // const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const value = event.target.value;
-  //   console.log(value);
-  //   //  setSelectedOption(value);
-  // };
-  console.log(showOrdering, 'showOrdering');
   const history = useHistory();
+
+  useEffect(() => {
+    if (supplierValue.length) {
+      console.log(supplierValue, 'supplierValue');
+      setShowOrdering(true);
+    }
+  });
 
   return (
     <>

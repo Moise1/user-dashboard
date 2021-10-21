@@ -23,7 +23,7 @@ const AddAccountsSelect = () => {
   // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [showAccountInput, setShowAccountInput] = useState<boolean>();
-  const [whatSelect, setWhatSelect] = useState<string>('Select Supplier');
+  const [whatSelect, setWhatSelect] = useState<string>('Select or add account');
   const [supplierData, setSupplierData] = useState(arrayLists);
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
   const [AddAccountValue, setAddAccountValue] = useState<string>('');

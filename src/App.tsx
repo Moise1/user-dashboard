@@ -13,6 +13,7 @@ import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SettingSourceConfig from './components/sources/SettingSourceConfig';
+import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 
 const App = () => {
@@ -78,30 +79,32 @@ const App = () => {
         ''
       )}
 
-      <Router>
-        <Topbar handleSidebarMobile={handleSidebarMobile} />
-        <Layout className="bg-white layout_height">
-          <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
-            <Sidebar
-              staticvalue={staticValue}
-              togglestatic={toggleStaticValue}
-              toggle={toggleCollapse}
-              collapsed={collapse}
-            />
-          </SidbarCover>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/home" />
-            </Route>
-            <Route path="/home" component={Home} />
-            <Route path="/listings" component={Listings} />
-            <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
-            <Route path="/sources-setting" component={Sources} />
-            <Route path="/sources" component={() => <SettingSourceConfig staticValue={staticValue} />} />
-            <Route path="/newchannel" component={ChannelCreate} />
-          </Switch>
-        </Layout>
-      </Router>
+      <SelectSupplierProvider>
+        <Router>
+          <Topbar handleSidebarMobile={handleSidebarMobile} />
+          <Layout className="bg-white layout_height">
+            <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
+              <Sidebar
+                staticvalue={staticValue}
+                togglestatic={toggleStaticValue}
+                toggle={toggleCollapse}
+                collapsed={collapse}
+              />
+            </SidbarCover>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" component={Home} />
+              <Route path="/listings" component={Listings} />
+              <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
+              <Route path="/sources-setting" component={Sources} />
+              <Route path="/sources" component={() => <SettingSourceConfig staticValue={staticValue} />} />
+              <Route path="/newchannel" component={ChannelCreate} />
+            </Switch>
+          </Layout>
+        </Router>
+      </SelectSupplierProvider>
     </div>
   );
 };

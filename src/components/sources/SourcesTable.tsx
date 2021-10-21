@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { sourceData } from './SourceData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
@@ -7,15 +7,29 @@ import DispatchIcon from '../../assets/dispatchedicon.svg';
 import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
+import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
 
 interface props {
   tableValue: boolean;
+  // setSupplierValue : setSupplierValue: (arg0: boolean) => void;
 }
+
+type ContextType = {
+  supplierValue: string;
+  setSupplierValue: (arg0: string) => void;
+};
 
 function SourcesTable(myProps: props) {
   const { tableValue } = myProps;
   const history = useHistory();
+  const { supplierValue, setSupplierValue } = React.useContext(SelectSupplierContext) as ContextType;
 
+  const handleSupplierValue = (value: string) => {
+    setSupplierValue(value);
+    console.log(supplierValue);
+    console.log(value, 'value');
+    history.push('/sources-setting');
+  };
   return (
     <>
       <div className={` ${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
@@ -91,7 +105,7 @@ function SourcesTable(myProps: props) {
                       }
                     >
                       <button
-                        onClick={() => (autoOrdering === 'Enabled' ? history.push('/sources-setting') : null)}
+                        onClick={() => handleSupplierValue(provider)}
                         className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
                           autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                         } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
