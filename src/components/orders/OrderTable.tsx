@@ -19,7 +19,6 @@ import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
 
-// import { useState } from 'react';
 interface props {
   tableValue: boolean;
 }
@@ -106,7 +105,7 @@ const OrderTable = (myProps: props) => {
                   <button
                     onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : null)}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
-                      obj.state === 'In progress' ? 'bg-primary' : ''
+                      obj.state === 'In progress' ? 'in-progress-btn' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
                       obj.state === 'Paused' ? 'bg-color-light-orange' : ''
                     } ${obj.state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''} obj-state-text `}

@@ -246,8 +246,6 @@ body {
 }
 
 .logout-icon {
-  /* padding-right: 17px;
-   */
   padding-bottom: 17px;
   font-weight: normal;
   font-size: 16px;
@@ -326,11 +324,6 @@ body {
   color: var(--color-white) !important;
 }
 
-/* 
-.w-sidebar-toggle .logout-icon {
-  display: none;
-} 
-*/
 .cursor-pointer {
   cursor: pointer;
 }
@@ -514,12 +507,6 @@ label {
     min-width: 0px !important;
     max-width: 0px !important;
     width: 0px !important;
-  }
-
-  .mobile-sidebar-on.w-sidebar-toggle .ant-layout-sider {
-    /* min-width: 250px !important;
-    max-width: 250px !important;
-    width: 250px !important; */
   }
 }
 
@@ -1244,6 +1231,9 @@ table {
 .bg-dark-pink {
   background-color: var(--bg-dark-pink);
 }
+.bg-dark-pink:hover {
+  background-color: var(--color-dark-pink);
+}
 
 .bg-primary {
   background-color: var(--color-primary);
@@ -1252,9 +1242,22 @@ table {
 .bg-color-light-orange {
   background-color: var(--color-light-orange);
 }
+.bg-color-light-orange:hover {
+  background-color: #e8ab66e1;
+}
 
 .bg-color-dark-green {
   background-color: var(--color-secondry);
+}
+.bg-color-dark-green:hover {
+  background-color: #228b22dc;
+}
+
+.in-progress-btn {
+  background-color: var(--bgBlue);
+}
+.in-progress-btn:hover {
+  background-color: var(--active-bg);
 }
 
 /* table css ends here */
@@ -1686,7 +1689,7 @@ table {
 
 .shop-address {
   font-size: var(--font-18);
-  color: #000;
+  color: var(--txtBaseColor);
   font-weight: 700;
 }
 
@@ -2142,11 +2145,13 @@ table {
   font-size: 16px;
   color: var(--active-bg) !important;
 }
+
 .source-url-input::placeholder {
   font-weight: normal;
   font-size: 16px;
   color: var(--active-bg) !important;
 }
+
 @keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
@@ -2162,7 +2167,7 @@ table {
 }
 
 .rotating:hover path {
-  stroke: black;
+  stroke: var(--txtBaseColor);
 }
 
 .disabled-order-svg {
@@ -2179,16 +2184,17 @@ table {
 .start-order-active-svg svg circle,
 .start-order-active-svg g #Path_311,
 .start-order-active-svg g #Path_310 {
-  stroke: #262e80;
+  stroke: var(--dBlue);
 }
 
 .order-checkout-icon rect,
 .order-checkout-icon line {
-  stroke: #262e80;
+  stroke: var(--dBlue);
 }
 .last-step-order-icon #Path_315 {
-  fill: #262e80;
+  fill: var(--dBlue);
 }
+
 @media (max-width: 576px) {
   .box-width {
     width: 100%;

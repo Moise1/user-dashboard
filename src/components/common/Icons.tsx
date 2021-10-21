@@ -1141,7 +1141,7 @@ export const ServiceIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg"
+        className="active-white-svg serice-icon-sidebar"
         id="Group_93"
         data-name="Group 93"
         xmlns="http://www.w3.org/2000/svg"

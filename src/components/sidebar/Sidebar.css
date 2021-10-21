@@ -44,13 +44,19 @@
 
 /* HOVER SVG  */
 
-.ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
+/* .ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
   stroke: var(--color-white);
 }
 .ant-menu-submenu.ant-menu-submenu-active:hover svg circle {
   stroke: var(--color-white);
+} */
+.ant-menu-submenu.ant-menu-submenu-active:hover .serice-icon-sidebar circle {
+  stroke: var(--color-white);
 }
-.ant-menu-submenu.ant-menu-submenu-active:hover svg #Path_10 {
+.ant-menu-submenu.ant-menu-submenu-active:hover .serice-icon-sidebar circle {
+  stroke: var(--color-white);
+}
+.ant-menu-submenu.ant-menu-submenu-active:hover .serice-icon-sidebar #Path_10 {
   stroke: var(--color-white);
 }
 .ant-menu-submenu.ant-menu-submenu-active:hover .help-icon ellipse {
