@@ -97,6 +97,10 @@
   "SourceConfigInputs.AccountConfiguration": "Account configuration",
   "SourceConfigInputs.ConfigureAutoordering": "Configure Autoordering (Beta)",
   "SourceConfigInputs.ConfigureSuppliers": "Configure suppliers",
+  "SourceConfigInputs.OTPCode2FA": "OTP code(2FA)",
+  "SourceConfigInputs.ObtainYourOTPCode": "Obtain your OTP code",
+  "SourceConfigInputs.DeactivateYourAccountMessage": "If you deactivate this account, orders will be placed through the activated accounts.",
+  "SourceConfigInputs.DeleteYourAccountMessage": " If you delete this account, you will have to set it up again and no payments will be made through this account.",
 
   "SourceTable.Provider": "Provider",
   "SourceTable.Markup": "Markup",
@@ -108,6 +112,7 @@
   "SourceTable.ShippingPolicy": "Shipping Policy",
   "SourceTable.Beta": "Beta",
   "SourceTable.AutoOrdering": "Auto ordering",
+  "SourceTable.SourceTableHeadingLine": "All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel",
 
   "OrderButtons.ProcessOrders": "Process orders",
   "OrderButtons.StopOrders": "Stop orders",

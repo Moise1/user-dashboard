@@ -28,7 +28,7 @@ const Sources = () => {
 
   return (
     <>
-      <div className="w-100 p-sm-3 ant-layout">
+      <div className="w-100 p-sm-3 ant-layout mt-3 mt-sm-0">
         <SearchWithButton />
 
         <div className="d-flex flex-column flex-sm-row mt-2 mt-sm-4">

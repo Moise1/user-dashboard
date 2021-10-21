@@ -16,9 +16,7 @@ const SettingSourceConfig = (myProps: props) => {
   return (
     <>
       <div className="setting-source-config-wrapper ant-layout">
-        <p className="all-the-setting-text">
-          All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel
-        </p>
+        <p className="all-the-setting-text"> {t('SourceTable.SourceTableHeadingLine')}</p>
 
         <div className="row">
           <div className="col-12 col-md-6">

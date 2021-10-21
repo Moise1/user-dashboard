@@ -39,6 +39,7 @@ const OrderTable = (myProps: props) => {
     setOrderDetailsModalShow(false);
     setShow(false);
   };
+
   return (
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
@@ -46,7 +47,7 @@ const OrderTable = (myProps: props) => {
           <tr>
             <th>Img</th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />{' '}
+              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
               <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdonwIcon />
@@ -88,22 +89,42 @@ const OrderTable = (myProps: props) => {
           return (
             <tbody className="order-table-body" key={obj.id}>
               <tr>
-                <td>
+                <td onClick={() => setShow(true)}>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body order-td-none">{obj.sale}</td>
-                <td className="obj-sale-body order-td-none">{obj.source}</td>
-                <td className="obj-sale-title order-td-none">{obj.title}</td>
-                <td className="obj-sale-qty order-td-none">{obj.qty}</td>
-                <td className="obj-sale-qty order-td-none">{obj.sold}</td>
-                <td className="obj-sale-cost  ">{obj.cost}</td>
-                <td className="obj-sale-qty  ">{obj.fees}</td>
-                <td className="obj-profit-text order-td-none">{obj.profit}</td>
-                <td className="obj-sale-cost order-td-none ">{obj.margin}</td>
-                <td className="obj-sale-qty   ">{obj.orderOn}</td>
+                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
+                  {obj.sale}
+                </td>
+                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
+                  {obj.source}
+                </td>
+                <td className="obj-sale-title order-td-none" onClick={() => setShow(true)}>
+                  {obj.title}
+                </td>
+                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
+                  {obj.qty}
+                </td>
+                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
+                  {obj.sold}
+                </td>
+                <td className="obj-sale-cost" onClick={() => setShow(true)}>
+                  {obj.cost}
+                </td>
+                <td className="obj-sale-qty" onClick={() => setShow(true)}>
+                  {obj.fees}
+                </td>
+                <td className="obj-profit-text order-td-none" onClick={() => setShow(true)}>
+                  {obj.profit}
+                </td>
+                <td className="obj-sale-cost order-td-none" onClick={() => setShow(true)}>
+                  {obj.margin}
+                </td>
+                <td className="obj-sale-qty" onClick={() => setShow(true)}>
+                  {obj.orderOn}
+                </td>
                 <td className="order-td-none">
                   <button
-                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : null)}
+                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'in-progress-btn' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
@@ -116,7 +137,7 @@ const OrderTable = (myProps: props) => {
                     {obj.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
                     {obj.state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
                     {obj.state}
-                  </button>{' '}
+                  </button>
                 </td>
                 <td className="order-three-dots-dropdown">
                   <Dropdown>
@@ -130,19 +151,16 @@ const OrderTable = (myProps: props) => {
                         <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
-                        {' '}
                         <span onClick={() => setShow(true)}>
                           <HandStopOrderIcon />
                           <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
                         </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
-                        {' '}
                         <DispatchedOrderIcon />
                         <span className="ml-2"> {t('OrderDetails.MarkAsDispatched')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
-                        {' '}
                         <DustbinDeleteOrderIcon />
                         <span className="ml-2">{t('OrderDetails.DeleteOrder')} </span>
                       </Dropdown.Item>

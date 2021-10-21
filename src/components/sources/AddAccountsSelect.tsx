@@ -23,6 +23,7 @@ const AddAccountsSelect = () => {
   // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [showAccountInput, setShowAccountInput] = useState<boolean>();
+  const [isDisabledAccount, setDisabledAccount] = useState<boolean>();
   const [whatSelect, setWhatSelect] = useState<string>('Select or add account');
   const [supplierData, setSupplierData] = useState(arrayLists);
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
@@ -57,7 +58,23 @@ const AddAccountsSelect = () => {
 
       <div className="react-search-with-select-parent add-account-select-parent">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
-          <h5>{whatSelect}</h5>
+          {/* IF ANY ACCOUNT DISABLED THEN SHOW POPOVER AND FADE THE TEXT  */}
+          <h5 className={`${isDisabledAccount ? 'disabled-account-text' : ''}`}>
+            {isDisabledAccount ? (
+              <Popover
+                placement="right"
+                content={
+                  <div className="pop-over-content">
+                    <p className="mb-0"> {t('SourceConfigInputs.Disabled')}</p>
+                  </div>
+                }
+              >
+                {whatSelect}
+              </Popover>
+            ) : (
+              whatSelect
+            )}
+          </h5>
           <span>
             <img src={dropicon} alt="dropicon" />
           </span>
@@ -99,7 +116,14 @@ const AddAccountsSelect = () => {
                 <li
                   className={`${list.status === 'disabled' ? 'disabled-btn' : ''}`}
                   key={list.id}
-                  onClick={() => handleSelectValue(list.value)}
+                  onClick={() => {
+                    handleSelectValue(list.value);
+                    if (list.status === 'disabled') {
+                      setDisabledAccount(true);
+                    } else {
+                      setDisabledAccount(false);
+                    }
+                  }}
                 >
                   {list.status === 'disabled' ? (
                     <Popover

@@ -12,8 +12,7 @@ import {
   SettingsIcon,
   HelpIcon,
   LogOutIcon,
-  OrdersIcon,
-  CircleDotIcon
+  OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 import './Sidebar.css';
@@ -52,26 +51,6 @@ export default function Sidebar(props: Props) {
   };
   const { collapsed, staticvalue, togglestatic } = props;
 
-  const listArray = [
-    { key: 11, listName: t('Menu.PricingRules') },
-    { key: 12, listName: t('Menu.BrowserExtensions') },
-    { key: 13, listName: t('Menu.VAProfile') },
-    { key: 14, listName: t('Menu.Templates') },
-    { key: 15, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
-  ];
-
-  const servicelistArray = [
-    { key: 111, listName: t('Menu.Channel') },
-    { key: 112, listName: t('Menu.Sources') },
-    { key: 113, listName: t('Menu.PricingRules') }
-  ];
-
-  const helplistArray = [
-    { key: 511, listName: t('Menu.Channel') },
-    { key: 512, listName: t('Menu.Sources') },
-    { key: 513, listName: t('Menu.PricingRules') }
-  ];
-
   const windowwidth = window.innerWidth;
   // FOR CLOSE SIDEBAR AND CHANGE ROUTE
   const handleSourcesSidebarClose = () => {
@@ -98,7 +77,28 @@ export default function Sidebar(props: Props) {
     }
   };
 
-  console.log(windowwidth);
+  const listArray = [
+    { key: 9, listName: t('Menu.Channel') },
+    { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
+    { key: 11, listName: t('Menu.PricingRules') },
+    { key: 12, listName: t('Menu.BrowserExtensions') },
+    { key: 13, listName: t('Menu.VAProfile') },
+    { key: 14, listName: t('Menu.Templates') },
+    { key: 15, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
+  ];
+
+  const servicelistArray = [
+    { key: 111, listName: t('Menu.Channel') },
+    { key: 112, listName: t('Menu.Sources') },
+    { key: 113, listName: t('Menu.PricingRules') }
+  ];
+
+  const helplistArray = [
+    { key: 511, listName: t('Menu.Channel') },
+    { key: 512, listName: t('Menu.Sources') },
+    { key: 513, listName: t('Menu.PricingRules') }
+  ];
+
   return (
     <>
       <Sider
@@ -190,32 +190,11 @@ export default function Sidebar(props: Props) {
             </Menu.Item>
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
-              // onClick={() => history.push('/orders')}
               key="sub3"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
-              <Menu.Item key="9">
-                <li className="list-unstyled list-items-hover m-0 h-25 leading-25">
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Channel
-                </li>
-              </Menu.Item>
-              <Menu.Item key="10">
-                <li
-                  className="list-unstyled list-items-hover m-0 h-25 leading-25"
-                  onClick={() => handleSourcesSidebarClose()}
-                >
-                  <span className="mr-3">
-                    <CircleDotIcon />
-                  </span>
-                  Sources
-                </li>
-              </Menu.Item>
-
               {listArray.map((obj) => (
                 <Menu.Item key={obj.key}>
                   <MenuListItem listName={obj.listName} onClick={obj.onClick} />

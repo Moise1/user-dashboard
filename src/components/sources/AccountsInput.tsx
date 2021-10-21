@@ -49,7 +49,8 @@ const AccountsInput = (myProps: props) => {
           <div className="col-12">
             <div className="width-466">
               <label className="account-label-style" htmlFor="">
-                OTP code(2FA) <span className="ml-2 obtain-code-otp">Obtain your OTP code </span>
+                {t('SourceConfigInputs.OTPCode2FA')}
+                <span className="ml-2 obtain-code-otp"> {t('SourceConfigInputs.ObtainYourOTPCode')} </span>
               </label>
               <input
                 disabled={DisableAccount}
@@ -80,7 +81,7 @@ const AccountsInput = (myProps: props) => {
           <div className="d-flex">
             <div className="enable-disable-para mr-4">
               <p>{t('SourceConfigInputs.DisableAccount')}</p>
-              <span>If you deactivate this account, orders will be placed through the activated accounts.</span>
+              <span>{t('SourceConfigInputs.DeactivateYourAccountMessage')} </span>
             </div>
 
             <div className="custom-control  d-flex align-items-center switchbox custom-switch ">
@@ -101,10 +102,7 @@ const AccountsInput = (myProps: props) => {
             {' '}
             <DustbinPinkIcon /> <div className="ml-2"> {t('SourceConfigInputs.RemoveAccount')}</div>
           </p>
-          <p className="dark-pink-para mt-3">
-            If you delete this account, you will have to set it up again and no payments will be made through this
-            account.
-          </p>
+          <p className="dark-pink-para mt-3">{t('SourceConfigInputs.DeleteYourAccountMessage')}I</p>
         </div>
       </div>
     </>

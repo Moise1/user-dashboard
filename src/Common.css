@@ -1357,7 +1357,7 @@ table {
   font-weight: bold;
   font-size: var(--font-large);
   text-align: left;
-  color: #dd0a54;
+  color: var(--bg-dark-pink);
   background: #fff1f1;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
 }
@@ -1369,7 +1369,7 @@ table {
 .dark-pink-para {
   font-weight: 400;
   font-size: var(--font-extra-small);
-  color: #dd0a54;
+  color: var(--bg-dark-pink);
   max-width: 370px;
 }
 
@@ -1771,7 +1771,9 @@ table {
 .white-space-pre-wrap {
   white-space: pre-wrap;
 }
-
+.disabled-account-text {
+  opacity: 0.5;
+}
 /* MODAL CSS END */
 
 /* MEDIA  QUERY */
@@ -1790,28 +1792,6 @@ table {
 .amazon-order-ss {
   width: 566px;
   height: 414px;
-}
-
-.progress-order .progress-bar {
-  /* background-color: var(--color-secondry); */
-  width: 436px;
-  border-radius: 9.5px;
-  background: linear-gradient(
-    var(--color-secondry) 0%,
-    var(--color-secondry) 15.85%,
-    #3aa23a 67.04%,
-    var(--color-secondry) 100%
-  );
-}
-
-.progress-order .progress {
-  border-radius: 9.5px;
-}
-
-.progress-order {
-  font-weight: bold;
-  font-size: 18px;
-  color: var(--color-dark-violet);
 }
 
 .history-text {
@@ -1846,23 +1826,6 @@ table {
   opacity: 0.4;
 }
 
-.save-btnn-modal {
-  padding: 10px;
-  background: var(--color-secondry);
-  border-radius: 10px;
-  border: 2px solid var(--color-secondry) !important;
-  opacity: 1;
-  color: var(--bgHighlight);
-  font-size: var(--font-18);
-  font-weight: 700;
-}
-
-.save-btnn-modal:hover {
-  background-color: transparent;
-  color: var(--color-secondry);
-  border: 2px solid var(--color-secondry) !important;
-}
-
 .modal-second-head {
   border-bottom: none;
   padding: 0px;
@@ -1876,38 +1839,6 @@ table {
 .btnn-in-model:focus {
   border: 0px solid transparent;
   box-shadow: none;
-}
-
-.middle-part-autoordering {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 485px;
-}
-
-.middle-part-autoordering p {
-  font-weight: bold;
-  font-size: var(--font-medium);
-  text-align: center;
-  color: var(--color-dark-violet);
-  max-width: 572px;
-  margin-bottom: 30px;
-}
-
-.middle-part-autoordering button {
-  width: 316px;
-  height: 59px;
-  border-radius: 10px;
-  background: var(--bgBlue);
-  color: var(--bgHighlight);
-  font-size: var(--font-medium);
-}
-
-.middle-part-autoordering button:hover {
-  background: #4f77d4;
-  color: var(--bgHighlight);
 }
 
 .order-details-back-text {
