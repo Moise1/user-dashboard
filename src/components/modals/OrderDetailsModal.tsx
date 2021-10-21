@@ -150,7 +150,12 @@ const OrderDetailsModal = (props: Props) => {
               <div className="row justify-content-between">
                 <div className="col-12 col-xl-5 pr-0 ">
                   <h1 className="source-url mt-4 ">{t('OrderDetails.SourceURL')}</h1>
-                  <Form.Control id="source-urls" type="text" placeholder="" />
+                  <Form.Control
+                    className="source-url-input"
+                    id="source-urls"
+                    type="text"
+                    placeholder="https://www.source-url.com/list/item/item-name"
+                  />
                 </div>
                 <div className="col-12 col-xl-6 d-flex pr-0">
                   <div className="row">

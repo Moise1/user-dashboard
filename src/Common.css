@@ -2137,6 +2137,16 @@ table {
   stroke: #262e80;
 }
 
+.source-url-input {
+  font-weight: normal !important;
+  font-size: 16px;
+  color: var(--active-bg) !important;
+}
+.source-url-input::placeholder {
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--active-bg) !important;
+}
 @keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
