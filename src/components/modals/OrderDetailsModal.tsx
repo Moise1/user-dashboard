@@ -67,128 +67,130 @@ const OrderDetailsModal = (props: Props) => {
           {addressModalShow ? (
             <AddressModal handleCloseAllModals={handleCloseAllModals} setAddressModalShow={setAddressModalShow} />
           ) : (
-            <div className="p-4 modals-inputs">
-              <div className="row justify-content-between">
-                <div className="col-12 col-xl-5 modal-head-box">
-                  <div className="row ">
-                    <div className="ship-bill-box d-flex flex-column flex-sm-row  py-3 px-2">
-                      <div
-                        className="col-2 pl-0 d-flex align-items-center cursor-pointer"
-                        onClick={() => setAddressModalShow(true)}
-                      >
-                        <span>
-                          <IconEdit />
-                        </span>
-                        <span className="edit-btnn">{t('OrderDetails.Edit')}</span>
-                      </div>
+            <div className="py-3 modals-inputs">
+              <div className="container">
+                <div className="row justify-content-between">
+                  <div className="col-12 col-xl-5">
+                    <div className="row ">
+                      {/* SHIPPING AND BILLING ADRESS TEXT  */}
+                      <div className="col-12">
+                        <div className="ship-bill-box d-flex justify-content-around flex-column flex-sm-row  py-3 px-2">
+                          <div className="d-flex  cursor-pointer" onClick={() => setAddressModalShow(true)}>
+                            <span>
+                              <IconEdit />
+                            </span>
+                            <span className="edit-btnn">{t('OrderDetails.Edit')}</span>
+                          </div>
 
-                      <div className="col-12 col-md-5 px-0 pt-4 pb-3">
-                        <h1 className="shop-address ">{t('OrderDetails.ShippingAddress')}</h1>
-                        <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                        <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                        <p className="content-shop-address mb-0">US</p>
-                      </div>
-                      <div className="col-12 col-md-6 pt-4 pb-3">
-                        <h1 className="shop-address">{t('OrderDetails.Billingaddress')}</h1>
-                        <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                        <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                        <p className="content-shop-address mb-0">US</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row mt-5">
-                    <div className="col-12 col-md-6 pr-0">
-                      <h1 className="sale-head">{t('OrderDetails.Sale')}</h1>
-                      <Form.Control className="modal-inputs" type="text" placeholder="123" />
-                    </div>
-                    <div className="col-12 col-md-6 pr-0">
-                      <h1 className="sale-head   mt-4 mt-md-0">{t('OrderDetails.ChannelItem')}</h1>
-                      <Form.Control className="modal-inputs" type="text" placeholder="Channel item name" />
-                    </div>
-                  </div>
-                  <div className="row mt-4 ">
-                    <div className="col-12 col-md-6 pr-0">
-                      <h1 className="sale-head">{t('OrderDetails.Reference')}</h1>
-                      <Form.Control className="modal-inputs" type="text" placeholder="123" />
-                    </div>
-                    <div className="col-12 col-md-5 mt-4 mt-md-0 pr-0">
-                      <h1 className=" sale-head ">{t('OrderDetails.BuyerUsername')}</h1>
-                      <Form.Control className="modal-inputs   " type="text" placeholder="john doe" />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-xl-6">
-                  <div className="row">
-                    <div className="col-12 col-xl-6 pr-0">
-                      <div className="">
-                        <h1 className="sale-head mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h1>
-                        <Form.Control className="modal-inputs" type="text" placeholder="123" />
-                      </div>
-                      <div className="d-flex mt-4 ">
-                        <div className="w-82  mr-3">
-                          <h1 className=" sale-head">{t('OrderDetails.Quantity')}</h1>
-                          <Form.Control className="modal-inputs" type="text" placeholder="123" />
-                        </div>
-                        <div className="w-82">
-                          <h1 className="sold-head">{t('OrderDetails.Sold')}</h1>
-                          <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                          <div className="px-0 pt-4 pb-3">
+                            <h1 className="shop-address ">{t('OrderDetails.ShippingAddress')}</h1>
+                            <p className="content-shop-address mb-0">156 Harvest Ln,</p>
+                            <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
+                            <p className="content-shop-address mb-0">US</p>
+                          </div>
+                          <div className="pt-4 pb-3">
+                            <h1 className="shop-address">{t('OrderDetails.Billingaddress')}</h1>
+                            <p className="content-shop-address mb-0">156 Harvest Ln,</p>
+                            <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
+                            <p className="content-shop-address mb-0">US</p>
+                          </div>
                         </div>
                       </div>
+                    </div>
 
-                      <div className="mt-4 w-179">
-                        <h1 className="sale-head">{t('OrderDetails.DateOfOrder')} </h1>
+                    <div className="row my-4">
+                      <div className="col-12 col-md-6">
+                        <h1 className="sale-head">{t('OrderDetails.Sale')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                      </div>
+                      <div className="col-12 col-md-6">
+                        <h1 className="sale-head   mt-4 mt-md-0">{t('OrderDetails.ChannelItem')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="Channel item name" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-12 col-md-6">
+                        <h1 className="sale-head">{t('OrderDetails.Reference')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                      </div>
+                      <div className="col-12 col-md-5 mt-4 mt-md-0">
+                        <h1 className=" sale-head ">{t('OrderDetails.BuyerUsername')}</h1>
+                        <Form.Control className="modal-inputs   " type="text" placeholder="john doe" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-xl-6">
+                    <div className="row">
+                      <div className="col-12 col-xl-6 ">
+                        <div className="">
+                          <h1 className="sale-head mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h1>
+                          <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                        </div>
+                        <div className="d-flex mt-4 ">
+                          <div className="w-82  mr-3">
+                            <h1 className=" sale-head">{t('OrderDetails.Quantity')}</h1>
+                            <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                          </div>
+                          <div className="w-82">
+                            <h1 className="sold-head">{t('OrderDetails.Sold')}</h1>
+                            <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                          </div>
+                        </div>
+
+                        <div className="mt-4 w-179">
+                          <h1 className="sale-head">{t('OrderDetails.DateOfOrder')} </h1>
+                          <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                        </div>
+                      </div>
+                      <div className="col-12 pr-0 d-flex justify-content-center col-xl-6 mt-4 mt-lg-0">
+                        <img src={Headphone} className="headphone-img-style" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row justify-content-between">
+                  <div className="col-12 col-xl-5 pr-0 ">
+                    <h1 className="source-url mt-4 ">{t('OrderDetails.SourceURL')}</h1>
+                    <Form.Control
+                      className="source-url-input"
+                      id="source-urls"
+                      type="text"
+                      placeholder="https://www.source-url.com/list/item/item-name"
+                    />
+                  </div>
+                  <div className="col-12 col-xl-6 d-flex pr-0">
+                    <div className="row">
+                      {/* <div className="col-4 col-lg-auto col-xl-1"></div> */}
+                      <div className="col-4 col-lg-auto col-xl-2">
+                        <h1 className="sale-head mt-4">{t('OrderDetails.Sell')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="€40.00" />
+                      </div>
+                      <div className="col-4 col-lg-auto col-xl-2">
+                        <h1 className="sale-head mt-4">{t('OrderDetails.Cost')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="123" />
+                      </div>
+                      <div className="col-4 col-lg-auto col-xl-2">
+                        <h1 className="sale-head mt-4">{t('OrderDetails.Fees')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="€34.99" />
+                      </div>
+                      <div className="col-4 col-lg-auto col-xl-2">
+                        <h1 className="sale-head mt-4">{t('OrderDetails.Profit')}</h1>
+                        <Form.Control className="modal-inputs" type="text" placeholder="€1.00" />
+                      </div>
+                      <div className="col-4 col-lg-auto col-xl-2">
+                        <h1 className="sale-head mt-4">{t('OrderDetails.Margin')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                     </div>
-                    <div className="col-12 pr-0 d-flex justify-content-center col-xl-6 mt-4 mt-lg-0">
-                      <img src={Headphone} style={{ width: '192px ', height: '249px' }} />
-                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="row justify-content-between">
-                <div className="col-12 col-xl-5 pr-0 ">
-                  <h1 className="source-url mt-4 ">{t('OrderDetails.SourceURL')}</h1>
-                  <Form.Control
-                    className="source-url-input"
-                    id="source-urls"
-                    type="text"
-                    placeholder="https://www.source-url.com/list/item/item-name"
-                  />
-                </div>
-                <div className="col-12 col-xl-6 d-flex pr-0">
-                  <div className="row">
-                    <div className="col-4  col-lg-1"></div>
-                    <div className="col-4  col-lg-2">
-                      <h1 className="sale-head mt-4">{t('OrderDetails.Sell')}</h1>
-                      <Form.Control className="modal-inputs w-76" type="text" placeholder="€40.00" />
-                    </div>
-                    <div className="col-4  col-lg-2">
-                      <h1 className="sale-head mt-4">{t('OrderDetails.Cost')}</h1>
-                      <Form.Control className="modal-inputs w-76" type="text" placeholder="123" />
-                    </div>
-                    <div className="col-4  col-lg-2">
-                      <h1 className="sale-head mt-4">{t('OrderDetails.Fees')}</h1>
-                      <Form.Control className="modal-inputs w-76" type="text" placeholder="€34.99" />
-                    </div>
-                    <div className="col-4  col-lg-2">
-                      <h1 className="sale-head mt-4">{t('OrderDetails.Profit')}</h1>
-                      <Form.Control className="modal-inputs w-76" type="text" placeholder="€1.00" />
-                    </div>
-                    <div className="col-4  col-lg-2">
-                      <h1 className="sale-head mt-4">{t('OrderDetails.Margin')}</h1>
-                      <Form.Control className="modal-inputs w-76" type="text" placeholder="123" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col mt-5 d-flex align-items-center">
-                  <IconArrowModal />
+                <div className="row">
+                  <div className="col mt-5 d-flex align-items-center">
+                    <IconArrowModal />
 
-                  <div className="btnn-in-model order-details-back-text cursor-pointer">
-                    <span> {t('OrderDetails.OrderStateProcess')}</span>
+                    <div className="btnn-in-model order-details-back-text cursor-pointer">
+                      <span> {t('OrderDetails.OrderStateProcess')}</span>
+                    </div>
                   </div>
                 </div>
               </div>
