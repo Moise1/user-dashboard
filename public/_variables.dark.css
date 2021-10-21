@@ -26,7 +26,7 @@
   --color-dark-violet: #777;
   --box-shadow-color: #111;
   --color-primary: #555;
-  --color-dark-green: #30c630; /* profit */
+  --color-secondry: #30c630; /* profit */
   --color-violet-shade-1: #1890ff;
 
   --color-violet-shade-2: #9694ff;
@@ -61,5 +61,5 @@
 }
 
 .tickIcon > * {
-  stroke: var(--color-dark-green);
+  stroke: var(--color-secondry);
 }

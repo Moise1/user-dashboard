@@ -58,7 +58,7 @@
 }
 
 .mark-dispatch-btn {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-secondry);
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;

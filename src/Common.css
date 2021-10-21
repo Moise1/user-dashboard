@@ -596,11 +596,11 @@ button:focus {
 }
 
 .d-green {
-  color: var(--color-dark-green);
+  color: var(--color-secondry);
 }
 
 .bg-d-green {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-secondry);
 }
 
 .bg-trans {
@@ -1003,7 +1003,7 @@ table {
 .table-body-profit {
   font-weight: 500;
   font-size: var(--font-18);
-  color: var(--color-dark-green);
+  color: var(--color-secondry);
 }
 
 .pagination-number {
@@ -1238,7 +1238,7 @@ table {
 .obj-profit-text {
   font-size: var(--font-large);
   font-weight: normal;
-  color: var(--color-dark-green);
+  color: var(--color-secondry);
 }
 
 .bg-dark-pink {
@@ -1254,7 +1254,7 @@ table {
 }
 
 .bg-color-dark-green {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-secondry);
 }
 
 /* table css ends here */
@@ -1280,7 +1280,7 @@ table {
 }
 
 .save-changes-btn {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-secondry);
   color: var(--bgPage);
   width: 217px;
   height: 59px;
@@ -1474,7 +1474,7 @@ table {
 /* TOGGLE  ICON STYLE */
 
 .ao-enabled-button {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-secondry);
   display: flex;
   align-items: center;
   height: 32px;
@@ -1671,7 +1671,7 @@ table {
 }
 
 .head-part-second {
-  background: var(--color-dark-green);
+  background: var(--color-secondry);
   border-radius: 10px;
   opacity: 1;
   color: var(--color-white);
@@ -1800,14 +1800,14 @@ table {
 }
 
 .progress-order .progress-bar {
-  /* background-color: var(--color-dark-green); */
+  /* background-color: var(--color-secondry); */
   width: 436px;
   border-radius: 9.5px;
   background: linear-gradient(
-    var(--color-dark-green) 0%,
-    var(--color-dark-green) 15.85%,
+    var(--color-secondry) 0%,
+    var(--color-secondry) 15.85%,
     #3aa23a 67.04%,
-    var(--color-dark-green) 100%
+    var(--color-secondry) 100%
   );
 }
 
@@ -1855,9 +1855,9 @@ table {
 
 .save-btnn-modal {
   padding: 10px;
-  background: var(--color-dark-green);
+  background: var(--color-secondry);
   border-radius: 10px;
-  border: 2px solid var(--color-dark-green) !important;
+  border: 2px solid var(--color-secondry) !important;
   opacity: 1;
   color: var(--bgHighlight);
   font-size: var(--font-18);
@@ -1866,8 +1866,8 @@ table {
 
 .save-btnn-modal:hover {
   background-color: transparent;
-  color: var(--color-dark-green);
-  border: 2px solid var(--color-dark-green) !important;
+  color: var(--color-secondry);
+  border: 2px solid var(--color-secondry) !important;
 }
 
 .modal-second-head {

@@ -58,7 +58,7 @@
   --color-light-violet: #f7f9fd;
   --color-light-pink: #ef6092;
   --color-dark-pink: #f12b70;
-  --color-dark-green: #228b22;
+  --color-secondry: #228b22;
   --color-light-green: #5ac35a;
   --color-light-orange: #e8ac66;
   --bg-dark-pink: #dd0a54;
@@ -251,7 +251,7 @@ input {
   height: 30px;
 }
 .tickIcon > * {
-  stroke: var(--color-dark-green);
+  stroke: var(--color-secondry);
 }
 
 /*
