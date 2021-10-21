@@ -171,7 +171,7 @@ const OrderStateProgressModal = (props: Props) => {
                         setShow(false);
                       }}
                     >
-                      Order Details
+                      {t('OrderDetails.OrderDetails')}
                     </div>
                     <span>
                       <svg

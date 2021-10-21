@@ -1500,7 +1500,7 @@ table {
   border-radius: 10px;
   color: var(--bgHighlight);
   font-weight: bold;
-  font-size: 12px;
+  font-size: var(--font-extra-small);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1667,7 +1667,7 @@ table {
 
 .head-part-one {
   color: var(--color-dark-violet);
-  font-size: 24px;
+  font-size: var(--sub-heading);
 }
 
 .head-part-second {
@@ -1896,7 +1896,7 @@ table {
 
 .middle-part-autoordering p {
   font-weight: bold;
-  font-size: 16px;
+  font-size: var(--font-medium);
   text-align: center;
   color: var(--color-dark-violet);
   max-width: 572px;
@@ -1909,6 +1909,7 @@ table {
   border-radius: 10px;
   background: var(--bgBlue);
   color: var(--bgHighlight);
+  font-size: var(--font-medium);
 }
 
 .middle-part-autoordering button:hover {
@@ -1918,10 +1919,12 @@ table {
 
 .order-details-back-text {
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--font-large);
   color: var(--color-dark-violet);
 }
-
+.rotate-180-arrow svg {
+  transform: rotate(180deg);
+}
 @media (max-width: 575.98px) {
   .advance-search-purple-button {
     padding: 10px 40px;

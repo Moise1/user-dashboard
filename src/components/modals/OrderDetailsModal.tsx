@@ -47,8 +47,7 @@ const OrderDetailsModal = (props: Props) => {
                 <h1 className="head-part-one mr-5">{t('OrderDetails.OrderDetails')}</h1>
                 <button className="head-part-second align-items-center   d-flex ">
                   <AoIconHead />
-
-                  <span className="px-2 ">AO Enabled</span>
+                  <span className="px-2 ">{t('OrderDetails.AOEnabled')}</span>
                 </button>
                 <span
                   className="cursor-pointer cross-round-iconModal"

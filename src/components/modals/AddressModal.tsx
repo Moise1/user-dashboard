@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { CrossModalIcon, IconEdit } from '../common/Icons';
+import { t } from '../../global/transShim';
 
 interface Props {
   setAddressModalShow: (value: boolean) => void;
@@ -33,12 +34,12 @@ const AddressModal = (props: Props) => {
               {/* SHIPPING ADDRESSS  */}
               <div className="col-lg-5">
                 <div className="modal-second-inputs  ">
-                  <h1 className="shop-address ">Shipping address</h1>
-                  <p className="modal-second-input-heads pt-3">Street address</p>
+                  <h1 className="shop-address ">{t('OrderDetails.ShippingAddress')}</h1>
+                  <p className="modal-second-input-heads pt-3"> {t('OrderDetails.StreetAddress')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
-                  <p className="modal-second-input-heads pt-3">City</p>
+                  <p className="modal-second-input-heads pt-3"> {t('OrderDetails.City')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
-                  <p className="modal-second-input-heads pt-3">Postal code/state</p>
+                  <p className="modal-second-input-heads pt-3"> {t('OrderDetails.PostalCodeState')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
                 </div>
               </div>
@@ -46,12 +47,12 @@ const AddressModal = (props: Props) => {
               {/* BILLING ADDRESSS  */}
               <div className="col-lg-5">
                 <div className="mt-4 mt-lg-0 modal-second-inputs">
-                  <h1 className="shop-address ">Billing address</h1>
-                  <p className="modal-second-input-heads pt-3">Street address</p>
+                  <h1 className="shop-address "> {t('OrderDetails.Billingaddress')}</h1>
+                  <p className="modal-second-input-heads pt-3">{t('OrderDetails.StreetAddress')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
-                  <p className="modal-second-input-heads pt-3">City</p>
+                  <p className="modal-second-input-heads pt-3">{t('OrderDetails.City')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
-                  <p className="modal-second-input-heads pt-3">Postal code/state</p>
+                  <p className="modal-second-input-heads pt-3">{t('OrderDetails.PostalCodeState')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />
                 </div>
               </div>
@@ -64,7 +65,7 @@ const AddressModal = (props: Props) => {
         <div className="row">
           <div className="col-12 d-flex justify-content-end">
             <button className="save-btnn-modal px-5" onClick={() => handleCloseAllModals()}>
-              Save
+              {t('OrderDetails.Save')}
             </button>
           </div>
         </div>
