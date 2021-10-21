@@ -47,8 +47,8 @@ export default function ListingTable() {
           <div className="d-flex justify-content-between">
             <div className="pt-3">
               <span className="py-1 px-2 p-sm-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-                <span className="check-click-text  pr-3 border-left-dark-voilet">{t('Edit N Listings')}</span>
-                <span className="check-click-text  pr-3 border-left-dark-voilet mx-3">
+                <span className="check-click-text  pr-3 listing-table-border">{t('Edit N Listings')}</span>
+                <span className="check-click-text  pr-3 listing-table-border mx-3">
                   {' '}
                   Copy <span className="fw-600">5</span> listings{' '}
                 </span>
@@ -101,8 +101,8 @@ export default function ListingTable() {
         </div>
         <div className="d-flex  mx-4  justify-content-between align-items-start align-items-sm-center py-3">
           <div className="d-flex align-items-center ">
-            <p className="table-body-sell border-left-dark-voilet w-50px pr-3 mb-0">50</p>
-            <p className="table-body-sell border-left-dark-voilet w-50px px-3 mb-0">100</p>
+            <p className="table-body-sell listing-table-border w-50px pr-3 mb-0">50</p>
+            <p className="table-body-sell listing-table-border w-50px px-3 mb-0">100</p>
             <p className="table-body-sell w-50px pl-3 mb-0">500</p>
           </div>
           <p className="mb-0">

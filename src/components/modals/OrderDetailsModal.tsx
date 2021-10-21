@@ -126,7 +126,7 @@ const OrderDetailsModal = (props: Props) => {
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                       <div className="d-flex mt-4 ">
-                        <div className="w-82  mright-15">
+                        <div className="w-82  mr-3">
                           <h1 className=" sale-head">{t('OrderDetails.Quantity')}</h1>
                           <Form.Control className="modal-inputs" type="text" placeholder="123" />
                         </div>
