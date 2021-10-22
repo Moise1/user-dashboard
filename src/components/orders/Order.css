@@ -14,6 +14,10 @@
   color: var(--bgPage);
   font-size: var(--font-medium);
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .process-5-order-btn:hover {
@@ -43,6 +47,10 @@
   color: var(--bgPage);
   font-size: var(--font-medium);
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 .stop-5-order-btn:focus {
   box-shadow: none;
@@ -74,6 +82,10 @@
   color: var(--bgPage);
   font-size: var(--font-medium);
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .delete-5-order-btn:focus {
@@ -92,6 +104,10 @@
   color: var(--bgPage);
   font-size: var(--font-medium);
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .mark-dispatch-btn:hover {
@@ -261,19 +277,40 @@
     padding: 6px 15px !important;
   }
 }
-@media (max-width: 576px) {
+
+@media (max-width: 768px) {
   .orders-table-main {
-    padding: 1rem;
+    padding: 6px;
     margin: 1rem 0;
     border-radius: 10px;
   }
 
   .stop-5-order-btn {
-    width: 160px;
-    padding: 0;
+    width: unset;
+    height: unset;
+    padding: 4px 8px;
   }
 
   .process-5-order-btn {
-    width: 160px;
+    width: unset;
+    height: unset;
+    padding: 4px 8px;
+  }
+  .mark-dispatch-btn {
+    width: unset;
+    height: unset;
+    padding: 4px 8px;
+  }
+
+  .delete-5-order-btn {
+    width: unset;
+    height: unset;
+    padding: 4px 8px;
+  }
+  .stop-5-order-btn svg,
+  .delete-5-order-btn svg,
+  .mark-dispatch-btn svg,
+  .process-5-order-btn svg {
+    height: 15px;
   }
 }

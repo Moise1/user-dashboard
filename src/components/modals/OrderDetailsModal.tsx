@@ -25,7 +25,6 @@ const OrderDetailsModal = (props: Props) => {
   } = props;
 
   console.log(setShow);
-  console.log(addressModalShow);
 
   return (
     <div className="modal-first ">

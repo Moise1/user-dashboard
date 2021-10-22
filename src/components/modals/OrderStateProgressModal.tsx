@@ -31,7 +31,6 @@ const OrderStateProgressModal = (props: Props) => {
   const { show, setShow, orderProgress, setOrderDetailsModalShow } = props;
 
   const now = 60;
-  console.log(orderProgress);
 
   return (
     <>

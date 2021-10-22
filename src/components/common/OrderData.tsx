@@ -17,7 +17,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 2,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -32,7 +32,7 @@ const OrderData = [
     state: 'In progress'
   },
   {
-    id: 1,
+    id: 3,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -47,7 +47,7 @@ const OrderData = [
     state: 'Dispatched'
   },
   {
-    id: 1,
+    id: 4,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -62,7 +62,7 @@ const OrderData = [
     state: 'Paused'
   },
   {
-    id: 1,
+    id: 5,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -77,7 +77,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 6,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -92,7 +92,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 7,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -107,7 +107,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 8,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -122,7 +122,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 9,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -137,7 +137,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 10,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -152,7 +152,7 @@ const OrderData = [
     state: 'Error'
   },
   {
-    id: 1,
+    id: 11,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -167,7 +167,7 @@ const OrderData = [
     state: 'Dispatched'
   },
   {
-    id: 1,
+    id: 12,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',
@@ -182,7 +182,7 @@ const OrderData = [
     state: 'AO Disabled'
   },
   {
-    id: 1,
+    id: 13,
     img: dataoneimg,
     sale: '-',
     source: 'Amazon',

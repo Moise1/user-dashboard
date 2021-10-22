@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import {
   UpdonwIcon,
   DustbinDeleteOrderIcon,
@@ -21,18 +21,33 @@ import { t } from '../../global/transShim';
 
 interface props {
   tableValue: boolean;
+  setOrderNumber: (arg0: number) => void;
 }
 
+const orderSelectedArray: Array<number> = [];
+
 const OrderTable = (myProps: props) => {
-  const { tableValue } = myProps;
+  const { tableValue, setOrderNumber } = myProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
   const [orderProgress, setOrderProgress] = useState(1);
   const [show, setShow] = useState(false);
+  const [saveObjectId, setSaveObjectId] = useState<number>(0);
 
   const [addressModalShow, setAddressModalShow] = useState(false);
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
+  // const [orderSelectedArray, setOrderSelectedArray] = useState<IChecked>([]);
 
   console.log(setOrderProgress);
+
+  // const orderSelectedArray = [];
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    console.log(event.target.checked);
+    console.log(saveObjectId);
+    orderSelectedArray.push(saveObjectId);
+    console.log(orderSelectedArray, 'orderSelectedArray');
+    setOrderNumber(orderSelectedArray.length);
+  };
 
   const handleCloseAllModals = () => {
     setAddressModalShow(false);
@@ -45,6 +60,9 @@ const OrderTable = (myProps: props) => {
       <table className="table order-table">
         <thead className="order-table-head">
           <tr>
+            <th>
+              <input type="checkbox" />
+            </th>
             <th>Img</th>
             <th className="order-th-none">
               <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />
@@ -58,25 +76,25 @@ const OrderTable = (myProps: props) => {
             <th className="order-th-none">
               <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdonwIcon />
             </th>
-            <th className="order-th-none">
+            <th>
               <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdonwIcon />
             </th>
-            <th>
+            <th className="order-th-none">
               <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdonwIcon />
             </th>
             <th className="order-th-none">
               <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdonwIcon />
             </th>
-            <th className="order-th-none">
+            <th className="d-flex justify-content-center justify-content-sm-start">
               <span className="mr-2"> {t('OrderTable.State')} </span> <UpdonwIcon />
             </th>
             <th>
@@ -89,6 +107,9 @@ const OrderTable = (myProps: props) => {
           return (
             <tbody className="order-table-body" key={obj.id}>
               <tr>
+                <td onClick={() => setSaveObjectId(obj.id)}>
+                  <input type="checkbox" onChange={handleChange} />
+                </td>
                 <td onClick={() => setShow(true)}>
                   <img src={obj.img} alt="" />
                 </td>
@@ -107,22 +128,22 @@ const OrderTable = (myProps: props) => {
                 <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
                   {obj.sold}
                 </td>
-                <td className="obj-sale-cost" onClick={() => setShow(true)}>
+                <td className="obj-sale-cost  order-td-none" onClick={() => setShow(true)}>
                   {obj.cost}
                 </td>
-                <td className="obj-sale-qty" onClick={() => setShow(true)}>
+                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
                   {obj.fees}
                 </td>
-                <td className="obj-profit-text order-td-none" onClick={() => setShow(true)}>
+                <td className="obj-profit-text " onClick={() => setShow(true)}>
                   {obj.profit}
                 </td>
                 <td className="obj-sale-cost order-td-none" onClick={() => setShow(true)}>
                   {obj.margin}
                 </td>
-                <td className="obj-sale-qty" onClick={() => setShow(true)}>
+                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
                   {obj.orderOn}
                 </td>
-                <td className="order-td-none">
+                <td>
                   <button
                     onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${

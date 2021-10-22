@@ -30,7 +30,7 @@ export default function Topbar(props: Props) {
           <img className="logoHGR ml-2 ml-md-3" src={Logo} alt="logo" />
         </div>
         <p className=" ml-2 quota-price ff-used mb-0 d-md-none">45% (12/13)</p>{' '}
-        <button className="upgrde-btn-topbar d-md-none">Upgrade</button>
+        <button className="upgrde-btn-topbar d-none d-sm-block">Upgrade</button>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-1 TopBarItems">
             <div className="d-flex align-items-center">
