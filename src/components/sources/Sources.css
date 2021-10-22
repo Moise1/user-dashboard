@@ -156,7 +156,7 @@
 
 .react-list-data-here li {
   list-style-type: none;
-  font-size: 18px;
+  font-size: var(--font-large);
   font-weight: 400;
   margin: 12px 0;
   cursor: pointer;
@@ -189,11 +189,12 @@
 
 .add-acccounnt-span {
   font-weight: 600;
-  font-size: 18px;
+  font-size: var(--font-large);
   color: var(--bgBlue);
   cursor: pointer;
   display: inline-block;
 }
+
 .add-account-input-inselect {
   width: 100%;
   padding: 5px 12px;
@@ -265,6 +266,9 @@
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {
+  .back-supplier-parent {
+    background-color: white;
+  }
   .source-table .source-th-none {
     display: none !important;
   }
@@ -273,9 +277,20 @@
   }
 }
 @media (max-width: 575.98px) {
-  .w-348_54 {
-    width: 290px !important;
+  .shows-search-drop-list {
+    padding: 8px;
+    top: 0;
   }
+  .drop-list-search-input {
+    padding: 3px 4px;
+  }
+  .drop-list-search-input input {
+    font-size: 8px;
+  }
+  .add-acccounnt-icon svg {
+    height: 16px;
+  }
+
   .auto-ordering-section {
     border-radius: 0;
     padding: 15px;
@@ -286,19 +301,18 @@
   }
 
   .react-search-with-select-parent .select-dropdown-shows h5 {
-    font-size: 14px;
+    font-size: var(--font-small);
   }
   .react-search-with-select-parent {
-    width: 180px;
-    height: 50px;
+    width: 110px;
+    height: 35px;
   }
 
   .react-list-data-here li {
-    font-size: 14px;
     margin: 8px 0;
   }
   .add-account-select-parent {
-    width: 230px !important;
-    height: 50px;
+    width: 160px !important;
+    height: 35px;
   }
 }

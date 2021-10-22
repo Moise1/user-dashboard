@@ -105,7 +105,7 @@ const AddAccountsSelect = () => {
             ) : (
               <div className="d-flex aling-items-center  mt-2" onClick={() => setShowAccountInput(true)}>
                 <span className="add-acccounnt-span"> {t('SourceConfigInputs.AddAccount')}</span>
-                <span className="ml-2">
+                <span className="ml-2 add-acccounnt-icon">
                   <PersonWithPlusIcon />
                 </span>
               </div>

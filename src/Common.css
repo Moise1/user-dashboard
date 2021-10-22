@@ -1265,6 +1265,8 @@ table {
   border-radius: 8px;
   font-weight: bold;
   padding: 5px 8px;
+  /* position: sticky; */
+  /* top: 0; */
 }
 
 .reset-to-default-btn:hover {
@@ -1282,6 +1284,8 @@ table {
   font-weight: bold;
   transition: 0.3s ease;
   padding: 5px 8px;
+  position: sticky;
+  top: 0;
 }
 
 .save-changes-btn:hover {
@@ -1882,11 +1886,13 @@ table {
   .save-changes-btn {
     width: unset;
     height: unset;
+    padding: 3px 9px;
   }
 
   .reset-to-default-btn {
     width: unset;
     height: unset;
+    padding: 3px 9px;
   }
 
   .dark-pink-para {
@@ -2142,6 +2148,16 @@ table {
 }
 
 @media (max-width: 576px) {
+  .switch-toggle {
+    height: 25px;
+    width: 40px;
+  }
+
+  .slider-toggle:before {
+    height: 20px;
+    width: 20px;
+  }
+
   .config-supply-btn {
     width: unset;
     height: unset;
@@ -2165,6 +2181,16 @@ table {
   .source-table td,
   .source-table th {
     padding: 0.45rem;
+  }
+
+  .account-input-style {
+    height: 30px;
+  }
+  .amazonlogin-input-style {
+    height: 30px;
+  }
+  .otp-code-input-styles {
+    height: 30px;
   }
 }
 
