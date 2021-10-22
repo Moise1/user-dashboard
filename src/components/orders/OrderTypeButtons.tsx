@@ -20,7 +20,7 @@ const OrderTypeButtons = (myProps: props) => {
               Process {orderNumber > 0 ? orderNumber : ''}
               {/* {t('OrderButtons.Process5Orders')} */}
             </span>
-            <span className="d-none d-md-block">Orders</span>
+            <span className="d-none d-md-block">&nbsp;Orders</span>
           </button>
           <button className="btn stop-5-order-btn mx-1 mx-sm-3">
             <HandStopOrderIcon />
@@ -28,7 +28,7 @@ const OrderTypeButtons = (myProps: props) => {
               Stop
               {/* {t('OrderButtons.Stop5Orders')}  */}
             </span>
-            <span className="d-none d-md-block">Orders</span>
+            <span className="d-none d-md-block">&nbsp;Orders</span>
           </button>
         </div>
 
@@ -39,7 +39,7 @@ const OrderTypeButtons = (myProps: props) => {
               Delete
               {/* {t('OrderButtons.Delete5Orders')} */}
             </span>
-            <span className="d-none d-md-block">Orders</span>
+            <span className="d-none d-md-block">&nbsp;Orders</span>
           </button>
           <button className="btn mark-dispatch-btn mx-1  mx-sm-3">
             <DispatchedOrderIcon />

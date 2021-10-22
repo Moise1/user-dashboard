@@ -86,4 +86,22 @@
     width: 20px;
     height: 20px;
   }
+  .hamburger-mobile {
+    padding: 8px;
+  }
+  .hamburger-mobile span {
+    width: 16px;
+  }
+  .logoHGR {
+    height: 28px;
+    width: 26px;
+  }
+  .hamburger-mobile .second {
+    margin: 4px 0;
+  }
+
+  .storeSelector img {
+    height: 10px !important;
+    width: 10px !important;
+  }
 }

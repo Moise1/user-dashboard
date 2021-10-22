@@ -21,7 +21,7 @@ export default function Topbar(props: Props) {
   return (
     <>
       <div className="TopBar">
-        <div className="ml-3 d-flex align-items-center">
+        <div className="ml-2 ml-sm-3 d-flex align-items-center">
           <div className="hamburger-mobile d-lg-none" onClick={() => handleSidebarMobile()}>
             <span className="first"></span>
             <span className="second"></span>
@@ -29,8 +29,10 @@ export default function Topbar(props: Props) {
           </div>
           <img className="logoHGR ml-2 ml-md-3" src={Logo} alt="logo" />
         </div>
-        <p className=" ml-2 quota-price ff-used mb-0 d-md-none">45% (12/13)</p>{' '}
-        <button className="upgrde-btn-topbar d-none d-sm-block">Upgrade</button>
+        <div>
+          <p className=" ml-2 mb-0 mt-2 quota-price ff-used d-md-none">45% (12/13)</p>{' '}
+        </div>
+        <button className="upgrde-btn-topbar d-md-none mt-2">Upgrade</button>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-1 TopBarItems">
             <div className="d-flex align-items-center">

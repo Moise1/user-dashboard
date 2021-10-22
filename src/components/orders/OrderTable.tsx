@@ -35,6 +35,7 @@ const OrderTable = (myProps: props) => {
 
   const [addressModalShow, setAddressModalShow] = useState(false);
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
+  const [isSeletAllOrder, setSeletAllOrder] = useState(false);
   // const [orderSelectedArray, setOrderSelectedArray] = useState<IChecked>([]);
 
   console.log(setOrderProgress);
@@ -55,13 +56,21 @@ const OrderTable = (myProps: props) => {
     setShow(false);
   };
 
+  const handleAllchecked = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSeletAllOrder(event.target.checked);
+    setOrderNumber(OrderData.length);
+  };
+
   return (
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
       <table className="table order-table">
         <thead className="order-table-head">
           <tr>
             <th>
-              <input type="checkbox" />
+              <label className="select-all-checkbox">
+                <input onChange={handleAllchecked} type="checkbox" />
+                <span className="checkmark"></span>
+              </label>
             </th>
             <th>Img</th>
             <th className="order-th-none">
@@ -108,7 +117,10 @@ const OrderTable = (myProps: props) => {
             <tbody className="order-table-body" key={obj.id}>
               <tr>
                 <td onClick={() => setSaveObjectId(obj.id)}>
-                  <input type="checkbox" onChange={handleChange} />
+                  <label className="container-checkbox">
+                    <input type="checkbox" checked={isSeletAllOrder} onChange={handleChange} />
+                    <span className="checkmark"></span>
+                  </label>
                 </td>
                 <td onClick={() => setShow(true)}>
                   <img src={obj.img} alt="" />
