@@ -1553,9 +1553,12 @@ table {
   border-radius: 10px;
   background: var(--bgBlue);
   font-weight: bold;
-  font-size: 16px;
+  font-size: var(--font-medium);
   color: var(--color-white);
   transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .config-auto-ordering-beta-btn:hover {
@@ -1573,8 +1576,11 @@ table {
   border-radius: 10px;
   background: var(--color-violet-shade-2);
   font-weight: bold;
-  font-size: 16px;
+  font-size: var(--font-medium);
   color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .config-supply-btn:hover {
@@ -1626,7 +1632,8 @@ table {
   border-radius: 10px;
   background: #9a9a9a;
   font-weight: bold;
-  font-size: 12px;
+  font-size: var(--font-extra-small);
+
   color: var(--bgHighlight);
 }
 
@@ -1636,7 +1643,7 @@ table {
   border-radius: 10px;
   background: var(--bgBlue) !important;
   font-weight: bold;
-  font-size: 12px;
+  font-size: var(--font-extra-small);
   color: var(--bgHighlight);
 }
 
@@ -1646,7 +1653,8 @@ table {
   border-radius: 10px;
   background: #aec7ff !important;
   font-weight: bold;
-  font-size: 12px;
+  font-size: var(--font-extra-small);
+
   text-align: left;
   color: var(--bgHighlight);
   display: flex;
@@ -1850,6 +1858,20 @@ table {
   transform: rotate(180deg);
 }
 @media (max-width: 575.98px) {
+  .table-disable-button {
+    width: 95px;
+    height: 23px;
+  }
+
+  .table-enabled-button {
+    width: 95px;
+    height: 23px;
+  }
+
+  .table-coming-soon-button {
+    width: 100px;
+    height: 23px;
+  }
   .advance-search-purple-button {
     padding: 10px 40px;
     width: 280px;
@@ -1894,13 +1916,13 @@ table {
 }
 
 @media (max-width: 767.98px) {
-  .config-auto-ordering-beta-btn {
+  /* .config-auto-ordering-beta-btn {
     width: 100%;
   }
 
   .config-supply-btn {
     width: 100%;
-  }
+  } */
 }
 
 /* MODAL CSS END */
@@ -2120,6 +2142,17 @@ table {
 }
 
 @media (max-width: 576px) {
+  .config-supply-btn {
+    width: unset;
+    height: unset;
+    padding: 5px 10px;
+  }
+  .config-auto-ordering-beta-btn {
+    width: unset;
+    height: unset;
+    padding: 5px 10px;
+  }
+
   .box-width {
     width: 100%;
   }
@@ -2128,5 +2161,23 @@ table {
   }
   .obj-state-text {
     padding: 5px 6px;
+  }
+  .source-table td,
+  .source-table th {
+    padding: 0.45rem;
+  }
+}
+
+@media (max-width: 360.98px) {
+  .table-disable-button {
+    width: 85px;
+  }
+
+  .table-enabled-button {
+    width: 85px;
+  }
+
+  .table-coming-soon-button {
+    width: 90px;
   }
 }

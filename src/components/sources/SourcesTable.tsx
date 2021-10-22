@@ -37,28 +37,28 @@ function SourcesTable(myProps: props) {
           <thead className="source-table-head">
             <tr>
               <th> {t('SourceTable.Provider')}</th>
-              <th>
-                <span className="mr-2"> {t('SourceTable.Markup')} </span>{' '}
+              <th className="text-center">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.Markup')} </span>{' '}
+              </th>
+              <th className="text-center">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.MonitorStock')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> {t('SourceTable.MonitorStock')} </span>
+                <span className="mr-0 mr-sm-2">{t('SourceTable.MonitorPrice')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2">{t('SourceTable.MonitorPrice')} </span>
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.PriceDecrease')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> {t('SourceTable.PriceDecrease')} </span>
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.DecreaseLimit')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> {t('SourceTable.DecreaseLimit')} </span>
-              </th>
-              <th>
-                <span className="mr-2"> {t('SourceTable.Template')} </span>
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.Template')} </span>
               </th>
               <th className="source-th-none">
-                <span className="mr-2"> {t('SourceTable.ShippingPolicy')}</span>
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
-              <th>
+              <th className="text-center">
                 <Popover
                   placement="right"
                   content={
@@ -67,7 +67,7 @@ function SourcesTable(myProps: props) {
                     </div>
                   }
                 >
-                  <span className="mr-2"> {t('SourceTable.AutoOrdering')} </span>
+                  <span className="mr-0 mr-sm-2"> {t('SourceTable.AutoOrdering')} </span>
                 </Popover>
               </th>
             </tr>
@@ -79,23 +79,23 @@ function SourcesTable(myProps: props) {
               <tbody className="order-table-body" key={id}>
                 <tr>
                   <td className="obj-sale-body">{provider}</td>
-                  <td className="obj-sale-body  source-td-none">{markup}</td>
+                  <td className="obj-sale-body text-center  ">{markup}</td>
                   <td className="obj-sale-title source-td-none">{decreaseLimit}</td>
                   <td className="obj-sale-qty source-td-none">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty  source-td-none  ">
+                  <td className="obj-sale-qty    text-center">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty   ">
+                  <td className="obj-sale-qty  source-td-none ">
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-cost  ">{template}</td>
-                  <td className="w-12per shipping-policy-text white-space-pre-wrap">{shippingPolicy}</td>
+                  <td className="obj-sale-cost source-td-none  ">{template}</td>
+                  <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
 
-                  <td className="w-15per  source-td-none">
+                  <td className="w-15per text-center ">
                     <Popover
                       placement="right"
                       content={

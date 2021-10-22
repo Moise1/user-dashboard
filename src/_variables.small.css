@@ -101,4 +101,7 @@
   .storeSelector {
     width: unset;
   }
+  .searchBar {
+    height: 33px !important;
+  }
 }
