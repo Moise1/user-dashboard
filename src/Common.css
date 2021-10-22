@@ -1265,8 +1265,8 @@ table {
   border-radius: 8px;
   font-weight: bold;
   padding: 5px 8px;
-  /* position: sticky; */
-  /* top: 0; */
+  position: sticky;
+  top: 70px;
 }
 
 .reset-to-default-btn:hover {
@@ -1821,7 +1821,7 @@ table {
 }
 
 .modal-second-inputs .form-control {
-  background-color: #f2f8ff !important;
+  background-color: #fff !important;
   border-radius: 10px;
   border: none;
   height: 42px;
