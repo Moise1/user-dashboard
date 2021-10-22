@@ -27,18 +27,20 @@ const SettingSourceConfig = (myProps: props) => {
           </div>
         </div>
 
-        <div className="d-flex justify-content-end my-2 mt-0 mb-sm-4">
-          <button className="btn config-auto-ordering-beta-btn" onClick={() => history.push('/sources-setting')}>
-            {t('SourceConfigInputs.ConfigureAutoordering')}
+        <div className="bg-white mt-3 br-10">
+          <div className="d-flex justify-content-end my-2 mt-0 mb-sm-4">
+            <button className="btn config-auto-ordering-beta-btn" onClick={() => history.push('/sources-setting')}>
+              {t('SourceConfigInputs.ConfigureAutoordering')}
 
-            <span className="mx-1">
-              <OrdersIcon />{' '}
-            </span>
-          </button>
-          <button className="btn config-supply-btn ml-3"> {t('SourceConfigInputs.ConfigureSuppliers')}</button>
+              <span className="mx-1">
+                <OrdersIcon />{' '}
+              </span>
+            </button>
+            <button className="btn config-supply-btn ml-3"> {t('SourceConfigInputs.ConfigureSuppliers')}</button>
+          </div>
+
+          <SourcesTable tableValue={staticValue} />
         </div>
-
-        <SourcesTable tableValue={staticValue} />
       </div>
     </>
   );

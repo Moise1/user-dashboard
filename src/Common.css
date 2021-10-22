@@ -1610,7 +1610,7 @@ table {
 }
 
 .source-table-head {
-  background-color: #fafcff;
+  background-color: #fff;
 
   color: var(--color-dark-violet);
   white-space: nowrap;

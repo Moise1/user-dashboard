@@ -37,10 +37,10 @@ function SourcesTable(myProps: props) {
           <thead className="source-table-head">
             <tr>
               <th> {t('SourceTable.Provider')}</th>
-              <th className="text-center">
+              <th className="text-center text-md-left">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.Markup')} </span>{' '}
               </th>
-              <th className="text-center">
+              <th className="text-center text-md-left">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.MonitorStock')} </span>
               </th>
               <th className="source-th-none">
@@ -58,7 +58,7 @@ function SourcesTable(myProps: props) {
               <th className="source-th-none">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
-              <th className="text-center">
+              <th className="text-center text-md-left">
                 <Popover
                   placement="right"
                   content={
@@ -77,15 +77,15 @@ function SourcesTable(myProps: props) {
             const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
             return (
               <tbody className="order-table-body" key={id}>
-                <tr>
+                <tr onClick={() => handleSupplierValue(provider)}>
                   <td className="obj-sale-body">{provider}</td>
-                  <td className="obj-sale-body text-center  ">{markup}</td>
+                  <td className="obj-sale-body text-center text-md-left ">{markup}</td>
                   <td className="obj-sale-title source-td-none">{decreaseLimit}</td>
                   <td className="obj-sale-qty source-td-none">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty    text-center">
+                  <td className="obj-sale-qty    text-center text-md-left">
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
@@ -95,7 +95,7 @@ function SourcesTable(myProps: props) {
                   <td className="obj-sale-cost source-td-none  ">{template}</td>
                   <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
 
-                  <td className="w-15per text-center ">
+                  <td className="w-15per text-center text-md-left">
                     <Popover
                       placement="right"
                       content={
@@ -105,7 +105,6 @@ function SourcesTable(myProps: props) {
                       }
                     >
                       <button
-                        onClick={() => handleSupplierValue(provider)}
                         className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
                           autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                         } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
@@ -122,6 +121,23 @@ function SourcesTable(myProps: props) {
             );
           })}
         </table>
+
+        {/* PAGINATION UI  */}
+        <div className="d-flex  mx-4  justify-content-between align-items-start align-items-sm-center py-3">
+          <div className="d-flex align-items-center ">
+            <p className="table-body-sell listing-table-border w-50px pr-3 mb-0">50</p>
+            <p className="table-body-sell listing-table-border w-50px px-3 mb-0">100</p>
+            <p className="table-body-sell w-50px pl-3 mb-0">500</p>
+          </div>
+          <p className="mb-0">
+            <span className="pagination-number w-50px px-2">1</span>
+            <span className="pagination-number w-50px px-2">2</span>
+            <span className="pagination-number w-50px px-2">3</span>
+            <span className="pagination-number w-50px pl-2">4</span>
+            <span className="pagination-number w-50px ">...</span>
+            <span className="pagination-number w-50px px-2">5</span>
+          </p>
+        </div>
       </div>
     </>
   );
