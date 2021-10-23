@@ -38,7 +38,7 @@ const OrderTable = (myProps: props) => {
   const [isSeletAllOrder, setSeletAllOrder] = useState(false);
   // const [orderSelectedArray, setOrderSelectedArray] = useState<IChecked>([]);
 
-  console.log(setOrderProgress);
+  console.log(setOrderProgress, isSeletAllOrder);
 
   // const orderSelectedArray = [];
 
@@ -49,9 +49,11 @@ const OrderTable = (myProps: props) => {
     orderSelectedArray.push(saveObjectId);
 
     // if (orderSelectedArray.includes(saveObjectId)) {
-    //   orderSelectedArray.pop(saveObjectId);
+    //   // const indexArr = orderSelectedArray.findIndex(saveObjectId);
+    //   // console.log(indexArr, 'indexArr');
+    //   // orderSelectedArray.pop(saveObjectId);
     // } else {
-    //   orderSelectedArray.push(saveObjectId);
+    //   // orderSelectedArray.push(saveObjectId);
     // }
     console.log(orderSelectedArray, 'orderSelectedArray');
     setOrderNumber(orderSelectedArray.length);
@@ -69,170 +71,172 @@ const OrderTable = (myProps: props) => {
   };
 
   return (
-    <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
-      <table className="table order-table">
-        <thead className="order-table-head">
-          <tr>
-            <th>
-              <label className="select-all-checkbox">
-                <input onChange={handleAllchecked} type="checkbox" />
-                <span className="checkmark"></span>
-              </label>
-            </th>
-            <th>Img</th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdonwIcon />
-            </th>
-            <th>
-              <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdonwIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdonwIcon />
-            </th>
-            <th className="d-flex justify-content-center justify-content-sm-start">
-              <span className="mr-2"> {t('OrderTable.State')} </span> <UpdonwIcon />
-            </th>
-            <th>
-              <span className="mr-2"> &nbsp; </span>
-            </th>
-          </tr>
-        </thead>
+    <>
+      <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
+        <table className="table order-table">
+          <thead className="order-table-head">
+            <tr>
+              <th>
+                <label className="select-all-checkbox">
+                  <input onChange={handleAllchecked} type="checkbox" />
+                  <span className="checkmark"></span>
+                </label>
+              </th>
+              <th>Img</th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdonwIcon />
+              </th>
+              <th>
+                <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdonwIcon />
+              </th>
+              <th className="order-th-none">
+                <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdonwIcon />
+              </th>
+              <th className="d-flex justify-content-center justify-content-sm-start">
+                <span className="mr-2"> {t('OrderTable.State')} </span> <UpdonwIcon />
+              </th>
+              <th>
+                <span className="mr-2"> &nbsp; </span>
+              </th>
+            </tr>
+          </thead>
 
-        {OrderData.map((obj) => {
-          return (
-            <tbody className="order-table-body" key={obj.id}>
-              <tr className="cursor-pointer">
-                <td onClick={() => setSaveObjectId(obj.id)}>
-                  <label className="container-checkbox">
-                    <input type="checkbox" checked={isSeletAllOrder} onChange={handleChange} />
-                    <span className="checkmark"></span>
-                  </label>
-                </td>
-                <td onClick={() => setShow(true)}>
-                  <img src={obj.img} alt="" />
-                </td>
-                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
-                  {obj.sale}
-                </td>
-                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
-                  {obj.source}
-                </td>
-                <td className="obj-sale-title order-td-none" onClick={() => setShow(true)}>
-                  {obj.title}
-                </td>
-                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
-                  {obj.qty}
-                </td>
-                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
-                  {obj.sold}
-                </td>
-                <td className="obj-sale-cost  order-td-none" onClick={() => setShow(true)}>
-                  {obj.cost}
-                </td>
-                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
-                  {obj.fees}
-                </td>
-                <td className="obj-profit-text " onClick={() => setShow(true)}>
-                  {obj.profit}
-                </td>
-                <td className="obj-sale-cost order-td-none" onClick={() => setShow(true)}>
-                  {obj.margin}
-                </td>
-                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
-                  {obj.orderOn}
-                </td>
-                <td>
-                  <button
-                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
-                    className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
-                      obj.state === 'In progress' ? 'in-progress-btn' : ''
-                    } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
-                      obj.state === 'Paused' ? 'bg-color-light-orange' : ''
-                    } ${obj.state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''} obj-state-text `}
-                  >
-                    {obj.state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-                    {obj.state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-                    {obj.state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                    {obj.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
-                    {obj.state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
-                    {obj.state}
-                  </button>
-                </td>
-                <td className="order-three-dots-dropdown">
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-basic">
-                      <ThreeDotsColumnIcon />
-                    </Dropdown.Toggle>
+          {OrderData.map((obj) => {
+            return (
+              <tbody className="order-table-body" key={obj.id}>
+                <tr className="cursor-pointer">
+                  <td onClick={() => setSaveObjectId(obj.id)}>
+                    <label className="container-checkbox">
+                      <input type="checkbox" onChange={handleChange} />
+                      <span className="checkmark"></span>
+                    </label>
+                  </td>
+                  <td onClick={() => setShow(true)}>
+                    <img src={obj.img} alt="" />
+                  </td>
+                  <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
+                    {obj.sale}
+                  </td>
+                  <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
+                    {obj.source}
+                  </td>
+                  <td className="obj-sale-title order-td-none" onClick={() => setShow(true)}>
+                    {obj.title}
+                  </td>
+                  <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
+                    {obj.qty}
+                  </td>
+                  <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
+                    {obj.sold}
+                  </td>
+                  <td className="obj-sale-cost  order-td-none" onClick={() => setShow(true)}>
+                    {obj.cost}
+                  </td>
+                  <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
+                    {obj.fees}
+                  </td>
+                  <td className="obj-profit-text " onClick={() => setShow(true)}>
+                    {obj.profit}
+                  </td>
+                  <td className="obj-sale-cost order-td-none" onClick={() => setShow(true)}>
+                    {obj.margin}
+                  </td>
+                  <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
+                    {obj.orderOn}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
+                      className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
+                        obj.state === 'In progress' ? 'in-progress-btn' : ''
+                      } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
+                        obj.state === 'Paused' ? 'bg-color-light-orange' : ''
+                      } ${obj.state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''} obj-state-text `}
+                    >
+                      {obj.state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
+                      {obj.state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
+                      {obj.state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
+                      {obj.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
+                      {obj.state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
+                      {obj.state}
+                    </button>
+                  </td>
+                  <td className="order-three-dots-dropdown">
+                    <Dropdown>
+                      <Dropdown.Toggle id="dropdown-basic">
+                        <ThreeDotsColumnIcon />
+                      </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                      <Dropdown.Item>
-                        <ProcessOrderIcon />
-                        <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <span onClick={() => setShow(true)}>
-                          <HandStopOrderIcon />
-                          <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
-                        </span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <DispatchedOrderIcon />
-                        <span className="ml-2"> {t('OrderDetails.MarkAsDispatched')}</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <DustbinDeleteOrderIcon />
-                        <span className="ml-2">{t('OrderDetails.DeleteOrder')} </span>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
-      <OrderStateProgressModal
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
-        setOrderDetailsModalShow={setOrderDetailsModalShow}
-        orderDetailsModalShow={orderDetailsModalShow}
-        orderProgress={orderProgress}
-        show={show}
-        setShow={setShow}
-        handleCloseAllModals={handleCloseAllModals}
-      />
+                      <Dropdown.Menu>
+                        <Dropdown.Item>
+                          <ProcessOrderIcon />
+                          <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                          <span onClick={() => setShow(true)}>
+                            <HandStopOrderIcon />
+                            <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
+                          </span>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                          <DispatchedOrderIcon />
+                          <span className="ml-2"> {t('OrderDetails.MarkAsDispatched')}</span>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                          <DustbinDeleteOrderIcon />
+                          <span className="ml-2">{t('OrderDetails.DeleteOrder')} </span>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
+        <OrderStateProgressModal
+          addressModalShow={addressModalShow}
+          setAddressModalShow={setAddressModalShow}
+          setOrderDetailsModalShow={setOrderDetailsModalShow}
+          orderDetailsModalShow={orderDetailsModalShow}
+          orderProgress={orderProgress}
+          show={show}
+          setShow={setShow}
+          handleCloseAllModals={handleCloseAllModals}
+        />
 
-      <OrderDetailsModal
-        setOrderDetailsModalShow={setOrderDetailsModalShow}
-        orderDetailsModalShow={orderDetailsModalShow}
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
-        handleCloseAllModals={handleCloseAllModals}
-        setShow={setShow}
-      />
-    </div>
+        <OrderDetailsModal
+          setOrderDetailsModalShow={setOrderDetailsModalShow}
+          orderDetailsModalShow={orderDetailsModalShow}
+          addressModalShow={addressModalShow}
+          setAddressModalShow={setAddressModalShow}
+          handleCloseAllModals={handleCloseAllModals}
+          setShow={setShow}
+        />
+      </div>
+    </>
   );
 };
 

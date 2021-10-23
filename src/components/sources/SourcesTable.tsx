@@ -77,7 +77,7 @@ function SourcesTable(myProps: props) {
             const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
             return (
               <tbody className="order-table-body" key={id}>
-                <tr onClick={() => handleSupplierValue(provider)}>
+                <tr className="cursor-pointer" onClick={() => handleSupplierValue(provider)}>
                   <td className="obj-sale-body">{provider}</td>
                   <td className="obj-sale-body text-center text-md-left ">{markup}</td>
                   <td className="obj-sale-title source-td-none">{decreaseLimit}</td>
