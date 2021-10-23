@@ -476,6 +476,14 @@
 }
 
 @media (max-width: 768px) {
+  .time-line-here svg {
+    width: 30px;
+    height: 30px;
+  }
+  .time-line-here .rotating {
+    width: 15px;
+    height: 15px;
+  }
   .middle-part-autoordering {
     height: 250px;
   }
@@ -515,6 +523,6 @@
   .delete-5-order-btn svg,
   .mark-dispatch-btn svg,
   .process-5-order-btn svg {
-    height: 15px;
+    height: 12px;
   }
 }

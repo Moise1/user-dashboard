@@ -46,13 +46,13 @@ const OrderStateProgressModal = (props: Props) => {
           <Modal.Body className="position-relative p-2 p-lg-3">
             <div className="p-0 p-lg-3">
               <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex flex-column flex-lg-row">
-                  <h2 className="head-part-one mr-5"> {t('OrderDetails.OrderStateProcess')}</h2>
+                <div className="d-flex">
+                  <h2 className="head-part-one mr-2 mr-lg-5"> {t('OrderDetails.OrderStateProcess')}</h2>
                   <button className="btn ao-enabled-button">
                     <span>
                       <AoIconHead />
                     </span>
-                    <span className="px-3"> {t('OrderDetails.AOEnabled')}</span>
+                    <span className="px-2 px-lg-3"> {t('OrderDetails.AOEnabled')}</span>
                   </button>
                 </div>
 
@@ -177,7 +177,7 @@ const OrderStateProgressModal = (props: Props) => {
                       <LeftBackArrowIcon />
                     </span>
                   </span>
-                  <div className="d-flex align-items-lg-end flex-lg-column">
+                  <div className="d-flex justify-content-between align-items-lg-end flex-lg-column">
                     <div className="d-flex align-items-center">
                       <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-3">
                         <ProcessOrderIcon />
@@ -194,7 +194,7 @@ const OrderStateProgressModal = (props: Props) => {
                         <DustbinDeleteOrderIcon />
                         <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
                       </button>
-                      <button className=" btn mark-dispatch-modal-btn-style">
+                      <button className=" btn disabled-btn mark-dispatch-modal-btn-style">
                         <DispatchedOrderIcon />
                         <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
                       </button>

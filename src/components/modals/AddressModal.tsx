@@ -33,7 +33,7 @@ const AddressModal = (props: Props) => {
           <div className="col-12">
             <div className="row justify-content-between">
               {/* SHIPPING ADDRESSS  */}
-              <div className="col-lg-5">
+              <div className="col-6 col-lg-5">
                 <div className="modal-second-inputs  ">
                   <h1 className="shop-address ">{t('OrderDetails.ShippingAddress')}</h1>
                   <p className="modal-second-input-heads pt-3"> {t('OrderDetails.StreetAddress')}</p>
@@ -46,8 +46,8 @@ const AddressModal = (props: Props) => {
               </div>
 
               {/* BILLING ADDRESSS  */}
-              <div className="col-lg-6">
-                <div className="mt-4 mt-lg-0 modal-second-inputs">
+              <div className="col-6 col-lg-6">
+                <div className="modal-second-inputs">
                   <h1 className="shop-address "> {t('OrderDetails.Billingaddress')}</h1>
                   <p className="modal-second-input-heads pt-3">{t('OrderDetails.StreetAddress')}</p>
                   <Form.Control className="modal-inputs" type="text" placeholder="" />

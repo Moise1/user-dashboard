@@ -1739,11 +1739,10 @@ table {
 
 .modals-inputs .form-control {
   background-color: #f2f8ff !important;
-
   border-radius: 10px;
   border: none;
   height: 42px;
-  font-size: 15px;
+  font-size: var(--font-medium);
   font-weight: 700;
 }
 
@@ -1922,6 +1921,13 @@ table {
 }
 
 @media (max-width: 767.98px) {
+  .modal-second-inputs .form-control {
+    width: 130px;
+    height: 25px;
+  }
+  .rotate-180-arrow svg {
+    height: 17px;
+  }
   /* .config-auto-ordering-beta-btn {
     width: 100%;
   }
@@ -2094,13 +2100,13 @@ table {
 
 .source-url-input {
   font-weight: normal !important;
-  font-size: 16px;
+  font-size: var(--font-medium);
   color: var(--active-bg) !important;
 }
 
 .source-url-input::placeholder {
   font-weight: normal;
-  font-size: 16px;
+  font-size: var(--font-medium);
   color: var(--active-bg) !important;
 }
 
@@ -2148,6 +2154,23 @@ table {
 }
 
 @media (max-width: 576px) {
+  .headphone-img-style {
+    height: 200px;
+    width: 170px;
+  }
+  .modals-inputs .form-control {
+    height: 25px;
+  }
+  .ao-enabled-button {
+    height: 28px;
+    padding: 4px;
+  }
+  .h-blue-line {
+    height: 50px;
+  }
+  .disabled-line {
+    height: 50px;
+  }
   .ao-disabled-button {
     height: 24px;
     padding: 4px 6px;
