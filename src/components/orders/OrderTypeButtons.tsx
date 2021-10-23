@@ -11,8 +11,8 @@ const OrderTypeButtons = (myProps: props) => {
 
   return (
     <>
-      <div className="d-flex">
-        <div className=" d-flex   justify-content-between">
+      <div className="d-flex  ">
+        <div className=" d-flex   ">
           <button className="btn process-5-order-btn">
             <ProcessOrderIcon />
             <span className="ml-1 ml-sm-2">
@@ -32,7 +32,7 @@ const OrderTypeButtons = (myProps: props) => {
           </button>
         </div>
 
-        <div className="d-flex  justify-content-between ">
+        <div className="d-flex   ">
           <button className="btn delete-5-order-btn">
             <DustbinDeleteOrderIcon />
             <span className="ml-1 ml-sm-2">

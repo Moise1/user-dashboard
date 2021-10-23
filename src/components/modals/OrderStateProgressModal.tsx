@@ -162,7 +162,7 @@ const OrderStateProgressModal = (props: Props) => {
               </div>
 
               <div className="row">
-                <div className="col-12 d-flex flex-column flex-lg-row justify-content-between ">
+                <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
                   <span className="d-flex align-items-center mt-4 mb-3 mb-lg-0">
                     <div
                       className="order-details-model-btnn order-details-back-text cursor-pointer"

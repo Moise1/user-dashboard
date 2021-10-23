@@ -526,5 +526,6 @@
   .mark-dispatch-btn svg,
   .process-5-order-btn svg {
     height: 12px;
+    width: 12px;
   }
 }
