@@ -11,6 +11,7 @@ interface props {
 const AutoOrdering = (myProps: props) => {
   const [checked, setChecked] = useState<boolean>(false);
   const { whatSelect } = myProps;
+  const [DisableAccount, setDisableAccount] = useState<boolean>(false);
 
   // FOR GET VALUE OF TOGGLE SWITCH
 
@@ -42,9 +43,13 @@ const AutoOrdering = (myProps: props) => {
             {t('SourceConfigInputs.AccountConfiguration')} : <span> {t('SourceConfigInputs.DadAccount')}</span>{' '}
           </h2>
 
-          <AddAccountsSelect />
+          <AddAccountsSelect DisableAccount={DisableAccount} />
 
-          <AccountsInput whatSelect={whatSelect} />
+          <AccountsInput
+            whatSelect={whatSelect}
+            DisableAccount={DisableAccount}
+            setDisableAccount={setDisableAccount}
+          />
         </div>
         <div className="d-flex flex-row flex-sm-column">
           <button className="btn save-changes-btn mb-0 mb-sm-3">

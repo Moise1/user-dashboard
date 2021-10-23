@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DustbinPinkIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 
 interface props {
   whatSelect: string;
+  DisableAccount: boolean;
+  setDisableAccount: (arg0: boolean) => void;
 }
 
 const AccountsInput = (myProps: props) => {
-  const { whatSelect } = myProps;
-  const [DisableAccount, setDisableAccount] = useState<boolean>(false);
+  const { whatSelect, DisableAccount, setDisableAccount } = myProps;
 
   console.log(DisableAccount, 'DisableAccount');
   return (
@@ -88,7 +89,11 @@ const AccountsInput = (myProps: props) => {
               <label className="switch-toggle mb-0 " htmlFor="checkbox-1">
                 <input
                   className="input-toggle-switch"
-                  onChange={() => setDisableAccount(!DisableAccount)}
+                  onChange={() => {
+                    if (whatSelect.length) {
+                      setDisableAccount(!DisableAccount);
+                    }
+                  }}
                   type="checkbox"
                   id="checkbox-1"
                 />

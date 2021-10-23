@@ -14,7 +14,7 @@ type ContextType = {
 
 const Sources = () => {
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
-  const { supplierValue } = React.useContext(SelectSupplierContext) as ContextType;
+  const { supplierValue, setSupplierValue } = React.useContext(SelectSupplierContext) as ContextType;
   const [whatSelect, setWhatSelect] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
 
   const history = useHistory();
@@ -26,6 +26,13 @@ const Sources = () => {
     }
   });
 
+  const initialStateSourceSettings = () => {
+    setWhatSelect('Select Supplier');
+    setSupplierValue('');
+    setShowOrdering(false);
+    history.goBack();
+  };
+
   return (
     <>
       <div className="w-100 p-sm-3 ant-layout mt-3 mt-sm-0">
@@ -34,7 +41,10 @@ const Sources = () => {
         </div>
 
         <div className="d-flex flex-column flex-sm-row mt-0 mt-md-4 back-supplier-parent">
-          <h2 className="back-to-supplier-heading d-flex align-items-center" onClick={() => history.goBack()}>
+          <h2
+            className="back-to-supplier-heading d-flex align-items-center"
+            onClick={() => initialStateSourceSettings()}
+          >
             <span className="left-back-arrow-svg">
               <LeftBackArrowIcon />
             </span>
@@ -47,7 +57,7 @@ const Sources = () => {
           </div>
         </div>
 
-        <div className="auto-ordering-section my-0 my-md-3">
+        <div className={` ${showOrdering ? '' : 'h-100'} auto-ordering-section my-0 my-md-3`}>
           <h2 className="auto-ordering-heading-text mb-3 ">
             Autoordering supplier configuration:{' '}
             <span> {whatSelect ? whatSelect : 'select a supplier from the list'} </span>

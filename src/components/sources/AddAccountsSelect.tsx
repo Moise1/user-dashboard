@@ -5,7 +5,13 @@ import { PersonWithPlusIcon } from '../common/Icons';
 import { Popover } from 'antd';
 import { t } from '../../global/transShim';
 
-const AddAccountsSelect = () => {
+interface props {
+  DisableAccount: boolean;
+}
+
+const AddAccountsSelect = (myProps: props) => {
+  const { DisableAccount } = myProps;
+
   // ACCOUNT LISTS ARRAY
   const arrayLists = [
     { value: 'account222@gmail.com', id: 101, status: 'active' },
@@ -78,8 +84,8 @@ const AddAccountsSelect = () => {
       <div className="react-search-with-select-parent add-account-select-parent">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           {/* IF ANY ACCOUNT DISABLED THEN SHOW POPOVER AND FADE THE TEXT  */}
-          <h5 className={`${isDisabledAccount ? 'disabled-account-text' : ''}`}>
-            {isDisabledAccount ? (
+          <h5 className={`${DisableAccount || isDisabledAccount ? 'disabled-account-text' : ''}`}>
+            {DisableAccount || isDisabledAccount ? (
               <Popover
                 placement="right"
                 content={
