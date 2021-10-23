@@ -234,7 +234,13 @@ const OrderDetailsModal = (props: Props) => {
                 <div className="col mt-5 d-flex align-items-center">
                   <IconArrowModal />
 
-                  <div className="btnn-in-model order-details-back-text cursor-pointer">
+                  <div
+                    onClick={() => {
+                      setOrderDetailsModalShow(false);
+                      setShow(true);
+                    }}
+                    className="btnn-in-model order-details-back-text cursor-pointer"
+                  >
                     <span> {t('OrderDetails.OrderStateProcess')}</span>
                   </div>
                 </div>

@@ -45,7 +45,14 @@ const OrderTable = (myProps: props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     console.log(event.target.checked);
     console.log(saveObjectId);
+
     orderSelectedArray.push(saveObjectId);
+
+    // if (orderSelectedArray.includes(saveObjectId)) {
+    //   orderSelectedArray.pop(saveObjectId);
+    // } else {
+    //   orderSelectedArray.push(saveObjectId);
+    // }
     console.log(orderSelectedArray, 'orderSelectedArray');
     setOrderNumber(orderSelectedArray.length);
   };
@@ -115,7 +122,7 @@ const OrderTable = (myProps: props) => {
         {OrderData.map((obj) => {
           return (
             <tbody className="order-table-body" key={obj.id}>
-              <tr>
+              <tr className="cursor-pointer">
                 <td onClick={() => setSaveObjectId(obj.id)}>
                   <label className="container-checkbox">
                     <input type="checkbox" checked={isSeletAllOrder} onChange={handleChange} />

@@ -24,20 +24,6 @@
   background-color: #3a66ce;
   color: var(--bgPage);
 }
-.process-order-btn-style {
-  background-color: var(--bgBlue);
-  height: 43px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-}
-
-.process-order-btn-style:hover {
-  background-color: #3a66ce;
-  color: var(--bgPage);
-}
 
 .stop-5-order-btn {
   background-color: var(--color-light-orange);
@@ -60,20 +46,7 @@
   background-color: #df9c4f;
   color: var(--bgPage);
 }
-.stop-order-btn-style {
-  background-color: var(--color-light-orange);
-  height: 43px;
-  padding: 10px 40px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-}
 
-.stop-order-btn-style:hover {
-  background-color: #df9c4f;
-  color: var(--bgPage);
-}
 .delete-5-order-btn {
   background-color: var(--bg-dark-pink);
   height: 43px;
@@ -129,6 +102,83 @@
   background-color: var(--bgHighlight);
   font-size: var(--font-large) !important;
   z-index: 1;
+}
+
+/* MODAL BUTTONS  */
+
+.process-order-btn-style {
+  background-color: var(--bgBlue);
+  height: 43px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: var(--font-medium);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.stop-order-btn-style {
+  background-color: var(--color-light-orange);
+  height: 43px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: var(--font-medium);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.stop-order-btn-style:hover {
+  background-color: #df9c4f;
+  color: var(--bgPage);
+}
+
+.process-order-btn-style:hover {
+  background-color: #3a66ce;
+  color: var(--bgPage);
+}
+.mark-dispatch-modal-btn-style {
+  background-color: var(--color-secondry);
+  height: 43px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: var(--font-medium);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.mark-dispatch-modal-btn-style:hover {
+  background-color: #198319;
+  color: var(--bgPage);
+}
+
+.delete-order-modal-btn-style {
+  background-color: var(--bg-dark-pink);
+  height: 43px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: var(--bgPage);
+  font-size: var(--font-medium);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.delete-order-modal-btn-style:hover {
+  background-color: #c20648;
+  color: var(--bgPage);
 }
 
 /* DROPDOWN STYLES  */
@@ -208,7 +258,7 @@
 
 .progress-order {
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--font-large);
   color: var(--color-dark-violet);
 }
 
@@ -389,6 +439,33 @@
   }
   .order-table .order-td-none {
     display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .delete-order-modal-btn-style {
+    height: unset;
+    padding: 3px 2.5px;
+  }
+  .process-order-btn-style {
+    height: unset;
+    padding: 3px 2.5px;
+  }
+  .stop-order-btn-style {
+    height: unset;
+    padding: 3px 2.5px;
+  }
+  .mark-dispatch-modal-btn-style {
+    height: unset;
+    padding: 3px 2.5px;
+  }
+
+  .mark-dispatch-modal-btn-style svg,
+  .stop-order-btn-style svg,
+  .process-order-btn-style svg,
+  .delete-order-modal-btn-style svg {
+    height: 14px;
+    width: 14px;
   }
 }
 

@@ -43,7 +43,7 @@ const OrderStateProgressModal = (props: Props) => {
           centered
           dialogClassName="modal-90w"
         >
-          <Modal.Body className="position-relative">
+          <Modal.Body className="position-relative p-2 p-lg-3">
             <div className="p-0 p-lg-3">
               <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex flex-column flex-lg-row">
@@ -177,26 +177,26 @@ const OrderStateProgressModal = (props: Props) => {
                       <LeftBackArrowIcon />
                     </span>
                   </span>
-                  <div className="d-flex align-items-end flex-column">
-                    <div className="d-flex flex-column flex-lg-row width-100">
+                  <div className="d-flex align-items-lg-end flex-lg-column">
+                    <div className="d-flex align-items-center">
                       <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-3">
                         <ProcessOrderIcon />
-                        <span className="ml-2">{t('OrderButtons.ProcessOrders')}</span>
+                        <span className="ml-1 ml-lg-2">{t('OrderButtons.ProcessOrders')}</span>
                       </button>
-                      <button className="btn stop-order-btn-style  mt-3 mt-lg-0">
+                      <button className="btn stop-order-btn-style">
                         <HandStopOrderIcon />
-                        <span className="ml-2"> {t('OrderButtons.StopOrders')} </span>
+                        <span className="ml-1 ml-lg-2"> {t('OrderButtons.StopOrders')} </span>
                       </button>
                     </div>
 
-                    <div className="d-flex flex-column flex-lg-row justify-content-between mt-3 width-100">
-                      <button className="btn delete-5-order-btn mr-0 mr-lg-3">
+                    <div className="d-flex mt-lg-2 align-items-center">
+                      <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
                         <DustbinDeleteOrderIcon />
-                        <span className="ml-2"> {t('OrderButtons.DeleteOrders')}</span>
+                        <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
                       </button>
-                      <button className=" disabled-btn btn mark-dispatch-btn mt-3 mt-lg-0">
+                      <button className=" btn mark-dispatch-modal-btn-style">
                         <DispatchedOrderIcon />
-                        <span className="ml-2"> {t('OrderButtons.MarkAsDispatched')}</span>
+                        <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
                       </button>
                     </div>
                   </div>
