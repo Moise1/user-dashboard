@@ -8,7 +8,7 @@ import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
-
+import Pagination from '../common/Pagination';
 interface props {
   tableValue: boolean;
   // setSupplierValue : setSupplierValue: (arg0: boolean) => void;
@@ -131,22 +131,7 @@ function SourcesTable(myProps: props) {
           })}
         </table>
 
-        {/* PAGINATION UI  */}
-        <div className="d-flex  mx-4  justify-content-between align-items-start align-items-sm-center py-3">
-          <div className="d-flex align-items-center ">
-            <p className="table-body-sell listing-table-border w-50px pr-3 mb-0">50</p>
-            <p className="table-body-sell listing-table-border w-50px px-3 mb-0">100</p>
-            <p className="table-body-sell w-50px pl-3 mb-0">500</p>
-          </div>
-          <p className="mb-0">
-            <span className="pagination-number w-50px px-2">1</span>
-            <span className="pagination-number w-50px px-2">2</span>
-            <span className="pagination-number w-50px px-2">3</span>
-            <span className="pagination-number w-50px pl-2">4</span>
-            <span className="pagination-number w-50px ">...</span>
-            <span className="pagination-number w-50px px-2">5</span>
-          </p>
-        </div>
+        <Pagination />
       </div>
     </>
   );

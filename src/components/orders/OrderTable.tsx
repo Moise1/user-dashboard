@@ -18,6 +18,7 @@ import OrderStateModal from '../modals/OrderStateModal';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
+import Pagination from '../common/Pagination';
 
 interface props {
   tableValue: boolean;
@@ -74,7 +75,7 @@ const OrderTable = (myProps: props) => {
   return (
     <>
       <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive  `}>
-        <table className="table order-table">
+        <table className="table order-table mb-0">
           <thead className="order-table-head">
             <tr>
               <th>
@@ -236,6 +237,8 @@ const OrderTable = (myProps: props) => {
           handleCloseAllModals={handleCloseAllModals}
           setShow={setShow}
         />
+
+        <Pagination />
       </div>
     </>
   );
