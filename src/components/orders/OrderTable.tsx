@@ -24,7 +24,7 @@ interface props {
   setOrderNumber: (arg0: number) => void;
 }
 
-const orderSelectedArray: Array<number> = [];
+let orderSelectedArray: Array<number> = [];
 
 const OrderTable = (myProps: props) => {
   const { tableValue, setOrderNumber } = myProps;
@@ -43,23 +43,20 @@ const OrderTable = (myProps: props) => {
   // const orderSelectedArray = [];
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log(event.target.checked);
-    console.log(saveObjectId);
+    if (orderSelectedArray.length > 0) {
+      console.log(event.target.checked);
+      // orderSelectedArray.push(saveObjectId);
 
-    // orderSelectedArray.push(saveObjectId);
-
-    if (orderSelectedArray.includes(saveObjectId)) {
-      const indexArr = orderSelectedArray.findIndex((order) => order === saveObjectId);
-      console.log(indexArr, 'indexArr');
-      const index = orderSelectedArray.indexOf(indexArr, 0);
-      if (index > -1) {
-        orderSelectedArray.splice(index, 1);
+      if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
+        orderSelectedArray = orderSelectedArray.filter((order) => order !== saveObjectId);
+      } else {
+        console.log('Emlem');
+        orderSelectedArray.push(saveObjectId);
       }
-      orderSelectedArray.slice(indexArr);
     } else {
       orderSelectedArray.push(saveObjectId);
     }
-    console.log(orderSelectedArray, 'orderSelectedArray');
+
     setOrderNumber(orderSelectedArray.length);
   };
 

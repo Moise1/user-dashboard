@@ -476,6 +476,13 @@
 }
 
 @media (max-width: 768px) {
+  .middle-part-autoordering {
+    height: 250px;
+  }
+  .middle-part-autoordering button {
+    width: 220px;
+    height: 40px;
+  }
   .orders-table-main {
     padding: 6px;
     margin: 8px 0;

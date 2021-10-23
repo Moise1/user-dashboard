@@ -24,13 +24,13 @@ const OrderStateModal = (props: Props) => {
         <Modal.Body>
           <div className="p-0 p-lg-3">
             <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex flex-column flex-sm-row">
+              <div className="d-flex">
                 <h2 className="head-part-one mr-2 mr-lg-5">{t('OrderDetails.OrderStateProgress')}</h2>
                 <button className="btn ao-disabled-button">
                   <span>
                     <AoIconHead />
                   </span>
-                  <span className="px-3"> {t('OrderDetails.AODisabled')}</span>
+                  <span className="px-1 px-md-3"> {t('OrderDetails.AODisabled')}</span>
                 </button>
               </div>
 

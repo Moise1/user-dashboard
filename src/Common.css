@@ -2148,6 +2148,14 @@ table {
 }
 
 @media (max-width: 576px) {
+  .ao-disabled-button {
+    height: 24px;
+    padding: 4px 6px;
+  }
+  .ao-disabled-button svg {
+    height: 16px;
+  }
+
   .switch-toggle {
     height: 25px;
     width: 40px;
