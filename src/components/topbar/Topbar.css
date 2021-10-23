@@ -21,9 +21,11 @@
   justify-content: center;
   align-items: center;
 }
+
 .hamburger-mobile .second {
   margin: 5px 0;
 }
+
 .hamburger-mobile span {
   display: inline-block;
   width: 20px;
@@ -82,15 +84,24 @@
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
 }
 @media (max-width: 576.98px) {
+  .TopBar {
+    height: 50px;
+  }
   .bell-icoon-topbar {
     width: 20px;
     height: 20px;
+  }
+  .storeSelector {
+    padding: 0 4px;
   }
   .hamburger-mobile {
     padding: 8px;
   }
   .hamburger-mobile span {
     width: 16px;
+  }
+  .ant-space-item .ant-btn {
+    padding: 0px;
   }
   .logoHGR {
     height: 28px;
@@ -103,5 +114,11 @@
   .storeSelector img {
     height: 10px !important;
     width: 10px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  .storeSelector .country-name {
+    display: none;
   }
 }

@@ -34,7 +34,7 @@ export default function Topbar(props: Props) {
         </div>
         <button className="upgrde-btn-topbar d-md-none mt-2">Upgrade</button>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
-          <div className="d-flex hgr-progress p-1 TopBarItems">
+          <div className="d-flex hgr-progress p-sm-1 TopBarItems">
             <div className="d-flex align-items-center">
               <h4 className="mb-0 quota-head ff-used "> {t('Topbar.Quota')}:</h4>{' '}
               <p className=" ml-1 ml-md-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
@@ -68,9 +68,9 @@ export default function Topbar(props: Props) {
               <div className="ant-space-item d-flex">
                 <Dropdown overlay={<DropDownMenu />} placement="bottomLeft" trigger={['click']}>
                   <div className="storeSelector d-flex lav_button_shadow">
-                    <div className="fs-18 pl-2 mr-1 lh-1 font-weight-bold d-none d-sm-block">Lavivatienda</div>
+                    <div className="fs-18 pl-md-2 mr-1 lh-1 font-weight-bold country-name">Lavivatienda</div>
                     <img src={flag} className="lh-1" height="20" alt="" />
-                    <img src={amazon} className="mx-3 lh-1" height="20" alt="" />
+                    <img src={amazon} className="mx-1 mx-md-3 lh-1" height="20" alt="" />
                     <Button>
                       <img className="lh-1  my-auto" src={dropicon} alt="" />
                     </Button>
