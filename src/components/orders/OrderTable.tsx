@@ -46,15 +46,19 @@ const OrderTable = (myProps: props) => {
     console.log(event.target.checked);
     console.log(saveObjectId);
 
-    orderSelectedArray.push(saveObjectId);
+    // orderSelectedArray.push(saveObjectId);
 
-    // if (orderSelectedArray.includes(saveObjectId)) {
-    //   // const indexArr = orderSelectedArray.findIndex(saveObjectId);
-    //   // console.log(indexArr, 'indexArr');
-    //   // orderSelectedArray.pop(saveObjectId);
-    // } else {
-    //   // orderSelectedArray.push(saveObjectId);
-    // }
+    if (orderSelectedArray.includes(saveObjectId)) {
+      const indexArr = orderSelectedArray.findIndex((order) => order === saveObjectId);
+      console.log(indexArr, 'indexArr');
+      const index = orderSelectedArray.indexOf(indexArr, 0);
+      if (index > -1) {
+        orderSelectedArray.splice(index, 1);
+      }
+      orderSelectedArray.slice(indexArr);
+    } else {
+      orderSelectedArray.push(saveObjectId);
+    }
     console.log(orderSelectedArray, 'orderSelectedArray');
     setOrderNumber(orderSelectedArray.length);
   };

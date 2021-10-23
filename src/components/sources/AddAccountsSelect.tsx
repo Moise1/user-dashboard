@@ -52,6 +52,24 @@ const AddAccountsSelect = () => {
     console.log(arrayLists, 'arrayLists');
   };
 
+  // const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+  //   // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+  //   console.log('run key');
+  //   if (event.key === 'Enter') {
+  //     // event.preventDefault();
+  //     // event.stopPropagation();
+  //     handleAccountPushToList();
+  //   }
+  // };
+
+  // const handleKeyPress = (event: ChangeEvent<HTMLInputElement>): void => {
+  //   if (event) {
+  //     handleAccountPushToList();
+  //   }
+  // };
+  // const handleKeyPress = () => {
+  //   handleAccountPushToList();
+  // };
   return (
     <>
       {showDropDown ? <div onClick={() => setShowDropDown(false)} className="overlay-select"></div> : ''}
@@ -96,12 +114,17 @@ const AddAccountsSelect = () => {
             </div>
 
             {showAccountInput ? (
-              <div className="add-account-input-inselect">
-                <input type="text" className="position-relative" onChange={(e) => setAddAccountValue(e.target.value)} />
+              <form className="add-account-input-inselect" onSubmit={handleAccountPushToList}>
+                <input
+                  type="text"
+                  className="position-relative"
+                  // onKeyPress={handleKeyPress}
+                  onChange={(e) => setAddAccountValue(e.target.value)}
+                />
                 <span className="plus-icon-add" onClick={() => handleAccountPushToList()}>
                   <PersonWithPlusIcon />
                 </span>
-              </div>
+              </form>
             ) : (
               <div className="d-flex aling-items-center  mt-2" onClick={() => setShowAccountInput(true)}>
                 <span className="add-acccounnt-span"> {t('SourceConfigInputs.AddAccount')}</span>
