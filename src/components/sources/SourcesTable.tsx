@@ -77,22 +77,30 @@ function SourcesTable(myProps: props) {
             const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
             return (
               <tbody className="order-table-body" key={id}>
-                <tr className="cursor-pointer" onClick={() => handleSupplierValue(provider)}>
-                  <td className="obj-sale-body">{provider}</td>
-                  <td className="obj-sale-body text-center text-md-left ">{markup}</td>
-                  <td className="obj-sale-title source-td-none">{decreaseLimit}</td>
-                  <td className="obj-sale-qty source-td-none">
+                <tr className="cursor-pointer">
+                  <td className="obj-sale-body" onClick={() => handleSupplierValue(provider)}>
+                    {provider}
+                  </td>
+                  <td className="obj-sale-body text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
+                    {markup}
+                  </td>
+                  <td className="obj-sale-title source-td-none" onClick={() => handleSupplierValue(provider)}>
+                    {decreaseLimit}
+                  </td>
+                  <td className="obj-sale-qty source-td-none" onClick={() => handleSupplierValue(provider)}>
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty    text-center text-md-left">
+                  <td className="obj-sale-qty text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
                     {' '}
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-qty  source-td-none ">
+                  <td className="obj-sale-qty  source-td-none" onClick={() => handleSupplierValue(provider)}>
                     <img src={RightCircle} alt="RightCircle" />
                   </td>
-                  <td className="obj-sale-cost source-td-none  ">{template}</td>
+                  <td className="obj-sale-cost source-td-none" onClick={() => handleSupplierValue(provider)}>
+                    {template}
+                  </td>
                   <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
 
                   <td className="w-15per text-center text-md-left">
@@ -105,6 +113,7 @@ function SourcesTable(myProps: props) {
                       }
                     >
                       <button
+                        onClick={() => (autoOrdering === 'Coming Soon' ? '' : handleSupplierValue(provider))}
                         className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
                           autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                         } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
