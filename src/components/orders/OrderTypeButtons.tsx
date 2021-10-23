@@ -25,7 +25,7 @@ const OrderTypeButtons = (myProps: props) => {
           <button className="btn stop-5-order-btn mx-1 mx-sm-3">
             <HandStopOrderIcon />
             <span className="ml-1 ml-sm-2">
-              Stop
+              Stop {orderNumber > 0 ? orderNumber : ''}
               {/* {t('OrderButtons.Stop5Orders')}  */}
             </span>
             <span className="d-none d-md-block">&nbsp;Orders</span>
@@ -36,7 +36,7 @@ const OrderTypeButtons = (myProps: props) => {
           <button className="btn delete-5-order-btn">
             <DustbinDeleteOrderIcon />
             <span className="ml-1 ml-sm-2">
-              Delete
+              Delete {orderNumber > 0 ? orderNumber : ''}
               {/* {t('OrderButtons.Delete5Orders')} */}
             </span>
             <span className="d-none d-md-block">&nbsp;Orders</span>

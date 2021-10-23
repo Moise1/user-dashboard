@@ -339,15 +339,17 @@
   height: 16px;
   width: 16px;
   border: 2px solid #202020;
-  border-radius: 2px;
+  border-radius: 2.5px;
 }
 /* On mouse-over, add a grey background color */
 .select-all-checkbox:hover input ~ .checkmark {
-  background-color: #5e69db;
+  /* background-color: #5e69db; */
+  border: 2px solid #202020;
 }
 /* When the checkbox is checked, add a blue background */
 .select-all-checkbox input:checked ~ .checkmark {
   background-color: #5e69db;
+  border: 2px solid #5e69db;
 }
 /* Create the checkmark/indicator (hidden when not checked) */
 .select-all-checkbox .checkmark:after {
@@ -363,8 +365,8 @@
 .select-all-checkbox .checkmark:after {
   left: 3px;
   top: 0px;
-  width: 6px;
-  height: 9px;
+  width: 5px;
+  height: 8px;
   border: solid #45ff00;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);

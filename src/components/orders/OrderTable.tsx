@@ -128,7 +128,7 @@ const OrderTable = (myProps: props) => {
               <tbody className="order-table-body" key={obj.id}>
                 <tr className="cursor-pointer">
                   <td onClick={() => setSaveObjectId(obj.id)}>
-                    <label className="container-checkbox">
+                    <label className="select-all-checkbox">
                       <input type="checkbox" onChange={handleChange} />
                       <span className="checkmark"></span>
                     </label>
