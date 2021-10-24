@@ -7,44 +7,82 @@ import { t } from '../../global/transShim';
 
 interface props {
   DisableAccount: boolean;
+  whichAccountSelect: string;
+  setwhichAccountSelect: (arg0: string) => void;
+  setAlias: (arg0: string) => void;
+  setPassword: (arg0: number) => void;
+  setOtp: (arg0: string) => void;
+  setphone: (arg0: string) => void;
 }
 
 const AddAccountsSelect = (myProps: props) => {
-  const { DisableAccount } = myProps;
+  const { setAlias, setOtp, setPassword, setphone, DisableAccount, whichAccountSelect, setwhichAccountSelect } =
+    myProps;
 
   // ACCOUNT LISTS ARRAY
-  const arrayLists = [
-    { value: 'account222@gmail.com', id: 101, status: 'active' },
-    { value: 'hello@gmail.com', id: 102, status: 'active' },
-    { value: 'srk@gmail.com', id: 103, status: 'active' },
-    { value: 'joanaount222@gmail.com', id: 104, status: 'active' },
-    { value: 'whatsapp222@gmail.com', id: 105, status: 'active' },
-    { value: 'good@gmail.com', id: 106, status: 'active' },
-    { value: 'account222@gmail.com', id: 107, status: 'active' },
-    { value: 'div@gmail.com', id: 108, status: 'active' },
-    { value: 'span@gmail.com', id: 109, status: 'active' },
-    { value: 'Jenny Amazon account', id: 110, status: 'disabled' }
+  const accountArray = [
+    {
+      id: 101,
+      email: 'account222@gmail.com',
+      alias: 'Dad Account',
+      AWDSLogin: 'something',
+      AWDSPassword: 232132,
+      OTPCode: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+      phoneNumber: '(555) 555-5555',
+      isDisabled: true
+    },
+    {
+      id: 102,
+      email: 'fasdf@gmail.com',
+      alias: 'Here we Go',
+      AWDSLogin: 'something',
+      AWDSPassword: 232132,
+      OTPCode: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+      phoneNumber: '(124) 555-5555',
+      isDisabled: false
+    },
+    {
+      id: 101,
+      email: 'account222@gmail.com',
+      alias: 'Dad Account',
+      AWDSLogin: 'something',
+      AWDSPassword: 232132,
+      OTPCode: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+      phoneNumber: '(555) 555-5555',
+      isDisabled: false
+    }
   ];
+  // const accountArray = [
+  //   { value: 'account222@gmail.com', id: 101, status: 'active' },
+  //   { value: 'hello@gmail.com', id: 102, status: 'active' },
+  //   { value: 'srk@gmail.com', id: 103, status: 'active' },
+  //   { value: 'joanaount222@gmail.com', id: 104, status: 'active' },
+  //   { value: 'whatsapp222@gmail.com', id: 105, status: 'active' },
+  //   { value: 'good@gmail.com', id: 106, status: 'active' },
+  //   { value: 'account222@gmail.com', id: 107, status: 'active' },
+  //   { value: 'div@gmail.com', id: 108, status: 'active' },
+  //   { value: 'span@gmail.com', id: 109, status: 'active' },
+  //   { value: 'Jenny Amazon account', id: 110, status: 'disabled' }
+  // ];
 
   // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [showAccountInput, setShowAccountInput] = useState<boolean>();
   const [isDisabledAccount, setDisabledAccount] = useState<boolean>();
-  const [whatSelect, setWhatSelect] = useState<string>('Select or add account');
-  const [supplierData, setSupplierData] = useState(arrayLists);
+  const [supplierData, setSupplierData] = useState(accountArray);
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
   const [AddAccountValue, setAddAccountValue] = useState<string>('');
 
   // FOR HANDLE SELECT VALUE
   const handleSelectValue = (value: string) => {
-    setWhatSelect(value);
+    setwhichAccountSelect(value);
     setShowDropDown(false);
   };
 
   // FUNCTION TO FILTER ON INPUT SEARCH
   const handleSearch = (value: string) => {
     setInputSearchValue(inputSearchValue);
-    const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
+    const filteredSearch = accountArray.filter((obj) => obj.email.toLowerCase().includes(value.toLowerCase()));
     setSupplierData(filteredSearch);
   };
 
@@ -52,10 +90,18 @@ const AddAccountsSelect = (myProps: props) => {
   const handleAccountPushToList = () => {
     setShowAccountInput(false);
     const id = Math.random() * 1023812031111;
-    const newAccount = { value: AddAccountValue, id: id, status: 'active' };
+    const newAccount = {
+      id: id,
+      email: AddAccountValue,
+      alias: 'Dad Account',
+      AWDSLogin: 'something',
+      AWDSPassword: 232132123,
+      OTPCode: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+      phoneNumber: '(555) 555-5555',
+      isDisabled: false
+    };
     supplierData.unshift(newAccount);
-    console.log(AddAccountValue);
-    console.log(arrayLists, 'arrayLists');
+    console.log(accountArray, 'accountArray');
   };
 
   // const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
@@ -94,10 +140,10 @@ const AddAccountsSelect = (myProps: props) => {
                   </div>
                 }
               >
-                {whatSelect}
+                {whichAccountSelect}
               </Popover>
             ) : (
-              whatSelect
+              whichAccountSelect
             )}
           </h5>
           <span>
@@ -144,18 +190,22 @@ const AddAccountsSelect = (myProps: props) => {
             <div className="react-list-data-here">
               {supplierData.map((list) => (
                 <li
-                  className={`${list.status === 'disabled' ? 'disabled-btn' : ''}`}
+                  className={`${list.isDisabled ? 'disabled-btn' : ''}`}
                   key={list.id}
                   onClick={() => {
-                    handleSelectValue(list.value);
-                    if (list.status === 'disabled') {
+                    handleSelectValue(list.email);
+                    setAlias(list.alias);
+                    setphone(list.phoneNumber);
+                    setOtp(list.OTPCode);
+                    setPassword(list.AWDSPassword);
+                    if (list.isDisabled) {
                       setDisabledAccount(true);
                     } else {
                       setDisabledAccount(false);
                     }
                   }}
                 >
-                  {list.status === 'disabled' ? (
+                  {list.isDisabled ? (
                     <Popover
                       placement="right"
                       content={
@@ -164,10 +214,10 @@ const AddAccountsSelect = (myProps: props) => {
                         </div>
                       }
                     >
-                      {list.value}
+                      {list.email}
                     </Popover>
                   ) : (
-                    list.value
+                    list.email
                   )}
                 </li>
               ))}

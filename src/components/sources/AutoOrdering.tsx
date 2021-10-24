@@ -7,19 +7,36 @@ import { t } from '../../global/transShim';
 interface props {
   whatSelect: string;
 }
+// interface IAccount {
+//   id: number;
+//   email: string;
+//   alias: string;
+//   AWDSLogin: string;
+//   AWDSPassword: number;
+//   OTPCode: string;
+//   phoneNumber: string;
+//   isDisabled: boolean;
+// }
 
 const AutoOrdering = (myProps: props) => {
   const [checked, setChecked] = useState<boolean>(false);
   const { whatSelect } = myProps;
   const [DisableAccount, setDisableAccount] = useState<boolean>(false);
+  const [whichAccountSelect, setwhichAccountSelect] = useState<string>('Select or add account');
+  const [alias, setAlias] = useState<string>('Sheru');
+  // const [login, setLogin] = useState<string>('Amazon');
+  const [password, setPassword] = useState<number>(543634);
+  const [otp, setOtp] = useState<string>('JJSndfnfgurbgjD935h5gmSKFJASFNF@#WEFSD');
+  const [phone, setphone] = useState<string>('4442323423');
+  // const [accountInputObject, setAccountInputObject] = useState<IAccount>();
 
   // FOR GET VALUE OF TOGGLE SWITCH
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setChecked(event.target.checked);
   };
 
   console.log(checked, 'state');
+
 
   return (
     <>
@@ -43,13 +60,30 @@ const AutoOrdering = (myProps: props) => {
             {t('SourceConfigInputs.AccountConfiguration')} : <span> {t('SourceConfigInputs.DadAccount')}</span>{' '}
           </h2>
 
-          <AddAccountsSelect DisableAccount={DisableAccount} />
-
-          <AccountsInput
-            whatSelect={whatSelect}
+          <AddAccountsSelect
             DisableAccount={DisableAccount}
-            setDisableAccount={setDisableAccount}
+            setwhichAccountSelect={setwhichAccountSelect}
+            whichAccountSelect={whichAccountSelect}
+            setAlias={setAlias}
+            setPassword={setPassword}
+            setOtp={setOtp}
+            setphone={setphone}
           />
+
+          {whichAccountSelect.length && whichAccountSelect !== 'Select or add account' ? (
+            <AccountsInput
+              alias={alias}
+              otp={otp}
+              password={password}
+              phone={phone}
+              whatSelect={whatSelect}
+              DisableAccount={DisableAccount}
+              setDisableAccount={setDisableAccount}
+              whichAccountSelect={whichAccountSelect}
+            />
+          ) : (
+            ''
+          )}
         </div>
         <div className="d-flex flex-row flex-sm-column">
           <button className="btn save-changes-btn mb-0 mb-sm-3">

@@ -3,13 +3,18 @@ import { DustbinPinkIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 
 interface props {
+  alias: string;
+  otp: string;
+  password: number;
+  phone: string;
   whatSelect: string;
+  whichAccountSelect: string;
   DisableAccount: boolean;
   setDisableAccount: (arg0: boolean) => void;
 }
 
 const AccountsInput = (myProps: props) => {
-  const { whatSelect, DisableAccount, setDisableAccount } = myProps;
+  const { alias, otp, password, phone, whatSelect, DisableAccount, setDisableAccount, whichAccountSelect } = myProps;
 
   console.log(DisableAccount, 'DisableAccount');
   return (
@@ -20,7 +25,7 @@ const AccountsInput = (myProps: props) => {
           <div className="col-12">
             <div className="width-207">
               <label className="account-label-style" htmlFor="">
-                {t('SourceConfigInputs.Alias')}
+                {alias}
               </label>
               <input disabled={DisableAccount} className="account-input-style" type="text" placeholder="Dad Account" />
             </div>
@@ -35,14 +40,19 @@ const AccountsInput = (myProps: props) => {
                   disabled={DisableAccount}
                   className="amazonlogin-input-style"
                   type="text"
-                  placeholder="dadaccount@gmail.com"
+                  placeholder={whichAccountSelect}
                 />
               </div>
               <div className="width-207 ml-3 ml-sm-5">
                 <label className="account-label-style" htmlFor="">
                   {whatSelect} {t('SourceConfigInputs.password')}
                 </label>
-                <input disabled={DisableAccount} className="account-input-style" type="text" placeholder="3456344" />
+                <input
+                  disabled={DisableAccount}
+                  className="account-input-style"
+                  type="text"
+                  placeholder={password.toString()}
+                />
               </div>
             </div>
           </div>
@@ -53,12 +63,7 @@ const AccountsInput = (myProps: props) => {
                 {t('SourceConfigInputs.OTPCode2FA')}
                 <span className="ml-2 obtain-code-otp"> {t('SourceConfigInputs.ObtainYourOTPCode')} </span>
               </label>
-              <input
-                disabled={DisableAccount}
-                className="otp-code-input-styles"
-                type="text"
-                placeholder="JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG"
-              />
+              <input disabled={DisableAccount} className="otp-code-input-styles" type="text" placeholder={otp} />
             </div>
           </div>
 
@@ -67,12 +72,7 @@ const AccountsInput = (myProps: props) => {
               <label className="account-label-style" htmlFor="">
                 {t('SourceConfigInputs.PhoneNumber')}
               </label>
-              <input
-                disabled={DisableAccount}
-                className="account-input-style"
-                type="text"
-                placeholder="(555) 555-5555"
-              />
+              <input disabled={DisableAccount} className="account-input-style" type="text" placeholder={phone} />
             </div>
           </div>
         </div>

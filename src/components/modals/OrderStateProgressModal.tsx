@@ -179,7 +179,7 @@ const OrderStateProgressModal = (props: Props) => {
                   </span>
                   <div className="d-flex justify-content-between align-items-lg-end flex-lg-column">
                     <div className="d-flex align-items-center">
-                      <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-3">
+                      <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-4">
                         <ProcessOrderIcon />
                         <span className="ml-1 ml-lg-2">{t('OrderButtons.ProcessOrders')}</span>
                       </button>
