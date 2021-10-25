@@ -60,7 +60,7 @@ export default function ListingTable() {
               </span>
             </div>
 
-            <div className="py-3 pr-1">
+            <div className="py-3 pr-1 pr-md-3">
               {' '}
               <p className="active-text-black">26 active</p>
             </div>

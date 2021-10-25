@@ -44,7 +44,7 @@ const AutoOrdering = (myProps: props) => {
           </div>
 
           <h2 className="acc-config-text py-3">
-            {t('SourceConfigInputs.AccountConfiguration')} : <span> {t('SourceConfigInputs.DadAccount')}</span>{' '}
+            {t('SourceConfigInputs.AccountConfiguration')} : <span>{whichAccountSelect} </span>{' '}
           </h2>
 
           <AddAccountsSelect
