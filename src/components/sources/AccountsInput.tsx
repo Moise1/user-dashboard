@@ -16,7 +16,6 @@ interface props {
 const AccountsInput = (myProps: props) => {
   const { alias, otp, password, phone, whatSelect, DisableAccount, setDisableAccount, whichAccountSelect } = myProps;
 
-  console.log(DisableAccount, 'DisableAccount');
   return (
     <>
       <div className="position-relative">
@@ -94,6 +93,7 @@ const AccountsInput = (myProps: props) => {
                       setDisableAccount(!DisableAccount);
                     }
                   }}
+                  checked={DisableAccount}
                   type="checkbox"
                   id="checkbox-1"
                 />

@@ -14,11 +14,9 @@ const AutoOrdering = (myProps: props) => {
   const [DisableAccount, setDisableAccount] = useState<boolean>(false);
   const [whichAccountSelect, setwhichAccountSelect] = useState<string>('Select or add account');
   const [alias, setAlias] = useState<string>('Sheru');
-  // const [login, setLogin] = useState<string>('Amazon');
   const [password, setPassword] = useState<number>(543634);
   const [otp, setOtp] = useState<string>('JJSndfnfgurbgjD935h5gmSKFJASFNF@#WEFSD');
   const [phone, setphone] = useState<string>('4442323423');
-  // const [accountInputObject, setAccountInputObject] = useState<IAccount>();
 
   // FOR GET VALUE OF TOGGLE SWITCH
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -51,6 +49,7 @@ const AutoOrdering = (myProps: props) => {
 
           <AddAccountsSelect
             DisableAccount={DisableAccount}
+            setDisableAccount={setDisableAccount}
             setwhichAccountSelect={setwhichAccountSelect}
             whichAccountSelect={whichAccountSelect}
             setAlias={setAlias}

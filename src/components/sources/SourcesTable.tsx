@@ -11,7 +11,6 @@ import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
 import Pagination from '../common/Pagination';
 interface props {
   tableValue: boolean;
-  // setSupplierValue : setSupplierValue: (arg0: boolean) => void;
 }
 
 type ContextType = {

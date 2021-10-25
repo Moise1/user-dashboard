@@ -7,6 +7,7 @@ import { t } from '../../global/transShim';
 
 interface props {
   DisableAccount: boolean;
+  setDisableAccount: (arg0: boolean) => void;
   whichAccountSelect: string;
   setwhichAccountSelect: (arg0: string) => void;
   setAlias: (arg0: string) => void;
@@ -16,8 +17,16 @@ interface props {
 }
 
 const AddAccountsSelect = (myProps: props) => {
-  const { setAlias, setOtp, setPassword, setphone, DisableAccount, whichAccountSelect, setwhichAccountSelect } =
-    myProps;
+  const {
+    setAlias,
+    setOtp,
+    setPassword,
+    setphone,
+    DisableAccount,
+    setDisableAccount,
+    whichAccountSelect,
+    setwhichAccountSelect
+  } = myProps;
 
   // ACCOUNT LISTS ARRAY
   const accountArray = [
@@ -56,7 +65,7 @@ const AddAccountsSelect = (myProps: props) => {
   // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
   const [showAccountInput, setShowAccountInput] = useState<boolean>();
-  const [isDisabledAccount, setDisabledAccount] = useState<boolean>();
+  // const [isDisabledAccount, setDisabledAccount] = useState<boolean>();
   const [supplierData, setSupplierData] = useState(accountArray);
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
   const [AddAccountValue, setAddAccountValue] = useState<string>('');
@@ -99,8 +108,8 @@ const AddAccountsSelect = (myProps: props) => {
       <div className="react-search-with-select-parent add-account-select-parent">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           {/* IF ANY ACCOUNT DISABLED THEN SHOW POPOVER AND FADE THE TEXT  */}
-          <h5 className={`${DisableAccount || isDisabledAccount ? 'disabled-account-text' : ''}`}>
-            {DisableAccount || isDisabledAccount ? (
+          <h5 className={`${DisableAccount ? 'disabled-account-text' : ''}`}>
+            {DisableAccount ? (
               <Popover
                 placement="right"
                 content={
@@ -168,9 +177,9 @@ const AddAccountsSelect = (myProps: props) => {
                     setOtp(list.OTPCode);
                     setPassword(list.AWDSPassword);
                     if (list.isDisabled) {
-                      setDisabledAccount(true);
+                      setDisableAccount(true);
                     } else {
-                      setDisabledAccount(false);
+                      setDisableAccount(false);
                     }
                   }}
                 >
