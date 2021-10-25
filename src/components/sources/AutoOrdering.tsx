@@ -7,16 +7,6 @@ import { t } from '../../global/transShim';
 interface props {
   whatSelect: string;
 }
-// interface IAccount {
-//   id: number;
-//   email: string;
-//   alias: string;
-//   AWDSLogin: string;
-//   AWDSPassword: number;
-//   OTPCode: string;
-//   phoneNumber: string;
-//   isDisabled: boolean;
-// }
 
 const AutoOrdering = (myProps: props) => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -36,7 +26,6 @@ const AutoOrdering = (myProps: props) => {
   };
 
   console.log(checked, 'state');
-
 
   return (
     <>

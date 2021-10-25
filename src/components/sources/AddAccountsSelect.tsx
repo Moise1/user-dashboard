@@ -52,18 +52,6 @@ const AddAccountsSelect = (myProps: props) => {
       isDisabled: false
     }
   ];
-  // const accountArray = [
-  //   { value: 'account222@gmail.com', id: 101, status: 'active' },
-  //   { value: 'hello@gmail.com', id: 102, status: 'active' },
-  //   { value: 'srk@gmail.com', id: 103, status: 'active' },
-  //   { value: 'joanaount222@gmail.com', id: 104, status: 'active' },
-  //   { value: 'whatsapp222@gmail.com', id: 105, status: 'active' },
-  //   { value: 'good@gmail.com', id: 106, status: 'active' },
-  //   { value: 'account222@gmail.com', id: 107, status: 'active' },
-  //   { value: 'div@gmail.com', id: 108, status: 'active' },
-  //   { value: 'span@gmail.com', id: 109, status: 'active' },
-  //   { value: 'Jenny Amazon account', id: 110, status: 'disabled' }
-  // ];
 
   // STATE TO MANAGE SELECTION AND FILTERED
   const [showDropDown, setShowDropDown] = useState<boolean>();
@@ -103,25 +91,6 @@ const AddAccountsSelect = (myProps: props) => {
     supplierData.unshift(newAccount);
     console.log(accountArray, 'accountArray');
   };
-
-  // const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
-  //   // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
-  //   console.log('run key');
-  //   if (event.key === 'Enter') {
-  //     // event.preventDefault();
-  //     // event.stopPropagation();
-  //     handleAccountPushToList();
-  //   }
-  // };
-
-  // const handleKeyPress = (event: ChangeEvent<HTMLInputElement>): void => {
-  //   if (event) {
-  //     handleAccountPushToList();
-  //   }
-  // };
-  // const handleKeyPress = () => {
-  //   handleAccountPushToList();
-  // };
 
   return (
     <>
