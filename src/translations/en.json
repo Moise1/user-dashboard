@@ -74,6 +74,9 @@
   "OrderDetails.AODisabled": "AO Disabled",
   "OrderDetails.HISTORY": "HISTORY",
   "OrderDetails.viewFullLog": "view full log",
+  "OrderDetails.Delete": "Delete",
+  "OrderDetails.Stop": "Stop",
+  "OrderDetails.Process": "Process",
 
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",

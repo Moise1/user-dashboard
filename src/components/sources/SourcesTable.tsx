@@ -26,7 +26,6 @@ function SourcesTable(myProps: props) {
   const handleSupplierValue = (value: string) => {
     setSupplierValue(value);
     console.log(supplierValue);
-    console.log(value, 'value');
     history.push('/sources-setting');
   };
   return (

@@ -58,6 +58,7 @@ const AutoOrdering = (myProps: props) => {
             setphone={setphone}
           />
 
+          {/* IF ANY ACCOUNT IS NOT SELECTED AND VALUE IS NOT DEFAULT VALUE THEN WE HAVE NOT TO SHOW INPUT OR TOGGLE ICON  */}
           {whichAccountSelect.length && whichAccountSelect !== 'Select or add account' ? (
             <AccountsInput
               alias={alias}

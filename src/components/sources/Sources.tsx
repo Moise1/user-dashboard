@@ -21,7 +21,6 @@ const Sources = () => {
 
   useEffect(() => {
     if (supplierValue.length) {
-      console.log(supplierValue, 'supplierValue');
       setShowOrdering(true);
     }
   });
