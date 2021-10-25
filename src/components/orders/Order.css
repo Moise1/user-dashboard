@@ -447,19 +447,19 @@
 @media (max-width: 991.98px) {
   .delete-order-modal-btn-style {
     height: unset;
-    padding: 3px 2.5px;
+    padding: 3px 3px;
   }
   .process-order-btn-style {
     height: unset;
-    padding: 3px 2.5px;
+    padding: 3px 3px;
   }
   .stop-order-btn-style {
     height: unset;
-    padding: 3px 2.5px;
+    padding: 3px 3px;
   }
   .mark-dispatch-modal-btn-style {
     height: unset;
-    padding: 3px 2.5px;
+    padding: 3px 3px;
   }
 
   .mark-dispatch-modal-btn-style svg,
@@ -527,5 +527,13 @@
   .process-5-order-btn svg {
     height: 12px;
     width: 12px;
+  }
+
+  .mark-dispatch-modal-btn-style svg,
+  .stop-order-btn-style svg,
+  .process-order-btn-style svg,
+  .delete-order-modal-btn-style svg {
+    width: 12px;
+    height: 12px;
   }
 }

@@ -97,6 +97,19 @@
   }
 }
 
+@media (max-width: 361px) {
+  :root {
+    /* -- font sizes --- */
+    --text-heading: 16px;
+    --font-xl: 12px;
+    --sub-heading: 12px;
+    --font-large: 10px;
+    --font-medium: 7px;
+    --font-small: 7px;
+    --font-extra-small: 10px;
+  }
+}
+
 @media (max-width: 576px) {
   .storeSelector {
     width: unset;

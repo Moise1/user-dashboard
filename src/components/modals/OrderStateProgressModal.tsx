@@ -178,7 +178,7 @@ const OrderStateProgressModal = (props: Props) => {
                     </span>
                   </span>
                   <div className="d-flex justify-content-between align-items-lg-end flex-lg-column">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex w-45  justify-content-around align-items-center">
                       <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-4">
                         <ProcessOrderIcon />
                         <span className="ml-1 ml-lg-2">{t('OrderButtons.ProcessOrders')}</span>
@@ -189,7 +189,7 @@ const OrderStateProgressModal = (props: Props) => {
                       </button>
                     </div>
 
-                    <div className="d-flex mt-lg-2 align-items-center">
+                    <div className="d-flex w-55  justify-content-around  mt-lg-2 align-items-center">
                       <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
                         <DustbinDeleteOrderIcon />
                         <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
