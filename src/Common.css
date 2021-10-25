@@ -2140,6 +2140,9 @@ table {
 .disabled-order-svg {
   stroke: #c3c4c7;
 }
+.hand-disabled svg path {
+  stroke: #9a9a9a;
+}
 
 .disabled-line {
   background-color: #7e7373;

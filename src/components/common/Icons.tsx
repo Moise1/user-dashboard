@@ -1,5 +1,65 @@
 import React from 'react';
 
+export const HandFiveFingerIcon = () => {
+  return (
+    <>
+      <svg
+        id="Group_305"
+        data-name="Group 305"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24.131"
+        height="24.131"
+        viewBox="0 0 24.131 24.131"
+      >
+        <path id="Path_288" data-name="Path 288" d="M0,0H24.131V24.131H0Z" fill="none" />
+        <path
+          id="Path_289"
+          data-name="Path 289"
+          d="M8,13.049V5.508a1.508,1.508,0,1,1,3.016,0v6.535"
+          transform="translate(0.044 0.022)"
+          fill="none"
+          stroke="#5e69db"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_290"
+          data-name="Path 290"
+          d="M11,5.519V3.508a1.508,1.508,0,0,1,3.016,0v8.546"
+          transform="translate(0.06 0.011)"
+          fill="none"
+          stroke="#5e69db"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_291"
+          data-name="Path 291"
+          d="M14,5.508a1.508,1.508,0,1,1,3.016,0v6.535"
+          transform="translate(0.076 0.022)"
+          fill="none"
+          stroke="#5e69db"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+        <path
+          id="Path_292"
+          data-name="Path 292"
+          d="M17.073,7.508a1.508,1.508,0,1,1,3.016,0v8.546a6.033,6.033,0,0,1-6.033,6.033h-1.8a6.033,6.033,0,0,1-5.04-2.716l-.2-.3q-.471-.722-3.3-5.759a1.508,1.508,0,0,1,.539-2.033,1.877,1.877,0,0,1,2.292.282l1.478,1.478"
+          transform="translate(0.019 0.033)"
+          fill="none"
+          stroke="#5e69db"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </svg>
+    </>
+  );
+};
 export const ThreeDotsColumnIcon = () => {
   return (
     <>
@@ -52,6 +112,7 @@ export const ThreeDotsColumnIcon = () => {
     </>
   );
 };
+
 export const CrossModalIcon = () => {
   return (
     <>

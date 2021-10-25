@@ -445,6 +445,12 @@
 }
 
 @media (max-width: 991.98px) {
+  .delete-btn-parent {
+    width: 55%;
+  }
+  .process-btn-parent {
+    width: 45%;
+  }
   .delete-order-modal-btn-style {
     height: unset;
     padding: 3px 3px;

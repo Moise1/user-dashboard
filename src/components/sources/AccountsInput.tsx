@@ -1,5 +1,5 @@
 import React from 'react';
-import { DustbinPinkIcon } from '../common/Icons';
+import { DustbinPinkIcon, HandFiveFingerIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 
 interface props {
@@ -80,7 +80,10 @@ const AccountsInput = (myProps: props) => {
         <div className="col-12 my-4 my-sm-5">
           <div className="d-flex">
             <div className="enable-disable-para mr-4">
-              <p>{t('SourceConfigInputs.DisableAccount')}</p>
+              <p className={`${DisableAccount ? 'hand-disabled' : ''} d-flex`}>
+                <p className="mr-2">{t('SourceConfigInputs.DisableAccount')}</p>
+                <HandFiveFingerIcon />
+              </p>
               <span>{t('SourceConfigInputs.DeactivateYourAccountMessage')} </span>
             </div>
 
@@ -103,6 +106,8 @@ const AccountsInput = (myProps: props) => {
           </div>
         </div>
         <div className="col-12">
+          {/* <HandFiveFingerIcon /> */}
+
           <p className="remove-account-div">
             {' '}
             <DustbinPinkIcon /> <div className="ml-2"> {t('SourceConfigInputs.RemoveAccount')}</div>
