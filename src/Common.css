@@ -2119,6 +2119,25 @@ table {
 .w-45 {
   width: 45%;
 }
+
+.select-all-listing-input label {
+  height: unset;
+  width: unset;
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.select-all-listing-checkbox label {
+  height: unset;
+  width: unset;
+}
+
+.select-all-label-text-listing {
+  font-size: 14px;
+  font-weight: normal;
+  white-space: nowrap;
+  margin-left: -84px;
+}
+
 @keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
@@ -2163,6 +2182,20 @@ table {
 }
 .last-step-order-icon #Path_315 {
   fill: var(--dBlue);
+}
+@media (min-width: 1900px) {
+  .select-all-label-text-listing {
+    margin-left: -120px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .select-all-label-text-listing {
+    margin-left: -14px;
+  }
+  .select-all-checkbox {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 576px) {

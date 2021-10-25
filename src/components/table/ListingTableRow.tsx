@@ -11,11 +11,16 @@ export function ListingTableRow(props: props) {
     <>
       <div className="listingTableRow border-bottom-body my-3 ">
         <div className="d-flex  align-items-center justify-content-center justify-content-md-start">
-          <div className="form-group form-check d-flex  d-md-block align-items-center justify-content-center">
-            <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
+          <div className="select-all-listing-checkbox form-group d-flex  align-items-center justify-content-center">
+            {/* <input type="checkbox" className="form-check-input mt-2" id="exampleCheck1" />
             <label key={key.id} htmlFor="exampleCheck1" className="form-check-label ml-4 ">
-              <img className="d-none d-md-block" src={key.selectall} alt="" />
+          </label> */}
+
+            <label className="select-all-checkbox">
+              <input type="checkbox" />
+              <span className="checkmark"></span>
             </label>
+            <img className="d-none d-md-block" src={key.selectall} alt="" />
           </div>
         </div>
         <div>

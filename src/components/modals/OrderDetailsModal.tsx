@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
-import { AoIconHead, CrossModalIcon, IconArrowModal, IconEdit } from '../common/Icons';
+import { AoIconHead, CrossModalIcon, IconArrowModal } from '../common/Icons';
 import AddressModal from './AddressModal';
 import { t } from '../../global/transShim';
 
@@ -64,8 +64,12 @@ const OrderDetailsModal = (props: Props) => {
               <div className="row justify-content-between">
                 <div className="col-12 col-xl-6">
                   <div className="row ">
+                    <AddressModal
+                      handleCloseAllModals={handleCloseAllModals}
+                      setAddressModalShow={setAddressModalShow}
+                    />
                     {/* SHIPPING AND BILLING ADRESS TEXT  */}
-                    {addressModalShow ? (
+                    {/* {addressModalShow ? (
                       <AddressModal
                         handleCloseAllModals={handleCloseAllModals}
                         setAddressModalShow={setAddressModalShow}
@@ -94,7 +98,7 @@ const OrderDetailsModal = (props: Props) => {
                           </div>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="row my-4">

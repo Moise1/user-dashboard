@@ -47,7 +47,9 @@ export default function ListingTable() {
           <div className="d-flex justify-content-between">
             <div className="pt-3">
               <span className="py-1 px-2 p-sm-2 ml-sm-4 mx-2 mx-sm-0 bg-f2f8ff br-15 box-width  ">
-                <span className="check-click-text  pr-3 listing-table-border">{t('Edit N Listings')}</span>
+                <span className="check-click-text  pr-3 listing-table-border">
+                  Edit <span className="fw-600">5</span> Listings
+                </span>
                 <span className="check-click-text  pr-3 listing-table-border mx-3">
                   {' '}
                   Copy <span className="fw-600">5</span> listings{' '}
@@ -67,7 +69,7 @@ export default function ListingTable() {
         <div className="overflow-x-auto pt-4">
           <div className="d-flex table-head border-bottom-body ml-3 table-header listingTableRow">
             <div className="d-flex align-items-center">
-              <input
+              {/* <input
                 onClick={() => {
                   setShowActive(!showActive);
                 }}
@@ -77,11 +79,20 @@ export default function ListingTable() {
 
               <label className="d-none d-md-block" htmlFor="select-all">
                 Select all
+              </label> */}
+
+              <label className="select-all-checkbox">
+                <input
+                  onClick={() => {
+                    setShowActive(!showActive);
+                  }}
+                  type="checkbox"
+                />
+                <span className="checkmark"></span>
               </label>
-              {/* <Form.Group className="select-custom" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Select all" />
-              </Form.Group> */}
+              <span className="select-all-label-text-listing d-none d-lg-block"> Select all</span>
             </div>
+
             <div>{t('Listings.Column.Item no.')}</div>
             <div className="d-none d-md-block">{t('Listings.Column.Source')}</div>
             <div>{t('Listings.Column.Title')}</div>
