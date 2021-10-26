@@ -9,7 +9,7 @@ interface props {
   checked: boolean;
 }
 
-const AutoOrdering = (myProps: props) => {
+const AccountsMangage = (myProps: props) => {
   const { whatSelect, checked } = myProps;
   const [DisableAccount, setDisableAccount] = useState<boolean>(false);
   const [whichAccountSelect, setwhichAccountSelect] = useState<string>('Select or add account');
@@ -71,4 +71,4 @@ const AutoOrdering = (myProps: props) => {
   );
 };
 
-export default AutoOrdering;
+export default AccountsMangage;

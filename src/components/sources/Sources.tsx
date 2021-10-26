@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
-import AutoOrdering from './AutoOrdering';
+import AccountsMangage from './AccountsMangage';
 import SearchSelect from './SearchSelect';
 import { useHistory } from 'react-router-dom';
 import './Sources.css';
@@ -95,7 +95,7 @@ const Sources = () => {
             </div>
           </div>
 
-          {showOrdering ? <AutoOrdering checked={checked} whatSelect={whatSelect} /> : ''}
+          {showOrdering ? <AccountsMangage checked={checked} whatSelect={whatSelect} /> : ''}
         </div>
       </div>
     </>
