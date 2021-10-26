@@ -19,7 +19,7 @@ const AccountsMangage = (myProps: props) => {
 
   return (
     <>
-      <div className="d-flex flex-column flex-lg-row justify-content-between mt-4 mt-lg-0">
+      <div className="d-flex flex-column flex-lg-row justify-content-between">
         <div className="d-flex flex-column mb-3 mb-lg-0">
           {checked ? (
             <>

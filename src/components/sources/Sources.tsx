@@ -89,7 +89,7 @@ const Sources = () => {
 
         <div className="auto-ordering-section">
           <div className="container-fluid">
-            <div className="row justify-content-between flex-column flex-lg-row">
+            <div className="row justify-content-between flex-column flex-lg-row mt-3">
               {isShowSourceSettings ? <SourceSettings /> : ''}
               {isShowAutoOrderingSetting ? (
                 <AutoOrdering
@@ -102,7 +102,7 @@ const Sources = () => {
                 ''
               )}
 
-              <div className="col-auto">
+              <div className="col-12 col-sm-4 mt-2 d-flex flex-column align-items-lg-end ">
                 <div className="supplier-dropdown">
                   <SearchSelect
                     whatSelect={whatSelect}
@@ -111,7 +111,7 @@ const Sources = () => {
                   />
                 </div>
 
-                <div className="d-flex justify-content-end sticky-btns">
+                <div className="sticky-btns">
                   <SourceButtons />
                 </div>
               </div>
