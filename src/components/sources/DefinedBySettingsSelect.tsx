@@ -3,13 +3,15 @@ import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 
 interface props {
-  setDefinedByStateSelect: (arg0: string) => void;
-  definedByStateSelect: string;
+  value: string;
 }
 
 const DefinedBySettingsSelect = (myProps: props) => {
-  const { setDefinedByStateSelect, definedByStateSelect } = myProps;
+  const { value } = myProps;
+  console.log(value);
+  const [definedByStateSelect, setDefinedByStateSelect] = useState<string>(value);
 
+  console.log(definedByStateSelect, 'definedByStateSelect');
   const arrayLists = [
     { value: 'Amazon', id: 101 },
     { value: 'Others', id: 102 },

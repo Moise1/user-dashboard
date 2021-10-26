@@ -1,14 +1,7 @@
 import React from 'react';
 import DefinedBySettingsSelect from './DefinedBySettingsSelect';
 
-interface propsList {
-  definedByStateSelect: string;
-  setDefinedByStateSelect: (arg0: string) => void;
-}
-
-export const SourceSettingsListItem = (PropsSource: propsList) => {
-  const { definedByStateSelect, setDefinedByStateSelect } = PropsSource;
-
+export const SourceSettingsListItem = () => {
   return (
     <>
       {/* SOURCE SETTING LIST  */}
@@ -24,10 +17,7 @@ export const SourceSettingsListItem = (PropsSource: propsList) => {
           </div>
         </div>
         <div className="col-12 col-xl-5 mt-3 mt-xl-5 d-flex justify-content-end">
-          <DefinedBySettingsSelect
-            definedByStateSelect={definedByStateSelect}
-            setDefinedByStateSelect={setDefinedByStateSelect}
-          />
+          <DefinedBySettingsSelect value="Defined by Settings(30)" />
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -43,10 +33,7 @@ export const SourceSettingsListItem = (PropsSource: propsList) => {
           </div>
         </div>
         <div className="col-12 col-xl-5 mt-3 mt-xl-5 d-flex justify-content-end">
-          <DefinedBySettingsSelect
-            definedByStateSelect={definedByStateSelect}
-            setDefinedByStateSelect={setDefinedByStateSelect}
-          />
+          <DefinedBySettingsSelect value="Defined by Settings(plain)" />
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -62,10 +49,7 @@ export const SourceSettingsListItem = (PropsSource: propsList) => {
           </div>
         </div>
         <div className="col-12 col-xl-5 mt-3 mt-xl-5 d-flex justify-content-end">
-          <DefinedBySettingsSelect
-            definedByStateSelect={definedByStateSelect}
-            setDefinedByStateSelect={setDefinedByStateSelect}
-          />
+          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -81,10 +65,7 @@ export const SourceSettingsListItem = (PropsSource: propsList) => {
           </div>
         </div>
         <div className="col-12 col-xl-5 mt-3 mt-xl-5 d-flex justify-content-end">
-          <DefinedBySettingsSelect
-            definedByStateSelect={definedByStateSelect}
-            setDefinedByStateSelect={setDefinedByStateSelect}
-          />
+          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -100,10 +81,7 @@ export const SourceSettingsListItem = (PropsSource: propsList) => {
           </div>
         </div>
         <div className="col-12 col-xl-5 mt-3 mt-xl-5 d-flex justify-content-end">
-          <DefinedBySettingsSelect
-            definedByStateSelect={definedByStateSelect}
-            setDefinedByStateSelect={setDefinedByStateSelect}
-          />
+          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
         </div>
       </div>
     </>

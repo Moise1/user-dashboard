@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
 import AccountsMangage from './AccountsMangage';
-// import SearchSelect from './SearchSelect';
 import { t } from '../../global/transShim';
 
 interface props {
