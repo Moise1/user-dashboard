@@ -1266,7 +1266,7 @@ table {
   font-weight: bold;
   padding: 5px 8px;
   position: sticky;
-  /* top: 90px; */
+  top: 150px;
 }
 
 .reset-to-default-btn:hover {
