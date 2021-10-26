@@ -1,12 +1,11 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import SearchWithButton from '../common/SearchWithButton';
-import AccountsMangage from './AccountsMangage';
-import SearchSelect from './SearchSelect';
 import { useHistory } from 'react-router-dom';
 import './Sources.css';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
-import { t } from '../../global/transShim';
+import AutoOrdering from './AutoOrdering';
+import SourceSettings from './SourceSettings';
 
 type ContextType = {
   supplierValue: string;
@@ -14,10 +13,11 @@ type ContextType = {
 };
 
 const Sources = () => {
+  const [isShowSourceSettings, setShowSourceSettings] = useState<boolean>(true);
+  const [isShowAutoOrderingSetting, setShowAutoOrderingSetting] = useState<boolean>(false);
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
   const { supplierValue, setSupplierValue } = React.useContext(SelectSupplierContext) as ContextType;
   const [whatSelect, setWhatSelect] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
-  const [checked, setChecked] = useState<boolean>(false);
 
   const history = useHistory();
 
@@ -34,11 +34,15 @@ const Sources = () => {
     history.goBack();
   };
 
-  // FOR GET VALUE OF TOGGLE SWITCH
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setChecked(event.target.checked);
+  const handleSourceTabs = () => {
+    if (isShowSourceSettings) {
+      setShowSourceSettings(false);
+      setShowAutoOrderingSetting(true);
+    } else if (isShowAutoOrderingSetting) {
+      setShowSourceSettings(true);
+      setShowAutoOrderingSetting(false);
+    }
   };
-
   return (
     <>
       <div className="w-100 p-sm-3 ant-layout mt-3 mt-sm-0">
@@ -69,34 +73,37 @@ const Sources = () => {
             <span>This service is free while in beta</span>
           </div> */}
         </div>
-
-        <div className={` ${showOrdering ? '' : 'h-100'} auto-ordering-section my-0 my-md-3`}>
-          {/* <h2 className="auto-ordering-heading-text mb-3 ">
-            Autoordering supplier configuration:{' '}
-            <span> {whatSelect ? whatSelect : 'select a supplier from the list'} </span>
-          </h2> */}
-          <div className="d-flex justify-content-between mb-4">
-            <div className="d-flex">
-              <div className="enable-disable-para ">
-                <p>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</p>
-                <span className="mr-5">Disabling auto-ordering will require you to manually process new orders.</span>
-              </div>
-
-              <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
-                <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
-                  <input className="input-toggle-switch" onChange={handleChange} type="checkbox" id="checkbox-2" />
-                  <div className="slider-toggle round"></div>
-                </label>
-              </div>
-            </div>
-
-            <div className="supplier-dropdown">
-              <SearchSelect whatSelect={whatSelect} setWhatSelect={setWhatSelect} setShowOrdering={setShowOrdering} />
-            </div>
+        {/* SOURCE TABS  */}
+        <div className="tab-source">
+          <div
+            className={`${isShowSourceSettings ? 'active-tab-bar' : ' '} tab-list-items`}
+            onClick={() => handleSourceTabs()}
+          >
+            <h4>Sources Settings</h4>
           </div>
-
-          {showOrdering ? <AccountsMangage checked={checked} whatSelect={whatSelect} /> : ''}
+          <div
+            className={`${isShowAutoOrderingSetting ? 'active-tab-bar' : ' '} tab-list-items`}
+            onClick={() => handleSourceTabs()}
+          >
+            <h4>Autoordering Settings</h4>
+          </div>
         </div>
+
+        {isShowSourceSettings ? (
+          <SourceSettings whatSelect={whatSelect} setWhatSelect={setWhatSelect} setShowOrdering={setShowOrdering} />
+        ) : (
+          ''
+        )}
+        {isShowAutoOrderingSetting ? (
+          <AutoOrdering
+            showOrdering={showOrdering}
+            whatSelect={whatSelect}
+            setWhatSelect={setWhatSelect}
+            setShowOrdering={setShowOrdering}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </>
   );

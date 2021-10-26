@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { DispatchedOrderIcon } from '../common/Icons';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
+import SourceButtons from './SourceButtons';
 import { t } from '../../global/transShim';
 
 interface props {
@@ -59,13 +59,8 @@ const AccountsMangage = (myProps: props) => {
             ''
           )}
         </div>
-        <div className="d-flex flex-row flex-sm-column">
-          <button className="btn save-changes-btn mb-0 mb-sm-3">
-            <DispatchedOrderIcon />
-            <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
-          </button>
-          <button className="ml-3 ml-sm-0 btn reset-to-default-btn"> {t('SourceConfigInputs.ResetToDefault')}</button>
-        </div>
+
+        <SourceButtons />
       </div>
     </>
   );

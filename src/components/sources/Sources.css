@@ -86,7 +86,10 @@
 .add-account-select-parent {
   width: 348.54px !important;
 }
-
+.defined-by-settings-select-parent {
+  width: 100% !important;
+  height: 44px !important;
+}
 .react-search-with-select-parent {
   width: 349.47px;
   height: 62px;
@@ -261,6 +264,47 @@
   top: 0;
   pointer-events: none;
   z-index: 2;
+}
+
+/* TABS  STYLE  */
+
+.tab-source {
+  display: flex;
+  background-color: var(--bgPage);
+  border-radius: 10px 10px 0px 0px;
+  width: 42%;
+}
+
+.tab-list-items {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab-list-items h4 {
+  padding: 20px 10px;
+  font-size: var(--sub-heading);
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.active-tab-bar {
+  background-color: #bfbfbf;
+  border-radius: 10px 10px 0px 0px;
+}
+.active-tab-bar h4 {
+  color: #707070;
+}
+
+.source-setting-list-item h4 {
+  font-weight: bold;
+  font-size: var(--sub-heading);
+}
+.source-setting-list-item p {
+  font-weight: 400;
+  font-size: var(--font-small);
+  color: var(--color-grey);
 }
 
 /* MEDIA QUERY  */

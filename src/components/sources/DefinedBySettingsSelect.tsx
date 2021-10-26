@@ -8,7 +8,7 @@ interface props {
   whatSelect: string;
 }
 
-const SearchSelect = (myProps: props) => {
+const DefinedBySettingsSelect = (myProps: props) => {
   const { setShowOrdering, setWhatSelect, whatSelect } = myProps;
 
   const arrayLists = [
@@ -43,7 +43,7 @@ const SearchSelect = (myProps: props) => {
   return (
     <>
       {showDropDown ? <div onClick={() => setShowDropDown(false)} className="overlay-select"></div> : ''}
-      <div className="react-search-with-select-parent mb-4">
+      <div className="react-search-with-select-parent defined-by-settings-select-parent mb-4">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
           <h5>{whatSelect}</h5>
           <span>
@@ -82,4 +82,4 @@ const SearchSelect = (myProps: props) => {
   );
 };
 
-export default SearchSelect;
+export default DefinedBySettingsSelect;
