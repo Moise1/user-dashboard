@@ -3,13 +3,12 @@ import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 
 interface props {
-  setShowOrdering: (arg0: boolean) => void;
-  setWhatSelect: (arg0: string) => void;
-  whatSelect: string;
+  setDefinedByStateSelect: (arg0: string) => void;
+  definedByStateSelect: string;
 }
 
 const DefinedBySettingsSelect = (myProps: props) => {
-  const { setShowOrdering, setWhatSelect, whatSelect } = myProps;
+  const { setDefinedByStateSelect, definedByStateSelect } = myProps;
 
   const arrayLists = [
     { value: 'Amazon', id: 101 },
@@ -29,9 +28,8 @@ const DefinedBySettingsSelect = (myProps: props) => {
   const [inputSearchValue, setInputSearchValue] = useState<string>('');
 
   const handleSelectValue = (value: string) => {
-    setWhatSelect(value);
+    setDefinedByStateSelect(value);
     setShowDropDown(false);
-    setShowOrdering(true);
   };
 
   const handleSearch = (value: string) => {
@@ -45,7 +43,7 @@ const DefinedBySettingsSelect = (myProps: props) => {
       {showDropDown ? <div onClick={() => setShowDropDown(false)} className="overlay-select"></div> : ''}
       <div className="react-search-with-select-parent defined-by-settings-select-parent mb-4">
         <div className="select-dropdown-shows" onClick={() => setShowDropDown(!showDropDown)}>
-          <h5>{whatSelect}</h5>
+          <h5>{definedByStateSelect}</h5>
           <span>
             <img src={dropicon} alt="dropicon" />
           </span>
