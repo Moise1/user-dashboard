@@ -6,6 +6,8 @@ import './Sources.css';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import SourceSettings from './SourceSettings';
+import SearchSelect from './SearchSelect';
+import SourceButtons from './SourceButtons';
 
 type ContextType = {
   supplierValue: string;
@@ -68,10 +70,6 @@ const Sources = () => {
               {whatSelect && whatSelect !== 'Select Supplier' ? whatSelect : 'select a supplier from the list'}{' '}
             </span>
           </h2>
-          {/* <div className="beta-bg ml-0 ml-sm-4 d-none d-md-flex">
-            <h2 className="mb-0 mr-2">Beta:</h2>
-            <span>This service is free while in beta</span>
-          </div> */}
         </div>
         {/* SOURCE TABS  */}
         <div className="tab-source">
@@ -89,21 +87,37 @@ const Sources = () => {
           </div>
         </div>
 
-        {isShowSourceSettings ? (
-          <SourceSettings whatSelect={whatSelect} setWhatSelect={setWhatSelect} setShowOrdering={setShowOrdering} />
-        ) : (
-          ''
-        )}
-        {isShowAutoOrderingSetting ? (
-          <AutoOrdering
-            showOrdering={showOrdering}
-            whatSelect={whatSelect}
-            setWhatSelect={setWhatSelect}
-            setShowOrdering={setShowOrdering}
-          />
-        ) : (
-          ''
-        )}
+        <div className="auto-ordering-section">
+          <div className="container-fluid">
+            <div className="row justify-content-between flex-column flex-lg-row">
+              {isShowSourceSettings ? <SourceSettings /> : ''}
+              {isShowAutoOrderingSetting ? (
+                <AutoOrdering
+                  showOrdering={showOrdering}
+                  whatSelect={whatSelect}
+                  setWhatSelect={setWhatSelect}
+                  setShowOrdering={setShowOrdering}
+                />
+              ) : (
+                ''
+              )}
+
+              <div className="col-auto">
+                <div className="supplier-dropdown">
+                  <SearchSelect
+                    whatSelect={whatSelect}
+                    setWhatSelect={setWhatSelect}
+                    setShowOrdering={setShowOrdering}
+                  />
+
+                  <div className="d-flex justify-content-end">
+                    <SourceButtons />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

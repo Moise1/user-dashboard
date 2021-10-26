@@ -1266,7 +1266,7 @@ table {
   font-weight: bold;
   padding: 5px 8px;
   position: sticky;
-  top: 70px;
+  /* top: 90px; */
 }
 
 .reset-to-default-btn:hover {
@@ -1285,7 +1285,7 @@ table {
   transition: 0.3s ease;
   padding: 5px 8px;
   position: sticky;
-  top: 0;
+  top: 50px;
 }
 
 .save-changes-btn:hover {

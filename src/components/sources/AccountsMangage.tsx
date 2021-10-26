@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
-import SourceButtons from './SourceButtons';
 import { t } from '../../global/transShim';
 
 interface props {
@@ -59,8 +58,6 @@ const AccountsMangage = (myProps: props) => {
             ''
           )}
         </div>
-
-        <SourceButtons />
       </div>
     </>
   );
