@@ -109,10 +109,10 @@ const Sources = () => {
                     setWhatSelect={setWhatSelect}
                     setShowOrdering={setShowOrdering}
                   />
+                </div>
 
-                  <div className="d-flex justify-content-end">
-                    <SourceButtons />
-                  </div>
+                <div className="d-flex justify-content-end sticky-btns">
+                  <SourceButtons />
                 </div>
               </div>
             </div>

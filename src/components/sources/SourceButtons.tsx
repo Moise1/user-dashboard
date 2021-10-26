@@ -5,7 +5,7 @@ import { t } from '../../global/transShim';
 const SourceButtons = () => {
   return (
     <>
-      <div className="d-flex flex-row flex-sm-column">
+      <div className="d-flex flex-row flex-sm-column ">
         <button className="btn save-changes-btn mb-0 mb-sm-3">
           <DispatchedOrderIcon />
           <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
