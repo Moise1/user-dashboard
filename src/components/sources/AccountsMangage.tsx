@@ -19,10 +19,10 @@ const AccountsMangage = (myProps: props) => {
 
   return (
     <>
-      <div className="d-flex flex-column flex-lg-row justify-content-between">
-        <div className="d-flex flex-column mb-3 mb-lg-0">
-          {checked ? (
-            <>
+      {checked ? (
+        <>
+          <div className="d-flex flex-column flex-lg-row justify-content-between">
+            <div className="d-flex flex-column mb-3 mb-lg-0">
               <h2 className="acc-config-text py-3">
                 {t('SourceConfigInputs.AccountConfiguration')} : <span>{whichAccountSelect} </span>{' '}
               </h2>
@@ -37,28 +37,28 @@ const AccountsMangage = (myProps: props) => {
                 setOtp={setOtp}
                 setphone={setphone}
               />
-            </>
-          ) : (
-            ''
-          )}
 
-          {/* IF ANY ACCOUNT IS NOT SELECTED AND VALUE IS NOT DEFAULT VALUE THEN WE HAVE NOT TO SHOW INPUT OR TOGGLE ICON  */}
-          {whichAccountSelect.length && whichAccountSelect !== 'Select or add account' ? (
-            <AccountsInput
-              alias={alias}
-              otp={otp}
-              password={password}
-              phone={phone}
-              whatSelect={whatSelect}
-              DisableAccount={DisableAccount}
-              setDisableAccount={setDisableAccount}
-              whichAccountSelect={whichAccountSelect}
-            />
-          ) : (
-            ''
-          )}
-        </div>
-      </div>
+              {/* IF ANY ACCOUNT IS NOT SELECTED AND VALUE IS NOT DEFAULT VALUE THEN WE HAVE NOT TO SHOW INPUT OR TOGGLE ICON  */}
+              {whichAccountSelect.length && whichAccountSelect !== 'Select or add account' ? (
+                <AccountsInput
+                  alias={alias}
+                  otp={otp}
+                  password={password}
+                  phone={phone}
+                  whatSelect={whatSelect}
+                  DisableAccount={DisableAccount}
+                  setDisableAccount={setDisableAccount}
+                  whichAccountSelect={whichAccountSelect}
+                />
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        ''
+      )}
     </>
   );
 };
