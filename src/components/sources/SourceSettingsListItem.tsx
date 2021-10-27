@@ -80,6 +80,89 @@ export const SourceSettingsListItem = () => {
           <DefinedBySettingsSelect value="Defined by Settings(yes)" />
         </div>
       </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Returns</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3  d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Select" />
+        </div>
+      </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Shipping</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3  d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Select" />
+        </div>
+      </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Dispatch Days</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3  d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Select" />
+        </div>
+      </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row my-3 my-lg-4 align-items-center justify-content-between">
+        <div className="col-6 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>GSP</h4>
+          </div>
+        </div>
+        <div className="col-6 col-xl-5   d-flex justify-content-end">
+          <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
+            <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
+              <input className="input-toggle-switch" type="checkbox" id="checkbox-2" />
+              <div className="slider-toggle round"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Overwrite Item Postcode</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3  d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Default" />
+        </div>
+      </div>
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Overwrite Item City</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3 d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Default" />
+        </div>
+      </div>
+
+      {/* SOURCE SETTING LIST  */}
+      <div className="row mb-0 mb-sm-3 justify-content-between">
+        <div className="col-12 col-xl-5">
+          <div className="source-setting-list-item">
+            <h4>Overwrite Item Country Code</h4>
+          </div>
+        </div>
+        <div className="col-12 col-xl-5 mt-3 d-flex justify-content-end">
+          <DefinedBySettingsSelect value="Default" />
+        </div>
+      </div>
     </>
   );
 };
