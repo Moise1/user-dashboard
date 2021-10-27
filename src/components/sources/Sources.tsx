@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
-import SearchWithButton from '../common/SearchWithButton';
 import { useHistory } from 'react-router-dom';
 import './Sources.css';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
@@ -48,9 +47,6 @@ const Sources = () => {
   return (
     <>
       <div className="w-100 p-sm-3 ant-layout mt-3 mt-sm-0">
-        <div className="d-none d-md-block">
-          <SearchWithButton />
-        </div>
 
         <div className="d-flex flex-column mt-0 mt-md-3 back-supplier-parent">
           <h2
@@ -63,13 +59,13 @@ const Sources = () => {
             Back to suppliers overview
           </h2>
 
-          <h2 className="auto-ordering-heading-text px-3">
+          <h1 className="auto-ordering-heading-text px-3">
             Source:{' '}
             <span>
               {' '}
               {whatSelect && whatSelect !== 'Select Supplier' ? whatSelect : 'select a supplier from the list'}{' '}
             </span>
-          </h2>
+          </h1>
         </div>
         {/* SOURCE TABS  */}
         <div className="tab-source">

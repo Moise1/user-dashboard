@@ -3,6 +3,7 @@
   font-size: var(--font-large);
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .beta-bg {
@@ -33,7 +34,7 @@
 
 .auto-ordering-heading-text {
   font-weight: bold;
-  font-size: var(--sub-heading);
+  font-size: var(--text-heading);
   color: black;
   font-weight: bold;
 }
@@ -102,7 +103,7 @@
   color: rgba(0, 0, 0, 0.4) !important;
 }
 .react-search-with-select-parent {
-  width: 349.47px;
+  width: 217px;
   height: 62px;
   border-radius: 8px !important;
   background: var(--bgHighlight);
