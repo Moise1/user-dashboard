@@ -47,7 +47,6 @@ const Sources = () => {
   return (
     <>
       <div className="w-100 p-sm-3 ant-layout mt-3 mt-sm-0">
-
         <div className="d-flex flex-column mt-0 mt-md-3 back-supplier-parent">
           <h2
             className="back-to-supplier-heading d-flex align-items-center"
@@ -99,15 +98,14 @@ const Sources = () => {
               )}
 
               <div className="col-12 col-sm-4 mt-2 d-flex flex-column align-items-lg-end ">
-                <div className="supplier-dropdown">
-                  <SearchSelect
-                    whatSelect={whatSelect}
-                    setWhatSelect={setWhatSelect}
-                    setShowOrdering={setShowOrdering}
-                  />
-                </div>
-
                 <div className="sticky-btns">
+                  <div className="supplier-dropdown">
+                    <SearchSelect
+                      whatSelect={whatSelect}
+                      setWhatSelect={setWhatSelect}
+                      setShowOrdering={setShowOrdering}
+                    />
+                  </div>
                   <SourceButtons />
                 </div>
               </div>
