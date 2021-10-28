@@ -29,7 +29,7 @@
   --navLinkColorHover: #000;
   --inputColor: #000;
   --inputBg: #fff;
-  --placeholderColor: #000;
+  --placeholderColor: rgb(223, 223, 223);
   --bgHighlight: #fff;
   --tableBg: #fff;
   --txtHighlight: #262e80;

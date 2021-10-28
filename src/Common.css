@@ -1703,7 +1703,7 @@ table {
 }
 
 .ship-bill-box {
-  background: rgba(250, 252, 255, 1);
+  background: #f2f8ff;
   border-radius: 8px;
   opacity: 1;
 }
@@ -1718,7 +1718,7 @@ table {
 
 .sold-head {
   font-size: var(--font-18);
-  color: #9a9a9a;
+  color: #000000;
   font-weight: 700;
 }
 

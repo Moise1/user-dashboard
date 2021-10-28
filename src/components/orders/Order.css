@@ -506,26 +506,26 @@
   }
 
   .stop-5-order-btn {
-    width: unset;
+    width: 100%;
     height: unset;
-    padding: 4px 8px;
+    padding: 8px;
   }
 
   .process-5-order-btn {
-    width: unset;
+    width: 100%;
     height: unset;
-    padding: 4px 8px;
+    padding: 8px;
   }
   .mark-dispatch-btn {
-    width: unset;
+    width: 100%;
     height: unset;
-    padding: 4px 8px;
+    padding: 8px;
   }
 
   .delete-5-order-btn {
-    width: unset;
+    width: 100%;
     height: unset;
-    padding: 4px 8px;
+    padding: 8px;
   }
   .stop-5-order-btn svg,
   .delete-5-order-btn svg,
