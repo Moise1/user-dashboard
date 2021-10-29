@@ -201,6 +201,7 @@ input {
   justify-content: space-between;
   align-items: center;
   padding: var(--paddingStoreSelector);
+  cursor: pointer;
 }
 
 .TopBarItems {
@@ -212,6 +213,15 @@ input {
   height: var(--logoHeight);
   width: var(--logoWidth);
 }
+
+
+.storeLinkedRow{
+display: flex;
+cursor: pointer;
+align-items: center;
+justify-content: right;
+}
+
 
 .table-header > div {
   font-size: var(--font-18);

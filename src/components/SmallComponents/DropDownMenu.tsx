@@ -25,19 +25,20 @@ export default function DropDownMenu() {
                 </span>
               </div>
             </div>
-            <div className="col-md-12"></div>
-            <HeaderDropDownItem />
-            <HeaderDropDownItem />
-            <HeaderDropDownItem />
-
             <div className="col-md-12">
-              <p className="fw-700">...</p>
+              <HeaderDropDownItem />
+              <HeaderDropDownItem />
+              <HeaderDropDownItem />
+
+              <div className="col-md-12">
+                <p className="moreStores">...</p>
+              </div>
             </div>
-            <div className="col-md-12 mb-2 pl-2">
+            <div className="col-md-12 mb-2 pl-2 add-new-channel-container">
               <Link to="/newchannel">
                 <div className="add-new-channel-drop">
-                  <p className="mb-0">{t('AddNewChannel')}</p>
                   <PlusIcon />
+                  <p className="mb-0">{t('AddNewChannel')}</p>
                 </div>
               </Link>
             </div>
