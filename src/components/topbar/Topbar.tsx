@@ -29,16 +29,12 @@ export default function Topbar(props: Props) {
           </div>
           <img className="logoHGR ml-2 ml-md-3" src={Logo} alt="logo" />
         </div>
-        <div>
-          <p className=" ml-2 mb-0 mt-2 quota-price ff-used d-md-none">45% (12/13)</p>{' '}
-        </div>
-        <button className="upgrde-btn-topbar d-md-none mt-2">Upgrade</button>
         <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
           <div className="d-flex hgr-progress p-sm-1 TopBarItems">
             <div className="d-flex align-items-center">
               <h4 className="mb-0 quota-head ff-used "> {t('Topbar.Quota')}:</h4>{' '}
               <p className=" ml-1 ml-md-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
-              <div>
+              <div className="progressBar">
                 <Progress
                   percent={50}
                   showInfo={false}

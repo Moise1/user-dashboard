@@ -812,13 +812,7 @@ table {
 }
 
 /* MAIN CSS */
-.hgr-progress .ant-progress {
-  width: 370px !important;
-  margin-left: 30px;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 30px;
-}
+
 
 .py-1px {
   padding-top: 1px;
