@@ -56,17 +56,21 @@ function SourcesTable(myProps: props) {
               <th className="source-th-none">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
-              <th className="text-center text-md-left">
-                <Popover
-                  placement="right"
-                  content={
-                    <div className="pop-over-content">
-                      <p className="mb-0"> {t('SourceTable.Beta')}</p>
-                    </div>
-                  }
-                >
-                  <span className="mr-0 mr-sm-2"> {t('SourceTable.AutoOrdering')} </span>
-                </Popover>
+            
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ReturnPolicy')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemPostcode')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemCity')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemCountryCode')}</span>
               </th>
             </tr>
           </thead>

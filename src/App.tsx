@@ -17,33 +17,7 @@ import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 
 const App = () => {
-  // const [collapsed, setCollapsed] = useState(true);
-  // const [staticvalue, setStaticvalue] = useState(false);
-
-  // const toggle = () => {
-  //   setCollapsed(!collapsed);
-  // };
-  // const togglestatic = () => {
-  //   setStaticvalue(!staticvalue);
-  // };
-
-  // class App extends React.Component {
-  //   state = {
-  //     collapsed: true,
-  //     staticvalue: false
-  //   };
-
-  //   toggle = () => {
-  //     this.setState({
-  //       collapsed: !this.state.collapsed
-  //     });
-  //   };
-
-  //   togglestatic = () => {
-  //     this.setState({
-  //       staticvalue: !this.state.staticvalue
-  //     });
-  //   };
+  
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
 
