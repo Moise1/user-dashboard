@@ -56,23 +56,39 @@ function SourcesTable(myProps: props) {
               <th className="source-th-none">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
-              <th className="text-center text-md-left">
-                <Popover
-                  placement="right"
-                  content={
-                    <div className="pop-over-content">
-                      <p className="mb-0"> {t('SourceTable.Beta')}</p>
-                    </div>
-                  }
-                >
-                  <span className="mr-0 mr-sm-2"> {t('SourceTable.AutoOrdering')} </span>
-                </Popover>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ReturnPolicy')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemPostcode')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemCity')}</span>
+              </th>
+
+              <th className="source-th-none">
+                <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemCountryCode')}</span>
               </th>
             </tr>
           </thead>
 
           {sourceData.map((obj) => {
-            const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
+            const {
+              id,
+              provider,
+              markup,
+              autoOrdering,
+              decreaseLimit,
+              template,
+              shippingPolicy,
+              returnPolicy,
+              itemPostcode,
+              itemCity,
+              itemCountry
+            } = obj;
             return (
               <tbody className="order-table-body" key={id}>
                 <tr className="cursor-pointer">
@@ -100,7 +116,6 @@ function SourcesTable(myProps: props) {
                     {template}
                   </td>
                   <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
-
                   <td className="w-15per text-center text-md-left">
                     <Popover
                       placement="right"
@@ -112,8 +127,7 @@ function SourcesTable(myProps: props) {
                     >
                       <button
                         onClick={() => (autoOrdering === 'Coming Soon' ? '' : handleSupplierValue(provider))}
-                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
-                          autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
+                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                         } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
                       >
                         {autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
@@ -123,6 +137,10 @@ function SourcesTable(myProps: props) {
                       </button>
                     </Popover>
                   </td>
+                  <td className="w-12per return-policy-text white-space-pre-wrap source-td-none">{returnPolicy}</td>
+                  <td className="w-12per item-postcode-text white-space-pre-wrap source-td-none">{itemPostcode}</td>
+                  <td className="w-12per item-city-text white-space-pre-wrap source-td-none">{itemCity}</td>
+                  <td className="w-12per item-country-text white-space-pre-wrap source-td-none">{itemCountry}</td>
                 </tr>
               </tbody>
             );
