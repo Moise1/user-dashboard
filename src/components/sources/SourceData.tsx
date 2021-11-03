@@ -5,6 +5,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Disabled'
   },
@@ -14,6 +18,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: 'Shenzhen',
+    itemCountry: 'CN',
     shippingPolicy: 'Expedited Shipping from China/Hong Kong/Taiwan to worldwide, 2-7 Days',
     autoOrdering: 'Disabled'
   },
@@ -23,6 +31,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Disabled'
   },
@@ -32,6 +44,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Enabled'
   },
@@ -41,6 +57,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Enabled'
   },
@@ -50,6 +70,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Enabled'
   },
@@ -59,6 +83,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Coming Soon'
   },
@@ -68,6 +96,10 @@ export const sourceData = [
     markup: 30,
     decreaseLimit: 0,
     template: '-',
+    returnPolicy: '-',
+    itemPostcode: '',
+    itemCity: '',
+    itemCountry: '',
     shippingPolicy: 'Parcelforce 24, 1 Day',
     autoOrdering: 'Enabled'
   }

@@ -1,9 +1,7 @@
 import React from 'react';
 import SearchInput from '../SmallComponents/SearchInput';
-//import { OrdersIcon } from '../common/Icons';
 import SourcesTable from './SourcesTable';
-//import { useHistory } from 'react-router-dom';
-//import { t } from '../../global/transShim';
+
 
 interface props {
   staticValue: boolean;

@@ -1,9 +1,5 @@
 import * as React from 'react';
 import { sourceData } from './SourceData';
-import ErrorIcon from '../../assets/erroricon.svg';
-import InProgressIcon from '../../assets/progressicon.svg';
-import { Popover } from 'antd';
-import DispatchIcon from '../../assets/dispatchedicon.svg';
 import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
@@ -56,7 +52,7 @@ function SourcesTable(myProps: props) {
               <th className="source-th-none">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.ShippingPolicy')}</span>
               </th>
-            
+
               <th className="source-th-none">
                 <span className="mr-0 mr-sm-2"> {t('SourceTable.ReturnPolicy')}</span>
               </th>
@@ -76,7 +72,18 @@ function SourcesTable(myProps: props) {
           </thead>
 
           {sourceData.map((obj) => {
-            const { id, provider, markup, decreaseLimit, template, shippingPolicy, autoOrdering } = obj;
+            const {
+              id,
+              provider,
+              markup,
+              decreaseLimit,
+              template,
+              shippingPolicy,
+              returnPolicy,
+              itemPostcode,
+              itemCity,
+              itemCountry
+            } = obj;
             return (
               <tbody className="order-table-body" key={id}>
                 <tr className="cursor-pointer">
@@ -104,29 +111,10 @@ function SourcesTable(myProps: props) {
                     {template}
                   </td>
                   <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
-
-                  <td className="w-15per text-center text-md-left">
-                    <Popover
-                      placement="right"
-                      content={
-                        <div className="pop-over-content">
-                          <p className="mb-0">{autoOrdering === 'Coming Soon' ? 'Not ready' : 'Configure'}</p>
-                        </div>
-                      }
-                    >
-                      <button
-                        onClick={() => (autoOrdering === 'Coming Soon' ? '' : handleSupplierValue(provider))}
-                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
-                          autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
-                        } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
-                      >
-                        {autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-                        {autoOrdering === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-                        {autoOrdering === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                        {autoOrdering}
-                      </button>
-                    </Popover>
-                  </td>
+                  <td className="w-12per return-policy-text white-space-pre-wrap source-td-none">{returnPolicy}</td>
+                  <td className="w-12per item-postcode-text white-space-pre-wrap source-td-none">{itemPostcode}</td>
+                  <td className="w-12per item-city-text white-space-pre-wrap source-td-none">{itemCity}</td>
+                  <td className="w-12per item-country-text white-space-pre-wrap source-td-none">{itemCountry}</td>
                 </tr>
               </tbody>
             );
