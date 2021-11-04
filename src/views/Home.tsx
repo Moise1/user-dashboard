@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <Layout className="site-layout">
         <div className="d-block d-lg-none">
-          <SidebarMb />
+          <SidebarMb  className="side-nav"/>
         </div>
         <HeaderLayout>
           <TabsList />
