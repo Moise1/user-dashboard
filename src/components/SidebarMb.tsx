@@ -5,6 +5,7 @@
 // import { Navbar, Container, Nav } from 'react-bootstrap';
 interface props {
   _ignored?: number;
+  className: string;
 }
 //setTranslations({ en });
 //setDefaultLanguage('en');

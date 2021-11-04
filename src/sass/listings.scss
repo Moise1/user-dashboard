@@ -1,0 +1,23 @@
+// For desktops and large screens
+@media screen and (min-width: 1025px) and (max-width: 1200px){
+    .listings-container{
+        overflow-y: scroll;
+        max-width: 100%;
+        
+        .side-nav{
+            display: none;
+        }
+    }
+}
+
+// For small screens and laptops
+@media screen and (min-width: 769px) and (max-width: 1024px){
+    .listings-container{
+        overflow-y: scroll;
+        max-width: 100%;
+        
+        .side-nav{
+            display: none;
+        }
+    }
+}
