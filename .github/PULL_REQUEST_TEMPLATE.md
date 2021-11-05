@@ -1,7 +1,7 @@
 ## What does this merge request do?
 
 
-## How should this be manually tested (Netlify)?
+## How should this be manually tested?
 
 
 ## Types of changes
@@ -11,7 +11,7 @@
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to change)
-
+- [ ] Codebase cleanup.
 
 ### Screenshots (if applicable)
 

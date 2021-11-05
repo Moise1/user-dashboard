@@ -34,17 +34,14 @@ export default function Home() {
         <HeaderLayout>
           <TabsList />
           <div className="d-md-block d-none">
-            <SearchBar />
+            <SearchBar className="phone-search-bar"/>
           </div>
           <div className="my-2 d-block d-md-none">
-            <SearchBar />
+            <SearchBar className="web-search-bar"/>
           </div>
         </HeaderLayout>
-        {/* <Route path="/orders" component={Orders} /> */}
         <ContentLayout>
           <TableContent />
-          {/* <PendingDataContent />
-            <TerminatedDataContent /> */}
         </ContentLayout>
       </Layout>
     </>

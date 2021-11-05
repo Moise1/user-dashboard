@@ -4,7 +4,7 @@ import HeaderLayout from '../../components/HeaderLayout';
 import SidebarMb from '../../components/SidebarMb';
 import SearchBar from '../../components/SmallComponents/SearchBar';
 import TabsList from '../../components/SmallComponents/TabsList';
-import '../../css/listings.css';
+import '../../css/listings.min.css';
 import { Container } from 'react-bootstrap';
 
 const Listings = () => {
@@ -14,12 +14,8 @@ const Listings = () => {
         <SidebarMb className="side-nav" />
         <HeaderLayout>
           <TabsList />
-          <div className="d-md-block d-none">
-            <SearchBar />
-          </div>
-          <div className="my-2 d-block d-md-none">
-            <SearchBar />
-          </div>
+          <SearchBar className="phone-search-bar" />
+          <SearchBar className="web-search-bar" />
         </HeaderLayout>
         <ContentLayout>
           <TableContent />

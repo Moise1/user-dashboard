@@ -1,23 +1,78 @@
-// For desktops and large screens
-@media screen and (min-width: 1025px) and (max-width: 1200px){
+// Mobile devices
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px){
     .listings-container{
-        overflow-y: scroll;
-        max-width: 100%;
-        
-        .side-nav{
+
+        .web-search-bar{
             display: none;
+        };
+
+        .phone-search-bar{
+            margin: 20px 0;
+        }
+    }
+};
+
+@media only screen and (min-device-width: 450px) and (max-device-width: 1034px){
+    .listings-container{
+
+        .web-search-bar{
+            display: none;
+        };
+
+        .phone-search-bar{
+            margin: 20px 0;
+        }
+    }
+};
+
+
+// iPads and Tablets
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) 
+and (-webkit-min-device-pixel-ratio: 2){
+    .listings-container{
+
+        .web-search-bar{
+            display: none;
+        };
+
+        .phone-search-bar{
+            margin: 20px 0;
         }
     }
 }
 
-// For small screens and laptops
-@media screen and (min-width: 769px) and (max-width: 1024px){
+
+// Screens and laptops
+@media only screen and (min-width: 1224px){
+    
     .listings-container{
         overflow-y: scroll;
         max-width: 100%;
-        
-        .side-nav{
+
+        .phone-search-bar{
             display: none;
+        };
+
+        .web-search-bar{
+            margin: 20px 0;
+        }
+    }
+};
+
+
+// Large screens
+@media only screen and (min-width: 1824px){
+
+    .listings-container{
+        overflow-y: scroll;
+        max-width: 100%;
+
+        .phone-search-bar{
+            display: none;
+        };
+        .web-search-bar{
+            margin: 20px 0;
         }
     }
 }
