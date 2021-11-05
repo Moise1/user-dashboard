@@ -1,4 +1,4 @@
-// import clsx from 'clsx';
+
 import list_saerch from '../../assets/list_search.jpg';
 import column_img from '../../assets/columnimg.svg';
 import SearchInput from './SearchInput';
@@ -12,10 +12,10 @@ interface props {
 const  SearchBar = (searchBarProps: props) =>{
 
   const {className} = searchBarProps;
-
+  
   return (
     <div className={className}>
-      <div className="row justify-content-between ">
+      <div className="row justify-content-between">
         <div className="col-md-6 col">
           <SearchInput />
         </div>

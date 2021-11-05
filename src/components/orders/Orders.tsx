@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
-import SearchWithButton from '../common/SearchWithButton';
-import OrderTable from './OrderTable';
+import { useState } from 'react';
+import SearchBar from '../SmallComponents/SearchBar';
+import OrdersTable from './OrdersTable';
 import OrderTypeButtons from './OrderTypeButtons';
+import { Container } from 'react-bootstrap';
+import '../../css/orders.min.css';
 import './Order.css';
 interface props {
   staticValue: boolean;
 }
 
-const Orders = (myProps: props) => {
+const Orders = (ordersProps: props) => {
   const [orderNumber, setOrderNumber] = useState(0);
-  console.log(orderNumber);
-  const { staticValue } = myProps;
+  const { staticValue } = ordersProps;
   return (
-    <>
-      <div className="d-flex flex-column w-100 p-0 p-sm-3 ant-layout">
-        <SearchWithButton />
-        <div className="orders-table-main">
-          <OrderTypeButtons orderNumber={orderNumber} />
-        </div>
-        <OrderTable tableValue={staticValue} setOrderNumber={setOrderNumber} />
-      </div>
-    </>
+    <Container fluid className="orders-container">
+      <SearchBar className="web-search-bar" />
+      <OrderTypeButtons orderNumber={orderNumber} />
+      <OrdersTable tableValue={staticValue} setOrderNumber={setOrderNumber} />
+    </Container>
   );
 };
 

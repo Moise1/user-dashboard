@@ -1,10 +1,9 @@
+import { useState } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import React, { useState } from 'react';
 import Home from './views/Home';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
-// import Orders from './components/orders/Orders';
 import Topbar from './components/topbar/Topbar';
 import SidbarCover from './components/SidbarCover';
 import Sidebar from './components/sidebar/Sidebar';

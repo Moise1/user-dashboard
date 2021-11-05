@@ -10,7 +10,7 @@ import { Container } from 'react-bootstrap';
 const Listings = () => {
   return (
     <>
-      <Container className="listings-container">
+      <Container className="listings-container" fluid>
         <SidebarMb className="side-nav" />
         <HeaderLayout>
           <TabsList />

@@ -1,0 +1,23 @@
+@import 'config';
+
+// Screens and laptops
+@media only screen and (min-width: 1224px){
+
+   
+    .orders-container{
+        overflow-y: scroll;
+        .web-search-bar{
+            margin: 20px 0;
+        }
+    };
+
+
+    .orders-type-btns {
+        display: flex;
+        background-color: $primary-bg-color;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 10px;
+      }
+    
+};
