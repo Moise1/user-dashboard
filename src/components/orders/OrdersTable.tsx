@@ -20,7 +20,7 @@ import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../css/orders.min.css';
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
 
 interface props {
   tableValue: boolean;
@@ -75,8 +75,8 @@ const OrdersTable = (tableProps: props) => {
   };
 
   return (
-    <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} orders-table-container`}>
-      <Table className="T order-table mb-0 orders-table" responsive="sm md">
+    <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive`}>
+      <table  className="table order-table mb-0">
         <thead className="order-table-head">
           <tr>
             <th>
@@ -217,7 +217,7 @@ const OrdersTable = (tableProps: props) => {
             </tbody>
           );
         })}
-      </Table>
+      </table>
       <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
       <OrderStateProgressModal
         addressModalShow={addressModalShow}
