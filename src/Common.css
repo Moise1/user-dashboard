@@ -107,12 +107,10 @@ body {
 
 /* DROPDOWN CSS  */
 
-.add-new-channel-container{
-
+.add-new-channel-container {
   display: flex;
   justify-content: right;
 }
-
 
 .add-new-channel-drop {
   width: 180.58px;
@@ -134,7 +132,7 @@ body {
   color: var(--color-black);
 }
 
-.moreStores{
+.moreStores {
   text-align: right;
 }
 
@@ -812,7 +810,6 @@ table {
 }
 
 /* MAIN CSS */
-
 
 .py-1px {
   padding-top: 1px;

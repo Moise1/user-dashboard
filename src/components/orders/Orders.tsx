@@ -5,6 +5,7 @@ import OrderTypeButtons from './OrderTypeButtons';
 import { Container } from 'react-bootstrap';
 import '../../css/orders.min.css';
 import './Order.css';
+
 interface props {
   staticValue: boolean;
 }

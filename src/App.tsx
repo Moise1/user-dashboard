@@ -16,7 +16,6 @@ import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 
 const App = () => {
-  
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
 

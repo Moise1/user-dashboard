@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import {
-  UpdonwIcon,
+  UpdownIcon,
   DustbinDeleteOrderIcon,
   DispatchedOrderIcon,
   HandStopOrderIcon,
@@ -20,7 +20,7 @@ import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../css/orders.min.css';
-import {Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 interface props {
   tableValue: boolean;
@@ -87,44 +87,44 @@ const OrdersTable = (tableProps: props) => {
             </th>
             <th>Img</th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdownIcon />
             </th>
             <th>
-              <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdownIcon />
             </th>
             <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdownIcon />
             </th>
             <th className="d-flex justify-content-center justify-content-sm-start">
-              <span className="mr-2"> {t('OrderTable.State')} </span> <UpdonwIcon />
+              <span className="mr-2"> {t('OrderTable.State')} </span> <UpdownIcon />
             </th>
             <th>
               <span className="mr-2"> &nbsp; </span>
             </th>
           </tr>
         </thead>
-    
+
         {OrderData.map((obj) => {
           return (
             <tbody className="order-table-body" key={obj.id}>

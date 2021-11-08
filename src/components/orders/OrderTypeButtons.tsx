@@ -1,9 +1,4 @@
-import {
-  ProcessOrderIcon,
-  HandStopOrderIcon,
-  DustbinDeleteOrderIcon, 
-  DispatchedOrderIcon 
-} from '../common/Icons';
+import { ProcessOrderIcon, HandStopOrderIcon, DustbinDeleteOrderIcon, DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 import '../../css/orders.min.css';
 
