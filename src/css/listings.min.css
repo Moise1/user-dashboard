@@ -1,1 +1,46 @@
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px){.listings-container .web-search-bar{display:none}.listings-container .phone-search-bar{margin:20px 0}}@media only screen and (min-device-width: 450px) and (max-device-width: 1034px){.listings-container .web-search-bar{display:none}.listings-container .phone-search-bar{margin:20px 0}}@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2){.listings-container .web-search-bar{display:none}.listings-container .phone-search-bar{margin:20px 0}}@media only screen and (min-width: 1224px){.listings-container{overflow-y:scroll}.listings-container .phone-search-bar{display:none}.listings-container .web-search-bar{margin:20px 0}}@media only screen and (min-width: 1824px){.listings-container{overflow-y:scroll}.listings-container .phone-search-bar{display:none}.listings-container .web-search-bar{margin:20px 0}}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .listings-container .web-search-bar {
+    display: none;
+  }
+  .listings-container .phone-search-bar {
+    margin: 20px 0;
+  }
+}
+@media only screen and (min-device-width: 450px) and (max-device-width: 1034px) {
+  .listings-container .web-search-bar {
+    display: none;
+  }
+  .listings-container .phone-search-bar {
+    margin: 20px 0;
+  }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .listings-container .web-search-bar {
+    display: none;
+  }
+  .listings-container .phone-search-bar {
+    margin: 20px 0;
+  }
+}
+@media only screen and (min-width: 1224px) {
+  .listings-container {
+    overflow-y: scroll;
+  }
+  .listings-container .phone-search-bar {
+    display: none;
+  }
+  .listings-container .web-search-bar {
+    margin: 20px 0;
+  }
+}
+@media only screen and (min-width: 1824px) {
+  .listings-container {
+    overflow-y: scroll;
+  }
+  .listings-container .phone-search-bar {
+    display: none;
+  }
+  .listings-container .web-search-bar {
+    margin: 20px 0;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import {
   UpdownIcon,
   DustbinDeleteOrderIcon,
@@ -20,7 +20,6 @@ import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../css/orders.min.css';
-// import { Table } from 'react-bootstrap';
 
 interface props {
   tableValue: boolean;
@@ -32,28 +31,16 @@ let orderSelectedArray: Array<number> = [];
 const OrdersTable = (tableProps: props) => {
   const { tableValue, setOrderNumber } = tableProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
-  const [orderProgress, setOrderProgress] = useState(1);
   const [show, setShow] = useState(false);
-  const [saveObjectId, setSaveObjectId] = useState<number>(0);
 
   const [addressModalShow, setAddressModalShow] = useState(false);
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
-  const [isSeletAllOrder, setSeletAllOrder] = useState(false);
-  // const [orderSelectedArray, setOrderSelectedArray] = useState<IChecked>([]);
 
-  console.log(setOrderProgress, isSeletAllOrder);
-
-  // const orderSelectedArray = [];
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (saveObjectId: number) => {
     if (orderSelectedArray.length > 0) {
-      console.log(event.target.checked);
-      // orderSelectedArray.push(saveObjectId);
-
       if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
         orderSelectedArray = orderSelectedArray.filter((order) => order !== saveObjectId);
       } else {
-        console.log('Emlem');
         orderSelectedArray.push(saveObjectId);
       }
     } else {
@@ -69,14 +56,23 @@ const OrdersTable = (tableProps: props) => {
     setShow(false);
   };
 
-  const handleAllchecked = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSeletAllOrder(event.target.checked);
+  const handleAllchecked = () => {
     setOrderNumber(OrderData.length);
+  };
+
+  const handleShowModal = (e: React.MouseEvent) => {
+    if ((e.target as HTMLInputElement)?.className === 'checkmark') {
+      const id = parseInt((e.currentTarget as HTMLInputElement).dataset.id || '0', 10);
+      handleChange(id);
+      e.preventDefault();
+    } else {
+      setShow(true);
+    }
   };
 
   return (
     <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive`}>
-      <table  className="table order-table mb-0">
+      <table className="table order-table mb-0">
         <thead className="order-table-head">
           <tr>
             <th>
@@ -125,49 +121,30 @@ const OrdersTable = (tableProps: props) => {
           </tr>
         </thead>
 
-        {OrderData.map((obj) => {
-          return (
-            <tbody className="order-table-body" key={obj.id}>
-              <tr className="cursor-pointer">
-                <td onClick={() => setSaveObjectId(obj.id)}>
+        <tbody className="order-table-body">
+          {OrderData.map((obj) => {
+            const isSelected = orderSelectedArray.includes(obj.id);
+            return (
+              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={handleShowModal}>
+                <td>
                   <label className="select-all-checkbox">
-                    <input type="checkbox" onChange={handleChange} />
+                    <input type="checkbox" checked={isSelected} />
                     <span className="checkmark"></span>
                   </label>
                 </td>
-                <td onClick={() => setShow(true)}>
+                <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
-                  {obj.sale}
-                </td>
-                <td className="obj-sale-body order-td-none" onClick={() => setShow(true)}>
-                  {obj.source}
-                </td>
-                <td className="obj-sale-title order-td-none" onClick={() => setShow(true)}>
-                  {obj.title}
-                </td>
-                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
-                  {obj.qty}
-                </td>
-                <td className="obj-sale-qty order-td-none" onClick={() => setShow(true)}>
-                  {obj.sold}
-                </td>
-                <td className="obj-sale-cost  order-td-none" onClick={() => setShow(true)}>
-                  {obj.cost}
-                </td>
-                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
-                  {obj.fees}
-                </td>
-                <td className="obj-profit-text " onClick={() => setShow(true)}>
-                  {obj.profit}
-                </td>
-                <td className="obj-sale-cost order-td-none" onClick={() => setShow(true)}>
-                  {obj.margin}
-                </td>
-                <td className="obj-sale-qty  order-td-none" onClick={() => setShow(true)}>
-                  {obj.orderOn}
-                </td>
+                <td className="obj-sale-body order-td-none">{obj.sale}</td>
+                <td className="obj-sale-body order-td-none">{obj.source}</td>
+                <td className="obj-sale-title order-td-none">{obj.title}</td>
+                <td className="obj-sale-qty order-td-none">{obj.qty}</td>
+                <td className="obj-sale-qty order-td-none">{obj.sold}</td>
+                <td className="obj-sale-cost  order-td-none">{obj.cost}</td>
+                <td className="obj-sale-qty  order-td-none">{obj.fees}</td>
+                <td className="obj-profit-text">{obj.profit}</td>
+                <td className="obj-sale-cost order-td-none">{obj.margin}</td>
+                <td className="obj-sale-qty  order-td-none">{obj.orderOn}</td>
                 <td>
                   <button
                     onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
@@ -214,9 +191,9 @@ const OrdersTable = (tableProps: props) => {
                   </Dropdown>
                 </td>
               </tr>
-            </tbody>
-          );
-        })}
+            );
+          })}
+        </tbody>
       </table>
       <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
       <OrderStateProgressModal
@@ -224,7 +201,7 @@ const OrdersTable = (tableProps: props) => {
         setAddressModalShow={setAddressModalShow}
         setOrderDetailsModalShow={setOrderDetailsModalShow}
         orderDetailsModalShow={orderDetailsModalShow}
-        orderProgress={orderProgress}
+        orderProgress={1}
         show={show}
         setShow={setShow}
         handleCloseAllModals={handleCloseAllModals}
