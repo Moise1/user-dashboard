@@ -1,47 +1,32 @@
-
 // Mobile devices screens
-@media screen and (min-width: 320px) and (max-width: 480px){
-
-};
-
+@media screen and (min-width: 320px) and (max-width: 480px) {
+}
 
 // iPads and Tablets devices
-@media screen and (min-width: 481px) and (max-width: 768px){
-    
+@media screen and (min-width: 481px) and (max-width: 768px) {
 }
 
-// For desktops and large screens
-@media screen and (min-width: 1025px) and (max-width: 1200px){
-    .listings-container{
-        overflow-y: scroll;
-        max-width: 100%;
-        
-        .side-nav{
-            display: none;
-        };
-
-        .phone-search-bar{
-            display: none;
-        };
-
-        .web-search-bar{
-            margin: 0 20px;
-        }
+// Screens and laptops
+@media only screen and (min-width: 1224px) {
+  .home-container {
+    .phone-search-bar{
+        display: none;
+    };
+    .web-search-bar{
+        margin: 20px 0;
     }
+  }
 }
 
-// For small screens and laptops
-@media screen and (min-width: 769px) and (max-width: 1024px){
-    .listings-container{
-        overflow-y: scroll;
-        max-width: 100vw;
-        
-        .side-nav{
-            display: none;
-        };
+// Large screens
 
-        .web-search-bar{
-            display: none;
-        }
+@media only screen and (min-width: 1824px) {
+  .home-container {
+    .phone-search-bar{
+        display: none;
+    };
+    .web-search-bar{
+        margin: 20px 0;
     }
+  }
 }

@@ -1,32 +1,19 @@
-import { Layout } from 'antd';
 import TableContent from '../components/TableContent';
-import ContentLayout from '../components/ContentLayout';
-import HeaderLayout from '../components/HeaderLayout';
 import TabsList from '../components/SmallComponents/TabsList';
 import SearchBar from '../components/SmallComponents/SearchBar';
 import SidebarMb from '../components/SidebarMb';
+import { Container } from 'react-bootstrap';
+import '../css/home.min.css';
 
 const Home = () => {
   return (
-    <>
-      <Layout className="site-layout">
-        <div className="d-block d-lg-none">
-          <SidebarMb className="side-nav" />
-        </div>
-        <HeaderLayout>
-          <TabsList />
-          <div className="d-md-block d-none">
-            <SearchBar className="phone-search-bar" />
-          </div>
-          <div className="my-2 d-block d-md-none">
-            <SearchBar className="web-search-bar" />
-          </div>
-        </HeaderLayout>
-        <ContentLayout>
-          <TableContent />
-        </ContentLayout>
-      </Layout>
-    </>
+    <Container fluid className="home-container">
+      <SidebarMb className="side-nav" />
+      <TabsList />
+      <SearchBar className="phone-search-bar" showColumns />
+      <SearchBar className="web-search-bar" showColumns />
+      <TableContent />
+    </Container>
   );
 };
 

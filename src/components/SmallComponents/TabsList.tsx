@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TabButton from './TabButton';
 import { t } from '../../global/transShim';
 
 let hasAddedCallback = false;
-export default function TabsList() {
+const  TabsList = ()=> {
   const [active, setActive] = useState(1);
 
-  const [_dimensions, setDimensions] = React.useState({
+  const [_dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth
   });
-  React.useEffect(() => {
+  useEffect(() => {
     function handleResize() {
       setDimensions({
         height: window.innerHeight,
@@ -52,4 +52,6 @@ export default function TabsList() {
       </div>
     </div>
   );
-}
+};
+
+export default TabsList;

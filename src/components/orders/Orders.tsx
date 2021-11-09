@@ -14,7 +14,7 @@ const Orders = (ordersProps: props) => {
   const { staticValue } = ordersProps;
   return (
     <Container fluid className="orders-container">
-      <SearchBar className="web-search-bar" />
+      <SearchBar className="web-search-bar" showColumns={false}/>
       <OrderTypeButtons orderNumber={orderNumber} />
       <OrdersTable tableValue={staticValue} setOrderNumber={setOrderNumber} />
     </Container>

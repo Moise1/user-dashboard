@@ -2,14 +2,13 @@ import list_search from '../../assets/list_search.jpg';
 import column_img from '../../assets/columnimg.svg';
 import SearchInput from './SearchInput';
 import { t } from '../../global/transShim';
-import { useLocation } from 'react-router-dom';
 
 interface props {
   className: string;
+  showColumns: boolean;
 }
 const SearchBar = (searchBarProps: props) => {
-  const { className } = searchBarProps;
-  const location = useLocation();
+  const { className, showColumns } = searchBarProps;
 
   return (
     <div className={className}>
@@ -23,7 +22,7 @@ const SearchBar = (searchBarProps: props) => {
               <img src={list_search} className="invert mr-3 " height="26" alt="" />
               {t('AdvancedSearch')}
             </button>
-            {location.pathname !== '/orders' && (
+            {showColumns && (
               <button className="d-none d-lg-block btn w-xxl-251px ml-3 my-auto p-3  fs-18 fw-bold bg-purple text-white border-0 br-8 view-columns-hover">
                 <img src={column_img} className="mr-3" height="25" alt="" /> {t('ViewColumns')}
               </button>
