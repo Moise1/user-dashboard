@@ -7,7 +7,6 @@ import {
   ProcessOrderIcon,
   ThreeDotsColumnIcon
 } from '../common/Icons';
-import OrderData from '../common/OrderData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
@@ -15,59 +14,31 @@ import DispatchIcon from '../../assets/dispatchedicon.svg';
 import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
-import OrderStateProgressModal from '../modals/OrderStateProgressModal';
-import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../css/orders.min.css';
 
 interface props {
-  tableValue: boolean;
-  setOrderNumber: (arg0: number) => void;
+  tableValue?: boolean;
+  setOrderNumber?: (arg0: number) => void;
+  showModal?: (e: React.MouseEvent) => void;
+  orderSelectedArray?: Array<number>;
+  headerData: Array<any>;
+  bodyData: Array<any>;
 }
 
-let orderSelectedArray: Array<number> = [];
-
-const OrdersTable = (tableProps: props) => {
-  const { tableValue, setOrderNumber } = tableProps;
+const ContentTable = (tableProps: props) => {
+  const {
+    tableValue,
+    setOrderNumber, 
+    showModal, 
+    orderSelectedArray, 
+    headerData, 
+    bodyData } = tableProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
-  const [show, setShow] = useState(false);
-
-  const [addressModalShow, setAddressModalShow] = useState(false);
-  const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
-
-  const handleChange = (saveObjectId: number) => {
-    if (orderSelectedArray.length > 0) {
-      if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
-        orderSelectedArray = orderSelectedArray.filter((order) => order !== saveObjectId);
-      } else {
-        orderSelectedArray.push(saveObjectId);
-      }
-    } else {
-      orderSelectedArray.push(saveObjectId);
-    }
-
-    setOrderNumber(orderSelectedArray.length);
-  };
-
-  const handleCloseAllModals = () => {
-    setAddressModalShow(false);
-    setOrderDetailsModalShow(false);
-    setShow(false);
-  };
 
   const handleAllchecked = () => {
-    setOrderNumber(OrderData.length);
-  };
-
-  const handleShowModal = (e: React.MouseEvent) => {
-    if ((e.target as HTMLInputElement)?.className === 'checkmark') {
-      const id = parseInt((e.currentTarget as HTMLInputElement).dataset.id || '0', 10);
-      handleChange(id);
-      e.preventDefault();
-    } else {
-      setShow(true);
-    }
+    if(setOrderNumber) setOrderNumber(bodyData.length);
   };
 
   return (
@@ -81,51 +52,19 @@ const OrdersTable = (tableProps: props) => {
                 <span className="checkmark"></span>
               </label>
             </th>
-            <th>Img</th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sale')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Source')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Title')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.QTY')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Sold')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.Cost')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Fees')} </span> <UpdownIcon />
-            </th>
-            <th>
-              <span className="mr-2"> {t('OrderDetails.Profit')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderDetails.Margin')} </span> <UpdownIcon />
-            </th>
-            <th className="order-th-none">
-              <span className="mr-2"> {t('OrderTable.OrderedOn')} </span> <UpdownIcon />
-            </th>
-            <th className="d-flex justify-content-center justify-content-sm-start">
-              <span className="mr-2"> {t('OrderTable.State')} </span> <UpdownIcon />
-            </th>
-            <th>
-              <span className="mr-2"> &nbsp; </span>
-            </th>
+            {headerData.map((heading) => (
+              <th key={heading} className="order-th-none">
+                <span className="mr-2"> {t(heading)}</span> <UpdownIcon />
+              </th>
+            ))}
           </tr>
         </thead>
 
         <tbody className="order-table-body">
-          {OrderData.map((obj) => {
-            const isSelected = orderSelectedArray.includes(obj.id);
+          {bodyData.map((obj) => {
+            const isSelected = orderSelectedArray?.includes(obj.id);
             return (
-              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={handleShowModal}>
+              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={showModal}>
                 <td>
                   <label className="select-all-checkbox">
                     <input type="checkbox" checked={isSelected} />
@@ -135,10 +74,10 @@ const OrdersTable = (tableProps: props) => {
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body order-td-none">{obj.sale}</td>
+                <td className="obj-sale-body order-td-none">{obj.sale ? obj.sale : obj.itemNo}</td>
                 <td className="obj-sale-body order-td-none">{obj.source}</td>
                 <td className="obj-sale-title order-td-none">{obj.title}</td>
-                <td className="obj-sale-qty order-td-none">{obj.qty}</td>
+                <td className="obj-sale-qty order-td-none">{obj.qty ? obj.qty : obj.sell}</td>
                 <td className="obj-sale-qty order-td-none">{obj.sold}</td>
                 <td className="obj-sale-cost  order-td-none">{obj.cost}</td>
                 <td className="obj-sale-qty  order-td-none">{obj.fees}</td>
@@ -147,7 +86,7 @@ const OrdersTable = (tableProps: props) => {
                 <td className="obj-sale-qty  order-td-none">{obj.orderOn}</td>
                 <td>
                   <button
-                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : setShow(true))}
+                    onClick={() => (obj.state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}
                     className={`btn btn-state-style ${obj.state === 'Error' ? 'bg-dark-pink' : ''} ${
                       obj.state === 'In progress' ? 'in-progress-btn' : ''
                     } ${obj.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
@@ -174,7 +113,7 @@ const OrdersTable = (tableProps: props) => {
                         <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
-                        <span onClick={() => setShow(true)}>
+                        <span>
                           <HandStopOrderIcon />
                           <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
                         </span>
@@ -196,29 +135,9 @@ const OrdersTable = (tableProps: props) => {
         </tbody>
       </table>
       <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
-      <OrderStateProgressModal
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
-        setOrderDetailsModalShow={setOrderDetailsModalShow}
-        orderDetailsModalShow={orderDetailsModalShow}
-        orderProgress={1}
-        show={show}
-        setShow={setShow}
-        handleCloseAllModals={handleCloseAllModals}
-      />
-
-      <OrderDetailsModal
-        setOrderDetailsModalShow={setOrderDetailsModalShow}
-        orderDetailsModalShow={orderDetailsModalShow}
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
-        handleCloseAllModals={handleCloseAllModals}
-        setShow={setShow}
-      />
-
       <Pagination />
     </div>
   );
 };
 
-export default OrdersTable;
+export default ContentTable;

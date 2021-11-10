@@ -1,6 +1,21 @@
 import dataoneimg from '../../assets/data1img.png';
 
-const OrderData = [
+export const orderHeadingData = [
+  'OrderTable.Item',
+  'OrderDetails.Sale',
+  'OrderTable.Source',
+  'OrderTable.Title',
+  'OrderTable.QTY',
+  'OrderDetails.Sold',
+  'OrderTable.Cost',
+  'OrderDetails.Fees',
+  'OrderDetails.Profit',
+  'OrderDetails.Margin',
+  'OrderTable.OrderedOn',
+  'OrderTable.State',
+  'OrderTable.Options',
+];
+export const orderData = [
   {
     id: 1,
     img: dataoneimg,
@@ -197,5 +212,3 @@ const OrderData = [
     state: 'Error'
   }
 ];
-
-export default OrderData;

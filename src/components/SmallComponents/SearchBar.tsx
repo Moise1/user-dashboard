@@ -5,7 +5,7 @@ import { t } from '../../global/transShim';
 
 interface props {
   className: string;
-  showColumns: boolean;
+  showColumns?: boolean;
 }
 const SearchBar = (searchBarProps: props) => {
   const { className, showColumns } = searchBarProps;

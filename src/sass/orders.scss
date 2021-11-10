@@ -105,6 +105,7 @@
 
 .table-with-open-sidebar{
   max-height: 53vh;
+  overflow-x: scroll;
   .order-table-head {
     color: var(--color-dark-violet);
     white-space: nowrap;

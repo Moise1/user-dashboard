@@ -1,7 +1,7 @@
 import img from '../assets/icon.png';
 import doticon from '../assets/doticon.svg';
 import editicon from '../assets/editicon.svg';
-import ListingTable from './table/ListingTable';
+import ListingTable from './tables/ListingTable';
 
 type dataKeyType = string | number;
 
