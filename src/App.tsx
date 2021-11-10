@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import Home from './views/Home';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
 import Topbar from './components/topbar/Topbar';
@@ -67,7 +66,7 @@ const App = () => {
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/home" component={Home} />
+              <Route path="/home" component={Listings} />
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
               <Route path="/sources-setting" component={Sources} />
