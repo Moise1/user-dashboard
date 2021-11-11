@@ -1,6 +1,6 @@
 import list_saerch from '../../assets/list_search.jpg';
 import { t } from '../../global/transShim';
-import SearchInput from '../SmallComponents/SearchInput';
+import { SearchInput } from '../SmallComponents/SearchBars';
 
 const SearchWithButton = () => {
   return (

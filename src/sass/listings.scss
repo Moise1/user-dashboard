@@ -53,9 +53,11 @@ and (-webkit-min-device-pixel-ratio: 2){
             display: none;
         };
 
-        .web-search-bar{
-            margin: 20px 0;
-        }
+        // .web-search-bar{
+        //     margin: 20px 0;
+        //     display: flex;
+        //     justify-content: center;
+        // }
     }
 };
 
@@ -69,8 +71,8 @@ and (-webkit-min-device-pixel-ratio: 2){
         .phone-search-bar{
             display: none;
         };
-        .web-search-bar{
-            margin: 20px 0;
-        }
+        // .web-search-bar{
+        //     margin: 20px 0;
+        // }
     }
 }

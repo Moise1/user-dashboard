@@ -1,5 +1,4 @@
-import React from 'react';
-import SearchInput from '../SmallComponents/SearchInput';
+import { SearchInput } from '../../components/SmallComponents/SearchBars';
 import SourcesTable from './SourcesTable';
 
 interface props {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { LeftBackArrowIcon } from '../common/Icons';
 import { useHistory } from 'react-router-dom';
 import './Sources.css';
@@ -17,7 +17,7 @@ const Sources = () => {
   const [isShowSourceSettings, setShowSourceSettings] = useState<boolean>(true);
   const [isShowAutoOrderingSetting, setShowAutoOrderingSetting] = useState<boolean>(false);
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
-  const { supplierValue, setSupplierValue } = React.useContext(SelectSupplierContext) as ContextType;
+  const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
   const [whatSelect, setWhatSelect] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
 
   const history = useHistory();

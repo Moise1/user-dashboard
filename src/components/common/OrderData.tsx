@@ -13,7 +13,7 @@ export const orderHeadingData = [
   'OrderDetails.Margin',
   'OrderTable.OrderedOn',
   'OrderTable.State',
-  'OrderTable.Options',
+  'OrderTable.Options'
 ];
 export const orderData = [
   {

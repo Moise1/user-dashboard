@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SearchBar from '../SmallComponents/SearchBar';
+import { SearchBars } from '../SmallComponents/SearchBars';
 import OrdersTable from '../tables/ContentTable';
 import OrderTypeButtons from './OrderTypeButtons';
 import { Container } from 'react-bootstrap';
@@ -13,7 +13,6 @@ interface props {
   staticValue: boolean;
 }
 
-
 const Orders = (ordersProps: props) => {
   const [orderNumber, setOrderNumber] = useState(0);
   const [show, setShow] = useState(false);
@@ -22,7 +21,7 @@ const Orders = (ordersProps: props) => {
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
 
   let orderSelectedArray: Array<number> = [];
-  
+
   const handleChange = (saveObjectId: number) => {
     if (orderSelectedArray.length > 0) {
       if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
@@ -55,7 +54,7 @@ const Orders = (ordersProps: props) => {
 
   return (
     <Container fluid className="orders-container">
-      <SearchBar className="web-search-bar" />
+      <SearchBars />
       <OrderTypeButtons orderNumber={orderNumber} />
       <OrdersTable
         headerData={orderHeadingData}
