@@ -4,7 +4,7 @@ import advancedSearchIcon from '../../assets/listsearch.svg';
 import column_img from '../../assets/columnimg.svg';
 import RDS from 'react-dom/server';
 import { t } from '../../global/transShim';
-import '../../css/searchbar.min.css';
+import '../../css/searchbars.min.css';
 
 interface props {
   showColumns?: boolean;
@@ -39,6 +39,9 @@ export const SearchBars = (searchBarProps: props) => {
     <div className="search-bars-container">
       <SearchInput />
       <div className="advanced-search-container">
+        <button className="advanced-search-icon-btn">
+          <img src={advancedSearchIcon} height="20" alt="" />
+        </button>
         <input
           type="text"
           className="input"
@@ -46,9 +49,6 @@ export const SearchBars = (searchBarProps: props) => {
           aria-describedby="inputGroup-sizing-sm"
           placeholder={advancedSearch}
         />
-        <button className="advanced-search-icon-btn">
-          <img src={advancedSearchIcon} height="20" alt="" />
-        </button>
       </div>
       {showColumns && (
         <button className="view-columns">

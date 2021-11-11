@@ -12,7 +12,7 @@ COPY package.json ./
 COPY yarn.lock ./
 RUN yarn install --frozen-lockfile --silent
 RUN yarn global add react-scripts@4.0.3 --silent
-RUN yarn run transpile-sass
+RUN yarn run dockerized-css
 
 # add app
 COPY . ./

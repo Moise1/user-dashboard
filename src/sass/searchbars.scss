@@ -4,13 +4,16 @@
   border-radius: 10px;
   padding: 20px 10px;
   background: $white-bg;
-  width: auto;
   display: flex;
   justify-content: space-between;
+  width: 60%;
+ 
   .input {
     border: none !important;
     outline: none !important;
     font-weight: bold;
+    border: 2px solid red;
+    width: 100%;
   }
   &:focus {
     outline: none;
@@ -24,8 +27,10 @@
 .search-bars-container {
   margin: 20px 0;
   display: flex;
-  justify-content: space-evenly;
-
+  justify-content: space-around;
+  &>*{
+    margin-left: 15px;
+  };
   .advanced-search-container {
     border-radius: 10px;
     padding: 20px 10px;
@@ -38,6 +43,7 @@
       background: none !important;
       color: $white;
       font-weight: bold;
+     
     }
     &:focus {
       outline: none;
@@ -53,7 +59,7 @@
   };
 
   .view-columns {
-    width: 20%;
+    width: 15%;
     display: flex;
     padding: 20px 5px;
     justify-content: space-around;
