@@ -2,7 +2,6 @@ import React from 'react';
 import SearchInput from '../SmallComponents/SearchInput';
 import SourcesTable from './SourcesTable';
 
-
 interface props {
   staticValue: boolean;
 }

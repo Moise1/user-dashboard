@@ -127,7 +127,8 @@ function SourcesTable(myProps: props) {
                     >
                       <button
                         onClick={() => (autoOrdering === 'Coming Soon' ? '' : handleSupplierValue(provider))}
-                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
+                        className={`  ${autoOrdering === 'Disabled' ? 'table-disable-button ' : ''} ${
+                          autoOrdering === 'Enabled' ? 'table-enabled-button' : ''
                         } ${autoOrdering === 'Coming Soon' ? 'table-coming-soon-button' : ''} `}
                       >
                         {autoOrdering === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}

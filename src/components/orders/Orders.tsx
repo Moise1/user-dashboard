@@ -1,26 +1,91 @@
-import React, { useState } from 'react';
-import SearchWithButton from '../common/SearchWithButton';
-import OrderTable from './OrderTable';
+import { useState } from 'react';
+import SearchBar from '../SmallComponents/SearchBar';
+import OrdersTable from '../tables/ContentTable';
 import OrderTypeButtons from './OrderTypeButtons';
-import './Order.css';
+import { Container } from 'react-bootstrap';
+import OrderStateProgressModal from '../modals/OrderStateProgressModal';
+import OrderDetailsModal from '../modals/OrderDetailsModal';
+import { orderData, orderHeadingData } from '../common/OrderData';
+
+import '../../css/orders.min.css';
+
 interface props {
   staticValue: boolean;
 }
 
-const Orders = (myProps: props) => {
+
+const Orders = (ordersProps: props) => {
   const [orderNumber, setOrderNumber] = useState(0);
-  console.log(orderNumber);
-  const { staticValue } = myProps;
+  const [show, setShow] = useState(false);
+  const { staticValue } = ordersProps;
+  const [addressModalShow, setAddressModalShow] = useState(false);
+  const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
+
+  let orderSelectedArray: Array<number> = [];
+  
+  const handleChange = (saveObjectId: number) => {
+    if (orderSelectedArray.length > 0) {
+      if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
+        orderSelectedArray = orderSelectedArray.filter((order) => order !== saveObjectId);
+      } else {
+        orderSelectedArray.push(saveObjectId);
+      }
+    } else {
+      orderSelectedArray.push(saveObjectId);
+    }
+
+    setOrderNumber(orderSelectedArray.length);
+  };
+
+  const handleShowModal = (e: React.MouseEvent) => {
+    if ((e.target as HTMLInputElement)?.className === 'checkmark') {
+      const id = parseInt((e.currentTarget as HTMLInputElement).dataset.id || '0', 10);
+      handleChange(id);
+      e.preventDefault();
+    } else {
+      setShow(true);
+    }
+  };
+
+  const handleCloseAllModals = () => {
+    setAddressModalShow(false);
+    setOrderDetailsModalShow(false);
+    setShow(false);
+  };
+
   return (
-    <>
-      <div className="d-flex flex-column w-100 p-0 p-sm-3 ant-layout">
-        <SearchWithButton />
-        <div className="orders-table-main">
-          <OrderTypeButtons orderNumber={orderNumber} />
-        </div>
-        <OrderTable tableValue={staticValue} setOrderNumber={setOrderNumber} />
-      </div>
-    </>
+    <Container fluid className="orders-container">
+      <SearchBar className="web-search-bar" />
+      <OrderTypeButtons orderNumber={orderNumber} />
+      <OrdersTable
+        headerData={orderHeadingData}
+        bodyData={orderData}
+        orderSelectedArray={orderSelectedArray}
+        tableValue={staticValue}
+        setOrderNumber={setOrderNumber}
+        showModal={handleShowModal}
+      />
+
+      <OrderStateProgressModal
+        addressModalShow={addressModalShow}
+        setAddressModalShow={setAddressModalShow}
+        setOrderDetailsModalShow={setOrderDetailsModalShow}
+        orderDetailsModalShow={orderDetailsModalShow}
+        orderProgress={1}
+        show={show}
+        setShow={setShow}
+        handleCloseAllModals={handleCloseAllModals}
+      />
+
+      <OrderDetailsModal
+        setOrderDetailsModalShow={setOrderDetailsModalShow}
+        orderDetailsModalShow={orderDetailsModalShow}
+        addressModalShow={addressModalShow}
+        setAddressModalShow={setAddressModalShow}
+        handleCloseAllModals={handleCloseAllModals}
+        setShow={setShow}
+      />
+    </Container>
   );
 };
 

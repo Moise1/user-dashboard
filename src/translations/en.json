@@ -15,6 +15,7 @@
   "Edit N Listings": "Edit <span className=\"fw-600\">{num}</span> Listings",
 
   "Listings.Column.Cost": "Cost",
+  "Listings.Column.Img": "Item",
   "Listings.Column.Created on": "Created on",
   "Listings.Column.Item no.": "Item no.",
   "Listings.Column.Markup": "Markup",
@@ -78,6 +79,8 @@
   "OrderDetails.Stop": "Stop",
   "OrderDetails.Process": "Process",
 
+  "OrderTable.Item": "Item",
+  "OrderTable.Options": "Options",
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
   "OrderTable.QTY": "QTY",

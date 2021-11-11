@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { AoIconHead, CrossModalIcon, IconArrowModal } from '../common/Icons';
@@ -24,7 +23,6 @@ const OrderDetailsModal = (props: Props) => {
     setShow
   } = props;
 
-  console.log(setShow);
 
   return (
     <div className="modal-first ">

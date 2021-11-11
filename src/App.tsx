@@ -1,10 +1,8 @@
+import { useState } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import React, { useState } from 'react';
-import Home from './views/Home';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
-// import Orders from './components/orders/Orders';
 import Topbar from './components/topbar/Topbar';
 import SidbarCover from './components/SidbarCover';
 import Sidebar from './components/sidebar/Sidebar';
@@ -17,7 +15,6 @@ import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 
 const App = () => {
-  
   const [collapse, setCollapse] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
 
@@ -69,7 +66,7 @@ const App = () => {
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/home" component={Home} />
+              <Route path="/home" component={Listings} />
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
               <Route path="/sources-setting" component={Sources} />

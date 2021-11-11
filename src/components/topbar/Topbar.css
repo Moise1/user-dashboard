@@ -67,7 +67,6 @@
   opacity: 0.8;
 }
 
-
 .upgrde-btn-topbar {
   font-weight: 600;
   font-size: 8px;
@@ -84,7 +83,6 @@
     display: none !important;
   }
 }
-
 
 @media (max-width: 576.98px) {
   .TopBar {
@@ -127,5 +125,4 @@
   .quota-head {
     display: none;
   }
-
 }
