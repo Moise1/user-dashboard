@@ -1,1 +1,13 @@
-.content-table{max-height:53vh}.content-table .order-table-head{color:var(--color-dark-violet);white-space:nowrap;font-weight:bold;position:sticky;top:0;background-color:var(--bgHighlight);font-size:var(--font-large) !important;z-index:1}
+.content-table {
+  max-height: 53vh;
+}
+.content-table .order-table-head {
+  color: var(--color-dark-violet);
+  white-space: nowrap;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  background-color: var(--bgHighlight);
+  font-size: var(--font-large) !important;
+  z-index: 1;
+}

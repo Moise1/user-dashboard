@@ -1,4 +1,4 @@
-import list_saerch from '../../assets/list_search.jpg';
+import searchIcon from '../../assets/listsearch.svg';
 import { t } from '../../global/transShim';
 import { SearchInput } from '../SmallComponents/SearchBars';
 
@@ -9,7 +9,7 @@ const SearchWithButton = () => {
         <SearchInput />
         <div className="ml-sm-3 ml-0 mt-3 mt-sm-0 d-none d-md-block">
           <button className="btn advance-search-purple-button">
-            <img src={list_saerch} className="invert mr-3 " height="26" alt="" />
+            <img src={searchIcon} className="invert mr-3 " height="26" alt="" />
             {t('AdvancedSearch')}
           </button>
         </div>
