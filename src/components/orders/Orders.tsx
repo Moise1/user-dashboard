@@ -7,12 +7,11 @@ import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { orderData, orderHeadingData } from '../common/OrderData';
 
-import '../../css/orders.min.css';
+import '../../sass/orders.scss';
 
 interface props {
   staticValue: boolean;
 }
-
 
 const Orders = (ordersProps: props) => {
   const [orderNumber, setOrderNumber] = useState(0);
@@ -22,7 +21,7 @@ const Orders = (ordersProps: props) => {
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
 
   let orderSelectedArray: Array<number> = [];
-  
+
   const handleChange = (saveObjectId: number) => {
     if (orderSelectedArray.length > 0) {
       if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {

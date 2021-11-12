@@ -28,17 +28,11 @@ interface props {
 }
 
 const ContentTable = (tableProps: props) => {
-  const {
-    tableValue,
-    setOrderNumber, 
-    showModal, 
-    orderSelectedArray, 
-    headerData, 
-    bodyData } = tableProps;
+  const { tableValue, setOrderNumber, showModal, orderSelectedArray, headerData, bodyData } = tableProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
 
   const handleAllchecked = () => {
-    if(setOrderNumber) setOrderNumber(bodyData.length);
+    if (setOrderNumber) setOrderNumber(bodyData.length);
   };
 
   return (

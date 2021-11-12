@@ -3,7 +3,7 @@ import TabButton from './TabButton';
 import { t } from '../../global/transShim';
 
 let hasAddedCallback = false;
-const  TabsList = ()=> {
+const TabsList = () => {
   const [active, setActive] = useState(1);
 
   const [_dimensions, setDimensions] = useState({

@@ -23,7 +23,6 @@ const OrderDetailsModal = (props: Props) => {
     setShow
   } = props;
 
-
   return (
     <div className="modal-first ">
       <Modal

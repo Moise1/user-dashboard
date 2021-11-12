@@ -3,7 +3,7 @@ import SearchBar from '../../components/SmallComponents/SearchBar';
 import TabsList from '../../components/SmallComponents/TabsList';
 import '../../css/listings.min.css';
 import { Container } from 'react-bootstrap';
-import {listingsData, listingsHeadingData} from '../common/ListingsData';
+import { listingsData, listingsHeadingData } from '../common/ListingsData';
 import ListingsTable from '../tables/ContentTable';
 
 const Listings = () => {
