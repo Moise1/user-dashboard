@@ -16,7 +16,7 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../css/orders.min.css';
+import '../../sass/orders.scss';
 
 interface props {
   tableValue?: boolean;

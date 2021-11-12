@@ -6,8 +6,7 @@ import { Container } from 'react-bootstrap';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import { orderData, orderHeadingData } from '../common/OrderData';
-
-import '../../css/orders.min.css';
+import '../../sass/orders.scss';
 
 interface props {
   staticValue: boolean;
