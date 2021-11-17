@@ -2,23 +2,41 @@ import dataoneimg from '../../assets/data1img.png';
 
 export const orderHeadingData = [
   'OrderTable.Item',
-  'OrderDetails.Sale',
+  'OrderTable.Sale',
   'OrderTable.Source',
   'OrderTable.Title',
   'OrderTable.QTY',
-  'OrderDetails.Sold',
+  'OrderTable.Sold',
   'OrderTable.Cost',
-  'OrderDetails.Fees',
-  'OrderDetails.Profit',
-  'OrderDetails.Margin',
+  'OrderTable.Fees',
+  'OrderTable.Profit',
+  'OrderTable.Margin',
   'OrderTable.OrderedOn',
   'OrderTable.State',
   'OrderTable.Options'
 ];
-export const orderData = [
+
+
+export interface OrderItems{
+  id: number;
+  img: JSX.Element;
+  sale: string;
+  qty: string;
+  source: string;
+  title: string;
+  sold: string;
+  cost: string;
+  fees: string;
+  profit: string;
+  margin: string;
+  orderedOn: string;
+  state: string
+}
+
+export const orderData: OrderItems[] = [
   {
     id: 1,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -28,12 +46,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 2,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -43,12 +61,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'In progress'
   },
   {
     id: 3,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -58,12 +76,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Dispatched'
   },
   {
     id: 4,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -73,12 +91,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Paused'
   },
   {
     id: 5,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -88,12 +106,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 6,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -103,12 +121,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 7,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -118,12 +136,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 8,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -133,12 +151,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 9,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -148,12 +166,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 10,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -163,12 +181,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   },
   {
     id: 11,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -178,12 +196,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Dispatched'
   },
   {
     id: 12,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -193,12 +211,12 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'AO Disabled'
   },
   {
     id: 13,
-    img: dataoneimg,
+    img: <img src={dataoneimg} alt="Image"/>,
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
@@ -208,7 +226,7 @@ export const orderData = [
     fees: '€1.00',
     profit: '€1.00',
     margin: '-',
-    orderOn: '13/07/12:56',
+    orderedOn: '13/07/12:56',
     state: 'Error'
   }
 ];
