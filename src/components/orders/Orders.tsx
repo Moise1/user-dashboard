@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { SearchBars } from '../SmallComponents/SearchBars';
-import { OrdersTable } from '../tables/OrdersTable';
+import {OrdersTable} from '../tables/OrdersTable';
 import OrderTypeButtons from './OrderTypeButtons';
 import { Container } from 'react-bootstrap';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
-import //  orderData,
-// orderHeadingData
-'../common/OrderData';
 import '../../sass/orders.scss';
 
 interface props {
@@ -58,8 +55,6 @@ const Orders = (ordersProps: props) => {
       <SearchBars />
       <OrderTypeButtons orderNumber={orderNumber} />
       <OrdersTable
-        // headerData={orderHeadingData}
-        // bodyData={orderData}
         orderSelectedArray={orderSelectedArray}
         tableValue={staticValue}
         setOrderNumber={setOrderNumber}

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useSortBy, Column } from 'react-table';
-
+import moment from 'moment';
 import {
   // UpdownIcon,
   DustbinDeleteOrderIcon,
@@ -19,7 +19,6 @@ import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../sass/orders.scss';
-// import { OrderItems } from '../common/OrderData';
 import { orderData } from '../common/OrderData';
 
 interface Props {
@@ -30,13 +29,22 @@ interface Props {
 }
 
 export const OrdersTable = (tableProps: Props) => {
-  const {setOrderNumber,showModal, orderSelectedArray} = tableProps;
+  const { setOrderNumber, showModal, orderSelectedArray } = tableProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(orderData.length);
   };
 
-  const data = useMemo(() => orderData, []);
+  const data = useMemo(
+    () =>
+      orderData.map((d) => {
+        return {
+          ...d,
+          orderedOn: moment(d.orderedOn).format('L')
+        };
+      }),
+    []
+  );
 
   const columns: Array<Column> = useMemo(
     () => [
@@ -139,7 +147,7 @@ export const OrdersTable = (tableProps: Props) => {
                     {cell.render('Cell')}
                   </td>
                 ))}
-               
+                {/* {console.log("STATE", row.original)} */}
                 {/* <td>
                   <button
                     onClick={() => (row.original.state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}

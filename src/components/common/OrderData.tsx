@@ -1,5 +1,6 @@
 import dataoneimg from '../../assets/data1img.png';
 
+
 export const orderHeadingData = [
   'OrderTable.Item',
   'OrderTable.Sale',
@@ -21,16 +22,16 @@ export interface OrderItems{
   id: number;
   img: JSX.Element;
   sale: string;
-  qty: string;
+  qty: number;
   source: string;
   title: string;
-  sold: string;
-  cost: string;
-  fees: string;
-  profit: string;
+  sold: number;
+  cost: number;
+  fees: number;
+  profit: number;
   margin: string;
-  orderedOn: string;
-  state: string
+  orderedOn: Date;
+  state: string | JSX.Element;
 }
 
 export const orderData: OrderItems[] = [
@@ -40,13 +41,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -55,13 +56,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'In progress'
   },
   {
@@ -70,13 +71,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Dispatched'
   },
   {
@@ -85,13 +86,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Paused'
   },
   {
@@ -100,13 +101,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -115,13 +116,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -130,13 +131,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -145,13 +146,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -160,13 +161,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -175,13 +176,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   },
   {
@@ -190,13 +191,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Dispatched'
   },
   {
@@ -205,13 +206,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'AO Disabled'
   },
   {
@@ -220,13 +221,13 @@ export const orderData: OrderItems[] = [
     sale: '-',
     source: 'Amazon',
     title: 'Title of the product',
-    qty: '1',
-    sold: '€15.99',
-    cost: '€12.99',
-    fees: '€1.00',
-    profit: '€1.00',
+    qty: 1,
+    sold: 15.99,
+    cost: 12.99,
+    fees: 1.00,
+    profit: 1.00,
     margin: '-',
-    orderedOn: '13/07/12:56',
+    orderedOn: new Date(),
     state: 'Error'
   }
 ];
