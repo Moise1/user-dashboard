@@ -38,7 +38,7 @@ export const OrdersTable = (tableProps: Props) => {
   const stateBtn = (state: JSX.Element | string) => (
     <button
       onClick={() => (state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}
-      className={`btn btn-state-style ${state === 'Error' ? 'bg-dark-pink' : ''} ${
+      className={`state-btn ${state === 'Error' ? 'bg-dark-pink' : ''} ${
         state === 'In progress' ? 'in-progress-btn' : ''
       } ${state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${state === 'Paused' ? 'bg-color-light-orange' : ''} ${
         state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''
@@ -58,7 +58,7 @@ export const OrdersTable = (tableProps: Props) => {
       orderData.map((d) => {
         return {
           ...d,
-          orderedOn: moment(d.orderedOn).format('L'),
+          orderedOn: moment(d.orderedOn).format('DD/MM/h:mm'),
           state: stateBtn(d.state)
         };
       }),

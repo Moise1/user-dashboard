@@ -98,6 +98,15 @@
 
 // TABLE STYLE
 
+.state-btn {
+  width: 137px;
+  cursor: pointer;
+}
+
+.state-btn:hover {
+  color: var(--bgHighlight);
+}
+
 .table-with-open-sidebar {
   max-height: 53vh;
   overflow-x: scroll;
