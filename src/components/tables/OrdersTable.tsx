@@ -9,11 +9,11 @@ import {
   ProcessOrderIcon,
   ThreeDotsColumnIcon
 } from '../common/Icons';
-// import ErrorIcon from '../../assets/erroricon.svg';
-// import InProgressIcon from '../../assets/progressicon.svg';
-// import PasuedIcon from '../../assets/pasuedicon.svg';
-// import DispatchIcon from '../../assets/dispatchedicon.svg';
-// import AoDisabled from '../../assets/ao-disabled-img.png';
+import ErrorIcon from '../../assets/erroricon.svg';
+import InProgressIcon from '../../assets/progressicon.svg';
+import PasuedIcon from '../../assets/pasuedicon.svg';
+import DispatchIcon from '../../assets/dispatchedicon.svg';
+import AoDisabled from '../../assets/ao-disabled-img.png';
 import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
@@ -35,12 +35,31 @@ export const OrdersTable = (tableProps: Props) => {
     if (setOrderNumber) setOrderNumber(orderData.length);
   };
 
+  const stateBtn = (state: JSX.Element | string) => (
+    <button
+      onClick={() => (state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}
+      className={`btn btn-state-style ${state === 'Error' ? 'bg-dark-pink' : ''} ${
+        state === 'In progress' ? 'in-progress-btn' : ''
+      } ${state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${state === 'Paused' ? 'bg-color-light-orange' : ''} ${
+        state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''
+      } obj-state-text `}
+    >
+      {state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
+      {state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
+      {state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
+      {state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
+      {state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
+      {state}
+    </button>
+  );
+
   const data = useMemo(
     () =>
       orderData.map((d) => {
         return {
           ...d,
-          orderedOn: moment(d.orderedOn).format('L')
+          orderedOn: moment(d.orderedOn).format('L'),
+          state: stateBtn(d.state)
         };
       }),
     []
@@ -147,24 +166,7 @@ export const OrdersTable = (tableProps: Props) => {
                     {cell.render('Cell')}
                   </td>
                 ))}
-                {/* {console.log("STATE", row.original)} */}
-                {/* <td>
-                  <button
-                    onClick={() => (row.original.state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}
-                    className={`btn btn-state-style ${row.original.state === 'Error' ? 'bg-dark-pink' : ''} ${
-                      row.original.state === 'In progress' ? 'in-progress-btn' : ''
-                    } ${row.original.state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${
-                      row.original.state === 'Paused' ? 'bg-color-light-orange' : ''
-                    } ${row.original.state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''} obj-state-text `}
-                  >
-                    {row.original.state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-                    {row.original.state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-                    {row.original.state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-                    {row.original.state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
-                    {row.original.state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
-                    {row.original.state}
-                  </button>
-                </td> */}
+                
                 <td className="order-three-dots-dropdown">
                   <Dropdown>
                     <Dropdown.Toggle id="dropdown-basic">

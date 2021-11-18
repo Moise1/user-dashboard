@@ -31,7 +31,7 @@ export interface OrderItems{
   profit: number;
   margin: string;
   orderedOn: Date;
-  state: string | JSX.Element;
+  state:  JSX.Element | string;
 }
 
 export const orderData: OrderItems[] = [
