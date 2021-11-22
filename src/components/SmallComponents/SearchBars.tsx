@@ -4,7 +4,7 @@ import advancedSearchIcon from '../../assets/listsearch.svg';
 import column_img from '../../assets/columnimg.svg';
 import RDS from 'react-dom/server';
 import { t } from '../../global/transShim';
-import '../../sass/searchbars.scss';
+import '../../sass/ligth-theme/search-bars.scss';
 
 interface props {
   showColumns?: boolean;

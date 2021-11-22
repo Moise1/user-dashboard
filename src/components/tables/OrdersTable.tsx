@@ -18,7 +18,7 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/orders.scss';
+import '../../sass/ligth-theme/orders.scss';
 import { orderData } from '../common/OrderData';
 
 interface Props {

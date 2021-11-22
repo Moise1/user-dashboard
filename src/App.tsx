@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
@@ -52,7 +51,7 @@ const App = () => {
 
       <SelectSupplierProvider>
         <Router>
-          <Topbar handleSidebarMobile={handleSidebarMobile} />
+          <Topbar handleSidebarMobile={handleSidebarMobile}/>
           <Layout className="bg-white layout_height">
             <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
               <Sidebar

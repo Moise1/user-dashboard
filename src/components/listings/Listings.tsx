@@ -1,7 +1,7 @@
 import SidebarMb from '../../components/SidebarMb';
 import { SearchBars } from '../SmallComponents/SearchBars';
 import TabsList from '../../components/SmallComponents/TabsList';
-import '../../sass/listings.scss';
+import '../../sass/ligth-theme/listings.scss';
 import { Container } from 'react-bootstrap';
 import { listingsData, listingsHeadingData} from '../common/ListingsData';
 import {ListingsTable} from '../tables/ListingsTable';

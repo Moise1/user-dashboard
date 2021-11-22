@@ -5,7 +5,7 @@ import OrderTypeButtons from './OrderTypeButtons';
 import { Container } from 'react-bootstrap';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
-import '../../sass/orders.scss';
+import '../../sass/ligth-theme/orders.scss';
 
 interface props {
   staticValue: boolean;

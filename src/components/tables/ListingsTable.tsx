@@ -3,7 +3,7 @@ import { UpdownIcon} from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/orders.scss';
+import '../../sass/ligth-theme/orders.scss';
 import { ListingsItems } from '../common/ListingsData';
 
 interface props {
