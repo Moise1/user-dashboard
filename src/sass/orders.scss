@@ -1,16 +1,11 @@
 @import 'config';
 
-// SEARCH BAR STYLES
 
-.web-search-bar{
-  margin-top: 17px;
-};
-
-// BUTTON STYLES  
+// BUTTON STYLES
 
 .orders-type-btns {
   display: flex;
-  background-color: $primary-bg-color;
+  background-color: $white-bg;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 10px;
@@ -101,9 +96,18 @@
   white-space: nowrap;
 }
 
-// TABLE STYLE 
+// TABLE STYLE
 
-.table-with-open-sidebar{
+.state-btn {
+  width: 137px;
+  cursor: pointer;
+}
+
+.state-btn:hover {
+  color: var(--bgHighlight);
+}
+
+.table-with-open-sidebar {
   max-height: 53vh;
   overflow-x: scroll;
   .order-table-head {
@@ -115,12 +119,10 @@
     background-color: var(--bgHighlight);
     font-size: var(--font-large) !important;
     z-index: 1;
-  };
-
+  }
 }
 
-
-// MODAL BUTTONS 
+// MODAL BUTTONS
 
 .process-order-btn-style {
   background-color: var(--bgBlue);
@@ -197,7 +199,7 @@
   color: var(--bgPage);
 }
 
-// DROPDOWN STYLES 
+// DROPDOWN STYLES
 
 .order-three-dots-dropdown .dropdown-menu {
   width: 190px;
@@ -256,7 +258,7 @@
   stroke: var(--iconColor) !important;
 }
 
-// PROGRESS  BAR 
+// PROGRESS  BAR
 
 .progress-order .progress-bar {
   width: 436px;
@@ -296,7 +298,7 @@
   border: 2px solid var(--color-secondry) !important;
 }
 
-// AO DISABLED MODAL STYLES 
+// AO DISABLED MODAL STYLES
 
 .middle-part-autoordering {
   display: flex;
@@ -357,15 +359,15 @@
   width: 16px;
   border: 2px solid #202020;
   border-radius: 2.5px;
-};
+}
 
-// On mouse-over, add a grey background color 
+// On mouse-over, add a grey background color
 
 .select-all-checkbox:hover input ~ .checkmark {
   border: 2px solid #202020;
-};
+}
 
-//  When the checkbox is checked, add a blue background 
+//  When the checkbox is checked, add a blue background
 
 .select-all-checkbox input:checked ~ .checkmark {
   background-color: #5e69db;
@@ -496,7 +498,6 @@
     width: 14px;
   }
 }
-
 
 @media (min-width: 1200px) and (max-width: 1250px) {
   .process-5-order-btn {

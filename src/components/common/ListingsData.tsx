@@ -15,7 +15,22 @@ export const listingsHeadingData = [
   'Listings.Column.Created on'
 ];
 
-export const listingsData = [
+export interface ListingsItems{
+  id: number;
+  img: string;
+  itemNo: number;
+  source: string;
+  title: JSX.Element;
+  sell: number;
+  cost: number;
+  profit: number;
+  markup: JSX.Element;
+  stock: JSX.Element;
+  created: JSX.Element;
+}
+
+
+export const listingsData: ListingsItems[] = [
   {
     id: 1,
     img: dataoneimg,
@@ -29,7 +44,7 @@ export const listingsData = [
     ),
     sell: 30.4,
     cost: 34.44,
-    profile: 309,
+    profit: 309,
     markup: <div className="pl-2">30%</div>,
     stock: (
       <div className="pl-1">
@@ -57,7 +72,7 @@ export const listingsData = [
     ),
     sell: 30.4,
     cost: 34.44,
-    profile: 309,
+    profit: 309,
     markup: <div className="pl-2">30%</div>,
     stock: (
       <div className="pl-1">
@@ -85,7 +100,7 @@ export const listingsData = [
     ),
     sell: 30.4,
     cost: 34.44,
-    profile: 309,
+    profit: 309,
     markup: <div className="pl-2">30%</div>,
     stock: (
       <div className="pl-1">
@@ -113,7 +128,7 @@ export const listingsData = [
     ),
     sell: 30.4,
     cost: 34.44,
-    profile: 309,
+    profit: 309,
     markup: <div className="pl-2">30%</div>,
     stock: (
       <div className="pl-1">
@@ -141,7 +156,7 @@ export const listingsData = [
     ),
     sell: 30.4,
     cost: 34.44,
-    profile: 309,
+    profit: 309,
     markup: <div className="pl-2">30%</div>,
     stock: (
       <div className="pl-1">

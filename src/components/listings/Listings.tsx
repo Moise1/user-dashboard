@@ -1,22 +1,19 @@
 import SidebarMb from '../../components/SidebarMb';
-import SearchBar from '../../components/SmallComponents/SearchBar';
+import { SearchBars } from '../SmallComponents/SearchBars';
 import TabsList from '../../components/SmallComponents/TabsList';
-import '../../css/listings.min.css';
+import '../../sass/listings.scss';
 import { Container } from 'react-bootstrap';
-import { listingsData, listingsHeadingData } from '../common/ListingsData';
-import ListingsTable from '../tables/ContentTable';
+import { listingsData, listingsHeadingData} from '../common/ListingsData';
+import {ListingsTable} from '../tables/ListingsTable';
 
 const Listings = () => {
   return (
-    <>
-      <Container className="listings-container" fluid>
-        <SidebarMb className="side-nav" />
-        <TabsList />
-        <SearchBar className="phone-search-bar" showColumns />
-        <SearchBar className="web-search-bar" showColumns />
-        <ListingsTable bodyData={listingsData} headerData={listingsHeadingData} />
-      </Container>
-    </>
+    <Container className="listings-container" fluid>
+      <SidebarMb className="side-nav" />
+      <TabsList />
+      <SearchBars showColumns />
+      <ListingsTable bodyData={listingsData} headerData={listingsHeadingData} />
+    </Container>
   );
 };
 export default Listings;

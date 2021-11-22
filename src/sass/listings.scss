@@ -49,13 +49,6 @@ and (-webkit-min-device-pixel-ratio: 2){
     .listings-container{
         overflow-y: scroll;
          
-        .phone-search-bar{
-            display: none;
-        };
-
-        .web-search-bar{
-            margin: 20px 0;
-        }
     }
 };
 
@@ -65,12 +58,5 @@ and (-webkit-min-device-pixel-ratio: 2){
 
     .listings-container{
         overflow-y: scroll;
-
-        .phone-search-bar{
-            display: none;
-        };
-        .web-search-bar{
-            margin: 20px 0;
-        }
     }
 }
