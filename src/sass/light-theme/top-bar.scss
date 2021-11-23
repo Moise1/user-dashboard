@@ -74,7 +74,7 @@
       display: none;
     }
 
-    .top-bar-nav {
+    .topbar-navav {
       padding-top: 10px;
       width: 80%;
       display: flex;
@@ -92,23 +92,23 @@
         &:focus {
           border: none !important;
           outline: none !important;
-        };
+        }
 
-        .country-name{
+        .country-name {
           font-size: $font-large;
-          padding-left: $spacer *.25;
-          margin-right: $spacer *.25;
-          line-height: $spacer *.25;
-          font-weight: bold; 
-        };
+          padding-left: $spacer * 0.25;
+          margin-right: $spacer * 0.25;
+          line-height: $spacer * 0.25;
+          font-weight: bold;
+        }
 
-        .flag{
-          line-height: $spacer * .25;
-        };
+        .flag {
+          line-height: $spacer * 0.25;
+        }
 
-        .company{
-          margin: 0 $spacer * .25;
-          line-height: $spacer * .25;
+        .company {
+          margin: 0 $spacer * 0.25;
+          line-height: $spacer * 0.25;
         }
 
         .dropdown-menu {
@@ -119,15 +119,13 @@
           background: transparent !important;
           outline: none !important;
           color: $black;
-  
+
           &:focus {
             border: transparent !important;
             outline: none !important;
           }
         }
       }
-
-      
 
       .quota {
         font-size: $font-large;
@@ -141,8 +139,8 @@
       }
 
       .progress-bar {
-        width: 15%;
-        background: none;
+        min-width: 10%;
+        background: $primary !important;
       }
 
       .update-btn {

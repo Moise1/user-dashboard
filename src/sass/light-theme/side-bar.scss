@@ -1,0 +1,70 @@
+@import 'config';
+
+// medium screens and laptops
+@media only screen and (min-width: 1224px) {
+  .sidebar-container {
+    margin-top: 80px;
+    min-width: 80px;
+    border-top: 1px solid $light-gray;
+    border-right: 1px solid $light-gray;
+    flex: 0 0 80px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 111 !important;
+    height: 100vh;
+
+    .side-menu-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      position: relative;
+
+      .sidebar-btns {
+        position: absolute;
+        right: 10px;
+        margin-top: 10px;
+
+        .fa-chevron-left {
+          margin-top: $spacer * 0.25 !important;
+          padding-top: $spacer * 0.25 !important;
+          cursor: pointer !important;
+          color: $white;
+          width: 30.02px;
+          height: 30.02px;
+          border-radius: 8px;
+          background: $light-primary;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .sidebar-pin {
+          margin-top: $spacer * 0.25;
+          background: $light-gray;
+          border-radius: 8px;
+          padding: $spacer * 0.25;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      .logout {
+        position: absolute;
+        padding-bottom: 25px;
+        font-size: 16px;
+        bottom: 0;
+        right: 10%;
+        background: transparent;
+        color: $medium-pink;
+        cursor: pointer;
+        display: inline-block;
+
+        .hide-logout-text{
+            display: none;
+        }
+      }
+    }
+  }
+}

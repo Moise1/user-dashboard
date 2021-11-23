@@ -1,8 +1,8 @@
-import React from 'react';
 import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
+import logout from '../../assets/logout.svg';
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -11,11 +11,11 @@ import {
   ServiceIcon,
   SettingsIcon,
   HelpIcon,
-  LogOutIcon,
   OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 import './Sidebar.css';
+import '../../sass/light-theme/side-bar.scss';
 
 const { SubMenu } = Menu;
 
@@ -103,7 +103,7 @@ export default function Sidebar(props: Props) {
     <>
       <Sider
         theme="light"
-        className="h-100 border-right border z-1 sidebarInitial ant-sidebar-aside"
+        className="sidebar-container"
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -111,41 +111,19 @@ export default function Sidebar(props: Props) {
         collapsedWidth="var(--siderWidth)"
       >
         <div className="logo" />
-        <div className="d-flex flex-column justify-content-between h-100">
+        <div className="side-menu-container">
           <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
-            {/* <Menu.Item
-              key="0"
-              icon={<img src={logo} className="d-none" height={30} alt="" />}
-            >
-              <span className="font-weight-bold  d-blue">{t("HGR")}</span>
-            </Menu.Item> */}
-            <div
-              className="text-white position-absolute"
-              style={{
-                top: '0%',
-                right: '3%',
-                zIndex: 999999
-              }}
-            >
-              {collapsed ? (
-                ''
-              ) : (
-                <>
-                  <div className="ml-auto float-right m-2">
-                    {staticvalue ? (
-                      <i
-                        onClick={togglestatic}
-                        className="fas fa-chevron-left text-dark bg-light  p-1 mt-1 active-left-icon arrow-icon-sidebar cursor-pointer"
-                      ></i>
-                    ) : (
-                      <button className="mt-1 btn border-0 btn-light br-8 p-1 h-30_02 w-30_02 d-flex justify-content-center align-items-center">
-                        <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
-                      </button>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>{' '}
+            {!collapsed && (
+              <div className="sidebar-btns">
+                {staticvalue ? (
+                  <i onClick={togglestatic} className="fas fa-chevron-left"></i>
+                ) : (
+                  <button className="sidebar-pin">
+                    <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
+                  </button>
+                )}
+              </div>
+            )}
             <div className="pt-5"></div>
             <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
               {t('Menu.Dashboard')}
@@ -171,9 +149,7 @@ export default function Sidebar(props: Props) {
                 </span>
               }
             >
-              <button className="bg-trans p-0 border-0 listing-btn" onClick={() => history.push('/home')}>
-                {t('Menu.Listings')}
-              </button>
+              {t('Menu.Listings')}
             </Menu.Item>
             <Menu.Item
               onClick={() => handleOrdersSidebar()}
@@ -227,13 +203,10 @@ export default function Sidebar(props: Props) {
               ))}
             </SubMenu>
           </Menu>
-          <div className="logout-icon d-flex justify-content-end align-items-center z-10">
-            <span className="mx-2 ">
-              <LogOutIcon />
-            </span>
-
-            <span className="d-none-icon"> {t('Menu.Logout')}</span>
-          </div>
+          <button className="logout">
+            <img src={logout} />
+            <span className={collapsed? 'hide-logout-text': 'logout-text'}> {t('Menu.Logout')}</span>
+          </button>
         </div>
       </Sider>
     </>
