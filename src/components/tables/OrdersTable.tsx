@@ -18,7 +18,7 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/ligth-theme/orders.scss';
+import '../../sass/light-theme/orders.scss';
 import { orderData } from '../common/OrderData';
 
 interface Props {
@@ -166,7 +166,7 @@ export const OrdersTable = (tableProps: Props) => {
                     {cell.render('Cell')}
                   </td>
                 ))}
-                
+
                 <td className="order-three-dots-dropdown">
                   <Dropdown>
                     <Dropdown.Toggle id="dropdown-basic">

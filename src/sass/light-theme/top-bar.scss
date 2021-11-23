@@ -1,0 +1,187 @@
+@import 'config';
+
+// mobile devices
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+    background: $white !important;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-left: $spacer;
+    }
+
+    .menu-burger {
+      cursor: pointer;
+      width: auto;
+      border-radius: 8px;
+      padding: 12px;
+      background: $light-red;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & .second {
+        margin: 5px 0;
+      }
+
+      & span {
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        background: $white;
+      }
+    }
+  }
+}
+
+// medium screens and laptops
+@media only screen and (min-width: 1224px) {
+  .top-bar {
+    position: sticky;
+    padding: 15px 0;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+    background: $white !important;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-left: $spacer * 0.5;
+    }
+    .burger-menu-container {
+      display: flex;
+      align-items: center;
+      margin-left: 3px;
+    }
+
+    .menu-burger {
+      display: none;
+    }
+
+    .top-bar-nav {
+      padding-top: 10px;
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+
+      .dropdown {
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0px 2px 6px #00000029;
+        border-radius: 10px;
+        opacity: 1;
+
+        &:focus {
+          border: none !important;
+          outline: none !important;
+        };
+
+        .country-name{
+          font-size: $font-large;
+          padding-left: $spacer *.25;
+          margin-right: $spacer *.25;
+          line-height: $spacer *.25;
+          font-weight: bold; 
+        };
+
+        .flag{
+          line-height: $spacer * .25;
+        };
+
+        .company{
+          margin: 0 $spacer * .25;
+          line-height: $spacer * .25;
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          z-index: 2;
+        }
+        .dropdown-toggle {
+          background: transparent !important;
+          outline: none !important;
+          color: $black;
+  
+          &:focus {
+            border: transparent !important;
+            outline: none !important;
+          }
+        }
+      }
+
+      
+
+      .quota {
+        font-size: $font-large;
+        color: $dark-violet;
+        font-weight: bold;
+        color: $black;
+      }
+
+      .quota-price {
+        margin-left: $spacer;
+      }
+
+      .progress-bar {
+        width: 15%;
+        background: none;
+      }
+
+      .update-btn {
+        border-radius: 20px;
+        top: 29px;
+        left: 1091px;
+        width: 111px;
+        height: 29px;
+        color: $white;
+        background: $primary 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #00000029;
+        opacity: 1;
+      }
+
+      .notifications {
+        font-weight: bold;
+        font-size: $font-large;
+        display: inline;
+        margin-left: $spacer;
+      }
+
+      .tokens-container {
+        color: $primary;
+        display: flex;
+        align-items: center;
+        line-height: 1px;
+      }
+
+      .token-number {
+        font-size: $font-large;
+        font-weight: bold;
+        margin: 0 $spacer * 0.25;
+      }
+
+      .tokens {
+        display: inline;
+        font-size: $font-large;
+        font-weight: bold;
+      }
+    }
+  }
+}

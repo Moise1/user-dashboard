@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { SearchBars } from '../SmallComponents/SearchBars';
-import {OrdersTable} from '../tables/OrdersTable';
+import { OrdersTable } from '../tables/OrdersTable';
 import OrderTypeButtons from './OrderTypeButtons';
 import { Container } from 'react-bootstrap';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
-import '../../sass/ligth-theme/orders.scss';
+import '../../sass/light-theme/orders.scss';
 
 interface props {
   staticValue: boolean;

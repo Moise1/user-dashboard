@@ -3,7 +3,7 @@ import ring_icon from '../assets/notification.svg';
 import flag from '../assets/flag-round-500.svg';
 import amazon from '../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Space } from 'antd';
-import DropDownMenu from './SmallComponents/DropDownMenu';
+import DropDownMenu from './SmallComponents/StoreList';
 import { t } from '../global/transShim';
 
 interface props {

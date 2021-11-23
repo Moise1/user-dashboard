@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { UpdownIcon} from '../common/Icons';
+import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/ligth-theme/orders.scss';
+import '../../sass/light-theme/orders.scss';
 import { ListingsItems } from '../common/ListingsData';
 
 interface props {
@@ -51,14 +51,14 @@ export const ListingsTable = (tableProps: props) => {
                     <input type="checkbox" checked={isSelected} />
                     <span className="checkmark"></span>
                   </label>
-                </td> 
+                </td>
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
                 <td className="obj-sale-body order-td-none">{obj.itemNo}</td>
                 <td className="obj-sale-body order-td-none">{obj.source}</td>
                 <td className="obj-sale-title order-td-none">{obj.title}</td>
-                <td className="obj-sale-qty order-td-none">{ obj.sell}</td>
+                <td className="obj-sale-qty order-td-none">{obj.sell}</td>
                 <td className="obj-sale-cost  order-td-none">{obj.cost}</td>
                 <td className="obj-profit-text">{obj.profit}</td>
                 <td className="obj-sale-cost order-td-none">{obj.markup}</td>
@@ -73,4 +73,3 @@ export const ListingsTable = (tableProps: props) => {
     </div>
   );
 };
-
