@@ -1,3 +1,5 @@
+@import 'config';
+
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
     .listings-container{
@@ -48,8 +50,22 @@ and (-webkit-min-device-pixel-ratio: 2){
     
     .listings-container{
         overflow-y: scroll;
-         
-    }
+    };
+
+    .listings-table {
+        max-height: 53vh;
+        overflow-x: scroll;
+        .listings-table-head {
+          color: $primary;
+          white-space: nowrap;
+          font-weight: bold;
+          position: sticky;
+          top: 0;
+          background-color: $white;
+          font-size: $font-large !important;
+          z-index: 1;
+        }
+      }
 };
 
 
@@ -58,5 +74,6 @@ and (-webkit-min-device-pixel-ratio: 2){
 
     .listings-container{
         overflow-y: scroll;
-    }
+    };
+    
 }

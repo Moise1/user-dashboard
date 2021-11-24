@@ -9,7 +9,7 @@ import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
-import SettingSourceConfig from './components/sources/SettingSourceConfig';
+import SourcesTable from './components/sources/SourcesTable';
 import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 
@@ -69,7 +69,7 @@ const App = () => {
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
               <Route path="/sources-setting" component={Sources} />
-              <Route path="/sources" component={() => <SettingSourceConfig staticValue={staticValue} />} />
+              <Route path="/sources" component={SourcesTable}/>
               <Route path="/newchannel" component={ChannelCreate} />
             </Switch>
           </Layout>

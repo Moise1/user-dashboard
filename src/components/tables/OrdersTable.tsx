@@ -117,7 +117,7 @@ export const OrdersTable = (tableProps: Props) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data }, useSortBy);
 
   return (
-    <div className="table-with-open-sidebar">
+    <div className="orders-table">
       <table className="table order-table mb-0" {...getTableProps()}>
         <thead className="order-table-head">
           {headerGroups.map((headerGroup) => (

@@ -3,11 +3,10 @@ import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/light-theme/orders.scss';
+import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 
 interface props {
-  tableValue?: boolean;
   setOrderNumber?: (arg0: number) => void;
   showModal?: (e: React.MouseEvent) => void;
   orderSelectedArray?: Array<number>;
@@ -16,16 +15,16 @@ interface props {
 }
 
 export const ListingsTable = (tableProps: props) => {
-  const { tableValue, setOrderNumber, showModal, orderSelectedArray, headerData, bodyData } = tableProps;
+  const { setOrderNumber, showModal, orderSelectedArray, headerData, bodyData } = tableProps;
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(bodyData.length);
   };
 
   return (
-    <div className={`${tableValue ? 'table-order-responsive' : 'table-with-open-sidebar'} table-responsive`}>
-      <table className="table order-table mb-0">
-        <thead className="order-table-head">
+    <div className='listings-table'>
+      <table className="table listings-table mb-0">
+        <thead className="listings-table-head">
           <tr>
             <th>
               <label className="select-all-checkbox">
@@ -34,14 +33,14 @@ export const ListingsTable = (tableProps: props) => {
               </label>
             </th>
             {headerData.map((heading) => (
-              <th key={heading} className="order-th-none">
+              <th key={heading} className="listings-th-none">
                 <span className="mr-2"> {t(heading)}</span> <UpdownIcon />
               </th>
             ))}
           </tr>
         </thead>
 
-        <tbody className="order-table-body">
+        <tbody className="listings-table-body">
           {bodyData.map((obj) => {
             const isSelected = orderSelectedArray?.includes(obj.id);
             return (
@@ -55,14 +54,14 @@ export const ListingsTable = (tableProps: props) => {
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body order-td-none">{obj.itemNo}</td>
-                <td className="obj-sale-body order-td-none">{obj.source}</td>
-                <td className="obj-sale-title order-td-none">{obj.title}</td>
-                <td className="obj-sale-qty order-td-none">{obj.sell}</td>
-                <td className="obj-sale-cost  order-td-none">{obj.cost}</td>
+                <td className="obj-sale-body listings-td-none">{obj.itemNo}</td>
+                <td className="obj-sale-body listings-td-none">{obj.source}</td>
+                <td className="obj-sale-title listings-td-none">{obj.title}</td>
+                <td className="obj-sale-qty listings-td-none">{obj.sell}</td>
+                <td className="obj-sale-cost  listings-td-none">{obj.cost}</td>
                 <td className="obj-profit-text">{obj.profit}</td>
-                <td className="obj-sale-cost order-td-none">{obj.markup}</td>
-                <td className="obj-sale-qty  order-td-none">{obj.created}</td>
+                <td className="obj-sale-cost listings-td-none">{obj.markup}</td>
+                <td className="obj-sale-qty  listings-td-none">{obj.created}</td>
               </tr>
             );
           })}
