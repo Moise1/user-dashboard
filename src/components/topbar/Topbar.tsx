@@ -17,22 +17,34 @@ const Topbar = (props: Props) => {
 
   return (
     <div className="top-bar">
-      <div className="burger-menu-container">
-        <div className="menu-burger" onClick={() => handleSidebarMobile()}>
-          <span className="first"></span>
-          <span className="second"></span>
-          <span className="thrid"></span>
-        </div>
+      <div className="logo-container">
         <img className="logo" src={Logo} alt="logo" />
+        <h1 className="logo-text">HGR</h1>
       </div>
-      <div className="topbar-navav">
-        <h4 className="quota"> {t('Topbar.Quota')}:</h4> <p className="quota-price">45% (12/13)</p>{' '}
-        <ProgressBar now={20} className="progress-bar" />
+
+      <div className="menu-burger" onClick={() => handleSidebarMobile()}>
+        <span className="first"></span>
+        <span className="second"></span>
+        <span className="thrid"></span>
+      </div>
+      <div className="burger-menu-container"></div>
+      <div className="top-bar-nav">
+        <div className="quota-container">
+          <div className="quota">
+            <strong className="quota-text">
+              <p>{t('Topbar.Quota')}: &nbsp;</p>
+            </strong>
+            <span className="quota-progress">45% (12/13)</span>
+          </div>
+        </div>
+        <ProgressBar className="progress-bar" />
         <button type="button" className="update-btn">
           {t('Topbar.Update')}
-        </button>{' '}
-        <img className="bell-icon" src={bellIcon} alt="" />
-        <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span>
+        </button>
+        <div className="notifications-container">
+          <img className="nofications-bell" src={bellIcon} alt="" />
+          <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span>
+        </div>
         <div className="tokens-container">
           <img src={coinIcon} alt="coinIcon" />
           <span className="token-number">1232</span>

@@ -1,10 +1,9 @@
 @import 'config';
 
-// medium screens and laptops
-@media only screen and (min-width: 1224px) {
+// mobile devices breakpoints
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
   .sidebar-container {
-    margin-top: 80px;
-    min-width: 80px;
     border-top: 1px solid $light-gray;
     border-right: 1px solid $light-gray;
     flex: 0 0 80px;
@@ -12,18 +11,64 @@
     left: 0;
     top: 0;
     z-index: 111 !important;
-    height: 100vh;
+    height: 100%;
 
     .side-menu-container {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
-      position: relative;
+
+      .sidebar-overhead {
+        display: flex;
+        margin-top: 1rem;
+
+        .logo-container {
+          margin-top: 1rem;
+          .logo {
+            width: 40px;
+            height: 40px;
+          }
+
+          .logo-text {
+            display: none;
+          }
+        }
+
+        .quota-container {
+          position: absolute;
+          display: flex;
+          justify-content: space-evenly;
+          margin-top: 1rem;
+          margin: 1rem 3rem;
+         .quota{
+           display: flex;
+           .quota-text{
+             display: none;
+           }
+           .quota-progress{
+             margin-top: 1rem;
+           }
+         }
+          
+
+          
+          .update-btn {
+            border-radius: 20px;
+            color: $white;
+            background: $primary 0% 0% no-repeat padding-box;
+            box-shadow: 0px 3px 6px #00000029;
+            opacity: 1;
+            width: 90px;
+            padding: 1rem 0;
+            margin-left: 1rem;
+          }
+        }
+      }
 
       .sidebar-btns {
         position: absolute;
-        right: 10px;
+        right: 0;
         margin-top: 10px;
 
         .fa-chevron-left {
@@ -61,8 +106,83 @@
         cursor: pointer;
         display: inline-block;
 
-        .hide-logout-text{
-            display: none;
+        .hide-logout-text {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// medium screens and laptops
+@media only screen and (min-width: 1224px) {
+  .sidebar-container {
+    margin-top: 5.2rem;
+    min-width: 80px;
+    border-top: 1px solid $light-gray;
+    border-right: 1px solid $light-gray;
+    flex: 0 0 80px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 111 !important;
+    height: 100vh;
+
+    .side-menu-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .sidebar-overhead {
+        .logo-container,
+        .quota-container {
+          display: none;
+        }
+      }
+      .sidebar-btns {
+        position: absolute;
+        right: 10px;
+        margin-top: 10px;
+
+        .fa-chevron-left {
+          margin-top: $spacer * 0.25 !important;
+          padding-top: $spacer * 0.25 !important;
+          cursor: pointer !important;
+          color: $white;
+          width: 30.02px;
+          height: 30.02px;
+          border-radius: 8px;
+          background: $light-primary;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .sidebar-pin {
+          margin-top: $spacer * 0.25;
+          background: $light-gray;
+          border-radius: 8px;
+          padding: $spacer * 0.25;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .logout {
+        // position: absolute;
+        padding-bottom: 25px;
+        font-size: 16px;
+        // bottom: 10%;
+        // right: 10%;
+        margin-top: 3rem;
+        background: transparent;
+        color: $medium-pink;
+        cursor: pointer;
+        display: inline-block;
+
+        .hide-logout-text {
+          display: none;
         }
       }
     }
