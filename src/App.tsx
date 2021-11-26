@@ -70,7 +70,7 @@ const App = () => {
               <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
               <Route path="/sources-setting" component={Sources} />
               <Route path="/sources" component={SourcesTable}/>
-              <Route path="/newchannel" component={ChannelCreate} />
+              <Route path="/new-channel" component={ChannelCreate} />
             </Switch>
           </Layout>
         </Router>

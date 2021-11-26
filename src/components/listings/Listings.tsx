@@ -1,6 +1,6 @@
 import SidebarMb from '../../components/SidebarMb';
 import { SearchBars } from '../SmallComponents/SearchBars';
-import TabsList from '../../components/SmallComponents/TabsList';
+import ListingsStatus from '../SmallComponents/ListingsStatus';
 import '../../sass/light-theme/listings.scss';
 import { Container } from 'react-bootstrap';
 import { listingsData, listingsHeadingData } from '../common/ListingsData';
@@ -10,7 +10,7 @@ const Listings = () => {
   return (
     <Container className="listings-container" fluid>
       <SidebarMb className="side-nav" />
-      <TabsList />
+      <ListingsStatus />
       <SearchBars showColumns />
       <ListingsTable bodyData={listingsData} headerData={listingsHeadingData} />
     </Container>
