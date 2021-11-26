@@ -12,7 +12,7 @@ RUN yarn global add react-scripts@4.0.3 --silent
 COPY *.ps1 *.json ./
 COPY . ./
 RUN rm -rf ./src/css && \
-    sass --no-source-map --style compressed ./src/sass/**/:./src/css/ && \
+    sass --no-source-map --style compressed ./src/sass/light-theme/ ./src/sass/dark-theme/:./src/css/ && \
     for f in ./src/css/*.css; do mv -- "$f" "${f%.css}.min.css"; done;
     
 RUN yarn build
