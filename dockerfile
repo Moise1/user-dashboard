@@ -14,7 +14,7 @@ COPY yarn.lock ./
 RUN yarn install --frozen-lockfile --silent
 RUN yarn global add react-scripts@4.0.3 --silent
 RUN rm -rf ./src/css && \
-    sass --no-source-map --style compressed ./src/sass/light-theme/ ./src/sass/dark-theme/:./src/css/ && \
+    sass --no-source-map --style compressed ./src/sass/ ./src/sass/light-theme/:./src/css/ && \
     for f in ./src/css/*.css; do mv -- "$f" "${f%.css}.min.css"; done;
 
 # add app
