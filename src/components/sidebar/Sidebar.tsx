@@ -192,7 +192,8 @@ export default function Sidebar(props: Props) {
             ))}
           </SubMenu>
           {/* SERVICES  */}
-          <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<ServiceIcon />}>
+
+          <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<ServiceIcon />} onClick={() => history.push('/services')}>
             <span>{t('Menu.Services')}</span>
           </Menu.Item>
 
