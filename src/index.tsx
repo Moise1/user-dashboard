@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './sass/index.scss';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { IntlProvider } from 'react-intl';
 import locale_en from './translations/en.json';

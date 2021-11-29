@@ -18,7 +18,7 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/orders.scss';
+import '../../sass/light-theme/orders.scss';
 import { orderData } from '../common/OrderData';
 
 interface Props {
@@ -117,7 +117,7 @@ export const OrdersTable = (tableProps: Props) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data }, useSortBy);
 
   return (
-    <div className="table-with-open-sidebar">
+    <div className="orders-table">
       <table className="table order-table mb-0" {...getTableProps()}>
         <thead className="order-table-head">
           {headerGroups.map((headerGroup) => (
@@ -166,7 +166,7 @@ export const OrdersTable = (tableProps: Props) => {
                     {cell.render('Cell')}
                   </td>
                 ))}
-                
+
                 <td className="order-three-dots-dropdown">
                   <Dropdown>
                     <Dropdown.Toggle id="dropdown-basic">

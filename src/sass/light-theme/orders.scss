@@ -1,11 +1,10 @@
 @import 'config';
 
-
 // BUTTON STYLES
 
 .orders-type-btns {
   display: flex;
-  background-color: $white-bg;
+  background-color: $white;
   padding: 1.5rem;
   margin: 1.5rem 0;
   border-radius: 10px;
@@ -107,7 +106,7 @@
   color: var(--bgHighlight);
 }
 
-.table-with-open-sidebar {
+.orders-table {
   max-height: 53vh;
   overflow-x: scroll;
   .order-table-head {
@@ -260,16 +259,16 @@
 
 // PROGRESS  BAR
 
-.progress-order .progress-bar {
-  width: 436px;
-  border-radius: 9.5px;
-  background: linear-gradient(
-    var(--color-secondry) 0%,
-    var(--color-secondry) 15.85%,
-    #3aa23a 67.04%,
-    var(--color-secondry) 100%
-  );
-}
+// .progress-order .progress-bar {
+//   width: 436px;
+//   border-radius: 9.5px;
+//   background: linear-gradient(
+//     var(--color-secondry) 0%,
+//     var(--color-secondry) 15.85%,
+//     #3aa23a 67.04%,
+//     var(--color-secondry) 100%
+//   );
+// }
 
 .progress-order .progress {
   border-radius: 9.5px;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { Table } from 'antd';
 import img from '../assets/icon.png';
 import { columns } from './SmallComponents/TerminatedData';
@@ -10,7 +9,6 @@ console.log(windowwidth);
 interface iData {
   key: number;
   item: number;
-
   img: JSX.Element;
   title: JSX.Element;
   created: JSX.Element;
@@ -89,12 +87,7 @@ function TerminatedDataContent() {
             <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
               <div className="row">
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Edit ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
+                  
                   <div className="listing-tabs">
                     Edit <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -102,13 +95,7 @@ function TerminatedDataContent() {
                   ''
                 )}
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Copy ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   border={true}
-                  //   last={false}
-                  // />
+                 
                   <div className="listing-tabs">
                     Copy <span>{selectedRowKeys.length}</span> Listings
                   </div>
@@ -116,12 +103,7 @@ function TerminatedDataContent() {
                   ''
                 )}
                 {selectedRowKeys.length ? (
-                  // <SmallTabs
-                  //   title={`Optimize ${selectedRowKeys.length} ${
-                  //     windowwidth < 900 ? "" : "Listings"
-                  //   } `}
-                  //   last={false}
-                  // />
+                  
                   <div className="listing-tabs">
                     Optimize <span>{selectedRowKeys.length}</span> Listings
                   </div>

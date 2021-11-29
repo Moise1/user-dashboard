@@ -1,4 +1,3 @@
-import React from 'react';
 import DefinedBySettingsSelect from './DefinedBySettingsSelect';
 
 export const SourceSettingsListItem = () => {

@@ -1,0 +1,21 @@
+// medium screens and laptops breakpoints
+
+@media only screen and (min-width: 1224px) {
+  .sources-table-container {
+    .sources-table {
+      max-height: 53vh;
+      overflow-x: scroll;
+      .sources-table-head {
+        color: var(--color-dark-violet);
+        border: 2px solid green;
+        white-space: nowrap;
+        font-weight: bold;
+        position: sticky;
+        top: 0;
+        background-color: var(--bgHighlight);
+        font-size: var(--font-large) !important;
+        z-index: 1;
+      }
+    }
+  }
+}

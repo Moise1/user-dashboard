@@ -1,6 +1,6 @@
 import { ProcessOrderIcon, HandStopOrderIcon, DustbinDeleteOrderIcon, DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
-import '../../sass/orders.scss';
+import '../../sass/light-theme/orders.scss';
 
 interface props {
   orderNumber: number;

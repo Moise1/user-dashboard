@@ -1,82 +1,71 @@
-import React from 'react';
-import { Progress } from 'antd';
 import coinIcon from '../../assets/tokenCoin.png';
 import bellIcon from '../../assets/bellIcon.svg';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
-import { Dropdown, Button, Space } from 'antd';
-import DropDownMenu from '../SmallComponents/DropDownMenu';
+import { Dropdown, Button, Progress } from 'antd';
+
+// import { Dropdown, ProgressBar } from 'react-bootstrap';
+import StoreList from '../SmallComponents/StoreList';
 import Logo from '../../assets//logoHGR.png';
-import dropicon from '../../assets/dropicon.svg';
 import { t } from 'src/global/transShim';
-import './Topbar.css';
+import '../../sass/light-theme/top-bar.scss';
 
 interface Props {
   handleSidebarMobile: () => void;
 }
 
-export default function Topbar(props: Props) {
+const Topbar = (props: Props) => {
   const { handleSidebarMobile } = props;
 
   return (
-    <>
-      <div className="TopBar">
-        <div className="ml-2 ml-sm-3 d-flex align-items-center">
-          <div className="hamburger-mobile d-lg-none" onClick={() => handleSidebarMobile()}>
-            <span className="first"></span>
-            <span className="second"></span>
-            <span className="thrid"></span>
-          </div>
-          <img className="logoHGR ml-2 ml-md-3" src={Logo} alt="logo" />
-        </div>
-        <div className="  px-0 bg-white rounded mt-2 mt-lg-0">
-          <div className="d-flex hgr-progress p-sm-1 TopBarItems">
-            <div className="d-flex align-items-center">
-              <h4 className="mb-0 quota-head ff-used "> {t('Topbar.Quota')}:</h4>{' '}
-              <p className=" ml-1 ml-md-2 quota-price ff-used mb-0">45% (12/13)</p>{' '}
-              <div className="progressBar">
-                <Progress
-                  percent={50}
-                  showInfo={false}
-                  strokeWidth={12}
-                  strokeColor={{
-                    '0%': '#262E80',
-                    '100%': '#262E80'
-                  }}
-                />
-              </div>
-              <button type="button" className="btn ff-used py-1px Update-btn rounded-pill ">
-                {t('Topbar.Update')}
-              </button>
-            </div>
-            <img className="bell-icoon-topbar" src={bellIcon} alt="" />
-            <div className="d-blue lh-1">
-              {' '}
-              <span className="d-none fs-18 fw-bold d-md-inline ml-3">{t('Topbar.Notifications', { count: 2 })}</span>
-            </div>
-            <div className="d-blue d-flex align-items-center mx-0  mx-sm-3 lh-1">
-              {/* <i className="fas fa-circle yellow"></i> */}
-              <img src={coinIcon} alt="coinIcon" />
-              <span className="fs-18 fw-bold mx-1">1232</span>
-              <span className="d-none fs-18 fw-bold d-md-inline ">Tokens </span>
-            </div>
-            <Space direction="vertical">
-              <div className="ant-space-item d-flex">
-                <Dropdown overlay={<DropDownMenu />} placement="bottomLeft" trigger={['click']}>
-                  <div className="storeSelector d-flex lav_button_shadow">
-                    <div className="fs-18 pl-md-2 mr-1 lh-1 font-weight-bold country-name">Lavivatienda</div>
-                    <img src={flag} className="lh-1" height="20" alt="" />
-                    <img src={amazon} className="mx-1 mx-md-3 lh-1" height="20" alt="" />
-                    <Button>
-                      <img className="lh-1  my-auto" src={dropicon} alt="" />
-                    </Button>
-                  </div>
-                </Dropdown>
-              </div>
-            </Space>
-          </div>
-        </div>
+    <div className="top-bar">
+      <div className="logo-container">
+        <img className="logo" src={Logo} alt="logo" />
+        <h1 className="logo-text">HGR</h1>
       </div>
-    </>
+
+      <div className="menu-burger" onClick={() => handleSidebarMobile()}>
+        <span className="first"></span>
+        <span className="second"></span>
+        <span className="thrid"></span>
+      </div>
+      <div className="burger-menu-container"></div>
+      <div className="top-bar-nav">
+        <div className="quota-container">
+          <div className="quota">
+            <strong className="quota-text">
+              <p>{t('Topbar.Quota')}: &nbsp;</p>
+            </strong>
+            <span className="quota-progress">45% (12/13)</span>
+          </div>
+        </div>
+        <Progress percent={45} showInfo={false} className="progress-bar" />
+        <button type="button" className="update-btn">
+          {t('Topbar.Update')}
+        </button>
+        <div className="notifications-container">
+          <img className="nofications-bell" src={bellIcon} alt="" />
+          <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span>
+        </div>
+        <div className="tokens-container">
+          <img src={coinIcon} alt="coinIcon" />
+          <span className="token-number">1232</span>
+          <span className="tokens">Tokens </span>
+        </div>
+
+        <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
+          <div className="">
+            <div className="country-name">Lavivatienda</div>
+            <img src={flag} className="lh-1" height="20" alt="" />
+            <img src={amazon} className="" height="20" alt="" />
+            <Button>
+              <i className="fa fa-caret-down" aria-hidden="true" />
+            </Button>
+          </div>
+        </Dropdown>
+      </div>
+    </div>
   );
-}
+};
+
+export default Topbar;

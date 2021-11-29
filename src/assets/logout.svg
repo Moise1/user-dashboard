@@ -1,0 +1,32 @@
+<svg
+        id="Group_84"
+        data-name="Group 84"
+        xmlns="http://www.w3.org/2000/svg"
+        width="26"
+        height="26"
+        viewBox="0 0 31.622 31.622"
+      >
+        <path id="Path_17" data-name="Path 17" d="M0,0H31.622V31.622H0Z" fill="none" />
+        <path
+          id="Path_18"
+          data-name="Path 18"
+          d="M17.494,9.27V6.635A2.635,2.635,0,0,0,14.858,4H5.635A2.635,2.635,0,0,0,3,6.635V22.446a2.635,2.635,0,0,0,2.635,2.635h9.223a2.635,2.635,0,0,0,2.635-2.635V19.811"
+          transform="translate(0.953 1.27)"
+          fill="none"
+          stroke="#ef6092"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          id="Path_19"
+          data-name="Path 19"
+          d="M7,12.953H25.446L21.494,9m0,7.906,3.953-3.953"
+          transform="translate(2.223 2.858)"
+          fill="none"
+          stroke="#ef6092"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>

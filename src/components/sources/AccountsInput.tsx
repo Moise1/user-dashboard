@@ -1,4 +1,3 @@
-import React from 'react';
 import { DustbinPinkIcon, HandFiveFingerIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 
@@ -106,7 +105,6 @@ const AccountsInput = (myProps: props) => {
           </div>
         </div>
         <div className="col-12">
-          {/* <HandFiveFingerIcon /> */}
 
           <p className="remove-account-div">
             {' '}

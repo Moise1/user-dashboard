@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AccountsInput from './AccountsInput';
 import AddAccountsSelect from './AddAccountsSelect';
 import { t } from '../../global/transShim';
