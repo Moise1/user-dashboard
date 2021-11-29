@@ -88,11 +88,7 @@ export default function Sidebar(props: Props) {
     { key: 15, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
   ];
 
-  const servicelistArray = [
-    { key: 111, listName: t('Menu.Channel') },
-    { key: 112, listName: t('Menu.Sources') },
-    { key: 113, listName: t('Menu.PricingRules') }
-  ];
+  
 
   const helplistArray = [
     { key: 511, listName: t('Menu.Channel') },
@@ -196,18 +192,10 @@ export default function Sidebar(props: Props) {
             ))}
           </SubMenu>
           {/* SERVICES  */}
-          <SubMenu
-            key="sub4"
-            style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
-            icon={<ServiceIcon />}
-            title={t('Menu.Services')}
-          >
-            {servicelistArray.map((obj) => (
-              <Menu.Item key={obj.key}>
-                <MenuListItem listName={obj.listName} />
-              </Menu.Item>
-            ))}
-          </SubMenu>
+          <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<ServiceIcon />}>
+            <span>{t('Menu.Services')}</span>
+          </Menu.Item>
+
           <SubMenu
             key="sub5"
             style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}

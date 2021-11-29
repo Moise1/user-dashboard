@@ -2,7 +2,9 @@ import coinIcon from '../../assets/tokenCoin.png';
 import bellIcon from '../../assets/bellIcon.svg';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
-import { Dropdown, ProgressBar } from 'react-bootstrap';
+import { Dropdown, Button, Progress } from 'antd';
+
+// import { Dropdown, ProgressBar } from 'react-bootstrap';
 import StoreList from '../SmallComponents/StoreList';
 import Logo from '../../assets//logoHGR.png';
 import { t } from 'src/global/transShim';
@@ -37,7 +39,7 @@ const Topbar = (props: Props) => {
             <span className="quota-progress">45% (12/13)</span>
           </div>
         </div>
-        <ProgressBar className="progress-bar" />
+        <Progress percent={45} showInfo={false} className="progress-bar" />
         <button type="button" className="update-btn">
           {t('Topbar.Update')}
         </button>
@@ -50,14 +52,16 @@ const Topbar = (props: Props) => {
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>
         </div>
-        <Dropdown className="dropdown">
-          <div className="country-name">Lavivatienda</div>
-          <img src={flag} className="flag" height="20" alt="" />
-          <img src={amazon} className="company" height="20" alt="" />
-          <Dropdown.Toggle className="dropdown-toggle" />
-          <Dropdown.Menu className="dropdown-menu">
-            <StoreList />
-          </Dropdown.Menu>
+
+        <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
+          <div className="">
+            <div className="country-name">Lavivatienda</div>
+            <img src={flag} className="lh-1" height="20" alt="" />
+            <img src={amazon} className="" height="20" alt="" />
+            <Button>
+              <i className="fa fa-caret-down" aria-hidden="true" />
+            </Button>
+          </div>
         </Dropdown>
       </div>
     </div>

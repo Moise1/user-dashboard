@@ -1,10 +1,12 @@
 @import 'config';
 
-// Screens and laptops
+// medium screens and laptops
 @media only screen and (min-width: 1224px) {
 
   .store-list-container{
-    position: relative;
+    position: absolute;
+    background: $white;
+    padding: .1rem;
     .store-list-search{
       display: flex;
       .search-input{

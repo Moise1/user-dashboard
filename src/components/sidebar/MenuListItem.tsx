@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { CircleDotIcon } from '../common/Icons';
 interface props {
-  listName: string | ReactNode;
+  listName?: string | ReactNode;
   onClick?: () => void;
 }
 

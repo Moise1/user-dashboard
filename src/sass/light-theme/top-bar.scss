@@ -276,7 +276,7 @@
       justify-content: flex-end;
 
       & > * {
-        margin-left: 2%;
+        margin-left: 3rem;
       }
 
       .quota-container {
@@ -289,9 +289,10 @@
         }
       }
       .progress-bar {
-        width: 10%;
+        width: 15%;
         margin-top: 1.2rem;
         border-radius: 12px;
+        background: transparent !important;
       }
       .update-btn {
         margin-top: 1rem;
@@ -439,9 +440,8 @@
         }
       }
       .progress-bar {
-        width: 10%;
         margin-top: 1.2rem;
-        border-radius: 12px;
+        // border-radius: 12px;
       }
       .update-btn {
         margin-top: 1rem;
