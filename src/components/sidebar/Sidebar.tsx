@@ -44,7 +44,7 @@ async function toggleDarkTheme() {
   darkApplied = !darkApplied;
 }
 
-export default function Sidebar(props: Props) {
+const Sidebar = (props: Props) => {
   const history = useHistory();
 
   const routeChange = () => {
@@ -83,12 +83,11 @@ export default function Sidebar(props: Props) {
     { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
     { key: 11, listName: t('Menu.PricingRules') },
     { key: 12, listName: t('Menu.BrowserExtensions') },
-    { key: 13, listName: t('Menu.VAProfile') },
-    { key: 14, listName: t('Menu.Templates') },
-    { key: 15, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
+    { key: 13, listName: t('Menu.Subscriptions'), onClick: () => history.push('/subscriptions') },
+    { key: 14, listName: t('Menu.VAProfile') },
+    { key: 15, listName: t('Menu.Templates') },
+    { key: 16, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
   ];
-
-  
 
   const helplistArray = [
     { key: 511, listName: t('Menu.Channel') },
@@ -178,6 +177,7 @@ export default function Sidebar(props: Props) {
           >
             Orders
           </Menu.Item>
+
           {/* SETTINGS LIST ITEMS .  */}
           <SubMenu
             key="sub3"
@@ -186,14 +186,19 @@ export default function Sidebar(props: Props) {
             title={t('Menu.Settings')}
           >
             {listArray.map((obj) => (
-              <Menu.Item key={obj.key}>
-                <MenuListItem listName={obj.listName} onClick={obj.onClick} />
+              <Menu.Item key={obj.key} onClick={obj.onClick}>
+                <MenuListItem listName={obj.listName} />
               </Menu.Item>
             ))}
           </SubMenu>
-          {/* SERVICES  */}
 
-          <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<ServiceIcon />} onClick={() => history.push('/services')}>
+          {/* SERVICES  */}
+          <Menu.Item
+            style={{ fontSize: '18px', fontWeight: 'bold' }}
+            key="2"
+            icon={<ServiceIcon />}
+            onClick={() => history.push('/services')}
+          >
             <span>{t('Menu.Services')}</span>
           </Menu.Item>
 
@@ -217,4 +222,6 @@ export default function Sidebar(props: Props) {
       </div>
     </Sider>
   );
-}
+};
+
+export default Sidebar;

@@ -1,7 +1,3 @@
-body {
-  font-weight: 500;
-  font-family: var(--mainFontFamily);
-}
 
 .fs-14 {
   font-size: var(--font-14);
@@ -10,29 +6,6 @@ body {
   z-index: 1;
 }
 
-/* HOVER LIST ITEMS  */
-/* .ant-menu-item:hover {
-  color: var(--color-white) !important;
-  font-size: var(--font-18) !important;
-  background-color: var(--color-primary) !important ;
-} */
-/* .ant-menu-submenu-title:hover {
-  color: var(--color-white) !important;
-  font-size: var(--font-18) !important;
-  background-color: var(--color-primary) !important ;
-}
-.ant-menu-submenu-title:hover path circle {
-  stroke: white !important;
-} */
-
-/* .ant-layout-sider-collapsed
-  .ant-menu:not(.ant-menu-horizontal)
-  .ant-menu-item-selected {
-  width: 30px;
-  min-width: 30px;
-  margin: auto;
-  border-radius: 10px;
-} */
 
 .c-262e80 {
   color: var(--color-dark-violet);

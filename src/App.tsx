@@ -8,11 +8,13 @@ import Sidebar from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Services } from './components/services/Services';
+import {Subscriptions} from './components/subscriptions/Subscriptions';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
+import './sass/light-theme/app.scss';
 
 const App = () => {
   const [collapse, setCollapse] = useState(true);
@@ -37,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <div className="overflow-hidden h-100vh">
+    <div>
       {staticValue ? (
         <div
           onClick={() => {
@@ -53,7 +55,7 @@ const App = () => {
       <SelectSupplierProvider>
         <Router>
           <Topbar handleSidebarMobile={handleSidebarMobile} />
-          <Layout className="bg-white layout_height">
+          <Layout className="layout">
             <SidebarCover staticValue={staticValue} setCollapse={setCollapse}>
               <Sidebar
                 staticvalue={staticValue}
@@ -73,6 +75,7 @@ const App = () => {
               <Route path="/sources" component={SourcesTable} />
               <Route path="/new-channel" component={ChannelCreate} />
               <Route path="/services" component={Services} />
+              <Route path="/subscriptions" component={Subscriptions} />
             </Switch>
           </Layout>
         </Router>

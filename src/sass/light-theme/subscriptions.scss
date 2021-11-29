@@ -1,0 +1,71 @@
+@import 'config';
+
+// medium screens and laptops
+@media only screen and (min-width: 1224px) {
+  .subscriptions-slider {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10rem 0 0 0;
+    width: 100%;
+    .subscription {
+      background: $white;
+      width: 264px;
+      max-height: 350px;
+      border-radius: 10px;
+
+      .monthly-rate {
+        margin-top: 0.9rem;
+        text-align: center;
+      }
+
+      .listings-count {
+        margin-bottom: 1rem;
+        text-align: center;
+        background: $light-blue;
+        color: $white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.4em;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+    }
+  }
+}
+
+// Large screens
+@media only screen and (min-width: 1824px) {
+  .subscriptions-slider {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10rem 0 0 0;
+    width: 100%;
+    .subscription {
+      background: $white;
+      width: 264px;
+      max-height: 350px;
+      border-radius: 10px;
+
+      .monthly-rate {
+        margin-top: 0.9rem;
+        text-align: center;
+      }
+
+      .listings-count {
+        margin-bottom: 1rem;
+        text-align: center;
+        background: $light-blue;
+        color: $white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0.4em;
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+    }
+  }
+}

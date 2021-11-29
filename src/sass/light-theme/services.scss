@@ -20,6 +20,42 @@
       background: $white;
       width: 264px;
       height: 300px;
+      border-radius: 10px;
+      .card-info {
+        margin-top: 5rem;
+        display: grid;
+        place-items: center;
+
+        a {
+          position: absolute;
+          bottom: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Large screens
+@media only screen and (min-width: 1824px) {
+  .services-container {
+    margin: 2rem 10rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    min-height: 100vh;
+    overflow-y: auto;
+    .service-img {
+      width: 20%;
+      position: absolute;
+      left: 40%;
+      top: 10%;
+    }
+
+    .service {
+      background: $white;
+      width: 264px;
+      height: 300px;
+      border-radius: 10px;
       .card-info {
         margin-top: 5rem;
         display: grid;

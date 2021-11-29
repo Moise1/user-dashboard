@@ -3,8 +3,7 @@ import '../../sass/light-theme/services.scss';
 import serviceImg from '../../assets/services/listing-service.png';
 
 export const Services = () => {
-  //   const { Meta } = Card;
-  const services = [
+  const data = [
     {
       id: 1,
       title: 'Title',
@@ -51,7 +50,7 @@ export const Services = () => {
 
   return (
     <div className="services-container">
-      {services.map((s) => (
+      {data.map((s) => (
         <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>
           <div className="card-info">
             <h1>{s.title}</h1>
