@@ -2,7 +2,7 @@
 
 // mobile devices breakpoints
 
-@media screen and (min-width: 320px) and (max-width: 480px) {
+@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .top-bar {
     position: sticky;
     top: 0;
@@ -128,6 +128,244 @@
     margin: auto;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
     background: $white !important;
+    .logo-container,
+    .quota-container {
+      display: none;
+    }
+
+    .menu-burger {
+      cursor: pointer;
+      width: auto;
+      border-radius: 8px;
+      padding: 12px;
+      background: $light-primary;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & .second {
+        margin: 5px 0;
+      }
+
+      & span {
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        background: $white;
+      }
+    }
+
+    .top-bar-nav {
+      padding-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      float: right;
+
+      & > * {
+        margin-left: 2rem;
+      }
+      .progress-bar,
+      .notifications,
+      .country-name,
+      .update-btn {
+        display: none;
+      }
+
+      .dropdown {
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0px 2px 6px #00000029;
+        border-radius: 10px;
+        opacity: 1;
+
+        &:focus {
+          border: none !important;
+          outline: none !important;
+        }
+
+        .flag {
+          line-height: $spacer * 0.25;
+        }
+
+        .company {
+          margin: 0 $spacer * 0.25;
+          line-height: $spacer * 0.25;
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          z-index: 2;
+        }
+        .dropdown-toggle {
+          background: transparent !important;
+          outline: none !important;
+          color: $black;
+
+          &:focus {
+            border: transparent !important;
+            outline: none !important;
+          }
+        }
+      }
+
+      .tokens-container {
+        color: $primary;
+        display: flex;
+        align-items: center;
+        line-height: 1px;
+      }
+
+      .token-number {
+        font-size: $font-large;
+        font-weight: bold;
+        margin: 0 $spacer * 0.25;
+      }
+
+      .tokens {
+        display: inline;
+        font-size: $font-large;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// iPad Mini:  Portrait and landscape styles
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  .top-bar {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+    background: $white !important;
+    .logo-container,
+    .quota-container {
+      display: none;
+    }
+
+    .menu-burger {
+      cursor: pointer;
+      width: auto;
+      border-radius: 8px;
+      padding: 12px;
+      background: $light-primary;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & .second {
+        margin: 5px 0;
+      }
+
+      & span {
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        background: $white;
+      }
+    }
+
+    .top-bar-nav {
+      padding-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      float: right;
+
+      & > * {
+        margin-left: 2rem;
+      }
+      .progress-bar,
+      .notifications,
+      .country-name,
+      .update-btn {
+        display: none;
+      }
+
+      .dropdown {
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 15px;
+        box-shadow: 0px 2px 6px #00000029;
+        border-radius: 10px;
+        opacity: 1;
+
+        &:focus {
+          border: none !important;
+          outline: none !important;
+        }
+
+        .flag {
+          line-height: $spacer * 0.25;
+        }
+
+        .company {
+          margin: 0 $spacer * 0.25;
+          line-height: $spacer * 0.25;
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          z-index: 2;
+        }
+        .dropdown-toggle {
+          background: transparent !important;
+          outline: none !important;
+          color: $black;
+
+          &:focus {
+            border: transparent !important;
+            outline: none !important;
+          }
+        }
+      }
+
+      .tokens-container {
+        color: $primary;
+        display: flex;
+        align-items: center;
+        line-height: 1px;
+      }
+
+      .token-number {
+        font-size: $font-large;
+        font-weight: bold;
+        margin: 0 $spacer * 0.25;
+      }
+
+      .tokens {
+        display: inline;
+        font-size: $font-large;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// iPad Pro: Portraid and Landscape
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .top-bar {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+    background: $white !important;
+    
     .logo-container,
     .quota-container {
       display: none;
@@ -370,12 +608,13 @@
           height: 36vh;
           overflow-y: scroll;
         }
-         
+
         .dropdown-toggle {
           background: transparent !important;
           outline: none !important;
           color: $black;
-          &:focus, &:active {
+          &:focus,
+          &:active {
             border: transparent !important;
             outline: none !important;
             border: none !important;
