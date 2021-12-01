@@ -1,79 +1,69 @@
 @import 'config';
 
 // Mobile devices
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px){
-    .listings-container{
-
-        .web-search-bar{
-            display: none;
-        };
-
-        .phone-search-bar{
-            margin: 20px 0;
-        }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .listings-container {
+    .web-search-bar {
+      display: none;
     }
-};
 
-@media only screen and (min-device-width: 450px) and (max-device-width: 1034px){
-    .listings-container{
-
-        .web-search-bar{
-            display: none;
-        };
-
-        .phone-search-bar{
-            margin: 20px 0;
-        }
+    .phone-search-bar {
+      margin: 20px 0;
     }
-};
+  }
+}
 
+@media only screen and (min-device-width: 450px) and (max-device-width: 1034px) {
+  .listings-container {
+    .web-search-bar {
+      display: none;
+    }
+
+    .phone-search-bar {
+      margin: 20px 0;
+    }
+  }
+}
 
 // iPads and Tablets
 
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) 
-and (-webkit-min-device-pixel-ratio: 2){
-    .listings-container{
-
-        .web-search-bar{
-            display: none;
-        };
-
-        .phone-search-bar{
-            margin: 20px 0;
-        }
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .listings-container {
+    .web-search-bar {
+      display: none;
     }
+
+    .phone-search-bar {
+      margin: 20px 0;
+    }
+  }
 }
 
-
 // Screens and laptops
-@media only screen and (min-width: 1224px){
-    
-    .listings-container{
-        overflow-y: scroll;
-    };
+@media only screen and (min-width: 1224px) {
+  .listings-container {
+    overflow-y: scroll;
+  }
 
-    .listings-table {
-        max-height: 53vh;
-        overflow-x: scroll;
-        .listings-table-head {
-          color: $primary;
-          white-space: nowrap;
-          font-weight: bold;
-          position: sticky;
-          top: 0;
-          background-color: $white;
-          font-size: $font-large !important;
-          z-index: 1;
-        }
-      }
-};
-
+  .listings-table {
+    max-height: 53vh;
+    overflow-x: scroll;
+    .listings-table-head {
+      color: $primary;
+      white-space: nowrap;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      background-color: $white;
+      font-size: $font-large !important;
+      z-index: 1;
+    }
+  }
+}
 
 // Large screens
-@media only screen and (min-width: 1824px){
-
-    .listings-container{
-        overflow-y: scroll;
-    };
-    
+@media only screen and (min-width: 1920px) {
+  .listings-container {
+    overflow-y: scroll;
+  }
 }

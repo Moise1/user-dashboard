@@ -6,28 +6,29 @@
     display: block;
     margin: 3rem 2rem;
     width: 100%;
-    .subscriptions-detail{
+    .subscriptions-detail {
       font-weight: bold;
-    };
+    }
 
-    .subscriptions-limit, .subscriptions-items{
+    .subscriptions-limit,
+    .subscriptions-items {
       color: $primary;
 
-      & span{
+      & span {
         background: $mild-light-blue;
         color: $light-blue;
         margin-left: 1rem;
-        padding: .2rem .8rem;
+        padding: 0.2rem 0.8rem;
         border-radius: 5px;
-      };
-    };
-    
-    .subscription-cancel{
+      }
+    }
+
+    .subscription-cancel {
       color: $black;
       background: $mild-light-blue;
       border-radius: 5px;
       font-weight: bold;
-      &:hover{
+      &:hover {
         color: $black;
       }
     }
@@ -123,7 +124,6 @@
       .control-btn {
         background: $light-primary;
         border-radius: 5px;
-        border: 2px solid red;
         display: block;
 
         i {
@@ -138,10 +138,37 @@
 }
 
 // Large screens
-@media only screen and (min-width: 1824px) {
+@media only screen and (min-width: 1920px) {
   .carousel-container {
     display: block;
     margin-top: 9rem;
+
+    .subscriptions-detail {
+      font-weight: bold;
+    }
+
+    .subscriptions-limit,
+    .subscriptions-items {
+      color: $primary;
+
+      & span {
+        background: $mild-light-blue;
+        color: $light-blue;
+        margin-left: 1rem;
+        padding: 0.2rem 0.8rem;
+        border-radius: 5px;
+      }
+    }
+
+    .subscription-cancel {
+      color: $black;
+      background: $mild-light-blue;
+      border-radius: 5px;
+      font-weight: bold;
+      &:hover {
+        color: $black;
+      }
+    }
     .carousel {
       display: grid;
       position: absolute;

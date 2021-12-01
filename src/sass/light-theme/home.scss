@@ -9,24 +9,24 @@
 // Screens and laptops
 @media only screen and (min-width: 1224px) {
   .home-container {
-    .phone-search-bar{
-        display: none;
-    };
-    .web-search-bar{
-        margin: 20px 0;
+    .phone-search-bar {
+      display: none;
+    }
+    .web-search-bar {
+      margin: 20px 0;
     }
   }
 }
 
 // Large screens
 
-@media only screen and (min-width: 1824px) {
+@media only screen and (min-width: 1920px) {
   .home-container {
-    .phone-search-bar{
-        display: none;
-    };
-    .web-search-bar{
-        margin: 20px 0;
+    .phone-search-bar {
+      display: none;
+    }
+    .web-search-bar {
+      margin: 20px 0;
     }
   }
 }
