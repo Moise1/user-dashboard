@@ -81,7 +81,7 @@ const Sidebar = (props: Props) => {
   const listArray = [
     { key: 9, listName: t('Menu.Channel') },
     { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
-    { key: 11, listName: t('Menu.PricingRules') },
+    { key: 11, listName: t('Menu.PricingRules'), onClick: () => history.push('/pricing-rules') },
     { key: 12, listName: t('Menu.BrowserExtensions') },
     { key: 13, listName: t('Menu.Subscriptions'), onClick: () => history.push('/subscriptions') },
     { key: 14, listName: t('Menu.VAProfile') },

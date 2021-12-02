@@ -9,6 +9,7 @@ import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Services } from './components/services/Services';
 import {Subscriptions} from './components/subscriptions/Subscriptions';
+import {PricingRules} from './components/pricing-rules/PricingRules';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
@@ -76,6 +77,7 @@ const App = () => {
               <Route path="/new-channel" component={ChannelCreate} />
               <Route path="/services" component={Services} />
               <Route path="/subscriptions" component={Subscriptions} />
+              <Route path="/pricing-rules" component={PricingRules} />
             </Switch>
           </Layout>
         </Router>

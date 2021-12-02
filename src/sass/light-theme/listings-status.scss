@@ -1,40 +1,48 @@
 @import 'config';
 
+
+// Extra Large screens
+
+.status-bar {
+  margin: 2rem;
+  height: auto;
+  position: relative;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 10px;
+  background: $white 0% 0% no-repeat padding-box;
+  opacity: 1;
+  box-shadow: 0px 3px 6px #2338c129;
+}
+
+.status-btn {
+  border-radius: 10px !important;
+  padding: $spacer * 0.25 0;
+}
+.active-btn {
+  padding: .9rem;
+  font-size: $font-large;
+  font-weight: bold;
+
+  &:focus {
+    border: none !important;
+    outline: none !important;
+    color: $white;
+    background: $light-primary;
+  }
+}
+
+.inactive-btn {
+  background: transparent !important;
+  font-size: $font-large;
+  font-weight: bold !important;
+  color: $primary;
+};
+
 // medium screens and laptops
-@media only screen and (min-width: 1224px) {
-  .status-bar {
-    margin-top: 2rem;
-    padding: 1rem 0;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    border-radius: 10px;
-    background: $white 0% 0% no-repeat padding-box;
-    opacity: 1;
-    box-shadow: 0px 3px 6px #2338c129;
-  }
-
-  .status-btn {
-    border-radius: 10px !important;
-    padding: $spacer * 0.25 0;
-  }
-  .active-btn {
-    padding: .9rem;
-    font-size: $font-large;
-    font-weight: bold;
-
-    &:focus {
-      border: none !important;
-      outline: none !important;
-      color: $white;
-      background: $light-primary;
-    }
-  }
-
-  .inactive-btn {
-    background: transparent !important;
-    font-size: $font-large;
-    font-weight: bold !important;
-    color: $primary;
+@media only screen and (max-width: 1224px) {
+  .status-bar{
+    margin: 0;
   }
 }
