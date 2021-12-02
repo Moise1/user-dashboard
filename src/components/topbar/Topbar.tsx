@@ -3,8 +3,6 @@ import bellIcon from '../../assets/bellIcon.svg';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
-
-// import { Dropdown, ProgressBar } from 'react-bootstrap';
 import StoreList from '../SmallComponents/StoreList';
 import Logo from '../../assets//logoHGR.png';
 import { t } from 'src/global/transShim';

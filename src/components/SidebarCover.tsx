@@ -2,12 +2,11 @@ import React from 'react';
 
 interface props {
   staticValue: boolean;
-  // handleMobile: boolean;
   setCollapse: (value: boolean) => void;
   children?: JSX.Element | JSX.Element[];
 }
 
-export default function SidbarCover(myProps: props) {
+const  SidebarCover = (myProps: props) => {
   const { staticValue, setCollapse, children } = myProps;
   return (
     <div
@@ -28,4 +27,6 @@ export default function SidbarCover(myProps: props) {
       {children}
     </div>
   );
-}
+};
+
+export default SidebarCover;

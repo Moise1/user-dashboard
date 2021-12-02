@@ -3,15 +3,18 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ChannelCreate from './components/ChannelCreate';
 import Topbar from './components/topbar/Topbar';
-import SidbarCover from './components/SidbarCover';
+import SidebarCover from './components/SidebarCover';
 import Sidebar from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
+import { Services } from './components/services/Services';
+import {Subscriptions} from './components/subscriptions/Subscriptions';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
+import './sass/light-theme/app.scss';
 
 const App = () => {
   const [collapse, setCollapse] = useState(true);
@@ -36,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <div className="overflow-hidden h-100vh">
+    <div>
       {staticValue ? (
         <div
           onClick={() => {
@@ -51,16 +54,16 @@ const App = () => {
 
       <SelectSupplierProvider>
         <Router>
-          <Topbar handleSidebarMobile={handleSidebarMobile}/>
-          <Layout className="bg-white layout_height">
-            <SidbarCover staticValue={staticValue} setCollapse={setCollapse}>
+          <Topbar handleSidebarMobile={handleSidebarMobile} />
+          <Layout className="layout">
+            <SidebarCover staticValue={staticValue} setCollapse={setCollapse}>
               <Sidebar
                 staticvalue={staticValue}
                 togglestatic={toggleStaticValue}
                 toggle={toggleCollapse}
                 collapsed={collapse}
               />
-            </SidbarCover>
+            </SidebarCover>
             <Switch>
               <Route exact path="/">
                 <Redirect to="/home" />
@@ -69,8 +72,10 @@ const App = () => {
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
               <Route path="/sources-setting" component={Sources} />
-              <Route path="/sources" component={SourcesTable}/>
+              <Route path="/sources" component={SourcesTable} />
               <Route path="/new-channel" component={ChannelCreate} />
+              <Route path="/services" component={Services} />
+              <Route path="/subscriptions" component={Subscriptions} />
             </Switch>
           </Layout>
         </Router>

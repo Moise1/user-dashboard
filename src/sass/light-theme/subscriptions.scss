@@ -1,0 +1,262 @@
+@import 'config';
+
+// medium screens and laptops
+@media only screen and (min-width: 1224px) {
+  .carousel-container {
+    display: block;
+    margin: 3rem 2rem;
+    width: 100%;
+    .subscriptions-detail {
+      font-weight: bold;
+    }
+
+    .subscriptions-limit,
+    .subscriptions-items {
+      color: $primary;
+
+      & span {
+        background: $mild-light-blue;
+        color: $light-blue;
+        margin-left: 1rem;
+        padding: 0.2rem 0.8rem;
+        border-radius: 5px;
+      }
+    }
+
+    .subscription-cancel {
+      color: $black;
+      background: $mild-light-blue;
+      border-radius: 5px;
+      font-weight: bold;
+      &:hover {
+        color: $black;
+      }
+    }
+    .carousel {
+      display: grid;
+      position: absolute;
+      height: auto;
+      margin: 2rem 12.5rem;
+      padding: 0 !important;
+      width: auto;
+
+      .subscription {
+        background: $white;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        padding: 0.3rem 0.3rem;
+        transition: 0.3s ease-in-out;
+        width: 90% !important;
+
+        .discount {
+          width: 100%;
+          position: relative;
+
+          .twenty-off,
+          .forty-off {
+            position: absolute;
+            right: 0;
+            padding: 0 3px;
+            background: $light-gray;
+            font-weight: bold;
+            border-radius: 5px;
+            color: $green;
+          }
+
+          .euro {
+            position: absolute;
+            left: 28%;
+            bottom: 53%;
+            color: $black;
+            opacity: 0.56;
+          }
+          .duration {
+            position: absolute;
+            right: 40%;
+            top: 100%;
+          }
+          .frequency {
+            position: absolute;
+            bottom: 30%;
+            right: 25%;
+          }
+
+          .frequency,
+          .duration {
+            font-size: $font-small;
+          }
+        }
+
+        .divider {
+          width: 100% !important;
+        }
+        .monthly-rate {
+          margin-top: 0.8rem;
+          text-align: center;
+        }
+
+        .listings-count {
+          margin-bottom: 1rem;
+          text-align: center;
+          background: $light-blue;
+          color: $white;
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 0.4em;
+          width: 100%;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+      }
+    }
+
+    .control-btns-container {
+      width: 80%;
+      position: absolute;
+      top: 55%;
+      margin-left: 1rem;
+      left: 10%;
+      display: flex;
+      justify-content: space-between;
+
+      .control-btn {
+        background: $light-primary;
+        border-radius: 5px;
+        display: block;
+
+        i {
+          color: $white !important;
+        }
+        &:hover {
+          color: $white !important;
+        }
+      }
+    }
+  }
+}
+
+// Large screens
+@media only screen and (min-width: 1920px) {
+  .carousel-container {
+    display: block;
+    margin-top: 9rem;
+
+    .subscriptions-detail {
+      font-weight: bold;
+    }
+
+    .subscriptions-limit,
+    .subscriptions-items {
+      color: $primary;
+
+      & span {
+        background: $mild-light-blue;
+        color: $light-blue;
+        margin-left: 1rem;
+        padding: 0.2rem 0.8rem;
+        border-radius: 5px;
+      }
+    }
+
+    .subscription-cancel {
+      color: $black;
+      background: $mild-light-blue;
+      border-radius: 5px;
+      font-weight: bold;
+      &:hover {
+        color: $black;
+      }
+    }
+    .carousel {
+      display: grid;
+      position: absolute;
+      height: auto;
+      margin: 0 12.5rem;
+      padding: 0 !important;
+      width: auto;
+
+      .subscription {
+        background: $white;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        padding: 0.3rem 0.3rem;
+        transition: 0.3s ease-in-out;
+        width: 90% !important;
+
+        .discount {
+          width: 100%;
+          position: relative;
+
+          .twenty-off,
+          .forty-off {
+            position: absolute;
+            right: 0;
+            padding: 0 3px;
+            background: $light-gray;
+            font-weight: bold;
+            border-radius: 5px;
+            color: $green;
+          }
+
+          .euro {
+            position: absolute;
+            left: 28%;
+            bottom: 53%;
+            color: $black;
+            opacity: 0.56;
+          }
+          .duration {
+            position: absolute;
+            right: 40%;
+            top: 100%;
+          }
+          .frequency {
+            position: absolute;
+            bottom: 30%;
+            right: 25%;
+          }
+
+          .frequency,
+          .duration {
+            font-size: $font-small;
+          }
+        }
+
+        .divider {
+          width: 100% !important;
+        }
+        .monthly-rate {
+          margin-top: 0.8rem;
+          text-align: center;
+        }
+
+        .listings-count {
+          margin-bottom: 1rem;
+          text-align: center;
+          background: $light-blue;
+          color: $white;
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 0.4em;
+          width: 100%;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+      }
+    }
+
+    .control-btns-container {
+      width: 80%;
+      position: absolute;
+      top: 55%;
+      margin-left: 1rem;
+      left: 9%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
