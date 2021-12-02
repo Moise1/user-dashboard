@@ -1,0 +1,25 @@
+// Extra large screens
+
+.pricing-rules-container {
+  width: 100%;
+  .table {
+    margin: 5rem 3rem 5rem 13rem;
+    width: 70%;
+  }
+
+  .form {
+    position: absolute;
+    left: 0;
+    margin-top: 3.2rem;
+    display: flex;
+    justify-content: space-evenly;
+
+    .rule-btn,
+    .select,
+    .input {
+      width: 30%;
+      margin-left: 1.5rem;
+      border-radius: 5px;
+    }
+  }
+}
