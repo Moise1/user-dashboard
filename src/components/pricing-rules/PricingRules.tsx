@@ -8,52 +8,93 @@ export const PricingRules = () => {
   const dataSource = [
     {
       key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street'
+      source: 'Ali Express',
+      priceFrom: 32,
+      priceTo: 30,
+      markUp: 0,
+      status: 'disabled',
+      options: (
+        <div className="options">
+          <span role="button" onClick={() => alert('Clicked')}>
+            <i className="fa fa-trash" aria-hidden="true" />
+          </span>
+          <span role="button" onClick={() => alert('Clicked')}>
+            <i className="fa fa-pencil" aria-hidden="true" />
+          </span>
+        </div>
+      )
     },
     {
       key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street'
+      source: 'Amazon',
+      priceFrom: 32,
+      priceTo: 30,
+      markUp: 0,
+      status: 'disabled',
+      options: (
+        <div className="options">
+          <span role="button" onClick={() => alert('Clicked')}>
+            <i className="fa fa-trash" aria-hidden="true" />
+          </span>
+          <span role="button" onClick={() => alert('Clicked')}>
+            <i className="fa fa-pencil" aria-hidden="true" />
+          </span>
+        </div>
+      )
     }
   ];
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
+      title: 'Source',
+      dataIndex: 'source',
+      key: 'source'
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age'
+      title: 'Price From',
+      dataIndex: 'priceFrom',
+      key: 'priceFrom'
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address'
+      title: 'Price to',
+      dataIndex: 'priceTo',
+      key: 'priceTo'
+    },
+    {
+      title: 'Mark Up',
+      dataIndex: 'markUp',
+      key: 'markUp'
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status'
+    },
+
+    {
+      title: '',
+      dataIndex: 'options',
+      key: 'options'
     }
   ];
 
   return (
     <div className="pricing-rules-container">
-      <StatusBar>
-        <h1>Add new rule</h1>
-        <p>
+      <StatusBar className="pricing-rules-bar">
+        <h4 className="add-rule">Add new rule</h4>
+        <p className="status-description">
           The initial status of the rule will be “Disabled”, so that you can double check your set of rules before
           enabling it.
         </p>
-        <Form className="form">
+        <Form className="form" layout="inline">
           <Select className="select" value="Select" onChange={() => console.log('Selected...')}>
             <Option value="1">Source 1</Option>
             <Option value="2">Source 2</Option>
           </Select>
-          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Add from price" />
-          <Input className="input" type="text" onChange={() => console.log('Input...')}  placeholder="Add to price"/>
-          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Mark up"/>
+
+          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Set a price from"/>
+          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Set a price to" />
+          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Mark up" />
           <Button className="rule-btn">Add rule</Button>
         </Form>
       </StatusBar>
