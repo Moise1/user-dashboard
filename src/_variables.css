@@ -124,6 +124,7 @@ input {
 .ant-layout {
   background-color: var(--bgPage2) !important;
 }
+
 .ant-table {
   background-color: var(--tableBg) !important;
   border-color: var(--borderColor) !important;

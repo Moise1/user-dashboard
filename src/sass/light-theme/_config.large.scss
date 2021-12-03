@@ -1,0 +1,21 @@
+@media only screen and (min-width: 1440px) {
+  h1 {
+    font-size: $heading-font;
+  }
+
+  h2 {
+    font-size: $subheading-font;
+  }
+
+  h3 {
+    font-size: $sub-subheading-font;
+  }
+
+  p {
+    font-size: $paragraf-font;
+  }
+
+  button {
+    $font-large: 1.2rem;
+  }
+}

@@ -1,0 +1,9 @@
+@media only screen and (max-width: 750px) {
+  :root {
+    $heading-font: 0.5rem;
+
+    h1 {
+      font-size: $heading-font;
+    }
+  }
+}
