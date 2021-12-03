@@ -116,7 +116,7 @@
   .control-btns-container {
     width: 80%;
     position: absolute;
-    top: 70%;
+    top: 60%;
     margin-left: 1rem;
     left: 10%;
     display: flex;
@@ -137,92 +137,4 @@
   }
 }
 
-// medium screens and laptops
-@media only screen and (max-width: 1224px) {
-  .carousel-container {
-    .carousel {
-      display: grid;
-      position: absolute;
-      height: auto;
-      margin: 2rem 12.5rem;
-      padding: 0 !important;
-      width: auto;
-
-      .subscription {
-        background: $white;
-        display: grid;
-        place-items: center;
-        border-radius: 10px;
-        padding: 0.3rem 0.3rem;
-        transition: 0.3s ease-in-out;
-        width: 90% !important;
-
-        .discount {
-          width: 100%;
-          position: relative;
-
-          .twenty-off,
-          .forty-off {
-            position: absolute;
-            right: 0;
-            padding: 0 3px;
-            background: $light-gray;
-            font-weight: bold;
-            border-radius: 5px;
-            color: $green;
-          }
-
-          .euro {
-            position: absolute;
-            left: 28%;
-            bottom: 53%;
-            color: $black;
-            opacity: 0.56;
-          }
-          .duration {
-            position: absolute;
-            right: 40%;
-            top: 100%;
-          }
-          .frequency {
-            position: absolute;
-            bottom: 30%;
-            right: 25%;
-          }
-
-          .frequency,
-          .duration {
-            font-size: $font-small;
-          }
-        }
-
-        .divider {
-          width: 100% !important;
-        }
-        .monthly-rate {
-          margin-top: 0.8rem;
-          text-align: center;
-        }
-
-        .listings-count {
-          margin-bottom: 1rem;
-          text-align: center;
-          background: $light-blue;
-          color: $white;
-          position: absolute;
-          top: 0;
-          left: 0;
-          padding: 0.4em;
-          width: 100%;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-      }
-    }
-
-    .control-btns-container {
-      top: 43%;
-    }
-  }
-}
 

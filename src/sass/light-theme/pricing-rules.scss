@@ -4,11 +4,9 @@
 
 .options {
   display: flex;
-  border: 2px solid red;
   justify-content: space-between;
   span {
     cursor: pointer;
-    // margin-left: .5rem;
   }
 }
 .pricing-rules-container {
