@@ -1,5 +1,10 @@
 @import 'config';
 
+// Extra large screens
+.listings-container{
+  width: auto;
+  margin: auto;
+}
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .listings-container {
@@ -41,10 +46,7 @@
 
 // Screens and laptops
 @media only screen and (min-width: 1224px) {
-  .listings-container {
-    overflow-y: scroll;
-  }
-
+ 
   .listings-table {
     max-height: 53vh;
     overflow-x: scroll;
@@ -61,9 +63,3 @@
   }
 }
 
-// Large screens
-@media only screen and (min-width: 1920px) {
-  .listings-container {
-    overflow-y: scroll;
-  }
-}
