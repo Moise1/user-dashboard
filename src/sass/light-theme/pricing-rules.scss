@@ -8,9 +8,14 @@
   span {
     cursor: pointer;
   }
+  .trash-icon {
+    border: 2px solid red;
+    background: $black;
+  }
 }
 .pricing-rules-container {
-  width: auto;
+
+  width: 70%;
   margin: auto;
   margin-top: 1rem;
 

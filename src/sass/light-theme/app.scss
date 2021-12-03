@@ -1,4 +1,8 @@
 @import 'config';
+@import 'config.large';
+@import 'config.medium';
+@import 'config.small';
+
 
 .layout{
     background: $super-light-blue;
