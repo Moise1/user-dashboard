@@ -1,7 +1,6 @@
 @import 'config';
 
 // Extra Large screens
-
 .services-container {
   margin: 2rem 6rem;
   width: 100%;
@@ -37,10 +36,9 @@
   }
 }
 
-// Medium screens and laptops
-@media only screen and (max-width: 1224px) {
+@media only screen and (min-width: 1440px) {
   .services-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   .card-info {
     h1 {
@@ -49,27 +47,20 @@
   }
 }
 
-// iPads screens
-@media only screen and (max-width: 1063px) {
+@media only screen and (max-width: 1440px) {
+  .services-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
   .services-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .card-info {
-    h1 {
-      font-size: $font-large;
-    }
-  }
-};
+}
 
-
-// mobile phone screens
-@media only screen and (max-width: 736px) {
+@media only screen and (max-width: 750px) {
   .services-container {
     grid-template-columns: repeat(1, 1fr);
-  }
-  .card-info {
-    h1 {
-      font-size: $font-medium;
-    }
   }
 }
