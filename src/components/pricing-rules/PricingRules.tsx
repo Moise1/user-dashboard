@@ -1,7 +1,11 @@
 import { Table, Form, Input, Select, Button } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTrash, faCog } from '@fortawesome/free-solid-svg-icons';
 import StatusBar from '../SmallComponents/StatusBar';
 import '../../sass/light-theme/pricing-rules.scss';
 
+library.add(faTrash, faCog);
 export const PricingRules = () => {
   const { Option } = Select;
 
@@ -16,7 +20,7 @@ export const PricingRules = () => {
       options: (
         <div className="options">
           <span role="button" onClick={() => alert('Clicked')}>
-            <i className="fa fa-trash" aria-hidden="true" />
+            <FontAwesomeIcon icon={faTrash} />
           </span>
           <span role="button" onClick={() => alert('Clicked')}>
             <i className="fa fa-pencil" aria-hidden="true" />
@@ -92,7 +96,12 @@ export const PricingRules = () => {
             <Option value="2">Source 2</Option>
           </Select>
 
-          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Set a price from"/>
+          <Input
+            className="input"
+            type="text"
+            onChange={() => console.log('Input...')}
+            placeholder="Set a price from"
+          />
           <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Set a price to" />
           <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Mark up" />
           <Button className="rule-btn">Add rule</Button>
