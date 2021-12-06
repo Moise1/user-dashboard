@@ -11,6 +11,7 @@ import { Services } from './components/services/Services';
 import {Subscriptions} from './components/subscriptions/Subscriptions';
 import {PricingRules} from './components/pricing-rules/PricingRules';
 import {BrowserExtensions} from './components/browser-extensions/BrowserExtensions';
+import {VaProfiles} from './components/va-profiles/VaProfiles';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
@@ -80,6 +81,7 @@ const App = () => {
               <Route path="/subscriptions" component={Subscriptions} />
               <Route path="/pricing-rules" component={PricingRules} />
               <Route path="/browser-extensions" component={BrowserExtensions} />
+              <Route path="/va-profiles" component={VaProfiles} />
             </Switch>
           </Layout>
         </Router>

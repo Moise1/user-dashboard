@@ -22,8 +22,7 @@ export const BrowserExtensions = () => {
       divider: <Divider />,
       installText: <p className="install-text">Install and start selling!</p>,
       installBtn: <Button className="install-btn">Install</Button>,
-      tutorial: <p className="tutorial">Manual Lister tutorial</p>
-
+      tutorial: 'Manual Lister tutorial'
     },
     {
       id: 2,
@@ -40,14 +39,14 @@ export const BrowserExtensions = () => {
       divider: <Divider />,
       installText: 'Install and start monitoring!',
       installBtn: <Button className="install-btn">Install</Button>,
-      tutorial: <p className="tutorial">Manual Lister tutorial</p>
+      tutorial: 'Manual Lister tutorial'
     }
   ];
   return (
     <div className="browser-extensions">
-      <Row className="card-container" gutter={[32, {xs: 16, lg: 0}]}>
+      <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
         {data.map((d) => (
-          <Col xs={24} sm={8} xl={8} key={d.id}>
+          <Col xs={24} sm={12} xl={8} key={d.id}>
             <Card className="card">
               <div className="upper-section">
                 <h6 className="title">{d.title}</h6>
@@ -59,7 +58,12 @@ export const BrowserExtensions = () => {
                 {d.divider}
                 {d.installText}
                 {d.installBtn}
-                {d.tutorial}
+                <a href="#" className="tutorial">
+                  {d.tutorial}
+                  <span>
+                    <i className="fa fa-arrow-right" aria-hidden="true" />
+                  </span>
+                </a>
               </div>
             </Card>
           </Col>
