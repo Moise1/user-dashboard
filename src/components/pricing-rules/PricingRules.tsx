@@ -1,11 +1,7 @@
 import { Table, Form, Input, Select, Button } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faCog } from '@fortawesome/free-solid-svg-icons';
 import StatusBar from '../SmallComponents/StatusBar';
 import '../../sass/light-theme/pricing-rules.scss';
 
-library.add(faTrash, faCog);
 export const PricingRules = () => {
   const { Option } = Select;
 
@@ -16,11 +12,11 @@ export const PricingRules = () => {
       priceFrom: 32,
       priceTo: 30,
       markUp: 0,
-      status: 'disabled',
+      status: <button className="status-btn">Disabled</button>,
       options: (
         <div className="options">
           <span role="button" onClick={() => alert('Clicked')}>
-            <FontAwesomeIcon icon={faTrash} />
+            <i className="fa fa-trash" aria-hidden="true" />
           </span>
           <span role="button" onClick={() => alert('Clicked')}>
             <i className="fa fa-pencil" aria-hidden="true" />
@@ -34,7 +30,7 @@ export const PricingRules = () => {
       priceFrom: 32,
       priceTo: 30,
       markUp: 0,
-      status: 'disabled',
+      status: <button className="status-btn enabled">Enabled</button>,
       options: (
         <div className="options">
           <span role="button" onClick={() => alert('Clicked')}>
@@ -91,9 +87,13 @@ export const PricingRules = () => {
           enabling it.
         </p>
         <Form className="form" layout="inline">
-          <Select className="select" value="Select" onChange={() => console.log('Selected...')}>
-            <Option value="1">Source 1</Option>
-            <Option value="2">Source 2</Option>
+          <Select
+            defaultValue="Select"
+            className="select"
+            onChange={() => console.log('Selected...')}
+          >
+            <Option value="Source 1">Source 1</Option>
+            <Option value="Source 2">Source 2</Option>
           </Select>
 
           <Input

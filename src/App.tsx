@@ -10,6 +10,7 @@ import Listings from './components/listings/Listings';
 import { Services } from './components/services/Services';
 import {Subscriptions} from './components/subscriptions/Subscriptions';
 import {PricingRules} from './components/pricing-rules/PricingRules';
+import {BrowserExtensions} from './components/browser-extensions/BrowserExtensions';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
@@ -78,6 +79,7 @@ const App = () => {
               <Route path="/services" component={Services} />
               <Route path="/subscriptions" component={Subscriptions} />
               <Route path="/pricing-rules" component={PricingRules} />
+              <Route path="/browser-extensions" component={BrowserExtensions} />
             </Switch>
           </Layout>
         </Router>
