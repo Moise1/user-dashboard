@@ -1,5 +1,5 @@
 import coinIcon from '../../assets/tokenCoin.png';
-import bellIcon from '../../assets/bellIcon.svg';
+// import bellIcon from '../../assets/bellIcon.svg';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
@@ -7,6 +7,8 @@ import StoreList from '../SmallComponents/StoreList';
 import Logo from '../../assets//logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
+import { Badge } from 'antd';
+// import { BellOutlined } from '@ant-design/icons';
 
 interface Props {
   handleSidebarMobile: () => void;
@@ -42,8 +44,12 @@ const Topbar = (props: Props) => {
           {t('Topbar.Update')}
         </button>
         <div className="notifications-container">
-          <img className="nofications-bell" src={bellIcon} alt="" />
-          <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span>
+          <Badge count={2}>
+            <i className="fa fa-bell-o" aria-hidden="true"/>
+            {/* <BellOutlined/> */}
+          </Badge>
+          {/* <img className="nofications-bell" src={bellIcon} alt="" />
+          <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span> */}
         </div>
         <div className="tokens-container">
           <img src={coinIcon} alt="coinIcon" />
