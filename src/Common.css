@@ -1,11 +1,9 @@
-
 .fs-14 {
   font-size: var(--font-14);
 }
 .z-1 {
   z-index: 1;
 }
-
 
 .c-262e80 {
   color: var(--color-dark-violet);
@@ -464,10 +462,6 @@ label {
 }
 
 @media (max-width: 991.98px) {
-  .w-sidebar-toggle {
-    width: 0;
-  }
-
   .ant-layout-sider {
     position: fixed;
   }
@@ -1577,7 +1571,6 @@ table {
   border-bottom: 1px solid #dedede !important;
 }
 
-
 .source-table-head {
   background-color: #fff;
 
@@ -2213,7 +2206,7 @@ table {
   .box-width {
     width: 100%;
   }
-  
+
   .source-table td,
   .source-table th {
     padding: 0.45rem;
