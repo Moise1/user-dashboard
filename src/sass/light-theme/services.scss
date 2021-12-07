@@ -36,6 +36,8 @@
   }
 }
 
+// laptop screens
+
 @media only screen and (min-width: 1440px) {
   .services-container {
     grid-template-columns: repeat(4, 1fr);
@@ -47,11 +49,14 @@
   }
 }
 
+
 @media only screen and (max-width: 1440px) {
   .services-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+// Tablet screens
 
 @media only screen and (max-width: 1000px) {
   .services-container {
@@ -59,6 +64,7 @@
   }
 }
 
+// mobile phone screen;
 @media only screen and (max-width: 750px) {
   .services-container {
     grid-template-columns: repeat(1, 1fr);

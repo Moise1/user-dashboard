@@ -1,0 +1,89 @@
+@import 'config';
+
+// Extra large screens
+
+.cover-img {
+  width: 10%;
+  margin-bottom: 2rem;
+}
+
+.descircle {
+  margin: 5rem 0;
+}
+.browsers {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+  img {
+    width: 10%;
+  }
+}
+
+.install-btn {
+  background: $light-primary;
+  color: $white;
+  border-radius: 10px;
+  padding: 0.3rem 3rem;
+
+  &:hover {
+    color: $white;
+    background: $light-primary;
+  }
+}
+
+.title,
+.description,
+.install-text {
+  color: $primary !important;
+}
+.browser-extensions {
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  background: $super-light-blue;
+
+  .card-container {
+    margin: 5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card {
+      width: 70% !important;
+      margin: auto;
+      .upper-section {
+        display: grid;
+        place-items: center;
+      }
+      .lower-section {
+        margin-top: 2rem;
+        display: grid;
+        row-gap: 0.5rem;
+        place-items: center;
+
+        .tutorial {
+          color: $primary !important;
+
+          span {
+            margin-left: 0.3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Tablet screens
+
+@media only screen and (max-width: 1000px) {
+  .card {
+    margin: auto;
+  }
+}
+
+// mobile phone screen;
+@media only screen and (max-width: 750px) {
+  .card {
+    margin: auto;
+  }
+}
