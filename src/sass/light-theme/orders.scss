@@ -1,95 +1,88 @@
 @import 'config';
 
-// BUTTON STYLES
+// Large and extra screens
 
-.orders-type-btns {
+.order-action-bar {
   display: flex;
   background-color: $white;
-  padding: 1.5rem;
   margin: 1.5rem 0;
-  border-radius: 10px;
+
+  .process-btn {
+    background-color: $light-blue;
+    &:focus {
+      box-shadow: none;
+    }
+    &:hover {
+      background-color: $dark-blue;
+      color: $white;
+    }
+  }
+
+  .stop-btn {
+    background-color: $orange;
+    &:focus {
+      box-shadow: none;
+    }
+    &:hover {
+      background-color: $dark-orange;
+      color: $white;
+    }
+  }
+
+  .delete-btn {
+    background-color: $red;
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:hover {
+      background-color: $dark-red;
+      color: $white;
+    }
+  }
+
+  .dispatch-btn {
+    background-color: $green;
+    &:focus {
+      box-shadow: none;
+    }
+    &:hover {
+      background-color: $dark-green;
+      color: $white;
+    }
+  }
+
+  .action-btn {
+    height: 43px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: $white;
+    font-size: var(--font-medium);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+
+    .btn-text {
+      display: flex;
+      & span {
+        margin-left: 0.3rem;
+      }
+    }
+  }
 }
 
-.process-5-order-btn {
-  background-color: var(--bgBlue);
-  height: 43px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
+// Mobile screen;
 
-.process-5-order-btn:hover {
-  background-color: #3a66ce;
-  color: var(--bgPage);
-}
-
-.stop-5-order-btn {
-  background-color: var(--color-light-orange);
-  height: 43px;
-  padding: 10px 40px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
-.stop-5-order-btn:focus {
-  box-shadow: none;
-}
-
-.stop-5-order-btn:hover {
-  background-color: #df9c4f;
-  color: var(--bgPage);
-}
-
-.delete-5-order-btn {
-  background-color: var(--bg-dark-pink);
-  height: 43px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.delete-5-order-btn:focus {
-  box-shadow: none;
-}
-.delete-5-order-btn:hover {
-  background-color: #c20648;
-  color: var(--bgPage);
-}
-
-.mark-dispatch-btn {
-  background-color: var(--color-secondry);
-  height: 43px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: var(--bgPage);
-  font-size: var(--font-medium);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.mark-dispatch-btn:hover {
-  background-color: #198319;
-  color: var(--bgPage);
+@media only screen and (max-width: 500px) {
+  .order-action-bar {
+    row-gap: 2rem;
+    display: grid !important;
+    .action-btn {
+      width: 100% !important;
+    }
+  }
 }
 .order-table-body {
   white-space: nowrap;
@@ -128,7 +121,7 @@
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
-  color: var(--bgPage);
+  color: $white;
   font-size: var(--font-medium);
   font-weight: bold;
   display: flex;
@@ -142,7 +135,7 @@
   height: 43px;
   padding: 10px 40px;
   border-radius: 10px;
-  color: var(--bgPage);
+  color: $white;
   font-size: var(--font-medium);
   font-weight: bold;
   display: flex;
@@ -153,19 +146,19 @@
 
 .stop-order-btn-style:hover {
   background-color: #df9c4f;
-  color: var(--bgPage);
+  color: $white;
 }
 
 .process-order-btn-style:hover {
   background-color: #3a66ce;
-  color: var(--bgPage);
+  color: $white;
 }
 .mark-dispatch-modal-btn-style {
   background-color: var(--color-secondry);
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
-  color: var(--bgPage);
+  color: $white;
   font-size: var(--font-medium);
   font-weight: bold;
   display: flex;
@@ -176,7 +169,7 @@
 
 .mark-dispatch-modal-btn-style:hover {
   background-color: #198319;
-  color: var(--bgPage);
+  color: $white;
 }
 
 .delete-order-modal-btn-style {
@@ -184,7 +177,7 @@
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
-  color: var(--bgPage);
+  color: $white;
   font-size: var(--font-medium);
   font-weight: bold;
   display: flex;
@@ -195,7 +188,7 @@
 
 .delete-order-modal-btn-style:hover {
   background-color: #c20648;
-  color: var(--bgPage);
+  color: $white;
 }
 
 // DROPDOWN STYLES
@@ -204,7 +197,7 @@
   width: 190px;
   height: 155px;
   border-radius: 0px 0px 15px 15px;
-  background: var(--bgPage);
+  background: $white;
   box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.16);
 }
 
@@ -250,25 +243,12 @@
 }
 
 .order-three-dots-dropdown .process-order-icon g {
-  stroke: var(--bgPage) !important;
+  stroke: $white !important;
 }
 
 .order-three-dots-dropdown .process-order-icon #Path_287 {
   stroke: var(--iconColor) !important;
 }
-
-// PROGRESS  BAR
-
-// .progress-order .progress-bar {
-//   width: 436px;
-//   border-radius: 9.5px;
-//   background: linear-gradient(
-//     var(--color-secondry) 0%,
-//     var(--color-secondry) 15.85%,
-//     #3aa23a 67.04%,
-//     var(--color-secondry) 100%
-//   );
-// }
 
 .progress-order .progress {
   border-radius: 9.5px;
@@ -454,6 +434,7 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {

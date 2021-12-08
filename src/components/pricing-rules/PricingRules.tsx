@@ -1,5 +1,5 @@
 import { Table, Form, Input, Select, Button } from 'antd';
-import StatusBar from '../SmallComponents/StatusBar';
+import {StatusBar} from '../SmallComponents/StatusBar';
 import '../../sass/light-theme/pricing-rules.scss';
 
 export const PricingRules = () => {

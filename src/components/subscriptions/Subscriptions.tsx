@@ -2,7 +2,7 @@ import { createRef, useState } from 'react';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
-import StatusBar from '../SmallComponents/StatusBar';
+import {StatusBar} from '../SmallComponents/StatusBar';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
