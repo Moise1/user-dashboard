@@ -1,6 +1,6 @@
 import SidebarMb from '../../components/SidebarMb';
 import { SearchBars } from '../SmallComponents/SearchBars';
-import StatusBar from '../SmallComponents/StatusBar';
+import {StatusBar} from '../SmallComponents/StatusBar';
 import ListingsStatusBtn from '../SmallComponents/ListingsStatusBtn';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/listings.scss';

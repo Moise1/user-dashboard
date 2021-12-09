@@ -1,170 +1,81 @@
 @import 'config';
 
-// Mobile devices
+// Large and extra large screens
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .search-input {
+.search-bars-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  & > * {
+    margin-left: 15px;
+  }
+  .advanced-search-btn {
+    width: 15%;
     border-radius: 10px;
     padding: 20px 10px;
-    background: $white;
-    display: flex;
-    justify-content: space-between;
-    .input {
-      border: none !important;
-      outline: none !important;
-      font-weight: bold;
-      width: 100%;
-    }
-
-    &:focus {
-      outline: none;
-      border: none;
-    }
-    .search-icon-btn {
-      background: none;
-    }
-  }
-
-  .search-bars-container {
-    display: block;
-    .view-columns {
-      display: none;
-    }
-  }
-}
-
-// iPads and Tablets devices
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .search-input {
-    width: auto;
-    display: flex;
-    border-radius: 10px;
-    padding: 20px 10px;
-    background: $white;
-    display: flex;
-    justify-content: space-between;
-    .input {
-      border: none !important;
-      outline: none !important;
-      font-weight: bold;
-      width: 100%;
-    }
-
-    &:focus {
-      outline: none;
-      border: none;
-    }
-    .search-icon-btn {
-      background: none;
-    }
-  }
-}
-
-// Medium screens and laptops
-@media only screen and (min-width: 1224px) {
-  .search-input {
-    border-radius: 10px;
-    padding: 20px 10px;
-    background: $white;
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-
-    .input {
-      border: none !important;
-      outline: none !important;
-      font-weight: bold;
-      width: 100%;
-    }
-
-    &:focus {
-      outline: none;
-      border: none;
-    }
-    .search-icon-btn {
-      background: none;
-    }
-  }
-
-  .search-bars-container {
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    & > * {
-      margin-left: 15px;
-    }
-    .advanced-search-btn {
-      width: 15%;
-      border-radius: 10px;
-      padding: 20px 10px;
-      background: #c4c4c4;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .view-columns {
-      width: 15%;
-      display: flex;
-      padding: 20px 5px;
-      justify-content: space-around;
-      color: $white;
-      font-weight: bold;
-      background: $secondary !important;
-      border-radius: 10px;
-    }
-  }
-}
-
-//  large screens
-@media only screen and (min-width: 1920px) {
-  .search-input {
-    border-radius: 10px;
-    padding: 20px 10px;
-    background: $white;
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-
-    .input {
-      border: none !important;
-      outline: none !important;
-      font-weight: bold;
-      width: 100%;
-    }
-    &:focus {
-      outline: none;
-      border: none;
-    }
-    .search-icon-btn {
-      background: none;
-    }
-  }
-
-  .search-bars-container {
-    margin: 20px 0;
+    background: #c4c4c4;
     display: flex;
     justify-content: space-around;
-    & > * {
-      margin-left: 15px;
-    }
-    .advanced-search-btn {
-      width: 15%;
-      border-radius: 10px;
-      padding: 20px 10px;
-      background: #c4c4c4;
-      display: flex;
-      justify-content: space-around;
-    }
+  }
 
-    .view-columns {
-      width: 15%;
-      display: flex;
-      padding: 20px 5px;
-      justify-content: space-around;
-      color: $white;
-      font-weight: bold;
-      background: $secondary !important;
-      border-radius: 10px;
+  .view-columns {
+    width: 15%;
+    display: flex;
+    padding: 20px 5px;
+    justify-content: space-around;
+    color: $white;
+    font-weight: bold;
+    background: $secondary !important;
+    border-radius: 10px;
+  }
+}
+
+.search-input {
+  border-radius: 10px;
+  padding: 20px 10px;
+  background: $white;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+
+  .input {
+    border: none !important;
+    outline: none !important;
+    font-weight: bold;
+    width: 100%;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+  .search-icon-btn {
+    background: none;
+  }
+}
+
+// Tablets screens
+
+@media only screen and (max-width: 1000px) {
+  .search-bars-container {
+    width: 60%;
+    display: block;
+    margin: auto;
+    & > * {
+      width: inherit !important;
+      margin: 1rem auto !important;
+    }
+  }
+}
+
+// Mobile devices
+@media only screen and (max-width: 750px) {
+  .search-bars-container {
+    width: 100%;
+    display: block;
+    & > * {
+      width: inherit !important;
+      margin: 1rem auto !important;
     }
   }
 }

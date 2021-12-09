@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SearchBars } from '../SmallComponents/SearchBars';
 import { OrdersTable } from '../tables/OrdersTable';
-import OrderTypeButtons from './OrderTypeButtons';
+import { OrderActionBtns} from './OrderActionBtns';
 import { Container } from 'react-bootstrap';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
@@ -53,7 +53,7 @@ const Orders = (ordersProps: props) => {
   return (
     <Container fluid className="orders-container">
       <SearchBars />
-      <OrderTypeButtons orderNumber={orderNumber} />
+      <OrderActionBtns orderNumber={orderNumber} />
       <OrdersTable
         orderSelectedArray={orderSelectedArray}
         tableValue={staticValue}
