@@ -1,6 +1,5 @@
 @import 'config';
 
-
 // Extra Large screens
 
 .status-bar {
@@ -21,7 +20,7 @@
   padding: $spacer * 0.25 0;
 }
 .active-btn {
-  padding: .9rem;
+  padding: 0.9rem;
   font-size: $font-large;
   font-weight: bold;
 
@@ -38,11 +37,11 @@
   font-size: $font-large;
   font-weight: bold !important;
   color: $primary;
-};
+}
 
 // medium screens and laptops
 @media only screen and (max-width: 1224px) {
-  .status-bar{
+  .status-bar {
     margin: 0;
   }
 }

@@ -1,23 +1,28 @@
-@import 'config';
-
 @media only screen and (min-width: 1440px) {
-  h1 {
-    font-size: $heading-font;
-  }
+  :root {
+    // Responsiveness font sizes
 
-  h2 {
-    font-size: $subheading-font;
-  }
+    //Default fonts
 
-  h3 {
-    font-size: $sub-subheading-font;
-  }
-
-  p {
-    font-size: $paragraf-font;
-  }
-
-  button {
+    $font-xl: 2rem;
     $font-large: 1.2rem;
+    $font-medium: 1rem;
+    $font-small: 0.75rem;
+
+    //Headings
+    $heading-font: 1.5rem;
+
+    //Subheadings
+    $subheading-font: 1.2rem;
+
+    //Sub-subheadings
+    $sub-subheading-font: 1rem;
+
+    //Paragrafs
+    $paragraf-font: 0.75rem;
+
+    // Spacers & margins
+
+    $spacer: 1rem;
   }
 }
