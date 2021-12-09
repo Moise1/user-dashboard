@@ -1,7 +1,7 @@
-@import 'config';
+@import 'general.config';
 
 // Extra large screens
-.listings-container{
+.listings-container {
   width: auto;
   margin: auto;
 }
@@ -46,7 +46,6 @@
 
 // Screens and laptops
 @media only screen and (min-width: 1224px) {
- 
   .listings-table {
     max-height: 53vh;
     overflow-x: scroll;
@@ -62,4 +61,3 @@
     }
   }
 }
-

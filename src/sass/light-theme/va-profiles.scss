@@ -1,11 +1,10 @@
-@import 'config';
+@import 'general.config';
 
 .va-profiles-container {
   background: $super-light-blue;
   width: 100%;
   overflow-x: hidden;
 
-  
   .row {
     display: flex;
     margin-top: 4rem;

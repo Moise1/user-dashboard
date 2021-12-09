@@ -17,7 +17,7 @@ import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
-import './sass/light-theme/app.scss';
+// import './sass/light-theme/app.scss';
 
 const App = () => {
   const [collapse, setCollapse] = useState(true);
