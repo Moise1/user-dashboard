@@ -38,14 +38,14 @@ const Topbar = (props: Props) => {
             </strong>
             <span className="quota-progress">45% (12/13)</span>
           </div>
+          <Progress percent={45} showInfo={false} className="progress-bar" />
+          <button type="button" className="update-btn">
+            {t('Topbar.Update')}
+          </button>
         </div>
-        <Progress percent={45} showInfo={false} className="progress-bar" />
-        <button type="button" className="update-btn">
-          {t('Topbar.Update')}
-        </button>
         <div className="notifications-container">
           <Badge count={2}>
-            <i className="fa fa-bell-o" aria-hidden="true"/>
+            <i className="fa fa-bell-o" aria-hidden="true" />
             {/* <BellOutlined/> */}
           </Badge>
           {/* <img className="nofications-bell" src={bellIcon} alt="" />
