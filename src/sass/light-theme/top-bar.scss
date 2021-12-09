@@ -4,7 +4,7 @@
 
 .top-bar {
   position: sticky;
-  padding: 8px 0;
+  padding: 10px;
   top: 0;
   z-index: 0;
   display: flex;
@@ -26,6 +26,7 @@
 
     .logo-text {
       color: $primary;
+      margin: auto;
     }
   }
   .menu-burger {
@@ -44,6 +45,10 @@
     }
 
     .quota-container {
+      width: 500px;
+      margin: auto;
+      display: flex;
+
       .quota {
         display: flex;
         .quota-text,
@@ -53,24 +58,23 @@
       }
     }
     .progress-bar {
-      width: 15%;
-      margin-top: 1.2rem;
+      width: 30%;
       border-radius: 12px;
-      background: transparent !important;
+      background: transparent;
+      margin: auto;
     }
     .update-btn {
-      margin-top: 1rem;
       border-radius: 20px;
       color: $white;
       background: $primary 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       opacity: 1;
       width: 113px;
+      height: 30px;
+      margin: auto;
     }
 
     .notifications-container {
-      margin-top: 0.75rem;
-
       .notifications {
         font-weight: bold;
         font-size: $font-large;
@@ -150,42 +154,36 @@
   }
 }
 
-// Tablets and iPads screen 
+// Tablets and iPads screen
 
-@media only screen and (max-width: 1200px) {
-  .top-bar {
-    width: 100%;
-    margin: auto;
-    .logo-container,
-    .quota-container {
-      display: none;
+@media only screen and (max-width: 1440px) {
+  .quota {
+    display: none !important;
+  }
+
+  .menu-burger {
+    cursor: pointer;
+    width: auto;
+    border-radius: 8px;
+    padding: 12px;
+    background: $light-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .second {
+      margin: 5px 0;
     }
 
-    .menu-burger {
-      cursor: pointer;
-      width: auto;
-      border-radius: 8px;
-      padding: 12px;
-      background: $light-primary;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      & .second {
-        margin: 5px 0;
-      }
-
-      & span {
-        display: inline-block;
-        width: 20px;
-        height: 2px;
-        background: $white;
-      }
+    & span {
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: $white;
     }
   }
 }
-
 
 // Mobile devices screen
 @media screen and (max-width: 750px) {
@@ -193,7 +191,7 @@
     width: auto !important;
     .logo-container,
     .quota-container {
-      display: none;
+      display: none !important;
     }
 
     .menu-burger {
