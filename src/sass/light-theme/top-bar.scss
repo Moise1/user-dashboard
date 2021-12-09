@@ -26,6 +26,7 @@
 
     .logo-text {
       color: $primary;
+      margin: auto;
     }
   }
   .menu-burger {
@@ -219,6 +220,13 @@
     .top-bar-nav {
       padding-top: 10px;
       margin: auto;
+
+      .progress-bar,
+      .notifications,
+      .country-name,
+      .update-btn {
+        display: none;
+      }
     }
   }
 }
