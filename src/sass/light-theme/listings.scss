@@ -17,6 +17,33 @@
   color: var(--color-dark-violet);
 }
 
+.danger-text{
+  color: $red;
+}
+
+.linked-store{
+  display: flex;
+  padding: 1rem;
+  border-radius: 10px;
+  background: $light-gray;
+  & > *{
+    margin-left: .4rem;
+  }
+  img{
+    margin-top: -.9rem;
+    width: 5%;
+    // border: 2px solid green;
+  }
+};
+
+.action-btns{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .listings-container {

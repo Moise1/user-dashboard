@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { useTable, useSortBy, Column } from 'react-table';
 import moment from 'moment';
 import {
-  // UpdownIcon,
   DustbinDeleteOrderIcon,
   DispatchedOrderIcon,
   HandStopOrderIcon,
