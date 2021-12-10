@@ -67,17 +67,4 @@
     width: 16px;
     height: 16px;
   }
-
-  /* this is the Active/pending/terminated nav bar */
-  .p-3.header-box-shadow {
-    padding: 0 !important;
-  }
-
-  /* this is the container for the search bar*/
-  .input-group.br-10.input-group-sm.rounded.px-3.bg-white.z-0 {
-    padding: 0 1rem 0 1rem !important;
-  }
-  input.search_placeholder {
-    padding: 0 !important;
-  }
 }

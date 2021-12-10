@@ -5,6 +5,18 @@
   background: $white;
 }
 
+.listing-tabs span {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-dark-violet);
+}
+
+.listing-tabs {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-dark-violet);
+}
+
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .listings-container {
