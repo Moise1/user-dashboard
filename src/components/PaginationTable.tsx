@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../sass/light-theme/pagination.scss';
+import '../../src/sass/light-theme/pagination.scss';
 
 const PaginationTable = () => {
   return (
