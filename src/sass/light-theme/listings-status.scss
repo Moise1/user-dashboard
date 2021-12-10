@@ -4,25 +4,25 @@
 
 .status-bar {
   // margin: auto;
-  height: auto;
+  margin-top: $spacer;
   position: relative;
   padding: 1rem 0;
   display: flex;
   justify-content: space-around;
   border-radius: 10px;
   background: $white 0% 0% no-repeat padding-box;
-  opacity: 1;
   box-shadow: 0px 3px 6px #2338c129;
 }
 
 .status-btn {
   border-radius: 10px !important;
   padding: $spacer * 0.25 0;
+  background: none;
 }
 .active-btn {
   padding: 0.9rem;
   font-size: $font-large;
-  font-weight: bold;
+  font-weight: $bold;
 
   &:focus {
     border: none !important;
@@ -35,13 +35,6 @@
 .inactive-btn {
   background: transparent !important;
   font-size: $font-large;
-  font-weight: bold !important;
+  font-weight: $bold;
   color: $primary;
-}
-
-// medium screens and laptops
-@media only screen and (max-width: 1224px) {
-  .status-bar {
-    margin: 0;
-  }
 }

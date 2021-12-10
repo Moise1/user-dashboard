@@ -4,8 +4,8 @@
 
 .search-bars-container {
   margin: auto;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: $spacer;
+  margin-bottom: $spacer;
   display: flex;
   justify-content: space-between;
   height: 3.5rem;
@@ -22,7 +22,7 @@
     .input {
       border: none !important;
       outline: none !important;
-      font-weight: bold;
+      font-weight: $bold;
       width: 100%;
     }
 
@@ -44,9 +44,9 @@
     align-items: center;
     max-width: 200px;
     display: flex;
-    padding: 5px;
+    padding: $spacer;
     height: 100%;
-    margin-right: 10px;
+    margin-right: $spacer;
     white-space: nowrap;
   }
 
@@ -54,7 +54,7 @@
     align-items: center;
     max-width: 200px;
     display: flex;
-    padding: 5px;
+    padding: $spacer;
     justify-content: space-around;
     color: $white;
     font-weight: $bold;
