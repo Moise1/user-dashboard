@@ -15,34 +15,87 @@
   font-weight: 400;
   font-size: 16px;
   color: var(--color-dark-violet);
+// Extra large screens
+
+.modal-title {
+  margin-bottom: 1rem;
+}
+.modal-title,
+.confirm-text {
+  color: $primary;
+}
+.listings-container {
+  width: auto;
+  margin: auto;
 }
 
-.danger-text{
+.danger-text {
   color: $red;
 }
 
-.linked-store{
+.linked-store {
   display: flex;
   padding: 1rem;
   border-radius: 10px;
   background: $light-gray;
-  & > *{
-    margin-left: .4rem;
+  margin: 1rem 0;
+  & > * {
+    margin-left: 0.4rem;
   }
-  img{
-    margin-top: -.9rem;
+  img {
+    margin-top: -0.9rem;
     width: 5%;
-    // border: 2px solid green;
   }
-};
+}
 
-.action-btns{
+.confirm {
+  display: flex;
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: $light-primary !important;
+    border-color: $light-primary !important;
+  }
+  .confirm-text {
+    margin-left: 1rem;
+  }
+}
+.action-btns {
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
+
+  .cancel-btn {
+    background: $light-gray;
+    border-radius: 5px;
+    color: $black;
+
+    &:hover {
+      background: $light-gray;
+      color: $black;
+    }
+  }
+
+  .disabled {
+    background: rgba($light-primary, 0.2);
+    color: $white;
+    border-radius: 5px;
+
+    &:hover {
+      background: rgba($light-primary, 0.2);
+      color: $white;
+    }
+  }
+
+  .confirm-btn {
+    background: $light-primary;
+    color: $white;
+    border-radius: 5px;
+
+    &:hover {
+      background: $light-primary;
+      color: $white;
+    }
+  }
 }
-
-
 
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {

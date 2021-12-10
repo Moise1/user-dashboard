@@ -1,12 +1,13 @@
 import { useState, useMemo } from 'react';
 import moment from 'moment';
+import { Checkbox } from 'antd';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
-import {ListingsModal} from '../modals/ListingsModal';
+import { ListingsModal } from '../modals/ListingsModal';
 
 interface props {
   setOrderNumber?: (arg0: number) => void;
@@ -19,11 +20,13 @@ interface props {
 export const ListingsTable = (tableProps: props) => {
   const { setOrderNumber, orderSelectedArray, headerData, bodyData } = tableProps;
   const [openModal, setOpenModal] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [AoDisabledModal, setAoDisabledModal] = useState(false);
 
   const handleOpenModal = () => setOpenModal(!openModal);
   const handleCancel = () => setOpenModal(!openModal);
   const handleDelete = () => setOpenModal(!openModal);
+  const handleCheck = () => setChecked(!checked);
 
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(bodyData.length);
@@ -41,7 +44,9 @@ export const ListingsTable = (tableProps: props) => {
   );
   return (
     <div className="listings-table">
-      <ListingsModal open={openModal} onCancel={handleCancel} onDelete={handleDelete}/>
+      <ListingsModal open={openModal} onCancel={handleCancel} onDelete={handleDelete} checked={checked}>
+        <Checkbox checked={checked} onChange={handleCheck} />
+      </ListingsModal>
       <table className="table listings-table mb-0">
         <thead className="listings-table-head">
           <tr>
