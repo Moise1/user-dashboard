@@ -1,10 +1,10 @@
 @import 'general.config';
 
-// Extra large screens
-.listings-container {
-  width: auto;
-  margin: auto;
+//custom class here
+.table {
+  background: $white;
 }
+
 // Mobile devices
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .listings-container {
