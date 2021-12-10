@@ -68,15 +68,6 @@
     height: 16px;
   }
 
-  .searchBar {
-    height: 50px !important;
-  }
-
-  .searchBar img {
-    width: 12px;
-    height: 12px;
-  }
-
   /* this is the Active/pending/terminated nav bar */
   .p-3.header-box-shadow {
     padding: 0 !important;
@@ -88,33 +79,5 @@
   }
   input.search_placeholder {
     padding: 0 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .searchBar {
-    height: 43px !important;
-  }
-}
-
-@media (max-width: 361px) {
-  :root {
-    /* -- font sizes --- */
-    --text-heading: 16px;
-    --font-xl: 12px;
-    --sub-heading: 12px;
-    --font-large: 10px;
-    --font-medium: 7px;
-    --font-small: 7px;
-    --font-extra-small: 10px;
-  }
-}
-
-@media (max-width: 576px) {
-  .storeSelector {
-    width: unset;
-  }
-  .searchBar {
-    height: 33px !important;
   }
 }
