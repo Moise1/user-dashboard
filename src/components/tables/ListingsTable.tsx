@@ -1,13 +1,13 @@
 import { useState, useMemo } from 'react';
 import moment from 'moment';
-import { Checkbox } from 'antd';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
-import { ListingsModal } from '../modals/ListingsModal';
+import { PopupModal } from '../modals/PopupModal';
+import { DeleteAccount } from '../listings/DeleteAccount';
 
 interface props {
   setOrderNumber?: (arg0: number) => void;
@@ -44,9 +44,15 @@ export const ListingsTable = (tableProps: props) => {
   );
   return (
     <div className="listings-table">
-      <ListingsModal open={openModal} onCancel={handleCancel} onDelete={handleDelete} checked={checked}>
-        <Checkbox checked={checked} onChange={handleCheck} />
-      </ListingsModal>
+      <PopupModal open={openModal}>
+        <DeleteAccount
+          checked={checked}
+          handleCheck={handleCheck}
+          handleCancel={handleCancel}
+          handleDelete={handleDelete}
+        />
+      </PopupModal>
+
       <table className="table listings-table mb-0">
         <thead className="listings-table-head">
           <tr>
