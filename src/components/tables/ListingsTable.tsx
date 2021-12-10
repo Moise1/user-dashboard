@@ -19,9 +19,9 @@ interface props {
 
 export const ListingsTable = (tableProps: props) => {
   const { setOrderNumber, orderSelectedArray, headerData, bodyData } = tableProps;
-  const [openModal, setOpenModal] = useState(false);
-  const [checked, setChecked] = useState(false);
-  const [AoDisabledModal, setAoDisabledModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [AoDisabledModal, setAoDisabledModal] = useState<boolean>(false);
 
   const handleOpenModal = () => setOpenModal(!openModal);
   const handleCancel = () => setOpenModal(!openModal);
