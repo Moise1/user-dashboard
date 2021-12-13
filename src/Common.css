@@ -2,105 +2,7 @@
   cursor: pointer;
 }
 
-.ant-menu-item .ant-menu-title-content {
-  padding-left: 26px;
-}
-
-.ant-menu-submenu-title .ant-menu-title-content {
-  padding-left: 26px;
-}
-
-.ant-menu.ant-menu-sub {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ant-menu-title-content {
-  font-weight: 400;
-}
-
-.nav-shadow {
-  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
-}
-
-.header-box-shadow {
-  box-shadow: 0px 3px 6px var(--box-shadow-color);
-}
-
-.position-stickey {
-  position: sticky;
-}
-
-.top-0 {
-  top: 0;
-}
-
-.z-100 {
-  z-index: 100;
-}
-
-@media (min-width: 1400px) {
-  .w-xxl-251px {
-    width: 251px;
-  }
-}
-
-/* CHECKBOX CSS  */
-.input-blue-check input[type='checkbox'] + label {
-  display: block;
-  margin: 0.2em;
-  cursor: pointer;
-  padding: 0.2em;
-}
-
-.input-blue-check input[type='checkbox'] {
-  display: none;
-}
-
-.input-blue-check input[type='checkbox'] + label:before {
-  content: '\2714';
-  border: 0.1em solid var(--txtBaseColor);
-  border-radius: 0.2em;
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  padding-left: 0.2em;
-  padding-bottom: 0.3em;
-  margin-right: 0.2em;
-  vertical-align: bottom;
-  color: transparent;
-  transition: 0.2s;
-}
-
-.input-blue-check input[type='checkbox'] + label:active:before {
-  transform: scale(0);
-}
-
-.input-blue-check input[type='checkbox']:checked + label:before {
-  background-color: MediumSeaGreen;
-  border-color: MediumSeaGreen;
-  color: var(--bgHighlight);
-}
-
-/* CHECKBOX CSS  */
 /* APP CSS  */
-
-body {
-  font-weight: 500;
-  font-family: var(--mainFontFamily);
-}
-
-.blue {
-  color: var(--bgBlue);
-}
-
-.bg-lighter {
-  background-color: #f0f2f5;
-}
-
-label {
-  width: 100%;
-}
 
 .card-input-element {
   display: none;
@@ -134,20 +36,8 @@ label {
   overflow-x: visible;
 }
 
-@media (max-width: 991.98px) {
-  .w-sidebar-toggle {
-    width: 0;
-  }
-
-  .ant-layout-sider {
-    position: fixed;
-  }
-
-  .w-sidebar-toggle .ant-layout-sider {
-    min-width: 0px !important;
-    max-width: 0px !important;
-    width: 0px !important;
-  }
+.ant-layout-sider {
+  position: fixed;
 }
 
 .br-8 {
@@ -172,10 +62,6 @@ label {
 
 .bg-input-light {
   background-color: #f2f8ff;
-}
-
-.bg-blue {
-  background-color: var(--bgBlue);
 }
 
 .d-blue {

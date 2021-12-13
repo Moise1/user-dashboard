@@ -1,15 +1,5 @@
 @import 'general.config';
 
-.add-new-channel-drop p {
-  font-size: 11px;
-  display: inline-block;
-  color: var(--color-black);
-}
-
-.moreStores {
-  text-align: right;
-}
-
 // medium screens and laptops
 .store-list-container {
   background: $white;
@@ -49,5 +39,10 @@
   .new-channel {
     bottom: 0;
     left: 1rem;
+    color: $black;
+  }
+
+  .new-channel:hover {
+    font-weight: $bold;
   }
 }
