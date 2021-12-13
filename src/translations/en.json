@@ -24,6 +24,7 @@
   "Listings.Column.Source": "Source",
   "Listings.Column.Stock": "Stock",
   "Listings.Column.Title": "Title",
+  "Listings.Column.Options": "Options",
 
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",

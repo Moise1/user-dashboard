@@ -1,0 +1,80 @@
+@import 'general.config';
+
+// Large screens and extra large screens
+
+.benefits li {
+  list-style-type: none;
+  &:before {
+    content: '-';
+    margin-right: 1rem;
+  }
+}
+.cards-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: auto;
+  margin-top: 2rem;
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    display: flex;
+    width: 100%;
+    margin: 0 0.7rem;
+    cursor: pointer;
+    z-index: 0;
+    .coin {
+      position: absolute;
+      left: 20%;
+    }
+
+    &:hover {
+      background: $light-primary;
+      width: 120%;
+      z-index: 1;
+      transform: scale(1.2);
+      transition: width 0.5s ease-in-out;
+
+      .card-info {
+        .tokens-count,
+        .euros-amount {
+          color: $white;
+        }
+
+        .euros-amount span,
+        .cents-amount {
+          color: rgba($white, 0.7);
+        }
+
+        .buy-btn {
+          background: $white;
+          color: $black;
+        }
+      }
+    }
+    .card-info {
+      width: 100%;
+      display: grid;
+      place-items: center;
+
+      .euros-amount:not(span) {
+        font-weight: bold;
+        font-size: $font-large;
+        span {
+          margin: -0.3rem 0 0 -1.5rem;
+          position: absolute;
+        }
+      }
+      .euros-amount span,
+      .cents-amount {
+        color: rgba($black, 0.3);
+      }
+
+      .buy-btn {
+        background: $light-primary;
+        color: $white;
+        border-radius: 5px;
+      }
+    }
+  }
+}

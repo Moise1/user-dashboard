@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import coinIcon from '../../assets/tokenCoin.png';
-// import bellIcon from '../../assets/bellIcon.svg';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
@@ -8,7 +8,8 @@ import Logo from '../../assets//logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
 import { Badge } from 'antd';
-// import { BellOutlined } from '@ant-design/icons';
+import { PopupModal } from '../modals/PopupModal';
+import { BuyTokens } from './BuyTokens';
 
 interface Props {
   handleSidebarMobile: () => void;
@@ -16,6 +17,9 @@ interface Props {
 
 const Topbar = (props: Props) => {
   const { handleSidebarMobile } = props;
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpenModal = () => setOpen(!open);
 
   return (
     <div className="top-bar">
@@ -43,14 +47,14 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <div className="notifications-container">
+        <button className="notifications-container" onClick={handleOpenModal} >
+          <PopupModal open={open} width={800} style={{top: 20}} bodyStyle={{height: 600}}>
+            <BuyTokens/>
+          </PopupModal>
           <Badge count={2}>
             <i className="fa fa-bell-o" aria-hidden="true" />
-            {/* <BellOutlined/> */}
           </Badge>
-          {/* <img className="nofications-bell" src={bellIcon} alt="" />
-          <span className="notifications">{t('Topbar.Notifications', { count: 2 })}</span> */}
-        </div>
+        </button>
         <div className="tokens-container">
           <img src={coinIcon} alt="coinIcon" />
           <span className="token-number">1232</span>

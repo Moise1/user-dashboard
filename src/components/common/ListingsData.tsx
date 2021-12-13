@@ -12,7 +12,8 @@ export const listingsHeadingData = [
   'Listings.Column.Profit',
   'Listings.Column.Markup',
   'Listings.Column.Stock',
-  'Listings.Column.Created on'
+  'Listings.Column.Created on',
+  'Listings.Column.Options'
 ];
 
 export interface ListingsItems{
@@ -26,7 +27,8 @@ export interface ListingsItems{
   profit: number;
   markup: JSX.Element;
   stock: JSX.Element;
-  created: JSX.Element;
+  created: Date;
+  options: JSX.Element
 }
 
 
@@ -51,9 +53,9 @@ export const listingsData: ListingsItems[] = [
         <i className="d-green far fa-check-circle"></i> 2
       </div>
     ),
-    created: (
+    created: new Date(),
+    options: (
       <div className="d-flex justify-content-between">
-        13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>
@@ -79,9 +81,9 @@ export const listingsData: ListingsItems[] = [
         <i className="d-green far fa-check-circle"></i> 2
       </div>
     ),
-    created: (
+    created: new Date(),
+    options: (
       <div className="d-flex justify-content-between">
-        13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>
@@ -107,10 +109,10 @@ export const listingsData: ListingsItems[] = [
         <i className="d-green far fa-check-circle"></i> 2
       </div>
     ),
-    created: (
+    created: new Date(),
+    options: (
       <div className="d-flex justify-content-between">
-        13/07/2021 12:56
-        <img className="ml-4" src={editicon} />
+        <img className="ml-4" src={editicon}/>
         <img className="ml-3" src={doticon} />
       </div>
     )
@@ -135,9 +137,9 @@ export const listingsData: ListingsItems[] = [
         <i className="d-green far fa-check-circle"></i> 2
       </div>
     ),
-    created: (
+    created: new Date(),
+    options: (
       <div className="d-flex justify-content-between">
-        13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>
@@ -163,9 +165,9 @@ export const listingsData: ListingsItems[] = [
         <i className="d-green far fa-check-circle"></i> 2
       </div>
     ),
-    created: (
+    created: new Date(),
+    options: (
       <div className="d-flex justify-content-between">
-        13/07/2021 12:56
         <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>

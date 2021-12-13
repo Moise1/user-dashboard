@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import moment from 'moment';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
+import { PopupModal } from '../modals/PopupModal';
+import { DeleteAccount } from '../listings/DeleteAccount';
 
 interface props {
   setOrderNumber?: (arg0: number) => void;
@@ -15,14 +18,41 @@ interface props {
 }
 
 export const ListingsTable = (tableProps: props) => {
-  const { setOrderNumber, showModal, orderSelectedArray, headerData, bodyData } = tableProps;
-  const [AoDisabledModal, setAoDisabledModal] = useState(false);
+  const { setOrderNumber, orderSelectedArray, headerData, bodyData } = tableProps;
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [AoDisabledModal, setAoDisabledModal] = useState<boolean>(false);
+
+  const handleOpenModal = () => setOpenModal(!openModal);
+  const handleCancel = () => setOpenModal(!openModal);
+  const handleDelete = () => setOpenModal(!openModal);
+  const handleCheck = () => setChecked(!checked);
+
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(bodyData.length);
   };
 
+  const modifiedData = useMemo(
+    () =>
+      bodyData.map((d) => {
+        return {
+          ...d,
+          created: moment(d.created).format('DD/MM/h:mm')
+        };
+      }),
+    []
+  );
   return (
-    <div className='listings-table'>
+    <div className="listings-table">
+      <PopupModal open={openModal}>
+        <DeleteAccount
+          checked={checked}
+          handleCheck={handleCheck}
+          handleCancel={handleCancel}
+          handleDelete={handleDelete}
+        />
+      </PopupModal>
+
       <table className="table listings-table mb-0">
         <thead className="listings-table-head">
           <tr>
@@ -41,10 +71,10 @@ export const ListingsTable = (tableProps: props) => {
         </thead>
 
         <tbody className="listings-table-body">
-          {bodyData.map((obj) => {
+          {modifiedData.map((obj) => {
             const isSelected = orderSelectedArray?.includes(obj.id);
             return (
-              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={showModal}>
+              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={handleOpenModal}>
                 <td>
                   <label className="select-all-checkbox">
                     <input type="checkbox" checked={isSelected} />
@@ -61,7 +91,9 @@ export const ListingsTable = (tableProps: props) => {
                 <td className="obj-sale-cost  listings-td-none">{obj.cost}</td>
                 <td className="obj-profit-text">{obj.profit}</td>
                 <td className="obj-sale-cost listings-td-none">{obj.markup}</td>
+                <td className="obj-sale-cost listings-td-none">{obj.stock}</td>
                 <td className="obj-sale-qty  listings-td-none">{obj.created}</td>
+                <td className="obj-sale-qty  listings-td-none">{obj.options}</td>
               </tr>
             );
           })}
