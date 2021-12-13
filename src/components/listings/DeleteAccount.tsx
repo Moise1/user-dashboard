@@ -4,14 +4,14 @@ import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import '../../sass/light-theme/listings.scss';
 
-interface IProps {
+interface Props {
   checked: boolean;
   handleCheck: () => void;
   handleCancel: () => void;
   handleDelete: () => void;
 }
 
-export const DeleteAccount: FC<IProps> = (props: IProps) => {
+export const DeleteAccount: FC<Props> = (props: Props) => {
   const { checked, handleCancel, handleCheck, handleDelete } = props;
   return (
     <>

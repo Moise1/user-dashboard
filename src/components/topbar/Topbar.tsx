@@ -47,15 +47,13 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <button className="notifications-container" onClick={handleOpenModal} >
-          <PopupModal open={open} width={800} style={{top: 20}} bodyStyle={{height: 600}}>
-            <BuyTokens/>
+        <Badge count={2}>
+          <i className="fa fa-bell-o" aria-hidden="true" />
+        </Badge>
+        <div className="tokens-container" role="button" onClick={handleOpenModal}>
+          <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }}>
+            <BuyTokens />
           </PopupModal>
-          <Badge count={2}>
-            <i className="fa fa-bell-o" aria-hidden="true" />
-          </Badge>
-        </button>
-        <div className="tokens-container">
           <img src={coinIcon} alt="coinIcon" />
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>

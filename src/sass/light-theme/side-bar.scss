@@ -1,4 +1,6 @@
 @import 'general.config';
+
+// Large and extra large screens 
 .sidebar-container {
   min-width: 80px;
   border-top: 1px solid $light-gray;
@@ -64,7 +66,10 @@
       }
     }
   }
-}
+};
+
+
+// Laptop screens 
 
 @media (max-width: 1440px) {
   .sidebar-container {
@@ -159,7 +164,41 @@
     z-index: 10;
     cursor: pointer;
   }
-}
+};
+
+
+// Mobile screens 
+
+@media only screen and (max-width: 750px){
+  .menu-burger {
+    cursor: pointer;
+    margin: 1rem auto;
+    border-radius: 8px;
+    padding: 12px;
+    background: $light-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .second {
+      margin: 5px 0;
+    }
+
+    & span {
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: $white;
+    }
+  }
+
+  .menu-burger-left{
+    @extend .menu-burger;
+    margin-left: 1rem;
+  }
+};
+
 .ant-menu-item .ant-menu-title-content {
   padding-left: 26px;
 }

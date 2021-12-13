@@ -26,10 +26,11 @@ interface Props {
   toggle: () => void;
   staticvalue: boolean;
   togglestatic: () => void;
+  handleSidebarMobile: () => void;
 }
 
 let darkApplied = false;
-async function toggleDarkTheme() {
+const toggleDarkTheme = async () => {
   if (darkApplied) {
     const element = document.getElementById('darkThemeLink');
     element?.parentElement?.removeChild(element);
@@ -42,7 +43,7 @@ async function toggleDarkTheme() {
     document.head.appendChild(link);
   }
   darkApplied = !darkApplied;
-}
+};
 
 const Sidebar = (props: Props) => {
   const history = useHistory();
@@ -50,7 +51,7 @@ const Sidebar = (props: Props) => {
   const routeChange = () => {
     history.push('/home');
   };
-  const { collapsed, staticvalue, togglestatic } = props;
+  const { collapsed, staticvalue, togglestatic, handleSidebarMobile } = props;
 
   const windowwidth = window.innerWidth;
   // FOR CLOSE SIDEBAR AND CHANGE ROUTE
@@ -106,6 +107,11 @@ const Sidebar = (props: Props) => {
       collapsedWidth="var(--siderWidth)"
     >
       <div className="side-menu-container">
+        <div className={!collapsed ? 'menu-burger-left': 'menu-burger'} onClick={handleSidebarMobile}>
+          <span className="first"></span>
+          <span className="second"></span>
+          <span className="thrid"></span>
+        </div>
         <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
           {!collapsed && (
             <div className="sidebar-overhead">

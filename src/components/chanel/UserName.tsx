@@ -1,7 +1,5 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-//import Input from '@material-ui/core/Input';
-//import back_icon from '../../assets/channel/flags/back.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';

@@ -1,24 +1,22 @@
-import React from 'react';
-
 interface props {
   staticValue: boolean;
-  setCollapse: (value: boolean) => void;
+  setCollapsed: (value: boolean) => void;
   children?: JSX.Element | JSX.Element[];
 }
 
 const  SidebarCover = (myProps: props) => {
-  const { staticValue, setCollapse, children } = myProps;
+  const { staticValue, setCollapsed, children } = myProps;
   return (
     <div
       onMouseEnter={() => {
         if (!staticValue) {
-          setCollapse(false);
+          setCollapsed(false);
           return;
         }
       }}
       onMouseLeave={() => {
         if (!staticValue) {
-          setCollapse(true);
+          setCollapsed(true);
           return;
         }
       }}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-
 import aus_flag from '../../assets/channel/flags/AU.png';
 import ger_flag from '../../assets/channel/flags/DE.png';
 import sp_flag from '../../assets/channel/flags/ES.png';
@@ -8,7 +7,6 @@ import fr_flag from '../../assets/channel/flags/FR.png';
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
-//import back_icon from '../../assets/channel/flags/back.png';
 import ProgressBar from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import ButtonComp from './component/ButttonCom';

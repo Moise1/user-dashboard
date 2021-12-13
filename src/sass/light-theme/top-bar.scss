@@ -88,6 +88,7 @@
       display: flex;
       align-items: center;
       line-height: 1px;
+      cursor: pointer;
     }
 
     .token-number {
@@ -193,7 +194,6 @@
     .quota-container {
       display: none !important;
     }
-
     .menu-burger {
       cursor: pointer;
       width: auto;
@@ -204,6 +204,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      border: 2px solid red;
 
       & .second {
         margin: 5px 0;

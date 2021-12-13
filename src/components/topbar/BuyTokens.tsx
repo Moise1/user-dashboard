@@ -32,10 +32,10 @@ export const BuyTokens = () => {
   return (
     <div className="buy-tokens-container">
       <div className="text-container">
-        <h1>Buy Tokens</h1>
-        <p>We optimize your listing titles for you!</p>
+        <h1 className="buy-tokens-title">Buy Tokens</h1>
+        <p className="buy-tokens-sub-title">We optimize your listing titles for you!</p>
 
-        <p>
+        <p className="buy-tokens-desc">
           With each token we can optimize on title. We use our algorithm to choose the title the best keyword for your
           product. As you know, optimizing your titles offers the following benefits:
         </p>
