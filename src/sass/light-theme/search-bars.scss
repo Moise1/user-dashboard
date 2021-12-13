@@ -3,12 +3,16 @@
 // Large and extra large screens
 
 .search-bars-container {
+  margin: auto;
+  margin-top: $spacer;
+  margin-bottom: $spacer;
   display: flex;
   justify-content: space-between;
+  height: 3.5rem;
 
   .search-input {
     border-radius: 10px;
-    padding: 20px 10px;
+    padding: 10px;
     background: $white;
     display: flex;
     justify-content: space-between;
@@ -18,7 +22,7 @@
     .input {
       border: none !important;
       outline: none !important;
-      font-weight: bold;
+      font-weight: $bold;
       width: 100%;
     }
 
@@ -32,39 +36,41 @@
   }
 
   .advanced-search-btn {
-    width: 15%;
+    color: $white;
+    font-weight: $bold;
     border-radius: 10px;
-    padding: 20px 10px;
-    background: #c4c4c4;
-    display: flex;
+    background: $gray;
     justify-content: space-around;
+    align-items: center;
+    max-width: 200px;
+    display: flex;
+    padding: $spacer;
+    height: 100%;
+    margin-right: $spacer;
+    white-space: nowrap;
   }
 
   .view-columns {
-    width: 15%;
+    align-items: center;
+    max-width: 200px;
     display: flex;
-    padding: 20px 5px;
+    padding: $spacer;
     justify-content: space-around;
     color: $white;
-    font-weight: bold;
-    background: $secondary !important;
+    font-weight: $bold;
+    background: $light-blue;
     border-radius: 10px;
+    white-space: nowrap;
   }
 }
 
-// Tablets screens
-
-@media only screen and (max-width: 1440px) {
-  .search-bars-container {
+@media screen and (max-width: 750px) {
+  .view-columns,
+  .advanced-search-btn {
+    display: none !important;
+  }
+  .search-input {
     width: 100%;
-    margin: auto;
-    & > * {
-      width: inherit;
-      margin: 1rem auto;
-    }
-    .advanced-search-btn {
-      max-width: 2rem;
-      min-width: fit-content;
-    }
+    margin: 0 !important;
   }
 }

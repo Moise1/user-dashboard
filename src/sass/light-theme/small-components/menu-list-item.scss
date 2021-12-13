@@ -1,0 +1,17 @@
+@import '../general.config';
+
+.menu-list {
+  list-style: none;
+  color: $gray;
+  background-color: unset !important;
+  margin: 0;
+}
+
+.dot-icon {
+  margin-right: 1rem;
+}
+
+.menu-list:hover,
+.dot-icon:hover {
+  color: $light-primary;
+}

@@ -160,3 +160,19 @@
     cursor: pointer;
   }
 }
+.ant-menu-item .ant-menu-title-content {
+  padding-left: 26px;
+}
+
+.ant-menu-submenu-title .ant-menu-title-content {
+  padding-left: 26px;
+}
+
+.ant-menu.ant-menu-sub {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ant-menu-title-content {
+  font-weight: 400;
+}

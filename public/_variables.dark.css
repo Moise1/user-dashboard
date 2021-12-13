@@ -7,7 +7,7 @@
   --borderColor: #111;
   --tableBg: #333;
   --bgLighter: var(--bgPage2);
-  --bgHighlight:#333 ;
+  --bgHighlight: #333;
   --navLinkColor: #777;
   --navLinkColorHover: #999;
   --inputColor: #ccc;
@@ -38,8 +38,6 @@
   --color-dark-pink: #f12b70;
 
   --color-light-green: #5ac35a;
-  --searchbarHeight: 42px;
-
   --navLinkActive: var(--color-white);
   --subnavLinkHover: var(--color-light-pink);
   --subnavLinkActive: var(--color-light-pink);
@@ -54,10 +52,6 @@
 
 .bg-purple {
   background: var(--bgPage2);
-}
-
-.searchBar {
-  box-shadow: 0px 3px 6px var(--box-shadow-color);
 }
 
 .tickIcon > * {
