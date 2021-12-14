@@ -40,6 +40,10 @@
     display: flex;
     justify-content: flex-end;
 
+    .notifications{
+      margin-top: 1rem;
+    }
+
     & > * {
       margin-left: 3rem;
     }

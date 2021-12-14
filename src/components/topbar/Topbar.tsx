@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import coinIcon from '../../assets/tokenCoin.png';
 import flag from '../../assets/flag-round-500.svg';
+import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
 import StoreList from '../SmallComponents/StoreList';
@@ -46,8 +47,8 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <Badge count={2}>
-          <i className="fa fa-bell-o" aria-hidden="true" />
+        <Badge count={2} className="notifications">
+          <img src={bell} alt="" />
         </Badge>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>
           <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }}>

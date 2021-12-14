@@ -11,6 +11,7 @@
   left: 0;
   z-index: 111 !important;
   height: 100vh;
+  overflow-y: scroll;
 
   .side-menu-container {
     display: flex;
@@ -174,14 +175,13 @@
 @media only screen and (max-width: 750px) {
   .sidebar-container {
     @include sidebar-styles();
-    // border: 2px solid red;
-    // margin-top: 4.3rem;
     display: none;
   };
 
   .toggled {
     @include sidebar-styles();
     display: block;
+    border: 2px solid red;
   }
 }
 
