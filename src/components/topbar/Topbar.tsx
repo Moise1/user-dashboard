@@ -33,7 +33,6 @@ const Topbar = (props: Props) => {
         <span className="second"></span>
         <span className="thrid"></span>
       </div>
-      <div className="burger-menu-container"></div>
       <div className="top-bar-nav">
         <div className="quota-container">
           <div className="quota">

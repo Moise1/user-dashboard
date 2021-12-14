@@ -22,6 +22,7 @@ const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 interface Props {
+  className: string;
   collapsed: boolean;
   toggle: () => void;
   staticvalue: boolean;
@@ -51,7 +52,7 @@ const Sidebar = (props: Props) => {
   const routeChange = () => {
     history.push('/home');
   };
-  const { collapsed, staticvalue, togglestatic, handleSidebarMobile } = props;
+  const { collapsed, staticvalue, togglestatic, className } = props;
 
   const windowwidth = window.innerWidth;
   // FOR CLOSE SIDEBAR AND CHANGE ROUTE
@@ -80,7 +81,7 @@ const Sidebar = (props: Props) => {
   };
 
   const listArray = [
-    { key: 9, listName: t('Menu.Channel') },
+    { key: 9, listName: t('Menu.Channel'), onClick: () => history.push('/new-channel') },
     { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
     { key: 11, listName: t('Menu.PricingRules'), onClick: () => history.push('/pricing-rules') },
     { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => history.push('/browser-extensions') },
@@ -99,7 +100,7 @@ const Sidebar = (props: Props) => {
   return (
     <Sider
       theme="light"
-      className="sidebar-container"
+      className={className}
       trigger={null}
       collapsible
       collapsed={collapsed}
@@ -107,11 +108,6 @@ const Sidebar = (props: Props) => {
       collapsedWidth="var(--siderWidth)"
     >
       <div className="side-menu-container">
-        <div className={!collapsed ? 'menu-burger-left': 'menu-burger'} onClick={handleSidebarMobile}>
-          <span className="first"></span>
-          <span className="second"></span>
-          <span className="thrid"></span>
-        </div>
         <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
           {!collapsed && (
             <div className="sidebar-overhead">

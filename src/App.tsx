@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import {NewChannel} from './components/chanel/NewChannel';
+import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import SidebarCover from './components/SidebarCover';
 import Sidebar from './components/sidebar/Sidebar';
@@ -19,17 +19,16 @@ import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 import './sass/index.scss';
 
-
 export const App = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
-
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
+    document.querySelector('.sidebar-container')?.classList.add('toggled');
   };
 
   return (
@@ -52,6 +51,7 @@ export const App = () => {
           <Layout className="layout">
             <SidebarCover staticValue={staticValue} setCollapsed={setCollapsed}>
               <Sidebar
+                className="sidebar-container"
                 staticvalue={staticValue}
                 togglestatic={toggleStaticValue}
                 toggle={toggleCollapse}
@@ -59,7 +59,7 @@ export const App = () => {
                 handleSidebarMobile={handleSidebarMobile}
               />
             </SidebarCover>
-            <Layout className={!collapsed ? 'content-area' : ''}>
+            <Layout className={staticValue ? 'content-area' : ''}>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />

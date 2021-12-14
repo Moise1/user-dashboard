@@ -1,7 +1,8 @@
 @import 'general.config';
 
-// Large and extra large screens 
-.sidebar-container {
+// Large and extra large screens
+
+@mixin sidebar-styles(){
   min-width: 80px;
   border-top: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
@@ -66,12 +67,14 @@
       }
     }
   }
-};
+}
+.sidebar-container {
+ @include sidebar-styles();
+}
 
+// Laptop screens
 
-// Laptop screens 
-
-@media (max-width: 1440px) {
+@media only screen and (max-width: 1440px) {
   .sidebar-container {
     border-top: 1px solid $light-gray;
     border-right: 1px solid $light-gray;
@@ -164,40 +167,23 @@
     z-index: 10;
     cursor: pointer;
   }
-};
+}
 
+// Mobile screens
 
-// Mobile screens 
+@media only screen and (max-width: 750px) {
+  .sidebar-container {
+    @include sidebar-styles();
+    // border: 2px solid red;
+    // margin-top: 4.3rem;
+    display: none;
+  };
 
-@media only screen and (max-width: 750px){
-  .menu-burger {
-    cursor: pointer;
-    margin: 1rem auto;
-    border-radius: 8px;
-    padding: 12px;
-    background: $light-primary;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    & .second {
-      margin: 5px 0;
-    }
-
-    & span {
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: $white;
-    }
+  .toggled {
+    @include sidebar-styles();
+    display: block;
   }
-
-  .menu-burger-left{
-    @extend .menu-burger;
-    margin-left: 1rem;
-  }
-};
+}
 
 .ant-menu-item .ant-menu-title-content {
   padding-left: 26px;

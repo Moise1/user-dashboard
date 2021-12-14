@@ -15,8 +15,7 @@ body {
     background: $super-light-blue;
     .content-area{
       & > *{
-        width: 55%;
-      margin: auto;
+        margin-left: 20rem;
       }
     }
   }
