@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import ProgressBar from './ProgressBar';
+import {ProgressBar} from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';

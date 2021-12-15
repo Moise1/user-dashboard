@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
-import SidebarCover from './components/SidebarCover';
+// import SidebarCover from './components/SidebarCover';
 import Sidebar from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
@@ -22,43 +22,45 @@ import './sass/index.scss';
 export const App = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
+
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
+  const screenWidth = window.screen.width;
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
-    document.querySelector('.sidebar-container')?.classList.add('toggled');
+    if (screenWidth < 750 || screenWidth < 1030) {
+      const sidebar = document.querySelector<HTMLElement>('.sider');
+      sidebar!.style.display = 'block';
+    }
   };
 
+  const collapseSideBar = () => {
+    setStaticValue(!staticValue);
+    setCollapsed(!collapsed);
+    if (screenWidth <= 750 || screenWidth <= 1030) {
+      const sidebar = document.querySelector<HTMLElement>('.sider');
+      sidebar!.style.display = 'none';
+    }
+  };
   return (
     <div>
-      {staticValue ? (
-        <div
-          onClick={() => {
-            setStaticValue(!staticValue);
-            setCollapsed(!collapsed);
-          }}
-          className="overlay-sidebar-mobile"
-        ></div>
-      ) : (
-        ''
-      )}
+      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"></div> : ''}
 
       <SelectSupplierProvider>
         <Router>
           <Topbar handleSidebarMobile={handleSidebarMobile} />
           <Layout className="layout">
-            <SidebarCover staticValue={staticValue} setCollapsed={setCollapsed}>
-              <Sidebar
-                className="sidebar-container"
-                staticvalue={staticValue}
-                togglestatic={toggleStaticValue}
-                toggle={toggleCollapse}
-                collapsed={collapsed}
-                handleSidebarMobile={handleSidebarMobile}
-              />
-            </SidebarCover>
+            <Sidebar
+              className="sider"
+              setCollapsed={setCollapsed}
+              staticValue={staticValue}
+              togglestatic={toggleStaticValue}
+              toggle={toggleCollapse}
+              collapsed={collapsed}
+              handleSidebarMobile={handleSidebarMobile}
+            />
             <Layout className={staticValue ? 'content-area' : ''}>
               <Switch>
                 <Route exact path="/">

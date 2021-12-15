@@ -5,7 +5,7 @@ import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
 import StoreList from '../SmallComponents/StoreList';
-import Logo from '../../assets//logoHGR.png';
+import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
 import { Badge } from 'antd';
@@ -47,7 +47,8 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <Badge count={2} className="notifications">
+        <Badge count={2} className="notifications
+        ">
           <img src={bell} alt="" />
         </Badge>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>

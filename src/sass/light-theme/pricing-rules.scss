@@ -24,7 +24,9 @@
   }
 }
 .pricing-rules-container {
-  width: 70%;
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
   margin: auto;
   margin-top: 1rem;
 

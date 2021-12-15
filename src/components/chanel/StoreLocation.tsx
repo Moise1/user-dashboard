@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Layout } from 'antd';
 import aus_flag from '../../assets/channel/flags/AU.png';
 import ger_flag from '../../assets/channel/flags/DE.png';
 import sp_flag from '../../assets/channel/flags/ES.png';
@@ -7,12 +7,12 @@ import fr_flag from '../../assets/channel/flags/FR.png';
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
-import ProgressBar from './ProgressBar';
+import {ProgressBar} from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
-import ButtonComp from './component/ButttonCom';
+import {NextBtn} from './NextBtn';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
-import Flag, { FlagProps } from './component/Flag';
+import Flag, { FlagProps } from './Flag';
 
 interface values {
   storeLocation: string;
@@ -86,7 +86,7 @@ function StoreLocation(props: StoreLocationProps) {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Layout>
       <div>
         <form>
           <div className="row mx-auto">
@@ -123,7 +123,7 @@ function StoreLocation(props: StoreLocationProps) {
                   <div className="text-danger w-100 text-center small d-block d-md-none">
                     {values.storeLocation == '' ? '  *Please select a country in order to proceed' : ''}
                   </div>
-                  <ButtonComp onClick={Continue} title={t('nxt')} disabled={values.storeLocation == ''} />
+                  <NextBtn onClick={Continue} title={t('nxt')} disabled={values.storeLocation == ''} />
 
                   <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
                     {values.storeLocation == '' ? t('strchck') : ''}
@@ -137,7 +137,7 @@ function StoreLocation(props: StoreLocationProps) {
           </div>
         </form>
       </div>
-    </Container>
+    </Layout>
   );
 }
 

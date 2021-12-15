@@ -3,6 +3,10 @@
 // Large and extra large screens
 
 .new-channel{
+    overflow-y: scroll;
     background: $white;
-    margin: auto 2rem;
+    margin: 2rem 2rem 5rem 5rem;
+    width: -moz-available; /* WebKit-based browsers will ignore this. */
+    width: fill-available;
+    width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
 }
