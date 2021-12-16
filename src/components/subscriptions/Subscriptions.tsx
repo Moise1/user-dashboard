@@ -1,14 +1,15 @@
-import { createRef, useState } from 'react';
+import { createRef, useState, useMemo } from 'react';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
-import {StatusBar} from '../SmallComponents/StatusBar';
+import { StatusBar } from '../SmallComponents/StatusBar';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
   const sliderRef = createRef<CarouselRef>();
   const handleNext = () => sliderRef?.current?.next();
   const handlePrev = () => sliderRef?.current?.prev();
+  const screenWidth = window.screen.width;
 
   const data = [
     {
@@ -41,17 +42,13 @@ export const Subscriptions = () => {
     }
   ];
 
-
-  window.onresize = () => {
-    if (window.matchMedia('(max-width: 1224px)').matches) {
-      return setSlides(2);
-    } else if (window.matchMedia('(max-width: 1063px)').matches) {
-      return setSlides(2);
-    } else if (window.matchMedia('(max-width: 736px)').matches) {
-      return setSlides(1);
-    }
-  };
-
+  const renderSlides = useMemo(() => {
+    if (screenWidth < 750) {
+      setSlides(1);
+    } 
+    return slides;
+  }, [slides]);
+  
   return (
     <div className="carousel-container">
       <StatusBar>
@@ -64,7 +61,7 @@ export const Subscriptions = () => {
         </p>
         <Button className="subscription-cancel">Request cancellation</Button>
       </StatusBar>
-      <Carousel arrows slidesToShow={slides} className="carousel" dots={false} ref={sliderRef}>
+      <Carousel arrows slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
         {data.map((d) => (
           <Card key={d.id} className="subscription">
             <p className="listings-count">

@@ -1,0 +1,67 @@
+@import 'general.config';
+
+// Large and extra large screens
+.platforms-form {
+  display: flex;
+  .platforms-area {
+    .sell-title {
+      margin-top: 1rem;
+      text-align: center;
+      color: $black;
+      font-weight: bold;
+    }
+
+    .cards-container {
+      margin-top: 3rem;
+      padding: 2rem;
+      box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+
+      .platforms-card {
+        .input {
+          display: none;
+          &:checked + .card-input {
+            box-shadow: 0 0 1px 1px #39418b;
+          }
+        }
+        .card-input {
+          border-radius: 10px;
+          box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+
+          .description-area {
+            margin-top: 1rem;
+            & p {
+              overflow-wrap: break-word;
+              word-wrap: break-word;
+              hyphens: auto;
+            }
+            .amazon-sub {
+              font-style: italic;
+            }
+            .market-place {
+              margin: 0.8rem 0;
+            }
+            .market-place,
+            .amazon-sub {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+
+    .action-area {
+      position: absolute;
+      top: 90%;
+      left: 50%;
+      margin: 0 auto;
+    }
+  }
+}
+
+// Tablets screens
+
+@media only screen and (max-width: 1030px) {
+  .platforms-form {
+    display: block;
+  }
+}

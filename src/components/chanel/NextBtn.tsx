@@ -6,7 +6,7 @@ interface props {
   disabled: boolean;
 }
 
-export default function ButttonCom(props: props) {
+export const NextBtn = (props: props) => {
   const { title, onClick, disabled } = props;
 
   return (
@@ -22,4 +22,4 @@ export default function ButttonCom(props: props) {
       </div>
     </button>
   );
-}
+};

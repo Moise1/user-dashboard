@@ -4,8 +4,7 @@ import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
-//import back_icon from '../../assets/channel/flags/back.png'
-import ProgressBar from './ProgressBar';
+import {ProgressBar} from './ProgressBar';
 import { useHistory } from 'react-router-dom';
 import MbProgressBar from './MbProgressBar';
 import Previousstep from '../SmallComponents/Previousstep';

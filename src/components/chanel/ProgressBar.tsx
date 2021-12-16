@@ -1,19 +1,18 @@
-import React from 'react';
 import progress_done from '../../assets/channel/progress.png';
 import progress_remain from '../../assets/channel/progress_remain.png';
 import progress_remain_dots from '../../assets/channel/progress_remain_dots.png';
 import progress_done_dots from '../../assets/channel/progress_done_dots.png';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/progress-bar.scss';
 
 interface props {
   step: number;
   platform: platformType;
 }
 
-function ProgressBar(props: props) {
-  console.log(props.platform, 'sidebar');
+export const ProgressBar = (props: props) => {
   return (
-    <div className="row mx-auto tex-center">
+    <div className="channel-progress-bar">
       <div className="col-10 mx-auto">
         <div className="d-flex align-items-center">
           <img height="30" src={progress_done} alt="progress" />{' '}
@@ -80,6 +79,4 @@ function ProgressBar(props: props) {
       </div>
     </div>
   );
-}
-
-export default ProgressBar;
+};

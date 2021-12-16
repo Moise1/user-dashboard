@@ -1,10 +1,8 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-//import Input from '@material-ui/core/Input';
-//import back_icon from '../../assets/channel/flags/back.png';
-import ProgressBar from './ProgressBar';
+import { ProgressBar } from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
-import ButtonComp from './component/ButttonCom';
+import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
 
@@ -19,9 +17,6 @@ interface props {
   values: values;
   platform: platformType;
   handleChangeUser: (newUser: string) => void;
-  /*
-   { nextStep, handleChangeUser, values, step, prevStep, platform, user }: any
-   */
 }
 
 function UserName(props: props) {
@@ -89,20 +84,7 @@ function UserName(props: props) {
                   </div>
                 </div>
                 <div className="mx-auto next-fix mt-auto pt-2 mb-3 text-md-center text-right w-100 align-items-end d-flex">
-                  <ButtonComp onClick={Continue} title={'Next'} disabled={values.user == ''} />
-                  {/* <button
-                    onClick={Continue}
-                    type="submit"
-                    disabled={values.user == ""}
-                    className={`border-0 bg-trans mx-md-auto ml-auto 
-                    ${values.user == "" ? " text-grey btn-disbaled" : "d-blue"}
-                    `}
-                  >
-                    <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">Next</span>
-                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-md-1"></i>
-                    </div>
-                  </button> */}
+                  <NextBtn onClick={Continue} title={'Next'} disabled={values.user == ''} />
                 </div>
               </div>
             </div>

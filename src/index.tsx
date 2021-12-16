@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './sass/index.scss';
-import App from './App';
+import {App} from './App';
 import { IntlProvider } from 'react-intl';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
