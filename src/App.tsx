@@ -3,7 +3,6 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
-// import SidebarCover from './components/SidebarCover';
 import Sidebar from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
@@ -31,8 +30,8 @@ export const App = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
     if (screenWidth < 750 || screenWidth < 1030) {
-      const sidebar = document.querySelector<HTMLElement>('.sider');
-      sidebar!.style.display = 'block';
+      const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
+      sidebar.style.display = 'block';
     }
   };
 
@@ -40,8 +39,8 @@ export const App = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
     if (screenWidth <= 750 || screenWidth <= 1030) {
-      const sidebar = document.querySelector<HTMLElement>('.sider');
-      sidebar!.style.display = 'none';
+      const sidebar = document.querySelector('.sider') as HTMLElement;
+      sidebar.style.display = 'none';
     }
   };
   return (

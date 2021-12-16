@@ -14,9 +14,6 @@
     .cards-container {
       margin-top: 3rem;
       padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: 1rem;
       box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 
       .platforms-card {
@@ -32,12 +29,17 @@
 
           .description-area {
             margin-top: 1rem;
+            & p {
+              overflow-wrap: break-word;
+              word-wrap: break-word;
+              hyphens: auto;
+            }
             .amazon-sub {
               font-style: italic;
             }
-            .market-place{
-              margin: .8rem 0;
-            };
+            .market-place {
+              margin: 0.8rem 0;
+            }
             .market-place,
             .amazon-sub {
               font-weight: bold;
@@ -45,13 +47,21 @@
           }
         }
       }
-    };
+    }
 
-    .action-area{
+    .action-area {
       position: absolute;
       top: 90%;
       left: 50%;
       margin: 0 auto;
     }
+  }
+}
+
+// Tablets screens
+
+@media only screen and (max-width: 1030px) {
+  .platforms-form {
+    display: block;
   }
 }

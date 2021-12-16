@@ -1,4 +1,5 @@
 import React from 'react';
+import {Row, Col} from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
@@ -28,8 +29,8 @@ export const PlatForm = (props: props) => {
     <form className="platforms-form">
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
-        <div className="cards-container">
-          <div className="platforms-card">
+        <Row className="cards-container" gutter={[0, 8]}>
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
             <label>
               <input
                 type="radio"
@@ -47,14 +48,14 @@ export const PlatForm = (props: props) => {
                 </div>
               </div>
             </label>
-          </div>
+          </Col>
 
-          <div className="platforms-card">
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
             <label>
               <input
                 type="radio"
                 name="product"
-                value={'platform'}
+                value='platform'
                 checked={platform == 'shopify'}
                 className="input"
                 onChange={() => handleChangePlatform('shopify')}
@@ -67,13 +68,13 @@ export const PlatForm = (props: props) => {
                 </div>
               </div>
             </label>
-          </div>
-          <div className="platforms-card">
+          </Col>
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
             <label>
               <input
                 type="radio"
                 name="product"
-                value={'platform'}
+                value='platform'
                 checked={platform == 'amazon'}
                 className="input"
                 onChange={() => handleChangePlatform('amazon')}
@@ -89,8 +90,8 @@ export const PlatForm = (props: props) => {
                 </div>
               </div>
             </label>
-          </div>
-        </div>
+          </Col>
+        </Row>
         
         <div className="action-area">
           <NextBtn onClick={Continue} disabled={!values.platform} title={t('nxt')} />
