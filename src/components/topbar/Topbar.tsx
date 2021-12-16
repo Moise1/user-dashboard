@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import coinIcon from '../../assets/tokenCoin.png';
 import flag from '../../assets/flag-round-500.svg';
+import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
 import StoreList from '../SmallComponents/StoreList';
-import Logo from '../../assets//logoHGR.png';
+import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
 import { Badge } from 'antd';
@@ -33,7 +34,6 @@ const Topbar = (props: Props) => {
         <span className="second"></span>
         <span className="thrid"></span>
       </div>
-      <div className="burger-menu-container"></div>
       <div className="top-bar-nav">
         <div className="quota-container">
           <div className="quota">
@@ -47,15 +47,14 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <button className="notifications-container" onClick={handleOpenModal} >
-          <PopupModal open={open} width={800} style={{top: 20}} bodyStyle={{height: 600}}>
-            <BuyTokens/>
+        <Badge count={2} className="notifications
+        ">
+          <img src={bell} alt="" />
+        </Badge>
+        <div className="tokens-container" role="button" onClick={handleOpenModal}>
+          <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }}>
+            <BuyTokens />
           </PopupModal>
-          <Badge count={2}>
-            <i className="fa fa-bell-o" aria-hidden="true" />
-          </Badge>
-        </button>
-        <div className="tokens-container">
           <img src={coinIcon} alt="coinIcon" />
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>

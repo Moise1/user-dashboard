@@ -1,7 +1,7 @@
 import { FC, CSSProperties } from 'react';
 import { Modal } from 'antd';
 
-interface IProps {
+interface Props {
   open: boolean;
   children: JSX.Element[] | JSX.Element;
   width?: number;
@@ -9,8 +9,8 @@ interface IProps {
   style?: CSSProperties;
 }
 
-export const PopupModal: FC<IProps> = ({ open, children, width,  style , bodyStyle}: IProps) => (
-  <Modal visible={open} footer={null} width={width}  style={style} bodyStyle={bodyStyle}>
+export const PopupModal: FC<Props> = ({ open, children, width, style, bodyStyle }: Props) => (
+  <Modal visible={open} footer={null} width={width} style={style} bodyStyle={bodyStyle}>
     {' '}
     {children}
   </Modal>

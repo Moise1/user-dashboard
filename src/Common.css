@@ -29,12 +29,7 @@
   filter: invert(1);
 }
 
-.w-sidebar-toggle {
-  width: var(--siderWidth);
-  z-index: 10;
-  /* height: 100vh; */
-  overflow-x: visible;
-}
+
 
 .ant-layout-sider {
   position: fixed;

@@ -22,14 +22,17 @@ const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 interface Props {
+  className: string;
   collapsed: boolean;
+  setCollapsed: (value: boolean) => void;
   toggle: () => void;
-  staticvalue: boolean;
+  staticValue: boolean;
   togglestatic: () => void;
+  handleSidebarMobile: () => void;
 }
 
 let darkApplied = false;
-async function toggleDarkTheme() {
+const toggleDarkTheme = async () => {
   if (darkApplied) {
     const element = document.getElementById('darkThemeLink');
     element?.parentElement?.removeChild(element);
@@ -42,7 +45,7 @@ async function toggleDarkTheme() {
     document.head.appendChild(link);
   }
   darkApplied = !darkApplied;
-}
+};
 
 const Sidebar = (props: Props) => {
   const history = useHistory();
@@ -50,7 +53,7 @@ const Sidebar = (props: Props) => {
   const routeChange = () => {
     history.push('/home');
   };
-  const { collapsed, staticvalue, togglestatic } = props;
+  const { collapsed, staticValue, togglestatic, className, setCollapsed } = props;
 
   const windowwidth = window.innerWidth;
   // FOR CLOSE SIDEBAR AND CHANGE ROUTE
@@ -79,7 +82,7 @@ const Sidebar = (props: Props) => {
   };
 
   const listArray = [
-    { key: 9, listName: t('Menu.Channel') },
+    { key: 9, listName: t('Menu.Channel'), onClick: () => history.push('/new-channel') },
     { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
     { key: 11, listName: t('Menu.PricingRules'), onClick: () => history.push('/pricing-rules') },
     { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => history.push('/browser-extensions') },
@@ -95,132 +98,150 @@ const Sidebar = (props: Props) => {
     { key: 513, listName: t('Menu.PricingRules') }
   ];
 
-  return (
-    <Sider
-      theme="light"
-      className="sidebar-container"
-      trigger={null}
-      collapsible
-      collapsed={collapsed}
-      width="var(--expandedSiderWidth)"
-      collapsedWidth="var(--siderWidth)"
-    >
-      <div className="side-menu-container">
-        <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
-          {!collapsed && (
-            <div className="sidebar-overhead">
-              <div className="logo-container">
-                <img className="logo" src={Logo} alt="logo" />
-                <h1 className="logo-text">HGR</h1>
-              </div>
+  const handleMouseEnter = () => {
+    if (!staticValue) {
+      setCollapsed(false);
+      return;
+    }
+  };
 
-              <div className="quota-container">
-                <div className="quota">
-                  <strong className="quota-text">
-                    <p>{t('Topbar.Quota')}: &nbsp;</p>
-                  </strong>
-                  <span className="quota-progress">45% (12/13)</span>
+  const handleMouseLeave = () => {
+    if (!staticValue) {
+      setCollapsed(true);
+      return;
+    }
+  };
+  return (
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Sider
+        theme="light"
+        className={className}
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        width="var(--expandedSiderWidth)"
+        collapsedWidth="var(--siderWidth)"
+      >
+        <div className="side-menu-container">
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+            {!collapsed && (
+              <div className="sidebar-overhead">
+                <div className="logo-container">
+                  <img className="logo" src={Logo} alt="logo" />
+                  <h1 className="logo-text">HGR</h1>
                 </div>
 
-                <button type="button" className="update-btn">
-                  {t('Topbar.Update')}
-                </button>
-              </div>
-              <div className="sidebar-btns">
-                {staticvalue ? (
-                  <i onClick={togglestatic} className="fas fa-chevron-left"></i>
-                ) : (
-                  <button className="sidebar-pin">
-                    <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
+                <div className="quota-container">
+                  <div className="quota">
+                    <strong className="quota-text">
+                      <p>{t('Topbar.Quota')}: &nbsp;</p>
+                    </strong>
+                    <span className="quota-progress">45% (12/13)</span>
+                  </div>
+
+                  <button type="button" className="update-btn">
+                    {t('Topbar.Update')}
                   </button>
-                )}
+                </div>
+                <div className="sidebar-btns">
+                  {staticValue ? (
+                    <i onClick={togglestatic} className="fas fa-chevron-left"></i>
+                  ) : (
+                    <button className="sidebar-pin">
+                      <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-          <div className="pt-5"></div>
-          <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
-            {t('Menu.Dashboard')}
-          </Menu.Item>
-          <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
-            <span className="sidebar_element">{t('Menu.Catalog')}</span>
-          </Menu.Item>
-          <Menu.Item
-            onClick={() => history.push('/sources')}
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            key="3"
-            icon={<ListNowIcon />}
-          >
-            {t('Menu.ListNow')}
-          </Menu.Item>
-          <Menu.Item
-            onClick={() => handleCloseLlistingSidebar()}
-            key="4"
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            icon={
-              <span onClick={routeChange}>
-                <ListingsIcon />
-              </span>
-            }
-          >
-            {t('Menu.Listings')}
-          </Menu.Item>
-          <Menu.Item
-            onClick={() => handleOrdersSidebar()}
-            key="5"
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            icon={
-              <span>
-                <OrdersIcon />
-              </span>
-            }
-            title={t('Menu.Orders')}
-          >
-            Orders
-          </Menu.Item>
+            )}
+            <div className="pt-5"></div>
+            <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
+              {t('Menu.Dashboard')}
+            </Menu.Item>
+            <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
+              <span className="sidebar_element">{t('Menu.Catalog')}</span>
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => history.push('/sources')}
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              key="3"
+              icon={<ListNowIcon />}
+            >
+              {t('Menu.ListNow')}
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => handleCloseLlistingSidebar()}
+              key="4"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={
+                <span onClick={routeChange}>
+                  <ListingsIcon />
+                </span>
+              }
+            >
+              {t('Menu.Listings')}
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => handleOrdersSidebar()}
+              key="5"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={
+                <span>
+                  <OrdersIcon />
+                </span>
+              }
+              title={t('Menu.Orders')}
+            >
+              Orders
+            </Menu.Item>
 
-          {/* SETTINGS LIST ITEMS .  */}
-          <SubMenu
-            key="sub3"
-            style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
-            icon={<SettingsIcon />}
-            title={t('Menu.Settings')}
-          >
-            {listArray.map((obj) => (
-              <Menu.Item key={obj.key} onClick={obj.onClick}>
-                <MenuListItem listName={obj.listName} />
-              </Menu.Item>
-            ))}
-          </SubMenu>
+            {/* SETTINGS LIST ITEMS .  */}
+            <SubMenu
+              key="sub3"
+              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              icon={<SettingsIcon />}
+              title={t('Menu.Settings')}
+            >
+              {listArray.map((obj) => (
+                <Menu.Item key={obj.key} onClick={obj.onClick}>
+                  <MenuListItem listName={obj.listName} />
+                </Menu.Item>
+              ))}
+            </SubMenu>
 
-          {/* SERVICES  */}
-          <Menu.Item
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            key="2"
-            icon={<ServiceIcon />}
-            onClick={() => history.push('/services')}
-          >
-            <span>{t('Menu.Services')}</span>
-          </Menu.Item>
+            {/* SERVICES  */}
+            <Menu.Item
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              key="2"
+              icon={<ServiceIcon />}
+              onClick={() => history.push('/services')}
+            >
+              <span>{t('Menu.Services')}</span>
+            </Menu.Item>
 
-          <SubMenu
-            key="sub5"
-            style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
-            icon={<HelpIcon />}
-            title={t('Menu.Help')}
-          >
-            {helplistArray.map((obj) => (
-              <Menu.Item key={obj.key}>
-                <MenuListItem listName={obj.listName} />
-              </Menu.Item>
-            ))}
-          </SubMenu>
-        </Menu>
-        <button className="logout">
-          <img src={logout} />
-          <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
-        </button>
-      </div>
-    </Sider>
+            <SubMenu
+              key="sub5"
+              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              icon={<HelpIcon />}
+              title={t('Menu.Help')}
+            >
+              {helplistArray.map((obj) => (
+                <Menu.Item key={obj.key}>
+                  <MenuListItem listName={obj.listName} />
+                </Menu.Item>
+              ))}
+            </SubMenu>
+          </Menu>
+          <button className="logout">
+            <img src={logout} />
+            <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
+          </button>
+        </div>
+      </Sider>
+    </div>
   );
 };
 

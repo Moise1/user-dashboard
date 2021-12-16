@@ -38,6 +38,9 @@
 }
 .browser-extensions {
   width: 100%;
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
   margin: 0 auto;
   overflow-x: hidden;
   background: $super-light-blue;

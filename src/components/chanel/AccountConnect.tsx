@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
-//import Checkbox from '@material-ui/core/Checkbox'
-//import FormGroup from '@material-ui/core/FormGroup'
-//import FormControlLabel from '@material-ui/core/FormControlLabel'
-
-import ProgressBar from './ProgressBar';
+import { ProgressBar } from './ProgressBar';
 import MbProgressBar from './MbProgressBar';
 import { t } from '../../global/transShim';
-
 import Previousstep from '../SmallComponents/Previousstep';
-import ButttonCom from './component/ButttonCom';
+import {NextBtn} from './NextBtn';
 
 interface values {
   extension: string;
@@ -184,7 +179,7 @@ function AccountConnect(props: props) {
                       <i> {t('howextrun')}</i>
                     </div>
                   </div>
-                  <ButttonCom
+                  <NextBtn
                     title={'Next'}
                     onClick={Continue}
                     disabled={values.api == '' || (values.api == 'advance' && values.extension == '')}

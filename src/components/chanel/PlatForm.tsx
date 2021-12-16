@@ -1,13 +1,12 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
-
+import {Row, Col} from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
-import ProgressBar from './ProgressBar';
-import MbProgressBar from './MbProgressBar';
-import ButtonComp from './component/ButttonCom';
+import { ProgressBar } from './ProgressBar';
+import { NextBtn} from './NextBtn';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/platform.scss';
 
 export interface values {
   platform?: platformType;
@@ -19,148 +18,87 @@ export interface props {
   values: values;
   step: number;
 }
-function PlatForm(props: props) {
-  const { nextStep, handleChangePlatform, platform, values, step } = props;
 
+export const PlatForm = (props: props) => {
+  const { nextStep, handleChangePlatform, platform, values, step } = props;
   const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };
   return (
-    <Container component="main" maxWidth="lg">
-      <div>
-        <form>
-          <div className="row mx-auto">
-            <div className="col-12 my-2 d-block d-xl-none px-0">
-              <MbProgressBar step={step} />
-            </div>
-            <div className="col-xl-8 mt-2 pt-1 shade-Channel mb-no-shade bg-white br-8">
-              <div className="row mx-auto px-lg-4 px-md-3">
-                <div className="text-center col-12">
-                  <h5 className="font-weight-bold mb-0">{t('liketosell')}</h5>
-                </div>
-                <div className="col-md-6 col-4 mt-md-1 px-0 px-md-2">
-                  <label className="h-md-100">
-                    <input
-                      type="radio"
-                      name="product"
-                      value={'platform'}
-                      className="card-input-element"
-                      checked={platform == 'ebay'}
-                      onChange={() => handleChangePlatform('ebay')}
-                    />
-                    <div
-                      className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == 'ebay' ? ' ' : ''}
-                    
-                    `}
-                    >
-                      <div className="mt-md-2 mb-md-2">
-                        <img src={ebay_logo} className="w-res-100" alt="ebay logo" />
-                      </div>
-                      <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">{t('mrktplc')}</div>
-                        <div className="panel-body">{t('ebayslctd')}</div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-
-                <div className="col-md-6 col-4 mt-md-1 px-0 px-md-2">
-                  <label className="h-md-100">
-                    <input
-                      type="radio"
-                      name="product"
-                      value={'platform'}
-                      checked={platform == 'shopify'}
-                      className="card-input-element"
-                      onChange={() => handleChangePlatform('shopify')}
-                    />
-                    <div
-                      className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == 'shopify' ? '' : ''}
-                    
-                    `}
-                    >
-                      <div className="mt-md-2 mb-md-2">
-                        <img src={shopify_logo} className="w-res-100" alt="ebay logo" />
-                      </div>
-                      <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">{t('onwstore')}</div>
-                        <div className="panel-body">{t('shopslctd')}</div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-                <div className="col-md-12 col-4 mt-md-2 px-0 px-md-2">
-                  <label className="h-100">
-                    <input
-                      type="radio"
-                      name="product"
-                      value={'platform'}
-                      checked={platform == 'amazon'}
-                      className="card-input-element"
-                      onChange={() => handleChangePlatform('amazon')}
-                    />
-                    <div
-                      className={`panel panel-default panel-platform card-input shade-card br-8 h-100
-                    ${platform == 'amazon' ? '' : ''}
-                    
-                    `}
-                    >
-                      <div className="mt-md-2 mb-md-4">
-                        <img src={amazon_logo} className="w-res-100" alt="ebay logo" />
-                      </div>
-                      <div className="d-md-block d-none">
-                        <div className=" font-weight-bold">{t('mrktplc')}</div>
-                        <div className="panel-body">{t('amzsltcd')}</div>
-                        <div>
-                          <i className="font-weight-bold">{t('amzsub')}</i>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-                <div className="row d-flex d-md-none mt-2 text-center h-resp-65">
-                  {values.platform == 'ebay' ? (
-                    <div className="m-auto px-5">
-                      <div className=" font-weight-bold h6 mb-0">{t('mrktplc')}</div>
-                      <div className="panel-body px-2">{t('ebayslctd')}</div>
-                    </div>
-                  ) : values.platform == 'shopify' ? (
-                    <div className="m-auto px-5">
-                      <div className=" font-weight-bold h6 mb-0">{t('onwstore')}</div>
-                      <div className="panel-body px-2">{t('shopslctd')}</div>
-                    </div>
-                  ) : values.platform == 'amazon' ? (
-                    <div className="m-auto px-5">
-                      <div className=" font-weight-bold h6 mb-0">{t('mrktplc')}</div>
-                      <div className="panel-body px-2">{t('amzsltcd')}</div>
-                      <i className="font-weight-bold">{t('amzsub')}</i>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className="mx-md-auto ml-auto mt-md-4 mb-2 text-md-center text-right w-100 next-fix">
-                  <div className="text-danger small text-center d-md-none d-block">
-                    {!values.platform ? t('platchck') : ''}
-                  </div>
-                  <ButtonComp onClick={Continue} disabled={!values.platform} title={t('nxt')} />
-                  <div className="text-danger small text-center d-none d-md-block">
-                    {!values.platform ? t('platchck') : ''}
-                  </div>
+    <form className="platforms-form">
+      <div className="platforms-area">
+        <h5 className="sell-title">{t('liketosell')} ?</h5>
+        <Row className="cards-container" gutter={[0, 8]}>
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+            <label>
+              <input
+                type="radio"
+                name="product"
+                value="platform"
+                className="input"
+                checked={platform == 'ebay'}
+                onChange={() => handleChangePlatform('ebay')}
+              />
+              <div className="card-input">
+                <img src={ebay_logo} className="platform-img" alt="ebay logo" />
+                <div className="description-area">
+                  <div className="market-place">{t('mrktplc')}</div>
+                  <p>{t('ebayslctd')}</p>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-4 d-xl-block d-none m-auto">
-              <ProgressBar platform={platform} step={step} />
-            </div>
-          </div>
-        </form>
-      </div>
-    </Container>
-  );
-}
+            </label>
+          </Col>
 
-export default PlatForm;
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+            <label>
+              <input
+                type="radio"
+                name="product"
+                value='platform'
+                checked={platform == 'shopify'}
+                className="input"
+                onChange={() => handleChangePlatform('shopify')}
+              />
+              <div className="card-input">
+                <img src={shopify_logo} className="platform-img" alt="ebay logo" />
+                <div className="description-area">
+                  <div className="market-place">{t('onwstore')}</div>
+                  <p>{t('shopslctd')}</p>
+                </div>
+              </div>
+            </label>
+          </Col>
+          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+            <label>
+              <input
+                type="radio"
+                name="product"
+                value='platform'
+                checked={platform == 'amazon'}
+                className="input"
+                onChange={() => handleChangePlatform('amazon')}
+              />
+              <div className="card-input">
+                <img src={amazon_logo} className="platform-img" alt="ebay logo" />
+                <div className="description-area">
+                  <div className="market-place">{t('mrktplc')}</div>
+                  <div>{t('amzsltcd')}</div>
+                  <p>
+                    <i className="amazon-sub">{t('amzsub')}</i>
+                  </p>
+                </div>
+              </div>
+            </label>
+          </Col>
+        </Row>
+        
+        <div className="action-area">
+          <NextBtn onClick={Continue} disabled={!values.platform} title={t('nxt')} />
+          <p className="select-warning">{!values.platform ? t('platchck') : ''}</p>
+        </div>
+      </div>
+      <ProgressBar platform={platform} step={step} />
+    </form>
+  );
+};

@@ -1,7 +1,6 @@
-import {Layout} from  'antd';
-import SidebarMb from '../../components/SidebarMb';
+import { Layout } from 'antd';
 import { SearchBars } from '../SmallComponents/SearchBars';
-import {StatusBar} from '../SmallComponents/StatusBar';
+import { StatusBar } from '../SmallComponents/StatusBar';
 import ListingsStatusBtn from '../SmallComponents/ListingsStatusBtn';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/listings.scss';
@@ -13,7 +12,6 @@ const Listings = () => {
 
   return (
     <Layout className="listings-container">
-      <SidebarMb className="side-nav" />
       <StatusBar>
         <ListingsStatusBtn title={`${windowwidth < 900 ? t('ActiveListingsShort') : t('ActiveListings')}`} />
         <ListingsStatusBtn title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`} />
