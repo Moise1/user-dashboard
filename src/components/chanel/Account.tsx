@@ -1,6 +1,5 @@
 import { Layout } from 'antd';
 import {ProgressBar} from './ProgressBar';
-import MbProgressBar from './MbProgressBar';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
 
@@ -28,9 +27,6 @@ export const  Account = (props: props) => {
     <Layout>
       <form>
         <div className="row mx-auto">
-          <div className="col-12 my-2 d-block d-xl-none px-0">
-            <MbProgressBar platform={platform} step={step} />
-          </div>
           <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2">
             <Previousstep Previous={Previous} />
             <div className="row mx-auto px-lg-5 px-md-3">
