@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
 import { ProgressBar } from './ProgressBar';
-import MbProgressBar from './MbProgressBar';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
-import {NextBtn} from './NextBtn';
+import { NextBtn } from './NextBtn';
 
 interface values {
   extension: string;
@@ -40,9 +39,6 @@ function AccountConnect(props: props) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-12 my-2 d-block d-xl-none px-0">
-              <MbProgressBar step={step} platform={platform} />
-            </div>
             <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">

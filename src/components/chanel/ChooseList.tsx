@@ -4,9 +4,8 @@ import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
-import {ProgressBar} from './ProgressBar';
+import { ProgressBar } from './ProgressBar';
 import { useHistory } from 'react-router-dom';
-import MbProgressBar from './MbProgressBar';
 import Previousstep from '../SmallComponents/Previousstep';
 import { t } from '../../global/transShim';
 
@@ -37,10 +36,7 @@ function ChooseList(props: props) {
     history.push('/home');
   };
 
-  //const Continue = (e: any) => {
-  //  e.preventDefault();
-  //  nextStep();
-  //};
+ 
   const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
@@ -50,9 +46,6 @@ function ChooseList(props: props) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-12 my-2 d-block d-xl-none px-0">
-              <MbProgressBar platform={platform} step={step} />
-            </div>
             <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 pb-xl-5">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">

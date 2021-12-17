@@ -3,4 +3,10 @@
 .channel-progress-bar{
     margin-top: 1rem;
     width: 100%;
+};
+
+// Mobile scree sizes 
+
+@media only screen and (max-width: 750px){
+    .channel-progress-bar{display: none};
 }

@@ -98,7 +98,7 @@ export const PlatForm = (props: props) => {
           <p className="select-warning">{!values.platform ? t('platchck') : ''}</p>
         </div>
       </div>
-      <ProgressBar platform={platform} step={step} />
+      <ProgressBar platform={platform} step={step}/>
     </form>
   );
 };

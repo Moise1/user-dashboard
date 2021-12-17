@@ -63,5 +63,9 @@
 @media only screen and (max-width: 1030px) {
   .platforms-form {
     display: block;
+    .cards-container{
+      border: 2px solid blue;
+      overflow-y: scroll;
+    }
   }
 }
