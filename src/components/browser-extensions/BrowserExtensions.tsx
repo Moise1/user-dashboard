@@ -4,6 +4,7 @@ import chrome from '../../assets/browser-extensions/chrome-logo.png';
 import opera from '../../assets/browser-extensions/opera-logo.png';
 import safari from '../../assets/browser-extensions/safari-logo.png';
 import service from '../../assets/services/listing-service.png';
+import { Layout } from 'antd';
 
 export const BrowserExtensions = () => {
   const data = [
@@ -43,7 +44,7 @@ export const BrowserExtensions = () => {
     }
   ];
   return (
-    <div className="browser-extensions">
+    <Layout className="browser-extensions">
       <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
         {data.map((d) => (
           <Col xs={24} sm={12} xl={8} key={d.id}>
@@ -69,6 +70,6 @@ export const BrowserExtensions = () => {
           </Col>
         ))}
       </Row>
-    </div>
+    </Layout>
   );
 };

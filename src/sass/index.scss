@@ -4,19 +4,40 @@
 @import '../_variables.small.css';
 @import './light-theme/general.config';
 
-
-
 body {
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
+  background: $super-light-blue;
+  font-size: 14px;
+  line-height: 1.5715;
+
+  .all-content {
+    background: $super-light-blue;
+  }
+
+  .ant-layout {
+    height: calc(100vh - 80px);
+    overflow: auto;
+    background: $super-light-blue;
+  }
+  .ant-layout.ant-layout-has-sider {
+    margin: 0px 5px 0px 85px;
+  }
 
   .layout {
     background: $super-light-blue;
-    .content-area{
-      & > *{
-        margin-left: 20rem;
+
+    .content-area {
+      & > * {
+        margin-left: 220px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .ant-layout.ant-layout-has-sider {
+    margin: 0px !important;
   }
 }

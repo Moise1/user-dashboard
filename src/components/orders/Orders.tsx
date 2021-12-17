@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SearchBars } from '../SmallComponents/SearchBars';
 import { OrdersTable } from '../tables/OrdersTable';
-import { OrderActionBtns} from './OrderActionBtns';
-import { Container } from 'react-bootstrap';
+import { OrderActionBtns } from './OrderActionBtns';
+import { Layout } from 'antd';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import '../../sass/light-theme/orders.scss';
@@ -51,7 +51,7 @@ const Orders = (ordersProps: props) => {
   };
 
   return (
-    <Container fluid className="orders-container">
+    <Layout className="orders-container">
       <SearchBars />
       <OrderActionBtns orderNumber={orderNumber} />
       <OrdersTable
@@ -80,7 +80,7 @@ const Orders = (ordersProps: props) => {
         handleCloseAllModals={handleCloseAllModals}
         setShow={setShow}
       />
-    </Container>
+    </Layout>
   );
 };
 

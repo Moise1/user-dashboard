@@ -84,22 +84,6 @@
   color: var(--navLinkColorHover);
 }
 
-/****** Overrides of ant stuff ********/
-/*#region Ant */
-body {
-  color: var(--txtBaseColor) !important;
-  background-color: var(--bgPage) !important;
-}
-/* override of ant stuff */
-
-/* aside.ant-layout-sider { max-width: var(--siderWidth) !important; min-width: var(--siderWidth) !important; width: var(--siderWidth) !important; } */
-
-.ant-layout-sider.sidebarInitial {
-  min-width: var(--siderWidth);
-  width: var(--siderWidth);
-  flex: 0 0 var(--siderWidth);
-}
-
 .bg-white {
   background-color: var(--bgHighlight) !important;
 }
@@ -119,9 +103,6 @@ input {
 .border,
 .ant-menu-vertical {
   border-color: var(--borderColor) !important;
-}
-.ant-layout {
-  background-color: var(--bgPage2) !important;
 }
 
 .ant-table {
@@ -145,9 +126,6 @@ input {
   border-color: var(--borderColor) !important;
 }
 .ant-menu,
-.ant-layout-sider {
-  background-color: var(--bgPage) !important;
-}
 .ant-menu-title-content {
   color: var(--navLinkColor);
 }

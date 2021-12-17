@@ -1,6 +1,7 @@
 import { Card } from 'antd';
 import '../../sass/light-theme/services.scss';
 import serviceImg from '../../assets/services/listing-service.png';
+import { Layout } from 'antd';
 
 export const Services = () => {
   const data = [
@@ -49,7 +50,7 @@ export const Services = () => {
   ];
 
   return (
-    <div className="services-container">
+    <Layout className="services-container">
       {data.map((s) => (
         <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>
           <div className="card-info">
@@ -59,6 +60,6 @@ export const Services = () => {
           </div>
         </Card>
       ))}
-    </div>
+    </Layout>
   );
 };
