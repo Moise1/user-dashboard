@@ -1,5 +1,6 @@
 import { Table, Row, Col, Card, Input, Form, Button } from 'antd';
 import '../../sass/light-theme/va-profiles.scss';
+import { Layout } from 'antd';
 
 export const VaProfiles = () => {
   const dataSource = [
@@ -29,12 +30,12 @@ export const VaProfiles = () => {
   ];
 
   return (
-    <div className="va-profiles-container">
+    <Layout className="va-profiles-container">
       <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
-        <Col xs={24} sm={12} xl={8}  className="table-container">
+        <Col xs={24} sm={12} xl={8} className="table-container">
           <Table dataSource={dataSource} columns={columns}></Table>
         </Col>
-        <Col xs={24} sm={12} xl={8} className="form-container" >
+        <Col xs={24} sm={12} xl={8} className="form-container">
           <Card className="card">
             <Form className="form">
               <p>Add new VA Profile</p>
@@ -44,6 +45,6 @@ export const VaProfiles = () => {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Layout>
   );
 };

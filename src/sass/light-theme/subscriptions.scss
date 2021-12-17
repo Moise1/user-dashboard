@@ -4,7 +4,7 @@
 
 .carousel-container {
   display: block;
-  margin: 3rem 2rem;
+
   width: 100%;
   .subscriptions-detail {
     font-weight: bold;
@@ -21,6 +21,12 @@
       padding: 0.2rem 0.8rem;
       border-radius: 5px;
     }
+  }
+
+  .rate-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .subscription-cancel {
@@ -48,6 +54,7 @@
       padding: 0.3rem 0.3rem;
       transition: 0.3s ease-in-out;
       width: 90% !important;
+      min-width: 200px;
 
       .discount {
         width: 100%;
@@ -65,25 +72,15 @@
         }
 
         .euro {
-          position: absolute;
           left: 28%;
           bottom: 53%;
           color: $black;
           opacity: 0.56;
         }
-        .duration {
-          position: absolute;
-          right: 40%;
-          top: 100%;
-        }
+
         .frequency {
-          position: absolute;
           bottom: 30%;
           right: 25%;
-        }
-
-        .frequency,
-        .duration {
           font-size: $font-small;
         }
       }
@@ -111,11 +108,10 @@
       }
     }
   }
-
   .control-btns-container {
     width: 80%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     margin-left: 1rem;
     left: 10%;
     display: flex;
@@ -134,4 +130,27 @@
       }
     }
   }
+  .duration {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: $font-small;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .twenty-off,
+  .forty-off {
+    margin-top: -20px;
+  }
+  .frequency {
+    right: 10%;
+  }
+}
+
+@media only screen and (max-width: 1030px) {
+}
+
+@media only screen and (max-width: 750px) {
 }

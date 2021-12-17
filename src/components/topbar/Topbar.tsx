@@ -25,8 +25,10 @@ const Topbar = (props: Props) => {
   return (
     <div className="top-bar">
       <div className="logo-container">
-        <img className="logo" src={Logo} alt="logo" />
-        <h1 className="logo-text">HGR</h1>
+        <a className="logo-link" href="/">
+          <img className="logo" src={Logo} alt="logo" />
+          <h1 className="logo-text">HGR</h1>
+        </a>
       </div>
 
       <div className="menu-burger" onClick={() => handleSidebarMobile()}>
@@ -47,8 +49,11 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <Badge count={2} className="notifications
-        ">
+        <Badge
+          count={2}
+          className="notifications
+        "
+        >
           <img src={bell} alt="" />
         </Badge>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>

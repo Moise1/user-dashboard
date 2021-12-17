@@ -24,6 +24,10 @@
       opacity: 1;
     }
 
+    .logo-link {
+      display: flex;
+    }
+
     .logo-text {
       color: $primary;
       margin: auto;
@@ -209,4 +213,3 @@
     }
   }
 }
-

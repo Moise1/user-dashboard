@@ -15,7 +15,6 @@ type ContextType = {
   setSupplierValue: (arg0: string) => void;
 };
 
-
 const Sources = () => {
   const [isShowSourceSettings, setShowSourceSettings] = useState<boolean>(true);
   const [isShowAutoOrderingSetting, setShowAutoOrderingSetting] = useState<boolean>(false);
@@ -92,31 +91,25 @@ const Sources = () => {
       </div>
 
       <div className="auto-ordering-section">
-        <div className="container-fluid">
-          <div className="row justify-content-between flex-column flex-lg-row mt-3">
-            {isShowSourceSettings ? <SourceSettings /> : ''}
-            {isShowAutoOrderingSetting ? (
-              <AutoOrdering
-                showOrdering={showOrdering}
-                whatSelect={whatSelect}
-                setWhatSelect={setWhatSelect}
-                setShowOrdering={setShowOrdering}
-              />
-            ) : (
-              ''
-            )}
+        <div className="row justify-content-between flex-column flex-lg-row mt-3">
+          {isShowSourceSettings ? <SourceSettings /> : ''}
+          {isShowAutoOrderingSetting ? (
+            <AutoOrdering
+              showOrdering={showOrdering}
+              whatSelect={whatSelect}
+              setWhatSelect={setWhatSelect}
+              setShowOrdering={setShowOrdering}
+            />
+          ) : (
+            ''
+          )}
 
-            <div className="col-12 col-sm-4 mt-2 d-flex flex-column align-items-lg-end ">
-              <div className="sticky-btns">
-                <div className="supplier-dropdown">
-                  <SearchSelect
-                    whatSelect={whatSelect}
-                    setWhatSelect={setWhatSelect}
-                    setShowOrdering={setShowOrdering}
-                  />
-                </div>
-                <SourceButtons />
+          <div className="col-12 col-sm-4 mt-2 d-flex flex-column align-items-lg-end ">
+            <div className="sticky-btns">
+              <div className="supplier-dropdown">
+                <SearchSelect whatSelect={whatSelect} setWhatSelect={setWhatSelect} setShowOrdering={setShowOrdering} />
               </div>
+              <SourceButtons />
             </div>
           </div>
         </div>

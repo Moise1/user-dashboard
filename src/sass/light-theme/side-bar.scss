@@ -11,12 +11,21 @@
   left: 0;
   z-index: 111 !important;
   height: 100vh;
-  overflow-y: scroll;
+  overflow: hidden;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ant-layout-sider-children {
+    overflow: scroll;
+  }
 
   .side-menu-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: scroll;
 
     .sidebar-overhead {
       .logo-container,

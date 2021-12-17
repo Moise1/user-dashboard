@@ -44,7 +44,7 @@ export const App = () => {
     }
   };
   return (
-    <div>
+    <div className="all-content">
       {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"></div> : ''}
 
       <SelectSupplierProvider>

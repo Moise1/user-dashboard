@@ -10,7 +10,6 @@ interface props {
 const MenuListItem = (props: props) => {
   const { listName, onClick } = props;
   return (
-    //put this style on separated file with custom classes
     <li className="menu-list" onClick={onClick}>
       <span className="dot-icon">
         <CircleDotIcon />
