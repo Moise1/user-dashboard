@@ -11,9 +11,6 @@ import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/sources-table.scss';
 
-
-
-
 type ContextType = {
   supplierValue: string;
   setSupplierValue: (arg0: string) => void;
@@ -91,27 +88,27 @@ const SourcesTable = () => {
           return (
             <tbody className="order-table-body" key={id}>
               <tr className="cursor-pointer">
-                <td className="obj-sale-body" onClick={() => handleSupplierValue(provider)}>
+                <td className="" onClick={() => handleSupplierValue(provider)}>
                   {provider}
                 </td>
-                <td className="obj-sale-body text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
+                <td className=" text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
                   {markup}
                 </td>
                 <td className="obj-sale-title source-td-none" onClick={() => handleSupplierValue(provider)}>
                   {decreaseLimit}
                 </td>
-                <td className="obj-sale-qty source-td-none" onClick={() => handleSupplierValue(provider)}>
+                <td className=" source-td-none" onClick={() => handleSupplierValue(provider)}>
                   {' '}
                   <img src={RightCircle} alt="RightCircle" />
                 </td>
-                <td className="obj-sale-qty text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
+                <td className=" text-center text-md-left" onClick={() => handleSupplierValue(provider)}>
                   {' '}
                   <img src={RightCircle} alt="RightCircle" />
                 </td>
-                <td className="obj-sale-qty  source-td-none" onClick={() => handleSupplierValue(provider)}>
+                <td className="  source-td-none" onClick={() => handleSupplierValue(provider)}>
                   <img src={RightCircle} alt="RightCircle" />
                 </td>
-                <td className="obj-sale-cost source-td-none" onClick={() => handleSupplierValue(provider)}>
+                <td className="source-td-none" onClick={() => handleSupplierValue(provider)}>
                   {template}
                 </td>
                 <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
