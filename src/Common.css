@@ -17,9 +17,6 @@
   cursor: pointer;
 }
 
-.card-input-element:checked + .card-input {
-  box-shadow: 0 0 1px 1px #39418b;
-}
 
 .card-input-flag:checked + .card-input {
   box-shadow: 0 0 1px 4px #39418b85;

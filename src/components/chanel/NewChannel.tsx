@@ -5,6 +5,7 @@ import ChooseList, { chooseListValues } from './ChooseList';
 import {PlatForm} from './PlatForm';
 import StoreLocation from './StoreLocation';
 import UserName from './UserName';
+import {Stepper} from './Stepper';
 import '../../sass/light-theme/new-channel.scss';
 
 interface state {
@@ -146,5 +147,12 @@ export const NewChannel = ({_ignored}: Props) => {
     }
   };
   
-  return <div className="new-channel">{stepDetector()}</div>;
+  return(
+    <div className="new-channel-container">
+      <Stepper current={step} className="stepper"/>
+      <div className="new-channel">
+        {stepDetector()}
+      </div>
+    </div>
+  );
 };

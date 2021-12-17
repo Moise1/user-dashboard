@@ -7,9 +7,8 @@ import fr_flag from '../../assets/channel/flags/FR.png';
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
-import {ProgressBar} from './ProgressBar';
-import MbProgressBar from './MbProgressBar';
-import {NextBtn} from './NextBtn';
+import { ProgressBar } from './ProgressBar';
+import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
 import Previousstep from '../SmallComponents/Previousstep';
 import Flag, { FlagProps } from './Flag';
@@ -90,9 +89,6 @@ function StoreLocation(props: StoreLocationProps) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-12 my-2 d-block d-xl-none px-0">
-              <MbProgressBar step={step} platform={platform} />
-            </div>
             <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2 pt-1">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
