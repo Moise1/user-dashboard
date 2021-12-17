@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 @import '../_variables.css';
-@import '../_variables.medium.css';
-@import '../_variables.small.css';
 @import './light-theme/general.config';
 
 body {
@@ -9,7 +7,6 @@ body {
   position: relative;
   overflow: hidden;
   background: $super-light-blue;
-  font-size: 14px;
   line-height: 1.5715;
 
   .all-content {
@@ -20,6 +17,7 @@ body {
     height: calc(100vh - 80px);
     overflow: auto;
     background: $super-light-blue;
+    padding: 0.3rem;
   }
   .ant-layout.ant-layout-has-sider {
     margin: 0px 5px 0px 85px;
@@ -34,6 +32,14 @@ body {
       }
     }
   }
+}
+
+svg > path:first-child {
+  display: none;
+}
+
+button:focus {
+  outline: none !important;
 }
 
 @media screen and (max-width: 1030px) {

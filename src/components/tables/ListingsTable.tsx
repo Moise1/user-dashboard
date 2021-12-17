@@ -63,7 +63,7 @@ export const ListingsTable = (tableProps: props) => {
               </label>
             </th>
             {headerData.map((heading) => (
-              <th key={heading} className="listings-th-none">
+              <th key={heading} className="">
                 <span className="mr-2"> {t(heading)}</span> <UpdownIcon />
               </th>
             ))}
@@ -84,16 +84,16 @@ export const ListingsTable = (tableProps: props) => {
                 <td>
                   <img src={obj.img} alt="" />
                 </td>
-                <td className="obj-sale-body listings-td-none">{obj.itemNo}</td>
-                <td className="obj-sale-body listings-td-none">{obj.source}</td>
+                <td className=" listings-td-none">{obj.itemNo}</td>
+                <td className=" listings-td-none">{obj.source}</td>
                 <td className="obj-sale-title listings-td-none">{obj.title}</td>
-                <td className="obj-sale-qty listings-td-none">{obj.sell}</td>
-                <td className="obj-sale-cost  listings-td-none">{obj.cost}</td>
-                <td className="obj-profit-text">{obj.profit}</td>
-                <td className="obj-sale-cost listings-td-none">{obj.markup}</td>
-                <td className="obj-sale-cost listings-td-none">{obj.stock}</td>
-                <td className="obj-sale-qty  listings-td-none">{obj.created}</td>
-                <td className="obj-sale-qty  listings-td-none">{obj.options}</td>
+                <td className=" listings-td-none">{obj.sell}</td>
+                <td className=" listings-td-none">{obj.cost}</td>
+                <td className="">{obj.profit}</td>
+                <td className="listings-td-none">{obj.markup}</td>
+                <td className="listings-td-none">{obj.stock}</td>
+                <td className="  listings-td-none">{obj.created}</td>
+                <td className="  listings-td-none">{obj.options}</td>
               </tr>
             );
           })}

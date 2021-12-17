@@ -9,7 +9,7 @@ export const tableData = [
     item: 1234567,
     src: 'Amazon',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -24,7 +24,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -39,7 +39,7 @@ export const tableData = [
     item: 1234567,
     src: 'Lights4living',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -54,7 +54,7 @@ export const tableData = [
     item: 1234567,
     src: 'Banggood',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -69,7 +69,7 @@ export const tableData = [
     item: 1234567,
     src: 'Banggood',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className="align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -84,7 +84,7 @@ export const tableData = [
     item: 1234567,
     src: 'Banggood',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -99,7 +99,7 @@ export const tableData = [
     item: 1234567,
     src: 'Banggood',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -114,7 +114,7 @@ export const tableData = [
     item: 1234567,
     src: 'Amazon',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -129,7 +129,7 @@ export const tableData = [
     item: 1234567,
     src: 'Amazon',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -144,7 +144,7 @@ export const tableData = [
     item: 1234567,
     src: 'Amazon',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -159,7 +159,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -174,7 +174,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -189,7 +189,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -204,7 +204,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -219,7 +219,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -234,7 +234,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -249,7 +249,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -264,7 +264,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -279,7 +279,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -294,7 +294,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -309,7 +309,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -324,7 +324,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -339,7 +339,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -354,7 +354,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -369,7 +369,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -384,7 +384,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>
@@ -399,7 +399,7 @@ export const tableData = [
     item: 1234567,
     src: 'Light in the box',
     title: (
-      <div className="w-title align-items-center my-auto ">
+      <div className=" align-items-center my-auto ">
         {' '}
         <p className="mb-0">Title of the product</p>{' '}
       </div>

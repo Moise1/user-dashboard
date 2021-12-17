@@ -41,9 +41,6 @@
   --navLinkActive: var(--color-white);
   --subnavLinkHover: var(--color-light-pink);
   --subnavLinkActive: var(--color-light-pink);
-
-  --siderWidth: 45px;
-  --expandedSiderWidth: 293px;
 }
 
 .bg-c4c4c4 {

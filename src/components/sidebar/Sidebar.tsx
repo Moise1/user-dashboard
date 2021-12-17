@@ -112,10 +112,7 @@ const Sidebar = (props: Props) => {
     }
   };
   return (
-    <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Sider
         theme="light"
         className={className}
