@@ -3,6 +3,7 @@ import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
 import { StatusBar } from '../SmallComponents/StatusBar';
+import { Layout } from 'antd';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
@@ -45,12 +46,20 @@ export const Subscriptions = () => {
   const renderSlides = useMemo(() => {
     if (screenWidth < 750) {
       setSlides(1);
-    } 
+    }
     return slides;
   }, [slides]);
-  
+
   return (
-    <div className="carousel-container">
+    <Layout className="carousel-container">
+      <Space className="control-btns-container">
+        <Button onClick={handlePrev} className="control-btn">
+          <i className="fas fa-chevron-left" aria-hidden="true" />
+        </Button>
+        <Button onClick={handleNext} className="control-btn">
+          <i className="fas fa-chevron-right" aria-hidden="true" />
+        </Button>
+      </Space>
       <StatusBar>
         <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
         <p className="subscriptions-limit">
@@ -76,8 +85,8 @@ export const Subscriptions = () => {
                 <span className="euro">&euro;</span>
                 <h1 className="monthly-rate">{d.firstDiscount}</h1>
                 <span className="frequency">/mo</span>
-                <span className="duration">(6 months)</span>
               </div>
+              <span className="duration">(6 months)</span>
             </div>
             <Divider className="divider" />
             <div className="discount">
@@ -86,20 +95,12 @@ export const Subscriptions = () => {
                 <span className="euro">&euro;</span>
                 <h1 className="monthly-rate">{d.secondDiscount}</h1>
                 <span className="frequency">/mo</span>
-                <span className="duration">(1 year)</span>
               </div>
+              <span className="duration">(1 year)</span>
             </div>
           </Card>
         ))}
       </Carousel>
-      <Space className="control-btns-container">
-        <Button onClick={handlePrev} className="control-btn">
-          <i className="fas fa-chevron-left" aria-hidden="true" />
-        </Button>
-        <Button onClick={handleNext} className="control-btn">
-          <i className="fas fa-chevron-right" aria-hidden="true" />
-        </Button>
-      </Space>
-    </div>
+    </Layout>
   );
 };

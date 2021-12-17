@@ -1,5 +1,9 @@
 @import '../general.config';
 
+.ant-menu-sub.ant-menu-inline > .ant-menu-item {
+  height: 30px;
+}
+
 .menu-list {
   list-style: none;
   color: $gray;
