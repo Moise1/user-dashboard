@@ -479,11 +479,6 @@ button {
   background-color: var(--bg-light-skyblue);
 }
 
-.sticky-btns {
-  position: sticky;
-  top: 5px;
-}
-
 .reset-to-default-btn {
   background-color: var(--color-grey-shade-1);
   color: var(--bgPage);
@@ -1311,9 +1306,6 @@ button {
 .headphone-img-style {
   width: 192px;
   height: 249px;
-}
-.left-back-arrow-svg svg:hover path {
-  stroke: var(--dBlue);
 }
 
 .source-url-input {
