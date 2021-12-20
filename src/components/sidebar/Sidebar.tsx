@@ -15,7 +15,7 @@ import {
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
-import Logo from '../../assets//logoHGR.png';
+import Logo from '../../assets/logoHGR.png';
 
 const { SubMenu } = Menu;
 
@@ -202,16 +202,15 @@ const Sidebar = (props: Props) => {
                   <OrdersIcon />
                 </span>
               }
-              title={t('Menu.Orders')}
             >
-              Orders
+              {t('Menu.Orders')}
             </Menu.Item>
 
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               className="submenu-item"
               key="sub3"
-              style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >

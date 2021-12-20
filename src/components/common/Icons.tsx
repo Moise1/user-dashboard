@@ -716,7 +716,7 @@ export const CatalogIcon = () => {
   return (
     <>
       <svg
-        className=" sidebar-icon"
+        className="sidebar-icon"
         id="Group_2"
         data-name="Group 2"
         xmlns="http://www.w3.org/2000/svg"
@@ -921,24 +921,24 @@ export const ListingsIcon = () => {
 };
 export const SettingsIcon = () => {
   return (
-    <>
-      <svg
-        className="sidebar-icon settings-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-      >
-        <path
-          fill="none"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-          d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
-        />
-      </svg>
-    </>
+    <svg
+      className="sidebar-icon"
+      width="24px"
+      height="24px"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-labelledby="controlsAltIconTitle"
+      stroke="#000000"
+      strokeWidth="1"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
+      color="#000000"
+    >
+      <circle cx="9" cy="6" r="2" /> <path d="M4 6H7" />
+      <path d="M11 6H20" /> <circle cx="9" cy="18" r="2" /> <path d="M4 18H7" /> <path d="M11 18H20" />{' '}
+      <circle cx="15" cy="12" r="2" /> <path d="M4 12H13" /> <path d="M17 12L20 12" />{' '}
+    </svg>
   );
 };
 export const ProcessOrderIcon = () => {
