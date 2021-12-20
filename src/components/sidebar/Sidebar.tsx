@@ -155,13 +155,24 @@ const Sidebar = (props: Props) => {
               </div>
             )}
             <div className="pt-5"></div>
-            <Menu.Item key="1" style={{ fontSize: '18px', fontWeight: 'bold' }} icon={<DashBoardIcon />}>
+            <Menu.Item
+              className="menu-item"
+              key="1"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={<DashBoardIcon />}
+            >
               {t('Menu.Dashboard')}
             </Menu.Item>
-            <Menu.Item style={{ fontSize: '18px', fontWeight: 'bold' }} key="2" icon={<CatalogIcon />}>
+            <Menu.Item
+              className="menu-item"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              key="2"
+              icon={<CatalogIcon />}
+            >
               <span className="sidebar_element">{t('Menu.Catalog')}</span>
             </Menu.Item>
             <Menu.Item
+              className="menu-item"
               onClick={() => history.push('/sources')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="3"
@@ -170,6 +181,7 @@ const Sidebar = (props: Props) => {
               {t('Menu.ListNow')}
             </Menu.Item>
             <Menu.Item
+              className="menu-item"
               onClick={() => handleCloseLlistingSidebar()}
               key="4"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
@@ -182,6 +194,7 @@ const Sidebar = (props: Props) => {
               {t('Menu.Listings')}
             </Menu.Item>
             <Menu.Item
+              className="menu-item"
               onClick={() => handleOrdersSidebar()}
               key="5"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
@@ -197,6 +210,7 @@ const Sidebar = (props: Props) => {
 
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
+              className="submenu-item"
               key="sub3"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
@@ -211,6 +225,7 @@ const Sidebar = (props: Props) => {
 
             {/* SERVICES  */}
             <Menu.Item
+              className="menu-item"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="2"
               icon={<ServiceIcon />}
@@ -220,6 +235,7 @@ const Sidebar = (props: Props) => {
             </Menu.Item>
 
             <SubMenu
+              className="submenu-item"
               key="sub5"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<HelpIcon />}

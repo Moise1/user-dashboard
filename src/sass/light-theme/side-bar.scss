@@ -21,6 +21,64 @@
     overflow: scroll;
   }
 
+  .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+    border-right: none !important;
+  }
+
+  .menu-item,
+  .submenu-item {
+    color: $black;
+    width: 90% !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .sidebar-icon > * {
+    stroke: $primary !important;
+  }
+  .menu-item:hover,
+  .ant-menu-item-selected {
+    .sidebar-icon > * {
+      stroke: $white !important;
+    }
+  }
+
+  .menu-item:hover,
+  .ant-menu-submenu-title:hover,
+  .ant-menu-item-selected {
+    color: $white !important;
+    background: $light-primary !important;
+    span {
+      font-weight: $bold !important;
+    }
+  }
+
+  .menu-list {
+    color: $gray;
+    &:hover {
+      font-weight: $bold !important;
+    }
+  }
+
+  .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+    background: transparent !important;
+    font-weight: $bold;
+  }
+
+  //temporal fix
+  .settings-icon > path:first-child {
+    display: block;
+  }
+  //</> temporal fix
+
   .side-menu-container {
     display: flex;
     flex-direction: column;
