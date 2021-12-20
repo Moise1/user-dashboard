@@ -64,7 +64,7 @@ export const ProgressBar = (props: props) => {
 
           <div className={` ${props.step > 5 ? 'text-success' : ''} font-weight-bold m-auto`}>
             {t('lnk')}
-            {props.platform == 'ebay' ? ' Ebay ' : props.platform == 'amazon' ? ' Amazon ' : ' Shopify '} {t('account')}
+            {props.platform == 'ebay' ? ' Ebay ' : props.platform == 'amazon' ? ' Amazon ' : ' Shopify '} {t('acnt')}
           </div>
         </div>
       </div>

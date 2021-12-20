@@ -1,10 +1,10 @@
-import React from 'react';
-import {Row, Col} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Row, Col } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
 import { ProgressBar } from './ProgressBar';
-import { NextBtn} from './NextBtn';
+import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/platform.scss';
 
@@ -21,16 +21,43 @@ export interface props {
 
 export const PlatForm = (props: props) => {
   const { nextStep, handleChangePlatform, platform, values, step } = props;
+  const [inputs, setInputs] = useState<HTMLInputElement[]>([]);
   const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     nextStep();
   };
+
+  useEffect(() => {
+    const dt = document.querySelectorAll('.input');
+    const arr = [];
+    for (const d of dt) {
+      arr.push(d as HTMLInputElement);
+    }
+    setInputs(arr);
+  }, []);
+
+  const newDescription = document.querySelector('.new-description-area') as HTMLElement;
+
+  if (inputs[0]?.checked) {
+    const newContent = inputs[0].nextSibling?.childNodes[1] as HTMLElement;
+    newDescription.innerHTML = newContent.innerHTML;
+  }
+  if (inputs[1]?.checked) {
+    const newContent = inputs[1].nextSibling?.childNodes[1] as HTMLElement;
+    newDescription.innerHTML = newContent.innerHTML;
+
+  }
+  if (inputs[2]?.checked) {
+    const newContent = inputs[2].nextSibling?.childNodes[1] as HTMLElement;
+    newDescription.innerHTML = newContent.innerHTML;
+  }
+
   return (
     <form className="platforms-form">
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
         <Row className="cards-container" gutter={[0, 8]}>
-          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+          <Col className="platforms-card" lg={{ span: 6 }}>
             <label>
               <input
                 type="radio"
@@ -50,55 +77,53 @@ export const PlatForm = (props: props) => {
             </label>
           </Col>
 
-          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+          <Col className="platforms-card" lg={{ span: 6 }}>
             <label>
               <input
                 type="radio"
                 name="product"
-                value='platform'
+                value="platform"
                 checked={platform == 'shopify'}
                 className="input"
                 onChange={() => handleChangePlatform('shopify')}
               />
               <div className="card-input">
-                <img src={shopify_logo} className="platform-img" alt="ebay logo" />
+                <img src={shopify_logo} className="platform-img" alt="shopify logo" />
                 <div className="description-area">
-                  <div className="market-place">{t('onwstore')}</div>
+                  <div className="market-place">{t('ownStore')}</div>
                   <p>{t('shopslctd')}</p>
                 </div>
               </div>
             </label>
           </Col>
-          <Col className="platforms-card" xs={{span: 24}} lg={{span: 6}}>
+          <Col className="platforms-card" lg={{ span: 6 }}>
             <label>
               <input
                 type="radio"
                 name="product"
-                value='platform'
+                value="platform"
                 checked={platform == 'amazon'}
                 className="input"
                 onChange={() => handleChangePlatform('amazon')}
               />
               <div className="card-input">
-                <img src={amazon_logo} className="platform-img" alt="ebay logo" />
+                <img src={amazon_logo} className="platform-img" alt="amazon logo" />
                 <div className="description-area">
                   <div className="market-place">{t('mrktplc')}</div>
                   <div>{t('amzsltcd')}</div>
-                  <p>
-                    <i className="amazon-sub">{t('amzsub')}</i>
-                  </p>
+                  <p className="amazon-sub"> <i>{t('amzsub')}</i></p>
                 </div>
               </div>
             </label>
           </Col>
+          <div className="new-description-area"></div>
         </Row>
-        
         <div className="action-area">
           <NextBtn onClick={Continue} disabled={!values.platform} title={t('nxt')} />
           <p className="select-warning">{!values.platform ? t('platchck') : ''}</p>
         </div>
       </div>
-      <ProgressBar platform={platform} step={step}/>
+      <ProgressBar platform={platform} step={step} />
     </form>
   );
 };
