@@ -14,7 +14,6 @@ import {
   OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
-import './Sidebar.css';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets//logoHGR.png';
 
