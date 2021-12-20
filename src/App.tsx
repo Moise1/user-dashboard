@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import history from './history';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
@@ -21,10 +22,10 @@ import './sass/index.scss';
 export const App = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
-
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const screenWidth = window.screen.width;
+  const location = history.location;
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
@@ -43,23 +44,25 @@ export const App = () => {
       sidebar.style.display = 'none';
     }
   };
+
   return (
     <div className="all-content">
       {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"></div> : ''}
-
       <SelectSupplierProvider>
         <Router>
-          <Topbar handleSidebarMobile={handleSidebarMobile} />
+          {location.pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
           <Layout className="layout">
-            <Sidebar
-              className="sider"
-              setCollapsed={setCollapsed}
-              staticValue={staticValue}
-              togglestatic={toggleStaticValue}
-              toggle={toggleCollapse}
-              collapsed={collapsed}
-              handleSidebarMobile={handleSidebarMobile}
-            />
+            {location.pathname === '/new-channel' ? null : (
+              <Sidebar
+                className="sider"
+                setCollapsed={setCollapsed}
+                staticValue={staticValue}
+                togglestatic={toggleStaticValue}
+                toggle={toggleCollapse}
+                collapsed={collapsed}
+                handleSidebarMobile={handleSidebarMobile}
+              />
+            )}
             <Layout className={staticValue ? 'content-area' : ''}>
               <Switch>
                 <Route exact path="/">
