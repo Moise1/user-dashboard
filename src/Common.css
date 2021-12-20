@@ -391,24 +391,6 @@ button {
   }
 }
 
-.orders-icon-sidebar > * {
-  stroke: var(--iconColor);
-}
-
-.setting-icon > path:first-child {
-  display: block;
-}
-
-.ant-menu-item.ant-menu-item-selected .orders-icon-sidebar circle,
-.ant-menu-item.ant-menu-item-selected .orders-icon-sidebar path {
-  stroke: var(--bgPage);
-}
-
-.ant-menu-item.ant-menu-item-active .orders-icon-sidebar circle,
-.ant-menu-item.ant-menu-item-active .orders-icon-sidebar path {
-  stroke: var(--bgPage);
-}
-
 /* ORDERS STYLE  */
 .advance-search-purple-button {
   display: flex;

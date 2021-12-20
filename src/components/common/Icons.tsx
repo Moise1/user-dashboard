@@ -236,7 +236,7 @@ export const DashBoardIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg dashboard-icon"
+        className="sidebar-icon"
         id="Group_1"
         data-name="Group 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -716,7 +716,7 @@ export const CatalogIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg catalog-icon"
+        className=" sidebar-icon"
         id="Group_2"
         data-name="Group 2"
         xmlns="http://www.w3.org/2000/svg"
@@ -788,7 +788,7 @@ export const ListNowIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg list-now-icon"
+        className="sidebar-icon"
         id="Group_3"
         data-name="Group 3"
         xmlns="http://www.w3.org/2000/svg"
@@ -840,7 +840,7 @@ export const ListingsIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg listing-icon"
+        className="sidebar-icon"
         id="Group_92"
         data-name="Group 92"
         xmlns="http://www.w3.org/2000/svg"
@@ -923,15 +923,18 @@ export const SettingsIcon = () => {
   return (
     <>
       <svg
-        className="bi bi-sliders active-white-svg setting-icon mr-1"
-        xmlns="http://www.w3.org/2000/svg "
-        width="16"
-        height="16"
-        fill="#262e80"
-        viewBox="0 0 16 16"
+        className="sidebar-icon settings-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
       >
         <path
-          fillRule="evenodd"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
         />
       </svg>
@@ -954,12 +957,7 @@ export const ProcessOrderIcon = () => {
             id="Path_287"
             data-name="Path 287"
             d="M16.3,5H17a2,2,0,0,1,2,2V17a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V7A2,2,0,0,1,7,5h5L9.18,2.18m0,5.64L12,5"
-            transform="translate(-4.971 12) rotate(-45)"
             fill="none"
-            stroke="#fff"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
           />
         </g>
       </svg>
@@ -1136,12 +1134,12 @@ export const OrdersIcon = () => {
   return (
     <>
       <svg
+        className="sidebar-icon"
         id="Group_290"
         data-name="Group 290"
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
-        className="orders-icon-sidebar"
         viewBox="0 0 29.789 29.789"
       >
         <path id="Path_281" data-name="Path 281" d="M0,0H29.789V29.789H0Z" fill="none" />
@@ -1202,7 +1200,7 @@ export const ServiceIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg serice-icon-sidebar"
+        className="sidebar-icon"
         id="Group_93"
         data-name="Group 93"
         xmlns="http://www.w3.org/2000/svg"
@@ -1244,7 +1242,7 @@ export const HelpIcon = () => {
   return (
     <>
       <svg
-        className="active-white-svg help-icon"
+        className="sidebar-icon"
         id="Group_94"
         data-name="Group 94"
         xmlns="http://www.w3.org/2000/svg"
