@@ -9,10 +9,10 @@
   flex: 0 0 80px;
   position: absolute;
   left: 0;
+  top: 12%;
   z-index: 111 !important;
   height: 100vh;
   overflow: hidden;
-
   ::-webkit-scrollbar {
     display: none;
   }
@@ -41,7 +41,9 @@
     border-radius: 10px !important;
   }
 
-  
+  .sidebar-icon{
+    margin-left: -.3rem;
+  }
   .sidebar-icon > * {
     stroke: $primary !important;
   }
@@ -58,7 +60,6 @@
     color: $white !important;
     background: $light-primary !important;
     .sidebar-icon{
-      margin-left: -.3rem;
       color: $white !important;
       background: $light-primary !important;
     }

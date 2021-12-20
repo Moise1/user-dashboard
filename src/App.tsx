@@ -24,30 +24,27 @@ export const App = () => {
   const [staticValue, setStaticValue] = useState(false);
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
-  const screenWidth = window.screen.width;
   const location = history.location;
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
-    if (screenWidth < 750 || screenWidth < 1030) {
-      const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
-      sidebar.style.display = 'block';
-    }
+    const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
+    sidebar.style.display = 'block';
+    sidebar.style.position = 'absolute';
+    sidebar.style.top = '8.5%';    
   };
 
   const collapseSideBar = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
-    if (screenWidth <= 750 || screenWidth <= 1030) {
-      const sidebar = document.querySelector('.sider') as HTMLElement;
-      sidebar.style.display = 'none';
-    }
+    const sidebar = document.querySelector('.sider') as HTMLElement;
+    sidebar.style.display = 'none';
   };
 
   return (
     <div className="all-content">
-      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"></div> : ''}
+      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"/> : null}
       <SelectSupplierProvider>
         <Router>
           {location.pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
