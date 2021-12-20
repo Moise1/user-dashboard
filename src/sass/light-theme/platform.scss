@@ -3,6 +3,9 @@
 // Large and extra large screens
 .platforms-form {
   display: flex;
+  .new-description-area {
+    display: none;
+  };
   .platforms-area {
     .sell-title {
       margin-top: 1rem;
@@ -43,7 +46,8 @@
             .market-place,
             .amazon-sub {
               font-weight: bold;
-            }
+            };
+            
           }
         }
       }
@@ -63,9 +67,48 @@
 @media only screen and (max-width: 1030px) {
   .platforms-form {
     display: block;
-    .cards-container{
-      border: 2px solid blue;
-      overflow-y: scroll;
+    
+    .new-description-area {
+      display: grid;
+      place-items: center;
+      gap: 0;
+      margin-top: -8rem;
+      .market-place {
+        margin-top: -5rem;
+        font-weight: bold;
+      };
+     
+      p{
+        margin-top: -10rem;
+        text-align: center;
+      };
+
+      .amazon-sub{
+        font-weight: bold;
+        margin-top: .4rem;
+      }
+    }
+
+    
+    .cards-container {
+      height: 60vh;
+      .platforms-card {
+        .card-input {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+          .platform-img {
+            width: 70px;
+          }
+          .description-area {
+            display: none;
+          };
+
+          
+        }
+      }
     }
   }
 }
