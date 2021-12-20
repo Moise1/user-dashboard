@@ -41,6 +41,7 @@
   "Menu.Sources": "Sources",
   "Menu.Templates": "Templates",
   "Menu.VaProfiles": "VA Profiles",
+  "Menu.Orders": "Orders",
 
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",

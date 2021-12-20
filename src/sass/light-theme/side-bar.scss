@@ -41,12 +41,13 @@
     border-radius: 10px !important;
   }
 
+  
   .sidebar-icon > * {
     stroke: $primary !important;
   }
   .menu-item:hover,
   .ant-menu-item-selected {
-    .sidebar-icon > * {
+    .sidebar-icon > *{
       stroke: $white !important;
     }
   }
@@ -56,6 +57,11 @@
   .ant-menu-item-selected {
     color: $white !important;
     background: $light-primary !important;
+    .sidebar-icon{
+      margin-left: -.3rem;
+      color: $white !important;
+      background: $light-primary !important;
+    }
     span {
       font-weight: $bold !important;
     }
@@ -73,11 +79,6 @@
     font-weight: $bold;
   }
 
-  //temporal fix
-  .settings-icon > path:first-child {
-    display: block;
-  }
-  //</> temporal fix
 
   .side-menu-container {
     display: flex;
