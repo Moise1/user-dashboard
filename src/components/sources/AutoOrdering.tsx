@@ -1,6 +1,7 @@
-import  { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import AccountsMangage from './AccountsMangage';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/small-components/switch.scss';
 
 interface props {
   showOrdering: boolean;
@@ -22,19 +23,18 @@ const AutoOrdering = (myProps: props) => {
     <>
       <div className="col">
         <div className={` ${showOrdering ? '' : 'h-100'} `}>
-          <div className="d-flex flex-column flex-lg-row justify-content-between">
-            <div className="d-flex">
-              <div className="enable-disable-para ">
-                <p>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</p>
-                <span className="mr-5">Disabling auto-ordering will require you to manually process new orders.</span>
-              </div>
+          <div className="auto-ordering-container">
+            <div className="setting-list-item">
+              <h4>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h4>
+              <p className="mr-5">Disabling auto-ordering will require you to manually process new orders.</p>
+            </div>
 
-              <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
-                <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
-                  <input className="input-toggle-switch" onChange={handleChange} type="checkbox" id="checkbox-2" />
-                  <div className="slider-toggle round"></div>
-                </label>
-              </div>
+            {/* changetodo Put this Switch on different component */}
+            <div className="switch-container">
+              <label className="switch-toggle" htmlFor="checkbox-2">
+                <input className="input-toggle-switch" onChange={handleChange} type="checkbox" id="checkbox-2" />
+                <div className="slider-toggle round"></div>
+              </label>
             </div>
 
             {/* <div className="supplier-dropdown">
