@@ -2,7 +2,7 @@ import React from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 
-const SourceButtons = () => {
+const ConfigButtons = () => {
   return (
     <>
       <div className="d-flex flex-row flex-sm-column ">
@@ -16,4 +16,4 @@ const SourceButtons = () => {
   );
 };
 
-export default SourceButtons;
+export default ConfigButtons;

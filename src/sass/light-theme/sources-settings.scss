@@ -1,0 +1,99 @@
+@import 'general.config';
+
+.sticky-btns {
+  position: sticky;
+  top: 5px;
+}
+
+.back-to-supplier {
+  color: $primary;
+  font-size: $font-large;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.surce-configuration-name {
+  font-weight: bold;
+  font-size: $font-large;
+  color: black;
+  font-weight: bold;
+  & span {
+    color: $light-blue;
+    font-size: $font-large;
+  }
+}
+
+.tab-settings {
+  display: flex;
+  background-color: #e9e9e9;
+  border-radius: 10px 10px 0px 0px;
+  width: 42%;
+  color: #828282;
+}
+
+.tab-list-items {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & h4 {
+    padding: 20px 10px;
+    font-size: $font-medium;
+    font-weight: bold;
+    margin-bottom: 0;
+    color: $gray;
+  }
+}
+
+.active-tab-bar {
+  background-color: $white;
+  border-radius: 10px 10px 0px 0px;
+  & h4 {
+    color: $black;
+  }
+}
+
+.auto-ordering-section {
+  background-color: $white;
+  border-radius: 0px 10px 10px 10px;
+  padding: 12px;
+}
+
+.auto-ordering-container {
+  justify-content: space-between;
+  display: flex;
+  margin-top: $spacer;
+}
+
+.buttons-config {
+  margin-top: $spacer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.overlay-select {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.01);
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1030px) {
+  .tab-settings {
+    width: 80%;
+  }
+}
+
+@media (max-width: 750px) {
+  .tab-settings {
+    width: 100%;
+  }
+}
