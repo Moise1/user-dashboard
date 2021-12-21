@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import AccountsMangage from './AccountsMangage';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/small-components/switch.scss';
 
 interface props {
   showOrdering: boolean;
@@ -28,7 +29,8 @@ const AutoOrdering = (myProps: props) => {
               <p className="mr-5">Disabling auto-ordering will require you to manually process new orders.</p>
             </div>
 
-            <div className="custom-control d-flex align-items-center switchbox custom-switch px-2">
+            {/* changetodo Put this Switch on different component */}
+            <div className="custom-control d-flex align-items-center px-2">
               <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
                 <input className="input-toggle-switch" onChange={handleChange} type="checkbox" id="checkbox-2" />
                 <div className="slider-toggle round"></div>

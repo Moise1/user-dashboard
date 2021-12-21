@@ -607,59 +607,6 @@ button {
   display: none;
 }
 
-.slider-toggle {
-  background-color: #c4c4c4;
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: 0.4s;
-}
-
-.slider-toggle:before {
-  background-color: var(--bgHighlight);
-  top: 50%;
-  content: '';
-  height: 26px;
-  left: 3px;
-  position: absolute;
-  transition: 0.4s;
-  width: 26px;
-  transform: translateY(-50%);
-}
-
-.input-toggle-switch:checked + .slider-toggle {
-  background: var(--color-primary);
-}
-
-.input-toggle-switch:checked + .slider-toggle:before {
-  transform: translate(18px, -50%);
-  background-color: var(--bgHighlight);
-}
-
-.slider-toggle.round {
-  border-radius: 34px;
-}
-
-.slider-toggle.round:before {
-  border-radius: 50%;
-}
-
-.custom-switch .custom-control-label::after {
-  background-color: #212529 !important;
-}
-
-.custom-control-label::before {
-  background-color: #adb5bd !important;
-}
-
-.custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem transparent !important;
-  border-color: transparent !important;
-}
-
 /* REACT SELECT */
 .css-1s2u09g-control {
   width: 219.47px;
