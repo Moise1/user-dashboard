@@ -3,6 +3,7 @@ import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { AoIconHead, CrossModalIcon, IconArrowModal } from '../common/Icons';
 import AddressModal from './AddressModal';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/order-details-modal.scss';
 
 interface Props {
   addressModalShow: boolean;
@@ -24,7 +25,7 @@ const OrderDetailsModal = (props: Props) => {
   } = props;
 
   return (
-    <div className="modal-first ">
+    <div className="modal-first">
       <Modal
         className="modal-page"
         show={orderDetailsModalShow}
@@ -36,11 +37,11 @@ const OrderDetailsModal = (props: Props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            <div className="d-flex flex-sm-row  flex-column  ">
-              <h1 className="head-part-one mr-5">{t('OrderDetails.OrderDetails')}</h1>
-              <button className="head-part-second align-items-center   d-flex ">
+            <div className="flex-sm-row order-details-header">
+              <h1 className="modal-title">{t('OrderDetails.OrderDetails')}</h1>
+              <button className="autoordering-state">
                 <AoIconHead />
-                <span className="px-2 ">{t('OrderDetails.AOEnabled')}</span>
+                <span>{t('OrderDetails.AOEnabled')}</span>
               </button>
               <span
                 className="cursor-pointer cross-round-iconModal"
@@ -65,37 +66,6 @@ const OrderDetailsModal = (props: Props) => {
                       handleCloseAllModals={handleCloseAllModals}
                       setAddressModalShow={setAddressModalShow}
                     />
-                    {/* SHIPPING AND BILLING ADRESS TEXT  */}
-                    {/* {addressModalShow ? (
-                      <AddressModal
-                        handleCloseAllModals={handleCloseAllModals}
-                        setAddressModalShow={setAddressModalShow}
-                      />
-                    ) : (
-                      <div className="col-12">
-                        <div className="ship-bill-box d-flex justify-content-around flex-column flex-sm-row  py-3 px-2">
-                          <div className="d-flex  cursor-pointer" onClick={() => setAddressModalShow(true)}>
-                            <span>
-                              <IconEdit />
-                            </span>
-                            <span className="edit-btnn">{t('OrderDetails.Edit')}</span>
-                          </div>
-
-                          <div className="px-0 pt-4 pb-3">
-                            <h1 className="shop-address ">{t('OrderDetails.ShippingAddress')}</h1>
-                            <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                            <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                            <p className="content-shop-address mb-0">US</p>
-                          </div>
-                          <div className="pt-4 pb-3">
-                            <h1 className="shop-address">{t('OrderDetails.Billingaddress')}</h1>
-                            <p className="content-shop-address mb-0">156 Harvest Ln,</p>
-                            <p className="content-shop-address mb-0">Phoenixville, PA, 19460</p>
-                            <p className="content-shop-address mb-0">US</p>
-                          </div>
-                        </div>
-                      </div>
-                    )} */}
                   </div>
 
                   <div className="row my-4">

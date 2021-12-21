@@ -800,21 +800,6 @@ button {
 
 /* ORDER STATE PROGRESS  */
 
-.head-part-one {
-  color: var(--color-dark-violet);
-  font-size: var(--sub-heading);
-}
-
-.head-part-second {
-  background: var(--color-secondry);
-  border-radius: 10px;
-  opacity: 1;
-  color: var(--color-white);
-  font-size: 12px;
-  width: 137px;
-  height: 27px;
-}
-
 .width-80 {
   width: 80%;
 }
@@ -890,10 +875,6 @@ button {
 
 .mright-15 {
   margin-right: 15px;
-}
-
-.modal-page .modal-header {
-  border-bottom: none !important;
 }
 
 .modal-head-box {

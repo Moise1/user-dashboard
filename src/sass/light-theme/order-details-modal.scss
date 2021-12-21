@@ -1,0 +1,29 @@
+@import './general.config';
+
+.modal-page .modal-header {
+  border-bottom: none !important;
+}
+
+.order-details-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-title {
+  color: $primary;
+  font-size: $font-large;
+  margin-right: $spacer;
+}
+
+.autoordering-state {
+  background: $green;
+  border-radius: 10px;
+  opacity: 1;
+  color: $white;
+  font-size: $font-small;
+  width: 137px;
+  height: 27px;
+  align-items: center;
+  display: flex;
+  padding: $spacer;
+}
