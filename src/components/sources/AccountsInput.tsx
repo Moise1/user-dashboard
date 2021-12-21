@@ -86,7 +86,7 @@ const AccountsInput = (myProps: props) => {
               <span>{t('SourceConfigInputs.DeactivateYourAccountMessage')} </span>
             </div>
 
-            <div className="custom-control  d-flex align-items-center switchbox custom-switch ">
+            <div className="d-flex align-items-center switchbox custom-switch ">
               <label className="switch-toggle mb-0 " htmlFor="checkbox-1">
                 <input
                   className="input-toggle-switch"

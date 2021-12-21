@@ -596,17 +596,6 @@ button {
 
 /* TOGGLE  ICON STYLE */
 
-.switch-toggle {
-  display: inline-block;
-  height: 30px;
-  position: relative;
-  width: 50px;
-}
-
-.switch-toggle input {
-  display: none;
-}
-
 /* REACT SELECT */
 .css-1s2u09g-control {
   width: 219.47px;
@@ -1352,11 +1341,6 @@ button {
   }
   .ao-disabled-button svg {
     height: 16px;
-  }
-
-  .switch-toggle {
-    height: 25px;
-    width: 40px;
   }
 
   .slider-toggle:before {

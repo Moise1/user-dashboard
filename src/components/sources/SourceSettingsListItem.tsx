@@ -120,7 +120,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-6 col-xl-5 selector-container">
-          <div className="custom-control  d-flex align-items-center switchbox custom-switch px-2">
+          <div className="d-flex align-items-center switchbox custom-switch px-2">
             <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
               <input className="input-toggle-switch" type="checkbox" id="checkbox-2" />
               <div className="slider-toggle round"></div>

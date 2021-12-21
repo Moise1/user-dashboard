@@ -20,7 +20,7 @@ const Switch = (myProps: props) => {
 */
 function Switch() {
   return (
-    <div className="custom-control d-flex align-items-center px-2">
+    <div className="d-flex align-items-center px-2">
       <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
         <input className="input-toggle-switch" /*onChange={handleChange}*/ type="checkbox" id="checkbox-2" />
         <div className="slider-toggle round"></div>

@@ -30,8 +30,8 @@ const AutoOrdering = (myProps: props) => {
             </div>
 
             {/* changetodo Put this Switch on different component */}
-            <div className="custom-control d-flex align-items-center px-2">
-              <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
+            <div className="switch-container">
+              <label className="switch-toggle" htmlFor="checkbox-2">
                 <input className="input-toggle-switch" onChange={handleChange} type="checkbox" id="checkbox-2" />
                 <div className="slider-toggle round"></div>
               </label>
