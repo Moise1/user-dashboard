@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './sass/index.scss';
-import { App } from './App';
+import {App} from './App';
 import { IntlProvider } from 'react-intl';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
@@ -18,11 +19,12 @@ if (Object.keys(locales).indexOf(language) == -1) {
   language = 'en';
 }
 
-
 ReactDOM.render(
   <React.StrictMode>
     <IntlProvider locale={language} messages={locales[language]}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </IntlProvider>
   </React.StrictMode>,
   document.getElementById('root')

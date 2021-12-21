@@ -9,7 +9,7 @@
   flex: 0 0 80px;
   position: absolute;
   left: 0;
-  top: 12%;
+  top: 13.7%;
   z-index: 111 !important;
   height: 100vh;
   overflow: hidden;
@@ -85,6 +85,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
+    margin: 3rem auto;
 
     .sidebar-overhead {
       .logo-container,
@@ -94,8 +95,8 @@
     }
     .sidebar-btns {
       position: absolute;
-      right: 10px;
-      margin-top: 10px;
+      right: 5%;
+      top: 1%;
 
       .fa-chevron-left {
         margin-top: $spacer * 0.25 !important;
