@@ -824,17 +824,6 @@ button {
 .bg-light-skyBlue {
   background: rgba(250, 252, 255, 1);
 }
-.sale-head {
-  font-size: var(--font-18);
-  color: var(--txtBaseColor);
-  font-weight: 700;
-}
-
-.sold-head {
-  font-size: var(--font-18);
-  color: #000000;
-  font-weight: 700;
-}
 
 .channel-item {
   font-size: var(--font-18);
@@ -905,11 +894,6 @@ button {
 }
 
 /* MODAL SECOND CSS START */
-.cross-round-iconModal {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
 
 .amazon-order-ss {
   width: 566px;

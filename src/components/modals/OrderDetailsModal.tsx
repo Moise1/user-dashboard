@@ -44,7 +44,7 @@ const OrderDetailsModal = (props: Props) => {
                 <span>{t('OrderDetails.AOEnabled')}</span>
               </button>
               <span
-                className="cursor-pointer cross-round-iconModal"
+                className="cross-round-iconModal"
                 onClick={() => {
                   setAddressModalShow(false);
                   setOrderDetailsModalShow(false);
@@ -56,7 +56,7 @@ const OrderDetailsModal = (props: Props) => {
           </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body className="p-2 p-sm-3">
+        <Modal.Body className="order-details-body">
           <div className=" modals-inputs">
             <div className="container">
               <div className="row justify-content-between">
@@ -70,22 +70,22 @@ const OrderDetailsModal = (props: Props) => {
 
                   <div className="row my-4">
                     <div className="col-6">
-                      <h1 className="sale-head">{t('OrderDetails.Sale')}</h1>
+                      <h1 className="heading-details">{t('OrderDetails.Sale')}</h1>
                       <Form.Control className="modal-inputs" type="text" placeholder="123" />
                     </div>
                     <div className="col-6">
-                      <h1 className="sale-head">{t('OrderDetails.ChannelItem')}</h1>
+                      <h1 className="heading-details">{t('OrderDetails.ChannelItem')}</h1>
                       <Form.Control className="modal-inputs" type="text" placeholder="Channel item name" />
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="col-6">
-                      <h1 className="sale-head">{t('OrderDetails.Reference')}</h1>
+                      <h1 className="heading-details">{t('OrderDetails.Reference')}</h1>
                       <Form.Control className="modal-inputs" type="text" placeholder="123" />
                     </div>
                     <div className="col-6 col-md-5">
-                      <h1 className=" sale-head ">{t('OrderDetails.BuyerUsername')}</h1>
+                      <h1 className=" heading-details ">{t('OrderDetails.BuyerUsername')}</h1>
                       <Form.Control className="modal-inputs   " type="text" placeholder="john doe" />
                     </div>
                   </div>
@@ -94,22 +94,22 @@ const OrderDetailsModal = (props: Props) => {
                   <div className="row">
                     <div className="col-6 ">
                       <div className="">
-                        <h1 className="sale-head mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h1>
+                        <h1 className="heading-details mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                       <div className="d-flex mt-4 ">
                         <div className="w-82  mr-3">
-                          <h1 className=" sale-head">{t('OrderDetails.Quantity')}</h1>
+                          <h1 className="heading-details">{t('OrderDetails.Quantity')}</h1>
                           <Form.Control className="modal-inputs" type="text" placeholder="123" />
                         </div>
                         <div className="w-82">
-                          <h1 className="sold-head">{t('OrderDetails.Sold')}</h1>
+                          <h1 className="heading-details">{t('OrderDetails.Sold')}</h1>
                           <Form.Control className="modal-inputs" type="text" placeholder="123" />
                         </div>
                       </div>
 
                       <div className="mt-4 w-179">
-                        <h1 className="sale-head">{t('OrderDetails.DateOfOrder')} </h1>
+                        <h1 className="heading-details">{t('OrderDetails.DateOfOrder')} </h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="1/9/2021" />
                       </div>
                     </div>
@@ -133,23 +133,23 @@ const OrderDetailsModal = (props: Props) => {
                         <div className="row">
                           {/* <div className="col-4 col-lg-auto col-xl-1"></div> */}
                           <div className="col col-lg-auto col-xl-2 px-2">
-                            <h1 className="sale-head mt-4">{t('OrderDetails.Sell')}</h1>
+                            <h1 className="heading-details mt-4">{t('OrderDetails.Sell')}</h1>
                             <Form.Control className="modal-inputs" type="text" placeholder="€40.00" />
                           </div>
                           <div className="col col-lg-auto col-xl-2 px-2">
-                            <h1 className="sale-head mt-4">{t('OrderDetails.Cost')}</h1>
+                            <h1 className="heading-details mt-4">{t('OrderDetails.Cost')}</h1>
                             <Form.Control className="modal-inputs" type="text" placeholder="123" />
                           </div>
                           <div className="col col-lg-auto col-xl-2 px-2">
-                            <h1 className="sale-head mt-4">{t('OrderDetails.Fees')}</h1>
+                            <h1 className="heading-details mt-4">{t('OrderDetails.Fees')}</h1>
                             <Form.Control className="modal-inputs" type="text" placeholder="€34.99" />
                           </div>
                           <div className="col col-lg-auto col-xl-2 px-2">
-                            <h1 className="sale-head mt-4">{t('OrderDetails.Profit')}</h1>
+                            <h1 className="heading-details mt-4">{t('OrderDetails.Profit')}</h1>
                             <Form.Control className="modal-inputs" type="text" placeholder="€1.00" />
                           </div>
                           <div className="col col-lg-auto col-xl-2 px-2">
-                            <h1 className="sale-head mt-4">{t('OrderDetails.Margin')}</h1>
+                            <h1 className="heading-details mt-4">{t('OrderDetails.Margin')}</h1>
                             <Form.Control className="modal-inputs" type="text" placeholder="123" />
                           </div>
                         </div>
@@ -177,23 +177,23 @@ const OrderDetailsModal = (props: Props) => {
                     <div className="row">
                       {/* <div className="col-4 col-lg-auto col-xl-1"></div> */}
                       <div className="col col-lg-auto col-xl-2 px-2">
-                        <h1 className="sale-head mt-4">{t('OrderDetails.Sell')}</h1>
+                        <h1 className="heading-details mt-4">{t('OrderDetails.Sell')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="€40.00" />
                       </div>
                       <div className="col col-lg-auto col-xl-2 px-2">
-                        <h1 className="sale-head mt-4">{t('OrderDetails.Cost')}</h1>
+                        <h1 className="heading-details mt-4">{t('OrderDetails.Cost')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                       <div className="col col-lg-auto col-xl-2 px-2">
-                        <h1 className="sale-head mt-4">{t('OrderDetails.Fees')}</h1>
+                        <h1 className="heading-details mt-4">{t('OrderDetails.Fees')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="€34.99" />
                       </div>
                       <div className="col col-lg-auto col-xl-2 px-2">
-                        <h1 className="sale-head mt-4">{t('OrderDetails.Profit')}</h1>
+                        <h1 className="heading-details mt-4">{t('OrderDetails.Profit')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="€1.00" />
                       </div>
                       <div className="col col-lg-auto col-xl-2 px-2">
-                        <h1 className="sale-head mt-4">{t('OrderDetails.Margin')}</h1>
+                        <h1 className="heading-details mt-4">{t('OrderDetails.Margin')}</h1>
                         <Form.Control className="modal-inputs" type="text" placeholder="123" />
                       </div>
                     </div>

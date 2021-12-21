@@ -2,6 +2,7 @@
 
 .modal-page .modal-header {
   border-bottom: none !important;
+  padding-bottom: 0;
 }
 
 .order-details-header {
@@ -26,4 +27,27 @@
   align-items: center;
   display: flex;
   padding: $spacer;
+  font-weight: $bold;
+}
+
+.cross-round-iconModal {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.order-details-body {
+  padding: $spacer;
+}
+
+.heading-details {
+  font-size: $font-medium;
+  color: $black;
+  font-weight: $bold;
+}
+
+.sold-head {
+  font-size: var(--font-18);
+  color: #000000;
+  font-weight: 700;
 }
