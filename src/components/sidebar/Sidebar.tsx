@@ -70,7 +70,7 @@ const Sidebar = (props: Props) => {
     history.push(route);
     handleMouseLeave();
   };
-  
+
   const listArray = [
     {
       key: 9,
@@ -79,9 +79,9 @@ const Sidebar = (props: Props) => {
         history.push('/new-channel'), location.reload();
       }
     },
-    { key: 10, listName: t('Menu.Sources'), onClick: () =>  routeChange('/sources') },
+    { key: 10, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
     { key: 11, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions')},
+    { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
     { key: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
     { key: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
     { key: 15, listName: t('Menu.Templates') },

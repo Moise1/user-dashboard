@@ -41,13 +41,8 @@
 }
 
 .heading-details {
-  font-size: $font-medium;
+  font-size: $font-large;
   color: $black;
   font-weight: $bold;
-}
-
-.sold-head {
-  font-size: var(--font-18);
-  color: #000000;
-  font-weight: 700;
+  white-space: nowrap;
 }

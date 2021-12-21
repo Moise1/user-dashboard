@@ -3,6 +3,7 @@
 // Large and extra large screens
 
 .sider {
+  top: auto !important;
   min-width: 80px;
   border-top: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
@@ -40,15 +41,15 @@
     border-radius: 10px !important;
   }
 
-  .sidebar-icon{
-    margin-left: -.3rem;
+  .sidebar-icon {
+    margin-left: -0.3rem;
   }
   .sidebar-icon > * {
     stroke: $primary !important;
   }
   .menu-item:hover,
   .ant-menu-item-selected {
-    .sidebar-icon > *{
+    .sidebar-icon > * {
       stroke: $white !important;
     }
   }
@@ -58,7 +59,7 @@
   .ant-menu-item-selected {
     color: $white !important;
     background: $light-primary !important;
-    .sidebar-icon{
+    .sidebar-icon {
       color: $white !important;
       background: $light-primary !important;
     }
@@ -78,7 +79,6 @@
     background: transparent !important;
     font-weight: $bold;
   }
-
 
   .side-menu-container {
     display: flex;
