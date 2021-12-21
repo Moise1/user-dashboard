@@ -18,12 +18,6 @@
   color: var(--color-grey);
 }
 
-.auto-ordering-section {
-  background-color: var(--bgPage);
-  border-radius: 0px 10px 10px 10px;
-  padding: 12px;
-}
-
 /* DROPDOWN STYLE  */
 
 .supplier-dropdown .Dropdown-control {
@@ -266,38 +260,6 @@
 }
 /* TABS  STYLE  */
 
-.tab-source {
-  display: flex;
-  background-color: #e9e9e9;
-  border-radius: 10px 10px 0px 0px;
-  width: 42%;
-  color: #828282;
-}
-
-.tab-list-items {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.tab-list-items h4 {
-  padding: 20px 10px;
-  font-size: var(--sub-heading);
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: 0;
-  color: #828282;
-}
-
-.active-tab-bar {
-  background-color: var(--bgPage);
-  border-radius: 10px 10px 0px 0px;
-}
-
-.active-tab-bar h4 {
-  color: black;
-}
-
 .source-setting-list-item h4 {
   font-weight: bold;
   font-size: var(--font-large);
@@ -311,19 +273,7 @@
 }
 
 /* MEDIA QUERY  */
-
-@media (max-width: 1199.98px) {
-  .tab-source {
-    width: 50%;
-  }
-}
-@media (max-width: 768px) {
-  .tab-source {
-    width: 60%;
-  }
-  .back-supplier-parent {
-    background-color: white;
-  }
+@media (max-width: 750px) {
   .source-table .source-th-none {
     display: none !important;
   }
@@ -331,10 +281,8 @@
     display: none !important;
   }
 }
+
 @media (max-width: 575.98px) {
-  .tab-source {
-    width: 100%;
-  }
   .shows-search-drop-list {
     padding: 8px;
     top: 0;

@@ -6,7 +6,7 @@ import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import SourceSettings from './SourceSettings';
 import SearchSelect from './SearchSelect';
-import SourceButtons from './SourceButtons';
+import ConfigButtons from './ConfigButtons';
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
 
@@ -68,7 +68,7 @@ const Sources = () => {
           </h1>
         </div>
         {/* SOURCE TABS  */}
-        <div className="tab-source">
+        <div className="tab-settings">
           <div
             className={`${isShowSourceSettings ? 'active-tab-bar' : ' '} tab-list-items`}
             onClick={() => handleSourceTabs()}
@@ -84,7 +84,7 @@ const Sources = () => {
         </div>
 
         <div className="auto-ordering-section">
-          <div className="row justify-content-between flex-column flex-lg-row mt-3">
+          <div className="auto-ordering-container row">
             {isShowSourceSettings ? <SourceSettings /> : ''}
             {isShowAutoOrderingSetting ? (
               <AutoOrdering
@@ -97,7 +97,7 @@ const Sources = () => {
               ''
             )}
 
-            <div className="col-12 col-sm-4 mt-2 d-flex flex-column align-items-lg-end ">
+            <div className="col-12 col-sm-4 buttons-config">
               <div className="sticky-btns">
                 <div className="supplier-dropdown">
                   <SearchSelect
@@ -106,7 +106,7 @@ const Sources = () => {
                     setShowOrdering={setShowOrdering}
                   />
                 </div>
-                <SourceButtons />
+                <ConfigButtons />
               </div>
             </div>
           </div>
