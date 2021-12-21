@@ -9,8 +9,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 3ch;
   place-items: center;
-  min-height: 50vh;
-
+  
   .service-img {
     width: 20%;
     position: absolute;
@@ -20,8 +19,8 @@
 
   .service {
     background: $white;
-    width: 264px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 10px;
 
     .card-info {
