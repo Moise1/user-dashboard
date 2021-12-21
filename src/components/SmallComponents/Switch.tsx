@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChangeEvent, useState } from 'react';
+//import { ChangeEvent, useState } from 'react';
 import '../../sass/light-theme/small-components/switch.scss';
 
 /*
