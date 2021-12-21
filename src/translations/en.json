@@ -90,6 +90,36 @@
   "OrderTable.OrderedOn": "Ordered on",
   "OrderTable.State": "State",
 
+
+
+  "OrderDetails.OrderStateProcess":"OrderStateProcess",
+  "OrderDetails.AOEnabled":"AO Enabled",
+  "OrderDetails.HISTORY":"Order history",
+  "OrderDetails.viewFullLog":"View full log",
+  "OrderDetails.StartOrder":"Order started",
+  "OrderDetails.OrderDetails":"Order details",
+
+  "OrderDetails.ShippingAddress":"Shipping address",
+  "OrderDetails.Billingaddress":"Billing address",
+  "OrderDetails.StreetAddress":"Street address",
+  "OrderDetails.City":"City",
+  "OrderDetails.PostalCodeState":"Postal code",
+  "OrderDetails.Sale":"Sale",
+  "OrderDetails.ChannelItem":"Channel item",
+  "OrderDetails.Reference":"Reference",
+  "OrderDetails.BuyerUsername":"Buyer username",
+  "OrderDetails.SourceURL":"Source URL",
+  "OrderDetails.NameOfProduct":"Name of product",
+  "OrderDetails.Quantity":"Quantity",
+  "OrderDetails.Sold":"Sold",
+  "OrderDetails.DateOfOrder":"Date of order",
+  "OrderDetails.Sell":"Sell",
+  "OrderDetails.Cost":"Cost",
+  "OrderDetails.Fees":"Fees",
+  "OrderDetails.Profit":"Profit",
+  "OrderDetails.Margin":"Margin",
+  
+
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
   "SourceConfigInputs.password": "password",

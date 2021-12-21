@@ -180,7 +180,7 @@ export const OrdersTable = (tableProps: Props) => {
                       <Dropdown.Item>
                         <span>
                           <HandStopOrderIcon />
-                          <span className="ml-2"> {t('OrderDetails.StopOrder')} </span>
+                          <span className="ml-2">{t('OrderDetails.StopOrder')} </span>
                         </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
