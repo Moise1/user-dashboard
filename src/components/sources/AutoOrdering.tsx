@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import AccountsMangage from './AccountsMangage';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/small-components/switch.scss';
+import '../../sass/light-theme/switch.scss';
 
 interface props {
   showOrdering: boolean;

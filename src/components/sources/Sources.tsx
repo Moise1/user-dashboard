@@ -5,11 +5,9 @@ import './Sources.css';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import SourceSettings from './SourceSettings';
-import SearchSelect from './SearchSelect';
 import ConfigButtons from './ConfigButtons';
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
-
 import '../../sass/light-theme/sources-settings.scss';
 
 type ContextType = {
@@ -99,13 +97,6 @@ const Sources = () => {
 
             <div className="col-12 col-sm-4 buttons-config">
               <div className="sticky-btns">
-                <div className="supplier-dropdown">
-                  <SearchSelect
-                    whatSelect={whatSelect}
-                    setWhatSelect={setWhatSelect}
-                    setShowOrdering={setShowOrdering}
-                  />
-                </div>
                 <ConfigButtons />
               </div>
             </div>

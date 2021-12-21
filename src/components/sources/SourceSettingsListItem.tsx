@@ -1,6 +1,8 @@
-import DefinedBySettingsSelect from './DefinedBySettingsSelect';
+import { Selector } from '../SmallComponents/Selector';
+import { dummyData } from 'src/dummy-data/dummyData';
 
 export const SourceSettingsListItem = () => {
+
   return (
     <>
       {/* SOURCE SETTING LIST  */}
@@ -15,7 +17,9 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Defined by Settings(30)" />
+          <Selector defaultValue="Defined by Settings(30)">
+            {dummyData}
+          </Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -31,7 +35,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Defined by Settings(plain)" />
+          <Selector defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -46,7 +50,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
+          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -61,7 +65,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
+          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -76,7 +80,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Defined by Settings(yes)" />
+          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -87,7 +91,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Select" />
+          <Selector defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -98,7 +102,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Select" />
+          <Selector defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -109,7 +113,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Select" />
+          <Selector defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -136,7 +140,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Default" />
+          <Selector defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -147,7 +151,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Default" />
+          <Selector defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
 
@@ -159,7 +163,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <DefinedBySettingsSelect value="Default" />
+          <Selector defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
     </>

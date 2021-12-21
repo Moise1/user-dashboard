@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { CircleDotIcon } from '../common/Icons';
-import '../../sass/light-theme/small-components/menu-list-item.scss';
+import '../../sass/light-theme/menu-list-item.scss';
 
 interface props {
   listName?: string | ReactNode;

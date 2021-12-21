@@ -1,4 +1,3 @@
-import React from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 

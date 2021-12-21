@@ -1,24 +1,6 @@
-import React from 'react';
-//import { ChangeEvent, useState } from 'react';
-import '../../sass/light-theme/small-components/switch.scss';
+import '../../sass/light-theme/switch.scss';
 
-/*
-interface props {
-  showOrdering: boolean;
-  whatSelect: string;
-  setWhatSelect: (arg0: string) => void;
-  setShowOrdering: (arg0: boolean) => void;
-}
-
-const Switch = (myProps: props) => {
-  const [checked, setChecked] = useState<boolean>(false);
-
-  // FOR GET VALUE OF TOGGLE SWITCH
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setChecked(event.target.checked);
-  };
-*/
-function Switch() {
+ export const Switch = () => {
   return (
     <div className="switch-container">
       <label className="switch-toggle" htmlFor="checkbox-2">
@@ -29,4 +11,3 @@ function Switch() {
   );
 }
 
-export default Switch;

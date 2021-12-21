@@ -1,0 +1,22 @@
+@import 'general.config';
+
+// Large screens and extra large screens
+
+.selector {
+  width: 100%;
+  &:focus {
+    border: none !important;
+    outline: none !important;
+  }
+  .ant-select-selector {
+    border-radius: 7px !important;
+    box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
+    &::before {
+      content: '▼';
+      margin-top: 0.2rem;
+      position: absolute;
+      right: 3%;
+    }
+   
+  }
+}
