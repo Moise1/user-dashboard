@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import history from './history';
+import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
@@ -19,20 +18,19 @@ import SelectSupplierProvider from './contexts/SelectSupplierProvider';
 import './Common.css';
 import './sass/index.scss';
 
-export const App = () => {
+export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
-  const location = history.location;
-
+  const { pathname } = history.location;
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
     const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
     sidebar.style.display = 'block';
     sidebar.style.position = 'absolute';
-    sidebar.style.top = '0';    
+    sidebar.style.top = '0';
   };
 
   const collapseSideBar = () => {
@@ -44,12 +42,12 @@ export const App = () => {
 
   return (
     <div className="all-content">
-      {staticValue ? <div className="overlay-sidebar-mobile"/> : null}
+      {staticValue ? <div className="overlay-sidebar-mobile" /> : null}
       <SelectSupplierProvider>
         <Router>
-          {location.pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
+          {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
           <Layout className="layout">
-            {location.pathname === '/new-channel' ? null : (
+            {pathname === '/new-channel' ? null : (
               <Sidebar
                 className="sider"
                 setCollapsed={setCollapsed}
@@ -84,4 +82,4 @@ export const App = () => {
       </SelectSupplierProvider>
     </div>
   );
-};
+});

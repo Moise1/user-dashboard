@@ -20,6 +20,7 @@ import Logo from '../../assets/logoHGR.png';
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
+
 interface Props {
   className: string;
   collapsed: boolean;
@@ -48,55 +49,8 @@ const toggleDarkTheme = async () => {
 };
 
 const Sidebar = (props: Props) => {
-  const history = useHistory();
-
-  const routeChange = () => {
-    history.push('/home');
-  };
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
-
-  const windowwidth = window.innerWidth;
-  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
-  const handleSourcesSidebarClose = () => {
-    history.push('/sources');
-
-    // IF TOGGLE BUTTON SHOW ON TOP BAR, ONLY THEN CLOSE SIDEBAR OR IN MOBILE
-    if (windowwidth < 992) {
-      togglestatic();
-    }
-  };
-
-  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
-  const handleOrdersSidebar = () => {
-    history.push('/orders');
-    if (windowwidth < 992) {
-      togglestatic();
-    }
-  };
-  // FOR CLOSE SIDEBAR AND CHANGE ROUTE
-  const handleCloseLlistingSidebar = () => {
-    history.push('/listings');
-    if (windowwidth < 992) {
-      togglestatic();
-    }
-  };
-
-  const listArray = [
-    { key: 9, listName: t('Menu.Channel'), onClick: () => history.push('/new-channel') },
-    { key: 10, listName: t('Menu.Sources'), onClick: () => handleSourcesSidebarClose() },
-    { key: 11, listName: t('Menu.PricingRules'), onClick: () => history.push('/pricing-rules') },
-    { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => history.push('/browser-extensions') },
-    { key: 13, listName: t('Menu.Subscriptions'), onClick: () => history.push('/subscriptions') },
-    { key: 14, listName: t('Menu.VaProfiles'), onClick: () => history.push('/va-profiles') },
-    { key: 15, listName: t('Menu.Templates') },
-    { key: 16, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
-  ];
-
-  const helplistArray = [
-    { key: 511, listName: t('Menu.Channel') },
-    { key: 512, listName: t('Menu.Sources') },
-    { key: 513, listName: t('Menu.PricingRules') }
-  ];
+  const history = useHistory();
 
   const handleMouseEnter = () => {
     if (!staticValue) {
@@ -111,6 +65,35 @@ const Sidebar = (props: Props) => {
       return;
     }
   };
+
+  const routeChange = (route: string) => {
+    history.push(route);
+    handleMouseLeave();
+  };
+  
+  const listArray = [
+    {
+      key: 9,
+      listName: t('Menu.Channel'),
+      onClick: () => {
+        history.push('/new-channel'), location.reload();
+      }
+    },
+    { key: 10, listName: t('Menu.Sources'), onClick: () =>  routeChange('/sources') },
+    { key: 11, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions')},
+    { key: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { key: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { key: 15, listName: t('Menu.Templates') },
+    { key: 16, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
+  ];
+
+  const helplistArray = [
+    { key: 511, listName: t('Menu.Channel') },
+    { key: 512, listName: t('Menu.Sources') },
+    { key: 513, listName: t('Menu.PricingRules') }
+  ];
+
   return (
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Sider
@@ -123,7 +106,7 @@ const Sidebar = (props: Props) => {
         collapsedWidth="var(--siderWidth)"
       >
         <div className="side-menu-container">
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']} className="menu-container">
             {!collapsed && (
               <div className="sidebar-overhead">
                 <div className="logo-container">
@@ -145,7 +128,10 @@ const Sidebar = (props: Props) => {
                 </div>
                 <div className="sidebar-btns">
                   {staticValue ? (
-                    <i onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} className="fas fa-chevron-left"></i>
+                    <i
+                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
+                      className="fas fa-chevron-left"
+                    ></i>
                   ) : (
                     <button className="sidebar-pin">
                       <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
@@ -154,9 +140,9 @@ const Sidebar = (props: Props) => {
                 </div>
               </div>
             )}
-            <div className="pt-5"></div>
             <Menu.Item
               className="menu-item"
+              onClick={() => routeChange('/dashboard')}
               key="1"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={<DashBoardIcon />}
@@ -165,6 +151,7 @@ const Sidebar = (props: Props) => {
             </Menu.Item>
             <Menu.Item
               className="menu-item"
+              onClick={() => routeChange('/catalog')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="2"
               icon={<CatalogIcon />}
@@ -173,7 +160,7 @@ const Sidebar = (props: Props) => {
             </Menu.Item>
             <Menu.Item
               className="menu-item"
-              onClick={() => history.push('/sources')}
+              onClick={() => routeChange('/sources')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="3"
               icon={<ListNowIcon />}
@@ -182,27 +169,19 @@ const Sidebar = (props: Props) => {
             </Menu.Item>
             <Menu.Item
               className="menu-item"
-              onClick={() => handleCloseLlistingSidebar()}
+              onClick={() => routeChange('/listings')}
               key="4"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={
-                <span onClick={routeChange}>
-                  <ListingsIcon />
-                </span>
-              }
+              icon={<ListingsIcon />}
             >
               {t('Menu.Listings')}
             </Menu.Item>
             <Menu.Item
               className="menu-item"
-              onClick={() => handleOrdersSidebar()}
+              onClick={() => routeChange('/orders')}
               key="5"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={
-                <span>
-                  <OrdersIcon />
-                </span>
-              }
+              icon={<OrdersIcon />}
             >
               {t('Menu.Orders')}
             </Menu.Item>
