@@ -260,18 +260,6 @@
 }
 /* TABS  STYLE  */
 
-.source-setting-list-item h4 {
-  font-weight: bold;
-  font-size: var(--font-large);
-  color: #000;
-}
-.source-setting-list-item p {
-  font-weight: 400;
-  font-size: var(--font-extra-small);
-  color: rgba(0, 0, 0, 0.4);
-  max-width: 400px;
-}
-
 /* MEDIA QUERY  */
 @media (max-width: 750px) {
   .source-table .source-th-none {
@@ -295,11 +283,6 @@
   }
   .add-acccounnt-icon svg {
     height: 16px;
-  }
-
-  .auto-ordering-section {
-    border-radius: 0;
-    padding: 10px 0px;
   }
 
   .acc-input-parent {

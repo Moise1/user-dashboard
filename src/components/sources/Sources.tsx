@@ -83,7 +83,7 @@ const Sources = () => {
           </div>
         </div>
 
-        <div className="auto-ordering-section">
+        <div className="settings-container-section">
           <div className="auto-ordering-container row">
             {isShowSourceSettings ? <SourceSettings /> : ''}
             {isShowAutoOrderingSetting ? (

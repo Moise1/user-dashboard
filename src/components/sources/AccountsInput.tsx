@@ -105,7 +105,6 @@ const AccountsInput = (myProps: props) => {
           </div>
         </div>
         <div className="col-12">
-
           <p className="remove-account-div">
             {' '}
             <DustbinPinkIcon /> <div className="ml-2"> {t('SourceConfigInputs.RemoveAccount')}</div>

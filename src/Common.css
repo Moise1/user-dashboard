@@ -512,22 +512,6 @@ button {
   color: var(--bgPage);
 }
 
-.enable-disable-para p {
-  font-weight: bold;
-  font-size: var(--font-large);
-  color: var(--color-black);
-  margin-bottom: 0px;
-}
-
-.enable-disable-para span {
-  display: inline-block;
-  max-width: 364px;
-  font-weight: 400;
-  font-size: var(--font-extra-small);
-  color: var(--color-black);
-  opacity: 0.4;
-}
-
 .acc-config-text {
   font-weight: bold;
   font-size: var(--font-xl);
