@@ -32,7 +32,7 @@ export const App = () => {
     const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
     sidebar.style.display = 'block';
     sidebar.style.position = 'absolute';
-    sidebar.style.top = '8.5%';    
+    sidebar.style.top = '0';    
   };
 
   const collapseSideBar = () => {
@@ -44,7 +44,7 @@ export const App = () => {
 
   return (
     <div className="all-content">
-      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile"/> : null}
+      {staticValue ? <div className="overlay-sidebar-mobile"/> : null}
       <SelectSupplierProvider>
         <Router>
           {location.pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
@@ -58,6 +58,7 @@ export const App = () => {
                 toggle={toggleCollapse}
                 collapsed={collapsed}
                 handleSidebarMobile={handleSidebarMobile}
+                collapseSideBar={collapseSideBar}
               />
             )}
             <Layout className={staticValue ? 'content-area' : ''}>

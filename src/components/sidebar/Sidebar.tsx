@@ -28,6 +28,7 @@ interface Props {
   staticValue: boolean;
   togglestatic: () => void;
   handleSidebarMobile: () => void;
+  collapseSideBar: () => void;
 }
 
 let darkApplied = false;
@@ -52,7 +53,7 @@ const Sidebar = (props: Props) => {
   const routeChange = () => {
     history.push('/home');
   };
-  const { collapsed, staticValue, togglestatic, className, setCollapsed } = props;
+  const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
 
   const windowwidth = window.innerWidth;
   // FOR CLOSE SIDEBAR AND CHANGE ROUTE
@@ -144,7 +145,7 @@ const Sidebar = (props: Props) => {
                 </div>
                 <div className="sidebar-btns">
                   {staticValue ? (
-                    <i onClick={togglestatic} className="fas fa-chevron-left"></i>
+                    <i onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} className="fas fa-chevron-left"></i>
                   ) : (
                     <button className="sidebar-pin">
                       <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
