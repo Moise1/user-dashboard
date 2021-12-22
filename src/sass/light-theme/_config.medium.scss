@@ -1,13 +1,8 @@
 @media only screen and (max-width: 1440px) {
   :root {
-    $font-large: 0.8rem;
-    $heading-font: 1.5rem;
+    $font-large: 1rem;
 
     h1 {
-      font-size: $heading-font;
-    }
-
-    span {
       font-size: $font-large;
     }
   }
