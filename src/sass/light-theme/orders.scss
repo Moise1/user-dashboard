@@ -1,6 +1,7 @@
 @import 'general.config';
+@import './small-components/medium-button.scss';
 
-// Large and extra screens
+// NAVBAR
 .orders-container {
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: fill-available;
@@ -9,79 +10,15 @@
     display: flex;
     background-color: $white;
     margin: 1.5rem 0;
-
-    .process-btn {
-      background-color: $light-blue;
-      &:focus {
-        box-shadow: none;
-      }
-      &:hover {
-        background-color: $dark-blue;
-        color: $white;
-      }
-    }
-
-    .stop-btn {
-      background-color: $orange;
-      &:focus {
-        box-shadow: none;
-      }
-      &:hover {
-        background-color: $dark-orange;
-        color: $white;
-      }
-    }
-
-    .delete-btn {
-      background-color: $red;
-      &:focus {
-        box-shadow: none;
-      }
-
-      &:hover {
-        background-color: $dark-red;
-        color: $white;
-      }
-    }
-
-    .dispatch-btn {
-      background-color: $green;
-      &:focus {
-        box-shadow: none;
-      }
-      &:hover {
-        background-color: $dark-green;
-        color: $white;
-      }
-    }
-
-    .action-btn {
-      height: 43px;
-      padding: 10px 15px;
-      border-radius: 10px;
-      color: $white;
-      font-size: var(--font-medium);
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-
-      .btn-text {
-        display: flex;
-        & span {
-          margin-left: 0.3rem;
-        }
-      }
-    }
   }
 }
+
+
+// TABLE STYLE
 
 .order-table-body {
   white-space: nowrap;
 }
-
-// TABLE STYLE
 
 .state-btn {
   width: 137px;
@@ -89,20 +26,20 @@
 }
 
 .state-btn:hover {
-  color: var(--bgHighlight);
+  color: $white;
 }
 
 .orders-table {
   max-height: 53vh;
   overflow-x: scroll;
   .order-table-head {
-    color: var(--color-dark-violet);
+    color: $dark-violet;
     white-space: nowrap;
-    font-weight: bold;
+    font-weight:$bold;
     position: sticky;
     top: 0;
-    background-color: var(--bgHighlight);
-    font-size: var(--font-large) !important;
+    background-color: $white;
+    font-size: $font-large !important;
     z-index: 1;
   }
 }
@@ -110,13 +47,13 @@
 // MODAL BUTTONS
 
 .process-order-btn-style {
-  background-color: var(--bgBlue);
+  background-color: $light-blue2;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
   color: $white;
-  font-size: var(--font-medium);
-  font-weight: bold;
+  font-size: $font-medium;
+  font-weight:$bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,13 +61,13 @@
 }
 
 .stop-order-btn-style {
-  background-color: var(--color-light-orange);
+  background-color: $dark-orange;
   height: 43px;
   padding: 10px 40px;
   border-radius: 10px;
   color: $white;
-  font-size: var(--font-medium);
-  font-weight: bold;
+  font-size: $font-medium;
+  font-weight:$bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,13 +84,13 @@
   color: $white;
 }
 .mark-dispatch-modal-btn-style {
-  background-color: var(--color-secondry);
+  background-color: $light-green;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
   color: $white;
-  font-size: var(--font-medium);
-  font-weight: bold;
+  font-size: $font-medium;
+  font-weight:$bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,13 +103,13 @@
 }
 
 .delete-order-modal-btn-style {
-  background-color: var(--bg-dark-pink);
+  background-color: $dark-pink;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
   color: $white;
-  font-size: var(--font-medium);
-  font-weight: bold;
+  font-size: $font-medium;
+  font-weight:$bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,7 +132,7 @@
 }
 
 .order-three-dots-dropdown .btn-primary {
-  background-color: var(--bgHighlight) !important;
+  background-color: $white !important;
   padding: 0;
 }
 
@@ -232,7 +169,7 @@
 }
 
 .order-three-dots-dropdown svg > * {
-  stroke: var(--iconColor);
+  stroke: $primary;
 }
 
 .order-three-dots-dropdown .process-order-icon g {
@@ -240,7 +177,7 @@
 }
 
 .order-three-dots-dropdown .process-order-icon #Path_287 {
-  stroke: var(--iconColor) !important;
+  stroke: $primary !important;
 }
 
 .progress-order .progress {
@@ -248,26 +185,26 @@
 }
 
 .progress-order {
-  font-weight: bold;
-  font-size: var(--font-large);
-  color: var(--color-dark-violet);
+  font-weight:$bold;
+  font-size: $font-large;
+  color: $dark-violet;
 }
 
 .save-btnn-modal {
   padding: 10px;
-  background: var(--color-secondry);
+  background: $light-green;
   border-radius: 10px;
-  border: 2px solid var(--color-secondry) !important;
+  border: 2px solid $light-green !important;
   opacity: 1;
-  color: var(--bgHighlight);
-  font-size: var(--font-18);
+  color: $white;
+  font-size: $font-large;
   font-weight: 700;
 }
 
 .save-btnn-modal:hover {
   background-color: transparent;
-  color: var(--color-secondry);
-  border: 2px solid var(--color-secondry) !important;
+  color: $light-green;
+  border: 2px solid $light-green !important;
 }
 
 // AO DISABLED MODAL STYLES
@@ -282,10 +219,10 @@
 }
 
 .middle-part-autoordering p {
-  font-weight: bold;
-  font-size: var(--font-medium);
+  font-weight:$bold;
+  font-size: $font-medium;
   text-align: center;
-  color: var(--color-dark-violet);
+  color: $dark-violet;
   max-width: 572px;
   margin-bottom: 30px;
 }
@@ -294,14 +231,14 @@
   width: 316px;
   height: 59px;
   border-radius: 10px;
-  background: var(--bgBlue);
-  color: var(--bgHighlight);
-  font-size: var(--font-medium);
+  background: $light-blue2;
+  color: $white;
+  font-size: $font-medium;
 }
 
 .middle-part-autoordering button:hover {
   background: #4f77d4;
-  color: var(--bgHighlight);
+  color: $white;
 }
 
 // CHECKBOX STYLE
@@ -366,177 +303,4 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-/* PURPLE FILLED */
-
-.container-checkbox {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-/* Hide the browser's default checkbox */
-.container-checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-/* Create a custom checkbox */
-.container-checkbox .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 16px;
-  width: 16px;
-  background-color: #5e69db;
-  border-radius: 2px;
-}
-/* On mouse-over, add a grey background color */
-.container-checkbox:hover input ~ .checkmark {
-  background-color: #5e69db;
-}
-/* When the checkbox is checked, add a blue background */
-.container-checkbox input:checked ~ .checkmark {
-  background-color: #5e69db;
-}
-/* Create the checkmark/indicator (hidden when not checked) */
-.container-checkbox .checkmark:after {
-  content: '';
-  position: absolute;
-  display: none;
-}
-/* Show the checkmark when checked */
-.container-checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-/* Style the checkmark/indicator */
-.container-checkbox .checkmark:after {
-  left: 4px;
-  top: 4px;
-  width: 5px;
-  height: 8px;
-  border: solid #45ff00;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-@media (max-width: 1400px) {
-  .delete-btn-parent {
-    width: 55%;
-  }
-  .process-btn-parent {
-    width: 45%;
-  }
-  .delete-order-modal-btn-style {
-    height: unset;
-    padding: 3px 3px;
-  }
-  .process-order-btn-style {
-    height: unset;
-    padding: 3px 3px;
-  }
-  .stop-order-btn-style {
-    height: unset;
-    padding: 3px 3px;
-  }
-  .mark-dispatch-modal-btn-style {
-    height: unset;
-    padding: 3px 3px;
-  }
-
-  .mark-dispatch-modal-btn-style svg,
-  .stop-order-btn-style svg,
-  .process-order-btn-style svg,
-  .delete-order-modal-btn-style svg {
-    height: 14px;
-    width: 14px;
-  }
-}
-
-@media (max-width: 500px) {
-  .order-action-bar {
-    row-gap: 2rem;
-    display: grid !important;
-    .action-btn {
-      width: 100% !important;
-    }
-  }
-
-  .time-line-here svg {
-    width: 30px;
-    height: 30px;
-  }
-  .time-line-here .rotating {
-    width: 15px;
-    height: 15px;
-  }
-  .middle-part-autoordering {
-    height: 250px;
-  }
-  .middle-part-autoordering button {
-    width: 220px;
-    height: 40px;
-  }
-  .orders-table-main {
-    padding: 6px;
-    margin: 8px 0;
-    border-radius: 10px;
-  }
-
-  .stop-5-order-btn {
-    width: 100%;
-    height: unset;
-    padding: 8px;
-  }
-
-  .process-5-order-btn {
-    width: 100%;
-    height: unset;
-    padding: 8px;
-  }
-  .mark-dispatch-btn {
-    width: 100%;
-    height: unset;
-    padding: 8px;
-  }
-
-  .delete-5-order-btn {
-    width: 100%;
-    height: unset;
-    padding: 8px;
-  }
-  .stop-5-order-btn svg,
-  .delete-5-order-btn svg,
-  .mark-dispatch-btn svg,
-  .process-5-order-btn svg {
-    height: 12px;
-    width: 12px;
-  }
-
-  .mark-dispatch-modal-btn-style svg,
-  .stop-order-btn-style svg,
-  .process-order-btn-style svg,
-  .delete-order-modal-btn-style svg {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* MEDIA QUERY  */
-
-@media (max-width: 768px) {
-  .order-table .order-th-none {
-    display: none !important;
-  }
-  .order-table .order-td-none {
-    display: none !important;
-  }
 }
