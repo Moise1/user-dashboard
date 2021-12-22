@@ -17,7 +17,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector"  defaultValue="Defined by Settings(30)">{dummyData}</Selector>
+          <Selector   defaultValue="Defined by Settings(30)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -33,7 +33,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
+          <Selector  defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -48,7 +48,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector  defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -63,7 +63,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector  defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -78,7 +78,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector  defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -89,7 +89,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
+          <Selector  defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -100,7 +100,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
+          <Selector  defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -111,7 +111,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
+          <Selector  defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -133,7 +133,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
+          <Selector  defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -144,7 +144,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
+          <Selector  defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
 
@@ -156,7 +156,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
+          <Selector  defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
     </>

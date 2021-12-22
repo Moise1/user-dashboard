@@ -4,7 +4,6 @@ import '../../sass/light-theme/selector.scss';
 interface Props {
   children:  { id: number; value: string }[];
   defaultValue: string;
-  className?: string;
 }
 
 const { Option } = Select;
