@@ -535,10 +535,6 @@ button {
   color: var(--txtHighlight);
 }
 
-.otp-code-input-styles::placeholder {
-  color: var(--txtHighlight) !important;
-}
-
 .account-input-style {
   padding: 9px 12px;
   width: 100%;
@@ -804,18 +800,6 @@ button {
   width: 80%;
 }
 
-.shop-address {
-  font-size: var(--font-18);
-  color: var(--txtBaseColor);
-  font-weight: 700;
-}
-
-.content-shop-address {
-  padding-bottom: 0px !important;
-  font-size: 12px;
-  color: rgba(62, 62, 62, 0.44);
-}
-
 .ship-bill-box {
   background: #f2f8ff;
   border-radius: 8px;
@@ -830,32 +814,14 @@ button {
   color: var(--txtBaseColor);
 }
 
-.modals-inputs .form-control:focus {
-  box-shadow: none !important;
-  border-color: #ced4da !important;
-}
-
 .source-url {
   font-size: var(--font-18);
   color: var(--txtBaseColor);
   font-weight: 700;
 }
 
-.modals-inputs .form-control {
-  background-color: #f2f8ff !important;
-  border-radius: 10px;
-  border: none;
-  height: 42px;
-  font-size: var(--font-medium);
-  font-weight: 700;
-}
-
 .w-76 {
   width: 76px;
-}
-
-.w-82 {
-  width: 82px;
 }
 
 .w-179 {
@@ -867,10 +833,6 @@ button {
 }
 
 .modal-head-box {
-  padding-right: 0px;
-}
-
-.pr-0 {
   padding-right: 0px;
 }
 
@@ -912,19 +874,6 @@ button {
   font-size: var(--font-medium);
   color: rgba(22, 73, 151, 0.98);
   cursor: pointer;
-}
-
-.modal-second-inputs .form-control {
-  background-color: #fff !important;
-  border-radius: 10px;
-  border: none;
-  height: 42px;
-  width: 207px;
-}
-
-.modal-second-input-heads {
-  font-size: var(--font-16);
-  font-weight: 500;
 }
 
 .disabled-btn {
@@ -1019,10 +968,6 @@ button {
 }
 
 @media (max-width: 767.98px) {
-  .modal-second-inputs .form-control {
-    width: 130px;
-    height: 25px;
-  }
   .rotate-180-arrow svg {
     height: 17px;
   }
@@ -1043,42 +988,6 @@ button {
 
 .reset-to-default-btn:focus {
   box-shadow: none;
-}
-
-.modal-second-inputs .form-control:focus {
-  box-shadow: none;
-}
-
-.ao-enabled-button:focus {
-  box-shadow: none;
-}
-
-/* ORDER SVG COLOR  */
-.Update-btn:focus {
-  box-shadow: none;
-}
-
-.advance-search-purple-button:focus {
-  box-shadow: none;
-}
-
-.advance-search-hover:focus {
-  box-shadow: none;
-}
-
-.view-columns-hover:focus {
-  box-shadow: none;
-}
-
-.order-details-model-btnn:focus {
-  box-shadow: none;
-}
-
-.all-the-setting-text {
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--inputColor);
-  margin-top: 5px;
 }
 
 /* ORDER SVG COLOR  */
@@ -1180,19 +1089,8 @@ button {
   border-radius: 6px;
 }
 
-.headphone-img-style {
-  width: 192px;
-  height: 249px;
-}
-
 .source-url-input {
   font-weight: normal !important;
-  font-size: var(--font-medium);
-  color: var(--active-bg) !important;
-}
-
-.source-url-input::placeholder {
-  font-weight: normal;
   font-size: var(--font-medium);
   color: var(--active-bg) !important;
 }
@@ -1283,13 +1181,6 @@ button {
 }
 
 @media (max-width: 576px) {
-  .headphone-img-style {
-    height: 200px;
-    width: 170px;
-  }
-  .modals-inputs .form-control {
-    height: 25px;
-  }
   .ao-enabled-button {
     height: 28px;
     padding: 4px;

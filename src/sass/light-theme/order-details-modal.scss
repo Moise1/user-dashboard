@@ -30,10 +30,11 @@
   font-weight: $bold;
 }
 
-.cross-round-iconModal {
+.close-modal-icon {
   position: absolute;
   right: 5px;
   top: 5px;
+  cursor: pointer;
 }
 
 .order-details-body {
@@ -41,8 +42,41 @@
 }
 
 .heading-details {
-  font-size: $font-large;
-  color: $black;
+  font-size: $font-medium;
+  color: $txt-dark;
   font-weight: $bold;
   white-space: nowrap;
+}
+
+.shipping-billing-container {
+  justify-content: space-between;
+  background: $background-soft-light;
+  padding: $spacer;
+  border-radius: 10px;
+}
+
+.heading-addresses {
+  margin-top: $spacer;
+  font-size: $font-small;
+  font-weight: $bold;
+}
+
+.small-input {
+  width: 80px;
+  margin: $spacer;
+}
+
+.large-input {
+  width: 180px;
+  margin: $spacer;
+}
+
+.sourceurl {
+  width: 90%;
+  margin: $spacer;
+}
+
+.product-img {
+  height: auto;
+  margin: auto;
 }

@@ -1,5 +1,6 @@
 // All colors
 $primary: #262e80;
+$cta-color: #fdcf00;
 $orange: #e8ac66;
 $red: #dd0a54;
 $dark-red: #c20648;
@@ -9,7 +10,7 @@ $secondary: #9694ff;
 $light-blue: #5e84db;
 $dark-blue: #3a66ce;
 $mild-light-blue: #f2f8ff;
-$super-light-blue: #e8ecf7;
+$super-light-blue: #f2f8ff;
 $green: #228b22;
 $dark-green: #198319;
 $light-gray: #f0f0f0;
@@ -23,10 +24,22 @@ $black: #000;
 
 // Text colors
 
-$txt-black: #000;
-$txt-white: #fff;
+$txt-dark: #000;
+$txt-light: #fff;
 $txt-primary: #262e80;
 $txt-secondary: #5e69db;
+
+// Background colors
+
+$background-light: #fff;
+$background-soft-light: #f2f8ff;
+$background-primary: #262e80;
+$background-secondary: #5e69db;
+
+// Input colors
+
+$input-background: #fff;
+$input-background-secondary: #f2f8ff;
 
 // Responsiveness font sizes
 
@@ -61,3 +74,38 @@ $bold: 700;
 
 $siderWidth: 80px;
 $expandedSiderWidth: 293px;
+
+a {
+  color: $primary;
+  font-weight: $bold;
+  &:hover {
+    color: $cta-color;
+    transition: 0.5s;
+  }
+}
+
+.white-input {
+  border-radius: 10px;
+  border: none;
+  height: 42px;
+  width: 207px;
+  margin-top: $spacer;
+  background-color: $input-background !important;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.blue-input {
+  background-color: $input-background-secondary;
+  border-radius: 10px;
+  border: none;
+  height: 42px;
+  font-size: $font-medium;
+  font-weight: $bold;
+
+  &:focus {
+    box-shadow: none !important;
+    background-color: $input-background-secondary !important;
+  }
+}
