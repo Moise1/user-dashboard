@@ -889,24 +889,6 @@ button {
   padding: 0px;
 }
 
-.btnn-in-model {
-  background-color: transparent !important;
-  color: var(--color-dark-violet);
-}
-
-.btnn-in-model:focus {
-  border: 0px solid transparent;
-  box-shadow: none;
-}
-
-.order-details-back-text {
-  font-weight: bold;
-  font-size: var(--font-large);
-  color: var(--color-dark-violet);
-}
-.rotate-180-arrow svg {
-  transform: rotate(180deg);
-}
 @media (max-width: 575.98px) {
   .table-disable-button {
     width: 95px;
@@ -965,19 +947,6 @@ button {
   .width-100 {
     width: 100%;
   }
-}
-
-@media (max-width: 767.98px) {
-  .rotate-180-arrow svg {
-    height: 17px;
-  }
-  /* .config-auto-ordering-beta-btn {
-    width: 100%;
-  }
-
-  .config-supply-btn {
-    width: 100%;
-  } */
 }
 
 /* MODAL CSS END */
