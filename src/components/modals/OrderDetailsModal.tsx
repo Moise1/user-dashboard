@@ -5,16 +5,15 @@ import { t } from '../../global/transShim';
 import '../../sass/light-theme/order-details-modal.scss';
 
 interface Props {
-  addressModalShow: boolean;
   orderDetailsModalShow: boolean;
   setShow: (value: boolean) => void;
-  setAddressModalShow: (value: boolean) => void;
+
   setOrderDetailsModalShow: (value: boolean) => void;
   handleCloseAllModals: () => void;
 }
 
 const OrderDetailsModal = (props: Props) => {
-  const { setAddressModalShow, setOrderDetailsModalShow, orderDetailsModalShow, setShow } = props;
+  const { setOrderDetailsModalShow, orderDetailsModalShow, setShow } = props;
 
   return (
     <div className="modal-first">
@@ -38,7 +37,6 @@ const OrderDetailsModal = (props: Props) => {
               <span
                 className="close-modal-icon"
                 onClick={() => {
-                  setAddressModalShow(false);
                   setOrderDetailsModalShow(false);
                 }}
               >

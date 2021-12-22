@@ -18,8 +18,6 @@ import { t } from '../../global/transShim';
 
 interface Props {
   orderProgress: number;
-  addressModalShow: boolean;
-  setAddressModalShow: (value: boolean) => void;
   show: boolean;
   setShow: (value: boolean) => void;
   orderDetailsModalShow: boolean;
