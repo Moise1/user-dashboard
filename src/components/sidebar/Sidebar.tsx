@@ -207,7 +207,7 @@ const Sidebar = (props: Props) => {
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="2"
               icon={<ServiceIcon />}
-              onClick={() => history.push('/services')}
+              onClick={() =>routeChange('/services')}
             >
               <span>{t('Menu.Services')}</span>
             </Menu.Item>
