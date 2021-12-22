@@ -1,8 +1,8 @@
-import { Selector } from '../SmallComponents/Selector';
+import { Selector } from '../small-components/Selector';
 import { dummyData } from 'src/dummy-data/dummyData';
+import {Switch} from '../small-components/Switch';
 
 export const SourceSettingsListItem = () => {
-
   return (
     <>
       {/* SOURCE SETTING LIST  */}
@@ -17,9 +17,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Defined by Settings(30)">
-            {dummyData}
-          </Selector>
+          <Selector className="selector"  defaultValue="Defined by Settings(30)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -35,7 +33,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -50,7 +48,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -65,7 +63,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -80,7 +78,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -91,7 +89,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Select">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -102,7 +100,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Select">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -113,7 +111,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Select">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Select">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -124,12 +122,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-6 col-xl-5 selector-container">
-          <div className="d-flex align-items-center switchbox custom-switch px-2">
-            <label className="switch-toggle mb-0 " htmlFor="checkbox-2">
-              <input className="input-toggle-switch" type="checkbox" id="checkbox-2" />
-              <div className="slider-toggle round"></div>
-            </label>
-          </div>
+          <Switch />
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -140,7 +133,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Default">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
       {/* SOURCE SETTING LIST  */}
@@ -151,7 +144,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Default">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
 
@@ -163,7 +156,7 @@ export const SourceSettingsListItem = () => {
           </div>
         </div>
         <div className="col-12 col-xl-5 selector-container">
-          <Selector defaultValue="Default">{dummyData}</Selector>
+          <Selector className="selector" defaultValue="Default">{dummyData}</Selector>
         </div>
       </div>
     </>

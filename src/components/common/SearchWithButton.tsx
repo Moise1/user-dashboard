@@ -1,6 +1,6 @@
 import searchIcon from '../../assets/listsearch.svg';
 import { t } from '../../global/transShim';
-import { SearchInput } from '../SmallComponents/SearchBars';
+import { SearchInput } from '../small-components/SearchBars';
 
 const SearchWithButton = () => {
   return (

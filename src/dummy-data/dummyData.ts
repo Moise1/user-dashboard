@@ -10,3 +10,9 @@ export const dummyData = [
   { value: 'Amaozoamsd', id: 109 },
   { value: 'Third', id: 110 }
 ];
+
+export const dummyPricingRules = [
+  { value: 'Rule 1', id: 1 },
+  { value: 'Rule 2', id: 2 },
+  { value: 'Rule 3', id: 3 }
+];

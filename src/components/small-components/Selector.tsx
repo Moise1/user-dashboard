@@ -4,11 +4,13 @@ import '../../sass/light-theme/selector.scss';
 interface Props {
   children:  { id: number; value: string }[];
   defaultValue: string;
+  className?: string;
 }
 
 const { Option } = Select;
 
-export const Selector: React.FC<Props> = ({ children, defaultValue}: Props) => {
+export const Selector: React.FC<Props> = (props: Props) => {
+  const {children, defaultValue} = props;
   const options = [];
   for (let i = 0; i < children.length; i++) {
     options.push(

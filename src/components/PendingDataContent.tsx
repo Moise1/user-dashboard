@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Table } from 'antd';
 import img from '../assets/icon.png';
-import { columns } from '../components/SmallComponents/PendindData';
+import { columns } from './small-components/PendindData';
 
 interface iData {
   key: number;

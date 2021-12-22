@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { ProcessOrderIcon, HandStopOrderIcon, DustbinDeleteOrderIcon, DispatchedOrderIcon } from '../common/Icons';
-import { StatusBar } from '../SmallComponents/StatusBar';
+import { StatusBar } from '../small-components/StatusBar';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/orders.scss';
 

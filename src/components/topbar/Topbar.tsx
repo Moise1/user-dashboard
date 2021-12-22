@@ -4,7 +4,7 @@ import flag from '../../assets/flag-round-500.svg';
 import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import { Dropdown, Button, Progress } from 'antd';
-import StoreList from '../SmallComponents/StoreList';
+import StoreList from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';

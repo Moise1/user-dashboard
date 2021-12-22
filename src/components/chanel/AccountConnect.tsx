@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
 import { ProgressBar } from './ProgressBar';
 import { t } from '../../global/transShim';
-import Previousstep from '../SmallComponents/Previousstep';
+import Previousstep from '../small-components/Previousstep';
 import { NextBtn } from './NextBtn';
 
 interface values {

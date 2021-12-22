@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
 import img from '../assets/icon.png';
-import { columns } from './SmallComponents/TerminatedData';
+import { columns } from './small-components/TerminatedData';
 
 const windowwidth = window.innerWidth;
 console.log(windowwidth);

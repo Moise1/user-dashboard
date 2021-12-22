@@ -10,7 +10,7 @@ import us_flag from '../../assets/channel/flags/US.png';
 import { ProgressBar } from './ProgressBar';
 import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
-import Previousstep from '../SmallComponents/Previousstep';
+import Previousstep from '../small-components/Previousstep';
 import Flag, { FlagProps } from './Flag';
 
 interface values {

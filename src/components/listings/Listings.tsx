@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
-import { SearchBars } from '../SmallComponents/SearchBars';
-import { StatusBar } from '../SmallComponents/StatusBar';
-import ListingsStatusBtn from '../SmallComponents/ListingsStatusBtn';
+import { SearchBars } from '../small-components/SearchBars';
+import { StatusBar } from '../small-components/StatusBar';
+import ListingsStatusBtn from '../small-components/ListingsStatusBtn';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/listings.scss';
 import { listingsData, listingsHeadingData } from '../common/ListingsData';
