@@ -15,7 +15,6 @@ const Orders = (ordersProps: props) => {
   const [orderNumber, setOrderNumber] = useState(0);
   const [show, setShow] = useState(false);
   const { staticValue } = ordersProps;
-  const [addressModalShow, setAddressModalShow] = useState(false);
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
 
   let orderSelectedArray: Array<number> = [];
@@ -45,7 +44,6 @@ const Orders = (ordersProps: props) => {
   };
 
   const handleCloseAllModals = () => {
-    setAddressModalShow(false);
     setOrderDetailsModalShow(false);
     setShow(false);
   };
@@ -62,8 +60,6 @@ const Orders = (ordersProps: props) => {
       />
 
       <OrderStateProgressModal
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
         setOrderDetailsModalShow={setOrderDetailsModalShow}
         orderDetailsModalShow={orderDetailsModalShow}
         orderProgress={1}
@@ -75,8 +71,6 @@ const Orders = (ordersProps: props) => {
       <OrderDetailsModal
         setOrderDetailsModalShow={setOrderDetailsModalShow}
         orderDetailsModalShow={orderDetailsModalShow}
-        addressModalShow={addressModalShow}
-        setAddressModalShow={setAddressModalShow}
         handleCloseAllModals={handleCloseAllModals}
         setShow={setShow}
       />
