@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AccountsMangage from './AccountsMangage';
+import {ManageAccounts} from './ManageAccounts';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/switch.scss';
 import { Switch } from '../small-components/Switch';
@@ -13,8 +13,9 @@ interface props {
 
 const AutoOrdering = (myProps: props) => {
   const { showOrdering, whatSelect } = myProps;
-  const [checked] = useState<boolean>(false);
-
+  const [checked, setChecked] = useState<boolean>(false);
+  const handleSwitch = () => setChecked(!checked);
+  
   return (
     <div className="col">
       <div className={` ${showOrdering ? '' : 'h-100'} `}>
@@ -23,10 +24,9 @@ const AutoOrdering = (myProps: props) => {
             <h4>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h4>
             <p className="mr-5">Disabling auto-ordering will require you to manually process new orders.</p>
           </div>
-
-          <Switch />
+          <Switch onChange={handleSwitch}/>
         </div>
-        {showOrdering && <AccountsMangage checked={checked} whatSelect={whatSelect} />}
+        {checked && <ManageAccounts checked={checked} whatSelect={whatSelect} />}
       </div>
     </div>
   );

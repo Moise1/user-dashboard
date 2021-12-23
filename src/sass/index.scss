@@ -8,30 +8,6 @@ body {
   overflow: hidden;
   background: $super-light-blue;
   line-height: 1.5715;
-
-  .all-content {
-    background: $super-light-blue;
-  }
-
-  .ant-layout {
-    height: calc(100vh - 80px);
-    overflow: auto;
-    background: $super-light-blue;
-    padding: 0.3rem;
-  }
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px 5px 0px 85px;
-  }
-
-  .layout {
-    background: $super-light-blue;
-
-    .content-area {
-      & > * {
-        margin-left: 220px;
-      }
-    }
-  }
 }
 
 svg > path:first-child {

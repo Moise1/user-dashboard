@@ -48,7 +48,7 @@ const toggleDarkTheme = async () => {
   darkApplied = !darkApplied;
 };
 
-const Sidebar = (props: Props) => {
+export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const history = useHistory();
 
@@ -235,5 +235,3 @@ const Sidebar = (props: Props) => {
     </div>
   );
 };
-
-export default Sidebar;

@@ -2,6 +2,69 @@
 
 // Large and extra large screens
 
+.source-container {
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
+  padding: 0 6rem;
+
+  
+  .source-description {
+    margin-top: 1rem;
+  }
+  .tabs-container {
+    background: $white;
+    border-radius: 10px;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    height: 68vh;
+    .tabs {
+      overflow-y: scroll;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      padding: 1rem 0;
+      &::-webkit-scrollbar {
+        /* Chrome */
+        display: none;
+      }
+      .tab-pane {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        .source-settings {
+          width: 55vw;
+        }
+      }
+    }
+
+    .right-section {
+      margin-top: 6.5rem; 
+      height: 28vh;
+      & > *{
+        margin-bottom: 1rem;
+      }
+      .config-btns {
+        display: grid;
+        row-gap: 1rem;
+        .save-btn,
+        .reset-btn,
+        .selector {
+          padding: 5px 8px;
+          border-radius: 8px;
+          color: $white;
+          width: 217px;
+          height: 59px;
+        }
+        .save-btn {
+          background: $green;
+        }
+        .reset-btn {
+          background: $ash-gray;
+        }
+      }
+    }
+  }
+}
 
 .sticky-btns {
   position: sticky;
