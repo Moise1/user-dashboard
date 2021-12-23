@@ -14,7 +14,7 @@ import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
-import SelectSupplierProvider from './contexts/SelectSupplierProvider';
+import {SelectSupplierProvider} from './contexts/SelectSupplierProvider';
 import './Common.css';
 import './sass/index.scss';
 
@@ -41,7 +41,7 @@ export const App = withRouter(({ history }) => {
   };
 
   return (
-    <div>
+    <div className="app-container">
       {staticValue ? <div className="overlay-sidebar-mobile" /> : null}
       <SelectSupplierProvider>
         <Router>

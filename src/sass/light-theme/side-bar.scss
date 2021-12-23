@@ -1,7 +1,9 @@
 @import 'general.config';
 
 // Large and extra large screens
-
+.toggle-mode{
+  margin-left: .5rem;
+}
 .sider {
   top: auto !important;
   min-width: 80px;

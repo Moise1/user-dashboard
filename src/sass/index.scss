@@ -8,18 +8,30 @@ body {
   overflow: hidden;
   background: $super-light-blue;
   line-height: 1.5715;
+
+  svg > path:first-child {
+    display: none;
+  }
+
+  button:focus {
+    outline: none !important;
+  }
+
+  @media screen and (max-width: 1030px) {
+    .ant-layout.ant-layout-has-sider {
+      margin: 0px !important;
+    }
+  };
+
 }
 
-svg > path:first-child {
-  display: none;
-}
-
-button:focus {
-  outline: none !important;
-}
-
-@media screen and (max-width: 1030px) {
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px !important;
+.dark{
+  .app-container{
+    .routes-content{
+      .top-bar{
+        background: black !important;
+      };
+    }
   }
 }
+
