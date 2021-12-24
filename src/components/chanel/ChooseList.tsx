@@ -6,7 +6,7 @@ import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
 import { ProgressBar } from './ProgressBar';
 import { useHistory } from 'react-router-dom';
-import Previousstep from '../SmallComponents/Previousstep';
+import Previousstep from '../small-components/Previousstep';
 import { t } from '../../global/transShim';
 
 export interface chooseListValues {

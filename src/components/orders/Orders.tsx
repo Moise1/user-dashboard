@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SearchBars } from '../SmallComponents/SearchBars';
+import { SearchBars } from '../small-components/SearchBars';
 import { OrdersTable } from '../tables/OrdersTable';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';

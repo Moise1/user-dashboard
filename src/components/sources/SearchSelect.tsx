@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
 import search_icon from '../../assets/search.svg';
 

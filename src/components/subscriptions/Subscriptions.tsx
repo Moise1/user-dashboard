@@ -2,7 +2,7 @@ import { createRef, useState, useMemo } from 'react';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
-import { StatusBar } from '../SmallComponents/StatusBar';
+import { StatusBar } from '../small-components/StatusBar';
 import { Layout } from 'antd';
 
 export const Subscriptions = () => {

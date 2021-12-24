@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core';
 import { ProgressBar } from './ProgressBar';
 import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
-import Previousstep from '../SmallComponents/Previousstep';
+import Previousstep from '../small-components/Previousstep';
 
 interface values {
   user: string;

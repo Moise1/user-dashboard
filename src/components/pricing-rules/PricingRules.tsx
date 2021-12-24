@@ -1,10 +1,10 @@
-import { Table, Form, Input, Select, Button } from 'antd';
-import {StatusBar} from '../SmallComponents/StatusBar';
+import { Table, Form, Input, Button } from 'antd';
+import { StatusBar } from '../small-components/StatusBar';
 import '../../sass/light-theme/pricing-rules.scss';
+import { Selector } from '../small-components/Selector';
+import { dummyPricingRules } from '../../dummy-data/dummyData';
 
 export const PricingRules = () => {
-  const { Option } = Select;
-
   const dataSource = [
     {
       key: '1',
@@ -87,14 +87,7 @@ export const PricingRules = () => {
           enabling it.
         </p>
         <Form className="form" layout="inline">
-          <Select
-            defaultValue="Select"
-            className="select"
-            onChange={() => console.log('Selected...')}
-          >
-            <Option value="Source 1">Source 1</Option>
-            <Option value="Source 2">Source 2</Option>
-          </Select>
+          <Selector defaultValue="Select a source">{dummyPricingRules}</Selector>
 
           <Input
             className="input"

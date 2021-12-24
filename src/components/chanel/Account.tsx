@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import {ProgressBar} from './ProgressBar';
 import { t } from '../../global/transShim';
-import Previousstep from '../SmallComponents/Previousstep';
+import Previousstep from '../small-components/Previousstep';
 
 interface props {
   nextStep: () => void;

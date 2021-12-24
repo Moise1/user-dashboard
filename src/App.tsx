@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
-import Sidebar from './components/sidebar/Sidebar';
+import {Sidebar} from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
 import Listings from './components/listings/Listings';
 import { Services } from './components/services/Services';
@@ -14,7 +14,7 @@ import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
-import SelectSupplierProvider from './contexts/SelectSupplierProvider';
+import {SelectSupplierProvider} from './contexts/SelectSupplierProvider';
 import './Common.css';
 import './sass/index.scss';
 
@@ -41,7 +41,7 @@ export const App = withRouter(({ history }) => {
   };
 
   return (
-    <div className="all-content">
+    <div className="app-container">
       {staticValue ? <div className="overlay-sidebar-mobile" /> : null}
       <SelectSupplierProvider>
         <Router>
@@ -59,7 +59,7 @@ export const App = withRouter(({ history }) => {
                 collapseSideBar={collapseSideBar}
               />
             )}
-            <Layout className={staticValue ? 'content-area' : ''}>
+            <Layout className={staticValue ? 'content-area' : 'all-content'}>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />

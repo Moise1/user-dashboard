@@ -9,41 +9,29 @@ body {
   background: $super-light-blue;
   line-height: 1.5715;
 
-  .all-content {
-    background: $super-light-blue;
+  svg > path:first-child {
+    display: none;
   }
 
-  .ant-layout {
-    height: calc(100vh - 80px);
-    overflow: auto;
-    background: $super-light-blue;
-    padding: 0.3rem;
-  }
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px 5px 0px 85px;
+  button:focus {
+    outline: none !important;
   }
 
-  .layout {
-    background: $super-light-blue;
+  @media screen and (max-width: 1030px) {
+    .ant-layout.ant-layout-has-sider {
+      margin: 0px !important;
+    }
+  };
 
-    .content-area {
-      & > * {
-        margin-left: 220px;
-      }
+}
+
+.dark{
+  .app-container{
+    .routes-content{
+      .top-bar{
+        background: black !important;
+      };
     }
   }
 }
 
-svg > path:first-child {
-  display: none;
-}
-
-button:focus {
-  outline: none !important;
-}
-
-@media screen and (max-width: 1030px) {
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px !important;
-  }
-}

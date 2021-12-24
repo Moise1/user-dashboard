@@ -1,18 +1,19 @@
-import React from 'react';
 import { DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
+import {Button} from 'antd';
 
-const ConfigButtons = () => {
+interface Props {
+  className: string;
+}
+const ConfigButtons = ({ className }: Props) => {
   return (
-    <>
-      <div className="d-flex flex-row flex-sm-column ">
-        <button className="btn save-changes-btn mb-0 mb-sm-3">
-          <DispatchedOrderIcon />
-          <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
-        </button>
-        <button className="ml-3 ml-sm-0 btn reset-to-default-btn"> {t('SourceConfigInputs.ResetToDefault')}</button>
-      </div>
-    </>
+    <div className={className}>
+      <Button className="save-btn">
+        <DispatchedOrderIcon />
+        <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
+      </Button>
+      <Button className="reset-btn"> {t('SourceConfigInputs.ResetToDefault')}</Button>
+    </div>
   );
 };
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +17,8 @@ import {
 import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
+import { Switch } from '../small-components/Switch';
+import { useColorScheme } from '../../custom-hooks/useColorScheme';
 
 const { SubMenu } = Menu;
 
@@ -32,25 +35,28 @@ interface Props {
   collapseSideBar: () => void;
 }
 
-let darkApplied = false;
-const toggleDarkTheme = async () => {
-  if (darkApplied) {
-    const element = document.getElementById('darkThemeLink');
-    element?.parentElement?.removeChild(element);
-  } else {
-    const link = document.createElement('link');
-    link.type = 'text/css';
-    link.id = 'darkThemeLink';
-    link.rel = 'stylesheet';
-    link.href = './_variables.dark.css';
-    document.head.appendChild(link);
-  }
-  darkApplied = !darkApplied;
+interface ToggleModeProps{
+  className?: string;
+}
+const DarkModeToggle: React.FC<ToggleModeProps> = ({className}: ToggleModeProps) => {
+
+  const { isDark, setIsDark } = useColorScheme();
+  return (
+    <Switch
+      className={className}
+      checked={isDark}
+      onChange={() => setIsDark(!isDark)}
+      checkedChildren="🔆"
+      unCheckedChildren="🌙"
+      aria-label="Dark mode toggle"
+    />
+  );
 };
 
-const Sidebar = (props: Props) => {
+export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const history = useHistory();
+  const { isDark } = useColorScheme();
 
   const handleMouseEnter = () => {
     if (!staticValue) {
@@ -85,7 +91,15 @@ const Sidebar = (props: Props) => {
     { key: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
     { key: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
     { key: 15, listName: t('Menu.Templates') },
-    { key: 16, listName: '+/- Dark', onClick: () => toggleDarkTheme() }
+    {
+      key: 16,
+      listName: (
+        <>
+          <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
+          <DarkModeToggle className="toggle-mode"/>
+        </>
+      )
+    }
   ];
 
   const helplistArray = [
@@ -207,7 +221,7 @@ const Sidebar = (props: Props) => {
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="2"
               icon={<ServiceIcon />}
-              onClick={() => history.push('/services')}
+              onClick={() => routeChange('/services')}
             >
               <span>{t('Menu.Services')}</span>
             </Menu.Item>
@@ -235,5 +249,3 @@ const Sidebar = (props: Props) => {
     </div>
   );
 };
-
-export default Sidebar;
