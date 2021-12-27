@@ -10,7 +10,6 @@ interface props {
 }
 export const ThemeSelector = ({ children }: props) => {
   const { isDark } = useColorScheme();
-  console.log('IS IT DARK???', isDark);
   return (
     <>
       <Suspense fallback={<Spin size="large" className="" />}>{isDark ? <DarkTheme /> : <LightTheme />}</Suspense>

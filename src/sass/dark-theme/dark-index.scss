@@ -1,49 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
-@import '../../_variables.css';
 @import 'general.config';
 
-body {
-  font-family: 'Poppins', sans-serif;
-  position: relative;
-  overflow: hidden;
-  line-height: 1.5715;
-  .ant-layout {
-    height: calc(100vh - 80px);
-    overflow: auto;
+.ant-layout {
     background: $super-light-blue;
-    padding: 0.3rem;
-
-    .spinner {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-    }
-  }
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px 5px 0px 85px;
   }
 
-  .layout {
-    background: $super-light-blue;
-
-    .content-area {
-      & > * {
-        margin-left: 220px;
-      }
-    }
-  }
-}
-
-svg > path:first-child {
-  display: none;
-}
-
-button:focus {
-  outline: none !important;
-}
-
-@media screen and (max-width: 1030px) {
-  .ant-layout.ant-layout-has-sider {
-    margin: 0px !important;
-  }
-}

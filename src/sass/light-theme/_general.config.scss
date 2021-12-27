@@ -2,3 +2,11 @@
 @import 'config.large';
 @import 'config.medium';
 @import 'config.small';
+
+body {
+    background: $super-light-blue;
+  .layout {
+    // height: calc(100vh - 80px);
+    // background: $super-light-blue;
+  }
+}
