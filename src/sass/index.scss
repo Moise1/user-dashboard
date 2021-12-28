@@ -1,37 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 @import '../_variables.css';
-@import './light-theme/general.config';
+// @import '../sass/light-theme/general.config';
 
 body {
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
-  background: $super-light-blue;
   line-height: 1.5715;
-
-  svg > path:first-child {
-    display: none;
-  }
-
-  button:focus {
-    outline: none !important;
-  }
-
-  @media screen and (max-width: 1030px) {
-    .ant-layout.ant-layout-has-sider {
-      margin: 0px !important;
+  .ant-layout {
+    height: calc(100vh - 80px);
+    overflow: auto;
+    padding: 0.3rem;
+    // background: $super-light-blue;
+    .spinner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
     }
-  };
-
-}
-
-.dark{
-  .app-container{
-    .routes-content{
-      .top-bar{
-        background: black !important;
-      };
+  }
+  .ant-layout.ant-layout-has-sider {
+    margin: 0px 5px 0px 85px;
+  }
+  .content-area {
+    & > * {
+      margin-left: 220px;
     }
   }
 }
 
+
+svg > path:first-child {
+  display: none;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+@media screen and (max-width: 1030px) {
+  .ant-layout.ant-layout-has-sider {
+    margin: 0px !important;
+  }
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import './sass/index.scss';
-import {App} from './App';
+import { App } from './App';
 import { IntlProvider } from 'react-intl';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
+// import { ThemeSelector } from './components/helpers/ThemeSelector';
+// import './sass/index.scss';
 
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,
