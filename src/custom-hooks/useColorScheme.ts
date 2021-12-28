@@ -8,13 +8,13 @@ export const useColorScheme = (): {
   isDark: boolean;
   setIsDark: (value: boolean) => void;
 } => {
+  const [isDark, setIsDark] = useColorSchemeState<boolean>();
   const systemPrefersDark = useMediaQuery(
     {
       query: '(prefers-color-scheme: dark)'
     },
     undefined
   );
-  const [isDark, setIsDark] = useColorSchemeState<boolean>();
 
   const value = useMemo(() => (isDark === undefined ? !!systemPrefersDark : isDark), [isDark, systemPrefersDark]);
   useEffect(() => {

@@ -35,7 +35,8 @@
         width: 52px !important;
         height: 13px;
         .ant-steps-item-container {
-          .ant-steps-item-icon, .ant-steps-item-content {
+          .ant-steps-item-icon,
+          .ant-steps-item-content {
             display: none;
           }
         }

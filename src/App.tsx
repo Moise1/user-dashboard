@@ -16,7 +16,7 @@ import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import {SelectSupplierProvider} from './contexts/SelectSupplierProvider';
 import './Common.css';
-// import './sass/index.scss';
+import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);

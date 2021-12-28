@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
@@ -18,7 +18,7 @@ import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
-import { useColorScheme } from '../../custom-hooks/useColorScheme';
+// import { useColorScheme } from '../../custom-hooks/useColorScheme';
 
 const { SubMenu } = Menu;
 
@@ -35,28 +35,26 @@ interface Props {
   collapseSideBar: () => void;
 }
 
-interface ToggleModeProps{
-  className?: string;
-}
-const DarkModeToggle: React.FC<ToggleModeProps> = ({className}: ToggleModeProps) => {
-
-  const { isDark, setIsDark } = useColorScheme();
-  return (
-    <Switch
-      className={className}
-      checked={isDark}
-      onChange={() => setIsDark(!isDark)}
-      checkedChildren="🔆"
-      unCheckedChildren="🌙"
-      aria-label="Dark mode toggle"
-    />
-  );
-};
-
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const history = useHistory();
-  const { isDark } = useColorScheme();
+  const [isDark, setIsDark] = useState(false);
+
+  const handleToggle = () => {
+    if (isDark) {
+      const element = document.getElementById('darkThemeLink');
+      element?.parentElement?.removeChild(element);
+      
+    } else {
+      const link = document.createElement('link');
+      link.type = 'text/css';
+      link.id = 'darkThemeLink';
+      link.rel = 'stylesheet';
+      link.href = './_variables.dark.css';
+      document.head.appendChild(link);
+    }
+    setIsDark(!isDark);
+  };
 
   const handleMouseEnter = () => {
     if (!staticValue) {
@@ -96,7 +94,14 @@ export const Sidebar = (props: Props) => {
       listName: (
         <>
           <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
-          <DarkModeToggle className="toggle-mode"/>
+          <Switch
+            className="toggle-mode"
+            checked={isDark}
+            onChange={handleToggle}
+            checkedChildren="🔆"
+            unCheckedChildren="🌙"
+            aria-label="Dark mode toggle"
+          />
         </>
       )
     }

@@ -8,7 +8,6 @@
   width: fill-available;
   padding: 0 6rem;
 
-  
   .source-description {
     margin-top: 1rem;
   }
@@ -38,9 +37,9 @@
     }
 
     .right-section {
-      margin-top: 6.5rem; 
+      margin-top: 6.5rem;
       height: 28vh;
-      & > *{
+      & > * {
         margin-bottom: 1rem;
       }
       .config-btns {
