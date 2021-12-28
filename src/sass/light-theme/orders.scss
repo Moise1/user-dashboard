@@ -1,5 +1,4 @@
-@import 'general.config';
-@import './small-components/medium-button.scss';
+@import './general.config';
 
 // NAVBAR
 .orders-container {
@@ -12,7 +11,6 @@
     margin: 1.5rem 0;
   }
 }
-
 
 // TABLE STYLE
 
@@ -33,9 +31,9 @@
   max-height: 53vh;
   overflow-x: scroll;
   .order-table-head {
-    color: $dark-violet;
+    color: $primary;
     white-space: nowrap;
-    font-weight:$bold;
+    font-weight: $bold;
     position: sticky;
     top: 0;
     background-color: $white;
@@ -47,20 +45,18 @@
 // MODAL BUTTONS
 
 .process-order-btn-style {
-
   background-color: $light-blue;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
   color: $white;
   font-size: $font-medium;
-  font-weight:$bold;
+  font-weight: $bold;
   display: flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
 }
-
 
 .stop-order-btn-style {
   background-color: $dark-orange;
@@ -69,7 +65,7 @@
   border-radius: 10px;
   color: $white;
   font-size: $font-medium;
-  font-weight:$bold;
+  font-weight: $bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +88,7 @@
   border-radius: 10px;
   color: $white;
   font-size: $font-medium;
-  font-weight:$bold;
+  font-weight: $bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,13 +101,13 @@
 }
 
 .delete-order-modal-btn-style {
-  background-color: $dark-pink;
+  background-color: $exit;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
   color: $white;
   font-size: $font-medium;
-  font-weight:$bold;
+  font-weight: $bold;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,9 +183,9 @@
 }
 
 .progress-order {
-  font-weight:$bold;
+  font-weight: $bold;
   font-size: $font-large;
-  color: $dark-violet;
+  color: $primary;
 }
 
 .save-btnn-modal {
@@ -221,10 +217,10 @@
 }
 
 .middle-part-autoordering p {
-  font-weight:$bold;
+  font-weight: $bold;
   font-size: $font-medium;
   text-align: center;
-  color: $dark-violet;
+  color: $primary;
   max-width: 572px;
   margin-bottom: 30px;
 }

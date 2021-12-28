@@ -1,71 +1,66 @@
 @import '../general.config';
 
 .action-btn {
-    height: 43px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    color: $white;
-    font-size: $font-medium;
-    font-weight:$bold;
+  height: 43px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: $white;
+  font-size: $font-medium;
+  font-weight: $bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+
+  .btn-text {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-
-    .btn-text {
-      display: flex;
-      & span {
-        margin-left: 0.3rem;
-      }
+    & span {
+      margin-left: 0.3rem;
     }
   }
+}
 
-  .dispatch-btn {
-    background-color: $green;
-    &:focus {
-      box-shadow: none;
-    }
-    &:hover {
-      background-color: $dark-green;
-      color: $white;
-    }
+.dispatch-btn {
+  background-color: $green;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    background-color: $dark-green;
+    color: $white;
+  }
+}
+
+.delete-btn {
+  background-color: $red;
+  &:focus {
+    box-shadow: none;
   }
 
-
-  .delete-btn {
-    background-color: $red;
-    &:focus {
-      box-shadow: none;
-    }
-
-    &:hover {
-      background-color: $dark-red;
-      color: $white;
-    }
+  &:hover {
+    background-color: $dark-red;
+    color: $white;
   }
+}
 
-  .process-btn {
-    background-color: $light-blue;
-    &:focus {
-      box-shadow: none;
-    }
-    &:hover {
-      background-color: $dark-blue;
-      color: $white;
-    }
+.process-btn {
+  background-color: $light-blue;
+  &:focus {
+    box-shadow: none;
   }
-
-  .stop-btn {
-    background-color: $orange;
-    &:focus {
-      box-shadow: none;
-    }
-    &:hover {
-      background-color: $dark-orange;
-      color: $white;
-    }
+  &:hover {
+    background-color: $dark-blue;
+    color: $white;
   }
+}
 
-
-
-
+.stop-btn {
+  background-color: $orange;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    background-color: $dark-orange;
+    color: $white;
+  }
+}
