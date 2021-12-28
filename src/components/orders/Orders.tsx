@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import '../../sass/light-theme/orders.scss';
+import '../../sass/light-theme/medium-button.scss';
 
 interface props {
   staticValue: boolean;
