@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Select, Input } from 'antd';
-import { ReactNode } from 'react';
+import { Select, Input, Form } from 'antd';
 import '../../sass/light-theme/selector.scss';
 import profile from '../../assets/new-account.svg';
 
 interface Props {
-  children: ReactNode;
+  children: { id: number; value: string }[];
   defaultValue: string;
   addAccount?: boolean;
 }
@@ -15,47 +14,35 @@ const { Option } = Select;
 export const Selector: React.FC<Props> = (props: Props) => {
   const { children, defaultValue, addAccount } = props;
   const [showInput, setShowInput] = useState<boolean>(false);
-  const [newAccount, setNewAccount] = useState<string>('');
-  // const [showSearch, setShowSearch] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
+
   const options = [];
-  if (Array.isArray(children)) {
-    for (let i = 0; i < children.length; i++) {
-      options.push(
-        <Option key={children[i].id} value={children[i].value}>
-          {children[i].value}
-        </Option>
-      );
-    }
+  for (let i = 0; i < children.length; i++) {
+    options.push(
+      <Option key={children[i].id} value={children[i].value}>
+        {children[i].value}
+      </Option>
+    );
   }
- 
-  // const handleFocus = () => setShowSearch(!showSearch);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLInputElement>): void => {
-    e.stopPropagation();
-    setNewAccount(e.target.value);
+
+  const handleOptionClick = (): void => {
+    setShowInput(!showInput);
   };
 
-  const handleOptionClick = (e: React.MouseEvent<HTMLSpanElement | HTMLParagraphElement>): void => {
-    e.stopPropagation();
-    setShowInput(!showInput);
+  const handleFormSubmit = (values: { newAccount: string }): void => {
+    const { newAccount } = values;
+    children.push({ id: children.length + 1, value: newAccount });
+    console.log('form submitted...');
   };
 
   const newAccBtn = (
     <div>
       {showInput ? (
-        <Input
-          className="new-acc-input"
-          placeholder="Create account..."
-          name="new-account"
-          value={newAccount}
-          onClick={handleChange}
-          onChange={handleChange}
-        >
-          {/* <span onClick={handleOptionClick} role="">
-            {' '}
-            <img src={profile} alt="New acc" />
-          </span> */}
-        </Input>
+        <Form onFinish={handleFormSubmit}>
+          <Form.Item name="newAccount">
+            <Input className="new-acc-input" placeholder="Create account..." name="newAccount" />
+          </Form.Item>
+        </Form>
       ) : (
         <p className="new-acc-btn" onClick={handleOptionClick}>
           <span>Add acount</span>
@@ -74,8 +61,13 @@ export const Selector: React.FC<Props> = (props: Props) => {
       showSearch
       placeholder="Select..."
       defaultValue={defaultValue}
+      dropdownRender={(menu) => (
+        <>
+          {showAddAccount && newAccBtn}
+          {menu}
+        </>
+      )}
     >
-      {showAddAccount && newAccBtn}
       {options}
     </Select>
   );
