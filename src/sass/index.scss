@@ -47,7 +47,8 @@ svg > path:first-child {
 
 button:focus,
 button,
-#dropdown-basic {
+#dropdown-basic,
+.ant-btn {
   outline: none;
   border: 0;
 }
