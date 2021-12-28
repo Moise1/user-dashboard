@@ -92,7 +92,7 @@
 
 
 
-  "OrderDetails.OrderStateProcess":"OrderStateProcess",
+  "OrderDetails.OrderState":"Order State",
   "OrderDetails.AOEnabled":"AO Enabled",
   "OrderDetails.HISTORY":"Order history",
   "OrderDetails.viewFullLog":"View full log",

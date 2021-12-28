@@ -65,6 +65,84 @@
     transform: rotate(180deg);
   }
 }
+.disabled-line {
+  background-color: #7e7373;
+  margin: 7px 0;
+  width: 1.8px;
+  height: 70px;
+}
+
+.h-blue-line {
+  margin: 7px 0;
+  width: 1.8px;
+  height: 70px;
+  background-color: rgba(22, 73, 151, 0.98);
+}
+
+.start-order-active-svg svg circle,
+.start-order-active-svg g #Path_311,
+.start-order-active-svg g #Path_310 {
+  stroke: $primary;
+}
+
+.order-checkout-icon rect,
+.order-checkout-icon line {
+  stroke: $primary;
+}
+.last-step-order-icon #Path_315 {
+  fill: $primary;
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotating 2s linear infinite;
+}
+
+.img-order-container {
+  padding: $spacer;
+}
+
+.img-order {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+}
+
+.order-step-heading h4 {
+  font-weight: 600;
+  font-size: $font-medium;
+  color: rgba(0, 0, 0, 0.98);
+}
+
+.history-text {
+  font-weight: 600;
+  font-size: $font-large;
+  color: rgba(0, 0, 0, 0.98);
+  opacity: 0.33;
+}
+
+.order-step-heading p {
+  font-weight: 400;
+  font-size: $font-small;
+  color: rgba(0, 0, 0, 0.98);
+  opacity: 0.48;
+}
+
+.order-step-heading span {
+  font-weight: 400;
+  font-size: $font-medium;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.98);
+}
 
 .go-back-details {
   font-weight: bold;

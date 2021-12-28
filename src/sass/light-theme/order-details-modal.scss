@@ -91,47 +91,6 @@
   }
 }
 
-.ao-enabled-button {
-  background-color: var(--color-secondry);
-  display: flex;
-  align-items: center;
-  height: 32px;
-  border-radius: 10px;
-  color: var(--bgHighlight);
-  font-weight: bold;
-  font-size: var(--font-extra-small);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.h-blue-line {
-  margin: 7px 0;
-  width: 1.8px;
-  height: 70px;
-  background-color: rgba(22, 73, 151, 0.98);
-}
-
-.order-step-heading h4 {
-  font-weight: 600;
-  font-size: $font-medium;
-  color: rgba(0, 0, 0, 0.98);
-}
-
-.order-step-heading p {
-  font-weight: 400;
-  font-size: $font-small;
-  color: rgba(0, 0, 0, 0.98);
-  opacity: 0.48;
-}
-
-.order-step-heading span {
-  font-weight: 400;
-  font-size: $font-medium;
-  line-height: 20px;
-  color: rgba(0, 0, 0, 0.98);
-}
-
 .go-back-orders {
   font-weight: bold;
   font-size: $font-medium;

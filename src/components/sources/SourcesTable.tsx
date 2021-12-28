@@ -10,6 +10,7 @@ import { t } from '../../global/transShim';
 import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/sources-table.scss';
+import '../../sass/light-theme/popover.scss';
 
 type ContextType = {
   supplierValue: string;
@@ -134,10 +135,10 @@ const SourcesTable = () => {
                     </button>
                   </Popover>
                 </td>
-                <td className="w-12per return-policy-text white-space-pre-wrap source-td-none">{returnPolicy}</td>
-                <td className="w-12per item-postcode-text white-space-pre-wrap source-td-none">{itemPostcode}</td>
-                <td className="w-12per item-city-text white-space-pre-wrap source-td-none">{itemCity}</td>
-                <td className="w-12per item-country-text white-space-pre-wrap source-td-none">{itemCountry}</td>
+                <td className="return-policy-text white-space-pre-wrap source-td-none">{returnPolicy}</td>
+                <td className="item-postcode-text white-space-pre-wrap source-td-none">{itemPostcode}</td>
+                <td className="item-city-text white-space-pre-wrap source-td-none">{itemCity}</td>
+                <td className="item-country-text white-space-pre-wrap source-td-none">{itemCountry}</td>
               </tr>
             </tbody>
           );
