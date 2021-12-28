@@ -1,0 +1,17 @@
+@import 'general.config';
+
+.account-details{
+    border: 2px solid red;
+    margin-top: 2rem;
+    width:60%;
+    .form{
+        margin: 0 auto;
+        .disable-account{
+            display: flex;
+        }
+    }
+    .platfrom-creds{
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

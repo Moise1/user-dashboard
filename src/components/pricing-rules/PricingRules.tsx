@@ -88,15 +88,9 @@ export const PricingRules = () => {
         </p>
         <Form className="form" layout="inline">
           <Selector defaultValue="Select a source">{dummyPricingRules}</Selector>
-
-          <Input
-            className="input"
-            type="text"
-            onChange={() => console.log('Input...')}
-            placeholder="Set a price from"
-          />
-          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Set a price to" />
-          <Input className="input" type="text" onChange={() => console.log('Input...')} placeholder="Mark up" />
+          <Input className="input" type="text" placeholder="Set a price from" />
+          <Input className="input" type="text" placeholder="Set a price to" />
+          <Input className="input" type="text" placeholder="Mark up" />
           <Button className="rule-btn">Add rule</Button>
         </Form>
       </StatusBar>

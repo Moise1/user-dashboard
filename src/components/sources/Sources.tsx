@@ -20,7 +20,7 @@ type ContextType = {
 const Sources = () => {
   const [showOrdering, setShowOrdering] = useState<boolean>(false);
   const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
-  const [whatSelect, setWhatSelect] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
+  const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const history = useHistory();
   const { TabPane } = Tabs;
 
@@ -31,11 +31,13 @@ const Sources = () => {
   });
 
   const initialStateSourceSettings = () => {
-    setWhatSelect('Select Supplier');
+    setSelectedAccount('Select Supplier');
     setSupplierValue('');
     setShowOrdering(false);
     history.goBack();
   };
+
+  const handleOptionChange = (value: string) => setSupplierValue(value);
 
   return (
     <Layout className="source-container">
@@ -51,7 +53,8 @@ const Sources = () => {
           Source:{' '}
           <span>
             {' '}
-            {whatSelect && whatSelect !== 'Select Supplier' ? whatSelect : 'select a supplier from the list'}{' '}
+            {/* {whatSelect && whatSelect !== 'Select Supplier' ? whatSelect : 'select a supplier from the list'}{' '} */}
+            {supplierValue}
           </span>
         </h1>
       </div>
@@ -64,14 +67,16 @@ const Sources = () => {
           <TabPane tab="Auto Ordering" key="2" className="tab-pane">
             <AutoOrdering
               showOrdering={showOrdering}
-              whatSelect={whatSelect}
-              setWhatSelect={setWhatSelect}
+              // selectedAccount={selectedAccount}
+              // setSelectedAccount={setSelectedAccount}
               setShowOrdering={setShowOrdering}
             />
           </TabPane>
         </Tabs>
         <div className="right-section">
-          <Selector defaultValue="Select Supplier">{dummyData}</Selector>
+          <Selector defaultValue="Select Supplier" onChange={handleOptionChange}>
+            {dummyData}
+          </Selector>
           <ConfigButtons className="config-btns" />
         </div>
       </div>

@@ -7,12 +7,13 @@ interface Props {
   children: { id: number; value: string }[];
   defaultValue: string;
   addAccount?: boolean;
+  onChange?: (value: string) => void;
 }
 
 const { Option } = Select;
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, addAccount } = props;
+  const { children, defaultValue, addAccount, onChange } = props;
   const [showInput, setShowInput] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
 
@@ -58,6 +59,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
     <Select
       className="selector"
       allowClear={false}
+      onChange={onChange}
       showSearch
       placeholder="Select..."
       defaultValue={defaultValue}
