@@ -117,7 +117,7 @@ export const OrdersTable = (tableProps: Props) => {
 
   return (
     <div className="orders-table">
-      <table className="table order-table mb-0" {...getTableProps()}>
+      <table className="table mb-0" {...getTableProps()}>
         <thead className="order-table-head">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={`${headerGroup.headers.map((h) => h.id)}`}>
@@ -149,7 +149,7 @@ export const OrdersTable = (tableProps: Props) => {
             return (
               <tr
                 {...row.getRowProps()}
-                className="cursor-pointer"
+                className=""
                 data-id={`${rows.map((r) => r.id)}`}
                 onClick={showModal}
                 key={`${rows.map((r) => r.id)}`}

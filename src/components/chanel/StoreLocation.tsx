@@ -89,7 +89,7 @@ function StoreLocation(props: StoreLocationProps) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2 pt-1">
+            <div className="col-xl-8   bg-white  mt-2 pt-1">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
                 <div className="text-center col-10 mt-2 mx-auto">

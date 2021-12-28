@@ -36,7 +36,6 @@ function ChooseList(props: props) {
     history.push('/home');
   };
 
- 
   const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     prevStep();
@@ -46,7 +45,7 @@ function ChooseList(props: props) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 pb-xl-5">
+            <div className="col-lg-8   bg-white  pb-xl-5">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">
                 <div className="text-center mx-auto col-md-6 px-0 px-md-2">
@@ -63,8 +62,9 @@ function ChooseList(props: props) {
                       onChange={() => handleChangeList('catalog')}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0
-                      ${list == 'catalog' ? 'border border-primary bg-sm-purple' : ''}
+                      className={`panel panel-default card-input h-100 my-1 py-1 py-md-0 ${
+                        list == 'catalog' ? 'border bg-sm-purple' : ''
+                      }
                       `}
                     >
                       <div className="d-md-flex d-block justify-content-around align-items-center text-center text-md-left">
@@ -76,13 +76,13 @@ function ChooseList(props: props) {
                           />
                         </div>
                         <div className="px-md-2">
-                          <h5 className={`font-weight-bold d-blue ${list == 'catalog' ? 'text-sm-white' : ''}`}>
+                          <h5 className={`font-weight-bold  ${list == 'catalog' ? 'text-sm-white' : ''}`}>
                             {t('cata')}
                           </h5>
                           <div className="lh-1 d-md-block d-none">{t('catapara')}</div>
                         </div>
                         <div className="text-right d-md-block d-none">
-                          <i className="fas d-blue fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
+                          <i className="fas  fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                         </div>
                       </div>
                     </div>
@@ -98,8 +98,8 @@ function ChooseList(props: props) {
                       onChange={() => handleChangeList('manual')}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 
-                      ${list == 'manual' ? 'border border-primary bg-sm-purple' : ''}
+                      className={`panel panel-default card-input   h-100 my-1 py-1 
+                      ${list == 'manual' ? 'border bg-sm-purple' : ''}
                       `}
                     >
                       <div className="d-md-flex d-block justify-content-around align-items-center text-center text-md-left">
@@ -111,13 +111,13 @@ function ChooseList(props: props) {
                           />
                         </div>
                         <div className="px-md-2">
-                          <h5 className={`font-weight-bold d-blue ${list == 'manual' ? 'text-sm-white' : ''}`}>
+                          <h5 className={`font-weight-bold  ${list == 'manual' ? 'text-sm-white' : ''}`}>
                             {t('manual')}
                           </h5>
                           <div className="lh-1 d-md-block d-none">{t('manualpara')}</div>
                         </div>
                         <div className="text-right d-md-block d-none">
-                          <i className="fas d-blue fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
+                          <i className="fas  fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                         </div>
                       </div>
                     </div>
@@ -133,8 +133,8 @@ function ChooseList(props: props) {
                       onChange={() => handleChangeList('bulk')}
                     />
                     <div
-                      className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1 py-md-0 
-                      ${list == 'bulk' ? 'border border-primary bg-sm-purple' : ''}
+                      className={`panel panel-default card-input   h-100 my-1 py-1 py-md-0 
+                      ${list == 'bulk' ? 'border bg-sm-purple' : ''}
                       `}
                     >
                       <div className="d-md-flex d-block justify-content-around align-items-center text-center text-md-left">
@@ -146,13 +146,11 @@ function ChooseList(props: props) {
                           />
                         </div>
                         <div className="px-md-2">
-                          <h5 className={`font-weight-bold d-blue ${list == 'bulk' ? 'text-sm-white' : ''}`}>
-                            {t('bulk')}
-                          </h5>
+                          <h5 className={`font-weight-bold  ${list == 'bulk' ? 'text-sm-white' : ''}`}>{t('bulk')}</h5>
                           <div className="lh-1 d-md-block d-none">{t('bulkpara')}</div>
                         </div>
                         <div className="text-right d-md-block d-none">
-                          <i className="fas d-blue fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
+                          <i className="fas  fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                         </div>
                       </div>
                     </div>
@@ -170,8 +168,8 @@ function ChooseList(props: props) {
                           onChange={() => handleChangeList('we')}
                         />
                         <div
-                          className={`panel panel-default card-input shade-card br-8 h-100 my-1 py-1
-                      ${list == 'we' ? 'border border-primary bg-sm-purple' : ''}
+                          className={`panel panel-default card-input  h-100 my-1 py-1
+                      ${list == 'we' ? 'border bg-sm-purple' : ''}
                       `}
                         >
                           <div className="d-md-flex d-block justify-content-around align-items-center text-center text-md-left">
@@ -183,7 +181,7 @@ function ChooseList(props: props) {
                               />
                             </div>
                             <div className="px-md-2">
-                              <h5 className={`font-weight-bold d-blue ${list == 'we' ? 'text-sm-white' : ''}`}>
+                              <h5 className={`font-weight-bold  ${list == 'we' ? 'text-sm-white' : ''}`}>
                                 {t('welist')}
                               </h5>
                               <div className="lh-1 d-md-block d-none">{t('welistpara')}</div>
@@ -192,7 +190,7 @@ function ChooseList(props: props) {
                               </button>
                             </div>
                             <div className="text-right d-md-block d-none">
-                              <i className="fas d-blue fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
+                              <i className="fas  fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
                             </div>
                           </div>
                         </div>
@@ -214,7 +212,7 @@ function ChooseList(props: props) {
                     <div
                       className={`w-100 text-center my-4 py-5 font-weight-bold ${values.list == '' ? 'd-none' : ''} `}
                     >
-                      <h5 className="font-weight-bold d-blue mb-0">
+                      <h5 className="font-weight-bold  mb-0">
                         {list == 'catalog'
                           ? ' Catalog Listing'
                           : list == 'manual'
@@ -232,7 +230,7 @@ function ChooseList(props: props) {
                     onClick={handleRoute}
                     type="submit"
                     disabled={values.list == ''}
-                    className={`border-0 bg-trans mx-auto ${values.list == '' ? 'btn-disbaled text-grey' : 'd-blue'} `}
+                    className={`border-0 bg-trans mx-auto ${values.list == '' ? 'btn-disbaled text-grey' : ''} `}
                   >
                     <div className="d-flex align-items-center">
                       <span className="font-weight-bold">{t('fininsh')} </span>

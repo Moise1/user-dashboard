@@ -81,10 +81,10 @@ function TerminatedDataContent() {
 
   return (
     <React.Fragment>
-      <div className="bg-white br-10">
+      <div className="bg-white">
         <div className="row mx-auto  align-items-center">
           {selectedRowKeys.length ? (
-            <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
+            <div className="col-lg-6 col-md-8 mr-3 bg-lighter p-2">
               <div className="row">
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">

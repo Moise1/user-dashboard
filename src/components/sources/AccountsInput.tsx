@@ -21,7 +21,7 @@ const AccountsInput = (myProps: props) => {
         <div className="row">
           <div className={`${DisableAccount ? 'overlay-dsiable-account' : ''}`}></div>
           <div className="col-12">
-            <div className="width-207">
+            <div>
               <label className="account-label-style" htmlFor="">
                 {alias}
               </label>
@@ -41,7 +41,7 @@ const AccountsInput = (myProps: props) => {
                   placeholder={whichAccountSelect}
                 />
               </div>
-              <div className="width-207 ml-3 ml-sm-5">
+              <div className="ml-3 ml-sm-5">
                 <label className="account-label-style" htmlFor="">
                   {whatSelect} {t('SourceConfigInputs.password')}
                 </label>
@@ -56,7 +56,7 @@ const AccountsInput = (myProps: props) => {
           </div>
 
           <div className="col-12">
-            <div className="width-466">
+            <div>
               <label className="account-label-style" htmlFor="">
                 {t('SourceConfigInputs.OTPCode2FA')}
                 <span className="ml-2 obtain-code-otp"> {t('SourceConfigInputs.ObtainYourOTPCode')} </span>
@@ -66,7 +66,7 @@ const AccountsInput = (myProps: props) => {
           </div>
 
           <div className="col-12">
-            <div className="width-207">
+            <div>
               <label className="account-label-style" htmlFor="">
                 {t('SourceConfigInputs.PhoneNumber')}
               </label>

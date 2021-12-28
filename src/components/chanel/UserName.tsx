@@ -34,7 +34,7 @@ function UserName(props: props) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-lg-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
+            <div className="col-lg-8   bg-white  mt-3">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3 h-80vh">
                 <div className="text-center mx-auto col-md-6 mt-2 px-0 px-md-2">
@@ -53,7 +53,7 @@ function UserName(props: props) {
                   <div>
                     <input
                       type="email"
-                      className="form-control bg-input-light mt-2"
+                      className="form-control mt-2"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       value={user}

@@ -45,7 +45,7 @@ const OrderStateProgressModal = (props: Props) => {
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">
               <div className="flex-sm-row order-state-header">
-                <h1 className="modal-title">{t('OrderDetails.OrderDetails')}</h1>
+                <h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>
                 <button className="autoordering-state">
                   <AoIconHead />
                   <span>{t('OrderDetails.AOEnabled')}</span>
@@ -66,7 +66,9 @@ const OrderStateProgressModal = (props: Props) => {
               <div className="col-12 col-lg-5">
                 <div className="d-flex justify-content-between pb-3">
                   <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
-                  <span className="view-full-vlog-text">{t('OrderDetails.viewFullLog')}</span>{' '}
+                  <a href="/" className="view-full-log">
+                    {t('OrderDetails.viewFullLog')}
+                  </a>{' '}
                 </div>
 
                 <div className="time-line-here">
@@ -156,8 +158,8 @@ const OrderStateProgressModal = (props: Props) => {
               </div>
 
               <div className="col-12 col-lg-7">
-                <div className="p-4 bg-InputLight amazon-order-ss ml-auto br-10">
-                  <img className="w-100 h-100 ml-auto" src={amazonOrder} alt="amazonOrder" />
+                <div className="img-order-container">
+                  <img className="img-order" src={amazonOrder} alt="amazonOrder" />
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import {ProgressBar} from './ProgressBar';
+import { ProgressBar } from './ProgressBar';
 import { t } from '../../global/transShim';
 import Previousstep from '../small-components/Previousstep';
 
@@ -11,7 +11,7 @@ interface props {
 
   handleChangeApi: (newApi: string) => void;
 }
-export const  Account = (props: props) => {
+export const Account = (props: props) => {
   const { nextStep, step, prevStep, platform } = props;
   //_handleChangeApi = handleChangeApi
   const Continue = (e: React.MouseEvent) => {
@@ -27,7 +27,7 @@ export const  Account = (props: props) => {
     <Layout>
       <form>
         <div className="row mx-auto">
-          <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-2">
+          <div className="col-xl-8  bg-white  mt-2">
             <Previousstep Previous={Previous} />
             <div className="row mx-auto px-lg-5 px-md-3">
               <div className="text-center mx-auto col-10 mt-2">
@@ -71,7 +71,7 @@ export const  Account = (props: props) => {
               </div>
               <div className="text-left col-12 col-md-10 mx-auto">
                 <a>
-                  <div className="d-flex align-items-center d-blue">
+                  <div className="d-flex align-items-center ">
                     <span className="font-weight-bold">
                       {t('howtobcm')}
                       {platform == 'ebay' ? ' eBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}
@@ -82,7 +82,7 @@ export const  Account = (props: props) => {
               </div>
               <div className="border-bottom mt-2 mb-lg-5  col-11 col-md-9 mx-auto"></div>
               <div className="mx-md-auto ml-auto mt-5 pt-lg-5 mb-2 text-right text-md-center w-100 next-fix">
-                <button onClick={Continue} type="submit" className="border-0 d-blue bg-trans mx-auto">
+                <button onClick={Continue} type="submit" className="border-0  bg-trans mx-auto">
                   <div className="d-flex align-items-center">
                     <span className="font-weight-bold">
                       {platform == 'ebay'

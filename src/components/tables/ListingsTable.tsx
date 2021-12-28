@@ -74,7 +74,7 @@ export const ListingsTable = (tableProps: props) => {
           {modifiedData.map((obj) => {
             const isSelected = orderSelectedArray?.includes(obj.id);
             return (
-              <tr key={obj.id} className="cursor-pointer" data-id={obj.id} onClick={handleOpenModal}>
+              <tr key={obj.id} className="" data-id={obj.id} onClick={handleOpenModal}>
                 <td>
                   <label className="select-all-checkbox">
                     <input type="checkbox" checked={isSelected} />

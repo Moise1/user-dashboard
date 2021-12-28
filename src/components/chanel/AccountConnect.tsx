@@ -39,7 +39,7 @@ function AccountConnect(props: props) {
       <div>
         <form>
           <div className="row mx-auto">
-            <div className="col-xl-8 shade-Channel mb-no-shade bg-white br-8 mt-3">
+            <div className="col-xl-8   bg-white  mt-3">
               <Previousstep Previous={Previous} />
               <div className="row mx-auto px-lg-5 px-md-3">
                 <div className="text-center mx-auto col-md-12 px-0 px-md-2">
@@ -65,7 +65,7 @@ function AccountConnect(props: props) {
                           onChange={() => handleChangeApi('easy')}
                         />
                         <div
-                          className={`panel panel-default  card-input shade-card br-8 my-1
+                          className={`panel panel-default  card-input   my-1
                     ${api == 'easy' ? '' : ''}
                     
                     `}
@@ -99,14 +99,14 @@ function AccountConnect(props: props) {
                     />
 
                     <div
-                      className={`panel panel-default  card-input shade-card br-8 my-1
+                      className={`panel panel-default  card-input   my-1
                     ${api == 'advance' ? '' : ''}
                     
                     `}
                     >
                       <div className="d-flex justify-content-between">
                         <div className="font-weight-bold text-dark">{t('napi')}</div>
-                        <div className="d-blue">
+                        <div className="">
                           <i>{t('advnc')}</i>
                         </div>
                       </div>
@@ -180,25 +180,6 @@ function AccountConnect(props: props) {
                     onClick={Continue}
                     disabled={values.api == '' || (values.api == 'advance' && values.extension == '')}
                   />
-                  {/* <button
-                    onClick={Continue}
-                    type="submit"
-                    disabled={
-                      values.api == "" ||
-                      (values.api == "advance" && values.extension == "")
-                    }
-                    className={`border-0 bg-trans mx-auto ${
-                      values.api == "" ||
-                      (values.api == "advance" && values.extension == "")
-                        ? "btn-disbaled text-grey"
-                        : "d-blue"
-                    } `}
-                  >
-                    <div className="d-flex align-items-center">
-                      <span className="font-weight-bold">Next</span>
-                      <i className="fas fa-long-arrow-alt-right ml-2 fa-lg pt-1"></i>
-                    </div>
-                  </button> */}
                   <div className="d-md-block d-none w-100 text-center">
                     <div
                       className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${

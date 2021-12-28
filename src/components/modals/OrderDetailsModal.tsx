@@ -181,7 +181,7 @@ const OrderDetailsModal = (props: Props) => {
                       }}
                       className="go-back-orders"
                     >
-                      <span> {t('OrderDetails.OrderStateProcess')}</span>
+                      <span> {t('OrderDetails.OrderState')}</span>
                     </div>
                   </div>
                 </div>
