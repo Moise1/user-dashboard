@@ -6,7 +6,7 @@ import {
   DispatchedOrderIcon,
   HandStopOrderIcon,
   ProcessOrderIcon,
-  ThreeDotsColumnIcon
+  ThreeDotsColumnIcon 
 } from '../common/Icons';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
