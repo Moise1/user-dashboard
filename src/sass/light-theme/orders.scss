@@ -47,7 +47,7 @@
 // MODAL BUTTONS
 
 .process-order-btn-style {
-  background-color: $light-blue2;
+  background-color: $light-blue;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
@@ -231,7 +231,7 @@
   width: 316px;
   height: 59px;
   border-radius: 10px;
-  background: $light-blue2;
+  background: $light-blue;
   color: $white;
   font-size: $font-medium;
 }
@@ -303,4 +303,178 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+/* PURPLE FILLED */
+
+.container-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Create a custom checkbox */
+.container-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #5e69db;
+  border-radius: 2px;
+}
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+  background-color: #5e69db;
+}
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+  background-color: #5e69db;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.container-checkbox .checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+  left: 4px;
+  top: 4px;
+  width: 5px;
+  height: 8px;
+  border: solid #45ff00;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1400px) {
+  .delete-btn-parent {
+    width: 55%;
+  }
+  .process-btn-parent {
+    width: 45%;
+  }
+  .delete-order-modal-btn-style {
+    height: unset;
+    padding: 3px 3px;
+  }
+  .process-order-btn-style {
+    height: unset;
+    padding: 3px 3px;
+  }
+  .stop-order-btn-style {
+    height: unset;
+    padding: 3px 3px;
+  }
+  .mark-dispatch-modal-btn-style {
+    height: unset;
+    padding: 3px 3px;
+  }
+
+  .mark-dispatch-modal-btn-style svg,
+  .stop-order-btn-style svg,
+  .process-order-btn-style svg,
+  .delete-order-modal-btn-style svg {
+    height: 14px;
+    width: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .order-action-bar {
+    row-gap: 2rem;
+    display: grid !important;
+    .action-btn {
+      width: 100% !important;
+    }
+  }
+
+  .time-line-here svg {
+    width: 30px;
+    height: 30px;
+  }
+  .time-line-here .rotating {
+    width: 15px;
+    height: 15px;
+  }
+  .middle-part-autoordering {
+    height: 250px;
+  }
+  .middle-part-autoordering button {
+    width: 220px;
+    height: 40px;
+  }
+  .orders-table-main {
+    padding: 6px;
+    margin: 8px 0;
+    border-radius: 10px;
+  }
+
+  .stop-5-order-btn {
+    width: 100%;
+    height: unset;
+    padding: 8px;
+  }
+
+  .process-5-order-btn {
+    width: 100%;
+    height: unset;
+    padding: 8px;
+  }
+  .mark-dispatch-btn {
+    width: 100%;
+    height: unset;
+    padding: 8px;
+  }
+
+  .delete-5-order-btn {
+    width: 100%;
+    height: unset;
+    padding: 8px;
+  }
+  .stop-5-order-btn svg,
+  .delete-5-order-btn svg,
+  .mark-dispatch-btn svg,
+  .process-5-order-btn svg {
+    height: 12px;
+    width: 12px;
+  }
+
+  .mark-dispatch-modal-btn-style svg,
+  .stop-order-btn-style svg,
+  .process-order-btn-style svg,
+  .delete-order-modal-btn-style svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* MEDIA QUERY  */
+
+@media (max-width: 768px) {
+  .order-table .order-th-none {
+    display: none !important;
+  }
+  .order-table .order-td-none {
+    display: none !important;
+  }
 }
