@@ -90,7 +90,7 @@ function PendingDataContent() {
       <div className="bg-white br-10">
         <div className="row mx-auto  align-items-center">
           {selectedRowKeys.length && (
-            <div className="col-lg-6 col-md-8 mr-3 bg-lighter br-15 p-2">
+            <div className="col-lg-6 col-md-8 mr-3 bg-lighter p-2">
               <div className="row justify-content-around mt-2">
                 {selectedRowKeys.length ? (
                   <div className="listing-tabs">

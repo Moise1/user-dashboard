@@ -87,7 +87,7 @@ const SourcesTable = () => {
           } = obj;
           return (
             <tbody className="order-table-body" key={id}>
-              <tr className="cursor-pointer">
+              <tr className="">
                 <td className="" onClick={() => handleSupplierValue(provider)}>
                   {provider}
                 </td>

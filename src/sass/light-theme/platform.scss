@@ -1,6 +1,11 @@
 @import 'general.config';
 
 // Large and extra large screens
+
+.card-input-element {
+  display: none;
+}
+
 .platforms-form {
   display: flex;
   .new-description-area {

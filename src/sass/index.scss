@@ -19,7 +19,7 @@ body {
     }
   }
   .ant-layout.ant-layout-has-sider {
-    margin: 0px 5px 0px 85px;
+    margin: 0px 5px 0px 80px;
   }
   .content-area {
     & > * {
@@ -28,17 +28,39 @@ body {
   }
 }
 
-
 svg > path:first-child {
   display: none;
 }
 
-button:focus {
-  outline: none !important;
+//Ant buttons styles fixed
+
+button:focus,
+button,
+#dropdown-basic {
+  outline: none;
+  border: 0;
 }
 
 @media screen and (max-width: 1030px) {
   .ant-layout.ant-layout-has-sider {
     margin: 0px !important;
+  }
+}
+
+.table td,
+.table th {
+  vertical-align: unset !important;
+}
+//MISSING TRANSLATION STYLES
+
+.missingTranslation {
+  color: var(--errorTxt);
+  font-size: var(--font-small);
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  10% {
+    opacity: 0;
   }
 }

@@ -26,7 +26,7 @@ const OrderStateModal = (props: Props) => {
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-flex">
                 <h2 className="head-part-one mr-2 mr-lg-5">{t('OrderDetails.OrderStateProgress')}</h2>
-                <button className="btn ao-disabled-button">
+                <button className="btn">
                   <span>
                     <AoIconHead />
                   </span>
@@ -34,7 +34,7 @@ const OrderStateModal = (props: Props) => {
                 </button>
               </div>
 
-              <span className="cursor-pointer cross-round-iconModal" onClick={() => setAoDisabledModal(false)}>
+              <span className="cross-round-iconModal" onClick={() => setAoDisabledModal(false)}>
                 <CrossModalIcon />
               </span>
             </div>
