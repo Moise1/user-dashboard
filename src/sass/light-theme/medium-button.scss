@@ -23,7 +23,8 @@
 .dispatch-btn {
   background-color: $green;
   &:focus {
-    box-shadow: none;
+    background-color: $dark-green;
+    color: $white;
   }
   &:hover {
     background-color: $dark-green;
@@ -34,7 +35,8 @@
 .delete-btn {
   background-color: $red;
   &:focus {
-    box-shadow: none;
+    background-color: $dark-red;
+    color: $white;
   }
 
   &:hover {
@@ -46,7 +48,8 @@
 .process-btn {
   background-color: $light-blue;
   &:focus {
-    box-shadow: none;
+    background-color: $dark-blue;
+    color: $white;
   }
   &:hover {
     background-color: $dark-blue;
@@ -57,7 +60,8 @@
 .stop-btn {
   background-color: $orange;
   &:focus {
-    box-shadow: none;
+    background-color: $dark-orange;
+    color: $white;
   }
   &:hover {
     background-color: $dark-orange;

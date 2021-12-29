@@ -17,8 +17,10 @@ import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
-import '../../sass/light-theme/orders.scss';
 import { orderData } from '../common/OrderData';
+
+import '../../sass/light-theme/orders.scss';
+import '../../sass/light-theme/orders-dropdown.scss';
 
 interface Props {
   tableValue?: boolean;
@@ -37,17 +39,17 @@ export const OrdersTable = (tableProps: Props) => {
   const stateBtn = (state: JSX.Element | string) => (
     <button
       onClick={() => (state === 'AO Disabled' ? setAoDisabledModal(true) : undefined)}
-      className={`state-btn ${state === 'Error' ? 'bg-dark-pink' : ''} ${
-        state === 'In progress' ? 'in-progress-btn' : ''
-      } ${state === 'Dispatched' ? 'bg-color-dark-green' : ''} ${state === 'Paused' ? 'bg-color-light-orange' : ''} ${
-        state === 'AO Disabled' ? 'ao-disabled-btn-style' : ''
+      className={`state-btn ${state === 'Error' ? 'button-error' : ''} ${
+        state === 'In progress' ? 'button-inprogress' : ''
+      } ${state === 'Dispatched' ? 'button-dispatched' : ''} ${state === 'Paused' ? 'button-paused' : ''} ${
+        state === 'AO Disabled' ? 'button-aodisabled' : ''
       } obj-state-text `}
     >
-      {state === 'Error' ? <img className="mr-2" src={ErrorIcon} alt="" /> : ''}
-      {state === 'In progress' ? <img className="mr-2" src={InProgressIcon} alt="" /> : ''}
-      {state === 'Dispatched' ? <img className="mr-2" src={DispatchIcon} alt="" /> : ''}
-      {state === 'Paused' ? <img className="mr-2" src={PasuedIcon} alt="" /> : ''}
-      {state === 'AO Disabled' ? <img className="mr-2" src={AoDisabled} alt="" /> : ''}
+      {state === 'Error' ? <img className="button-icon" src={ErrorIcon} alt="" /> : ''}
+      {state === 'In progress' ? <img className=".button-icon" src={InProgressIcon} alt="" /> : ''}
+      {state === 'Dispatched' ? <img className=".button-icon" src={DispatchIcon} alt="" /> : ''}
+      {state === 'Paused' ? <img className=".button-icon" src={PasuedIcon} alt="" /> : ''}
+      {state === 'AO Disabled' ? <img className=".button-icon" src={AoDisabled} alt="" /> : ''}
       {state}
     </button>
   );
@@ -117,7 +119,7 @@ export const OrdersTable = (tableProps: Props) => {
 
   return (
     <div className="orders-table">
-      <table className="table mb-0" {...getTableProps()}>
+      <table className="table" {...getTableProps()}>
         <thead className="order-table-head">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={`${headerGroup.headers.map((h) => h.id)}`}>
@@ -133,7 +135,7 @@ export const OrdersTable = (tableProps: Props) => {
                   key={`${column.id}`}
                   className="order-th-none"
                 >
-                  <span className="mr-2">{column.render('Header')}</span>
+                  <span className=".button-icon">{column.render('Header')}</span>
                   <span>{column.isSorted ? (column.isSortedDesc ? '🔽' : '🔼') : ''}</span>
                 </th>
               ))}
@@ -175,21 +177,21 @@ export const OrdersTable = (tableProps: Props) => {
                     <Dropdown.Menu>
                       <Dropdown.Item>
                         <ProcessOrderIcon />
-                        <span className="ml-2"> {t('OrderDetails.ProcessOrder')}</span>
+                        <span className="dropdown-item"> {t('OrderDetails.ProcessOrder')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         <span>
                           <HandStopOrderIcon />
-                          <span className="ml-2">{t('OrderDetails.StopOrder')} </span>
+                          <span className="dropdown-item">{t('OrderDetails.StopOrder')} </span>
                         </span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         <DispatchedOrderIcon />
-                        <span className="ml-2"> {t('OrderDetails.MarkAsDispatched')}</span>
+                        <span className="dropdown-item"> {t('OrderDetails.MarkAsDispatched')}</span>
                       </Dropdown.Item>
                       <Dropdown.Item>
                         <DustbinDeleteOrderIcon />
-                        <span className="ml-2">{t('OrderDetails.DeleteOrder')} </span>
+                        <span className="dropdown-item">{t('OrderDetails.DeleteOrder')} </span>
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

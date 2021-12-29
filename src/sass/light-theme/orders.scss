@@ -12,7 +12,24 @@
   }
 }
 
+// BUTTONS STYLE
+
+.button-error{background-color:$red}
+.button-icon{margin-right: 10%;}
+.button-inprogress{background-color:$light-blue}
+.button-paused{background-color:$dark-orange}
+.button-dispatched{background-color:$green}
+.button-aodisabled{background-color:$gray}
+
+
+
 // TABLE STYLE
+
+.table{
+  margin-bottom : 0 !important;
+  padding-bottom : 0 !important;
+
+}
 
 .order-table-body {
   white-space: nowrap;
@@ -73,12 +90,12 @@
 }
 
 .stop-order-btn-style:hover {
-  background-color: #df9c4f;
+  background-color: $orange;
   color: $white;
 }
 
 .process-order-btn-style:hover {
-  background-color: #3a66ce;
+  background-color: $dark-blue;
   color: $white;
 }
 .mark-dispatch-modal-btn-style {
@@ -96,7 +113,7 @@
 }
 
 .mark-dispatch-modal-btn-style:hover {
-  background-color: #198319;
+  background-color: $dark-green;
   color: $white;
 }
 
@@ -115,7 +132,7 @@
 }
 
 .delete-order-modal-btn-style:hover {
-  background-color: #c20648;
+  background-color: $red;
   color: $white;
 }
 
@@ -126,7 +143,7 @@
   height: 155px;
   border-radius: 0px 0px 15px 15px;
   background: $white;
-  box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.16);
+  box-shadow: 15px 15px 55px $black;
 }
 
 .order-three-dots-dropdown .btn-primary {
@@ -149,7 +166,7 @@
   padding: 0 8px;
   font-weight: 500;
   font-size: 14px;
-  color: #3b3b3b;
+  color: $black;
   margin-bottom: 10px;
 }
 
@@ -235,7 +252,7 @@
 }
 
 .middle-part-autoordering button:hover {
-  background: #4f77d4;
+  background: $light-blue;
   color: $white;
 }
 
@@ -264,21 +281,21 @@
   left: 0;
   height: 16px;
   width: 16px;
-  border: 2px solid #202020;
+  border: 2px solid $black;
   border-radius: 2.5px;
 }
 
 // On mouse-over, add a grey background color
 
 .select-all-checkbox:hover input ~ .checkmark {
-  border: 2px solid #202020;
+  border: 2px solid $black;
 }
 
 //  When the checkbox is checked, add a blue background
 
 .select-all-checkbox input:checked ~ .checkmark {
-  background-color: #5e69db;
-  border: 2px solid #5e69db;
+  background-color: $light-primary;
+  border: 2px solid $light-primary;
 }
 /* Create the checkmark/indicator (hidden when not checked) */
 .select-all-checkbox .checkmark:after {
@@ -296,7 +313,7 @@
   top: 0px;
   width: 5px;
   height: 8px;
-  border: solid #45ff00;
+  border: solid $light-green;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -330,16 +347,16 @@
   left: 0;
   height: 16px;
   width: 16px;
-  background-color: #5e69db;
+  background-color: $light-primary;
   border-radius: 2px;
 }
 /* On mouse-over, add a grey background color */
 .container-checkbox:hover input ~ .checkmark {
-  background-color: #5e69db;
+  background-color: $light-primary;
 }
 /* When the checkbox is checked, add a blue background */
 .container-checkbox input:checked ~ .checkmark {
-  background-color: #5e69db;
+  background-color: $light-primary;
 }
 /* Create the checkmark/indicator (hidden when not checked) */
 .container-checkbox .checkmark:after {
@@ -357,7 +374,7 @@
   top: 4px;
   width: 5px;
   height: 8px;
-  border: solid #45ff00;
+  border: solid $light-green;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
