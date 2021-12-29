@@ -8,7 +8,7 @@ import { SourceSettings } from './SourceSettings';
 import ConfigButtons from './ConfigButtons';
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
-import '../../sass/light-theme/source-settings.scss';
+import '../../sass/light-theme/sources-setting.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
 
@@ -41,10 +41,14 @@ const Sources = () => {
           Back to suppliers overview
         </h2>
 
-        <h1 className="surce-configuration-name">
-          Source: <span> {supplierValue}</span>
-        </h1>
+        <p className="beta-area">
+          <span className="beta">Beta:</span> This service is free while in beta
+        </p>
       </div>
+
+      <h1 className="surce-configuration-name">
+        Source: <span> {supplierValue}</span>
+      </h1>
 
       <div className="tabs-container">
         <Tabs type="card" className="tabs">
