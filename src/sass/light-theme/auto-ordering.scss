@@ -1,17 +1,58 @@
 @import 'general.config';
 
-.account-details{
-    border: 2px solid red;
-    margin-top: 2rem;
-    width:60%;
-    .form{
-        margin: 0 auto;
-        .disable-account{
-            display: flex;
-        }
+.select-account {
+    width: 60%;
+  .account-config {
+    font-weight: bold;
+  }
+}
+
+.account-details {
+  margin-top: 2rem;
+  width: 60%;
+  .form {
+    margin: 0 auto;
+    .disable-account {
+      display: flex;
     }
-    .platfrom-creds{
-        display: flex;
-        justify-content: space-evenly;
+  }
+
+  .account-form-input {
+    background: $mild-light-blue !important;
+    border-radius: 10px;
+  }
+
+  .copy-icon {
+    position: absolute;
+    top: 0.2rem;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+  .platfrom-creds {
+    display: flex;
+    justify-content: space-evenly;
+
+    & > * {
+      margin-left: 1rem;
     }
+  }
+  .disable-account {
+    .hand {
+      margin-left: 1rem;
+      border: $light-primary;
+    }
+  }
+  .remove-account {
+    .remove-account-btn {
+      background: $light-red;
+      color: $red;
+      box-shadow: 0px 3px 6px #00000017;
+      border-radius: 10px;
+    }
+
+    p {
+      color: $red;
+      margin-top: 1rem;
+    }
+  }
 }

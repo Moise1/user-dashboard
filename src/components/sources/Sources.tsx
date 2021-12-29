@@ -53,7 +53,6 @@ const Sources = () => {
           Source:{' '}
           <span>
             {' '}
-            {/* {whatSelect && whatSelect !== 'Select Supplier' ? whatSelect : 'select a supplier from the list'}{' '} */}
             {supplierValue}
           </span>
         </h1>
@@ -67,8 +66,6 @@ const Sources = () => {
           <TabPane tab="Auto Ordering" key="2" className="tab-pane">
             <AutoOrdering
               showOrdering={showOrdering}
-              // selectedAccount={selectedAccount}
-              // setSelectedAccount={setSelectedAccount}
               setShowOrdering={setShowOrdering}
             />
           </TabPane>

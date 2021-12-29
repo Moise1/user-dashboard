@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Select, Input, Form } from 'antd';
+import { Select, Input, Button } from 'antd';
 import '../../sass/light-theme/selector.scss';
-import profile from '../../assets/new-account.svg';
+import { PlusOutlined } from '@ant-design/icons';
 
 interface Props {
   children: { id: number; value: string }[];
@@ -16,44 +16,26 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const { children, defaultValue, addAccount, onChange } = props;
   const [showInput, setShowInput] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
+  const [newAccount, setNewAccount] = useState({ value: '' });
+  const [data] = useState(children);
 
-  const options = [];
-  for (let i = 0; i < children.length; i++) {
-    options.push(
-      <Option key={children[i].id} value={children[i].value}>
-        {children[i].value}
-      </Option>
-    );
-  }
-
+  const options = data.map((d) => (
+    <Option key={d.id} value={d.value}>
+      {d.value}
+    </Option>
+  ));
   const handleOptionClick = (): void => {
     setShowInput(!showInput);
   };
 
-  const handleFormSubmit = (values: { newAccount: string }): void => {
-    const { newAccount } = values;
-    children.push({ id: children.length + 1, value: newAccount });
-    console.log('form submitted...');
+  const handleChange = (e: React.ChangeEvent<{ value: string }>) => {
+    setNewAccount({ value: e?.currentTarget?.value });
   };
 
-  const newAccBtn = (
-    <div>
-      {showInput ? (
-        <Form onFinish={handleFormSubmit}>
-          <Form.Item name="newAccount">
-            <Input className="new-acc-input" placeholder="Create account..." name="newAccount" />
-          </Form.Item>
-        </Form>
-      ) : (
-        <p className="new-acc-btn" onClick={handleOptionClick}>
-          <span>Add acount</span>
-          <span>
-            <img src={profile} alt="New acc" />
-          </span>
-        </p>
-      )}
-    </div>
-  );
+  const handleSubmit = () => {
+    data.push({ id: data.length + 1, value: newAccount.value });
+    setNewAccount({ value: '' });
+  };
 
   return (
     <Select
@@ -65,7 +47,28 @@ export const Selector: React.FC<Props> = (props: Props) => {
       defaultValue={defaultValue}
       dropdownRender={(menu) => (
         <>
-          {showAddAccount && newAccBtn}
+          {showAddAccount && (
+            <div className="action-ctrl">
+              {showInput ? (
+                <div className="input-container">
+                  <Input
+                    className="new-acc-input"
+                    placeholder="Create account..."
+                    value={newAccount.value}
+                    name="newAccount"
+                    onChange={handleChange}
+                  />
+                  <a onClick={handleSubmit}>
+                    <PlusOutlined className="add-icon" />
+                  </a>
+                </div>
+              ) : (
+                <Button className="new-acc-btn" onClick={handleOptionClick}>
+                  New Account
+                </Button>
+              )}
+            </div>
+          )}
           {menu}
         </>
       )}

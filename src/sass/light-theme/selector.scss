@@ -1,20 +1,27 @@
 @import 'general.config';
 
-.new-acc-btn {
-  border: 2px solid blue;
+.input-container {
   display: flex;
   justify-content: space-between;
 }
-
-.new-acc-input {
-  border: 2px solid green;
-  &:after {
-    content: url('../../assets/new-account.svg');
-    margin-top: 0.2rem;
-    position: absolute;
-    // right: 3%;
-    cursor: pointer;
+.action-ctrl{
+  margin-bottom: 1rem;
+  .new-acc-input {
+    border-radius: 7px;
   }
+  .new-acc-btn {
+    background: $primary !important;
+    width: 100%;
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+  }
+  
+}
+
+.add-icon {
+  padding: 0 0.6rem;
 }
 
 .selector {
