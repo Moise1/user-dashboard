@@ -4,7 +4,7 @@ import '../../sass/light-theme/selector.scss';
 import { PlusOutlined } from '@ant-design/icons';
 
 interface Props {
-  children: { id: number; value: string }[];
+  children: { id: number; value: string, alias?: string }[];
   defaultValue: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
@@ -20,8 +20,8 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const [data] = useState<Props['children']>(children);
 
   const options = data.map((d) => (
-    <Option key={d.id} value={d.value}>
-      {d.value}
+    <Option key={d.id} value={d.alias ? d.alias : d.value}>
+      {d.alias ? d.alias : d.value}
     </Option>
   ));
   const handleOptionClick = (): void => {

@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Tooltip } from 'antd';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/switch.scss';
 import { Switch } from '../small-components/Switch';
 import { Selector } from '../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import '../../sass/light-theme/auto-ordering.scss';
-import { UserAddOutlined } from '@ant-design/icons';
 import hand from '../../assets/hand.svg';
 import copy from '../../assets/copy.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 
 const AutoOrdering = () => {
   const [accountConfig, setAccountConfig] = useState<string>('');
@@ -24,17 +22,16 @@ const AutoOrdering = () => {
 
   const handleOptionChange = (value: string) => setAccountConfig(value);
 
-  const accountData = dummyUsers.filter((user) => user.value === accountConfig)[0];
+  const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
 
   return (
-    <div>
-      <UserAddOutlined />
-      <div className="auto-ordering-container">
+    <div className={accountConfig ? 'adjusted-main-container' : 'main-container'}>
+      <div className="auto-ordering">
         <div className="setting-list-item">
           <h4>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h4>
           <p>Disabling auto-ordering will require you to manually process new orders.</p>
         </div>
-        <Switch onChange={showAccountConfig} />
+        <Switch onChange={showAccountConfig} className="switch" />
       </div>
       {checked && (
         <div className="select-account">
@@ -48,31 +45,61 @@ const AutoOrdering = () => {
       )}
 
       <div className="account-details">
-        {accountConfig !== '' ? (
+        {checked && accountConfig && (
           <>
             <fieldset disabled={!activeAccount}>
               <Form className="form">
-                <Form.Item label="Alias">
-                  <Input value={accountData?.alias} className="account-form-input" />
+                <Form.Item label="Alias" name="alias">
+                  <Tooltip
+                    placement="topRight"
+                    title={!activeAccount && 'Disabled'}
+                    trigger={!activeAccount ? ['hover'] : ''}
+                  >
+                    <Input value={accountData?.alias} className="account-form-input" />
+                  </Tooltip>
                 </Form.Item>
                 <div className="platfrom-creds">
-                  <Form.Item label="Amazon Login">
-                    <Input value={accountData?.value} className="account-form-input" />
+                  <Form.Item label="Amazon Login" name="value">
+                    <Tooltip
+                      placement="topRight"
+                      title={!activeAccount && 'Disabled'}
+                      trigger={!activeAccount ? ['hover'] : ''}
+                    >
+                      <Input value={accountData?.value} className="account-form-input" />
+                    </Tooltip>
                   </Form.Item>
 
                   <Form.Item label="Amazon Password">
-                    <Input value={accountData?.password} className="account-form-input" />
+                    <Tooltip
+                      placement="topRight"
+                      title={!activeAccount && 'Disabled'}
+                      trigger={!activeAccount ? ['hover'] : ''}
+                    >
+                      <Input value={accountData?.password} className="account-form-input" />
+                    </Tooltip>
                   </Form.Item>
                 </div>
                 <Form.Item label="OTP Code (2FA)">
-                  <Input className="account-form-input" value={accountData?.otp} />
-                  <CopyToClipboard text="" onCopy={() => setCopied(true)}>
-                    <img src={copy} alt="copy-icon" className="copy-icon" />
-                  </CopyToClipboard>
+                  <Tooltip
+                    placement="topRight"
+                    title={!activeAccount && 'Disabled'}
+                    trigger={!activeAccount ? ['hover'] : ''}
+                  >
+                    <Input className="account-form-input" value={accountData?.otp} />
+                    <CopyToClipboard text="" onCopy={() => setCopied(true)}>
+                      <img src={copy} alt="copy-icon" className="copy-icon" />
+                    </CopyToClipboard>
+                  </Tooltip>
                 </Form.Item>
 
                 <Form.Item label="Phone umber">
-                  <Input value={accountData?.phone} className="account-form-input" />
+                  <Tooltip
+                    placement="topRight"
+                    title={!activeAccount && 'Disabled'}
+                    trigger={!activeAccount ? ['hover'] : ''}
+                  >
+                    <Input value={accountData?.phone} className="account-form-input" />
+                  </Tooltip>
                 </Form.Item>
               </Form>
             </fieldset>
@@ -81,7 +108,7 @@ const AutoOrdering = () => {
                 <h4>
                   Disable account{' '}
                   <span>
-                    <img src={hand} className={activeAccount ? 'hand': 'gray-hand'}/>
+                    <img src={hand} className={activeAccount ? 'hand' : 'gray-hand'} />
                   </span>
                 </h4>
                 <p>If you deactivate this account, orders will be placed through the activated accounts.</p>
@@ -97,7 +124,7 @@ const AutoOrdering = () => {
               </p>
             </div>
           </>
-        ) : null}
+        )}
       </div>
     </div>
   );
