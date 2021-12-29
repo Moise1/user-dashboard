@@ -17,7 +17,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
   const [newAccount, setNewAccount] = useState({ value: '' });
-  const [data] = useState(children);
+  const [data] = useState<Props['children']>(children);
 
   const options = data.map((d) => (
     <Option key={d.id} value={d.value}>

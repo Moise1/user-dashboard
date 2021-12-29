@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { LeftBackArrowIcon } from '../common/Icons';
@@ -18,22 +18,14 @@ type ContextType = {
 };
 
 const Sources = () => {
-  const [showOrdering, setShowOrdering] = useState<boolean>(false);
   const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const history = useHistory();
   const { TabPane } = Tabs;
 
-  useEffect(() => {
-    if (supplierValue.length) {
-      setShowOrdering(true);
-    }
-  });
-
   const initialStateSourceSettings = () => {
     setSelectedAccount('Select Supplier');
     setSupplierValue('');
-    setShowOrdering(false);
     history.goBack();
   };
 
@@ -50,11 +42,7 @@ const Sources = () => {
         </h2>
 
         <h1 className="surce-configuration-name">
-          Source:{' '}
-          <span>
-            {' '}
-            {supplierValue}
-          </span>
+          Source: <span> {supplierValue}</span>
         </h1>
       </div>
 
@@ -64,10 +52,7 @@ const Sources = () => {
             <SourceSettings />
           </TabPane>
           <TabPane tab="Auto Ordering" key="2" className="tab-pane">
-            <AutoOrdering
-              showOrdering={showOrdering}
-              setShowOrdering={setShowOrdering}
-            />
+            <AutoOrdering />
           </TabPane>
         </Tabs>
         <div className="right-section">

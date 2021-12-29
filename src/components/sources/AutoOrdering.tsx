@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Form, Input, Button } from 'antd';
-import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/switch.scss';
 import { Switch } from '../small-components/Switch';
@@ -12,37 +11,36 @@ import hand from '../../assets/hand.svg';
 import copy from '../../assets/copy.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-type ContextType = {
-  supplierValue: string;
-  setSupplierValue: (arg0: string) => void;
-};
-interface Props {
-  showOrdering: boolean;
-  setShowOrdering: (arg0: boolean) => void;
-}
 
-const AutoOrdering = (props: Props) => {
-  const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
-
-  const { showOrdering } = props;
+const AutoOrdering = () => {
+  const [accountConfig, setAccountConfig] = useState<string>('');
   const [checked, setChecked] = useState<boolean>(false);
-  const handleSwitch = () => setChecked(!checked);
+  const [activeAccount, setActiveAccount] = useState<boolean>(true);
   const [, setCopied] = useState<boolean>(false);
 
-  const handleOptionChange = (value: string) => setSupplierValue(value);
+  const showAccountConfig = (): void => setChecked(!checked);
+
+  const handleActiveAccount = (): void => setActiveAccount(!activeAccount);
+
+  const handleOptionChange = (value: string) => setAccountConfig(value);
+
+  const accountData = dummyUsers.filter((user) => user.value === accountConfig)[0];
+
   return (
-    <div className={` ${showOrdering ? '' : 'h-100'} `}>
+    <div>
       <UserAddOutlined />
       <div className="auto-ordering-container">
         <div className="setting-list-item">
           <h4>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h4>
           <p>Disabling auto-ordering will require you to manually process new orders.</p>
         </div>
-        <Switch onChange={handleSwitch} />
+        <Switch onChange={showAccountConfig} />
       </div>
       {checked && (
         <div className="select-account">
-          <p className="account-config">{t('SourceConfigInputs.AccountConfiguration')} : </p>
+          <p className="account-config">
+            {t('SourceConfigInputs.AccountConfiguration')} :<span className="account-alias">{accountData?.alias}</span>
+          </p>
           <Selector defaultValue="Select or add account" addAccount={true} onChange={handleOptionChange}>
             {dummyUsers}
           </Selector>
@@ -50,42 +48,45 @@ const AutoOrdering = (props: Props) => {
       )}
 
       <div className="account-details">
-        {supplierValue !== '' ? (
-          <Form className="form">
-            <Form.Item label="Alias">
-              <Input value="Dad acocount" className="account-form-input" />
-            </Form.Item>
-            <div className="platfrom-creds">
-              <Form.Item label="Amazon Login">
-                <Input value="dadaccount@gmail.com" className="account-form-input" />
-              </Form.Item>
+        {accountConfig !== '' ? (
+          <>
+            <fieldset disabled={!activeAccount}>
+              <Form className="form">
+                <Form.Item label="Alias">
+                  <Input value={accountData?.alias} className="account-form-input" />
+                </Form.Item>
+                <div className="platfrom-creds">
+                  <Form.Item label="Amazon Login">
+                    <Input value={accountData?.value} className="account-form-input" />
+                  </Form.Item>
 
-              <Form.Item label="Amazon Password">
-                <Input value="12345" className="account-form-input" />
-              </Form.Item>
-            </div>
-            <Form.Item label="OTP Code (2FA)">
-              <Input className="account-form-input" value="JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG" />
-              <CopyToClipboard text="" onCopy={() => setCopied(true)}>
-                <img src={copy} alt="copy-icon" className="copy-icon" />
-              </CopyToClipboard>
-            </Form.Item>
+                  <Form.Item label="Amazon Password">
+                    <Input value={accountData?.password} className="account-form-input" />
+                  </Form.Item>
+                </div>
+                <Form.Item label="OTP Code (2FA)">
+                  <Input className="account-form-input" value={accountData?.otp} />
+                  <CopyToClipboard text="" onCopy={() => setCopied(true)}>
+                    <img src={copy} alt="copy-icon" className="copy-icon" />
+                  </CopyToClipboard>
+                </Form.Item>
 
-            <Form.Item label="Phone umber">
-              <Input value="(555) 555-5555" className="account-form-input" />
-            </Form.Item>
-
+                <Form.Item label="Phone umber">
+                  <Input value={accountData?.phone} className="account-form-input" />
+                </Form.Item>
+              </Form>
+            </fieldset>
             <div className="disable-account">
               <div className="disable-account-text">
                 <h4>
                   Disable account{' '}
                   <span>
-                    <img src={hand} className="hand" alt="hand-icon" />
+                    <img src={hand} className={activeAccount ? 'hand': 'gray-hand'}/>
                   </span>
                 </h4>
                 <p>If you deactivate this account, orders will be placed through the activated accounts.</p>
               </div>
-              <Switch />
+              <Switch onChange={handleActiveAccount} />
             </div>
 
             <div className="remove-account">
@@ -95,7 +96,7 @@ const AutoOrdering = (props: Props) => {
                 account.
               </p>
             </div>
-          </Form>
+          </>
         ) : null}
       </div>
     </div>

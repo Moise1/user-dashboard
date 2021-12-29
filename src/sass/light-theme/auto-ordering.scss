@@ -1,9 +1,13 @@
 @import 'general.config';
 
 .select-account {
-    width: 60%;
+  width: 60%;
   .account-config {
     font-weight: bold;
+  }
+  .account-alias {
+    margin-left: 1rem;
+    color: $light-primary;
   }
 }
 
@@ -12,9 +16,10 @@
   width: 60%;
   .form {
     margin: 0 auto;
-    .disable-account {
-      display: flex;
-    }
+  }
+
+  .disable-account {
+    display: flex;
   }
 
   .account-form-input {
@@ -37,9 +42,14 @@
     }
   }
   .disable-account {
-    .hand {
+    .hand,
+    .gray-hand {
       margin-left: 1rem;
-      border: $light-primary;
+    }
+
+    .gray-hand {
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
     }
   }
   .remove-account {

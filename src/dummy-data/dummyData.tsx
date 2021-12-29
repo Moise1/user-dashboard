@@ -18,7 +18,28 @@ export const dummyPricingRules = [
 ];
 
 export const dummyUsers = [
-  { value: 'user-one@gmail.com', id: 1 },
-  { value: 'user-twoe@gmail.com', id: 2 },
-  { value: 'user-three@gmail.com', id: 3 }
+  {
+    value: 'dad@gmail.com',
+    id: 1,
+    alias: 'Dad account',
+    phone: '(555) 555-5555',
+    otp: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+    password: '12345'
+  },
+  {
+    value: 'son@gmail.com',
+    id: 2,
+    alias: 'Son account',
+    phone: '(555) 555-5555',
+    otp: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+    password: '12345'
+  },
+  {
+    value: 'uncle@gmail.com',
+    id: 3,
+    alias: 'Uncle account',
+    phone: '(555) 555-5555',
+    otp: 'JJSndfnfgurbgjD935h5gmSKFJASFNFNBGG',
+    password: '12345'
+  }
 ];
