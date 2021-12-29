@@ -118,6 +118,11 @@
   "OrderDetails.Fees":"Fees",
   "OrderDetails.Profit":"Profit",
   "OrderDetails.Margin":"Margin",
+
+  "OrderDetails.ProcessOrder": "Process order",
+  "OrderDetails.StopOrder": "Stop order",
+  "OrderDetails.MarkAsDispatched": "Mark as dispatched",
+  "OrderDetails.DeleteOrder": "Delete order",
   
 
   "SourceConfigInputs.Alias": "Alias",

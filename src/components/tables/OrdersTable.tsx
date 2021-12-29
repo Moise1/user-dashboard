@@ -1,26 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useSortBy, Column } from 'react-table';
 import moment from 'moment';
-import {
-  DustbinDeleteOrderIcon,
-  DispatchedOrderIcon,
-  HandStopOrderIcon,
-  ProcessOrderIcon,
-  ThreeDotsColumnIcon 
-} from '../common/Icons';
+
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
 import PasuedIcon from '../../assets/pasuedicon.svg';
 import DispatchIcon from '../../assets/dispatchedicon.svg';
 import AoDisabled from '../../assets/ao-disabled-img.png';
-import { Dropdown } from 'react-bootstrap';
 import OrderStateModal from '../modals/OrderStateModal';
-import { t } from '../../global/transShim';
 import Pagination from '../common/Pagination';
 import { orderData } from '../common/OrderData';
+import OrdersDropdown from '../orders/OrdersDropdown';
 
 import '../../sass/light-theme/orders.scss';
-import '../../sass/light-theme/orders-dropdown.scss';
 
 interface Props {
   tableValue?: boolean;
@@ -169,32 +161,7 @@ export const OrdersTable = (tableProps: Props) => {
                 ))}
 
                 <td className="order-three-dots-dropdown">
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-basic">
-                      <ThreeDotsColumnIcon />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Dropdown.Item>
-                        <ProcessOrderIcon />
-                        <span className="dropdown-item"> {t('OrderDetails.ProcessOrder')}</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <span>
-                          <HandStopOrderIcon />
-                          <span className="dropdown-item">{t('OrderDetails.StopOrder')} </span>
-                        </span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <DispatchedOrderIcon />
-                        <span className="dropdown-item"> {t('OrderDetails.MarkAsDispatched')}</span>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <DustbinDeleteOrderIcon />
-                        <span className="dropdown-item">{t('OrderDetails.DeleteOrder')} </span>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  <OrdersDropdown />
                 </td>
               </tr>
             );

@@ -14,21 +14,30 @@
 
 // BUTTONS STYLE
 
-.button-error{background-color:$red}
-.button-icon{margin-right: 10%;}
-.button-inprogress{background-color:$light-blue}
-.button-paused{background-color:$dark-orange}
-.button-dispatched{background-color:$green}
-.button-aodisabled{background-color:$gray}
-
-
+.button-error {
+  background-color: $red;
+}
+.button-icon {
+  margin-right: 10%;
+}
+.button-inprogress {
+  background-color: $light-blue;
+}
+.button-paused {
+  background-color: $dark-orange;
+}
+.button-dispatched {
+  background-color: $green;
+}
+.button-aodisabled {
+  background-color: $gray;
+}
 
 // TABLE STYLE
 
-.table{
-  margin-bottom : 0 !important;
-  padding-bottom : 0 !important;
-
+.table {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .order-table-body {
@@ -134,65 +143,6 @@
 .delete-order-modal-btn-style:hover {
   background-color: $red;
   color: $white;
-}
-
-// DROPDOWN STYLES
-
-.order-three-dots-dropdown .dropdown-menu {
-  width: 190px;
-  height: 155px;
-  border-radius: 0px 0px 15px 15px;
-  background: $white;
-  box-shadow: 15px 15px 55px $black;
-}
-
-.order-three-dots-dropdown .btn-primary {
-  background-color: $white !important;
-  padding: 0;
-}
-
-.order-three-dots-dropdown .dropdown-toggle::after {
-  display: inline-block;
-  margin-left: 0.255em;
-  vertical-align: 0.255em;
-  content: '';
-  border-top: 0;
-  border-right: 0 solid transparent;
-  border-bottom: 0;
-  border-left: 0 solid transparent;
-}
-
-.order-three-dots-dropdown .dropdown-item {
-  padding: 0 8px;
-  font-weight: 500;
-  font-size: 14px;
-  color: $black;
-  margin-bottom: 10px;
-}
-
-.show > .btn-primary.dropdown-toggle {
-  background-color: transparent;
-}
-
-.order-three-dots-dropdown .btn-primary.focus,
-.order-three-dots-dropdown .btn-primary:focus {
-  box-shadow: none !important;
-}
-
-.order-three-dots-dropdown .dropdown-item:active {
-  background-color: transparent;
-}
-
-.order-three-dots-dropdown svg > * {
-  stroke: $primary;
-}
-
-.order-three-dots-dropdown .process-order-icon g {
-  stroke: $white !important;
-}
-
-.order-three-dots-dropdown .process-order-icon #Path_287 {
-  stroke: $primary !important;
 }
 
 .progress-order .progress {
