@@ -44,7 +44,6 @@ export const Sidebar = (props: Props) => {
     if (isDark) {
       const element = document.getElementById('darkThemeLink');
       element?.parentElement?.removeChild(element);
-      
     } else {
       const link = document.createElement('link');
       link.type = 'text/css';
@@ -121,8 +120,8 @@ export const Sidebar = (props: Props) => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        width="var(--expandedSiderWidth)"
-        collapsedWidth="var(--siderWidth)"
+        width="293px"
+        collapsedWidth="80px"
       >
         <div className="side-menu-container">
           <Menu theme="light" mode="inline" defaultSelectedKeys={['4']} className="menu-container">

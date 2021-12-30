@@ -1,5 +1,4 @@
 import React from 'react';
-import { Layout } from 'antd';
 import aus_flag from '../../assets/channel/flags/AU.png';
 import ger_flag from '../../assets/channel/flags/DE.png';
 import sp_flag from '../../assets/channel/flags/ES.png';
@@ -12,6 +11,8 @@ import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
 import Previousstep from '../small-components/Previousstep';
 import Flag, { FlagProps } from './Flag';
+import '../../sass/light-theme/store-location.scss';
+
 
 interface values {
   storeLocation: string;
@@ -85,55 +86,51 @@ function StoreLocation(props: StoreLocationProps) {
   };
 
   return (
-    <Layout>
-      <div>
-        <form>
-          <div className="row mx-auto">
-            <div className="col-xl-8   bg-white  mt-2 pt-1">
-              <Previousstep Previous={Previous} />
-              <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
-                <div className="text-center col-10 mt-2 mx-auto">
-                  <h5 className="font-weight-bold">{t('bar2')}?</h5>
-                </div>
-                <div className="text-center col-12 col-md-10 mx-auto">
-                  <h6 className="">
-                    {platform == 'ebay' ? t('storebay') : platform == 'amazon' ? t('storamz') : t('storshp')}
-                  </h6>
-                </div>
-                {flags.map((i) => (
-                  <React.Fragment key={i.name}>
-                    <Flag
-                      platform={platform}
-                      currentPlatform={i.platform}
-                      // handleChangeLocation={i.slug}
-                      flag={i.path}
-                      name={i.name}
-                      location={values.storeLocation}
-                      handleChangeLocation={handleChangeLocation}
-                    />
-                  </React.Fragment>
-                ))}
+    <form className="location-form">
+      <div className="location-area">
+        <div className="col-xl-8   bg-white  mt-2 pt-1">
+          <Previousstep Previous={Previous} />
+          <div className="row mx-auto px-lg-5 px-md-3 h-resp-65">
+            <div className="text-center col-10 mt-2 mx-auto">
+              <h5 className="font-weight-bold">{t('bar2')}?</h5>
+            </div>
+            <div className="text-center col-12 col-md-10 mx-auto">
+              <h6 className="">
+                {platform == 'ebay' ? t('storebay') : platform == 'amazon' ? t('storamz') : t('storshp')}
+              </h6>
+            </div>
+            {flags.map((i) => (
+              <React.Fragment key={i.name}>
+                <Flag
+                  platform={platform}
+                  currentPlatform={i.platform}
+                  // handleChangeLocation={i.slug}
+                  flag={i.path}
+                  name={i.name}
+                  location={values.storeLocation}
+                  handleChangeLocation={handleChangeLocation}
+                />
+              </React.Fragment>
+            ))}
 
-                <div className="col-12"></div>
-                <div className="mx-md-auto ml-auto mt-md-4 text-right text-md-center w-100 next-fix">
-                  <div className="text-danger w-100 text-center small d-block d-md-none">
-                    {values.storeLocation == '' ? '  *Please select a country in order to proceed' : ''}
-                  </div>
-                  <NextBtn onClick={Continue} title={t('nxt')} disabled={values.storeLocation == ''} />
+            <div className="col-12"></div>
+            <div className="mx-md-auto ml-auto mt-md-4 text-right text-md-center w-100 next-fix">
+              <div className="text-danger w-100 text-center small d-block d-md-none">
+                {values.storeLocation == '' ? '  *Please select a country in order to proceed' : ''}
+              </div>
+              <NextBtn onClick={Continue} title={t('nxt')} disabled={values.storeLocation == ''} />
 
-                  <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
-                    {values.storeLocation == '' ? t('strchck') : ''}
-                  </div>
-                </div>
+              <div className="text-danger w-100 text-center mb-2 small d-md-block d-none">
+                {values.storeLocation == '' ? t('strchck') : ''}
               </div>
             </div>
-            <div className="col-xl-4 d-xl-block d-none m-auto">
-              <ProgressBar platform={platform} step={step} />
-            </div>
           </div>
-        </form>
+        </div>
+        <div className="col-xl-4 d-xl-block d-none m-auto">
+          <ProgressBar platform={platform} step={step} />
+        </div>
       </div>
-    </Layout>
+    </form>
   );
 }
 
