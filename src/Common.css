@@ -7,7 +7,6 @@
 }
 
 .obj-state-text {
-  color: var(--color-fff);
   font-size: var(--font-small);
   font-weight: bold;
   border-radius: 10px;
@@ -28,124 +27,6 @@
 }
 .bg-dark-pink:hover {
   background-color: var(--color-dark-pink);
-}
-
-.bg-primary {
-  background-color: var(--color-primary);
-}
-
-.bg-color-light-orange {
-  background-color: var(--color-light-orange);
-}
-.bg-color-light-orange:hover {
-  background-color: #e8ab66e1;
-}
-
-.bg-color-dark-green {
-  background-color: var(--color-secondry);
-}
-.bg-color-dark-green:hover {
-  background-color: #228b22dc;
-}
-
-.in-progress-btn {
-  background-color: var(--bgBlue);
-}
-.in-progress-btn:hover {
-  background-color: var(--active-bg);
-}
-
-.acc-config-text {
-  font-weight: bold;
-  font-size: var(--font-xl);
-  color: var(--color-black);
-}
-
-.acc-config-text span {
-  color: var(--bgBlue);
-}
-
-.otp-code-input-styles {
-  padding: 9px 12px;
-  width: 100%;
-  height: 42px;
-  border-radius: 10px;
-  background-color: var(--bgInputLight) !important;
-  border: 0;
-  outline: none;
-  font-weight: 400;
-  font-size: var(--font-medium);
-  color: var(--txtHighlight);
-}
-
-.account-input-style {
-  padding: 9px 12px;
-  width: 100%;
-  height: 42px;
-  border-radius: 10px;
-  background-color: var(--bgInputLight) !important;
-  border: 0;
-  outline: none;
-  font-weight: bold;
-  font-size: var(--font-medium);
-  color: var(--txtBaseColor);
-}
-
-.remove-account-div {
-  cursor: pointer;
-  margin-bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 204px;
-  height: 31px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: var(--font-large);
-  text-align: left;
-  color: var(--bg-dark-pink);
-  background: #fff1f1;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
-}
-
-.remove-account-div:hover {
-  background: #fae9e9;
-}
-
-.dark-pink-para {
-  font-weight: 400;
-  font-size: var(--font-extra-small);
-  color: var(--bg-dark-pink);
-  max-width: 370px;
-}
-
-.obtain-code-otp {
-  font-weight: 500;
-  font-size: var(--font-small);
-  color: var(--color-primary);
-}
-
-.ao-disabled-btn-style {
-  width: 137px;
-  background: #9a9a9a;
-  font-weight: bold;
-  font-size: var(--font-extra-small);
-  color: var(--bgHighlight);
-}
-
-.source-table {
-  border-bottom: 1px solid #dedede !important;
-}
-
-.source-table-head {
-  background-color: #fff;
-
-  color: var(--color-dark-violet);
-  white-space: nowrap;
-  font-weight: bold;
-  position: sticky;
-  top: 0;
-  font-size: var(--font-large) !important;
 }
 
 .shipping-policy-text {
@@ -222,17 +103,9 @@
     width: 100px;
     height: 23px;
   }
-
-  .dark-pink-para {
-    max-width: 231px;
-  }
 }
 
 /* ORDER SVG COLOR  */
-
-.hand-disabled svg path {
-  stroke: #9a9a9a;
-}
 
 @media (max-width: 576px) {
   .account-input-style {

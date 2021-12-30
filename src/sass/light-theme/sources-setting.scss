@@ -22,20 +22,19 @@
       .beta {
         color: $light-primary;
         font-weight: bold;
-        margin-right: .2rem;
+        margin-right: 0.2rem;
         font-size: $font-large;
       }
     }
   }
   .tabs-container {
+    height: auto;
     background: $white;
     border-radius: 10px;
     padding: 0 1rem;
     display: flex;
     justify-content: space-between;
-    height: 68vh;
     .tabs {
-      overflow-y: scroll;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
       padding: 1rem 0;
@@ -44,8 +43,12 @@
         display: none;
       }
       .tab-pane {
+        color: $black;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
+        &.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+          color: $light-primary !important;
+        }
         .source-settings {
           width: 55vw;
         }
@@ -53,6 +56,8 @@
     }
 
     .right-section {
+      position: sticky;
+      top: 50px;
       margin-top: 6.5rem;
       height: 28vh;
       & > * {
@@ -79,11 +84,6 @@
       }
     }
   }
-}
-
-.sticky-btns {
-  position: sticky;
-  top: 5px;
 }
 
 .back-to-supplier {
@@ -151,13 +151,6 @@
   margin-top: $spacer;
 }
 
-.buttons-config {
-  margin-top: $spacer;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .overlay-select {
   position: fixed;
   top: 0;
@@ -192,6 +185,9 @@
 }
 
 @media (max-width: 1030px) {
+  .tablist {
+    width: 100% !important;
+  }
   .tab-settings {
     width: 80%;
   }

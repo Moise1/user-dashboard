@@ -1,60 +1,16 @@
-.beta-bg {
-  background-color: var(--bgPage);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
+.source-table {
+  border-bottom: 1px solid #dedede !important;
 }
 
-.beta-bg h2 {
-  color: var(--bgBlue);
+.source-table-head {
+  background-color: #fff;
+
+  color: var(--color-dark-violet);
+  white-space: nowrap;
   font-weight: bold;
-  font-size: var(--text-heading);
-}
-
-.beta-bg span {
-  font-weight: 400;
-  font-size: var(--font-xl);
-  color: var(--color-grey);
-}
-
-/* DROPDOWN STYLE  */
-
-.supplier-dropdown .Dropdown-control {
-  width: 219.47px;
-  height: 62px;
-  border-radius: 8px;
-  background: var(--bgHighlight);
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  border: 0;
-}
-
-.supplier-dropdown .Dropdown-arrow {
-  border-color: #000 transparent transparent;
-  border-width: 8px 5px 3px;
-}
-
-.supplier-dropdown .is-open .Dropdown-arrow {
-  border-color: transparent transparent #000;
-  border-width: 3px 5px 8px;
-}
-
-.supplier-dropdown .Dropdown-arrow {
-  margin-top: 10px;
-}
-
-.supplier-dropdown .Dropdown-placeholder.is-selected {
-  font-weight: 400;
-  font-size: 18px;
-  color: #000;
-  margin-top: 10px;
-}
-
-.supplier-dropdown .Dropdown-menu {
-  width: 219.47px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  border: 0;
-  border-radius: 8px;
+  position: sticky;
+  top: 0;
+  font-size: var(--font-large) !important;
 }
 
 /* SELECT SOURCES STYLES  */
@@ -155,73 +111,6 @@
 
 .react-list-data-here li:hover {
   background-color: rgba (255, 255, 255, 0.418);
-}
-
-.drop-list-search-input {
-  width: 100%;
-  padding: 5px 12px;
-  border-radius: 8px;
-  background: var(--bgHighlight);
-  border: 2px solid #707070;
-  opacity: 0.29;
-}
-
-.drop-list-search-input input {
-  border: 0;
-  outline: none;
-}
-
-.drop-list-search-input .search-icon-input-box {
-  position: absolute;
-  top: 18px;
-  right: 25px;
-}
-
-.add-acccounnt-span {
-  font-weight: 600;
-  font-size: var(--font-large);
-  color: var(--bgBlue);
-  cursor: pointer;
-  display: inline-block;
-}
-
-.add-account-input-inselect {
-  width: 100%;
-  padding: 5px 12px;
-  border-radius: 8px;
-  background: var(--bgHighlight);
-  border: 2px solid #70707052;
-  /* opacity: 0.29; */
-  position: relative;
-  margin: 12px 0;
-}
-
-.add-account-input-inselect input {
-  border: 0;
-  outline: none;
-}
-
-.add-account-input-inselect .plus-icon-add {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.account-label-style {
-  font-weight: bold;
-  font-size: var(--font-medium);
-  color: var(--txtBaseColor);
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-
-.account-input-style:focus-visible {
-  outline: none;
-}
-
-.acc-input-parent {
-  width: 255px;
 }
 
 .amazonlogin-input-style {
