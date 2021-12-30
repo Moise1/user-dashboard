@@ -127,7 +127,7 @@
 }
 
 .delete-order-modal-btn-style {
-  background-color: $exit;
+  background-color: $dark-red;
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
@@ -433,6 +433,15 @@
   }
 }
 
+.obj-state-text {
+  font-size: var(--font-small);
+  font-weight: bold;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {

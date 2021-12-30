@@ -111,7 +111,7 @@ const SourcesTable = () => {
                 <td className="source-td-none" onClick={() => handleSupplierValue(provider)}>
                   {template}
                 </td>
-                <td className="w-12per shipping-policy-text white-space-pre-wrap source-td-none">{shippingPolicy}</td>
+                <td className="w-12per shipping-policy-text source-td-none">{shippingPolicy}</td>
                 <td className="w-15per text-center text-md-left">
                   <Popover
                     placement="right"
@@ -134,10 +134,10 @@ const SourcesTable = () => {
                     </button>
                   </Popover>
                 </td>
-                <td className="return-policy-text white-space-pre-wrap source-td-none">{returnPolicy}</td>
-                <td className="item-postcode-text white-space-pre-wrap source-td-none">{itemPostcode}</td>
-                <td className="item-city-text white-space-pre-wrap source-td-none">{itemCity}</td>
-                <td className="item-country-text white-space-pre-wrap source-td-none">{itemCountry}</td>
+                <td className="return-policy-text source-td-none">{returnPolicy}</td>
+                <td className="item-postcode-text source-td-none">{itemPostcode}</td>
+                <td className="item-city-text source-td-none">{itemCity}</td>
+                <td className="item-country-text source-td-none">{itemCountry}</td>
               </tr>
             </tbody>
           );

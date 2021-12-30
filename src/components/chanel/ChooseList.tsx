@@ -230,7 +230,7 @@ function ChooseList(props: props) {
                     onClick={handleRoute}
                     type="submit"
                     disabled={values.list == ''}
-                    className={`border-0 bg-trans mx-auto ${values.list == '' ? 'btn-disbaled text-grey' : ''} `}
+                    className={`border-0 bg-trans mx-auto ${values.list == '' ? 'btn-disabled text-grey' : ''} `}
                   >
                     <div className="d-flex align-items-center">
                       <span className="font-weight-bold">{t('fininsh')} </span>

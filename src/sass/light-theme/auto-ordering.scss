@@ -36,9 +36,9 @@
 
       .copy-icon {
         position: absolute;
-        right: .1rem;
+        right: 0.1rem;
         cursor: pointer;
-        margin-top: .3rem;
+        margin-top: 0.3rem;
       }
       .platfrom-creds {
         display: flex;
@@ -92,5 +92,5 @@
 
 .adjusted-main-container {
   @include auto-ordering();
-  width: 60%;
+  width: 85%;
 }

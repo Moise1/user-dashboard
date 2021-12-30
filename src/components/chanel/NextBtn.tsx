@@ -14,7 +14,7 @@ export const NextBtn = (props: props) => {
       onClick={onClick}
       type="submit"
       disabled={disabled}
-      className={`border-0 bg-trans mx-md-auto ml-auto ${disabled ? ' text-grey btn-disbaled' : ''}`}
+      className={`border-0 bg-trans mx-md-auto ml-auto ${disabled ? ' text-grey disabled-btn' : ''}`}
     >
       <div className="d-flex align-items-center">
         <span className="font-weight-bold">{title}</span>
