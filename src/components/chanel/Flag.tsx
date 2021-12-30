@@ -31,7 +31,7 @@ export default function Flag(props: FlagProps) {
             src={flag}
             height="80"
             width="80"
-            className={`  ${location == name || location == '' ? '' : 'btn-disbaled'}`}
+            className={`  ${location == name || location == '' ? '' : 'disabled-btn'}`}
             alt="flag"
           />
         </div>

@@ -34,12 +34,7 @@ const AccountsInput = (myProps: props) => {
                 <label className="account-label-style" htmlFor="">
                   {whatSelect} {t('SourceConfigInputs.login')}
                 </label>
-                <input
-                  disabled={DisableAccount}
-                  className="amazonlogin-input-style"
-                  type="text"
-                  placeholder={whichAccountSelect}
-                />
+                <input disabled={DisableAccount} className="" type="text" placeholder={whichAccountSelect} />
               </div>
               <div className="ml-3 ml-sm-5">
                 <label className="account-label-style" htmlFor="">

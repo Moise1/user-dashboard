@@ -1,5 +1,96 @@
 // medium screens and laptops breakpoints
 
+.obj-sale-title {
+  color: var(--avery-bg);
+  font-size: var(--font-small);
+  font-weight: 500;
+}
+
+.shipping-policy-text {
+  font-weight: normal;
+  font-size: 14px;
+  color: var(--color-dark-violet);
+}
+
+.table-disable-button {
+  width: 117px;
+  height: 27px;
+  border-radius: 10px;
+  background: #9a9a9a;
+  font-weight: bold;
+  font-size: var(--font-extra-small);
+
+  color: var(--bgHighlight);
+}
+
+.table-enabled-button {
+  width: 117px;
+  height: 27px;
+  border-radius: 10px;
+  background: var(--bgBlue) !important;
+  font-weight: bold;
+  font-size: var(--font-extra-small);
+  color: var(--bgHighlight);
+}
+
+.table-coming-soon-button {
+  width: 137px;
+  height: 27px;
+  border-radius: 10px;
+  background: #aec7ff !important;
+  font-weight: bold;
+  font-size: var(--font-extra-small);
+
+  text-align: left;
+  color: var(--bgHighlight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 575.98px) {
+  .table-disable-button {
+    width: 95px;
+    height: 23px;
+  }
+
+  .table-enabled-button {
+    width: 95px;
+    height: 23px;
+  }
+
+  .table-coming-soon-button {
+    width: 100px;
+    height: 23px;
+  }
+}
+
+/* ORDER SVG COLOR  */
+
+@media (max-width: 576px) {
+  .account-input-style {
+    height: 30px;
+  }
+
+  .otp-code-input-styles {
+    height: 30px;
+  }
+}
+
+@media (max-width: 360.98px) {
+  .table-disable-button {
+    width: 85px;
+  }
+
+  .table-enabled-button {
+    width: 85px;
+  }
+
+  .table-coming-soon-button {
+    width: 90px;
+  }
+}
+
 @media only screen and (min-width: 1224px) {
   .sources-table-container {
     .sources-table {

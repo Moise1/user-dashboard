@@ -433,6 +433,15 @@
   }
 }
 
+.obj-state-text {
+  font-size: var(--font-small);
+  font-weight: bold;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 /* MEDIA QUERY  */
 
 @media (max-width: 768px) {

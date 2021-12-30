@@ -96,3 +96,9 @@ a {
     background-color: $input-background-secondary !important;
   }
 }
+
+.disabled-btn {
+  cursor: auto !important;
+  opacity: 0.3;
+  box-shadow: none;
+}
