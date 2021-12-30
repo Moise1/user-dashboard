@@ -1,81 +1,78 @@
 import { useState } from 'react';
-import { Select, Input } from 'antd';
-import { ReactNode } from 'react';
+import { Select, Input, Button } from 'antd';
 import '../../sass/light-theme/selector.scss';
-import profile from '../../assets/new-account.svg';
+import { PlusOutlined } from '@ant-design/icons';
 
 interface Props {
-  children: ReactNode;
+  children: { id: number; value: string, alias?: string }[];
   defaultValue: string;
   addAccount?: boolean;
+  onChange?: (value: string) => void;
 }
 
 const { Option } = Select;
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, addAccount } = props;
+  const { children, defaultValue, addAccount, onChange } = props;
   const [showInput, setShowInput] = useState<boolean>(false);
-  const [newAccount, setNewAccount] = useState<string>('');
-  // const [showSearch, setShowSearch] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
-  const options = [];
-  if (Array.isArray(children)) {
-    for (let i = 0; i < children.length; i++) {
-      options.push(
-        <Option key={children[i].id} value={children[i].value}>
-          {children[i].value}
-        </Option>
-      );
-    }
-  }
- 
-  // const handleFocus = () => setShowSearch(!showSearch);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> & React.MouseEvent<HTMLInputElement>): void => {
-    e.stopPropagation();
-    setNewAccount(e.target.value);
-  };
+  const [newAccount, setNewAccount] = useState({ value: '' });
+  const [data] = useState<Props['children']>(children);
 
-  const handleOptionClick = (e: React.MouseEvent<HTMLSpanElement | HTMLParagraphElement>): void => {
-    e.stopPropagation();
+  const options = data.map((d) => (
+    <Option key={d.id} value={d.alias ? d.alias : d.value}>
+      {d.alias ? d.alias : d.value}
+    </Option>
+  ));
+  const handleOptionClick = (): void => {
     setShowInput(!showInput);
   };
 
-  const newAccBtn = (
-    <div>
-      {showInput ? (
-        <Input
-          className="new-acc-input"
-          placeholder="Create account..."
-          name="new-account"
-          value={newAccount}
-          onClick={handleChange}
-          onChange={handleChange}
-        >
-          {/* <span onClick={handleOptionClick} role="">
-            {' '}
-            <img src={profile} alt="New acc" />
-          </span> */}
-        </Input>
-      ) : (
-        <p className="new-acc-btn" onClick={handleOptionClick}>
-          <span>Add acount</span>
-          <span>
-            <img src={profile} alt="New acc" />
-          </span>
-        </p>
-      )}
-    </div>
-  );
+  const handleChange = (e: React.ChangeEvent<{ value: string }>) => {
+    setNewAccount({ value: e?.currentTarget?.value });
+  };
+
+  const handleSubmit = () => {
+    data.push({ id: data.length + 1, value: newAccount.value });
+    setNewAccount({ value: '' });
+  };
 
   return (
     <Select
       className="selector"
       allowClear={false}
+      onChange={onChange}
       showSearch
       placeholder="Select..."
       defaultValue={defaultValue}
+      dropdownRender={(menu) => (
+        <>
+          {showAddAccount && (
+            <div className="action-ctrl">
+              {showInput ? (
+                <div className="input-container">
+                  <Input
+                    className="new-acc-input"
+                    placeholder="Create account..."
+                    value={newAccount.value}
+                    name="newAccount"
+                    onChange={handleChange}
+                  />
+                  <a onClick={handleSubmit}>
+                    <PlusOutlined className="add-icon" />
+                  </a>
+                </div>
+              ) : (
+                <Button className="new-acc-btn" onClick={handleOptionClick}>
+                  New Account
+                </Button>
+              )}
+            </div>
+          )}
+          {menu}
+        </>
+      )}
     >
-      {showAddAccount && newAccBtn}
       {options}
     </Select>
   );

@@ -1,13 +1,27 @@
 @import 'general.config';
 
-.new-acc-btn {
-  border: 2px solid blue;
+.input-container {
   display: flex;
   justify-content: space-between;
 }
+.action-ctrl{
+  margin-bottom: 1rem;
+  .new-acc-input {
+    border-radius: 7px;
+  }
+  .new-acc-btn {
+    background: $primary !important;
+    width: 100%;
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+  }
+  
+}
 
-.new-acc-input {
-  border: 2px solid green;
+.add-icon {
+  padding: 0 0.6rem;
 }
 
 .selector {
@@ -26,6 +40,7 @@
       margin-top: 0.2rem;
       position: absolute;
       right: 3%;
+      cursor: pointer;
     }
   }
 }

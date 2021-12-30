@@ -10,6 +10,22 @@
 
   .source-description {
     margin-top: 1rem;
+    display: flex;
+
+    .beta-area {
+      background: $white;
+      width: 25%;
+      margin: 0 10rem;
+      padding: 0.3rem 0;
+      text-align: center;
+      border-radius: 10px;
+      .beta {
+        color: $light-primary;
+        font-weight: bold;
+        margin-right: .2rem;
+        font-size: $font-large;
+      }
+    }
   }
   .tabs-container {
     background: $white;
