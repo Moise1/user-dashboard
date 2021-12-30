@@ -1,4 +1,17 @@
-// medium screens and laptops breakpoints
+.source-table {
+  border-bottom: 1px solid #dedede !important;
+}
+
+.source-table-head {
+  background-color: #fff;
+
+  color: var(--color-dark-violet);
+  white-space: nowrap;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  font-size: var(--font-large) !important;
+}
 
 .obj-sale-title {
   color: var(--avery-bg);
