@@ -3,6 +3,7 @@
 // Large and extra large screens
 
 .top-bar {
+  height: 60px;
   position: sticky;
   padding: 10px;
   top: 0;
@@ -19,8 +20,8 @@
     .logo {
       top: 12px;
       left: 38px;
-      width: 47px;
-      height: 54px;
+      width: 37px;
+      height: 40px;
       opacity: 1;
     }
 
@@ -31,6 +32,7 @@
     .logo-text {
       color: $primary;
       margin: auto;
+      font-size: $font-large;
     }
   }
   .menu-burger {
@@ -118,6 +120,10 @@
       box-shadow: 0px 2px 6px #00000029;
       border-radius: 10px;
       opacity: 1;
+      margin: auto;
+      height: 30px;
+      padding: 15px 5px 15px 5px;
+      cursor: pointer;
 
       &:focus {
         border: none !important;
