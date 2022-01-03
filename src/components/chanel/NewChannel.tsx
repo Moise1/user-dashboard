@@ -45,10 +45,6 @@ export const NewChannel = ({_ignored}: Props) => {
     setData({ ...data, step: step + 1 });
   };
 
-  // const handleChange = (input: keyof state) => (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const ns = { ...data, [input]: e.target.value };
-  //   setData(ns);
-  // };
   const handleChangePlatform = (value: platformType) => {
     setData({ ...data, platform: value });
   };
