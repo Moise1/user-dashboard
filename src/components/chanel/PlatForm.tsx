@@ -45,7 +45,6 @@ export const PlatForm = (props: props) => {
   if (inputs[1]?.checked) {
     const newContent = inputs[1].nextSibling?.childNodes[1] as HTMLElement;
     newDescription.innerHTML = newContent.innerHTML;
-
   }
   if (inputs[2]?.checked) {
     const newContent = inputs[2].nextSibling?.childNodes[1] as HTMLElement;
@@ -110,8 +109,11 @@ export const PlatForm = (props: props) => {
                 <img src={amazon_logo} className="platform-img" alt="amazon logo" />
                 <div className="description-area">
                   <div className="market-place">{t('mrktplc')}</div>
-                  <div>{t('amzsltcd')}</div>
-                  <p className="amazon-sub"> <i>{t('amzsub')}</i></p>
+                  <p>{t('amzsltcd')}</p>
+                  <p className="amazon-sub">
+                    {' '}
+                    <i>{t('amzsub')}</i>
+                  </p>
                 </div>
               </div>
             </label>

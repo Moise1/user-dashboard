@@ -8,10 +8,14 @@
 
 .platforms-form {
   display: flex;
+  padding: $spacer;
+
   .new-description-area {
     display: none;
   }
   .platforms-area {
+    padding: 10px;
+    margin-top: $spacer;
     .sell-title {
       margin-top: 1rem;
       text-align: center;
@@ -22,7 +26,6 @@
     .cards-container {
       margin-top: 3rem;
       padding: 2rem;
-      box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 
       .platforms-card {
         .input {
@@ -33,6 +36,7 @@
         }
         .card-input {
           border-radius: 10px;
+          padding: $spacer;
           box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
 
           .description-area {
@@ -56,13 +60,6 @@
         }
       }
     }
-
-    .action-area {
-      position: absolute;
-      top: 90%;
-      left: 50%;
-      margin: 0 auto;
-    }
   }
 }
 
@@ -71,6 +68,7 @@
 @media only screen and (max-width: 1030px) {
   .platforms-form {
     display: block;
+    padding: 0 !important;
 
     .new-description-area {
       display: grid;
@@ -90,6 +88,8 @@
       .amazon-sub {
         font-weight: bold;
         margin-top: 0.4rem;
+        position: absolute;
+        margin-top: 170px;
       }
     }
 
@@ -102,8 +102,10 @@
           justify-content: center;
           align-items: center;
           height: auto;
+          padding: 10px !important;
+
           .platform-img {
-            width: 70px;
+            height: 20px;
           }
           .description-area {
             display: none;

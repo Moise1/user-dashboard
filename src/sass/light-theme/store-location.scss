@@ -1,0 +1,10 @@
+@import 'general.config';
+
+.location-form {
+  display: flex;
+  padding: $spacer;
+}
+.location-area {
+  padding: 10px;
+  margin-top: $spacer;
+}

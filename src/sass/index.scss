@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 @import '../sass/light-theme/general.config';
-@import '../_variables.css';
+
 body {
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
   line-height: 1.5715;
   .ant-layout {
-    height: calc(100vh - 80px);
     overflow: auto;
     padding: 0.3rem;
     background: $super-light-blue;
