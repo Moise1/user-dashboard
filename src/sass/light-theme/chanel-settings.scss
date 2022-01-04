@@ -1,0 +1,16 @@
+@import 'general.config';
+
+// large and extra large screens
+
+.channel-settings {
+  margin-top: 1rem;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+    margin-top: 2rem;
+    .config-btns {
+      margin-top: 2rem;
+    }
+  }
+}

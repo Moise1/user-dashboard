@@ -11,6 +11,7 @@ import { Subscriptions } from './components/subscriptions/Subscriptions';
 import { PricingRules } from './components/pricing-rules/PricingRules';
 import { BrowserExtensions } from './components/browser-extensions/BrowserExtensions';
 import { VaProfiles } from './components/va-profiles/VaProfiles';
+import {ChannelSettings} from './components/chanel/ChannelSettings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
@@ -68,6 +69,7 @@ export const App = withRouter(({ history }) => {
                 <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
                 <Route path="/sources-setting" component={Sources} />
                 <Route path="/sources" component={SourcesTable} />
+                <Route path="/channel" component={ChannelSettings} />
                 <Route path="/new-channel" component={NewChannel} />
                 <Route path="/services" component={Services} />
                 <Route path="/subscriptions" component={Subscriptions} />

@@ -84,16 +84,15 @@ a {
 }
 
 .blue-input {
-  background-color: $input-background-secondary;
+  background: $mild-light-blue !important;
   border-radius: 10px;
-  border: none;
   height: 42px;
   font-size: $font-medium;
   font-weight: $bold;
 
   &:focus {
     box-shadow: none !important;
-    background-color: $input-background-secondary !important;
+    background: $mild-light-blue !important;
   }
 }
 

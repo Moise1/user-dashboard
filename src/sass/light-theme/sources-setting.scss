@@ -63,25 +63,7 @@
       & > * {
         margin-bottom: 1rem;
       }
-      .config-btns {
-        display: grid;
-        row-gap: 1rem;
-        .save-btn,
-        .reset-btn,
-        .selector {
-          padding: 5px 8px;
-          border-radius: 8px;
-          color: $white;
-          width: 217px;
-          height: 59px;
-        }
-        .save-btn {
-          background: $green;
-        }
-        .reset-btn {
-          background: $ash-gray;
-        }
-      }
+      
     }
   }
 }

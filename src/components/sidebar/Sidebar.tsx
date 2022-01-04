@@ -19,6 +19,7 @@ import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 
+
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
@@ -78,7 +79,7 @@ export const Sidebar = (props: Props) => {
       key: 9,
       listName: t('Menu.Channel'),
       onClick: () => {
-        history.push('/new-channel'), location.reload();
+        history.push('/channel'), location.reload();
       }
     },
     { key: 10, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
