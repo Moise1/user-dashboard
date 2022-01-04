@@ -6,4 +6,3 @@ interface StatusBarProps {
 export const StatusBar = (props: StatusBarProps) => {
   return <div className={`status-bar ${props.className}`}>{props.children}</div>;
 };
-

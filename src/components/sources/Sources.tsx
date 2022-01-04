@@ -5,7 +5,7 @@ import { LeftBackArrowIcon } from '../common/Icons';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import { SourceSettings } from './SourceSettings';
-import ConfigButtons from './ConfigButtons';
+import {ConfigButtons} from '../small-components/ConfigButtons';
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
 import '../../sass/light-theme/sources-setting.scss';
@@ -63,7 +63,7 @@ const Sources = () => {
           <Selector defaultValue="Select Supplier" onChange={handleOptionChange}>
             {dummyData}
           </Selector>
-          <ConfigButtons className="config-btns" />
+          <ConfigButtons />
         </div>
       </div>
     </Layout>

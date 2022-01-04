@@ -43,3 +43,14 @@ export const dummyUsers = [
     password: '12345'
   }
 ];
+
+export const dummyDuration = [
+  { value: '30 days', id: 1 },
+  { value: 'Test policy', id: 2 },
+  { value: 'Other test policy', id: 3 }
+];
+
+export const dummyDeliver = [
+  { value: '30 days', id: 1 },
+  { value: 'Test return', id: 2 }
+];

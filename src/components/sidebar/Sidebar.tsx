@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
@@ -18,7 +18,7 @@ import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
-// import { useColorScheme } from '../../custom-hooks/useColorScheme';
+
 
 const { SubMenu } = Menu;
 
@@ -79,7 +79,7 @@ export const Sidebar = (props: Props) => {
       key: 9,
       listName: t('Menu.Channel'),
       onClick: () => {
-        history.push('/new-channel'), location.reload();
+        history.push('/channel'), location.reload();
       }
     },
     { key: 10, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },

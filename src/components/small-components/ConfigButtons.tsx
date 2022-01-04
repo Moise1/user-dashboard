@@ -1,13 +1,11 @@
 import { DispatchedOrderIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
-import {Button} from 'antd';
+import { Button } from 'antd';
+import '../../sass/light-theme/config-btns.scss';
 
-interface Props {
-  className: string;
-}
-const ConfigButtons = ({ className }: Props) => {
+export const ConfigButtons = () => {
   return (
-    <div className={className}>
+    <div className="config-btns">
       <Button className="save-btn">
         <DispatchedOrderIcon />
         <span className="ml-2">{t('SourceConfigInputs.SaveChanges')} </span>
@@ -16,5 +14,3 @@ const ConfigButtons = ({ className }: Props) => {
     </div>
   );
 };
-
-export default ConfigButtons;

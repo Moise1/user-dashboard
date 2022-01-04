@@ -5,6 +5,12 @@
   "addchan": "Add new channel",
 
   "AddNewChannel": "Add new channel",
+  
+  "Channel.Monitoring": "Monitoring",
+  "Channel.Listing": "Listing",
+  "Channel.Business": "Business",
+  "Channel.Other": "Other",
+
   "ActiveListings": "Active Listings",
   "ActiveListingsShort": "Active",
 

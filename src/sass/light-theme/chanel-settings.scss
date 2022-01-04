@@ -1,0 +1,62 @@
+@import 'general.config';
+
+// large and extra large screens
+
+.channel-settings {
+  margin-top: 1rem;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: $white;
+    .text-section {
+      margin-bottom: 5rem;
+    }
+    .description-and-controls {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      width: 50vw;
+      .limit-area,
+      .stock-area {
+        margin-top: 1rem;
+        width: 100%;
+        .radio {
+          width: 100%;
+        }
+        .stock-input {
+          width: 5vw !important;
+        }
+        .limit,
+        .stock {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .description-area {
+        h4 {
+          font-weight: bold;
+          font-size: $font-large;
+        }
+        p {
+          font-size: $font-small;
+        }
+      }
+    }
+    .config-btns {
+      margin-top: 2rem;
+    }
+  }
+}
+
+// Mobile screen sizes
+
+@media only screen and(max-width: 750px) {
+  .channel-settings {
+    .content {
+      display: grid;
+    }
+  }
+}

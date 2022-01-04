@@ -1,21 +1,37 @@
+import { useState } from 'react';
 import { Layout } from 'antd';
 import { SearchBars } from '../small-components/SearchBars';
 import { StatusBar } from '../small-components/StatusBar';
-import ListingsStatusBtn from '../small-components/ListingsStatusBtn';
+import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/listings.scss';
 import { listingsData, listingsHeadingData } from '../common/ListingsData';
 import { ListingsTable } from '../tables/ListingsTable';
 
 const Listings = () => {
+
   const windowwidth = window.innerWidth;
+  const [active, setActive] = useState(false);
+  const onChangeTab = () => setActive(true);
 
   return (
     <Layout className="listings-container">
       <StatusBar>
-        <ListingsStatusBtn title={`${windowwidth < 900 ? t('ActiveListingsShort') : t('ActiveListings')}`} />
-        <ListingsStatusBtn title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`} />
-        <ListingsStatusBtn title={`${windowwidth < 900 ? t('TerminatedListingsShort') : t('TerminatedListings')}`} />
+        <StatusBtn
+          title={`${windowwidth < 900 ? t('ActiveListingsShort') : t('ActiveListings')}`}
+          handleClick={onChangeTab}
+          active={active}
+        />
+        <StatusBtn
+          title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`}
+          handleClick={onChangeTab}
+          active={active}
+        />
+        <StatusBtn
+          title={`${windowwidth < 900 ? t('TerminatedListingsShort') : t('TerminatedListings')}`}
+          handleClick={onChangeTab}
+          active={active}
+        />
       </StatusBar>
       <SearchBars showColumns />
       <ListingsTable bodyData={listingsData} headerData={listingsHeadingData} />
