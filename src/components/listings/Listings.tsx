@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { Layout } from 'antd';
 import { SearchBars } from '../small-components/SearchBars';
 import { StatusBar } from '../small-components/StatusBar';
@@ -11,13 +10,9 @@ import { ListingsTable } from '../tables/ListingsTable';
 
 const Listings = () => {
   const windowwidth = window.innerWidth;
-  const [active, setActive] = useState<number>(1);
-  const [index, setIndex] = useState<number>(1);
+  const [active, setActive] = useState(true);
 
-  const onChangeTab = () => {
-    setActive((preveStep) => preveStep + 1);
-    setIndex((preveStep) => preveStep + 1);
-  };
+  const onChangeTab = () => setActive(!active);
   return (
     <Layout className="listings-container">
       <StatusBar>
@@ -25,19 +20,16 @@ const Listings = () => {
           title={`${windowwidth < 900 ? t('ActiveListingsShort') : t('ActiveListings')}`}
           handleClick={onChangeTab}
           active={active}
-          index={index}
         />
         <StatusBtn
           title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`}
           handleClick={onChangeTab}
-          active={active}
-          index={index}
+          active={!active}
         />
         <StatusBtn
           title={`${windowwidth < 900 ? t('TerminatedListingsShort') : t('TerminatedListings')}`}
           handleClick={onChangeTab}
-          active={active}
-          index={index}
+          active={!active}
         />
       </StatusBar>
       <SearchBars showColumns />

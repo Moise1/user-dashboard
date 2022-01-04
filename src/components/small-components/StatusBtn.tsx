@@ -3,13 +3,13 @@ import '../../sass/light-theme/listings-status.scss';
 
 interface Props {
   title: string;
-  active?: number;
-  index?: number;
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+  active?: boolean;
 }
 
 export const StatusBtn = (props: Props) => {
-  const { title, handleClick, active, index } = props;
+  const { title, handleClick, active } = props;
   let hasAddedCallback = false;
 
   const [_dimensions, setDimensions] = useState({
@@ -28,11 +28,8 @@ export const StatusBtn = (props: Props) => {
       hasAddedCallback = true;
     }
   });
-
   return (
-    <button onClick={handleClick}
-      className={`${active == index ? 'active-btn' : 'inactive-btn'} status-btn`}
-    >
+    <button className={active ? 'active-btn' : 'inactive-btn'} onClick={handleClick}>
       {title}
     </button>
   );

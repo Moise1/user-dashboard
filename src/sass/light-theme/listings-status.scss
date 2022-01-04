@@ -14,27 +14,30 @@
   box-shadow: 0px 3px 6px #2338c129;
 }
 
-.status-btn {
+@mixin status-btn() {
   border-radius: 10px !important;
-  padding: $spacer * 0.25 0;
-  background: none;
-}
-.active-btn {
-  padding: 0.9rem;
+  padding: $spacer * 0.55;
   font-size: $font-large;
   font-weight: $bold;
+  border: none !important;
+  outline: none !important;
 
   &:focus {
     border: none !important;
     outline: none !important;
+  }
+}
+
+.active-btn {
+  @include status-btn();
+  &:focus {
     color: $white;
     background: $light-primary;
   }
 }
 
 .inactive-btn {
+  @include status-btn();
   background: transparent !important;
-  font-size: $font-large;
-  font-weight: $bold;
   color: $primary;
 }
