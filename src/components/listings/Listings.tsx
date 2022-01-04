@@ -9,10 +9,11 @@ import { listingsData, listingsHeadingData } from '../common/ListingsData';
 import { ListingsTable } from '../tables/ListingsTable';
 
 const Listings = () => {
-  const windowwidth = window.innerWidth;
-  const [active, setActive] = useState(true);
 
-  const onChangeTab = () => setActive(!active);
+  const windowwidth = window.innerWidth;
+  const [active, setActive] = useState(false);
+  const onChangeTab = () => setActive(true);
+
   return (
     <Layout className="listings-container">
       <StatusBar>
@@ -24,12 +25,12 @@ const Listings = () => {
         <StatusBtn
           title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`}
           handleClick={onChangeTab}
-          active={!active}
+          active={active}
         />
         <StatusBtn
           title={`${windowwidth < 900 ? t('TerminatedListingsShort') : t('TerminatedListings')}`}
           handleClick={onChangeTab}
-          active={!active}
+          active={active}
         />
       </StatusBar>
       <SearchBars showColumns />

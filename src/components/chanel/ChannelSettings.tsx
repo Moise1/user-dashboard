@@ -12,7 +12,7 @@ import { ChannelOther } from '../small-components/ChannelOther';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
-  const [active, setActive] = useState<boolean>(true);
+  const [active, setActive] = useState<boolean>(false);
 
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
@@ -31,17 +31,20 @@ export const ChannelSettings = () => {
     }
   };
 
+  
   const handleChangeIndex = (index: number) => {
     setIndex(index);
-    setActive(!active);
+    setActive(true);
   };
+  
+  
   return (
     <Layout className="channel-settings">
       <StatusBar>
         <StatusBtn title={`${t('Channel.Monitoring')}`} handleClick={() => handleChangeIndex(0)} active={active}/>
-        <StatusBtn title={`${t('Channel.Listing')}`} handleClick={() => handleChangeIndex(1)} active={!active}/>
-        <StatusBtn title={`${t('Channel.Business')}`} handleClick={() => handleChangeIndex(2)} active={!active}/>
-        <StatusBtn title={`${t('Channel.Other')}`} handleClick={() => handleChangeIndex(3)} active={!active}/>
+        <StatusBtn title={`${t('Channel.Listing')}`} handleClick={() => handleChangeIndex(1)} active={active}/>
+        <StatusBtn title={`${t('Channel.Business')}`} handleClick={() => handleChangeIndex(2)} active={active}/>
+        <StatusBtn title={`${t('Channel.Other')}`} handleClick={() => handleChangeIndex(3)} active={active}/>
       </StatusBar>
 
       <Row className="content">
