@@ -11,6 +11,11 @@
   "Channel.Business": "Business",
   "Channel.Other": "Other",
 
+  "Listing.Main": "Main",
+  "Listing.Description": "Description",
+  "Listing.Details": "Details",
+  "Listing.Options": "Options",
+
   "ActiveListings": "Active Listings",
   "ActiveListingsShort": "Active",
 
@@ -130,7 +135,11 @@
   "OrderDetails.MarkAsDispatched": "Mark as dispatched",
   "OrderDetails.DeleteOrder": "Delete order",
   
-
+  "SaveChanges": "Save Changes",
+  "ResetToDefault": "Reset to Default",
+  "TerminateItem": "Terminate Item",
+  "ForceRefresh": "Force Refresh",
+  
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
   "SourceConfigInputs.password": "password",
@@ -140,8 +149,7 @@
   "SourceConfigInputs.AddAccount": "Add account",
   "SourceConfigInputs.Disabled": "Disabled",
   "SourceConfigInputs.EnableDisableAutoOrdering": "Enable/Disable Auto-ordering",
-  "SourceConfigInputs.SaveChanges": "Save changes",
-  "SourceConfigInputs.ResetToDefault": "Reset to default",
+ 
   "SourceConfigInputs.DadAccount": "Dad account",
   "SourceConfigInputs.AccountConfiguration": "Account configuration",
   "SourceConfigInputs.ConfigureAutoordering": "Configure Autoordering (Beta)",

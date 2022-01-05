@@ -1,12 +1,5 @@
-import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import {
-  DustbinDeleteOrderIcon,
-  DispatchedOrderIcon,
-  HandStopOrderIcon,
-  ProcessOrderIcon,
-  ThreeDotsColumnIcon
-} from '../common/Icons';
+import { TrashIcon, CheckIcon, HandStopOrderIcon, ProcessOrderIcon, ThreeDotsColumnIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/orders-dropdown.scss';
 import '../../sass/light-theme/orders.scss';
@@ -31,11 +24,11 @@ function OrdersDropdown() {
             </span>
           </Dropdown.Item>
           <Dropdown.Item className="dropdown-item">
-            <DispatchedOrderIcon />
+            <CheckIcon />
             <span className="dropdown-text"> {t('OrderDetails.MarkAsDispatched')}</span>
           </Dropdown.Item>
           <Dropdown.Item className="dropdown-item">
-            <DustbinDeleteOrderIcon />
+            <TrashIcon />
             <span className="dropdown-text">{t('OrderDetails.DeleteOrder')} </span>
           </Dropdown.Item>
         </Dropdown.Menu>

@@ -7,7 +7,7 @@ import Pagination from '../common/Pagination';
 import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 import { PopupModal } from '../modals/PopupModal';
-import { DeleteAccount } from '../listings/DeleteAccount';
+import { EditListing } from '../listings/EditListing';
 
 interface props {
   setOrderNumber?: (arg0: number) => void;
@@ -19,15 +19,10 @@ interface props {
 
 export const ListingsTable = (tableProps: props) => {
   const { setOrderNumber, orderSelectedArray, headerData, bodyData } = tableProps;
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [AoDisabledModal, setAoDisabledModal] = useState<boolean>(false);
-
-  const handleOpenModal = () => setOpenModal(!openModal);
-  const handleCancel = () => setOpenModal(!openModal);
-  const handleDelete = () => setOpenModal(!openModal);
-  const handleCheck = () => setChecked(!checked);
-
+  const handleOpenModal = () => setOpen(!open);
+  
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(bodyData.length);
   };
@@ -44,13 +39,8 @@ export const ListingsTable = (tableProps: props) => {
   );
   return (
     <div className="listings-table">
-      <PopupModal open={openModal}>
-        <DeleteAccount
-          checked={checked}
-          handleCheck={handleCheck}
-          handleCancel={handleCancel}
-          handleDelete={handleDelete}
-        />
+      <PopupModal open={open} width={900} handleClose={handleOpenModal }>
+        <EditListing />
       </PopupModal>
 
       <table className="table listings-table mb-0">

@@ -8,9 +8,11 @@ import StoreList from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
-import { Badge } from 'antd';
+import { Badge, Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
+import { DeleteAccount } from '../users/DeleteAccount';
 
 interface Props {
   handleSidebarMobile: () => void;
@@ -19,11 +21,37 @@ interface Props {
 const Topbar = (props: Props) => {
   const { handleSidebarMobile } = props;
   const [open, setOpen] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
+  const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
+  
+  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
+  const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
+  const handleDelete = () => setOpenDeleteModal(!openDeleteModal);
 
   return (
     <div className="top-bar">
+      <PopupModal open={openDeleteModal}>
+        <DeleteAccount
+          checked={checked}
+          handleCheck={handleCheck}
+          handleCancel={handleCancel}
+          handleDelete={handleDelete}
+        />
+      </PopupModal>
+
+      <PopupModal 
+        open={open} 
+        width={800} 
+        style={{ top: 20 }} 
+        bodyStyle={{ height: 600 }}
+        handleClose={handleOpenModal}
+      >
+        <BuyTokens />
+      </PopupModal>
+
       <div className="logo-container">
         <a className="logo-link" href="/">
           <img className="logo" src={Logo} alt="logo" />
@@ -57,9 +85,6 @@ const Topbar = (props: Props) => {
           <img src={bell} alt="" />
         </Badge>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>
-          <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }}>
-            <BuyTokens />
-          </PopupModal>
           <img src={coinIcon} alt="coinIcon" />
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>
@@ -75,6 +100,8 @@ const Topbar = (props: Props) => {
             </Button>
           </div>
         </Dropdown>
+
+        <Avatar size={40} icon={<UserOutlined onClick={handleDeleteModal} />} />
       </div>
     </div>
   );

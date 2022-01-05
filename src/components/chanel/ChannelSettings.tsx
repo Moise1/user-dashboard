@@ -3,12 +3,12 @@ import { Layout, Row, Col } from 'antd';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
-import { ConfigButtons } from '../small-components/ConfigButtons';
 import '../../sass/light-theme/chanel-settings.scss';
 import { ChannelMonitoring } from '../small-components/ChannelMonitoring';
 import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';
 import { ChannelOther } from '../small-components/ChannelOther';
+import {SuccessBtn, ResetBtn} from '../small-components/ActionBtns';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
@@ -49,8 +49,9 @@ export const ChannelSettings = () => {
 
       <Row className="content">
         <Col className="text-section">{renderContent(index)}</Col>
-        <Col>
-          <ConfigButtons />
+        <Col className="action-btns">
+          <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+          <ResetBtn>{t('SResetToDefault')}</ResetBtn>
         </Col>
       </Row>
     </Layout>
