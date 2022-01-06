@@ -8,7 +8,7 @@ import { ChannelMonitoring } from '../small-components/ChannelMonitoring';
 import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';
 import { ChannelOther } from '../small-components/ChannelOther';
-import {SuccessBtn, ResetBtn} from '../small-components/ActionBtns';
+import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
@@ -31,20 +31,18 @@ export const ChannelSettings = () => {
     }
   };
 
-  
   const handleChangeIndex = (index: number) => {
     setIndex(index);
     setActive(true);
   };
-  
-  
+
   return (
     <Layout className="channel-settings">
       <StatusBar>
-        <StatusBtn title={`${t('Channel.Monitoring')}`} handleClick={() => handleChangeIndex(0)} active={active}/>
-        <StatusBtn title={`${t('Channel.Listing')}`} handleClick={() => handleChangeIndex(1)} active={active}/>
-        <StatusBtn title={`${t('Channel.Business')}`} handleClick={() => handleChangeIndex(2)} active={active}/>
-        <StatusBtn title={`${t('Channel.Other')}`} handleClick={() => handleChangeIndex(3)} active={active}/>
+        <StatusBtn title={`${t('Channel.Monitoring')}`} handleClick={() => handleChangeIndex(0)} active={active} />
+        <StatusBtn title={`${t('Channel.Listing')}`} handleClick={() => handleChangeIndex(1)} active={active} />
+        <StatusBtn title={`${t('Channel.Business')}`} handleClick={() => handleChangeIndex(2)} active={active} />
+        <StatusBtn title={`${t('Channel.Other')}`} handleClick={() => handleChangeIndex(3)} active={active} />
       </StatusBar>
 
       <Row className="content">

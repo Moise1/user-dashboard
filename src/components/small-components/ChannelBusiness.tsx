@@ -111,6 +111,6 @@ export const ChannelBusiness = () => {
           <Radio>Paypal</Radio>
         </Col>
       </Row>
-    </> 
+    </>
   );
 };

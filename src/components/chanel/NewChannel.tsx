@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import {Account} from './Account';
+import { Account } from './Account';
 import AccountConnect from './AccountConnect';
 import ChooseList, { chooseListValues } from './ChooseList';
-import {PlatForm} from './PlatForm';
+import { PlatForm } from './PlatForm';
 import StoreLocation from './StoreLocation';
 import UserName from './UserName';
-import {Stepper} from './Stepper';
+import { Stepper } from './Stepper';
 import '../../sass/light-theme/new-channel.scss';
 
 interface state {
@@ -24,7 +24,7 @@ interface Props {
   _ignored?: boolean;
 }
 
-export const NewChannel = ({_ignored}: Props) => {
+export const NewChannel = ({ _ignored }: Props) => {
   const [data, setData] = useState<state>({
     step: 1,
     platform: 'ebay',
@@ -148,17 +148,15 @@ export const NewChannel = ({_ignored}: Props) => {
           />
         </div>
       );
-    default: 
+    default:
       return undefined;
     }
   };
-  
-  return(
+
+  return (
     <div className="new-channel-container">
-      <Stepper current={step} className="stepper"/>
-      <div className="new-channel">
-        {stepDetector()}
-      </div>
+      <Stepper current={step} className="stepper" />
+      <div className="new-channel">{stepDetector()}</div>
     </div>
   );
 };

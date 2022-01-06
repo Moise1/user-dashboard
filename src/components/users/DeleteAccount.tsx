@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Checkbox, Button } from 'antd';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
-import '../../sass/light-theme/listings.scss';
+import '../../sass/light-theme/top-bar.scss';
 
 interface Props {
   checked: boolean;

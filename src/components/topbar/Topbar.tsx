@@ -9,7 +9,8 @@ import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
 import { Badge, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { User } from 'react-feather';
+
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../users/DeleteAccount';
@@ -26,7 +27,7 @@ const Topbar = (props: Props) => {
 
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
-  
+
   const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
   const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
   const handleDelete = () => setOpenDeleteModal(!openDeleteModal);
@@ -42,13 +43,7 @@ const Topbar = (props: Props) => {
         />
       </PopupModal>
 
-      <PopupModal 
-        open={open} 
-        width={800} 
-        style={{ top: 20 }} 
-        bodyStyle={{ height: 600 }}
-        handleClose={handleOpenModal}
-      >
+      <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
         <BuyTokens />
       </PopupModal>
 
@@ -101,7 +96,7 @@ const Topbar = (props: Props) => {
           </div>
         </Dropdown>
 
-        <Avatar size={40} icon={<UserOutlined onClick={handleDeleteModal} />} />
+        <Avatar size={40} icon={<User onClick={handleDeleteModal} />} />
       </div>
     </div>
   );

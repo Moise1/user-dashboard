@@ -16,7 +16,7 @@ export const listingsHeadingData = [
   'Listings.Column.Options'
 ];
 
-export interface ListingsItems{
+export interface ListingsItems {
   id: number;
   img: string;
   itemNo: number;
@@ -28,9 +28,8 @@ export interface ListingsItems{
   markup: JSX.Element;
   stock: JSX.Element;
   created: Date;
-  options: JSX.Element
+  options: JSX.Element;
 }
-
 
 export const listingsData: ListingsItems[] = [
   {
@@ -112,7 +111,7 @@ export const listingsData: ListingsItems[] = [
     created: new Date(),
     options: (
       <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon}/>
+        <img className="ml-4" src={editicon} />
         <img className="ml-3" src={doticon} />
       </div>
     )

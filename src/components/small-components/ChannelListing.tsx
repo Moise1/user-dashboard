@@ -100,7 +100,9 @@ export const ChannelListing = () => {
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
           <h4>Default Template</h4>
-          <p>Define the look and feel of your listings. You can see different options under the Settings &gt; Templates</p>
+          <p>
+            Define the look and feel of your listings. You can see different options under the Settings &gt; Templates
+          </p>
         </Col>
         <Col span={8}>
           <Selector defaultValue="Plain">{dummyData}</Selector>

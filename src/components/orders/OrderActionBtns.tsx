@@ -8,7 +8,7 @@ interface props {
   orderNumber: number;
 }
 
-export const  OrderActionBtns = (typeBtnProps: props) => {
+export const OrderActionBtns = (typeBtnProps: props) => {
   const { orderNumber } = typeBtnProps;
 
   return (

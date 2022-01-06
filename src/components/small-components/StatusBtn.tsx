@@ -29,7 +29,7 @@ export const StatusBtn = (props: Props) => {
     }
   });
   return (
-    <button className={`${active  ? 'active-btn' : 'inactive-btn'} active-btn`} onClick={handleClick}>
+    <button className={`${active ? 'active-btn' : 'inactive-btn'} active-btn`} onClick={handleClick}>
       {title}
     </button>
   );

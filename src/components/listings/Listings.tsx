@@ -9,7 +9,6 @@ import { listingsData, listingsHeadingData } from '../common/ListingsData';
 import { ListingsTable } from '../tables/ListingsTable';
 
 const Listings = () => {
-
   const windowwidth = window.innerWidth;
   const [active, setActive] = useState(false);
   const onChangeTab = () => setActive(true);

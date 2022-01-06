@@ -1,8 +1,7 @@
 import { Row, Col, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { t } from '../../global/transShim';
-import {SuccessBtn, DeleteBtn, WarningBtn} from './ActionBtns';
-
+import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 
 export const ListingMain = () => {
   const { TextArea } = Input;
@@ -19,7 +18,7 @@ export const ListingMain = () => {
           </Form.Item>
 
           <Form.Item label="Notes">
-            <TextArea rows={4}/>
+            <TextArea rows={6} />
           </Form.Item>
           <div className="btns-container">
             <DeleteBtn>{t('TerminateItem')}</DeleteBtn>

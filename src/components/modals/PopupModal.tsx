@@ -13,9 +13,9 @@ interface Props {
 export const PopupModal: FC<Props> = (props: Props) => {
   const { open, children, width, style, bodyStyle, handleClose } = props;
   return (
-    <Modal 
+    <Modal
       visible={open}
-      footer={null} 
+      footer={null}
       width={width}
       style={style}
       bodyStyle={bodyStyle}

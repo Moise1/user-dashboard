@@ -9,7 +9,7 @@
 // buttons' container for the main tab
 .btns-container {
   display: flex;
-  margin-top: 6rem;
+  margin-top: 3.5rem;
   justify-content: space-between;
   & > * {
     margin-left: 1rem;
@@ -18,8 +18,9 @@
 
 // buttons' container for the description tab
 .btns-container-description,
-.btns-container-details, .btns-container-options {
-  margin-top: 3rem;
+.btns-container-details,
+.btns-container-options{
+  margin-top: 2rem;
   display: flex;
   justify-content: flex-start;
   & > * {

@@ -11,7 +11,7 @@ import { Subscriptions } from './components/subscriptions/Subscriptions';
 import { PricingRules } from './components/pricing-rules/PricingRules';
 import { BrowserExtensions } from './components/browser-extensions/BrowserExtensions';
 import { VaProfiles } from './components/va-profiles/VaProfiles';
-import {ChannelSettings} from './components/chanel/ChannelSettings';
+import { ChannelSettings } from './components/chanel/ChannelSettings';
 import { Layout } from 'antd';
 import Sources from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';

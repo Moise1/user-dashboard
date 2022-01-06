@@ -3,10 +3,11 @@ import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
 import { ListingMain } from '../small-components/ListingMain';
-import {ListingDescription } from '../small-components/ListingDescription';
+import { ListingDescription } from '../small-components/ListingDescription';
 import { ListingDetails } from '../small-components/ListingDetails';
 import { ListingOptions } from '../small-components/ListingOptions';
 import '../../sass/light-theme/edit-listing.scss';
+import { ExternalLink } from 'react-feather';
 
 export const EditListing = () => {
   const [active, setActive] = useState(false);
@@ -15,14 +16,14 @@ export const EditListing = () => {
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
-      return <ListingMain/>;
+      return <ListingMain />;
     case 1:
-      return <ListingDescription/>;
+      return <ListingDescription />;
     case 2:
-      return <ListingDetails/>;
+      return <ListingDetails />;
 
     case 3:
-      return <ListingOptions/>;
+      return <ListingOptions />;
 
     default:
       return <></>;
@@ -31,7 +32,6 @@ export const EditListing = () => {
   const onChangeTab = (index: number) => {
     setActive(true);
     setIndex(index);
-
   };
   return (
     <>
@@ -41,44 +41,29 @@ export const EditListing = () => {
           <a href="#">
             View price Changes{' '}
             <span>
-              <i className="fa fa-external-link" aria-hidden="true"></i>
+              <ExternalLink size="20" />
             </span>
           </a>
           <a href="#">
             View stock changes{' '}
             <span>
-              <i className="fa fa-external-link" aria-hidden="true" />
+              <ExternalLink size="20" />
             </span>
           </a>
         </div>
       </div>
 
       <StatusBar>
-        <StatusBtn
-          title={`${t('Listing.Main')}`}
-          handleClick={() => onChangeTab(0)} 
-          active={active}/>
+        <StatusBtn title={`${t('Listing.Main')}`} handleClick={() => onChangeTab(0)} active={active} />
 
-        <StatusBtn 
-          title={`${t('Listing.Description')}`}
-          handleClick={() => onChangeTab(1)} 
-          active={active} />
-    
-        <StatusBtn 
-          title={`${t('Listing.Details')}`}
-          handleClick={() => onChangeTab(2)} 
-          active={active} />
+        <StatusBtn title={`${t('Listing.Description')}`} handleClick={() => onChangeTab(1)} active={active} />
 
-        <StatusBtn 
-          title={`${t('Listing.Options')}`}
-          handleClick={() => onChangeTab(3)} 
-          active={active} />
+        <StatusBtn title={`${t('Listing.Details')}`} handleClick={() => onChangeTab(2)} active={active} />
 
+        <StatusBtn title={`${t('Listing.Options')}`} handleClick={() => onChangeTab(3)} active={active} />
       </StatusBar>
 
-      <div className="content">
-        {renderContent(index)}
-      </div>
+      <div className="content">{renderContent(index)}</div>
     </>
   );
 };

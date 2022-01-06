@@ -22,7 +22,7 @@ export const ListingsTable = (tableProps: props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [AoDisabledModal, setAoDisabledModal] = useState<boolean>(false);
   const handleOpenModal = () => setOpen(!open);
-  
+
   const handleAllchecked = () => {
     if (setOrderNumber) setOrderNumber(bodyData.length);
   };
@@ -39,7 +39,7 @@ export const ListingsTable = (tableProps: props) => {
   );
   return (
     <div className="listings-table">
-      <PopupModal open={open} width={900} handleClose={handleOpenModal }>
+      <PopupModal open={open} width={900} handleClose={handleOpenModal}>
         <EditListing />
       </PopupModal>
 

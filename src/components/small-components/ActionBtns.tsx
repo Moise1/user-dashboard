@@ -1,4 +1,4 @@
-import { CheckIcon, TrashIcon, RefreshIcon} from '../common/Icons';
+import { CheckIcon, TrashIcon, RefreshIcon } from '../common/Icons';
 import '../../sass/light-theme/action-btns.scss';
 
 import { Button } from 'antd';
