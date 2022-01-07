@@ -9,7 +9,7 @@ import { ListingOptions } from '../small-components/ListingOptions';
 import '../../sass/light-theme/edit-listing.scss';
 import { ExternalLink } from 'react-feather';
 
-export const EditListing = () => {
+export const EditSingleListing = () => {
   const [active, setActive] = useState(false);
   const [index, setIndex] = useState<number>(0);
 
@@ -54,13 +54,10 @@ export const EditListing = () => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Listing.Main')}`} handleClick={() => onChangeTab(0)} active={active} />
-
-        <StatusBtn title={`${t('Listing.Description')}`} handleClick={() => onChangeTab(1)} active={active} />
-
-        <StatusBtn title={`${t('Listing.Details')}`} handleClick={() => onChangeTab(2)} active={active} />
-
-        <StatusBtn title={`${t('Listing.Options')}`} handleClick={() => onChangeTab(3)} active={active} />
+        <StatusBtn title={`${t('Main')}`} handleClick={() => onChangeTab(0)} active={active} />
+        <StatusBtn title={`${t('Description')}`} handleClick={() => onChangeTab(1)} active={active} />
+        <StatusBtn title={`${t('Details')}`} handleClick={() => onChangeTab(2)} active={active} />
+        <StatusBtn title={`${t('Options')}`} handleClick={() => onChangeTab(3)} active={active} />
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>
