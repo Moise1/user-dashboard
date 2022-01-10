@@ -11,6 +11,10 @@
     margin-top: 2rem;
     padding: 2rem;
     background: $white;
+    .action-btns{
+      display: grid !important;
+      height: 25vh !important;
+    }
     .text-section {
       margin-bottom: 5rem;
     }

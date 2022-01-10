@@ -102,7 +102,6 @@ function StoreLocation(props: StoreLocationProps) {
               <Flag
                 platform={platform}
                 currentPlatform={i.platform}
-                // handleChangeLocation={i.slug}
                 flag={i.path}
                 name={i.name}
                 location={values.storeLocation}

@@ -3,7 +3,7 @@ import { Layout, Row, Col } from 'antd';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/chanel-settings.scss';
+import '../../sass/light-theme/channel-settings.scss';
 import { ChannelMonitoring } from '../small-components/ChannelMonitoring';
 import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';
@@ -49,7 +49,7 @@ export const ChannelSettings = () => {
         <Col className="text-section">{renderContent(index)}</Col>
         <Col className="action-btns">
           <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
-          <ResetBtn>{t('SResetToDefault')}</ResetBtn>
+          <ResetBtn>{t('ResetToDefault')}</ResetBtn>
         </Col>
       </Row>
     </Layout>

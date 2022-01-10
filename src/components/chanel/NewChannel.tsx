@@ -81,72 +81,62 @@ export const NewChannel = ({ _ignored }: Props) => {
       );
     case 2:
       return (
-        <div className="new-channel">
-          <StoreLocation
-            platform={data.platform}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            values={values}
-            step={step}
-            handleChangeLocation={handleChangeLocation}
-          />
-        </div>
+        <StoreLocation
+          platform={data.platform}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          values={values}
+          step={step}
+          handleChangeLocation={handleChangeLocation}
+        />
       );
     case 3:
       return (
-        <div className="new-channel">
-          <Account
-            platform={data.platform}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            handleChangeApi={handleChangeApi}
-            step={step}
-          />
-        </div>
+        <Account
+          platform={data.platform}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChangeApi={handleChangeApi}
+          step={step}
+        />
       );
     case 4:
       return (
-        <div className="new-channel">
-          <AccountConnect
-            api={data.api}
-            extension={data.extension}
-            platform={data.platform}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            handleChangeApi={handleChangeApi}
-            handleChangeExtension={handleChangeExtension}
-            values={values}
-            step={step}
-          />
-        </div>
+        <AccountConnect
+          api={data.api}
+          extension={data.extension}
+          platform={data.platform}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChangeApi={handleChangeApi}
+          handleChangeExtension={handleChangeExtension}
+          values={values}
+          step={step}
+        />
       );
     case 5:
       return (
-        <div className="new-channel">
-          <UserName
-            platform={data.platform}
-            user={data.user}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            handleChangeUser={handleChangeUser}
-            values={values}
-            step={step}
-          />
-        </div>
+        <UserName
+          platform={data.platform}
+          user={data.user}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChangeUser={handleChangeUser}
+          values={values}
+          step={step}
+        />
       );
     case 6:
       return (
-        <div className="new-channel">
-          <ChooseList
-            platform={data.platform}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            handleChangeList={handleChangeList}
-            values={values}
-            list={list}
-            step={step}
-          />
-        </div>
+        <ChooseList
+          platform={data.platform}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          handleChangeList={handleChangeList}
+          values={values}
+          list={list}
+          step={step}
+        />
       );
     default:
       return undefined;
