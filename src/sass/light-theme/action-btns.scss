@@ -6,17 +6,8 @@
   height: 25vh;
 }
 
-// buttons' container for the main tab
-.btns-container {
-  display: flex;
-  margin-top: 3.5rem;
-  justify-content: space-between;
-  & > * {
-    margin-left: 1rem;
-  }
-}
-
-// buttons' container for the description tab
+// buttons' containers.
+.btns-container,
 .btns-container-description,
 .btns-container-details,
 .btns-container-options{
@@ -70,3 +61,36 @@
     color: $white;
   }
 }
+
+
+// Mobile screen sizes
+
+@media only screen and (max-width: 750px) {
+  .action-btns,
+  .btns-container,.btns-container-options, .btns-container-description,
+  .btns-container-details{
+    font-size: $font-small;
+    padding: 0.6rem 1.3rem;
+    .success-btn {
+      margin-left: 0.9rem;
+    }
+  }
+
+
+  .form {
+    padding: 5rem 0;
+  };
+
+  .btns-container,.btns-container-options, .btns-container-description,
+    .btns-container-details{
+     justify-content: space-between;
+     width: 100% !important;
+     & > *{
+       margin-left: .3rem;
+     }
+     .success-btn{
+       position: static;
+     }
+    }
+ 
+} ;

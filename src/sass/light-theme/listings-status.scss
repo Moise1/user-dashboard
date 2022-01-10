@@ -3,7 +3,6 @@
 // Extra Large screens
 
 .status-bar {
-  // margin: auto;
   margin-top: $spacer;
   position: relative;
   padding: $spacer;
@@ -41,4 +40,13 @@
   @include status-btn();
   background: $light-gray;
   color: $primary;
+}
+
+
+// small screen sizes
+@media only screen and (max-width: 750px) {
+  .active-btn, .inactive-btn {
+    padding: 0.6rem 1.3rem;
+    font-size: $font-small;
+  }
 }

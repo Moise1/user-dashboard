@@ -35,7 +35,7 @@ export const BulkEditMain = () => {
       </Row>
       <div className="action-btns">
         <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <SuccessBtn>{t('ForceRefresh')}</SuccessBtn>
+        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
       </div>
     </Form>
   );

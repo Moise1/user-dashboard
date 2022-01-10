@@ -9,28 +9,15 @@ import { listingsData, listingsHeadingData } from '../common/ListingsData';
 import { ListingsTable } from '../tables/ListingsTable';
 
 const Listings = () => {
-  const windowwidth = window.innerWidth;
   const [active, setActive] = useState(false);
   const onChangeTab = () => setActive(true);
 
   return (
     <Layout className="listings-container">
       <StatusBar>
-        <StatusBtn
-          title={`${windowwidth < 900 ? t('ActiveListingsShort') : t('ActiveListings')}`}
-          handleClick={onChangeTab}
-          active={active}
-        />
-        <StatusBtn
-          title={`${windowwidth < 900 ? t('PendingListingsShort') : t('PendingListings')}`}
-          handleClick={onChangeTab}
-          active={active}
-        />
-        <StatusBtn
-          title={`${windowwidth < 900 ? t('TerminatedListingsShort') : t('TerminatedListings')}`}
-          handleClick={onChangeTab}
-          active={active}
-        />
+        <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active} />
+        <StatusBtn title={`${t('PendingListings')}`} handleClick={onChangeTab} active={active} />
+        <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>
       <SearchBars showColumns />
       <ListingsTable bodyData={listingsData} headerData={listingsHeadingData} />

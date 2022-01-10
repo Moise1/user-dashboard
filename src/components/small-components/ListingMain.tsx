@@ -7,7 +7,7 @@ export const ListingMain = () => {
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">
-      <Row gutter={[70, 0]}>
+      <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
             <Input className="blue-input" value="2021 New Stylish Simplicity Print..." />
@@ -20,10 +20,6 @@ export const ListingMain = () => {
           <Form.Item label="Notes">
             <TextArea rows={6} />
           </Form.Item>
-          <div className="btns-container">
-            <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-            <WarningBtn>{t('ForceRefresh')}</WarningBtn>
-          </div>
         </Col>
 
         <Col>
@@ -46,10 +42,13 @@ export const ListingMain = () => {
           <p>
             <strong>Your</strong> fee percentage <strong>is set to 13%</strong>. <Link to="/change"> Change</Link>
           </p>
-
-          <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
         </Col>
       </Row>
+      <div className="btns-container">
+        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
+        <WarningBtn>{t('ForceRefresh')}</WarningBtn>
+        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+      </div>
     </Form>
   );
 };

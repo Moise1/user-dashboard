@@ -5,7 +5,7 @@ import { t } from '../../global/transShim';
 import { BulkEditMain } from '../small-components/BulkEditMain';
 import { BulkEditOptions } from '../small-components/BulkEditOptions';
 import { AlertCircle } from 'react-feather';
-import '../../sass/light-theme/edit-listing.scss';
+import '../../sass/light-theme/edit-multiple-listings.scss';
 
 
 interface Props{
