@@ -53,7 +53,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical/>,
+    options: <MoreVertical />,
     checked: false
   },
   {
@@ -77,7 +77,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical/>,
+    options: <MoreVertical />,
     checked: false
   },
   {
@@ -101,7 +101,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical/>,
+    options: <MoreVertical />,
     checked: false
   },
   {
@@ -125,7 +125,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical/>,
+    options: <MoreVertical />,
     checked: false
   },
   {
@@ -149,7 +149,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical/>,
+    options: <MoreVertical />,
     checked: false
   }
 ];

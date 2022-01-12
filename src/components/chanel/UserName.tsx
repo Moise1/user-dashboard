@@ -1,97 +1,65 @@
-import React from 'react';
-import { Container } from '@material-ui/core';
-import { ProgressBar } from './ProgressBar';
-import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
-import Previousstep from '../small-components/Previousstep';
 
 interface values {
   user: string;
 }
 interface props {
-  nextStep: () => void;
   step: number;
-  prevStep: () => void;
   user: string;
   values: values;
   platform: platformType;
   handleChangeUser: (newUser: string) => void;
 }
 
-function UserName(props: props) {
-  const { nextStep, handleChangeUser, values, step, prevStep, platform, user } = props;
+export const UserName = (props: props) => {
+  const { handleChangeUser,values, platform, user } = props;
 
-  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    nextStep();
-  };
-  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    prevStep();
-  };
   return (
-    <Container component="main" maxWidth="lg">
-      <div>
-        <form>
-          <div className="row mx-auto">
-            <div className="col-lg-8   bg-white  mt-3">
-              <Previousstep Previous={Previous} />
-              <div className="row mx-auto px-lg-5 px-md-3 h-80vh">
-                <div className="text-center mx-auto col-md-6 mt-2 px-0 px-md-2">
-                  <h5 className="font-weight-bold mb-0">
-                    {t('whatsur')}
-                    {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}
-                    {t('username')}?
-                  </h5>
-                </div>
-                <div className="text-center col-12 col-md-8 mx-auto">
-                  <div>
-                    {t('makesure')}
-                    {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}{' '}
-                    <span className="font-weight-bold">{t('username')} </span> {t('notur')}
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      className="form-control mt-2"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      value={user}
-                      placeholder={
-                        platform == 'ebay'
-                          ? ' EBay username'
-                          : platform == 'amazon'
-                            ? ' Amazon username'
-                            : ' Shopify username'
-                      }
-                      onChange={(e) => handleChangeUser(e.target.value)}
-                    />
-                    <div
-                      className={`text-left font-weight-bold
-                    ${values.user == '' ? 'text-danger' : 'd-none'}
-                    `}
-                    >
-                      <i>
-                        {t('fill')}
-                        {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}{' '}
-                        {t('username')}
-                      </i>
-                    </div>
-                  </div>
-                </div>
-                <div className="mx-auto next-fix mt-auto pt-2 mb-3 text-md-center text-right w-100 align-items-end d-flex">
-                  <NextBtn onClick={Continue} title={'Next'} disabled={values.user == ''} />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 d-xl-block d-none m-auto">
-              <ProgressBar step={step} platform={platform} />
+    <form>
+      <div className="row mx-auto px-lg-5 px-md-3 h-80vh">
+        <div className="text-center mx-auto col-md-6 mt-2 px-0 px-md-2">
+          <h5 className="font-weight-bold mb-0">
+            {t('whatsur')}
+            {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}
+            {t('username')}?
+          </h5>
+        </div>
+        <div className="text-center col-12 col-md-8 mx-auto">
+          <div>
+            {t('makesure')}
+            {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}{' '}
+            <span className="font-weight-bold">{t('username')} </span> {t('notur')}
+          </div>
+          <div>
+            <input
+              type="email"
+              className="form-control mt-2"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              value={user}
+              placeholder={
+                platform == 'ebay'
+                  ? ' EBay username'
+                  : platform == 'amazon'
+                    ? ' Amazon username'
+                    : ' Shopify username'
+              }
+              onChange={(e) => handleChangeUser(e.target.value)}
+            />
+            <div
+              className={`text-left font-weight-bold
+            ${values.user == '' ? 'text-danger' : 'd-none'}
+            `}
+            >
+              <i>
+                {t('fill')}
+                {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}{' '}
+                {t('username')}
+              </i>
             </div>
           </div>
-        </form>
+        </div>
       </div>
-    </Container>
+    </form>
   );
-}
-
-export default UserName;
+};

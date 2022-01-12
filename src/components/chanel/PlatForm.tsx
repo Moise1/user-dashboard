@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Row, Col } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
-import { ProgressBar } from './ProgressBar';
-import { NextBtn } from './NextBtn';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/platform.scss';
 
 export interface values {
   platform?: platformType;
 }
 export interface props {
-  nextStep: () => void;
   handleChangePlatform: (newPlatform: platformType) => void;
   platform: platformType;
   values: values;
@@ -20,13 +16,9 @@ export interface props {
 }
 
 export const PlatForm = (props: props) => {
-  const { nextStep, handleChangePlatform, platform, values, step } = props;
+  const {  handleChangePlatform, platform } = props;
   const [inputs, setInputs] = useState<HTMLInputElement[]>([]);
-  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    nextStep();
-  };
-
+  
   useEffect(() => {
     const dt = document.querySelectorAll('.input');
     const arr = [];
@@ -55,8 +47,8 @@ export const PlatForm = (props: props) => {
     <form className="platforms-form">
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
-        <Row className="cards-container" gutter={[0, 8]}>
-          <Col className="platforms-card" lg={{ span: 6 }}>
+        <Row className="cards-container">
+          <Col className="platforms-card" xs={24} lg={8} >
             <label>
               <input
                 type="radio"
@@ -120,12 +112,7 @@ export const PlatForm = (props: props) => {
           </Col>
           <div className="new-description-area"></div>
         </Row>
-        <div className="action-area">
-          <NextBtn onClick={Continue} disabled={!values.platform} title={t('nxt')} />
-          <p className="select-warning">{!values.platform ? t('platchck') : ''}</p>
-        </div>
       </div>
-      <ProgressBar platform={platform} step={step} />
     </form>
   );
 };

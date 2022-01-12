@@ -8,7 +8,7 @@ export const BulkEditOptions = () => {
   return (
     <div className="listing-options">
       <Row className="description-and-controls">
-        <Col xs={24} xl={8}className="description-area">
+        <Col xs={24} xl={8} className="description-area">
           <h4>Monitor stock</h4>
           <p>
             If the supplier is out of stock of a product, we will prevent people from buying it on your store. When it
@@ -46,7 +46,7 @@ export const BulkEditOptions = () => {
           </p>
           <br />
         </Col>
-        <Col xs={24} xl={8}className="limit-section controls-area">
+        <Col xs={24} xl={8} className="limit-section controls-area">
           <Switch />
           <div className="limit-area">
             <Radio className="radio">No Limit</Radio>

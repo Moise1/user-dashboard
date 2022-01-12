@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { ProgressBar } from './ProgressBar';
+import  { useState } from 'react';
 import { t } from '../../global/transShim';
-import Previousstep from '../small-components/Previousstep';
-import { NextBtn } from './NextBtn';
 import '../../sass/light-theme/account-connect.scss';
 
 interface values {
@@ -10,35 +7,23 @@ interface values {
   api: string;
 }
 interface props {
-  nextStep: () => void;
   handleChangeApi: (newApi: string) => void;
   values: values;
   step: number;
-  prevStep: () => void;
   platform: platformType;
   api: string;
   handleChangeExtension: (newExtension: string) => void;
   extension: string;
 }
 
-function AccountConnect(props: props) {
-  // eslint-disable-next-line no-unused-vars
-  const { nextStep, handleChangeApi, values, step, prevStep, platform, api, handleChangeExtension, extension } = props;
-  const [enable, _setEnable] = useState(false); // ignored setEnable
-  const Continue = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    nextStep();
-  };
-  const Previous = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    prevStep();
-  };
-  console.log(enable, 'value for extension');
+export const AccountConnect = (props: props) => {
+  const { handleChangeApi, values, platform, api, handleChangeExtension, extension } = props;
+  const [, _setEnable] = useState(false); // ignored setEnable
+  
   return (
-    <form className="accountconnect-form">
+    <form className="account connect-form">
       <div className="row mx-auto">
         <div className="col-xl-8   bg-white  mt-3">
-          <Previousstep Previous={Previous} />
           <div className="row mx-auto px-lg-5 px-md-3">
             <div className="text-center mx-auto col-md-12 px-0 px-md-2">
               <h5 className="font-weight-bold mb-0">
@@ -173,11 +158,7 @@ function AccountConnect(props: props) {
                   <i> {t('howextrun')}</i>
                 </div>
               </div>
-              <NextBtn
-                title={'Next'}
-                onClick={Continue}
-                disabled={values.api == '' || (values.api == 'advance' && values.extension == '')}
-              />
+             
               <div className="d-md-block d-none w-100 text-center">
                 <div
                   className={`small mx-auto text-center font-weight-bold mb-1 text-danger lh-1 ${
@@ -197,12 +178,8 @@ function AccountConnect(props: props) {
             </div>
           </div>
         </div>
-        <div className="col-xl-4 d-xl-block d-none m-auto">
-          <ProgressBar step={step} platform={platform} />
-        </div>
+      
       </div>
     </form>
   );
-}
-
-export default AccountConnect;
+};

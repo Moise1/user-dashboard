@@ -23,17 +23,6 @@
   .options {
     cursor: pointer;
   }
-
-  .bulk-edit {
-    margin: 1rem 0;
-    background: $primary;
-    border-radius: 8px;
-    color: $white;
-    &:hover {
-      background: $primary;
-      color: $white;
-    }
-  }
 }
 
 // Mobile devices

@@ -7,12 +7,10 @@ import { BulkEditOptions } from '../small-components/BulkEditOptions';
 import { AlertCircle } from 'react-feather';
 import '../../sass/light-theme/edit-multiple-listings.scss';
 
-
-interface Props{
-    selectedItems: number;
+interface Props {
+  selectedItems: number;
 }
-export const BulkEditListings = ({selectedItems}: Props) => {
-
+export const BulkEditListings = ({ selectedItems }: Props) => {
   const [active, setActive] = useState(false);
   const [index, setIndex] = useState<number>(0);
 
@@ -21,7 +19,7 @@ export const BulkEditListings = ({selectedItems}: Props) => {
     case 0:
       return <BulkEditMain />;
     case 1:
-      return <BulkEditOptions/>;
+      return <BulkEditOptions />;
     default:
       return <></>;
     }
@@ -35,8 +33,7 @@ export const BulkEditListings = ({selectedItems}: Props) => {
       <div className="upper-section">
         <h3>Edit {selectedItems} listings</h3>
         <div className="warning">
-          <AlertCircle/>
-          {' '}
+          <AlertCircle />{' '}
           <span>Be careful, by editing these values you will set this to all the selected listings.</span>
         </div>
       </div>

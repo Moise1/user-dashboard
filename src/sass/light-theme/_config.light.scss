@@ -96,6 +96,24 @@ a {
   }
 }
 
+@mixin btn-styles($color: null) {
+  margin: 1rem 0;
+  background: $color;
+  border-radius: 8px;
+  color: $white;
+  &:hover {
+    background: $color;
+    color: $white;
+  }
+}
+
+.primary-btn {
+  @include btn-styles($primary);
+}
+
+.secondary-btn {
+  @include btn-styles($gray);
+}
 .disabled-btn {
   cursor: auto !important;
   opacity: 0.3;

@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import {Button, Row, Col} from 'antd';
 import { Account } from './Account';
-import AccountConnect from './AccountConnect';
+import {AccountConnect} from './AccountConnect';
 import ChooseList, { chooseListValues } from './ChooseList';
 import { PlatForm } from './PlatForm';
-import StoreLocation from './StoreLocation';
-import UserName from './UserName';
+import {StoreLocation} from './StoreLocation';
+import {UserName} from './UserName';
 import { Stepper } from './Stepper';
+import { ProgressBar } from './ProgressBar';
 import '../../sass/light-theme/new-channel.scss';
 
 interface state {
-  step: number;
   platform: platformType;
   storeLocation: string;
   flag: string;
@@ -25,8 +26,8 @@ interface Props {
 }
 
 export const NewChannel = ({ _ignored }: Props) => {
+  const [step, setStep] = useState<number>(1);
   const [data, setData] = useState<state>({
-    step: 1,
     platform: 'ebay',
     storeLocation: '',
     flag: '',
@@ -37,13 +38,8 @@ export const NewChannel = ({ _ignored }: Props) => {
     list: ''
   });
 
-  const { step } = data;
-  const prevStep = () => {
-    setData({ ...data, step: step - 1 });
-  };
-  const nextStep = () => {
-    setData({ ...data, step: step + 1 });
-  };
+  const handlePrev = () => setStep(prevState => prevState -1);
+  const handleNext = () => setStep(prevState => prevState +1);
 
   const handleChangePlatform = (value: platformType) => {
     setData({ ...data, platform: value });
@@ -67,13 +63,12 @@ export const NewChannel = ({ _ignored }: Props) => {
   const { platform, storeLocation, api, user, list, extension } = data;
   const values: chooseListValues = { platform, storeLocation, api, user, list, extension };
 
-  const stepDetector = (): JSX.Element | undefined => {
+  const stepDetector = (step: number): JSX.Element => {
     switch (step) {
     case 1:
       return (
         <PlatForm
           platform={data.platform || 'ebay'}
-          nextStep={nextStep}
           values={values}
           step={step}
           handleChangePlatform={handleChangePlatform}
@@ -83,8 +78,6 @@ export const NewChannel = ({ _ignored }: Props) => {
       return (
         <StoreLocation
           platform={data.platform}
-          nextStep={nextStep}
-          prevStep={prevStep}
           values={values}
           step={step}
           handleChangeLocation={handleChangeLocation}
@@ -94,8 +87,6 @@ export const NewChannel = ({ _ignored }: Props) => {
       return (
         <Account
           platform={data.platform}
-          nextStep={nextStep}
-          prevStep={prevStep}
           handleChangeApi={handleChangeApi}
           step={step}
         />
@@ -106,8 +97,6 @@ export const NewChannel = ({ _ignored }: Props) => {
           api={data.api}
           extension={data.extension}
           platform={data.platform}
-          nextStep={nextStep}
-          prevStep={prevStep}
           handleChangeApi={handleChangeApi}
           handleChangeExtension={handleChangeExtension}
           values={values}
@@ -119,8 +108,6 @@ export const NewChannel = ({ _ignored }: Props) => {
         <UserName
           platform={data.platform}
           user={data.user}
-          nextStep={nextStep}
-          prevStep={prevStep}
           handleChangeUser={handleChangeUser}
           values={values}
           step={step}
@@ -130,8 +117,6 @@ export const NewChannel = ({ _ignored }: Props) => {
       return (
         <ChooseList
           platform={data.platform}
-          nextStep={nextStep}
-          prevStep={prevStep}
           handleChangeList={handleChangeList}
           values={values}
           list={list}
@@ -139,14 +124,25 @@ export const NewChannel = ({ _ignored }: Props) => {
         />
       );
     default:
-      return undefined;
+      return <></>;
     }
   };
 
   return (
     <div className="new-channel-container">
       <Stepper current={step} className="stepper" />
-      <div className="new-channel">{stepDetector()}</div>
+      <Row gutter={[16,0]}>
+        <Col className="new-channel" lg={15}>
+          {stepDetector(step)}
+        </Col>
+        <Col lg={6}>
+          <ProgressBar platform={data.platform} step={step} />
+        </Col>
+        <div className="nav-btns">
+          <Button className="primary-btn" onClick={handlePrev}>Back</Button>
+          <Button className="primary-btn" onClick={handleNext}>Next</Button>
+        </div>
+      </Row>
     </div>
   );
 };

@@ -44,14 +44,13 @@ export const ListingsTable = (tableProps: props) => {
   const handleAllchecked = (e: CheckboxChangeEvent) => {
     updatedData.forEach((d) => (d.checked = e.target.checked));
     setData([...updatedData]);
-    setSelectedItems(prevState => [...prevState, updatedData.length]);
-
+    setSelectedItems((prevState) => [...prevState, updatedData.length]);
   };
   const handleItemChecked = (e: CheckboxChangeEvent) => {
     updatedData.forEach((d) => {
       if (d.id === e.target.value) {
         d.checked = e.target.checked;
-        setSelectedItems(prevState => [...prevState, d.id]);
+        setSelectedItems((prevState) => [...prevState, d.id]);
       }
     });
     setData([...updatedData]);
@@ -70,7 +69,9 @@ export const ListingsTable = (tableProps: props) => {
         <BulkEditListings selectedItems={selectedItems.length} />
       </PopupModal>
 
-      <Button className="bulk-edit" onClick={handleBulkListingModal}>Bulk Edit</Button>
+      <Button className="primary-btn" onClick={handleBulkListingModal}>
+        Bulk Edit
+      </Button>
 
       <table className="table listings-table mb-0">
         <thead className="listings-table-head">

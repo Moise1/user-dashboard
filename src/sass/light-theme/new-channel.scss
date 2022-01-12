@@ -1,36 +1,151 @@
 @import 'general.config';
+// Large and extra large screens
+
 .ant-layout {
   height: calc(100vh - 0px);
 }
-// Large and extra large screens
+
+// new channel's parent component styles 
 .new-channel-container {
   .stepper {
     display: none;
   }
   .new-channel {
-    margin: 0;
-    top: 50%;
     border-radius: 25px !important;
     background: $white;
+    margin: 2rem;
+    .account{
+      display: grid;
+      place-items: center;
+      margin: 2rem 0;
+      .title, .sub-title{
+        margin-bottom: 1rem;
+      }
+    }
+
+    .location-form{
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+
+      .flags{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 1rem;
+      }
+
+      .select-country{
+        color: $red;
+      }
+    }
+  };
+  .nav-btns{
+    bottom: 2rem;
+    position: absolute;
+    width: 30%;
+    margin-left: 15rem;
+    display: flex;
+    justify-content: space-evenly;
+  
+  }
+
+
+  // platforms component styles 
+  
+  .card-input-element {
+    display: none;
+  }
+  
+  .platforms-form {
+    display: flex;
+    padding: $spacer;
+  
+    .new-description-area {
+      display: none;
+    }
+    .platforms-area {
+      padding: 10px;
+      margin-top: $spacer;
+      .sell-title {
+        margin-top: 1rem;
+        text-align: center;
+        color: $black;
+        font-weight: bold;
+      }
+  
+      .cards-container {
+        margin-top: 3rem;
+        padding: 2rem;
+  
+        .platforms-card {
+          .input {
+            display: none;
+            &:checked + .card-input {
+              box-shadow: 0 0 1px 1px #39418b;
+            }
+          }
+          .card-input {
+            border-radius: 10px;
+            padding: $spacer;
+            box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+  
+            .description-area {
+              margin-top: 1rem;
+              & p {
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;
+              }
+              .amazon-sub {
+                font-style: italic;
+              }
+              .market-place {
+                margin: 0.8rem 0;
+              }
+              .market-place,
+              .amazon-sub {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 // mobile phone screen;
 
-@media only screen and (max-width: 1030px) {
+@media only screen and (max-width: 750px) {
   .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
     padding-left: 0px !important;
   }
-  .new-channel {
-    margin: 0 !important;
-  }
+  
   .new-channel-container {
+
+    margin: 2rem 0  !important;
+
+   .new-channel{
+     margin-top: 3rem;
+     justify-content:center;
+
+     .location-form{
+       .flags{
+         grid-template-columns: repeat(3, 1fr);
+       }
+     }
+   };
+
+   .nav-btns{
+     margin: auto;
+     width: 100%;
+     bottom: 6rem;
+   }
     .stepper {
       margin: 1rem 2rem 0 auto;
       width: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: row;
       & > * {
         margin-left: 10px;
       }
@@ -53,3 +168,61 @@
     }
   }
 }
+
+
+// Tablets screens
+
+@media only screen and (max-width: 1030px) {
+
+  // platforms  component styles 
+
+  .platforms-form {
+    display: block;
+    padding: 0 !important;
+
+    .new-description-area {
+      display: grid;
+      place-items: center;
+      gap: 0;
+      margin-top: -8rem;
+      .market-place {
+        margin-top: -5rem;
+        font-weight: bold;
+      }
+
+      p {
+        margin-top: -10rem;
+        text-align: center;
+      }
+
+      .amazon-sub {
+        font-weight: bold;
+        margin-top: 0.4rem;
+        position: absolute;
+        margin-top: 170px;
+      }
+    }
+
+    .cards-container {
+      height: 60vh;
+      .platforms-card {
+        .card-input {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+          padding: 10px !important;
+
+          .platform-img {
+            height: 20px;
+          }
+          .description-area {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
