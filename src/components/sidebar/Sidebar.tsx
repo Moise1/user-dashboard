@@ -19,7 +19,6 @@ import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 
-
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;

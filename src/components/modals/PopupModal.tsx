@@ -7,11 +7,23 @@ interface Props {
   width?: number;
   bodyStyle?: CSSProperties;
   style?: CSSProperties;
+  handleClose?: () => void;
 }
 
-export const PopupModal: FC<Props> = ({ open, children, width, style, bodyStyle }: Props) => (
-  <Modal visible={open} footer={null} width={width} style={style} bodyStyle={bodyStyle}>
-    {' '}
-    {children}
-  </Modal>
-);
+export const PopupModal: FC<Props> = (props: Props) => {
+  const { open, children, width, style, bodyStyle, handleClose } = props;
+  return (
+    <Modal
+      visible={open}
+      footer={null}
+      width={width}
+      style={style}
+      bodyStyle={bodyStyle}
+      onOk={handleClose}
+      onCancel={handleClose}
+    >
+      {' '}
+      {children}
+    </Modal>
+  );
+};

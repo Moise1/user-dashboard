@@ -19,7 +19,7 @@ type ContextType = {
 
 const SourcesTable = () => {
   const history = useHistory();
-  const {setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
+  const { setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
 
   const handleSupplierValue = (value: string) => {
     setSupplierValue(value);

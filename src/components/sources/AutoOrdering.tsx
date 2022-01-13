@@ -48,7 +48,7 @@ const AutoOrdering = () => {
         {checked && accountConfig && (
           <>
             <fieldset disabled={!activeAccount}>
-              <Form className="form">
+              <Form className="form" layout="vertical">
                 <Form.Item label="Alias" name="alias">
                   <Tooltip
                     placement="topRight"

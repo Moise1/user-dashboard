@@ -1,7 +1,6 @@
 export interface FlagProps {
   name: string;
   platform: platformType;
-
   path?: string;
   slug?: string;
   flag?: string;
@@ -10,7 +9,7 @@ export interface FlagProps {
   currentPlatform?: platformType;
 }
 
-export default function Flag(props: FlagProps) {
+export const Flag  = (props: FlagProps) =>{
   const { platform, currentPlatform, handleChangeLocation, flag, name, location } = props;
   return (
     <div
@@ -39,4 +38,4 @@ export default function Flag(props: FlagProps) {
       </label>
     </div>
   );
-}
+};

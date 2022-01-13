@@ -1,10 +1,9 @@
-import React from 'react';
 import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   AoIconHead,
   CrossModalIcon,
-  DispatchedOrderIcon,
-  DustbinDeleteOrderIcon,
+  CheckIcon,
+  TrashIcon,
   ProcessOrderIcon,
   HandStopOrderIcon,
   LastStepOrderIcon,
@@ -203,22 +202,15 @@ const OrderStateProgressModal = (props: Props) => {
                     </Button>
                   </div>
 
-                  <div className="modal-button-row">
-                    <Button className="delete-btn action-btn">
-                      <DustbinDeleteOrderIcon />
-                      <div className="btn-text">
-                        <span>
-                          {t('OrderTable.Delete')}
-                        </span>
-                        <span>Orders</span>
-                      </div>
-                    </Button>
-                    <Button className="dispatch-btn action-btn">
-                      <DispatchedOrderIcon />
-                      <div className="btn-text">
-                        <span>{t('OrderButtons.MarkAsDispatched')}</span>
-                      </div>
-                    </Button>
+                  <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
+                    <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
+                      <TrashIcon />
+                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
+                    </button>
+                    <button className=" btn disabled-btn mark-dispatch-modal-btn-style">
+                      <CheckIcon />
+                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
+                    </button>
                   </div>
                 </div>
               </div>

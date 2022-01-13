@@ -1,6 +1,5 @@
 import dataoneimg from '../../assets/data1img.png';
-import doticon from '../../assets/doticon.svg';
-import editicon from '../../assets/editicon.svg';
+import { MoreVertical } from 'react-feather';
 
 export const listingsHeadingData = [
   'Listings.Column.Img',
@@ -16,7 +15,7 @@ export const listingsHeadingData = [
   'Listings.Column.Options'
 ];
 
-export interface ListingsItems{
+export interface ListingsItems {
   id: number;
   img: string;
   itemNo: number;
@@ -28,9 +27,9 @@ export interface ListingsItems{
   markup: JSX.Element;
   stock: JSX.Element;
   created: Date;
-  options: JSX.Element
+  options: JSX.Element;
+  checked: boolean;
 }
-
 
 export const listingsData: ListingsItems[] = [
   {
@@ -54,12 +53,8 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: (
-      <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon} />
-        <img className="ml-3" src={doticon} />
-      </div>
-    )
+    options: <MoreVertical />,
+    checked: false
   },
   {
     id: 2,
@@ -82,12 +77,8 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: (
-      <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon} />
-        <img className="ml-3" src={doticon} />
-      </div>
-    )
+    options: <MoreVertical />,
+    checked: false
   },
   {
     id: 3,
@@ -110,12 +101,8 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: (
-      <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon}/>
-        <img className="ml-3" src={doticon} />
-      </div>
-    )
+    options: <MoreVertical />,
+    checked: false
   },
   {
     id: 4,
@@ -138,12 +125,8 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: (
-      <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon} />
-        <img className="ml-3" src={doticon} />
-      </div>
-    )
+    options: <MoreVertical />,
+    checked: false
   },
   {
     id: 5,
@@ -166,11 +149,7 @@ export const listingsData: ListingsItems[] = [
       </div>
     ),
     created: new Date(),
-    options: (
-      <div className="d-flex justify-content-between">
-        <img className="ml-4" src={editicon} />
-        <img className="ml-3" src={doticon} />
-      </div>
-    )
+    options: <MoreVertical />,
+    checked: false
   }
 ];

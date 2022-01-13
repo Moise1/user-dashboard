@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { ProcessOrderIcon, HandStopOrderIcon, DustbinDeleteOrderIcon, DispatchedOrderIcon } from '../common/Icons';
+import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
 import { StatusBar } from '../small-components/StatusBar';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/orders.scss';
@@ -8,7 +8,7 @@ interface props {
   orderNumber: number;
 }
 
-export const  OrderActionBtns = (typeBtnProps: props) => {
+export const OrderActionBtns = (typeBtnProps: props) => {
   const { orderNumber } = typeBtnProps;
 
   return (
@@ -34,7 +34,7 @@ export const  OrderActionBtns = (typeBtnProps: props) => {
         </Button>
 
         <Button className="delete-btn action-btn">
-          <DustbinDeleteOrderIcon />
+          <TrashIcon />
           <div className="btn-text">
             <span>
               {t('OrderTable.Delete')} {orderNumber > 0 ? orderNumber : ''}
@@ -43,7 +43,7 @@ export const  OrderActionBtns = (typeBtnProps: props) => {
           </div>
         </Button>
         <Button className="dispatch-btn action-btn">
-          <DispatchedOrderIcon />
+          <CheckIcon />
           <div className="btn-text">
             <span>{t('OrderButtons.MarkAsDispatched')}</span>
           </div>

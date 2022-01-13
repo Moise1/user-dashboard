@@ -51,9 +51,11 @@ export const BuyTokens = () => {
       <div className="cards-container">
         {data.map((d) => (
           <Card key={d.id} className="card">
-            <img src={d.coin} alt="coin img" className="coin"/>
+            <img src={d.coin} alt="coin img" className="coin" />
             <div className="card-info">
-              <p className="tokens-count"><strong>{d.tokens} Tokens</strong></p>
+              <p className="tokens-count">
+                <strong>{d.tokens} Tokens</strong>
+              </p>
               <p className="euros-amount">
                 <span>&euro;</span>
                 {d.euros}

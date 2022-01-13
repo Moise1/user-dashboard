@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Select, Input, Button } from 'antd';
 import '../../sass/light-theme/selector.scss';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircle } from 'react-feather';
 
 interface Props {
-  children: { id: number; value: string, alias?: string }[];
+  children: { id: number; value: string; alias?: string }[];
   defaultValue: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
@@ -59,7 +59,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
                     onChange={handleChange}
                   />
                   <a onClick={handleSubmit}>
-                    <PlusOutlined className="add-icon" />
+                    <PlusCircle className="add-icon" size="35" />
                   </a>
                 </div>
               ) : (

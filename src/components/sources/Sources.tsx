@@ -5,12 +5,13 @@ import { LeftBackArrowIcon } from '../common/Icons';
 import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import { SourceSettings } from './SourceSettings';
-import {ConfigButtons} from '../small-components/ConfigButtons';
+import { t } from '../../global/transShim';
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
 import '../../sass/light-theme/sources-setting.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
+import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
 type ContextType = {
   supplierValue: string;
@@ -63,7 +64,10 @@ const Sources = () => {
           <Selector defaultValue="Select Supplier" onChange={handleOptionChange}>
             {dummyData}
           </Selector>
-          <ConfigButtons />
+          <div className="action-btns">
+            <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+            <ResetBtn>{t('ResetToDefault')}</ResetBtn>
+          </div>
         </div>
       </div>
     </Layout>
