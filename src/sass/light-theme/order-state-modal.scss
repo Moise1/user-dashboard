@@ -150,3 +150,44 @@
   color: $primary;
   cursor: pointer;
 }
+.modal-buttons-block{
+  display:block;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-button-row{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+}
+
+button{
+width: 45%;
+}
+
+
+
+@media (max-width: 400px) {
+  .modal-buttons-block {
+    row-gap: 0rem;
+    display: grid !important;
+    width: 135%;
+
+    .action-btn {
+      width: 100% !important;
+    }
+  }
+
+  .modal-button-row{
+
+    display:block;
+  width: 70%;
+  }
+  Button{
+    margin-bottom: 0.5rem;
+
+  }
+  }

@@ -5,17 +5,18 @@ import {
   CrossModalIcon,
   DispatchedOrderIcon,
   DustbinDeleteOrderIcon,
+  ProcessOrderIcon,
   HandStopOrderIcon,
   LastStepOrderIcon,
   OrderCheckoutIcon,
   OrderProcessRoundedIcon,
-  ProcessOrderIcon,
   RoundCircleCycleIcon,
   LeftBackArrowIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/order-state-modal.scss';
+import { Button } from 'antd';
 
 interface Props {
   orderProgress: number;
@@ -180,27 +181,44 @@ const OrderStateProgressModal = (props: Props) => {
                     <LeftBackArrowIcon />
                   </div>
                 </div>
-                <div className="d-flex justify-content-between align-items-lg-end flex-lg-column">
-                  <div className="d-flex process-btn-parent justify-content-around align-items-center">
-                    <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-4">
+                <div className="modal-buttons-block">
+                  <div className="modal-button-row">
+                    <Button className="process-btn action-btn">
                       <ProcessOrderIcon />
-                      <span className="ml-1 ml-lg-2">{t('OrderButtons.ProcessOrders')}</span>
-                    </button>
-                    <button className="btn stop-order-btn-style">
+                      <div className="btn-text">
+                        <span>
+                          {t('OrderTable.Process')}
+                        </span>
+                        <span>Orders</span>
+                      </div>
+                    </Button>
+                    <Button className="stop-btn action-btn">
                       <HandStopOrderIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.StopOrders')} </span>
-                    </button>
+                      <div className="btn-tetx">
+                        <span>
+                          {t('OrderTable.Stop')}
+                        </span>
+                        <span>Orders</span>
+                      </div>
+                    </Button>
                   </div>
 
-                  <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
-                    <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
+                  <div className="modal-button-row">
+                    <Button className="delete-btn action-btn">
                       <DustbinDeleteOrderIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
-                    </button>
-                    <button className=" btn disabled-btn mark-dispatch-modal-btn-style">
+                      <div className="btn-text">
+                        <span>
+                          {t('OrderTable.Delete')}
+                        </span>
+                        <span>Orders</span>
+                      </div>
+                    </Button>
+                    <Button className="dispatch-btn action-btn">
                       <DispatchedOrderIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
-                    </button>
+                      <div className="btn-text">
+                        <span>{t('OrderButtons.MarkAsDispatched')}</span>
+                      </div>
+                    </Button>
                   </div>
                 </div>
               </div>
