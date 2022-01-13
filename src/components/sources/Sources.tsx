@@ -6,7 +6,6 @@ import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import { SourceSettings } from './SourceSettings';
 import { t } from '../../global/transShim';
-
 import '../../sass/light-theme/sources-table.scss';
 import { Layout } from 'antd';
 import '../../sass/light-theme/sources-setting.scss';

@@ -47,8 +47,8 @@ export const PlatForm = (props: props) => {
     <form className="platforms-form">
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
-        <Row className="cards-container">
-          <Col className="platforms-card" xs={24} lg={8} >
+        <Row className="cards-container" gutter={[26, 0]}>
+          <Col className="platforms-card"  xs={8}  lg={8} >
             <label>
               <input
                 type="radio"
@@ -68,7 +68,7 @@ export const PlatForm = (props: props) => {
             </label>
           </Col>
 
-          <Col className="platforms-card" lg={{ span: 6 }}>
+          <Col className="platforms-card" xs={8}  lg={8}>
             <label>
               <input
                 type="radio"
@@ -87,7 +87,7 @@ export const PlatForm = (props: props) => {
               </div>
             </label>
           </Col>
-          <Col className="platforms-card" lg={{ span: 6 }}>
+          <Col className="platforms-card" xs={8} lg={8}>
             <label>
               <input
                 type="radio"

@@ -10,10 +10,12 @@
   .stepper {
     display: none;
   }
-  .new-channel {
+  .left-section {
     border-radius: 25px !important;
     background: $white;
     margin: 2rem;
+    height: 100vh;
+    box-shadow: 5px 15px 55px #00000029;
     .account{
       display: grid;
       place-items: center;
@@ -38,18 +40,40 @@
         color: $red;
       }
     }
+
+    .account-connect{
+      .title, .change-settings{
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+
+    .choose-list{
+      border: 2px solid blue;
+      margin-top: 3rem;
+    }
+    .nav-btns{
+      width: 30%;
+      left: 15rem;
+      display: flex;
+      justify-content: space-evenly;
+      position: fixed;
+      bottom: 3rem;
+      .ant-btn{
+        background: transparent !important;
+        color: $primary;
+        outline: none !important;
+        font-weight: bold !important;
+      }
+    }
   };
-  .nav-btns{
-    bottom: 2rem;
-    position: absolute;
-    width: 30%;
-    margin-left: 15rem;
-    display: flex;
-    justify-content: space-evenly;
-  
+
+
+  .right-section{
+    margin-top: 2rem;
+    height: 100vh;
+
   }
-
-
   // platforms component styles 
   
   .card-input-element {
@@ -114,61 +138,6 @@
   }
 }
 
-// mobile phone screen;
-
-@media only screen and (max-width: 750px) {
-  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
-    padding-left: 0px !important;
-  }
-  
-  .new-channel-container {
-
-    margin: 2rem 0  !important;
-
-   .new-channel{
-     margin-top: 3rem;
-     justify-content:center;
-
-     .location-form{
-       .flags{
-         grid-template-columns: repeat(3, 1fr);
-       }
-     }
-   };
-
-   .nav-btns{
-     margin: auto;
-     width: 100%;
-     bottom: 6rem;
-   }
-    .stepper {
-      margin: 1rem 2rem 0 auto;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      & > * {
-        margin-left: 10px;
-      }
-      .ant-steps-item {
-        border-radius: 3px !important;
-        background: $gray !important;
-        width: 52px !important;
-        height: 13px;
-        .ant-steps-item-container {
-          .ant-steps-item-icon,
-          .ant-steps-item-content {
-            display: none;
-          }
-        }
-      }
-
-      .ant-steps-item-finish {
-        background: $green !important;
-      }
-    }
-  }
-}
-
 
 // Tablets screens
 
@@ -221,6 +190,69 @@
             display: none;
           }
         }
+      }
+    }
+  }
+}
+
+
+
+// mobile phone screen;
+
+@media only screen and (max-width: 750px) {
+  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+    padding-left: 0px !important;
+  }
+  .new-channel-container {
+    margin: 2rem 0  !important;
+   .left-section{
+     margin-top: 3rem;
+     justify-content:center;
+
+     .location-form{
+       .flags{
+         grid-template-columns: repeat(3, 1fr);
+       }
+     }
+   };
+
+   .choose-list, .platforms-form{
+      width: 100% !important; 
+   }
+
+   .platforms-card{
+    height: 20%;
+  }
+   .nav-btns{
+    width: 60% !important;
+    bottom: 6rem;
+    left: 20% !important;
+    justify-content: space-between !important;
+    
+  }
+    .stepper {
+      margin: 1rem 2rem 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      & > * {
+        margin-left: 10px;
+      }
+      .ant-steps-item {
+        border-radius: 3px !important;
+        background: $gray !important;
+        width: 52px !important;
+        height: 13px;
+        .ant-steps-item-container {
+          .ant-steps-item-icon,
+          .ant-steps-item-content {
+            display: none;
+          }
+        }
+      }
+
+      .ant-steps-item-finish {
+        background: $green !important;
       }
     }
   }
