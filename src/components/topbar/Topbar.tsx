@@ -84,7 +84,6 @@ const Topbar = (props: Props) => {
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>
         </div>
-
         <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
           <div className="">
             <div className="country-name">Lavivatienda</div>

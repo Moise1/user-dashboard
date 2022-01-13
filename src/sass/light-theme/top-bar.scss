@@ -89,6 +89,7 @@
 
 
 .top-bar {
+  height: 60px;
   position: sticky;
   padding: 10px;
   top: 0;
@@ -109,8 +110,8 @@
     .logo {
       top: 12px;
       left: 38px;
-      width: 47px;
-      height: 54px;
+      width: 37px;
+      height: 40px;
       opacity: 1;
     }
 
@@ -121,6 +122,7 @@
     .logo-text {
       color: $primary;
       margin: auto;
+      font-size: $font-large;
     }
   }
   .menu-burger {
@@ -200,7 +202,9 @@
       font-size: $font-large;
       font-weight: bold;
     }
+
     .dropdown {
+      margin-top: 0.5rem;
       display: flex;
       align-items: center;
       position: relative;
@@ -208,6 +212,9 @@
       box-shadow: 0px 2px 6px #00000029;
       border-radius: 10px;
       opacity: 1;
+      height: 30px;
+      padding: 20px 5px 20px 5px;
+      cursor: pointer;
 
       &:focus {
         border: none !important;
@@ -257,7 +264,11 @@
 
 @media only screen and (max-width: 1030px) {
   .top-bar {
+    padding-top: 0 !important;
     width: auto !important;
+    .dropdown {
+      margin-top: 0 !important;
+    }
     .logo-container,
     .quota-container {
       display: none !important;

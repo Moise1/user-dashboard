@@ -1,21 +1,21 @@
-import React from 'react';
 import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   AoIconHead,
   CrossModalIcon,
   CheckIcon,
   TrashIcon,
+  ProcessOrderIcon,
   HandStopOrderIcon,
   LastStepOrderIcon,
   OrderCheckoutIcon,
   OrderProcessRoundedIcon,
-  ProcessOrderIcon,
   RoundCircleCycleIcon,
   LeftBackArrowIcon
 } from '../common/Icons';
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/order-state-modal.scss';
+import { Button } from 'antd';
 
 interface Props {
   orderProgress: number;
@@ -180,16 +180,26 @@ const OrderStateProgressModal = (props: Props) => {
                     <LeftBackArrowIcon />
                   </div>
                 </div>
-                <div className="d-flex justify-content-between align-items-lg-end flex-lg-column">
-                  <div className="d-flex process-btn-parent justify-content-around align-items-center">
-                    <button className=" disabled-btn btn process-order-btn-style mr-0 mr-lg-4">
+                <div className="modal-buttons-block">
+                  <div className="modal-button-row">
+                    <Button className="process-btn action-btn">
                       <ProcessOrderIcon />
-                      <span className="ml-1 ml-lg-2">{t('OrderButtons.ProcessOrders')}</span>
-                    </button>
-                    <button className="btn stop-order-btn-style">
+                      <div className="btn-text">
+                        <span>
+                          {t('OrderTable.Process')}
+                        </span>
+                        <span>Orders</span>
+                      </div>
+                    </Button>
+                    <Button className="stop-btn action-btn">
                       <HandStopOrderIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.StopOrders')} </span>
-                    </button>
+                      <div className="btn-tetx">
+                        <span>
+                          {t('OrderTable.Stop')}
+                        </span>
+                        <span>Orders</span>
+                      </div>
+                    </Button>
                   </div>
 
                   <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
