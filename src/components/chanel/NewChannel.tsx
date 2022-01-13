@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import {Button, Row, Col} from 'antd';
-import {ArrowLeft, ArrowRight} from 'react-feather';
+import { Button, Row, Col } from 'antd';
+import { ArrowLeft, ArrowRight } from 'react-feather';
 import { Account } from './Account';
-import {AccountConnect} from './AccountConnect';
+import { AccountConnect } from './AccountConnect';
 import ChooseList, { chooseListValues } from './ChooseList';
 import { PlatForm } from './PlatForm';
-import {StoreLocation} from './StoreLocation';
-import {UserName} from './UserName';
+import { StoreLocation } from './StoreLocation';
+import { UserName } from './UserName';
 import { Stepper } from './Stepper';
 import { ProgressBar } from './ProgressBar';
 import '../../sass/light-theme/new-channel.scss';
@@ -30,7 +30,7 @@ export const NewChannel = ({ _ignored }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
- 
+
   const [data, setData] = useState<state>({
     platform: 'ebay',
     storeLocation: '',
@@ -42,9 +42,9 @@ export const NewChannel = ({ _ignored }: Props) => {
     list: ''
   });
 
-  const handlePrev = () => setStep(prevState => prevState -1);
+  const handlePrev = () => setStep((prevState) => prevState - 1);
   const handleNext = () => {
-    setStep(prevState => prevState +1);
+    setStep((prevState) => prevState + 1);
     setShowPrev(true);
   };
 
@@ -68,7 +68,6 @@ export const NewChannel = ({ _ignored }: Props) => {
     setData({ ...data, list: value });
   };
 
-  
   const { platform, storeLocation, api, user, list, extension } = data;
   const values: chooseListValues = { platform, storeLocation, api, user, list, extension };
 
@@ -93,11 +92,11 @@ export const NewChannel = ({ _ignored }: Props) => {
         />
       );
     case 3:
-      return (
+      return(
         <Account
           platform={data.platform}
-          handleChangeApi={handleChangeApi}
-          step={step}
+          handleChangeApi={handleChangeApi} 
+          step={step} 
         />
       );
     case 4:
@@ -140,20 +139,21 @@ export const NewChannel = ({ _ignored }: Props) => {
   return (
     <div className="new-channel-container">
       <Stepper current={step} className="stepper" />
-      <Row gutter={[16,0]}>
+      <Row gutter={[16, 0]}>
         <Col className="left-section" lg={15}>
           {stepDetector(step)}
           <div className="nav-btns">
-            {showPrev &&  <Button className="" onClick={handlePrev}>
-              <ArrowLeft/>
-              {' '}
-              Previous Step
-            </Button>}
-            {showNext && <Button  onClick={handleNext}>
-              <ArrowRight/>
-              {step === 6? 'Finish':'Next'}
-              {' '}
-            </Button>}
+            {showPrev && (
+              <Button className="" onClick={handlePrev}>
+                <ArrowLeft /> Previous Step
+              </Button>
+            )}
+            {showNext && (
+              <Button onClick={handleNext}>
+                <ArrowRight />
+                {step === 6 ? 'Finish' : 'Next'}{' '}
+              </Button>
+            )}
           </div>
         </Col>
         <Col lg={6} className="right-section">
