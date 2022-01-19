@@ -11,6 +11,8 @@ import '../../sass/light-theme/top-bar.scss';
 import { Badge, Avatar } from 'antd';
 import { User } from 'react-feather';
 
+import { useHistory } from 'react-router-dom';
+
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../users/DeleteAccount';
@@ -31,6 +33,12 @@ const Topbar = (props: Props) => {
   const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
   const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
   const handleDelete = () => setOpenDeleteModal(!openDeleteModal);
+
+  const history = useHistory();
+
+  const routeChange = (route: string) => {
+    history.push(route);
+  };
 
   return (
     <div className="top-bar">
@@ -68,7 +76,7 @@ const Topbar = (props: Props) => {
             <span className="quota-progress">45% (12/13)</span>
           </div>
           <Progress percent={45} showInfo={false} className="progress-bar" />
-          <button type="button" className="update-btn">
+          <button type="button" onClick={() => routeChange('/subscriptions')} className="update-btn">
             {t('Topbar.Update')}
           </button>
         </div>
