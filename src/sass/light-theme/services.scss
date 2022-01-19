@@ -23,6 +23,9 @@
     height: 250px;
     border-radius: 10px;
 
+    .service-title {
+      font-size: $font-large;
+    }
     .card-info {
       margin-top: 5rem;
       display: grid;
