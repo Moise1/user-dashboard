@@ -3,7 +3,7 @@ import { Button, Row, Col } from 'antd';
 import { ArrowLeft, ArrowRight } from 'react-feather';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
-import ChooseList, { chooseListValues } from './ChooseList';
+import  {ChooseList, chooseListValues } from './ChooseList';
 import { PlatForm } from './PlatForm';
 import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';

@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Radio } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
@@ -50,8 +50,7 @@ export const PlatForm = (props: props) => {
         <Row className="cards-container" gutter={[26, 0]}>
           <Col className="platforms-card"  xs={8}  lg={8} >
             <label>
-              <input
-                type="radio"
+              <Radio
                 name="product"
                 value="platform"
                 className="input"
@@ -70,8 +69,7 @@ export const PlatForm = (props: props) => {
 
           <Col className="platforms-card" xs={8}  lg={8}>
             <label>
-              <input
-                type="radio"
+              <Radio
                 name="product"
                 value="platform"
                 checked={platform == 'shopify'}
@@ -89,8 +87,7 @@ export const PlatForm = (props: props) => {
           </Col>
           <Col className="platforms-card" xs={8} lg={8}>
             <label>
-              <input
-                type="radio"
+              <Radio
                 name="product"
                 value="platform"
                 checked={platform == 'amazon'}
