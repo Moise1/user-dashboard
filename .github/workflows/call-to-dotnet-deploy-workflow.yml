@@ -1,0 +1,25 @@
+name: Call to dotnet-build-and-deploy workflow
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*.*.*'
+      - 'v*.*.*'
+
+jobs:
+  simple-job-for-reuse-workflow:
+    uses: HustleGotReal/reusable-workflows/.github/workflows/dotnet-build-and-deploy.yml@master
+    with:
+      DOCKER_IMAGEBASE: hustlegotreal/hgrweb
+      DOCKER_FILEPATH: ./dockerfile
+      DOCKER_CONTEXT_X: ./
+      DOCKERHUB_USER: hustlegotreal
+      K8S_DEPLOYMENT: hgrweb
+      K8S_NAMESPACE: live
+      K8S_CONTAINERNAME: hgrweb
+      #IGNOREME: true
+    secrets:
+      DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
+      GPACKAGES_TOKEN: ${{secrets.GPACKAGES_TOKEN}}
+      KUBECONFIG: ${{secrets.KUBECONFIG}}
