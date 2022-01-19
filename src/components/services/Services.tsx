@@ -7,37 +7,37 @@ export const Services = () => {
   const data = [
     {
       id: 1,
-      title: 'Title',
+      title: 'Auto Ordering',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
     {
       id: 2,
-      title: 'Title',
+      title: 'VeRo Checker',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
     {
       id: 3,
-      title: 'Title',
+      title: 'Price Warrior',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
     {
       id: 4,
-      title: 'Title',
+      title: 'No Api Server',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
     {
       id: 5,
-      title: 'Title',
+      title: 'Private Supplier',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
     {
       id: 6,
-      title: 'Title',
+      title: 'Listing Service',
       description: 'Lorem ipsum dolor sit amet.',
       readMore: 'Read More'
     },
@@ -54,7 +54,7 @@ export const Services = () => {
       {data.map((s) => (
         <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>
           <div className="card-info">
-            <h1>{s.title}</h1>
+            <h1 className="service-title">{s.title}</h1>
             <p>{s.description}</p>
             <a href="#">{s.readMore}</a>
           </div>

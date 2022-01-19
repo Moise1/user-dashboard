@@ -86,8 +86,6 @@
   }
 }
 
-
-
 .top-bar {
   height: 60px;
   position: sticky;
@@ -101,7 +99,7 @@
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
   background: $white !important;
 
-  .action-btns{
+  .action-btns {
     display: flex;
     justify-content: space-between;
   }
@@ -172,6 +170,13 @@
       width: 113px;
       height: 30px;
       margin: auto;
+      transition: 0.3s;
+
+      &:hover {
+        background: $light-primary;
+        transition: 0.3s;
+        width: 123px;
+      }
     }
 
     .notifications-container {
@@ -312,5 +317,11 @@
         display: none;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .tokens {
+    display: none !important;
   }
 }
