@@ -99,7 +99,7 @@ export const ListingsTable = (tableProps: props) => {
                   </label>
                 </td>
                 <td>
-                  <img src={dt.img} alt="" />
+                  {dt.img}
                 </td>
                 <td className=" listings-td-none">{dt.itemNo}</td>
                 <td className=" listings-td-none">{dt.source}</td>

@@ -17,7 +17,7 @@ export const listingsHeadingData = [
 
 export interface ListingsItems {
   id: number;
-  img: string;
+  img: JSX.Element;
   itemNo: number;
   source: string;
   title: JSX.Element;
@@ -34,7 +34,7 @@ export interface ListingsItems {
 export const listingsData: ListingsItems[] = [
   {
     id: 1,
-    img: dataoneimg,
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -58,7 +58,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 2,
-    img: dataoneimg,
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -82,7 +82,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 3,
-    img: dataoneimg,
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -106,7 +106,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 4,
-    img: dataoneimg,
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -130,7 +130,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 5,
-    img: dataoneimg,
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
