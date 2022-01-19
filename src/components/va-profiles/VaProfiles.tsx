@@ -32,10 +32,10 @@ export const VaProfiles = () => {
   return (
     <Layout className="va-profiles-container">
       <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
-        <Col xs={24} sm={12} xl={8} className="table-container">
+        <Col xs={24} xl={8} md={12} className="table-container">
           <Table dataSource={dataSource} columns={columns}></Table>
         </Col>
-        <Col xs={24} sm={12} xl={8} className="form-container">
+        <Col xs={24} xl={8} md={12} className="form-container">
           <Card className="card">
             <Form className="form">
               <p>Add new VA Profile</p>

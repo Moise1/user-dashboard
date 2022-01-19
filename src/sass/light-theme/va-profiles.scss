@@ -8,6 +8,10 @@
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: fill-available;
 
+  .ant-card {
+    border-radius: 15px !important;
+  }
+
   .row {
     display: flex;
     margin-top: 4rem;
@@ -15,6 +19,7 @@
 
     .form {
       display: grid;
+      margin-top: 0rem;
       .input {
         border-radius: 10px;
         background: $mild-light-blue !important;
@@ -28,6 +33,7 @@
         border-radius: 10px;
         margin-top: 1rem;
         width: 25% !important;
+        min-width: 100px;
 
         &:hover {
           background: $light-primary;
@@ -42,13 +48,16 @@
 // mobile phone screen;
 @media only screen and (max-width: 750px) {
   .va-profiles-container {
+    .form {
+      padding: 0;
+    }
     .row {
-      margin-top: 5rem;
       .form-container {
         order: -1;
       }
       .table-container {
         order: 1;
+        margin-top: 1rem;
       }
     }
   }
