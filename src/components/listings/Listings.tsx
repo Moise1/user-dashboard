@@ -15,109 +15,97 @@ const Listings = () => {
   const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedCols, setSelectedCols] = useState<string[]>([]); 
-  const [columns,] = useState( [
+  const [columns, setColumns] = useState( [
     
     {
       title: t('Listings.Column.Img'),
       dataIndex: 'img',
       key: 'img',
-      hidden: false
-    },
+      visible: true    },
   
     {
       title: t('Listings.Column.Item no.'),
       dataIndex: 'itemNO',
       key: 'itemNo',
-      hidden: false
-  
+      visible: true  
     },
   
     {
       title: t('Listings.Column.Source'),
       dataIndex: 'source',
       key: 'source',
-      hidden: false
-    },
+      visible: true    },
   
     {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
-      hidden: false
-    },
+      visible: true    },
   
     {
       title: t('Listings.Column.Sell'),
       dataIndex: 'sell',
       key: 'sell',
-      hidden: false
-  
+      visible: true  
     },
     {
       title: t('Listings.Column.Cost'),
       dataIndex: 'cost',
       key: 'cost',
-      hidden: false
-  
+      visible: true  
     },
     {
       title: t('Listings.Column.Profit'),
       dataIndex: 'profit',
       key: 'profit',
-      hidden: false
-    },
+      visible: true    },
     {
       title: t('Listings.Column.Markup'),
       dataIndex: 'markup',
       key: 'markup',
-      hidden: false
-    },
+      visible: true    },
   
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'stock',
       key: 'stock',
-      hidden: false
-  
+      visible: true  
     },
     {
       title: t('Listings.Column.Options'),
       dataIndex: 'options',
       key: 'options',
-      hidden: false
-    },
+      visible: true    },
   ]);
 
   const onChangeTab = () => setActive(true);
   const handleModalOpen = () => setOpen(!open);
 
   const onSelectChange = (selectedRowKeys: Key[])=>{
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys);
   };
-
-  // const columns =
 
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
 
-  const handleCheckBox = (e: CheckboxChangeEvent): void =>{
-    setSelectedCols(prevState => [...prevState, e.target.value]);
+  const handleCheckBox = (e: CheckboxChangeEvent): void =>{ 
+    const cloneColumns = columns.map(col => {
+      if(col.key === e.target.value){
+        return {...col, visible: !e.target.checked};
+      }else{
+        return col;
+      }
+    });
+    setColumns(cloneColumns);
   };
-
-  const newCols = () =>{
-    const uniqueValues = [...new Set(selectedCols)];
-    const newCols = columns.filter(col => !uniqueValues.includes(col.key));
-    return newCols;
-  };
+  const newCols = () => columns.filter(col => col.visible === true);
 
   return (
     <Layout className="listings-container">
       <PopupModal open={open} handleClose={handleModalOpen}>
-        <h5 className='cols-hide-title'>Select columns to display</h5>
+        <h5 className='cols-hide-title'>Select columns to hide</h5>
         <Card className='listings-cols'>
           <ul className='cols-list'>
             {columns.map(col => <li key={col.key}><Checkbox className='checkbox'  value={col.key} onChange={handleCheckBox}>{col.title}</Checkbox></li> )}

@@ -51,9 +51,8 @@
 
   .view-columns {
     align-items: center;
-    max-width: 200px;
+    width: auto;
     display: flex;
-
     justify-content: space-around;
     color: $white;
     font-weight: $bold;
