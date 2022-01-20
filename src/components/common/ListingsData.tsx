@@ -1,20 +1,6 @@
 import dataoneimg from '../../assets/data1img.png';
 import { MoreVertical } from 'react-feather';
 
-export const listingsHeadingData = [
-  'Listings.Column.Img',
-  'Listings.Column.Item no.',
-  'Listings.Column.Source',
-  'Listings.Column.Title',
-  'Listings.Column.Sell',
-  'Listings.Column.Cost',
-  'Listings.Column.Profit',
-  'Listings.Column.Markup',
-  'Listings.Column.Stock',
-  'Listings.Column.Created on',
-  'Listings.Column.Options'
-];
-
 export interface ListingsItems {
   id: number;
   img: JSX.Element;

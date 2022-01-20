@@ -3,6 +3,22 @@
 // Extra large screens
 
 //custom class here
+
+ .listings-cols{
+  display: block !important;
+  height: auto;
+  .cols-list{
+    list-style: none;
+    li{
+      margin-bottom: .5rem;
+    }
+  }
+ 
+}
+
+.cols-hide-title{
+  text-align: center;
+}
 .table {
   background: $white;
 }
