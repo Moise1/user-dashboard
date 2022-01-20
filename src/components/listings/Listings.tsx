@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { Layout, Card, Checkbox } from 'antd';
 import { SearchBars } from '../small-components/SearchBars';
 import { StatusBar } from '../small-components/StatusBar';
@@ -16,6 +16,78 @@ const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [selectedCols, setSelectedCols] = useState<string[]>([]); 
+  const [columns,] = useState( [
+    
+    {
+      title: t('Listings.Column.Img'),
+      dataIndex: 'img',
+      key: 'img',
+      hidden: false
+    },
+  
+    {
+      title: t('Listings.Column.Item no.'),
+      dataIndex: 'itemNO',
+      key: 'itemNo',
+      hidden: false
+  
+    },
+  
+    {
+      title: t('Listings.Column.Source'),
+      dataIndex: 'source',
+      key: 'source',
+      hidden: false
+    },
+  
+    {
+      title: t('Listings.Column.Title'),
+      dataIndex: 'title',
+      key: 'title',
+      hidden: false
+    },
+  
+    {
+      title: t('Listings.Column.Sell'),
+      dataIndex: 'sell',
+      key: 'sell',
+      hidden: false
+  
+    },
+    {
+      title: t('Listings.Column.Cost'),
+      dataIndex: 'cost',
+      key: 'cost',
+      hidden: false
+  
+    },
+    {
+      title: t('Listings.Column.Profit'),
+      dataIndex: 'profit',
+      key: 'profit',
+      hidden: false
+    },
+    {
+      title: t('Listings.Column.Markup'),
+      dataIndex: 'markup',
+      key: 'markup',
+      hidden: false
+    },
+  
+    {
+      title: t('Listings.Column.Stock'),
+      dataIndex: 'stock',
+      key: 'stock',
+      hidden: false
+  
+    },
+    {
+      title: t('Listings.Column.Options'),
+      dataIndex: 'options',
+      key: 'options',
+      hidden: false
+    },
+  ]);
 
   const onChangeTab = () => setActive(true);
   const handleModalOpen = () => setOpen(!open);
@@ -25,68 +97,7 @@ const Listings = () => {
     setSelectedRowKeys(selectedRowKeys);
   };
 
-  const columns = [
-    
-    {
-      title: t('Listings.Column.Img'),
-      dataIndex: 'img',
-      key: 'img',
-    },
-  
-    {
-      title: t('Listings.Column.Item no.'),
-      dataIndex: 'itemNO',
-      key: 'itemNo',
-  
-    },
-  
-    {
-      title: t('Listings.Column.Source'),
-      dataIndex: 'source',
-      key: 'source',
-    },
-  
-    {
-      title: t('Listings.Column.Title'),
-      dataIndex: 'title',
-      key: 'title',
-    },
-  
-    {
-      title: t('Listings.Column.Sell'),
-      dataIndex: 'sell',
-      key: 'sell',
-  
-    },
-    {
-      title: t('Listings.Column.Cost'),
-      dataIndex: 'cost',
-      key: 'cost',
-  
-    },
-    {
-      title: t('Listings.Column.Profit'),
-      dataIndex: 'profit',
-      key: 'profit',
-    },
-    {
-      title: t('Listings.Column.Markup'),
-      dataIndex: 'markup',
-      key: 'markup',
-    },
-  
-    {
-      title: t('Listings.Column.Stock'),
-      dataIndex: 'stock',
-      key: 'stock',
-  
-    },
-    {
-      title: t('Listings.Column.Options'),
-      dataIndex: 'options',
-      key: 'options',
-    },
-  ];
+  // const columns =
 
   const rowSelection = {
     selectedRowKeys,

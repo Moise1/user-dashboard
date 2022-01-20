@@ -19,7 +19,7 @@ type ListingsTypes = {
 };
 
   interface Props{
-    columns: {title: ReactNode, dataIndex: string, key: string}[];
+    columns: {title: ReactNode, dataIndex: string, key: string, hidden: boolean}[];
     dataSource: ListingsTypes[];
     rowSelection: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
   }
