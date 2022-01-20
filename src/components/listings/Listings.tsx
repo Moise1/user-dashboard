@@ -15,6 +15,7 @@ const Listings = () => {
   const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const [selectedCols, setSelectedCols] = useState<string[]>([]); 
 
   const onChangeTab = () => setActive(true);
   const handleModalOpen = () => setOpen(!open);
@@ -87,25 +88,20 @@ const Listings = () => {
     },
   ];
 
-  const cloneColumns = Array.from(columns);
-  console.log('visible columns', cloneColumns);
-
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
 
-  const handleCheckBox = (e: CheckboxChangeEvent) =>{
-    columns.forEach(col => {
-      if(col.key === e.target.value){
-        console.log('column key', col.key);
-        const selectedCol = col.key;
-        columns.filter(col => col.key !== selectedCol);
-      }
-    });
+  const handleCheckBox = (e: CheckboxChangeEvent): void =>{
+    setSelectedCols(prevState => [...prevState, e.target.value]);
   };
 
-  
+  const newCols = () =>{
+    const uniqueValues = [...new Set(selectedCols)];
+    const newCols = columns.filter(col => !uniqueValues.includes(col.key));
+    return newCols;
+  };
 
   return (
     <Layout className="listings-container">
@@ -113,7 +109,7 @@ const Listings = () => {
         <h5 className='cols-hide-title'>Select columns to display</h5>
         <Card className='listings-cols'>
           <ul className='cols-list'>
-            {cloneColumns.map(col => <li key={col.key}><Checkbox className='checkbox'  value={col.key} onChange={handleCheckBox}>{col.title}</Checkbox></li> )}
+            {columns.map(col => <li key={col.key}><Checkbox className='checkbox'  value={col.key} onChange={handleCheckBox}>{col.title}</Checkbox></li> )}
           </ul>
         </Card>
       </PopupModal>
@@ -123,7 +119,7 @@ const Listings = () => {
         <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>
       <SearchBars showColumns onClick={handleModalOpen}/>
-      <DataTable columns={columns} dataSource={listingsData} rowSelection={rowSelection}/>
+      <DataTable columns={newCols()} dataSource={listingsData} rowSelection={rowSelection}/>
     </Layout>
   );
 };
