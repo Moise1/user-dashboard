@@ -19,10 +19,6 @@ jobs:
       K8S_NAMESPACE: live
       K8S_CONTAINERNAME: hgrweb
       #IGNOREME: true
-    secrets:
-      DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
-      GPACKAGES_TOKEN: ${{secrets.GPACKAGES_TOKEN}}
-      KUBECONFIG: ${{secrets.KUBECONFIG}}
 
     steps:
       - name: Checkout code
