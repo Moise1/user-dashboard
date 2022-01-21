@@ -71,8 +71,6 @@ jobs:
           #  --tag my-image-name:$(date +%s)
           context: ${{ env.DOCKER_CONTEXT_X}}
           file: ${{ env.DOCKER_FILEPATH }}
-          secrets: |
-            "GPACKAGESTOKEN=${{ secrets.GPACKAGES_TOKEN }}"
 
       - name: Generate patch command for kubectl
         if: ${{ !env.ACT }}
