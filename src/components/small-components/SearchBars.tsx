@@ -8,6 +8,7 @@ import '../../sass/light-theme/search-bars.scss';
 
 interface props {
   showColumns?: boolean;
+  onClick? : () => void;
 }
 
 export const SearchInput = () => {
@@ -30,8 +31,7 @@ export const SearchInput = () => {
   );
 };
 
-export const SearchBars = (searchBarProps: props) => {
-  const { showColumns } = searchBarProps;
+export const SearchBars = ({showColumns, onClick}: props) => {
 
   return (
     <div className="search-bars-container">
@@ -42,8 +42,8 @@ export const SearchBars = (searchBarProps: props) => {
       </button>
 
       {showColumns && (
-        <button className="view-columns">
-          <img src={column_img} height="20" alt="" /> {t('ViewColumns')}
+        <button className="view-columns" onClick={onClick} >
+          <img src={column_img} height="20" alt="" /> {t('showColumns')}/ {t('hideColumns')} 
         </button>
       )}
     </div>

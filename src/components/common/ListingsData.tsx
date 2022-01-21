@@ -1,23 +1,10 @@
 import dataoneimg from '../../assets/data1img.png';
 import { MoreVertical } from 'react-feather';
 
-export const listingsHeadingData = [
-  'Listings.Column.Img',
-  'Listings.Column.Item no.',
-  'Listings.Column.Source',
-  'Listings.Column.Title',
-  'Listings.Column.Sell',
-  'Listings.Column.Cost',
-  'Listings.Column.Profit',
-  'Listings.Column.Markup',
-  'Listings.Column.Stock',
-  'Listings.Column.Created on',
-  'Listings.Column.Options'
-];
-
 export interface ListingsItems {
   id: number;
-  img: string;
+  key:string,
+  img: JSX.Element;
   itemNo: number;
   source: string;
   title: JSX.Element;
@@ -34,7 +21,8 @@ export interface ListingsItems {
 export const listingsData: ListingsItems[] = [
   {
     id: 1,
-    img: dataoneimg,
+    key:'1',
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -58,7 +46,8 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 2,
-    img: dataoneimg,
+    key:'2',
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -82,7 +71,8 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 3,
-    img: dataoneimg,
+    key:'3',
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -106,7 +96,8 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 4,
-    img: dataoneimg,
+    key:'4',
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
@@ -130,7 +121,8 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 5,
-    img: dataoneimg,
+    key:'5',
+    img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
     title: (
