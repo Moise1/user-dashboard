@@ -12,7 +12,7 @@ jobs:
     uses: HustleGotReal/reusable-workflows/.github/workflows/dotnet-build-and-deploy.yml@master
     with:
       DOCKER_IMAGEBASE: hustlegotreal/hgrweb
-      DOCKER_FILEPATH: ./dockerfile
+      DOCKER_FILEPATH: ./production.dockerfile
       DOCKER_CONTEXT_X: ./
       DOCKERHUB_USER: hustlegotreal
       K8S_DEPLOYMENT: hgrweb
