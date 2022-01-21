@@ -1,4 +1,4 @@
-name: Build dotnet image and Deploy
+name: Build image and Deploy
 
 on:
   workflow_dispatch:
