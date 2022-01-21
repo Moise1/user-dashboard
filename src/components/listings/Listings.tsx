@@ -40,7 +40,8 @@ const Listings = () => {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
-      visible: true    },
+      visible: true    
+    },
   
     {
       title: t('Listings.Column.Sell'),
@@ -105,7 +106,7 @@ const Listings = () => {
   return (
     <Layout className="listings-container">
       <PopupModal open={open} handleClose={handleModalOpen}>
-        <h5 className='cols-hide-title'>Select columns to hide</h5>
+        <h5 className='cols-hide-title'>Select columns to display</h5>
         <Card className='listings-cols'>
           <ul className='cols-list'>
             {columns.map(col => <li key={col.key}><Checkbox className='checkbox'  value={col.key} onChange={handleCheckBox}>{col.title}</Checkbox></li> )}
@@ -118,7 +119,12 @@ const Listings = () => {
         <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>
       <SearchBars showColumns onClick={handleModalOpen}/>
-      <DataTable columns={newCols()} dataSource={listingsData} rowSelection={rowSelection}/>
+      <DataTable 
+        columns={newCols()} 
+        dataSource={listingsData} 
+        rowSelection={rowSelection} 
+        selectedRows={selectedRowKeys.length}
+        totalItems={listingsData.length}/>
     </Layout>
   );
 };

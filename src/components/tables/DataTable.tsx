@@ -22,8 +22,26 @@ type ListingsTypes = {
     columns: {title: ReactNode, dataIndex: string, key: string, visible: boolean}[];
     dataSource: ListingsTypes[];
     rowSelection: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
+    selectedRows: number;
+    totalItems: number;
   }
 
-export const DataTable: React.FC<Props> = ({columns, dataSource, rowSelection}: Props) =>{  
-  return <Table  columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>;
+export const DataTable: React.FC<Props> = (props: Props) =>{  
+  const {columns, dataSource, rowSelection, selectedRows, totalItems} = props;
+  return(
+    <>
+      <div className="table-info">
+        <p className="total-selected"> <strong>{selectedRows}</strong> selected</p>
+        <div className="selected-options">
+          <ul className="list">
+            <li className="list-item">Edit <strong>{selectedRows}</strong> listings</li>
+            <li className="list-item">Copy <strong>{selectedRows}</strong> listings</li>
+            <li className="list-item">OPtimize <strong>{selectedRows}</strong> listings</li>
+          </ul>
+        </div>
+        <p className='total-items'><strong>{totalItems} listings</strong></p>
+      </div>
+      <Table  columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
+    </>
+  );
 };
