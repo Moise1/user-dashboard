@@ -1,4 +1,4 @@
-name: Dockerize & push to cluster
+name: Build dotnet image and Deploy
 
 on:
   workflow_dispatch:
