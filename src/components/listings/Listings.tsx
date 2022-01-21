@@ -15,6 +15,7 @@ const Listings = () => {
   const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery]= useState<string>('');
   const [columns, setColumns] = useState( [
     
     {
