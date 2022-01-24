@@ -4,19 +4,48 @@
 
 //custom class here
 
- .listings-cols{
-  display: block !important;
-  height: auto;
-  .cols-list{
-    list-style: none;
-    li{
-      margin-bottom: .5rem;
+.listings-card{
+  .listings-cols{
+    display: flex !important;
+    justify-content: space-between;
+    height: auto;
+    .cols-list{
+      list-style: none;
+      -moz-column-count: 2;
+      -moz-column-gap: 5rem;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 5rem;
+      column-count: 2;
+      column-gap: 5rem;
+      li{
+        margin-bottom: .5rem;
+      }
+    }
+   
+    .cols-amount{
+      display: block;
+      p, h3 {
+        text-align: center;
+        color: $primary;
+      }
+    }
+  
+  };
+
+  .action-btns{
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    width: 20vw;
+    .cancel-btn, .success-btn{
+      margin-left: 1.5rem;
     }
   }
- 
 }
+ 
 
-.cols-hide-title{
+.cols-display-title, .description{
+  color: $primary;
   text-align: center;
 };
 

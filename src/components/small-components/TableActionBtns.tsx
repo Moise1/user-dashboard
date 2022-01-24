@@ -46,7 +46,7 @@ export const TableActionBtns = ({showColumns, onClick, handleSideDrawer}: TableA
       </button>
       {showColumns && (
         <button className="view-columns" onClick={onClick} >
-          <img src={column_img} height="20" alt="" /> {t('showColumns')}/ {t('hideColumns')} 
+          <img src={column_img} height="20" alt="" /> {t('showColumns')}
         </button>
       )}
     </div>

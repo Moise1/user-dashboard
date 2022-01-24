@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Layout, Card, Checkbox } from 'antd';
-import { TableActionBtns, SearchInput} from '../small-components/TableActionBtns';
+import { useState, useMemo } from 'react';
+import { Layout, Card, Checkbox, Row, Col } from 'antd';
+import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
@@ -10,7 +10,9 @@ import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import {AdvancedSearch} from '../small-components/AdvancedSearch';
+import { AdvancedSearch } from '../small-components/AdvancedSearch';
+import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
+
 
 const Listings = () => {
   const [active, setActive] = useState(false);
@@ -18,18 +20,18 @@ const Listings = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
-  // const [searchQuery,] = useState<string>('');
-  const [columns, setColumns] = useState([
+  
+  const tableColumns = [
     {
       title: t('Listings.Column.Img'),
       dataIndex: 'img',
       key: 'img',
-      visible: true
+      visible: false
     },
 
     {
       title: t('Listings.Column.Item no.'),
-      dataIndex: 'itemNO',
+      dataIndex: 'itemNo',
       key: 'itemNo',
       visible: true
     },
@@ -45,7 +47,7 @@ const Listings = () => {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
-      visible: true
+      visible: false
     },
 
     {
@@ -70,25 +72,25 @@ const Listings = () => {
       title: t('Listings.Column.Markup'),
       dataIndex: 'markup',
       key: 'markup',
-      visible: true
+      visible: false
     },
 
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'stock',
       key: 'stock',
-      visible: true
+      visible: false
     },
     {
       title: t('Listings.Column.Options'),
       dataIndex: 'options',
       key: 'options',
-      visible: true
+      visible: false
     }
-  ]);
+  ];
+  const [columns, setColumns] = useState(tableColumns);
 
   const onChangeTab = () => setActive(true);
-  const handleModalOpen = () => setOpen(!open);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
     setSelectedRowKeys(selectedRowKeys);
@@ -102,36 +104,59 @@ const Listings = () => {
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
     const cloneColumns = columns.map((col) => {
       if (col.key === e.target.value) {
-        return { ...col, visible: !e.target.checked };
+        return { ...col, visible: e.target.checked };
       } else {
         return col;
       }
     });
     setColumns(cloneColumns);
   };
-  const newCols = () => columns.filter((col) => col.visible === true);
-  // const updateSearch = (e: ChangeEvent<HTMLInputElement>) => {
-  //   console.log('target input value', e.target.value);
-  // };
 
-  // value={searchQuery} onChange={updateSearch}
+  const handleClose = () => {
+    setColumns(tableColumns);
+    setOpen(!open);
+  };
+
+  const handleApplyChanges = () => setOpen(!open);
+
+  const handleCancelChanges = () => {
+    setColumns(tableColumns);
+    setOpen(!open);
+  };
+
+  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   return (
     <Layout className="listings-container">
-      <PopupModal open={open} handleClose={handleModalOpen}>
-        <h5 className="cols-hide-title">Select columns to display</h5>
-        <Card className="listings-cols">
-          <ul className="cols-list">
-            {columns.map((col) => (
-              <li key={col.key}>
-                <Checkbox className="checkbox" value={col.key} onChange={handleCheckBox}>
-                  {col.title}
-                </Checkbox>
-              </li>
-            ))}
-          </ul>
+      <PopupModal open={open} handleClose={handleClose} width={900}>
+        <h5 className="cols-display-title">Select columns to display</h5>
+        <p className="description">Display columns in the listing table that suit your interests.</p>
+        <Card className="listings-card">
+          <Row className="listings-cols">
+            <Col>
+              <ul className="cols-list">
+                {columns.map((col) => (
+                  <li key={col.key}>
+                    <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
+                      {col.title}
+                    </Checkbox>
+                  </li>
+                ))}
+              </ul>
+            </Col>
+            <Col>
+              <div className="cols-amount">
+                <p>Amount of columns on your listings table</p>
+                <h3>{visibleCols.length}</h3>
+              </div>
+            </Col>
+          </Row>
+          <div className="action-btns">
+            <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
+            <SuccessBtn handleClose={handleApplyChanges}>{t('ApplyChanges')}</SuccessBtn>
+          </div>
         </Card>
       </PopupModal>
       <StatusBar>
@@ -140,8 +165,8 @@ const Listings = () => {
         <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>
       <div className="action-components">
-        <SearchInput/>
-        <TableActionBtns showColumns onClick={handleModalOpen} handleSideDrawer={handleSideDrawer}/>
+        <SearchInput />
+        <TableActionBtns showColumns onClick={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
         <p>Advanced Search content</p>
@@ -149,7 +174,7 @@ const Listings = () => {
         <p>Advanced Search content</p>
       </AdvancedSearch>
       <DataTable
-        columns={newCols()}
+        columns={visibleCols}
         dataSource={listingsData}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
