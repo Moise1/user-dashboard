@@ -136,6 +136,8 @@
   "OrderDetails.DeleteOrder": "Delete order",
   
   "SaveChanges": "Save Changes",
+  "ApplyChanges": "ApplyChanges",
+  "Cancel": "Cancel",
   "ResetToDefault": "Reset to Default",
   "TerminateItem": "Terminate Item",
   "ForceRefresh": "Force Refresh",

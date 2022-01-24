@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SearchBars } from '../small-components/SearchBars';
+import { TableActionBtns } from '../small-components/TableActionBtns';
 import { OrdersTable } from '../tables/OrdersTable';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';
@@ -51,7 +51,7 @@ const Orders = (ordersProps: props) => {
 
   return (
     <Layout className="orders-container">
-      <SearchBars />
+      <TableActionBtns />
       <OrderActionBtns orderNumber={orderNumber} />
       <OrdersTable
         orderSelectedArray={orderSelectedArray}

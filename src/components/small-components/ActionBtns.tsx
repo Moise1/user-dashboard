@@ -5,16 +5,23 @@ import { Button } from 'antd';
 
 interface props {
   children: React.ReactNode;
+  handleClose?: () => void;
 }
 
-export const SuccessBtn = ({ children }: props) => (
-  <Button className="success-btn">
+export const SuccessBtn = ({ children, handleClose }: props) => (
+  <Button className="success-btn" onClick={handleClose}>
     <CheckIcon />
     <span>{children}</span>
   </Button>
 );
 
-export const ResetBtn = ({ children }: props) => (
+export const CancelBtn = ({ children, handleClose }: props) => (
+  <Button className="cancel-btn" onClick={handleClose}>
+    <span>{children}</span>
+  </Button>
+);
+
+export const ResetBtn = ({ children,  }: props) => (
   <Button className="reset-btn">
     <span>{children}</span>
   </Button>

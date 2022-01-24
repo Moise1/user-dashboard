@@ -3,53 +3,30 @@
 // Large and extra large screens
 
 .search-bars-container {
-  margin-top: $spacer;
-  margin-bottom: $spacer;
+  margin: $spacer 5rem $spacer auto;
+  width: 30vw;
   display: flex;
   justify-content: space-between;
   height: 2.7rem;
-
-  .search-input {
-    border-radius: 10px;
-    padding: 10px;
-    background: $white;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-right: 10px;
-
-    .input {
-      border: none !important;
-      outline: none !important;
-      font-weight: $bold;
-      width: 100%;
-    }
-
-    &:focus {
-      outline: none;
-      border: none;
-    }
-    .search-icon-btn {
-      background: none;
-    }
-  }
-
+  
   .advanced-search-btn {
+    margin-left: 1rem;
+    padding: .5rem 2rem;
+    width: auto;
     color: $white;
     font-weight: $bold;
     border-radius: 10px;
     background: $gray;
     justify-content: space-around;
     align-items: center;
-    max-width: 200px;
     display: flex;
-
     height: 100%;
-    margin-right: $spacer;
     white-space: nowrap;
   }
 
   .view-columns {
+    margin-left: 1rem;
+    padding: .5rem 1rem;
     align-items: center;
     width: auto;
     display: flex;
@@ -62,6 +39,24 @@
   }
 }
 
+.search-input {
+  border-radius: 10px;
+  padding: 2rem 1rem;
+  background: $white;
+  width: 40vw;
+  .input {
+    border: none !important;
+    outline: none !important;
+    font-weight: $bold;
+    width: 100%;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+  
+}
 @media screen and (max-width: 750px) {
   .view-columns,
   .advanced-search-btn {
