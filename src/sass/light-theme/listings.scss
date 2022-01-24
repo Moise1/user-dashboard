@@ -4,6 +4,14 @@
 
 //custom class here
 
+.listings-title{
+  font-weight: bold;
+  color: $primary;
+  width: 8vw;
+  margin-top: 2rem;
+  text-align: left;
+}
+
 .listings-card{
   .listings-cols{
     display: flex !important;
@@ -76,6 +84,7 @@
     
       .list-item{
         margin-left: .9rem;
+        cursor: pointer;
         color: $primary;
       &:nth-last-child(-n+2):before{
         content: '|';

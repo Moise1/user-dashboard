@@ -2,61 +2,52 @@
 
 // Large and extra large screens
 
-.search-bars-container {
-  margin: $spacer 5rem $spacer auto;
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-  height: 2.7rem;
-  
-  .advanced-search-btn {
-    margin-left: 1rem;
-    padding: .5rem 2rem;
-    width: auto;
-    color: $white;
-    font-weight: $bold;
+.action-components{
+  .ant-input-wrapper{
+    margin: 2rem 0;
     border-radius: 10px;
-    background: $gray;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    height: 100%;
-    white-space: nowrap;
-  }
-
-  .view-columns {
-    margin-left: 1rem;
-    padding: .5rem 1rem;
-    align-items: center;
-    width: auto;
-    display: flex;
-    justify-content: space-around;
-    color: $white;
-    font-weight: $bold;
-    background: $light-blue;
-    border-radius: 10px;
-    white-space: nowrap;
-  }
-}
-
-.search-input {
-  border-radius: 10px;
-  padding: 2rem 1rem;
-  background: $white;
-  width: 40vw;
-  .input {
     border: none !important;
     outline: none !important;
     font-weight: $bold;
-    width: 100%;
-  }
+    background: $white;
+    width: 40vw !important;
+    &:focus{
+      border: none !important;
+      outline: none !important;
+    };
 
-  &:focus {
-    outline: none;
-    border: none;
+    .ant-input-group-addon{
+      display: none;
+    }
   }
+  .search-bars-container {
+    margin: $spacer 5rem $spacer auto;
+    width: 30vw;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    
+    @mixin action-btn{
+      width: 345px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: $primary;
+      margin-left: 1rem;
+      color: $white;
+    };
   
+    .advanced-search-btn {
+      @include action-btn;
+    }
+    .view-columns {
+      @include action-btn;
+    };
+  }
 }
+
+
+
+
 @media screen and (max-width: 750px) {
   .view-columns,
   .advanced-search-btn {

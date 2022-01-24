@@ -1,53 +1,50 @@
 import { ReactElement } from 'react';
+import { Input, Button } from 'antd';
+import {Search as SearchIcon} from 'react-feather';
 import advancedSearchIcon from '../../assets/listsearch.svg';
 import column_img from '../../assets/columnimg.svg';
 import RDS from 'react-dom/server';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/table-action-btns.scss';
-import {Input} from 'antd';
 
 interface TableActionBtnsProps {
   showColumns?: boolean;
-  onClick? : () => void;
+  onClick?: () => void;
   handleSideDrawer?: () => void;
+  handleShowColumns?: () => void;
 }
 
-export interface InputProps{
+export interface InputProps {
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
+  onSearch?: (value: string) => void;
 }
 
-export const SearchInput = ({value, onChange}: InputProps) => {
-  const {Search} = Input;
+export const SearchInput = ({ value, onSearch }: InputProps) => {
+  const { Search } = Input;
   const searchComponent = t('search');
   const search = RDS.renderToString(searchComponent as ReactElement);
 
   return (
-    <div className="search-input">
-      <Search
-        placeholder={search}
-        allowClear
-        value={value}
-        onChange={onChange}
-        enterButton="Search"
-      />
-    </div>
+    <Search
+      placeholder={search}
+      onSearch={onSearch}
+      value={value}
+      suffix={<SearchIcon/>}
+    />
   );
 };
 
-export const TableActionBtns = ({showColumns, onClick, handleSideDrawer}: TableActionBtnsProps) => {
-
+export const TableActionBtns = ({ showColumns, handleShowColumns, handleSideDrawer }: TableActionBtnsProps) => {
   return (
     <div className="search-bars-container">
-      <button className="advanced-search-btn" onClick={handleSideDrawer}>
+      <Button className="advanced-search-btn" onClick={handleSideDrawer}>
         <img src={advancedSearchIcon} height="20" alt="" />
         {t('AdvancedSearch')}
-      </button>
+      </Button>
       {showColumns && (
-        <button className="view-columns" onClick={onClick} >
+        <Button className="view-columns" onClick={handleShowColumns}>
           <img src={column_img} height="20" alt="" /> {t('showColumns')}
-        </button>
+        </Button>
       )}
     </div>
   );
