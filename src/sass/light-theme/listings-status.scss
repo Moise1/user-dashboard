@@ -15,9 +15,9 @@
 
 @mixin status-btn() {
   border-radius: 10px !important;
-  padding: 0.9rem 1.5rem;
+  padding: 0.6rem 1.2rem;
   width: auto;
-  font-size: $font-large;
+  font-size: $font-medium;
   font-weight: $bold;
   border: none !important;
   outline: none !important;
@@ -38,14 +38,14 @@
 
 .inactive-btn {
   @include status-btn();
-  background: $light-gray;
+  background: none;
   color: $primary;
 }
 
-
 // small screen sizes
 @media only screen and (max-width: 750px) {
-  .active-btn, .inactive-btn {
+  .active-btn,
+  .inactive-btn {
     padding: 0.6rem 1.3rem;
     font-size: $font-small;
   }
