@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
-import search_icon from '../../assets/search.svg';
+import {SearchInput} from '../small-components/TableActionBtns';
 
 interface props {
   setShowOrdering: (arg0: boolean) => void;
@@ -25,8 +25,8 @@ const SearchSelect = (myProps: props) => {
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
-  const [supplierData, setSupplierData] = useState(arrayLists);
-  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const [supplierData,] = useState(arrayLists);
+  // const [inputSearchValue, setInputSearchValue] = useState<string>('');
 
   const handleSelectValue = (value: string) => {
     setWhatSelect(value);
@@ -34,11 +34,11 @@ const SearchSelect = (myProps: props) => {
     setShowOrdering(true);
   };
 
-  const handleSearch = (value: string) => {
-    setInputSearchValue(inputSearchValue);
-    const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
-    setSupplierData(filteredSearch);
-  };
+  // const handleSearch = (value: string) => {
+  //   setInputSearchValue(inputSearchValue);
+  //   const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
+  //   setSupplierData(filteredSearch);
+  // };
 
   return (
     <>
@@ -53,19 +53,7 @@ const SearchSelect = (myProps: props) => {
 
         {showDropDown ? (
           <div className="shows-search-drop-list">
-            <div className="drop-list-search-input">
-              <input
-                onChange={(e) => handleSearch(e.target.value)}
-                type="text"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                placeholder="Search..."
-              />
-              <span className="search-icon-input-box">
-                <img src={search_icon} height="12" alt="search_icon" />
-              </span>
-            </div>
-
+            <SearchInput/>
             <div className="react-list-data-here">
               {supplierData.map((list) => (
                 <li key={list.id} onClick={() => handleSelectValue(list.value)}>
