@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Layout, Card, Checkbox, Row, Col } from 'antd';
+import {  Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
@@ -12,15 +12,17 @@ import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { AdvancedSearch } from '../small-components/AdvancedSearch';
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
-
+import { EditSingleListing } from '../listings/EditSingleListing';
+import { BulkEditListings } from '../listings/BulkEditListings';
 
 const Listings = () => {
   const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
+  const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
+  const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
 
-  
   const tableColumns = [
     {
       title: t('Listings.Column.Img'),
@@ -114,23 +116,28 @@ const Listings = () => {
 
   const handleClose = () => {
     setColumns(tableColumns);
-    setOpen(!open);
+    setShowColumns(!showColumns);
   };
 
-  const handleApplyChanges = () => setOpen(!open);
+  const handleApplyChanges = () => setShowColumns(!showColumns);
 
   const handleCancelChanges = () => {
     setColumns(tableColumns);
-    setOpen(!open);
+    setShowColumns(!showColumns);
   };
 
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
+  const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+  const onSearch = (value: string) => console.log('searched value',value);
+
   return (
-    <Layout className="listings-container">
-      <PopupModal open={open} handleClose={handleClose} width={900}>
+    <Layout>
+      <PopupModal open={showColumns} handleClose={handleClose} width={900}>
         <h5 className="cols-display-title">Select columns to display</h5>
         <p className="description">Display columns in the listing table that suit your interests.</p>
         <Card className="listings-card">
@@ -159,21 +166,36 @@ const Listings = () => {
           </div>
         </Card>
       </PopupModal>
+
+      {selectedRowKeys.length > 1 ? (
+        <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
+          <BulkEditListings selectedItems={selectedRowKeys.length} />
+        </PopupModal>
+      ) : (
+        <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
+          <EditSingleListing />
+        </PopupModal>
+      )}
+
+      <h3 className="listings-title">Listings</h3>
+      <div className="action-components">
+        <SearchInput onSearch={onSearch}/>
+        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
+      </div>
       <StatusBar>
         <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active} />
         <StatusBtn title={`${t('PendingListings')}`} handleClick={onChangeTab} active={active} />
         <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>
-      <div className="action-components">
-        <SearchInput />
-        <TableActionBtns showColumns onClick={handleClose} handleSideDrawer={handleSideDrawer} />
-      </div>
+
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
         <p>Advanced Search content</p>
         <p>Advanced Search content</p>
         <p>Advanced Search content</p>
       </AdvancedSearch>
       <DataTable
+        handleSingleListingModal={handleSingleListingModal}
+        handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
         dataSource={listingsData}
         rowSelection={rowSelection}

@@ -2,68 +2,64 @@
 
 // Large and extra large screens
 
+.ant-input-wrapper{
+  margin: 2rem 0;
+  border-radius: 10px;
+  border: none !important;
+  outline: none !important;
+  font-weight: $bold;
+  background: $white;
+  width: 40vw !important;
+  &:focus{
+    border: none !important;
+    outline: none !important;
+  };
+
+  .ant-input-group-addon{
+    display: none;
+  }
+}
 .search-bars-container {
   margin: $spacer 5rem $spacer auto;
   width: 30vw;
   display: flex;
   justify-content: space-between;
-  height: 2.7rem;
+  height: auto;
   
-  .advanced-search-btn {
-    margin-left: 1rem;
-    padding: .5rem 2rem;
-    width: auto;
-    color: $white;
-    font-weight: $bold;
+  @mixin action-btn{
+    width: 345px;
+    height: 50px;
     border-radius: 10px;
-    background: $gray;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    height: 100%;
-    white-space: nowrap;
-  }
+    background-color: $primary;
+    margin-left: 1rem;
+    color: $white;
+  };
 
+  .advanced-search-btn {
+    @include action-btn();
+  }
   .view-columns {
-    margin-left: 1rem;
-    padding: .5rem 1rem;
-    align-items: center;
-    width: auto;
+    @include action-btn;
+  };
+}
+
+
+
+// Phone screen size.
+@media only screen and (max-width: 750px) {
+  .action-components{
     display: flex;
-    justify-content: space-around;
-    color: $white;
-    font-weight: $bold;
-    background: $light-blue;
-    border-radius: 10px;
-    white-space: nowrap;
-  }
-}
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-.search-input {
-  border-radius: 10px;
-  padding: 2rem 1rem;
-  background: $white;
-  width: 40vw;
-  .input {
-    border: none !important;
-    outline: none !important;
-    font-weight: $bold;
-    width: 100%;
+    .ant-input-wrapper{
+      width: 90vw !important;
+    }
+    .search-bars-container{
+      margin: 0 auto;
+      width: 100%;
+    }
   }
 
-  &:focus {
-    outline: none;
-    border: none;
-  }
-  
-}
-@media screen and (max-width: 750px) {
-  .view-columns,
-  .advanced-search-btn {
-    display: none !important;
-  }
-  .search-input {
-    width: 100%;
-    margin: 0 !important;
-  }
 }
