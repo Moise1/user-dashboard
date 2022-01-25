@@ -5,16 +5,14 @@
   margin-left: 0.5rem;
 }
 .sider {
-  top: auto !important;
+  top: 11% !important;
   min-width: 80px;
   border-top: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
   flex: 0 0 80px;
   position: absolute;
   left: 0;
-  top: 12.3%;
-  z-index: 111 !important;
-  height: 100vh;
+  z-index: 1 !important;
   overflow: hidden;
   ::-webkit-scrollbar {
     display: none;
@@ -146,7 +144,7 @@
 @media only screen and (max-width: 1030px) {
   .sider {
     display: none;
-    top: 0px !important;
+    top: 0 !important;
   }
 
   .overlay-sidebar-mobile {

@@ -5,7 +5,7 @@ import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import { Sidebar } from './components/sidebar/Sidebar';
 import Orders from './components/orders/Orders';
-import Listings from './components/listings/Listings';
+import {Listings} from './components/listings/Listings';
 import { Services } from './components/services/Services';
 import { Subscriptions } from './components/subscriptions/Subscriptions';
 import { PricingRules } from './components/pricing-rules/PricingRules';
@@ -24,6 +24,7 @@ export const App = withRouter(({ history }) => {
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
+
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
@@ -42,7 +43,7 @@ export const App = withRouter(({ history }) => {
 
   return (
     <div className="app-container">
-      {staticValue ? <div className="overlay-sidebar-mobile" /> : null}
+      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile" /> : null}
       <SelectSupplierProvider>
         <Router>
           {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}

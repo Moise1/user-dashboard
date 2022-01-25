@@ -15,7 +15,7 @@ import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 
-const Listings = () => {
+export const Listings = () => {
   const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
@@ -136,7 +136,7 @@ const Listings = () => {
   const onSearch = (value: string) => console.log('searched value',value);
 
   return (
-    <Layout>
+    <Layout className="listings">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
         <h5 className="cols-display-title">Select columns to display</h5>
         <p className="description">Display columns in the listing table that suit your interests.</p>
@@ -205,4 +205,3 @@ const Listings = () => {
     </Layout>
   );
 };
-export default Listings;

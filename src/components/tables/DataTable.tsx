@@ -31,7 +31,7 @@ type ListingsTypes = {
 export const DataTable: React.FC<Props> = (props: Props) =>{  
   const {columns, dataSource, rowSelection, selectedRows, totalItems, handleBulkListingModal, handleSingleListingModal} = props;
   return(
-    <>
+    <div className="data-table">
       <div className="table-info">
         <p className="total-selected"> <strong>{selectedRows}</strong> selected</p>
         <div className="selected-options">
@@ -43,7 +43,7 @@ export const DataTable: React.FC<Props> = (props: Props) =>{
         </div>
         <p className='total-items'><strong>{totalItems} listings</strong></p>
       </div>
-      <Table  columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
-    </>
+      <Table  className="table" columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
+    </div>
   );
 };

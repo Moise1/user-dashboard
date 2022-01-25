@@ -7,9 +7,14 @@
 .listings-title{
   font-weight: bold;
   color: $primary;
-  width: 8vw;
+  width: 5vw;
   margin-top: 2rem;
   text-align: left;
+}
+
+.table{
+  height: 40vh;
+  overflow: scroll;
 }
 
 .listings-card{
@@ -40,15 +45,6 @@
   
   };
 
-  .action-btns{
-    display: flex;
-    justify-content: space-between;
-    float: right;
-    width: 20vw;
-    .cancel-btn, .success-btn{
-      margin-left: 1.5rem;
-    }
-  }
 }
  
 
@@ -58,8 +54,13 @@
 };
 
 .action-components{
-  margin: 1rem 0;
+  margin: 0 8rem 0 0;
   display: flex;
+  height: 5rem;
+  .search-bars-container{
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .table-info{
@@ -100,17 +101,22 @@
   }
 };
 
-// Mobile devices
-@media only screen and (max-width: 750px){
-  .listings-container {
-    .web-search-bar {
-      display: none;
-    }
 
-    .phone-search-bar {
-      margin: 20px 0;
-    }
+ // Mobile devices
+ @media only screen and (max-width: 750px){
+    
+  .listings-title, .table, .status-bar{
+    margin-top: 3rem;
   };
+
+  .status-bar{
+    display: flex;
+    justify-content: space-evenly;
+    .active-btn{
+      margin-left: 1rem;
+    }
+  }
+
   .table-info{
     display: grid;
     place-items: center;
@@ -125,50 +131,6 @@
     }
     .total-items{
       margin-right: auto;
-    }
-  }
-}
-
-@media only screen and (min-device-width: 450px) and (max-device-width: 1034px) {
-  .listings-container {
-    .web-search-bar {
-      display: none;
-    }
-
-    .phone-search-bar {
-      margin: 20px 0;
-    }
-  }
-}
-
-// iPads and Tablets
-
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
-  .listings-container {
-    .web-search-bar {
-      display: none;
-    }
-
-    .phone-search-bar {
-      margin: 20px 0;
-    }
-  }
-}
-
-// Screens and laptops
-@media only screen and (min-width: 1224px) {
-  .listings-table {
-    max-height: 53vh;
-    overflow-x: scroll;
-    .listings-table-head {
-      color: $primary;
-      white-space: nowrap;
-      font-weight: bold;
-      position: sticky;
-      top: 0;
-      background-color: $white;
-      font-size: $font-medium !important;
-      z-index: 1;
     }
   }
 }
