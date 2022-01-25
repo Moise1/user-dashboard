@@ -22,18 +22,42 @@
     background: $black;
   }
 }
-.pricing-rules-container {
+.pricing-rules {
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: fill-available;
   margin: auto;
-  margin-top: 1rem;
+  border: 2px solid blue;
 
   .pricing-rules-bar {
     display: block;
-    margin: 2rem 0;
     padding: 1rem 2rem;
-    height: 20vh;
+    border: 2px solid green;
+    margin-bottom: 2rem;
+    .form {
+      margin-top: 1 rem;
+      display: flex;
+      .select {
+        background: $white;
+        box-shadow: 0px 3px 6px #00000029;
+        opacity: 1;
+      }
+  
+      .input {
+        background: $mild-light-blue !important;
+      }
+      .rule-btn {
+        background: $light-primary;
+        color: $white;
+      }
+      .rule-btn,
+      .selector,
+      .input {
+        width: 18%;
+        margin-left: 1rem;
+        border-radius: 10px;
+      }
+    }
   }
 
   .table {
@@ -41,29 +65,5 @@
     border-radius: 5px;
   }
 
-  .form {
-    position: absolute;
-    display: flex;
-
-    .select {
-      background: $white;
-      box-shadow: 0px 3px 6px #00000029;
-      opacity: 1;
-    }
-
-    .input {
-      background: $mild-light-blue !important;
-    }
-    .rule-btn {
-      background: $light-primary;
-      color: $white;
-    }
-    .rule-btn,
-    .selector,
-    .input {
-      width: 18%;
-      margin-left: 1rem;
-      border-radius: 10px;
-    }
-  }
+ 
 }

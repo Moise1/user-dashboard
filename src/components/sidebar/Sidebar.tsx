@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Layout, Menu } from 'antd';
-import pin_icon from '../../assets/pin.svg';
+import {PushpinOutlined} from '@ant-design/icons';
+import { ChevronLeft } from 'react-feather';
+// import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import logout from '../../assets/logout.svg';
@@ -18,6 +20,7 @@ import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
+
 
 const { SubMenu } = Menu;
 
@@ -70,7 +73,12 @@ export const Sidebar = (props: Props) => {
 
   const routeChange = (route: string) => {
     history.push(route);
-    handleMouseLeave();
+    const x = window.matchMedia('(max-width: 1030px)');
+    if(x.matches){
+      collapseSideBar();
+    }else{
+      handleMouseLeave();
+    }
   };
 
   const listArray = [
@@ -143,16 +151,16 @@ export const Sidebar = (props: Props) => {
                     {t('Topbar.Update')}
                   </button>
                 </div>
-                <div className="sidebar-btns">
+                <div className="sidebar-control-btns">
                   {staticValue ? (
-                    <i
-                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
-                      className="fas fa-chevron-left"
-                    ></i>
+                    <ChevronLeft
+                      className="chevron-left"
+                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} 
+                    />
                   ) : (
-                    <button className="sidebar-pin">
-                      <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
-                    </button>
+                    <PushpinOutlined onClick={togglestatic}
+                      className="pin"
+                    />
                   )}
                 </div>
               </div>
