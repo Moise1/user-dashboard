@@ -30,8 +30,9 @@ export const App = withRouter(({ history }) => {
     setCollapsed(!collapsed);
     const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
     sidebar.style.display = 'block';
-    sidebar.style.position = 'absolute';
+    sidebar.style.position = 'fixed';
     sidebar.style.top = '0';
+    sidebar.style.height = '100vh !important';
   };
 
   const collapseSideBar = () => {
@@ -43,7 +44,7 @@ export const App = withRouter(({ history }) => {
 
   return (
     <div className="app-container">
-      {staticValue && <div onClick={collapseSideBar} className="overlay-sidebar-mobile" />}
+      {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar}/>}
       <SelectSupplierProvider>
         <Router>
           {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}

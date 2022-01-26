@@ -3,8 +3,8 @@
 // Extra Large screens
 .services-container {
   width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: fill-available;
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: stretch;
+  width: -webkit-stretch; /* Mozilla-based browsers will ignore this. */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3ch;

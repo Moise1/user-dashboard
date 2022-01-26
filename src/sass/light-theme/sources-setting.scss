@@ -3,9 +3,9 @@
 // Large and extra large screens
 
 .source-container {
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -webkit-stretch; /* Mozilla-based browsers will ignore this. */
   width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: fill-available;
+  width: stretch;
   padding: 0 6rem;
 
   .source-description {
