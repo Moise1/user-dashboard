@@ -2,9 +2,7 @@
 
 // Extra large screens
 
-//custom class here
-
-.listings-title{
+.listings-title {
   font-weight: bold;
   color: $primary;
   width: 5vw;
@@ -12,17 +10,17 @@
   text-align: left;
 }
 
-.table{
+.table {
   height: 40vh;
   overflow: scroll;
 }
 
-.listings-card{
-  .listings-cols{
+.listings-card {
+  .listings-cols {
     display: flex !important;
     justify-content: space-between;
     height: auto;
-    .cols-list{
+    .cols-list {
       list-style: none;
       -moz-column-count: 2;
       -moz-column-gap: 5rem;
@@ -30,106 +28,110 @@
       -webkit-column-gap: 5rem;
       column-count: 2;
       column-gap: 5rem;
-      li{
-        margin-bottom: .5rem;
+      li {
+        margin-bottom: 0.5rem;
       }
     }
-   
-    .cols-amount{
+
+    .cols-amount {
       display: block;
-      p, h3 {
+      p,
+      h3 {
         text-align: center;
         color: $primary;
       }
     }
-  
-  };
-
-}
- 
-
-.cols-display-title, .description{
-  color: $primary;
-  text-align: center;
-};
-
-.action-components{
-  margin: 0 8rem 0 0;
-  display: flex;
-  height: 5rem;
-  .search-bars-container{
-    display: flex;
-    justify-content: space-between;
   }
 }
 
-.table-info{
+.cols-display-title,
+.description {
+  color: $primary;
+  text-align: center;
+}
+
+.action-components {
+  margin: -1rem 8rem 0 0;
+  padding: -12px 0 !important;
+  display: flex;
+  justify-content: space-between !important;
+  height: 5rem;
+  width: 100%;
+  .search-bars-container {
+    margin: .8rem 0 0  auto;
+    width: 30vw;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+  }
+}
+
+.table-info {
   display: flex;
   background: $white;
   margin-top: 1rem;
   padding: 1rem;
-  .selected-options{
+  .selected-options {
     margin-left: 2rem;
-    .total-selected{
+    .total-selected {
       color: $primary;
     }
-    .list{
+    .list {
       list-style-type: none;
       display: flex;
       flex-direction: row;
-      justify-content: center ;
+      justify-content: center;
       align-items: center;
       background: $mild-light-blue;
-      padding: .2rem 2rem;
+      padding: 0.2rem 2rem;
       border-radius: 16px;
-    
-      .list-item{
-        margin-left: .9rem;
+
+      .list-item {
+        margin-left: 0.9rem;
         cursor: pointer;
         color: $primary;
-      &:nth-last-child(-n+2):before{
-        content: '|';
-        margin-right: .2rem;
+        &:nth-last-child(-n + 2):before {
+          content: '|';
+          margin-right: 0.2rem;
+        }
       }
-      };
-  
     }
   }
 
-  .total-items{
+  .total-items {
     margin-left: auto;
   }
-};
+}
 
-
- // Mobile devices
- @media only screen and (max-width: 750px){
-    
-  .listings-title, .table, .status-bar{
+// Mobile devices
+@media only screen and (max-width: 750px) {
+  .listings-title,
+  .table,
+  .status-bar {
     margin-top: 3rem;
-  };
+  }
 
-  .status-bar{
+  .status-bar {
     display: flex;
     justify-content: space-evenly;
-    .active-btn{
+    .active-btn {
       margin-left: 1rem;
     }
   }
 
-  .table-info{
+  .table-info {
     display: grid;
     place-items: center;
-    .list{
+    .list {
       width: 100%;
       display: flex;
       justify-content: space-between;
       padding: 0;
-      .list-item{
+      .list-item {
         margin-left: 0;
       }
     }
-    .total-items{
+    .total-items {
       margin-right: auto;
     }
   }

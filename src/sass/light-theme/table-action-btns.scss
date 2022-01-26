@@ -9,7 +9,7 @@
   outline: none !important;
   font-weight: $bold;
   background: $white;
-  width: 40vw !important;
+  width: 60vw !important;
   &:focus{
     border: none !important;
     outline: none !important;
@@ -19,31 +19,22 @@
     display: none;
   }
 }
-.search-bars-container {
-  margin: $spacer 5rem $spacer auto;
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-  height: auto;
-  
-  @mixin action-btn{
-    width: 345px;
-    height: 40px;
-    margin-top: .8rem;
-    border-radius: 10px;
-    background-color: $primary;
-    margin-left: 3rem;
-    color: $white;
-  };
+@mixin action-btn{
+  width: 345px;
+  height: 40px;
+  margin-top: .8rem;
+  border-radius: 10px;
+  background-color: $primary;
+  margin-left: 3rem;
+  color: $white;
+};
 
-  .advanced-search-btn {
-    @include action-btn();
-  }
-  .view-columns {
-    @include action-btn;
-  };
+.advanced-search-btn {
+  @include action-btn();
 }
-
+.view-columns {
+  @include action-btn;
+};
 
 
 // Phone screen size.

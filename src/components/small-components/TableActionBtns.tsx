@@ -29,7 +29,7 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
       placeholder={search}
       onSearch={onSearch}
       value={value}
-      suffix={<SearchIcon/>}
+      suffix={<SearchIcon size="15"/>}
     />
   );
 };
