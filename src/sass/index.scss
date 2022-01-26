@@ -20,6 +20,10 @@ body {
     margin: 0px 5px 0px 80px;
   }
   .content-area {
+    .listings .action-components .ant-input-wrapper{
+      border: 2px solid green;
+      width: 45vw !important;
+    }
     & > * {
       margin-left: 220px;
     }

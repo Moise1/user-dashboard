@@ -5,8 +5,8 @@
   width: 100%;
   overflow-x: hidden;
   width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: -webkit-stretch; /* Mozilla-based browsers will ignore this. */
-  width: stretch;
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: fill-available;
 
   .ant-card {
     border-radius: 15px !important;

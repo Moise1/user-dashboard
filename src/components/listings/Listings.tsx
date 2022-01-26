@@ -134,7 +134,7 @@ export const Listings = () => {
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const onSearch = (value: string) => console.log('searched value',value);
-
+ 
   return (
     <Layout className="listings">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
@@ -183,7 +183,7 @@ export const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active} />
+        <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active}/>
         <StatusBtn title={`${t('PendingListings')}`} handleClick={onChangeTab} active={active} />
         <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
       </StatusBar>

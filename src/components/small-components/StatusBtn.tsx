@@ -11,7 +11,7 @@ export const StatusBtn = (props: Props) => {
   const { title, handleClick, active } = props;
 
   return (
-    <button className={`${active ? 'active-btn' : 'inactive-btn'} active-btn`} onClick={handleClick}>
+    <button className={`${active ? 'active-btn' : 'inactive-btn'}`} onClick={handleClick}>
       {title}
     </button>
   );
