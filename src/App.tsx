@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 're
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import { Sidebar } from './components/sidebar/Sidebar';
-import Orders from './components/orders/Orders';
+import {Orders} from './components/orders/Orders';
 import {Listings} from './components/listings/Listings';
 import { Services } from './components/services/Services';
 import { Subscriptions } from './components/subscriptions/Subscriptions';
@@ -43,7 +43,7 @@ export const App = withRouter(({ history }) => {
 
   return (
     <div className="app-container">
-      {staticValue ? <div onClick={collapseSideBar} className="overlay-sidebar-mobile" /> : null}
+      {staticValue && <div onClick={collapseSideBar} className="overlay-sidebar-mobile" />}
       <SelectSupplierProvider>
         <Router>
           {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
@@ -67,7 +67,7 @@ export const App = withRouter(({ history }) => {
                 </Route>
                 <Route path="/home" component={Listings} />
                 <Route path="/listings" component={Listings} />
-                <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
+                <Route path="/orders" component={Orders} />
                 <Route path="/sources-setting" component={Sources} />
                 <Route path="/sources" component={SourcesTable} />
                 <Route path="/channel" component={ChannelSettings} />

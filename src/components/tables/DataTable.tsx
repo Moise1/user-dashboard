@@ -18,14 +18,30 @@ type ListingsTypes = {
   checked: boolean 
 };
 
+
+type OrdersTypes = {
+  id: number;
+  img: JSX.Element;
+  sale: string;
+  qty: number;
+  source: string;
+  title: string;
+  sold: number;
+  cost: number;
+  fees: number;
+  profit: number;
+  margin: string;
+  orderedOn: Date;
+  state: JSX.Element | string;
+}
   interface Props{
-    columns: {title: ReactNode, dataIndex: string, key: string, visible: boolean}[];
-    dataSource: ListingsTypes[];
-    rowSelection: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
-    selectedRows: number;
-    totalItems: number;
-    handleSingleListingModal: () => void;
-    handleBulkListingModal: ()  => void;
+    columns: {title: ReactNode, dataIndex: string, key: string, visible?: boolean}[];
+    dataSource: Array<ListingsTypes| OrdersTypes>;
+    rowSelection?: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
+    selectedRows?: number;
+    totalItems?: number;
+    handleSingleListingModal?: () => void;
+    handleBulkListingModal?: ()  => void;
   }
 
 export const DataTable: React.FC<Props> = (props: Props) =>{  
@@ -36,7 +52,7 @@ export const DataTable: React.FC<Props> = (props: Props) =>{
         <p className="total-selected"> <strong>{selectedRows}</strong> selected</p>
         <div className="selected-options">
           <ul className="list">
-            <li className="list-item" onClick={selectedRows > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> listing(s)</li>
+            <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> listing(s)</li>
             <li className="list-item">Copy <strong>{selectedRows}</strong> listing(s)</li>
             <li className="list-item">Optimize <strong>{selectedRows}</strong> listing(s)</li>
           </ul>

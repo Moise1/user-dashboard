@@ -1,4 +1,5 @@
 import { createRef, useState, useMemo } from 'react';
+import {ChevronLeft, ChevronRight} from 'react-feather';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
@@ -53,12 +54,8 @@ export const Subscriptions = () => {
   return (
     <Layout className="carousel-container">
       <Space className="control-btns-container">
-        <Button onClick={handlePrev} className="control-btn">
-          <i className="fas fa-chevron-left" aria-hidden="true" />
-        </Button>
-        <Button onClick={handleNext} className="control-btn">
-          <i className="fas fa-chevron-right" aria-hidden="true" />
-        </Button>
+        <ChevronLeft onClick={handlePrev} className="chevron-left"/>
+        <ChevronRight onClick={handleNext} className="chevron-right"/>
       </Space>
       <StatusBar>
         <h6 className="subscriptions-detail">Your subscription offers the following: </h6>

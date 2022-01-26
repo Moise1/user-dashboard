@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Layout, Menu } from 'antd';
-import {PushpinOutlined} from '@ant-design/icons';
 import { ChevronLeft } from 'react-feather';
-// import pin_icon from '../../assets/pin.svg';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import logout from '../../assets/logout.svg';
@@ -20,11 +18,12 @@ import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
-
+import pin from '../../assets/pin.svg';
 
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
+
 
 interface Props {
   className: string;
@@ -157,11 +156,7 @@ export const Sidebar = (props: Props) => {
                       className="chevron-left"
                       onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} 
                     />
-                  ) : (
-                    <PushpinOutlined onClick={togglestatic}
-                      className="pin"
-                    />
-                  )}
+                  ) : <img src={pin} className="pin-icon" onClick={togglestatic}/>}
                 </div>
               </div>
             )}

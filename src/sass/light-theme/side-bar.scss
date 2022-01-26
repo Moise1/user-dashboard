@@ -5,10 +5,10 @@
   margin-left: 0.5rem;
 }
 .sider{
-  margin-top: 3.4rem;
+  margin-top: -.3rem;
   border-top: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
-  position: absolute;
+  position: fixed;
   left: 0;
   height: 100%;
   z-index: 1 !important;
@@ -97,21 +97,9 @@
       right: 5%;
       top: 1%;
 
-      .chevron-left {
-        margin-top: $spacer * 0.25 !important;
-        color: $white;
-        background: $light-blue;
-        border-radius: 5px;
-      }
-
-      .sidebar-pin {
-        margin-top: $spacer * 0.25;
-        background: $light-gray;
-        border-radius: 8px;
-        padding: $spacer * 0.25;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  
+      .pin-icon {
+        cursor: pointer;
       }
     }
 
@@ -136,6 +124,7 @@
 @media only screen and (max-width: 1030px) {
   .sider {
     display: none;
+    z-index: 2
   }
 
   .overlay-sidebar-mobile {
@@ -143,10 +132,9 @@
     right: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.23);
-    left: 33%;
+    left: 30%;
     height: 100vh !important;
-    z-index: 2;
-    cursor: pointer;
+    z-index: 1;
   }
 }
 
