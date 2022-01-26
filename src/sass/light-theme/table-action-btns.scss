@@ -20,8 +20,8 @@
   }
 }
 @mixin action-btn{
-  width: 345px;
-  height: 40px;
+  width: 22rem;
+  height: 3rem;
   margin-top: .8rem;
   border-radius: 10px;
   background-color: $primary;
@@ -32,26 +32,19 @@
 .advanced-search-btn {
   @include action-btn();
 }
-.view-columns {
-  @include action-btn;
+.view-columns-btn {
+  @include action-btn();
 };
 
 
 // Phone screen size.
 @media only screen and (max-width: 750px) {
-  .action-components{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .ant-input-wrapper{
-      width: 90vw !important;
-    }
-    .search-bars-container{
-      margin: 0 auto;
-      width: 100%;
-    }
+  .ant-input-wrapper{
+    width: 90vw !important;
+  }
+  .search-bars-container{
+    margin: 0 auto;
+    width: 100%;
   }
 
 }
