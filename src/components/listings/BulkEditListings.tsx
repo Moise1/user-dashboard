@@ -11,7 +11,6 @@ interface Props {
   selectedItems: number;
 }
 export const BulkEditListings = ({ selectedItems }: Props) => {
-  const [active, setActive] = useState(false);
   const [index, setIndex] = useState<number>(0);
 
   const renderContent = (index: number): JSX.Element => {
@@ -24,10 +23,12 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
       return <></>;
     }
   };
-  const onChangeTab = (index: number) => {
-    setActive(true);
+  const handleChangeTab = (e: React.MouseEvent, index: number): void => {
+    document.querySelector('.active-btn')?.classList.remove('active-btn');
+    (e.target as Element).classList.add('active-btn');
     setIndex(index);
   };
+
   return (
     <>
       <div className="upper-section">
@@ -39,8 +40,8 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`} handleSelect={() => onChangeTab(0)} active={active} />
-        <StatusBtn title={`${t('Description')}`} handleSelect={() => onChangeTab(1)} active={active} />
+        <StatusBtn title={`${t('Main')}`}  changeTab={(e) => handleChangeTab(e, 0)} className="active-btn" />
+        <StatusBtn title={`${t('Description')}`}  changeTab={(e) => handleChangeTab(e, 1)}/>
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>

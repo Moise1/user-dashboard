@@ -92,7 +92,7 @@ export const Listings = () => {
   const [columns, setColumns] = useState(tableColumns);
 
 
-  const handleSelect = (e: React.MouseEvent) => {
+  const handleChangeTab = (e: React.MouseEvent) => {
     document.querySelector('.active-btn')?.classList.remove('active-btn');
     (e.target as Element).classList.add('active-btn');
   };
@@ -186,9 +186,9 @@ export const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} handleSelect={handleSelect} className="active-btn"/>
-        <StatusBtn title={`${t('PendingListings')}`} handleSelect={handleSelect}/>
-        <StatusBtn title={`${t('TerminatedListings')}`} handleSelect={handleSelect}/>
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className="active-btn"/>
+        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}/>
+        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}/>
       </StatusBar>
 
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
