@@ -12,7 +12,6 @@ import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
-  const [active, setActive] = useState<boolean>(false);
 
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
@@ -31,18 +30,20 @@ export const ChannelSettings = () => {
     }
   };
 
-  const handleChangeIndex = (index: number) => {
+ 
+  const handleSelect = (e: React.MouseEvent, index: number): void => {
+    document.querySelector('.active-btn')?.classList.remove('active-btn');
+    (e.target as Element).classList.add('active-btn');
     setIndex(index);
-    setActive(true);
   };
 
   return (
     <Layout className="channel-settings">
       <StatusBar>
-        <StatusBtn title={`${t('Channel.Monitoring')}`} handleClick={() => handleChangeIndex(0)} active={active} />
-        <StatusBtn title={`${t('Channel.Listing')}`} handleClick={() => handleChangeIndex(1)} active={active} />
-        <StatusBtn title={`${t('Channel.Business')}`} handleClick={() => handleChangeIndex(2)} active={active} />
-        <StatusBtn title={`${t('Channel.Other')}`} handleClick={() => handleChangeIndex(3)} active={active} />
+        <StatusBtn title={`${t('Channel.Monitoring')}`} handleSelect={(e) => handleSelect(e, 0)} className="active-btn"/>
+        <StatusBtn title={`${t('Channel.Listing')}`} handleSelect={(e) => handleSelect(e, 1)}/>
+        <StatusBtn title={`${t('Channel.Business')}`} handleSelect={(e) => handleSelect(e, 2)}/>
+        <StatusBtn title={`${t('Channel.Other')}`} handleSelect={(e) => handleSelect(e,3)} />
       </StatusBar>
 
       <Row className="content">

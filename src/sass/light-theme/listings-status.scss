@@ -21,7 +21,6 @@
   font-weight: $bold;
   border: none !important;
   outline: none !important;
-
   &:focus {
     border: none !important;
     outline: none !important;
@@ -30,16 +29,22 @@
 
 .active-btn {
   @include status-btn();
+  color: $white !important;
+  background: $light-primary !important;
   &:focus {
     color: $white;
     background: $light-primary;
   }
 }
 
-.inactive-btn {
+.status-btn {
   @include status-btn();
-  background: $light-gray;
+  background: $light-gray ;
   color: $primary;
+  &:hover{
+    background: $light-gray ;
+    color: $primary;
+  }
 }
 
 

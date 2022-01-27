@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {  Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
@@ -16,7 +16,6 @@ import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 
 export const Listings = () => {
-  const [active, setActive] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -92,7 +91,11 @@ export const Listings = () => {
   ];
   const [columns, setColumns] = useState(tableColumns);
 
-  const onChangeTab = () => setActive(true);
+
+  const handleSelect = (e: React.MouseEvent) => {
+    document.querySelector('.active-btn')?.classList.remove('active-btn');
+    (e.target as Element).classList.add('active-btn');
+  };
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
     setSelectedRowKeys(selectedRowKeys);
@@ -183,9 +186,9 @@ export const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active}/>
-        <StatusBtn title={`${t('PendingListings')}`} handleClick={onChangeTab} active={active} />
-        <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
+        <StatusBtn title={`${t('ActiveListings')}`} handleSelect={handleSelect} className="active-btn"/>
+        <StatusBtn title={`${t('PendingListings')}`} handleSelect={handleSelect}/>
+        <StatusBtn title={`${t('TerminatedListings')}`} handleSelect={handleSelect}/>
       </StatusBar>
 
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>

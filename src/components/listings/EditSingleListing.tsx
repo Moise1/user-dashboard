@@ -54,10 +54,10 @@ export const EditSingleListing = () => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`} handleClick={() => onChangeTab(0)} active={active} />
-        <StatusBtn title={`${t('Description')}`} handleClick={() => onChangeTab(1)} active={active} />
-        <StatusBtn title={`${t('Details')}`} handleClick={() => onChangeTab(2)} active={active} />
-        <StatusBtn title={`${t('Options')}`} handleClick={() => onChangeTab(3)} active={active} />
+        <StatusBtn title={`${t('Main')}`} handleSelect={() => onChangeTab(0)} active={active} />
+        <StatusBtn title={`${t('Description')}`} handleSelect={() => onChangeTab(1)} active={active} />
+        <StatusBtn title={`${t('Details')}`} handleSelect={() => onChangeTab(2)} active={active} />
+        <StatusBtn title={`${t('Options')}`} handleSelect={() => onChangeTab(3)} active={active} />
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>

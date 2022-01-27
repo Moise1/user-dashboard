@@ -2,16 +2,17 @@ import '../../sass/light-theme/listings-status.scss';
 
 interface Props {
   title: string;
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleSelect: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
-  active?: boolean;
+  active? : boolean;
 }
 
+
 export const StatusBtn = (props: Props) => {
-  const { title, handleClick, active } = props;
+  const { title, handleSelect, className } = props;
 
   return (
-    <button className={`${active ? 'active-btn' : 'inactive-btn'}`} onClick={handleClick}>
+    <button className={`status-btn ${className}`} onClick={handleSelect}>
       {title}
     </button>
   );
