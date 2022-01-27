@@ -1,4 +1,4 @@
-import { createRef, useState, useMemo } from 'react';
+import { createRef, useState, useMemo} from 'react';
 import {ChevronLeft, ChevronRight} from 'react-feather';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
@@ -11,7 +11,8 @@ export const Subscriptions = () => {
   const sliderRef = createRef<CarouselRef>();
   const handleNext = () => sliderRef?.current?.next();
   const handlePrev = () => sliderRef?.current?.prev();
-  const screenWidth = window.screen.width;
+  const tabletScreen = window.matchMedia('(max-width: 1030px)');
+  const mobileScreen = window.matchMedia('(max-width: 750px)');
 
   const data = [
     {
@@ -44,12 +45,17 @@ export const Subscriptions = () => {
     }
   ];
 
-  const renderSlides = useMemo(() => {
-    if (screenWidth < 750) {
+  const renderSlides = useMemo(()=> {
+    if(tabletScreen.matches){
+      setSlides(2);
+      slides;
+    }
+    if (mobileScreen.matches) {
       setSlides(1);
+      slides;
     }
     return slides;
-  }, [slides]);
+  },[slides]);
 
   return (
     <Layout className="carousel-container">

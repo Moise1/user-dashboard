@@ -13,7 +13,7 @@ import { BrowserExtensions } from './components/browser-extensions/BrowserExtens
 import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { ChannelSettings } from './components/chanel/ChannelSettings';
 import { Layout } from 'antd';
-import Sources from './components/sources/Sources';
+import {Sources} from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import { SelectSupplierProvider } from './contexts/SelectSupplierProvider';
 import './sass/index.scss';

@@ -115,7 +115,6 @@
     width: 80%;
     position: absolute;
     margin: 20rem auto 0 5rem;
-    z-index: 1;
     display: flex;
     justify-content: space-between;
   }
@@ -128,7 +127,15 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media only screen and (max-width: 750px) {
+  .status-bar{
+    margin-top: 2rem !important;
+    display: grid;
+    place-items: center;
+  }
+  .control-btns-container{
+    margin: 22rem 1.2rem !important;
+  }
   .twenty-off,
   .forty-off {
     margin-top: -20px;

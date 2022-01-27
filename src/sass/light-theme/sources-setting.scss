@@ -63,7 +63,11 @@
         margin-bottom: 1rem;
       }
       
-    }
+      .action-btns{
+        display: grid !important;
+        height: 25vh !important;
+      }
+    };
   }
 }
 

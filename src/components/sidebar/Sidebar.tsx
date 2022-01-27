@@ -72,8 +72,8 @@ export const Sidebar = (props: Props) => {
 
   const routeChange = (route: string) => {
     history.push(route);
-    const x = window.matchMedia('(max-width: 1030px)');
-    if(x.matches){
+    const tabletScreen = window.matchMedia('(max-width: 1030px)');
+    if(tabletScreen.matches){
       collapseSideBar();
     }else{
       handleMouseLeave();
@@ -130,7 +130,7 @@ export const Sidebar = (props: Props) => {
         collapsedWidth="80px"
       >
         <div className="side-menu-container">
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']} className="menu-container">
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} className="menu-container">
             {!collapsed && (
               <div className="sidebar-overhead">
                 <div className="logo-container">
