@@ -2,64 +2,52 @@
 
 // Large and extra large screens
 
-.ant-input-wrapper{
+.ant-input-wrapper {
   margin: 2rem 0;
   border-radius: 10px;
   border: none !important;
   outline: none !important;
   font-weight: $bold;
   background: $white;
-  width: 40vw !important;
-  &:focus{
+  width: 60vw !important;
+  &:focus {
     border: none !important;
     outline: none !important;
-  };
+  }
 
-  .ant-input-group-addon{
+  .ant-input-group-addon {
     display: none;
   }
 }
-.search-bars-container {
-  margin: $spacer 5rem $spacer auto;
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-  height: auto;
-  
-  @mixin action-btn{
-    width: 345px;
-    height: 50px;
-    border-radius: 10px;
-    background-color: $primary;
-    margin-left: 1rem;
-    color: $white;
-  };
+@mixin action-btn {
+  width: 22rem;
+  height: 3rem;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+  background-color: $primary;
+  margin-left: 3rem;
+  color: $white;
 
-  .advanced-search-btn {
-    @include action-btn();
+  &:hover, &:focus {
+    background-color: $primary;
+    color: $white;
   }
-  .view-columns {
-    @include action-btn;
-  };
 }
 
-
+.advanced-search-btn {
+  @include action-btn();
+}
+.view-columns-btn {
+  @include action-btn();
+}
 
 // Phone screen size.
 @media only screen and (max-width: 750px) {
-  .action-components{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .ant-input-wrapper{
-      width: 90vw !important;
-    }
-    .search-bars-container{
-      margin: 0 auto;
-      width: 100%;
-    }
+  .ant-input-wrapper {
+    width: 90vw !important;
   }
-
+  .search-bars-container {
+    margin: 0 auto;
+    width: 100%;
+  }
 }

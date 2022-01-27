@@ -29,7 +29,7 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
       placeholder={search}
       onSearch={onSearch}
       value={value}
-      suffix={<SearchIcon/>}
+      suffix={<SearchIcon size="15"/>}
     />
   );
 };
@@ -42,7 +42,7 @@ export const TableActionBtns = ({ showColumns, handleShowColumns, handleSideDraw
         {t('AdvancedSearch')}
       </Button>
       {showColumns && (
-        <Button className="view-columns" onClick={handleShowColumns}>
+        <Button className="view-columns-btn" onClick={handleShowColumns}>
           <img src={column_img} height="20" alt="" /> {t('showColumns')}
         </Button>
       )}

@@ -21,31 +21,36 @@
   font-weight: $bold;
   border: none !important;
   outline: none !important;
-
   &:focus {
     border: none !important;
     outline: none !important;
   }
 }
 
-.active-btn {
+.active-tab {
   @include status-btn();
+  color: $white !important;
+  background: $light-primary !important;
   &:focus {
     color: $white;
     background: $light-primary;
   }
 }
 
-.inactive-btn {
+.status-btn {
   @include status-btn();
-  background: $light-gray;
+  background: $light-gray ;
   color: $primary;
+  &:hover{
+    background: $light-gray ;
+    color: $primary;
+  }
 }
 
 
 // small screen sizes
 @media only screen and (max-width: 750px) {
-  .active-btn, .inactive-btn {
+  .active-tab, .inactive-tab {
     padding: 0.6rem 1.3rem;
     font-size: $font-small;
   }

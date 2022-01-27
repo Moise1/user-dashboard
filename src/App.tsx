@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 're
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
 import { Sidebar } from './components/sidebar/Sidebar';
-import Orders from './components/orders/Orders';
-import Listings from './components/listings/Listings';
+import {Orders} from './components/orders/Orders';
+import {Listings} from './components/listings/Listings';
 import { Services } from './components/services/Services';
 import { Subscriptions } from './components/subscriptions/Subscriptions';
 import { PricingRules } from './components/pricing-rules/PricingRules';
@@ -13,7 +13,7 @@ import { BrowserExtensions } from './components/browser-extensions/BrowserExtens
 import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { ChannelSettings } from './components/chanel/ChannelSettings';
 import { Layout } from 'antd';
-import Sources from './components/sources/Sources';
+import {Sources} from './components/sources/Sources';
 import SourcesTable from './components/sources/SourcesTable';
 import { SelectSupplierProvider } from './contexts/SelectSupplierProvider';
 import './sass/index.scss';
@@ -24,13 +24,15 @@ export const App = withRouter(({ history }) => {
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
+
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
     const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
     sidebar.style.display = 'block';
-    sidebar.style.position = 'absolute';
+    sidebar.style.position = 'fixed';
     sidebar.style.top = '0';
+    sidebar.style.height = '100vh !important';
   };
 
   const collapseSideBar = () => {
@@ -42,7 +44,7 @@ export const App = withRouter(({ history }) => {
 
   return (
     <div className="app-container">
-      {staticValue ? <div className="overlay-sidebar-mobile" /> : null}
+      {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar}/>}
       <SelectSupplierProvider>
         <Router>
           {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
@@ -66,7 +68,7 @@ export const App = withRouter(({ history }) => {
                 </Route>
                 <Route path="/home" component={Listings} />
                 <Route path="/listings" component={Listings} />
-                <Route path="/orders" component={() => <Orders staticValue={staticValue} />} />
+                <Route path="/orders" component={Orders} />
                 <Route path="/sources-setting" component={Sources} />
                 <Route path="/sources" component={SourcesTable} />
                 <Route path="/channel" component={ChannelSettings} />

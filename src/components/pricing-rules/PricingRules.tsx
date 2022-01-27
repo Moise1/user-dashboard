@@ -79,7 +79,7 @@ export const PricingRules = () => {
   ];
 
   return (
-    <div className="pricing-rules-container">
+    <div className="pricing-rules">
       <StatusBar className="pricing-rules-bar">
         <h4 className="add-rule">Add new rule</h4>
         <p className="status-description">

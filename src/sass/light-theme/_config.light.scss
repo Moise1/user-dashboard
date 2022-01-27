@@ -95,6 +95,18 @@ a {
   }
 }
 
+@mixin chevrons{
+  margin-top: $spacer * 0.25 !important;
+  background: $light-blue;
+  color: $white;
+  border-radius: 5px;
+  cursor: pointer;
+};
+
+.chevron-right, .chevron-left{
+  @include chevrons();
+}
+
 @mixin btn-styles($color: null) {
   margin: 1rem 0;
   background: $color;

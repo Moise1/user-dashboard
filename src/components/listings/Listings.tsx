@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {  Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
@@ -15,13 +15,13 @@ import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 
-const Listings = () => {
-  const [active, setActive] = useState(false);
+export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
+
 
   const tableColumns = [
     {
@@ -92,7 +92,11 @@ const Listings = () => {
   ];
   const [columns, setColumns] = useState(tableColumns);
 
-  const onChangeTab = () => setActive(true);
+
+  const handleChangeTab = (e: React.MouseEvent): void => {
+    document.querySelector('.active-tab')?.classList.remove('active-tab');
+    (e.target as Element).classList.add('active-tab');
+  };
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
     setSelectedRowKeys(selectedRowKeys);
@@ -134,9 +138,9 @@ const Listings = () => {
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const onSearch = (value: string) => console.log('searched value',value);
-
+ 
   return (
-    <Layout>
+    <Layout className="listings">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
         <h5 className="cols-display-title">Select columns to display</h5>
         <p className="description">Display columns in the listing table that suit your interests.</p>
@@ -183,9 +187,9 @@ const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} handleClick={onChangeTab} active={active} />
-        <StatusBtn title={`${t('PendingListings')}`} handleClick={onChangeTab} active={active} />
-        <StatusBtn title={`${t('TerminatedListings')}`} handleClick={onChangeTab} active={active} />
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className='active-tab'/>
+        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}/>
+        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}/>
       </StatusBar>
 
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
@@ -205,4 +209,3 @@ const Listings = () => {
     </Layout>
   );
 };
-export default Listings;

@@ -18,7 +18,7 @@ type ContextType = {
   setSupplierValue: (arg0: string) => void;
 };
 
-const Sources = () => {
+export const Sources = () => {
   const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const history = useHistory();
@@ -73,5 +73,3 @@ const Sources = () => {
     </Layout>
   );
 };
-
-export default Sources;

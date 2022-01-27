@@ -10,7 +10,6 @@ import '../../sass/light-theme/edit-single-listing.scss';
 import { ExternalLink } from 'react-feather';
 
 export const EditSingleListing = () => {
-  const [active, setActive] = useState(false);
   const [index, setIndex] = useState<number>(0);
 
   const renderContent = (index: number): JSX.Element => {
@@ -29,10 +28,13 @@ export const EditSingleListing = () => {
       return <></>;
     }
   };
-  const onChangeTab = (index: number) => {
-    setActive(true);
+
+  const handleChangeTab = (e: React.MouseEvent, index: number): void => {
+    document.querySelector('.active-tab')?.classList.remove('active-tab');
+    (e.target as Element).classList.add('active-tab');
     setIndex(index);
   };
+
   return (
     <>
       <div className="upper-section">
@@ -54,10 +56,10 @@ export const EditSingleListing = () => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`} handleClick={() => onChangeTab(0)} active={active} />
-        <StatusBtn title={`${t('Description')}`} handleClick={() => onChangeTab(1)} active={active} />
-        <StatusBtn title={`${t('Details')}`} handleClick={() => onChangeTab(2)} active={active} />
-        <StatusBtn title={`${t('Options')}`} handleClick={() => onChangeTab(3)} active={active} />
+        <StatusBtn title={`${t('Main')}`} changeTab={(e) => handleChangeTab(e, 0)} className="active-tab" />
+        <StatusBtn title={`${t('Description')}`} changeTab={(e) => handleChangeTab(e, 1)} />
+        <StatusBtn title={`${t('Details')}`} changeTab={(e) => handleChangeTab(e, 2)} />
+        <StatusBtn title={`${t('Options')}`} changeTab={(e) => handleChangeTab(e, 3)}/>
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>

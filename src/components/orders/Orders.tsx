@@ -1,48 +1,59 @@
 import { useState } from 'react';
 import { TableActionBtns } from '../small-components/TableActionBtns';
-import { OrdersTable } from '../tables/OrdersTable';
+import {orderData} from '../common/OrderData';
+// import { OrdersTable } from '../tables/OrdersTable';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';
 import OrderStateProgressModal from '../modals/OrderStateProgressModal';
 import OrderDetailsModal from '../modals/OrderDetailsModal';
 import '../../sass/light-theme/orders.scss';
 import '../../sass/light-theme/medium-button.scss';
+import {DataTable} from '../tables/DataTable';
+import { t } from 'src/global/transShim';
 
-interface props {
-  staticValue: boolean;
-}
+// interface props {
+//   staticValue: boolean;
+// }
 
-const Orders = (ordersProps: props) => {
-  const [orderNumber, setOrderNumber] = useState(0);
+export const Orders = () => {
+  const [orderNumber,] = useState(0);
   const [show, setShow] = useState(false);
-  const { staticValue } = ordersProps;
   const [orderDetailsModalShow, setOrderDetailsModalShow] = useState(false);
 
-  let orderSelectedArray: Array<number> = [];
-
-  const handleChange = (saveObjectId: number) => {
-    if (orderSelectedArray.length > 0) {
-      if (orderSelectedArray.filter((order) => order === saveObjectId).length > 0) {
-        orderSelectedArray = orderSelectedArray.filter((order) => order !== saveObjectId);
-      } else {
-        orderSelectedArray.push(saveObjectId);
-      }
-    } else {
-      orderSelectedArray.push(saveObjectId);
+  const columns = [
+    {
+      title: t('OrderTable.Item'),
+      dataIndex: 'img',
+      key: 'img'
+    },
+    {
+      title: t('OrderTable.Sale'),
+      dataIndex: 'sale',
+      key: 'sale'
+    },
+    {
+      title: t('OrderTable.Source'),
+      dataIndex: 'source',
+      key: 'source'
+    },
+    {
+      title: t('OrderTable.Title'),
+      dataIndex: 'title',
+      key: 'title'
+    },
+    {
+      title: t('OrderTable.Quantity'),
+      dataIndex: 'qty',
+      key: 'qty'
+    },
+    {
+      title: t('OrderTable.Sold'),
+      dataIndex: 'sold',
+      key: 'sold'
     }
 
-    setOrderNumber(orderSelectedArray.length);
-  };
 
-  const handleShowModal = (e: React.MouseEvent) => {
-    if ((e.target as HTMLInputElement)?.className === 'checkmark') {
-      const id = parseInt((e.currentTarget as HTMLInputElement).dataset.id || '0', 10);
-      handleChange(id);
-      e.preventDefault();
-    } else {
-      setShow(true);
-    }
-  };
+  ];
 
   const handleCloseAllModals = () => {
     setOrderDetailsModalShow(false);
@@ -53,13 +64,7 @@ const Orders = (ordersProps: props) => {
     <Layout className="orders-container">
       <TableActionBtns />
       <OrderActionBtns orderNumber={orderNumber} />
-      <OrdersTable
-        orderSelectedArray={orderSelectedArray}
-        tableValue={staticValue}
-        setOrderNumber={setOrderNumber}
-        showModal={handleShowModal}
-      />
-
+      <DataTable columns={columns} dataSource={orderData}/>
       <OrderStateProgressModal
         setOrderDetailsModalShow={setOrderDetailsModalShow}
         orderDetailsModalShow={orderDetailsModalShow}
@@ -78,5 +83,3 @@ const Orders = (ordersProps: props) => {
     </Layout>
   );
 };
-
-export default Orders;

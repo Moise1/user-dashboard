@@ -11,7 +11,7 @@ export const SelectSupplierProvider: React.FC<React.ReactNode> = ({ children }) 
   const [supplierValue, setSupplierValue] = React.useState<string>('');
 
   return (
-    <div className="routes-content">
+    <div className="routes-container">
       <SelectSupplierContext.Provider value={{ supplierValue, setSupplierValue }}>
         {children}
       </SelectSupplierContext.Provider>

@@ -18,32 +18,48 @@ type ListingsTypes = {
   checked: boolean 
 };
 
+
+type OrdersTypes = {
+  id: number;
+  img: JSX.Element;
+  sale: string;
+  qty: number;
+  source: string;
+  title: string;
+  sold: number;
+  cost: number;
+  fees: number;
+  profit: number;
+  margin: string;
+  orderedOn: Date;
+  state: JSX.Element | string;
+}
   interface Props{
-    columns: {title: ReactNode, dataIndex: string, key: string, visible: boolean}[];
-    dataSource: ListingsTypes[];
-    rowSelection: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
-    selectedRows: number;
-    totalItems: number;
-    handleSingleListingModal: () => void;
-    handleBulkListingModal: ()  => void;
+    columns: {title: ReactNode, dataIndex: string, key: string, visible?: boolean}[];
+    dataSource: Array<ListingsTypes| OrdersTypes>;
+    rowSelection?: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
+    selectedRows?: number;
+    totalItems?: number;
+    handleSingleListingModal?: () => void;
+    handleBulkListingModal?: ()  => void;
   }
 
 export const DataTable: React.FC<Props> = (props: Props) =>{  
   const {columns, dataSource, rowSelection, selectedRows, totalItems, handleBulkListingModal, handleSingleListingModal} = props;
   return(
-    <>
+    <div className="data-table">
       <div className="table-info">
         <p className="total-selected"> <strong>{selectedRows}</strong> selected</p>
         <div className="selected-options">
           <ul className="list">
-            <li className="list-item" onClick={selectedRows > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> listing(s)</li>
+            <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> listing(s)</li>
             <li className="list-item">Copy <strong>{selectedRows}</strong> listing(s)</li>
             <li className="list-item">Optimize <strong>{selectedRows}</strong> listing(s)</li>
           </ul>
         </div>
         <p className='total-items'><strong>{totalItems} listings</strong></p>
       </div>
-      <Table  columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
-    </>
+      <Table  className="table" columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
+    </div>
   );
 };
