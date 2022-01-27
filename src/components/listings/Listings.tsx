@@ -198,6 +198,7 @@ export const Listings = () => {
         <p>Advanced Search content</p>
       </AdvancedSearch>
       <DataTable
+        page='listing'
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}

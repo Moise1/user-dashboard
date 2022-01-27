@@ -42,22 +42,23 @@ type OrdersTypes = {
     totalItems?: number;
     handleSingleListingModal?: () => void;
     handleBulkListingModal?: ()  => void;
+    page: string;
   }
 
 export const DataTable: React.FC<Props> = (props: Props) =>{  
-  const {columns, dataSource, rowSelection, selectedRows, totalItems, handleBulkListingModal, handleSingleListingModal} = props;
+  const {columns, dataSource, rowSelection, selectedRows, totalItems, handleBulkListingModal, handleSingleListingModal, page} = props;
   return(
     <div className="data-table">
       <div className="table-info">
         <p className="total-selected"> <strong>{selectedRows}</strong> selected</p>
         <div className="selected-options">
           <ul className="list">
-            <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> listing(s)</li>
-            <li className="list-item">Copy <strong>{selectedRows}</strong> listing(s)</li>
-            <li className="list-item">Optimize <strong>{selectedRows}</strong> listing(s)</li>
+            <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>Edit <strong>{selectedRows}</strong> {page}(s)</li>
+            <li className="list-item">Copy <strong>{selectedRows}</strong> {page}(s)</li>
+            <li className="list-item">Optimize <strong>{selectedRows}</strong> {page}(s)</li>
           </ul>
         </div>
-        <p className='total-items'><strong>{totalItems} listings</strong></p>
+        <p className='total-items'><strong>{totalItems} {page}s</strong></p>
       </div>
       <Table  className="table" columns={columns} dataSource={dataSource} rowSelection={rowSelection}/>
     </div>
