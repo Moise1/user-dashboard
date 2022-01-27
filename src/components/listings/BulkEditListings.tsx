@@ -24,8 +24,8 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
     }
   };
   const handleChangeTab = (e: React.MouseEvent, index: number): void => {
-    document.querySelector('.actve-tab')?.classList.remove('actve-tab');
-    (e.target as Element).classList.add('actve-tab');
+    document.querySelector('.active-tab')?.classList.remove('active-tab');
+    (e.target as Element).classList.add('active-tab');
     setIndex(index);
   };
 
@@ -40,7 +40,7 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`}  changeTab={(e) => handleChangeTab(e, 0)} className="actve-tab" />
+        <StatusBtn title={`${t('Main')}`}  changeTab={(e) => handleChangeTab(e, 0)} className="active-tab" />
         <StatusBtn title={`${t('Description')}`}  changeTab={(e) => handleChangeTab(e, 1)}/>
       </StatusBar>
 
