@@ -27,7 +27,7 @@
   }
 }
 
-.active-btn {
+.active-tab {
   @include status-btn();
   color: $white !important;
   background: $light-primary !important;
@@ -50,7 +50,7 @@
 
 // small screen sizes
 @media only screen and (max-width: 750px) {
-  .active-btn, .inactive-btn {
+  .actve-tab, .inactve-tab {
     padding: 0.6rem 1.3rem;
     font-size: $font-small;
   }

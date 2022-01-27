@@ -9,7 +9,7 @@ interface Props {
 
 
 export const StatusBtn = (props: Props) => {
-  const { title, changeTab, className } = props;
+  const { title, changeTab, className} = props;
 
   return (
     <button className={`status-btn ${className}`} onClick={changeTab}>

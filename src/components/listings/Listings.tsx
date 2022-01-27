@@ -22,6 +22,7 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
 
+
   const tableColumns = [
     {
       title: t('Listings.Column.Img'),
@@ -92,9 +93,9 @@ export const Listings = () => {
   const [columns, setColumns] = useState(tableColumns);
 
 
-  const handleChangeTab = (e: React.MouseEvent) => {
-    document.querySelector('.active-btn')?.classList.remove('active-btn');
-    (e.target as Element).classList.add('active-btn');
+  const handleChangeTab = (e: React.MouseEvent): void => {
+    document.querySelector('.active-tab')?.classList.remove('active-tab');
+    (e.target as Element).classList.add('active-tab');
   };
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
@@ -186,7 +187,7 @@ export const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className="active-btn"/>
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className='active-tab'/>
         <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}/>
         <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}/>
       </StatusBar>

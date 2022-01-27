@@ -30,8 +30,8 @@ export const EditSingleListing = () => {
   };
 
   const handleChangeTab = (e: React.MouseEvent, index: number): void => {
-    document.querySelector('.active-btn')?.classList.remove('active-btn');
-    (e.target as Element).classList.add('active-btn');
+    document.querySelector('.actve-tab')?.classList.remove('actve-tab');
+    (e.target as Element).classList.add('actve-tab');
     setIndex(index);
   };
 
@@ -56,7 +56,7 @@ export const EditSingleListing = () => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`} changeTab={(e) => handleChangeTab(e, 0)} className="active-btn" />
+        <StatusBtn title={`${t('Main')}`} changeTab={(e) => handleChangeTab(e, 0)} className="actve-tab" />
         <StatusBtn title={`${t('Description')}`} changeTab={(e) => handleChangeTab(e, 1)} />
         <StatusBtn title={`${t('Details')}`} changeTab={(e) => handleChangeTab(e, 2)} />
         <StatusBtn title={`${t('Options')}`} changeTab={(e) => handleChangeTab(e, 3)}/>
