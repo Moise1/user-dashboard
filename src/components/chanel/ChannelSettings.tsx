@@ -12,6 +12,8 @@ import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(0);
+
 
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
@@ -32,18 +34,18 @@ export const ChannelSettings = () => {
 
  
   const handleChangeTab = (e: React.MouseEvent, index: number): void => {
-    document.querySelector('.active-tab')?.classList.remove('active-tab');
-    (e.target as Element).classList.add('active-tab');
+    const id = e.currentTarget.getAttribute('id');
+    setActiveTab(parseInt(id!));
     setIndex(index);
   };
 
   return (
     <Layout className="channel-settings">
       <StatusBar>
-        <StatusBtn title={`${t('Channel.Monitoring')}`} changeTab={(e) => handleChangeTab(e, 0)} className="active-tab"/>
-        <StatusBtn title={`${t('Channel.Listing')}`} changeTab={(e) => handleChangeTab(e, 1)}/>
-        <StatusBtn title={`${t('Channel.Business')}`} changeTab={(e) => handleChangeTab(e, 2)}/>
-        <StatusBtn title={`${t('Channel.Other')}`} changeTab={(e) => handleChangeTab(e,3)} />
+        <StatusBtn title={`${t('Channel.Monitoring')}`} changeTab={(e) => handleChangeTab(e, 0)} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
+        <StatusBtn title={`${t('Channel.Listing')}`} changeTab={(e) => handleChangeTab(e, 1)} className={activeTab === 1 ? 'active-tab': ''} id="1"/>
+        <StatusBtn title={`${t('Channel.Business')}`} changeTab={(e) => handleChangeTab(e, 2)} className={activeTab === 2 ? 'active-tab': ''} id="2"/>
+        <StatusBtn title={`${t('Channel.Other')}`} changeTab={(e) => handleChangeTab(e,3)} className={activeTab === 3 ? 'active-tab': ''} id="3"/>
       </StatusBar>
 
       <Row className="content">

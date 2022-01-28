@@ -21,6 +21,7 @@ export const Listings = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<number>(0);
 
 
   const tableColumns = [
@@ -94,8 +95,8 @@ export const Listings = () => {
 
 
   const handleChangeTab = (e: React.MouseEvent): void => {
-    document.querySelector('.active-tab')?.classList.remove('active-tab');
-    (e.target as Element).classList.add('active-tab');
+    const id = e.currentTarget.getAttribute('id');
+    setActiveTab(parseInt(id!));
   };
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
@@ -187,9 +188,9 @@ export const Listings = () => {
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className='active-tab'/>
-        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}/>
-        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}/>
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
+        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}  className={activeTab === 1 ? 'active-tab': ''} id="1"/>
+        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}  className={activeTab === 2 ? 'active-tab': ''} id="2"/>
       </StatusBar>
 
       <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>

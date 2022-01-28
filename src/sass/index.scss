@@ -20,11 +20,16 @@ body {
     margin: 0px 5px 0px 80px;
   }
   .content-area {
-    margin: 2rem 2rem 0 13rem;
+    margin: 1rem 2rem 0 13rem;
+    // border: 2px solid red;
     .listings .action-components .ant-input-wrapper{
       width: 43vw !important;
     }
 
+    .listings-title{
+      // border: 2px solid blue;
+      margin-top: -.4rem;
+    }
     .control-btns-container{
       width: 68vw !important;
     }
