@@ -2,17 +2,6 @@
 
 // Extra Large screens
 
-.status-bar {
-  margin-top: $spacer;
-  position: relative;
-  padding: $spacer;
-  display: flex;
-  justify-content: space-around;
-  border-radius: 10px;
-  background: $white 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #2338c129;
-}
-
 @mixin status-btn() {
   border-radius: 10px !important;
   padding: 0.6rem 1.2rem;
@@ -49,9 +38,15 @@
 
 // small screen sizes
 @media only screen and (max-width: 750px) {
-  .active-btn,
-  .inactive-btn {
-    padding: 0.6rem 1.3rem;
+  .status-bar {
+    display: flex !important;
+  }
+
+  .total-items {
+    display: none !important;
+  }
+
+  .status-btn {
     font-size: $font-small;
   }
 }

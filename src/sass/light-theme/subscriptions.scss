@@ -5,9 +5,7 @@
 .carousel-container {
   display: block;
   width: 100%;
-  .status-bar{
-    margin-top: 3rem;
-  }
+
   .subscriptions-detail {
     font-weight: bold;
   }
@@ -128,15 +126,14 @@
 }
 
 @media only screen and (max-width: 750px) {
-  .status-bar{
-    margin-top: 2rem !important;
+  .status-bar {
     display: grid;
     place-items: center;
   }
-  .control-btns-container{
+  .control-btns-container {
     margin: 22rem 1.2rem !important;
   }
-  .slick-list{
+  .slick-list {
     width: 60vw !important;
     margin-left: -9rem !important;
   }
