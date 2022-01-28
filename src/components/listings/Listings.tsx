@@ -181,9 +181,13 @@ export const Listings = () => {
       )}
 
       <h3 className="listings-title">Listings</h3>
-      <div className="">
-        <SearchOptions />
-        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
+      <div className="search-options-area">
+        <SearchOptions visible={drawerOpen} onClose={handleSideDrawer}/>
+        <TableActionBtns 
+          showColumns 
+          handleShowColumns={handleClose} 
+          handleSideDrawer={handleSideDrawer}
+        />
       </div>
       <StatusBar>
         <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
