@@ -1,0 +1,25 @@
+@import 'general.config';
+
+.action-components {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  height: auto;
+
+  .ant-input-wrapper {
+    width: 80vw !important;
+    margin: 0 auto !important;
+  }
+  .search-bars-container {
+    margin: 0 auto;
+    justify-content: center;
+    .advanced-search-btn,
+    .view-columns-btn {
+      width: 10rem !important;
+      margin-left: 0.5rem;
+    }
+  }
+}

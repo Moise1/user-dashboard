@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import {  Card, Checkbox, Row, Col, Layout } from 'antd';
-import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
+import { Card, Checkbox, Row, Col, Layout } from 'antd';
+import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
@@ -10,10 +10,11 @@ import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { AdvancedSearch } from '../small-components/AdvancedSearch';
+
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
+import { SearchOptions } from '../small-components/SearchOptions';
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
@@ -21,7 +22,6 @@ export const Listings = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
-
 
   const tableColumns = [
     {
@@ -92,7 +92,6 @@ export const Listings = () => {
   ];
   const [columns, setColumns] = useState(tableColumns);
 
-
   const handleChangeTab = (e: React.MouseEvent): void => {
     document.querySelector('.active-tab')?.classList.remove('active-tab');
     (e.target as Element).classList.add('active-tab');
@@ -137,8 +136,7 @@ export const Listings = () => {
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
-  const onSearch = (value: string) => console.log('searched value',value);
- 
+
   return (
     <Layout className="listings">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
@@ -182,21 +180,16 @@ export const Listings = () => {
       )}
 
       <h3 className="listings-title">Listings</h3>
-      <div className="action-components">
-        <SearchInput onSearch={onSearch}/>
+      <StatusBar>
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className="active-tab" />
+        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab} />
+        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab} />
+      </StatusBar>
+      <div className="">
+        <SearchOptions />
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
-      <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className='active-tab'/>
-        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}/>
-        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}/>
-      </StatusBar>
 
-      <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
-        <p>Advanced Search content</p>
-        <p>Advanced Search content</p>
-        <p>Advanced Search content</p>
-      </AdvancedSearch>
       <DataTable
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
