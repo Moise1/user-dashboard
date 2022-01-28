@@ -3,6 +3,6 @@ interface StatusBarProps {
   children: JSX.Element[];
   className?: string;
 }
-export const StatusBar = (props: StatusBarProps) => {
-  return <div className={`status-bar ${props.className}`}>{props.children}</div>;
+export const StatusBar = ({className, children}: StatusBarProps) => {
+  return <div className={`status-bar ${className}`}>{children}</div>;
 };

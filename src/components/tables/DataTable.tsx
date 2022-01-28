@@ -34,15 +34,28 @@ type OrdersTypes = {
   orderedOn: Date;
   state: JSX.Element | string;
 }
+
+
+type pricingRulesTypes = {
+  key: string;
+  priceFrom: number;
+  priceTo: number;
+  markup: number;
+  status: JSX.Element;
+  options: JSX.Element
+}
+
+
+
   interface Props{
     columns: {title: ReactNode, dataIndex: string, key: string, visible?: boolean}[];
-    dataSource: Array<ListingsTypes| OrdersTypes>;
+    dataSource: Array<ListingsTypes| OrdersTypes | pricingRulesTypes>;
     rowSelection?: {selectedRowKeys: Key[], onChange: (selectedRowKeys: Key[]) => void}
     selectedRows?: number;
     totalItems?: number;
     handleSingleListingModal?: () => void;
     handleBulkListingModal?: ()  => void;
-    page: string;
+    page?: string;
   }
 
 export const DataTable: React.FC<Props> = (props: Props) =>{  

@@ -27,35 +27,39 @@
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: fill-available;
   margin: auto;
-  border: 2px solid blue;
-
+  margin-top: 0rem;
   .pricing-rules-bar {
     display: block;
-    padding: 1rem 2rem;
-    border: 2px solid green;
-    margin-bottom: 2rem;
+    padding: auto 2rem;
+    margin: 5rem 0 2rem 0;
     .form {
-      margin-top: 1 rem;
       display: flex;
-      .select {
-        background: $white;
-        box-shadow: 0px 3px 6px #00000029;
-        opacity: 1;
+      justify-content: space-evenly;
+      padding: -1rem 0 !important;
+      margin: .1rem ;
+      height: auto !important;
+      & > * {
+        margin-left: 1rem !important;
       }
-  
-      .input {
-        background: $mild-light-blue !important;
+    
+      [title="Source"], [title="Price From"], [title="Price To"], [title="Markup"]{
+        font-weight: bold;
       }
+      .ant-select{
+        width: 16vw;
+      }
+    
       .rule-btn {
         background: $light-primary;
         color: $white;
+        height: 42px;
       }
+     
       .rule-btn,
-      .selector,
-      .input {
+      .-ant-select {
         width: 18%;
-        margin-left: 1rem;
         border-radius: 10px;
+        margin-top: 1.8rem;
       }
     }
   }
@@ -64,6 +68,26 @@
     width: 100%;
     border-radius: 5px;
   }
+};
 
+
+@media only screen and (max-width: 750px){
+  .pricing-rules-bar{
+    h4, p{
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form{
+      margin-top: -1rem;
+      display: grid !important;
+      place-items: center;
+      .ant-select{
+        width: 70vw !important;
+      }
+      .rule-btn{
+        width: 55vw !important;
+      }
+    }
+  }
  
 }

@@ -14,7 +14,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   return (
     <>
       <StatusBar className="order-action-bar">
-        <Button className="process-btn action-btn">
+        <Button className="action-btn">
           <ProcessOrderIcon />
           <div className="btn-text">
             <span>
@@ -23,7 +23,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
             <span>Orders</span>
           </div>
         </Button>
-        <Button className="stop-btn action-btn">
+        <Button className="action-btn">
           <HandStopOrderIcon />
           <div className="btn-tetx">
             <span>
@@ -33,7 +33,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
           </div>
         </Button>
 
-        <Button className="delete-btn action-btn">
+        <Button className="action-btn">
           <TrashIcon />
           <div className="btn-text">
             <span>
@@ -42,7 +42,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
             <span>Orders</span>
           </div>
         </Button>
-        <Button className="dispatch-btn action-btn">
+        <Button className="action-btn">
           <CheckIcon />
           <div className="btn-text">
             <span>{t('OrderButtons.MarkAsDispatched')}</span>
