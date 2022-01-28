@@ -2,22 +2,11 @@
 
 // Extra Large screens
 
-.status-bar {
-  margin-top: $spacer;
-  position: relative;
-  padding: $spacer;
-  display: flex;
-  justify-content: space-around;
-  border-radius: 10px;
-  background: $white 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #2338c129;
-}
-
 @mixin status-btn() {
   border-radius: 10px !important;
-  padding: 0.9rem 1.5rem;
+  padding: 0.6rem 1.2rem;
   width: auto;
-  font-size: $font-large;
+  font-size: $font-medium;
   font-weight: $bold;
   border: none !important;
   outline: none !important;
@@ -39,19 +28,25 @@
 
 .status-btn {
   @include status-btn();
-  background: $light-gray ;
+  background: none;
   color: $primary;
-  &:hover{
-    background: $light-gray ;
+  &:hover {
+    background: $light-gray;
     color: $primary;
   }
 }
 
-
 // small screen sizes
 @media only screen and (max-width: 750px) {
-  .active-tab, .inactive-tab {
-    padding: 0.6rem 1.3rem;
+  .status-bar {
+    display: flex !important;
+  }
+
+  .total-items {
+    display: none !important;
+  }
+
+  .status-btn {
     font-size: $font-small;
   }
 }

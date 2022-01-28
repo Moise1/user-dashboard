@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import {  Card, Checkbox, Row, Col, Layout } from 'antd';
-import { TableActionBtns, SearchInput } from '../small-components/TableActionBtns';
+import { Card, Checkbox, Row, Col, Layout } from 'antd';
+import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
@@ -10,10 +10,11 @@ import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { AdvancedSearch } from '../small-components/AdvancedSearch';
+
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
+import { SearchOptions } from '../small-components/SearchOptions';
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
@@ -22,7 +23,6 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
-
 
   const tableColumns = [
     {
@@ -93,7 +93,6 @@ export const Listings = () => {
   ];
   const [columns, setColumns] = useState(tableColumns);
 
-
   const handleChangeTab = (e: React.MouseEvent): void => {
     const id = e.currentTarget.getAttribute('id');
     setActiveTab(parseInt(id!));
@@ -138,8 +137,7 @@ export const Listings = () => {
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
-  const onSearch = (value: string) => console.log('searched value',value);
- 
+
   return (
     <Layout className="listings">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
@@ -183,8 +181,8 @@ export const Listings = () => {
       )}
 
       <h3 className="listings-title">Listings</h3>
-      <div className="action-components">
-        <SearchInput onSearch={onSearch}/>
+      <div className="">
+        <SearchOptions />
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
@@ -193,11 +191,6 @@ export const Listings = () => {
         <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}  className={activeTab === 2 ? 'active-tab': ''} id="2"/>
       </StatusBar>
 
-      <AdvancedSearch title="Advanced Search" placement="right" onClose={handleSideDrawer} visible={drawerOpen}>
-        <p>Advanced Search content</p>
-        <p>Advanced Search content</p>
-        <p>Advanced Search content</p>
-      </AdvancedSearch>
       <DataTable
         page='listing'
         handleSingleListingModal={handleSingleListingModal}

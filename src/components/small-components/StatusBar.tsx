@@ -1,4 +1,4 @@
-import '../../sass/light-theme/listings-status.scss';
+import '../../sass/light-theme/status-bar.scss';
 interface StatusBarProps {
   children: JSX.Element[];
   className?: string;
