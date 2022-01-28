@@ -2,14 +2,25 @@
 
 // Extra large screens
 
-//custom class here
+.listings-title {
+  font-weight: bold;
+  color: $primary;
+  width: 5vw;
+  margin-top: 1rem;
+  text-align: left;
+}
 
-.listings-card{
-  .listings-cols{
+.table {
+  height: 40vh;
+  overflow: scroll;
+}
+
+.listings-card {
+  .listings-cols {
     display: flex !important;
     justify-content: space-between;
     height: auto;
-    .cols-list{
+    .cols-list {
       list-style: none;
       -moz-column-count: 2;
       -moz-column-gap: 5rem;
@@ -17,149 +28,145 @@
       -webkit-column-gap: 5rem;
       column-count: 2;
       column-gap: 5rem;
-      li{
-        margin-bottom: .5rem;
+      li {
+        margin-bottom: 0.5rem;
       }
     }
-   
-    .cols-amount{
+
+    .cols-amount {
       display: block;
-      p, h3 {
+      p,
+      h3 {
         text-align: center;
         color: $primary;
       }
     }
-  
-  };
-
-  .action-btns{
-    display: flex;
-    justify-content: space-between;
-    float: right;
-    width: 20vw;
-    .cancel-btn, .success-btn{
-      margin-left: 1.5rem;
-    }
   }
 }
- 
 
-.cols-display-title, .description{
+.cols-display-title,
+.description {
   color: $primary;
   text-align: center;
-};
-
-.action-components{
-  margin: 1rem 0;
-  display: flex;
 }
 
-.table-info{
+.action-components {
+  margin: -1rem auto 0 auto;
+  padding: -12px 0 !important;
+  display: flex;
+  justify-content: space-between !important;
+  height: 5rem;
+  width: 100%;
+  .search-bars-container {
+    margin: .6rem  0;
+    right: 1.5%;
+    width: 30vw;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+  }
+}
+
+.table-info {
   display: flex;
   background: $white;
   margin-top: 1rem;
   padding: 1rem;
-  .selected-options{
+  .selected-options {
     margin-left: 2rem;
-    .total-selected{
+    .total-selected {
       color: $primary;
     }
-    .list{
+    .list {
       list-style-type: none;
       display: flex;
       flex-direction: row;
-      justify-content: center ;
+      justify-content: center;
       align-items: center;
       background: $mild-light-blue;
-      padding: .2rem 2rem;
+      padding: 0.2rem 2rem;
       border-radius: 16px;
-    
-      .list-item{
-        margin-left: .9rem;
+
+      .list-item {
+        margin-left: 0.9rem;
+        cursor: pointer;
         color: $primary;
-      &:nth-last-child(-n+2):before{
-        content: '|';
-        margin-right: .2rem;
+        &:nth-last-child(-n + 2):before {
+          content: '|';
+          margin-right: 0.2rem;
+        }
       }
-      };
-  
     }
   }
 
-  .total-items{
+  .total-items {
     margin-left: auto;
   }
-};
+}
 
 // Mobile devices
-@media only screen and (max-width: 750px){
-  .listings-container {
-    .web-search-bar {
-      display: none;
-    }
+@media only screen and (max-width: 750px) {
+  .listings-title,
+  .table,
+  .status-bar {
+    margin-top: 3rem;
+  }
 
-    .phone-search-bar {
-      margin: 20px 0;
+  .status-bar {
+    display: flex;
+    justify-content: space-evenly;
+    .active-tab {
+      margin-left: 1rem;
     }
-  };
-  .table-info{
+  }
+
+  .table-info {
     display: grid;
     place-items: center;
-    .list{
+    .list {
       width: 100%;
       display: flex;
       justify-content: space-between;
       padding: 0;
-      .list-item{
+      .list-item {
         margin-left: 0;
       }
     }
-    .total-items{
+    .total-items {
       margin-right: auto;
     }
   }
 }
 
-@media only screen and (min-device-width: 450px) and (max-device-width: 1034px) {
-  .listings-container {
-    .web-search-bar {
-      display: none;
-    }
-
-    .phone-search-bar {
-      margin: 20px 0;
-    }
+// Phone screen size.
+@media only screen and (max-width: 1030px) {
+  .listings-title {
+    text-align: center;
+    width: 100%;
+    margin: .8rem auto;
   }
-}
 
-// iPads and Tablets
+  .action-components {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
 
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
-  .listings-container {
-    .web-search-bar {
-      display: none;
+    .ant-input-wrapper {
+      width: 80vw !important;
+      margin: 0 auto !important;
     }
-
-    .phone-search-bar {
-      margin: 20px 0;
-    }
-  }
-}
-
-// Screens and laptops
-@media only screen and (min-width: 1224px) {
-  .listings-table {
-    max-height: 53vh;
-    overflow-x: scroll;
-    .listings-table-head {
-      color: $primary;
-      white-space: nowrap;
-      font-weight: bold;
-      position: sticky;
-      top: 0;
-      background-color: $white;
-      font-size: $font-medium !important;
-      z-index: 1;
+    .search-bars-container {
+      margin: 0 auto;
+      justify-content: center;
+      .advanced-search-btn,
+      .view-columns-btn {
+        width: 10rem !important;
+        margin-left: .5rem;
+      }
     }
   }
 }

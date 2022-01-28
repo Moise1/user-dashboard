@@ -2,68 +2,52 @@
 
 // Large and extra large screens
 
-.search-bars-container {
-  margin: $spacer 5rem $spacer auto;
-  width: 30vw;
-  display: flex;
-  justify-content: space-between;
-  height: 2.7rem;
-  
-  .advanced-search-btn {
-    margin-left: 1rem;
-    padding: .5rem 2rem;
-    width: auto;
-    color: $white;
-    font-weight: $bold;
-    border-radius: 10px;
-    background: $gray;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    height: 100%;
-    white-space: nowrap;
-  }
-
-  .view-columns {
-    margin-left: 1rem;
-    padding: .5rem 1rem;
-    align-items: center;
-    width: auto;
-    display: flex;
-    justify-content: space-around;
-    color: $white;
-    font-weight: $bold;
-    background: $light-blue;
-    border-radius: 10px;
-    white-space: nowrap;
-  }
-}
-
-.search-input {
+.ant-input-wrapper {
+  margin: 2rem 0;
   border-radius: 10px;
-  padding: 2rem 1rem;
+  border: none !important;
+  outline: none !important;
+  font-weight: $bold;
   background: $white;
-  width: 40vw;
-  .input {
+  width: 60vw !important;
+  &:focus {
     border: none !important;
     outline: none !important;
-    font-weight: $bold;
-    width: 100%;
   }
 
-  &:focus {
-    outline: none;
-    border: none;
+  .ant-input-group-addon {
+    display: none;
   }
-  
 }
-@media screen and (max-width: 750px) {
-  .view-columns,
-  .advanced-search-btn {
-    display: none !important;
+@mixin action-btn {
+  width: 22rem;
+  height: 3rem;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+  background-color: $primary;
+  margin-left: 3rem;
+  color: $white;
+
+  &:hover, &:focus {
+    background-color: $primary;
+    color: $white;
   }
-  .search-input {
+}
+
+.advanced-search-btn {
+  @include action-btn();
+}
+.view-columns-btn {
+  @include action-btn();
+}
+
+// Phone screen size.
+@media only screen and (max-width: 750px) {
+  .ant-input-wrapper {
+    width: 90vw !important;
+  }
+  .search-bars-container {
+    margin: 0 auto;
     width: 100%;
-    margin: 0 !important;
   }
 }

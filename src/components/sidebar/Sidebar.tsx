@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout, Menu } from 'antd';
-import pin_icon from '../../assets/pin.svg';
+import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import logout from '../../assets/logout.svg';
@@ -18,10 +18,12 @@ import MenuListItem from './MenuListItem';
 import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
+import pin from '../../assets/pin.svg';
 
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
+
 
 interface Props {
   className: string;
@@ -70,7 +72,12 @@ export const Sidebar = (props: Props) => {
 
   const routeChange = (route: string) => {
     history.push(route);
-    handleMouseLeave();
+    const tabletScreen = window.matchMedia('(max-width: 1030px)');
+    if(tabletScreen.matches){
+      collapseSideBar();
+    }else{
+      handleMouseLeave();
+    }
   };
 
   const listArray = [
@@ -123,7 +130,7 @@ export const Sidebar = (props: Props) => {
         collapsedWidth="80px"
       >
         <div className="side-menu-container">
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['4']} className="menu-container">
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} className="menu-container">
             {!collapsed && (
               <div className="sidebar-overhead">
                 <div className="logo-container">
@@ -143,17 +150,13 @@ export const Sidebar = (props: Props) => {
                     {t('Topbar.Update')}
                   </button>
                 </div>
-                <div className="sidebar-btns">
+                <div className="sidebar-control-btns">
                   {staticValue ? (
-                    <i
-                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
-                      className="fas fa-chevron-left"
-                    ></i>
-                  ) : (
-                    <button className="sidebar-pin">
-                      <img onClick={togglestatic} className="" src={pin_icon} height={20} width={20} alt="" />
-                    </button>
-                  )}
+                    <ChevronLeft
+                      className="chevron-left"
+                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} 
+                    />
+                  ) : <img src={pin} className="pin-icon" onClick={togglestatic}/>}
                 </div>
               </div>
             )}

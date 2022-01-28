@@ -4,8 +4,10 @@
 
 .carousel-container {
   display: block;
-
   width: 100%;
+  .status-bar{
+    margin-top: 3rem;
+  }
   .subscriptions-detail {
     font-weight: bold;
   }
@@ -34,6 +36,7 @@
     background: $mild-light-blue;
     border-radius: 5px;
     font-weight: bold;
+    width: auto;
     &:hover {
       color: $black;
     }
@@ -111,24 +114,9 @@
   .control-btns-container {
     width: 80%;
     position: absolute;
-    top: 40%;
-    margin-left: 1rem;
-    left: 10%;
+    margin: 20rem auto 0 5rem;
     display: flex;
     justify-content: space-between;
-
-    .control-btn {
-      background: $light-primary;
-      border-radius: 5px;
-      display: block;
-
-      i {
-        color: $white !important;
-      }
-      &:hover {
-        color: $white !important;
-      }
-    }
   }
   .duration {
     position: absolute;
@@ -139,7 +127,19 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media only screen and (max-width: 750px) {
+  .status-bar{
+    margin-top: 2rem !important;
+    display: grid;
+    place-items: center;
+  }
+  .control-btns-container{
+    margin: 22rem 1.2rem !important;
+  }
+  .slick-list{
+    width: 60vw !important;
+    margin-left: -9rem !important;
+  }
   .twenty-off,
   .forty-off {
     margin-top: -20px;
@@ -147,10 +147,4 @@
   .frequency {
     right: 10%;
   }
-}
-
-@media only screen and (max-width: 1030px) {
-}
-
-@media only screen and (max-width: 750px) {
 }
