@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
+import { Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { NewChannel } from './components/chanel/NewChannel';
 import Topbar from './components/topbar/Topbar';
@@ -12,8 +13,8 @@ import { PricingRules } from './components/pricing-rules/PricingRules';
 import { BrowserExtensions } from './components/browser-extensions/BrowserExtensions';
 import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { ChannelSettings } from './components/chanel/ChannelSettings';
-import { Layout } from 'antd';
 import {Sources} from './components/sources/Sources';
+import { GetStarted } from './components/help/GetStarted';
 import SourcesTable from './components/sources/SourcesTable';
 import { SelectSupplierProvider } from './contexts/SelectSupplierProvider';
 import './sass/index.scss';
@@ -78,6 +79,7 @@ export const App = withRouter(({ history }) => {
                 <Route path="/pricing-rules" component={PricingRules} />
                 <Route path="/browser-extensions" component={BrowserExtensions} />
                 <Route path="/va-profiles" component={VaProfiles} />
+                <Route path="/get-started" component={GetStarted} />
               </Switch>
             </Layout>
           </Layout>

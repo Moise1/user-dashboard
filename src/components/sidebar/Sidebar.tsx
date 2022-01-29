@@ -80,22 +80,22 @@ export const Sidebar = (props: Props) => {
     }
   };
 
-  const listArray = [
+  const settingsListArray = [
     {
-      key: 9,
+      key: 1,
       listName: t('Menu.Channel'),
       onClick: () => {
         history.push('/channel'), location.reload();
       }
     },
-    { key: 10, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
-    { key: 11, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { key: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { key: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { key: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { key: 15, listName: t('Menu.Templates') },
+    { key: 2, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
+    { key: 3, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { key: 4, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    { key: 5, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { key: 6, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { key: 7, listName: t('Menu.Templates') },
     {
-      key: 16,
+      key: 8,
       listName: (
         <>
           <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
@@ -112,10 +112,10 @@ export const Sidebar = (props: Props) => {
     }
   ];
 
-  const helplistArray = [
-    { key: 511, listName: t('Menu.Channel') },
-    { key: 512, listName: t('Menu.Sources') },
-    { key: 513, listName: t('Menu.PricingRules') }
+  const helpListArray = [
+    { key: 1, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { key: 2, listName: t('Menu.FAQ') },
+    { key: 3, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -214,7 +214,7 @@ export const Sidebar = (props: Props) => {
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
-              {listArray.map((obj) => (
+              {settingsListArray.map((obj) => (
                 <Menu.Item key={obj.key} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
@@ -239,8 +239,8 @@ export const Sidebar = (props: Props) => {
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
-              {helplistArray.map((obj) => (
-                <Menu.Item key={obj.key}>
+              {helpListArray.map((obj) => (
+                <Menu.Item key={obj.key} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
               ))}
