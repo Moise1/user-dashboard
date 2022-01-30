@@ -1,103 +1,152 @@
 @import 'general.config';
 
 // Large screen sizes
-.back-to-dashboard {
-  margin-top: 5rem;
-  width: 15vw;
-  color: $primary;
-  &:hover {
+.main-container {
+  margin: 3.5rem 0 3rem  0;
+  .back-to-dashboard {
+    width: 15vw;
     color: $primary;
-  }
-}
-.get-started-container {
-  margin: 1rem 0 0 0;
-  padding: 0 1rem;
-  height: auto;
-  background: $white;
-  .intro-area {
-    margin: 2rem auto 0 auto;
-  }
-  .description-area {
-    margin-top: 2rem;
-    p {
-      color: $black;
-    }
-    ul {
-      list-style-type: none;
-
-      li {
-        display: flex;
-        .description {
-          margin-left: 2rem;
-        }
-      }
-    }
-  }
-
-  .updates-area {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: space-between;
-    .ebay-location {
+    &:hover {
       color: $primary;
-      &:hover {
-        color: $primary;
+    }
+  }
+  .get-started-container {
+    margin: 1rem 0 0 0;
+    padding: 1rem;
+    height: auto;
+    background: $white;
+    .intro-area {
+      margin: 2rem auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      
+      .get-started-vid {
+        position: relative;
+        padding-bottom: 56.25%; /* 4:3 -> 3/4x100 */
+        overflow: hidden;
+        // width: 30vw;
+        
+        .intro-vid {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
     }
-    .social-media-list {
-      list-style-type: none;
-      display: flex;
-      .list-item {
-        margin-left: 2rem;
-        .social-media-icon {
-          display: block;
-          margin-left: 0 auto;
-          width: 50px;
-          height: 50px;
-        }
+    .description-area {
+      margin-top: 2rem;
+      p {
+        color: $black;
+      }
+      .description-list {
+        list-style-type: none;
 
-        .social-media-link {
-          text-align: justify;
-          font-weight: normal;
-          color: $primary;
-          &:hover {
-            color: $primary;
+        .list-item {
+          display: flex;
+          .description {
+            margin-left: 2rem;
           }
         }
       }
     }
-  }
 
-  .resources {
-    // border: 2px solid red;
-    margin-top: 2rem;
-    .resources-list {
+    .updates-area {
       margin-top: 2rem;
-      list-style: none;
-      -moz-column-count: 2;
-      -moz-column-gap: 5rem;
-      -webkit-column-count: 2;
-      -webkit-column-gap: 5rem;
-      column-count: 2;
-      column-gap: 5rem;
-     .list-item{
-         margin-top: 1rem;
-     }
-    };
-    .list-item-title{
-        color: $primary;
-        &:hover{
-            color: $primary;
-        }
-    }
-  };
-.more-help{
-    margin-top: 2rem;
-    .contact-mail{
+      display: flex;
+      justify-content: space-between;
+      .ebay-location {
         color: $primary;
         &:hover {
-            color: $primary;
+          color: $primary;
         }
+      }
+      .social-media-list {
+        list-style-type: none;
+        display: flex;
+        .list-item {
+          margin-left: 2rem;
+          .social-media-icon {
+            display: block;
+            margin-left: 0 auto;
+            width: 50px;
+            height: 50px;
+          }
+
+          .social-media-link {
+            text-align: justify;
+            font-weight: normal;
+            color: $primary;
+            &:hover {
+              color: $primary;
+            }
+          }
+        }
+      }
     }
+
+    .resources {
+      .resources-list {
+        margin-top: 2rem;
+        list-style: none;
+        padding: 1rem 0;
+        -moz-column-count: 2;
+        -moz-column-gap: 5rem;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 5rem;
+        column-count: 2;
+        column-gap: 5rem;
+        li:nth-child(4) {
+          margin-top: 3rem;
+        }
+      }
+      .list-item-title {
+        color: $primary;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+    .more-help {
+      margin-top: 2rem;
+      .contact-mail {
+        color: $primary;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
 }
+
+// tablet screen size
+
+@media only screen and (max-width: 1030px) {
+  .back-to-dashboard {
+    border: 2px solid red;
+    width: 30vw;
+  };
+
+  .intro-area{
+    flex-direction: column;
+    // column-gap:  10rem;
+    .description-area{
+      // margin-top: 20rem;
+      border: 2px solid red;
+    }
+
+    .get-started-vid{
+      border: 2px solid blue;
+      width: none;
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 750px) {
+  .back-to-dashboard {
+    width: 55vw;
+  }
 }
