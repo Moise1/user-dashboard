@@ -5,6 +5,9 @@
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: fill-available;
   width: -moz-available; /* WebKit-based browsers will ignore this. */
+  .search-bars-container{
+    margin-top: 4rem;
+  };
   .order-action-bar {
     display: flex;
     background-color: $white;

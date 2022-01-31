@@ -1,49 +1,11 @@
-import { Table, Form, Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { StatusBar } from '../small-components/StatusBar';
 import '../../sass/light-theme/pricing-rules.scss';
 import { Selector } from '../small-components/Selector';
-import { dummyPricingRules } from '../../dummy-data/dummyData';
+import { dummyPricingRulesOptions, dummyPricingRulesData } from '../../dummy-data/dummyData';
+import { DataTable } from '../tables/DataTable';
 
 export const PricingRules = () => {
-  const dataSource = [
-    {
-      key: '1',
-      source: 'Ali Express',
-      priceFrom: 32,
-      priceTo: 30,
-      markUp: 0,
-      status: <button className="status-btn">Disabled</button>,
-      options: (
-        <div className="options">
-          <span role="button" onClick={() => alert('Clicked')}>
-            <i className="fa fa-trash" aria-hidden="true" />
-          </span>
-          <span role="button" onClick={() => alert('Clicked')}>
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </span>
-        </div>
-      )
-    },
-    {
-      key: '2',
-      source: 'Amazon',
-      priceFrom: 32,
-      priceTo: 30,
-      markUp: 0,
-      status: <button className="status-btn enabled">Enabled</button>,
-      options: (
-        <div className="options">
-          <span role="button" onClick={() => alert('Clicked')}>
-            <i className="fa fa-trash" aria-hidden="true" />
-          </span>
-          <span role="button" onClick={() => alert('Clicked')}>
-            <i className="fa fa-pencil" aria-hidden="true" />
-          </span>
-        </div>
-      )
-    }
-  ];
-
   const columns = [
     {
       title: 'Source',
@@ -62,8 +24,8 @@ export const PricingRules = () => {
     },
     {
       title: 'Mark Up',
-      dataIndex: 'markUp',
-      key: 'markUp'
+      dataIndex: 'markup',
+      key: 'markup'
     },
     {
       title: 'Status',
@@ -86,15 +48,23 @@ export const PricingRules = () => {
           The initial status of the rule will be “Disabled”, so that you can double check your set of rules before
           enabling it.
         </p>
-        <Form className="form" layout="inline">
-          <Selector defaultValue="Select a source">{dummyPricingRules}</Selector>
-          <Input className="input" type="text" placeholder="Set a price from" />
-          <Input className="input" type="text" placeholder="Set a price to" />
-          <Input className="input" type="text" placeholder="Mark up" />
+        <Form className="form" layout="vertical">
+          <Form.Item label="Source">
+            <Selector defaultValue="Select a source">{dummyPricingRulesOptions}</Selector>
+          </Form.Item>
+          <Form.Item label="Price From">
+            <Input className="blue-input" type="text" placeholder="Set a price from" />
+          </Form.Item>
+          <Form.Item label="Price To">
+            <Input className="blue-input" type="text" placeholder="Set a price to" />
+          </Form.Item>
+          <Form.Item label="Markup">
+            <Input className="blue-input" type="text" placeholder="Mark up" />
+          </Form.Item>
           <Button className="rule-btn">Add rule</Button>
         </Form>
       </StatusBar>
-      <Table className="table" dataSource={dataSource} columns={columns} />
+      <DataTable dataSource={dummyPricingRulesData} columns={columns} />
     </div>
   );
 };

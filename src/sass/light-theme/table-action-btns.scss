@@ -3,24 +3,25 @@
 // Large and extra large screens
 
 .ant-input-wrapper {
-  margin: 2rem 0;
-  border-radius: 10px;
-  border: none !important;
-  outline: none !important;
-  font-weight: $bold;
-  background: $white;
-  width: 60vw !important;
-  &:focus {
-    border: none !important;
-    outline: none !important;
-  }
-
+  box-shadow: inset 0px 3px 6px #0000000b;
+  opacity: 1;
+  .ant-input-affix-wrapper {
+    height: 2.2rem !important;
+    background: $white;
+    border-radius: 10px !important;
+    border: none;
+    outline: none;
+    &:focus {
+      border: none !important;
+      outline: none !important;
+    }
+  };
   .ant-input-group-addon {
     display: none;
-  }
+  };
 }
 @mixin action-btn {
-  width: 22rem;
+  width: 12rem;
   height: 3rem;
   margin-top: 0.8rem;
   border-radius: 10px;
@@ -28,7 +29,8 @@
   margin-left: 3rem;
   color: $white;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $primary;
     color: $white;
   }

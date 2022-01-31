@@ -39,8 +39,8 @@
 
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
-  "Menu.Catalog": "Catalog",
   "Menu.Channel": "Channel",
+  "Menu.Catalog": "Catalog",
   "Menu.Dashboard": "Dashboard",
   "Menu.Help": "Help",
   "Menu.Listings": "Listings",
@@ -53,6 +53,11 @@
   "Menu.Templates": "Templates",
   "Menu.VaProfiles": "VA Profiles",
   "Menu.Orders": "Orders",
+  
+  "Menu.FAQ": "FAQ",
+  "Menu.ListingServices": "Listing Services",
+  "Menu.Start": "Get Started",
+
 
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",

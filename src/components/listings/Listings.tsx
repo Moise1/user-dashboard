@@ -10,7 +10,6 @@ import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -22,6 +21,7 @@ export const Listings = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<number>(0);
 
   const tableColumns = [
     {
@@ -93,8 +93,8 @@ export const Listings = () => {
   const [columns, setColumns] = useState(tableColumns);
 
   const handleChangeTab = (e: React.MouseEvent): void => {
-    document.querySelector('.active-tab')?.classList.remove('active-tab');
-    (e.target as Element).classList.add('active-tab');
+    const id = e.currentTarget.getAttribute('id');
+    setActiveTab(parseInt(id!));
   };
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
@@ -162,7 +162,7 @@ export const Listings = () => {
               </div>
             </Col>
           </Row>
-          <div className="action-btns">
+          <div className="show-columns-action-btns">
             <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
             <SuccessBtn handleClose={handleApplyChanges}>{t('ApplyChanges')}</SuccessBtn>
           </div>
@@ -180,17 +180,22 @@ export const Listings = () => {
       )}
 
       <h3 className="listings-title">Listings</h3>
-      <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className="active-tab" />
-        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab} />
-        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab} />
-      </StatusBar>
-      <div className="">
-        <SearchOptions />
-        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
+      <div className="search-options-area">
+        <SearchOptions visible={drawerOpen} onClose={handleSideDrawer}/>
+        <TableActionBtns 
+          showColumns 
+          handleShowColumns={handleClose} 
+          handleSideDrawer={handleSideDrawer}
+        />
       </div>
+      <StatusBar>
+        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
+        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}  className={activeTab === 1 ? 'active-tab': ''} id="1"/>
+        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}  className={activeTab === 2 ? 'active-tab': ''} id="2"/>
+      </StatusBar>
 
       <DataTable
+        page='listing'
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
