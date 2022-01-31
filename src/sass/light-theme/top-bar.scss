@@ -38,10 +38,7 @@
 
 .confirm {
   display: flex;
-  .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: $light-primary !important;
-    border-color: $light-primary !important;
-  }
+  
   .confirm-text {
     margin-left: 1rem;
   }
@@ -52,35 +49,12 @@
   height: auto !important;
   justify-content: space-between;
 
-  .cancel-btn {
-    background: $light-gray;
-    border-radius: 5px;
-    color: $black;
-
-    &:hover {
-      background: $light-gray;
-      color: $black;
-    }
-  }
-
   .disabled {
     background: rgba($light-primary, 0.2);
     color: $white;
-    border-radius: 5px;
-
+    border-radius: 8px;
     &:hover {
       background: rgba($light-primary, 0.2);
-      color: $white;
-    }
-  }
-
-  .confirm-btn {
-    background: $light-primary;
-    color: $white;
-    border-radius: 5px;
-
-    &:hover {
-      background: $light-primary;
       color: $white;
     }
   }

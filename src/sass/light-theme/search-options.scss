@@ -1,14 +1,15 @@
 @import 'general.config';
 
 .supplier-one{
-  background: $primary;
+  background: $light-primary;
   color: $white;
   border-radius: 5px;
   &:hover{
     background: $primary;
     color: $white;
   }
-}
+};
+
 .advanced-search-form {
   height: auto;
   [title="Min source price"],
@@ -32,8 +33,11 @@
   .prime-options{
     margin: 1rem 0;
   }
-  .check-boxes {
+  .checkboxes {
     display: flex;
+    .checkbox{
+      color: $primary;
+    }
   }
 }
 
@@ -74,6 +78,25 @@
     .view-columns-btn {
       width: 10rem !important;
       margin-left: 0.5rem;
+    }
+  }
+}
+
+
+// Mobile screen size 
+
+@media only screen and (max-width: 750px){
+
+  .advanced-search-form{
+    width: 60vw !important;
+    margin: 0 auto !important;
+    margin-top: 2rem !important;
+    .inputs{
+      -moz-column-count: initial !important;
+      -webkit-column-count: initial !important;
+      column-count: initial !important;
+      margin: 0 auto !important;
+     
     }
   }
 }

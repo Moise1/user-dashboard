@@ -24,14 +24,14 @@
 }
 
 @mixin action-btn() {
-  padding: 5px 8px;
+  padding: 4px 12px;
   border-radius: 8px;
   color: $white;
-  width: 200px;
-  height: 59px;
-}
+  width: auto;
+};
 
 .success-btn,
+.confirm-btn,
 .reset-btn,
 .cancel-btn,
 .selector,
@@ -43,6 +43,15 @@
   background: $green;
   &:hover {
     background: $green;
+    color: $white;
+  }
+};
+
+.confirm-btn{
+  background: $light-primary;
+  color: $white;
+  &:hover {
+    background: $light-primary;
     color: $white;
   }
 }
@@ -63,6 +72,14 @@
   }
 }
 
+.cancel-btn{
+  background: $ash-gray;
+  color: $white;
+  &:hover{
+    background: $ash-gray;
+    color: $white;
+  }
+}
 
 // Mobile screen sizes
 

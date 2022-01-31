@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Checkbox, Button } from 'antd';
+import { Checkbox } from 'antd';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import '../../sass/light-theme/top-bar.scss';
+import {CancelBtn, ConfirmBtn} from '../small-components/ActionBtns';
 
 interface Props {
   checked: boolean;
@@ -30,12 +31,12 @@ export const DeleteAccount: FC<Props> = (props: Props) => {
         <span className="confirm-text">Yes, I am sure I want to delete this account and all its listings.</span>
       </div>
       <div className="action-btns">
-        <Button onClick={handleCancel} className="cancel-btn">
+        <CancelBtn handleClose={handleCancel}>
           Cancel
-        </Button>
-        <Button onClick={handleDelete} className={!checked ? 'disabled' : 'confirm-btn'} disabled={!checked}>
+        </CancelBtn>
+        <ConfirmBtn handleClose={handleDelete} className={!checked ? 'disabled' : 'confirm-btn'} disabled={!checked}>
           Confirm
-        </Button>
+        </ConfirmBtn>
       </div>
     </>
   );

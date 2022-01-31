@@ -18,7 +18,7 @@ export const GetStarted = () => {
       </Link>
       <div className="get-started-container">
         <Row  className="intro-area">
-          <Col className="intro-vid-container" lg={8} xs={24} md={8}>
+          <Col className="intro-vid-container" xs={24} md={24} lg={8}>
             <h5 className="how-to-list">
               <strong>How to list your item?</strong>
             </h5>
@@ -33,7 +33,7 @@ export const GetStarted = () => {
             </div>
           </Col>
 
-          <Col className="description-area" span={12}>
+          <Col className="description-area" xs={24} lg={12}>
             <p>
               The extension will automatically change its color depending on whether the item has already been listed or
               not.
@@ -62,7 +62,7 @@ export const GetStarted = () => {
         </Row>
 
         <Row className="updates-area">
-          <Col span={10} className="up-to-date">
+          <Col xs={24} className="up-to-date" lg={8}>
             <h5 className="up-to-date-title">
               <strong>Staying-up-to-date</strong>
             </h5>
@@ -84,7 +84,7 @@ export const GetStarted = () => {
             </p>
           </Col>
 
-          <Col className="social-media" span={13}>
+          <Col className="social-media" xs={24}  lg={13}>
             <ul className="social-media-list">
               <li className="list-item">
                 <img src={facebook} alt="Facebook" className="social-media-icon" />
@@ -136,7 +136,7 @@ export const GetStarted = () => {
                 your entire customer support cycle in an easy and intuitive way.
               </p>
             </li>
-            <li>
+            <li className="list-item">
               <h6>
                 <a href="#" className="list-item-title">
                   OnlineJobs.ph
@@ -144,7 +144,7 @@ export const GetStarted = () => {
               </h6>
               <p>Scaling up? This is the most popular jobs portal for virtual assistants in Philippines.</p>
             </li>
-            <li>
+            <li className="list-item">
               <h6>
                 <a href="#" className="list-item-title">
                   VeRo Checker
@@ -155,7 +155,7 @@ export const GetStarted = () => {
                 reports from the community. Our lister extension is integrated with this extension.
               </p>
             </li>
-            <li>
+            <li className="list-item">
               <h6>
                 <a href="#" className="list-item-title">
                   Mighty Text
@@ -167,7 +167,7 @@ export const GetStarted = () => {
                 certain SMS messages.
               </p>
             </li>
-            <li>
+            <li className="list-item">
               <h6>
                 <a href="#" className="list-item-title">
                   HubStaff

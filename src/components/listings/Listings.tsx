@@ -10,7 +10,6 @@ import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -163,7 +162,7 @@ export const Listings = () => {
               </div>
             </Col>
           </Row>
-          <div className="action-btns">
+          <div className="show-columns-action-btns">
             <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
             <SuccessBtn handleClose={handleApplyChanges}>{t('ApplyChanges')}</SuccessBtn>
           </div>

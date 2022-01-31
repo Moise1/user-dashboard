@@ -10,9 +10,7 @@ import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
 import { Badge, Avatar } from 'antd';
 import { User } from 'react-feather';
-
 import { useHistory } from 'react-router-dom';
-
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../users/DeleteAccount';
@@ -82,8 +80,7 @@ const Topbar = (props: Props) => {
         </div>
         <Badge
           count={2}
-          className="notifications
-        "
+          className="notifications"
         >
           <img src={bell} alt="" />
         </Badge>

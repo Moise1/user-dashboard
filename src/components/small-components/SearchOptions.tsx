@@ -27,25 +27,25 @@ export const SearchOptions = ({ visible, onClose }: AdvancedSearchProps) => {
           <Form layout="vertical" className="advanced-search-form">
             <div className="inputs">
               <Form.Item label="Min source price">
-                <Input className="blue-input" />
+                <Input className="blue-input" value="50"/>
               </Form.Item>
 
               <Form.Item label="Min Profit">
-                <Input className="blue-input" />
+                <Input className="blue-input" value="Mini"/>
               </Form.Item>
               <Form.Item label="Max source price">
-                <Input className="blue-input" />
+                <Input className="blue-input" value="100"/>
               </Form.Item>
               <Form.Item label="Max Profit">
-                <Input className="blue-input" />
+                <Input className="blue-input" value="Max"/>
               </Form.Item>
             </div>
 
             <div className="prime-options">
               <p className="amazon-prime"><strong>Amazon Prime</strong></p>
-              <div className="check-boxes">
-                <Checkbox checked>Only Prime</Checkbox>
-                <Checkbox>All Items</Checkbox>
+              <div className="checkboxes">
+                <Checkbox checked className="checkbox">Only Prime</Checkbox>
+                <Checkbox className="checkbox">All Items</Checkbox>
               </div>
             </div>
 
