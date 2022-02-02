@@ -1,3 +1,9 @@
+import light_bulb_one from '../assets/catalog-imgs/light-bulb-1.jpg';
+import light_bulb_two from '../assets/catalog-imgs/light-bulb-2.jpg';
+import light_bulb_three from '../assets/catalog-imgs/light-bulb-3.jpg';
+import light_bulb_four from '../assets/catalog-imgs/light-bulb-4.jpg';
+
+
 export const dummyData = [
   { value: 'Amazon', id: 101 },
   { value: 'Others', id: 102 },
@@ -95,3 +101,47 @@ export const dummyPricingRulesData = [
   }
 ];
 
+
+export const catalogData = [
+
+  {
+    id: 1,
+    img: light_bulb_one,
+    title: 'Lamp 1',
+    sell: 49.61,
+    cost: 38.16,
+    profit: 5.45,
+    source: 'Lights4Living'
+  },
+  {
+    id: 2,
+    img: light_bulb_two,
+    title: 'Lamp 1',
+    sell: 49.61,
+    cost: 38.16,
+    profit: 5.45,
+    source: 'Lights4Living'
+
+  },
+  {
+    id: 3,
+    img: light_bulb_three,
+    title: 'Lamp 1',
+    sell: 49.61,
+    cost: 38.16,
+    profit: 5.45,
+    source: 'Lights4Living'
+
+  },
+  {
+    id: 4,
+    img: light_bulb_four,
+    title: 'Lamp 1',
+    sell: 49.61,
+    cost: 38.16,
+    profit: 5.45,
+    source: 'Lights4Living'
+
+  }
+
+];

@@ -82,20 +82,20 @@ export const Sidebar = (props: Props) => {
 
   const settingsListArray = [
     {
-      key: 1,
+      id: 1,
       listName: t('Menu.Channel'),
       onClick: () => {
         history.push('/channel'), location.reload();
       }
     },
-    { key: 2, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
-    { key: 3, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { key: 4, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { key: 5, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { key: 6, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { key: 7, listName: t('Menu.Templates') },
+    { id: 2, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
+    { id: 3, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { id: 4, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    { id: 5, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { id: 6, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { id: 7, listName: t('Menu.Templates') },
     {
-      key: 8,
+      id: 8,
       listName: (
         <>
           <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
@@ -113,9 +113,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { key: 1, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    { key: 2, listName: t('Menu.FAQ') },
-    { key: 3, listName: t('Menu.ListingServices') }
+    { id: 1, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 2, listName: t('Menu.FAQ') },
+    { id: 3, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -209,13 +209,13 @@ export const Sidebar = (props: Props) => {
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               className="submenu-item"
-              key="sub3"
+              key="sub1"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
               {settingsListArray.map((obj) => (
-                <Menu.Item key={obj.key} onClick={obj.onClick}>
+                <Menu.Item  key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
               ))}
@@ -234,13 +234,13 @@ export const Sidebar = (props: Props) => {
 
             <SubMenu
               className="submenu-item"
-              key="sub5"
+              key="sub2"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
               {helpListArray.map((obj) => (
-                <Menu.Item key={obj.key} onClick={obj.onClick}>
+                <Menu.Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
               ))}

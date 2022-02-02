@@ -4,12 +4,17 @@ import { AdvancedSearch } from './AdvancedSearch';
 import { AdvancedSearchProps } from './AdvancedSearch';
 import { Space, Button, Form, Input, Checkbox } from 'antd';
 
-export const SearchOptions = ({ visible, onClose }: AdvancedSearchProps) => {
+interface SearchOptionsProps {
+  showSearchInput: boolean;
+}
+
+export const SearchOptions = (props:(AdvancedSearchProps & SearchOptionsProps)) => {
+  const {visible, onClose, showSearchInput} = props;
   const onSearch = (value: string) => console.log('searched value', value);
 
   return (
     <div className="action-components">
-      <SearchInput onSearch={onSearch} />
+      {showSearchInput && <SearchInput onSearch={onSearch}/>}
       <AdvancedSearch
         title="Search Criteria"
         placement="right"

@@ -15,6 +15,7 @@ import { VaProfiles } from './components/va-profiles/VaProfiles';
 import { ChannelSettings } from './components/chanel/ChannelSettings';
 import {Sources} from './components/sources/Sources';
 import { GetStarted } from './components/help/GetStarted';
+import { Catalog } from './components/catalog/Catalog';
 import SourcesTable from './components/sources/SourcesTable';
 import { SelectSupplierProvider } from './contexts/SelectSupplierProvider';
 import './sass/index.scss';
@@ -80,6 +81,7 @@ export const App = withRouter(({ history }) => {
                 <Route path="/browser-extensions" component={BrowserExtensions} />
                 <Route path="/va-profiles" component={VaProfiles} />
                 <Route path="/get-started" component={GetStarted} />
+                <Route path="/catalog" component={Catalog}/>
               </Switch>
             </Layout>
           </Layout>

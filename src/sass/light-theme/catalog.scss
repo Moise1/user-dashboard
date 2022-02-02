@@ -1,0 +1,81 @@
+@import 'general.config';
+
+// large and extra large screens
+.ant-modal-title { 
+  .source, .title{
+    text-align: center;
+  };
+  .source{
+    color: $gray;
+    font-size: $font-small; 
+  };
+  .title{
+    color: $black !important;
+  }
+}
+.catalog-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+
+  .action-components {
+    position: absolute;
+    width: auto;
+    right: 2rem;
+  }
+  .search-bars-container {
+    position: absolute;
+    width: auto;
+    left: 8rem;
+  }
+
+  .product-card {
+    margin-top: 5.5rem;
+    border-radius: 10px;
+    width: 15rem;
+    background: $white;
+    height: auto;
+    cursor: pointer;
+
+    
+    .product-img {
+      height: 13rem;
+      width: stretch;
+    }
+    .product-description {
+      margin-top: 1rem;
+      .title-section {
+        display: flex;
+        justify-content: space-between;
+        .view-details {
+          cursor: pointer;
+        }
+      }
+
+      .source {
+        color: $black;
+        font-size: 11px;
+      }
+      .transaction-type,
+      .transaction-amount {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .transaction-amount p {
+        font-weight: bold;
+        &:nth-child(1) {
+          color: $black;
+        }
+
+        &:nth-child(2) {
+          color: $red;
+        }
+
+        &:nth-child(3) {
+          color: $green;
+        }
+      }
+    }
+  }
+}

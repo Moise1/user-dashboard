@@ -181,7 +181,10 @@ export const Listings = () => {
 
       <h3 className="listings-title">Listings</h3>
       <div className="search-options-area">
-        <SearchOptions visible={drawerOpen} onClose={handleSideDrawer}/>
+        <SearchOptions
+          visible={drawerOpen} 
+          onClose={handleSideDrawer} 
+          showSearchInput/>
         <TableActionBtns 
           showColumns 
           handleShowColumns={handleClose} 

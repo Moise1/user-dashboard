@@ -146,6 +146,8 @@
   "ResetToDefault": "Reset to Default",
   "TerminateItem": "Terminate Item",
   "ForceRefresh": "Force Refresh",
+  "Dismiss": "Dismisss",
+  "AddToSelection": "Add to Selection",
   
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
