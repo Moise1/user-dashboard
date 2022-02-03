@@ -23,7 +23,6 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
   const { Search } = Input;
   const searchComponent = t('search');
   const search = RDS.renderToString(searchComponent as ReactElement);
-
   return (
     <Search
       placeholder={search}

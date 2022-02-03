@@ -41,7 +41,8 @@
 }
 .success-btn {
   background: $green;
-  &:hover {
+  color: $white;
+  &:hover, &:focus {
     background: $green;
     color: $white;
   }
@@ -75,7 +76,7 @@
 .cancel-btn{
   background: $ash-gray;
   color: $white;
-  &:hover{
+  &:hover, &:focus{
     background: $ash-gray;
     color: $white;
   }
