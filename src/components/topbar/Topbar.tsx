@@ -78,24 +78,21 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <Badge
-          count={2}
-          className="notifications"
-        >
+        <Badge count={2} className="notifications">
           <img src={bell} alt="" />
         </Badge>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>
-          <img src={coinIcon} alt="coinIcon" />
+          <img src={coinIcon} className="token-icon" alt="coinIcon" />
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>
         </div>
         <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
           <div className="">
-            <div className="country-name">Lavivatienda</div>
-            <img src={flag} className="lh-1" height="20" alt="" />
-            <img src={amazon} className="" height="20" alt="" />
+            <span className="store-name">Teststore</span>
+            <img src={flag} className="flag" height="20" alt="" />
+            <img src={amazon} className="company" height="20" alt="" />
             <Button>
-              <i className="fa fa-caret-down" aria-hidden="true" />
+              <img className="fa fa-caret-down" aria-hidden="true" />
             </Button>
           </div>
         </Dropdown>
