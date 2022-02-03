@@ -3,7 +3,6 @@ import light_bulb_two from '../assets/catalog-imgs/light-bulb-2.jpg';
 import light_bulb_three from '../assets/catalog-imgs/light-bulb-3.jpg';
 import light_bulb_four from '../assets/catalog-imgs/light-bulb-4.jpg';
 
-
 export const dummyData = [
   { value: 'Amazon', id: 101 },
   { value: 'Others', id: 102 },
@@ -16,7 +15,6 @@ export const dummyData = [
   { value: 'Amaozoamsd', id: 109 },
   { value: 'Third', id: 110 }
 ];
-
 
 export const dummyUsers = [
   {
@@ -101,9 +99,7 @@ export const dummyPricingRulesData = [
   }
 ];
 
-
 export const catalogData = [
-
   {
     id: 1,
     img: light_bulb_one,
@@ -111,7 +107,19 @@ export const catalogData = [
     sell: 49.61,
     cost: 38.16,
     profit: 5.45,
-    source: 'Lights4Living'
+    source: 'Lights4Living',
+    details: (
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis dolor iure! Quos officiis minus quas
+        et cupiditate ipsa, sit laudantium. Dolore autem aperiam inventore laboriosam similique natus corporis provident
+        accusantium fuga amet illum, eveniet repellat eius vel explicabo, vero iusto quam mollitia praesentium? Eius,
+        numquam excepturi! Facilis dolorum accusantium adipisci deleniti aspernatur repudiandae amet minima natus a
+        consequuntur animi, reprehenderit tempora repellat et, exercitationem perferendis ab earum, obcaecati
+        voluptates? Repudiandae, iusto! Recusandae ea aut at corporis animi deserunt numquam et labore, impedit nesciunt
+        temporibus assumenda dicta, veritatis facilis quas harum, minus expedita aliquam ipsa reprehenderit. A ratione
+        vitae eaque!
+      </p>
+    )
   },
   {
     id: 2,
@@ -120,8 +128,19 @@ export const catalogData = [
     sell: 49.61,
     cost: 38.16,
     profit: 5.45,
-    source: 'Lights4Living'
-
+    source: 'Lights4Living',
+    details: (
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis dolor iure! Quos officiis minus quas
+        et cupiditate ipsa, sit laudantium. Dolore autem aperiam inventore laboriosam similique natus corporis provident
+        accusantium fuga amet illum, eveniet repellat eius vel explicabo, vero iusto quam mollitia praesentium? Eius,
+        numquam excepturi! Facilis dolorum accusantium adipisci deleniti aspernatur repudiandae amet minima natus a
+        consequuntur animi, reprehenderit tempora repellat et, exercitationem perferendis ab earum, obcaecati
+        voluptates? Repudiandae, iusto! Recusandae ea aut at corporis animi deserunt numquam et labore, impedit nesciunt
+        temporibus assumenda dicta, veritatis facilis quas harum, minus expedita aliquam ipsa reprehenderit. A ratione
+        vitae eaque!
+      </p>
+    )
   },
   {
     id: 3,
@@ -130,8 +149,19 @@ export const catalogData = [
     sell: 49.61,
     cost: 38.16,
     profit: 5.45,
-    source: 'Lights4Living'
-
+    source: 'Lights4Living',
+    details: (
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis dolor iure! Quos officiis minus quas
+        et cupiditate ipsa, sit laudantium. Dolore autem aperiam inventore laboriosam similique natus corporis provident
+        accusantium fuga amet illum, eveniet repellat eius vel explicabo, vero iusto quam mollitia praesentium? Eius,
+        numquam excepturi! Facilis dolorum accusantium adipisci deleniti aspernatur repudiandae amet minima natus a
+        consequuntur animi, reprehenderit tempora repellat et, exercitationem perferendis ab earum, obcaecati
+        voluptates? Repudiandae, iusto! Recusandae ea aut at corporis animi deserunt numquam et labore, impedit nesciunt
+        temporibus assumenda dicta, veritatis facilis quas harum, minus expedita aliquam ipsa reprehenderit. A ratione
+        vitae eaque!
+      </p>
+    )
   },
   {
     id: 4,
@@ -140,8 +170,18 @@ export const catalogData = [
     sell: 49.61,
     cost: 38.16,
     profit: 5.45,
-    source: 'Lights4Living'
-
+    source: 'Lights4Living',
+    details: (
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis dolor iure! Quos officiis minus quas
+        et cupiditate ipsa, sit laudantium. Dolore autem aperiam inventore laboriosam similique natus corporis provident
+        accusantium fuga amet illum, eveniet repellat eius vel explicabo, vero iusto quam mollitia praesentium? Eius,
+        numquam excepturi! Facilis dolorum accusantium adipisci deleniti aspernatur repudiandae amet minima natus a
+        consequuntur animi, reprehenderit tempora repellat et, exercitationem perferendis ab earum, obcaecati
+        voluptates? Repudiandae, iusto! Recusandae ea aut at corporis animi deserunt numquam et labore, impedit nesciunt
+        temporibus assumenda dicta, veritatis facilis quas harum, minus expedita aliquam ipsa reprehenderit. A ratione
+        vitae eaque!
+      </p>
+    )
   }
-
 ];

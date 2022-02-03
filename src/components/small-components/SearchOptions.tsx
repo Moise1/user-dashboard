@@ -6,10 +6,11 @@ import { Space, Button, Form, Input, Checkbox } from 'antd';
 
 interface SearchOptionsProps {
   showSearchInput: boolean;
+  openSourceModal?: () => void;
 }
 
 export const SearchOptions = (props:(AdvancedSearchProps & SearchOptionsProps)) => {
-  const {visible, onClose, showSearchInput} = props;
+  const {visible, onClose, showSearchInput, openSourceModal} = props;
   const onSearch = (value: string) => console.log('searched value', value);
 
   return (
@@ -28,7 +29,7 @@ export const SearchOptions = (props:(AdvancedSearchProps & SearchOptionsProps)) 
       >
         <div className="advanced-form-container">
           <h5><strong>Choose your suppliers</strong></h5>
-          <Button className="supplier-one">1 supplier</Button>
+          <Button className="supplier-one" onClick={openSourceModal}>1 supplier</Button>
           <Form layout="vertical" className="advanced-search-form">
             <div className="inputs">
               <Form.Item label="Min source price">

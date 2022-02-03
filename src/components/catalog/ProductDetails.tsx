@@ -1,40 +1,64 @@
 import { Col, Row, Divider } from 'antd';
-import { CancelBtn, WarningBtn } from '../small-components/ActionBtns';
+import { CancelBtn, SuccessBtn } from '../small-components/ActionBtns';
 import { t } from '../../global/transShim';
+import '../../sass/light-theme/product-details.scss';
 
-export const ProductDetails = () => {
+interface Props {
+  img: string;
+  details: JSX.Element;
+  sell: number;
+  cost: number;
+  profit: number;
+  handleClose: () => void;
+}
+export const ProductDetails = (props: Props) => {
+  const { img, details, sell, cost, profit, handleClose} = props;
   return (
     <div className="product-details">
       <Row gutter={[32, 0]}>
-        <Col>
-          <p>Image section</p>
-
+        <Col lg={8}>
+          <img src={img} alt="" className='product-img' />
         </Col>
-        <Col>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim voluptas quos nam reiciendis nemo quaerat eius
-            error, ducimus quod repudiandae quo placeat tempora ad ipsum. Reprehenderit eum saepe praesentium! Odio
-            molestiae soluta voluptates, nesciunt id eos et voluptatibus asperiores placeat adipisci, minus molestias
-            aut ipsa repellendus quos. Praesentium, eveniet? Dolore, explicabo id? Sit dicta iste ipsam voluptatem optio
-            vero officia vitae placeat perferendis itaque nesciunt obcaecati corrupti tempore blanditiis praesentium
-            incidunt ab, eum quidem cupiditate temporibus repellat voluptatibus id omnis. Repellat eaque consectetur,
-            eos suscipit perferendis aspernatur incidunt eveniet fuga odit ea adipisci iure porro delectus! Ipsum
-            necessitatibus qui dignissimos voluptate sapiente! Quis eos quam eligendi magnam tempore voluptate! Pariatur
-            repudiandae blanditiis ut saepe adipisci doloribus, exercitationem neque animi, est culpa tempore corporis
-            mollitia? Totam sunt soluta amet officiis nihil? Dolores odio quia perspiciatis ab repellat nulla, minus
-            asperiores inventore necessitatibus quam laboriosam aliquid enim mollitia. Et sapiente ratione voluptates
-            quis blanditiis exercitationem ab molestiae natus facilis, adipisci porro veritatis tempore voluptatem ullam
-            aut facere eligendi. Sit impedit quae fuga hic culpa? Quos obcaecati esse voluptatum asperiores iusto minima
-            sunt, aliquid fuga suscipit. Quibusdam ipsa aspernatur ratione neque qui repellendus harum assumenda odio,
-            odit dicta tenetur possimus. Natus, odio ab?
-          </p>
+        <Col lg={14}>
+          {details}
+          <div className="transaction-details">
+            <div className="transaction-type">
+              <p>
+                <strong>Sell</strong>
+              </p>
+              <p>
+                <strong>Cost</strong>
+              </p>
+              <p>
+                <strong>Cost</strong>
+              </p>
+            </div>
+            <div className="transaction-amount">
+              <p>
+                <strong>
+                  <span>&pound;</span> {sell}
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  <span>&pound;</span> {cost}
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  {' '}
+                  <span>&pound;</span> {profit}
+                </strong>
+              </p>
+            </div>
+          </div>
+          <Divider/>
+          <div className="action-btns">
+            <CancelBtn handleClose={handleClose}>{t('Cancel')}</CancelBtn>
+            <SuccessBtn>{t('AddToSelection')}</SuccessBtn>
+          </div>
         </Col>
       </Row>
-      <Divider />
-      <div className="action-btns">
-        <CancelBtn>{t('Dismiss')}</CancelBtn>
-        <WarningBtn>{t('AddToSelection')}</WarningBtn>
-      </div>
     </div>
   );
 };
