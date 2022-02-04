@@ -942,81 +942,77 @@ export const SettingsIcon = () => {
 };
 export const ProcessOrderIcon = () => {
   return (
-    <>
-      <svg
-        className="process-order-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="25.174"
-        height="25.174"
-        viewBox="0 0 25.174 25.174"
-      >
-        <g id="Group_291" data-name="Group 291" transform="translate(1.174 1.174)">
-          <path id="Path_286" data-name="Path 286" d="M0,0H24V24H0Z" fill="none" />
-          <path
-            id="Path_287"
-            data-name="Path 287"
-            d="M16.3,5H17a2,2,0,0,1,2,2V17a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V7A2,2,0,0,1,7,5h5L9.18,2.18m0,5.64L12,5"
-            fill="none"
-          />
-        </g>
-      </svg>
-    </>
+    <svg xmlns="http://www.w3.org/2000/svg" width="25.174" height="25.174" viewBox="0 0 25.174 25.174">
+      <g id="Group_291" data-name="Group 291" transform="translate(1.174 1.174)">
+        <path id="Path_286" data-name="Path 286" d="M0,0H24V24H0Z" fill="none" />
+        <path
+          id="Path_287"
+          data-name="Path 287"
+          d="M16.3,5H17a2,2,0,0,1,2,2V17a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V7A2,2,0,0,1,7,5h5L9.18,2.18m0,5.64L12,5"
+          transform="translate(-4.971 12) rotate(-45)"
+          fill="none"
+          stroke="#fff"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+        />
+      </g>
+    </svg>
   );
 };
+
 export const HandStopOrderIcon = () => {
   return (
-    <>
-      <svg
-        id="Group_292"
-        data-name="Group 292"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-      >
-        <path id="Path_288" data-name="Path 288" d="M0,0H24V24H0Z" fill="none" />
-        <path
-          id="Path_289"
-          data-name="Path 289"
-          d="M8,13V5.5a1.5,1.5,0,1,1,3,0V12"
-          fill="none"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-        />
-        <path
-          id="Path_290"
-          data-name="Path 290"
-          d="M11,5.5v-2a1.5,1.5,0,0,1,3,0V12"
-          fill="none"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-        />
-        <path
-          id="Path_291"
-          data-name="Path 291"
-          d="M14,5.5a1.5,1.5,0,1,1,3,0V12"
-          fill="none"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-        />
-        <path
-          id="Path_292"
-          data-name="Path 292"
-          d="M17,7.5a1.5,1.5,0,1,1,3,0V16a6,6,0,0,1-6,6H12.208A6,6,0,0,1,7.2,19.3L7,19q-.468-.719-3.286-5.728A1.5,1.5,0,0,1,4.25,11.25a1.867,1.867,0,0,1,2.28.28L8,13"
-          fill="none"
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-        />
-      </svg>
-    </>
+    <svg
+      id="Group_292"
+      data-name="Group 292"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path id="Path_288" data-name="Path 288" d="M0,0H24V24H0Z" fill="none" />
+      <path
+        id="Path_289"
+        data-name="Path 289"
+        d="M8,13V5.5a1.5,1.5,0,1,1,3,0V12"
+        fill="none"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+      <path
+        id="Path_290"
+        data-name="Path 290"
+        d="M11,5.5v-2a1.5,1.5,0,0,1,3,0V12"
+        fill="none"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+      <path
+        id="Path_291"
+        data-name="Path 291"
+        d="M14,5.5a1.5,1.5,0,1,1,3,0V12"
+        fill="none"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+      <path
+        id="Path_292"
+        data-name="Path 292"
+        d="M17,7.5a1.5,1.5,0,1,1,3,0V16a6,6,0,0,1-6,6H12.208A6,6,0,0,1,7.2,19.3L7,19q-.468-.719-3.286-5.728A1.5,1.5,0,0,1,4.25,11.25a1.867,1.867,0,0,1,2.28.28L8,13"
+        fill="none"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
   );
 };
 export const TrashIcon = () => {
@@ -1546,59 +1542,75 @@ export const RefreshIcon = () => (
 );
 
 export const GreenLogo = () => (
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-    width="40.000000pt" height="40.000000pt" viewBox="0 0 313.000000 340.000000"
-    preserveAspectRatio="xMidYMid meet">
-
-    <g transform="translate(0.000000,340.000000) scale(0.100000,-0.100000)"
-      fill="green" stroke="none">
-      <path d="M840 2734 c-245 -141 -457 -263 -473 -273 l-27 -17 597 -345 c328
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    width="40.000000pt"
+    height="40.000000pt"
+    viewBox="0 0 313.000000 340.000000"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <g transform="translate(0.000000,340.000000) scale(0.100000,-0.100000)" fill="green" stroke="none">
+      <path
+        d="M840 2734 c-245 -141 -457 -263 -473 -273 l-27 -17 597 -345 c328
 -189 606 -349 618 -356 18 -10 34 -4 120 46 55 32 332 192 615 355 283 164
 516 299 517 300 2 2 -320 187 -337 194 -4 2 -25 -20 -45 -49 -31 -41 -35 -53
 -24 -60 8 -5 42 -25 77 -45 34 -19 62 -37 62 -39 0 -2 -127 -76 -282 -166
 -156 -89 -372 -214 -481 -277 -172 -99 -201 -113 -220 -104 -84 41 -930 539
 -930 547 0 6 36 31 79 56 43 25 151 88 239 139 88 51 204 118 257 149 108 62
-106 58 90 158 l-7 42 -445 -255z"/>
-      <path d="M270 1607 l0 -714 618 -356 617 -357 3 408 c2 224 0 547 -3 717 l-7
+106 58 90 158 l-7 42 -445 -255z"
+      />
+      <path
+        d="M270 1607 l0 -714 618 -356 617 -357 3 408 c2 224 0 547 -3 717 l-7
 311 -87 49 c-47 27 -322 185 -610 352 -288 167 -525 303 -527 303 -2 0 -4
 -321 -4 -713z m347 359 c109 -63 322 -185 473 -273 l275 -159 3 -558 2 -558
 -32 20 c-18 11 -234 135 -480 277 l-448 257 0 554 c0 305 2 554 5 554 2 0 93
--51 202 -114z"/>
-      <path d="M2495 2100 c-209 -121 -484 -279 -611 -352 l-232 -133 -6 -150 c-4
+-51 202 -114z"
+      />
+      <path
+        d="M2495 2100 c-209 -121 -484 -279 -611 -352 l-232 -133 -6 -150 c-4
 -82 -6 -405 -4 -718 l3 -567 455 263 c250 144 528 305 618 356 l162 94 0 713
 c0 393 -1 714 -2 713 -2 0 -174 -99 -383 -219z m245 -1124 c-5 -5 -222 -132
 -482 -282 l-473 -273 -3 551 c-1 304 1 555 6 560 4 4 222 132 483 283 l474
-275 3 -552 c1 -352 -1 -555 -8 -562z"/>
+275 3 -552 c1 -352 -1 -555 -8 -562z"
+      />
     </g>
   </svg>
-
 );
 
 export const RedLogo = () => (
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-    width="40.000000pt" height="40.000000pt" viewBox="0 0 313.000000 340.000000"
-    preserveAspectRatio="xMidYMid meet">
-
-    <g transform="translate(0.000000,340.000000) scale(0.100000,-0.100000)"
-      fill="red" stroke="none">
-      <path d="M840 2734 c-245 -141 -457 -263 -473 -273 l-27 -17 597 -345 c328
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    width="40.000000pt"
+    height="40.000000pt"
+    viewBox="0 0 313.000000 340.000000"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <g transform="translate(0.000000,340.000000) scale(0.100000,-0.100000)" fill="red" stroke="none">
+      <path
+        d="M840 2734 c-245 -141 -457 -263 -473 -273 l-27 -17 597 -345 c328
 -189 606 -349 618 -356 18 -10 34 -4 120 46 55 32 332 192 615 355 283 164
 516 299 517 300 2 2 -320 187 -337 194 -4 2 -25 -20 -45 -49 -31 -41 -35 -53
 -24 -60 8 -5 42 -25 77 -45 34 -19 62 -37 62 -39 0 -2 -127 -76 -282 -166
 -156 -89 -372 -214 -481 -277 -172 -99 -201 -113 -220 -104 -84 41 -930 539
 -930 547 0 6 36 31 79 56 43 25 151 88 239 139 88 51 204 118 257 149 108 62
-106 58 90 158 l-7 42 -445 -255z"/>
-      <path d="M270 1607 l0 -714 618 -356 617 -357 3 408 c2 224 0 547 -3 717 l-7
+106 58 90 158 l-7 42 -445 -255z"
+      />
+      <path
+        d="M270 1607 l0 -714 618 -356 617 -357 3 408 c2 224 0 547 -3 717 l-7
 311 -87 49 c-47 27 -322 185 -610 352 -288 167 -525 303 -527 303 -2 0 -4
 -321 -4 -713z m347 359 c109 -63 322 -185 473 -273 l275 -159 3 -558 2 -558
 -32 20 c-18 11 -234 135 -480 277 l-448 257 0 554 c0 305 2 554 5 554 2 0 93
--51 202 -114z"/>
-      <path d="M2495 2100 c-209 -121 -484 -279 -611 -352 l-232 -133 -6 -150 c-4
+-51 202 -114z"
+      />
+      <path
+        d="M2495 2100 c-209 -121 -484 -279 -611 -352 l-232 -133 -6 -150 c-4
 -82 -6 -405 -4 -718 l3 -567 455 263 c250 144 528 305 618 356 l162 94 0 713
 c0 393 -1 714 -2 713 -2 0 -174 -99 -383 -219z m245 -1124 c-5 -5 -222 -132
 -482 -282 l-473 -273 -3 551 c-1 304 1 555 6 560 4 4 222 132 483 283 l474
-275 3 -552 c1 -352 -1 -555 -8 -562z"/>
+275 3 -552 c1 -352 -1 -555 -8 -562z"
+      />
     </g>
   </svg>
-
 );

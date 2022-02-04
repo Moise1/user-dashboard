@@ -75,27 +75,19 @@ export const Sidebar = (props: Props) => {
     const tabletScreen = window.matchMedia('(max-width: 1030px)');
     if(tabletScreen.matches){
       collapseSideBar();
-    }else{
-      handleMouseLeave();
     }
   };
 
   const settingsListArray = [
+    {id: 6, listName: t('Menu.Channel'),onClick: () => routeChange('/channel')},
+    { id: 7, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
+    { id: 8 , listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { id: 12, listName: t('Menu.Templates') },
     {
-      id: 1,
-      listName: t('Menu.Channel'),
-      onClick: () => {
-        history.push('/channel'), location.reload();
-      }
-    },
-    { id: 2, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
-    { id: 3, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { id: 4, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { id: 5, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { id: 6, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { id: 7, listName: t('Menu.Templates') },
-    {
-      id: 8,
+      id: 13,
       listName: (
         <>
           <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
@@ -113,9 +105,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 1, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    { id: 2, listName: t('Menu.FAQ') },
-    { id: 3, listName: t('Menu.ListingServices') }
+    { id: 15, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 16, listName: t('Menu.FAQ') },
+    { id: 17, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -225,7 +217,7 @@ export const Sidebar = (props: Props) => {
             <Menu.Item
               className="menu-item"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              key="2"
+              key="14"
               icon={<ServiceIcon />}
               onClick={() => routeChange('/services')}
             >

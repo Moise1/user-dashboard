@@ -35,13 +35,15 @@
 .reset-btn,
 .cancel-btn,
 .selector,
+.danger-btn,
 .delete-btn,
 .warning-btn {
   @include action-btn();
-}
+};
+
+
 .success-btn {
   background: $green;
-  color: $white;
   &:hover, &:focus {
     background: $green;
     color: $white;
@@ -50,8 +52,7 @@
 
 .confirm-btn{
   background: $light-primary;
-  color: $white;
-  &:hover {
+  &:hover, &:focus{
     background: $light-primary;
     color: $white;
   }
@@ -63,6 +64,10 @@
 .danger-btn,
 .delete-btn {
   background: $red;
+  &:hover, &:focus{
+    background: $red;
+    color: $white;
+  }
 }
 
 .warning-btn {
@@ -75,7 +80,6 @@
 
 .cancel-btn{
   background: $ash-gray;
-  color: $white;
   &:hover, &:focus{
     background: $ash-gray;
     color: $white;

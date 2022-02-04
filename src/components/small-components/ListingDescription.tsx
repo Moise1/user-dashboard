@@ -2,6 +2,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import { t } from 'src/global/transShim';
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import '../../sass/light-theme/listing-description.scss';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+
 
 export const ListingDescription = () => {
   return (
@@ -10,9 +12,18 @@ export const ListingDescription = () => {
       <Editor />
 
       <div className="btns-container-description">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <WarningBtn>{t('ForceRefresh')}</WarningBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <WarningBtn>
+          <RefreshIcon />
+          {t('ForceRefresh')}
+        </WarningBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </div>
   );

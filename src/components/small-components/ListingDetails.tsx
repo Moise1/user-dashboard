@@ -1,6 +1,8 @@
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/listing-details.scss';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+
 
 export const ListingDetails = () => {
   return (
@@ -28,9 +30,18 @@ export const ListingDetails = () => {
         </li>
       </ul>
       <div className="btns-container-details">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <WarningBtn>{t('ForceRefresh')}</WarningBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <WarningBtn>
+          <RefreshIcon />
+          {t('ForceRefresh')}
+        </WarningBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@
 // NAVBAR
 .orders-container {
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-  width: fill-available;
+  width: stretch;
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   .search-bars-container{
     margin-top: 4rem;
@@ -91,42 +91,7 @@
   white-space: nowrap;
 }
 
-.stop-order-btn-style {
-  background-color: $dark-orange;
-  height: 43px;
-  padding: 10px 40px;
-  border-radius: 10px;
-  color: $white;
-  font-size: $font-medium;
-  font-weight: $bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
 
-.stop-order-btn-style:hover {
-  background-color: $orange;
-  color: $white;
-}
-
-.process-order-btn-style:hover {
-  background-color: $dark-blue;
-  color: $white;
-}
-.mark-dispatch-modal-btn-style {
-  background-color: $light-green;
-  height: 43px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: $white;
-  font-size: $font-medium;
-  font-weight: $bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-}
 
 .mark-dispatch-modal-btn-style:hover {
   background-color: $dark-green;

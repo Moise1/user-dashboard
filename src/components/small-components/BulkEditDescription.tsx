@@ -3,8 +3,10 @@ import { Switch } from './Switch';
 import { SuccessBtn, DeleteBtn } from './ActionBtns';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/listing-options.scss';
+import { CheckIcon, TrashIcon } from '../common/Icons';
 
-export const BulkEditOptions = () => {
+
+export const BulkEditDescription = () => {
   return (
     <div className="listing-options">
       <Row className="description-and-controls">
@@ -59,8 +61,14 @@ export const BulkEditOptions = () => {
       </Row>
 
       <div className="btns-container-options">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </div>
   );

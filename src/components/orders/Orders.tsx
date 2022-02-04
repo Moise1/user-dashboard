@@ -8,6 +8,7 @@ import '../../sass/light-theme/medium-button.scss';
 import {DataTable} from '../tables/DataTable';
 import { t } from 'src/global/transShim';
 
+
 export const Orders = () => {
   const [orderNumber,] = useState(0);
   const columns = [
