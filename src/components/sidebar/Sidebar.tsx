@@ -34,11 +34,10 @@ interface Props {
   togglestatic: () => void;
   handleSidebarMobile: () => void;
   collapseSideBar: () => void;
-  setStaticValue: (isStatic: boolean) => void;
 }
 
 export const Sidebar = (props: Props) => {
-  const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar, setStaticValue } = props;
+  const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const history = useHistory();
   const [isDark, setIsDark] = useState(false);
 
@@ -77,7 +76,7 @@ export const Sidebar = (props: Props) => {
     if(tabletScreen.matches){
       collapseSideBar();
     }else{
-      setStaticValue(true);
+      setCollapsed(false);
     }
   };
 

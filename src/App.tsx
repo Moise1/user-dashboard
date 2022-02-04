@@ -54,7 +54,6 @@ export const App = withRouter(({ history }) => {
             {pathname === '/new-channel' ? null : (
               <Sidebar
                 className="sider"
-                setStaticValue={setStaticValue}
                 setCollapsed={setCollapsed}
                 staticValue={staticValue}
                 togglestatic={toggleStaticValue}
@@ -64,7 +63,7 @@ export const App = withRouter(({ history }) => {
                 collapseSideBar={collapseSideBar}
               />
             )}
-            <Layout className={staticValue ? 'content-area' : 'all-content'} onClick={toggleCollapse}>
+            <Layout className={staticValue || !collapsed ? 'content-area' : 'all-content'}>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />
