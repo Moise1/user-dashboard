@@ -3,6 +3,8 @@ import { Switch } from './Switch';
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/listing-options.scss';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+
 
 export const ListingOptions = () => {
   return (
@@ -59,9 +61,18 @@ export const ListingOptions = () => {
       </Row>
 
       <div className="btns-container-options">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <WarningBtn>{t('ForceRefresh')}</WarningBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <WarningBtn>
+          <RefreshIcon />
+          {t('ForceRefresh')}
+        </WarningBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </div>
   );

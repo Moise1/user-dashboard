@@ -54,6 +54,7 @@ export const App = withRouter(({ history }) => {
             {pathname === '/new-channel' ? null : (
               <Sidebar
                 className="sider"
+                setStaticValue={setStaticValue}
                 setCollapsed={setCollapsed}
                 staticValue={staticValue}
                 togglestatic={toggleStaticValue}
