@@ -64,7 +64,7 @@ export const App = withRouter(({ history }) => {
                 collapseSideBar={collapseSideBar}
               />
             )}
-            <Layout className={staticValue ? 'content-area' : 'all-content'}>
+            <Layout className={staticValue ? 'content-area' : 'all-content'} onClick={toggleCollapse}>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />
