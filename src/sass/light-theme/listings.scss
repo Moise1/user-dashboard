@@ -6,26 +6,25 @@
   font-weight: bold;
   color: $primary;
   width: 5vw;
-  margin-top: 3rem;
   text-align: left;
 }
 
-.search-options-area{
+.search-options-area {
   display: flex;
   justify-content: space-between;
-  .action-components{
+  .action-components {
     width: 62vw;
     margin-left: 0;
-    .ant-input-wrapper{
+    .ant-input-wrapper {
       width: 100% !important;
-    };
+    }
   }
 
-  .search-bars-container{
+  .search-bars-container {
     display: flex;
     margin-top: -1rem;
   }
-};
+}
 
 .table {
   height: 40vh;
@@ -58,8 +57,8 @@
         color: $primary;
       }
     }
-  };
-  .show-columns-action-btns{
+  }
+  .show-columns-action-btns {
     display: flex;
     justify-content: flex-end;
     & > * {
@@ -93,7 +92,7 @@
       background: $mild-light-blue;
       padding: 0.2rem 2rem;
       border-radius: 16px;
-      .horizontal-divider{
+      .horizontal-divider {
         display: none;
       }
       .list-item {
@@ -113,54 +112,54 @@
   }
 }
 
-
 // Phone and tablets screen size.
 @media only screen and (max-width: 750px) {
-  .listings-title{
+  .listings-title {
     text-align: center;
     width: 100vw;
     margin-top: 4rem;
-  };
-  .search-options-area{
+  }
+  .search-options-area {
     display: grid;
     justify-content: center;
-    .action-components{
+    .action-components {
       width: 50vw;
       margin: 1rem auto;
     }
-    .search-bars-container{
+    .search-bars-container {
       display: grid;
       margin-top: -1rem;
       margin: auto 0;
-      .advanced-search-btn, .view-columns-btn{
-       margin: .5rem 1.5rem;
-     }
+      .advanced-search-btn,
+      .view-columns-btn {
+        margin: 0.5rem 1.5rem;
+      }
     }
-  };
+  }
 
-  .table-info{
+  .table-info {
     display: grid;
     place-items: center;
   }
-  .selected-options{
+  .selected-options {
     width: 100%;
     margin: 0 -2rem !important;
-    .list{
+    .list {
       display: grid !important;
       place-items: center;
-     .list-item{
-       margin-bottom: .9rem !important;
-       &:nth-last-child(-n + 2):before {
-        content: '' !important;
+      .list-item {
+        margin-bottom: 0.9rem !important;
+        &:nth-last-child(-n + 2):before {
+          content: '' !important;
+        }
       }
-     };
 
-     .horizontal-divider{
-       display: block !important;
-       width: 4vw;
-       margin-bottom: .3rem;
-      border-top: 1px solid  $black;
-     }
+      .horizontal-divider {
+        display: block !important;
+        width: 4vw;
+        margin-bottom: 0.3rem;
+        border-top: 1px solid $black;
+      }
     }
   }
 }
