@@ -2,6 +2,7 @@ import { Row, Col, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
 
 export const ListingMain = () => {
   const { TextArea } = Input;
@@ -45,9 +46,18 @@ export const ListingMain = () => {
         </Col>
       </Row>
       <div className="btns-container">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <WarningBtn>{t('ForceRefresh')}</WarningBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <WarningBtn>
+          <RefreshIcon />
+          {t('ForceRefresh')}
+        </WarningBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </Form>
   );

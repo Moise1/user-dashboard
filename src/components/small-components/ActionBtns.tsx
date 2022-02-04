@@ -1,4 +1,3 @@
-import { CheckIcon, TrashIcon, RefreshIcon } from '../common/Icons';
 import '../../sass/light-theme/action-btns.scss';
 
 import { Button } from 'antd';
@@ -12,43 +11,39 @@ interface Props {
 
 export const SuccessBtn = ({ children, handleClose }: Props) => (
   <Button className="success-btn" onClick={handleClose}>
-    <CheckIcon />
-    <span>{children}</span>
+    {children}
   </Button>
 );
 
 export const ConfirmBtn = ({ children, handleClose, className, disabled }: Props) => (
-  <Button className={className} onClick={handleClose}  disabled={disabled}>
-    <span>{children}</span>
+  <Button className={`confirm-btn ${className}`} onClick={handleClose}  disabled={disabled}>
+    {children}
   </Button>
 );
 
 export const CancelBtn = ({ children, handleClose }: Props) => (
   <Button className="cancel-btn" onClick={handleClose}>
-    <span>{children}</span>
+    {children}
   </Button>
 );
 
 export const ResetBtn = ({ children,  }: Props) => (
   <Button className="reset-btn">
-    <span>{children}</span>
+    {children}
   </Button>
 );
 export const DangerBtn = ({ children }: Props) => (
   <Button className="danger-btn">
-    <CheckIcon />
-    <span>{children}</span>
+    {children}
   </Button>
 );
 export const DeleteBtn = ({ children }: Props) => (
   <Button className="delete-btn">
-    <TrashIcon />
-    <span>{children}</span>
+    {children}
   </Button>
 );
 export const WarningBtn = ({ children }: Props) => (
   <Button className="warning-btn">
-    <RefreshIcon />
-    <span>{children}</span>
+    {children}
   </Button>
 );

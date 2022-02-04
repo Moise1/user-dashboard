@@ -1,6 +1,7 @@
 import { Row, Col, Form, Input } from 'antd';
 import { t } from '../../global/transShim';
 import { SuccessBtn, DeleteBtn } from './ActionBtns';
+import { CheckIcon, TrashIcon } from '../common/Icons';
 
 export const BulkEditMain = () => {
   return (
@@ -34,8 +35,14 @@ export const BulkEditMain = () => {
         </Col>
       </Row>
       <div className="action-btns">
-        <DeleteBtn>{t('TerminateItem')}</DeleteBtn>
-        <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+        <DeleteBtn>
+          <TrashIcon />
+          {t('TerminateItem')}
+        </DeleteBtn>
+        <SuccessBtn>
+          <CheckIcon />
+          {t('SaveChanges')}
+        </SuccessBtn>
       </div>
     </Form>
   );

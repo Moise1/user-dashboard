@@ -14,6 +14,7 @@ import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
+import { CheckIcon } from '../common/Icons';
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
@@ -164,7 +165,10 @@ export const Listings = () => {
           </Row>
           <div className="show-columns-action-btns">
             <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
-            <SuccessBtn handleClose={handleApplyChanges}>{t('ApplyChanges')}</SuccessBtn>
+            <SuccessBtn handleClose={handleApplyChanges}>
+              <CheckIcon/>
+              {t('ApplyChanges')}
+            </SuccessBtn>
           </div>
         </Card>
       </PopupModal>

@@ -225,7 +225,7 @@ export const Sidebar = (props: Props) => {
             <Menu.Item
               className="menu-item"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              key="2"
+              key="6"
               icon={<ServiceIcon />}
               onClick={() => routeChange('/services')}
             >

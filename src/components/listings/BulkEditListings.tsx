@@ -3,7 +3,7 @@ import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
 import { BulkEditMain } from '../small-components/BulkEditMain';
-import { BulkEditOptions } from '../small-components/BulkEditOptions';
+import { BulkEditDescription } from '../small-components/BulkEditDescription';
 import { AlertCircle } from 'react-feather';
 import '../../sass/light-theme/edit-multiple-listings.scss';
 
@@ -20,7 +20,7 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
     case 0:
       return <BulkEditMain />;
     case 1:
-      return <BulkEditOptions />;
+      return <BulkEditDescription />;
     default:
       return <></>;
     }
