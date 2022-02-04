@@ -109,10 +109,6 @@
     display: flex;
     justify-content: flex-end;
 
-    .notifications {
-      margin-top: 0.7rem;
-    }
-
     & > * {
       margin-left: 3rem;
     }
@@ -159,11 +155,17 @@
     }
 
     .notifications-container {
+      display: flex;
+      align-items: center;
+      line-height: 1px;
+      cursor: pointer;
+      margin: auto;
+      width: fit-content;
+      justify-content: center;
       .notifications {
         font-weight: bold;
         font-size: $font-medium;
         display: inline;
-        margin-left: $spacer;
       }
     }
 
@@ -173,43 +175,72 @@
       align-items: center;
       line-height: 1px;
       cursor: pointer;
-    }
-    .token-icon {
-      width: 30px;
+      margin: auto;
+      width: 140px;
+      justify-content: center;
+
+      .token-icon {
+        width: 30px;
+      }
+
+      .token-number {
+        font-size: $font-medium;
+        font-weight: $semibold;
+        margin: 0 $spacer * 0.25;
+      }
+
+      .tokens {
+        display: inline;
+        font-size: $font-medium;
+      }
     }
 
-    .token-number {
-      font-size: $font-medium;
-      font-weight: $semibold;
-      margin: 0 $spacer * 0.25;
-    }
-
-    .tokens {
-      display: inline;
-      font-size: $font-medium;
+    .avatar-container {
+      display: flex;
+      align-items: center;
+      line-height: 1px;
+      cursor: pointer;
+      margin: auto;
+      width: 140px;
+      justify-content: center;
     }
 
     .dropdown {
-      margin-top: 0.5rem;
+      margin-top: 0.7rem;
       display: flex;
       align-items: center;
       position: relative;
-
-      border-radius: 10px;
+      border-radius: 20px;
+      border: solid 2px $gray;
       opacity: 1;
       height: 30px;
-      padding: 20px 5px 20px 5px;
+      padding: 10px 5px 10px 5px;
       cursor: pointer;
+      transition: 0.5s;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.137) 0px 5px 5px;
+        transition: 0.5s;
+      }
 
       &:focus {
         border: none !important;
         outline: none !important;
       }
 
+      .btn-arrow-container {
+        background: none !important;
+        & :focus {
+          text-decoration: none !important;
+          border: none !important;
+        }
+        .down-arrow-icon {
+          width: 10px;
+        }
+      }
+
       .store-name {
         font-size: $font-medium;
         padding-left: $spacer;
-        font-weight: bold;
       }
 
       .flag {
@@ -242,14 +273,23 @@
   }
 }
 
+//Hover elements effect
+
+.tokens-container:hover,
+.notifications-container:hover {
+  transition: all 0.5s ease;
+  background: $light-gray;
+  height: 30px;
+  border-radius: 25px;
+}
+
 // Tablets and iPads screen
 
 @media only screen and (max-width: 1030px) {
   .top-bar {
-    padding-top: 0 !important;
     width: auto !important;
     .dropdown {
-      margin-top: 0 !important;
+      margin: auto !important;
     }
     .logo-container,
     .quota-container {
@@ -284,11 +324,7 @@
     }
 
     .top-bar-nav {
-      padding-top: 10px;
-      margin: auto;
-
       .progress-bar,
-      .notifications,
       .store-name,
       .update-btn {
         display: none;

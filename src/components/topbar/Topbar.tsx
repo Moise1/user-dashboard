@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import coinIcon from '../../assets/tokenCoin.png';
+import coinIcon from '../../assets/token.svg';
+import downArrow from '../../assets/downArrow.svg';
 import flag from '../../assets/flag-round-500.svg';
 import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
@@ -78,9 +79,11 @@ const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <Badge count={2} className="notifications">
-          <img src={bell} alt="" />
-        </Badge>
+        <div className="notifications-container">
+          <Badge count={2} className="notifications">
+            <img src={bell} alt="" />
+          </Badge>
+        </div>
         <div className="tokens-container" role="button" onClick={handleOpenModal}>
           <img src={coinIcon} className="token-icon" alt="coinIcon" />
           <span className="token-number">1232</span>
@@ -91,13 +94,14 @@ const Topbar = (props: Props) => {
             <span className="store-name">Teststore</span>
             <img src={flag} className="flag" height="20" alt="" />
             <img src={amazon} className="company" height="20" alt="" />
-            <Button>
-              <img className="fa fa-caret-down" aria-hidden="true" />
+            <Button className="btn-arrow-container">
+              <img src={downArrow} className="down-arrow-icon" alt="coinIcon" aria-hidden="true" />
             </Button>
           </div>
         </Dropdown>
-
-        <Avatar size={40} icon={<User onClick={handleDeleteModal} />} />
+        <div className="avatar-container">
+          <Avatar size={40} icon={<User onClick={handleDeleteModal} />} />
+        </div>
       </div>
     </div>
   );

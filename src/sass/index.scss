@@ -54,6 +54,12 @@ svg > path:first-child {
 
 //Ant buttons styles fixed
 
+button[ant-click-animating-without-extra-node]:after {
+  border: 0 none;
+  opacity: 0;
+  animation: none 0 ease 0 1 normal;
+}
+
 button:focus,
 button,
 #dropdown-basic,
