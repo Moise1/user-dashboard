@@ -31,30 +31,32 @@
   .pricing-rules-bar {
     display: block;
     padding: auto 2rem;
-    margin: 5rem 0 2rem 0;
     .form {
       display: flex;
       justify-content: space-evenly;
       padding: -1rem 0 !important;
-      margin: .1rem ;
+      margin: 0.1rem;
       height: auto !important;
       & > * {
         margin-left: 1rem !important;
       }
-    
-      [title="Source"], [title="Price From"], [title="Price To"], [title="Markup"]{
+
+      [title='Source'],
+      [title='Price From'],
+      [title='Price To'],
+      [title='Markup'] {
         font-weight: bold;
       }
-      .ant-select{
+      .ant-select {
         width: 16vw;
       }
-    
+
       .rule-btn {
         background: $light-primary;
         color: $white;
         height: 42px;
       }
-     
+
       .rule-btn,
       .-ant-select {
         width: 18%;
@@ -68,26 +70,25 @@
     width: 100%;
     border-radius: 5px;
   }
-};
+}
 
-
-@media only screen and (max-width: 750px){
-  .pricing-rules-bar{
-    h4, p{
+@media only screen and (max-width: 750px) {
+  .pricing-rules-bar {
+    h4,
+    p {
       text-align: center;
       margin-top: 1rem;
     }
-    .form{
+    .form {
       margin-top: -1rem;
       display: grid !important;
       place-items: center;
-      .ant-select{
+      .ant-select {
         width: 70vw !important;
       }
-      .rule-btn{
+      .rule-btn {
         width: 55vw !important;
       }
     }
   }
- 
 }

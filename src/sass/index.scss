@@ -7,6 +7,7 @@ body {
   overflow: hidden;
   line-height: 1.5715;
   .ant-layout {
+    margin-top: 0.5rem;
     overflow: auto;
     padding: 0.3rem;
     background: $mild-light-blue;
@@ -21,19 +22,18 @@ body {
   }
   .content-area {
     margin: 1rem 2rem 0 13rem;
-    .listings .action-components .ant-input-wrapper{
+    .listings .action-components .ant-input-wrapper {
       width: 43vw !important;
     }
 
-    .listings-title{
+    .listings-title {
       // border: 2px solid blue;
-      margin-top: -.4rem;
+      margin-top: -0.4rem;
     }
-    .control-btns-container{
+    .control-btns-container {
       width: 68vw !important;
     }
   }
-
 }
 
 //Scrollbar
