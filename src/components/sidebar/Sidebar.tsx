@@ -75,8 +75,6 @@ export const Sidebar = (props: Props) => {
     const tabletScreen = window.matchMedia('(max-width: 1030px)');
     if(tabletScreen.matches){
       collapseSideBar();
-    }else{
-      setCollapsed(false);
     }
   };
 
