@@ -4,22 +4,14 @@ import { t } from '../../global/transShim';
 import '../../sass/light-theme/store-list.scss';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
+import { SearchInput } from '../small-components/TableActionBtns';
 
 const StoreList = () => {
   return (
     <div className="store-list-container">
       <div className="store-list-dropdown">
         <div className="store-list-search">
-          <input
-            type="text"
-            className="search-input"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            placeholder="Search..."
-          />
-          <span className="search-icon">
-            <i className="fa fa-search" aria-hidden="true" />
-          </span>
+          <SearchInput />
         </div>
 
         <div className="linked-stores">
