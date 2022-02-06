@@ -47,9 +47,7 @@ export const App = withRouter(({ history }) => {
   
   return (
     <div className="app-container">
-      {/* <SelectSupplierProvider>
-       
-      </SelectSupplierProvider> */}
+      
 
       <Router>
         {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}

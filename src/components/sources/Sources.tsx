@@ -1,8 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { LeftBackArrowIcon } from '../common/Icons';
-import { SelectSupplierContext } from '../../contexts/SelectSupplierProvider';
 import AutoOrdering from './AutoOrdering';
 import { SourceSettings } from './SourceSettings';
 import { t } from '../../global/transShim';
@@ -14,12 +13,12 @@ import { dummyData } from '../../dummy-data/dummyData';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
 type ContextType = {
-  supplierValue: string;
+  // supplierValue: string;
   setSupplierValue: (arg0: string) => void;
 };
 
 export const Sources = () => {
-  const { supplierValue, setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
+  const [ supplierValue, setSupplierValue ] = useState('Supplier')
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const history = useHistory();
   const { TabPane } = Tabs;
