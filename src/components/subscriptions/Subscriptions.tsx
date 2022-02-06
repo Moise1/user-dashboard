@@ -1,5 +1,5 @@
-import { createRef, useState, useMemo} from 'react';
-import {ChevronLeft, ChevronRight} from 'react-feather';
+import { createRef, useState, useMemo } from 'react';
+import { ChevronLeft, ChevronRight } from 'react-feather';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
 import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
@@ -45,8 +45,8 @@ export const Subscriptions = () => {
     }
   ];
 
-  const renderSlides = useMemo(()=> {
-    if(tabletScreen.matches){
+  const renderSlides = useMemo(() => {
+    if (tabletScreen.matches) {
       setSlides(2);
       slides;
     }
@@ -55,13 +55,13 @@ export const Subscriptions = () => {
       slides;
     }
     return slides;
-  },[slides]);
+  }, [slides]);
 
   return (
     <Layout className="carousel-container">
       <Space className="control-btns-container">
-        <ChevronLeft onClick={handlePrev} className="chevron-left"/>
-        <ChevronRight onClick={handleNext} className="chevron-right"/>
+        <ChevronLeft onClick={handlePrev} className="chevron-left" />
+        <ChevronRight onClick={handleNext} className="chevron-right" />
       </Space>
       <StatusBar>
         <h6 className="subscriptions-detail">Your subscription offers the following: </h6>

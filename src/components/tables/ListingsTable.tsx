@@ -98,9 +98,7 @@ export const ListingsTable = (tableProps: props) => {
                     <Checkbox checked={dt.checked} value={dt.id} onChange={handleItemChecked} />
                   </label>
                 </td>
-                <td>
-                  {dt.img}
-                </td>
+                <td>{dt.img}</td>
                 <td className=" listings-td-none">{dt.itemNo}</td>
                 <td className=" listings-td-none">{dt.source}</td>
                 <td className="dt-sale-title listings-td-none">{dt.title}</td>

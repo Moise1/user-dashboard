@@ -1,5 +1,5 @@
 import { t } from '../../global/transShim';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface props {
   step: number;
@@ -9,13 +9,11 @@ interface props {
 }
 export const Account = (props: props) => {
   const { platform } = props;
-  
+
   return (
     <form className="account">
       <h5 className="title"> {`Do you have a ${platform} account?`}</h5>
-      <h6 className="sub-title">
-        {`No ${platform} store yet? We will happily show you how to get started!`}
-      </h6>
+      <h6 className="sub-title">{`No ${platform} store yet? We will happily show you how to get started!`}</h6>
       <div className="">
         {platform == 'ebay' ? (
           t('ebayacntslct')
@@ -34,7 +32,9 @@ export const Account = (props: props) => {
         {platform == 'ebay' ? <>{t('ebay1')}</> : platform == 'shopify' ? t('shppara3') : t('amznpara1')}
       </p>
       <p className="">{platform == 'amazon' ? <>{t('amznpara2')}</> : ''}</p>
-      <Link to="/become-a-seller" className="become-seller">How to be come a {platform} seller</Link>
+      <Link to="/become-a-seller" className="become-seller">
+        How to be come a {platform} seller
+      </Link>
     </form>
   );
 };

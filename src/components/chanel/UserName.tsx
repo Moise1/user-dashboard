@@ -1,5 +1,5 @@
 import { t } from '../../global/transShim';
-import {Input} from 'antd';
+import { Input } from 'antd';
 
 interface values {
   user: string;
@@ -13,11 +13,14 @@ interface props {
 }
 
 export const UserName = (props: props) => {
-  const { handleChangeUser,values, platform, user } = props;
+  const { handleChangeUser, values, platform, user } = props;
 
   return (
-    <form className='username-form'>
-      <h5 className="title"> {t('whatsur')} {platform} &apos;s {t('username')}? </h5>
+    <form className="username-form">
+      <h5 className="title">
+        {' '}
+        {t('whatsur')} {platform} &apos;s {t('username')}?{' '}
+      </h5>
       <p>
         {t('makesure')}
         {platform}
@@ -30,11 +33,7 @@ export const UserName = (props: props) => {
           aria-describedby="emailHelp"
           value={user}
           placeholder={
-            platform == 'ebay'
-              ? ' EBay username'
-              : platform == 'amazon'
-                ? ' Amazon username'
-                : ' Shopify username'
+            platform == 'ebay' ? ' EBay username' : platform == 'amazon' ? ' Amazon username' : ' Shopify username'
           }
           onChange={(e) => handleChangeUser(e.target.value)}
         />
@@ -45,8 +44,7 @@ export const UserName = (props: props) => {
         >
           <i>
             {t('fill')}
-            {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '}{' '}
-            {t('username')}
+            {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '} {t('username')}
           </i>
         </div>
       </div>

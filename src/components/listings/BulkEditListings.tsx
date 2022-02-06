@@ -14,7 +14,6 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
 
-
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
@@ -42,8 +41,18 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`}  changeTab={(e) => handleChangeTab(e, 0)} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
-        <StatusBtn title={`${t('Description')}`}  changeTab={(e) => handleChangeTab(e, 1)} className={activeTab === 1 ? 'active-tab': ''} id="1"/>
+        <StatusBtn
+          title={`${t('Main')}`}
+          changeTab={(e) => handleChangeTab(e, 0)}
+          className={activeTab === 0 ? 'active-tab' : ''}
+          id="0"
+        />
+        <StatusBtn
+          title={`${t('Description')}`}
+          changeTab={(e) => handleChangeTab(e, 1)}
+          className={activeTab === 1 ? 'active-tab' : ''}
+          id="1"
+        />
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>

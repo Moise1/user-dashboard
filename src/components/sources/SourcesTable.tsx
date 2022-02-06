@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { sourceData } from './SourceData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
@@ -13,7 +13,7 @@ import '../../sass/light-theme/popover.scss';
 
 const SourcesTable = () => {
   const history = useHistory();
-  const [, setSupplierValue ]= useState('Supplier');
+  const [, setSupplierValue] = useState('Supplier');
 
   const handleSupplierValue = (value: string) => {
     setSupplierValue(value);

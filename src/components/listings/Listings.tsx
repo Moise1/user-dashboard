@@ -166,7 +166,7 @@ export const Listings = () => {
           <div className="show-columns-action-btns">
             <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
             <SuccessBtn handleClose={handleApplyChanges}>
-              <CheckIcon/>
+              <CheckIcon />
               {t('ApplyChanges')}
             </SuccessBtn>
           </div>
@@ -185,24 +185,32 @@ export const Listings = () => {
 
       <h3 className="listings-title">Listings</h3>
       <div className="search-options-area">
-        <SearchOptions
-          visible={drawerOpen} 
-          onClose={handleSideDrawer} 
-          showSearchInput/>
-        <TableActionBtns 
-          showColumns 
-          handleShowColumns={handleClose} 
-          handleSideDrawer={handleSideDrawer}
-        />
+        <SearchOptions visible={drawerOpen} onClose={handleSideDrawer} showSearchInput />
+        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer} />
       </div>
       <StatusBar>
-        <StatusBtn title={`${t('ActiveListings')}`} changeTab={handleChangeTab} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
-        <StatusBtn title={`${t('PendingListings')}`} changeTab={handleChangeTab}  className={activeTab === 1 ? 'active-tab': ''} id="1"/>
-        <StatusBtn title={`${t('TerminatedListings')}`} changeTab={handleChangeTab}  className={activeTab === 2 ? 'active-tab': ''} id="2"/>
+        <StatusBtn
+          title={`${t('ActiveListings')}`}
+          changeTab={handleChangeTab}
+          className={activeTab === 0 ? 'active-tab' : ''}
+          id="0"
+        />
+        <StatusBtn
+          title={`${t('PendingListings')}`}
+          changeTab={handleChangeTab}
+          className={activeTab === 1 ? 'active-tab' : ''}
+          id="1"
+        />
+        <StatusBtn
+          title={`${t('TerminatedListings')}`}
+          changeTab={handleChangeTab}
+          className={activeTab === 2 ? 'active-tab' : ''}
+          id="2"
+        />
       </StatusBar>
 
       <DataTable
-        page='listing'
+        page="listing"
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}

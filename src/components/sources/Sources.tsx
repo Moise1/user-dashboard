@@ -12,13 +12,8 @@ import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
-type ContextType = {
-  // supplierValue: string;
-  setSupplierValue: (arg0: string) => void;
-};
-
 export const Sources = () => {
-  const [ supplierValue, setSupplierValue ] = useState('Supplier')
+  const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const history = useHistory();
   const { TabPane } = Tabs;

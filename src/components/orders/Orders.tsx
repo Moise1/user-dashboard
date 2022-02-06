@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { TableActionBtns } from '../small-components/TableActionBtns';
-import {orderData} from '../common/OrderData';
+import { orderData } from '../common/OrderData';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';
 import '../../sass/light-theme/orders.scss';
 import '../../sass/light-theme/medium-button.scss';
-import {DataTable} from '../tables/DataTable';
+import { DataTable } from '../tables/DataTable';
 import { t } from 'src/global/transShim';
 
-
 export const Orders = () => {
-  const [orderNumber,] = useState(0);
+  const [orderNumber] = useState(0);
   const columns = [
     {
       title: t('OrderTable.Item'),
@@ -48,7 +47,7 @@ export const Orders = () => {
     <Layout className="orders-container">
       <TableActionBtns />
       <OrderActionBtns orderNumber={orderNumber} />
-      <DataTable columns={columns} dataSource={orderData} page='order'/>
+      <DataTable columns={columns} dataSource={orderData} page="order" />
     </Layout>
   );
 };

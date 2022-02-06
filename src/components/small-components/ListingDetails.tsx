@@ -3,7 +3,6 @@ import { t } from 'src/global/transShim';
 import '../../sass/light-theme/listing-details.scss';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
 
-
 export const ListingDetails = () => {
   return (
     <div className="listing-details">

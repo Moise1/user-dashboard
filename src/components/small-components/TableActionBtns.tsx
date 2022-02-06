@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Input, Button } from 'antd';
-import {Search as SearchIcon} from 'react-feather';
+import { Search as SearchIcon } from 'react-feather';
 import advancedSearchIcon from '../../assets/listsearch.svg';
 import column_img from '../../assets/columnimg.svg';
 import RDS from 'react-dom/server';
@@ -23,14 +23,7 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
   const { Search } = Input;
   const searchComponent = t('search');
   const search = RDS.renderToString(searchComponent as ReactElement);
-  return (
-    <Search
-      placeholder={search}
-      onSearch={onSearch}
-      value={value}
-      suffix={<SearchIcon size="15"/>}
-    />
-  );
+  return <Search placeholder={search} onSearch={onSearch} value={value} suffix={<SearchIcon size="15" />} />;
 };
 
 export const TableActionBtns = ({ showColumns, handleShowColumns, handleSideDrawer }: TableActionBtnsProps) => {

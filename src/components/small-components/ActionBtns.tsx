@@ -16,7 +16,7 @@ export const SuccessBtn = ({ children, handleClose }: Props) => (
 );
 
 export const ConfirmBtn = ({ children, handleClose, className, disabled }: Props) => (
-  <Button className={`confirm-btn ${className}`} onClick={handleClose}  disabled={disabled}>
+  <Button className={`confirm-btn ${className}`} onClick={handleClose} disabled={disabled}>
     {children}
   </Button>
 );
@@ -27,23 +27,7 @@ export const CancelBtn = ({ children, handleClose }: Props) => (
   </Button>
 );
 
-export const ResetBtn = ({ children,  }: Props) => (
-  <Button className="reset-btn">
-    {children}
-  </Button>
-);
-export const DangerBtn = ({ children }: Props) => (
-  <Button className="danger-btn">
-    {children}
-  </Button>
-);
-export const DeleteBtn = ({ children }: Props) => (
-  <Button className="delete-btn">
-    {children}
-  </Button>
-);
-export const WarningBtn = ({ children }: Props) => (
-  <Button className="warning-btn">
-    {children}
-  </Button>
-);
+export const ResetBtn = ({ children }: Props) => <Button className="reset-btn">{children}</Button>;
+export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
+export const DeleteBtn = ({ children }: Props) => <Button className="delete-btn">{children}</Button>;
+export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { catalogData } from '../../dummy-data/dummyData';
 import { Search } from 'react-feather';
 import { Card } from 'antd';
@@ -20,24 +20,20 @@ export const Catalog = () => {
   const handleProdcutModal = () => setModalOpen(!modalOpen);
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
 
-  const handleSelectProduct = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>{
+  const handleSelectProduct = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     setProductId(JSON.parse(e.currentTarget.id));
   };
-  const selectedProduct = catalogData.filter(d => d.id === productId)[0];
+  const selectedProduct = catalogData.filter((d) => d.id === productId)[0];
   return (
     <div className="catalog-container">
-      <TableActionBtns 
-        showColumns={false}
-        handleSideDrawer={handleSideDrawer}
-
-      />
-      <SearchOptions 
-        visible={drawerOpen} 
+      <TableActionBtns showColumns={false} handleSideDrawer={handleSideDrawer} />
+      <SearchOptions
+        visible={drawerOpen}
         onClose={handleSideDrawer}
         showSearchInput={false}
         openSourceModal={handleSourceModal}
       />
-      
+
       <PopupModal
         open={modalOpen}
         handleClose={handleProdcutModal}
@@ -47,9 +43,9 @@ export const Catalog = () => {
             <h1 className="title">{selectedProduct?.title}</h1>
             <p className="source">{selectedProduct?.source}</p>
           </div>
-        }>
-
-        <ProductDetails 
+        }
+      >
+        <ProductDetails
           img={selectedProduct?.img}
           details={selectedProduct?.details}
           profit={selectedProduct?.profit}
@@ -59,8 +55,8 @@ export const Catalog = () => {
         />
       </PopupModal>
 
-      <PopupModal 
-        open={sourceModalOpen} 
+      <PopupModal
+        open={sourceModalOpen}
         handleClose={handleSourceModal}
         width={800}
         title={
@@ -68,8 +64,9 @@ export const Catalog = () => {
             <h1 className="title">Select Sources</h1>
             <p className="source">Include or exclude selected sources to refine the catalog</p>
           </div>
-        }>
-        <CatalogSource handleClose={handleSourceModal}/>
+        }
+      >
+        <CatalogSource handleClose={handleSourceModal} />
       </PopupModal>
 
       <div className="cards-container">
@@ -81,27 +78,39 @@ export const Catalog = () => {
                 <div className="product-description">
                   <div className="title-section">
                     <h6 className="product-title">{d.title}</h6>
-                    <Search className="view-details" onClick={handleProdcutModal}/>
+                    <Search className="view-details" onClick={handleProdcutModal} />
                   </div>
                   <p className="source">by {d.source}</p>
                   <div className="transaction-details">
                     <div className="transaction-type">
-                      <p><strong>Sell</strong></p>
-                      <p><strong>Cost</strong></p>
-                      <p><strong>Cost</strong></p>
+                      <p>
+                        <strong>Sell</strong>
+                      </p>
+                      <p>
+                        <strong>Cost</strong>
+                      </p>
+                      <p>
+                        <strong>Cost</strong>
+                      </p>
                     </div>
                     <div className="transaction-amount">
                       <p>
-                        <strong><span>&pound;</span> {d.sell}</strong>
+                        <strong>
+                          <span>&pound;</span> {d.sell}
+                        </strong>
                       </p>
                       <p>
-                        <strong><span>&pound;</span> {d.cost}</strong>
+                        <strong>
+                          <span>&pound;</span> {d.cost}
+                        </strong>
                       </p>
                       <p>
-                        <strong> <span>&pound;</span> {d.profit}</strong>
+                        <strong>
+                          {' '}
+                          <span>&pound;</span> {d.profit}
+                        </strong>
                       </p>
                     </div>
-
                   </div>
                 </div>
               }
