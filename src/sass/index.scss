@@ -27,14 +27,21 @@ body {
     }
 
     .listings-title {
-      // border: 2px solid blue;
       margin-top: -0.4rem;
     }
     .control-btns-container {
       width: 68vw !important;
     }
   }
+
+  @media only screen and (max-width: 1030px) {
+    .content-area {
+      margin: 0 auto !important;
+    }
+  }
 }
+
+// Tablets and iPads scree sizes
 
 //Scrollbar
 ::-webkit-scrollbar {

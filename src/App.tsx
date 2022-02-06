@@ -17,20 +17,21 @@ import {Sources} from './components/sources/Sources';
 import { GetStarted } from './components/help/GetStarted';
 import { Catalog } from './components/catalog/Catalog';
 import SourcesTable from './components/sources/SourcesTable';
-import { SelectSupplierProvider } from './contexts/SelectSupplierProvider';
 import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
+
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
+
   const { pathname } = history.location;
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
-    const sidebar = document.querySelector<HTMLElement>('.sider') as HTMLElement;
+    const sidebar = document.querySelector('.sider') as HTMLElement;
     sidebar.style.display = 'block';
     sidebar.style.position = 'fixed';
     sidebar.style.top = '0';
@@ -43,50 +44,53 @@ export const App = withRouter(({ history }) => {
     const sidebar = document.querySelector('.sider') as HTMLElement;
     sidebar.style.display = 'none';
   };
-
+  
   return (
     <div className="app-container">
-      {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar}/>}
-      <SelectSupplierProvider>
-        <Router>
-          {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
-          <Layout className="layout">
-            {pathname === '/new-channel' ? null : (
-              <Sidebar
-                className="sider"
-                setCollapsed={setCollapsed}
-                staticValue={staticValue}
-                togglestatic={toggleStaticValue}
-                toggle={toggleCollapse}
-                collapsed={collapsed}
-                handleSidebarMobile={handleSidebarMobile}
-                collapseSideBar={collapseSideBar}
-              />
-            )}
-            <Layout className={staticValue  ? 'content-area' : 'all-content'}>
-              <Switch>
-                <Route exact path="/">
-                  <Redirect to="/home" />
-                </Route>
-                <Route path="/home" component={Listings} />
-                <Route path="/listings" component={Listings} />
-                <Route path="/orders" component={Orders} />
-                <Route path="/sources-setting" component={Sources} />
-                <Route path="/sources" component={SourcesTable} />
-                <Route path="/channel" component={ChannelSettings} />
-                <Route path="/new-channel" component={NewChannel} />
-                <Route path="/services" component={Services} />
-                <Route path="/subscriptions" component={Subscriptions} />
-                <Route path="/pricing-rules" component={PricingRules} />
-                <Route path="/browser-extensions" component={BrowserExtensions} />
-                <Route path="/va-profiles" component={VaProfiles} />
-                <Route path="/get-started" component={GetStarted} />
-                <Route path="/catalog" component={Catalog}/>
-              </Switch>
-            </Layout>
+      {/* <SelectSupplierProvider>
+       
+      </SelectSupplierProvider> */}
+
+      <Router>
+        {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
+        <Layout className="layout">
+          {pathname === '/new-channel' ? null : (
+            <Sidebar
+              className="sider"
+              setCollapsed={setCollapsed}
+              staticValue={staticValue}
+              togglestatic={toggleStaticValue}
+              toggle={toggleCollapse}
+              collapsed={collapsed}
+              handleSidebarMobile={handleSidebarMobile}
+              collapseSideBar={collapseSideBar}
+            />
+          )}
+          <Layout className={staticValue  ? 'content-area' : 'all-content'}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" component={Listings} />
+              <Route path="/listings" component={Listings} />
+              <Route path="/orders" component={Orders} />
+              <Route path="/sources-setting" component={Sources} />
+              <Route path="/sources" component={SourcesTable} />
+              <Route path="/channel" component={ChannelSettings} />
+              <Route path="/new-channel" component={NewChannel} />
+              <Route path="/services" component={Services} />
+              <Route path="/subscriptions" component={Subscriptions} />
+              <Route path="/pricing-rules" component={PricingRules} />
+              <Route path="/browser-extensions" component={BrowserExtensions} />
+              <Route path="/va-profiles" component={VaProfiles} />
+              <Route path="/get-started" component={GetStarted} />
+              <Route path="/catalog" component={Catalog}/>
+            </Switch>
           </Layout>
-        </Router>
-      </SelectSupplierProvider>
+        </Layout>
+      </Router>
+      {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar}/>}
+
     </div>
   );
 });

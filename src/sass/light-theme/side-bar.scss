@@ -47,11 +47,12 @@
       border-radius: 10px;
     }
     &:hover {
-      .ant-menu-submenu-arrow, .ant-menu-submenu-title {
+      .ant-menu-submenu-arrow,
+      .ant-menu-submenu-title {
         color: $white;
       }
-    };
-  };
+    }
+  }
 
   .sidebar-icon {
     margin-left: -0.3rem;
@@ -136,12 +137,13 @@
     display: none;
     z-index: 3;
   }
+
   .overlay-sidebar-mobile {
     position: fixed;
     right: 0;
     top: 0;
     left: 29%;
-    background-color: rgba(0, 0, 0, 0.23);
+    background-color: rgba(0, 0, 0, 0.4);
     height: 100%;
     z-index: 2;
   }

@@ -38,8 +38,8 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
-  const history = useHistory();
   const [isDark, setIsDark] = useState(false);
+  const history = useHistory();
 
   const handleToggle = () => {
     if (isDark) {
