@@ -30,7 +30,7 @@
 
   .cards-container {
     margin-top: 1rem;
-    .product-card {
+    @mixin product-card() {
       border-radius: 10px;
       width: 15rem;
       background: $white;
@@ -76,6 +76,15 @@
           }
         }
       }
+    };
+
+    .product-card{
+      @include product-card();
+    };
+
+    .selected-product-card{
+      @include product-card();
+      border: 2px solid $primary;
     }
   }
 }

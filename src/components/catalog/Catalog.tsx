@@ -21,7 +21,13 @@ export const Catalog = () => {
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
 
   const handleSelectProduct = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
-    setProductId(JSON.parse(e.currentTarget.id));
+    const cardElement = e.currentTarget;
+    setProductId(JSON.parse(cardElement.id));
+    if(cardElement.classList.contains('selected-product-card')){
+      cardElement.classList.remove('selected-product-card');
+    }else{
+      cardElement.classList.add('selected-product-card');
+    }
   };
   const selectedProduct = catalogData.filter((d) => d.id === productId)[0];
   return (
