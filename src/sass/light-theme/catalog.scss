@@ -23,7 +23,7 @@
     width: auto;
     display: flex;
     justify-content: flex-start;
-    .advanced-search-btn{
+    .advanced-search-btn {
       margin-left: 6rem;
     }
   }
@@ -80,18 +80,13 @@
   }
 }
 
-
 // tablet's screen sizes
 
 @media only screen and (max-width: 1030px) {
-
-  .search-bars-container{
+  .search-bars-container {
     margin-top: 2rem;
-    .advanced-search-btn{
-      margin-left: 5rem;
-    }
   }
-  
+
   .cards-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -104,7 +99,7 @@
   }
 }
 
-// mobile screen size 
+// mobile screen size
 @media only screen and (max-width: 750px) {
   .cards-container {
     display: block;
@@ -113,5 +108,4 @@
       margin-bottom: 1rem !important;
     }
   }
- 
 }
