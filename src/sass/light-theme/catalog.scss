@@ -11,9 +11,37 @@
   }
 }
 .catalog-container {
-  margin-top: 1rem;
-  display: block;
+  margin-top: 3rem;
+  height: 100vh;
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 4rem;
 
+    .catalog {
+      margin: 1.5rem 0;
+    }
+  }
+
+  .actions-section {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1rem;
+    margin: 0 4rem;
+    .all-selected-products,
+    .clear-all {
+      font-size: $font-medium;
+      cursor: pointer;
+    }
+
+    .all-selected-products {
+      color: $primary;
+    }
+
+    .clear-all {
+      color: $red;
+    }
+  }
   .action-components {
     position: absolute;
     width: auto;
@@ -34,52 +62,76 @@
     margin-top: 2rem;
     @mixin product-card() {
       border-radius: 10px;
-      width: 15rem;
       background: $white;
-      height: auto;
+      width: 19vw;
+      height: 46vh;
       cursor: pointer;
       box-shadow: 0px 3px 6px #00000029;
-      .product-img {
-        height: 13rem;
-        width: stretch;
+      transition: transform .4s;
+      &:hover {
+        -ms-transform: scale(1.05); /* IE 9 */
+        -webkit-transform: scale(1.05); /* Safari 3-8 */
+        transform: scale(1.05);
+      };
+
+      .img-container {
+        margin: 1rem 0;
+        height: 25vh;
+        width: 100%;
+        .product-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
+
       .product-description {
-        margin-top: 1rem;
-        .title-section {
-          display: flex;
-          justify-content: space-between;
-          .view-details {
-            cursor: pointer;
-          }
-        }
-
-        .source {
-          color: $black;
-          font-size: 11px;
-        }
-
-        .transaction-details {
-          display: flex;
-          justify-content: space-evenly;
-          .transaction-type {
-            color: $gray;
-          }
-          .transaction-amount {
-            font-weight: bold;
-          };
-          .sell {
-            color: $primary;
+        margin: auto 0 !important;
+        .product-info-area {
+          width: auto;
+          height: 100%;
+          .header {
+            line-height: 8px;
+            display: block;
+            justify-content: space-between;
+            .view-details {
+              float: right;
+              margin-top: -2.8rem;
+              cursor: pointer;
+            }
           }
 
-          .cost {
-            color: $light-primary;
+          .source {
+            color: $black;
+            font-size: 11px;
           }
 
-          .profit {
-            color: $green;
+          .transaction-details {
+            display: flex;
+            justify-content: space-evenly;
+            line-height: 8px;
+            .transaction-type {
+              color: $gray;
+            }
+            .transaction-amount {
+              font-weight: bold;
+            }
+            .sell {
+              color: $primary;
+            }
+
+            .cost {
+              color: $light-primary;
+            }
+
+            .profit {
+              color: $green;
+            }
           }
         }
       }
+
+     
     }
 
     .product-card {
@@ -96,6 +148,15 @@
         left: -0.8rem;
       }
     }
+  }
+
+  .pagination {
+    margin: 2rem 3rem;
+    display: flex;
+    background: $white;
+    border-radius: 10px;
+    padding: 1rem;
+    justify-content: space-between;
   }
 }
 
@@ -116,18 +177,25 @@
     column-gap: 2rem;
     margin: 1rem auto;
     .product-card {
-      margin: auto;
+      margin: 1rem auto;
+      width: 30vw !important;
     }
   }
 }
 
-// mobile screen size
+// small mobile  screen size
 @media only screen and (max-width: 750px) {
   .cards-container {
     display: block;
     margin: 0 auto;
     .product-card {
-      margin-bottom: 1rem !important;
+      width: 40vw !important;
     }
   }
-}
+  .actions-section {
+    display: grid !important;
+    row-gap: 1rem;
+    place-items: center !important;
+    justify-content: center !important;
+  }
+} ;

@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Tabs } from 'antd';
-import { LeftBackArrowIcon } from '../common/Icons';
+import { useHistory, Link } from 'react-router-dom';
+import { Layout, Tabs } from 'antd';
+import { ChevronLeft } from 'react-feather';
 import AutoOrdering from './AutoOrdering';
 import { SourceSettings } from './SourceSettings';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/sources-table.scss';
-import { Layout } from 'antd';
 import '../../sass/light-theme/sources-setting.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
@@ -15,6 +14,7 @@ import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 export const Sources = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
+  const [to, setTo] = useState<string>('');
   const history = useHistory();
   const { TabPane } = Tabs;
 
@@ -22,6 +22,7 @@ export const Sources = () => {
     setSelectedAccount('Select Supplier');
     setSupplierValue('');
     history.goBack();
+    setTo('/sources');
   };
 
   const handleOptionChange = (value: string) => setSupplierValue(value);
@@ -29,12 +30,12 @@ export const Sources = () => {
   return (
     <Layout className="source-container">
       <div className="source-description">
-        <h2 className="back-to-supplier" onClick={() => initialStateSourceSettings()}>
+        <Link to={to} className="back-link" onClick={() => initialStateSourceSettings()}>
           <span className="back-arrow">
-            <LeftBackArrowIcon />
+            <ChevronLeft />
           </span>
           Back to suppliers overview
-        </h2>
+        </Link>
 
         <p className="beta-area">
           <span className="beta">Beta:</span> This service is free while in beta

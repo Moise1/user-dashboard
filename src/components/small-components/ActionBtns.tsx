@@ -7,6 +7,7 @@ interface Props {
   handleClose?: () => void;
   className?: string;
   disabled?: boolean;
+  handleClick?: () => void;
 }
 
 export const SuccessBtn = ({ children, handleClose }: Props) => (
@@ -15,8 +16,8 @@ export const SuccessBtn = ({ children, handleClose }: Props) => (
   </Button>
 );
 
-export const ConfirmBtn = ({ children, handleClose, className, disabled }: Props) => (
-  <Button className={`confirm-btn ${className}`} onClick={handleClose} disabled={disabled}>
+export const ConfirmBtn = ({ children, handleClick, className, disabled }: Props) => (
+  <Button className={`confirm-btn ${className}`} onClick={handleClick} disabled={disabled}>
     {children}
   </Button>
 );

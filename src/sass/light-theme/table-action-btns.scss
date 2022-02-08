@@ -15,10 +15,10 @@
       border: none !important;
       outline: none !important;
     }
-  };
+  }
   .ant-input-group-addon {
     display: none;
-  };
+  }
 }
 @mixin action-btn {
   width: 13rem;
@@ -41,20 +41,31 @@
 }
 .view-columns-btn {
   @include action-btn();
-};
+}
 
-.view-all-selected-products{
+.filters-btn {
   @include action-btn();
-  background: transparent;
+  background: $light-primary;
+  &:hover {
+    background: $light-primary;
+  }
+}
+.view-all-selected-products {
+  background: none;
   color: $primary;
-  &:hover, &:focus{
-    background: transparent;
+  border: none;
+  margin: 1.5rem 2rem;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background: none;
     color: $primary;
   }
-};
+}
 
-.add-all-products, .clear-all-products{
-  margin:0 9rem 0  auto;
+.add-all-products,
+.clear-all-products {
+  margin: 0 9rem 0 auto;
 }
 
 // Phone screen size.
@@ -67,9 +78,9 @@
     width: 100%;
     display: grid !important;
     place-items: center;
-    
+
     & > * {
-      margin: .8rem 5rem;
+      margin: 0.8rem 5rem;
     }
   }
 }

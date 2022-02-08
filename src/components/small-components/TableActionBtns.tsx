@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Input, Button } from 'antd';
 import { Search as SearchIcon } from 'react-feather';
 import advancedSearchIcon from '../../assets/listsearch.svg';
@@ -18,11 +18,17 @@ interface TableActionBtnsProps {
   handleAddAllProducts?: () => void;
   clearAllSelectedProducts?: boolean;
   handleClearAllSelectedProducts?: () => void;
+  children?: ReactNode;
 }
 
 export interface InputProps {
   value?: string;
   onSearch?: (value: string) => void;
+}
+
+interface FiltersProps {
+  handleSideDrawer?: () => void;
+  children: ReactNode;
 }
 
 export const SearchInput = ({ value, onSearch }: InputProps) => {
@@ -42,13 +48,14 @@ export const TableActionBtns = (props: TableActionBtnsProps) => {
     addAllProducts,
     handleAddAllProducts,
     clearAllSelectedProducts,
-    handleClearAllSelectedProducts
+    handleClearAllSelectedProducts,
+    children
   } = props;
   return (
     <div className="search-bars-container">
       <Button className="advanced-search-btn" onClick={handleSideDrawer}>
         <img src={advancedSearchIcon} height="20" alt="" />
-        {t('AdvancedSearch')}
+        {children}
       </Button>
       {showColumns && (
         <Button className="view-columns-btn" onClick={handleShowColumns}>
@@ -57,9 +64,9 @@ export const TableActionBtns = (props: TableActionBtnsProps) => {
       )}
 
       {showSeletectedProducts && (
-        <Button className="view-all-selected-products" onClick={showAllSelectedProducts}>
+        <p className="view-all-selected-products" onClick={showAllSelectedProducts}>
           View All Selected Products
-        </Button>
+        </p>
       )}
 
       {addAllProducts && (
@@ -76,3 +83,10 @@ export const TableActionBtns = (props: TableActionBtnsProps) => {
     </div>
   );
 };
+
+export const FiltersBtn = ({ children, handleSideDrawer }: FiltersProps) => (
+  <Button className="filters-btn" onClick={handleSideDrawer}>
+    <img src={advancedSearchIcon} height="20" alt="" />
+    {children}
+  </Button>
+);

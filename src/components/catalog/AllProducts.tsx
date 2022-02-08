@@ -2,7 +2,6 @@ import {useState} from 'react';
 import { X as CloseIcon } from 'react-feather';
 import { ICatalogData } from '../../dummy-data/dummyData';
 import '../../sass/light-theme/all-products.scss';
-import {ConfirmBtn} from '../small-components/ActionBtns'; 
 
 interface Props {
   children: ICatalogData[];
@@ -49,9 +48,7 @@ export const AllProducts = ({ children }: Props) => {
           <CloseIcon className="close-icon" onClick={() => removeProduct(c.id)}/>
         </div>
       )): <p>No selected products yet.</p> }
-      <div className="action-btn">
-        {modalData.length && <ConfirmBtn>List {modalData.length} products</ConfirmBtn>}
-      </div>
+      
     </div>
   );
 };
