@@ -119,7 +119,7 @@ a {
 
 .chevron-right,
 .chevron-left {
-  @include chevrons();
+  @include chevrons;
 }
 
 @mixin btn-styles($color: null) {

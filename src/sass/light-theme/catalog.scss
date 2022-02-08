@@ -52,7 +52,6 @@
     width: auto;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     .advanced-search-btn {
       margin-left: 6rem;
     }
@@ -60,7 +59,7 @@
 
   .cards-container {
     margin-top: 2rem;
-    @mixin product-card() {
+    @mixin product-card {
       border-radius: 10px;
       background: $white;
       width: 19vw;
@@ -135,11 +134,11 @@
     }
 
     .product-card {
-      @include product-card();
+      @include product-card;
     }
 
     .selected-product-card {
-      @include product-card();
+      @include product-card;
       border: 2px solid $light-primary;
       &:before {
         content: url('../../assets/catalog-imgs/circle-check.svg');
@@ -165,9 +164,6 @@
 @media only screen and (max-width: 1030px) {
   .search-bars-container {
     margin-top: 2rem;
-    .advanced-search-btn {
-      margin-left: 5rem;
-    }
   }
 
   .cards-container {

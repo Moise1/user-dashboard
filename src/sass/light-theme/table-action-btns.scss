@@ -21,30 +21,28 @@
   }
 }
 @mixin action-btn {
-  width: 13rem;
-  height: 3rem;
-  margin-top: 0.8rem;
+  width: fit-content;
   border-radius: 10px;
-  background-color: $primary;
-  margin-left: 3rem;
+  background-color: $light-blue;
+  margin-left: 1rem;
   color: $white;
 
   &:hover,
   &:focus {
-    background-color: $primary;
+    background-color: $light-blue;
     color: $white;
   }
 }
 
 .advanced-search-btn {
-  @include action-btn();
+  @include action-btn;
 }
 .view-columns-btn {
-  @include action-btn();
+  @include action-btn;
 }
 
 .filters-btn {
-  @include action-btn();
+  @include action-btn;
   background: $light-primary;
   &:hover {
     background: $light-primary;
