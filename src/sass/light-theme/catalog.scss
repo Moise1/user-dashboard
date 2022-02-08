@@ -13,6 +13,7 @@
 .catalog-container {
   margin-top: 1rem;
   display: block;
+
   .action-components {
     position: absolute;
     width: auto;
@@ -23,13 +24,14 @@
     width: auto;
     display: flex;
     justify-content: flex-start;
-    .advanced-search-btn{
+    align-items: center;
+    .advanced-search-btn {
       margin-left: 6rem;
     }
   }
 
   .cards-container {
-    margin-top: 1rem;
+    margin-top: 2rem;
     @mixin product-card() {
       border-radius: 10px;
       width: 15rem;
@@ -55,52 +57,58 @@
           color: $black;
           font-size: 11px;
         }
-        .transaction-type,
-        .transaction-amount {
+
+        .transaction-details {
           display: flex;
           justify-content: space-evenly;
-        }
-
-        .transaction-amount p {
-          font-weight: bold;
-          &:nth-child(1) {
+          .transaction-type {
+            color: $gray;
+          }
+          .transaction-amount {
+            font-weight: bold;
+          };
+          .sell {
             color: $primary;
           }
 
-          &:nth-child(2) {
+          .cost {
             color: $light-primary;
           }
 
-          &:nth-child(3) {
+          .profit {
             color: $green;
           }
         }
       }
-    };
+    }
 
-    .product-card{
+    .product-card {
       @include product-card();
-    };
+    }
 
-    .selected-product-card{
+    .selected-product-card {
       @include product-card();
-      border: 2px solid $primary;
+      border: 2px solid $light-primary;
+      &:before {
+        content: url('../../assets/catalog-imgs/circle-check.svg');
+        position: absolute;
+        top: -0.9rem;
+        left: -0.8rem;
+      }
     }
   }
 }
 
-
 // tablet's screen sizes
 
 @media only screen and (max-width: 1030px) {
-
-  .search-bars-container{
+  .search-bars-container {
     margin-top: 2rem;
-    .advanced-search-btn{
+    .advanced-search-btn {
       margin-left: 5rem;
     }
   }
-  
+
   .cards-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -113,7 +121,7 @@
   }
 }
 
-// mobile screen size 
+// mobile screen size
 @media only screen and (max-width: 750px) {
   .cards-container {
     display: block;
@@ -122,5 +130,4 @@
       margin-bottom: 1rem !important;
     }
   }
- 
 }

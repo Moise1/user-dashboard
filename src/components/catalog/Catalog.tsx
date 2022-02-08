@@ -1,38 +1,67 @@
 import { useState } from 'react';
-import { catalogData } from '../../dummy-data/dummyData';
-import { Search } from 'react-feather';
 import { Card } from 'antd';
-import '../../sass/light-theme/catalog.scss';
+import { Search } from 'react-feather';
+import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { PopupModal } from '../modals/PopupModal';
 import { ProductDetails } from './ProductDetails';
+import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
+import '../../sass/light-theme/catalog.scss';
 
-const { Meta } = Card;
 export const Catalog = () => {
+  
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
   const [productId, setProductId] = useState<number>();
-
+  const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
+  const [allProducts, setAllProducts] = useState<ICatalogData[]>([]);
+  const [className, setClassName] = useState<string>('product-card');
+  const { Meta } = Card;
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-  const handleProdcutModal = () => setModalOpen(!modalOpen);
+  const handleProductModal = () => setModalOpen(!modalOpen);
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
+  const handleAllProudctsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
 
   const handleSelectProduct = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     const cardElement = e.currentTarget;
+    const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
     setProductId(JSON.parse(cardElement.id));
-    if(cardElement.classList.contains('selected-product-card')){
+    if (cardElement.classList.contains('selected-product-card')) {
       cardElement.classList.remove('selected-product-card');
-    }else{
+      setAllProducts(catalogData.filter((d) => d.id !== JSON.parse(cardElement.id)));
+    } else {
       cardElement.classList.add('selected-product-card');
+      setAllProducts((prevState) => [...prevState, selectedProductData]);
     }
   };
+
   const selectedProduct = catalogData.filter((d) => d.id === productId)[0];
+
+  const handleAddAllProducts = (): void =>{
+    setClassName(className + ' ' +'selected-product-card');
+    setAllProducts(catalogData);
+  };
+
+  const handleClearAllSelectedProducts = (): void => {
+    setClassName('product-card');
+    setAllProducts([]);
+  };
+
   return (
     <div className="catalog-container">
-      <TableActionBtns showColumns={false} handleSideDrawer={handleSideDrawer} />
+      <TableActionBtns
+        showColumns={false}
+        handleSideDrawer={handleSideDrawer}
+        showSeletectedProducts={allProducts.length !== 0 && true}
+        showAllSelectedProducts={handleAllProudctsModal}
+        addAllProducts={true}
+        handleAddAllProducts={handleAddAllProducts}
+        clearAllSelectedProducts={allProducts.length !== 0 && true}
+        handleClearAllSelectedProducts={handleClearAllSelectedProducts}
+      />
       <SearchOptions
         visible={drawerOpen}
         onClose={handleSideDrawer}
@@ -42,7 +71,7 @@ export const Catalog = () => {
 
       <PopupModal
         open={modalOpen}
-        handleClose={handleProdcutModal}
+        handleClose={handleProductModal}
         width={900}
         title={
           <div className="modal-title">
@@ -57,7 +86,7 @@ export const Catalog = () => {
           profit={selectedProduct?.profit}
           cost={selectedProduct?.cost}
           sell={selectedProduct?.sell}
-          handleClose={handleProdcutModal}
+          handleClose={handleProductModal}
         />
       </PopupModal>
 
@@ -75,46 +104,48 @@ export const Catalog = () => {
         <CatalogSource handleClose={handleSourceModal} />
       </PopupModal>
 
+      <PopupModal
+        open={allProductsModalOpen}
+        handleClose={handleAllProudctsModal}
+        width={600}
+        style={{ overflowY: 'scroll' }}
+        bodyStyle={{ height: 500 }}
+        closable={false}
+      >
+        <AllProducts>{allProducts}</AllProducts>
+      </PopupModal>
       <div className="cards-container">
         {catalogData.map((d) => (
-          <Card key={d.id} className="product-card" onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
+          <Card key={d.id} className={className} onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
             <img src={d.img} className="product-img" />
             <Meta
               description={
                 <div className="product-description">
                   <div className="title-section">
                     <h6 className="product-title">{d.title}</h6>
-                    <Search className="view-details" onClick={handleProdcutModal} />
+                    <Search className="view-details" onClick={handleProductModal} />
                   </div>
                   <p className="source">by {d.source}</p>
                   <div className="transaction-details">
-                    <div className="transaction-type">
-                      <p>
-                        <strong>Sell</strong>
-                      </p>
-                      <p>
-                        <strong>Cost</strong>
-                      </p>
-                      <p>
-                        <strong>Cost</strong>
+                    <div>
+                      <p className="transaction-type">Sell</p>
+                      <p className="transaction-amount sell">
+                        <span>&pound;</span>
+                        {d.sell}
                       </p>
                     </div>
-                    <div className="transaction-amount">
-                      <p>
-                        <strong>
-                          <span>&pound;</span> {d.sell}
-                        </strong>
+                    <div>
+                      <p className="transaction-type">Cost</p>
+                      <p className="transaction-amount cost">
+                        <span>&pound;</span>
+                        {d.cost}
                       </p>
-                      <p>
-                        <strong>
-                          <span>&pound;</span> {d.cost}
-                        </strong>
-                      </p>
-                      <p>
-                        <strong>
-                          {' '}
-                          <span>&pound;</span> {d.profit}
-                        </strong>
+                    </div>
+                    <div>
+                      <p className="transaction-type">Profit</p>
+                      <p className="transaction-amount profit">
+                        <span>&pound;</span>
+                        {d.profit}
                       </p>
                     </div>
                   </div>

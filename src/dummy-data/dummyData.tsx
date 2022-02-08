@@ -99,6 +99,16 @@ export const dummyPricingRulesData = [
   }
 ];
 
+export interface ICatalogData {
+  id: number;
+  img: string;
+  title: string;
+  sell: number;
+  cost: number;
+  profit: number;
+  source: string;
+  details: JSX.Element
+}
 export const catalogData = [
   {
     id: 1,

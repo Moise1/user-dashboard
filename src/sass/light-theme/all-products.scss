@@ -1,0 +1,67 @@
+@import 'general.config';
+.selected-products-modal {
+  margin-top: 2rem;
+  .product-card {
+    display: flex;
+    width: auto;
+    background: $white;
+    justify-self: space-around;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 0.5rem 1rem;
+    height: 20vh;
+    margin-bottom: 1rem;
+
+    .product-img {
+      width: 60px;
+      height: 60px;
+    }
+    .product-info-area {
+      width: 100%;
+      margin: auto 1rem;
+      height: 100%;
+      overflow: hidden;
+      .header{
+        line-height: 10px;
+      }
+      .source {
+        color: $gray;
+      }
+      .transaction-details {
+        display: flex;
+        justify-content: space-evenly;
+        .transaction-type {
+          color: $gray;
+        }
+        .transaction-amount {
+          font-weight: bold;
+        };
+        .sell {
+          color: $primary;
+        }
+
+        .cost {
+          color: $light-primary;
+        }
+
+        .profit {
+          color: $green;
+        }
+      }
+    }
+
+    .close-icon {
+      margin-left: auto;
+      color: $primary;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  };
+
+  .action-btn{
+    margin: auto;
+    .confirm-btn{
+      background: $primary;
+    }
+  }
+}

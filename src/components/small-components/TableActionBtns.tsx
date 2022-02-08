@@ -12,6 +12,12 @@ interface TableActionBtnsProps {
   onClick?: () => void;
   handleSideDrawer?: () => void;
   handleShowColumns?: () => void;
+  showSeletectedProducts?: boolean;
+  showAllSelectedProducts?: () => void;
+  addAllProducts?: boolean;
+  handleAddAllProducts?: () => void;
+  clearAllSelectedProducts?: boolean;
+  handleClearAllSelectedProducts?: () => void;
 }
 
 export interface InputProps {
@@ -26,7 +32,18 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
   return <Search placeholder={search} onSearch={onSearch} value={value} suffix={<SearchIcon size="15" />} />;
 };
 
-export const TableActionBtns = ({ showColumns, handleShowColumns, handleSideDrawer }: TableActionBtnsProps) => {
+export const TableActionBtns = (props: TableActionBtnsProps) => {
+  const {
+    showColumns,
+    handleShowColumns,
+    handleSideDrawer,
+    showSeletectedProducts,
+    showAllSelectedProducts,
+    addAllProducts,
+    handleAddAllProducts,
+    clearAllSelectedProducts,
+    handleClearAllSelectedProducts
+  } = props;
   return (
     <div className="search-bars-container">
       <Button className="advanced-search-btn" onClick={handleSideDrawer}>
@@ -36,6 +53,24 @@ export const TableActionBtns = ({ showColumns, handleShowColumns, handleSideDraw
       {showColumns && (
         <Button className="view-columns-btn" onClick={handleShowColumns}>
           <img src={column_img} height="20" alt="" /> {t('showColumns')}
+        </Button>
+      )}
+
+      {showSeletectedProducts && (
+        <Button className="view-all-selected-products" onClick={showAllSelectedProducts}>
+          View All Selected Products
+        </Button>
+      )}
+
+      {addAllProducts && (
+        <Button className="add-all-products" onClick={handleAddAllProducts}>
+          Add All
+        </Button>
+      )}
+
+      {clearAllSelectedProducts && (
+        <Button className="clear-all-products" onClick={handleClearAllSelectedProducts}>
+          Clear All
         </Button>
       )}
     </div>

@@ -21,7 +21,7 @@
   };
 }
 @mixin action-btn {
-  width: 12rem;
+  width: 13rem;
   height: 3rem;
   margin-top: 0.8rem;
   border-radius: 10px;
@@ -41,15 +41,35 @@
 }
 .view-columns-btn {
   @include action-btn();
+};
+
+.view-all-selected-products{
+  @include action-btn();
+  background: transparent;
+  color: $primary;
+  &:hover, &:focus{
+    background: transparent;
+    color: $primary;
+  }
+};
+
+.add-all-products, .clear-all-products{
+  margin:0 9rem 0  auto;
 }
 
 // Phone screen size.
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1030px) {
   .ant-input-wrapper {
     width: 90vw !important;
   }
   .search-bars-container {
     margin: 0 auto;
     width: 100%;
+    display: grid !important;
+    place-items: center;
+    
+    & > * {
+      margin: .8rem 5rem;
+    }
   }
 }
