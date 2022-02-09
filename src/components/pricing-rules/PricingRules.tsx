@@ -4,6 +4,7 @@ import '../../sass/light-theme/pricing-rules.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyPricingRulesOptions, dummyPricingRulesData } from '../../dummy-data/dummyData';
 import { DataTable } from '../tables/DataTable';
+import { Layout } from 'antd';
 
 export const PricingRules = () => {
   const columns = [
@@ -41,30 +42,33 @@ export const PricingRules = () => {
   ];
 
   return (
-    <div className="pricing-rules">
-      <StatusBar className="pricing-rules-bar">
-        <h4 className="add-rule">Add new rule</h4>
-        <p className="status-description">
-          The initial status of the rule will be “Disabled”, so that you can double check your set of rules before
-          enabling it.
-        </p>
-        <Form className="form" layout="vertical">
-          <Form.Item label="Source">
-            <Selector defaultValue="Select a source">{dummyPricingRulesOptions}</Selector>
-          </Form.Item>
-          <Form.Item label="Price From">
-            <Input className="blue-input" type="text" placeholder="Set a price from" />
-          </Form.Item>
-          <Form.Item label="Price To">
-            <Input className="blue-input" type="text" placeholder="Set a price to" />
-          </Form.Item>
-          <Form.Item label="Markup">
-            <Input className="blue-input" type="text" placeholder="Mark up" />
-          </Form.Item>
-          <Button className="rule-btn">Add rule</Button>
-        </Form>
-      </StatusBar>
-      <DataTable dataSource={dummyPricingRulesData} columns={columns} />
-    </div>
+    <Layout className="pricing-rules-container">
+      <h1 className="page-title">Pricing Rules</h1>
+      <div className="pricing-rules">
+        <StatusBar className="pricing-rules-bar">
+          <h4 className="add-rule">Add new rule</h4>
+          <p className="status-description">
+            The initial status of the rule will be “Disabled”, so that you can double check your set of rules before
+            enabling it.
+          </p>
+          <Form className="form" layout="vertical">
+            <Form.Item label="Source">
+              <Selector defaultValue="Select a source">{dummyPricingRulesOptions}</Selector>
+            </Form.Item>
+            <Form.Item label="Price From">
+              <Input className="blue-input" type="text" placeholder="Set a price from" />
+            </Form.Item>
+            <Form.Item label="Price To">
+              <Input className="blue-input" type="text" placeholder="Set a price to" />
+            </Form.Item>
+            <Form.Item label="Markup">
+              <Input className="blue-input" type="text" placeholder="Mark up" />
+            </Form.Item>
+            <Button className="rule-btn">Add rule</Button>
+          </Form>
+        </StatusBar>
+        <DataTable dataSource={dummyPricingRulesData} columns={columns} />
+      </div>
+    </Layout>
   );
 };

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Layout, Card, Pagination } from 'antd';
-import { Search, ChevronLeft } from 'react-feather';
+import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../small-components/ActionBtns';
 import {
@@ -60,15 +59,7 @@ export const Catalog = () => {
 
   return (
     <Layout className="catalog-container">
-      <Link to="/dashboard" className="back-link">
-        <span>
-          <ChevronLeft />
-        </span>
-        Back to dashboard
-      </Link>
-      <div className="header-section">
-        <h5 className="catalog-title">Catalog</h5>
-      </div>
+      <h1 className="page-title">Catalog</h1>
 
       <div className="actions-section">
         <div className="view-clear-all">

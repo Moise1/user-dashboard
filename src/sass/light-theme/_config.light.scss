@@ -32,7 +32,7 @@ $input-background-secondary: #f2f8ff;
 
 //Default fonts
 
-$font-xl: 2rem;
+$font-xl: 1.6rem;
 $font-large: 1.2rem;
 $font-medium: 1rem;
 $font-small: 0.75rem;
@@ -79,9 +79,18 @@ a {
   border-color: $light-primary !important;
 }
 
-.back-link{
+.page-title {
+  margin: 0;
+  font-weight: bold;
   color: $primary;
-  &:hover{
+  text-align: left;
+  font-size: $font-xl;
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  color: $primary;
+  &:hover {
     color: $primary;
   }
 }
