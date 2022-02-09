@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Divider, Card, Pagination } from 'antd';
+import { Layout, Card, Pagination } from 'antd';
 import { Search, ChevronLeft } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../small-components/ActionBtns';
@@ -39,7 +39,7 @@ export const Catalog = () => {
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
       cardElement.classList.remove('selected-product-card');
-      setAllProducts(prevState => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
+      setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
       cardElement.classList.add('selected-product-card');
       setAllProducts((prevState) => [...prevState, selectedProductData]);
@@ -59,7 +59,7 @@ export const Catalog = () => {
   };
 
   return (
-    <div className="catalog-container">
+    <Layout className="catalog-container">
       <Link to="/dashboard" className="back-link">
         <span>
           <ChevronLeft />
@@ -67,18 +67,22 @@ export const Catalog = () => {
         Back to dashboard
       </Link>
       <div className="header-section">
-        <h5 className="catalog">Catalog</h5>
-        <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
+        <h5 className="catalog-title">Catalog</h5>
       </div>
-      <Divider className='divider'/>
+
       <div className="actions-section">
-        {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
-        <p className="all-selected-products" onClick={handleAllProudctsModal}>
-          View all selected products
-        </p>
-        <p className="clear-all" onClick={handleClearAllSelectedProducts}>
-          Clear all
-        </p>
+        <div className="view-clear-all">
+          {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
+          <p className="all-selected-products" onClick={handleAllProudctsModal}>
+            View all selected products
+          </p>
+          <p className="clear-all" onClick={handleClearAllSelectedProducts}>
+            Clear all
+          </p>
+        </div>
+        <div className="filters-container">
+          <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
+        </div>
       </div>
 
       <SearchOptions
@@ -134,8 +138,8 @@ export const Catalog = () => {
         <AllProducts>{allProducts}</AllProducts>
       </PopupModal>
 
-      <div className="catalog-and-pagination-container">
-        <div className="cards-container">
+      <div className="catalog-cards">
+        <div className="cards-container-catalog">
           {catalogData.map((d) => (
             <Card key={d.id} className={className} onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
               <Meta
@@ -181,11 +185,11 @@ export const Catalog = () => {
             </Card>
           ))}
         </div>
-        <div className="pagination-container">
-          <Pagination defaultCurrent={1} total={600} responsive />
-          <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
-        </div>
       </div>
-    </div>
+      <div className="pagination-container">
+        <Pagination defaultCurrent={1} total={600} responsive />
+        <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+      </div>
+    </Layout>
   );
 };
