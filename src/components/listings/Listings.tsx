@@ -189,6 +189,7 @@ export const Listings = () => {
           {t('AdvancedSearch')}
         </TableActionBtns>
       </div>
+
       <StatusBar>
         <StatusBtn
           title={`${t('ActiveListings')}`}
