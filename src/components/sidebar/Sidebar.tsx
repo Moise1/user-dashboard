@@ -24,7 +24,6 @@ const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 
-
 interface Props {
   className: string;
   collapsed: boolean;
@@ -38,8 +37,8 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
-  const history = useHistory();
   const [isDark, setIsDark] = useState(false);
+  const history = useHistory();
 
   const handleToggle = () => {
     if (isDark) {
@@ -73,15 +72,15 @@ export const Sidebar = (props: Props) => {
   const routeChange = (route: string) => {
     history.push(route);
     const tabletScreen = window.matchMedia('(max-width: 1030px)');
-    if(tabletScreen.matches){
+    if (tabletScreen.matches) {
       collapseSideBar();
     }
   };
 
   const settingsListArray = [
-    {id: 6, listName: t('Menu.Channel'),onClick: () => routeChange('/channel')},
+    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
     { id: 7, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
-    { id: 8 , listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
     { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
     { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
     { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
@@ -146,9 +145,11 @@ export const Sidebar = (props: Props) => {
                   {staticValue ? (
                     <ChevronLeft
                       className="chevron-left"
-                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic} 
+                      onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
                     />
-                  ) : <img src={pin} className="pin-icon" onClick={togglestatic}/>}
+                  ) : (
+                    <img src={pin} className="pin-icon" onClick={togglestatic} />
+                  )}
                 </div>
               </div>
             )}
@@ -207,7 +208,7 @@ export const Sidebar = (props: Props) => {
               title={t('Menu.Settings')}
             >
               {settingsListArray.map((obj) => (
-                <Menu.Item  key={obj.id} onClick={obj.onClick}>
+                <Menu.Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Menu.Item>
               ))}

@@ -3,7 +3,7 @@ import { Button, Row, Col } from 'antd';
 import { ArrowLeft, ArrowRight } from 'react-feather';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
-import  {ChooseList, chooseListValues } from './ChooseList';
+import { ChooseList, chooseListValues } from './ChooseList';
 import { PlatForm } from './PlatForm';
 import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';
@@ -92,13 +92,7 @@ export const NewChannel = ({ _ignored }: Props) => {
         />
       );
     case 3:
-      return(
-        <Account
-          platform={data.platform}
-          handleChangeApi={handleChangeApi} 
-          step={step} 
-        />
-      );
+      return <Account platform={data.platform} handleChangeApi={handleChangeApi} step={step} />;
     case 4:
       return (
         <AccountConnect

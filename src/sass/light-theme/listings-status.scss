@@ -2,7 +2,7 @@
 
 // Extra Large screens
 
-@mixin status-btn() {
+@mixin status-btn {
   border-radius: 10px !important;
   padding: 0.6rem 1.2rem;
   width: auto;
@@ -17,7 +17,7 @@
 }
 
 .active-tab {
-  @include status-btn();
+  @include status-btn;
   color: $white !important;
   background: $light-primary !important;
   &:focus {
@@ -27,7 +27,7 @@
 }
 
 .status-btn {
-  @include status-btn();
+  @include status-btn;
   background: none;
   color: $primary;
   &:hover {

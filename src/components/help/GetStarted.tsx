@@ -17,7 +17,7 @@ export const GetStarted = () => {
         Back to dashboard
       </Link>
       <div className="get-started-container">
-        <Row  className="intro-area">
+        <Row className="intro-area">
           <Col className="intro-vid-container" xs={24} md={24} lg={8}>
             <h5 className="how-to-list">
               <strong>How to list your item?</strong>
@@ -84,7 +84,7 @@ export const GetStarted = () => {
             </p>
           </Col>
 
-          <Col className="social-media" xs={24}  lg={13}>
+          <Col className="social-media" xs={24} lg={13}>
             <ul className="social-media-list">
               <li className="list-item">
                 <img src={facebook} alt="Facebook" className="social-media-icon" />
@@ -178,7 +178,6 @@ export const GetStarted = () => {
                 Includes screenshots and activity levels.
               </p>
             </li>
-            
           </ul>
         </div>
 

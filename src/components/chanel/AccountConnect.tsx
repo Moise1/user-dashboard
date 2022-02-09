@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Radio } from 'antd';
 import { t } from '../../global/transShim';
 
@@ -19,12 +19,10 @@ interface props {
 export const AccountConnect = (props: props) => {
   const { handleChangeApi, platform, api, handleChangeExtension, extension } = props;
   const [, _setEnable] = useState(false); // ignored setEnable
-  
+
   return (
     <form className="account-connect">
-      <h5 className="title">
-        How do you want HGR to connect to your {platform} account?
-      </h5>
+      <h5 className="title">How do you want HGR to connect to your {platform} account?</h5>
       <p className="change-settings">{t('changeset')}</p>
       <div className="with-api">
         <Radio
@@ -50,7 +48,7 @@ export const AccountConnect = (props: props) => {
           </div>
         </div>
       </div>
-          
+
       <div className="no-api">
         <Radio
           name="product"
@@ -65,7 +63,8 @@ export const AccountConnect = (props: props) => {
           <p className="advance">{t('advnc')}</p>
         </div>
         <div className="content">
-          <p>{t('step4para1')} {platform} &apos; s {t('api')}
+          <p>
+            {t('step4para1')} {platform} &apos; s {t('api')}
           </p>
           <div className="computer-extension">
             <Radio
@@ -76,7 +75,12 @@ export const AccountConnect = (props: props) => {
             />
             <span>{t('runext')}</span>
           </div>
-          <p><i>{t('oncomputer')} {platform}{t('acnt')}.</i></p>
+          <p>
+            <i>
+              {t('oncomputer')} {platform}
+              {t('acnt')}.
+            </i>
+          </p>
           <div className="server-extension">
             <Radio
               value={'ext'}
@@ -86,12 +90,16 @@ export const AccountConnect = (props: props) => {
             />
             <span>{t('extpkg')}</span>
           </div>
-          <p><i>{t('keeppcon')}</i></p>
+          <p>
+            <i>{t('keeppcon')}</i>
+          </p>
           <p className="cause">{t('whyext')}</p>
           <div>
             {platform}
             {t('strictpara')}
-            <a href="#"><i>{t('seetut')}</i></a>
+            <a href="#">
+              <i>{t('seetut')}</i>
+            </a>
           </div>
         </div>
       </div>

@@ -4,7 +4,6 @@ import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import '../../sass/light-theme/listing-description.scss';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
 
-
 export const ListingDescription = () => {
   return (
     <div className="listing-description">

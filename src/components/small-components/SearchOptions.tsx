@@ -9,13 +9,13 @@ interface SearchOptionsProps {
   openSourceModal?: () => void;
 }
 
-export const SearchOptions = (props:(AdvancedSearchProps & SearchOptionsProps)) => {
-  const {visible, onClose, showSearchInput, openSourceModal} = props;
+export const SearchOptions = (props: AdvancedSearchProps & SearchOptionsProps) => {
+  const { visible, onClose, showSearchInput, openSourceModal } = props;
   const onSearch = (value: string) => console.log('searched value', value);
 
   return (
     <div className="action-components">
-      {showSearchInput && <SearchInput onSearch={onSearch}/>}
+      {showSearchInput && <SearchInput onSearch={onSearch} />}
       <AdvancedSearch
         title="Search Criteria"
         placement="right"
@@ -28,29 +28,37 @@ export const SearchOptions = (props:(AdvancedSearchProps & SearchOptionsProps)) 
         }
       >
         <div className="advanced-form-container">
-          <h5><strong>Choose your suppliers</strong></h5>
-          <Button className="supplier-one" onClick={openSourceModal}>1 supplier</Button>
+          <h5>
+            <strong>Choose your suppliers</strong>
+          </h5>
+          <Button className="supplier-one" onClick={openSourceModal}>
+            1 supplier
+          </Button>
           <Form layout="vertical" className="advanced-search-form">
             <div className="inputs">
               <Form.Item label="Min source price">
-                <Input className="blue-input" value="50"/>
+                <Input className="blue-input" value="50" />
               </Form.Item>
 
               <Form.Item label="Min Profit">
-                <Input className="blue-input" value="Mini"/>
+                <Input className="blue-input" value="Mini" />
               </Form.Item>
               <Form.Item label="Max source price">
-                <Input className="blue-input" value="100"/>
+                <Input className="blue-input" value="100" />
               </Form.Item>
               <Form.Item label="Max Profit">
-                <Input className="blue-input" value="Max"/>
+                <Input className="blue-input" value="Max" />
               </Form.Item>
             </div>
 
             <div className="prime-options">
-              <p className="amazon-prime"><strong>Amazon Prime</strong></p>
+              <p className="amazon-prime">
+                <strong>Amazon Prime</strong>
+              </p>
               <div className="checkboxes">
-                <Checkbox checked className="checkbox">Only Prime</Checkbox>
+                <Checkbox checked className="checkbox">
+                  Only Prime
+                </Checkbox>
                 <Checkbox className="checkbox">All Items</Checkbox>
               </div>
             </div>

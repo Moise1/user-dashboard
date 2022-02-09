@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
-import {SearchInput} from '../small-components/TableActionBtns';
+import { SearchInput } from '../small-components/TableActionBtns';
 
 interface props {
   setShowOrdering: (arg0: boolean) => void;
@@ -25,7 +25,7 @@ const SearchSelect = (myProps: props) => {
   ];
 
   const [showDropDown, setShowDropDown] = useState<boolean>();
-  const [supplierData,] = useState(arrayLists);
+  const [supplierData] = useState(arrayLists);
   // const [inputSearchValue, setInputSearchValue] = useState<string>('');
 
   const handleSelectValue = (value: string) => {
@@ -53,7 +53,7 @@ const SearchSelect = (myProps: props) => {
 
         {showDropDown ? (
           <div className="shows-search-drop-list">
-            <SearchInput/>
+            <SearchInput />
             <div className="react-list-data-here">
               {supplierData.map((list) => (
                 <li key={list.id} onClick={() => handleSelectValue(list.value)}>

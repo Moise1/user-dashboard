@@ -13,7 +13,6 @@ export const EditSingleListing = () => {
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
 
-
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
@@ -58,10 +57,30 @@ export const EditSingleListing = () => {
       </div>
 
       <StatusBar>
-        <StatusBtn title={`${t('Main')}`} changeTab={(e) => handleChangeTab(e, 0)} className={activeTab === 0 ? 'active-tab': ''} id="0"/>
-        <StatusBtn title={`${t('Description')}`} changeTab={(e) => handleChangeTab(e, 1)} className={activeTab === 1 ? 'active-tab': ''} id="1" />
-        <StatusBtn title={`${t('Details')}`} changeTab={(e) => handleChangeTab(e, 2)} className={activeTab === 2 ? 'active-tab': ''} id="2"/>
-        <StatusBtn title={`${t('Options')}`} changeTab={(e) => handleChangeTab(e, 3)} className={activeTab === 3 ? 'active-tab': ''} id="3"/>
+        <StatusBtn
+          title={`${t('Main')}`}
+          changeTab={(e) => handleChangeTab(e, 0)}
+          className={activeTab === 0 ? 'active-tab' : ''}
+          id="0"
+        />
+        <StatusBtn
+          title={`${t('Description')}`}
+          changeTab={(e) => handleChangeTab(e, 1)}
+          className={activeTab === 1 ? 'active-tab' : ''}
+          id="1"
+        />
+        <StatusBtn
+          title={`${t('Details')}`}
+          changeTab={(e) => handleChangeTab(e, 2)}
+          className={activeTab === 2 ? 'active-tab' : ''}
+          id="2"
+        />
+        <StatusBtn
+          title={`${t('Options')}`}
+          changeTab={(e) => handleChangeTab(e, 3)}
+          className={activeTab === 3 ? 'active-tab' : ''}
+          id="3"
+        />
       </StatusBar>
 
       <div className="content">{renderContent(index)}</div>

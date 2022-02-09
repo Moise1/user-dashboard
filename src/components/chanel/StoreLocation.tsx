@@ -6,7 +6,7 @@ import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
 import { t } from '../../global/transShim';
-import  {Flag, FlagProps } from './Flag';
+import { Flag, FlagProps } from './Flag';
 
 interface values {
   storeLocation: string;
@@ -84,7 +84,7 @@ const flags: FlagProps[] = [
     path: it_flag,
     platform: 'ebay',
     slug: 'italy'
-  },
+  }
 ];
 
 export const StoreLocation = (props: StoreLocationProps) => {
@@ -93,7 +93,9 @@ export const StoreLocation = (props: StoreLocationProps) => {
   return (
     <form className="location-form">
       <h5 className="title">{t('bar2')}?</h5>
-      <h6 className="sub-title">{platform == 'ebay' ? t('storebay') : platform == 'amazon' ? t('storamz') : t('storshp')}</h6>
+      <h6 className="sub-title">
+        {platform == 'ebay' ? t('storebay') : platform == 'amazon' ? t('storamz') : t('storshp')}
+      </h6>
       <div className="flags">
         {flags.map((i) => (
           <Flag

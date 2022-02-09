@@ -153,12 +153,13 @@
     display: none;
     z-index: 3;
   }
+
   .overlay-sidebar-mobile {
     position: fixed;
     right: 0;
     top: 0;
     left: 29%;
-    background-color: rgba(0, 0, 0, 0.23);
+    background-color: rgba(0, 0, 0, 0.4);
     height: 100%;
     z-index: 2;
   }

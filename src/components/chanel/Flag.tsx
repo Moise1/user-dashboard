@@ -9,7 +9,7 @@ export interface FlagProps {
   currentPlatform?: platformType;
 }
 
-export const Flag  = (props: FlagProps) =>{
+export const Flag = (props: FlagProps) => {
   const { platform, currentPlatform, handleChangeLocation, flag, name, location } = props;
   return (
     <div

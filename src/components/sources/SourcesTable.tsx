@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState } from 'react';
 import { sourceData } from './SourceData';
 import ErrorIcon from '../../assets/erroricon.svg';
 import InProgressIcon from '../../assets/progressicon.svg';
@@ -7,19 +7,13 @@ import DispatchIcon from '../../assets/dispatchedicon.svg';
 import RightCircle from '../../assets/circle-right-green-icon.png';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
-import { SelectSupplierContext } from 'src/contexts/SelectSupplierProvider';
 import Pagination from '../common/Pagination';
 import '../../sass/light-theme/sources-table.scss';
 import '../../sass/light-theme/popover.scss';
 
-type ContextType = {
-  supplierValue: string;
-  setSupplierValue: (arg0: string) => void;
-};
-
 const SourcesTable = () => {
   const history = useHistory();
-  const { setSupplierValue } = useContext(SelectSupplierContext) as ContextType;
+  const [, setSupplierValue] = useState('Supplier');
 
   const handleSupplierValue = (value: string) => {
     setSupplierValue(value);

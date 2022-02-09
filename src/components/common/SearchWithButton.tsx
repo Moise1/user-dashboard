@@ -1,8 +1,8 @@
 import { Input } from 'antd';
 
 const SearchWithButton = () => {
-  const {Search} = Input;
-  return  (
+  const { Search } = Input;
+  return (
     <Search
       className="input"
       aria-label="small"

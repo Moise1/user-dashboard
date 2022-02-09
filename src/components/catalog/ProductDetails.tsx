@@ -12,12 +12,12 @@ interface Props {
   handleClose: () => void;
 }
 export const ProductDetails = (props: Props) => {
-  const { img, details, sell, cost, profit, handleClose} = props;
+  const { img, details, sell, cost, profit, handleClose } = props;
   return (
     <div className="product-details">
       <Row gutter={[32, 0]}>
         <Col lg={8}>
-          <img src={img} alt="" className='product-img' />
+          <img src={img} alt="" className="product-img" />
         </Col>
         <Col lg={14}>
           {details}
@@ -52,7 +52,7 @@ export const ProductDetails = (props: Props) => {
               </p>
             </div>
           </div>
-          <Divider/>
+          <Divider />
           <div className="action-btns">
             <CancelBtn handleClose={handleClose}>{t('Cancel')}</CancelBtn>
             <SuccessBtn>{t('AddToSelection')}</SuccessBtn>

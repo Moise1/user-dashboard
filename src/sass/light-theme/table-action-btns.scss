@@ -35,19 +35,50 @@
 }
 
 .advanced-search-btn {
-  @include action-btn();
+  @include action-btn;
 }
 .view-columns-btn {
-  @include action-btn();
+  @include action-btn;
+}
+
+.filters-btn {
+  @include action-btn;
+  background: $light-primary;
+  &:hover {
+    background: $light-primary;
+  }
+}
+.view-all-selected-products {
+  background: none;
+  color: $primary;
+  border: none;
+  margin: 1.5rem 2rem;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background: none;
+    color: $primary;
+  }
+}
+
+.add-all-products,
+.clear-all-products {
+  margin: 0 9rem 0 auto;
 }
 
 // Phone screen size.
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1030px) {
   .ant-input-wrapper {
     width: 90vw !important;
   }
   .search-bars-container {
     margin: 0 auto;
     width: 100%;
+    display: grid !important;
+    place-items: center;
+
+    & > * {
+      margin: 0.8rem 5rem;
+    }
   }
 }

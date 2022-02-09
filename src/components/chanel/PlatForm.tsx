@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, Radio } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
@@ -16,9 +16,9 @@ export interface props {
 }
 
 export const PlatForm = (props: props) => {
-  const {  handleChangePlatform, platform } = props;
+  const { handleChangePlatform, platform } = props;
   const [inputs, setInputs] = useState<HTMLInputElement[]>([]);
-  
+
   useEffect(() => {
     const dt = document.querySelectorAll('.input');
     const arr = [];
@@ -48,7 +48,7 @@ export const PlatForm = (props: props) => {
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
         <Row className="cards-container" gutter={[26, 0]}>
-          <Col className="platforms-card"  xs={8}  lg={8} >
+          <Col className="platforms-card" xs={8} lg={8}>
             <label>
               <Radio
                 name="product"
@@ -67,7 +67,7 @@ export const PlatForm = (props: props) => {
             </label>
           </Col>
 
-          <Col className="platforms-card" xs={8}  lg={8}>
+          <Col className="platforms-card" xs={8} lg={8}>
             <label>
               <Radio
                 name="product"

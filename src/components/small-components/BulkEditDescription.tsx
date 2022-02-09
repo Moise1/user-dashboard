@@ -5,7 +5,6 @@ import { t } from 'src/global/transShim';
 import '../../sass/light-theme/listing-options.scss';
 import { CheckIcon, TrashIcon } from '../common/Icons';
 
-
 export const BulkEditDescription = () => {
   return (
     <div className="listing-options">

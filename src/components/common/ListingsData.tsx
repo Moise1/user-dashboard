@@ -3,7 +3,7 @@ import { MoreVertical } from 'react-feather';
 
 export interface ListingsItems {
   id: number;
-  key:string,
+  key: string;
   img: JSX.Element;
   itemNo: number;
   source: string;
@@ -21,7 +21,7 @@ export interface ListingsItems {
 export const listingsData: ListingsItems[] = [
   {
     id: 1,
-    key:'1',
+    key: '1',
     img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
@@ -46,7 +46,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 2,
-    key:'2',
+    key: '2',
     img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
@@ -71,7 +71,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 3,
-    key:'3',
+    key: '3',
     img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
@@ -96,7 +96,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 4,
-    key:'4',
+    key: '4',
     img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',
@@ -121,7 +121,7 @@ export const listingsData: ListingsItems[] = [
   },
   {
     id: 5,
-    key:'5',
+    key: '5',
     img: <img src={dataoneimg} />,
     itemNo: 1234546789,
     source: 'Amazon',

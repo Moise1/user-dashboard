@@ -1,6 +1,6 @@
 @import 'general.config';
 
-@mixin auto-ordering() {
+@mixin auto-ordering {
   .auto-ordering {
     display: flex;
     justify-content: space-between;
@@ -21,15 +21,6 @@
 
   .account-details {
     margin-top: 2rem;
-    // .deactivation-ovarlay{
-    //   position: fixed;
-    //   top: 28%;
-    //   left: 6%;
-    //   background-color: rgba(0, 0, 0, 0.1);
-    //   width: 35%;
-    //   height: 35%;
-    //   z-index: 2;
-    // }
     .form {
       margin: 0 auto;
       padding: 0 2rem 0 0;
@@ -87,10 +78,10 @@
 }
 
 .main-container {
-  @include auto-ordering();
+  @include auto-ordering;
 }
 
 .adjusted-main-container {
-  @include auto-ordering();
+  @include auto-ordering;
   width: 85%;
 }

@@ -79,6 +79,12 @@ a {
   border-color: $light-primary !important;
 }
 
+.back-link{
+  color: $primary;
+  &:hover{
+    color: $primary;
+  }
+}
 .white-input {
   border-radius: 10px;
   border: none;
@@ -113,7 +119,7 @@ a {
 
 .chevron-right,
 .chevron-left {
-  @include chevrons();
+  @include chevrons;
 }
 
 @mixin btn-styles($color: null) {

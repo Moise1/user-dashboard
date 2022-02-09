@@ -23,17 +23,17 @@
     overflow-y: scroll;
     .source {
       display: flex;
-      @mixin action-icon(){
+      @mixin action-icon{
         margin-right: 1rem;
         cursor: pointer;
         stroke: $white;
       };
       .remove-source-icon{
-        @include action-icon();
+        @include action-icon;
         fill: $red;
       };
       .pending-source-icon{
-       @include action-icon();
+       @include action-icon;
         fill: $green;
       };
 

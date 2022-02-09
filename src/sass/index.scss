@@ -6,6 +6,7 @@ body {
   position: relative;
   overflow: hidden;
   line-height: 1.5715;
+  box-sizing: border-box;
   .ant-layout {
     margin-top: 0.5rem;
     overflow: auto;
@@ -27,14 +28,21 @@ body {
     }
 
     .listings-title {
-      // border: 2px solid blue;
       margin-top: -0.4rem;
     }
     .control-btns-container {
       width: 68vw !important;
     }
   }
+
+  @media only screen and (max-width: 1030px) {
+    .content-area {
+      margin: 0 auto !important;
+    }
+  }
 }
+
+// Tablets and iPads scree sizes
 
 //Scrollbar
 ::-webkit-scrollbar {
