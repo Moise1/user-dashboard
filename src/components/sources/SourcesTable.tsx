@@ -21,6 +21,7 @@ const SourcesTable = () => {
   };
   return (
     <div className="sources-table-container">
+      <h1 className="page-title">Sources Settings</h1>
       <table className="table sources-table">
         <thead className="source-table-head">
           <tr>

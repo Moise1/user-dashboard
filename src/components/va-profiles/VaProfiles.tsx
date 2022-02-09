@@ -31,6 +31,7 @@ export const VaProfiles = () => {
 
   return (
     <Layout className="va-profiles-container">
+      <h1 className="page-title">VA Profiles</h1>
       <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
         <Col xs={24} xl={8} md={12} className="table-container">
           <Table dataSource={dataSource} columns={columns}></Table>

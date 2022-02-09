@@ -44,32 +44,35 @@ export const BrowserExtensions = () => {
     }
   ];
   return (
-    <Layout className="browser-extensions">
-      <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
-        {data.map((d) => (
-          <Col xs={24} sm={12} xl={8} key={d.id}>
-            <Card className="card">
-              <div className="upper-section">
-                <h6 className="title">{d.title}</h6>
-                {d.img}
-                {d.description}
-                {d.browsers}
-              </div>
-              <div className="lower-section">
-                {d.divider}
-                {d.installText}
-                {d.installBtn}
-                <a href="#" className="tutorial">
-                  {d.tutorial}
-                  <span>
-                    <i className="fa fa-arrow-right" aria-hidden="true" />
-                  </span>
-                </a>
-              </div>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <Layout className="browser-extensions-container">
+      <h1 className="page-title">Browser Extensions</h1>
+      <div className="browser-extensions">
+        <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
+          {data.map((d) => (
+            <Col xs={24} sm={12} xl={8} key={d.id}>
+              <Card className="card">
+                <div className="upper-section">
+                  <h6 className="title">{d.title}</h6>
+                  {d.img}
+                  {d.description}
+                  {d.browsers}
+                </div>
+                <div className="lower-section">
+                  {d.divider}
+                  {d.installText}
+                  {d.installBtn}
+                  <a href="#" className="tutorial">
+                    {d.tutorial}
+                    <span>
+                      <i className="fa fa-arrow-right" aria-hidden="true" />
+                    </span>
+                  </a>
+                </div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </Layout>
   );
 };

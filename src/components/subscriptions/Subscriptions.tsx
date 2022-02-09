@@ -58,52 +58,55 @@ export const Subscriptions = () => {
   }, [slides]);
 
   return (
-    <Layout className="carousel-container">
-      <Space className="control-btns-container">
-        <ChevronLeft onClick={handlePrev} className="chevron-left" />
-        <ChevronRight onClick={handleNext} className="chevron-right" />
-      </Space>
-      <StatusBar>
-        <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
-        <p className="subscriptions-limit">
-          Subscription limit <span>110</span>
-        </p>
-        <p className="subscriptions-items">
-          Items<span>110</span>
-        </p>
-        <Button className="subscription-cancel">Request cancellation</Button>
-      </StatusBar>
-      <Carousel arrows slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
-        {data.map((d) => (
-          <Card key={d.id} className="subscription">
-            <p className="listings-count">
-              Up to <strong>{d.listingsCount}</strong> listings
-            </p>
-            <h1 className="monthly-rate">{d.monthlyRate}</h1>
+    <Layout className="subscriptions-container">
+      <h1 className="page-title">Subscriptions</h1>
+      <Layout className="carousel-container">
+        <Space className="control-btns-container">
+          <ChevronLeft onClick={handlePrev} className="chevron-left" />
+          <ChevronRight onClick={handleNext} className="chevron-right" />
+        </Space>
+        <StatusBar>
+          <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
+          <p className="subscriptions-limit">
+            Subscription limit <span>110</span>
+          </p>
+          <p className="subscriptions-items">
+            Items<span>110</span>
+          </p>
+          <Button className="subscription-cancel">Request cancellation</Button>
+        </StatusBar>
+        <Carousel arrows slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
+          {data.map((d) => (
+            <Card key={d.id} className="subscription">
+              <p className="listings-count">
+                Up to <strong>{d.listingsCount}</strong> listings
+              </p>
+              <h1 className="monthly-rate">{d.monthlyRate}</h1>
 
-            <Divider className="divider" />
-            <div className="discount">
-              <p className="twenty-off">20% off</p>
-              <div className="rate-details">
-                <span className="euro">&euro;</span>
-                <h1 className="monthly-rate">{d.firstDiscount}</h1>
-                <span className="frequency">/mo</span>
+              <Divider className="divider" />
+              <div className="discount">
+                <p className="twenty-off">20% off</p>
+                <div className="rate-details">
+                  <span className="euro">&euro;</span>
+                  <h1 className="monthly-rate">{d.firstDiscount}</h1>
+                  <span className="frequency">/mo</span>
+                </div>
+                <span className="duration">(6 months)</span>
               </div>
-              <span className="duration">(6 months)</span>
-            </div>
-            <Divider className="divider" />
-            <div className="discount">
-              <p className="forty-off">40% off</p>
-              <div className="rate-details">
-                <span className="euro">&euro;</span>
-                <h1 className="monthly-rate">{d.secondDiscount}</h1>
-                <span className="frequency">/mo</span>
+              <Divider className="divider" />
+              <div className="discount">
+                <p className="forty-off">40% off</p>
+                <div className="rate-details">
+                  <span className="euro">&euro;</span>
+                  <h1 className="monthly-rate">{d.secondDiscount}</h1>
+                  <span className="frequency">/mo</span>
+                </div>
+                <span className="duration">(1 year)</span>
               </div>
-              <span className="duration">(1 year)</span>
-            </div>
-          </Card>
-        ))}
-      </Carousel>
+            </Card>
+          ))}
+        </Carousel>
+      </Layout>
     </Layout>
   );
 };

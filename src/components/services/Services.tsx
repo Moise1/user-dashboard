@@ -51,15 +51,18 @@ export const Services = () => {
 
   return (
     <Layout className="services-container">
-      {data.map((s) => (
-        <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>
-          <div className="card-info">
-            <h1 className="service-title">{s.title}</h1>
-            <p>{s.description}</p>
-            <a href="#">{s.readMore}</a>
-          </div>
-        </Card>
-      ))}
+      <h1 className="page-title">Services</h1>
+      <div className="services-content">
+        {data.map((s) => (
+          <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>
+            <div className="card-info">
+              <h1 className="service-title">{s.title}</h1>
+              <p>{s.description}</p>
+              <a href="#">{s.readMore}</a>
+            </div>
+          </Card>
+        ))}
+      </div>
     </Layout>
   );
 };

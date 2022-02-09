@@ -139,7 +139,7 @@ export const Listings = () => {
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   return (
-    <Layout className="listings">
+    <Layout className="listings-container">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
         <h5 className="cols-display-title">Select columns to display</h5>
         <p className="description">Display columns in the listing table that suit your interests.</p>
@@ -183,10 +183,12 @@ export const Listings = () => {
         </PopupModal>
       )}
 
-      <h3 className="listings-title">Listings</h3>
+      <h1 className="page-title">Listings</h1>
       <div className="search-options-area">
         <SearchOptions visible={drawerOpen} onClose={handleSideDrawer} showSearchInput />
-        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>{t('AdvancedSearch')}</TableActionBtns>
+        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
+          {t('AdvancedSearch')}
+        </TableActionBtns>
       </div>
       <StatusBar>
         <StatusBtn
