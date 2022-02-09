@@ -11,22 +11,23 @@
   }
 }
 .catalog-container {
-  margin-top: 2rem;
-  overflow: hidden;
+  height: 100vh;
+  overflow-y: hidden;
   background: $white;
-  padding: 1rem;
+  padding: 5rem 1rem 0 1rem;
+  .back-link{
+    margin-top: 10rem;
+  }
   .header-section {
     display: flex;
     justify-content: space-between;
-    margin: 0 4rem;
-
-    .catalog {
-      margin: 1.5rem 0;
-    }
+    align-items: center;
+    margin: .2rem 4rem  0 4rem;
+    padding: 0;
   }
 
   .divider{
-    margin-top: -1rem;
+    margin-top: 1rem;
   }
   .actions-section {
     display: flex;
@@ -64,12 +65,14 @@
 
   .catalog-and-pagination-container {
     background: $mild-light-blue;
-    padding: 1rem 0;
+    margin-top: 0;
+    padding: .5rem 0;
+    height: auto;
     .cards-container {
-      margin: 1rem 0 5rem 0;
+      margin: .8rem 0 5rem 0;
       width: auto;
-      padding: 3rem 0;
-      height: 55vh;
+      padding: 1rem 0;
+      height: 50vh;
       overflow-y: scroll;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -164,7 +167,7 @@
     };
 
     .pagination-container {
-      width: 85vw;
+      width: 88vw;
       margin: -4rem auto 0 auto;
       display: flex;
       justify-content: space-between;
@@ -182,12 +185,15 @@
     margin-top: 2rem;
   }
 
+  .header-section, .actions-section{
+    margin: .8rem auto !important;
+  }
   .cards-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
     row-gap: 3rem;
     column-gap: 2rem;
-    margin: 1rem auto;
+    margin: 0 auto;
+    height: 45vh !important;
     .product-card {
       margin: 1rem auto;
       width: 30vw !important;
@@ -197,17 +203,16 @@
 
 // small mobile  screen size
 @media only screen and (max-width: 750px) {
-  .cards-container {
-    display: block;
-    margin: 0 auto;
-    .product-card {
-      width: 40vw !important;
-    }
-  }
+
   .actions-section {
-    display: grid !important;
-    row-gap: 1rem;
-    place-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    justify-content: space-between ;
+    width: 100%;
+    .success-btn{
+      position: fixed;
+      z-index: 1;
+      bottom: 8.5%;
+      right: 0;
+    }
   }
 } ;

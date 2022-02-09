@@ -39,7 +39,7 @@ export const Catalog = () => {
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
       cardElement.classList.remove('selected-product-card');
-      setAllProducts(catalogData.filter((d) => d.id !== JSON.parse(cardElement.id)));
+      setAllProducts(prevState => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
       cardElement.classList.add('selected-product-card');
       setAllProducts((prevState) => [...prevState, selectedProductData]);
