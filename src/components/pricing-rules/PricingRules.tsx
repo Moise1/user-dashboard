@@ -43,7 +43,6 @@ export const PricingRules = () => {
 
   return (
     <Layout className="pricing-rules-container">
-      <h1 className="page-title">Pricing Rules</h1>
       <div className="pricing-rules">
         <StatusBar className="pricing-rules-bar">
           <h4 className="add-rule">Add new rule</h4>

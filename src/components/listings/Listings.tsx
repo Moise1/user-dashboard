@@ -183,7 +183,6 @@ export const Listings = () => {
         </PopupModal>
       )}
 
-      <h1 className="page-title">Listings</h1>
       <div className="search-options-area">
         <SearchOptions visible={drawerOpen} onClose={handleSideDrawer} showSearchInput />
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>

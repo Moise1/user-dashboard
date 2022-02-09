@@ -45,7 +45,6 @@ export const BrowserExtensions = () => {
   ];
   return (
     <Layout className="browser-extensions-container">
-      <h1 className="page-title">Browser Extensions</h1>
       <div className="browser-extensions">
         <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
           {data.map((d) => (

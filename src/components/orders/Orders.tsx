@@ -45,7 +45,6 @@ export const Orders = () => {
 
   return (
     <Layout className="orders-container">
-      <h1 className="page-title">Orders</h1>
       <TableActionBtns />
       <OrderActionBtns orderNumber={orderNumber} />
       <DataTable columns={columns} dataSource={orderData} page="order" />

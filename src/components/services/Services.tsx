@@ -51,7 +51,6 @@ export const Services = () => {
 
   return (
     <Layout className="services-container">
-      <h1 className="page-title">Services</h1>
       <div className="services-content">
         {data.map((s) => (
           <Card key={s.id} className="service" cover={<img src={serviceImg} className="service-img" />}>

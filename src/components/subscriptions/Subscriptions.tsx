@@ -59,8 +59,7 @@ export const Subscriptions = () => {
 
   return (
     <Layout className="subscriptions-container">
-      <h1 className="page-title">Subscriptions</h1>
-      <Layout className="carousel-container">
+      <div className="carousel-container">
         <Space className="control-btns-container">
           <ChevronLeft onClick={handlePrev} className="chevron-left" />
           <ChevronRight onClick={handleNext} className="chevron-right" />
@@ -106,7 +105,7 @@ export const Subscriptions = () => {
             </Card>
           ))}
         </Carousel>
-      </Layout>
+      </div>
     </Layout>
   );
 };

@@ -59,8 +59,6 @@ export const Catalog = () => {
 
   return (
     <Layout className="catalog-container">
-      <h1 className="page-title">Catalog</h1>
-
       <div className="actions-section">
         <div className="view-clear-all">
           {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
