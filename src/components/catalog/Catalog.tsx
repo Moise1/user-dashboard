@@ -8,7 +8,7 @@ import {
   // TableActionBtns,
   FiltersBtn
 } from '../small-components/TableActionBtns';
-import {ConfirmBtn} from '../small-components/ActionBtns';
+import { ConfirmBtn } from '../small-components/ActionBtns';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { PopupModal } from '../modals/PopupModal';
 import { ProductDetails } from './ProductDetails';
@@ -70,7 +70,7 @@ export const Catalog = () => {
         <h5 className="catalog">Catalog</h5>
         <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
       </div>
-      <Divider />
+      <Divider className='divider'/>
       <div className="actions-section">
         {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
         <p className="all-selected-products" onClick={handleAllProudctsModal}>
@@ -80,7 +80,6 @@ export const Catalog = () => {
           Clear all
         </p>
       </div>
-      
 
       <SearchOptions
         visible={drawerOpen}
@@ -134,55 +133,58 @@ export const Catalog = () => {
       >
         <AllProducts>{allProducts}</AllProducts>
       </PopupModal>
-      <div className="cards-container">
-        {catalogData.map((d) => (
-          <Card key={d.id} className={className} onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
-            <Meta
-              description={
-                <div className="product-description">
-                  <div className="img-container">
-                    <img src={d.img} className="product-img" />
-                  </div>
-                  <div className="product-info-area">
-                    <div className="header">
-                      <p className="product-title">{d.title}</p>
-                      <p className="source">by {d.source}</p>
-                      <Search className="view-details" onClick={handleProductModal} />
-                    </div>
 
-                    <div className="transaction-details">
-                      <div>
-                        <p className="transaction-type">Sell</p>
-                        <p className="transaction-amount sell">
-                          <span>&pound;</span>
-                          {d.sell}
-                        </p>
+      <div className="catalog-and-pagination-container">
+        <div className="cards-container">
+          {catalogData.map((d) => (
+            <Card key={d.id} className={className} onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
+              <Meta
+                description={
+                  <div className="product-description">
+                    <div className="img-container">
+                      <img src={d.img} className="product-img" />
+                    </div>
+                    <div className="product-info-area">
+                      <div className="header">
+                        <p className="product-title">{d.title}</p>
+                        <p className="source">by {d.source}</p>
+                        <Search className="view-details" onClick={handleProductModal} />
                       </div>
-                      <div>
-                        <p className="transaction-type">Cost</p>
-                        <p className="transaction-amount cost">
-                          <span>&pound;</span>
-                          {d.cost}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="transaction-type">Profit</p>
-                        <p className="transaction-amount profit">
-                          <span>&pound;</span>
-                          {d.profit}
-                        </p>
+
+                      <div className="transaction-details">
+                        <div>
+                          <p className="transaction-type">Sell</p>
+                          <p className="transaction-amount sell">
+                            <span>&pound;</span>
+                            {d.sell}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="transaction-type">Cost</p>
+                          <p className="transaction-amount cost">
+                            <span>&pound;</span>
+                            {d.cost}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="transaction-type">Profit</p>
+                          <p className="transaction-amount profit">
+                            <span>&pound;</span>
+                            {d.profit}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              }
-            />
-          </Card>
-        ))}
-      </div>
-      <div className="pagination">
-        <Pagination defaultCurrent={1} total={600} responsive/>
-        <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+                }
+              />
+            </Card>
+          ))}
+        </div>
+        <div className="pagination-container">
+          <Pagination defaultCurrent={1} total={600} responsive />
+          <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+        </div>
       </div>
     </div>
   );

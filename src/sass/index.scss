@@ -6,6 +6,7 @@ body {
   position: relative;
   overflow: hidden;
   line-height: 1.5715;
+  box-sizing: border-box;
   .ant-layout {
     margin-top: 0.5rem;
     overflow: auto;
