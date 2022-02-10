@@ -1,33 +1,45 @@
 @import 'general.config';
+.ant-modal {
+  overflow: hidden !important;
+}
 .selected-products-modal {
-  margin-top: 2rem;
   .product-card {
+    align-items: center;
     display: flex;
     width: auto;
     background: $white;
     justify-self: space-around;
     border-radius: 10px;
     box-shadow: 0px 3px 6px #00000029;
-    padding: 0.5rem 1rem;
-    height: 20vh;
+    padding: 1rem;
+    height: auto;
     margin-bottom: 1rem;
 
     .product-img {
-      width: 60px;
-      height: 60px;
+      max-width: 100px;
+      max-height: 100px;
+      min-width: 60px;
+      min-height: 60px;
     }
     .product-info-area {
+      align-items: center;
+
+      display: flex;
       width: 100%;
       margin: auto 1rem;
       height: 100%;
       overflow: hidden;
-      .header{
+      .header {
         line-height: 10px;
+        width: 100%;
+        align-items: center;
       }
       .source {
         color: $gray;
       }
       .transaction-details {
+        width: 100%;
+        align-items: center;
         display: flex;
         justify-content: space-evenly;
         .transaction-type {
@@ -35,7 +47,7 @@
         }
         .transaction-amount {
           font-weight: bold;
-        };
+        }
         .sell {
           color: $primary;
         }
@@ -56,12 +68,26 @@
       font-weight: bold;
       cursor: pointer;
     }
-  };
+  }
 
-  .action-btn{
+  .action-btn {
     margin: auto;
-    .confirm-btn{
+    .confirm-btn {
       background: $primary;
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .product-card {
+    .product-info-area {
+      display: grid !important;
+      .header {
+        display: flex;
+
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   }
 }

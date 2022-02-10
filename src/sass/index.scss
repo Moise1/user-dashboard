@@ -57,6 +57,24 @@ svg > path:first-child {
   display: none;
 }
 
+// Ant pagination styles
+
+.ant-pagination-item,
+.ant-select-selector,
+.ant-pagination-item-link {
+  transition: none !important;
+  color: $primary;
+  border-radius: 8px !important;
+  &:hover {
+    color: $primary;
+    border-color: $primary !important;
+  }
+}
+.ant-pagination-item-active,
+.ant-select-item-option-state {
+  border-color: $primary !important;
+}
+
 //Ant buttons styles fixed
 
 button[ant-click-animating-without-extra-node]:after {
