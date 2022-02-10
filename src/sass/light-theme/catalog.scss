@@ -1,6 +1,7 @@
 @import 'general.config';
 
 // large and extra large screens
+
 .ant-modal-title {
   .source {
     color: $primary;
@@ -11,14 +12,6 @@
   }
 }
 .catalog-container {
-  height: 100vh;
-  overflow-y: hidden;
-  background: $white;
-  padding: 0rem 1rem 0 1rem;
-
-  .divider {
-    margin-top: 1rem;
-  }
   .actions-section {
     border-radius: 25px 25px 0px 0px;
     background: $white;
@@ -61,30 +54,26 @@
     width: auto;
     display: flex;
     justify-content: flex-start;
-    .advanced-search-btn {
-      margin-left: 6rem;
-    }
   }
 
   .catalog-cards {
     background: $white;
     margin-top: 0;
-    padding: 0.5rem 0;
     height: auto;
     overflow-y: scroll;
     .cards-container-catalog {
+      padding: 3rem;
       width: auto;
       height: 100% !important;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
       @mixin product-card {
-        min-width: 220px;
-        min-height: 320px;
         border-radius: 10px;
         background: $white;
-        width: 19vw;
-        height: 40vh;
+        width: 15vw;
+        min-width: 205px;
+        height: 100%;
         margin: 0 auto;
         cursor: pointer;
         box-shadow: 0px 3px 6px #00000029;
@@ -169,48 +158,88 @@
       }
     }
   }
-  .pagination-container {
+
+  .pagination-addall-container {
     position: fixed;
     bottom: 0;
-    width: 90%;
+    width: calc(100% - 80px);
+    white-space: nowrap;
     display: flex;
-    justify-content: space-between;
     background: $white;
-    border-radius: 10px;
-    padding: 1rem;
+    padding: $spacer;
+
+    button {
+      margin-right: 20px;
+    }
+  }
+  @media screen and (max-width: 1030px) {
+    .pagination-addall-container {
+      width: 100% !important;
+    }
+  }
+
+  .pagination-container {
+    margin: auto;
+    display: flex;
+    width: 100%;
+  }
+  .adall-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .cards-container-catalog {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 
 // tablet's screen sizes
 
-@media only screen and (max-width: 1030px) {
-  .search-bars-container {
-    margin-top: 2rem;
-  }
+@media only screen and (max-width: 1150px) {
   .cards-container-catalog {
-    grid-template-columns: repeat(2, 1fr) !important;
-    row-gap: 3rem;
-    column-gap: 2rem;
-    margin: 0 auto;
-
-    .product-card {
-      margin: 1rem auto;
-      width: 30vw !important;
-    }
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
 // small mobile  screen size
 @media only screen and (max-width: 750px) {
+  .cards-container-catalog {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
   .actions-section {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    .success-btn {
-      position: fixed;
-      z-index: 1;
-      bottom: 8.5%;
-      right: 0;
+    .view-clear-all {
+      display: grid !important;
+      white-space: nowrap;
     }
   }
-} ;
+  .pagination-addall-container {
+    .adall-container {
+      .success-btn {
+        position: fixed;
+        z-index: 1;
+        bottom: 8.5%;
+        left: 0;
+        margin-left: 20%;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .cards-container-catalog {
+    grid-template-columns: repeat(1, 1fr) !important;
+
+    .product-card {
+      width: 20vh !important;
+      min-width: 220px !important;
+    }
+  }
+}

@@ -61,7 +61,6 @@ export const Catalog = () => {
     <Layout className="catalog-container">
       <div className="actions-section">
         <div className="view-clear-all">
-          {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
           <p className="all-selected-products" onClick={handleAllProudctsModal}>
             View all selected products
           </p>
@@ -143,7 +142,6 @@ export const Catalog = () => {
                         <p className="source">by {d.source}</p>
                         <Search className="view-details" onClick={handleProductModal} />
                       </div>
-
                       <div className="transaction-details">
                         <div>
                           <p className="transaction-type">Sell</p>
@@ -174,10 +172,15 @@ export const Catalog = () => {
             </Card>
           ))}
         </div>
-      </div>
-      <div className="pagination-container">
-        <Pagination defaultCurrent={1} total={600} responsive />
-        <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+        <div className="pagination-addall-container">
+          <div className="pagination-container">
+            <Pagination defaultCurrent={1} total={600} responsive />
+          </div>
+          <div className="adall-container">
+            {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
+            <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+          </div>
+        </div>
       </div>
     </Layout>
   );
