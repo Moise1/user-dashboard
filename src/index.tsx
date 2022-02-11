@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from './App';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import { App } from './App';
+import { store } from './redux/store';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -21,11 +23,16 @@ if (Object.keys(locales).indexOf(language) == -1) {
 
 ReactDOM.render(
   <React.StrictMode>
-    <IntlProvider locale={language} messages={locales[language]}>
-      <Router>
-        <App />
-      </Router>
-    </IntlProvider>
+    {/* <CookiesProvider>
+     
+    </CookiesProvider> */}
+    <Provider store={store}>
+      <IntlProvider locale={language} messages={locales[language]}>
+        <Router>
+          <App />
+        </Router>
+      </IntlProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

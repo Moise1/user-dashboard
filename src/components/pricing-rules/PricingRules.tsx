@@ -1,12 +1,39 @@
+import {useState, useEffect} from 'react';
 import { Form, Input, Button } from 'antd';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+// import {Rule} from '../../redux/reducers/pricing-rules';
+import { fetchPricingRules } from 'src/redux/slices/pricing-rules/pricingRules';
 import { StatusBar } from '../small-components/StatusBar';
-import '../../sass/light-theme/pricing-rules.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyPricingRulesOptions, dummyPricingRulesData } from '../../dummy-data/dummyData';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
+import '../../sass/light-theme/pricing-rules.scss';
 
-export const PricingRules = () => {
+
+export interface Rule {
+  id: number;
+  userId: string;
+  sourceId: number;
+  priceFrom: number;
+  priceTo: number;
+  markup: number;
+  createdOn: Date;
+  active: false;
+  channelAuthId: number;
+}
+
+export const PricingRules =  () => {
+  const [pricingRules, setPricingRules] = useState<Rule[]>([]);
+  const dispatch = useAppDispatch();
+  const {rules} = useAppSelector(state => state.pricingRules);
+  
+  useEffect(()=>{
+    dispatch(fetchPricingRules());
+    setPricingRules(rules);
+  },[]);
+
+  console.log('PRICING RULES DATA', pricingRules);
   const columns = [
     {
       title: 'Source',
