@@ -19,7 +19,7 @@ import {
   Catalog,
   SourcesTable,
   Dashboard
-} from './routes';
+} from './components';
 
 import './sass/index.scss';
 
