@@ -1,27 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import axios from 'axios';
 import { Dispatch } from 'redux';
-import { Rule } from 'src/components/pricing-rules/PricingRules';
-import {api} from '../../api';
-// import { fetchPricingRules } from 'src/redux/actions/pricing-rules';
+import {client} from '../../client';
+
+export interface Rule {
+    id: number;
+    userId: string;
+    sourceId: number;
+    priceFrom: number;
+    priceTo: number;
+    markup: number;
+    createdOn: Date;
+    active: boolean;
+    channelAuthId: number;
+}
 
 const initialState = {
   rules: [] as Rule[],
   loading: false,
   error: ''
 };
-
-//  interface Rule {
-//     id: number;
-//     userId: string;
-//     sourceId: number;
-//     priceFrom: number;
-//     priceTo: number;
-//     markup: number;
-//     createdOn: Date;
-//     active: boolean;
-//     channelAuthId: number;
-// }
 type TPayload = {
   rules: Rule[];
   loading: boolean;
@@ -45,7 +42,7 @@ export const { pricingRulesSuccess } = pricingRulesSlice.actions;
 
 export const fetchPricingRules = () => async (dispatch: Dispatch) => {
   try {
-    const res = await api.get('/Pricing');
+    const res = await client.get('/Pricing');
     dispatch(pricingRulesSuccess(res.data));
     console.log('RES DATA FROM AXIOS', res.data);
   } catch (error) {

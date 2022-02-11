@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export const api = axios.create({
+export const client = axios.create({
   withCredentials:true,
   baseURL: 'https://dev-app.hustlegotreal.com/Api',
   validateStatus: (status) => (status >= 200 && status <= 404) || status === 500 || status === 452
 });
 
-api.interceptors.request.use(config =>{
+client.interceptors.request.use(config =>{
   document.cookie = '.AspNetCore.Session=CfDJ8PyoDRlL5htBtZvy1VW6hqBZHDIvXLeWUKD7M%2FnwhwVhuJXrlJeSv1hyZ9LuHYH6cqNd8%2BeBx4JRfnFKPb4nuLG7w3mrjs1Eblyk%2F3ubnTD6piP1jjjRNc8DD0rDSnEdQmk3OyFKGky4LLh1N1%2Fj35XVkeqW%2BZ7NgNoZ42oyLKi7; Path=/; Expires=Sat, 11 Feb 2023 08:33:59 GMT';
   document.cookie = 'hgr_ss=CfDJ8PyoDRlL5htBtZvy1VW6hqCrN73v1Jom8lJK8lC7ZbwmVBeyvtuhIzpSpuh43X6edG0kmTpVhORk6IiKyO-7RCSlEgAf_wVmW3kPdGfSRJDnvFXrnCrEYHFlS8wnUhcNGDxA51ROUQ8-cUVsCEKOQ90; Path=/; Expires=Sat, 11 Feb 2023 08:33:59 GMT';
   document.cookie = '_gid=GA1.2.1075893556.1644216987; Path=/; Expires=Sat, 11 Feb 2023 08:33:59 GMT';
@@ -29,7 +29,7 @@ api.interceptors.request.use(config =>{
 );
 
 
-api.interceptors.response.use(config =>{
+client.interceptors.response.use(config =>{
 //   console.log('INTERCEPTOR RESPONSE', config);
   return config;
 }, (error) => Promise.reject(error));

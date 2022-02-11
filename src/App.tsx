@@ -2,21 +2,25 @@ import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { NewChannel } from './components/chanel/NewChannel';
-import Topbar from './components/topbar/Topbar';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { Orders } from './components/orders/Orders';
-import { Listings } from './components/listings/Listings';
-import { Services } from './components/services/Services';
-import { Subscriptions } from './components/subscriptions/Subscriptions';
-import { PricingRules } from './components/pricing-rules/PricingRules';
-import { BrowserExtensions } from './components/browser-extensions/BrowserExtensions';
-import { VaProfiles } from './components/va-profiles/VaProfiles';
-import { ChannelSettings } from './components/chanel/ChannelSettings';
-import { Sources } from './components/sources/Sources';
-import { GetStarted } from './components/help/GetStarted';
-import { Catalog } from './components/catalog/Catalog';
-import SourcesTable from './components/sources/SourcesTable';
+import {
+  NewChannel,
+  Topbar,
+  Sidebar,
+  Orders,
+  Listings,
+  Services,
+  Subscriptions,
+  PricingRules,
+  BrowserExtensions,
+  VaProfiles,
+  ChannelSettings,
+  Sources,
+  GetStarted,
+  Catalog,
+  SourcesTable,
+  Dashboard
+} from './routes';
+
 import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
@@ -67,6 +71,7 @@ export const App = withRouter(({ history }) => {
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/home" component={Listings} />
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={Orders} />
