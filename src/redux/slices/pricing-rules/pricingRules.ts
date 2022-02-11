@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import axios from 'axios';
 import { Dispatch } from 'redux';
+import { Rule } from 'src/components/pricing-rules/PricingRules';
 import {api} from '../../api';
 // import { fetchPricingRules } from 'src/redux/actions/pricing-rules';
 
 const initialState = {
-  rules: [],
+  rules: [] as Rule[],
   loading: false,
   error: ''
 };
@@ -22,7 +23,7 @@ const initialState = {
 //     channelAuthId: number;
 // }
 type TPayload = {
-  rules: [];
+  rules: Rule[];
   loading: boolean;
   error: string;
 };

@@ -19,7 +19,7 @@ export interface Rule {
   priceTo: number;
   markup: number;
   createdOn: Date;
-  active: false;
+  active: boolean;
   channelAuthId: number;
 }
 
