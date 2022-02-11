@@ -25,6 +25,15 @@
       display: flex;
       column-gap: 1rem;
       width: 100%;
+      .clear-list-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .success-btn {
+          display: none;
+        }
+      }
     }
 
     .filters-container {
@@ -222,12 +231,15 @@
   .pagination-addall-container {
     .adall-container {
       .success-btn {
-        position: fixed;
-        z-index: 1;
-        bottom: 8.5%;
-        left: 0;
-        margin-left: 20%;
+        display: none;
       }
+    }
+  }
+  .clear-list-container {
+    display: flex;
+    align-items: center;
+    .success-btn {
+      display: block !important;
     }
   }
 }
@@ -242,7 +254,7 @@
   .cards-container-catalog {
     grid-template-columns: repeat(2, 1fr) !important;
     padding: 0 !important;
-
+    padding-top: 2rem !important;
     .product-card {
       min-width: 140px !important;
 
