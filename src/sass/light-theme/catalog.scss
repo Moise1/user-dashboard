@@ -227,19 +227,34 @@
         bottom: 8.5%;
         left: 0;
         margin-left: 20%;
-        transform: scale(1.2);
       }
     }
   }
 }
 
 @media only screen and (max-width: 500px) {
+  .ant-card-body {
+    padding: 5px !important;
+  }
+  .catalog-container {
+    padding: 0 !important;
+  }
   .cards-container-catalog {
-    grid-template-columns: repeat(1, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 0 !important;
 
     .product-card {
-      width: 20vh !important;
-      min-width: 220px !important;
+      min-width: 140px !important;
+
+      .img-container {
+        height: 15vh !important;
+      }
+      .transaction-details {
+        justify-content: space-between !important;
+        & p {
+          font-size: $font-small;
+        }
+      }
     }
   }
 }
