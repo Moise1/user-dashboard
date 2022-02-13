@@ -179,10 +179,11 @@
   }
 
   .pagination-container {
-    margin: auto;
+    margin-left: 37px;
     display: flex;
     width: 100%;
-  }
+  };
+
   .adall-container {
     display: flex;
     justify-content: flex-end;
@@ -240,6 +241,6 @@
     .product-card {
       width: 20vh !important;
       min-width: 220px !important;
-    }
+    };
   }
 }

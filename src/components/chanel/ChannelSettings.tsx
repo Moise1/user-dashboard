@@ -3,12 +3,12 @@ import { Layout, Row, Col } from 'antd';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/channel-settings.scss';
 import { ChannelMonitoring } from '../small-components/ChannelMonitoring';
 import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';
 import { ChannelOther } from '../small-components/ChannelOther';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
+import '../../sass/light-theme/channel-settings.scss';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);

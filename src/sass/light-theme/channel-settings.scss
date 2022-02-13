@@ -11,9 +11,13 @@
     padding: 2rem;
     background: $white;
     .action-btns {
-      display: grid !important;
-      height: 25vh !important;
+      position: fixed;
+      right: 2%;
+      top: 29%;
+      display: flex;
+      flex-direction: column;
     }
+
     .text-section {
       margin-bottom: 5rem;
     }
@@ -59,7 +63,50 @@
 @media only screen and(max-width: 750px) {
   .channel-settings {
     .content {
-      display: grid;
+      .action-btns {
+        right: 20%;
+        top: 85%;
+        flex-direction: row;
+        column-gap: 10px;
+      }
     }
+  }
+
+  .description-and-controls {
+    margin-top: 2rem;
+  }
+  .input-container,
+  .switch-container,
+  .limit-section {
+    margin: 0 auto;
+  }
+
+  .limit-section {
+    height: auto;
+    display: grid !important;
+    .limit-area {
+      .blue-input {
+        margin-top: -1rem;
+      }
+    }
+  }
+
+  .description-and-controls {
+    .stock-container{
+      .stock-area{
+        .radio{
+          margin-bottom: 1rem;
+        };
+        .stock{
+         
+          row-gap: 1rem;
+          .stock-input{
+            margin-top: -.6rem;
+            width: 35vw !important;
+          }
+        }
+        
+      }
+    };
   }
 }

@@ -41,16 +41,31 @@ type pricingRulesTypes = {
   options: JSX.Element;
 };
 
+type sourcesTypes = {
+  id: number;
+  provider: string;
+  markup: number
+  decreaseLimit: number;
+  template: string,
+  returnPolicy: string,
+  itemPostcode: string,
+  itemCity: string,
+  itemCountry: string,
+  shippingPolicy: string,
+  autoOrdering: string
+}
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsTypes | OrdersTypes | pricingRulesTypes>;
+  dataSource: Array<ListingsTypes | OrdersTypes | pricingRulesTypes | sourcesTypes>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
   handleBulkListingModal?: () => void;
   page?: string;
+  // onRow?: () => {onClick: (e: React.MouseEvent<Element, MouseEvent>) => void}
 }
+
 
 export const DataTable: React.FC<Props> = (props: Props) => {
   const {

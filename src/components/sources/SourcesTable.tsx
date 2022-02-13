@@ -1,27 +1,79 @@
-import { useState } from 'react';
-import { sourceData } from './SourceData';
-import ErrorIcon from '../../assets/erroricon.svg';
-import InProgressIcon from '../../assets/progressicon.svg';
-import { Popover } from 'antd';
-import DispatchIcon from '../../assets/dispatchedicon.svg';
-import RightCircle from '../../assets/circle-right-green-icon.png';
-import { useHistory } from 'react-router-dom';
+import { dataSource } from './SourceData';
+import {Link} from 'react-router-dom';
+// import ErrorIcon from '../../assets/erroricon.svg';
+// import InProgressIcon from '../../assets/progressicon.svg';
+// import { Popover } from 'antd';
+// import DispatchIcon from '../../assets/dispatchedicon.svg';
+// import RightCircle from '../../assets/circle-right-green-icon.png';
+// import { useHistory } from 'react-router-dom';
 import { t } from '../../global/transShim';
-import Pagination from '../common/Pagination';
+import { DataTable } from '../tables/DataTable';
 import '../../sass/light-theme/sources-table.scss';
 import '../../sass/light-theme/popover.scss';
 
 export const SourcesTable = () => {
-  const history = useHistory();
-  const [, setSupplierValue] = useState('Supplier');
+  // const history = useHistory();
+  // const [, setSupplierValue] = useState('Supplier');
 
-  const handleSupplierValue = (value: string) => {
-    setSupplierValue(value);
-    history.push('/sources-setting');
-  };
+  // const handleSupplierValue = (value: string) => {
+  //   setSupplierValue(value);
+  //   history.push('/sources-setting');
+  // };
+
+  const columns = [
+    {
+      title: t('SourceTable.Provider'),
+      dataIndex: 'provider',
+      key: 'provider',
+      render: (value: string) => <Link to="/sources-setting">{value}</Link>
+    },
+    {
+      title: t('SourceTable.Markup'),
+      dataIndex: 'markup',
+      key: 'markup',
+    },
+    {
+      title: t('SourceTable.MonitorStock'),
+      dataIndex: 'monitorStock',
+      key: 'monitorStock',
+    },
+    {
+      title: t('SourceTable.MonitorPrice'),
+      dataIndex: 'monitorPrice',
+      key: 'monitorPrice',
+    },
+    {
+      title: t('SourceTable.PriceDecrease'),
+      dataIndex: 'monitorDecrease',
+      key: 'monitorDecrease',
+    },
+    {
+      title: t('SourceTable.DecreaseLimit'),
+      dataIndex: 'decreaseLimit',
+      key: 'decreaseLimit',
+    },
+    {
+      title: t('SourceTable.Template'),
+      dataIndex: 'template',
+      key: 'template',
+    },
+    {
+      title: t('SourceTable.ShippingPolicy'),
+      dataIndex: 'shippingPolicy',
+      key: 'shippingPolicy',
+    },
+    {
+      title: t('SourceTable.ReturnPolicy'),
+      dataIndex: 'returnPolicy',
+      key: 'returnPolicy',
+    }
+  ];
+
+
+  //  const handleRowClick = (record: string, index: number) => e: 
   return (
     <div className="sources-table-container">
-      <table className="table sources-table">
+      {/* <table className="table sources-table">
         <thead className="source-table-head">
           <tr>
             <th> {t('SourceTable.Provider')}</th>
@@ -63,8 +115,8 @@ export const SourcesTable = () => {
               <span className="mr-0 mr-sm-2"> {t('SourceTable.ItemCountryCode')}</span>
             </th>
           </tr>
-        </thead>
-
+        </thead> */}
+      {/* 
         {sourceData.map((obj) => {
           const {
             id,
@@ -136,9 +188,13 @@ export const SourcesTable = () => {
             </tbody>
           );
         })}
-      </table>
+      </table> */}
 
-      <Pagination />
+      <DataTable columns={columns} dataSource={dataSource} 
+      // onRow={() =>{
+      //   return {onClick: (e: React.MouseEvent<Element, MouseEvent>) => console.log('CLICKED TABLE ROW', e)};
+      // }}
+      />
     </div>
   );
 };

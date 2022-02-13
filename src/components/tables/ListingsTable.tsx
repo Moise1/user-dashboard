@@ -4,7 +4,6 @@ import moment from 'moment';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
-import Pagination from '../common/Pagination';
 import '../../sass/light-theme/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 import { PopupModal } from '../modals/PopupModal';
@@ -117,7 +116,6 @@ export const ListingsTable = (tableProps: props) => {
         </tbody>
       </table>
       <OrderStateModal AoDisabledModal={AoDisabledModal} setAoDisabledModal={setAoDisabledModal} />
-      <Pagination />
     </div>
   );
 };

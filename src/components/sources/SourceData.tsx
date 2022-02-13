@@ -1,4 +1,4 @@
-export const sourceData = [
+export const dataSource = [
   {
     id: 1,
     provider: 'AO.com',
