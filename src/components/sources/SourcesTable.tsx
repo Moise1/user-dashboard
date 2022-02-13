@@ -11,7 +11,7 @@ import Pagination from '../common/Pagination';
 import '../../sass/light-theme/sources-table.scss';
 import '../../sass/light-theme/popover.scss';
 
-const SourcesTable = () => {
+export const SourcesTable = () => {
   const history = useHistory();
   const [, setSupplierValue] = useState('Supplier');
 
@@ -143,4 +143,3 @@ const SourcesTable = () => {
   );
 };
 
-export default SourcesTable;

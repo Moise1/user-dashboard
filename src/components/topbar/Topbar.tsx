@@ -20,7 +20,7 @@ interface Props {
   handleSidebarMobile: () => void;
 }
 
-const Topbar = (props: Props) => {
+export const Topbar = (props: Props) => {
   const { handleSidebarMobile } = props;
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -107,4 +107,3 @@ const Topbar = (props: Props) => {
   );
 };
 
-export default Topbar;
