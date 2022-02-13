@@ -42,7 +42,7 @@ export const { pricingRulesSuccess } = pricingRulesSlice.actions;
 
 export const fetchPricingRules = () => async (dispatch: Dispatch) => {
   try {
-    await client.post('/User/Credentials/Login',{email:"USERNAME",password:"PASSWORD",rememberMe:true});
+    //await client.post('/User/Credentials/Login',{email:"USERNAME",password:"PASSWORD",rememberMe:true});
     const res = await client.post('/Pricing/Get');
     dispatch(pricingRulesSuccess(res.data));
     console.log('RES DATA FROM AXIOS', res.data);
