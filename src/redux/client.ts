@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const client = axios.create({
   withCredentials:true,
-  baseURL: 'http://dev-app.hustlegotreal.com/Api',
+  baseURL: 'http://localhost:3000/Api',
   validateStatus: (status) => (status >= 200 && status <= 404) || status === 500 || status === 452
 });
 
