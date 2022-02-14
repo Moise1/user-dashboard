@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { Dispatch } from 'redux';
 import {client} from '../../client';
 
@@ -42,7 +43,12 @@ export const { pricingRulesSuccess } = pricingRulesSlice.actions;
 
 export const fetchPricingRules = () => async (dispatch: Dispatch) => {
   try {
-    const res = await client.get('/Pricing');
+    await client.post('/User/Credentials/Login',{email:'USER',password:'PASSWORD',rememberMe:true});
+    const channels = (await client.get<{channels:{id:number}[]}>('/User/Channels/Get')).data?.channels;
+    if(channels.length > 0)
+      axios.defaults.headers.common['channel'] = channels[0].id;//Not working, WHY?
+
+    const res = await client.post('/Pricing/Get',{},{headers:{channel:channels[0].id}});//I had to set manually to test it
     dispatch(pricingRulesSuccess(res.data));
     console.log('RES DATA FROM AXIOS', res.data);
   } catch (error) {
