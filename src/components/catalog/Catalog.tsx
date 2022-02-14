@@ -71,9 +71,14 @@ export const Catalog = () => {
           <p className="all-selected-products" onClick={handleAllProudctsModal}>
             View all selected products
           </p>
-          <p className="clear-all" onClick={handleClearAllSelectedProducts}>
-            Clear all
-          </p>
+          <div className="clear-list-container">
+            <p className="clear-all" onClick={handleClearAllSelectedProducts}>
+              Clear all
+            </p>
+            {!!allProducts.length && (
+              <SuccessBtn className="list-btn-mobile">List {allProducts.length} product(s)</SuccessBtn>
+            )}
+          </div>
         </div>
         <div className="filters-container">
           <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
