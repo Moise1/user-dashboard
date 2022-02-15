@@ -30,11 +30,8 @@
       .stock-area {
         margin-top: 1rem;
         width: 100%;
-        .radio {
-          width: 100%;
-        }
-        .stock-input {
-          width: 5vw !important;
+        .blue-input {
+          width: 50vw;
         }
         .limit,
         .stock {
@@ -54,59 +51,41 @@
     }
     .config-btns {
       margin-top: 2rem;
+      border: 2px solid red;
     }
   }
 }
 
-// Mobile screen sizes
+// Tablet's screen sizes
 
 @media only screen and(max-width: 750px) {
   .channel-settings {
     .content {
       .action-btns {
-        right: 20%;
-        top: 85%;
+        position: relative;
+        margin: 0 0 50% 0;
         flex-direction: row;
-        column-gap: 10px;
+        column-gap: 0px;
+        width: 100vw !important;
+        .reset-btn,
+        .success-btn {
+          width: 500px !important;
+        }
       }
-    }
-  }
-
-  .description-and-controls {
-    margin-top: 2rem;
-  }
-  .input-container,
-  .switch-container,
-  .limit-section {
-    margin: 0 auto;
-  }
-
-  .limit-section {
-    height: auto;
-    display: grid !important;
-    .limit-area {
-      .blue-input {
-        margin-top: -1rem;
-      }
-    }
-  }
-
-  .description-and-controls {
-    .stock-container{
-      .stock-area{
-        .radio{
-          margin-bottom: 1rem;
-        };
-        .stock{
-         
-          row-gap: 1rem;
-          .stock-input{
-            margin-top: -.6rem;
-            width: 35vw !important;
+    
+      .limit-area,
+      .stock-area {
+        width: 30%;
+        height: 100px;
+        position: relative;
+        .stock, .limit{
+          display: block !important;
+          .stock-input, .limit-input{
+            margin-top: .4rem;
+            width: 17vw !important;
           }
         }
-        
       }
-    };
+    }
   }
 }

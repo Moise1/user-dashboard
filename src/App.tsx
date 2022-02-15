@@ -14,11 +14,11 @@ import {
   BrowserExtensions,
   VaProfiles,
   ChannelSettings,
-  Sources,
   GetStarted,
   Catalog,
   SourcesTable,
-  Dashboard
+  Dashboard,
+  SourcesSettings
 } from './components';
 
 import './sass/index.scss';
@@ -75,8 +75,8 @@ export const App = withRouter(({ history }) => {
               <Route path="/home" component={Listings} />
               <Route path="/listings" component={Listings} />
               <Route path="/orders" component={Orders} />
-              <Route path="/sources-setting" component={Sources} />
-              <Route path="/sources" component={SourcesTable} />
+              <Route path="/sources-settings" component={SourcesSettings} />
+              <Route path="/sources-table" component={SourcesTable} />
               <Route path="/channel" component={ChannelSettings} />
               <Route path="/new-channel" component={NewChannel} />
               <Route path="/services" component={Services} />

@@ -9,7 +9,7 @@ export { PricingRules } from './pricing-rules/PricingRules';
 export { BrowserExtensions } from './browser-extensions/BrowserExtensions';
 export { VaProfiles } from './va-profiles/VaProfiles';
 export { ChannelSettings } from './chanel/ChannelSettings';
-export { Sources } from './sources/Sources';
+export { SourcesSettings } from './sources/SourcesSettings';
 export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
 export {SourcesTable} from './sources/SourcesTable';

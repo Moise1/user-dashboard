@@ -79,7 +79,7 @@ export const Sidebar = (props: Props) => {
 
   const settingsListArray = [
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
-    { id: 7, listName: t('Menu.Sources'), onClick: () => routeChange('/sources') },
+    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
     { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
     { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
     { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },

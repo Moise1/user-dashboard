@@ -2,16 +2,15 @@
 
 // Large and extra large screens
 
-.source-container {
+.sources-container {
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: fill-available;
   padding: 0 6rem;
 
-  .source-description {
-    margin-top: 1rem;
+  .sources-description {
+    margin: 4rem 0 0 0;
     display: flex;
-
     .beta-area {
       background: $white;
       width: 25%;
@@ -29,6 +28,7 @@
   }
   .tabs-container {
     height: auto;
+    overflow: hidden;
     background: $white;
     border-radius: 10px;
     padding: 0 1rem;
@@ -49,39 +49,42 @@
         &.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
           color: $light-primary !important;
         }
-        .source-settings {
-          width: 55vw;
+        .sources-settings-contents {
+          width: auto;
+          height: 60vh;
+          overflow-y: auto;
+          overflow-x: hidden;
+          .row {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    };
+    .right-section {
+      position: fixed;
+      right: 4%;
+      width: 15%;
+      margin-top: 3%;
+      height: 130px;
+      .action-btns {
+        margin-top: 5px;
+        width: auto;
+        row-gap: 7px;
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        & > *{
+          margin: 0 auto;
+          width: 200px;
         }
       }
     }
-
-    .right-section {
-      position: sticky;
-      margin-top: 6.5rem;
-      height: 40vh;
-      & > * {
-        margin-bottom: 1rem;
-      }
-      
-      .action-btns{
-        display: grid !important;
-        height: 25vh !important;
-      }
-    };
   }
+
+  
 }
 
-.back-to-supplier {
-  color: $primary;
-  font-size: $font-large;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.surce-configuration-name {
+.sources-configuration-name {
   font-weight: bold;
   font-size: $font-large;
   color: black;
@@ -98,22 +101,6 @@
   border-radius: 10px 10px 0px 0px;
   width: 42%;
   color: $gray;
-}
-
-.tab-list-items {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  & h4 {
-    padding: 20px 10px;
-    font-size: $font-medium;
-    font-weight: bold;
-    margin-bottom: 0;
-    color: $gray;
-  }
 }
 
 .active-tab-bar {
@@ -150,36 +137,53 @@
   justify-content: space-between;
 }
 
-.setting-list-item h4 {
-  margin-top: $spacer;
-  font-weight: $bold;
-  font-size: $font-medium;
-  color: $black;
-}
-.setting-list-item p {
-  font-weight: 400;
-  font-size: $font-small;
-  color: $gray;
-  max-width: 400px;
-}
-
 .selector-container {
-  margin-top: $spacer;
   display: flex;
   justify-content: end;
 }
 
-@media (max-width: 1030px) {
-  .tablist {
-    width: 100% !important;
+@media only screen and(max-width: 1030px) {
+  .sources-container{
+    position: relative;
   }
-  .tab-settings {
-    width: 80%;
+  .sources-description {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    .beta-area {
+      width: 55vw !important;
+      margin: 0 auto;
+    }
   }
-}
+  .tabs-container {
+    overflow: scroll !important;
+    display: block !important;
+    .sources-settings-contents{
+      width: 80vw !important;
+      height: auto !important;
+      margin: 0 auto !important;
+    }
+    .right-section {
+      display: flex;
+      top: 0 !important;
+      flex-direction: row;
+      position: relative !important;
+      margin: 0 1rem !important;
+      width: 100% !important;
+      .action-btns {
+        flex-direction: row !important;
+        height: 48px !important;
+        & > * {
+         width: stretch !important;
+         margin: 0 !important;
+        }
+      }
+      .selector {
+        width: 40vw !important;
+      }
+    }
+  };
 
-@media (max-width: 750px) {
-  .tab-settings {
-    width: 100%;
-  }
+ 
 }
