@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Dispatch } from 'redux';
 import { client } from '../../client';
 
@@ -44,7 +43,7 @@ export const pricingRulesSlice = createSlice({
 });
 
 export const pricingRulesReducer = pricingRulesSlice.reducer;
-export const {pricingRulesPending, pricingRulesSuccess } = pricingRulesSlice.actions;
+export const { pricingRulesPending, pricingRulesSuccess } = pricingRulesSlice.actions;
 
 export const fetchPricingRules = () => async (dispatch: Dispatch) => {
   dispatch(pricingRulesPending());
@@ -55,8 +54,8 @@ export const fetchPricingRules = () => async (dispatch: Dispatch) => {
       rememberMe: true
     });
     const channels = (await client.get<{ channels: { id: number }[] }>('/User/Channels/Get')).data?.channels;
-    if (channels.length > 0) {
-      axios.defaults.headers.common['channel'] = channels[0].id; //Not working, WHY?
+    if (channels?.length > 0) {
+      client.defaults.headers.common['channel'] = channels[0].id; //Not working, WHY?
     }
     const res = await client.get('/Pricing/Get', { headers: { channel: channels[0].id } }); //I had to set manually to test it
 

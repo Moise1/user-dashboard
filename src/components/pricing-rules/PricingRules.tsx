@@ -20,7 +20,9 @@ export const PricingRules =  () => {
     dispatch(fetchPricingRules());
     setPricingRules(rules);
   },[]);
-
+  
+  console.log('pricng rule results', pricingRules);
+  
   const columns = [
     {
       title: 'Source',

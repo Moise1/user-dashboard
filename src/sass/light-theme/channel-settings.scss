@@ -40,18 +40,14 @@
         }
       }
       .description-area {
-        h4 {
+        h4, p {
           font-weight: bold;
-          font-size: $font-large;
         }
-        p {
-          font-size: $font-small;
-        }
+      
       }
     }
     .config-btns {
       margin-top: 2rem;
-      border: 2px solid red;
     }
   }
 }
