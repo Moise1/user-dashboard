@@ -60,10 +60,6 @@ export const Subscriptions = () => {
   return (
     <Layout className="subscriptions-container">
       <div className="carousel-container">
-        <Space className="control-btns-container">
-          <ChevronLeft onClick={handlePrev} className="chevron-left" />
-          <ChevronRight onClick={handleNext} className="chevron-right" />
-        </Space>
         <StatusBar>
           <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
           <p className="subscriptions-limit">
@@ -105,6 +101,10 @@ export const Subscriptions = () => {
             </Card>
           ))}
         </Carousel>
+        <Space className="control-btns-container">
+          <ChevronLeft onClick={handlePrev} className="chevron-left" />
+          <ChevronRight onClick={handleNext} className="chevron-right" />
+        </Space>
       </div>
     </Layout>
   );

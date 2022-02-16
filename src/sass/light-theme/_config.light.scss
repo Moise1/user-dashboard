@@ -24,7 +24,6 @@ $black: #000;
 $ash-gray: #bfbfbf;
 
 // Input colors
-
 $input-background: #fff;
 $input-background-secondary: #f2f8ff;
 
@@ -71,6 +70,30 @@ a {
     transition: 0.5s;
   }
 }
+
+
+// Custom font-sizes for elements
+p{
+  font-size: medium;
+};
+
+h1{
+  font-size: 1.8rem;
+};
+
+h2{
+  font-size: 1.5rem;
+};
+
+h3{
+  font-size: 1.4rem;
+};
+
+h4{
+  font-size: 1.2rem;
+}
+
+
 
 // Checkbox styles
 

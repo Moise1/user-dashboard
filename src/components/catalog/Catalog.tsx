@@ -1,12 +1,9 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Layout, Card, Pagination } from 'antd';
-import { Search } from 'react-feather';
+import { Search, ChevronLeft, ChevronRight } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../small-components/ActionBtns';
-import {
-  // TableActionBtns,
-  FiltersBtn
-} from '../small-components/TableActionBtns';
+import {FiltersBtn} from '../small-components/TableActionBtns';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { PopupModal } from '../modals/PopupModal';
@@ -15,6 +12,9 @@ import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
 import { t } from '../../global/transShim';
 import '../../sass/light-theme/catalog.scss';
+
+
+type paginationSteps = 'prev' | 'next' | 'page' | 'jump-prev' | 'jump-next' ;
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -57,6 +57,13 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
+
+  const itemRender = (page: number, type: paginationSteps, originalElement: ReactNode): ReactNode =>{
+    if(type === 'prev') return <ChevronLeft/>;
+    if(type === 'next') return <ChevronRight/>;
+    return originalElement;
+  };
+  
   return (
     <Layout className="catalog-container">
       <div className="actions-section">
@@ -179,7 +186,7 @@ export const Catalog = () => {
         </div>
         <div className="pagination-addall-container">
           <div className="pagination-container">
-            <Pagination defaultCurrent={1} total={600} responsive />
+            <Pagination defaultCurrent={1} total={600} responsive itemRender={itemRender}/>
           </div>
           <div className="adall-container">
             {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}

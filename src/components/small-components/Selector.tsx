@@ -1,14 +1,24 @@
 import { useState } from 'react';
 import { Select, Input, Button } from 'antd';
-import '../../sass/light-theme/selector.scss';
 import { PlusCircle } from 'react-feather';
+import {Rule} from '../../redux/slices/pricing-rules/pricingRules';
+import '../../sass/light-theme/selector.scss';
 
 interface Props {
-  children: { id: number; value: string; alias?: string }[];
+  children: Array<dummyUsersTypes| Rule>;
   defaultValue: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
 }
+
+type dummyUsersTypes = {
+  value?: string,
+  id?: number,
+  alias?: string,
+  phone?: string,
+  otp?: string,
+  password?: string
+};
 
 const { Option } = Select;
 
@@ -20,8 +30,8 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const [data] = useState<Props['children']>(children);
 
   const options = data.map((d) => (
-    <Option key={d.id} value={d.alias ? d.alias : d.value}>
-      {d.alias ? d.alias : d.value}
+    <Option key={d.id} value={d.id}>
+      {d.id}
     </Option>
   ));
   const handleOptionClick = (): void => {

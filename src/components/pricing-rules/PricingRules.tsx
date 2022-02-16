@@ -1,44 +1,33 @@
 import {useState, useEffect} from 'react';
 import { Form, Input, Button } from 'antd';
+import {Loader} from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-// import {Rule} from '../../redux/reducers/pricing-rules';
+import {Rule} from '../../redux/slices/pricing-rules/pricingRules';
 import { fetchPricingRules } from 'src/redux/slices/pricing-rules/pricingRules';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
-import { dummyPricingRulesOptions, dummyPricingRulesData } from '../../dummy-data/dummyData';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import '../../sass/light-theme/pricing-rules.scss';
 
 
-export interface Rule {
-  id: number;
-  userId: string;
-  sourceId: number;
-  priceFrom: number;
-  priceTo: number;
-  markup: number;
-  createdOn: Date;
-  active: false;
-  channelAuthId: number;
-}
-
 export const PricingRules =  () => {
   const [pricingRules, setPricingRules] = useState<Rule[]>([]);
   const dispatch = useAppDispatch();
-  const {rules} = useAppSelector(state => state.pricingRules);
+  const {rules, loading} = useAppSelector(state => state.pricingRules);
   
   useEffect(()=>{
     dispatch(fetchPricingRules());
     setPricingRules(rules);
   },[]);
-
-  console.log('PRICING RULES DATA', pricingRules);
+  
+  console.log('pricng rule results', pricingRules);
+  
   const columns = [
     {
       title: 'Source',
-      dataIndex: 'source',
-      key: 'source'
+      dataIndex: 'sourceId',
+      key: 'sourceId'
     },
     {
       title: 'Price From',
@@ -57,8 +46,8 @@ export const PricingRules =  () => {
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status'
+      dataIndex: 'active',
+      key: 'active'
     },
 
     {
@@ -79,7 +68,7 @@ export const PricingRules =  () => {
           </p>
           <Form className="form" layout="vertical">
             <Form.Item label="Source">
-              <Selector defaultValue="Select a source">{dummyPricingRulesOptions}</Selector>
+              <Selector defaultValue="Select a source">{pricingRules}</Selector>
             </Form.Item>
             <Form.Item label="Price From">
               <Input className="blue-input" type="text" placeholder="Set a price from" />
@@ -93,7 +82,7 @@ export const PricingRules =  () => {
             <Button className="rule-btn">Add rule</Button>
           </Form>
         </StatusBar>
-        <DataTable dataSource={dummyPricingRulesData} columns={columns} />
+        <DataTable dataSource={pricingRules} columns={columns} loading={{indicator: <Loader/>, spinning: loading}}/>
       </div>
     </Layout>
   );

@@ -1,6 +1,8 @@
+import {  ReactNode } from 'react';
 import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
-import { ReactNode } from 'react';
+import {Rule} from '../../redux/slices/pricing-rules/pricingRules';
+
 
 type ListingsTypes = {
   id: number;
@@ -32,25 +34,33 @@ type OrdersTypes = {
   state: JSX.Element | string;
 };
 
-type pricingRulesTypes = {
-  key: string;
-  priceFrom: number;
-  priceTo: number;
-  markup: number;
-  status: JSX.Element;
-  options: JSX.Element;
-};
 
+
+type sourcesTypes = {
+  id: number;
+  provider: string;
+  markup: number
+  decreaseLimit: number;
+  template: string,
+  returnPolicy: string,
+  itemPostcode: string,
+  itemCity: string,
+  itemCountry: string,
+  shippingPolicy: string,
+  autoOrdering: string
+}
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsTypes | OrdersTypes | pricingRulesTypes>;
+  dataSource: Array<ListingsTypes | OrdersTypes | Rule | sourcesTypes>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
   handleBulkListingModal?: () => void;
   page?: string;
+  loading?: boolean | ReactNode
 }
+
 
 export const DataTable: React.FC<Props> = (props: Props) => {
   const {

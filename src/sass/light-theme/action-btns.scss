@@ -59,6 +59,10 @@
 }
 .reset-btn {
   background: $ash-gray;
+  &:hover{
+    background: $ash-gray;
+    color: $white;
+  }
 }
 
 .danger-btn,

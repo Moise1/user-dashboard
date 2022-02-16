@@ -3,15 +3,14 @@ import { useHistory, Link } from 'react-router-dom';
 import { Layout, Tabs } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import AutoOrdering from './AutoOrdering';
-import { SourceSettings } from './SourceSettings';
+import { SourcesSettingsContents } from './SourcesSettingsContents';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/sources-table.scss';
-import '../../sass/light-theme/sources-setting.scss';
+import '../../sass/light-theme/sources-settings.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 
-export const Sources = () => {
+export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const [to, setTo] = useState<string>('');
@@ -28,8 +27,8 @@ export const Sources = () => {
   const handleOptionChange = (value: string) => setSupplierValue(value);
 
   return (
-    <Layout className="source-container">
-      <div className="source-description">
+    <Layout className="sources-container">
+      <div className="sources-description">
         <Link to={to} className="back-link" onClick={() => initialStateSourceSettings()}>
           <span className="back-arrow">
             <ChevronLeft />
@@ -42,14 +41,14 @@ export const Sources = () => {
         </p>
       </div>
 
-      <h1 className="surce-configuration-name">
+      <h1 className="sources-configuration-name">
         Source: <span> {supplierValue}</span>
       </h1>
 
       <div className="tabs-container">
         <Tabs type="card" className="tabs">
-          <TabPane tab="Source Settings" key="1" className="tab-pane">
-            <SourceSettings />
+          <TabPane tab="Sources Settings" key="1" className="tab-pane">
+            <SourcesSettingsContents />
           </TabPane>
           <TabPane tab="Auto Ordering" key="2" className="tab-pane">
             <AutoOrdering />

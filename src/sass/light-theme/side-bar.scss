@@ -20,11 +20,11 @@
   overflow: hidden;
   ::-webkit-scrollbar {
     display: none;
-  }
+  };
 
   .ant-layout-sider-children {
     overflow: scroll;
-  }
+  };
 
   .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
     width: 80%;
@@ -34,7 +34,7 @@
     align-content: center;
     align-items: center;
     border-right: none !important;
-  }
+  };
 
   .menu-item,
   .ant-menu-submenu {
@@ -52,7 +52,7 @@
         color: $white;
       }
     }
-  }
+  };
 
   .sidebar-icon {
     margin-left: -0.3rem;
@@ -66,7 +66,8 @@
     .sidebar-icon > * {
       stroke: $white !important;
     }
-  }
+    
+  };
 
   .menu-item:hover,
   .ant-menu-submenu-vertical:hover,
@@ -86,10 +87,12 @@
   .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
     background: transparent !important;
     font-weight: $bold;
+    .menu-list{
+      font-weight: $bold;
+    }
   }
 
   // Hover transitions
-
   .ant-menu-inline.ant-menu-root .ant-menu-item,
   .ant-menu-inline.ant-menu-root .ant-menu-submenu-title,
   .ant-menu-title-content,
@@ -152,8 +155,8 @@
   .sider {
     display: none;
     z-index: 3;
-  }
-
+  };
+  
   .overlay-sidebar-mobile {
     position: fixed;
     right: 0;
