@@ -21,7 +21,6 @@ export const PricingRules =  () => {
     setPricingRules(rules);
   },[]);
 
-  console.log('rules results', pricingRules);
   const columns = [
     {
       title: 'Source',
