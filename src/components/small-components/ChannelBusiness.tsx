@@ -8,7 +8,7 @@ export const ChannelBusiness = () => {
     <>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Use Business Policies</h4>
+          <h2>Use Business Policies</h2>
           <p>
             Use your eBay seller profiles for shipping, returns and payments. If enabled, please configure the values
             for every source under Settings &gt; Sources
@@ -21,7 +21,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Returns</h4>
+          <h2>Returns</h2>
         </Col>
         <Col span={8}>
           <Selector defaultValue="30 days">{dummyDuration}</Selector>
@@ -30,7 +30,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Terminate if Out of Stock for too long</h4>
+          <h2>Terminate if Out of Stock for too long</h2>
           <p>
             Automatically terminate listings that have been Out Of Stock for a number of consecutive days. It can take
             up to 24h.
@@ -42,7 +42,7 @@ export const ChannelBusiness = () => {
       </Row>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Delivery</h4>
+          <h2>Delivery</h2>
         </Col>
         <Col span={8}>
           <Selector defaultValue="Parcelforce 24, 1 day">{dummyDeliver}</Selector>
@@ -51,7 +51,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col className="description-area" span={12}>
-          <h4>Forbidden words in URL</h4>
+          <h2>Forbidden words in URL</h2>
           <p>Determines whether the system will also look into the Source URL to find any of the fobidden words.</p>
         </Col>
         <Col span={8}>
@@ -61,7 +61,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col className="setting-list-item" span={12}>
-          <h4>Dispatch Days</h4>
+          <h2>Dispatch Days</h2>
         </Col>
         <Col span={8}>
           <Input className="blue-input" value="Other test return" />
@@ -70,7 +70,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Other test return</h4>
+          <h2>Other test return</h2>
           <p>
             Global Shipping Program (GSP) aims to make international shipping easy for eBay sellers. With GSP you only
             have to ship your product to a warehouse in your own country, then eBay takes over and handles international
@@ -84,7 +84,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Location Postcode</h4>
+          <h2>Location Postcode</h2>
           <p>Postal code to use as the location of your items.</p>
         </Col>
         <Col span={8}>
@@ -94,7 +94,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Location City</h4>
+          <h2>Location City</h2>
           <p>City to use as the location of your items.</p>
         </Col>
         <Col span={8}>
@@ -104,7 +104,7 @@ export const ChannelBusiness = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>eBay Payment method</h4>
+          <h2>eBay Payment method</h2>
         </Col>
         <Col span={8}>
           <Radio>eBay Managed Payments</Radio>

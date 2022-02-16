@@ -28,7 +28,7 @@ const AutoOrdering = () => {
     <div className={accountConfig ? 'adjusted-main-container' : 'main-container'}>
       <div className="auto-ordering">
         <div className="setting-list-item">
-          <h4>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h4>
+          <h2>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h2>
           <p>Disabling auto-ordering will require you to manually process new orders.</p>
         </div>
         <Switch onChange={showAccountConfig} className="switch" />
@@ -105,12 +105,12 @@ const AutoOrdering = () => {
             </fieldset>
             <div className="disable-account">
               <div className="disable-account-text">
-                <h4>
+                <h2>
                   Disable account{' '}
                   <span>
                     <img src={hand} className={activeAccount ? 'hand' : 'gray-hand'} />
                   </span>
-                </h4>
+                </h2>
                 <p>If you deactivate this account, orders will be placed through the activated accounts.</p>
               </div>
               <Switch onChange={handleActiveAccount} />

@@ -1,7 +1,4 @@
-import {
-  Input, Row, Col,
-  Radio
-} from 'antd';
+import { Input, Row, Col, Radio } from 'antd';
 import { Switch } from '../small-components/Switch';
 
 export const ChannelMonitoring = () => {
@@ -9,7 +6,7 @@ export const ChannelMonitoring = () => {
     <>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Markup %</h4>
+          <h2>Markup %</h2>
           <p>
             Percentage added to supplier’s price, which will determine the price of your products. For example, a 40%
             markup means that a product that costs £100 will be on sale for £140.
@@ -22,7 +19,7 @@ export const ChannelMonitoring = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Monitor stock</h4>
+          <h2>Monitor stock</h2>
           <p>
             If the supplier is out of stock of a product, we will prevent people from buying it on your store. When it
             is available again, we will automatically update your store again.
@@ -35,7 +32,7 @@ export const ChannelMonitoring = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Monitor price</h4>
+          <h2>Monitor price</h2>
           <p>
             If the supplier changes the price of a product, we will automatically update accordingly to keep your profit
             with the corresponding markup.
@@ -47,7 +44,7 @@ export const ChannelMonitoring = () => {
       </Row>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Monitor Price Decrease</h4>
+          <h2>Monitor Price Decrease</h2>
           <p>
             If the supplier reduces the price of a product, we will also reduce it in your store. If you turn this off,
             we will only update the price when it goes up in the supplier&apos;s catalog.
@@ -67,7 +64,7 @@ export const ChannelMonitoring = () => {
             <Radio className="radio">No Limit</Radio>
             <div className="limit">
               <Radio className="radio">Limit %</Radio>
-              <Input value="30" className="blue-input limit-input"/>
+              <Input value="30" className="blue-input limit-input" />
             </div>
           </div>
         </Col>
@@ -75,7 +72,7 @@ export const ChannelMonitoring = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Min. Quantity</h4>
+          <h2>Min. Quantity</h2>
           <p>HGR will maintain this minimun quantity while the item is in stock.</p>
         </Col>
         <Col span={8} className="input-container">
@@ -85,7 +82,7 @@ export const ChannelMonitoring = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Pending Price in .99</h4>
+          <h2>Pending Price in .99</h2>
           <p>
             The prices for all the items will end in .99. If set to NO, the price will be the exact result from applying
             the markup to the price in the source.
@@ -98,7 +95,7 @@ export const ChannelMonitoring = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Out of stock action</h4>
+          <h2>Out of stock action</h2>
           <p>
             When an item is Out Of Stock at the source the quantity of the product is set to 0. Setting available
             quantity to 0 requires the “Out of stock” option enabled on eBay settings. If this feature is not enabled on

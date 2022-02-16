@@ -2,14 +2,16 @@
 
 // Large and extra large screens;
 .upper-section {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   h3 {
     color: $primary;
   }
-  .external-links, .warning{
+  .external-links,
+  .warning {
     background: $light-gray;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem;
     border-radius: 19px;
 
     & > a {
@@ -48,26 +50,16 @@
         justify-content: space-between;
       }
     }
-    .description-area {
-      h4 {
-        font-weight: bold;
-        font-size: $font-large;
-      }
-      p {
-        font-size: $font-small;
-      }
-    }
   }
 }
 
+// Small screen sizes
 
-// Small screen sizes 
-
-@media only screen and (max-width: 750px){
-  .upper-section{
+@media only screen and (max-width: 750px) {
+  .upper-section {
     display: flex;
     flex-direction: column-reverse;
-    & > *{
+    & > * {
       margin-bottom: 1rem;
     }
   }

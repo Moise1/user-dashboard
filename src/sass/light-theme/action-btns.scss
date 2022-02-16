@@ -10,7 +10,7 @@
 .btns-container,
 .btns-container-description,
 .btns-container-details,
-.btns-container-options{
+.btns-container-options {
   margin-top: 2rem;
   display: flex;
   justify-content: flex-start;
@@ -28,7 +28,7 @@
   border-radius: 8px;
   color: $white;
   width: auto;
-};
+}
 
 .success-btn,
 .confirm-btn,
@@ -39,27 +39,28 @@
 .delete-btn,
 .warning-btn {
   @include action-btn;
-};
-
+}
 
 .success-btn {
   background: $green;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $green;
     color: $white;
   }
-};
+}
 
-.confirm-btn{
+.confirm-btn {
   background: $light-primary;
-  &:hover, &:focus{
+  &:hover,
+  &:focus {
     background: $light-primary;
     color: $white;
   }
 }
 .reset-btn {
   background: $ash-gray;
-  &:hover{
+  &:hover {
     background: $ash-gray;
     color: $white;
   }
@@ -68,7 +69,8 @@
 .danger-btn,
 .delete-btn {
   background: $red;
-  &:hover, &:focus{
+  &:hover,
+  &:focus {
     background: $red;
     color: $white;
   }
@@ -82,9 +84,10 @@
   }
 }
 
-.cancel-btn{
+.cancel-btn {
   background: $ash-gray;
-  &:hover, &:focus{
+  &:hover,
+  &:focus {
     background: $ash-gray;
     color: $white;
   }
@@ -94,8 +97,10 @@
 
 @media only screen and (max-width: 750px) {
   .action-btns,
-  .btns-container,.btns-container-options, .btns-container-description,
-  .btns-container-details{
+  .btns-container,
+  .btns-container-options,
+  .btns-container-description,
+  .btns-container-details {
     font-size: $font-small;
     padding: 0.6rem 1.3rem;
     .success-btn {
@@ -103,21 +108,21 @@
     }
   }
 
-
   .form {
-    padding: 5rem 0;
-  };
+    padding: 1rem 0;
+  }
 
-  .btns-container,.btns-container-options, .btns-container-description,
-    .btns-container-details{
-     justify-content: space-between;
-     width: 100% !important;
-     & > *{
-       margin-left: .3rem;
-     }
-     .success-btn{
-       position: static;
-     }
+  .btns-container,
+  .btns-container-options,
+  .btns-container-description,
+  .btns-container-details {
+    justify-content: space-between;
+    width: 100% !important;
+    & > * {
+      margin-left: 0.3rem;
     }
- 
+    .success-btn {
+      position: static;
+    }
+  }
 } ;

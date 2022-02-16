@@ -39,12 +39,6 @@
           justify-content: space-between;
         }
       }
-      .description-area {
-        h4, p {
-          font-weight: bold;
-        }
-      
-      }
     }
     .config-btns {
       margin-top: 2rem;
@@ -68,16 +62,18 @@
           width: 500px !important;
         }
       }
-    
+
       .limit-area,
       .stock-area {
         width: 30%;
         height: 100px;
         position: relative;
-        .stock, .limit{
+        .stock,
+        .limit {
           display: block !important;
-          .stock-input, .limit-input{
-            margin-top: .4rem;
+          .stock-input,
+          .limit-input {
+            margin-top: 0.4rem;
             width: 17vw !important;
           }
         }

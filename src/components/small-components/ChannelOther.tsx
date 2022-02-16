@@ -5,7 +5,7 @@ export const ChannelOther = () => {
     <>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>eBay username</h4>
+          <h2>eBay username</h2>
           <p>
             This value needs to match your actual eBay username, otherwise the extension won&apos;t be able to connect.
           </p>
@@ -17,7 +17,7 @@ export const ChannelOther = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Fees Percentage</h4>
+          <h2>Fees Percentage</h2>
           <p>
             To calculate the profit earned on every listing (eBay FVF, PayPal Fee...). It is just an estimation and it
             doesn&apos;t affect your prices.

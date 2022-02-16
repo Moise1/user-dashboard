@@ -4,15 +4,31 @@
   //Default fonts
 
   :root {
-    $font-large: 0.8rem;
-    $heading-font: 1rem;
+    $font-xl: 1.1rem;
+    $font-large: 0.9rem;
+    $font-medium: 0.7rem;
+    $font-small: 0.5rem;
 
-    h1 {
-      font-size: $heading-font;
+    // Custom font-sizes for elements
+    p {
+      font-size: $font-small;
     }
 
-    span {
+    h1 {
+      font-size: $font-xl;
+    }
+
+    h2 {
       font-size: $font-large;
+      font-weight: $bold;
+    }
+
+    h3 {
+      font-size: $font-large;
+    }
+
+    h4 {
+      font-size: $font-medium;
     }
   }
 }

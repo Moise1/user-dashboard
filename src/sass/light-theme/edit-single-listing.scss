@@ -10,7 +10,7 @@
   .external-links,
   .warning {
     background: $light-gray;
-    padding: 0.8rem 1rem;
+    padding: 0.5rem;
     border-radius: 19px;
 
     & > a {
@@ -49,15 +49,5 @@
         justify-content: space-between;
       }
     }
-    .description-area {
-      h4 {
-        font-weight: bold;
-        font-size: $font-large;
-      }
-      p {
-        font-size: $font-small;
-      }
-    }
   }
 }
-

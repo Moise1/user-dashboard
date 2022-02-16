@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
-import {Loader} from 'react-feather';
+import { Loader } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import {Rule} from '../../redux/slices/pricing-rules/pricingRules';
+import { Rule } from '../../redux/slices/pricing-rules/pricingRules';
 import { fetchPricingRules } from 'src/redux/slices/pricing-rules/pricingRules';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
@@ -10,19 +10,18 @@ import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import '../../sass/light-theme/pricing-rules.scss';
 
-
-export const PricingRules =  () => {
+export const PricingRules = () => {
   const [pricingRules, setPricingRules] = useState<Rule[]>([]);
   const dispatch = useAppDispatch();
-  const {rules, loading} = useAppSelector(state => state.pricingRules);
-  
-  useEffect(()=>{
+  const { rules, loading } = useAppSelector((state) => state.pricingRules);
+
+  useEffect(() => {
     dispatch(fetchPricingRules());
     setPricingRules(rules);
-  },[]);
-  
+  }, []);
+
   console.log('pricng rule results', pricingRules);
-  
+
   const columns = [
     {
       title: 'Source',
@@ -61,7 +60,7 @@ export const PricingRules =  () => {
     <Layout className="pricing-rules-container">
       <div className="pricing-rules">
         <StatusBar className="pricing-rules-bar">
-          <h4 className="add-rule">Add new rule</h4>
+          <h2 className="add-rule">Add new rule</h2>
           <p className="status-description">
             The initial status of the rule will be “Disabled”, so that you can double check your set of rules before
             enabling it.
@@ -82,7 +81,7 @@ export const PricingRules =  () => {
             <Button className="rule-btn">Add rule</Button>
           </Form>
         </StatusBar>
-        <DataTable dataSource={pricingRules} columns={columns} loading={{indicator: <Loader/>, spinning: loading}}/>
+        <DataTable dataSource={pricingRules} columns={columns} loading={{ indicator: <Loader />, spinning: loading }} />
       </div>
     </Layout>
   );

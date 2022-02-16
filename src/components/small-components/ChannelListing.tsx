@@ -8,7 +8,7 @@ export const ChannelListing = () => {
     <>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Forbidden Words</h4>
+          <h2>Forbidden Words</h2>
           <p>
             Prevent any listing from being submitted if it contains any of the words below. Comma separated list. You
             can add words referencing prohibited items. The software will scan the description and title of the listing
@@ -22,7 +22,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Listings Duration</h4>
+          <h2>Listings Duration</h2>
           <p>Select the default duration of your listings. We recommend GTC if you have an eBay Store subscription.</p>
         </Col>
         <Col span={8}>
@@ -32,7 +32,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Terminate if Out of Stock for too long</h4>
+          <h2>Terminate if Out of Stock for too long</h2>
           <p>
             Automatically terminate listings that have been Out Of Stock for a number of consecutive days. It can take
             up to 24h.
@@ -44,7 +44,7 @@ export const ChannelListing = () => {
       </Row>
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Monitor Price Descrease</h4>
+          <h2>Monitor Price Descrease</h2>
           <p>
             If the supplier reduces the price of a product, we will also reduce it in your store. If you turn this off,
             we will only update the price when it goes up in the supplier’s catalog.
@@ -63,7 +63,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col className="description-area" span={12}>
-          <h4>Forbidden words in URL</h4>
+          <h2>Forbidden words in URL</h2>
           <p>Determines whether the system will also look into the Source URL to find any of the fobidden words.</p>
         </Col>
         <Col span={8}>
@@ -73,7 +73,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col className="setting-list-item" span={12}>
-          <h4>Minimum title length</h4>
+          <h2>Minimum title length</h2>
           <p>
             Don&apos; t submit any listing whose title has less characters than specified here. Ebay listings can have
             up to 80 characters in the title.
@@ -86,7 +86,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Title Suggestions</h4>
+          <h2>Title Suggestions</h2>
           <p>
             See a list of suggested keywords and titles when creating a new listing, based on the best selling items on
             that category.
@@ -99,7 +99,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Default Template</h4>
+          <h2>Default Template</h2>
           <p>
             Define the look and feel of your listings. You can see different options under the Settings &gt; Templates
           </p>
@@ -111,7 +111,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>EAN/UPC - Default value</h4>
+          <h2>EAN/UPC - Default value</h2>
           <p>
             To be used when EAN/UPC is not found automatically when creating a listing. It can also be &quot;Does not
             apply&quot;.
@@ -124,7 +124,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Quantity - Default value</h4>
+          <h2>Quantity - Default value</h2>
           <p>
             Default number of items for sale when creating a listing. This number can still be changed in each
             individual listing.{' '}
@@ -137,7 +137,7 @@ export const ChannelListing = () => {
 
       <Row className="description-and-controls">
         <Col span={12} className="description-area">
-          <h4>Min. Images</h4>
+          <h2>Min. Images</h2>
           <p>
             We will generate more images (based on the existing ones) so that your eBay listing has at least the
             specified number of images.{' '}
