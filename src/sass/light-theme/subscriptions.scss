@@ -112,7 +112,7 @@
   .control-btns-container {
     width: 80%;
     position: absolute;
-    margin: 20rem auto 0 5rem;
+    margin: 13rem auto 0 5rem;
     display: flex;
     justify-content: space-between;
   }
@@ -127,11 +127,12 @@
 
 @media only screen and (max-width: 750px) {
   .status-bar {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     place-items: center;
   }
   .control-btns-container {
-    margin: 22rem 1.2rem !important;
+    margin: 8.5rem 1.2rem !important;
   }
   .slick-list {
     width: 60vw !important;

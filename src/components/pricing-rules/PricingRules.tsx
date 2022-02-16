@@ -19,7 +19,7 @@ export const PricingRules =  () => {
   useEffect(()=>{
     dispatch(fetchPricingRules());
     setPricingRules(rules);
-  },[pricingRules]);
+  },[]);
 
   console.log('rules results', pricingRules);
   const columns = [
