@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const {REACT_APP_HOST} = process.env;
-console.log('REACT APP HOST', REACT_APP_HOST);
 
 export const client = axios.create({
   withCredentials:true,

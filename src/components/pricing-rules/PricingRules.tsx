@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import { Loader } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { Rule } from '../../redux/slices/pricing-rules/pricingRules';
-import { fetchPricingRules } from 'src/redux/slices/pricing-rules/pricingRules';
+import {Rule} from '../../redux/slices/pricing-rules/rulesSlice';
+import { getRules } from 'src/redux/slices/pricing-rules/rulesThunk';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
@@ -13,14 +13,13 @@ import '../../sass/light-theme/pricing-rules.scss';
 export const PricingRules = () => {
   const [pricingRules, setPricingRules] = useState<Rule[]>([]);
   const dispatch = useAppDispatch();
-  const { rules, loading } = useAppSelector((state) => state.pricingRules);
-
-  useEffect(() => {
-    dispatch(fetchPricingRules());
+  const {rules, loading} = useAppSelector(state => state.pricingRules);
+  
+  useEffect(()=>{
+    dispatch(getRules());
     setPricingRules(rules);
-  }, []);
-
-  console.log('pricng rule results', pricingRules);
+  },[rules, dispatch]);
+  
 
   const columns = [
     {

@@ -1,7 +1,7 @@
 import {  ReactNode } from 'react';
 import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
-import {Rule} from '../../redux/slices/pricing-rules/pricingRules';
+import {Rule} from '../../redux/slices/pricing-rules/rulesSlice';
 
 
 type ListingsTypes = {

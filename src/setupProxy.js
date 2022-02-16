@@ -4,7 +4,7 @@ module.exports = app => {
   app.use(
     "/api",
     createProxyMiddleware ({
-      target: "https://dev-app.hustlegotreal.com",
+      target: `${process.env.REACT_APP_HGR_WEB_URL}`,
       changeOrigin: true
     })
   );
