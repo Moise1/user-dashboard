@@ -1,3 +1,4 @@
+@use 'general.config';
 @import 'general.config';
 
 // Extra big screens;
@@ -39,14 +40,30 @@
       color: $black;
     }
   }
+
+  .currencies-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    column-gap: 1rem;
+
+    
+    
+    .active-currency {
+      @include custom-btn-styles($primary, $white);
+    }
+  }
+
   .carousel {
     display: grid;
     position: absolute;
     height: auto;
-    margin: 2rem 12.5rem;
+    margin: 2rem 13rem;
     padding: 0 !important;
     width: auto;
-
     .subscription {
       background: $white;
       display: grid;
@@ -54,9 +71,7 @@
       border-radius: 10px;
       padding: 0.3rem 0.3rem;
       transition: 0.3s ease-in-out;
-      width: 90% !important;
-      min-width: 200px;
-
+      width: 89% !important;
       .discount {
         width: 100%;
         position: relative;
@@ -112,7 +127,7 @@
   .control-btns-container {
     width: 80%;
     position: absolute;
-    margin: 13rem auto 0 5rem;
+    margin: 10rem auto 0 5rem;
     display: flex;
     justify-content: space-between;
   }

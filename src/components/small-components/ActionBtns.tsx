@@ -1,5 +1,4 @@
 import '../../sass/light-theme/action-btns.scss';
-
 import { Button } from 'antd';
 
 interface Props {
@@ -7,7 +6,9 @@ interface Props {
   handleClose?: () => void;
   className?: string;
   disabled?: boolean;
-  handleClick?: () => void;
+  handleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  id?: string;
+
 }
 
 export const SuccessBtn = ({ children, handleClose }: Props) => (
@@ -32,3 +33,8 @@ export const ResetBtn = ({ children }: Props) => <Button className="reset-btn">{
 export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
 export const DeleteBtn = ({ children }: Props) => <Button className="delete-btn">{children}</Button>;
 export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;
+export const TransparentBtn = ({ id, children, className, handleClick }: Props) => (
+  <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick}>
+    {children}
+  </Button>
+);

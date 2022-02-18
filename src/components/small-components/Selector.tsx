@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Select, Input, Button } from 'antd';
 import { PlusCircle } from 'react-feather';
-import {Rule} from '../../redux/slices/pricing-rules/rulesSlice';
+import {Rule} from '../../redux/pricing-rules/rulesSlice';
 import '../../sass/light-theme/selector.scss';
 
 interface Props {

@@ -1,10 +1,11 @@
 const {createProxyMiddleware} = require ('http-proxy-middleware');
 
+const {REACT_APP_HGR_WEB_URL} = process.env;
 module.exports = app => {
   app.use(
     "/api",
     createProxyMiddleware ({
-      target: `${process.env.REACT_APP_HGR_WEB_URL}`,
+      target: `${REACT_APP_HGR_WEB_URL}`,
       changeOrigin: true
     })
   );

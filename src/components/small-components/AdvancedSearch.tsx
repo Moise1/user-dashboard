@@ -9,12 +9,13 @@ export interface AdvancedSearchProps {
   title?: string;
   children?: JSX.Element | JSX.Element[];
   extra?: ReactNode;
+  width?: number | string;
 }
 
 type DrawerPlacement = 'right' | 'top' | 'left' | 'bottom';
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
-  const { visible, placement, onClose, title, children, extra } = props;
+  const { visible, placement, onClose, title, children, extra, width } = props;
   return (
     <Drawer
       title={title}
@@ -23,6 +24,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
       onClose={onClose}
       closeIcon={<CloseIcon />}
       extra={extra}
+      width={width}
     >
       {children}
     </Drawer>

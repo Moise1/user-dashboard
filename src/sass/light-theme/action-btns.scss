@@ -1,3 +1,4 @@
+@use 'general.config';
 @import 'general.config';
 
 .action-btns {
@@ -91,6 +92,10 @@
     background: $ash-gray;
     color: $white;
   }
+}
+
+.transparent-btn{
+  @include custom-btn-styles($transparent, $primary);
 }
 
 // Mobile screen sizes

@@ -20,7 +20,7 @@ const initialState = {
 };
 
 
-export const pricingRulesSlice = createSlice({
+export const rulesSlice = createSlice({
   name: 'rules',
   initialState: initialState,
   reducers: {},
@@ -33,12 +33,12 @@ export const pricingRulesSlice = createSlice({
       state.loading = false;
       state.rules = payload.rules;
     });
-    builder.addCase(getRules.rejected, (state, { error })=>{
+    builder.addCase(getRules.rejected, (state, { payload })=>{
       state.loading = false;
-      state.error = error.message!;
+      state.error = String(payload);
     });
   }
 });
 
-export const pricingRulesReducer = pricingRulesSlice.reducer;
+export const pricingRulesReducer = rulesSlice.reducer;
 

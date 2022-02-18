@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { client } from '../../client';
+import { client } from '../client';
 
 export const getRules = createAsyncThunk('rules/getRules', async (_, thunkAPI) => {
   try {
@@ -15,6 +15,6 @@ export const getRules = createAsyncThunk('rules/getRules', async (_, thunkAPI) =
     const res = await client.get('/Pricing/Get', { headers: { channel: channels[0].id } }); //I had to set manually to test it
     return res.data;
   } catch (error) {
-    if (error instanceof Error) return thunkAPI.rejectWithValue({ error: error.message });
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
   }
 });

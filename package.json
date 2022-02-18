@@ -38,6 +38,7 @@
     "i18next": "^20.4.0",
     "moment": "^2.29.1",
     "parcel-bundler": "^1.12.5",
+    "rc-picker": "^2.6.4",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-copy-to-clipboard": "^5.0.4",
