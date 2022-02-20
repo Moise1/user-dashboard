@@ -81,22 +81,18 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
 
   const { visible, onClose } = props;
 
-  // const onChange = (value: Moment | null, dateString:string) =>{
-  //   setDate(value);
-  //   console.log('Selected Time: ', value);
-  //   console.log('Formatted Selected Time: ', dateString);
-  // };
-
-  // const onOk = (value: Moment | null) => {
-  //   console.log('onOk: ', value);
-  // };
-
   const handleRangePicker = (value: RangeValue<Moment>, dateString: [string, string]) => {
     console.log(dateString);
     console.log(value);
   };
   return (
-    <AdvancedSearch title="Advanced Search" placement="right" onClose={onClose} visible={visible} width={550}>
+    <AdvancedSearch 
+      className="listings-advanced-search"
+      title="Advanced Search" 
+      placement="right" 
+      onClose={onClose} 
+      visible={visible}
+    >
       <div className="advanced-form-container">
         <Form layout="vertical" className="advanced-search-form">
           <div className="listings-search-inputs">
@@ -132,14 +128,14 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
           </div>
 
           <div className="check-boxes">
-            <Form.Item className="price-options" label="Monitor Price">
+            <Form.Item className="monitor-price-options" label="Monitor Price">
               <Checkbox checked className="checkbox">
                 Yes
               </Checkbox>
               <Checkbox className="checkbox">No</Checkbox>
             </Form.Item>
 
-            <Form.Item className="price-options" label="Price Decrease">
+            <Form.Item className="price-decrease-options" label="Price Decrease">
               <Checkbox className="checkbox">Yes</Checkbox>
               <Checkbox className="checkbox">No</Checkbox>
             </Form.Item>
@@ -161,10 +157,11 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
             </Form.Item>
 
             <Form.Item label="Created On">
-              <Space direction="vertical" size={12}>
-                <RangePicker onChange={handleRangePicker} separator={<>-</>}/>
-              </Space>
-              ,
+              <RangePicker 
+                onChange={handleRangePicker} 
+                separator={<>-</>} 
+                className='date-picker'
+              />
             </Form.Item>
 
             <Form.Item label="Created by">

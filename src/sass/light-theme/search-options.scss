@@ -10,9 +10,14 @@
   }
 }
 
+.listings-advanced-search {
+  .ant-drawer-content-wrapper {
+    width: 500px !important;
+  }
+}
+
 .advanced-search-form {
   height: auto;
-  padding: 0 1rem;
   [title="Min source price"],
   [title="Max source price"],
   [title="Min Profit"], 
@@ -29,7 +34,8 @@
   }
   .catalog-filters-inputs,
   .listings-search-inputs,
-  .extra-options {
+  .extra-options,
+  .check-boxes {
     -moz-column-count: 2;
     -moz-column-gap: 2rem;
     -webkit-column-count: 2;
@@ -37,10 +43,6 @@
     column-count: 2;
     column-gap: 2rem;
     margin: 1rem 0;
-  }
-  .check-boxes {
-    display: flex;
-    justify-content: space-between;
   }
 
   .listings-search-inputs .sell-price-section,
@@ -65,12 +67,11 @@
     .checkbox {
       color: $primary;
     }
-  };
+  }
 
-  .filters-section{
+  .filters-section {
     display: flex;
     justify-content: flex-end;
-    
   }
 }
 
@@ -82,6 +83,17 @@
   }
 }
 
+.date-picker {
+  box-shadow: 0px 3px 6px #00000017;
+  border-radius: 10px;
+  // background: 
+  border: none !important;
+  outline: none !important;
+  &:hover {
+    border: none !important;
+    outline: none !important;
+  }
+}
 
 .action-components {
   display: flex;
@@ -110,8 +122,12 @@
 // Mobile screen size
 
 @media only screen and (max-width: 750px) {
+  .listings-advanced-search {
+    .ant-drawer-content-wrapper {
+      width: 378px !important;
+    }
+  }
   .advanced-search-form {
-    border: 2px solid red;
     width: auto !important;
     margin: 2rem auto 0 auto !important;
     .inputs {
@@ -119,12 +135,11 @@
       -webkit-column-count: initial !important;
       column-count: initial !important;
       margin: 0 auto !important;
-    };
+    }
 
-    .action-btns{
+    .action-btns {
       display: flex;
       justify-content: space-between !important;
-      border: 2px solid green;
       width: 100% !important;
     }
   }

@@ -10,14 +10,16 @@ export interface AdvancedSearchProps {
   children?: JSX.Element | JSX.Element[];
   extra?: ReactNode;
   width?: number | string;
+  className?: string;
 }
 
 type DrawerPlacement = 'right' | 'top' | 'left' | 'bottom';
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
-  const { visible, placement, onClose, title, children, extra, width } = props;
+  const { visible, placement, onClose, title, children, extra, width, className } = props;
   return (
     <Drawer
+      className={className}
       title={title}
       visible={visible}
       placement={placement}
