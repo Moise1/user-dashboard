@@ -48,18 +48,17 @@
 
 // Tablet's screen sizes
 
-@media only screen and(max-width: 750px) {
+@media only screen and(max-width: 1030px) {
   .channel-settings {
     .content {
       .action-btns {
         position: relative;
-        margin: 0 0 50% 0;
-        flex-direction: row;
-        column-gap: 0px;
-        width: 100vw !important;
-        .reset-btn,
-        .success-btn {
-          width: 500px !important;
+        margin: 0 0 60% 0;
+        flex-direction: row !important;
+        column-gap: 0 !important;
+        width: 100% !important;
+        .success-btn{
+          margin-left: -1rem;
         }
       }
 

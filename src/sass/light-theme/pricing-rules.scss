@@ -74,6 +74,12 @@
 
 @media only screen and (max-width: 750px) {
   .pricing-rules-bar {
+    display: block !important;
+    .form-header{
+      h2, p{
+        text-align: center;
+      }
+    }
     h4,
     p {
       text-align: center;
@@ -81,13 +87,15 @@
     }
     .form {
       margin-top: -1rem;
-      display: grid !important;
-      place-items: center;
-      .ant-select {
-        width: 70vw !important;
+      display: flex !important;
+      flex-direction: column;
+      padding: 0 1rem;
+      .selector .ant-select-selector{
+        margin: 0 !important;
+        width: 100% !important;
       }
-      .rule-btn {
-        width: 55vw !important;
+      .selector, .rule-btn {
+        width: 100% !important;
       }
     }
   }

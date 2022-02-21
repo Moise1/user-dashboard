@@ -1,19 +1,25 @@
 import { createRef, useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { Card, Divider, Carousel, Button, Space } from 'antd';
-import '../../sass/light-theme/subscriptions.scss';
 import { CarouselRef } from 'antd/lib/carousel';
 import { StatusBar } from '../small-components/StatusBar';
 import { Layout } from 'antd';
+import '../../sass/light-theme/subscriptions.scss';
+import { TransparentBtn } from '../small-components/ActionBtns';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
+  const [activeCurrency, setActiveCurrency] = useState<number>(0);
   const sliderRef = createRef<CarouselRef>();
   const handleNext = () => sliderRef?.current?.next();
   const handlePrev = () => sliderRef?.current?.prev();
   const tabletScreen = window.matchMedia('(max-width: 1030px)');
   const mobileScreen = window.matchMedia('(max-width: 750px)');
 
+  const handleChangeCurrency = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
+    const elementId = e.currentTarget.id;
+    setActiveCurrency(JSON.parse(elementId));
+  };
   const data = [
     {
       id: 1,
@@ -70,6 +76,11 @@ export const Subscriptions = () => {
           </p>
           <Button className="subscription-cancel">Request cancellation</Button>
         </StatusBar>
+        <div className="currencies-container">
+          <TransparentBtn id="0" handleClick={handleChangeCurrency} className={activeCurrency === 0 ? 'active-currency':'' }>EUR</TransparentBtn>
+          <TransparentBtn id="1" handleClick={handleChangeCurrency} className={activeCurrency === 1 ? 'active-currency':'' }>USD</TransparentBtn>
+          <TransparentBtn id="2" handleClick={handleChangeCurrency} className={activeCurrency === 2 ? 'active-currency':'' }>GBP</TransparentBtn>
+        </div>
         <Carousel arrows slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
           {data.map((d) => (
             <Card key={d.id} className="subscription">

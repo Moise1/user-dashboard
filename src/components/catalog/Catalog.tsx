@@ -11,6 +11,7 @@ import { ProductDetails } from './ProductDetails';
 import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
 import { t } from '../../global/transShim';
+import { CatalogFilters } from '../small-components/AdvancedSearchDrawers';
 import '../../sass/light-theme/catalog.scss';
 
 
@@ -85,13 +86,8 @@ export const Catalog = () => {
         </div>
       </div>
 
-      <SearchOptions
-        visible={drawerOpen}
-        onClose={handleSideDrawer}
-        showSearchInput={false}
-        openSourceModal={handleSourceModal}
-      />
-
+      <SearchOptions showSearchInput={false}/>
+      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}/>
       <PopupModal
         open={modalOpen}
         handleClose={handleProductModal}

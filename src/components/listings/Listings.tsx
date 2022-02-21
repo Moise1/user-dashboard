@@ -5,7 +5,6 @@ import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../global/transShim';
 import { DataTable } from '../tables/DataTable';
-import '../../sass/light-theme/listings.scss';
 import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
@@ -15,6 +14,8 @@ import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
+import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
+import '../../sass/light-theme/listings.scss';
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
@@ -184,7 +185,8 @@ export const Listings = () => {
       )}
 
       <div className="search-options-area">
-        <SearchOptions visible={drawerOpen} onClose={handleSideDrawer} showSearchInput />
+        <SearchOptions showSearchInput />
+        <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer}/>
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
           {t('AdvancedSearch')}
         </TableActionBtns>
@@ -220,6 +222,7 @@ export const Listings = () => {
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={listingsData.length}
+        showTableInfo
       />
     </Layout>
   );

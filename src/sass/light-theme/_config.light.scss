@@ -22,6 +22,7 @@ $gray: #777;
 $white: #fff;
 $black: #000;
 $ash-gray: #bfbfbf;
+$transparent: transparent;
 
 // Input colors
 $input-background: #fff;
@@ -131,26 +132,30 @@ h4 {
   @include chevrons;
 }
 
-@mixin btn-styles($color: null) {
+@mixin custom-btn-styles($bg-color: null, $color: null) {
   margin: 1rem 0;
-  background: $color;
+  background: $bg-color;
   border-radius: 8px;
-  color: $white;
+  color: $color;
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
   &:hover {
-    background: $color;
-    color: $white;
+    background: $bg-color;
+    color: $color;
   }
 }
 
 .primary-btn {
-  @include btn-styles($primary);
+  @include custom-btn-styles($primary, $white);
 }
 
 .secondary-btn {
-  @include btn-styles($gray);
+  @include custom-btn-styles($gray, $white);
 }
 .disabled-btn {
+  @include custom-btn-styles;
   cursor: auto !important;
   opacity: 0.3;
-  box-shadow: none;
-}
+};

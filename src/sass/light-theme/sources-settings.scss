@@ -6,7 +6,6 @@
   width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: fill-available;
-  padding: 0 6rem;
 
   .sources-description {
     margin: 4rem 0 0 0;
@@ -50,10 +49,19 @@
           color: $light-primary !important;
         }
         .sources-settings-contents {
-          width: auto;
+          width: 72vw;
           height: 60vh;
-          overflow-y: auto;
+          overflow-y: scroll;
           overflow-x: hidden;
+          padding: 0 2rem;
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+          padding: 1rem 0;
+      
+          &::-webkit-scrollbar {
+            /* Chrome */
+            display: none;
+          }
           .row {
             margin-bottom: 1rem;
           }

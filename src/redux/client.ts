@@ -1,11 +1,9 @@
 import axios from 'axios';
-
-const {REACT_APP_HOST} = process.env;
-console.log('REACT APP HOST', REACT_APP_HOST);
+const {origin} = window.location;
 
 export const client = axios.create({
   withCredentials:true,
-  baseURL: `${REACT_APP_HOST}/Api`,
+  baseURL: `${origin}/Api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status === 500 || status === 452
 });
 
