@@ -19,8 +19,9 @@ export const PricingRules = () => {
   useEffect(() => {
     dispatch(getRules());
     setPricingRules(rules);
-  }, []);
+  }, [pricingRules]);
 
+  // console.log('PRICING RULES==>', pricingRules);
   const columns = [
     {
       title: 'Source',

@@ -123,9 +123,10 @@
     }
   }
   .control-btns-container {
-    width: 80%;
+    width: 75%;
+    left: 14.5%;
+    top: 60%;
     position: absolute;
-    margin: 10rem auto 0 5rem;
     display: flex;
     justify-content: space-between;
   }
@@ -145,8 +146,18 @@
       flex-direction: column;
       place-items: center;
     }
+  
+    .slick-slide.slick-active.slick-current {
+      margin: 0 auto !important;
+      .subscription {
+        padding-bottom: 1rem !important;
+        width: 100% !important;
+      }
+    }
     .control-btns-container {
-      margin: 8.5rem 1.2rem !important;
+      top: 75%;
+      left: 10%;
+      width: 82%;
     }
     .slick-list {
       width: 60vw !important;
