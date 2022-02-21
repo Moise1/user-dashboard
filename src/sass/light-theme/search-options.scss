@@ -12,7 +12,7 @@
 
 .listings-advanced-search {
   .ant-drawer-content-wrapper {
-    width: 500px !important;
+    width: 530px !important;
   }
 }
 
@@ -86,7 +86,7 @@
 .date-picker {
   box-shadow: 0px 3px 6px #00000017;
   border-radius: 10px;
-  // background: 
+  background: $mild-light-blue;
   border: none !important;
   outline: none !important;
   &:hover {
