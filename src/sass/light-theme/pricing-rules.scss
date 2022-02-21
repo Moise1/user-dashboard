@@ -74,7 +74,6 @@
 
 @media only screen and (max-width: 750px) {
   .pricing-rules-bar {
-    border: 2px solid green;
     display: block !important;
     .form-header{
       h2, p{
@@ -90,10 +89,8 @@
       margin-top: -1rem;
       display: flex !important;
       flex-direction: column;
-      border: 2px solid black;
       padding: 0 1rem;
       .selector .ant-select-selector{
-        border: 2px solid red;
         margin: 0 !important;
         width: 100% !important;
       }
