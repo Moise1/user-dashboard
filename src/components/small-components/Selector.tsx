@@ -27,9 +27,8 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [showAddAccount] = useState<boolean | undefined>(addAccount);
   const [newAccount, setNewAccount] = useState({ value: '' });
-  const [data] = useState<Props['children']>(children);
-
-  const options = data.map((d) => (
+  
+  const options = children.map((d) => (
     <Option key={d.id} value={d.id}>
       {d.id}
     </Option>
@@ -43,7 +42,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
   };
 
   const handleSubmit = () => {
-    data.push({ id: data.length + 1, value: newAccount.value });
+    children.push({ id: children.length + 1, value: newAccount.value });
     setNewAccount({ value: '' });
   };
 

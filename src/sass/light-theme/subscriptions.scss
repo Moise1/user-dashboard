@@ -3,6 +3,9 @@
 
 // Extra big screens;
 
+.ant-spin-spinning {
+  margin-top: 20%;
+}
 .carousel-container {
   display: block;
   width: 100%;
@@ -141,12 +144,15 @@
 
 @media only screen and (max-width: 750px) {
   .subscriptions-container {
+    .ant-spin-spinning {
+      margin-top: 90%;
+    }
     .status-bar {
       display: flex;
       flex-direction: column;
       place-items: center;
     }
-  
+
     .slick-slide.slick-active.slick-current {
       margin: 0 auto !important;
       .subscription {

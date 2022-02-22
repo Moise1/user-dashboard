@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Form, Input } from 'antd';
-import { Loader } from 'react-feather';
+import { useEffect} from 'react';
+import { Form, Input, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { getRules } from 'src/redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
@@ -12,16 +10,13 @@ import {ConfirmBtn} from '../small-components/ActionBtns';
 import '../../sass/light-theme/pricing-rules.scss';
 
 export const PricingRules = () => {
-  const [pricingRules, setPricingRules] = useState<Rule[]>([]);
   const dispatch = useAppDispatch();
   const { rules, loading } = useAppSelector((state) => state.pricingRules);
   
   useEffect(() => {
     dispatch(getRules());
-    setPricingRules(rules);
-  }, [pricingRules]);
+  }, [getRules]);
 
-  // console.log('PRICING RULES==>', pricingRules);
   const columns = [
     {
       title: 'Source',
@@ -69,7 +64,7 @@ export const PricingRules = () => {
           </div>
           <Form className="form" layout="vertical">
             <Form.Item label="Source">
-              <Selector defaultValue="Select a source">{pricingRules}</Selector>
+              <Selector defaultValue="Select a source">{rules}</Selector>
             </Form.Item>
             <Form.Item label="Price From">
               <Input className="blue-input" type="text" placeholder="Set a price from" />
@@ -83,7 +78,7 @@ export const PricingRules = () => {
             <ConfirmBtn>Add rule</ConfirmBtn>
           </Form>
         </StatusBar>
-        <DataTable dataSource={pricingRules} columns={columns} loading={{ indicator: <Loader />, spinning: loading }} />
+        <DataTable dataSource={rules} columns={columns} loading={{indicator: <Spin/>, spinning: loading}} />
       </div>
     </Layout>
   );
