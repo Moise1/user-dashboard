@@ -1899,7 +1899,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/history@*", "@types/history@^4.7.9":
+"@types/history@*":
   version "4.7.10"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.10.tgz#992865313bb97d80eefa6aab5f2e4f1e10e84e86"
   integrity sha512-kq1vceWANyZLEt/+hbTWSAjLNhhXYgUw6Ywi0KQ9C7pZJP4Qrr0xjSKb3t59e5GwWtk1L6zt5KTxjH4oPk2l/w==

@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import {
+  UserLogin,
   NewChannel,
   Topbar,
   Sidebar,
@@ -69,8 +70,9 @@ export const App = withRouter(({ history }) => {
           <Layout className={staticValue ? 'content-area' : 'all-content'}>
             <Switch>
               <Route exact path="/">
-                <Redirect to="/home" />
+                <Redirect to="/login"/>
               </Route>
+              <Route path="/login" component={UserLogin}/>
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/home" component={Listings} />
               <Route path="/listings" component={Listings} />

@@ -15,10 +15,10 @@ import {
   OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
-import '../../sass/light-theme/side-bar.scss';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 import pin from '../../assets/pin.svg';
+import '../../sass/light-theme/side-bar.scss';
 
 const { SubMenu } = Menu;
 

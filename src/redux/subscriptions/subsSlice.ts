@@ -20,8 +20,6 @@ export interface Product{
 }
 
 
-
-
 const initialState = {
   products: [] as Product[],
   loading: false,
