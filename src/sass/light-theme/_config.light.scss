@@ -90,6 +90,7 @@ h4 {
 }
 
 .back-link {
+  width: 100%;
   color: $primary;
   &:hover {
     color: $primary;
@@ -158,4 +159,4 @@ h4 {
   @include custom-btn-styles;
   cursor: auto !important;
   opacity: 0.3;
-};
+}

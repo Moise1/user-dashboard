@@ -35,10 +35,6 @@ export const SourcesSettings = () => {
           </span>
           Back to suppliers overview
         </Link>
-
-        <p className="beta-area">
-          <span className="beta">Beta:</span> This service is free while in beta
-        </p>
       </div>
 
       <h1 className="sources-configuration-name">
