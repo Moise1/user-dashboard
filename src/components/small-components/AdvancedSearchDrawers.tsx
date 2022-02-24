@@ -4,7 +4,7 @@ import { RangeValue } from 'rc-picker/lib/interface';
 import { AdvancedSearch } from './AdvancedSearch';
 import { AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
-import '../../sass/light-theme/search-options.scss';
+import '../../sass/light-theme/advanced-search.scss';
 
 interface OtherDrawerProps {
   openSourceModal?: () => void;
@@ -86,11 +86,11 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
     console.log(value);
   };
   return (
-    <AdvancedSearch 
+    <AdvancedSearch
       className="listings-advanced-search"
-      title="Advanced Search" 
-      placement="right" 
-      onClose={onClose} 
+      title="Advanced Search"
+      placement="right"
+      onClose={onClose}
       visible={visible}
     >
       <div className="advanced-form-container">
@@ -157,11 +157,7 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
             </Form.Item>
 
             <Form.Item label="Created On">
-              <RangePicker 
-                onChange={handleRangePicker} 
-                separator={<>-</>} 
-                className='date-picker'
-              />
+              <RangePicker onChange={handleRangePicker} separator={<>-</>} className="date-picker" />
             </Form.Item>
 
             <Form.Item label="Created by">
