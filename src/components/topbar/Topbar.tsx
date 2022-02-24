@@ -9,8 +9,7 @@ import StoreList from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
 import '../../sass/light-theme/top-bar.scss';
-import { Badge, Avatar } from 'antd';
-import { User } from 'react-feather';
+import { Badge } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
@@ -53,20 +52,18 @@ export const Topbar = (props: Props) => {
       <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
         <BuyTokens />
       </PopupModal>
-
       <div className="logo-container">
         <a className="logo-link" href="/">
           <img className="logo" src={Logo} alt="logo" />
           <h1 className="logo-text">HGR</h1>
         </a>
       </div>
-
       <div className="menu-burger" onClick={() => handleSidebarMobile()}>
         <span className="first"></span>
         <span className="second"></span>
         <span className="thrid"></span>
       </div>
-      <div className="top-bar-nav">
+      <div className="quota-container-topbar">
         <div className="quota-container">
           <div className="quota">
             <strong className="quota-text">
@@ -79,31 +76,31 @@ export const Topbar = (props: Props) => {
             {t('Topbar.Update')}
           </button>
         </div>
-        <div className="notifications-container">
-          <Badge count={2} className="notifications">
-            <img src={bell} alt="" />
-          </Badge>
-        </div>
+      </div>
+      <div className="top-bar-item">
         <div className="tokens-container" role="button" onClick={handleOpenModal}>
           <img src={coinIcon} className="token-icon" alt="coinIcon" />
           <span className="token-number">1232</span>
           <span className="tokens">Tokens </span>
         </div>
-        <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
-          <div className="">
-            <span className="store-name">Teststore</span>
-            <img src={flag} className="flag" height="20" alt="" />
-            <img src={amazon} className="company" height="20" alt="" />
-            <Button className="btn-arrow-container">
-              <img src={downArrow} className="down-arrow-icon" alt="coinIcon" aria-hidden="true" />
-            </Button>
-          </div>
-        </Dropdown>
-        <div className="avatar-container">
-          <Avatar size={40} icon={<User onClick={handleDeleteModal} />} />
+      </div>
+      <div className="top-bar-item">
+        <div onClick={handleDeleteModal} className="notifications-container">
+          <Badge count={2} className="notifications">
+            <img src={bell} alt="" />
+          </Badge>
         </div>
       </div>
+      <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
+        <div className="">
+          <span className="store-name">Teststore</span>
+          <img src={flag} className="flag" height="20" alt="" />
+          <img src={amazon} className="company" height="20" alt="" />
+          <Button className="btn-arrow-container">
+            <img src={downArrow} className="down-arrow-icon" alt="coinIcon" aria-hidden="true" />
+          </Button>
+        </div>
+      </Dropdown>
     </div>
   );
 };
-

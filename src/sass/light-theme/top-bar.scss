@@ -31,7 +31,6 @@
     margin-left: 0.4rem;
   }
   img {
-    margin-top: -0.9rem;
     width: 5%;
   }
 }
@@ -44,7 +43,6 @@
   }
 }
 .action-btns {
-  margin-top: 1rem;
   display: flex !important;
   height: auto !important;
   justify-content: space-between;
@@ -56,6 +54,52 @@
     &:hover {
       background: rgba($light-primary, 0.2);
       color: $white;
+    }
+  }
+}
+
+.top-bar-item {
+  margin: 0 1rem;
+  display: flex;
+
+  .tokens-container {
+    color: $black;
+    display: flex;
+    align-items: center;
+    line-height: 1px;
+    cursor: pointer;
+    margin: auto;
+
+    justify-content: center;
+
+    .token-icon {
+      width: 30px;
+    }
+
+    .token-number {
+      font-size: $font-medium;
+      font-weight: $semibold;
+      margin: 0 $spacer * 0.25;
+    }
+
+    .tokens {
+      display: inline;
+      font-size: $font-medium;
+    }
+  }
+
+  .notifications-container {
+    display: flex;
+
+    line-height: 1px;
+    cursor: pointer;
+
+    width: fit-content;
+    justify-content: center;
+    .notifications {
+      font-weight: bold;
+      font-size: $font-medium;
+      display: inline;
     }
   }
 }
@@ -102,16 +146,13 @@
     display: none;
   }
 
-  .top-bar-nav {
+  .quota-container-topbar {
+    align-items: center;
     margin-right: 1%;
     padding: 5px;
     width: 90%;
     display: flex;
-    justify-content: flex-end;
-
-    & > * {
-      margin-left: 3rem;
-    }
+    justify-content: center;
 
     .quota-container {
       width: 500px;
@@ -153,122 +194,70 @@
         width: 123px;
       }
     }
+  }
+}
 
-    .notifications-container {
-      display: flex;
-      align-items: center;
-      line-height: 1px;
-      cursor: pointer;
-      margin: auto;
-      width: fit-content;
-      justify-content: center;
-      .notifications {
-        font-weight: bold;
-        font-size: $font-medium;
-        display: inline;
-      }
+.dropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 20px;
+  border: solid 2px $gray;
+  opacity: 1;
+  height: 30px;
+  padding: 10px 5px 10px 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.137) 0px 5px 5px;
+    transition: 0.5s;
+  }
+
+  &:focus {
+    border: none !important;
+    outline: none !important;
+  }
+
+  .btn-arrow-container {
+    background: none !important;
+    & :focus {
+      text-decoration: none !important;
+      border: none !important;
     }
-
-    .tokens-container {
-      color: $black;
-      display: flex;
-      align-items: center;
-      line-height: 1px;
-      cursor: pointer;
-      margin: auto;
-      width: 140px;
-      justify-content: center;
-
-      .token-icon {
-        width: 30px;
-      }
-
-      .token-number {
-        font-size: $font-medium;
-        font-weight: $semibold;
-        margin: 0 $spacer * 0.25;
-      }
-
-      .tokens {
-        display: inline;
-        font-size: $font-medium;
-      }
+    .down-arrow-icon {
+      width: 10px;
     }
+  }
 
-    .avatar-container {
-      display: flex;
-      align-items: center;
-      line-height: 1px;
-      cursor: pointer;
-      margin: auto;
-      width: 140px;
-      justify-content: center;
-    }
+  .store-name {
+    font-size: $font-medium;
+    padding-left: $spacer;
+  }
 
-    .dropdown {
-      margin-top: 0.7rem;
-      display: flex;
-      align-items: center;
-      position: relative;
-      border-radius: 20px;
-      border: solid 2px $gray;
-      opacity: 1;
-      height: 30px;
-      padding: 10px 5px 10px 5px;
-      cursor: pointer;
-      transition: 0.5s;
-      &:hover {
-        box-shadow: rgba(0, 0, 0, 0.137) 0px 5px 5px;
-        transition: 0.5s;
-      }
+  .flag {
+    padding-left: 5px;
+  }
 
-      &:focus {
-        border: none !important;
-        outline: none !important;
-      }
+  .company {
+    padding-left: 2px;
+  }
 
-      .btn-arrow-container {
-        background: none !important;
-        & :focus {
-          text-decoration: none !important;
-          border: none !important;
-        }
-        .down-arrow-icon {
-          width: 10px;
-        }
-      }
+  .dropdown-menu {
+    z-index: 1;
+    width: 100%;
+    height: 36vh;
+    overflow-y: scroll;
+  }
 
-      .store-name {
-        font-size: $font-medium;
-        padding-left: $spacer;
-      }
-
-      .flag {
-        padding-left: 5px;
-      }
-
-      .company {
-        padding-left: 2px;
-      }
-
-      .dropdown-menu {
-        z-index: 1;
-        width: 100%;
-        height: 36vh;
-        overflow-y: scroll;
-      }
-
-      .dropdown-toggle {
-        background: transparent !important;
-        outline: none !important;
-        color: $black;
-        &:focus,
-        &:active {
-          border: transparent !important;
-          outline: none !important;
-          border: none !important;
-        }
-      }
+  .dropdown-toggle {
+    background: transparent !important;
+    outline: none !important;
+    color: $black;
+    &:focus,
+    &:active {
+      border: transparent !important;
+      outline: none !important;
+      border: none !important;
     }
   }
 }
@@ -279,7 +268,6 @@
 .notifications-container:hover {
   transition: all 0.5s ease;
   background: $light-gray;
-  height: 30px;
   border-radius: 25px;
 }
 
@@ -288,9 +276,6 @@
 @media only screen and (max-width: 1030px) {
   .top-bar {
     width: auto !important;
-    .dropdown {
-      margin: auto !important;
-    }
     .logo-container,
     .quota-container {
       display: none !important;
@@ -323,9 +308,15 @@
       }
     }
 
+    .dropdown {
+      .store-name {
+        display: none;
+      }
+    }
+
     .top-bar-nav {
+      justify-content: end;
       .progress-bar,
-      .store-name,
       .update-btn {
         display: none;
       }
@@ -336,5 +327,8 @@
 @media only screen and (max-width: 750px) {
   .tokens {
     display: none !important;
+  }
+  .top-bar-item {
+    margin: 0 0.2rem;
   }
 }

@@ -7,26 +7,8 @@
   width: -moz-available; /* WebKit-based browsers will ignore this. */
   width: fill-available;
 
-  .sources-description {
-    margin: 4rem 0 0 0;
-    display: flex;
-    .beta-area {
-      background: $white;
-      width: 25%;
-      margin: 0 10rem;
-      padding: 0.3rem 0;
-      text-align: center;
-      border-radius: 10px;
-      .beta {
-        color: $light-primary;
-        font-weight: bold;
-        margin-right: 0.2rem;
-        font-size: $font-large;
-      }
-    }
-  }
   .tabs-container {
-    height: auto;
+    height: 100%;
     overflow: hidden;
     background: $white;
     border-radius: 10px;
@@ -37,6 +19,7 @@
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
       padding: 1rem 0;
+      overflow: scroll;
       &::-webkit-scrollbar {
         /* Chrome */
         display: none;
@@ -49,15 +32,12 @@
           color: $light-primary !important;
         }
         .sources-settings-contents {
-          width: 72vw;
-          height: 60vh;
-          overflow-y: scroll;
-          overflow-x: hidden;
+          width: 90vh;
           padding: 0 2rem;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
           padding: 1rem 0;
-      
+
           &::-webkit-scrollbar {
             /* Chrome */
             display: none;
@@ -67,7 +47,7 @@
           }
         }
       }
-    };
+    }
     .right-section {
       position: fixed;
       right: 4%;
@@ -79,17 +59,15 @@
         width: auto;
         row-gap: 7px;
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
         justify-content: center;
-        & > *{
+        & > * {
           margin: 0 auto;
           width: 200px;
         }
       }
     }
   }
-
-  
 }
 
 .sources-configuration-name {
@@ -151,23 +129,14 @@
 }
 
 @media only screen and(max-width: 1030px) {
-  .sources-container{
+  .sources-container {
     position: relative;
   }
-  .sources-description {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 10px;
-    .beta-area {
-      width: 55vw !important;
-      margin: 0 auto;
-    }
-  }
+
   .tabs-container {
     overflow: scroll !important;
     display: block !important;
-    .sources-settings-contents{
+    .sources-settings-contents {
       width: 80vw !important;
       height: auto !important;
       margin: 0 auto !important;
@@ -183,15 +152,13 @@
         flex-direction: row !important;
         height: 48px !important;
         & > * {
-         width: stretch !important;
-         margin: 0 !important;
+          width: stretch !important;
+          margin: 0 !important;
         }
       }
       .selector {
         width: 40vw !important;
       }
     }
-  };
-
- 
+  }
 }
