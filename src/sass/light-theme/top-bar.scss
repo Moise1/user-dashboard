@@ -31,7 +31,6 @@
     margin-left: 0.4rem;
   }
   img {
-    margin-top: -0.9rem;
     width: 5%;
   }
 }
@@ -44,7 +43,6 @@
   }
 }
 .action-btns {
-  margin-top: 1rem;
   display: flex !important;
   height: auto !important;
   justify-content: space-between;
@@ -103,15 +101,12 @@
   }
 
   .top-bar-nav {
+    align-items: center;
     margin-right: 1%;
     padding: 5px;
     width: 90%;
     display: flex;
     justify-content: flex-end;
-
-    & > * {
-      margin-left: 3rem;
-    }
 
     .quota-container {
       width: 500px;
@@ -156,10 +151,10 @@
 
     .notifications-container {
       display: flex;
-      align-items: center;
+
       line-height: 1px;
       cursor: pointer;
-      margin: auto;
+
       width: fit-content;
       justify-content: center;
       .notifications {
@@ -206,7 +201,6 @@
     }
 
     .dropdown {
-      margin-top: 0.7rem;
       display: flex;
       align-items: center;
       position: relative;
@@ -279,7 +273,6 @@
 .notifications-container:hover {
   transition: all 0.5s ease;
   background: $light-gray;
-  height: 30px;
   border-radius: 25px;
 }
 
@@ -288,9 +281,6 @@
 @media only screen and (max-width: 1030px) {
   .top-bar {
     width: auto !important;
-    .dropdown {
-      margin: auto !important;
-    }
     .logo-container,
     .quota-container {
       display: none !important;
