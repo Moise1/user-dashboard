@@ -77,6 +77,11 @@ export const Sidebar = (props: Props) => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    routeChange('/login');
+  };
+  
   const settingsListArray = [
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
     { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
@@ -239,7 +244,7 @@ export const Sidebar = (props: Props) => {
               ))}
             </SubMenu>
           </Menu>
-          <button className="logout">
+          <button className="logout" onClick={handleLogout}>
             <img src={logout} />
             <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
           </button>

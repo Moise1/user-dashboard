@@ -1,15 +1,17 @@
 import { Form, Input, Checkbox } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
-import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userLogin } from 'src/redux/user-login/userLoginThunk';
 import { User } from '../../redux/user-login/userLoginSlice';
 import '../../sass/light-theme/user-login.scss';
 
 export const UserLogin = withRouter(({history}) =>{
+  const {loading} = useAppSelector(state => state.login);
   const dispatch = useAppDispatch();
   const onFinish = (values: User) => {
     dispatch(userLogin({data: values, history}));
+    localStorage.setItem('isAuthenticated', 'true');
   };
   return (
     <div className="login-form-container">
@@ -39,7 +41,7 @@ export const UserLogin = withRouter(({history}) =>{
         </Form.Item>
   
         <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
-          <ConfirmBtn htmlType="submit">Submit</ConfirmBtn>
+          <ConfirmBtn htmlType="submit" disabled={loading}>{loading ? 'Please wait...': 'Log In'}</ConfirmBtn>
         </Form.Item>
       </Form>
     </div>
