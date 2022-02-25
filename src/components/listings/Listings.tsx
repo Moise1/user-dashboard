@@ -186,7 +186,7 @@ export const Listings = () => {
 
       <div className="search-options-area">
         <SearchOptions showSearchInput />
-        <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer}/>
+        <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
           {t('AdvancedSearch')}
         </TableActionBtns>
