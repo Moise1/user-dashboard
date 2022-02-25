@@ -55,6 +55,11 @@
 
       width: 70% !important;
       margin: auto;
+      .tutorial-section {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+      }
       .upper-section {
         display: grid;
         place-items: center;

@@ -25,13 +25,21 @@ export const BrowserExtensions = () => {
       installText: <p className="install-text">Install and start selling!</p>,
       installBtn: (
         <Button
+          target={'_blank'}
           className="install-btn"
           href="https://chrome.google.com/webstore/detail/lister-by-hustle-got-real/fakikmhjpdbdilplbjipceklhdglocmk?hl=en"
         >
           Install
         </Button>
       ),
-      tutorial: 'Manual Lister tutorial'
+      tutorial: (
+        <a rel="noreferrer" target={'_blank'} href="https://www.youtube.com/watch?v=P-CjSHtd4mQ" className="tutorial">
+          <span>
+            Manual Lister tutorial
+            <i className="fa fa-arrow-right" aria-hidden="true" />
+          </span>
+        </a>
+      )
     },
     {
       id: 2,
@@ -49,13 +57,21 @@ export const BrowserExtensions = () => {
       installText: <p className="install-text">Install and start monitoring!</p>,
       installBtn: (
         <Button
+          target={'_blank'}
           className="install-btn"
           href="https://chrome.google.com/webstore/detail/hgr-non-api/gmdcbkoddgblpnemlconaekpmhgapbcb?hl=en"
         >
           Install
         </Button>
       ),
-      tutorial: 'No API extension tutorial'
+      tutorial: (
+        <a rel="noreferrer" target={'_blank'} href="https://www.youtube.com/watch?v=nAwL1tbiZn0" className="tutorial">
+          <span>
+            No API tutorial
+            <i className="fa fa-arrow-right" aria-hidden="true" />
+          </span>
+        </a>
+      )
     }
   ];
   return (
@@ -75,13 +91,8 @@ export const BrowserExtensions = () => {
                   {d.divider}
                   {d.installText}
                   {d.installBtn}
-                  <a href="#" className="tutorial">
-                    {d.tutorial}
-                    <span>
-                      <i className="fa fa-arrow-right" aria-hidden="true" />
-                    </span>
-                  </a>
                 </div>
+                <div className="tutorial-section">{d.tutorial}</div>
               </Card>
             </Col>
           ))}
