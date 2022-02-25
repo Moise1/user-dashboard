@@ -3,7 +3,8 @@ import '../../sass/light-theme/browser-extensions.scss';
 import chrome from '../../assets/browser-extensions/chrome-logo.png';
 import opera from '../../assets/browser-extensions/opera-logo.png';
 import safari from '../../assets/browser-extensions/safari-logo.png';
-import service from '../../assets/services/listing-service.png';
+import noapiext from '../../assets/browser-extensions/noapi-extension.png';
+import listingext from '../../assets/browser-extensions/listing-extension.png';
 import { Layout } from 'antd';
 
 export const BrowserExtensions = () => {
@@ -12,7 +13,7 @@ export const BrowserExtensions = () => {
       id: 1,
       title: 'Listing Extension',
       description: <p className="description">Avaialble for the following browsers</p>,
-      img: <img src={service} alt="" className="cover-img" />,
+      img: <img src={listingext} alt="" className="cover-img" />,
       browsers: (
         <div className="browsers">
           <img src={chrome} alt="" />
@@ -28,19 +29,19 @@ export const BrowserExtensions = () => {
     {
       id: 2,
       title: 'Non API Extension',
-      img: <img src={service} alt="" className="cover-img" />,
+      img: <img src={noapiext} alt="" className="cover-img" />,
       description: <p className="description">Avaialble for the following browsers</p>,
       browsers: (
         <div className="browsers">
-          <img src={chrome} alt="" />
-          <img src={safari} alt="" />
-          <img src={opera} alt="" />
+          <img src={chrome} alt="chrome" />
+          <img src={safari} alt="safari" />
+          <img src={opera} alt="opera" />
         </div>
       ),
       divider: <Divider />,
-      installText: 'Install and start monitoring!',
+      installText: <p className="install-text">Install and start monitoring!</p>,
       installBtn: <Button className="install-btn">Install</Button>,
-      tutorial: 'Manual Lister tutorial'
+      tutorial: 'No API extension tutorial'
     }
   ];
   return (

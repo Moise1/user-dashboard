@@ -52,6 +52,7 @@ $siderWidth: 80px;
 $expandedSiderWidth: 293px;
 
 a {
+  font-size: $font-medium;
   color: $primary;
   font-weight: $bold;
   &:hover {

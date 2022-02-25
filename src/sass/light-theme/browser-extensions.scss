@@ -3,7 +3,7 @@
 // Extra large screens
 
 .cover-img {
-  width: 10%;
+  width: 35%;
   margin-bottom: 2rem;
 }
 
@@ -51,6 +51,8 @@
     align-items: center;
 
     .card {
+      border-radius: 1rem;
+
       width: 70% !important;
       margin: auto;
       .upper-section {
@@ -62,14 +64,6 @@
         display: grid;
         row-gap: 0.5rem;
         place-items: center;
-
-        .tutorial {
-          color: $primary !important;
-
-          span {
-            margin-left: 0.3rem;
-          }
-        }
       }
     }
   }
