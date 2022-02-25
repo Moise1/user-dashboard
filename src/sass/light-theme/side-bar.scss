@@ -1,6 +1,28 @@
 @import 'general.config';
 
 // Large and extra large screens
+
+.ant-menu-item .ant-menu-title-content {
+  padding-left: 26px;
+}
+
+.ant-menu-item::after {
+  border-right: 0px !important;
+}
+
+.ant-menu-submenu-title .ant-menu-title-content {
+  padding-left: 26px;
+}
+
+.ant-menu.ant-menu-sub {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ant-menu-title-content {
+  font-weight: 400;
+}
+
 .toggle-mode {
   margin-left: 0.5rem;
 }
@@ -20,11 +42,11 @@
   overflow: hidden;
   ::-webkit-scrollbar {
     display: none;
-  };
+  }
 
   .ant-layout-sider-children {
     overflow: scroll;
-  };
+  }
 
   .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
     width: 80%;
@@ -34,7 +56,7 @@
     align-content: center;
     align-items: center;
     border-right: none !important;
-  };
+  }
 
   .menu-item,
   .ant-menu-submenu {
@@ -52,7 +74,7 @@
         color: $white;
       }
     }
-  };
+  }
 
   .sidebar-icon {
     margin-left: -0.3rem;
@@ -62,17 +84,22 @@
   }
   .menu-item:hover,
   .submenu-item:hover,
-  .ant-menu-item-selected {
+  .ant-menu-item-selected,
+  .ant-menu-submenu-active {
     .sidebar-icon > * {
       stroke: $white !important;
     }
-    
-  };
+
+    .ant-menu-submenu-arrow {
+      color: $white;
+    }
+  }
 
   .menu-item:hover,
   .ant-menu-submenu-vertical:hover,
   .ant-menu-submenu-inline:hover,
-  .ant-menu-item-selected {
+  .ant-menu-item-selected,
+  .ant-menu-submenu-active {
     color: $white !important;
     background: $light-primary !important;
   }
@@ -87,7 +114,7 @@
   .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
     background: transparent !important;
     font-weight: $bold;
-    .menu-list{
+    .menu-list {
       font-weight: $bold;
     }
   }
@@ -133,15 +160,15 @@
       }
     }
 
-    .logout {
-      padding-bottom: 25px;
-      font-size: 16px;
-      margin-top: 3rem;
-      background: transparent;
-      color: $dark-red;
-      cursor: pointer;
-      display: inline-block;
+    .collapsed-logout-btn {
+      width: 40%;
+      margin: 1rem 0 0 2rem;
 
+      .hide-logout-text {
+        display: none;
+      }
+    }
+    .logout-btn {
       .hide-logout-text {
         display: none;
       }
@@ -155,8 +182,8 @@
   .sider {
     display: none;
     z-index: 3;
-  };
-  
+  }
+
   .overlay-sidebar-mobile {
     position: fixed;
     right: 0;
@@ -166,25 +193,4 @@
     height: 100%;
     z-index: 2;
   }
-}
-
-.ant-menu-item .ant-menu-title-content {
-  padding-left: 26px;
-}
-
-.ant-menu-item::after {
-  border-right: 0px !important;
-}
-
-.ant-menu-submenu-title .ant-menu-title-content {
-  padding-left: 26px;
-}
-
-.ant-menu.ant-menu-sub {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ant-menu-title-content {
-  font-weight: 400;
 }

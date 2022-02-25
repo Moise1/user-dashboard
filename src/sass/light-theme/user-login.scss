@@ -1,5 +1,6 @@
 @import 'general.config';
 
+// Large screens and extra large screens 
 .login-form-container {
   width: 30%;
   margin: 5% auto 0 auto;
@@ -14,5 +15,13 @@
         background: $transparent;
       }
     }
+  }
+}
+
+// Small screen device
+
+@media only screen and (max-width: 750px){
+  .login-form-container{
+    width: 100%;
   }
 }

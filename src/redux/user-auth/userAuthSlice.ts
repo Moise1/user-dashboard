@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userAuthThunk } from './userAuthThunk';
-
+import { userLogin } from './userAuthThunk';
 export interface User{
  email: string;
  passowrd: string;
  rememberMe: boolean;
 }
+
 
 const initialState = {
   user:  {} as User,
@@ -17,27 +17,27 @@ export const userAuthSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    // logout(state){
-    //   return {
-    //     ...state,
-    //     loge
-    //   };
-    // }
+    logout(state, {payload}){
+      return {
+        ...state,
+        user: {...payload, logged: false}
+      };
+    }
   },
   extraReducers: (builder) => {
-    builder.addCase(userAuthThunk.pending, (state) => {
+    builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(userAuthThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.user = payload;
     });
-    builder.addCase(userAuthThunk.rejected, (state, { payload }) => {
+    builder.addCase(userLogin.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const userAuthReducer = userAuthSlice.reducer;
+export const {reducer, actions}  = userAuthSlice;

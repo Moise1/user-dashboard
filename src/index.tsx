@@ -23,9 +23,6 @@ if (Object.keys(locales).indexOf(language) == -1) {
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <CookiesProvider>
-     
-    </CookiesProvider> */}
     <Provider store={store}>
       <IntlProvider locale={language} messages={locales[language]}>
         <Router>

@@ -15,9 +15,12 @@ import {
   OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
+import { actions } from '../../redux/user-auth/userAuthSlice';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 import pin from '../../assets/pin.svg';
+import { TransparentBtn } from '../small-components/ActionBtns';
 import '../../sass/light-theme/side-bar.scss';
 
 const { SubMenu } = Menu;
@@ -39,7 +42,8 @@ export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const [isDark, setIsDark] = useState(false);
   const history = useHistory();
-
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const handleToggle = () => {
     if (isDark) {
       const element = document.getElementById('darkThemeLink');
@@ -78,10 +82,11 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
+    dispatch(actions.logout(user));
     localStorage.removeItem('isAuthenticated');
     routeChange('/login');
   };
-  
+
   const settingsListArray = [
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
     { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
@@ -244,10 +249,10 @@ export const Sidebar = (props: Props) => {
               ))}
             </SubMenu>
           </Menu>
-          <button className="logout" onClick={handleLogout}>
+          <TransparentBtn className={!collapsed ? 'collapsed-logout-btn' : 'logout-btn'} handleClick={handleLogout}>
             <img src={logout} />
             <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
-          </button>
+          </TransparentBtn>
         </div>
       </Sider>
     </div>

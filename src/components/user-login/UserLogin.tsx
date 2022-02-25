@@ -2,17 +2,17 @@ import { Form, Input, Checkbox } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { userLogin } from 'src/redux/user-login/userLoginThunk';
-import { User } from '../../redux/user-login/userLoginSlice';
+import { userLogin } from 'src/redux/user-auth/userAuthThunk';
+import { User } from '../../redux/user-auth/userAuthSlice';
 import '../../sass/light-theme/user-login.scss';
 
 export const UserLogin = withRouter(({history}) =>{
-  const {loading} = useAppSelector(state => state.login);
+  const {loading} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
   const onFinish = (values: User) => {
     dispatch(userLogin({data: values, history}));
-    localStorage.setItem('isAuthenticated', 'true');
   };
+  
   return (
     <div className="login-form-container">
       <h2 className="login-form-title">Login</h2>

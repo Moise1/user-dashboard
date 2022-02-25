@@ -21,7 +21,7 @@ import {
   Dashboard,
   SourcesSettings
 } from './components';
-
+import {ProtectedRoute} from './ProtectedRoute';
 import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
@@ -69,24 +69,23 @@ export const App = withRouter(({ history }) => {
         <Layout className={staticValue ? 'content-area' : 'all-content'}>
           <Switch>
             <Route exact path="/">
-              {!isAuthenticated && <Redirect push to="/login" />}
+              <Redirect to="/dashboard"/>
             </Route>
             <Route path="/login" component={UserLogin} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/home" component={Listings} />
-            <Route path="/listings" component={Listings} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/sources-settings" component={SourcesSettings} />
-            <Route path="/sources-table" component={SourcesTable} />
-            <Route path="/channel" component={ChannelSettings} />
-            <Route path="/new-channel" component={NewChannel} />
-            <Route path="/services" component={Services} />
-            <Route path="/subscriptions" component={Subscriptions} />
-            <Route path="/pricing-rules" component={PricingRules} />
-            <Route path="/browser-extensions" component={BrowserExtensions} />
-            <Route path="/va-profiles" component={VaProfiles} />
-            <Route path="/get-started" component={GetStarted} />
-            <Route path="/catalog" component={Catalog} />
+            <ProtectedRoute path="/dashboard" component={Dashboard} />
+            <ProtectedRoute path="/listings" component={Listings} />
+            <ProtectedRoute path="/orders" component={Orders} />
+            <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
+            <ProtectedRoute path="/sources-table" component={SourcesTable} />
+            <ProtectedRoute path="/channel" component={ChannelSettings} />
+            <ProtectedRoute path="/new-channel" component={NewChannel} />
+            <ProtectedRoute path="/services" component={Services} />
+            <ProtectedRoute path="/subscriptions" component={Subscriptions} />
+            <ProtectedRoute path="/pricing-rules" component={PricingRules} />
+            <ProtectedRoute path="/browser-extensions" component={BrowserExtensions} />
+            <ProtectedRoute path="/va-profiles" component={VaProfiles} />
+            <ProtectedRoute path="/get-started" component={GetStarted} />
+            <ProtectedRoute path="/catalog" component={Catalog} />
           </Switch>
         </Layout>
       </Layout>
