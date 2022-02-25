@@ -23,7 +23,14 @@ export const BrowserExtensions = () => {
       ),
       divider: <Divider />,
       installText: <p className="install-text">Install and start selling!</p>,
-      installBtn: <Button className="install-btn">Install</Button>,
+      installBtn: (
+        <Button
+          className="install-btn"
+          href="https://chrome.google.com/webstore/detail/lister-by-hustle-got-real/fakikmhjpdbdilplbjipceklhdglocmk?hl=en"
+        >
+          Install
+        </Button>
+      ),
       tutorial: 'Manual Lister tutorial'
     },
     {
@@ -40,7 +47,14 @@ export const BrowserExtensions = () => {
       ),
       divider: <Divider />,
       installText: <p className="install-text">Install and start monitoring!</p>,
-      installBtn: <Button className="install-btn">Install</Button>,
+      installBtn: (
+        <Button
+          className="install-btn"
+          href="https://chrome.google.com/webstore/detail/hgr-non-api/gmdcbkoddgblpnemlconaekpmhgapbcb?hl=en"
+        >
+          Install
+        </Button>
+      ),
       tutorial: 'No API extension tutorial'
     }
   ];
