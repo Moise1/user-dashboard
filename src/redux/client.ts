@@ -1,5 +1,7 @@
 import axios from 'axios';
-const origin = (process.env.NODE_ENV === 'production') ? 'https://dev-app.hustlegotreal.com' : window.location.origin;
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+const origin = IS_PRODUCTION ? 'https://dev-app.hustlegotreal.com' : window.location.origin;
 
 export const client = axios.create({
   withCredentials:true,
