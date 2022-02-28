@@ -7,7 +7,7 @@ export const userLogin = createAsyncThunk(
   'user/userLogin' ,
   async ({data, history}: {data: User, history: RouteComponentProps['history'] },  thunkAPI)=> {
     try {
-      const res = await client.post<User>('/User/Credentials/Login', data); 
+      const res = await client.post<User>('/Api/User/Credentials/Login', data); 
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         history.push('/dashboard');

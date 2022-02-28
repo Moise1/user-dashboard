@@ -5,7 +5,7 @@ const productionUrl = 'https://newweb.hustlegotreal.net';
 const originalUrl = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl;
 export const client = axios.create({
   withCredentials:true,
-  baseURL: `${originalUrl}/Api`,
+  baseURL: `${originalUrl}`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status === 500 || status === 452
 });
 
