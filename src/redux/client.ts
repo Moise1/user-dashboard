@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const origin = IS_PRODUCTION ? 'https://newweb.hustlegotreal.net' : window.location.origin;
-
+const localhostUrl = 'http://localhost:3000';
+const productionUrl = 'https://newweb.hustlegotreal.net';
+const originalUrl = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl;
 export const client = axios.create({
   withCredentials:true,
-  baseURL: `${origin}/Api`,
+  baseURL: `${originalUrl}/Api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status === 500 || status === 452
 });
 
