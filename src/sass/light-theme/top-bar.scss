@@ -336,11 +336,11 @@
 
 /* DARK THEME CONFIG STARTS  */
 
-.top-bar{
-  @include themify($themes) {
-    background: t('bg-color') !important;
-    // color: t('text-color');
-  };
-}
+// .top-bar{
+//   @include themify($themes) {
+//     background: t('bg-color') !important;
+//     // color: t('text-color');
+//   };
+// }
 
 /* DARK THEME CONFIG ENDS  */

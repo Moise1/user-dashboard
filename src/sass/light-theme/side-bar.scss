@@ -211,12 +211,12 @@
 
 /* DARK THEME CONFIG STARTS  */
 
-.sider,
-.side-menu-container,
-.ant-menu-root {
-  @include themify($themes) {
-    background: t('bg-color');
-    // color: t('text-color');
-  }
-}
+// .sider,
+// .side-menu-container,
+// .ant-menu-root {
+//   @include themify($themes) {
+//     background: t('bg-color');
+//     // color: t('text-color');
+//   }
+// }
 /* DARK THEME CONFIG STARTS  */

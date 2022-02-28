@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
@@ -24,7 +24,7 @@ import pin from '../../assets/pin.svg';
 import { TransparentBtn } from '../small-components/ActionBtns';
 import {ThemeContext} from '../../contexts/ThemeContext';
 
-import '../../sass/light-theme/side-bar.scss';
+// import '../../sass/light-theme/side-bar.scss';
 
 const { SubMenu } = Menu;
 
@@ -49,6 +49,16 @@ export const Sidebar = (props: Props) => {
   const dispatch = useAppDispatch();
   const {setTheme} = useContext(ThemeContext);
   const themeOptions = [{ value: 'light' }, { value: 'dark' }];
+
+  const theme = localStorage.getItem('globalTheme');
+  useEffect(()=>{
+    if(theme === 'light'){
+      require('../../sass/light-theme/side-bar.scss');
+    }else{
+      require('../../sass/dark-theme/side-bar.scss');
+    }
+  },[theme]);
+
   // const handleToggle = () => {
   //   if (isDark) {
   //     const element = document.getElementById('darkThemeLink');

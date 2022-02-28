@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const localhostUrl = 'http://localhost:3000/Api';
-const productionUrl = 'https://newweb.hustlegotreal.net/Api';
+const productionUrl = 'https://dev-app.hustlegotreal.com/Api';
 const baseURL = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl;
+
 export const client = axios.create({
   withCredentials:true,
   baseURL,
