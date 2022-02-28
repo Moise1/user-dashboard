@@ -1,4 +1,5 @@
 @import 'general.config';
+@import '../themes';
 
 // Large and extra large screens
 
@@ -162,8 +163,9 @@
 
     .collapsed-logout-btn {
       width: 40%;
-      margin: 1rem 0 0 2rem;
-
+      margin: 1rem 0 0 1rem;
+      display: flex;
+      justify-content: space-between;
       .hide-logout-text {
         display: none;
       }
@@ -176,6 +178,18 @@
   }
 }
 
+// Dark theme starts
+
+.sider,
+.side-menu-container,
+.ant-menu-root {
+  @include themify($themes) {
+    background: t('bg-color');
+    // color: t('text-color');
+  }
+}
+
+// Dark theme ends
 // Tablets screens
 
 @media only screen and (max-width: 1030px) {
@@ -194,3 +208,15 @@
     z-index: 2;
   }
 }
+
+/* DARK THEME CONFIG STARTS  */
+
+.sider,
+.side-menu-container,
+.ant-menu-root {
+  @include themify($themes) {
+    background: t('bg-color');
+    // color: t('text-color');
+  }
+}
+/* DARK THEME CONFIG STARTS  */

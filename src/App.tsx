@@ -51,7 +51,7 @@ export const App = withRouter(({ history }) => {
   };
 
   return (
-    <div className="app-container">
+    <>
       {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
       <Layout className="layout">
         {pathname === '/new-channel' || !isAuthenticated ? null : (
@@ -90,6 +90,6 @@ export const App = withRouter(({ history }) => {
         </Layout>
       </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
-    </div>
+    </>
   );
 });

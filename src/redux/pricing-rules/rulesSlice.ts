@@ -11,6 +11,7 @@ export interface Rule {
   createdOn: Date;
   active: boolean;
   channelOAuthId: number;
+  value?: string;
 }
 
 const initialState = {

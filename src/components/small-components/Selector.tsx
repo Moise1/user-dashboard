@@ -5,11 +5,15 @@ import {Rule} from '../../redux/pricing-rules/rulesSlice';
 import '../../sass/light-theme/selector.scss';
 
 interface Props {
-  children: Array<dummyUsersTypes| Rule>;
+  children: Array<dummyUsersTypes| appThemeTypes | Rule >;
   defaultValue: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
+  value?: string;
 }
+
+// type regularOnChange = (e: React.MouseEvent) => void;
+// type themeChangeType = (theme: string) => void;
 
 type dummyUsersTypes = {
   value?: string,
@@ -20,6 +24,11 @@ type dummyUsersTypes = {
   password?: string
 };
 
+type appThemeTypes = {
+  id: number;
+  value: string
+}
+
 const { Option } = Select;
 
 export const Selector: React.FC<Props> = (props: Props) => {
@@ -29,8 +38,8 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const [newAccount, setNewAccount] = useState({ value: '' });
   
   const options = children.map((d) => (
-    <Option key={d.id} value={d.id}>
-      {d.id}
+    <Option key={d.id} value={d.id? d.id : d.value}>
+      {d.id ? d.id : d.value}
     </Option>
   ));
   const handleOptionClick = (): void => {
