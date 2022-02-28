@@ -1,5 +1,5 @@
 import axios from 'axios';
-const {origin} = window.location;
+const origin = (process.env.NODE_ENV !== 'development') ? process.env.REACT_APP_HGR_WEB_URL as string : window.location.origin;
 
 export const client = axios.create({
   withCredentials:true,
