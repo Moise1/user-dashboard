@@ -33,8 +33,6 @@ export const App = withRouter(({ history }) => {
 
   const { pathname } = history.location;
 
-  const theme = localStorage.getItem('globalTheme');
-  
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
