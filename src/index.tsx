@@ -5,6 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import { store } from './redux/store';
+import { ThemeProvider } from './ThemeProvider';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -23,13 +24,12 @@ if (Object.keys(locales).indexOf(language) == -1) {
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <CookiesProvider>
-     
-    </CookiesProvider> */}
     <Provider store={store}>
       <IntlProvider locale={language} messages={locales[language]}>
         <Router>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </Router>
       </IntlProvider>
     </Provider>

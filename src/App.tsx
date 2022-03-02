@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
-import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import {Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import {
+  UserLogin,
   NewChannel,
   Topbar,
   Sidebar,
@@ -20,17 +21,18 @@ import {
   Dashboard,
   SourcesSettings
 } from './components';
-
+import {ProtectedRoute} from './ProtectedRoute';
 import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
-
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
 
   const { pathname } = history.location;
+
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
@@ -50,47 +52,45 @@ export const App = withRouter(({ history }) => {
   };
 
   return (
-    <div className="app-container">
-      <Router>
-        {pathname === '/new-channel' ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
-        <Layout className="layout">
-          {pathname === '/new-channel' ? null : (
-            <Sidebar
-              className="sider"
-              setCollapsed={setCollapsed}
-              staticValue={staticValue}
-              togglestatic={toggleStaticValue}
-              toggle={toggleCollapse}
-              collapsed={collapsed}
-              handleSidebarMobile={handleSidebarMobile}
-              collapseSideBar={collapseSideBar}
-            />
-          )}
-          <Layout className={staticValue ? 'content-area' : 'all-content'}>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/home" component={Listings} />
-              <Route path="/listings" component={Listings} />
-              <Route path="/orders" component={Orders} />
-              <Route path="/sources-settings" component={SourcesSettings} />
-              <Route path="/sources-table" component={SourcesTable} />
-              <Route path="/channel" component={ChannelSettings} />
-              <Route path="/new-channel" component={NewChannel} />
-              <Route path="/services" component={Services} />
-              <Route path="/subscriptions" component={Subscriptions} />
-              <Route path="/pricing-rules" component={PricingRules} />
-              <Route path="/browser-extensions" component={BrowserExtensions} />
-              <Route path="/va-profiles" component={VaProfiles} />
-              <Route path="/get-started" component={GetStarted} />
-              <Route path="/catalog" component={Catalog} />
-            </Switch>
-          </Layout>
+    <>
+      {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
+      <Layout className="layout">
+        {pathname === '/new-channel' || !isAuthenticated ? null : (
+          <Sidebar
+            className="sider"
+            setCollapsed={setCollapsed}
+            staticValue={staticValue}
+            togglestatic={toggleStaticValue}
+            toggle={toggleCollapse}
+            collapsed={collapsed}
+            handleSidebarMobile={handleSidebarMobile}
+            collapseSideBar={collapseSideBar}
+          />
+        )}
+        <Layout className={staticValue ? 'content-area' : 'all-content'}>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/dashboard"/>
+            </Route>
+            <Route path="/login" component={UserLogin} />
+            <ProtectedRoute path="/dashboard" component={Dashboard} />
+            <ProtectedRoute path="/listings" component={Listings} />
+            <ProtectedRoute path="/orders" component={Orders} />
+            <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
+            <ProtectedRoute path="/sources-table" component={SourcesTable} />
+            <ProtectedRoute path="/channel" component={ChannelSettings} />
+            <ProtectedRoute path="/new-channel" component={NewChannel} />
+            <ProtectedRoute path="/services" component={Services} />
+            <ProtectedRoute path="/subscriptions" component={Subscriptions} />
+            <ProtectedRoute path="/pricing-rules" component={PricingRules} />
+            <ProtectedRoute path="/browser-extensions" component={BrowserExtensions} />
+            <ProtectedRoute path="/va-profiles" component={VaProfiles} />
+            <ProtectedRoute path="/get-started" component={GetStarted} />
+            <ProtectedRoute path="/catalog" component={Catalog} />
+          </Switch>
         </Layout>
-      </Router>
+      </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
-    </div>
+    </>
   );
 });

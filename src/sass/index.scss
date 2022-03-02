@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
-@import '../sass/light-theme/general.config';
+@import './light-theme/general-light.config';
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -11,7 +11,7 @@ body {
     margin-top: 0.5rem;
     overflow: auto;
     padding: 0.3rem;
-    background: $mild-light-blue;
+    background: $secondary-dark-bg;
     .spinner {
       position: absolute;
       left: 50%;

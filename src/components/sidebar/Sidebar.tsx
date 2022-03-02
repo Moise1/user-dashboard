@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
@@ -15,10 +15,15 @@ import {
   OrdersIcon
 } from '../common/Icons';
 import MenuListItem from './MenuListItem';
-import '../../sass/light-theme/side-bar.scss';
+import { actions } from '../../redux/user-auth/userAuthSlice';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
-import { Switch } from '../small-components/Switch';
+// import { Switch } from '../small-components/Switch';
+import { Selector } from '../small-components/Selector';
 import pin from '../../assets/pin.svg';
+import { TransparentBtn } from '../small-components/ActionBtns';
+import { ThemeContext } from '../../contexts/ThemeContext';
+// import '../../sass/light-theme/side-bar.scss'; 
 
 const { SubMenu } = Menu;
 
@@ -37,24 +42,39 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
-  const [isDark, setIsDark] = useState(false);
   const history = useHistory();
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { theme, setTheme } = useContext(ThemeContext);
+  const themeOptions = [{ value: 'light' }, { value: 'dark' }];
 
-  const handleToggle = () => {
-    if (isDark) {
-      const element = document.getElementById('darkThemeLink');
-      element?.parentElement?.removeChild(element);
-    } else {
-      const link = document.createElement('link');
-      link.type = 'text/css';
-      link.id = 'darkThemeLink';
-      link.rel = 'stylesheet';
-      link.href = './_variables.dark.css';
-      document.head.appendChild(link);
+  useEffect(() => {
+    console.log('CURRENT THEME NOWW===>', theme);
+    if (theme === 'dark') {
+      require('../../sass/dark-theme/side-bar-dark.scss');
+    }else {
+      require('../../sass/light-theme/side-bar.scss');
     }
-    setIsDark(!isDark);
-  };
+  }, [theme, setTheme]);
 
+  // const handleToggle = () => {
+  //   if (isDark) {
+  //     const element = document.getElementById('darkThemeLink');
+  //     element?.parentElement?.removeChild(element);
+  //   } else {
+  //     const link = document.createElement('link');
+  //     link.type = 'text/css';
+  //     link.id = 'darkThemeLink';
+  //     link.rel = 'stylesheet';
+  //     link.href = './_variables.dark.css';
+  //     document.head.appendChild(link);
+  //   }
+  //   setIsDark(!isDark);
+  // };
+
+  const handleThemeChange = (value: string) => {
+    setTheme(value);
+  };
   const handleMouseEnter = () => {
     if (!staticValue) {
       setCollapsed(false);
@@ -77,6 +97,12 @@ export const Sidebar = (props: Props) => {
     }
   };
 
+  const handleLogout = () => {
+    dispatch(actions.logout(user));
+    localStorage.removeItem('isAuthenticated');
+    routeChange('/login');
+  };
+
   const settingsListArray = [
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
     { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
@@ -89,15 +115,18 @@ export const Sidebar = (props: Props) => {
       id: 13,
       listName: (
         <>
-          <span>{!isDark ? 'Dark Mode?' : 'Light Mode?'}</span>
-          <Switch
+          {/* <span>{theme === 'light' ? 'Dark Mode?' : 'Light Mode?'}</span> */}
+          {/* <Switch
             className="toggle-mode"
-            checked={isDark}
-            onChange={handleToggle}
+            // checked={isDark}
+            onChange={setTheme} 
             checkedChildren="🔆"
             unCheckedChildren="🌙"
             aria-label="Dark mode toggle"
-          />
+          /> */}
+          <Selector defaultValue="Select Mode" onChange={handleThemeChange}>
+            {themeOptions}
+          </Selector>
         </>
       )
     }
@@ -239,10 +268,10 @@ export const Sidebar = (props: Props) => {
               ))}
             </SubMenu>
           </Menu>
-          <button className="logout">
+          <TransparentBtn className={!collapsed ? 'collapsed-logout-btn' : 'logout-btn'} handleClick={handleLogout}>
             <img src={logout} />
             <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
-          </button>
+          </TransparentBtn>
         </div>
       </Sider>
     </div>
