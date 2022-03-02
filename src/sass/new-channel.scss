@@ -1,0 +1,353 @@
+@import 'general.config';
+// Large and extra large screens
+
+.ant-layout {
+  height: calc(100vh - 0px);
+}
+
+// new channel's parent component styles 
+.new-channel-container {
+  .stepper {
+    display: none;
+  }
+  .left-section {
+    border-radius: 25px !important;
+    background: $white;
+    margin: 2rem;
+    height: auto;
+    box-shadow: 5px 15px 55px #00000029;
+    .account{
+      display: grid;
+      place-items: center;
+      margin: 2rem 0;
+      .title, .sub-title{
+        margin-bottom: 1rem;
+      }
+    }
+
+    .location-form{
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+
+      .flags{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 1rem;
+      }
+
+      .select-country{
+        color: $red;
+      }
+    }
+
+
+    .account-connect {
+      display: flex;
+      padding: $spacer;
+      display: grid;
+      row-gap: 2rem;
+
+      .title, .change-settings{
+        text-align: center;
+        font-weight: bold;
+      }
+     
+      .with-api, .no-api{
+        box-shadow: 0px 3px 6px #00000029;
+        padding: 2rem;
+        border-radius: 10px;
+    
+        .content a{
+          color: $primary;
+          &:hover{
+            color: $primary;
+          }
+        }
+        .options-label{
+          display: flex;
+          justify-content: space-between;
+          .advance{
+            color: $primary !important;
+          }
+          p:nth-child(1){
+            font-weight: bold;
+            color: $black;
+          }
+          p:nth-child(2){
+            font-weight: bold;
+            color: $green;
+          }
+         }
+      }
+    }
+    
+
+    .choose-list{
+      margin-top: 3rem;
+      display: grid;
+      row-gap: .6rem;
+      .list-check{
+        text-align: center;
+        color: $red;
+      }
+      .title{
+        text-align: center;
+      };
+
+      .list-card{
+        padding: 0 .9rem;
+        width: 50VW;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
+        box-shadow:  0px 3px 6px #00000029;
+        border-radius: 10px;
+        &:hover{
+          border: 2px solid $primary;
+        }
+        img{
+          width: 100px;
+          height: 100px;
+        }
+        .checkbox{
+          display: none;
+        }
+      };
+
+      .card-info{
+        margin: 2rem 0;
+        p span a {
+          color: $primary;
+          &:hover{
+            color: $primary;
+          }
+        }
+      }
+    }
+    .nav-btns{
+      width: 30%;
+      left: 15rem;
+      display: flex;
+      justify-content: space-around;
+      position: fixed;
+      bottom: 2rem;
+      .ant-btn{
+        background: transparent !important;
+        color: $primary;
+        outline: none !important;
+        font-weight: bold !important;
+      }
+    }
+  };
+
+
+  .right-section{
+    margin-top: 2rem;
+    height: 100vh;
+
+  }
+  // platforms component styles 
+  
+  .card-input-element {
+    display: none;
+  }
+  
+  .platforms-form {
+    display: flex;
+    padding: $spacer;
+  
+    .new-description-area {
+      display: none;
+    }
+    .platforms-area {
+      padding: 10px;
+      margin-top: $spacer;
+      .sell-title {
+        margin-top: 1rem;
+        text-align: center;
+        color: $black;
+        font-weight: bold;
+      }
+  
+      .cards-container {
+        margin-top: 3rem;
+        padding: 2rem;
+  
+        .platforms-card {
+          .input {
+            display: none;
+            &:checked + .card-input {
+              box-shadow: 0 0 1px 1px #39418b;
+            }
+          }
+          .card-input {
+            border-radius: 10px;
+            padding: $spacer;
+            box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+  
+            .description-area {
+              margin-top: 1rem;
+              & p {
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;
+              }
+              .amazon-sub {
+                font-style: italic;
+              }
+              .market-place {
+                margin: 0.8rem 0;
+              }
+              .market-place,
+              .amazon-sub {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .username-form{
+    width: 30vw;
+    margin: 2rem auto;
+    .title{
+      text-align: center;
+    }
+  }
+
+}
+
+
+// Tablets screens
+
+@media only screen and (max-width: 1030px) {
+
+  // platforms  component styles 
+
+  .platforms-form {
+    display: block;
+    padding: 0 !important;
+
+    .new-description-area {
+      display: grid;
+      place-items: center;
+      gap: 0;
+      margin-top: -8rem;
+      .market-place {
+        margin-top: -5rem;
+        font-weight: bold;
+      }
+
+      p {
+        margin-top: -10rem;
+        text-align: center;
+      }
+
+      .amazon-sub {
+        font-weight: bold;
+        margin-top: 0.4rem;
+        position: absolute;
+        margin-top: 170px;
+      }
+    }
+
+    .cards-container {
+      height: 60vh;
+      .platforms-card {
+        .card-input {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+          padding: 10px !important;
+
+          .platform-img {
+            height: 20px;
+          }
+          .description-area {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+// mobile phone screen;
+
+@media only screen and (max-width: 750px) {
+  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+    padding-left: 0px !important;
+  }
+  .new-channel-container {
+    margin: 2rem 0  !important;
+   .left-section{
+     margin-top: 3rem;
+     width: 100%;
+     height: auto;
+     justify-content:center;
+     .location-form{
+       .flags{
+         grid-template-columns: repeat(3, 1fr);
+       }
+     }
+   };
+
+   .choose-list, .platforms-form{
+      width: 100% !important; 
+   }
+
+   .platforms-card{
+    height: 20%;
+  }
+   .nav-btns{
+    width: 60% !important;
+    bottom: 6rem;
+    left: 20% !important;
+    justify-content: space-between !important;
+    
+  }
+    .stepper {
+      margin: 1rem 2rem 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      & > * {
+        margin-left: 10px;
+      }
+      .ant-steps-item {
+        border-radius: 3px !important;
+        background: $gray !important;
+        width: 52px !important;
+        height: 13px;
+        .ant-steps-item-container {
+          .ant-steps-item-icon,
+          .ant-steps-item-content {
+            display: none;
+          }
+        }
+      }
+
+      .ant-steps-item-finish {
+        background: $green !important;
+      }
+    }
+  }
+
+  .choose-list  .list-card{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .card-info h5, p{
+      text-align: center;
+    }
+  }
+}
+

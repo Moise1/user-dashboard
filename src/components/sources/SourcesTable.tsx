@@ -2,8 +2,8 @@ import { dataSource } from './SourceData';
 import { Link } from 'react-router-dom';
 import { t } from '../../global/transShim';
 import { DataTable } from '../tables/DataTable';
-import '../../sass/light-theme/sources-table.scss';
-import '../../sass/light-theme/popover.scss';
+import '../../sass/sources-table.scss';
+import '../../sass/popover.scss';
 import { Layout } from 'antd';
 import { SearchOptions } from '../small-components/SearchOptions';
 

@@ -12,7 +12,7 @@ import garden_line from '../../assets/catalog-sources/garden-line.png';
 import { SearchInput } from '../small-components/TableActionBtns';
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/catalog-source.scss';
+import '../../sass/catalog-source.scss';
 
 interface Props {
   handleClose: () => void;

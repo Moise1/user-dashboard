@@ -1,0 +1,53 @@
+@import 'general.config';
+
+// Large and extra large screens;
+.upper-section {
+  display: flex;
+  justify-content: space-between;
+  h3 {
+    color: $primary;
+  }
+  .external-links,
+  .warning {
+    background: $light-gray;
+    padding: 0.5rem;
+    border-radius: 19px;
+
+    & > a {
+      margin-left: 2rem;
+      color: $primary;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}
+.form {
+  margin-top: 2rem;
+}
+
+.content {
+  .description-and-controls {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+    .limit-area,
+    .stock-area {
+      margin-top: 1rem;
+      width: 100%;
+      .radio {
+        width: 100%;
+      }
+      .stock-input {
+        width: 5vw !important;
+      }
+      .limit,
+      .stock {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

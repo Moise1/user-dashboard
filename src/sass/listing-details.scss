@@ -1,0 +1,20 @@
+@import 'general.config';
+
+// large and extra large screens
+
+.listing-details {
+  ul {
+    margin-top: 2rem;
+    list-style-type: none;
+    p:nth-child(1) {
+      font-weight: bold;
+    }
+
+    a {
+      color: $primary;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

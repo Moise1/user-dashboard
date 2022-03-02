@@ -1,6 +1,6 @@
 import { Card, Button } from 'antd';
 import tokenCoin from '../../assets/tokenCoin.png';
-import '../../sass/light-theme/buy-tokens.scss';
+import '../../sass/buy-tokens.scss';
 
 export const BuyTokens = () => {
   const data = [

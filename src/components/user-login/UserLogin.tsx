@@ -4,7 +4,7 @@ import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userLogin } from 'src/redux/user-auth/userAuthThunk';
 import { User } from '../../redux/user-auth/userAuthSlice';
-import '../../sass/light-theme/user-login.scss';
+import '../../sass/user-login.scss';
 
 export const UserLogin = withRouter(({history}) =>{
   const {loading} = useAppSelector(state => state.auth);

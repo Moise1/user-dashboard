@@ -3,7 +3,7 @@ import progress_remain from '../../assets/channel/progress_remain.png';
 import progress_remain_dots from '../../assets/channel/progress_remain_dots.png';
 import progress_done_dots from '../../assets/channel/progress_done_dots.png';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/progress-bar.scss';
+import '../../sass/progress-bar.scss';
 
 interface props {
   step: number;

@@ -1,0 +1,74 @@
+@import 'general.config';
+
+// Extra Large screens
+.services-content {
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3ch;
+  place-items: center;
+
+  .service-img {
+    width: 20%;
+    position: absolute;
+    left: 40%;
+    top: 10%;
+  }
+
+  .service {
+    background: $white;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+
+    .service-title {
+      font-size: $font-large;
+    }
+    .card-info {
+      margin-top: 5rem;
+      display: grid;
+      place-items: center;
+
+      a {
+        position: absolute;
+        bottom: 1rem;
+      }
+    }
+  }
+}
+
+// laptop screens
+
+@media only screen and (min-width: 1440px) {
+  .services-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card-info {
+    h1 {
+      font-size: $font-xl;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .services-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Tablet screens
+
+@media only screen and (max-width: 1000px) {
+  .services-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// mobile phone screen;
+@media only screen and (max-width: 750px) {
+  .services-content {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -15,7 +15,7 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
-import '../../sass/light-theme/listings.scss';
+import '../../sass/listings.scss';
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);

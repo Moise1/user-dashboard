@@ -5,7 +5,7 @@ import { t } from '../../global/transShim';
 import { BulkEditMain } from '../small-components/BulkEditMain';
 import { BulkEditDescription } from '../small-components/BulkEditDescription';
 import { AlertCircle } from 'react-feather';
-import '../../sass/light-theme/edit-multiple-listings.scss';
+import '../../sass/edit-multiple-listings.scss';
 
 interface Props {
   selectedItems: number;

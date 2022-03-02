@@ -1,0 +1,52 @@
+@import 'general.config';
+
+// Extra Large screens
+
+@mixin status-btn {
+  border-radius: 10px !important;
+  padding: 0.6rem 1.2rem;
+  width: auto;
+  font-size: $font-medium;
+  font-weight: $bold;
+  border: none !important;
+  outline: none !important;
+  &:focus {
+    border: none !important;
+    outline: none !important;
+  }
+}
+
+.active-tab {
+  @include status-btn;
+  color: $white !important;
+  background: $light-primary !important;
+  &:focus {
+    color: $white;
+    background: $light-primary;
+  }
+}
+
+.status-btn {
+  @include status-btn;
+  background: none;
+  color: $primary;
+  &:hover {
+    background: $light-gray;
+    color: $primary;
+  }
+}
+
+// small screen sizes
+@media only screen and (max-width: 750px) {
+  .status-bar {
+    display: flex !important;
+  }
+
+  .total-items {
+    display: none !important;
+  }
+
+  .status-btn {
+    font-size: $font-small;
+  }
+}

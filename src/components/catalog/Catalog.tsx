@@ -12,7 +12,7 @@ import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
 import { t } from '../../global/transShim';
 import { CatalogFilters } from '../small-components/AdvancedSearchDrawers';
-import '../../sass/light-theme/catalog.scss';
+import '../../sass/catalog.scss';
 
 
 type paginationSteps = 'prev' | 'next' | 'page' | 'jump-prev' | 'jump-next' ;

@@ -1,0 +1,171 @@
+// Container background colors
+
+$primary-light-bg: #fff;
+$secondary-light-bg: #f2f8ff;
+
+$primary-dark-bg: #000;
+$secondary-dark-bg: #031253;
+
+// All light theme colors
+$primary: #262e80;
+$cta-color: #fdcf00;
+$yellow: #ffd77c;
+$orange: #e8ac66;
+$red: #dd0a54;
+$light-red: #fff1f1;
+$dark-red: #c20648;
+$dark-orange: #df9c4f;
+$light-primary: #5e69db;
+$secondary: #9694ff;
+$light-blue: #5e84db;
+$dark-blue: #3a66ce;
+$mild-light-blue: #f2f8ff;
+$green: #228b22;
+$dark-green: #198319;
+$light-green: #30c630;
+$light-gray: #f0f0f0;
+$snow-gray: #e9e9e9;
+$dark-gray: #333;
+$gray: #777;
+$white: #fff;
+$black: #000;
+$ash-gray: #bfbfbf;
+$transparent: transparent;
+
+// Input colors
+$input-background: #fff;
+$input-background-secondary: #f2f8ff;
+
+// Responsiveness font sizes
+
+//Default fonts
+
+$font-xl: 1.6rem;
+$font-large: 1.2rem;
+$font-medium: 1rem;
+$font-small: 0.75rem;
+
+// Spacers & margins
+
+$spacer: 1rem;
+
+//Bold fonts
+
+$bold: 700;
+$semibold: 500;
+
+//Sider
+
+$siderWidth: 80px;
+$expandedSiderWidth: 293px;
+
+a {
+  font-size: $font-medium;
+  color: $primary;
+  font-weight: $bold;
+  &:hover {
+    color: $cta-color;
+    transition: 0.5s;
+  }
+}
+
+// Custom font-sizes for elements
+p {
+  font-size: $font-small;
+}
+
+h1 {
+  font-size: $font-xl;
+}
+
+h2 {
+  font-size: $font-large;
+  font-weight: $bold;
+}
+
+h3 {
+  font-size: $font-large;
+}
+
+h4 {
+  font-size: $font-medium;
+}
+
+// Checkbox styles
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: $light-primary !important;
+  border-color: $light-primary !important;
+}
+
+.back-link {
+  width: 100%;
+  color: $primary;
+  &:hover {
+    color: $primary;
+  }
+}
+.white-input {
+  border-radius: 10px;
+  border: none;
+  height: 42px;
+  width: 207px;
+  margin-top: $spacer;
+  background-color: $input-background !important;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.blue-input {
+  background: $mild-light-blue !important;
+  border-radius: 10px;
+  height: 42px;
+  font-size: $font-medium;
+  font-weight: $bold;
+  &:focus {
+    box-shadow: none !important;
+    background: $mild-light-blue !important;
+  }
+}
+
+@mixin chevrons {
+  margin-top: $spacer * 0.25 !important;
+  background: $light-blue;
+  color: $white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chevron-right,
+.chevron-left {
+  @include chevrons;
+}
+
+@mixin custom-btn-styles($bg-color: null, $color: null) {
+  margin: 1rem 0;
+  background: $bg-color;
+  border-radius: 8px;
+  color: $color;
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  &:hover {
+    background: $bg-color;
+    color: $color;
+  }
+}
+
+.primary-btn {
+  @include custom-btn-styles($primary, $white);
+}
+
+.secondary-btn {
+  @include custom-btn-styles($gray, $white);
+}
+.disabled-btn {
+  @include custom-btn-styles;
+  cursor: auto !important;
+  opacity: 0.3;
+}

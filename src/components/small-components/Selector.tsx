@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Select, Input, Button } from 'antd';
 import { PlusCircle } from 'react-feather';
 import {Rule} from '../../redux/pricing-rules/rulesSlice';
-import '../../sass/light-theme/selector.scss';
+import '../../sass/selector.scss';
 
 interface Props {
   children: Array<dummyUsersTypes| appThemeTypes | Rule >;

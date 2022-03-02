@@ -9,7 +9,7 @@ import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';
 import { Stepper } from './Stepper';
 import { ProgressBar } from './ProgressBar';
-import '../../sass/light-theme/new-channel.scss';
+import '../../sass/new-channel.scss';
 
 interface state {
   platform: platformType;

@@ -1,7 +1,7 @@
 import { Editor } from 'react-draft-wysiwyg';
 import { t } from 'src/global/transShim';
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
-import '../../sass/light-theme/listing-description.scss';
+import '../../sass/listing-description.scss';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
 
 export const ListingDescription = () => {

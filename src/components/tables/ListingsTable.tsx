@@ -4,7 +4,7 @@ import moment from 'moment';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/listings.scss';
+import '../../sass/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 import { PopupModal } from '../modals/PopupModal';
 import { EditSingleListing } from '../listings/EditSingleListing';

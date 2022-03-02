@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/switch.scss';
+import '../../sass/switch.scss';
 import { Switch } from '../small-components/Switch';
 import { Selector } from '../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
-import '../../sass/light-theme/auto-ordering.scss';
+import '../../sass/auto-ordering.scss';
 import hand from '../../assets/hand.svg';
 import copy from '../../assets/copy.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
