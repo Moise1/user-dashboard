@@ -1,4 +1,4 @@
-@import './general.config';
+@import './general-light.config';
 
 .order-state-progress-modal {
   padding: $spacer;
@@ -150,25 +150,22 @@
   color: $primary;
   cursor: pointer;
 }
-.modal-buttons-block{
-  display:block;
+.modal-buttons-block {
+  display: block;
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
 }
 
-.modal-button-row{
+.modal-button-row {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-
 }
 
-button{
-width: 45%;
+button {
+  width: 45%;
 }
-
-
 
 @media (max-width: 400px) {
   .modal-buttons-block {
@@ -181,13 +178,11 @@ width: 45%;
     }
   }
 
-  .modal-button-row{
-
-    display:block;
-  width: 70%;
+  .modal-button-row {
+    display: block;
+    width: 70%;
   }
-  Button{
+  Button {
     margin-bottom: 0.5rem;
-
   }
-  }
+}
