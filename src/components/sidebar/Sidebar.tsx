@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
@@ -19,12 +19,11 @@ import { actions } from '../../redux/user-auth/userAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 // import { Switch } from '../small-components/Switch';
-import {Selector} from '../small-components/Selector';
+import { Selector } from '../small-components/Selector';
 import pin from '../../assets/pin.svg';
 import { TransparentBtn } from '../small-components/ActionBtns';
-import {ThemeContext} from '../../contexts/ThemeContext';
-
-// import '../../sass/light-theme/side-bar.scss';
+import { ThemeContext } from '../../contexts/ThemeContext';
+// import '../../sass/light-theme/side-bar.scss'; 
 
 const { SubMenu } = Menu;
 
@@ -43,21 +42,20 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
-  // const [isDark] = useState(false);
   const history = useHistory();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const {setTheme} = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const themeOptions = [{ value: 'light' }, { value: 'dark' }];
 
-  const theme = localStorage.getItem('globalTheme');
-  useEffect(()=>{
-    if(theme === 'light'){
+  useEffect(() => {
+    console.log('CURRENT THEME NOWW===>', theme);
+    if (theme === 'dark') {
+      require('../../sass/dark-theme/side-bar-dark.scss');
+    }else {
       require('../../sass/light-theme/side-bar.scss');
-    }else{
-      require('../../sass/dark-theme/side-bar.scss');
     }
-  },[theme]);
+  }, [theme, setTheme]);
 
   // const handleToggle = () => {
   //   if (isDark) {
@@ -74,7 +72,7 @@ export const Sidebar = (props: Props) => {
   //   setIsDark(!isDark);
   // };
 
-  const handleThemeChange = (value: string) =>{
+  const handleThemeChange = (value: string) => {
     setTheme(value);
   };
   const handleMouseEnter = () => {

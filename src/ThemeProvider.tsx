@@ -7,12 +7,10 @@ interface Props {
 export const ThemeProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialThemeState.theme);
 
-  const localStorage = window.localStorage;
-
   useEffect(() => {
-    const savedThemeLocal = localStorage.getItem('globalTheme');
-    if (savedThemeLocal) {
-      setTheme(savedThemeLocal);
+    const savedTheme = localStorage.getItem('globalTheme');
+    if (savedTheme) {
+      setTheme(savedTheme);
     }
   }, []);
 

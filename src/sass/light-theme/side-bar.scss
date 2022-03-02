@@ -1,5 +1,4 @@
-@import 'general.config';
-@import '../themes';
+@import 'general-light.config';
 
 // Large and extra large screens
 
@@ -31,6 +30,12 @@
 .ant-tooltip {
   display: none;
 }
+
+.sider,
+.side-menu-container,
+.ant-menu-root {
+    background: $primary-light-bg;
+};
 
 .sider {
   margin-top: -0.3rem;
@@ -96,6 +101,7 @@
     }
   }
 
+  
   .menu-item:hover,
   .ant-menu-submenu-vertical:hover,
   .ant-menu-submenu-inline:hover,
@@ -178,18 +184,7 @@
   }
 }
 
-// Dark theme starts
 
-.sider,
-.side-menu-container,
-.ant-menu-root {
-  @include themify($themes) {
-    background: t('bg-color');
-    // color: t('text-color');
-  }
-}
-
-// Dark theme ends
 // Tablets screens
 
 @media only screen and (max-width: 1030px) {
@@ -208,15 +203,3 @@
     z-index: 2;
   }
 }
-
-/* DARK THEME CONFIG STARTS  */
-
-// .sider,
-// .side-menu-container,
-// .ant-menu-root {
-//   @include themify($themes) {
-//     background: t('bg-color');
-//     // color: t('text-color');
-//   }
-// }
-/* DARK THEME CONFIG STARTS  */

@@ -1,9 +1,17 @@
-@import 'general.config';
+@import 'general-light.config';
 @import '../themes';
 
 // Large and extra large screens
 
 // Manage(delete/keep) accounts
+
+@mixin container-bg-color($light-theme: null){
+  @if $light-theme{
+    background: $primary-light-bg;
+  }@else{
+    background: $primary-dark-bg;
+  }
+};
 
 .modal-title {
   margin-bottom: 1rem;
@@ -59,53 +67,7 @@
   }
 }
 
-.top-bar-item {
-  margin: 0 1rem;
-  display: flex;
-
-  .tokens-container {
-    color: $black;
-    display: flex;
-    align-items: center;
-    line-height: 1px;
-    cursor: pointer;
-    margin: auto;
-
-    justify-content: center;
-
-    .token-icon {
-      width: 30px;
-    }
-
-    .token-number {
-      font-size: $font-medium;
-      font-weight: $semibold;
-      margin: 0 $spacer * 0.25;
-    }
-
-    .tokens {
-      display: inline;
-      font-size: $font-medium;
-    }
-  }
-
-  .notifications-container {
-    display: flex;
-
-    line-height: 1px;
-    cursor: pointer;
-
-    width: fit-content;
-    justify-content: center;
-    .notifications {
-      font-weight: bold;
-      font-size: $font-medium;
-      display: inline;
-    }
-  }
-}
-
-.top-bar {
+@mixin top-bar {
   height: 60px;
   width: 100%;
   position: sticky;
@@ -259,7 +221,20 @@
       border: none !important;
     }
   }
-}
+};
+
+.top-bar-light{
+  @include top-bar;
+  @include container-bg-color($light-theme: true);
+};
+
+.top-bar-dark{
+  @include top-bar;
+  @include container-bg-color($light-theme: false);
+};
+
+
+
 
 //Hover elements effect
 
@@ -332,15 +307,3 @@
   }
 }
 
-
-
-/* DARK THEME CONFIG STARTS  */
-
-// .top-bar{
-//   @include themify($themes) {
-//     background: t('bg-color') !important;
-//     // color: t('text-color');
-//   };
-// }
-
-/* DARK THEME CONFIG ENDS  */
