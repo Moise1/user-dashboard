@@ -6,7 +6,7 @@ import { StatusBar } from '../small-components/StatusBar';
 import { TransparentBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import {getSubscriptions } from 'src/redux/subscriptions/subsThunk';
-import '../../sass/light-theme/subscriptions.scss';
+import '../../sass/subscriptions.scss';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);

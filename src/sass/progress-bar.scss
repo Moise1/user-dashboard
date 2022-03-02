@@ -1,0 +1,14 @@
+@import 'general.config';
+
+.channel-progress-bar {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+// Mobile scree sizes
+
+@media only screen and (max-width: 1030px) {
+  .channel-progress-bar {
+    display: none;
+  }
+}

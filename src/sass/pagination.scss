@@ -1,0 +1,33 @@
+@import 'general.config';
+
+.border-left-tab {
+  width: 1.5px;
+  display: inline-block;
+  background-color: var(--color-dark-violet);
+}
+
+.pagination-number {
+  display: inline-block;
+  font-size: 18px;
+  color: $primary;
+  cursor: pointer;
+  font-weight: 400;
+  width: 25px;
+  transition: 0.2s ease;
+}
+
+.pagination-number:hover {
+  font-weight: $bold;
+}
+
+.pagination-number {
+  font-weight: 500;
+  font-size: var(--font-large);
+  color: var(--color-dark-violet);
+  cursor: pointer;
+}
+
+.pagination-number:hover {
+  color: #0013d4;
+  font-weight: 600;
+}

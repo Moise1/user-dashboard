@@ -1,0 +1,21 @@
+@import 'general.config';
+
+// large and extra large screen;
+
+.listing-options {
+  margin-top: 2rem;
+}
+
+// Mobile screen sizes
+
+@media only screen and (max-width: 750px) {
+  .description-and-controls {
+    width: 100% !important;
+    .description-area,
+    .controls-area {
+      display: grid !important;
+      place-items: center;
+      margin: 0 auto;
+    }
+  }
+}

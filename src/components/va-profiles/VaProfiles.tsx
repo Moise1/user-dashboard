@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Table, Row, Col, Card, Input, Form, Button, Layout, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getUserAssistants } from 'src/redux/va-profiles/vaProfilesThunk';
-import '../../sass/light-theme/va-profiles.scss';
+import '../../sass/va-profiles.scss';
 
 export const VaProfiles = () => {
   const dispatch = useAppDispatch();

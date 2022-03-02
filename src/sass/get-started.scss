@@ -1,0 +1,181 @@
+@import 'general.config';
+
+// Large screen sizes
+.main-container {
+  .back-to-dashboard {
+    width: 15vw;
+    color: $primary;
+    &:hover {
+      color: $primary;
+    }
+  }
+  .get-started-container {
+    margin: 1rem 0 0 0;
+    padding: 1rem;
+    height: auto;
+    background: $white;
+    .intro-area {
+      margin: 2rem auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+
+      .get-started-vid {
+        position: relative;
+        padding-bottom: 56.25%; /* 4:3 -> 3/4x100 */
+        overflow: hidden;
+
+        .intro-vid {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+    .description-area {
+      margin-top: 2rem;
+
+      .description-list {
+        list-style-type: none;
+
+        .list-item {
+          display: flex;
+          margin-left: -2rem;
+          .description {
+            margin-left: 2rem;
+          }
+        }
+      }
+    }
+
+    .updates-area {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      .ebay-location {
+        color: $primary;
+        &:hover {
+          color: $primary;
+        }
+      }
+      .social-media-list {
+        list-style-type: none;
+        display: flex;
+        margin-left: 1rem;
+        .list-item {
+          margin-left: 2rem;
+          .social-media-icon {
+            display: block;
+            margin-left: 0;
+            width: 50px;
+            height: 50px;
+          }
+
+          .social-media-link {
+            text-align: justify;
+            font-weight: normal;
+            color: $primary;
+            &:hover {
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+
+    .resources {
+      .resources-list {
+        margin-top: 2rem;
+        list-style: none;
+        padding: 1rem 0;
+        -moz-column-count: 2;
+        -moz-column-gap: 3rem;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 3rem;
+        column-count: 2;
+        column-gap: 3rem;
+        li:nth-child(4) {
+          margin-top: 3rem;
+        }
+      }
+      .list-item-title {
+        color: $primary;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+    .more-help {
+      margin-top: 2rem;
+      .contact-mail {
+        color: $primary;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+// tablet screen size
+
+@media only screen and (max-width: 1030px) {
+  .back-to-dashboard {
+    width: 30vw;
+  }
+
+  .intro-area {
+    .description-area {
+      margin-top: 20rem;
+    }
+  }
+
+  .updates-area {
+    .up-to-date-title {
+      text-align: center;
+    }
+
+    .social-media-list {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem auto;
+    }
+  }
+
+  .resources-title {
+    text-align: center;
+  }
+  .resources-list {
+    -moz-column-count: auto !important;
+    -webkit-column-count: auto !important;
+    column-count: auto !important;
+    .list-item h6 {
+      text-align: center !important;
+    }
+  }
+
+  .more-help {
+    h4,
+    p {
+      text-align: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .social-media-list {
+    width: 100vw;
+    li:nth-child(1) {
+      margin-left: -2rem !important;
+    }
+  }
+  .social-media-link {
+    text-align: initial;
+  }
+  .social-media-icon {
+    width: 35px !important;
+    height: 35px !important;
+  }
+}

@@ -1,0 +1,102 @@
+@import 'general.config';
+@import 'config.large';
+
+// Extra large screens
+.status-btn {
+  border-radius: 18px;
+  display: block;
+  padding: 0.2rem 1rem;
+  width: auto;
+}
+
+.enabled {
+  color: $green;
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  span {
+    cursor: pointer;
+  }
+  .trash-icon {
+    background: $black;
+  }
+}
+.pricing-rules {
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
+  margin: auto;
+  margin-top: 0rem;
+  .pricing-rules-bar {
+    display: block;
+    padding: auto 2rem;
+    .form {
+      display: flex;
+      justify-content: space-evenly;
+      padding: -1rem 0 !important;
+      margin: 0.1rem;
+      height: auto !important;
+      & > * {
+        margin-left: 1rem !important;
+      }
+
+      [title='Source'],
+      [title='Price From'],
+      [title='Price To'],
+      [title='Markup'] {
+        font-weight: bold;
+      }
+      .ant-select {
+        width: 16vw;
+      }
+
+      .rule-btn {
+        background: $light-primary;
+        color: $white;
+        height: 42px;
+      }
+
+      .rule-btn,
+      .-ant-select {
+        width: 18%;
+        border-radius: 10px;
+        margin-top: 1.8rem;
+      }
+    }
+  }
+
+  .table {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .pricing-rules-bar {
+    display: block !important;
+    .form-header{
+      h2, p{
+        text-align: center;
+      }
+    }
+    h4,
+    p {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form {
+      margin-top: -1rem;
+      display: flex !important;
+      flex-direction: column;
+      padding: 0 1rem;
+      .selector .ant-select-selector{
+        margin: 0 !important;
+        width: 100% !important;
+      }
+      .selector, .rule-btn {
+        width: 100% !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import 'app-styles.config';
+
+@mixin theme-config($light-theme: null){
+    @if $light-theme{
+      background: $primary-light-bg;
+    }@else{
+      background: $primary-dark-bg;
+    }
+  };
