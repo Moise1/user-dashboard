@@ -1,17 +1,8 @@
 @import 'general-light.config';
-@import '../themes';
 
 // Large and extra large screens
 
 // Manage(delete/keep) accounts
-
-@mixin container-bg-color($light-theme: null){
-  @if $light-theme{
-    background: $primary-light-bg;
-  }@else{
-    background: $primary-dark-bg;
-  }
-};
 
 .modal-title {
   margin-bottom: 1rem;
@@ -67,7 +58,53 @@
   }
 }
 
-@mixin top-bar {
+.top-bar-item {
+  margin: 0 1rem;
+  display: flex;
+
+  .tokens-container {
+    color: $black;
+    display: flex;
+    align-items: center;
+    line-height: 1px;
+    cursor: pointer;
+    margin: auto;
+
+    justify-content: center;
+
+    .token-icon {
+      width: 30px;
+    }
+
+    .token-number {
+      font-size: $font-medium;
+      font-weight: $semibold;
+      margin: 0 $spacer * 0.25;
+    }
+
+    .tokens {
+      display: inline;
+      font-size: $font-medium;
+    }
+  }
+
+  .notifications-container {
+    display: flex;
+
+    line-height: 1px;
+    cursor: pointer;
+
+    width: fit-content;
+    justify-content: center;
+    .notifications {
+      font-weight: bold;
+      font-size: $font-medium;
+      display: inline;
+    }
+  }
+}
+
+.top-bar {
   height: 60px;
   width: 100%;
   position: sticky;
@@ -79,6 +116,8 @@
   align-items: center;
   margin: auto;
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+  background: $white !important;
+
   .action-btns {
     display: flex;
     justify-content: space-between;
@@ -221,20 +260,7 @@
       border: none !important;
     }
   }
-};
-
-.top-bar-light{
-  @include top-bar;
-  @include container-bg-color($light-theme: true);
-};
-
-.top-bar-dark{
-  @include top-bar;
-  @include container-bg-color($light-theme: false);
-};
-
-
-
+}
 
 //Hover elements effect
 
@@ -306,4 +332,3 @@
     margin: 0 0.2rem;
   }
 }
-

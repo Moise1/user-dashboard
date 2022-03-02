@@ -1,4 +1,4 @@
-import { useState, useContext} from 'react';
+import { useState } from 'react';
 import coinIcon from '../../assets/token.svg';
 import downArrow from '../../assets/downArrow.svg';
 import flag from '../../assets/flag-round-500.svg';
@@ -14,8 +14,6 @@ import { useHistory } from 'react-router-dom';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../users/DeleteAccount';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import '../../sass/light-theme/top-bar.scss';
 
 interface Props {
   handleSidebarMobile: () => void;
@@ -40,10 +38,8 @@ export const Topbar = (props: Props) => {
     history.push(route);
   };
 
-  const { theme } = useContext(ThemeContext);
-
   return (
-    <div className={`top-bar-${theme}`}>
+    <div className="top-bar">
       <PopupModal open={openDeleteModal}>
         <DeleteAccount
           checked={checked}
