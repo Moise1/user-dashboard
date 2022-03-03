@@ -12,7 +12,7 @@ export const client = axios.create({
 client.interceptors.request.use(config =>{
 
   config.headers = {    
-    'Access-Control-Allow-Origin': 'https://dev-app.hustlegotreal.com',
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': '*',
     'Access-Control-Allow-Headers': '*',
     'Accept': 'application/json',
