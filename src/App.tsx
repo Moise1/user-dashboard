@@ -23,7 +23,6 @@ import {
   SourcesSettings
 } from './components';
 import {ProtectedRoute} from './ProtectedRoute';
-import './sass/index.scss';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -68,7 +67,7 @@ export const App = withRouter(({ history }) => {
             collapseSideBar={collapseSideBar}
           />
         )}
-        <Layout className={staticValue ? 'content-area' : 'all-content'}>
+        <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>
           <Switch>
             <Route exact path="/">
               <Redirect to="/dashboard"/>

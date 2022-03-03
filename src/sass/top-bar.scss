@@ -1,10 +1,8 @@
-// @import 'theme.config';
 @import 'general.config';
+
 // Large and extra large screens
 
 // Manage(delete/keep) accounts
-
-
 
 .modal-title {
   margin-bottom: 1rem;
@@ -118,7 +116,7 @@
   align-items: center;
   margin: auto;
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
-  background: $white !important;
+  background: $primary-bg;
 
   .action-btns {
     display: flex;
@@ -262,7 +260,7 @@
       border: none !important;
     }
   }
-};
+}
 
 //Hover elements effect
 
@@ -271,31 +269,12 @@
   transition: all 0.5s ease;
   background: $light-gray;
   border-radius: 25px;
-};
-
-// .top-bar-light{
-//   @include top-bar;
-//   @include theme-config($light-theme: true);
-// };
-
-
-// DARK THEME STYLES - START
-
-
-// .top-bar-dark{
-//   @include top-bar;
-//   @include theme-config($light-theme: false);
-// };
-
-// DARK THEME STYLES - END
-
-
-
-
+}
 
 // Tablets and iPads screen
+
 @media only screen and (max-width: 1030px) {
-  .top-bar-light, .top-bar-dark {
+  .top-bar {
     width: auto !important;
     .logo-container,
     .quota-container {

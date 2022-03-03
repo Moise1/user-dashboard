@@ -10,7 +10,7 @@ body {
     margin-top: 0.5rem;
     overflow: auto;
     padding: 0.3rem;
-    background: $secondary-light-bg;
+    background: $secondary-bg;
     .spinner {
       position: absolute;
       left: 50%;
@@ -20,7 +20,7 @@ body {
   .ant-layout.ant-layout-has-sider {
     margin: 0px 5px 0px 80px;
   }
-  .content-area {
+  .content-area-resized {
     margin: 1rem 2rem 0 13rem;
     .listings .action-components .ant-input-wrapper {
       width: 100% !important;
@@ -32,7 +32,7 @@ body {
   }
 
   @media only screen and (max-width: 1030px) {
-    .content-area {
+    .content-area-resized {
       margin: 0 auto !important;
     }
   }

@@ -1,5 +1,4 @@
 @import 'general.config';
-// @import 'theme.config';
 
 // Large and extra large screens
 
@@ -32,7 +31,7 @@
   display: none;
 }
 
-@mixin sider {
+.sider {
   margin-top: -0.3rem;
   border-top: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
@@ -45,6 +44,10 @@
     display: none;
   }
 
+  .side-menu-container,
+  .ant-menu-root {
+    background: $primary-bg;
+  }
   .ant-layout-sider-children {
     overflow: scroll;
   }
@@ -176,26 +179,10 @@
       }
     }
   }
-}
+};
 
-.sider-light {
-  @include sider;
-  @include theme-config($light-theme: true);
-}
-
-// DARK THEME STYLES - START
-.sider-dark {
-  @include sider;
-  @include theme-config($light-theme: false);
-  & .side-menu-container,
-  .ant-menu-root {
-    background: $primary-dark-bg;
-  }
-}
-// DARK THEME STYLES - END
 
 // Tablets screens
-
 @media only screen and (max-width: 1030px) {
   .sider {
     display: none;

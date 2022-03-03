@@ -45,7 +45,7 @@ export const Sidebar = (props: Props) => {
   const history = useHistory();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const {theme, setTheme } = useContext(ThemeContext);
+  const {setTheme } = useContext(ThemeContext);
   
   const handleThemeChange = () => {
     setIsDark(!isDark);
@@ -118,7 +118,7 @@ export const Sidebar = (props: Props) => {
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Sider
         theme="light"
-        className={`${className}-${theme}`}
+        className={className}
         trigger={null}
         collapsible
         collapsed={collapsed}

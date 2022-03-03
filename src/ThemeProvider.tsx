@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ThemeContext, initialThemeState } from './contexts/ThemeContext';
+import './sass/index.scss';
 
 interface Props {
     children: JSX.Element | JSX.Element[];
@@ -20,7 +21,7 @@ export const ThemeProvider = ({ children }: Props) => {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`theme-${theme}`}>
+      <div data-theme={theme} className="theme-provider">
         {children}
       </div>
     </ThemeContext.Provider>
