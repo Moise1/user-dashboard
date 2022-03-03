@@ -13,7 +13,7 @@ import { Badge } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
-import { DeleteAccount } from '../users/DeleteAccount';
+import { DeleteAccount } from '../user-auth/DeleteAccount';
 // import { ThemeContext } from '../../contexts/ThemeContext';
 import '../../sass/top-bar.scss';
 

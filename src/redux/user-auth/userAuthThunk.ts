@@ -17,3 +17,19 @@ export const userLogin = createAsyncThunk(
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
+
+export const userRegister = createAsyncThunk(
+  'user/userRegister' ,
+  async ({data, history}: {data: User, history: RouteComponentProps['history'] },  thunkAPI)=> {
+    try {
+      const res = await client.post<User>('/register/Register?returnUrl=www.someurl.com', data); 
+      if(res.status === 200) {
+        localStorage.setItem('isAuthenticated', 'true');
+        history.push('/dashboard');
+      }
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
+    }
+  });
+  

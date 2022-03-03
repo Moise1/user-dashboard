@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 import {Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import {
   UserLogin,
+  UserRegister,
   NewChannel,
   Topbar,
   Sidebar,
@@ -73,6 +74,7 @@ export const App = withRouter(({ history }) => {
               <Redirect to="/dashboard"/>
             </Route>
             <Route path="/login" component={UserLogin} />
+            <Route path="/register/Register" component={UserRegister}/>
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />
             <ProtectedRoute path="/orders" component={Orders} />
