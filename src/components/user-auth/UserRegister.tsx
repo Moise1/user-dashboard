@@ -1,5 +1,5 @@
 import { Form, Input, Checkbox } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userRegister } from 'src/redux/user-auth/userAuthThunk';
@@ -49,16 +49,34 @@ export const UserRegister = withRouter(({ history, location }) => {
           <Input.Password className="blue-input" />
         </Form.Item>
 
-        <Form.Item name="terms" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-          <Checkbox>Agree to Terms and Conditions</Checkbox>
+        <Form.Item name="terms" valuePropName="checked" wrapperCol={{ offset: 5, span: 18 }}>
+          <Checkbox className="checkbox">
+            I accept the{' '}
+            <span>
+              <a href="#">Terms</a> and <a href="#">Conditions</a>
+            </span>
+          </Checkbox>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
+        <Form.Item name="offers" valuePropName="checked" wrapperCol={{ offset: 5, span: 18 }}>
+          <Checkbox className="checkbox">I would like to receive offers and promotions</Checkbox>
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <ConfirmBtn htmlType="submit" disabled={loading}>
-            {loading ? 'Please wait...' : 'Register'}
+            {loading ? 'Please wait...' : 'Create account'}
           </ConfirmBtn>
         </Form.Item>
       </Form>
+      <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
+        Already have an account?{' '}
+        <span>
+          {' '}
+          <Link to="/login" className="alternative-link">
+            Sign In.
+          </Link>
+        </span>
+      </Form.Item>
     </div>
   );
 });

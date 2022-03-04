@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
-import {Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import {
   UserLogin,
   UserRegister,
@@ -22,7 +22,7 @@ import {
   Dashboard,
   SourcesSettings
 } from './components';
-import {ProtectedRoute} from './ProtectedRoute';
+import { ProtectedRoute } from './ProtectedRoute';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -32,7 +32,6 @@ export const App = withRouter(({ history }) => {
   const toggleStaticValue = () => setStaticValue(!staticValue);
 
   const { pathname } = history.location;
-
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
@@ -70,10 +69,10 @@ export const App = withRouter(({ history }) => {
         <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>
           <Switch>
             <Route exact path="/">
-              <Redirect to="/dashboard"/>
+              <Redirect to="/dashboard" />
             </Route>
             <Route path="/login" component={UserLogin} />
-            <Route path="/register/Register" component={UserRegister}/>
+            <Route path="/register" component={UserRegister} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />
             <ProtectedRoute path="/orders" component={Orders} />

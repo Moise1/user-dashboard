@@ -12,7 +12,10 @@ export const UserLogin = withRouter(({ history }) => {
   const onFinish = (values: User) => {
     dispatch(userLogin({ data: values, history }));
   };
-
+  const formInpuRules = [
+    { required: true, message: 'Please input your email!'},
+    // {type: 'email', message: 'Invalid e-mail address'}
+  ];
   return (
     <div className="login-form-container">
       <h2 className="login-form-title">Login</h2>
@@ -24,7 +27,9 @@ export const UserLogin = withRouter(({ history }) => {
         onFinish={onFinish}
         autoComplete="on"
       >
-        <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+        <Form.Item 
+          label="Email" name="email" 
+          rules={formInpuRules}>
           <Input className="blue-input" />
         </Form.Item>
 
@@ -36,16 +41,17 @@ export const UserLogin = withRouter(({ history }) => {
           <Input.Password className="blue-input" />
         </Form.Item>
 
-        <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        <p className="alternative">
-          Don&apos;t have an account?{' '}
+        <Form.Item className="alternative" wrapperCol={{ offset: 6, span: 14 }}>
+          No account?{' '}
           <span>
             {' '}
-            <Link to="/register/Register?returnUrl=www.someurl.com" className="alternative-link">Register Here.</Link>
+            <Link to="/register" className="alternative-link">Create one here.</Link>
           </span>
-        </p>
+        </Form.Item>
+        
         <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
           <ConfirmBtn htmlType="submit" disabled={loading}>
             {loading ? 'Please wait...' : 'Log In'}
