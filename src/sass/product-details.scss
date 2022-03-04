@@ -10,7 +10,7 @@
   }
   .transaction-details {
     .transaction-type p {
-        color: $primary;
+      color: $corporative-color;
     }
     .transaction-type,
     .transaction-amount {
@@ -20,7 +20,7 @@
 
     .transaction-amount p {
       &:nth-child(1) {
-        color: $primary;
+        color: $corporative-color;
       }
 
       &:nth-child(2) {

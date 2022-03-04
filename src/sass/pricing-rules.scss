@@ -19,7 +19,7 @@
     cursor: pointer;
   }
   .trash-icon {
-    background: $black;
+    background: $primary-txt;
   }
 }
 .pricing-rules {
@@ -53,7 +53,7 @@
 
       .rule-btn {
         background: $light-primary;
-        color: $white;
+        color: $primary-bg;
         height: 42px;
       }
 
@@ -75,8 +75,9 @@
 @media only screen and (max-width: 750px) {
   .pricing-rules-bar {
     display: block !important;
-    .form-header{
-      h2, p{
+    .form-header {
+      h2,
+      p {
         text-align: center;
       }
     }
@@ -90,11 +91,12 @@
       display: flex !important;
       flex-direction: column;
       padding: 0 1rem;
-      .selector .ant-select-selector{
+      .selector .ant-select-selector {
         margin: 0 !important;
         width: 100% !important;
       }
-      .selector, .rule-btn {
+      .selector,
+      .rule-btn {
         width: 100% !important;
       }
     }

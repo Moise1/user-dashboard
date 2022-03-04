@@ -2,7 +2,7 @@
 
 // medium screens and laptops
 .store-list-container {
-  background: $white;
+  background: $primary-bg;
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.16));
   border-radius: 10px;
   padding: $spacer;
@@ -16,7 +16,7 @@
       width: 100%;
       border-radius: 10px;
       padding: 0.35rem 1.3rem 0.35rem 0.19rem;
-      background: $white;
+      background: $primary-bg;
       border: 1px solid $snow-gray;
       font-size: $font-medium;
       box-shadow: inset 2px 2px 10px rgb(0 0 0 / 10%);
@@ -39,7 +39,7 @@
   .new-channel {
     bottom: 0;
     left: 1rem;
-    color: $black;
+    color: $primary-txt;
   }
 
   .new-channel:hover {

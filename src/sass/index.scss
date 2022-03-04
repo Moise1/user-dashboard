@@ -62,16 +62,16 @@ svg > path:first-child {
 .ant-select-selector,
 .ant-pagination-item-link {
   transition: none !important;
-  color: $primary;
+  color: $corporative-color;
   border-radius: 8px !important;
   &:hover {
-    color: $primary;
-    border-color: $primary !important;
+    color: $corporative-color;
+    border-color: $corporative-color !important;
   }
 }
 .ant-pagination-item-active,
 .ant-select-item-option-state {
-  border-color: $primary !important;
+  border-color: $corporative-color !important;
 }
 
 //Ant buttons styles fixed

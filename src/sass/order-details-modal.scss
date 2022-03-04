@@ -11,7 +11,7 @@
 }
 
 .modal-title {
-  color: $primary;
+  color: $corporative-color;
   font-size: $font-large;
   margin-right: $spacer;
 }
@@ -20,7 +20,7 @@
   background: $green;
   border-radius: 10px;
   opacity: 1;
-  color: $white;
+  color: $corporative-color-bg;
   font-size: $font-small;
   width: 137px;
   height: 27px;
@@ -43,14 +43,14 @@
 
 .heading-details {
   font-size: $font-medium;
-  color: $black;
+  color: $corporative-color-txt;
   font-weight: $bold;
   white-space: nowrap;
 }
 
 .shipping-billing-container {
   justify-content: space-between;
-  background: $mild-light-blue;
+  background: $secondary-bg;
   padding: $spacer;
   border-radius: 10px;
 }
@@ -94,6 +94,6 @@
 .go-back-orders {
   font-weight: bold;
   font-size: $font-medium;
-  color: $primary;
+  color: $corporative-color;
   cursor: pointer;
 }

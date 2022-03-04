@@ -24,7 +24,7 @@
 }
 
 .modal-title {
-  color: $primary;
+  color: $corporative-color;
   font-size: $font-large;
   margin-right: $spacer;
 }
@@ -33,7 +33,7 @@
   background: $green;
   border-radius: 10px;
   opacity: 1;
-  color: $white;
+  color: $corporative-color-bg;
   font-size: $font-small;
   width: 137px;
   height: 27px;
@@ -82,15 +82,15 @@
 .start-order-active-svg svg circle,
 .start-order-active-svg g #Path_311,
 .start-order-active-svg g #Path_310 {
-  stroke: $primary;
+  stroke: $corporative-color;
 }
 
 .order-checkout-icon rect,
 .order-checkout-icon line {
-  stroke: $primary;
+  stroke: $corporative-color;
 }
 .last-step-order-icon #Path_315 {
-  fill: $primary;
+  fill: $corporative-color;
 }
 
 @keyframes rotating {
@@ -147,7 +147,7 @@
 .go-back-details {
   font-weight: bold;
   font-size: $font-medium;
-  color: $primary;
+  color: $corporative-color;
   cursor: pointer;
 }
 .modal-buttons-block {

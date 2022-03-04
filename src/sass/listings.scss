@@ -53,7 +53,7 @@
       p,
       h3 {
         text-align: center;
-        color: $primary;
+        color: $corporative-color;
       }
     }
   }
@@ -68,19 +68,19 @@
 
 .cols-display-title,
 .description {
-  color: $primary;
+  color: $corporative-color;
   text-align: center;
 }
 
 .table-info {
   display: flex;
-  background: $white;
+  background: $primary-bg;
   margin-top: 1rem;
   padding: 1rem;
   .selected-options {
     margin-left: 2rem;
     .total-selected {
-      color: $primary;
+      color: $corporative-color;
     }
     .list {
       list-style-type: none;
@@ -88,7 +88,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      background: $mild-light-blue;
+      background: $secondary-bg;
       padding: 0.2rem 2rem;
       border-radius: 16px;
       .horizontal-divider {
@@ -97,7 +97,7 @@
       .list-item {
         margin-left: 0.9rem;
         cursor: pointer;
-        color: $primary;
+        color: $corporative-color;
         &:nth-last-child(-n + 2):before {
           content: '|';
           margin-right: 0.2rem;
@@ -140,7 +140,7 @@
         display: block !important;
         width: 4vw;
         margin-bottom: 0.3rem;
-        border-top: 1px solid $black;
+        border-top: 1px solid $primary-txt;
       }
     }
   }

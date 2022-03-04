@@ -18,10 +18,10 @@
 
 .active-tab {
   @include status-btn;
-  color: $white !important;
+  color: $primary-bg !important;
   background: $light-primary !important;
   &:focus {
-    color: $white;
+    color: $primary-bg;
     background: $light-primary;
   }
 }
@@ -29,10 +29,10 @@
 .status-btn {
   @include status-btn;
   background: none;
-  color: $primary;
+  color: $corporative-color;
   &:hover {
     background: $light-gray;
-    color: $primary;
+    color: $corporative-color;
   }
 }
 

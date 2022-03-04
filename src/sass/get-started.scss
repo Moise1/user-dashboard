@@ -4,16 +4,16 @@
 .main-container {
   .back-to-dashboard {
     width: 15vw;
-    color: $primary;
+    color: $corporative-color;
     &:hover {
-      color: $primary;
+      color: $corporative-color;
     }
   }
   .get-started-container {
     margin: 1rem 0 0 0;
     padding: 1rem;
     height: auto;
-    background: $white;
+    background: $primary-bg;
     .intro-area {
       margin: 2rem auto 0 auto;
       display: flex;
@@ -54,9 +54,9 @@
       display: flex;
       justify-content: space-between;
       .ebay-location {
-        color: $primary;
+        color: $corporative-color;
         &:hover {
-          color: $primary;
+          color: $corporative-color;
         }
       }
       .social-media-list {
@@ -75,9 +75,9 @@
           .social-media-link {
             text-align: justify;
             font-weight: normal;
-            color: $primary;
+            color: $corporative-color;
             &:hover {
-              color: $primary;
+              color: $corporative-color;
             }
           }
         }
@@ -100,18 +100,18 @@
         }
       }
       .list-item-title {
-        color: $primary;
+        color: $corporative-color;
         &:hover {
-          color: $primary;
+          color: $corporative-color;
         }
       }
     }
     .more-help {
       margin-top: 2rem;
       .contact-mail {
-        color: $primary;
+        color: $corporative-color;
         &:hover {
-          color: $primary;
+          color: $corporative-color;
         }
       }
     }

@@ -20,9 +20,9 @@
   .new-acc-btn {
     background: $primary !important;
     width: 100%;
-    color: $white;
+    color: $primary-bg;
     &:hover {
-      color: $white;
+      color: $primary-bg;
     }
   }
 }
@@ -35,7 +35,7 @@
   width: 100%;
   .ant-select-selector {
     width: 13rem !important;
-    color: $black !important;
+    color: $primary-txt !important;
     border-radius: 7px !important;
     box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
     border: none !important;

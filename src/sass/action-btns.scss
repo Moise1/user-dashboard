@@ -27,7 +27,7 @@
 @mixin action-btn {
   padding: 4px 12px;
   border-radius: 8px;
-  color: $white;
+  color: $primary-bg;
   width: auto;
 }
 
@@ -47,7 +47,7 @@
   &:hover,
   &:focus {
     background: $green;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -56,14 +56,14 @@
   &:hover,
   &:focus {
     background: $light-primary;
-    color: $white;
+    color: $primary-bg;
   }
 }
 .reset-btn {
   background: $ash-gray;
   &:hover {
     background: $ash-gray;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -73,7 +73,7 @@
   &:hover,
   &:focus {
     background: $red;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -81,7 +81,7 @@
   background: $yellow;
   &:hover {
     background: $yellow;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -90,11 +90,11 @@
   &:hover,
   &:focus {
     background: $ash-gray;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
-.transparent-btn{
+.transparent-btn {
   @include custom-btn-styles($transparent, $primary);
 }
 
