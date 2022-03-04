@@ -3,7 +3,7 @@
 // DROPDOWN STYLES
 
 .dropdown-orders-button .btn-primary {
-  background-color: $corporative-color-bg !important;
+  background-color: $primary !important;
   padding: 0;
 }
 
@@ -11,7 +11,7 @@
   width: 220px;
   height: 155px;
   border-radius: 0px 0px 15px 15px;
-  background: $corporative-color-bg;
+  background: $primary;
   box-shadow: 15px 15px 55px $corporative-color-txt;
 
   .dropdown-item {
@@ -57,7 +57,7 @@
 }
 
 .order-three-dots-dropdown .process-order-icon g {
-  stroke: $corporative-color-bg !important;
+  stroke: $primary !important;
 }
 
 .order-three-dots-dropdown .process-order-icon #Path_287 {
