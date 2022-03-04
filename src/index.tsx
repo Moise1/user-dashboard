@@ -26,11 +26,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <IntlProvider locale={language} messages={locales[language]}>
-        <Router>
-          <ThemeProvider>
+        <ThemeProvider>
+          <Router>
             <App />
-          </ThemeProvider>
-        </Router>
+          </Router>
+        </ThemeProvider>
       </IntlProvider>
     </Provider>
   </React.StrictMode>,

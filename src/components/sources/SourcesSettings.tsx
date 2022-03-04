@@ -5,7 +5,7 @@ import { ChevronLeft } from 'react-feather';
 import AutoOrdering from './AutoOrdering';
 import { SourcesSettingsContents } from './SourcesSettingsContents';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/sources-settings.scss';
+import '../../sass/sources-settings.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';

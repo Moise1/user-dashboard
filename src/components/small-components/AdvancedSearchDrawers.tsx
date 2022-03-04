@@ -4,7 +4,7 @@ import { RangeValue } from 'rc-picker/lib/interface';
 import { AdvancedSearch } from './AdvancedSearch';
 import { AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
-import '../../sass/light-theme/advanced-search.scss';
+import '../../sass/advanced-search.scss';
 
 interface OtherDrawerProps {
   openSourceModal?: () => void;

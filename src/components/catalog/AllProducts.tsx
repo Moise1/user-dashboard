@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { X as CloseIcon } from 'react-feather';
 import { ICatalogData } from '../../dummy-data/dummyData';
-import '../../sass/light-theme/all-products.scss';
+import '../../sass/all-products.scss';
 
 interface Props {
   children: ICatalogData[];

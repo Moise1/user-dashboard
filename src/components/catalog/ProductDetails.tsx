@@ -1,7 +1,7 @@
 import { Col, Row, Divider } from 'antd';
 import { CancelBtn, SuccessBtn } from '../small-components/ActionBtns';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/product-details.scss';
+import '../../sass/product-details.scss';
 
 interface Props {
   img: string;

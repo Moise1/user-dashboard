@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useState} from 'react';
 import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
@@ -18,12 +18,11 @@ import MenuListItem from './MenuListItem';
 import { actions } from '../../redux/user-auth/userAuthSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
-// import { Switch } from '../small-components/Switch';
-import { Selector } from '../small-components/Selector';
+import { Switch } from '../small-components/Switch';
 import pin from '../../assets/pin.svg';
 import { TransparentBtn } from '../small-components/ActionBtns';
 import { ThemeContext } from '../../contexts/ThemeContext';
-// import '../../sass/light-theme/side-bar.scss'; 
+import '../../sass/side-bar.scss'; 
 
 const { SubMenu } = Menu;
 
@@ -42,38 +41,19 @@ interface Props {
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
+  const [isDark, setIsDark] = useState<boolean>(false);
   const history = useHistory();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const { theme, setTheme } = useContext(ThemeContext);
-  const themeOptions = [{ value: 'light' }, { value: 'dark' }];
-
-  useEffect(() => {
-    console.log('CURRENT THEME NOWW===>', theme);
-    if (theme === 'dark') {
-      require('../../sass/dark-theme/side-bar-dark.scss');
-    }else {
-      require('../../sass/light-theme/side-bar.scss');
+  const {setTheme } = useContext(ThemeContext);
+  
+  const handleThemeChange = () => {
+    setIsDark(!isDark);
+    if(isDark === false){
+      setTheme('dark');
+    }else{
+      setTheme('light');
     }
-  }, [theme, setTheme]);
-
-  // const handleToggle = () => {
-  //   if (isDark) {
-  //     const element = document.getElementById('darkThemeLink');
-  //     element?.parentElement?.removeChild(element);
-  //   } else {
-  //     const link = document.createElement('link');
-  //     link.type = 'text/css';
-  //     link.id = 'darkThemeLink';
-  //     link.rel = 'stylesheet';
-  //     link.href = './_variables.dark.css';
-  //     document.head.appendChild(link);
-  //   }
-  //   setIsDark(!isDark);
-  // };
-
-  const handleThemeChange = (value: string) => {
-    setTheme(value);
   };
   const handleMouseEnter = () => {
     if (!staticValue) {
@@ -115,18 +95,14 @@ export const Sidebar = (props: Props) => {
       id: 13,
       listName: (
         <>
-          {/* <span>{theme === 'light' ? 'Dark Mode?' : 'Light Mode?'}</span> */}
-          {/* <Switch
+          <Switch
             className="toggle-mode"
-            // checked={isDark}
-            onChange={setTheme} 
+            checked={isDark}
+            onChange={handleThemeChange} 
             checkedChildren="🔆"
             unCheckedChildren="🌙"
             aria-label="Dark mode toggle"
-          /> */}
-          <Selector defaultValue="Select Mode" onChange={handleThemeChange}>
-            {themeOptions}
-          </Selector>
+          />
         </>
       )
     }

@@ -8,12 +8,14 @@ import { Dropdown, Button, Progress } from 'antd';
 import StoreList from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/global/transShim';
-import '../../sass/light-theme/top-bar.scss';
+import '../../sass/top-bar.scss';
 import { Badge } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
-import { DeleteAccount } from '../users/DeleteAccount';
+import { DeleteAccount } from '../user-auth/DeleteAccount';
+// import { ThemeContext } from '../../contexts/ThemeContext';
+import '../../sass/top-bar.scss';
 
 interface Props {
   handleSidebarMobile: () => void;

@@ -1,0 +1,12 @@
+@import 'general.config';
+
+// Extra Large screens
+.status-bar {
+  position: relative;
+  padding: $spacer;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 10px;
+  background: $white 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #2338c129;
+}

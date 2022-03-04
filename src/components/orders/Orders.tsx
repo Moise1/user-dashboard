@@ -3,8 +3,8 @@ import { TableActionBtns } from '../small-components/TableActionBtns';
 import { orderData } from '../common/OrderData';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';
-import '../../sass/light-theme/orders.scss';
-import '../../sass/light-theme/medium-button.scss';
+import '../../sass/orders.scss';
+import '../../sass/medium-button.scss';
 import { DataTable } from '../tables/DataTable';
 import { t } from 'src/global/transShim';
 

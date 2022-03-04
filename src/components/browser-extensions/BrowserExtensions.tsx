@@ -1,5 +1,5 @@
 import { Card, Row, Col, Divider, Button } from 'antd';
-import '../../sass/light-theme/browser-extensions.scss';
+import '../../sass/browser-extensions.scss';
 import chrome from '../../assets/browser-extensions/chrome-logo.png';
 import opera from '../../assets/browser-extensions/opera-logo.png';
 import safari from '../../assets/browser-extensions/safari-logo.png';

@@ -1,0 +1,99 @@
+@import 'general.config';
+
+.modal-page .modal-header {
+  border-bottom: none !important;
+  padding-bottom: 0;
+}
+
+.order-details-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-title {
+  color: $primary;
+  font-size: $font-large;
+  margin-right: $spacer;
+}
+
+.autoordering-state {
+  background: $green;
+  border-radius: 10px;
+  opacity: 1;
+  color: $white;
+  font-size: $font-small;
+  width: 137px;
+  height: 27px;
+  align-items: center;
+  display: flex;
+  padding: $spacer;
+  font-weight: $bold;
+}
+
+.close-modal-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.order-details-body {
+  padding: $spacer;
+}
+
+.heading-details {
+  font-size: $font-medium;
+  color: $black;
+  font-weight: $bold;
+  white-space: nowrap;
+}
+
+.shipping-billing-container {
+  justify-content: space-between;
+  background: $mild-light-blue;
+  padding: $spacer;
+  border-radius: 10px;
+}
+
+.heading-addresses {
+  margin-top: $spacer;
+  font-size: $font-small;
+  font-weight: $bold;
+}
+
+.small-input {
+  width: 80px;
+  margin: $spacer;
+}
+
+.large-input {
+  width: 180px;
+  margin: $spacer;
+}
+
+.sourceurl {
+  width: 90%;
+  margin: $spacer;
+}
+
+.product-img {
+  height: auto;
+  margin: auto;
+}
+
+.go-back-orders-container {
+  margin-top: $spacer;
+  display: flex;
+  align-items: center;
+
+  & svg {
+    cursor: pointer;
+  }
+}
+
+.go-back-orders {
+  font-weight: bold;
+  font-size: $font-medium;
+  color: $primary;
+  cursor: pointer;
+}

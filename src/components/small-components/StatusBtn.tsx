@@ -1,4 +1,4 @@
-import '../../sass/light-theme/listings-status.scss';
+import '../../sass/listings-status.scss';
 
 interface Props {
   title: string;

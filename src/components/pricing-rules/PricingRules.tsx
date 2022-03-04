@@ -7,7 +7,7 @@ import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import {ConfirmBtn} from '../small-components/ActionBtns';
-import '../../sass/light-theme/pricing-rules.scss';
+import '../../sass/pricing-rules.scss';
 
 export const PricingRules = () => {
   const dispatch = useAppDispatch();

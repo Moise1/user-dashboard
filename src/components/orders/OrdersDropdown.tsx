@@ -1,8 +1,8 @@
 import { Dropdown } from 'react-bootstrap';
 import { TrashIcon, CheckIcon, HandStopOrderIcon, ProcessOrderIcon, ThreeDotsColumnIcon } from '../common/Icons';
 import { t } from '../../global/transShim';
-import '../../sass/light-theme/orders-dropdown.scss';
-import '../../sass/light-theme/orders.scss';
+import '../../sass/orders-dropdown.scss';
+import '../../sass/orders.scss';
 
 function OrdersDropdown() {
   return (
