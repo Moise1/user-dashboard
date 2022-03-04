@@ -1,7 +1,7 @@
 @import 'general.config';
 
 .va-profiles-container {
-  background: $mild-light-blue;
+  background: $secondary-bg;
   width: 100%;
   overflow-x: hidden;
   width: -moz-available; /* WebKit-based browsers will ignore this. */
@@ -22,14 +22,14 @@
       margin-top: 0rem;
       .input {
         border-radius: 10px;
-        background: $mild-light-blue !important;
+        background: $secondary-bg !important;
         box-shadow: inset 0px 3px 6px #0000000b;
         width: 60% !important;
       }
 
       .btn {
         background: $light-primary;
-        color: $white;
+        color: $primary-bg;
         border-radius: 10px;
         margin-top: 1rem;
         width: 25% !important;
@@ -37,7 +37,7 @@
 
         &:hover {
           background: $light-primary;
-          color: $white;
+          color: $primary-bg;
           border-radius: 10px;
         }
       }

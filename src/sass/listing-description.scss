@@ -5,17 +5,16 @@
 .listing-description {
   margin-top: 2rem;
   p {
-    color: $primary;
+    color: $corporative-color;
     font-size: $font-large;
     font-weight: bold;
   }
 
   div.DraftEditor-root {
-    background-color: $mild-light-blue;
+    background-color: $secondary-bg;
     box-shadow: inset 0px 3px 6px #0000000b;
     width: 100%;
     height: auto;
     padding: 1rem;
   }
- 
 }

@@ -7,7 +7,7 @@
   opacity: 1;
   .ant-input-affix-wrapper {
     height: 2.2rem !important;
-    background: $white;
+    background: $primary-bg;
     border-radius: 10px !important;
     border: none;
     outline: none;
@@ -25,12 +25,12 @@
   border-radius: 10px;
   background-color: $light-blue;
   margin-left: 1rem;
-  color: $white;
+  color: $primary-bg;
 
   &:hover,
   &:focus {
     background-color: $light-blue;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -50,14 +50,14 @@
 }
 .view-all-selected-products {
   background: none;
-  color: $primary;
+  color: $corporative-color;
   border: none;
   margin: 1.5rem 2rem;
   cursor: pointer;
   &:hover,
   &:focus {
     background: none;
-    color: $primary;
+    color: $corporative-color;
   }
 }
 

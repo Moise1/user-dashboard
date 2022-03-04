@@ -21,12 +21,12 @@
 
 .install-btn {
   background: $light-primary;
-  color: $white;
+  color: $primary-bg;
   border-radius: 10px;
   padding: 0.3rem 3rem;
 
   &:hover {
-    color: $white;
+    color: $primary-bg;
     background: $light-primary;
   }
 }
@@ -43,7 +43,7 @@
   width: fill-available;
   margin: 0 auto;
   overflow-x: hidden;
-  background: $mild-light-blue;
+  background: $secondary-bg;
 
   .card-container {
     display: flex;

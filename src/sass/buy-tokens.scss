@@ -8,7 +8,7 @@
 
 .buy-tokens-title,
 .buy-tokens-sub-title {
-  color: $primary;
+  color: $corporative-color;
 }
 
 .buy-tokens-desc,
@@ -46,7 +46,7 @@
     }
 
     &:hover {
-      background: $primary;
+      background: $corporative-color;
       width: 120%;
       z-index: 1;
       transform: scale(1.15);
@@ -54,17 +54,17 @@
       .card-info {
         .tokens-count,
         .euros-amount {
-          color: $white;
+          color: $primary-bg;
         }
 
         .euros-amount span,
         .cents-amount {
-          color: rgba($white, 0.7);
+          color: rgba($primary-bg, 0.7);
         }
 
         .buy-btn {
-          background: $white;
-          color: $black;
+          background: $primary-bg;
+          color: $primary-txt;
           &:hover {
             background: $cta-color;
           }
@@ -86,12 +86,12 @@
       }
       .euros-amount span,
       .cents-amount {
-        color: rgba($black, 0.3);
+        color: rgba($primary-txt, 0.3);
       }
 
       .buy-btn {
         background: $light-primary;
-        color: $white;
+        color: $primary-bg;
         border-radius: 5px;
       }
     }

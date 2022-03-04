@@ -9,7 +9,7 @@
     overflow: scroll;
     margin-top: 2rem;
     padding: 2rem;
-    background: $white;
+    background: $primary-bg;
     .action-btns {
       position: fixed;
       right: 2%;
@@ -57,7 +57,7 @@
         flex-direction: row !important;
         column-gap: 0 !important;
         width: 100% !important;
-        .success-btn{
+        .success-btn {
           margin-left: -1rem;
         }
       }

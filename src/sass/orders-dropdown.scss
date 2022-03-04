@@ -3,7 +3,7 @@
 // DROPDOWN STYLES
 
 .dropdown-orders-button .btn-primary {
-  background-color: $white !important;
+  background-color: $corporative-color-bg !important;
   padding: 0;
 }
 
@@ -11,8 +11,8 @@
   width: 220px;
   height: 155px;
   border-radius: 0px 0px 15px 15px;
-  background: $white;
-  box-shadow: 15px 15px 55px $black;
+  background: $corporative-color-bg;
+  box-shadow: 15px 15px 55px $corporative-color-txt;
 
   .dropdown-item {
     margin-left: 0.5rem;
@@ -20,7 +20,7 @@
     padding: 0 8px;
     font-weight: 500;
     font-size: 14px;
-    color: $black;
+    color: $corporative-color-txt;
     margin-bottom: 10px;
     .dropdown-text {
       margin-left: 0.5rem;
@@ -53,13 +53,13 @@
 }
 
 .order-three-dots-dropdown svg > * {
-  stroke: $primary;
+  stroke: $corporative-color;
 }
 
 .order-three-dots-dropdown .process-order-icon g {
-  stroke: $white !important;
+  stroke: $corporative-color-bg !important;
 }
 
 .order-three-dots-dropdown .process-order-icon #Path_287 {
-  stroke: $primary !important;
+  stroke: $corporative-color !important;
 }

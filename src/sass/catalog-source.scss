@@ -2,19 +2,20 @@
 
 // Large and extra large screens
 .catalog-source {
-  .tag-line{
-    color: $black;
-  };
-  .ant-input-wrapper{
+  .tag-line {
+    color: $primary-txt;
+  }
+  .ant-input-wrapper {
     width: 80%;
     margin: auto;
-    .ant-input-affix-wrapper{
-      box-shadow: inset 0px 3px 6px #0000000B;
+    .ant-input-affix-wrapper {
+      box-shadow: inset 0px 3px 6px #0000000b;
     }
   }
-  
-  .pending-sources-list, .added-sources-list {
-    margin: 1rem  0;
+
+  .pending-sources-list,
+  .added-sources-list {
+    margin: 1rem 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
@@ -23,19 +24,19 @@
     overflow-y: scroll;
     .source {
       display: flex;
-      @mixin action-icon{
+      @mixin action-icon {
         margin-right: 1rem;
         cursor: pointer;
-        stroke: $white;
-      };
-      .remove-source-icon{
+        stroke: $primary-bg;
+      }
+      .remove-source-icon {
         @include action-icon;
         fill: $red;
-      };
-      .pending-source-icon{
-       @include action-icon;
+      }
+      .pending-source-icon {
+        @include action-icon;
         fill: $green;
-      };
+      }
 
       .source-img {
         max-height: 230px;
@@ -46,32 +47,33 @@
         margin: 1rem auto;
       }
     }
-  };
-  .action-btns{
+  }
+  .action-btns {
     justify-content: flex-end;
-    & > *{
+    & > * {
       margin-left: 2rem;
     }
   }
 }
 
-
-@media only screen and (max-width: 750px){
-  .pending-sources-list, .added-sources-list{
+@media only screen and (max-width: 750px) {
+  .pending-sources-list,
+  .added-sources-list {
     display: block !important;
-    .pending-source-icon, .remove-source-icon{
+    .pending-source-icon,
+    .remove-source-icon {
       margin-right: auto !important;
     }
-    .source-img{
+    .source-img {
       width: 40% !important;
     }
-  };
+  }
   .action-btns > * {
     border: 2px solid black;
     margin: 0 auto;
-  };
+  }
 
-  .ant-input-wrapper{
+  .ant-input-wrapper {
     width: 75% !important;
   }
 }

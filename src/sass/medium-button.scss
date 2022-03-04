@@ -4,7 +4,7 @@
   height: 43px;
   padding: 10px 15px;
   border-radius: 10px;
-  color: $white;
+  color: $primary-bg;
   font-size: $font-medium;
   font-weight: $bold;
   display: flex;
@@ -24,11 +24,11 @@
   background-color: $green;
   &:focus {
     background-color: $dark-green;
-    color: $white;
+    color: $primary-bg;
   }
   &:hover {
     background-color: $dark-green;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -36,12 +36,12 @@
   background-color: $red;
   &:focus {
     background-color: $dark-red;
-    color: $white;
+    color: $primary-bg;
   }
 
   &:hover {
     background-color: $dark-red;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -49,11 +49,11 @@
   background-color: $light-blue;
   &:focus {
     background-color: $dark-blue;
-    color: $white;
+    color: $primary-bg;
   }
   &:hover {
     background-color: $dark-blue;
-    color: $white;
+    color: $primary-bg;
   }
 }
 
@@ -61,10 +61,10 @@
   background-color: $orange;
   &:focus {
     background-color: $dark-orange;
-    color: $white;
+    color: $primary-bg;
   }
   &:hover {
     background-color: $dark-orange;
-    color: $white;
+    color: $primary-bg;
   }
 }
