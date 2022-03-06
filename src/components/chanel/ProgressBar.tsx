@@ -2,7 +2,7 @@ import progress_done from '../../assets/channel/progress.png';
 import progress_remain from '../../assets/channel/progress_remain.png';
 import progress_remain_dots from '../../assets/channel/progress_remain_dots.png';
 import progress_done_dots from '../../assets/channel/progress_done_dots.png';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/progress-bar.scss';
 
 interface props {

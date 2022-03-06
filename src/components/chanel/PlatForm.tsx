@@ -3,7 +3,7 @@ import { Row, Col, Radio } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 
 export interface values {
   platform?: platformType;

@@ -1,32 +1,31 @@
 import { useState } from 'react';
+import { Dropdown, Button, Progress, Badge } from 'antd';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
 import downArrow from '../../assets/downArrow.svg';
 import flag from '../../assets/flag-round-500.svg';
 import bell from '../../assets/bell-icon.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
-import { Dropdown, Button, Progress } from 'antd';
 import StoreList from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
-import { t } from 'src/global/transShim';
-import '../../sass/top-bar.scss';
-import { Badge } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
-import { DeleteAccount } from '../user-auth/DeleteAccount';
-// import { ThemeContext } from '../../contexts/ThemeContext';
+import { DeleteAccount } from '../user/DeleteAccount';
+import {useAppSelector} from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/top-bar.scss';
 
-interface Props {
+interface Props extends RouteComponentProps {
   handleSidebarMobile: () => void;
 }
 
-export const Topbar = (props: Props) => {
-  const { handleSidebarMobile } = props;
+export const Topbar = withRouter((props: Props) =>{
+  const { handleSidebarMobile, history } = props;
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
+  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.response_data);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
 
@@ -34,10 +33,12 @@ export const Topbar = (props: Props) => {
   const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
   const handleDelete = () => setOpenDeleteModal(!openDeleteModal);
 
-  const history = useHistory();
-
   const routeChange = (route: string) => {
     history.push(route);
+  };
+
+  const qoutaPercentage = (partial: number, total:number)=>{
+    return Math.round((100  * partial) / total);
   };
 
   return (
@@ -51,7 +52,13 @@ export const Topbar = (props: Props) => {
         />
       </PopupModal>
 
-      <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
+      <PopupModal 
+        open={open} 
+        width={800} 
+        style={{ top: 20 }} 
+        bodyStyle={{ height: 600 }} 
+        handleClose={handleOpenModal}
+      >
         <BuyTokens />
       </PopupModal>
       <div className="logo-container">
@@ -71,9 +78,12 @@ export const Topbar = (props: Props) => {
             <strong className="quota-text">
               <p>{t('Topbar.Quota')}: &nbsp;</p>
             </strong>
-            <span className="quota-progress">45% (12/13)</span>
+            <span className="quota-progress">
+              {qoutaPercentage(quotaUsed, quotaAdded)}% 
+              ({quotaUsed}/{quotaAdded})
+            </span>
           </div>
-          <Progress percent={45} showInfo={false} className="progress-bar" />
+          <Progress percent={qoutaPercentage(quotaUsed, quotaAdded)} showInfo={false} className="progress-bar" />
           <button type="button" onClick={() => routeChange('/subscriptions')} className="update-btn">
             {t('Topbar.Update')}
           </button>
@@ -105,4 +115,4 @@ export const Topbar = (props: Props) => {
       </Dropdown>
     </div>
   );
-};
+});

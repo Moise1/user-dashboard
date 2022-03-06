@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
+import {Source} from '../../redux/source-config/sourceSlice';
 
 type ListingsTypes = {
   id: number;
@@ -48,7 +49,7 @@ type sourcesTypes = {
 };
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsTypes | OrdersTypes | Rule | sourcesTypes>;
+  dataSource: Array<ListingsTypes | OrdersTypes | Rule | Source| sourcesTypes>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;

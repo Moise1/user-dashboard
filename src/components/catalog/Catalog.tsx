@@ -10,7 +10,7 @@ import { PopupModal } from '../modals/PopupModal';
 import { ProductDetails } from './ProductDetails';
 import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../small-components/AdvancedSearchDrawers';
 import '../../sass/catalog.scss';
 

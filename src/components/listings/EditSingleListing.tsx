@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { ListingMain } from '../small-components/ListingMain';
 import { ListingDescription } from '../small-components/ListingDescription';
 import { ListingDetails } from '../small-components/ListingDetails';

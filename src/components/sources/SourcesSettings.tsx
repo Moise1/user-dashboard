@@ -4,7 +4,7 @@ import { Layout, Tabs } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import AutoOrdering from './AutoOrdering';
 import { SourcesSettingsContents } from './SourcesSettingsContents';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/sources-settings.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';

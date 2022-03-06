@@ -3,11 +3,11 @@ import { CircleDotIcon } from '../common/Icons';
 import '../../sass/menu-list-item.scss';
 
 interface props {
-  listName?: string | ReactNode;
+  listName?: string | ReactNode | JSX.Element;
   onClick?: () => void;
 }
 
-const MenuListItem = (props: props) => {
+export const MenuListItem = (props: props) => {
   const { listName, onClick } = props;
   return (
     <li className="menu-list" onClick={onClick}>
@@ -19,4 +19,3 @@ const MenuListItem = (props: props) => {
   );
 };
 
-export default MenuListItem;

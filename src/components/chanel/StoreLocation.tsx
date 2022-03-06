@@ -5,7 +5,7 @@
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { Flag, FlagProps } from './Flag';
 
 interface values {

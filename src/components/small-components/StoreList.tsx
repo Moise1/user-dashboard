@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PlusIcon } from '../common/Icons';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/store-list.scss';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';

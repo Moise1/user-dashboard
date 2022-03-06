@@ -1,5 +1,5 @@
 import { Editor } from 'react-draft-wysiwyg';
-import { t } from 'src/global/transShim';
+import { t } from 'src/utils/transShim';
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import '../../sass/listing-description.scss';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';

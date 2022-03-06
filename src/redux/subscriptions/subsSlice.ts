@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getSubscriptions } from './subsThunk';
 
-interface Subscription {
+export interface Subscription {
     id: number;
     platformId: string;
     billingPeriodId: number;

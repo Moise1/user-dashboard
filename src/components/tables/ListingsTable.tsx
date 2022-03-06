@@ -3,7 +3,7 @@ import { Checkbox, Button } from 'antd';
 import moment from 'moment';
 import { UpdownIcon } from '../common/Icons';
 import OrderStateModal from '../modals/OrderStateModal';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 import { PopupModal } from '../modals/PopupModal';

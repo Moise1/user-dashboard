@@ -156,6 +156,12 @@
     overflow-y: scroll;
     margin: 3rem auto;
 
+    .menu-container{
+      .list-submenu-item{
+        border: 2px solid blue;
+        margin-bottom: 2rem;
+      }
+    }
     .sidebar-overhead {
       .logo-container,
       .quota-container {

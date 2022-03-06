@@ -1,5 +1,5 @@
 import { DustbinPinkIcon, HandFiveFingerIcon } from '../common/Icons';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 
 interface props {
   alias: string;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { BulkEditMain } from '../small-components/BulkEditMain';
 import { BulkEditDescription } from '../small-components/BulkEditDescription';
 import { AlertCircle } from 'react-feather';

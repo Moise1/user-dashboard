@@ -1,4 +1,4 @@
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { Link } from 'react-router-dom';
 
 interface props {

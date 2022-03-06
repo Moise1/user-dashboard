@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Radio } from 'antd';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 
 interface values {
   extension: string;

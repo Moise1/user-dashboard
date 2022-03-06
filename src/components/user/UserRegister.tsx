@@ -2,15 +2,14 @@ import { Form, Input, Checkbox } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { userRegister } from 'src/redux/user-auth/userAuthThunk';
-import { User } from '../../redux/user-auth/userAuthSlice';
+import { userRegister } from 'src/redux/user/userThunk';
+import { UserData } from '../../redux/user/userSlice';
 import '../../sass/user-register.scss';
 
-export const UserRegister = withRouter(({ history, location }) => {
-  const { loading } = useAppSelector((state) => state.auth);
-  console.log('ROUTE PROPS', location);
+export const UserRegister = withRouter(({ history }) => {
+  const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const onFinish = (values: User) => {
+  const onFinish = (values: UserData) => {
     dispatch(userRegister({ data: values, history }));
   };
 
@@ -29,14 +28,21 @@ export const UserRegister = withRouter(({ history, location }) => {
           <Input className="blue-input" />
         </Form.Item>
 
-        <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: 'Please provide your email!' },
+            { type: 'email', message: 'Invalid e-mail address' }
+          ]}
+        >
           <Input className="blue-input" />
         </Form.Item>
 
         <Form.Item
           label="Password"
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: 'Please provide your password!' }]}
         >
           <Input.Password className="blue-input" />
         </Form.Item>

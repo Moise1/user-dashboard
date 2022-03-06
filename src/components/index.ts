@@ -1,5 +1,5 @@
-export {UserLogin} from './user-auth/UserLogin';
-export {UserRegister} from './user-auth/UserRegister';
+export {UserLogin} from './user/UserLogin';
+export {UserRegister} from './user/UserRegister';
 export {NewChannel } from './chanel/NewChannel';
 export {Topbar} from './topbar/Topbar';
 export { Sidebar } from './sidebar/Sidebar';
