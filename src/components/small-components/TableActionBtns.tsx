@@ -4,7 +4,7 @@ import { Search as SearchIcon } from 'react-feather';
 import advancedSearchIcon from '../../assets/listsearch.svg';
 import column_img from '../../assets/columnimg.svg';
 import RDS from 'react-dom/server';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/table-action-btns.scss';
 
 interface TableActionBtnsProps {

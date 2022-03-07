@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Layout, Row, Col } from 'antd';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { ChannelMonitoring } from '../small-components/ChannelMonitoring';
 import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';

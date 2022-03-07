@@ -1,7 +1,7 @@
 import { Row, Col, Radio, Input } from 'antd';
 import { Switch } from './Switch';
 import { SuccessBtn, DeleteBtn } from './ActionBtns';
-import { t } from 'src/global/transShim';
+import { t } from 'src/utils/transShim';
 import '../../sass/listing-options.scss';
 import { CheckIcon, TrashIcon } from '../common/Icons';
 

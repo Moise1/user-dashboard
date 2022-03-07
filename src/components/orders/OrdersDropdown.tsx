@@ -1,6 +1,6 @@
 import { Dropdown } from 'react-bootstrap';
 import { TrashIcon, CheckIcon, HandStopOrderIcon, ProcessOrderIcon, ThreeDotsColumnIcon } from '../common/Icons';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/orders-dropdown.scss';
 import '../../sass/orders.scss';
 

@@ -11,7 +11,7 @@ import zoo_plus from '../../assets/catalog-sources/zooplus.png';
 import garden_line from '../../assets/catalog-sources/garden-line.png';
 import { SearchInput } from '../small-components/TableActionBtns';
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/catalog-source.scss';
 
 interface Props {

@@ -6,7 +6,7 @@ import { Layout } from 'antd';
 import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
 import { DataTable } from '../tables/DataTable';
-import { t } from 'src/global/transShim';
+import { t } from 'src/utils/transShim';
 
 export const Orders = () => {
   const [orderNumber] = useState(0);

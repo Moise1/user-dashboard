@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { App } from './App';
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
 import { ThemeProvider } from './ThemeProvider';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,
@@ -25,13 +27,15 @@ if (Object.keys(locales).indexOf(language) == -1) {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <IntlProvider locale={language} messages={locales[language]}>
-        <ThemeProvider>
-          <Router>
-            <App />
-          </Router>
-        </ThemeProvider>
-      </IntlProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <IntlProvider locale={language} messages={locales[language]}>
+          <ThemeProvider>
+            <Router>
+              <App />
+            </Router>
+          </ThemeProvider>
+        </IntlProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,8 +1,8 @@
-import { useContext, useState} from 'react';
+import { useContext, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import logout from '../../assets/logout.svg';
 import {
   DashBoardIcon,
@@ -14,18 +14,18 @@ import {
   HelpIcon,
   OrdersIcon
 } from '../common/Icons';
-import MenuListItem from './MenuListItem';
-import { actions } from '../../redux/user-auth/userAuthSlice';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { MenuListItem } from './MenuListItem';
+import { actions } from '../../redux/user/userSlice';
+import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 import pin from '../../assets/pin.svg';
 import { TransparentBtn } from '../small-components/ActionBtns';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import '../../sass/side-bar.scss'; 
+import { persistor } from 'src/redux/store';
+import '../../sass/side-bar.scss';
 
-const { SubMenu } = Menu;
-
+const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
 
 interface Props {
@@ -43,17 +43,14 @@ export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, collapseSideBar } = props;
   const [isDark, setIsDark] = useState<boolean>(false);
   const history = useHistory();
-  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const {setTheme } = useContext(ThemeContext);
-  
+  const { setTheme } = useContext(ThemeContext);
+  const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
+  const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
+
   const handleThemeChange = () => {
     setIsDark(!isDark);
-    if(isDark === false){
-      setTheme('dark');
-    }else{
-      setTheme('light');
-    }
+    isDark === false ? setTheme('dark') : setTheme('light');
   };
   const handleMouseEnter = () => {
     if (!staticValue) {
@@ -69,6 +66,15 @@ export const Sidebar = (props: Props) => {
     }
   };
 
+  const onOpenChange = (openKeysValue: string[]) => {
+    const latestOpenKey = openKeysValue.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys?.indexOf(latestOpenKey!) === -1) {
+      setOpenKeys(openKeysValue);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+
   const routeChange = (route: string) => {
     history.push(route);
     const tabletScreen = window.matchMedia('(max-width: 1030px)');
@@ -78,27 +84,67 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
-    dispatch(actions.logout(user));
+    dispatch(actions.logout());
     localStorage.removeItem('isAuthenticated');
+    persistor.purge();
     routeChange('/login');
   };
 
   const settingsListArray = [
-    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
-    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
-    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { id: 12, listName: t('Menu.Templates') },
     {
-      id: 13,
+      id: 6,
+      listName: (
+        <>
+          <SubMenu
+            className="list-submenu-item"
+            key="sub1"
+            style={{ fontSize: '18px', fontWeight: 'bold' }}
+            title="Item's Submenu"
+          >
+            <Item
+              className="menu-item"
+              onClick={() => routeChange('/dashboard')}
+              key="7"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={<DashBoardIcon />}
+            >
+            Another Menu Item
+            </Item>
+
+            <Item
+              className="menu-item"
+              onClick={() => routeChange('/dashboard')}
+              key="8"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+              icon={<DashBoardIcon />}
+            >
+            Another Menu Item
+            </Item>
+          </SubMenu>
+        </>
+      ),
+      onClick: () => routeChange('/channel'),
+      
+    },
+    {
+      id: 9,
+      listName: t('Menu.Channel'),
+      onClick: () => routeChange('/channel')
+    },
+    { id:10, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
+    { id: 11, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { id: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    { id: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { id: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { id: 15, listName: t('Menu.Templates') },
+    {
+      id: 16,
       listName: (
         <>
           <Switch
             className="toggle-mode"
             checked={isDark}
-            onChange={handleThemeChange} 
+            onChange={handleThemeChange}
             checkedChildren="🔆"
             unCheckedChildren="🌙"
             aria-label="Dark mode toggle"
@@ -109,9 +155,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 15, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    { id: 16, listName: t('Menu.FAQ') },
-    { id: 17, listName: t('Menu.ListingServices') }
+    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 19, listName: t('Menu.FAQ') },
+    { id: 20, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -126,7 +172,14 @@ export const Sidebar = (props: Props) => {
         collapsedWidth="80px"
       >
         <div className="side-menu-container">
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} className="menu-container">
+          <Menu
+            className="menu-container"
+            theme="light"
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+          >
             {!collapsed && (
               <div className="sidebar-overhead">
                 <div className="logo-container">
@@ -158,7 +211,7 @@ export const Sidebar = (props: Props) => {
                 </div>
               </div>
             )}
-            <Menu.Item
+            <Item
               className="menu-item"
               onClick={() => routeChange('/dashboard')}
               key="1"
@@ -166,8 +219,8 @@ export const Sidebar = (props: Props) => {
               icon={<DashBoardIcon />}
             >
               {t('Menu.Dashboard')}
-            </Menu.Item>
-            <Menu.Item
+            </Item>
+            <Item
               className="menu-item"
               onClick={() => routeChange('/catalog')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
@@ -175,8 +228,8 @@ export const Sidebar = (props: Props) => {
               icon={<CatalogIcon />}
             >
               <span className="sidebar_element">{t('Menu.Catalog')}</span>
-            </Menu.Item>
-            <Menu.Item
+            </Item>
+            <Item
               className="menu-item"
               onClick={() => routeChange('/sources')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
@@ -184,8 +237,8 @@ export const Sidebar = (props: Props) => {
               icon={<ListNowIcon />}
             >
               {t('Menu.ListNow')}
-            </Menu.Item>
-            <Menu.Item
+            </Item>
+            <Item
               className="menu-item"
               onClick={() => routeChange('/listings')}
               key="4"
@@ -193,8 +246,8 @@ export const Sidebar = (props: Props) => {
               icon={<ListingsIcon />}
             >
               {t('Menu.Listings')}
-            </Menu.Item>
-            <Menu.Item
+            </Item>
+            <Item
               className="menu-item"
               onClick={() => routeChange('/orders')}
               key="5"
@@ -202,45 +255,45 @@ export const Sidebar = (props: Props) => {
               icon={<OrdersIcon />}
             >
               {t('Menu.Orders')}
-            </Menu.Item>
+            </Item>
 
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               className="submenu-item"
-              key="sub1"
+              key="sub2"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
               {settingsListArray.map((obj) => (
-                <Menu.Item key={obj.id} onClick={obj.onClick}>
+                <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
-                </Menu.Item>
+                </Item>
               ))}
             </SubMenu>
 
             {/* SERVICES  */}
-            <Menu.Item
+            <Item
               className="menu-item"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              key="14"
+              key="21"
               icon={<ServiceIcon />}
               onClick={() => routeChange('/services')}
             >
               <span>{t('Menu.Services')}</span>
-            </Menu.Item>
+            </Item>
 
             <SubMenu
               className="submenu-item"
-              key="sub2"
+              key="sub3"
               style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
               {helpListArray.map((obj) => (
-                <Menu.Item key={obj.id} onClick={obj.onClick}>
+                <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
-                </Menu.Item>
+                </Item>
               ))}
             </SubMenu>
           </Menu>

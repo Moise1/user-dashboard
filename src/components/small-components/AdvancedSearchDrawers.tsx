@@ -1,16 +1,15 @@
 import { Moment } from 'moment';
 import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
-import { AdvancedSearch } from './AdvancedSearch';
-import { AdvancedSearchProps } from './AdvancedSearch';
+import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import '../../sass/advanced-search.scss';
 
-interface OtherDrawerProps {
+interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
 }
 
-export const CatalogFilters = (props: AdvancedSearchProps & OtherDrawerProps) => {
+export const CatalogFilters = (props: Props) => {
   const { visible, onClose, openSourceModal } = props;
   return (
     <AdvancedSearch

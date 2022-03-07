@@ -2,7 +2,7 @@ import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { Button } from 'antd';
 import { ArrowRight } from 'react-feather';
 

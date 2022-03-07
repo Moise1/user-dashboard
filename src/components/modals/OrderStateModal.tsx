@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { AoIconHead, CrossModalIcon } from '../common/Icons';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 
 interface Props {
   AoDisabledModal: boolean;

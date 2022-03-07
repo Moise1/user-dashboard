@@ -1,5 +1,5 @@
 import { Row, Col, Form, Input } from 'antd';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { SuccessBtn, DeleteBtn } from './ActionBtns';
 import { CheckIcon, TrashIcon } from '../common/Icons';
 

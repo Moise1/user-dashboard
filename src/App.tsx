@@ -2,6 +2,8 @@ import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import {X as CloseIcon} from 'react-feather';
 import {
   UserLogin,
   UserRegister,
@@ -91,6 +93,7 @@ export const App = withRouter(({ history }) => {
         </Layout>
       </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
+      <ToastContainer closeButton={<CloseIcon size='17'/>}/>
     </>
   );
 });

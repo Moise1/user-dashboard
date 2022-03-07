@@ -1,6 +1,6 @@
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
 import { StatusBar } from '../small-components/StatusBar';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/orders.scss';
 import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from '../small-components/ActionBtns';
 

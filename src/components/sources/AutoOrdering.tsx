@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import '../../sass/switch.scss';
 import { Switch } from '../small-components/Switch';
 import { Selector } from '../small-components/Selector';

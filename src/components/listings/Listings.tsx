@@ -3,7 +3,7 @@ import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
-import { t } from '../../global/transShim';
+import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
 import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
