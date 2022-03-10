@@ -1,21 +1,30 @@
-import { useEffect} from 'react';
+import { useEffect, useContext } from 'react';
 import { Form, Input, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getRules } from 'src/redux/pricing-rules/rulesThunk';
+import { getSources } from '../../redux/source-config/sourcesThunk';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
-import {ConfirmBtn} from '../small-components/ActionBtns';
+import { ConfirmBtn } from '../small-components/ActionBtns';
+import { AppContext } from '../../contexts/AppContext';
+import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import '../../sass/pricing-rules.scss';
 
 export const PricingRules = () => {
   const dispatch = useAppDispatch();
-  const { rules, loading } = useAppSelector((state) => state.pricingRules);
-  
+  const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
+  const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
+  const { channelId } = useContext(AppContext);
+
+  useEffect(() => {
+    dispatch(getSources());
+  }, [getSources, channelId]);
+
   useEffect(() => {
     dispatch(getRules());
-  }, [getRules]);
+  }, [getRules, channelId]);
 
   const columns = [
     {
@@ -64,7 +73,9 @@ export const PricingRules = () => {
           </div>
           <Form className="form" layout="vertical">
             <Form.Item label="Source">
-              <Selector defaultValue="Select a source">{rules}</Selector>
+              <Selector defaultValue="Select a source" loading={sourcesLoading}>
+                {sources.map(({ sourceName: value, sourceId: id }: SourceConfig) => ({ value, id }))}
+              </Selector>
             </Form.Item>
             <Form.Item label="Price From">
               <Input className="blue-input" type="text" placeholder="Set a price from" />
@@ -78,7 +89,7 @@ export const PricingRules = () => {
             <ConfirmBtn>Add rule</ConfirmBtn>
           </Form>
         </StatusBar>
-        <DataTable dataSource={rules} columns={columns} loading={{indicator: <Spin/>, spinning: loading}} />
+        <DataTable dataSource={rules} columns={columns} loading={{ indicator: <Spin />, spinning: rulesLoading }} />
       </div>
     </Layout>
   );

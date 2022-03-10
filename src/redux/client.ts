@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { toastAlert } from 'src/utils/toastAlert';
 
 const localhostUrl = 'http://localhost:3000';
@@ -10,15 +10,21 @@ export const client = axios.create({
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
 });
 
-client.interceptors.request.use(config =>{
+client.interceptors.request.use(async(config: AxiosRequestConfig) =>{
+  const channelId = localStorage.getItem('channelId');
+  
+  if(channelId){
+    config.headers = {
+      channel:  channelId,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...config.headers,
+    };
 
-  config.headers = {    
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': '*',
-    'Access-Control-Allow-Headers': '*',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  };
+  }
   return config;
 },
 

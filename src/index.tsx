@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { App } from './App';
 import { store, persistor } from './redux/store';
-import { ThemeProvider } from './ThemeProvider';
+import { AppContextProvider } from './AppContextProvider';
 import locale_en from './translations/en.json';
 import locale_es from './translations/es.json';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -29,11 +29,11 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <IntlProvider locale={language} messages={locales[language]}>
-          <ThemeProvider>
+          <AppContextProvider>
             <Router>
               <App />
             </Router>
-          </ThemeProvider>
+          </AppContextProvider>
         </IntlProvider>
       </PersistGate>
     </Provider>

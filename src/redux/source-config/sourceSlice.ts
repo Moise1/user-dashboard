@@ -1,42 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getSources} from './sourcesThunk';
+import { getSources } from './sourcesThunk';
 
-export interface Source {
-  userId: string;
+export interface SourceConfig {
   sourceId: number;
   sourceName: string;
   sourceBaseUrl: string;
   defaultShipping: string;
   defaultLocationCity: string;
   defaultLocationCountry: string;
+  [key: string]: string | number;
 }
 
 const initialState = {
-  sources: [] as Source[],
+  sources: [] as SourceConfig[],
   loading: false,
   error: ''
 };
-
 
 export const sourceSlice = createSlice({
   name: 'sources',
   initialState: initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(getSources.pending, (state)=>{
+  extraReducers: (builder) => {
+    builder.addCase(getSources.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getSources.fulfilled, (state, { payload })=>{
+    builder.addCase(getSources.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.sources = payload;
+      state.sources = payload.configuration;
     });
-    builder.addCase(getSources.rejected, (state, { payload })=>{
+    builder.addCase(getSources.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const sourcesConfigReducer = sourceSlice.reducer;
-
+export const { reducer: sourcesConfigReducer } = sourceSlice;

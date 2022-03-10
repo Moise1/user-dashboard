@@ -1,20 +1,23 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
 import { t } from '../../utils/transShim';
-import '../../sass/switch.scss';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { PlusCircle } from 'react-feather';
 import { Switch } from '../small-components/Switch';
 import { Selector } from '../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
-import '../../sass/auto-ordering.scss';
 import hand from '../../assets/hand.svg';
 import copy from '../../assets/copy.svg';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import '../../sass/switch.scss';
+import '../../sass/auto-ordering.scss';
 
 const AutoOrdering = () => {
   const [accountConfig, setAccountConfig] = useState<string>('');
   const [checked, setChecked] = useState<boolean>(false);
   const [activeAccount, setActiveAccount] = useState<boolean>(true);
   const [, setCopied] = useState<boolean>(false);
+  const [showInput, setShowInput] = useState<boolean>(false);
+  const [newAccount, setNewAccount] = useState({ value: '' });
 
   const showAccountConfig = (): void => setChecked(!checked);
 
@@ -23,6 +26,20 @@ const AutoOrdering = () => {
   const handleOptionChange = (value: string) => setAccountConfig(value);
 
   const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
+
+  const handleOptionClick = (): void => {
+    setShowInput(!showInput);
+  };
+
+  const handleChange = (e: React.ChangeEvent<{ value: string }>) => {
+    setNewAccount({ value: e?.currentTarget?.value });
+  };
+
+  const handleSubmit = () => {
+    dummyUsers.push({ id: dummyUsers.length + 1, value: newAccount.value });
+    setNewAccount({ value: '' });
+  };
+
 
   return (
     <div className={accountConfig ? 'adjusted-main-container' : 'main-container'}>
@@ -38,7 +55,34 @@ const AutoOrdering = () => {
           <p className="account-config">
             {t('SourceConfigInputs.AccountConfiguration')} :<span className="account-alias">{accountData?.alias}</span>
           </p>
-          <Selector defaultValue="Select or add account" addAccount={true} onChange={handleOptionChange}>
+          <Selector defaultValue="Select or add account"
+            addAccount={true}
+            onChange={handleOptionChange}
+            dropdownRender={(menu: ReactNode) => (
+              <>
+                <div className="action-ctrl">
+                  {showInput ? (
+                    <div className="input-container">
+                      <Input
+                        className="new-acc-input"
+                        placeholder="Create account..."
+                        value={newAccount.value}
+                        name="newAccount"
+                        onChange={handleChange}
+                      />
+                      <a onClick={handleSubmit}>
+                        <PlusCircle className="add-icon" size="35" />
+                      </a>
+                    </div>
+                  ) : (
+                    <Button className="new-acc-btn" onClick={handleOptionClick}>
+                      New Account
+                    </Button>
+                  )}
+                </div>
+                {menu}
+              </>
+            )}>
             {dummyUsers}
           </Selector>
         </div>

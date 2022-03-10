@@ -5,10 +5,10 @@ import { ChevronLeft } from 'react-feather';
 import AutoOrdering from './AutoOrdering';
 import { SourcesSettingsContents } from './SourcesSettingsContents';
 import { t } from '../../utils/transShim';
-import '../../sass/sources-settings.scss';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from '../../dummy-data/dummyData';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
+import '../../sass/sources-settings.scss';
 
 export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');

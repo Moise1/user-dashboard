@@ -71,7 +71,7 @@
   }
 
   .menu-item,
-  .ant-menu-submenu {
+  .ant-menu-submenu:not(.secondary-subemenu) {
     color: $primary-txt;
     width: 90% !important;
     margin: auto !important;

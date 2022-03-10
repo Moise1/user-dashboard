@@ -93,7 +93,7 @@ export const App = withRouter(({ history }) => {
         </Layout>
       </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
-      <ToastContainer closeButton={<CloseIcon size='17'/>}/>
+      <ToastContainer closeButton={<CloseIcon size='17'/>} theme="colored"/>
     </>
   );
 });

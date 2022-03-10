@@ -50,7 +50,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.response_data = payload.response_data;
+      state.response_data = payload;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
       state.loading = false;
@@ -73,4 +73,4 @@ export const userSlice = createSlice({
   }
 });
 
-export const { reducer, actions } = userSlice;
+export const { reducer: userReducer, actions } = userSlice;

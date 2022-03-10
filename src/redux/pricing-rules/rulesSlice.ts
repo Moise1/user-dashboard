@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {getRules} from './rulesThunk';
 
-export interface Rule {
+export interface  Rule {
   id: number;
   userId: string;
   sourceId: number;
@@ -11,7 +11,7 @@ export interface Rule {
   createdOn: Date;
   active: boolean;
   channelOAuthId: number;
-  value?: string;
+  [key: string]: string | number| Date | boolean
 }
 
 const initialState = {
@@ -41,5 +41,5 @@ export const rulesSlice = createSlice({
   }
 });
 
-export const pricingRulesReducer = rulesSlice.reducer;
+export const {reducer: pricingRulesReducer} = rulesSlice;
 

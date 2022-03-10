@@ -3,6 +3,11 @@ import light_bulb_two from '../assets/catalog-imgs/light-bulb-2.jpg';
 import light_bulb_three from '../assets/catalog-imgs/light-bulb-3.jpg';
 import light_bulb_four from '../assets/catalog-imgs/light-bulb-4.jpg';
 
+export interface DummyData{
+  [key: string]: string | number; 
+  value: string,
+  id: number;
+}
 export const dummyData = [
   { value: 'Amazon', id: 101 },
   { value: 'Others', id: 102 },
@@ -16,7 +21,9 @@ export const dummyData = [
   { value: 'Third', id: 110 }
 ];
 
-export const dummyUsers = [
+// type DumyUserPreview = ;
+
+export const dummyUsers: DummyData[]= [
   {
     value: 'dad@gmail.com',
     id: 1,
@@ -43,7 +50,7 @@ export const dummyUsers = [
   }
 ];
 
-export const dummyDuration = [
+export const dummyDuration: DummyData[] = [
   { value: '30 days', id: 1 },
   { value: 'Test policy', id: 2 },
   { value: 'Other test policy', id: 3 }

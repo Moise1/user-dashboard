@@ -14,7 +14,7 @@ export const userLogin = createAsyncThunk(
         toastAlert('Successfully logged in.', 'success');
         history.push('/dashboard');
       }
-      return res.data;
+      return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
     }
