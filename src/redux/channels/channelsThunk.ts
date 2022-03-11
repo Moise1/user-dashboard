@@ -3,7 +3,7 @@ import { client } from '../client';
 
 export const getChannels = createAsyncThunk('channels/getChannels', async (_, thunkAPI) => {
   try {
-    const res = await client.get('/User/Channels/Get');
+    const res = await client.get('/User/Channels/Get/');
     return res.data.response_data.channels;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;

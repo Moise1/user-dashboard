@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userLogin } from 'src/redux/user/userThunk';
-import {getChannels} from 'src/redux/channels/channelsThunk';
 import { UserData } from '../../redux/user/userSlice';
 import '../../sass/user-login.scss';
 
@@ -11,8 +10,7 @@ export const UserLogin = withRouter(({ history }) => {
   const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const onFinish = (values: UserData) => {
-    dispatch(getChannels());
-    dispatch(userLogin({ data: values, history }));
+    dispatch(userLogin({data: values, history}));
   };
   
   return (

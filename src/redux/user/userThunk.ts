@@ -3,12 +3,22 @@ import { RouteComponentProps } from 'react-router-dom';
 import { client } from '../client';
 import {UserData} from './userSlice';
 import {toastAlert} from '../../utils/toastAlert';
+import {getChannels} from '../channels/channelsThunk';
 
-export const userLogin = createAsyncThunk(
+/*
+  N.B: "rejectWithValue and dispatch" are destructured thunkAPI's props 
+*/
+interface Props { 
+  data: UserData; 
+  history: RouteComponentProps['history']
+}
+
+export const userLogin =  createAsyncThunk(
   'user/userLogin' ,
-  async ({data, history}: {data: UserData, history: RouteComponentProps['history'] },  thunkAPI)=> {
+  async ({data, history}: Props,  {rejectWithValue, dispatch} )=> {
+    await dispatch(getChannels());
     try {
-      const res = await client.post('/User/Credentials/Login', data); 
+      const res = await client.post('/User/Credentials/Login/', data); 
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
@@ -16,13 +26,13 @@ export const userLogin = createAsyncThunk(
       }
       return res.data.response_data;
     } catch (error) {
-      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
+      return rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
 
 export const userRegister = createAsyncThunk(
   'user/userRegister' ,
-  async ({data, history}: {data: UserData, history: RouteComponentProps['history'] },  thunkAPI)=> {
+  async ({data, history}: Props,  {rejectWithValue})=> {
     try {
       const res = await client.post<UserData>('/register/user', data); 
       if(res.status === 200) {
@@ -31,7 +41,7 @@ export const userRegister = createAsyncThunk(
       }
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
+      return rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
   
