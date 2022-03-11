@@ -13,8 +13,6 @@ import { AppContext } from '../../contexts/AppContext';
 
 
 export const StoreList = () => {
-  // const [channelId, setChannelId] = useState<string | null>(null);
-
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
@@ -23,16 +21,7 @@ export const StoreList = () => {
     dispatch(getChannels());
   }, [getChannels]);
 
-  // useEffect(() => {
-  //   const savedChannelId = localStorage.getItem('channelId');
-  //   if (savedChannelId) {
-  //     setChannelId(savedChannelId);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem('channelId', channelId!);
-  // }, [channelId]);
+  
 
   const provideChannelId = (value: string)=>{
     const selectedChannel = channels.filter((c: Channel) => c.name === value);
