@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AppContext, initialAppContext } from './contexts/AppContext';
-import {useAppSelector} from './custom-hooks/reduxCustomHooks';
+
 
 import './sass/index.scss';
 
@@ -9,10 +9,10 @@ interface Props {
 }
 export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
-  const { channels } = useAppSelector((state) => state.channels);
-  const stringChannelId = JSON.stringify(channels[0]?.id);
-  const [channelId, setChannelId] = useState<string|null>(initialAppContext.channelId = stringChannelId);
+  const [channelId, setChannelId] = useState<string|null>(initialAppContext.channelId);
   
+  
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
     const savedChannelId = localStorage.getItem('channelId');

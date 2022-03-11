@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
@@ -25,8 +25,7 @@ import {
   SourcesSettings
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
-import { useAppDispatch } from './custom-hooks/reduxCustomHooks';
-import { getChannels } from './redux/channels/channelsThunk';
+
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -54,10 +53,7 @@ export const App = withRouter(({ history }) => {
     sidebar.style.display = 'none';
   };
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getChannels());
-  }, [getChannels]);
+  
 
   return (
     <>

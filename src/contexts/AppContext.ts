@@ -2,7 +2,7 @@ import {createContext} from 'react';
 
 export const initialAppContext = {
   theme: 'light',
-  channelId: '0',
+  channelId: '',
   setChannelId:() => null,
   setTheme: () => null
 };
