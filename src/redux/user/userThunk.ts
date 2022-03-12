@@ -5,9 +5,7 @@ import {UserData} from './userSlice';
 import {toastAlert} from '../../utils/toastAlert';
 import {getChannels} from '../channels/channelsThunk';
 
-/*
-  N.B: "rejectWithValue and dispatch" are destructured thunkAPI's props 
-*/
+
 interface Props { 
   data: UserData; 
   history: RouteComponentProps['history']
@@ -15,10 +13,11 @@ interface Props {
 
 export const userLogin =  createAsyncThunk(
   'user/userLogin' ,
-  async ({data, history}: Props,  {rejectWithValue, dispatch} )=> {
+  async ({data, history}: Props, 
+    {rejectWithValue, dispatch} /* destructured thunkAPI's props */)=> {
     await dispatch(getChannels());
     try {
-      const res = await client.post('/User/Credentials/Login/', data); 
+      const res = await client.post('/User/Credentials/Login', data); 
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
