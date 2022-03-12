@@ -10,7 +10,7 @@ export const UserLogin = withRouter(({ history }) => {
   const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const onFinish = (values: UserData) => {
-    dispatch(userLogin({ data: values, history }));
+    dispatch(userLogin({data: values, history}));
   };
   
   return (

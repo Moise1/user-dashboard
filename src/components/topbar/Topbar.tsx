@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Dropdown, Button, Progress, Badge } from 'antd';
+import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
-import downArrow from '../../assets/downArrow.svg';
-import flag from '../../assets/flag-round-500.svg';
+// import downArrow from '../../assets/downArrow.svg';
+// import flag from '../../assets/flag-round-500.svg';
 import bell from '../../assets/bell-icon.svg';
-import amazon from '../../assets/amazon-icon-1.svg';
-import StoreList from '../small-components/StoreList';
+// import amazon from '../../assets/amazon-icon-1.svg';
+import {StoreList} from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
@@ -25,7 +25,7 @@ export const Topbar = withRouter((props: Props) =>{
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
-  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.response_data);
+  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.response_data || {});
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
 
@@ -38,7 +38,11 @@ export const Topbar = withRouter((props: Props) =>{
   };
 
   const qoutaPercentage = (partial: number, total:number)=>{
-    return Math.round((100  * partial) / total);
+    if(quotaUsed && quotaAdded){
+      return Math.round((100  * partial) / total);
+    }else {
+      return 0;
+    }
   };
 
   return (
@@ -103,8 +107,8 @@ export const Topbar = withRouter((props: Props) =>{
           </Badge>
         </div>
       </div>
-      <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
-        <div className="">
+      {/* <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
+        <div>
           <span className="store-name">Teststore</span>
           <img src={flag} className="flag" height="20" alt="" />
           <img src={amazon} className="company" height="20" alt="" />
@@ -112,7 +116,8 @@ export const Topbar = withRouter((props: Props) =>{
             <img src={downArrow} className="down-arrow-icon" alt="coinIcon" aria-hidden="true" />
           </Button>
         </div>
-      </Dropdown>
+      </Dropdown> */}
+      <StoreList/>
     </div>
   );
 });

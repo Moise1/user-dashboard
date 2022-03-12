@@ -26,6 +26,7 @@ import {
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 
+
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
@@ -51,6 +52,8 @@ export const App = withRouter(({ history }) => {
     const sidebar = document.querySelector('.sider') as HTMLElement;
     sidebar.style.display = 'none';
   };
+
+  
 
   return (
     <>
@@ -93,7 +96,7 @@ export const App = withRouter(({ history }) => {
         </Layout>
       </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
-      <ToastContainer closeButton={<CloseIcon size='17'/>}/>
+      <ToastContainer closeButton={<CloseIcon size='17'/>} theme="colored"/>
     </>
   );
 });

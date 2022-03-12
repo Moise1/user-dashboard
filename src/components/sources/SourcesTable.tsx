@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
@@ -6,16 +6,18 @@ import { DataTable } from '../tables/DataTable';
 import { SearchOptions } from '../small-components/SearchOptions';
 import {getSources} from '../../redux/source-config/sourcesThunk';
 import {useAppDispatch, useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+import {AppContext} from '../../contexts/AppContext';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 
 export const SourcesTable = () => {
   const dispatch = useAppDispatch();
   const { sources } = useAppSelector((state) => state.sources);
+  const {channelId} = useContext(AppContext);
   
   useEffect(() => {
     dispatch(getSources());
-  }, [getSources]);
+  }, [getSources, channelId]);
   
   const columns = [
     {

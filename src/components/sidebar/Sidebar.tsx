@@ -21,7 +21,7 @@ import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../small-components/Switch';
 import pin from '../../assets/pin.svg';
 import { TransparentBtn } from '../small-components/ActionBtns';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import '../../sass/side-bar.scss';
 
@@ -44,7 +44,7 @@ export const Sidebar = (props: Props) => {
   const [isDark, setIsDark] = useState<boolean>(false);
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const { setTheme } = useContext(ThemeContext);
+  const { setTheme } = useContext(AppContext);
   const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
 
@@ -91,54 +91,14 @@ export const Sidebar = (props: Props) => {
   };
 
   const settingsListArray = [
+    {listName: t('Menu.Channel'), onClick: () => routeChange('/channel')},
+    {listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
+    {listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    {listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    {listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    {listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    {listName: t('Menu.Templates') },
     {
-      id: 6,
-      listName: (
-        <>
-          <SubMenu
-            className="list-submenu-item"
-            key="sub1"
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            title="Item's Submenu"
-          >
-            <Item
-              className="menu-item"
-              onClick={() => routeChange('/dashboard')}
-              key="7"
-              style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={<DashBoardIcon />}
-            >
-            Another Menu Item
-            </Item>
-
-            <Item
-              className="menu-item"
-              onClick={() => routeChange('/dashboard')}
-              key="8"
-              style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={<DashBoardIcon />}
-            >
-            Another Menu Item
-            </Item>
-          </SubMenu>
-        </>
-      ),
-      onClick: () => routeChange('/channel'),
-      
-    },
-    {
-      id: 9,
-      listName: t('Menu.Channel'),
-      onClick: () => routeChange('/channel')
-    },
-    { id:10, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
-    { id: 11, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { id: 12, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { id: 13, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { id: 14, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { id: 15, listName: t('Menu.Templates') },
-    {
-      id: 16,
       listName: (
         <>
           <Switch
@@ -155,9 +115,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    { id: 19, listName: t('Menu.FAQ') },
-    { id: 20, listName: t('Menu.ListingServices') }
+    {listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    {listName: t('Menu.FAQ') },
+    {listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -260,16 +220,43 @@ export const Sidebar = (props: Props) => {
             {/* SETTINGS LIST ITEMS .  */}
             <SubMenu
               className="submenu-item"
-              key="sub2"
+              key="sub1"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
-              {settingsListArray.map((obj) => (
-                <Item key={obj.id} onClick={obj.onClick}>
+              {settingsListArray.map((obj, idx) => (
+                <Item key={idx} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>
               ))}
+
+              <SubMenu
+                className="secondary-submenu-item"
+                key="sub2"
+                style={{ fontSize: '18px', fontWeight: 'bold' }}
+                title="Item's Submenu"
+              >
+                <Item
+                  className="menu-item"
+                  onClick={() => routeChange('/dashboard')}
+                  key="7"
+                  style={{ fontSize: '18px', fontWeight: 'bold' }}
+                  icon={<DashBoardIcon />}
+                >
+                  Another Menu Item
+                </Item>
+
+                <Item
+                  className="menu-item"
+                  onClick={() => routeChange('/dashboard')}
+                  key="8"
+                  style={{ fontSize: '18px', fontWeight: 'bold' }}
+                  icon={<DashBoardIcon />}
+                >
+                  Another Menu Item
+                </Item>
+              </SubMenu>
             </SubMenu>
 
             {/* SERVICES  */}
@@ -290,8 +277,8 @@ export const Sidebar = (props: Props) => {
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
-              {helpListArray.map((obj) => (
-                <Item key={obj.id} onClick={obj.onClick}>
+              {helpListArray.map((obj, idx) => (
+                <Item key={idx} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>
               ))}
