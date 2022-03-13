@@ -12,7 +12,7 @@ import { AppContext } from '../../contexts/AppContext';
 
 
 export const StoreList = () => {
-  const { channels } = useAppSelector((state) => state.channels);
+  const {channels} = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
 
   

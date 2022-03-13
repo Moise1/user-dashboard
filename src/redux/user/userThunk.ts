@@ -14,10 +14,10 @@ interface Props {
 export const userLogin =  createAsyncThunk(
   'user/userLogin' ,
   async ({data, history}: Props, 
-    {rejectWithValue, dispatch} /* destructured thunkAPI's props */)=> {
-    await dispatch(getChannels());
+    {rejectWithValue, dispatch} /* destructured thunkAPI's prop */)=> {
     try {
       const res = await client.post('/User/Credentials/Login', data); 
+      await dispatch(getChannels());
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
@@ -43,4 +43,7 @@ export const userRegister = createAsyncThunk(
       return rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
+
   
+
+

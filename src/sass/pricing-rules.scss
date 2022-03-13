@@ -64,9 +64,17 @@
     }
   }
 
+  .spiner{
+    border: 2px solid;
+    width: 30%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+  }
   .table {
     width: 100%;
     border-radius: 5px;
+    margin-top: 4rem;
   }
 }
 

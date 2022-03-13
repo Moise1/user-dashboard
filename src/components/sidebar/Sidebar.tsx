@@ -87,7 +87,7 @@ export const Sidebar = (props: Props) => {
     dispatch(actions.logout());
     localStorage.removeItem('isAuthenticated');
     persistor.purge();
-    routeChange('/login');
+    routeChange('/Account/Login/?ReturnUrl=/Api/User/Channels/Get');
   };
 
   const settingsListArray = [

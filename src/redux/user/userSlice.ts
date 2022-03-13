@@ -30,6 +30,7 @@ export interface UserData {
   accessFailedCount?: number;
 }
 
+
 const initialState = {
   response_data: {} as UserData,
   loading: false,
@@ -56,7 +57,7 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
-
+    
     // User Register
     builder.addCase(userRegister.pending, (state) => {
       state.loading = true;

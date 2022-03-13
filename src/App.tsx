@@ -76,7 +76,7 @@ export const App = withRouter(({ history }) => {
             <Route exact path="/">
               <Redirect to="/dashboard" />
             </Route>
-            <Route path="/login" component={UserLogin} />
+            <Route path="/Account/Login" component={UserLogin} />
             <Route path="/register" component={UserRegister} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />

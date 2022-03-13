@@ -12,7 +12,7 @@ import '../../sass/popover.scss';
 
 export const SourcesTable = () => {
   const dispatch = useAppDispatch();
-  const { sources } = useAppSelector((state) => state.sources);
+  const { sources, loading } = useAppSelector((state) => state.sources);
   const {channelId} = useContext(AppContext);
   
   useEffect(() => {
@@ -77,6 +77,7 @@ export const SourcesTable = () => {
       <div className="search-options-area">
         <SearchOptions showSearchInput />
       </div>
+      {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
         <DataTable columns={columns} dataSource={sources} />
       </div>
