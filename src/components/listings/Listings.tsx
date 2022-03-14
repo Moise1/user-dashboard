@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-import { listingsData } from '../common/ListingsData';
+// import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -15,6 +15,9 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
+import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
+import { getListings } from 'src/redux/listings/listingsThunk';
+
 import '../../sass/listings.scss';
 
 export const Listings = () => {
@@ -24,6 +27,12 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
+  const {listings} = useAppSelector((state) => state.listings);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getListings());
+  }, [getListings]);
 
   const tableColumns = [
     {
@@ -35,8 +44,8 @@ export const Listings = () => {
 
     {
       title: t('Listings.Column.Item no.'),
-      dataIndex: 'itemNo',
-      key: 'itemNo',
+      dataIndex: 'id',
+      key: 'id',
       visible: true
     },
 
@@ -218,10 +227,10 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        dataSource={listingsData}
+        dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
-        totalItems={listingsData.length}
+        totalItems={0}
         showTableInfo
       />
     </Layout>

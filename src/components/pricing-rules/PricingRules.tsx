@@ -15,7 +15,7 @@ import '../../sass/pricing-rules.scss';
 export const PricingRules = () => {
   const { Item } = Form;
   const dispatch = useAppDispatch();
-  const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
+  const { rules } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
   const { channelId } = useContext(AppContext);
 
@@ -92,7 +92,7 @@ export const PricingRules = () => {
             </Item>
           </Form>
         </StatusBar>
-        <DataTable dataSource={rules} columns={columns} loading={{ indicator: <Spin />, spinning: rulesLoading }} />
+        {sourcesLoading? <Spin /> :<DataTable dataSource={rules} columns={columns} />}
       </div>
     </Layout>
   );

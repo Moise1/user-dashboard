@@ -1,27 +1,19 @@
-import { useEffect, useContext, ReactNode } from 'react';
+import {useContext, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle } from 'react-feather';
 import { t } from '../../utils/transShim';
 // import flag from '../../assets/flag-round-500.svg';
 // import amazon from '../../assets/amazon-icon-1.svg';
 // import { SearchInput } from './TableActionBtns';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getChannels } from '../../redux/channels/channelsThunk';
+import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { Selector } from './Selector';
 import { AppContext } from '../../contexts/AppContext';
 
 
 export const StoreList = () => {
-  const dispatch = useAppDispatch();
-  const { channels } = useAppSelector((state) => state.channels);
+  const {channels} = useAppSelector((state) => state.user.userResults);
   const { setChannelId } = useContext(AppContext);
-
-  useEffect(() => {
-    dispatch(getChannels());
-  }, [getChannels]);
-
-  
 
   const provideChannelId = (value: string)=>{
     const selectedChannel = channels.filter((c: Channel) => c.name === value);
