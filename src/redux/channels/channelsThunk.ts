@@ -14,3 +14,4 @@ export const getChannels = createAsyncThunk(
       return rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
+
