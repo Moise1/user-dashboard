@@ -17,12 +17,13 @@ export const userLogin =  createAsyncThunk(
     {rejectWithValue, dispatch} /* destructured thunkAPI's prop */)=> {
     try {
       const res = await client.post('/User/Credentials/Login', data); 
-      await dispatch(getChannels());
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
         history.push('/dashboard');
       }
+      const channels = (await client.get('/User/Channels/Get')).data?.response_data.channels;
+      await dispatch(getChannels(channels));
       return res.data.response_data;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):') ;

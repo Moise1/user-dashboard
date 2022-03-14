@@ -10,6 +10,6 @@ export const ProtectedRoute: React.FC<Props> = ({ component: Component, ...rest 
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   return (
     <Route {...rest} render={(props) => (isAuthenticated ? <Component {...props} /> :
-      <Redirect to="/Account/Login/?ReturnUrl=/Api/User/Channels/Get"/>)} />
+      <Redirect to="/login"/>)} />
   );
 };
