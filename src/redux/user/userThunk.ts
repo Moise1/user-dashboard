@@ -22,8 +22,8 @@ export const userLogin =  createAsyncThunk(
         toastAlert('Successfully logged in.', 'success');
         history.push('/dashboard');
       }
-      const channels = (await client.get('/User/Channels/Get')).data?.response_data.channels;
-      await dispatch(getChannels(channels));
+      
+      await dispatch(getChannels());
       return res.data.response_data;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):') ;
