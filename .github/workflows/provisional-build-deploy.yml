@@ -48,9 +48,7 @@ jobs:
       - name: Build and tag docker file
         if: ${{ !env.ACT }}
         run: |
-          docker pull hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} && \
-          docker build --cache-from hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} --file ./production.dockerfile \
-          --tag hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} ./
+          docker build --file ./production.dockerfile --tag hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} ./
           
       - name: Push docker image to dockerhub
         if: ${{ !env.ACT }}
