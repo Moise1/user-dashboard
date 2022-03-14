@@ -38,6 +38,13 @@ jobs:
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
           echo SOURCE_NAME $SOURCE_NAME $BRANCH ~ALSO~ SOURCE_TAG $SOURCE_TAG ~ALSO SHA $GITSHA
+
+      - uses: docker/login-action@v1
+        if: ${{ !env.ACT }}
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and tag docker file
         if: ${{ !env.ACT }}
         run: |
@@ -45,12 +52,6 @@ jobs:
           docker build --cache-from hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} --file ./production.dockerfile \
           --tag hustlegotreal/tools:hgrweb-${{ steps.branch_name.outputs.SOURCE_NAME }} ./
           
-      - uses: docker/login-action@v1
-        if: ${{ !env.ACT }}
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Push docker image to dockerhub
         if: ${{ !env.ACT }}
         run: |
