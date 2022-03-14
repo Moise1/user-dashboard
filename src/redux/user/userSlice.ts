@@ -55,6 +55,7 @@ export const userSlice = createSlice({
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.userResults.user = payload.user;
+      state.userResults.channels = payload.channels;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
       state.loading = false;
