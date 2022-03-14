@@ -37,7 +37,7 @@ export const subscriptionsSlice = createSlice({
     });
     builder.addCase(getSubscriptions.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.products = payload.products;
+      state.products = payload;
     });
     builder.addCase(getSubscriptions.rejected, (state, { payload }) => {
       state.loading = false;

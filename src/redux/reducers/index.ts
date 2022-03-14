@@ -4,7 +4,8 @@ import {subscriptionsReducer} from '../subscriptions/subsSlice';
 import {userAssistantsReducer} from '../va-profiles/vaProfilesSlice';
 import {userReducer} from '../user/userSlice';
 import {sourcesConfigReducer} from '../source-config/sourceSlice';
-import {channelsReducer} from '../channels/channelsSlice';
+// import {channelsReducer} from '../channels/channelsSlice';
+import {listingsReducer} from '../listings/listingsSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -12,6 +13,7 @@ export const allReducers = combineReducers({
   subscriptions: subscriptionsReducer,
   vaProfiles: userAssistantsReducer,
   sources: sourcesConfigReducer,
-  channels: channelsReducer,
+  // channels: channelsReducer,
+  listings: listingsReducer
 });
 

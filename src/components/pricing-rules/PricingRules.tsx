@@ -92,8 +92,7 @@ export const PricingRules = () => {
             </Item>
           </Form>
         </StatusBar>
-        <div className="spiner">{sourcesLoading && <Spin />}</div>
-        <DataTable dataSource={rules} columns={columns} />
+        {sourcesLoading? <Spin /> :<DataTable dataSource={rules} columns={columns} />}
       </div>
     </Layout>
   );

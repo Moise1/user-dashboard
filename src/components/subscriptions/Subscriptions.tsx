@@ -62,7 +62,7 @@ export const Subscriptions = () => {
           </div>
 
           <Carousel slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
-            {products.map((p: Product) => (
+            {products?.map((p: Product) => (
               <Card key={p.id} className="subscription">
                 <p className="listings-count">
                   <strong>{p.name}</strong> 

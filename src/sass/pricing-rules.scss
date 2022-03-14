@@ -29,6 +29,10 @@
   margin: auto;
   margin-top: 0rem;
 
+  .ant-spin-spinning {
+    margin: 10% 0 0 50%;
+  }
+
   .pricing-rules-bar {
     display: block;
     padding: auto 2rem;
@@ -56,15 +60,15 @@
         width: 18%;
         border-radius: 10px;
         margin-top: 1.8rem;
-      };
+      }
 
-      .confirm-btn{
+      .confirm-btn {
         margin-top: 2rem;
       }
     }
   }
 
-  .spiner{
+  .spiner {
     border: 2px solid;
     width: 30%;
     margin: auto;
