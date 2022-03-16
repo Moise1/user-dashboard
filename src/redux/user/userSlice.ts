@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userLogin, userRegister } from './userThunk';
-import {Channel} from '../channels/channelsSlice';
+// import {Channel} from '../channels/channelsSlice';
 export interface UserData {
   email?: string;
   passowrd?: string;
@@ -32,10 +32,7 @@ export interface UserData {
 
 
 const initialState = {
-  userResults: {
-    user: {} as UserData,
-    channels: [] as Channel[],
-  },
+  user: {} as UserData,
   loading: false,
   error: ''
 };
@@ -54,8 +51,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.userResults.user = payload.user;
-      state.userResults.channels = payload.channels;
+      state.user = payload;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
       state.loading = false;
@@ -69,7 +65,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userRegister.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.userResults.user = payload;
+      state.user = payload;
     });
     builder.addCase(userRegister.rejected, (state, { payload }) => {
       state.loading = false;

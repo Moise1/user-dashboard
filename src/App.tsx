@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import 'antd/dist/antd.css';
 import { Layout } from 'antd';
+import 'antd/dist/antd.css';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import {X as CloseIcon} from 'react-feather';

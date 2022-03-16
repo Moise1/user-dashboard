@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { client } from '../client';
 import {UserData} from './userSlice';
 import {toastAlert} from '../../utils/toastAlert';
-// import {getChannels} from '../channels/channelsThunk';
+import {getChannels} from '../channels/channelsThunk';
 
 
 interface Props { 
@@ -14,15 +14,16 @@ interface Props {
 export const userLogin =  createAsyncThunk(
   'user/userLogin' ,
   async ({data, history}: Props, 
-    {rejectWithValue} /* destructured thunkAPI's prop */)=> {
+    {rejectWithValue, dispatch} /* destructured thunkAPI's prop */)=> {
     try {
+      await dispatch(getChannels());
       const res = await client.post('/User/Credentials/Login', data); 
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
         history.push('/dashboard');
       }
-      localStorage.setItem('channelId', JSON.stringify(res.data.response_data.channels[0].id));
+      // localStorage.setItem('channelId', JSON.stringify(channels[0].id));
       return res.data.response_data;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):') ;

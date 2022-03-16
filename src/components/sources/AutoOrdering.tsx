@@ -6,6 +6,7 @@ import { PlusCircle } from 'react-feather';
 import { Switch } from '../small-components/Switch';
 import { Selector } from '../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
+import { ConfirmBtn } from '../small-components/ActionBtns';
 import hand from '../../assets/hand.svg';
 import copy from '../../assets/copy.svg';
 import '../../sass/switch.scss';
@@ -40,7 +41,6 @@ const AutoOrdering = () => {
     setNewAccount({ value: '' });
   };
 
-
   return (
     <div className={accountConfig ? 'adjusted-main-container' : 'main-container'}>
       <div className="auto-ordering">
@@ -55,16 +55,16 @@ const AutoOrdering = () => {
           <p className="account-config">
             {t('SourceConfigInputs.AccountConfiguration')} :<span className="account-alias">{accountData?.alias}</span>
           </p>
-          <Selector defaultValue="Select or add account"
+          <Selector
+            defaultValue="Select or add account"
             addAccount={true}
             onChange={handleOptionChange}
             dropdownRender={(menu: ReactNode) => (
-              <>
+              <div className="dropdown-content">
                 <div className="action-ctrl">
                   {showInput ? (
                     <div className="input-container">
                       <Input
-                        className="new-acc-input"
                         placeholder="Create account..."
                         value={newAccount.value}
                         name="newAccount"
@@ -75,14 +75,13 @@ const AutoOrdering = () => {
                       </a>
                     </div>
                   ) : (
-                    <Button className="new-acc-btn" onClick={handleOptionClick}>
-                      New Account
-                    </Button>
+                    <ConfirmBtn handleClick={handleOptionClick}>New Account</ConfirmBtn>
                   )}
                 </div>
                 {menu}
-              </>
-            )}>
+              </div>
+            )}
+          >
             {dummyUsers}
           </Selector>
         </div>

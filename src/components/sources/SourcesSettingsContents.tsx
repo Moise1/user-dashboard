@@ -11,10 +11,10 @@ export const SourcesSettingsContents = () => {
           <h2>Markup %</h2>
           <p>
             Percentage added to supplier’s price, which will determine the price of your products. For example, a 40%
-            markup means that a product that costs £100 will be on sale for £140.
+            markup means that a product that costs £120 will be on sale for £140.
           </p>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Defined by Settings(30)">{dummyData}</Selector>
         </Col>
       </Row>
@@ -28,7 +28,7 @@ export const SourcesSettingsContents = () => {
             <span className="blue-normal-text"> &gt; Templates</span>
           </p>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
         </Col>
       </Row>
@@ -41,7 +41,7 @@ export const SourcesSettingsContents = () => {
             is available again, we will automatically update your store again.
           </p>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Defined by Settings(yes)">{dummyData}</Selector>
         </Col>
       </Row>
@@ -54,7 +54,7 @@ export const SourcesSettingsContents = () => {
             with the corresponding markup.
           </p>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Defined by Settings(Yes)">{dummyData}</Selector>
         </Col>
       </Row>
@@ -67,7 +67,7 @@ export const SourcesSettingsContents = () => {
             we will only update the price when it goes up in the supplier’s catalog.
           </p>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Defined by Settings(Yes)">{dummyData}</Selector>
         </Col>
       </Row>
@@ -76,7 +76,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Returns</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Select">{dummyData}</Selector>
         </Col>
       </Row>
@@ -85,7 +85,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Shipping</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Select">{dummyData}</Selector>
         </Col>
       </Row>
@@ -94,7 +94,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Dispatch Days</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Select">{dummyData}</Selector>
         </Col>
       </Row>
@@ -103,7 +103,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>GSP</h2>
         </Col>
-        <Col className="switch-container" xs={7} lg={10}>
+        <Col className="switch-container" xs={7} lg={12}>
           <Switch />
         </Col>
       </Row>
@@ -112,7 +112,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Overwrite Item Postcode</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Default">{dummyData}</Selector>
         </Col>
       </Row>
@@ -121,7 +121,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Overwrite Item City</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Default">{dummyData}</Selector>
         </Col>
       </Row>
@@ -129,7 +129,7 @@ export const SourcesSettingsContents = () => {
         <Col className="description-area" xs={16} lg={12}>
           <h2>Overwrite Item Country Code</h2>
         </Col>
-        <Col className="selector-container" xs={7} lg={10}>
+        <Col className="selector-container" xs={7} lg={12}>
           <Selector defaultValue="Default">{dummyData}</Selector>
         </Col>
       </Row>

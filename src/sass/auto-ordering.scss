@@ -9,7 +9,18 @@
       margin-top: 0.8rem;
     }
   }
+ 
+
+  
   .select-account {
+    width: 50%;
+    border: 2px solid red;
+    display: flex; 
+    flex-direction: column;
+    align-items: flex-start !important;
+    .ant-select-selector {
+       border: 2px solid blue;
+    }
     .account-config {
       font-weight: bold;
     }
@@ -78,7 +89,14 @@
 }
 
 .main-container {
+ 
+  
   @include auto-ordering;
+  display: flex;
+  flex-direction: column;
+  .ant-select-dropdown{
+    border: 2px solid red;
+  };
 }
 
 .adjusted-main-container {
