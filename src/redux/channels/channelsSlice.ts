@@ -29,6 +29,7 @@ export const channelsSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getChannels.fulfilled, (state, { payload })=>{
+      // console.log('GET CHANNELS PAYLOAD', payload);
       state.loading = false;
       state.channels = payload;
     });
