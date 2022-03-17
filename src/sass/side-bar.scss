@@ -44,7 +44,9 @@
   ::-webkit-scrollbar {
     display: none;
   }
-
+  svg > path:first-child {
+    display: none;
+  }
   .ant-layout-sider-children {
     background: $primary-bg;
   }
@@ -90,6 +92,7 @@
 
   .sidebar-icon {
     margin-left: -0.3rem;
+    // border: 2px solid red;
   }
   .sidebar-icon > * {
     stroke: $primary !important;
@@ -156,8 +159,8 @@
     overflow-y: scroll;
     margin: 3rem auto;
 
-    .menu-container{
-      .list-submenu-item{
+    .menu-container {
+      .list-submenu-item {
         border: 2px solid blue;
         margin-bottom: 2rem;
       }

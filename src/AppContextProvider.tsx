@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AppContext, initialAppContext } from './contexts/AppContext';
 import './sass/index.scss';
-
 interface Props {
     children: JSX.Element | JSX.Element[];
 }

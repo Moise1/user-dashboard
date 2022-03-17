@@ -36,6 +36,8 @@ client.interceptors.response.use(res =>{
     toastAlert(res.statusText, 'error');
   }else if(res.status === 404){
     toastAlert(res.data.response_errors.error, 'error');
-  }
+  }else if(res.status === 409){
+    toastAlert(res.data.response_errors[0].description, 'error');
+  } 
   return res;
 }, (error) => Promise.reject(error)); 

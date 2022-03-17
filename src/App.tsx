@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
+
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import {X as CloseIcon} from 'react-feather';
@@ -25,7 +26,6 @@ import {
   SourcesSettings
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
-
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);

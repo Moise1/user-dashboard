@@ -30,7 +30,7 @@ export const userRegister = createAsyncThunk(
   async ({data, history}: Props,  {rejectWithValue})=> {
     try {
       const res = await client.post('/register/user', data); 
-      if(res.status === 200) {
+      if(res.status === 201) {
         localStorage.setItem('isAuthenticated', 'true');
         history.push('/dashboard');
       }
