@@ -7,6 +7,7 @@ RUN apk add bash
 
 COPY package.json ./
 COPY yarn.lock ./
+RUN yarn config set network-timeout 300000
 RUN yarn install --frozen-lockfile --silent
 RUN yarn global add react-scripts@4.0.3 --silent
 COPY *.ps1 *.json ./
