@@ -67,7 +67,7 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong> 
                 </p>
-                <h1 className="monthly-rate">monthly reate</h1>
+                <h1 className="monthly-rate">monthly rate</h1>
 
                 <Divider className="divider" />
                 <div className="discount">

@@ -131,28 +131,24 @@ h4 {
     color: $corporative-color;
   }
 }
-.white-input {
-  border-radius: 10px;
-  border: none;
-  height: 42px;
-  width: 207px;
-  margin-top: $spacer;
-  background-color: $input-background !important;
-  &:focus {
-    box-shadow: none !important;
-  }
-}
-
-.blue-input {
-  background: $secondary-bg !important;
+@mixin custom-input($bg-color: null) {
+  background: $bg-color;
   border-radius: 10px;
   height: 42px;
   font-size: $font-medium;
   font-weight: $bold;
   &:focus {
     box-shadow: none !important;
-    background: $secondary-bg !important;
+    background: $bg-color;
   }
+}
+
+.blue-input {
+  @include custom-input($secondary-bg);
+}
+
+.auth-input {
+  @include custom-input($transparent);
 }
 
 @mixin chevrons {

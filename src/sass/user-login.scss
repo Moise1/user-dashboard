@@ -8,14 +8,14 @@
     text-align: center;
     margin-bottom: 2rem;
   }
-  .login-form {
-    .ant-input, #basic_password, .ant-form-item-has-error {
-      background: $transparent;
-      &:focus {
-        background: $transparent;
-      }
-    };
-  }
+  // .login-form {
+  //   // .ant-input, #basic_password, .ant-form-item-has-error {
+  //   //   background: $transparent;
+  //   //   &:focus {
+  //   //     background: $transparent;
+  //   //   }
+  //   // };
+  // }
 }
 
 // Small screen device

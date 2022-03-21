@@ -12,6 +12,7 @@ import locale_es from './translations/es.json';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,
   es: locale_es as unknown as Record<string, string>

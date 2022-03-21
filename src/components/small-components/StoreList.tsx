@@ -12,7 +12,8 @@ import { AppContext } from '../../contexts/AppContext';
 
 
 export const StoreList = () => {
-  const {channels} = useAppSelector((state) => state.user.userResults);
+  // Fetching channels
+  const {channels} = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
 
   const provideChannelId = (value: string)=>{
@@ -45,7 +46,7 @@ export const StoreList = () => {
             </li>
           ))} */}
 
-        {channels.map(({ name: value }: Channel) => ({ value }))}
+        {channels?.map(({ name: value }: Channel) => ({ value }))}
       </Selector>
     </div>
   );

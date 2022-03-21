@@ -85,7 +85,7 @@ export const Sidebar = (props: Props) => {
 
   const handleLogout = () => {
     dispatch(actions.logout());
-    localStorage.removeItem('isAuthenticated');
+    localStorage.clear();
     persistor.purge();
     routeChange('/login');
   };
