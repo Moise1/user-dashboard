@@ -17,6 +17,7 @@ export const userLogin =  createAsyncThunk(
     try {
       const res = await client.post('/User/Credentials/Login', data); 
       if(res.status === 200) {
+        // get channels
         await dispatch(getChannels());
         localStorage.setItem('isAuthenticated', 'true');
         toastAlert('Successfully logged in.', 'success');
