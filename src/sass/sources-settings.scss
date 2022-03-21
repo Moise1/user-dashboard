@@ -2,75 +2,16 @@
 
 // Large and extra large screens
 
-.sources-container {
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-  width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: fill-available;
-
-  .tabs-container {
-    height: 100%;
-    overflow: hidden;
-    background: $primary-bg;
-    border-radius: 10px;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    .tabs {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-      padding: 1rem 0;
-      overflow: scroll;
-      &::-webkit-scrollbar {
-        /* Chrome */
-        display: none;
-      }
-      .tab-pane {
-        color: $primary-txt;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
-        &.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-          color: $light-primary !important;
-        }
-        .sources-settings-contents {
-          width: 90vh;
-          padding: 0 2rem;
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-          padding: 1rem 0;
-
-          &::-webkit-scrollbar {
-            /* Chrome */
-            display: none;
-          }
-          .row {
-            margin-bottom: 1rem;
-          }
-        }
-      }
-    }
-    .right-section {
-      position: fixed;
-      right: 4%;
-      width: 15%;
-      margin-top: 3%;
-      height: 130px;
-      .action-btns {
-        margin-top: 5px;
-        width: auto;
-        row-gap: 7px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        & > * {
-          margin: 0 auto;
-          width: 200px;
-        }
-      }
-    }
-  }
+.sources-settings-container {
+  border: 2px solid red;
+  margin: 5rem 0;
+  // padding: 0 1rem;
+  overflow-x: hidden;
+  // height: 100vh;
+  // overflow-y: scroll;
 }
 
-.sources-configuration-name {
+.sources-config-name {
   font-weight: bold;
   font-size: $font-large;
   color: $primary-txt;
@@ -81,51 +22,25 @@
   }
 }
 
-.tab-settings {
-  display: flex;
-  background-color: $light-gray;
-  border-radius: 10px 10px 0px 0px;
-  width: 42%;
-  color: $gray;
+.main-content {
+  margin-top: 2rem;
+  border: 2px solid green;
 }
-
-.active-tab-bar {
-  background-color: $primary-bg;
-  border-radius: 10px 10px 0px 0px;
-  & h4 {
-    color: $primary-txt;
+.control-section {
+  position: absolute;
+  right: 2%;
+  top: 24%;
+  height: auto;
+  .action-btns {
+    display: grid !important;
+    margin: 1rem;
   }
 }
 
-.settings-container-section {
-  background-color: $primary-bg;
-  border-radius: 0px 10px 10px 10px;
-  padding: 12px;
-}
-
-.auto-ordering-container {
-  justify-content: space-between;
-  display: flex;
-  margin-top: $spacer;
-}
-
-.overlay-select {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.01);
-  width: 100%;
-  height: 100%;
-}
 
 .settings-list {
   margin-top: $spacer;
   justify-content: space-between;
-}
-
-.selector-container {
-  display: flex;
-  justify-content: end;
 }
 
 @media only screen and(max-width: 1030px) {
@@ -156,9 +71,7 @@
           margin: 0 !important;
         }
       }
-      .selector {
-        width: 40vw !important;
-      }
+    
     }
   }
 }

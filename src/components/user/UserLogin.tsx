@@ -9,7 +9,7 @@ import '../../sass/user-login.scss';
 export const UserLogin = withRouter(({ history }) => {
   const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const onFinish = (values: UserData) => {
+  const onFinish = async(values: UserData) => {
     dispatch(userLogin({data: values, history}));
   };
   
@@ -32,15 +32,14 @@ export const UserLogin = withRouter(({ history }) => {
             { type: 'email', message: 'Invalid e-mail address' }
           ]}
         >
-          <Input className="blue-input" />
+          <Input className="auth-input" />
         </Form.Item>
-
         <Form.Item
           label="Password"
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password className="blue-input" />
+          <Input.Password className="auth-input"  />
         </Form.Item>
 
         <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>
