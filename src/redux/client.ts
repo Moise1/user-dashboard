@@ -14,7 +14,7 @@ client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
     req.headers = {
-      channel: channelId!,
+      channel: channelId ? channelId: 1,
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
