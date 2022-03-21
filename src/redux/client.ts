@@ -13,9 +13,8 @@ export const client = axios.create({
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
-
     req.headers = {
-      channel: channelId || 1,
+      channel: channelId!,
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',

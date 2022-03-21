@@ -9,7 +9,7 @@ export const Dashboard = () => {
     // (async ()=>{
     //   await dispatch(getChannels());
     // })();
-    localStorage.setItem('channelId', JSON.stringify(channelId));
+    localStorage.setItem('channelId', JSON.stringify(channelId ? channelId: 1));
   }, [channelId]);
 
   return (
