@@ -42,7 +42,7 @@ export const SourcesSettings = () => {
       </h1>
 
       <main className="main-content">
-        <Row gutter={[{ xs: 32, lg: 50}, 0]} className="row">
+        <Row gutter={[{ xs: 32, lg: 50}, 10]} className="row">
           <Col xs={16} lg={12} className="description-area">
             <h2>Markup %</h2>
             <p>

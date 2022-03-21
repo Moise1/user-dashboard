@@ -4,6 +4,9 @@
 
 .sources-settings-container {
   border: 2px solid red;
+  margin: 5rem 0;
+  // padding: 0 1rem;
+  overflow-x: hidden;
   // height: 100vh;
   // overflow-y: scroll;
 }
@@ -21,6 +24,7 @@
 
 .main-content {
   margin-top: 2rem;
+  border: 2px solid green;
 }
 .control-section {
   position: absolute;
@@ -33,15 +37,6 @@
   }
 }
 
-// .overlay-select {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   background-color: rgba(0, 0, 0, 0.01);
-//   width: 100%;
-//   height: 100%;
-//   border: 2px solid blue;
-// }
 
 .settings-list {
   margin-top: $spacer;
@@ -76,9 +71,7 @@
           margin: 0 !important;
         }
       }
-      .selector {
-        // width: 40vw !important;
-      }
+    
     }
   }
 }
