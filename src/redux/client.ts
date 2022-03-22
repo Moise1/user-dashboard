@@ -20,7 +20,6 @@ client.interceptors.request.use(
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
       'Accept': 'application/json',
-      'Access-Control-Allow-Credentials': true,
       'Content-Type': 'application/json',
       'Access-Control-Expose-Headers': '*',
       ...req.headers
