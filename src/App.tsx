@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -33,8 +33,13 @@ export const App = withRouter(({ history }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   const toggleCollapse = () => setCollapsed(!collapsed);
   const toggleStaticValue = () => setStaticValue(!staticValue);
-
   const { pathname } = history.location;
+
+  // useEffect(() => {
+  //   window.process = {
+  //     ...window.process,
+  //   };
+  // }, [])
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);

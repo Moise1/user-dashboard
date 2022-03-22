@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { toastAlert } from 'src/utils/toastAlert';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const localhostUrl = 'http://localhost:3000';
 const productionUrl = 'https://dev-app.hustlegotreal.com';
 const url = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl;
