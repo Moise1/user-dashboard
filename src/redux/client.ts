@@ -14,7 +14,7 @@ client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
     req.headers = {
-      channel: channelId ? channelId: 1,
+      channel: channelId!,
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
@@ -33,7 +33,7 @@ client.interceptors.response.use(
     if (res.status === 500) {
       toastAlert(res.statusText, 'error');
     } else if (res.status === 404) {
-      toastAlert(res.data.response_errors.error, 'error');
+      toastAlert(res.data.response_errors.error.description, 'error');
     } else if (res.status === 409) {
       toastAlert(res.data.response_errors.error[0].description, 'error');
     }

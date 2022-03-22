@@ -3,13 +3,9 @@
 // Large and extra large screens
 
 .sources-settings-container {
-  border: 2px solid red;
-  margin: 5rem 0;
-  // padding: 0 1rem;
-  overflow-x: hidden;
-  // height: 100vh;
-  // overflow-y: scroll;
-}
+  margin: 4rem 0;
+  overflow: hidden;
+};
 
 .sources-config-name {
   font-weight: bold;
@@ -23,8 +19,15 @@
 }
 
 .main-content {
-  margin-top: 2rem;
-  border: 2px solid green;
+  margin-top: 1rem;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  padding: 1rem;
+  &::-webkit-scrollbar {
+    /* Chrome */
+    display: none;
+  }
 }
 .control-section {
   position: absolute;
@@ -36,7 +39,6 @@
     margin: 1rem;
   }
 }
-
 
 .settings-list {
   margin-top: $spacer;
@@ -71,7 +73,6 @@
           margin: 0 !important;
         }
       }
-    
     }
   }
 }

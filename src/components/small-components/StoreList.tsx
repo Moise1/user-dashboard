@@ -17,7 +17,7 @@ export const StoreList = () => {
   const { setChannelId } = useContext(AppContext);
 
   const provideChannelId = (value: string)=>{
-    const selectedChannel = channels.filter((c: Channel) => c.name === value);
+    const selectedChannel = channels?.filter((c: Channel) => c.name === value);
     const channelId = selectedChannel[0].id;
     setChannelId(JSON.stringify(channelId));
   };
