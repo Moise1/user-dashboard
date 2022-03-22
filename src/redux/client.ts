@@ -7,9 +7,8 @@ const url = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl
 
 export const client = axios.create({
   baseURL: `${url}/Api`,
-  validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
+  validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500,
 });
-client.defaults.withCredentials = true;
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
@@ -18,8 +17,10 @@ client.interceptors.request.use(
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
-      Accept: 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Credentials': true,
       'Content-Type': 'application/json',
+      'Access-Control-Expose-Headers': '*',
       ...req.headers
     };
     return req;
