@@ -18,7 +18,7 @@ export interface ListingsItems {
   checked: boolean;
 }
 
-export const listingsData: ListingsItems[] = [
+export const listingsData = [
   {
     id: 1,
     key: '1',

@@ -9,7 +9,7 @@ export const client = axios.create({
   baseURL: `${url}/Api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
 });
-
+client.defaults.withCredentials = true;
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
