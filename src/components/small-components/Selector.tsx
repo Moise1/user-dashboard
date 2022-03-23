@@ -10,6 +10,7 @@ interface Props {
   defaultValue: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
+  size?: sizeType;
   value?: string;
   dropdownRender?: (
     menu: ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>
@@ -19,9 +20,9 @@ interface Props {
 }
 
 const { Option } = Select;
-
+type sizeType = 'large' | 'small' | 'middle';
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, onChange, dropdownRender, loading, style } = props;
+  const { children, defaultValue, onChange, dropdownRender, loading, style, size } = props;
   const options = children.map((c) => (
     <Option key={c.id} value={c.value}>
       {c.value}
@@ -39,6 +40,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
       defaultValue={defaultValue}
       dropdownRender={dropdownRender}
       loading={loading}
+      size={size}
     >
       {options}
     </Select>

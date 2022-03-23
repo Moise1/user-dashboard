@@ -1,4 +1,4 @@
-import {useContext, ReactNode } from 'react';
+import { useContext, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle } from 'react-feather';
 import { t } from '../../utils/transShim';
@@ -10,14 +10,13 @@ import { Channel } from 'src/redux/channels/channelsSlice';
 import { Selector } from './Selector';
 import { AppContext } from '../../contexts/AppContext';
 
-
 export const StoreList = () => {
   // Fetching channels
-  const {channels} = useAppSelector((state) => state.channels);
+  const { channels } = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
 
-  const provideChannelId = (value: string)=>{
-    const selectedChannel = channels.filter((c: Channel) => c.name === value);
+  const provideChannelId = (value: string) => {
+    const selectedChannel = channels?.filter((c: Channel) => c.name === value);
     const channelId = selectedChannel[0].id;
     setChannelId(JSON.stringify(channelId));
   };
@@ -25,6 +24,7 @@ export const StoreList = () => {
   return (
     <div className="store-list-container">
       <Selector
+        size="large"
         defaultValue="Select a store"
         onChange={provideChannelId}
         dropdownRender={(menu: ReactNode) => (

@@ -5,7 +5,8 @@ export const getListings = createAsyncThunk(
   'listings/getListings',
   async (_, {rejectWithValue} /* destructured thunkAPI's prop */) => {
     try {
-      const res = await client.get('/Listing/Bulk/GetListingStatus');
+      const res = await client.post('/Listing/Bulk/GetListingStatus');
+      console.log('LISTIGNS RESPONSE', res);
       return res.data.reponse_data;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):') ;

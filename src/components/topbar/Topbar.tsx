@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
-// import downArrow from '../../assets/downArrow.svg';
-// import flag from '../../assets/flag-round-500.svg';
 import bell from '../../assets/bell-icon.svg';
-// import amazon from '../../assets/amazon-icon-1.svg';
 import {StoreList} from '../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
@@ -107,16 +104,6 @@ export const Topbar = withRouter((props: Props) =>{
           </Badge>
         </div>
       </div>
-      {/* <Dropdown overlay={<StoreList />} placement="bottomLeft" trigger={['click']} className="dropdown">
-        <div>
-          <span className="store-name">Teststore</span>
-          <img src={flag} className="flag" height="20" alt="" />
-          <img src={amazon} className="company" height="20" alt="" />
-          <Button className="btn-arrow-container">
-            <img src={downArrow} className="down-arrow-icon" alt="coinIcon" aria-hidden="true" />
-          </Button>
-        </div>
-      </Dropdown> */}
       <StoreList/>
     </div>
   );
