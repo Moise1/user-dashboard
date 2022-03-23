@@ -28,7 +28,7 @@ export const sourceSlice = createSlice({
     });
     builder.addCase(getSources.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.sources = payload.configuration;
+      state.sources = payload;
     });
     builder.addCase(getSources.rejected, (state, { payload }) => {
       state.loading = false;
