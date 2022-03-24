@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {getListings} from './listingsThunk';
 
-export interface Listing {
+export interface ListingData {
     id: number;
     channelOAuthId: number;
     createdOn: Date;
@@ -26,7 +26,7 @@ export interface Listing {
 }
 
 const initialState = {
-  listings: {} as Listing,
+  listings: {} as ListingData,
   loading: false,
   error: ''
 };

@@ -9,7 +9,7 @@ import '../../sass/user-login.scss';
 export const UserLogin = withRouter(({ history }) => {
   const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const onFinish = async(values: UserData) => {
+  const onFinish = (values: UserData) => {
     dispatch(userLogin({data: values, history}));
   };
   

@@ -1,17 +1,28 @@
-import { useEffect } from 'react';
-import { Table, Row, Col, Card, Input, Form, Button, Layout, Spin } from 'antd';
+import { useEffect, useState } from 'react';
+import { Row, Col, Card, Input, Form, Layout, Spin } from 'antd';
+import { DataTable } from '../tables/DataTable';
+import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getUserAssistants } from 'src/redux/va-profiles/vaProfilesThunk';
+import { getUserAssistants, createUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
+import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import '../../sass/va-profiles.scss';
+
+
 
 export const VaProfiles = () => {
   const dispatch = useAppDispatch();
+  const [current, setCurrent] = useState<number>(1);
+
   const { userAssistants, loading } = useAppSelector((state) => state.vaProfiles);
 
   useEffect(() => {
     dispatch(getUserAssistants());
   }, [getUserAssistants]);
 
+  const onFinish = async(values: UserAssistant['name']) => {
+    await dispatch(createUserAssistant({ name: values }));
+    dispatch(getUserAssistants());
+  };
 
   const columns = [
     {
@@ -21,10 +32,12 @@ export const VaProfiles = () => {
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status'
+      dataIndex: 'active',
+      key: 'active',
+      render: (value: boolean) => value ? 'Active' : 'Inactive'
     }
   ];
+
 
   return (
     <Layout className="va-profiles-container">
@@ -33,14 +46,23 @@ export const VaProfiles = () => {
       ) : (
         <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
           <Col xs={24} xl={8} md={12} className="table-container">
-            <Table dataSource={userAssistants} columns={columns}></Table>
+            <DataTable 
+              dataSource={userAssistants} 
+              columns={columns} 
+              pageSize={4}
+              current={current}
+              onChange={setCurrent}
+              total={userAssistants.length}
+            />
           </Col>
           <Col xs={24} xl={8} md={12} className="form-container">
             <Card className="card">
-              <Form className="form">
+              <Form className="form" onFinish={onFinish}>
                 <p>Add new VA Profile</p>
-                <Input placeholder="Enter a name..." className="input" />
-                <Button className="btn">Add Profile</Button>
+                <Form.Item name="name">
+                  <Input placeholder="Enter a name..." className="input" />
+                </Form.Item>
+                <ConfirmBtn htmlType="submit">Add Profile</ConfirmBtn>
               </Form>
             </Card>
           </Col>

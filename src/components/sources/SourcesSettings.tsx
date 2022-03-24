@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Layout, Row, Col } from 'antd';
 import { ChevronLeft } from 'react-feather';
@@ -9,13 +9,22 @@ import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
 import { Selector } from '../small-components/Selector';
 import { dummyData } from 'src/dummy-data/dummyData';
 import { Switch } from '../small-components/Switch';
+import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import {getSources} from '../../redux/source-config/sourcesThunk';
+// import {ShippingOption} from '../../redux/source-config/sourceSlice';
 import '../../sass/sources-settings.scss';
 
 export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const [to, setTo] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const {shippingOptions, templateList, loading} = useAppSelector((state) => state.sources);
   const history = useHistory();
+
+  useEffect(()=>{
+    dispatch(getSources());
+  },[getSources]);
 
   const initialStateSourceSettings = () => {
     setSelectedAccount('Select Supplier');
@@ -25,6 +34,7 @@ export const SourcesSettings = () => {
   };
 
   const handleOptionChange = (value: string) => setSupplierValue(value);
+  
 
   return (
     <Layout className="sources-settings-container">
@@ -65,7 +75,7 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <Selector defaultValue="Defined by Settings(Plain)">{dummyData}</Selector>
+            <Selector defaultValue="Defined by Settings(Plain)">{templateList}</Selector>
           </Col>
         </Row>
 
@@ -122,7 +132,9 @@ export const SourcesSettings = () => {
             <h2>Shipping</h2>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <Selector defaultValue="Select">{dummyData}</Selector>
+            <Selector defaultValue="Select" loading={loading}>
+              {shippingOptions}
+            </Selector>
           </Col>
         </Row>
 

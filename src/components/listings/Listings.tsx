@@ -1,4 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo,
+  //  useEffect
+} from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
@@ -15,7 +17,7 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
-// import {useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+// import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
 // import { getListings } from 'src/redux/listings/listingsThunk';
 
 import '../../sass/listings.scss';
@@ -31,7 +33,7 @@ export const Listings = () => {
   // const dispatch = useAppDispatch();
 
   // useEffect(() => {
-  //   dispatch(getListings());
+  //   dispatch(getListings('00000000-0000-0000-0000-000000000000'));
   // }, [getListings]);
 
   const tableColumns = [
