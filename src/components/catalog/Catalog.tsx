@@ -1,6 +1,6 @@
-import { ReactNode, useState } from 'react';
-import { Layout, Card, Pagination } from 'antd';
-import { Search, ChevronLeft, ChevronRight } from 'react-feather';
+import {useState } from 'react';
+import { Layout, Card } from 'antd';
+import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../small-components/ActionBtns';
 import {FiltersBtn} from '../small-components/TableActionBtns';
@@ -15,7 +15,6 @@ import { CatalogFilters } from '../small-components/AdvancedSearchDrawers';
 import '../../sass/catalog.scss';
 
 
-type paginationSteps = 'prev' | 'next' | 'page' | 'jump-prev' | 'jump-next' ;
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -58,13 +57,6 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
-
-  const itemRender = (page: number, type: paginationSteps, originalElement: ReactNode): ReactNode =>{
-    if(type === 'prev') return <ChevronLeft/>;
-    if(type === 'next') return <ChevronRight/>;
-    return originalElement;
-  };
-  
   return (
     <Layout className="catalog-container">
       <div className="actions-section">
@@ -181,9 +173,6 @@ export const Catalog = () => {
           ))}
         </div>
         <div className="pagination-addall-container">
-          <div className="pagination-container">
-            <Pagination defaultCurrent={1} total={600} responsive itemRender={itemRender}/>
-          </div>
           <div className="adall-container">
             {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
             <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>

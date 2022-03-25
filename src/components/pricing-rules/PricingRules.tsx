@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Form, Input, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getRules } from 'src/redux/pricing-rules/rulesThunk';
@@ -15,6 +15,7 @@ import '../../sass/pricing-rules.scss';
 export const PricingRules = () => {
   const { Item } = Form;
   const dispatch = useAppDispatch();
+  const [current, setCurrent] = useState<number>(1);
   const { rules } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
   const { channelId } = useContext(AppContext);
@@ -75,7 +76,7 @@ export const PricingRules = () => {
           <Form className="form" layout="vertical">
             <Item label="Source">
               <Selector defaultValue="Select a source" loading={sourcesLoading}>
-                {sources.map(({ sourceName: value, sourceId: id }: SourceConfig) => ({ value, id }))}
+                {sources?.map(({ sourceName: value, sourceId: id }: SourceConfig) => ({ value, id }))}
               </Selector>
             </Item>
             <Item label="Price From">
@@ -92,7 +93,18 @@ export const PricingRules = () => {
             </Item>
           </Form>
         </StatusBar>
-        {sourcesLoading? <Spin /> :<DataTable dataSource={rules} columns={columns} />}
+        {sourcesLoading ? (
+          <Spin />
+        ) : (
+          <DataTable
+            dataSource={rules}
+            columns={columns}
+            pageSize={4}
+            current={current}
+            onChange={setCurrent}
+            total={rules.length}
+          />
+        )}
       </div>
     </Layout>
   );

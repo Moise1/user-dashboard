@@ -1,24 +1,25 @@
-import {useEffect, useContext} from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
 import { SearchOptions } from '../small-components/SearchOptions';
-import {getSources} from '../../redux/source-config/sourcesThunk';
-import {useAppDispatch, useAppSelector} from '../../custom-hooks/reduxCustomHooks';
-import {AppContext} from '../../contexts/AppContext';
+import { getSources } from '../../redux/source-config/sourcesThunk';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { AppContext } from '../../contexts/AppContext';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 
 export const SourcesTable = () => {
+  const [current, setCurrent] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { sources, loading } = useAppSelector((state) => state.sources);
-  const {channelId} = useContext(AppContext);
-  
+  const { channelId } = useContext(AppContext);
+
   useEffect(() => {
     dispatch(getSources());
   }, [getSources, channelId]);
-  
+
   const columns = [
     {
       title: t('SourceTable.Provider'),
@@ -79,7 +80,14 @@ export const SourcesTable = () => {
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
-        <DataTable columns={columns} dataSource={sources} />
+        <DataTable
+          columns={columns}
+          dataSource={sources}
+          pageSize={6}
+          current={current}
+          onChange={setCurrent}
+          total={sources?.length}
+        />
       </div>
     </Layout>
   );
