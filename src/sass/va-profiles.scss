@@ -27,13 +27,9 @@
         width: 60% !important;
       }
 
-      .btn {
-        background: $light-primary;
-        color: $primary-bg;
-        border-radius: 10px;
+      .confirm-btn {
         margin-top: 1rem;
-        width: 25% !important;
-        min-width: 100px;
+        width: 30% !important;
 
         &:hover {
           background: $light-primary;

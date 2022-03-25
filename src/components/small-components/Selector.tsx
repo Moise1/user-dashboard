@@ -23,11 +23,15 @@ const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 export const Selector: React.FC<Props> = (props: Props) => {
   const { children, defaultValue, onChange, dropdownRender, loading, style, size } = props;
-  const options = children.map((c) => (
-    <Option key={c.id} value={c.value}>
-      {c.value}
-    </Option>
-  ));
+  const options = children?.map((c) => {
+    for (const key in c) {
+      return (
+        <Option key={c.id} value={c.value ||c[key]}>
+          {c.value || c[key]}
+        </Option>
+      );
+    }
+  });
 
   return (
     <Select

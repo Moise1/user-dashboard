@@ -11,8 +11,13 @@ export interface SourceConfig {
   [key: string]: string | number;
 }
 
+export interface ShippingOption{
+  [key: string]: string;
+}
 const initialState = {
   sources: [] as SourceConfig[],
+  templateList: [],
+  shippingOptions: [] as ShippingOption[],
   loading: false,
   error: ''
 };
@@ -28,7 +33,9 @@ export const sourceSlice = createSlice({
     });
     builder.addCase(getSources.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.sources = payload;
+      state.sources = payload?.configuration;
+      state.templateList = payload?.templateList;
+      state.shippingOptions = payload?.shippingOptions;
     });
     builder.addCase(getSources.rejected, (state, { payload }) => {
       state.loading = false;

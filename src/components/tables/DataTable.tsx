@@ -1,22 +1,11 @@
 import { ReactNode } from 'react';
-import { Table } from 'antd';
+import { Table, Pagination } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import {SourceConfig} from '../../redux/source-config/sourceSlice';
-
-type ListingsTypes = {
-  id: number;
-  img: JSX.Element;
-  itemNo: number;
-  title: JSX.Element;
-  sell: number;
-  cost: number;
-  markup: JSX.Element;
-  stock: JSX.Element;
-  created: Date;
-  options: JSX.Element;
-  checked: boolean;
-};
+import { SourceConfig } from '../../redux/source-config/sourceSlice';
+import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
+// import {ListingData} from '../../redux/listings/listingsSlice';
+import { ListingsItems } from '../common/ListingsData';
 
 type OrdersTypes = {
   id: number;
@@ -34,22 +23,9 @@ type OrdersTypes = {
   state: JSX.Element | string;
 };
 
-type sourcesTypes = {
-  id: number;
-  provider: string;
-  markup: number;
-  decreaseLimit: number;
-  template: string;
-  returnPolicy: string;
-  itemPostcode: string;
-  itemCity: string;
-  itemCountry: string;
-  shippingPolicy: string;
-  autoOrdering: string;
-};
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsTypes | OrdersTypes | Rule | SourceConfig| sourcesTypes>;
+  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -58,6 +34,10 @@ interface Props {
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
+  onChange?: React.Dispatch<React.SetStateAction<number>>;
+  total?: number;
+  current?: number;
+  pageSize?: number;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -70,8 +50,17 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     handleBulkListingModal,
     handleSingleListingModal,
     page,
-    showTableInfo
+    showTableInfo,
+    onChange,
+    total,
+    current,
+    pageSize
   } = props;
+
+  const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
+    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
+  };
+  
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -102,7 +91,14 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           </p>
         </div>
       )}
-      <Table className="table" columns={columns} dataSource={dataSource} rowSelection={rowSelection} />
+      <Table
+        className="table"
+        columns={columns}
+        dataSource={getData(current, pageSize)}
+        rowSelection={rowSelection}
+        pagination={false}
+      />
+      <Pagination onChange={onChange} total={total} current={current} pageSize={pageSize} />
     </div>
   );
 };
