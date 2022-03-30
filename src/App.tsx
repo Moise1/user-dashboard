@@ -23,7 +23,8 @@ import {
   Catalog,
   SourcesTable,
   Dashboard,
-  SourcesSettings
+  SourcesSettings,
+  Templates
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -97,6 +98,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/va-profiles" component={VaProfiles} />
             <ProtectedRoute path="/get-started" component={GetStarted} />
             <ProtectedRoute path="/catalog" component={Catalog} />
+            <ProtectedRoute path="/templates" component={Templates}/>
           </Switch>
         </Layout>
       </Layout>

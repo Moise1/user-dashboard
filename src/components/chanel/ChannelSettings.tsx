@@ -8,15 +8,13 @@ import { ChannelListing } from '../small-components/ChannelListing';
 import { ChannelBusiness } from '../small-components/ChannelBusiness';
 import { ChannelOther } from '../small-components/ChannelOther';
 import { SuccessBtn, ResetBtn } from '../small-components/ActionBtns';
-import {useAppDispatch, useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+import {useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
 import { getChannels } from 'src/redux/channels/channelsThunk';
 import '../../sass/channel-settings.scss';
 
 export const ChannelSettings = () => {
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const {channels} = useAppSelector((state) => state.channels);
-  console.log('CHANNELS FETCH==>', channels);
   const dispatch = useAppDispatch();
 
   useEffect(()=>{

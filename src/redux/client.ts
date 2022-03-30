@@ -1,29 +1,30 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { toastAlert } from 'src/utils/toastAlert';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 const localhostUrl = 'http://localhost:3000';
 const productionUrl = 'https://dev-app.hustlegotreal.com';
 const url = process.env.NODE_ENV === 'production' ? productionUrl : localhostUrl;
 
 export const client = axios.create({
   baseURL: `${url}/Api`,
-  validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500,
+  validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
 });
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
-    const channelId = localStorage.getItem('channelId');
-    req.headers = {
-      channel: channelId!,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Expose-Headers': '*',
-      ...req.headers
-    };
+    const channelId =  localStorage.getItem('channelId');
+    if (channelId) {
+      req.headers = {
+        channel: await JSON.parse(channelId),
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        ...req.headers
+      };
+    }
     return req;
   },
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
@@ -9,7 +9,8 @@ import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../user/DeleteAccount';
-import {useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
+import {getNotifications} from '../../redux/notifications/notificationsThunk';
 import '../../sass/top-bar.scss';
 
 interface Props extends RouteComponentProps {
@@ -18,11 +19,13 @@ interface Props extends RouteComponentProps {
 
 export const Topbar = withRouter((props: Props) =>{
   const { handleSidebarMobile, history } = props;
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
   const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user || {});
+  const {notifications} = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
 
@@ -42,6 +45,11 @@ export const Topbar = withRouter((props: Props) =>{
     }
   };
 
+  useEffect(() =>{
+    dispatch(getNotifications());
+  },[getNotifications]);
+
+  
   return (
     <div className="top-bar">
       <PopupModal open={openDeleteModal}>
@@ -99,7 +107,7 @@ export const Topbar = withRouter((props: Props) =>{
       </div>
       <div className="top-bar-item">
         <div onClick={handleDeleteModal} className="notifications-container">
-          <Badge count={2} className="notifications">
+          <Badge count={notifications.length} className="notifications">
             <img src={bell} alt="" />
           </Badge>
         </div>

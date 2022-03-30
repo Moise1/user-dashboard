@@ -4,7 +4,6 @@ import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
-// import {ListingData} from '../../redux/listings/listingsSlice';
 import { ListingsItems } from '../common/ListingsData';
 
 type OrdersTypes = {
