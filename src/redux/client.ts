@@ -11,6 +11,7 @@ export const client = axios.create({
   baseURL: `${url}/Api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
 });
+
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const token = localStorage.getItem('Authorization');
@@ -23,7 +24,6 @@ client.interceptors.request.use(
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Access-Control-Expose-Headers': '*',
-
         ...req.headers
       };
     }
