@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext} from 'react';
 import { Form, Input, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getRules } from 'src/redux/pricing-rules/rulesThunk';
@@ -8,7 +8,7 @@ import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn } from '../small-components/ActionBtns';
-// import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '../../contexts/AppContext';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import '../../sass/pricing-rules.scss';
 
@@ -18,7 +18,7 @@ export const PricingRules = () => {
   const [current, setCurrent] = useState<number>(1);
   const { rules } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
-  // const { channelId } = useContext(AppContext);
+  const { channelId } = useContext(AppContext);
 
   useEffect(() => {
     dispatch(getSources());
@@ -26,7 +26,7 @@ export const PricingRules = () => {
 
   useEffect(() => {
     dispatch(getRules());
-  }, [getRules]);
+  }, [getRules, channelId]);
 
   const columns = [
     {

@@ -7,7 +7,6 @@ export const Dashboard = () => {
   useEffect(() => { 
     localStorage.setItem('channelId', JSON.stringify(channelId));
   }, [channelId]);
-
   return (
     <div>Dashboard</div>
   );
