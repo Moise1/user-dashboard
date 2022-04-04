@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userLogin, userRegister } from './userThunk';
-// import {Channel} from '../channels/channelsSlice';
 export interface UserData {
-  email?: string;
-  passowrd?: string;
-  rememberMe?: boolean;
+  email: string;
+  password: string;
   name?: string;
   confirmPassword?: string;
   terms?: boolean;
@@ -37,6 +35,9 @@ const initialState = {
   error: ''
 };
 
+//   const reqOptions = {
+  
+// };
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -54,7 +55,6 @@ export const userSlice = createSlice({
       state.user = payload;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
-      console.log('ERROR PAYLOAD', payload);
       state.loading = false;
       state.error = String(payload);
     });

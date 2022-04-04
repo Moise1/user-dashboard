@@ -97,7 +97,7 @@ export const Sidebar = (props: Props) => {
     {listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
     {listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
     {listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    {listName: t('Menu.Templates') },
+    {listName: t('Menu.Templates'),  onClick: () => routeChange('/templates')},
     {
       listName: (
         <>

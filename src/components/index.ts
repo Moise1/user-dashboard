@@ -16,3 +16,4 @@ export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
 export {SourcesTable} from './sources/SourcesTable';
 export { Dashboard } from './dashboard/Dashboard';
+export {Templates} from './templates/Templates';

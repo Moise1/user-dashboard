@@ -6,6 +6,9 @@ import {userReducer} from '../user/userSlice';
 import {sourcesConfigReducer} from '../source-config/sourceSlice';
 import {channelsReducer} from '../channels/channelsSlice';
 import {listingsReducer} from '../listings/listingsSlice';
+import {notificationsReducer} from '../notifications/notificationsSlice';
+import { templatesReducer } from '../templates/templatesSlice';
+import { catalogProductsReducer } from '../catalog/catalogSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -14,6 +17,9 @@ export const allReducers = combineReducers({
   vaProfiles: userAssistantsReducer,
   sources: sourcesConfigReducer,
   channels: channelsReducer,
-  listings: listingsReducer
+  listings: listingsReducer,
+  notifications: notificationsReducer,
+  templates: templatesReducer,
+  catalogProducts: catalogProductsReducer,
 });
 

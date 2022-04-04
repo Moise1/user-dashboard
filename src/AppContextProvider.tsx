@@ -6,29 +6,23 @@ interface Props {
 }
 export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
-  const [channelId, setChannelId] = useState<string|null>(initialAppContext.channelId);
   
-  
-
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
-    const savedChannelId = localStorage.getItem('channelId');
-    if (savedTheme && savedChannelId) {
+    if (savedTheme) {
       setTheme(savedTheme);
-      setChannelId(savedChannelId);
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('globalTheme', theme);
-    localStorage.setItem('channelId', channelId!);
-  }, [theme, channelId]);
+  }, [theme]);
 
 
 
   return (
     <AppContext.Provider 
-      value={{ theme, setTheme, channelId, setChannelId }}
+      value={{ theme, setTheme}}
     >
       <div data-theme={theme} className="theme-provider">
         {children}
