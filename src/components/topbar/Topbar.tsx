@@ -26,7 +26,7 @@ export const Topbar = withRouter((props: Props) =>{
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
-  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user);
+  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user || {});
   const {notifications} = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
