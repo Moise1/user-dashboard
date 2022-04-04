@@ -1,4 +1,4 @@
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Input } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
@@ -42,9 +42,9 @@ export const UserLogin = withRouter(({ history }) => {
           <Input.Password className="auth-input"  />
         </Form.Item>
 
-        <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>
+        {/* <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>
           <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item className="alternative" wrapperCol={{ offset: 6, span: 14 }}>
           No account?{' '}
           <span>

@@ -8,6 +8,7 @@ import {channelsReducer} from '../channels/channelsSlice';
 import {listingsReducer} from '../listings/listingsSlice';
 import {notificationsReducer} from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
+import { catalogProductsReducer } from '../catalog/catalogSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -18,6 +19,7 @@ export const allReducers = combineReducers({
   channels: channelsReducer,
   listings: listingsReducer,
   notifications: notificationsReducer,
-  templates: templatesReducer
+  templates: templatesReducer,
+  catalogProducts: catalogProductsReducer,
 });
 

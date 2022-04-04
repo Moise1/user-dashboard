@@ -31,7 +31,7 @@ export const notificationsSlice = createSlice({
     });
     builder.addCase(getNotifications.fulfilled, (state, { payload })=>{
       state.loading = false;
-      state.notifications = payload.noApiDisconnected;
+      state.notifications = payload?.noApiDisconnected;
     });
     builder.addCase(getNotifications.rejected, (state, { payload })=>{
       state.loading = false;

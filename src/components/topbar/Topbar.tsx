@@ -107,7 +107,7 @@ export const Topbar = withRouter((props: Props) =>{
       </div>
       <div className="top-bar-item">
         <div onClick={handleDeleteModal} className="notifications-container">
-          <Badge count={notifications.length} className="notifications">
+          <Badge count={notifications?.length} className="notifications">
             <img src={bell} alt="" />
           </Badge>
         </div>

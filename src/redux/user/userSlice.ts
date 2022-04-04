@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userLogin, userRegister } from './userThunk';
 export interface UserData {
-  email?: string;
-  passowrd?: string;
-  rememberMe?: boolean;
+  email: string;
+  password: string;
   name?: string;
   confirmPassword?: string;
   terms?: boolean;
@@ -36,6 +35,9 @@ const initialState = {
   error: ''
 };
 
+//   const reqOptions = {
+  
+// };
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
