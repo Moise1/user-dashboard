@@ -1,0 +1,11 @@
+@import 'general.config';
+
+// large ad extra large screens.
+
+.dashboard {
+  border: 2px solid green;
+  .auto-ordering-section{
+      display: flex;
+      justify-content: space-between;
+  }
+}

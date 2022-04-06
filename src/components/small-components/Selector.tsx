@@ -26,7 +26,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
   const options = children?.map((c) => {
     for (const key in c) {
       return (
-        <Option key={c.id} value={c.value ||c[key]}>
+        <Option key={c.id} value={c.value || c[key]}>
           {c.value || c[key]}
         </Option>
       );

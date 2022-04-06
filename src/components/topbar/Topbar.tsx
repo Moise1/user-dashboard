@@ -12,7 +12,6 @@ import { DeleteAccount } from '../user/DeleteAccount';
 import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
 import {getNotifications} from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
-
 import '../../sass/top-bar.scss';
 
 interface Props extends RouteComponentProps {

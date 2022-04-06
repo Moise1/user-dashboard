@@ -12,8 +12,7 @@ export const client = axios.create({
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
     const channelId = localStorage.getItem('channelId');
-    // const token = localStorage.getItem('Authorization');
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJjZTJlYjcyNi03OGYzLTRiZjEtYTAxYS1lN2ViNWMxNTMwMTUiLCJ1bmlxdWVfbmFtZSI6InRlc3RpbmdAaHVzdGxlZ290cmVhbC5jb20iLCJlbWFpbCI6InRlc3RpbmdAaHVzdGxlZ290cmVhbC5jb20iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkFBR0g1VDNBWFZUN0VKRDJPR1dCVTQ0QlVBQU5QUzMyIiwicm9sZSI6WyJFYmF5Tm9BcGlCZXRhIiwiU2hvcGlmeUJldGEiXSwiYW1yIjoicHdkIiwibmJmIjoxNjQ5MDU4NDYzLCJleHAiOjE2NDkxNDQ4NjMsImlhdCI6MTY0OTA1ODQ2M30.rO7X7sAaOOUfCaogQlREWj8rcQJhFRzOhzn-rRJDj0k';
+    const token = localStorage.getItem('Authorization');
     if (token) {
       req.headers = {
         Authorization: `Bearer ${token}`,
