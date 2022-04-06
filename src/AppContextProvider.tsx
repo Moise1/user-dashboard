@@ -2,28 +2,30 @@ import { useState, useEffect } from 'react';
 import { AppContext, initialAppContext } from './contexts/AppContext';
 import './sass/index.scss';
 interface Props {
-    children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
-  
+  const [channelId, setChannelId] = useState<string>(initialAppContext.channelId);
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
+    const savedChannelId = localStorage.getItem('channelId');
     if (savedTheme) {
       setTheme(savedTheme);
+    }
+    if (savedChannelId) {
+      setChannelId(savedChannelId);
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('globalTheme', theme);
-  }, [theme]);
-
-
+    localStorage.setItem('channelId', channelId);
+  }, [theme, channelId]);
 
   return (
-    <AppContext.Provider 
-      value={{ theme, setTheme}}
-    >
+    <AppContext.Provider value={{ theme, setTheme, channelId, setChannelId }}>
       <div data-theme={theme} className="theme-provider">
         {children}
       </div>

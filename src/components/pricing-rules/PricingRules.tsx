@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Form, Input, Spin } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getRules } from 'src/redux/pricing-rules/rulesThunk';
+import { getRules, createRule } from '../../redux/pricing-rules/rulesThunk';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn } from '../small-components/ActionBtns';
-// import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '../../contexts/AppContext';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
+import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import '../../sass/pricing-rules.scss';
 
 export const PricingRules = () => {
   const { Item } = Form;
   const dispatch = useAppDispatch();
   const [current, setCurrent] = useState<number>(1);
-  const { rules } = useAppSelector((state) => state.pricingRules);
+  const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
-  // const { channelId } = useContext(AppContext);
+  const { channelId } = useContext(AppContext);
 
   useEffect(() => {
     dispatch(getSources());
@@ -26,7 +27,16 @@ export const PricingRules = () => {
 
   useEffect(() => {
     dispatch(getRules());
-  }, [getRules]);
+  }, [getRules, channelId]);
+
+  const onFinish = async(values: Rule) => {
+    const source = sources.filter((s: SourceConfig) => s.sourceName === values.sourceId);
+    await dispatch(createRule({
+      ...values,
+      sourceId: source[0].sourceId
+    }));
+    dispatch(getRules());
+  };
 
   const columns = [
     {
@@ -73,23 +83,23 @@ export const PricingRules = () => {
               enabling it.
             </p>
           </div>
-          <Form className="form" layout="vertical">
-            <Item label="Source">
+          <Form className="form" layout="vertical" onFinish={onFinish}>
+            <Item label="Source" name="sourceId">
               <Selector defaultValue="Select a source" loading={sourcesLoading}>
                 {sources?.map(({ sourceName: value, sourceId: id }: SourceConfig) => ({ value, id }))}
               </Selector>
             </Item>
-            <Item label="Price From">
+            <Item label="Price From" name="priceFrom">
               <Input className="blue-input" type="text" placeholder="Set a price from" />
             </Item>
-            <Item label="Price To">
+            <Item label="Price To" name="priceTo">
               <Input className="blue-input" type="text" placeholder="Set a price to" />
             </Item>
-            <Item label="Markup">
+            <Item label="Markup" name="markup">
               <Input className="blue-input" type="text" placeholder="Mark up" />
             </Item>
             <Item>
-              <ConfirmBtn>Add rule</ConfirmBtn>
+              <ConfirmBtn htmlType="submit">{rulesLoading ? 'Please wait...' : 'Add rule'}</ConfirmBtn>
             </Item>
           </Form>
         </StatusBar>
