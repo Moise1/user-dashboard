@@ -47,7 +47,7 @@ export const Orders = () => {
     <Layout className="orders-container">
       <TableActionBtns />
       <OrderActionBtns orderNumber={orderNumber} />
-      <DataTable columns={columns} dataSource={orderData} page="order" />
+      <DataTable columns={columns} dataSource={orderData} page="order" pageSize={10} />
     </Layout>
   );
 };

@@ -11,7 +11,6 @@ function OrdersDropdown() {
         <Dropdown.Toggle id="dropdown-basic">
           <ThreeDotsColumnIcon />
         </Dropdown.Toggle>
-
         <Dropdown.Menu className="dropdown-box">
           <Dropdown.Item className="dropdown-item">
             <ProcessOrderIcon />

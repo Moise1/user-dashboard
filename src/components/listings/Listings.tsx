@@ -233,6 +233,7 @@ export const Listings = () => {
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={0}
+        pageSize={10}
         showTableInfo
       />
     </Layout>
