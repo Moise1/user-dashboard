@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Layout } from 'antd';
+import { Col, Layout, Row } from 'antd';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { ConfirmBtn } from '../small-components/ActionBtns';
@@ -38,6 +38,14 @@ export const Dashboard = () => {
           </p>
         </div>
       </div>
+
+      <Row>
+        <h1>General</h1>
+        <Col>
+          <h6>Products</h6>
+        </Col>
+        <Col></Col>
+      </Row>
     </Layout>
   );
 };

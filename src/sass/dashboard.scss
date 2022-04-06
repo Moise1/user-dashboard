@@ -5,7 +5,12 @@
 .dashboard {
   border: 2px solid green;
   .auto-ordering-section{
+      margin-top: 2rem;
+      padding: 2rem;
       display: flex;
       justify-content: space-between;
-  }
+      background: $corporative-color-dark;
+  };
+
+  
 }
