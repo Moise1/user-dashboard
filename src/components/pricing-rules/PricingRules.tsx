@@ -22,6 +22,7 @@ export const PricingRules = () => {
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
   const { channelId } = useContext(AppContext);
   const [dataSource, setDataSource] = useState(rules);
+  // const [active, setActive] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(getSources());
@@ -44,6 +45,18 @@ export const PricingRules = () => {
 
   const removeRecord = (id: Rule['id']) => {
     setDataSource(dataSource.filter((item: Rule) => item.id !== id));
+  };
+
+  const updateStatus = (id: Rule['id']) => {
+    setDataSource((prevState: Rule[]) => prevState.map((r: Rule) => {
+      if(r.id === id){
+        return {
+          ...r,
+          active: !r.active
+        };
+      }
+      return r;
+    }));
   };
 
   const columns = [
@@ -71,11 +84,15 @@ export const PricingRules = () => {
       title: 'Status',
       dataIndex: 'active',
       key: 'active',
-      render: (value: boolean) =>
+      render: (value: boolean, record: Rule) =>
         value ? (
-          <TransparentBtn className="status-btn enabled">Enabled</TransparentBtn>
+          <TransparentBtn className="status-btn enabled" handleClick={() => updateStatus(record.id)}>
+            Enabled
+          </TransparentBtn>
         ) : (
-          <TransparentBtn className="status-btn disabled">Disabled</TransparentBtn>
+          <TransparentBtn className="status-btn disabled" handleClick={() => updateStatus(record.id)}>
+            Disabled
+          </TransparentBtn>
         )
     },
 
