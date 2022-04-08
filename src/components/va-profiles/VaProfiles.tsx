@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Row, Col, Card, Input, Form, Layout, Spin } from 'antd';
+import { Row, Col, Card, Input, Form, Layout, Spin, Popconfirm } from 'antd';
 import { DataTable } from '../tables/DataTable';
 import { ConfirmBtn } from '../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getUserAssistants, createUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
+import { X as CloseIcon } from 'react-feather';
+
 import '../../sass/va-profiles.scss';
 
 
@@ -12,8 +14,8 @@ import '../../sass/va-profiles.scss';
 export const VaProfiles = () => {
   const dispatch = useAppDispatch();
   const [current, setCurrent] = useState<number>(1);
-
   const { userAssistants, loading } = useAppSelector((state) => state.vaProfiles);
+  const [dataSource, setDataSource] = useState(userAssistants);
 
   useEffect(() => {
     dispatch(getUserAssistants());
@@ -23,7 +25,9 @@ export const VaProfiles = () => {
     await dispatch(createUserAssistant({ name: values }));
     dispatch(getUserAssistants());
   };
-
+  const removeRecord = (id: UserAssistant['id']) => {
+    setDataSource(dataSource.filter((item: UserAssistant) => item.id !== id));
+  };
   const columns = [
     {
       title: 'Name',
@@ -35,6 +39,18 @@ export const VaProfiles = () => {
       dataIndex: 'active',
       key: 'active',
       render: (value: boolean) => value ? 'Active' : 'Inactive'
+    },
+    {
+      title: 'Delete',
+      dataIndex: '',
+      key: '',
+      render: (record: UserAssistant) => {
+        return (
+          <Popconfirm title="Sure to delete this record?" onConfirm={() => removeRecord(record.id)}>
+            <CloseIcon className="remove-rule" />
+          </Popconfirm>
+        );
+      }
     }
   ];
 
@@ -47,7 +63,7 @@ export const VaProfiles = () => {
         <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
           <Col xs={24} xl={8} md={12} className="table-container">
             <DataTable 
-              dataSource={userAssistants} 
+              dataSource={dataSource} 
               columns={columns} 
               pageSize={4}
               current={current}
