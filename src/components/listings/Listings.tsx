@@ -1,6 +1,4 @@
-import React, { useState, useMemo,
-  //  useEffect
-} from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
@@ -17,8 +15,8 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
-// import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
-// import { getListings } from 'src/redux/listings/listingsThunk';
+import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { getListings } from 'src/redux/listings/listingsThunk';
 
 import '../../sass/listings.scss';
 
@@ -29,12 +27,15 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
-  // const {listings} = useAppSelector((state) => state.listings);
-  // const dispatch = useAppDispatch();
+  const { listings } = useAppSelector((state) => state.listings);
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getListings('00000000-0000-0000-0000-000000000000'));
-  // }, [getListings]);
+  console.log({ listings });
+  console.log({ listingsData });
+
+  useEffect(() => {
+    dispatch(getListings());
+  }, [getListings]);
 
   const tableColumns = [
     {
@@ -235,6 +236,7 @@ export const Listings = () => {
         totalItems={0}
         pageSize={10}
         showTableInfo
+        listings={listings}
       />
     </Layout>
   );

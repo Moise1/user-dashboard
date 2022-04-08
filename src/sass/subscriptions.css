@@ -1,0 +1,538 @@
+@use 'general.config';
+:root {
+  --corporative-color: #262e80;
+  --primary-bg: #fff;
+  --secondary-bg: #f2f8ff;
+  --primary-txt: black;
+}
+
+[data-theme='dark'] {
+  --corporative-color: #ffffff;
+  --primary-bg: #262843;
+  --secondary-bg: linear-gradient(140deg, #252745 0%, #1b1b31 100%);
+  --primary-txt: white;
+}
+
+a {
+  font-size: 1rem;
+  color: var(--corporative-color);
+  font-weight: 700;
+}
+
+a:hover {
+  color: #fdcf00;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+p {
+  font-size: 0.75rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #5e69db !important;
+  border-color: #5e69db !important;
+}
+
+.redirect-link,
+.back-link,
+.alternative-link {
+  width: 100%;
+  color: var(--corporative-color);
+}
+
+.redirect-link:hover,
+.back-link:hover,
+.alternative-link:hover {
+  color: var(--corporative-color);
+}
+
+.blue-input {
+  background: var(--secondary-bg);
+  border-radius: 10px;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.blue-input:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background: var(--secondary-bg);
+}
+
+.auth-input {
+  background: transparent;
+  border-radius: 10px;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.auth-input:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background: transparent;
+}
+
+.chevron-right,
+.chevron-left {
+  margin-top: 0.25rem !important;
+  background: #5e84db;
+  color: var(--primary-bg);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary-btn {
+  margin: 1rem 0;
+  background: #262e80;
+  border-radius: 8px;
+  color: var(--primary-bg);
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.primary-btn:hover {
+  background: #262e80;
+  color: var(--primary-bg);
+}
+
+.secondary-btn {
+  margin: 1rem 0;
+  background: #777;
+  border-radius: 8px;
+  color: var(--primary-bg);
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.secondary-btn:hover {
+  background: #777;
+  color: var(--primary-bg);
+}
+
+.disabled-btn {
+  margin: 1rem 0;
+  border-radius: 8px;
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  cursor: auto !important;
+  opacity: 0.3;
+}
+
+:root {
+  --corporative-color: #262e80;
+  --primary-bg: #fff;
+  --secondary-bg: #f2f8ff;
+  --primary-txt: black;
+}
+
+[data-theme='dark'] {
+  --corporative-color: #ffffff;
+  --primary-bg: #262843;
+  --secondary-bg: linear-gradient(140deg, #252745 0%, #1b1b31 100%);
+  --primary-txt: white;
+}
+
+a {
+  font-size: 1rem;
+  color: var(--corporative-color);
+  font-weight: 700;
+}
+
+a:hover {
+  color: #fdcf00;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+p {
+  font-size: 0.75rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #5e69db !important;
+  border-color: #5e69db !important;
+}
+
+.redirect-link,
+.back-link,
+.alternative-link {
+  width: 100%;
+  color: var(--corporative-color);
+}
+
+.redirect-link:hover,
+.back-link:hover,
+.alternative-link:hover {
+  color: var(--corporative-color);
+}
+
+.blue-input {
+  background: var(--secondary-bg);
+  border-radius: 10px;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.blue-input:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background: var(--secondary-bg);
+}
+
+.auth-input {
+  background: transparent;
+  border-radius: 10px;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.auth-input:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  background: transparent;
+}
+
+.chevron-right,
+.chevron-left {
+  margin-top: 0.25rem !important;
+  background: #5e84db;
+  color: var(--primary-bg);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary-btn {
+  margin: 1rem 0;
+  background: #262e80;
+  border-radius: 8px;
+  color: var(--primary-bg);
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.primary-btn:hover {
+  background: #262e80;
+  color: var(--primary-bg);
+}
+
+.secondary-btn {
+  margin: 1rem 0;
+  background: #777;
+  border-radius: 8px;
+  color: var(--primary-bg);
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.secondary-btn:hover {
+  background: #777;
+  color: var(--primary-bg);
+}
+
+.disabled-btn {
+  margin: 1rem 0;
+  border-radius: 8px;
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  cursor: auto !important;
+  opacity: 0.3;
+}
+
+@media only screen and (max-width: 750px) {
+  :root p {
+    font-size: 0.5rem;
+  }
+  :root h1 {
+    font-size: 1.1rem;
+  }
+  :root h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  :root h3 {
+    font-size: 0.9rem;
+  }
+  :root h4 {
+    font-size: 0.7rem;
+  }
+  :root a {
+    font-size: 0.7rem;
+  }
+}
+
+.ant-spin-spinning {
+  margin-top: 20%;
+}
+
+.carousel-container {
+  display: block;
+  width: 100%;
+}
+
+.carousel-container .subscriptions-detail {
+  font-weight: bold;
+}
+
+.carousel-container .subscriptions-limit,
+.carousel-container .subscriptions-items {
+  color: var(--corporative-color);
+}
+
+.carousel-container .subscriptions-limit span,
+.carousel-container .subscriptions-items span {
+  background: var(--secondary-bg);
+  color: #5e84db;
+  margin-left: 1rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
+}
+
+.carousel-container .rate-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.carousel-container .subscription-cancel {
+  color: var(--primary-txt);
+  background: var(--secondary-bg);
+  border-radius: 5px;
+  font-weight: bold;
+  width: auto;
+}
+
+.carousel-container .subscription-cancel:hover {
+  color: var(--primary-txt);
+}
+
+.carousel-container .currencies-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 15%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  -webkit-column-gap: 1rem;
+          column-gap: 1rem;
+}
+
+.carousel-container .currencies-container .active-currency {
+  margin: 1rem 0;
+  background: #262e80;
+  border-radius: 8px;
+  color: var(--primary-bg);
+  border-radius: 8px;
+  outline: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.carousel-container .currencies-container .active-currency:hover {
+  background: #262e80;
+  color: var(--primary-bg);
+}
+
+.carousel-container .carousel {
+  display: -ms-grid;
+  display: grid;
+  position: absolute;
+  height: auto;
+  margin: 2rem 13rem;
+  padding: 0 !important;
+  width: auto;
+}
+
+.carousel-container .carousel .subscription {
+  background: var(--primary-bg);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  padding: 0.3rem 0.3rem;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  width: 89% !important;
+}
+
+.carousel-container .carousel .subscription .discount {
+  width: 100%;
+  position: relative;
+}
+
+.carousel-container .carousel .subscription .discount .twenty-off,
+.carousel-container .carousel .subscription .discount .forty-off {
+  position: absolute;
+  right: 0;
+  padding: 0 3px;
+  background: #f0f0f0;
+  font-weight: bold;
+  border-radius: 5px;
+  color: #228b22;
+}
+
+.carousel-container .carousel .subscription .discount .euro {
+  left: 28%;
+  bottom: 53%;
+  color: var(--primary-txt);
+  opacity: 0.56;
+}
+
+.carousel-container .carousel .subscription .discount .frequency {
+  bottom: 30%;
+  right: 25%;
+  font-size: 0.75rem;
+}
+
+.carousel-container .carousel .subscription .divider {
+  width: 100% !important;
+}
+
+.carousel-container .carousel .subscription .monthly-rate {
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+.carousel-container .carousel .subscription .listings-count {
+  margin-bottom: 1rem;
+  text-align: center;
+  background: #5e84db;
+  color: var(--primary-bg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.4em;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.carousel-container .control-btns-container {
+  width: 75%;
+  left: 14.5%;
+  top: 60%;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.carousel-container .duration {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+@media only screen and (max-width: 750px) {
+  .subscriptions-container .ant-spin-spinning {
+    margin-top: 90%;
+  }
+  .subscriptions-container .status-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    place-items: center;
+  }
+  .subscriptions-container .slick-slide.slick-active.slick-current {
+    margin: 0 auto !important;
+  }
+  .subscriptions-container .slick-slide.slick-active.slick-current .subscription {
+    padding-bottom: 1rem !important;
+    width: 100% !important;
+  }
+  .subscriptions-container .control-btns-container {
+    top: 75%;
+    left: 10%;
+    width: 82%;
+  }
+  .subscriptions-container .slick-list {
+    width: 60vw !important;
+    margin-left: -9rem !important;
+  }
+  .subscriptions-container .twenty-off,
+  .subscriptions-container .forty-off {
+    margin-top: -20px;
+  }
+  .subscriptions-container .frequency {
+    right: 10%;
+  }
+}
+/*# sourceMappingURL=subscriptions.css.map */

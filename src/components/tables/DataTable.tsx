@@ -37,6 +37,7 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  listings?: string;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -53,13 +54,14 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     onChange,
     total,
     current,
-    pageSize
+    pageSize,
+    listings
   } = props;
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
-  
+  console.log(listings);
   return (
     <div className="data-table">
       {showTableInfo && (

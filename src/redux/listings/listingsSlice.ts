@@ -26,7 +26,7 @@ export interface ListingData {
 }
 
 const initialState = {
-  listings: {} as ListingData,
+  listings: [] as ListingData[],
   loading: false,
   error: ''
 };
@@ -38,14 +38,19 @@ export const listingsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(getListings.pending, (state)=>{
+      console.log({t:'pending',state});
+
       state.loading = true;
       state.error = '';
     });
     builder.addCase(getListings.fulfilled, (state, { payload })=>{
+      console.log({payload,state});
       state.loading = false;
       state.listings = payload;
     });
     builder.addCase(getListings.rejected, (state, { payload })=>{
+      console.log({payload,state});
+
       state.loading = false;
       state.error = String(payload);
     });

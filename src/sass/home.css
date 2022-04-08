@@ -1,0 +1,18 @@
+@media only screen and (min-width: 1224px) {
+  .home-container .phone-search-bar {
+    display: none;
+  }
+  .home-container .web-search-bar {
+    margin: 20px 0;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .home-container .phone-search-bar {
+    display: none;
+  }
+  .home-container .web-search-bar {
+    margin: 20px 0;
+  }
+}
+/*# sourceMappingURL=home.css.map */

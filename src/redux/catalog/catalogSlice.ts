@@ -35,6 +35,7 @@ export const catalogSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getCatalogProducts.fulfilled, (state, { payload })=>{
+      console.log({state, payload});
       state.loading = false;
       state.catalogProducts = payload;
     });
