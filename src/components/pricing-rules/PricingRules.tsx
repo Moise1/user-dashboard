@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Form, Input, Spin } from 'antd';
+import { Form, Input, Spin, Popconfirm } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getRules, createRule } from '../../redux/pricing-rules/rulesThunk';
 import { getSources } from '../../redux/source-config/sourcesThunk';
@@ -7,10 +7,11 @@ import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
-import { ConfirmBtn } from '../small-components/ActionBtns';
+import { ConfirmBtn, TransparentBtn } from '../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
+import { X as CloseIcon } from 'react-feather';
 import '../../sass/pricing-rules.scss';
 
 export const PricingRules = () => {
@@ -20,6 +21,7 @@ export const PricingRules = () => {
   const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
   const { channelId } = useContext(AppContext);
+  const [dataSource, setDataSource] = useState(rules);
 
   useEffect(() => {
     dispatch(getSources());
@@ -29,13 +31,19 @@ export const PricingRules = () => {
     dispatch(getRules());
   }, [getRules, channelId]);
 
-  const onFinish = async(values: Rule) => {
+  const onFinish = async (values: Rule) => {
     const source = sources.filter((s: SourceConfig) => s.sourceName === values.sourceId);
-    await dispatch(createRule({
-      ...values,
-      sourceId: source[0].sourceId
-    }));
+    await dispatch(
+      createRule({
+        ...values,
+        sourceId: source[0].sourceId
+      })
+    );
     dispatch(getRules());
+  };
+
+  const removeRecord = (id: Rule['id']) => {
+    setDataSource(dataSource.filter((item: Rule) => item.id !== id));
   };
 
   const columns = [
@@ -62,13 +70,26 @@ export const PricingRules = () => {
     {
       title: 'Status',
       dataIndex: 'active',
-      key: 'active'
+      key: 'active',
+      render: (value: boolean) =>
+        value ? (
+          <TransparentBtn className="status-btn enabled">Enabled</TransparentBtn>
+        ) : (
+          <TransparentBtn className="status-btn disabled">Disabled</TransparentBtn>
+        )
     },
 
     {
-      title: '',
-      dataIndex: 'options',
-      key: 'options'
+      title: 'Delete',
+      dataIndex: '',
+      key: '',
+      render: (record: Rule) => {
+        return (
+          <Popconfirm title="Sure to delete this record?" onConfirm={() => removeRecord(record.id)}>
+            <CloseIcon className="remove-rule" />
+          </Popconfirm>
+        );
+      }
     }
   ];
 
@@ -99,7 +120,9 @@ export const PricingRules = () => {
               <Input className="blue-input" type="text" placeholder="Mark up" />
             </Item>
             <Item>
-              <ConfirmBtn htmlType="submit">{rulesLoading ? 'Please wait...' : 'Add rule'}</ConfirmBtn>
+              <ConfirmBtn htmlType="submit" disabled={rulesLoading}>
+                {rulesLoading ? 'Please wait...' : 'Add rule'}
+              </ConfirmBtn>
             </Item>
           </Form>
         </StatusBar>
@@ -107,7 +130,7 @@ export const PricingRules = () => {
           <Spin />
         ) : (
           <DataTable
-            dataSource={rules}
+            dataSource={dataSource}
             columns={columns}
             pageSize={4}
             current={current}

@@ -3,15 +3,27 @@
 
 // Extra large screens
 .status-btn {
-  border-radius: 18px;
+  border-radius: 30px;
+  border: 2px solid #ccc;
   display: block;
   padding: 0.2rem 1rem;
   width: auto;
 }
 
+.remove-rule {
+  cursor: pointer;
+  &:hover {
+    color: $red;
+  }
+}
+
 .enabled {
   color: $green;
 }
+.disabled {
+  color: $red;
+}
+
 .options {
   display: flex;
   justify-content: space-between;
