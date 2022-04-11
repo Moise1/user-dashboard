@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../small-components/TableActionBtns';
@@ -16,7 +17,7 @@ import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { getListings } from 'src/redux/listings/listingsThunk';
+import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk';
 
 import '../../sass/listings.scss';
 
@@ -31,11 +32,11 @@ export const Listings = () => {
   const dispatch = useAppDispatch();
 
   console.log({ listings });
-  console.log({ listingsData });
 
   useEffect(() => {
     dispatch(getListings());
-  }, [getListings]);
+    dispatch(getListingsSource());
+  }, [getListings, getListingsSource]);
 
   const tableColumns = [
     {
@@ -230,13 +231,13 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        dataSource={listingsData}
+        dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={0}
         pageSize={10}
-        showTableInfo
-        listings={listings}
+        showTableInfo={true}
+        current={1}
       />
     </Layout>
   );

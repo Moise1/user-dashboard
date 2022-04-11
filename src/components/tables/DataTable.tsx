@@ -4,7 +4,7 @@ import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
-import { ListingsItems } from '../common/ListingsData';
+import { ListingData } from 'src/redux/listings/listingsSlice';
 
 type OrdersTypes = {
   id: number;
@@ -24,7 +24,7 @@ type OrdersTypes = {
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant>;
+  dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -37,7 +37,6 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
-  listings?: string;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -54,14 +53,14 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     onChange,
     total,
     current,
-    pageSize,
-    listings
+    pageSize
   } = props;
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
-  console.log(listings);
+
+  console.log('The data source ', dataSource);
   return (
     <div className="data-table">
       {showTableInfo && (
