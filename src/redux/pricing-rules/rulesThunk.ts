@@ -3,6 +3,10 @@ import { toastAlert } from 'src/utils/toastAlert';
 import { client } from '../client';
 import {Rule} from './rulesSlice';
 
+interface RequestData{
+ id: Rule['id'];
+ active?: Rule['active']
+}
 export const getRules = createAsyncThunk(
   'rules/getRules', 
   async (_, thunkAPI) => {
@@ -31,9 +35,9 @@ export const createRule = createAsyncThunk(
   
 export const updateRule = createAsyncThunk(
   'rules/updateRule', 
-  async ({id, active}: {id:  Rule['id'], active: Rule['active']}, thunkAPI) => {
+  async (requestData: RequestData, thunkAPI) => {
     try {
-      const res = await client.put(`/Pricing/Update/${id}`, active);
+      const res = await client.put('/Pricing/Update/', requestData);
       if(res.status === 200) toastAlert('Rule updated sucessfully!', 'success');
       return res.data.response_data;
     } catch (error) {
@@ -43,9 +47,9 @@ export const updateRule = createAsyncThunk(
 
 export const deleteRule = createAsyncThunk(
   'rules/deleteRule', 
-  async (id: Rule['id'], thunkAPI) => {
+  async (ruleId: RequestData['id'], thunkAPI) => {
     try {
-      const res = await client.delete(`/Pricing/Delete/${id}`);
+      const res = await client.delete(`/Pricing/Delete/${ruleId}`);
       if(res.status === 200) toastAlert('Rule deleted sucessfully!', 'success');
       return res.data.response_data;
     } catch (error) {

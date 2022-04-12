@@ -48,7 +48,7 @@ export const rulesSlice = createSlice({
     });
     builder.addCase(createRule.fulfilled, (state, { payload })=>{
       state.loading = false;
-      state.ruleCreated = payload.success;
+      state.ruleCreated = payload?.success;
     });
     builder.addCase(createRule.rejected, (state, { payload })=>{
       state.loading = false;

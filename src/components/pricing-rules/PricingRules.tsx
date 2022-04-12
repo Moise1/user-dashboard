@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Form, Input, Spin, Popconfirm } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getRules, createRule } from '../../redux/pricing-rules/rulesThunk';
+import { getRules, createRule, deleteRule } from '../../redux/pricing-rules/rulesThunk';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { StatusBar } from '../small-components/StatusBar';
 import { Selector } from '../small-components/Selector';
@@ -21,7 +21,7 @@ export const PricingRules = () => {
   const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
   const { sources, loading: sourcesLoading } = useAppSelector((state) => state.sources);
   const { channelId } = useContext(AppContext);
-  const [dataSource, setDataSource] = useState(rules);
+  const [dataSource, setDataSource] = useState<Rule[]>(rules);
   // const [active, setActive] = useState<boolean>(true);
 
   useEffect(() => {
@@ -43,8 +43,11 @@ export const PricingRules = () => {
     dispatch(getRules());
   };
 
-  const removeRecord = (id: Rule['id']) => {
+  const removeRecord = async(id: Rule['id']) => {
+    const rule = dataSource.filter((item: Rule) => item.id === id)[0];
+    await dispatch(deleteRule(rule.id));
     setDataSource(dataSource.filter((item: Rule) => item.id !== id));
+    
   };
 
   const updateStatus = (id: Rule['id']) => {
@@ -152,7 +155,7 @@ export const PricingRules = () => {
             pageSize={4}
             current={current}
             onChange={setCurrent}
-            total={rules.length}
+            total={dataSource.length}
           />
         )}
       </div>

@@ -7,7 +7,7 @@ import '../../sass/selector.scss';
 
 interface Props {
   children: Array<DummyData | Rule | SourceConfig>;
-  defaultValue: string;
+  defaultValue?: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
   size?: sizeType;

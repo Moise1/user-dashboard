@@ -6,21 +6,17 @@ import { useAppSelector} from '../../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { Selector } from './Selector';
 import { AppContext } from '../../contexts/AppContext';
-// import { getChannels } from '../../redux/channels/channelsThunk';
 
 
 export const StoreList = () => {
   const { channels } = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
-  // const dispatch = useAppDispatch();
-
-  // useEffect(()=>{
-  //   dispatch(getChannels());
-  // }, [getChannels]);
-
+  const selectedChannel = localStorage.getItem('selectedChannnel');
+  
   const provideChannelId = (value: string) => {
     const selectedChannel = channels?.filter((c: Channel) => c.name === value);
     const channelId = selectedChannel[0].id;
+    localStorage.setItem('selectedChannnel', selectedChannel[0].name);
     setChannelId(JSON.stringify(channelId));
   };
 
@@ -28,7 +24,7 @@ export const StoreList = () => {
     <div className="store-list-container">
       <Selector
         size="large"
-        defaultValue="Select a store"
+        defaultValue={selectedChannel ? selectedChannel : 'Select a store'}
         onChange={provideChannelId}
         dropdownRender={(menu: ReactNode) => (
           <>
