@@ -3,8 +3,9 @@ import { Table, Pagination } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
-import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
+import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingsItems } from '../common/ListingsData';
+import { Channel } from '../../redux/channels/channelsSlice';
 
 type OrdersTypes = {
   id: number;
@@ -24,7 +25,7 @@ type OrdersTypes = {
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant>;
+  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
