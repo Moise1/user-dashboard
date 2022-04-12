@@ -41,13 +41,10 @@ export const getListingsSource = createAsyncThunk(
   async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
     try {
       const res = await client.get('/SearchProduct/GetActiveListings');
-
       var array = [];
-
       for (var x in res.data.response_data.sources) {
-        array.push(res.data.response_data.sources[x].name);
+        array.push(res.data.response_data.sources[x]);
       }
-      console.log('The array data is', array);
       return array;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):');

@@ -25,6 +25,7 @@ type OrdersTypes = {
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
+  // source: Array<getListingsSource | OrdersTypes | Rule | SourceConfig | UserAssistant>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -43,6 +44,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   const {
     columns,
     dataSource,
+    // source,
     rowSelection,
     selectedRows,
     totalItems,
@@ -59,6 +61,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
+
+  // const getSourceData = (current: Props['current'], pageSize: Props['pageSize']) => {
+  //   return source.slice((current! - 1) * pageSize!, current! * pageSize!);
+  // };
 
   console.log('The data source ', dataSource);
   return (
@@ -95,6 +101,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         className="table"
         columns={columns}
         dataSource={getData(current, pageSize)}
+        // source={getSourceData(current, pageSize)}
         rowSelection={rowSelection}
         pagination={false}
       />

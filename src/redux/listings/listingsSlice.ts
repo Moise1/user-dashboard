@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings } from './listingsThunk';
-
+import { getListings, getListingsSource } from './listingsThunk';
 export interface ListingData {
   id: number;
   channelOAuthId: number;
@@ -25,8 +24,36 @@ export interface ListingData {
   batchId: string;
 }
 
+// eslint-disable-next-line no-redeclare
+// export interface getListingsSource {
+//   id: number;
+//   baseUrl: string;
+//   name: string;
+//   site: string;
+//   visible: null;
+//   priority: null;
+//   description: null;
+//   recommended: false;
+//   allowedChannelFlags: null;
+//   compeliaCommission: null;
+//   compeliaSource: null;
+//   compeliaHidden: null;
+//   catalogAllowed: null;
+//   bulkAllowed: null;
+//   manualAllowed: null;
+//   recommendedByChannel: null;
+//   listingServiceAllowed: null;
+//   autoOrderingFee: null;
+// }
+
 const initialState = {
   listings: <unknown>[],
+  loading: false,
+  error: ''
+};
+
+const initialStatee = {
+  sourceListings: <unknown>[],
   loading: false,
   error: ''
 };
@@ -51,4 +78,26 @@ export const listingsSlice = createSlice({
   }
 });
 
+export const getListingsSourceSlice = createSlice({
+  name: 'sourceListings',
+  initialState: initialStatee,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getListingsSource.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      console.log({ mypayload: payload });
+      state.sourceListings = payload;
+    });
+    builder.addCase(getListingsSource.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const { reducer: listingsReducer } = listingsSlice;
+export const { reducer: listingsSourceReducer } = getListingsSourceSlice;

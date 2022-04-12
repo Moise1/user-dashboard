@@ -18,9 +18,7 @@ import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk';
-
 import '../../sass/listings.scss';
-
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
@@ -29,13 +27,21 @@ export const Listings = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
   const { listings } = useAppSelector((state) => state.listings);
+  const { listingSources } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   console.log({ listings });
+  console.log('the state', listingSources);
+
+  const [source, setSource] = useState([]);
 
   useEffect(() => {
     dispatch(getListings());
     dispatch(getListingsSource());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item);
+    setSource(t);
+    console.log('yes', t);
   }, [getListings, getListingsSource]);
 
   const tableColumns = [
@@ -231,6 +237,7 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
+        // source={source}
         dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
