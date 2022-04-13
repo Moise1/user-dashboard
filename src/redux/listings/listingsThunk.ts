@@ -11,6 +11,7 @@ export const getListings = createAsyncThunk(
       // console.log('calling listing api');
       const res = await client.get('/SearchProduct/GetActiveListings');
       const iter = unmap(res.data.response_data?.data as compArray);
+      // console.log(res.data.response_data);
       // console.log({ iter });
       // console.log({ t: res?.data?.response_data });
       const rv: ActiveListing[] = [];
@@ -27,7 +28,7 @@ export const getListings = createAsyncThunk(
       // }
       const arrayLists = rv;
       // console.log('this is rowSelection', { rv, arrayLists });
-      console.log('tested', res.data.response_data.sources);
+      // console.log('tested', res.data.response_data.sources);
       // return res.data.response_data;
       return arrayLists;
     } catch (error) {

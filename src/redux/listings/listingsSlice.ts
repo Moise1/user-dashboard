@@ -24,27 +24,29 @@ export interface ListingData {
   batchId: string;
 }
 
-// eslint-disable-next-line no-redeclare
-// export interface getListingsSource {
-//   id: number;
-//   baseUrl: string;
-//   name: string;
-//   site: string;
-//   visible: null;
-//   priority: null;
-//   description: null;
-//   recommended: false;
-//   allowedChannelFlags: null;
-//   compeliaCommission: null;
-//   compeliaSource: null;
-//   compeliaHidden: null;
-//   catalogAllowed: null;
-//   bulkAllowed: null;
-//   manualAllowed: null;
-//   recommendedByChannel: null;
-//   listingServiceAllowed: null;
-//   autoOrderingFee: null;
-// }
+export interface ListingsSource {
+  id: number;
+  channelOAuthId: number;
+  createdOn: Date;
+  lastProcessedOn: null;
+  productSourceId: null;
+  url: null;
+  finishedOn: null;
+  status: number;
+  errorCode: null;
+  errorMessage: null;
+  title: null;
+  listOOS: null;
+  optimizeTitle: null;
+  ignoreVero: null;
+  needsReview: null;
+  createdById: null;
+  origin: null;
+  dontListUntil: null;
+  retries: number;
+  channelListingId: null;
+  batchId: string;
+}
 
 const initialState = {
   listings: <unknown>[],
@@ -89,7 +91,7 @@ export const getListingsSourceSlice = createSlice({
     });
     builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
       state.loading = false;
-      console.log({ mypayload: payload });
+      // console.log({ mypayload: payload });
       state.sourceListings = payload;
     });
     builder.addCase(getListingsSource.rejected, (state, { payload }) => {

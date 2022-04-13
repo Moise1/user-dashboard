@@ -7,8 +7,6 @@ import { getUserAssistants, createUserAssistant } from 'src/redux/va-profiles/va
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import '../../sass/va-profiles.scss';
 
-
-
 export const VaProfiles = () => {
   const dispatch = useAppDispatch();
   const [current, setCurrent] = useState<number>(1);
@@ -19,7 +17,7 @@ export const VaProfiles = () => {
     dispatch(getUserAssistants());
   }, [getUserAssistants]);
 
-  const onFinish = async(values: UserAssistant['name']) => {
+  const onFinish = async (values: UserAssistant['name']) => {
     await dispatch(createUserAssistant({ name: values }));
     dispatch(getUserAssistants());
   };
@@ -34,10 +32,9 @@ export const VaProfiles = () => {
       title: 'Status',
       dataIndex: 'active',
       key: 'active',
-      render: (value: boolean) => value ? 'Active' : 'Inactive'
+      render: (value: boolean) => (value ? 'Active' : 'Inactive')
     }
   ];
-
 
   return (
     <Layout className="va-profiles-container">
@@ -46,9 +43,9 @@ export const VaProfiles = () => {
       ) : (
         <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
           <Col xs={24} xl={8} md={12} className="table-container">
-            <DataTable 
-              dataSource={userAssistants} 
-              columns={columns} 
+            <DataTable
+              dataSource={userAssistants}
+              columns={columns}
               pageSize={4}
               current={current}
               onChange={setCurrent}

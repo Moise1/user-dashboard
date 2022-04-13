@@ -9,6 +9,14 @@ export interface UserAssistant {
   createdOn: Date;
 }
 
+export interface SourcesUserAssistant {
+  id: number;
+  name: string;
+  userId: string;
+  active: boolean;
+  createdOn: Date;
+}
+
 const initialState = {
   userAssistants: [] as UserAssistant[],
   userAssistant: {},
@@ -49,4 +57,4 @@ export const userAssistantsSlice = createSlice({
   }
 });
 
-export const {reducer: userAssistantsReducer }= userAssistantsSlice;
+export const { reducer: userAssistantsReducer } = userAssistantsSlice;

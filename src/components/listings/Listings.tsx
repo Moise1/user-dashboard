@@ -31,7 +31,7 @@ export const Listings = () => {
   const dispatch = useAppDispatch();
 
   console.log({ listings });
-  console.log('the state', listingSources);
+  // console.log('the state', listingSources);
 
   const [source, setSource] = useState([]);
 
@@ -39,7 +39,7 @@ export const Listings = () => {
     dispatch(getListings());
     dispatch(getListingsSource());
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item);
+    const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item.name);
     setSource(t);
     console.log('yes', t);
   }, [getListings, getListingsSource]);
@@ -70,39 +70,39 @@ export const Listings = () => {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
-      visible: false
+      visible: true
     },
 
     {
       title: t('Listings.Column.Sell'),
-      dataIndex: 'sell',
+      dataIndex: 'channelPrice',
       key: 'sell',
       visible: true
     },
     {
       title: t('Listings.Column.Cost'),
-      dataIndex: 'cost',
+      dataIndex: 'sourcePrice',
       key: 'cost',
       visible: true
     },
     {
       title: t('Listings.Column.Profit'),
-      dataIndex: 'profit',
+      dataIndex: 'price',
       key: 'profit',
       visible: true
     },
     {
       title: t('Listings.Column.Markup'),
-      dataIndex: 'markup',
+      dataIndex: 'sourceId',
       key: 'markup',
-      visible: false
+      visible: true
     },
 
     {
       title: t('Listings.Column.Stock'),
-      dataIndex: 'stock',
+      dataIndex: 'sourceQuantity',
       key: 'stock',
-      visible: false
+      visible: true
     },
     {
       title: t('Listings.Column.Options'),
@@ -112,6 +112,8 @@ export const Listings = () => {
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
+
+  // console.log(tableColumns[0]);
 
   const handleChangeTab = (e: React.MouseEvent): void => {
     const id = e.currentTarget.getAttribute('id');
@@ -237,7 +239,6 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        // source={source}
         dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}

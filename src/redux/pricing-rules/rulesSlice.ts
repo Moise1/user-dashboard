@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getRules} from './rulesThunk';
+import { getRules } from './rulesThunk';
 
-export interface  Rule {
+export interface Rule {
   id: number;
   userId: string;
   sourceId: number;
@@ -11,7 +11,7 @@ export interface  Rule {
   createdOn: Date;
   active: boolean;
   channelOAuthId: number;
-  [key: string]: string | number| Date | boolean
+  [key: string]: string | number | Date | boolean;
 }
 
 const initialState = {
@@ -20,26 +20,24 @@ const initialState = {
   error: ''
 };
 
-
 export const rulesSlice = createSlice({
   name: 'rules',
   initialState: initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(getRules.pending, (state)=>{
+  extraReducers: (builder) => {
+    builder.addCase(getRules.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getRules.fulfilled, (state, { payload })=>{
+    builder.addCase(getRules.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.rules = payload.rules;
     });
-    builder.addCase(getRules.rejected, (state, { payload })=>{
+    builder.addCase(getRules.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const {reducer: pricingRulesReducer} = rulesSlice;
-
+export const { reducer: pricingRulesReducer } = rulesSlice;

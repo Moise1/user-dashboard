@@ -10,8 +10,7 @@ export interface SourceConfig {
   defaultLocationCountry: string;
   [key: string]: string | number;
 }
-
-export interface ShippingOption{
+export interface ShippingOption {
   [key: string]: string;
 }
 const initialState = {
