@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { StatusBar } from '../small-components/StatusBar';
-import { StatusBtn } from '../small-components/StatusBtn';
+import { StatusBar } from '../../small-components/StatusBar';
+import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
-import { ListingMain } from '../small-components/ListingMain';
-import { ListingDescription } from '../small-components/ListingDescription';
-import { ListingDetails } from '../small-components/ListingDetails';
-import { ListingOptions } from '../small-components/ListingOptions';
+import { ListingMain } from '../../small-components/ListingMain';
+import { ListingDescription } from '../../small-components/ListingDescription';
+import { ListingDetails } from '../../small-components/ListingDetails';
+import { ListingOptions } from '../../small-components/ListingOptions';
 import '../../sass/edit-single-listing.scss';
 import { ExternalLink } from 'react-feather';
 

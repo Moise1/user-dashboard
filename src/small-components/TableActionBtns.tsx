@@ -1,11 +1,11 @@
 import { ReactElement, ReactNode } from 'react';
 import { Input, Button } from 'antd';
 import { Search as SearchIcon } from 'react-feather';
-import advancedSearchIcon from '../../assets/listsearch.svg';
-import column_img from '../../assets/columnimg.svg';
+import advancedSearchIcon from '../assets/listsearch.svg';
+import column_img from '../assets/columnimg.svg';
 import RDS from 'react-dom/server';
-import { t } from '../../utils/transShim';
-import '../../sass/table-action-btns.scss';
+import { t } from '../utils/transShim';
+import '../sass/table-action-btns.scss';
 
 interface TableActionBtnsProps {
   showColumns?: boolean;

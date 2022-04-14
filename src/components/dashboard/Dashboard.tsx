@@ -1,45 +1,46 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Layout, Popconfirm, Row } from 'antd';
+import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
-import { X as CloseIcon, Book } from 'react-feather';
+import {Book } from 'react-feather';
 import { Line } from '@ant-design/plots';
-import { ConfirmBtn, SuccessBtn } from '../small-components/ActionBtns';
-import { Channel } from '../../redux/channels/channelsSlice';
-import { DataTable } from '../tables/DataTable';
-import { SearchInput } from '../small-components/TableActionBtns';
+import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
-import  miniAlert  from 'mini-alert';
+import {CloseIcon} from '../../small-components/CloseIcon';
+import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
+import { Channel } from '../../redux/channels/channelsSlice';
+import { DataTable } from '../tables/DataTable';
+import { SearchInput } from '../../small-components/TableActionBtns';
+import { client } from '../../redux/client';
 import '../../sass/dashboard.scss';
 
 interface GraphPadding {
   padding: graphPaddingType;
 }
 
+interface ProductQuota{
+  quota: number;
+  used: number;
+  price: number;
+  endsOn: Date;
+  currency: string;
+  pending: number;
+  cancelled: boolean;
+}
 type graphPaddingType = number | 'auto' | number[] | undefined;
 
 export const Dashboard = ({ padding }: GraphPadding) => {
   const { channels } = useAppSelector((state) => state.channels);
   const [dataSource, setDataSource] = useState<Channel[]>(channels);
-  const [current, setCurrent] = useState<number>(1);
   const [, setIsCopied] = useState<boolean>(false);
   const [text] = useState('https://app.hustlegotreal.com/Register/Landing?src=SPjLREeM');
-
-  const [sales, setSales] = useState([]);
+  const [productQuota, setProductQuota] = useState<ProductQuota>();
   const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
 
   const removeRecord = (id: Channel['id']) => {
     setDataSource(dataSource.filter((item: Channel) => item.id !== id));
-  };
-  const fetchSales = async () => {
-    try {
-      const res = await fetch('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json');
-      setSales(await res.json());
-    } catch (error) {
-      if (error) console.log('Sales data failed to load');
-    }
   };
 
   useEffect(() => {
@@ -47,11 +48,18 @@ export const Dashboard = ({ padding }: GraphPadding) => {
   }, [channelId]);
 
   useEffect(() => {
-    fetchSales();
+    (async () => {
+      try {
+        const res = await client.get('/Dashboard/GetProductQuotaSummary');
+        setProductQuota(res.data.response_data);
+      } catch (error) {
+        if (error) console.log('Product quota data failed to load');
+      }
+    })();
   }, []);
 
   const salesGraphConfig = {
-    data: sales.map(({ scales: sales, Date }) => ({ sales, Date })),
+    data: [{ Date: '2021', sales: 2009 }],
     padding,
     xField: 'Date',
     yField: 'sales',
@@ -87,45 +95,20 @@ export const Dashboard = ({ padding }: GraphPadding) => {
   const onCopyText = () => {
     setIsCopied(true);
     miniAlert({
-      overflow: true, 
+      overflow: true,
       autoremove: true,
-      time: 500, 
+      time: 500,
       size: 'small',
       cartoon: false,
-      text: 'Copied!',
-    });   
+      text: 'Copied!'
+    });
     setTimeout(() => {
       setIsCopied(false);
     }, 1000);
   };
+
   return (
-    <Layout className="dashboard">
-      <div className="auto-ordering-section">
-        <div className="right-contents">
-          <h1 className="title">
-            <span>Auto ordering</span> is now available
-          </h1>
-          <p>
-            Let our system process your orders <a href="#">automatically</a>. Just sit back and relax. We&apos;ve got
-            you covered.
-          </p>
-        </div>
-
-        <div className="middle-contents">
-          <h6>
-            Click here to get <Link to="/get-started">to get started</Link>
-          </h6>
-          <ConfirmBtn>Configure Auto Ordering</ConfirmBtn>
-        </div>
-
-        <div className="left-contents">
-          <p>You have sold a product for &pound;57 !</p>
-          <p>
-            Profit: <span>&pound;14</span>
-          </p>
-        </div>
-      </div>
-
+    <div className="dashboard-container">
       <div className="general-section">
         <h1>General</h1>
         <Row className="general-cols" gutter={[0, 15]}>
@@ -134,11 +117,11 @@ export const Dashboard = ({ padding }: GraphPadding) => {
             <div className="numbers-info">
               <div className="listed-monitored">
                 <p>Listed and Monitored</p>
-                <h2>24</h2>
+                <h2>{productQuota?.used}</h2>
               </div>
               <div className="subscription-allowance">
                 <p>Subscription allowance</p>
-                <h2>300</h2>
+                <h2>{productQuota?.quota}</h2>
               </div>
             </div>
             <div className="plan">
@@ -150,14 +133,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable
-              dataSource={dataSource}
-              columns={columns}
-              pageSize={2}
-              current={current}
-              onChange={setCurrent}
-              total={dataSource.length}
-            />
+            <DataTable dataSource={dataSource} columns={columns} pageSize={2} total={dataSource.length} />
             <Link to="/add-channel" className="alternative-link">
               Add channel
             </Link>
@@ -259,6 +235,6 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         <SocialIcon network="instagram" style={{ height: 30, width: 30 }} />
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
-    </Layout>
+    </div>
   );
 };

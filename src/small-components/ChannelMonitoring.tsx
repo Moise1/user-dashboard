@@ -1,5 +1,5 @@
 import { Input, Row, Col, Radio } from 'antd';
-import { Switch } from '../small-components/Switch';
+import { Switch } from './Switch';
 
 export const ChannelMonitoring = () => {
   return (

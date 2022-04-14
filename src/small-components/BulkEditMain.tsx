@@ -1,7 +1,7 @@
 import { Row, Col, Form, Input } from 'antd';
-import { t } from '../../utils/transShim';
+import { t } from '../utils/transShim';
 import { SuccessBtn, DeleteBtn } from './ActionBtns';
-import { CheckIcon, TrashIcon } from '../common/Icons';
+import { CheckIcon, TrashIcon } from '../components/common/Icons';
 
 export const BulkEditMain = () => {
   return (

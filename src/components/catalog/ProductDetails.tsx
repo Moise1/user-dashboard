@@ -1,5 +1,5 @@
 import { Col, Row, Divider } from 'antd';
-import { CancelBtn, SuccessBtn } from '../small-components/ActionBtns';
+import { CancelBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
 import '../../sass/product-details.scss';
 

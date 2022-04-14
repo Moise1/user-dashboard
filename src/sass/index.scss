@@ -7,8 +7,6 @@ body {
   line-height: 1.5715;
   box-sizing: border-box;
   .ant-layout {
-    margin-top: 0.5rem;
-    overflow: auto;
     padding: 0.3rem;
     background: $secondary-bg;
     .spinner {
@@ -36,6 +34,8 @@ body {
       margin: 0 auto !important;
     }
   }
+
+
 }
 
 // Tablets and iPads scree sizes
@@ -51,6 +51,8 @@ body {
   background-color: $gray;
   border-radius: 5px;
 }
+
+
 
 // Ant pagination styles
 .ant-pagination-item,

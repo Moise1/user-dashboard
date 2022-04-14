@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Table, Pagination } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
@@ -34,7 +34,6 @@ interface Props {
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
-  onChange?: React.Dispatch<React.SetStateAction<number>>;
   total?: number;
   current?: number;
   pageSize?: number;
@@ -51,16 +50,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     handleSingleListingModal,
     page,
     showTableInfo,
-    onChange,
     total,
-    current,
     pageSize
   } = props;
-
-  const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
-  };
   
+  const [defaultCurrent, setDefaultCurrent] = useState<number>(1);
+
+  const getData = (currentPage: Props['current'], pageSize: Props['pageSize'] ) => {
+    return dataSource.slice((currentPage! - 1) * pageSize!, currentPage! * pageSize!);
+  };
+
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -94,11 +93,15 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       <Table
         className="table"
         columns={columns}
-        dataSource={getData(current, pageSize)}
+        dataSource={getData(defaultCurrent, pageSize)}
         rowSelection={rowSelection}
         pagination={false}
       />
-      <Pagination onChange={onChange} total={total} current={current} pageSize={pageSize} />
+      <Pagination 
+        onChange={setDefaultCurrent} 
+        total={total} 
+        defaultCurrent={defaultCurrent} 
+        defaultPageSize={pageSize}/>
     </div>
   );
 };

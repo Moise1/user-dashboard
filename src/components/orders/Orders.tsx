@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TableActionBtns } from '../small-components/TableActionBtns';
+import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { orderData } from '../common/OrderData';
 import { OrderActionBtns } from './OrderActionBtns';
 import { Layout } from 'antd';

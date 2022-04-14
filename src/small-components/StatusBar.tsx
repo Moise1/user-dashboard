@@ -1,4 +1,5 @@
-import '../../sass/status-bar.scss';
+import '../sass/status-bar.scss';
+
 interface StatusBarProps {
   children: JSX.Element[];
   className?: string;

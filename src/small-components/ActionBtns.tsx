@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import '../../sass/action-btns.scss';
+import '../sass/action-btns.scss';
 
 interface Props {
   children: React.ReactNode;
