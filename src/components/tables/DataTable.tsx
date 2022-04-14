@@ -55,16 +55,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     current,
     pageSize
   } = props;
-
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    console.log(dataSource);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
-
-  // const getSourcesData = (current: Props['current'], pageSize: Props['pageSize']) => {
-  //   console.log('to check', listingSources);
-  //   return listingSources.slice((current! - 1) * pageSize!, current! * pageSize!);
-  // };
 
   // console.log('The data source ', dataSource);
   return (
@@ -101,7 +95,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         className="table"
         columns={columns}
         dataSource={getData(current, pageSize)}
-        rowSelection={rowSelection}
+        rowSelection={{
+          type: 'checkbox',
+          ...rowSelection
+        }}
         pagination={false}
       />
       <Pagination onChange={onChange} total={total} current={current} pageSize={pageSize} />

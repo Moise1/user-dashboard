@@ -41,79 +41,77 @@ export const Listings = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item.name);
     setSource(t);
-    console.log('yes', t);
+    // console.log('yes', t);
   }, [getListings, getListingsSource]);
 
   const tableColumns = [
     {
       title: t('Listings.Column.Img'),
       dataIndex: 'img',
-      key: 'img',
+      key: '1',
       visible: false
     },
 
     {
       title: t('Listings.Column.Item no.'),
       dataIndex: 'id',
-      key: 'id',
+      key: '2',
       visible: true
     },
 
     {
       title: t('Listings.Column.Source'),
       dataIndex: 'source',
-      key: 'source',
+      key: '3',
       visible: true
     },
 
     {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
-      key: 'title',
+      key: '4',
       visible: true
     },
 
     {
       title: t('Listings.Column.Sell'),
       dataIndex: 'channelPrice',
-      key: 'sell',
+      key: '5',
       visible: true
     },
     {
       title: t('Listings.Column.Cost'),
       dataIndex: 'sourcePrice',
-      key: 'cost',
+      key: '6',
       visible: true
     },
     {
       title: t('Listings.Column.Profit'),
       dataIndex: 'price',
-      key: 'profit',
+      key: '7',
       visible: true
     },
     {
       title: t('Listings.Column.Markup'),
       dataIndex: 'sourceId',
-      key: 'markup',
+      key: '8',
       visible: true
     },
 
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'sourceQuantity',
-      key: 'stock',
+      key: '9',
       visible: true
     },
     {
       title: t('Listings.Column.Options'),
       dataIndex: 'options',
-      key: 'options',
+      key: '10',
       visible: false
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
-
-  // console.log(tableColumns[0]);
 
   const handleChangeTab = (e: React.MouseEvent): void => {
     const id = e.currentTarget.getAttribute('id');
@@ -131,7 +129,9 @@ export const Listings = () => {
 
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
     const cloneColumns = columns.map((col) => {
+      console.log({ t: e.target.value });
       if (col.key === e.target.value) {
+        console.log('to', e.target.value);
         return { ...col, visible: e.target.checked };
       } else {
         return col;
