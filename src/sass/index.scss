@@ -68,6 +68,11 @@ body {
   border-color: $corporative-color !important;
 }
 
+.ant-input:placeholder-shown {
+  border-radius: 15px;
+  height: 35px;
+}
+
 //Ant buttons styles fixed
 
 button[ant-click-animating-without-extra-node]:after {

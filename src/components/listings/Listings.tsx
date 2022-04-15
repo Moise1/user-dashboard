@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
-import { Card, Checkbox, Row, Col, Layout } from 'antd';
+import { Card, Checkbox, Row, Col, Layout, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-import { listingsData } from '../common/ListingsData';
+// import { listingsData } from '../common/ListingsData';
+import { ListingData } from '../../redux/listings/listingsSlice';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -21,6 +23,8 @@ import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk
 import '../../sass/listings.scss';
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [searchKey, setSearchKey] = useState<string>('');
+  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
@@ -160,6 +164,15 @@ export const Listings = () => {
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
+  useEffect(() => {
+    // console.log(listings.filter((e: ListingData) => e.id === Number(searchKey)));
+    // console.log(listings.filter((item: { key: string }) => item.key.toLowerCase().includes(searchKey.toLowerCase())))
+    setSearchFilterKey(
+      listings.filter((e: ListingData) => e.id === Number(searchKey))
+      // listings.filter((item: { key: string }) => item.key.toLowerCase().includes(searchKey.toLowerCase()))
+    );
+  }, [listings, searchKey]);
+
   return (
     <Layout className="listings-container">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
@@ -206,7 +219,15 @@ export const Listings = () => {
       )}
 
       <div className="search-options-area">
-        <SearchOptions showSearchInput />
+        <Input
+          autoFocus
+          placeholder="Search....."
+          value={selectedRowKeys[0]}
+          onChange={(e) => {
+            setSearchKey(e.target.value ? e.target.value : '');
+            console.log(searchKey);
+          }}
+        ></Input>
         <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
         <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
           {t('AdvancedSearch')}
