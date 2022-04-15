@@ -3,10 +3,6 @@ import { toastAlert } from 'src/utils/toastAlert';
 import { client } from '../client';
 import {Rule} from './rulesSlice';
 
-interface RequestData{
- id: Rule['id'];
- active?: Rule['active']
-}
 export const getRules = createAsyncThunk(
   'rules/getRules', 
   async (_, thunkAPI) => {
@@ -24,7 +20,7 @@ export const createRule = createAsyncThunk(
   async (data: Rule, thunkAPI) => {
     try {
       const res = await client.post('/Pricing/Add', data);
-      if(res.status === 200) toastAlert('Rule added sucessfully!', 'success');
+      if(res.status === 200) toastAlert('Rule added successfully!', 'success');
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
@@ -35,22 +31,23 @@ export const createRule = createAsyncThunk(
   
 export const updateRule = createAsyncThunk(
   'rules/updateRule', 
-  async (requestData: RequestData, thunkAPI) => {
+  async ({id: ruleId, active}:  {id: Rule['id'], active: Rule['active'] }, thunkAPI) => {
     try {
-      const res = await client.put('/Pricing/Update/', requestData);
-      if(res.status === 200) toastAlert('Rule updated sucessfully!', 'success');
+      const res = await client.post('/Pricing/Update', {ruleId, active});
+      if(res.status === 200) toastAlert('Rule\'s status updated successfully!', 'success');
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
     }
   });
 
+
 export const deleteRule = createAsyncThunk(
   'rules/deleteRule', 
-  async (ruleId: RequestData['id'], thunkAPI) => {
+  async ({id: ruleId, active}:  {id: Rule['id'], active: Rule['active'] }, thunkAPI) => {
     try {
-      const res = await client.delete(`/Pricing/Delete/${ruleId}`);
-      if(res.status === 200) toastAlert('Rule deleted sucessfully!', 'success');
+      const res = await client.delete('/Pricing/Delete', {data: {ruleId, active}});
+      if(res.status === 200) toastAlert('Rule successfully deleted!', 'success');
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;

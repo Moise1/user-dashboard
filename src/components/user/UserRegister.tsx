@@ -1,6 +1,6 @@
 import { Form, Input, Checkbox } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
-import { ConfirmBtn } from '../small-components/ActionBtns';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userRegister } from 'src/redux/user/userThunk';
 import { UserData } from '../../redux/user/userSlice';

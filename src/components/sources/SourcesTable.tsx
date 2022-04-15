@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-import { SearchOptions } from '../small-components/SearchOptions';
+import { SearchOptions } from '../../small-components/SearchOptions';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-// import { AppContext } from '../../contexts/AppContext';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 
 export const SourcesTable = () => {
-  const [current, setCurrent] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { sources, loading } = useAppSelector((state) => state.sources);
-  // const { channelId } = useContext(AppContext);
 
   useEffect(() => {
     dispatch(getSources());
@@ -84,8 +81,6 @@ export const SourcesTable = () => {
           columns={columns}
           dataSource={sources}
           pageSize={6}
-          current={current}
-          onChange={setCurrent}
           total={sources?.length}
         />
       </div>

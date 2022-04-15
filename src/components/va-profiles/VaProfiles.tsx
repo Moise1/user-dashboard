@@ -1,21 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Row, Col, Card, Input, Form, Layout, Spin, Popconfirm } from 'antd';
 import { DataTable } from '../tables/DataTable';
-import { ConfirmBtn } from '../small-components/ActionBtns';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getUserAssistants, createUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
+import { getUserAssistants, createUserAssistant, deleteUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
-import { X as CloseIcon } from 'react-feather';
-
+import { CloseIcon }   from  '../../small-components/CloseIcon';
 import '../../sass/va-profiles.scss';
 
 
 
 export const VaProfiles = () => {
   const dispatch = useAppDispatch();
-  const [current, setCurrent] = useState<number>(1);
   const { userAssistants, loading } = useAppSelector((state) => state.vaProfiles);
-  const [dataSource, setDataSource] = useState(userAssistants);
 
   useEffect(() => {
     dispatch(getUserAssistants());
@@ -25,8 +22,9 @@ export const VaProfiles = () => {
     await dispatch(createUserAssistant({ name: values }));
     dispatch(getUserAssistants());
   };
-  const removeRecord = (id: UserAssistant['id']) => {
-    setDataSource(dataSource.filter((item: UserAssistant) => item.id !== id));
+  const removeRecord = async(id: UserAssistant['id']) => {
+    await dispatch(deleteUserAssistant({id, active: false}));
+    dispatch(getUserAssistants());
   };
   const columns = [
     {
@@ -46,7 +44,9 @@ export const VaProfiles = () => {
       key: '',
       render: (record: UserAssistant) => {
         return (
-          <Popconfirm title="Sure to delete this record?" onConfirm={() => removeRecord(record.id)}>
+          <Popconfirm 
+            title="Sure to delete this record?"
+            onConfirm={() => removeRecord(record.id)}>
             <CloseIcon className="remove-rule" />
           </Popconfirm>
         );
@@ -63,11 +63,9 @@ export const VaProfiles = () => {
         <Row className="row" gutter={[32, { xs: 16, lg: 0 }]}>
           <Col xs={24} xl={8} md={12} className="table-container">
             <DataTable 
-              dataSource={dataSource} 
+              dataSource={userAssistants} 
               columns={columns} 
               pageSize={4}
-              current={current}
-              onChange={setCurrent}
               total={userAssistants.length}
             />
           </Col>

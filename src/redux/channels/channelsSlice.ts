@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getChannels} from './channelsThunk';
+import {getChannels, deleteChannel} from './channelsThunk';
 
 export interface Channel {
   id: number;
@@ -14,6 +14,7 @@ export interface Channel {
 
 const initialState = {
   channels: [] as Channel[],
+  channelDeleted: false,
   loading: false,
   error: ''
 };
@@ -33,6 +34,19 @@ export const channelsSlice = createSlice({
       state.channels = payload;
     });
     builder.addCase(getChannels.rejected, (state, { payload })=>{
+      state.loading = false;
+      state.error = String(payload);
+    });
+
+    builder.addCase(deleteChannel.pending, (state)=>{
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(deleteChannel.fulfilled, (state, { payload })=>{
+      state.loading = false;
+      state.channelDeleted= payload.ok;
+    });
+    builder.addCase(deleteChannel.rejected, (state, { payload })=>{
       state.loading = false;
       state.error = String(payload);
     });

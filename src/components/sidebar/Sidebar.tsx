@@ -18,9 +18,9 @@ import { MenuListItem } from './MenuListItem';
 import { actions } from '../../redux/user/userSlice';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
-import { Switch } from '../small-components/Switch';
+import { Switch } from '../../small-components/Switch';
 import pin from '../../assets/pin.svg';
-import { TransparentBtn } from '../small-components/ActionBtns';
+import { TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import '../../sass/side-bar.scss';
@@ -84,8 +84,15 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
+    const keysToRemove = [
+      'root',
+      'Authorization',
+      'channelId', 
+      'globalTheme', 
+      'isAuthenticated'
+    ];
     dispatch(actions.logout());
-    localStorage.clear();
+    keysToRemove.forEach(key => localStorage.removeItem(key));
     persistor.purge();
     routeChange('/login');
   };

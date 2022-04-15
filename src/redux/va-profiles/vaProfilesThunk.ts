@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toastAlert } from 'src/utils/toastAlert';
 import { client } from '../client';
 import {UserAssistant} from './vaProfilesSlice';
 
@@ -18,6 +19,20 @@ export const createUserAssistant = createAsyncThunk(
   async ({name}: {name: UserAssistant['name']} , thunkAPI) => {
     try {
       const res = await client.post('/VirtualAssistants/Add', name);
+      if(res.status === 200) toastAlert('User assistant successfully added.', 'success');
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
+    }
+  });
+
+
+export const deleteUserAssistant = createAsyncThunk(
+  'userAssistants/deleteUserAssistant',
+  async (args:  UserAssistant , thunkAPI) => {
+    try {
+      const res = await client.post('/VirtualAssistants/Update', args);
+      if(res.status === 200) toastAlert('User assistant successfully deleted.', 'success');
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;

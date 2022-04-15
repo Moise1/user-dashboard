@@ -1,7 +1,7 @@
 import { Input, Row, Col, Radio } from 'antd';
-import { Selector } from '../small-components/Selector';
+import { Selector } from './Selector';
 import { dummyDeliver, dummyDuration } from 'src/dummy-data/dummyData';
-import { Switch } from '../small-components/Switch';
+import { Switch } from './Switch';
 
 export const ChannelBusiness = () => {
   return (

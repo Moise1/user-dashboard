@@ -3,7 +3,7 @@ import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
 import bell from '../../assets/bell-icon.svg';
-import {StoreList} from '../small-components/StoreList';
+import {StoreList} from '../../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';

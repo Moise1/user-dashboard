@@ -1,11 +1,11 @@
 import {ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle } from 'react-feather';
-import { t } from '../../utils/transShim';
-import { useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+import { t } from '../utils/transShim';
+import { useAppSelector} from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { Selector } from './Selector';
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '../contexts/AppContext';
 
 
 export const StoreList = () => {

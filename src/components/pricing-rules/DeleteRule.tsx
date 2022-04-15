@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CancelBtn, ConfirmBtn } from '../small-components/ActionBtns';
+import { CancelBtn, ConfirmBtn } from '../../small-components/ActionBtns';
 
 interface Props {
   handleCancel: () => void;

@@ -1,7 +1,7 @@
 import { Input, Row, Col } from 'antd';
-import { Switch } from '../small-components/Switch';
-import { Selector } from '../small-components/Selector';
-import { dummyData, dummyDuration } from '../../dummy-data/dummyData';
+import { Switch } from './Switch';
+import { Selector } from './Selector';
+import { dummyData, dummyDuration } from '../dummy-data/dummyData';
 
 export const ChannelListing = () => {
   return (

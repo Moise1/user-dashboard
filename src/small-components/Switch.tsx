@@ -1,7 +1,6 @@
 
 import { Switch as Toggle } from 'antd';
-// import { SwitchChangeEventHandler } from 'antd/lib/switch';
-import '../../sass/switch.scss';
+import '../sass/switch.scss';
 
 interface Props {
   onChange?: () => void

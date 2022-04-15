@@ -1,9 +1,9 @@
 import { ReactElement, JSXElementConstructor, ReactNode, CSSProperties } from 'react';
 import { Select } from 'antd';
-import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { SourceConfig } from '../../redux/source-config/sourceSlice';
-import { DummyData } from '../../dummy-data/dummyData';
-import '../../sass/selector.scss';
+import { Rule } from '../redux/pricing-rules/rulesSlice';
+import { SourceConfig } from '../redux/source-config/sourceSlice';
+import { DummyData } from '../dummy-data/dummyData';
+import '../sass/selector.scss';
 
 interface Props {
   children: Array<DummyData | Rule | SourceConfig>;

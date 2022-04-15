@@ -1,8 +1,8 @@
 import { Row, Col, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { t } from '../../utils/transShim';
+import { t } from '../utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
-import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
 
 export const ListingMain = () => {
   const { TextArea } = Input;

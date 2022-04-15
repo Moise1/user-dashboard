@@ -3,7 +3,7 @@ import { Checkbox } from 'antd';
 import flag from '../../assets/flag-round-500.svg';
 import amazon from '../../assets/amazon-icon-1.svg';
 import '../../sass/top-bar.scss';
-import { CancelBtn, ConfirmBtn } from '../small-components/ActionBtns';
+import { CancelBtn, ConfirmBtn } from '../../small-components/ActionBtns';
 
 interface Props {
   checked: boolean;
