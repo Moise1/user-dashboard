@@ -51,7 +51,6 @@ export const VaProfiles = () => {
               onChange={setCurrent}
               total={userAssistants.length}
             />
-            {console.log(setCurrent)}
           </Col>
           <Col xs={24} xl={8} md={12} className="form-container">
             <Card className="card">
