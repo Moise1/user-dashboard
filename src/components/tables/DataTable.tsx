@@ -41,7 +41,6 @@ interface Props {
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
-  // console.log('The data source is', props.dataSource);
   const {
     columns,
     dataSource,
@@ -61,8 +60,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
-
-  // console.log('The data source ', dataSource);
   return (
     <div className="data-table">
       {showTableInfo && (
