@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-// import { listingsData } from '../common/ListingsData';
 import { ListingData } from '../../redux/listings/listingsSlice';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
@@ -15,7 +13,6 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
-import { SearchOptions } from '../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
@@ -169,6 +166,8 @@ export const Listings = () => {
     setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchKey)));
   }, [listings, searchKey]);
 
+  const [current, setCurrent] = useState<number>(1);
+
   return (
     <Layout className="listings-container">
       <PopupModal open={showColumns} handleClose={handleClose} width={900}>
@@ -218,10 +217,8 @@ export const Listings = () => {
         <Input
           autoFocus
           placeholder="Search....."
-          value={selectedRowKeys[0]}
           onChange={(e) => {
             setSearchKey(e.target.value ? e.target.value : '');
-            console.log(searchKey);
           }}
         ></Input>
         <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
@@ -259,10 +256,12 @@ export const Listings = () => {
         dataSource={searchedArray.length > 0 ? searchedArray : listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
-        totalItems={0}
-        pageSize={10}
+        totalItems={listings.length}
+        pageSize={5}
         showTableInfo={true}
-        current={1}
+        current={current}
+        onChange={setCurrent}
+        pagination={false}
       />
     </Layout>
   );

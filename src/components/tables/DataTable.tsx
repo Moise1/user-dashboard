@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Table, Pagination } from 'antd';
+import { Pagination, Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
@@ -37,10 +37,11 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  pagination?: boolean;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
-  console.log('The data source is', props.dataSource);
+  // console.log('The data source is', props.dataSource);
   const {
     columns,
     dataSource,
@@ -52,7 +53,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     page,
     showTableInfo,
     onChange,
-    total,
+    // total,
     current,
     pageSize
   } = props;
@@ -102,7 +103,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         }}
         pagination={false}
       />
-      <Pagination onChange={onChange} total={total} current={current} pageSize={pageSize} />
+      <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} />
     </div>
   );
 };
