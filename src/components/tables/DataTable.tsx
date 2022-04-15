@@ -40,6 +40,7 @@ interface Props {
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
+  console.log('The data source is', props.dataSource);
   const {
     columns,
     dataSource,

@@ -34,11 +34,11 @@ export const Listings = () => {
   const { listingSources } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  console.log({ listings });
+  // console.log({ listings });
   // console.log('the state', listingSources);
 
   const [source, setSource] = useState([]);
-
+  const [searchedArray, setSearchedArray] = useState([]);
   useEffect(() => {
     dispatch(getListings());
     dispatch(getListingsSource());
@@ -165,12 +165,8 @@ export const Listings = () => {
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   useEffect(() => {
-    // console.log(listings.filter((e: ListingData) => e.id === Number(searchKey)));
-    // console.log(listings.filter((item: { key: string }) => item.key.toLowerCase().includes(searchKey.toLowerCase())))
-    setSearchFilterKey(
-      listings.filter((e: ListingData) => e.id === Number(searchKey))
-      // listings.filter((item: { key: string }) => item.key.toLowerCase().includes(searchKey.toLowerCase()))
-    );
+    setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchKey)));
+    setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchKey)));
   }, [listings, searchKey]);
 
   return (
@@ -260,7 +256,7 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        dataSource={listings}
+        dataSource={searchedArray.length > 0 ? searchedArray : listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={0}
