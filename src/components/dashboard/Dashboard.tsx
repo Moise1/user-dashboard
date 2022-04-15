@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row } from 'antd';
-import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import {Book } from 'react-feather';
 import { Line } from '@ant-design/plots';
@@ -13,6 +13,7 @@ import { Channel } from '../../redux/channels/channelsSlice';
 import { DataTable } from '../tables/DataTable';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
+import {deleteChannel, getChannels} from '../../redux/channels/channelsThunk';
 import '../../sass/dashboard.scss';
 
 interface GraphPadding {
@@ -32,15 +33,16 @@ type graphPaddingType = number | 'auto' | number[] | undefined;
 
 export const Dashboard = ({ padding }: GraphPadding) => {
   const { channels } = useAppSelector((state) => state.channels);
-  const [dataSource, setDataSource] = useState<Channel[]>(channels);
+  const dispatch = useAppDispatch();
   const [, setIsCopied] = useState<boolean>(false);
   const [text] = useState('https://app.hustlegotreal.com/Register/Landing?src=SPjLREeM');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
 
-  const removeRecord = (id: Channel['id']) => {
-    setDataSource(dataSource.filter((item: Channel) => item.id !== id));
+  const removeRecord = async (id: Channel['id']) => {
+    await dispatch(deleteChannel(id));
+    dispatch(getChannels());
   };
 
   useEffect(() => {
@@ -133,7 +135,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable dataSource={dataSource} columns={columns} pageSize={2} total={dataSource.length} />
+            <DataTable dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
             <Link to="/add-channel" className="alternative-link">
               Add channel
             </Link>
