@@ -317,6 +317,7 @@ h4 {
 }
 
 .status-bar {
+  margin: 8px 0px 20px 0px;
   position: relative;
   padding: 1rem;
   display: -webkit-box;

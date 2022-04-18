@@ -25,7 +25,6 @@ type OrdersTypes = {
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
-  // source: Array<getListingsSource | OrdersTypes | Rule | SourceConfig | UserAssistant>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -38,13 +37,13 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  pagination?: boolean;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
   const {
     columns,
     dataSource,
-    // source,
     rowSelection,
     selectedRows,
     totalItems,
@@ -53,20 +52,15 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     page,
     showTableInfo,
     onChange,
-    total,
+    // total,
     current,
     pageSize
   } = props;
-
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
-  // const getSourceData = (current: Props['current'], pageSize: Props['pageSize']) => {
-  //   return source.slice((current! - 1) * pageSize!, current! * pageSize!);
-  // };
-
-  console.log('The data source ', dataSource);
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -101,11 +95,20 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         className="table"
         columns={columns}
         dataSource={getData(current, pageSize)}
-        // source={getSourceData(current, pageSize)}
-        rowSelection={rowSelection}
+        rowSelection={{
+          type: 'checkbox',
+          ...rowSelection
+        }}
         pagination={false}
       />
-      <Pagination onChange={onChange} total={total} current={current} pageSize={pageSize} />
+      {/* console.log(rowSelection); */}
+      <Pagination
+        onChange={onChange}
+        total={totalItems}
+        current={current}
+        pageSize={pageSize}
+        style={{ paddingBottom: '25px' }}
+      />
     </div>
   );
 };

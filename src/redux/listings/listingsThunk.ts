@@ -25,9 +25,11 @@ export const getListings = createAsyncThunk(
       // for (var x in res.data.response_data.sources) {
       //   console.log(res.data.response_data.sources[x].name);
       // }
-      const arrayLists = rv;
+      const arrayLists = rv.map((item, key) => ({ ...item, key: key }));
+
+      // const arrayLists = rv;
       // console.log('this is rowSelection', { rv, arrayLists });
-      console.log('tested', res.data.response_data.sources);
+      // console.log('tested', res.data.response_data.sources);
       // return res.data.response_data;
       return arrayLists;
     } catch (error) {

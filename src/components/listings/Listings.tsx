@@ -6,7 +6,6 @@ import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -30,9 +29,6 @@ export const Listings = () => {
   const { listingSources } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  console.log({ listings });
-  console.log('the state', listingSources);
-
   const [source, setSource] = useState([]);
 
   useEffect(() => {
@@ -41,7 +37,6 @@ export const Listings = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item);
     setSource(t);
-    console.log('yes', t);
   }, [getListings, getListingsSource]);
 
   const tableColumns = [
@@ -51,28 +46,24 @@ export const Listings = () => {
       key: 'img',
       visible: false
     },
-
     {
       title: t('Listings.Column.Item no.'),
       dataIndex: 'id',
       key: 'id',
       visible: true
     },
-
     {
       title: t('Listings.Column.Source'),
       dataIndex: 'source',
       key: 'source',
       visible: true
     },
-
     {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
       visible: false
     },
-
     {
       title: t('Listings.Column.Sell'),
       dataIndex: 'sell',
@@ -97,7 +88,6 @@ export const Listings = () => {
       key: 'markup',
       visible: false
     },
-
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'stock',
