@@ -2,25 +2,25 @@ import { useEffect, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
-import {Book } from 'react-feather';
+import { Book } from 'react-feather';
 import { Line } from '@ant-design/plots';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
-import {CloseIcon} from '../../small-components/CloseIcon';
+import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
 import { DataTable } from '../tables/DataTable';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
-import {deleteChannel, getChannels} from '../../redux/channels/channelsThunk';
+import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import '../../sass/dashboard.scss';
 
 interface GraphPadding {
   padding: graphPaddingType;
 }
 
-interface ProductQuota{
+interface ProductQuota {
   quota: number;
   used: number;
   price: number;
@@ -116,19 +116,22 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
             <h6>Products</h6>
-            <div className="numbers-info">
-              <div className="listed-monitored">
-                <p>Listed and Monitored</p>
-                <h2>{productQuota?.used}</h2>
+            <div className="container-numbers">
+              <div className="numbers-info">
+                <div className="listed-monitored">
+                  <p>Listed and Monitored</p>
+                  <h2>{productQuota?.used}</h2>
+                </div>
+                <div className="subscription-allowance">
+                  <p>Subscription allowance</p>
+                  <h2>{productQuota?.quota}</h2>
+                </div>
               </div>
-              <div className="subscription-allowance">
-                <p>Subscription allowance</p>
-                <h2>{productQuota?.quota}</h2>
+
+              <div className="plan">
+                <p>Free Plan</p>
+                <SuccessBtn>Upgrade your plan</SuccessBtn>
               </div>
-            </div>
-            <div className="plan">
-              <p>Free Plan</p>
-              <SuccessBtn>Upgrade your plan</SuccessBtn>
             </div>
           </Col>
 
@@ -143,10 +146,12 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         </Row>
       </div>
 
-      <div className="sales">
-        <h2>Your sales</h2>
-        <div className="sales-graph">
-          <Line {...salesGraphConfig} />
+      <div className="sales-container">
+        <h1>Your sales</h1>
+        <div className="sales">
+          <div className="sales-graph">
+            <Line {...salesGraphConfig} />
+          </div>
         </div>
       </div>
 
@@ -207,7 +212,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
       </div>
 
       <div className="affiliates-main-container">
-        <h3>Affiliates</h3>
+        <h1>Affiliates</h1>
         <div className="affiliates-contents">
           <div className="affiliates-title">
             <h2>Your affiliate link</h2>
