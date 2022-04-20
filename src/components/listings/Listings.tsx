@@ -141,11 +141,8 @@ export const Listings = () => {
   };
 
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
-
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
-
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   return (

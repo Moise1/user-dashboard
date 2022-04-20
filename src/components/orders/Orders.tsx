@@ -28,8 +28,8 @@ export const Orders = () => {
   // const newDate = date.substring(10);
   // console.log('The new Date', newDate);
   console.log('The api data in the useSelector hook of order', orders);
-
   // console.log(tableColumns);
+
   //States:-
   const [current, setCurrent] = useState<number>(1);
   const [orderNumber] = useState(0);
