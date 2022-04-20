@@ -5,9 +5,15 @@ import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 
+interface Props {
+  selectedItems: unknown | string;
+}
 
-export const ListingMain = () => {
+// eslint-disable-next-line react/prop-types
+export const ListingMain : React.FC<Props> = ({selectedItems}) => {
+  console.log('first', selectedItems);
   const { listings } = useAppSelector((state) => state.listings);
+  console.log('Model Open', listings[2]);
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">

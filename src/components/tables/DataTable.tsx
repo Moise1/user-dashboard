@@ -25,7 +25,7 @@ type OrdersTypes = {
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
-  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
+  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[],selectedRows:unknown) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;

@@ -46,6 +46,8 @@ export const Listings = () => {
     // console.log('yes', t);
   }, [getListings, getListingsSource]);
 
+  const [mySelectedRows, setMySelectedRows] = useState<unknown>([]);
+
   const tableColumns = [
     {
       title: t('Listings.Column.Img'),
@@ -120,7 +122,10 @@ export const Listings = () => {
     setActiveTab(parseInt(id!));
   };
 
-  const onSelectChange = (selectedRowKeys: Key[]) => {
+  const onSelectChange = (selectedRowKeys: Key[],selectedRows:unknown) => {
+    console.log(selectedRowKeys);
+    console.log(selectedRows);
+    setMySelectedRows(selectedRows);
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -138,7 +143,6 @@ export const Listings = () => {
       }
     });
     setColumns(cloneColumns);
-    console.log(e.target.checked);
   };
 
   const handleClose = () => {
@@ -160,6 +164,7 @@ export const Listings = () => {
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+ 
 
   useEffect(() => {
     setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchKey)));
@@ -209,7 +214,7 @@ export const Listings = () => {
         </PopupModal>
       ) : (
         <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <EditSingleListing />
+          <EditSingleListing selectedItems={mySelectedRows} />
         </PopupModal>
       )}
 
