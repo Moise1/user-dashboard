@@ -34,7 +34,7 @@ export interface OrderData {
   sourceItem: string;
   channelItem: string;
   quantity: number;
-  channelPrice: string;
+  channelPrice: number;
   channelShipping: string;
   channelCurrency: string;
   sourcePrice: null;
@@ -49,11 +49,12 @@ export interface OrderData {
   sourceShipping: null;
   id: number;
   sourcePath: string;
-  fees: string;
+  fees: number;
   storeStatus: number;
   hgrTrackingNumber: null;
   buyReference: string;
   cancelRequested: boolean;
+  profit: number;
 }
 
 const initialState = {
@@ -72,6 +73,7 @@ export const orderSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getOrders.fulfilled, (state, { payload }) => {
+      console.log({ payload });
       state.loading = false;
       state.orders = payload;
     });

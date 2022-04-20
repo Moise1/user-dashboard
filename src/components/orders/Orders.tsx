@@ -19,11 +19,43 @@ import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHo
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 // import { SearchOptions } from '../small-components/SearchOptions';
+import moment from 'moment';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
+  // const { date } = orders;
+  // const newDate = date.substring(10);
+  // console.log('The new Date', newDate);
   console.log('The api data in the useSelector hook of order', orders);
+
+  // console.log(tableColumns);
+  //States:-
+  const [current, setCurrent] = useState<number>(1);
+  const [orderNumber] = useState(0);
+  const [order, setOrder] = useState([]);
+  const [searchedArray, setSearchedArray] = useState([]);
+  const [searchKey, setSearchKey] = useState<string>('');
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [showColumns, setShowColumns] = useState<boolean>(false);
+  const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
+  const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
+  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  console.log({ order });
+  //Get Orders
+  useEffect(() => {
+    dispatch(getOrders({ channelOAuthIds: [590881] }));
+    setOrder(
+      orders?.orders.length &&
+        orders?.orders.map((item: OrderData): unknown => ({
+          ...item,
+          profit: item.channelPrice - item.channelPrice - item.fees,
+          margin: (item.profit / item.channelPrice) * 100,
+          date: moment(item.date).format('DD/MM/YY/ hh:mm')
+        }))
+    );
+  }, [getOrders]);
   const tableColumns = [
     {
       title: t('OrderTable.Image'),
@@ -81,13 +113,13 @@ export const Orders = () => {
     },
     {
       title: t('OrderTable.Profit'),
-      dataIndex: 'fees',
+      dataIndex: 'profit',
       key: '10',
       visible: false
     },
     {
       title: t('OrderTable.Margin'),
-      dataIndex: 'fees',
+      dataIndex: 'margin',
       key: '11',
       visible: false
     },
@@ -104,28 +136,8 @@ export const Orders = () => {
       visible: true
     }
   ];
-  console.log(tableColumns);
-  //States:-
-  const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(0);
-  const [order, setOrder] = useState([]);
-  const [searchedArray, setSearchedArray] = useState([]);
-  const [searchKey, setSearchKey] = useState<string>('');
   const [columns, setColumns] = useState(tableColumns);
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [showColumns, setShowColumns] = useState<boolean>(false);
-  const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
-  const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
-  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
-
-  //Get Orders
-  useEffect(() => {
-    dispatch(getOrders({ channelOAuthIds: [590881] }));
-    setOrder(orders?.orders.length && orders?.orders.map((item: string) => item));
-  }, [getOrders]);
-
   // //For Searching
   useEffect(() => {
     setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
@@ -133,6 +145,7 @@ export const Orders = () => {
   }, [order, searchKey]);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
+    console.log({ selectedRowKeys });
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -149,7 +162,6 @@ export const Orders = () => {
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
     const cloneColumns = columns.map((col) => {
       if (col.key === e.target.value) {
-        console.log(e.target.checked);
         return { ...col, visible: e.target.checked };
       } else {
         return col;

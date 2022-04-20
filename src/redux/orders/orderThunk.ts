@@ -39,8 +39,14 @@ export const getOrders = createAsyncThunk(
   async ({ channelOAuthIds }: { channelOAuthIds: OrderData['channelOAuthIds'] }, thunkAPI) => {
     try {
       const res = await client.post('/Sales/Search', { channelOAuthIds });
-      console.log(res.data.response_data.orders);
-      return res.data.response_data.orders;
+      // console.log('response', res.data.response_data.orders);
+      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+        ...item,
+        date: new Date(item?.date),
+        key
+      }));
+      console.log({ data });
+      return data;
       // const iter = unmap(res.data.response_data?.orders as compArray);
       // const rv: ActiveListing[] = [];
       // let status = iter.next();
