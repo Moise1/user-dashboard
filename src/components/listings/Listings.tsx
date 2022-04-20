@@ -19,6 +19,7 @@ import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHo
 import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk';
 import '../../sass/listings.scss';
 export const Listings = () => {
+  
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
@@ -127,18 +128,17 @@ export const Listings = () => {
     selectedRowKeys,
     onChange: onSelectChange
   };
-
+ 
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
     const cloneColumns = columns.map((col) => {
-      console.log({ t: e.target.value });
       if (col.key === e.target.value) {
-        console.log('to', e.target.value);
         return { ...col, visible: e.target.checked };
       } else {
         return col;
       }
     });
     setColumns(cloneColumns);
+    console.log(e.target.checked);
   };
 
   const handleClose = () => {

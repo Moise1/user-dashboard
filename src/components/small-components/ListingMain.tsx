@@ -3,15 +3,19 @@ import { Link } from 'react-router-dom';
 import { t } from '../../utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+
 
 export const ListingMain = () => {
+  const { listings } = useAppSelector((state) => state.listings);
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">
       <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
-            <Input className="blue-input" value="2021 New Stylish Simplicity Print..." />
+            <Input className="blue-input" value={listings[5].title} />
+
           </Form.Item>
 
           <Form.Item label="Quantity">
