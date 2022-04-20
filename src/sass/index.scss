@@ -69,7 +69,10 @@ body {
 }
 
 //Ant buttons styles fixed
-
+.ant-input:placeholder-shown {
+  border-radius: 15px;
+  height: 35px;
+}
 button[ant-click-animating-without-extra-node]:after {
   border: 0 none;
   opacity: 0;

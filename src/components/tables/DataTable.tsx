@@ -12,14 +12,25 @@ type OrdersTypes = {
   sale: string;
   qty: number;
   source: string;
-  title: string;
+  // title: string;
   sold: number;
   cost: number;
-  fees: number;
+  // fees: number;
   profit: number;
   margin: string;
   orderedOn: Date;
   state: JSX.Element | string;
+
+  reference: string;
+  channelItem: number;
+  sourceItem: number;
+  title: string;
+  quantity: number;
+  channelPrice: number;
+  sourcePrice: number;
+  fees: number;
+  date: number;
+  status: number;
 };
 
 interface Props {

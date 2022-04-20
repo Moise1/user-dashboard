@@ -3,8 +3,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
 import { OrderData } from './orderSlice';
-import unmap, { ActiveListing, compArray } from '../../redux/unmap';
-
 // import unmap, { ActiveListing, compArray } from '../../redux/unmap';
 // export const getOrders = createAsyncThunk(
 //   'orders/getOrders',
@@ -12,10 +10,7 @@ import unmap, { ActiveListing, compArray } from '../../redux/unmap';
 //     try {
 //       // console.log('calling listing api');
 //       const res = await client.get('/Sales/Search');
-//       console.log('The sales api responsed', res);
 //       const iter = unmap(res.data.response_data?.data as compArray);
-//       // console.log({ iter });
-//       // console.log({ t: res?.data?.response_data });
 //       const rv: ActiveListing[] = [];
 //       let status = iter.next();
 //       while (!status.done) {
@@ -44,19 +39,20 @@ export const getOrders = createAsyncThunk(
   async ({ channelOAuthIds }: { channelOAuthIds: OrderData['channelOAuthIds'] }, thunkAPI) => {
     try {
       const res = await client.post('/Sales/Search', { channelOAuthIds });
-      const iter = unmap(res.data.response_data?.orders as compArray);
-      const rv: ActiveListing[] = [];
-      let status = iter.next();
-
-      while (!status.done) {
-        const itm = status.value as ActiveListing;
-        // console.log({ itm });
-        // itm.variationAtributes = res.data.response_data?.data.variationAtributes[itm.channelListingId];
-        rv.push(itm);
-        status = iter.next();
-      }
-      const arrayLists = rv.map((item, key) => ({ ...item, key: key }));
-      return arrayLists;
+      console.log(res.data.response_data.orders);
+      return res.data.response_data.orders;
+      // const iter = unmap(res.data.response_data?.orders as compArray);
+      // const rv: ActiveListing[] = [];
+      // let status = iter.next();
+      // while (!status.done) {
+      //   const itm = status.value as ActiveListing;
+      //   // console.log({ itm });
+      //   // itm.variationAtributes = res.data.response_data?.data.variationAtributes[itm.channelListingId];
+      //   rv.push(itm);
+      //   status = iter.next();
+      // }
+      // const arrayLists = rv.map((item, key) => ({ ...item, key: key }));
+      // return arrayLists;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
     }

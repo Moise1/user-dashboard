@@ -2,54 +2,32 @@
 import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
 import { t } from 'src/utils/transShim';
-import { useEffect, useState } from 'react';
+import { Key } from 'antd/lib/table/interface';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Card, Checkbox, Row, Col, Layout, Input } from 'antd';
+import { CheckIcon } from '../common/Icons';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
-import { Layout, Input } from 'antd';
 import { OrderData } from '../../redux/orders/orderSlice';
 import { DataTable } from '../tables/DataTable';
-import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { getOrders } from 'src/redux/orders/orderThunk';
-import { Key } from 'antd/lib/table/interface';
+import { PopupModal } from '../modals/PopupModal';
+import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
+import { TableActionBtns } from '../small-components/TableActionBtns';
+import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDrawers';
+import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { EditSingleListing } from '../listings/EditSingleListing';
+import { BulkEditListings } from '../listings/BulkEditListings';
+// import { SearchOptions } from '../small-components/SearchOptions';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
-
-  const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(0);
-  const [order, setOrder] = useState([]);
-  const [searchedArray, setSearchedArray] = useState([]);
-  const [searchKey, setSearchKey] = useState<string>('');
-  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-
-  useEffect(() => {
-    dispatch(getOrders({ channelOAuthIds: [590881] }));
-    setOrder(orders?.orders.length && orders?.orders.map((item: string) => item));
-  }, [getOrders]);
-
-  useEffect(() => {
-    setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
-    setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
-  }, [order, searchKey]);
-
-  const onSelectChange = (selectedRowKeys: Key[]) => {
-    setSelectedRowKeys(selectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange
-  };
-
-  console.log(rowSelection);
-  console.log('The search Array ', searchedArray);
-  console.log('The search Array ', searchFilterKey);
-
-  const columns = [
+  console.log('The api data in the useSelector hook of order', orders);
+  const tableColumns = [
     {
       title: t('OrderTable.Image'),
-      dataIndex: '<img src={imageUrl} />',
+      dataIndex: 'imageUrl',
       key: '1',
       visible: true
     },
@@ -63,25 +41,25 @@ export const Orders = () => {
       title: t('OrderTable.Item'),
       dataIndex: 'channelItem',
       key: '3',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Source'),
       dataIndex: 'sourceItem',
       key: '4',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Title'),
       dataIndex: 'title',
       key: '5',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Quantity'),
       dataIndex: 'quantity',
       key: '6',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Sold'),
@@ -117,34 +95,148 @@ export const Orders = () => {
       title: t('OrderTable.DateOfOrder'),
       dataIndex: 'date',
       key: '12',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Status'),
       dataIndex: 'status',
       key: '13',
-      visible: false
+      visible: true
     }
   ];
+  console.log(tableColumns);
+  //States:-
+  const [current, setCurrent] = useState<number>(1);
+  const [orderNumber] = useState(0);
+  const [order, setOrder] = useState([]);
+  const [searchedArray, setSearchedArray] = useState([]);
+  const [searchKey, setSearchKey] = useState<string>('');
+  const [columns, setColumns] = useState(tableColumns);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [showColumns, setShowColumns] = useState<boolean>(false);
+  const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
+  const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
+  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
+
+  //Get Orders
+  useEffect(() => {
+    dispatch(getOrders({ channelOAuthIds: [590881] }));
+    setOrder(orders?.orders.length && orders?.orders.map((item: string) => item));
+  }, [getOrders]);
+
+  // //For Searching
+  useEffect(() => {
+    setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
+    setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
+  }, [order, searchKey]);
+
+  const onSelectChange = (selectedRowKeys: Key[]) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange
+  };
+
+  const handleClose = () => {
+    setColumns(tableColumns);
+    setShowColumns(!showColumns);
+  };
+
+  const handleCheckBox = (e: CheckboxChangeEvent): void => {
+    const cloneColumns = columns.map((col) => {
+      if (col.key === e.target.value) {
+        console.log(e.target.checked);
+        return { ...col, visible: e.target.checked };
+      } else {
+        return col;
+      }
+    });
+    setColumns(cloneColumns);
+  };
+
+  const handleCancelChanges = () => {
+    setColumns(tableColumns);
+    setShowColumns(!showColumns);
+  };
+  const handleApplyChanges = () => setShowColumns(!showColumns);
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+  const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+  const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
+
+  // console.log(rowSelection);
+  console.log('The search Array ', searchFilterKey);
+  // console.log('The searchkey setter is', setSearchKey);
+  // console.log('The setShowColumn', setShowColumns);
+  // console.log('The setBulkEditOpen', setBulkEditOpen);
+  // console.log('setSingleEditOpen', setSingleEditOpen);
+  // console.log('setDrawerOpen', setDrawerOpen);
 
   return (
     <Layout className="orders-container">
+      <PopupModal open={showColumns} handleClose={handleClose} width={900}>
+        <h5 className="cols-display-title">Select columns to display</h5>
+        <p className="description">Display columns in the listing table that suit your interests.</p>
+        <Card className="listings-card">
+          <Row className="listings-cols">
+            <Col>
+              <ul className="cols-list">
+                {columns.map((col) => (
+                  <li key={col.key}>
+                    <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
+                      {col.title}
+                    </Checkbox>
+                  </li>
+                ))}
+              </ul>
+            </Col>
+            <Col>
+              <div className="cols-amount">
+                <p>Amount of columns on your listings table</p>
+                <h3>{visibleCols.length}</h3>
+              </div>
+            </Col>
+          </Row>
+          <div className="show-columns-action-btns">
+            <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
+            <SuccessBtn handleClose={handleApplyChanges}>
+              <CheckIcon />
+              {t('ApplyChanges')}
+            </SuccessBtn>
+          </div>
+        </Card>
+      </PopupModal>
+      {selectedRowKeys.length > 1 ? (
+        <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
+          <BulkEditListings selectedItems={selectedRowKeys.length} />
+        </PopupModal>
+      ) : (
+        <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
+          <EditSingleListing />
+        </PopupModal>
+      )}
+
       <div className="search-options-area">
+        {/* <SearchOptions showSearchInput /> */}
         <Input
           autoFocus
-          placeholder="Smart Search....."
-          value={selectedRowKeys[0]}
+          placeholder="Search....."
           onChange={(e) => {
             setSearchKey(e.target.value ? e.target.value : '');
-            console.log(searchKey);
           }}
         ></Input>
+        <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
+        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
+          {t('AdvancedSearch')}
+        </TableActionBtns>
       </div>
-      {/* <TableActionBtns /> This is small icon button for searching*/}
       <OrderActionBtns orderNumber={orderNumber} />
       <DataTable
         page="order"
-        columns={columns}
+        columns={visibleCols}
         dataSource={searchedArray.length > 0 ? searchedArray : order}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
