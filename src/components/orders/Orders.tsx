@@ -43,6 +43,8 @@ export const Orders = () => {
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   console.log({ order });
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+
   //Get Orders
   useEffect(() => {
     dispatch(getOrders({ channelOAuthIds: [590881] }));
@@ -59,9 +61,20 @@ export const Orders = () => {
   const tableColumns = [
     {
       title: t('OrderTable.Image'),
-      dataIndex: 'imageUrl',
+      dataIndex: '',
       key: '1',
-      visible: true
+      visible: true,
+      render: (record: OrderData['imageUrl']) => (
+        <>
+          <img
+            src={record}
+            alt="image"
+            onClick={() => {
+              // setBulkEditOpen, console.log('the bulk modal value', bulkEditOpen);
+            }}
+          />
+        </>
+      )
     },
     {
       title: t('OrderTable.Reference'),
@@ -175,7 +188,6 @@ export const Orders = () => {
     setShowColumns(!showColumns);
   };
   const handleApplyChanges = () => setShowColumns(!showColumns);
-  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
