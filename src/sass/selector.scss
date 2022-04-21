@@ -1,10 +1,10 @@
 @import 'general.config';
 
+
 .input-container {
   display: flex;
   justify-content: space-between;
 }
-
 .action-ctrl {
   margin-bottom: 1rem;
   .new-acc-input {
@@ -33,7 +33,6 @@
     right: 18px;
   }
   .ant-select-selector {
-    // width: 100%;
     color: $primary-txt !important;
     border-radius: 7px !important;
     box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
@@ -41,7 +40,6 @@
     outline: none !important;
     height: 40px !important;
     align-items: center !important;
-    // padding: 0 2rem;
-    // margin: auto;
+  
   }
 }
