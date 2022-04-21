@@ -26,8 +26,8 @@ export const ConfirmBtn = ({ children, handleClick, className, disabled, htmlTyp
   </Button>
 );
 
-export const CancelBtn = ({ children, handleClose }: Props) => (
-  <Button className="cancel-btn" onClick={handleClose}>
+export const CancelBtn = ({ children, handleClose, disabled }: Props) => (
+  <Button className="cancel-btn" onClick={handleClose} disabled={disabled}>
     {children}
   </Button>
 );

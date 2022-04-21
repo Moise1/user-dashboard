@@ -33,9 +33,10 @@ type OrdersTypes = {
   status: number;
 };
 
+export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
+  dataSource: Array<TableDataTypes>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -49,6 +50,8 @@ interface Props {
   current?: number;
   pageSize?: number;
   pagination?: boolean;
+  rowClassName?: string;
+  onRow?: ()=> { onClick: () =>  void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -65,7 +68,9 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     onChange,
     // total,
     current,
-    pageSize
+    pageSize,
+    rowClassName,
+    onRow
   } = props;
   console.log({ dataSource });
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
@@ -112,6 +117,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           ...rowSelection
         }}
         pagination={false}
+        rowClassName={rowClassName}
+        onRow={onRow}
       />
       {/* console.log(rowSelection); */}
       <Pagination

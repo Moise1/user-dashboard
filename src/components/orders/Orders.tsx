@@ -1,9 +1,8 @@
-// import { orderData } from '../common/OrderData';
 import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
 import { t } from 'src/utils/transShim';
 import { Key } from 'antd/lib/table/interface';
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout, Input } from 'antd';
 import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -18,19 +17,14 @@ import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDra
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
+import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
-  // const { date } = orders;
-  // const newDate = date.substring(10);
-  // console.log('The new Date', newDate);
-  console.log('The api data in the useSelector hook of order', orders);
-  // console.log(tableColumns);
 
-  //States:-
   const [current, setCurrent] = useState<number>(1);
   const [orderNumber] = useState(0);
   const [order, setOrder] = useState([]);
@@ -42,7 +36,7 @@ export const Orders = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  console.log({ order });
+
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   //Get Orders
@@ -58,22 +52,17 @@ export const Orders = () => {
         }))
     );
   }, [getOrders]);
+
   const tableColumns = [
     {
       title: t('OrderTable.Image'),
       dataIndex: '',
       key: '1',
       visible: true,
-      render: (record: OrderData['imageUrl']) => (
-        <>
-          <img
-            src={record}
-            alt="image"
-            onClick={() => {
-              // setBulkEditOpen, console.log('the bulk modal value', bulkEditOpen);
-            }}
-          />
-        </>
+      render: (record: OrderData) => (
+        <div className="img-container">
+          <img src={record.imageUrl} alt="image" className="record-img" />
+        </div>
       )
     },
     {
@@ -96,9 +85,10 @@ export const Orders = () => {
     },
     {
       title: t('OrderTable.Title'),
-      dataIndex: 'title',
+      dataIndex: '',
       key: '5',
-      visible: true
+      visible: true,
+      render: (record: OrderData) => <p className="title">{record.title}</p>
     },
     {
       title: t('OrderTable.Quantity'),
@@ -144,9 +134,10 @@ export const Orders = () => {
     },
     {
       title: t('OrderTable.Status'),
-      dataIndex: 'status',
+      dataIndex: '',
       key: '13',
-      visible: true
+      visible: true,
+      render: (record: OrderData) => determineStatus(record.status)
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
@@ -269,6 +260,12 @@ export const Orders = () => {
         current={current}
         onChange={setCurrent}
         pagination={false}
+        rowClassName="table-row"
+        onRow={() => {
+          return {
+            onClick: () => handleSingleListingModal()
+          };
+        }}
       />
     </Layout>
   );
