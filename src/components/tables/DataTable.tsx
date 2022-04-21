@@ -22,10 +22,12 @@ type OrdersTypes = {
   state: JSX.Element | string;
 };
 
+export type SeletedRowsType = (ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | undefined)[];
+
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
-  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[],selectedRows:unknown) => void };
+  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[],selectedRows: SeletedRowsType) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;

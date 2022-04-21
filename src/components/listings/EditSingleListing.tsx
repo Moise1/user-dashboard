@@ -8,14 +8,15 @@ import { ListingDetails } from '../small-components/ListingDetails';
 import { ListingOptions } from '../small-components/ListingOptions';
 import '../../sass/edit-single-listing.scss';
 import { ExternalLink } from 'react-feather';
-
+// import { SeletedRowsType } from '../tables/DataTable';
+import { ListingData } from 'src/redux/listings/listingsSlice';
 interface Props {
-  selectedItems: unknown;
+  selectedItems: ListingData;
 }
 
 // eslint-disable-next-line react/prop-types
-export const EditSingleListing :React.FC<Props>= ({selectedItems}) => {
-  console.log('selected', selectedItems);
+export const EditSingleListing :React.FC<Props>= ({selectedItems} : Props) => {
+  // console.log('selected', selectedItems);
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
 
@@ -45,7 +46,7 @@ export const EditSingleListing :React.FC<Props>= ({selectedItems}) => {
   return (
     <>
       <div className="upper-section">
-        <h3>Editing listing: 20000</h3>
+        <h3>Editing listing: {selectedItems.id}</h3>
         <div className="external-links">
           <a href="#">
             View price Changes{' '}

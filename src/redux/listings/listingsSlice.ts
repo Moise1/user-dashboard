@@ -1,27 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getListings, getListingsSource } from './listingsThunk';
 export interface ListingData {
+  asin: null;
+  buyBoxPrice: null;
+  channelItem: string;
+  channelListingId: number;
+  channelPrice: number;
+  channelQuantity: number;
+  createdById: number;
+  createdByName: string;
+  createdOn: string;
+  endsOn: null;
   id: number;
-  channelOAuthId: number;
-  createdOn: Date;
-  lastProcessedOn: null;
-  productSourceId: null;
-  url: null;
-  finishedOn: null;
+  isLowestPrice: null,
+  key: number;
+  lastTimeInStock: string;
+  lastTimeSold: null;
+  lowestPrice: null;
+  origin: undefined;
+  overrides: undefined;
+  price: number;
+  productNotes: null;
+  productSourceId: number;
+  quantitySold: number;
+  sourceId: number;
+  sourcePath: string;
+  sourcePrice: number;
+  sourceQuantity: number;
   status: number;
-  errorCode: null;
-  errorMessage: null;
-  title: null;
-  listOOS: null;
-  optimizeTitle: null;
-  ignoreVero: null;
-  needsReview: null;
-  createdById: null;
-  origin: null;
-  dontListUntil: null;
-  retries: number;
-  channelListingId: null;
-  batchId: string;
+  title: string;
+  updatedOn: string;
+  userProductSourceChannelId: number;
+  views: number;
+  watches: number;
 }
 
 export interface ListingsSource {

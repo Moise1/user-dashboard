@@ -5,7 +5,7 @@ import { TableActionBtns } from '../small-components/TableActionBtns';
 import { StatusBar } from '../small-components/StatusBar';
 import { StatusBtn } from '../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
-import { DataTable } from '../tables/DataTable';
+import { DataTable , SeletedRowsType } from '../tables/DataTable';
 import { ListingData } from '../../redux/listings/listingsSlice';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
@@ -31,7 +31,42 @@ export const Listings = () => {
   const { listings } = useAppSelector((state) => state.listings);
   const { listingSources } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const [singleRecordData, setSingleRecordData] = useState({
+    asin: null,
+    buyBoxPrice: null,
+    channelItem: '3548023',
+    channelListingId: 3548023,
+    channelPrice: 28.03,
+    channelQuantity: 0,
+    createdById: 30784,
+    createdByName: 'Admin',
+    createdOn: 'Tue Jul 13 2021 15:53:58 GMT+0500 (Pakistan Standard Time)',
+    endsOn: null,
+    id: 1879059,
+    isLowestPrice: null,
+    key: 0,
+    lastTimeInStock: 'Tue Apr 19 2022 11:26:58 GMT+0500 (Pakistan Standard Time)',
+    lastTimeSold: null,
+    lowestPrice: null,
+    origin: undefined,
+    overrides: undefined,
+    price: 28.03,
+    productNotes: null,
+    productSourceId: 1866638,
+    quantitySold: 0,
+    sourceId: 5,
+    sourcePath: '8-PCS-Solar-Power-Lights-Bubble-White-LED-Light-Outdoor-Lawn-Garden-Lamp-Solar-Garden-Light-p-1025499.html?cur_warehouse=UK&rmmds=category',
+    sourcePrice: 21.56,
+    sourceQuantity: 0,
+    status: 64,
+    title: '8 PCS Solar Power Lights Bubble White LED Light Outdoor Lawn Garden Lamp Solar G',
+    updatedOn: 'Thu Apr 21 2022 14:51:58 GMT+0500 (Pakistan Standard Time)',
+    userProductSourceChannelId: 1879059,
+    views: 0,
+    watches: 0
+  });
 
+  console.log('test', singleRecordData);
   // console.log({ listings });
   // console.log('the state', listingSources);
 
@@ -46,7 +81,7 @@ export const Listings = () => {
     // console.log('yes', t);
   }, [getListings, getListingsSource]);
 
-  const [mySelectedRows, setMySelectedRows] = useState<unknown>([]);
+  const [mySelectedRows, setMySelectedRows] = useState<SeletedRowsType>([]);
 
   const tableColumns = [
     {
@@ -122,11 +157,14 @@ export const Listings = () => {
     setActiveTab(parseInt(id!));
   };
 
-  const onSelectChange = (selectedRowKeys: Key[],selectedRows:unknown) => {
-    console.log(selectedRowKeys);
-    console.log(selectedRows);
+  const onSelectChange = (selectedRowKeys: Key[],selectedRows: SeletedRowsType) => {
+    // console.log(selectedRowKeys);
+    // console.log(selectedRows);
     setMySelectedRows(selectedRows);
     setSelectedRowKeys(selectedRowKeys);
+    const selectedRow = listings.filter((r: ListingData) => r.id === selectedRows[0]?.id)[0];
+    // console.log('to checked ID', selectedRow);
+    setSingleRecordData(selectedRow);
   };
 
   const rowSelection = {
@@ -165,7 +203,7 @@ export const Listings = () => {
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
  
-
+ 
   useEffect(() => {
     setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchKey)));
     setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchKey)));
@@ -214,7 +252,7 @@ export const Listings = () => {
         </PopupModal>
       ) : (
         <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <EditSingleListing selectedItems={mySelectedRows} />
+          <EditSingleListing selectedItems={singleRecordData} />
         </PopupModal>
       )}
 
