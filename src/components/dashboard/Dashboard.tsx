@@ -15,6 +15,7 @@ import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { countryFlag } from '../../utils/countryFlag';
+import { shopLogo } from '../../utils/shopLogo';
 import '../../sass/dashboard.scss';
 
 interface GraphPadding {
@@ -84,6 +85,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
       key: '',
       render: (record: Channel) => (
         <>
+          {shopLogo(record.channelId)}
           {countryFlag(record.isoCountry)}
           {record.name}
         </>

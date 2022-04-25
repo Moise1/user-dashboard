@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import {X as CloseIcon} from 'react-feather';
+import {CloseIcon} from './small-components/CloseIcon';
 import {
   UserLogin,
   UserRegister,

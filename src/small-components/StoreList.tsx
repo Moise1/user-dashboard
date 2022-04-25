@@ -35,7 +35,7 @@ export const StoreList = () => {
           </>
         )}
       >
-        {channels?.map(({ name: value, isoCountry }: Channel) => ({ value, isoCountry }))}
+        {channels?.map(({ name: value, isoCountry, channelId }: Channel) => ({ value, isoCountry, channelId }))}
       </Selector>
     </div>
   );
