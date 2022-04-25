@@ -10,6 +10,7 @@ export interface Channel {
   isoCountry: number;
   name: string;
   userId: string
+  [key: string]: string | number | boolean;
 }
 
 const initialState = {

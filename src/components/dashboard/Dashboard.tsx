@@ -14,6 +14,7 @@ import { DataTable } from '../tables/DataTable';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
+import { countryFlag } from '../../utils/countryFlag';
 import '../../sass/dashboard.scss';
 
 interface GraphPadding {
@@ -35,7 +36,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
   const { channels } = useAppSelector((state) => state.channels);
   const dispatch = useAppDispatch();
   const [, setIsCopied] = useState<boolean>(false);
-  const [text] = useState('https://app.hustlegotreal.com/Register/Landing?src=SPjLREeM');
+  const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
@@ -52,8 +53,10 @@ export const Dashboard = ({ padding }: GraphPadding) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await client.get('/Dashboard/GetProductQuotaSummary');
-        setProductQuota(res.data.response_data);
+        const quotaRes = await client.get('/Dashboard/GetProductQuotaSummary');
+        const affiliateRes = await client.get('/Dashboard/Affiliate');
+        setProductQuota(quotaRes.data.response_data);
+        setAffiliate(affiliateRes.data.response_data.affiliate);
       } catch (error) {
         if (error) console.log('Product quota data failed to load');
       }
@@ -77,8 +80,14 @@ export const Dashboard = ({ padding }: GraphPadding) => {
   const columns = [
     {
       title: 'Channel Name',
-      dataIndex: 'name',
-      key: 'name'
+      dataIndex: '',
+      key: '',
+      render: (record: Channel) => (
+        <>
+          {countryFlag(record.isoCountry)}
+          {record.name}
+        </>
+      )
     },
     {
       title: 'Delete',
@@ -221,8 +230,8 @@ export const Dashboard = ({ padding }: GraphPadding) => {
           <div className="affiliates-benefits">
             <p>Get money each time your referrals purchase any service from us</p>
             <div className="copy-actions">
-              <Input type="text" value={text} className="text-input" />
-              <CopyToClipboard text={text} onCopy={onCopyText}>
+              <Input type="text" value={affiliate} className="text-input" />
+              <CopyToClipboard text={affiliate} onCopy={onCopyText}>
                 <Button>Copy</Button>
               </CopyToClipboard>
             </div>
