@@ -5,7 +5,7 @@
   "addchan": "Add new channel",
 
   "AddNewChannel": "Add new channel",
-  
+
   "Channel.Monitoring": "Monitoring",
   "Channel.Listing": "Listing",
   "Channel.Business": "Business",
@@ -53,11 +53,10 @@
   "Menu.Templates": "Templates",
   "Menu.VaProfiles": "VA Profiles",
   "Menu.Orders": "Orders",
-  
+
   "Menu.FAQ": "FAQ",
   "Menu.ListingServices": "Listing Services",
   "Menu.Start": "Get Started",
-
 
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",
@@ -97,8 +96,10 @@
   "OrderTable.Delete": "Delete",
   "OrderTable.Stop": "Stop",
   "OrderTable.Process": "Process",
+  "OrderTable.Image": "Image",
+  "OrderTable.Item": "Channel Item",
+  "OrderTable.Status": "Status",
 
-  "OrderTable.Item": "Item",
   "OrderTable.Options": "Options",
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
@@ -106,40 +107,38 @@
   "OrderTable.OrderedOn": "Ordered on",
   "OrderTable.State": "State",
 
+  "OrderDetails.OrderState": "Order State",
+  "OrderDetails.AOEnabled": "AO Enabled",
+  "OrderDetails.HISTORY": "Order history",
+  "OrderDetails.viewFullLog": "View full log",
+  "OrderDetails.StartOrder": "Order started",
+  "OrderDetails.OrderDetails": "Order details",
 
-
-  "OrderDetails.OrderState":"Order State",
-  "OrderDetails.AOEnabled":"AO Enabled",
-  "OrderDetails.HISTORY":"Order history",
-  "OrderDetails.viewFullLog":"View full log",
-  "OrderDetails.StartOrder":"Order started",
-  "OrderDetails.OrderDetails":"Order details",
-
-  "OrderDetails.ShippingAddress":"Shipping address",
-  "OrderDetails.Billingaddress":"Billing address",
-  "OrderDetails.StreetAddress":"Street address",
-  "OrderDetails.City":"City",
-  "OrderDetails.PostalCodeState":"Postal code",
-  "OrderDetails.Sale":"Sale",
-  "OrderDetails.ChannelItem":"Channel item",
-  "OrderDetails.Reference":"Reference",
-  "OrderDetails.BuyerUsername":"Buyer username",
-  "OrderDetails.SourceURL":"Source URL",
-  "OrderDetails.NameOfProduct":"Name of product",
-  "OrderDetails.Quantity":"Quantity",
-  "OrderDetails.Sold":"Sold",
-  "OrderDetails.DateOfOrder":"Date of order",
-  "OrderDetails.Sell":"Sell",
-  "OrderDetails.Cost":"Cost",
-  "OrderDetails.Fees":"Fees",
-  "OrderDetails.Profit":"Profit",
-  "OrderDetails.Margin":"Margin",
+  "OrderDetails.ShippingAddress": "Shipping address",
+  "OrderDetails.Billingaddress": "Billing address",
+  "OrderDetails.StreetAddress": "Street address",
+  "OrderDetails.City": "City",
+  "OrderDetails.PostalCodeState": "Postal code",
+  "OrderDetails.Sale": "Sale",
+  "OrderDetails.ChannelItem": "Channel item",
+  "OrderDetails.Reference": "Reference",
+  "OrderDetails.BuyerUsername": "Buyer username",
+  "OrderDetails.SourceURL": "Source URL",
+  "OrderDetails.NameOfProduct": "Name of product",
+  "OrderDetails.Quantity": "Quantity",
+  "OrderDetails.Sold": "Sold",
+  "OrderDetails.DateOfOrder": "Date of order",
+  "OrderDetails.Sell": "Sell",
+  "OrderDetails.Cost": "Cost",
+  "OrderDetails.Fees": "Fees",
+  "OrderDetails.Profit": "Profit",
+  "OrderDetails.Margin": "Margin",
 
   "OrderDetails.ProcessOrder": "Process order",
   "OrderDetails.StopOrder": "Stop order",
   "OrderDetails.MarkAsDispatched": "Mark as dispatched",
   "OrderDetails.DeleteOrder": "Delete order",
-  
+
   "SaveChanges": "Save Changes",
   "ApplyChanges": "Apply Changes",
   "Cancel": "Cancel",
@@ -149,7 +148,7 @@
   "Dismiss": "Dismisss",
   "AddToSelection": "Add to Selection",
   "AddSources": "Add Sources",
-  
+
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
   "SourceConfigInputs.password": "password",
@@ -159,7 +158,7 @@
   "SourceConfigInputs.AddAccount": "Add account",
   "SourceConfigInputs.Disabled": "Disabled",
   "SourceConfigInputs.EnableDisableAutoOrdering": "Enable/Disable Auto-ordering",
- 
+
   "SourceConfigInputs.DadAccount": "Dad account",
   "SourceConfigInputs.AccountConfiguration": "Account configuration",
   "SourceConfigInputs.ConfigureAutoordering": "Configure Autoordering (Beta)",

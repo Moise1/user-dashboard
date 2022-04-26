@@ -3,10 +3,11 @@
 body {
   font-family: 'Poppins', sans-serif;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   line-height: 1.5715;
   box-sizing: border-box;
   .ant-layout {
+    margin-top: 0.5rem;
     padding: 0.3rem;
     background: $secondary-bg;
     .spinner {
@@ -72,7 +73,10 @@ body {
 }
 
 //Ant buttons styles fixed
-
+.ant-input:placeholder-shown {
+  border-radius: 15px;
+  height: 35px;
+}
 button[ant-click-animating-without-extra-node]:after {
   border: 0 none;
   opacity: 0;

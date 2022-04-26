@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { Table, Pagination } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
@@ -6,6 +6,7 @@ import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
+import { ListingData } from 'src/redux/listings/listingsSlice';
 
 type OrdersTypes = {
   id: number;
@@ -13,16 +14,28 @@ type OrdersTypes = {
   sale: string;
   qty: number;
   source: string;
-  title: string;
+  // title: string;
   sold: number;
   cost: number;
-  fees: number;
+  // fees: number;
   profit: number;
   margin: string;
   orderedOn: Date;
   state: JSX.Element | string;
+
+  reference: string;
+  channelItem: number;
+  sourceItem: number;
+  title: string;
+  quantity: number;
+  channelPrice: number;
+  sourcePrice: number;
+  fees: number;
+  date: Date;
+  status: number;
 };
 
+export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
@@ -37,6 +50,9 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  pagination?: boolean;
+  rowClassName?: string;
+  onRow?: () => { onClick: () => void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -50,14 +66,17 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     handleSingleListingModal,
     page,
     showTableInfo,
-    total,
-    pageSize
+    // onChange,
+    // total,
+    current,
+    pageSize,
+    rowClassName,
+    onRow
   } = props;
-  
-  const [defaultCurrent, setDefaultCurrent] = useState<number>(1);
-
-  const getData = (currentPage: Props['current'], pageSize: Props['pageSize'] ) => {
-    return dataSource.slice((currentPage! - 1) * pageSize!, currentPage! * pageSize!);
+  console.log({ dataSource });
+  const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
   return (
@@ -93,15 +112,23 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       <Table
         className="table"
         columns={columns}
-        dataSource={getData(defaultCurrent, pageSize)}
-        rowSelection={rowSelection}
+        dataSource={getData(current, pageSize)}
+        rowSelection={{
+          type: 'checkbox',
+          ...rowSelection
+        }}
         pagination={false}
+        rowClassName={rowClassName}
+        onRow={onRow}
       />
-      <Pagination 
-        onChange={setDefaultCurrent} 
-        total={total} 
-        defaultCurrent={defaultCurrent} 
-        defaultPageSize={pageSize}/>
+      {/* console.log(rowSelection); */}
+      <Pagination
+        // onChange={rowSelection?.onChange}
+        total={totalItems}
+        current={current}
+        pageSize={pageSize}
+        style={{ paddingBottom: '25px' }}
+      />
     </div>
   );
 };

@@ -9,3 +9,25 @@
     margin: 4rem 0 2rem 0;
   }
 }
+// .img-container {
+//   width: 50px;
+//   .record-img {
+//     width: 100%;
+//   }
+// };
+
+.img-container img {
+  max-width: 60px;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+.title {
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table-row {
+  cursor: pointer;
+}

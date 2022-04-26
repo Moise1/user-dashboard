@@ -43,6 +43,8 @@
 }
 
 .success-btn {
+  min-width: 170px;
+
   background: $green;
   &:hover,
   &:focus {
@@ -69,6 +71,7 @@
 
 .danger-btn,
 .delete-btn {
+  min-width: 170px;
   background: $red;
   &:hover,
   &:focus {
@@ -78,6 +81,8 @@
 }
 
 .warning-btn {
+  min-width: 170px;
+
   background: $yellow;
   &:hover {
     background: $yellow;
@@ -85,11 +90,14 @@
   }
 }
 
+//need for buttons
 .cancel-btn {
-  background: $ash-gray;
+  min-width: 170px;
+  color: #fff !important;
+  background: $red !important;
   &:hover,
   &:focus {
-    background: $ash-gray;
+    background: $red !important;
     color: $primary-bg;
   }
 }

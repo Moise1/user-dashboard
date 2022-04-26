@@ -1,13 +1,11 @@
-import React, { useState, useMemo,
-  //  useEffect
-} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
-import { listingsData } from '../common/ListingsData';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -17,11 +15,9 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { SearchOptions } from '../../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
-// import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
-// import { getListings } from 'src/redux/listings/listingsThunk';
-
+import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk';
 import '../../sass/listings.scss';
-
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
@@ -29,12 +25,19 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
-  // const {listings} = useAppSelector((state) => state.listings);
-  // const dispatch = useAppDispatch();
+  const { listings } = useAppSelector((state) => state.listings);
+  const { listingSources } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getListings('00000000-0000-0000-0000-000000000000'));
-  // }, [getListings]);
+  const [source, setSource] = useState([]);
+
+  useEffect(() => {
+    dispatch(getListings());
+    dispatch(getListingsSource());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item);
+    setSource(t);
+  }, [getListings, getListingsSource]);
 
   const tableColumns = [
     {
@@ -43,28 +46,24 @@ export const Listings = () => {
       key: 'img',
       visible: false
     },
-
     {
       title: t('Listings.Column.Item no.'),
       dataIndex: 'id',
       key: 'id',
       visible: true
     },
-
     {
       title: t('Listings.Column.Source'),
       dataIndex: 'source',
       key: 'source',
       visible: true
     },
-
     {
       title: t('Listings.Column.Title'),
       dataIndex: 'title',
       key: 'title',
       visible: false
     },
-
     {
       title: t('Listings.Column.Sell'),
       dataIndex: 'sell',
@@ -89,7 +88,6 @@ export const Listings = () => {
       key: 'markup',
       visible: false
     },
-
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'stock',
@@ -143,11 +141,8 @@ export const Listings = () => {
   };
 
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
-
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
-
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   return (
@@ -229,11 +224,14 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        dataSource={listingsData}
+        // source={source}
+        dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={0}
-        showTableInfo
+        pageSize={10}
+        showTableInfo={true}
+        current={1}
       />
     </Layout>
   );
