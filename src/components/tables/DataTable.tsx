@@ -3,7 +3,9 @@ import { Table, Pagination } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
-import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
+import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
+import { ListingsItems } from '../common/ListingsData';
+import { Channel } from '../../redux/channels/channelsSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 
 type OrdersTypes = {
@@ -36,7 +38,7 @@ type OrdersTypes = {
 export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<TableDataTypes>;
+  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -45,13 +47,12 @@ interface Props {
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
-  onChange?: React.Dispatch<React.SetStateAction<number>>;
   total?: number;
   current?: number;
   pageSize?: number;
   pagination?: boolean;
   rowClassName?: string;
-  onRow?: ()=> { onClick: () =>  void };
+  onRow?: () => { onClick: () => void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -65,7 +66,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     handleSingleListingModal,
     page,
     showTableInfo,
-    onChange,
+    // onChange,
     // total,
     current,
     pageSize,
@@ -122,7 +123,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       />
       {/* console.log(rowSelection); */}
       <Pagination
-        onChange={onChange}
+        // onChange={rowSelection?.onChange}
         total={totalItems}
         current={current}
         pageSize={pageSize}

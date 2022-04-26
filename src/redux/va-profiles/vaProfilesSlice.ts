@@ -1,17 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserAssistants, createUserAssistant } from './vaProfilesThunk';
+import { getUserAssistants, createUserAssistant, deleteUserAssistant } from './vaProfilesThunk';
 
 export interface UserAssistant {
   id: number;
-  name: string;
-  userId: string;
+  name?: string;
+  userId?: string;
   active: boolean;
-  createdOn: Date;
+  createdOn?: Date;
 }
 
 const initialState = {
   userAssistants: [] as UserAssistant[],
   userAssistant: {},
+  userAssistantDeleted: false,
   loading: false,
   error: ''
 };
@@ -21,6 +22,7 @@ export const userAssistantsSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Get all VA Profiles
     builder.addCase(getUserAssistants.pending, (state) => {
       state.loading = true;
       state.error = '';
@@ -34,6 +36,7 @@ export const userAssistantsSlice = createSlice({
       state.error = String(payload);
     });
 
+    // Create VA Profile
     builder.addCase(createUserAssistant.pending, (state) => {
       state.loading = true;
       state.error = '';
@@ -46,6 +49,22 @@ export const userAssistantsSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
+
+    // Delete VA Profile
+    builder.addCase(deleteUserAssistant.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(deleteUserAssistant.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.userAssistantDeleted = payload.success;
+    });
+    builder.addCase(deleteUserAssistant.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+
+
   }
 });
 

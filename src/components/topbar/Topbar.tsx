@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
 import bell from '../../assets/bell-icon.svg';
-import {StoreList} from '../small-components/StoreList';
+import {StoreList} from '../../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
@@ -11,6 +11,7 @@ import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../user/DeleteAccount';
 import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
 import {getNotifications} from '../../redux/notifications/notificationsThunk';
+import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 
 interface Props extends RouteComponentProps {
@@ -24,7 +25,7 @@ export const Topbar = withRouter((props: Props) =>{
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
-  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user || {});
+  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user || {});
   const {notifications} = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
@@ -45,9 +46,10 @@ export const Topbar = withRouter((props: Props) =>{
     }
   };
 
+  const {channelId} = useContext(AppContext);
   useEffect(() =>{
     dispatch(getNotifications());
-  },[getNotifications]);
+  },[getNotifications, channelId]);
 
   
   return (

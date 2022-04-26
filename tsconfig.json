@@ -1,6 +1,7 @@
 {
   "compilerOptions": {   
     "allowJs": true,
+    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "esModuleInterop": true,
@@ -25,12 +26,13 @@
     "types": []
   },
   "include": [
-    "src"
+    "src",
+    "types"
   ],
   "xexclude": [
     "node_modules",
     "./node_modules",
     "./node_modules/*/*.d.ts",
-    "./node_modules/@types/node/index.d.ts"
+    "./node_modules/@types/node/index.d.ts",
   ]
 }

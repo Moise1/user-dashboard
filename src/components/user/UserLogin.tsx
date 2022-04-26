@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-import { ConfirmBtn } from '../small-components/ActionBtns';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userLogin } from 'src/redux/user/userThunk';
 import { UserData } from '../../redux/user/userSlice';

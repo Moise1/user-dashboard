@@ -3,7 +3,7 @@ import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
-import '../../sass/advanced-search.scss';
+import '../sass/advanced-search.scss';
 
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;

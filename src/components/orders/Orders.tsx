@@ -11,8 +11,8 @@ import { OrderData } from '../../redux/orders/orderSlice';
 import { DataTable } from '../tables/DataTable';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
-import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
-import { TableActionBtns } from '../small-components/TableActionBtns';
+import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
+import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 // import { OrderEditSingleListing } from '../orders/OrderEditSingleListing';
@@ -54,6 +54,8 @@ export const Orders = () => {
         }))
     );
   }, [getOrders]);
+  
+  console.log(setCurrent);
 
   const tableColumns = [
     {
@@ -261,7 +263,7 @@ export const Orders = () => {
         totalItems={order.length}
         pageSize={10}
         current={current}
-        onChange={setCurrent}
+        // onChange={setCurrent}
         pagination={false}
         rowClassName="table-row"
         onRow={() => {

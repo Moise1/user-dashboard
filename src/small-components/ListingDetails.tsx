@@ -1,7 +1,7 @@
 import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import { t } from 'src/utils/transShim';
-import '../../sass/listing-details.scss';
-import { TrashIcon, CheckIcon, RefreshIcon } from '../common/Icons';
+import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
+import '../sass/listing-details.scss';
 
 export const ListingDetails = () => {
   return (

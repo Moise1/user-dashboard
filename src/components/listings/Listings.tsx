@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout } from 'antd';
-import { TableActionBtns } from '../small-components/TableActionBtns';
-import { StatusBar } from '../small-components/StatusBar';
-import { StatusBtn } from '../small-components/StatusBtn';
+import { TableActionBtns } from '../../small-components/TableActionBtns';
+import { StatusBar } from '../../small-components/StatusBar';
+import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
 import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
+import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
-import { SearchOptions } from '../small-components/SearchOptions';
+import { SearchOptions } from '../../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
-import { ListingsAdvancedSearch } from '../small-components/AdvancedSearchDrawers';
+import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { getListings, getListingsSource } from 'src/redux/listings/listingsThunk';
 import '../../sass/listings.scss';

@@ -11,16 +11,18 @@ export const client = axios.create({
 
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
+    const channelId = localStorage.getItem('channelId');
     const token = localStorage.getItem('Authorization');
     if (token) {
       req.headers = {
         Authorization: `Bearer ${token}`,
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Methods': '*',
-        // 'Access-Control-Allow-Headers': '*',
-        // Accept: 'application/json',
-        // 'Content-Type': 'application/json',
-        // 'Access-Control-Expose-Headers': '*',
+        channel: channelId!,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*',
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Expose-Headers': '*',
         ...req.headers
       };
     }

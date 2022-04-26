@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { X as CloseIcon } from 'react-feather';
+import { CloseIcon }   from  '../../small-components/CloseIcon';
 import { ICatalogData } from '../../dummy-data/dummyData';
 import '../../sass/all-products.scss';
 

@@ -18,9 +18,9 @@ import { MenuListItem } from './MenuListItem';
 import { actions } from '../../redux/user/userSlice';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
-import { Switch } from '../small-components/Switch';
+import { Switch } from '../../small-components/Switch';
 import pin from '../../assets/pin.svg';
-import { TransparentBtn } from '../small-components/ActionBtns';
+import { TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import '../../sass/side-bar.scss';
@@ -84,21 +84,28 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
+    const keysToRemove = [
+      'root',
+      'Authorization',
+      'channelId', 
+      'globalTheme', 
+      'isAuthenticated'
+    ];
     dispatch(actions.logout());
-    localStorage.clear();
+    keysToRemove.forEach(key => localStorage.removeItem(key));
     persistor.purge();
     routeChange('/login');
   };
 
   const settingsListArray = [
-    {listName: t('Menu.Channel'), onClick: () => routeChange('/channel')},
-    {listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
-    {listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    {listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    {listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    {listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    {listName: t('Menu.Templates'),  onClick: () => routeChange('/templates')},
-    {
+    {id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel')},
+    {id: 7 ,listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
+    {id: 8 ,listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    {id: 9,listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    {id: 10,listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    {id: 11,listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    {id: 12,listName: t('Menu.Templates'),  onClick: () => routeChange('/templates')},
+    { id: 13,
       listName: (
         <>
           <Switch
@@ -115,9 +122,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    {listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    {listName: t('Menu.FAQ') },
-    {listName: t('Menu.ListingServices') }
+    {id: 17, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    {id: 18, listName: t('Menu.FAQ') },
+    {id: 19, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -225,8 +232,8 @@ export const Sidebar = (props: Props) => {
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
-              {settingsListArray.map((obj, idx) => (
-                <Item key={idx} onClick={obj.onClick}>
+              {settingsListArray.map(obj => (
+                <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>
               ))}
@@ -240,7 +247,7 @@ export const Sidebar = (props: Props) => {
                 <Item
                   className="menu-item"
                   onClick={() => routeChange('/dashboard')}
-                  key="7"
+                  key="14"
                   style={{ fontSize: '18px', fontWeight: 'bold' }}
                   icon={<DashBoardIcon />}
                 >
@@ -250,7 +257,7 @@ export const Sidebar = (props: Props) => {
                 <Item
                   className="menu-item"
                   onClick={() => routeChange('/dashboard')}
-                  key="8"
+                  key="15"
                   style={{ fontSize: '18px', fontWeight: 'bold' }}
                   icon={<DashBoardIcon />}
                 >
@@ -263,7 +270,7 @@ export const Sidebar = (props: Props) => {
             <Item
               className="menu-item"
               style={{ fontSize: '18px', fontWeight: 'bold' }}
-              key="21"
+              key="16"
               icon={<ServiceIcon />}
               onClick={() => routeChange('/services')}
             >
@@ -277,8 +284,8 @@ export const Sidebar = (props: Props) => {
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
-              {helpListArray.map((obj, idx) => (
-                <Item key={idx} onClick={obj.onClick}>
+              {helpListArray.map(obj => (
+                <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>
               ))}
