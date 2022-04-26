@@ -26,7 +26,7 @@ export const Orders = () => {
   const { orders } = useAppSelector((state) => state);
   const { status } = useAppSelector((state) => state.orders);
   const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(0);
+  const [orderNumber] = useState(445378);
   const [order, setOrder] = useState([]);
   const [searchedArray, setSearchedArray] = useState([]);
   const [searchKey, setSearchKey] = useState<string>('');
@@ -251,7 +251,7 @@ export const Orders = () => {
           {t('AdvancedSearch')}
         </TableActionBtns>
       </div>
-      <OrderActionBtns orderNumber={orderNumber} />
+      <OrderActionBtns orderNumber={orderNumber} channelId={590881} />
       <DataTable
         page="order"
         columns={visibleCols}

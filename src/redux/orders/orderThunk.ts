@@ -64,3 +64,20 @@ export const getOrders = createAsyncThunk(
     }
   }
 );
+
+export const processOrders = createAsyncThunk(
+  'sales/loadProgress',
+  async ({ channelOAuthIds }: { channelOAuthIds: OrderData['channelOAuthIds'] }, thunkAPI) => {
+    try {
+      const res = await client.post('/Sales/LoadProgress', { channelOAuthIds });
+      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+        ...item,
+        date: new Date(item?.date),
+        key
+      }));
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);
