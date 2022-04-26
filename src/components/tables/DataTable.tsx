@@ -73,7 +73,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     rowClassName,
     onRow
   } = props;
-  console.log({ dataSource });
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);

@@ -1,5 +1,3 @@
-/* eslint-disable no-var */
-/* eslint-disable indent */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
 import { OrderData } from './orderSlice';

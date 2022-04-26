@@ -31,7 +31,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
 
   const options = children?.map((c) => {
     return (
-      <Option key={c.id} value={c.value}>
+      <Option key={c.id} value={showFlags ? c.id : c.value}>
         {showFlags && shopLogo(c.channelId)}
         {showFlags && countryFlag(c.isoCountry)}
         {c.value}
