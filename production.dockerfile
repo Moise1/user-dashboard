@@ -15,7 +15,7 @@ RUN rm -rf ./src/css && \
     sass --no-source-map --style compressed  ./src/sass/:./src/css/ && \
     for f in ./src/css/*.css; do mv -- "$f" "${f%.css}.min.css"; done;
     
-RUN yarn build --silent
+RUN yarn build
 
 # production environment
 FROM nginx:stable-alpine
