@@ -8,7 +8,7 @@ import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 
-type OrdersTypes = {
+export interface OrdersTypes {
   id: number;
   img: JSX.Element;
   sale: string;
@@ -33,7 +33,7 @@ type OrdersTypes = {
   fees: number;
   date: Date;
   status: number;
-};
+}
 
 export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
@@ -52,7 +52,7 @@ interface Props {
   pageSize?: number;
   pagination?: boolean;
   rowClassName?: string;
-  onRow?: () => { onClick: () => void };
+  onRow?: (record: OrdersTypes) => { onClick: () => void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -73,11 +73,13 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     rowClassName,
     onRow
   } = props;
-  console.log({ dataSource });
+  // console.log({ dataSource });
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
+
+  console.log('getData', getData(current, pageSize));
 
   return (
     <div className="data-table">
@@ -104,7 +106,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           </div>
           <p className="total-items">
             <strong>
-              {totalItems} {page}s
+              {totalItems} {page}
             </strong>
           </p>
         </div>

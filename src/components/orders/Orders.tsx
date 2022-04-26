@@ -20,7 +20,9 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
-import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
+// import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
+import { OrderContent } from '../small-components/OrderStateProgressModal';
+
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
@@ -54,7 +56,7 @@ export const Orders = () => {
         }))
     );
   }, [getOrders]);
-  
+
   console.log(setCurrent);
 
   const tableColumns = [
@@ -184,7 +186,6 @@ export const Orders = () => {
   };
   const handleApplyChanges = () => setShowColumns(!showColumns);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
-  console.log(handleSingleListingModal);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   // console.log(rowSelection);
@@ -234,9 +235,9 @@ export const Orders = () => {
           <BulkEditListings selectedItems={selectedRowKeys.length} />
         </PopupModal>
       ) : (
-        // <PopupModal open={singleEditOpen} width={900} handleClose={handleOrderModal}>
-        <OrderStateProgressModal orderProgress={status} show={orderModalOpen} handleClose={handleOrderModal} />
-        // </PopupModal>
+        <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
+          <OrderContent orderProgress={status} handleClose={handleOrderModal} />
+        </PopupModal>
       )}
 
       <div className="search-options-area">
@@ -266,9 +267,10 @@ export const Orders = () => {
         // onChange={setCurrent}
         pagination={false}
         rowClassName="table-row"
-        onRow={() => {
+        onRow={(record) => {
+          console.log(record);
           return {
-            onClick: () => handleOrderModal()
+            onClick: () => handleSingleListingModal()
           };
         }}
       />
