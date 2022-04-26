@@ -51,3 +51,37 @@
     }
   }
 }
+
+.order-listing-modal-container {
+  display: flex;
+  align-items: center;
+}
+
+.order-modal-icon {
+  margin-right: 15px;
+  background: $light-gray;
+  border-radius: 30% !important;
+}
+
+.order-channel-pic {
+  background-color: #e8f4ff;
+}
+
+.order-listing-modal-line {
+  border-left: 3px solid #3a93e8;
+  height: 60px;
+}
+
+.order-listing-modal-horizontal {
+  // border: 2px solid #1c63a6;
+  background-color: #1c63a6;
+  border-radius: 9%;
+  padding: 2px;
+  font-size: 12px;
+  color: #e8f4ff;
+  text-align: center;
+}
+
+.order-details-btn {
+  margin-top: 10px;
+}

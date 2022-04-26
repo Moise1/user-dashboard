@@ -15,16 +15,16 @@ import { SuccessBtn, CancelBtn } from '../small-components/ActionBtns';
 import { TableActionBtns } from '../small-components/TableActionBtns';
 import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { EditSingleListing } from '../listings/EditSingleListing';
+// import { OrderEditSingleListing } from '../orders/OrderEditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
-
+import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
-
+  const { status } = useAppSelector((state) => state.orders);
   const [current, setCurrent] = useState<number>(1);
   const [orderNumber] = useState(0);
   const [order, setOrder] = useState([]);
@@ -36,8 +36,10 @@ export const Orders = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+
+  const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
+  const handleOrderModal = () => setOrderModalOpen(!orderModalOpen);
 
   //Get Orders
   useEffect(() => {
@@ -180,6 +182,7 @@ export const Orders = () => {
   };
   const handleApplyChanges = () => setShowColumns(!showColumns);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+  console.log(handleSingleListingModal);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   // console.log(rowSelection);
@@ -229,9 +232,9 @@ export const Orders = () => {
           <BulkEditListings selectedItems={selectedRowKeys.length} />
         </PopupModal>
       ) : (
-        <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <EditSingleListing />
-        </PopupModal>
+        // <PopupModal open={singleEditOpen} width={900} handleClose={handleOrderModal}>
+        <OrderStateProgressModal orderProgress={status} show={orderModalOpen} handleClose={handleOrderModal} />
+        // </PopupModal>
       )}
 
       <div className="search-options-area">
@@ -263,7 +266,7 @@ export const Orders = () => {
         rowClassName="table-row"
         onRow={() => {
           return {
-            onClick: () => handleSingleListingModal()
+            onClick: () => handleOrderModal()
           };
         }}
       />
