@@ -4,9 +4,10 @@ import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
+import { ListingData } from 'src/redux/listings/listingsSlice';
+
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
-import { ListingData } from 'src/redux/listings/listingsSlice';
 
 export interface OrdersTypes {
   id: number;
@@ -35,10 +36,11 @@ export interface OrdersTypes {
   status: number;
 }
 
-export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
+// export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
+  // dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
+  dataSource: Array<ListingsItems | ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -52,7 +54,9 @@ interface Props {
   pageSize?: number;
   pagination?: boolean;
   rowClassName?: string;
-  onRow?: (record: OrdersTypes) => { onClick: () => void };
+  onRow?: (record: ListingsItems | ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel) => {
+    onClick: () => void;
+  };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -76,11 +80,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   // console.log({ dataSource });
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
+    return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
-  console.log('getData', getData(current, pageSize));
-
+  // console.log('getData', getData(current, pageSize));
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -126,6 +129,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       {/* console.log(rowSelection); */}
       <Pagination
         // onChange={rowSelection?.onChange}
+        // onChange={onChange}
         total={totalItems}
         current={current}
         pageSize={pageSize}

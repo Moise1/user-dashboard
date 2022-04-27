@@ -21,7 +21,8 @@ import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
 // import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
-import { OrderContent } from '../small-components/OrderStateProgressModal';
+import { OrderContent } from '../small-components/OrderContent';
+import OrderDetailsContent from '../small-components/OrderDetailsContent';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
@@ -38,10 +39,13 @@ export const Orders = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+  const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
 
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+  const [selectedRecord, setSelectedRecord] = useState({});
   const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const handleOrderModal = () => setOrderModalOpen(!orderModalOpen);
+  const handleOrderDetailsOpen = () => setOrderDetailsOpen(!orderDetailsOpen);
 
   //Get Orders
   useEffect(() => {
@@ -51,7 +55,7 @@ export const Orders = () => {
         orders?.orders.map((item: OrderData): unknown => ({
           ...item,
           profit: item.channelPrice - item.channelPrice - item.fees,
-          margin: (item.profit / item.channelPrice) * 100,
+          margin: (item.profit! / item.channelPrice) * 100,
           date: moment(item.date).format('DD/MM/YY/ hh:mm')
         }))
     );
@@ -155,7 +159,7 @@ export const Orders = () => {
   }, [order, searchKey]);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
-    console.log({ selectedRowKeys });
+    // console.log({ selectedRowKeys });
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -185,7 +189,10 @@ export const Orders = () => {
     setShowColumns(!showColumns);
   };
   const handleApplyChanges = () => setShowColumns(!showColumns);
-  const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+  const handleSingleListingModal = () => {
+    // console.log('in click', singleEditOpen);
+    setSingleEditOpen(!singleEditOpen);
+  };
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   // console.log(rowSelection);
@@ -236,10 +243,13 @@ export const Orders = () => {
         </PopupModal>
       ) : (
         <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <OrderContent orderProgress={status} handleClose={handleOrderModal} />
+          <OrderContent orderProgress={status} data={selectedRecord} handleClose={handleOrderModal} />
         </PopupModal>
       )}
-
+      <PopupModal open={orderDetailsOpen} width={900} handleClose={handleOrderDetailsOpen}>
+        <OrderDetailsContent data={selectedRecord} />
+      </PopupModal>
+      {console.log('The data in', selectedRecord)}
       <div className="search-options-area">
         {/* <SearchOptions showSearchInput /> */}
         <Input
@@ -254,7 +264,7 @@ export const Orders = () => {
           {t('AdvancedSearch')}
         </TableActionBtns>
       </div>
-      <OrderActionBtns orderNumber={orderNumber} channelId={590881} />
+      <OrderActionBtns orderNumber={orderNumber} channelId={445379} />
       <DataTable
         page="order"
         columns={visibleCols}
@@ -268,9 +278,13 @@ export const Orders = () => {
         pagination={false}
         rowClassName="table-row"
         onRow={(record) => {
-          console.log(record);
+          // console.log(record);
           return {
-            onClick: () => handleSingleListingModal()
+            onClick: () => {
+              // console.log({ record });
+              setSelectedRecord(record);
+              handleSingleListingModal();
+            }
           };
         }}
       />

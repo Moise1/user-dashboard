@@ -5,6 +5,7 @@ import '../../sass/orders.scss';
 import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
+import { manuallyDispatch } from '../../redux/orders/orderThunk';
 interface props {
   orderNumber: number;
   channelId: number;
@@ -14,16 +15,21 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   const dispatch = useAppDispatch();
 
   const { orderNumber, channelId } = typeBtnProps;
-  console.log('The orderNumber', orderNumber);
-  console.log('The channelId', channelId);
+  console.log('The orderNumber is', orderNumber);
+  console.log('The channelId is', channelId);
 
-  const handleClick = () => {
-    dispatch(processOrders({ channelOAuthIds: [590881] }));
+  const handleProcessOrders = () => {
+
+    dispatch(processOrders(orderNumber));
+  };
+
+  const handleManuallyDispatch = () => {
+    dispatch(manuallyDispatch(orderNumber));
   };
 
   return (
     <StatusBar>
-      <ConfirmBtn handleClick={handleClick}>
+      <ConfirmBtn handleConfirm={handleProcessOrders}>
         <ProcessOrderIcon />
         <span>
           {t('OrderTable.Process')} {orderNumber > 0 ? orderNumber : ''} orders{' '}
@@ -43,7 +49,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
           {t('OrderTable.Delete')} {orderNumber > 0 ? orderNumber : ''} orders{' '}
         </span>
       </DangerBtn>
-      <SuccessBtn>
+      <SuccessBtn handleConfirm={handleManuallyDispatch}>
         <CheckIcon />
         <span>{t('OrderButtons.MarkAsDispatched')}</span>
       </SuccessBtn>

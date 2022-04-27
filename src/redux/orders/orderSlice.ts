@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders } from './orderThunk';
+import { getOrders, processOrders, manuallyDispatch } from './orderThunk';
 // export interface OrderData {
 //   id: number;
 //   channelOAuthId: number;
@@ -47,14 +47,17 @@ export interface OrderData {
   channelPaymentTaxes: number;
   sourceVAT: null;
   sourceShipping: null;
-  id: number;
   sourcePath: string;
   fees: number;
   storeStatus: number;
   hgrTrackingNumber: null;
   buyReference: string;
   cancelRequested: boolean;
-  profit: number;
+  profit?: number;
+
+  //added on 26april
+  orderLineId: number;
+  id: number;
 }
 
 const initialState = {
@@ -78,6 +81,48 @@ export const orderSlice = createSlice({
       state.orders = payload;
     });
     builder.addCase(getOrders.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+export const processOrdersSlice = createSlice({
+  name: 'processOrders',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(processOrders.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(processOrders.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+      state.loading = false;
+      state.orders = payload;
+    });
+    builder.addCase(processOrders.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+export const manuallyDispatchSlice = createSlice({
+  name: 'manuallyDispatch',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(manuallyDispatch.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(manuallyDispatch.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+      state.loading = false;
+      state.orders = payload;
+    });
+    builder.addCase(manuallyDispatch.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });

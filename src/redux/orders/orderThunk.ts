@@ -40,12 +40,13 @@ export const getOrders = createAsyncThunk(
     try {
       const res = await client.post('/Sales/Search', { channelOAuthIds });
       // console.log('response', res.data.response_data.orders);
+      // console.log('The response', res);
       const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
         ...item,
         date: new Date(item?.date),
         key
       }));
-      console.log({ data });
+      // console.log('The order api repsonse on wednesday is', res);
       return data;
       // const iter = unmap(res.data.response_data?.orders as compArray);
       // const rv: ActiveListing[] = [];
@@ -65,19 +66,21 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const processOrders = createAsyncThunk(
-  'sales/loadProgress',
-  async ({ channelOAuthIds }: { channelOAuthIds: OrderData['channelOAuthIds'] }, thunkAPI) => {
-    try {
-      const res = await client.post('/Sales/LoadProgress', { channelOAuthIds });
-      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
-        ...item,
-        date: new Date(item?.date),
-        key
-      }));
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
-    }
+export const processOrders = createAsyncThunk('sales/processORder', async (id: number, thunkAPI) => {
+  try {
+
+    const res = await client.post('/Sales/LoadProgress', {id});
+    return res;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
   }
-);
+});
+
+export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async (orderLineId: number, thunkAPI) => {
+  try {
+    const res = await client.post('/Sales/ManuallyDispatchOrderLine', {orderLineId});
+    return res;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
