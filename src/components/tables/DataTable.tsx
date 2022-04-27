@@ -5,42 +5,42 @@ import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
+import { OrderData } from 'src/redux/orders/orderSlice';
 
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
-export interface OrdersTypes {
-  id: number;
-  img: JSX.Element;
-  sale: string;
-  qty: number;
-  source: string;
-  // title: string;
-  sold: number;
-  cost: number;
-  // fees: number;
-  profit: number;
-  margin: string;
-  orderedOn: Date;
-  state: JSX.Element | string;
+// export interface OrdersTypes {
+//   id: number;
+//   img: JSX.Element;
+//   sale: string;
+//   qty: number;
+//   source: string;
+//   // title: string;
+//   sold: number;
+//   cost: number;
+//   // fees: number;
+//   profit: number;
+//   margin: string;
+//   orderedOn: Date;
+//   state: JSX.Element | string;
 
-  reference: string;
-  channelItem: number;
-  sourceItem: number;
-  title: string;
-  quantity: number;
-  channelPrice: number;
-  sourcePrice: number;
-  fees: number;
-  date: Date;
-  status: number;
-}
+//   reference: string;
+//   channelItem: number;
+//   sourceItem: number;
+//   title: string;
+//   quantity: number;
+//   channelPrice: number;
+//   sourcePrice: number;
+//   fees: number;
+//   date: Date;
+//   status: number;
+// }
 
-// export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
+export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  // dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
-  dataSource: Array<ListingsItems | ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
+  dataSource: Array<TableDataTypes>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
@@ -54,9 +54,7 @@ interface Props {
   pageSize?: number;
   pagination?: boolean;
   rowClassName?: string;
-  onRow?: (record: ListingsItems | ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel) => {
-    onClick: () => void;
-  };
+  onRow?: (record: TableDataTypes ) => {onClick: () => void};
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {

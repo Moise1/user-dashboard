@@ -28,6 +28,7 @@ export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
   const { status } = useAppSelector((state) => state.orders);
+
   const [current, setCurrent] = useState<number>(1);
   const [orderNumber] = useState(445378);
   const [order, setOrder] = useState([]);
@@ -40,12 +41,18 @@ export const Orders = () => {
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
-
-  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const [selectedRecord, setSelectedRecord] = useState({});
   const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
+
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
+  const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+
   const handleOrderModal = () => setOrderModalOpen(!orderModalOpen);
-  const handleOrderDetailsOpen = () => setOrderDetailsOpen(!orderDetailsOpen);
+
+  const handleOrderDetailsOpen = () => {
+    handleSingleListingModal();
+    setOrderDetailsOpen(!orderDetailsOpen);
+  };
 
   //Get Orders
   useEffect(() => {
@@ -189,10 +196,7 @@ export const Orders = () => {
     setShowColumns(!showColumns);
   };
   const handleApplyChanges = () => setShowColumns(!showColumns);
-  const handleSingleListingModal = () => {
-    // console.log('in click', singleEditOpen);
-    setSingleEditOpen(!singleEditOpen);
-  };
+
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   // console.log(rowSelection);
@@ -243,7 +247,12 @@ export const Orders = () => {
         </PopupModal>
       ) : (
         <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <OrderContent orderProgress={status} data={selectedRecord} handleClose={handleOrderModal} />
+          <OrderContent 
+            orderProgress={status} 
+            data={selectedRecord}
+            handleClose={handleOrderModal} 
+            OrderDetailsModal={handleOrderDetailsOpen}
+          />
         </PopupModal>
       )}
       <PopupModal open={orderDetailsOpen} width={900} handleClose={handleOrderDetailsOpen}>
@@ -278,10 +287,8 @@ export const Orders = () => {
         pagination={false}
         rowClassName="table-row"
         onRow={(record) => {
-          // console.log(record);
           return {
             onClick: () => {
-              // console.log({ record });
               setSelectedRecord(record);
               handleSingleListingModal();
             }

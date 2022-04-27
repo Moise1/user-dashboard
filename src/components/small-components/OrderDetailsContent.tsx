@@ -6,9 +6,8 @@ import { OrderData } from 'src/redux/orders/orderSlice';
 import '../../sass/order-state-modal.scss';
 
 interface Props {
-  data: OrderDataType;
+  data: {[key: string]: OrderData};
 }
-type OrderDataType = OrderData;
 const OrderDetailsContent = ({ data }: Props) => {
   console.log(data.date);
   return (

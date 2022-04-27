@@ -20,6 +20,7 @@ interface Props {
   data?: unknown;
   // show: boolean;
   handleClose: () => void;
+  OrderDetailsModal: () => void;
   // setShow: (value: boolean) => void;
   // orderDetailsModalShow: boolean;
   // setOrderDetailsModalShow: (value: boolean) => void;
@@ -28,7 +29,7 @@ interface Props {
 }
 
 export const OrderContent = (props: Props) => {
-  const { orderProgress, data } = props;
+  const { orderProgress, data, OrderDetailsModal } = props;
   console.log('data in modal', { data });
   const now = 60;
   return (
@@ -137,10 +138,7 @@ export const OrderContent = (props: Props) => {
           <div className="row">
             <div className="go-back-details-container col">
               <div
-                onClick={() => {
-                  // setOrderDetailsModalShow(true);
-                  // setShow(false);
-                }}
+                onClick={OrderDetailsModal}
                 className="go-back-details"
               >
                 <span> {t('OrderDetails.OrderDetails')}</span>
