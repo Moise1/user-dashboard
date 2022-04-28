@@ -6,13 +6,16 @@
     margin-top: $spacer;
   }
 }
+
 .search-options-area {
   display: flex;
   justify-content: space-between;
+
   .action-components {
     width: 100%;
     margin-left: 0;
     margin: auto;
+
     .ant-input-wrapper {
       width: 100% !important;
     }
@@ -25,6 +28,11 @@
   }
 }
 
+.img-container img {
+  max-width: 60px;
+  max-height: 60px;
+}
+
 .table {
   // height: 100%;
   overflow: scroll;
@@ -35,6 +43,7 @@
     display: flex !important;
     justify-content: space-between;
     height: auto;
+
     .cols-list {
       list-style: none;
       -moz-column-count: 2;
@@ -43,6 +52,7 @@
       -webkit-column-gap: 5rem;
       column-count: 2;
       column-gap: 5rem;
+
       li {
         margin-bottom: 0.5rem;
       }
@@ -50,6 +60,7 @@
 
     .cols-amount {
       display: block;
+
       p,
       h3 {
         text-align: center;
@@ -57,10 +68,12 @@
       }
     }
   }
+
   .show-columns-action-btns {
     display: flex;
     justify-content: flex-end;
-    & > * {
+
+    &>* {
       margin-left: 1rem;
     }
   }
@@ -77,11 +90,14 @@
   background: $primary-bg;
   margin-top: 1rem;
   padding: 1rem;
+
   .selected-options {
     margin-left: 2rem;
+
     .total-selected {
       color: $corporative-color;
     }
+
     .list {
       list-style-type: none;
       display: flex;
@@ -91,13 +107,16 @@
       background: $secondary-bg;
       padding: 0.2rem 2rem;
       border-radius: 16px;
+
       .horizontal-divider {
         display: none;
       }
+
       .list-item {
         margin-left: 0.9rem;
         cursor: pointer;
         color: $corporative-color;
+
         &:nth-last-child(-n + 2):before {
           content: '|';
           margin-right: 0.2rem;
@@ -113,6 +132,7 @@
 
 // Phone and tablets screen size.
 @media only screen and (max-width: 750px) {
+
   .advanced-search-btn span,
   .view-columns-btn span {
     display: none !important;
@@ -121,15 +141,19 @@
   .total-selected {
     display: none;
   }
+
   .table-info {
     place-items: center;
   }
+
   .selected-options {
     width: 100%;
     margin: 0 !important;
+
     .list {
       place-items: center;
       justify-content: space-between !important;
+
       .list-item {
         &:nth-last-child(-n + 2):before {
           content: '' !important;

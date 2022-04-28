@@ -27,7 +27,7 @@ export type SeletedRowsType = (ListingData | OrdersTypes | Rule | SourceConfig |
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
-  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[],selectedRows: SeletedRowsType) => void };
+  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[], selectedRows: SeletedRowsType) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;

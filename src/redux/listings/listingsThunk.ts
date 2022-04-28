@@ -52,3 +52,45 @@ export const getListingsSource = createAsyncThunk(
     }
   }
 );
+
+export const getPendingListing = createAsyncThunk(
+  'listings/getPendingListing',
+  async (_,{ rejectWithValue }
+  ) => {
+    try {
+      const res = await client.get('/SearchProduct/getPendingListings');
+      var data = res?.data?.response_data;
+      return data;
+    } catch (error) {
+      return rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);
+
+export const getTerminateListings = createAsyncThunk(
+  'listings/getTerminatedListings',
+  async (_,{ rejectWithValue }
+    ) => {
+    try {
+      const res = await client.get('/SearchProduct/getTerminatedListings');
+      var data = res?.data?.response_data;
+      return data;
+    } catch (error) {
+      return rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);
+
+// export const getsListings = createAsyncThunk(
+//   'listings/getListings',
+//   async (batchId: string, { rejectWithValue } /* destructured thunkAPI's prop */) => {
+//     try {
+//       console.log('calling listings api');
+//       const res = await client.post('/Listing/Bulk/GetListingStatus', batchId);
+//       console.log(res.data.response_data);
+//       return res.data.response_data;
+//     } catch (error) {
+//       return rejectWithValue('Sorry! Something went wrong ): ');
+//     }
+//   }
+// );
