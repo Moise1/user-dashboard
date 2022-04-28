@@ -36,7 +36,7 @@ export const rulesSlice = createSlice({
     });
     builder.addCase(getRules.fulfilled, (state, { payload })=>{
       state.loading = false;
-      state.rules = payload.rules;
+      state.rules = payload;
     });
     builder.addCase(getRules.rejected, (state, { payload })=>{
       state.loading = false;

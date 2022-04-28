@@ -8,7 +8,12 @@ export const getRules = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await client.get('/Pricing/Get');
-      return res.data.response_data;
+      const rulesData = res.data.response_data.rules.map((item: Rule, key: number) => ({ 
+        ...item,
+        key
+      }));
+      
+      return rulesData;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
     }

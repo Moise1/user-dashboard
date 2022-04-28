@@ -99,23 +99,7 @@ export const Listings = () => {
       dataIndex: 'options',
       key: 'options',
       visible: false
-<<<<<<< HEAD
     }
-=======
-    },
-    {
-      title: t('Listings.Column.Created On'),
-      dataIndex: 'createdOn',
-      key: '11',
-      visible: activeListingsType === 'pendingTabListing' ? false : true
-    },
-    {
-      title: t('Listings.Column.Created By'),
-      dataIndex: 'createdByName',
-      key: '12',
-      visible: activeListingsType === 'pendingTabListing' ? false : true
-    },
->>>>>>> listings-page-shahid
   ];
   const [columns, setColumns] = useState(tableColumns);
 

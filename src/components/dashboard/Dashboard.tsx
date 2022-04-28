@@ -3,7 +3,6 @@ import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
-import { Line } from '@ant-design/plots';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
@@ -161,7 +160,11 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="sales-graph">
-            <Line {...salesGraphConfig} />
+
+            {/* Sales graph */}
+
+
+
           </div>
         </div>
       </div>
@@ -243,8 +246,8 @@ export const Dashboard = ({ padding }: GraphPadding) => {
             <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
           </div>
 
-          <div className="sales-graph">
-            <Line {...salesGraphConfig} />
+          <div className="affiliates-graph">
+            {/* affiliates graph /> */}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ export const userLogin =  createAsyncThunk(
   'user/userLogin' ,
   async ({data, history}: Props, {dispatch} )=> {
     try {
-      const res =await client.post('/Credentials/Login', data);
+      const res = await client.post('/Credentials/Login', data);
       if(res.status === 200) {
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('Authorization', res.data.response_data.token);

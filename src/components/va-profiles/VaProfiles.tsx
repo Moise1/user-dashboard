@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, Card, Input, Form, Layout, Spin, Popconfirm } from 'antd';
 import { DataTable } from '../tables/DataTable';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
@@ -11,6 +11,7 @@ import '../../sass/va-profiles.scss';
 
 
 export const VaProfiles = () => {
+  const [current] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { userAssistants, loading } = useAppSelector((state) => state.vaProfiles);
 
@@ -66,7 +67,8 @@ export const VaProfiles = () => {
               dataSource={userAssistants} 
               columns={columns} 
               pageSize={4}
-              total={userAssistants.length}
+              current={current}
+              totalItems={userAssistants.length}
             />
           </Col>
           <Col xs={24} xl={8} md={12} className="form-container">

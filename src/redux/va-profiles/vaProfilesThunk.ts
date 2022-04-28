@@ -8,7 +8,12 @@ export const getUserAssistants = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await client.get('/VirtualAssistants/Get');
-      return res.data.response_data.userAssistants;
+      const vaProfilesData = res.data.response_data.userAssistants.map((vp: UserAssistant, key: number) =>({
+        ...vp,
+        key
+      }));
+      
+      return vaProfilesData;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
     }
