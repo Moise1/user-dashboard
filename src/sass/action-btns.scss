@@ -44,7 +44,6 @@
 
 .success-btn {
   min-width: 170px;
-
   background: $green;
   &:hover,
   &:focus {
@@ -53,6 +52,16 @@
   }
 }
 
+.showVisibleCol-btn {
+  max-width: 170px !important;
+  border-radius: 8% !important;
+  background: $green;
+  color: #fff;
+  &:hover,
+  &:focus {
+    background: $green;
+  }
+}
 .confirm-btn {
   background: $light-primary;
   &:hover,

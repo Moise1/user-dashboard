@@ -112,3 +112,14 @@ export const loadAddressFromOrderLine = createAsyncThunk(
     }
   }
 );
+
+export const loadProgressOfOrder = createAsyncThunk('salessss/loadProgressOfTheOrder', async (id: number, thunkAPI) => {
+  try {
+    const res = await client.post('/Sales/LoadProgress', { id });
+    console.log('To see the progress of order', res.data.response_data.orderProgress);
+
+    return res.data.response_data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});

@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap';
-import Headphone from '../../assets/channel/modal_headphone_photo.png';
+// import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { IconArrowModal } from '../common/Icons';
 import { t } from '../../utils/transShim';
 import { OrderData } from 'src/redux/orders/orderSlice';
@@ -25,6 +25,8 @@ const OrderDetailsContent = (props: Props) => {
   const { data } = props;
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
+  // const orderImage = data.imageUrl;
+  console.log('The data from  api', data);
 
   const [orderNumber] = useState(data.id);
   const { ordersAddress } = useAppSelector((state) => state.orderAddress);
@@ -248,7 +250,7 @@ const OrderDetailsContent = (props: Props) => {
                   </div> */}
                 </div>
                 <div className="col-6 d-flex justify-content-center">
-                  <img src={Headphone} className="product-img" />
+                  {/* <img src={orderImage} className="product-img" /> */}
                 </div>
                 <div className="col-12 mt-4">
                   <div className="sourceurl">

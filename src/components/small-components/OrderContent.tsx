@@ -13,13 +13,17 @@ import {
 import { useState } from 'react';
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
 import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from '../../small-components/ActionBtns';
-import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import { t } from '../../utils/transShim';
 import '../../sass/order-state-modal.scss';
+import { loadProgressOfOrder } from '../../redux/orders/orderThunk';
+import { CrossModalIcon } from '../common/Icons';
+
+import { useEffect } from 'react';
 // import { Button } from 'antd';
 interface Props {
   orderProgress: number;
@@ -36,22 +40,31 @@ interface Props {
 
 export const OrderContent = (props: Props) => {
   const [orderNumber] = useState(445378);
+  const [id] = useState(445378);
+  const orderStatus = useAppSelector((state) => state.orderProgress.orderProgress.states);
+
+  const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
 
   const handleProcessOrders = () => {
     dispatch(processOrders(orderNumber));
   };
-
   const handleManuallyDispatch = () => {
     dispatch(manuallyDispatch(orderNumber));
   };
-
   const handleStopOrder = () => {
     dispatch(stopOrder(orderNumber));
   };
 
+  console.log(orderProgressStatus);
   const { orderProgress, data, OrderDetailsModal } = props;
   const now = 60;
+
+  useEffect(() => {
+    dispatch(loadProgressOfOrder(id));
+    setOrderProgressStatus(orderStatus);
+  }, []);
+
   return (
     <div className="order-state-progress-modal">
       <div className="flex-sm-row order-state-header">
@@ -61,6 +74,15 @@ export const OrderContent = (props: Props) => {
           {/* <span>{t('OrderDetails.AOEnabled')}</span> */}
           <span>Process</span>
         </button>
+
+        <span
+          className="close-modal-icon"
+          onClick={() => {
+            // setOrderDetailsModalShow(false);
+          }}
+        >
+          <CrossModalIcon />
+        </span>
       </div>
       <div className="order-state-body-container flex-lg-row my-4">
         <div className="col-12 col-lg-5">

@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders, processOrders, manuallyDispatch, stopOrder, loadAddressFromOrderLine } from './orderThunk';
+import {
+  getOrders,
+  processOrders,
+  manuallyDispatch,
+  stopOrder,
+  loadAddressFromOrderLine,
+  loadProgressOfOrder
+} from './orderThunk';
 // export interface OrderData {
 //   id: number;
 //   channelOAuthId: number;
@@ -54,7 +61,7 @@ export interface OrderData {
   buyReference: string;
   cancelRequested: boolean;
   profit?: number;
-
+  margin?:number;
   //added on 26april
   orderLineId: number;
   id: number;
@@ -80,6 +87,12 @@ const initialState = {
 
 const initiallState = {
   ordersAddress: <unknown>{},
+  loading: false,
+  error: ''
+};
+
+const initialllState = {
+  orderProgress: <unknown>{},
   loading: false,
   error: ''
 };
@@ -188,5 +201,28 @@ export const loadAddressOrderLineSlice = createSlice({
     });
   }
 });
+
+export const loadOrderProgressSlice = createSlice({
+  name: 'stopOrder',
+  initialState: initialllState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(loadProgressOfOrder.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(loadProgressOfOrder.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+      state.loading = false;
+      state.orderProgress = payload;
+    });
+    builder.addCase(loadProgressOfOrder.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const { reducer: ordersReducer } = orderSlice;
 export const { reducer: orderAddressReducer } = loadAddressOrderLineSlice;
+export const { reducer: orderProgressReducer } = loadOrderProgressSlice;

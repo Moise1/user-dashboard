@@ -11,7 +11,7 @@ import { OrderData } from '../../redux/orders/orderSlice';
 import { DataTable } from '../tables/DataTable';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
-import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
+import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
@@ -105,7 +105,7 @@ export const Orders = () => {
       dataIndex: '',
       key: '5',
       visible: true,
-      render: (record: OrderData) => <p className="title">{record.title}</p>
+      render: (record: OrderData) => <p>{record.title}</p>
     },
     {
       title: t('OrderTable.Quantity'),
@@ -117,31 +117,35 @@ export const Orders = () => {
       title: t('OrderTable.Sold'),
       dataIndex: 'channelPrice',
       key: '7',
-      visible: false
+      visible: true
     },
     {
       title: t('OrderTable.Cost'),
-      dataIndex: 'sourcePrice',
+      dataIndex: '',
       key: '8',
-      visible: false
+      visible: true,
+      render: (record: OrderData) => <p>£{record.sourcePrice}</p>
     },
     {
       title: t('OrderTable.Fees'),
-      dataIndex: 'fees',
+      dataIndex: '',
       key: '9',
-      visible: false
+      visible: true,
+      render: (record: OrderData) => <p>£{record.fees}</p>
     },
     {
       title: t('OrderTable.Profit'),
-      dataIndex: 'profit',
+      dataIndex: '',
       key: '10',
-      visible: false
+      visible: true,
+      render: (record: OrderData) => <p>£{record.profit}</p>
     },
     {
       title: t('OrderTable.Margin'),
-      dataIndex: 'margin',
+      dataIndex: '',
       key: '11',
-      visible: false
+      visible: false,
+      render: (record: OrderData) => <p>£{record.margin}</p>
     },
     {
       title: t('OrderTable.DateOfOrder'),
@@ -158,6 +162,8 @@ export const Orders = () => {
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
+
+  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
     // console.log({ selectedRowKeys });
@@ -193,8 +199,6 @@ export const Orders = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
-
-  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
@@ -240,10 +244,10 @@ export const Orders = () => {
           </Row>
           <div className="show-columns-action-btns">
             <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
-            <SuccessBtn handleClose={handleApplyChanges}>
+            <ShowVisibleColBtn handleClose={handleApplyChanges}>
               <CheckIcon />
               {t('ApplyChanges')}
-            </SuccessBtn>
+            </ShowVisibleColBtn>
           </div>
         </Card>
       </PopupModal>
