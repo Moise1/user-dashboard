@@ -30,7 +30,7 @@ export const Orders = () => {
   const { status } = useAppSelector((state) => state.orders);
 
   const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(445378);
+  const [orderNumber] = useState(445379);
   const [order, setOrder] = useState([]);
   const [searchedArray, setSearchedArray] = useState([]);
   const [searchKey, setSearchKey] = useState<string>('');
@@ -158,12 +158,6 @@ export const Orders = () => {
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
-  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
-  // //For Searching
-  useEffect(() => {
-    setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
-    setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
-  }, [order, searchKey]);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
     // console.log({ selectedRowKeys });
@@ -173,11 +167,6 @@ export const Orders = () => {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange
-  };
-
-  const handleClose = () => {
-    setColumns(tableColumns);
-    setShowColumns(!showColumns);
   };
 
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
@@ -191,13 +180,30 @@ export const Orders = () => {
     setColumns(cloneColumns);
   };
 
+  const handleClose = () => {
+    setColumns(tableColumns);
+    setShowColumns(!showColumns);
+  };
+
+  console.log(current);
+
+  const handleApplyChanges = () => setShowColumns(!showColumns);
+
   const handleCancelChanges = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
-  const handleApplyChanges = () => setShowColumns(!showColumns);
+
+  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
+
+  console.log('The selected column', showColumns);
+  // //For Searching
+  useEffect(() => {
+    setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
+    setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
+  }, [order, searchKey]);
 
   // console.log(rowSelection);
   console.log('The search Array ', searchFilterKey);
@@ -247,10 +253,10 @@ export const Orders = () => {
         </PopupModal>
       ) : (
         <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <OrderContent 
-            orderProgress={status} 
+          <OrderContent
+            orderProgress={status}
             data={selectedRecord}
-            handleClose={handleOrderModal} 
+            handleClose={handleOrderModal}
             OrderDetailsModal={handleOrderDetailsOpen}
           />
         </PopupModal>
@@ -258,7 +264,6 @@ export const Orders = () => {
       <PopupModal open={orderDetailsOpen} width={900} handleClose={handleOrderDetailsOpen}>
         <OrderDetailsContent data={selectedRecord} />
       </PopupModal>
-      {console.log('The data in', selectedRecord)}
       <div className="search-options-area">
         {/* <SearchOptions showSearchInput /> */}
         <Input
@@ -273,7 +278,7 @@ export const Orders = () => {
           {t('AdvancedSearch')}
         </TableActionBtns>
       </div>
-      <OrderActionBtns orderNumber={orderNumber} channelId={445379} />
+      <OrderActionBtns orderNumber={orderNumber} selectedRows={selectedRowKeys.length} />
       <DataTable
         page="order"
         columns={visibleCols}
@@ -283,7 +288,7 @@ export const Orders = () => {
         totalItems={order.length}
         pageSize={10}
         current={current}
-        // onChange={setCurrent}
+        onChange={setCurrent}
         pagination={false}
         rowClassName="table-row"
         onRow={(record) => {

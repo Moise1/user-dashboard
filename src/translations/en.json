@@ -114,12 +114,19 @@
   "OrderDetails.StartOrder": "Order started",
   "OrderDetails.OrderDetails": "Order details",
 
+  "OrderDetails.Name": "Name",
   "OrderDetails.ShippingAddress": "Shipping address",
   "OrderDetails.Billingaddress": "Billing address",
   "OrderDetails.StreetAddress": "Street address",
   "OrderDetails.City": "City",
   "OrderDetails.PostalCodeState": "Postal code",
   "OrderDetails.Sale": "Sale",
+  "OrderDetails.Phone": "Phone",
+  "OrderDetails.AddressLineOne": "Address Line 1",
+  "OrderDetails.AddressLineTwo": "Address Line 2",
+  "OrderDetails.State": "State/Province",
+  "OrderDetails.Country": "Country",
+
   "OrderDetails.ChannelItem": "Channel item",
   "OrderDetails.Reference": "Reference",
   "OrderDetails.BuyerUsername": "Buyer username",
@@ -186,7 +193,7 @@
 
   "OrderButtons.ProcessOrders": "Process orders",
   "OrderButtons.StopOrders": "Stop orders",
-  "OrderButtons.MarkAsDispatched": "Mark as dispatched",
+  "OrderButtons.MarkAsDispatched": "Dispatched orders",
   "OrderButtons.DeleteOrders": "Delete orders",
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",

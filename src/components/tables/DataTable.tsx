@@ -49,12 +49,13 @@ interface Props {
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
+  onChange?: React.Dispatch<React.SetStateAction<number>>;
   total?: number;
   current?: number;
   pageSize?: number;
   pagination?: boolean;
   rowClassName?: string;
-  onRow?: (record: TableDataTypes ) => {onClick: () => void};
+  onRow?: (record: TableDataTypes) => { onClick: () => void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -68,7 +69,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     handleSingleListingModal,
     page,
     showTableInfo,
-    // onChange,
+    onChange,
     // total,
     current,
     pageSize,
@@ -127,7 +128,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       {/* console.log(rowSelection); */}
       <Pagination
         // onChange={rowSelection?.onChange}
-        // onChange={onChange}
+        onChange={onChange}
         total={totalItems}
         current={current}
         pageSize={pageSize}

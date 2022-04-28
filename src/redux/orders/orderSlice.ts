@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders, processOrders, manuallyDispatch } from './orderThunk';
+import { getOrders, processOrders, manuallyDispatch, stopOrder, loadAddressFromOrderLine } from './orderThunk';
 // export interface OrderData {
 //   id: number;
 //   channelOAuthId: number;
@@ -58,10 +58,28 @@ export interface OrderData {
   //added on 26april
   orderLineId: number;
   id: number;
+
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2: string;
+  phone: number;
+  city: string;
+  zip: string;
+  province: string;
+  country: string;
+  countryCode: string;
+  provinceCode: string;
 }
 
 const initialState = {
   orders: <unknown>[],
+  loading: false,
+  error: ''
+};
+
+const initiallState = {
+  ordersAddress: <unknown>{},
   loading: false,
   error: ''
 };
@@ -129,4 +147,46 @@ export const manuallyDispatchSlice = createSlice({
   }
 });
 
+export const stopOrderSlice = createSlice({
+  name: 'stopOrder',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(stopOrder.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(stopOrder.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+      state.loading = false;
+      state.orders = payload;
+    });
+    builder.addCase(stopOrder.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+export const loadAddressOrderLineSlice = createSlice({
+  name: 'stopOrder',
+  initialState: initiallState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(loadAddressFromOrderLine.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(loadAddressFromOrderLine.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+      state.loading = false;
+      state.ordersAddress = payload;
+    });
+    builder.addCase(loadAddressFromOrderLine.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
 export const { reducer: ordersReducer } = orderSlice;
+export const { reducer: orderAddressReducer } = loadAddressOrderLineSlice;

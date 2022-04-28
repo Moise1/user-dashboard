@@ -15,8 +15,24 @@ interface Props {
 
 type htmlType = 'button' | 'submit' | 'reset';
 
-export const SuccessBtn = ({ children, handleClose }: Props) => (
-  <Button className="success-btn" onClick={handleClose}>
+export const ProgressBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
+  <Button 
+    className={`progress-btn  ${className}`}
+    onClick={handleConfirm} 
+    disabled={disabled}
+    htmlType={htmlType}
+  >
+    {children}
+  </Button>
+);
+
+export const WarningBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
+  <Button 
+    className={`warning-btn  ${className}`}
+    onClick={handleConfirm} 
+    disabled={disabled}
+    htmlType={htmlType}
+  >
     {children}
   </Button>
 );
@@ -32,6 +48,29 @@ export const ConfirmBtn = ({ children, handleConfirm, className, disabled, htmlT
   </Button>
 );
 
+export const SuccessBtn = ({ children, handleConfirm, className, disabled, htmlType}: Props) => (
+  <Button 
+    className={`success-btn ${className}`}
+    onClick={handleConfirm} 
+    disabled={disabled}
+    htmlType={htmlType}
+  >
+    {children}
+  </Button>
+);
+
+
+export const DangerBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
+  <Button 
+    className={`danger-btn ${className}`}
+    onClick={handleConfirm} 
+    disabled={disabled}
+    htmlType={htmlType}
+  >
+    {children}
+  </Button>
+);
+
 export const CancelBtn = ({ children, handleClose, disabled }: Props) => (
   <Button className="cancel-btn" onClick={handleClose} disabled={disabled}>
     {children}
@@ -39,9 +78,9 @@ export const CancelBtn = ({ children, handleClose, disabled }: Props) => (
 );
 
 export const ResetBtn = ({ children }: Props) => <Button className="reset-btn">{children}</Button>;
-export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
+// export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
 export const DeleteBtn = ({ children }: Props) => <Button className="delete-btn">{children}</Button>;
-export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;
+// export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;
 export const TransparentBtn = ({ id, children, className, handleClick }: Props) => (
   <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick}>
     {children}

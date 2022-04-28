@@ -1,23 +1,29 @@
 import { ProgressBar } from 'react-bootstrap';
+import { OrderData } from 'src/redux/orders/orderSlice';
 import {
   AoIconHead,
   // CheckIcon,
   // TrashIcon,
   LastStepOrderIcon,
-  HandStopOrderIcon,
   OrderCheckoutIcon,
   OrderProcessRoundedIcon,
   RoundCircleCycleIcon,
-  LeftBackArrowIcon,
-  ProcessOrderIcon
+  LeftBackArrowIcon
 } from '../common/Icons';
+import { useState } from 'react';
+import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
+import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from '../../small-components/ActionBtns';
+import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { processOrders } from '../../redux/orders/orderThunk';
+import { manuallyDispatch } from '../../redux/orders/orderThunk';
+import { stopOrder } from '../../redux/orders/orderThunk';
 import amazonOrder from '../../assets/amazon-order-ss.png';
 import { t } from '../../utils/transShim';
 import '../../sass/order-state-modal.scss';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 interface Props {
   orderProgress: number;
-  data?: unknown;
+  data: { [key: string]: OrderData };
   // show: boolean;
   handleClose: () => void;
   OrderDetailsModal: () => void;
@@ -29,8 +35,22 @@ interface Props {
 }
 
 export const OrderContent = (props: Props) => {
+  const [orderNumber] = useState(445378);
+  const dispatch = useAppDispatch();
+
+  const handleProcessOrders = () => {
+    dispatch(processOrders(orderNumber));
+  };
+
+  const handleManuallyDispatch = () => {
+    dispatch(manuallyDispatch(orderNumber));
+  };
+
+  const handleStopOrder = () => {
+    dispatch(stopOrder(orderNumber));
+  };
+
   const { orderProgress, data, OrderDetailsModal } = props;
-  console.log('data in modal', { data });
   const now = 60;
   return (
     <div className="order-state-progress-modal">
@@ -46,9 +66,9 @@ export const OrderContent = (props: Props) => {
         <div className="col-12 col-lg-5">
           <div className="d-flex justify-content-between pb-3">
             <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
-            <a href="/" className="view-full-log">
+            {/* <a href="/" className="view-full-log">
               {t('OrderDetails.viewFullLog')}
-            </a>{' '}
+            </a>{' '} */}
           </div>
           <div className="time-line-here">
             {/* START ORDER  */}
@@ -70,7 +90,7 @@ export const OrderContent = (props: Props) => {
                     ''
                   )}
                 </h4>
-                <p className="mb-0">Sep 1, 2021 4:43 pm</p>
+                <p className="mb-0">{data.date}</p>
                 <span>Order was selected for purchase</span>
               </div>
             </div>
@@ -94,7 +114,7 @@ export const OrderContent = (props: Props) => {
                     ''
                   )}
                 </h4>
-                <p className="mb-0">Sep 1, 2021 4:43 pm</p>
+                <p className="mb-0">{data.date}</p>
                 <span>Order was selected for purchase</span>
               </div>
             </div>
@@ -116,18 +136,18 @@ export const OrderContent = (props: Props) => {
                     ''
                   )}
                 </h4>
-                <p className="mb-0">Sep 1, 2021 4:43 pm</p>
+                <p className="mb-0">{data.date}</p>
               </div>
             </div>
             <div className="progress-order mt-4 mb-3 mb-lg-0">
-              <p className="mb-0">
-                Progress: <span className="fw-400">in checkout</span>{' '}
-              </p>
+              <h2 className="mb-0">
+                Progress: <h2 className="fw-400">in checkout</h2>{' '}
+              </h2>
               <ProgressBar now={now} label={`${now}%`} />
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-7">
+        <div className="col-12 col-lg-7" style={{ backgroundColor: '#f2f8ff' }}>
           <div className="img-order-container">
             <img className="img-order" src={amazonOrder} alt="amazonOrder" />
           </div>
@@ -137,18 +157,17 @@ export const OrderContent = (props: Props) => {
         <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
           <div className="row">
             <div className="go-back-details-container col">
-              <div
-                onClick={OrderDetailsModal}
-                className="go-back-details"
-              >
+              <div onClick={OrderDetailsModal} className="go-back-details">
                 <span> {t('OrderDetails.OrderDetails')}</span>
               </div>
               <LeftBackArrowIcon />
             </div>
           </div>
+
+          {/* Buttons to stop,process,dispatch,delete an order */}
           <div className="modal-buttons-block">
-            <div className="modal-button-row">
-              <Button className="process-btn action-btn">
+            <div className="modal-button-row-mt5">
+              {/* <Button className="process-btn action-btn">
                 <ProcessOrderIcon />
                 <div className="btn-text">
                   <span>{t('OrderTable.Process')}</span>
@@ -161,11 +180,19 @@ export const OrderContent = (props: Props) => {
                   <span>{t('OrderTable.Stop')}</span>
                   <span>Orders</span>
                 </div>
-              </Button>
+              </Button> */}
+              <WarningBtn handleConfirm={handleManuallyDispatch}>
+                <HandStopOrderIcon />
+                <span>{t('OrderTable.Stop')} order</span>
+              </WarningBtn>
+              <ConfirmBtn handleConfirm={handleProcessOrders}>
+                <ProcessOrderIcon />
+                <span>{t('OrderTable.Process')} order</span>
+              </ConfirmBtn>
             </div>
 
-            <div className="modal-button-row-mt5">
-              <Button className="process-btn action-btn">
+            <div className="modal-button-row-mt5 ">
+              {/* <Button className="process-btn action-btn">
                 <ProcessOrderIcon />
                 <div className="btn-text">
                   <span>{t('OrderTable.Process')}</span>
@@ -178,7 +205,15 @@ export const OrderContent = (props: Props) => {
                   <span>{t('OrderTable.Stop')}</span>
                   <span>Orders</span>
                 </div>
-              </Button>
+              </Button> */}
+              <SuccessBtn handleConfirm={handleStopOrder}>
+                <CheckIcon />
+                <span>{t('OrderButtons.MarkAsDispatched')}</span>
+              </SuccessBtn>
+              <DangerBtn className="mr-3">
+                <TrashIcon />
+                <span> {t('OrderTable.Delete')} order</span>
+              </DangerBtn>
             </div>
             {/* <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
                    <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">

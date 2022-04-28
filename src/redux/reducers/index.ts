@@ -11,6 +11,7 @@ import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { catalogProductsReducer } from '../catalog/catalogSlice';
 import { ordersReducer } from '../orders/orderSlice';
+import { orderAddressReducer } from '../orders/orderSlice';
 export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
@@ -23,5 +24,6 @@ export const allReducers = combineReducers({
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  orderAddress: orderAddressReducer
 });

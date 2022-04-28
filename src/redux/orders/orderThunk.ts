@@ -66,10 +66,11 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const processOrders = createAsyncThunk('sales/processORder', async (id: number, thunkAPI) => {
+export const processOrders = createAsyncThunk('sales/processOrder', async (orderLineId: number, thunkAPI) => {
   try {
+    const res = await client.post('Sales/ProcessOrderLine', { orderLineId });
+    console.log('The process order api responsed', res);
 
-    const res = await client.post('/Sales/LoadProgress', {id});
     return res;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -78,9 +79,36 @@ export const processOrders = createAsyncThunk('sales/processORder', async (id: n
 
 export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async (orderLineId: number, thunkAPI) => {
   try {
-    const res = await client.post('/Sales/ManuallyDispatchOrderLine', {orderLineId});
+    const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
+    console.log('The manually dispatch api responsed', res);
+
     return res;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
   }
 });
+
+export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: number, thunkAPI) => {
+  try {
+    const res = await client.post('/Sales/StopOrderLine', { orderLineId });
+    console.log('The stop order api responsed', res);
+
+    return res;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
+
+export const loadAddressFromOrderLine = createAsyncThunk(
+  'sales/loadAddressFromOrderLine',
+  async (orderLineId: OrderData, thunkAPI) => {
+    try {
+      const res = await client.post('Sales/LoadAddressesFromOrderLine', { orderLineId });
+      console.log('The load address api response is', res.data.response_data);
+
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);

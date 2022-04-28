@@ -82,11 +82,24 @@
 
 .warning-btn {
   min-width: 170px;
-
   background: $yellow;
-  &:hover {
+  &:hover,
+  &:focus {
     background: $yellow;
     color: $primary-bg;
+  }
+}
+
+.progress-btn {
+  min-width: 170px;
+  background: $light-blue;
+  color: #fff !important;
+  border-radius: 8px;
+  &:hover,
+  &:focus {
+    background: $light-blue;
+    color: $primary-bg;
+    color: #fff !important;
   }
 }
 
