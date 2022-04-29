@@ -149,7 +149,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
             <SearchInput onSearch={onSearch} />
             <DataTable dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
             <Link to="/add-channel" className="alternative-link">
-              Add channel
+              Add new channel
             </Link>
           </Col>
         </Row>
