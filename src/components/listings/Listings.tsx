@@ -138,7 +138,6 @@ export const Listings = () => {
       visible: activeListingsType === 'pendingTabListing' ? false : true,
       render: (record: pending_listings) => (
         <div className="img-container">
-          {console.log({activeListingsType})}
           <img src={record.imageUrl} alt="image" className="record-img" />
         </div>
       )
@@ -199,15 +198,19 @@ export const Listings = () => {
       title: t('Listings.Column.Created On'),
       dataIndex: 'createdOn',
       key: '11',
-      visible: activeTab === 0 ? true : false
+      // eslint-disable-next-line no-constant-condition
+      visible: activeListingsType === 'activeTabListings' ? false : true && activeListingsType === 'pendingTabListing' ? true : false && activeListingsType === 'terminateTypeListing' ? false : true
     },
     {
       title: t('Listings.Column.Created By'),
       dataIndex: 'createdByName',
       key: '12',
-      visible: activeTab === 0 ? true : false
+      visible: activeListingsType === 'activeTabListings' ? false : true
     },
   ];
+
+  console.log('first', {tableColumns});
+
   const [columns, setColumns] = useState(tableColumns);
 
   const handleChangeTab = (e: React.MouseEvent): void => {

@@ -20,7 +20,7 @@ export const ListingMain : React.FC<Props> = ({selectedItems} : Props) => {
       <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
-            <Input className="blue-input" value={selectedItems.title} />
+            <Input className="blue-input" value={selectedItems.title}/>
 
           </Form.Item>
 
