@@ -3,7 +3,7 @@ import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
-import { Line } from '@ant-design/plots';
+// import { Line } from '@ant-design/plots';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
@@ -17,9 +17,9 @@ import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import '../../sass/dashboard.scss';
 
-interface GraphPadding {
-  padding: graphPaddingType;
-}
+// interface GraphPadding {
+//   padding: graphPaddingType;
+// }
 
 interface ProductQuota {
   quota: number;
@@ -30,9 +30,9 @@ interface ProductQuota {
   pending: number;
   cancelled: boolean;
 }
-type graphPaddingType = number | 'auto' | number[] | undefined;
+// type graphPaddingType = number | 'auto' | number[] | undefined;
 
-export const Dashboard = ({ padding }: GraphPadding) => {
+export const Dashboard = () => {
   const { channels } = useAppSelector((state) => state.channels);
   const dispatch = useAppDispatch();
   const [, setIsCopied] = useState<boolean>(false);
@@ -63,19 +63,19 @@ export const Dashboard = ({ padding }: GraphPadding) => {
     })();
   }, []);
 
-  const salesGraphConfig = {
-    data: [{ Date: '2021', sales: 2009 }],
-    padding,
-    xField: 'Date',
-    yField: 'sales',
-    xAxis: {
-      tickCount: 5
-    },
-    slider: {
-      start: 0.1,
-      end: 0.5
-    }
-  };
+  // const salesGraphConfig = {
+  //   data: [{ Date: '2021', sales: 2009 }],
+  //   padding,
+  //   xField: 'Date',
+  //   yField: 'sales',
+  //   xAxis: {
+  //     tickCount: 5
+  //   },
+  //   slider: {
+  //     start: 0.1,
+  //     end: 0.5
+  //   }
+  // };
 
   const columns = [
     {
@@ -159,7 +159,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="sales-graph">
-            <Line {...salesGraphConfig} />
+            {/* <Line {...salesGraphConfig} /> */}
           </div>
         </div>
       </div>
@@ -242,7 +242,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
           </div>
 
           <div className="sales-graph">
-            <Line {...salesGraphConfig} />
+            {/* <Line {...salesGraphConfig} /> */}
           </div>
         </div>
       </div>

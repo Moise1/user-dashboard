@@ -1,17 +1,25 @@
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 // import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { IconArrowModal } from '../common/Icons';
 import { t } from '../../utils/transShim';
-import { OrderData } from 'src/redux/orders/orderSlice';
 import '../../sass/order-state-modal.scss';
 import { CrossModalIcon } from '../common/Icons';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { useEffect, useState } from 'react';
-import { loadAddressFromOrderLine } from '../../redux/orders/orderThunk';
+import { loadAddressFromOrderLine, orderDataType } from '../../redux/orders/orderThunk';
+
 interface Props {
-  data: { [key: string]: OrderData };
+  data:  {
+    [key: string]: orderDataType,
+    imageUrl?: string | undefined
+  };
 }
+
 const OrderDetailsContent = (props: Props) => {
+  
+  const { data } = props;
+
+
   const object = {
     firstName: ' ',
     phone: ' ',
@@ -22,10 +30,9 @@ const OrderDetailsContent = (props: Props) => {
     province: ' ',
     country: ' '
   };
-  const { data } = props;
+
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
-  // const orderImage = data.imageUrl;
   console.log('The data from  api', data);
 
   const [orderNumber] = useState(data.id);
@@ -34,7 +41,7 @@ const OrderDetailsContent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadAddressFromOrderLine(orderNumber));
+    dispatch(loadAddressFromOrderLine(orderNumber!));
     setOrderBillingAddress(ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
   }, [data.id]);
@@ -250,7 +257,7 @@ const OrderDetailsContent = (props: Props) => {
                   </div> */}
                 </div>
                 <div className="col-6 d-flex justify-content-center">
-                  {/* <img src={orderImage} className="product-img" /> */}
+                  <img src={data.imageUrl} className="product-img" />
                 </div>
                 <div className="col-12 mt-4">
                   <div className="sourceurl">
