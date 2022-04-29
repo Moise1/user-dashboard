@@ -198,14 +198,13 @@ export const Listings = () => {
       title: t('Listings.Column.Created On'),
       dataIndex: 'createdOn',
       key: '11',
-      // eslint-disable-next-line no-constant-condition
-      visible: activeListingsType === 'activeTabListings' ? false : true && activeListingsType === 'pendingTabListing' ? true : false && activeListingsType === 'terminateTypeListing' ? false : true
+      visible: activeListingsType === 'pendingTabListing' ? false : true
     },
     {
       title: t('Listings.Column.Created By'),
       dataIndex: 'createdByName',
       key: '12',
-      visible: activeListingsType === 'activeTabListings' ? false : true
+      visible: activeListingsType === 'pendingTabListing' ? false : true
     },
   ];
 
@@ -377,7 +376,7 @@ export const Listings = () => {
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
         dataSource={
-          activeListingsType === 'activeTabListings' ? listings : activeListingsType ==='pendingTabListing' ? list:  activeListingsType === 'terminateTypeListing' ? terminateList : searchedArray.length > 0 ? searchedArray : listings
+          activeListingsType === 'activeTabListings' ? listings : activeListingsType ==='pendingTabListing' ? list : activeListingsType === 'terminateTypeListing' ? terminateList : searchedArray.length > 0 ? searchedArray : listings
         }
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
