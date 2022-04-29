@@ -234,7 +234,6 @@ export const Listings = () => {
     setActiveTab(parseInt(id!));
     setActiveListingsType('terminateTypeListing');
     dispatch(getTerminateListings());
-    // console.log(activeListingsType);
   };
 
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: SeletedRowsType) => {
