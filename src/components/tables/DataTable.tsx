@@ -60,7 +60,7 @@ interface Props {
 
 export const DataTable: React.FC<Props> = (props: Props) => {
   const {
-    columns,
+    columns,  
     dataSource,
     rowSelection,
     selectedRows,

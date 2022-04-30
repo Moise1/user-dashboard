@@ -1,8 +1,11 @@
 /* eslint-disable no-var */
 /* eslint-disable indent */
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
 import { OrderData } from './orderSlice';
+
+export type orderDataType = Date | string | number | null | boolean | undefined;
 
 export const getOrders = createAsyncThunk(
   'search/getSearch',
@@ -59,7 +62,7 @@ export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId:
 
 export const loadAddressFromOrderLine = createAsyncThunk(
   'sales/loadAddressFromOrderLine',
-  async (orderLineId: OrderData, thunkAPI) => {
+  async (orderLineId: orderDataType, thunkAPI) => {
     try {
       const res = await client.post('Sales/LoadAddressesFromOrderLine', { orderLineId });
       console.log('The load address api response is', res.data.response_data);

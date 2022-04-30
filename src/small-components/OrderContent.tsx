@@ -9,19 +9,19 @@ import {
   OrderProcessRoundedIcon,
   RoundCircleCycleIcon,
   LeftBackArrowIcon
-} from '../common/Icons';
+} from '../components/common/Icons';
 import { useState } from 'react';
-import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
-import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from '../../small-components/ActionBtns';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { processOrders } from '../../redux/orders/orderThunk';
-import { manuallyDispatch } from '../../redux/orders/orderThunk';
-import { stopOrder } from '../../redux/orders/orderThunk';
-import amazonOrder from '../../assets/amazon-order-ss.png';
-import { t } from '../../utils/transShim';
-import '../../sass/order-state-modal.scss';
-import { loadProgressOfOrder } from '../../redux/orders/orderThunk';
-import { CrossModalIcon } from '../common/Icons';
+import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../components/common/Icons';
+import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from './ActionBtns';
+import { useAppDispatch, useAppSelector } from '../custom-hooks/reduxCustomHooks';
+import { processOrders } from '../redux/orders/orderThunk';
+import { manuallyDispatch } from '../redux/orders/orderThunk';
+import { stopOrder } from '../redux/orders/orderThunk';
+import amazonOrder from '../../src/assets/amazon-order-ss.png';
+import { t } from '../utils/transShim';
+import '../sass/order-state-modal.scss';
+import { loadProgressOfOrder } from '../redux/orders/orderThunk';
+import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
 // import { AutoOrderingState } from '../orders/OrderStatus';
 
@@ -67,6 +67,7 @@ export const OrderContent = (props: Props) => {
 
   console.log('The order progress status is', orderProgressStatus);
 
+  //To check status, working on it -Suleman Ahmad-
   // let statusText: string;
   // let orderProgressBar = 1;
   // orderProgressStatus.map((curr: any) => {

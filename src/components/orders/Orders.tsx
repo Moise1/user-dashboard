@@ -13,7 +13,6 @@ import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
-import { OrdersAdvancedSearch } from '../small-components/OrderAdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 // import { OrderEditSingleListing } from '../orders/OrderEditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -21,8 +20,9 @@ import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
 // import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
-import { OrderContent } from '../small-components/OrderContent';
-import OrderDetailsContent from '../small-components/OrderDetailsContent';
+import { OrderContent } from 'src/small-components/OrderContent';
+import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
+import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDrawers';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();

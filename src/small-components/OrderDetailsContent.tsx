@@ -1,17 +1,22 @@
-import { Form } from 'react-bootstrap';
-import Headphone from '../../assets/channel/modal_headphone_photo.png';
-import { IconArrowModal } from '../common/Icons';
-import { t } from '../../utils/transShim';
-import { OrderData } from 'src/redux/orders/orderSlice';
-import '../../sass/order-state-modal.scss';
-import { CrossModalIcon } from '../common/Icons';
-import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
-import { loadAddressFromOrderLine } from '../../redux/orders/orderThunk';
+import { Form } from 'react-bootstrap';
+// import Headphone from '../../assets/channel/modal_headphone_photo.png';
+import { IconArrowModal, CrossModalIcon } from '../components/common/Icons';
+import { t } from '../utils/transShim';
+import '../sass/order-state-modal.scss';
+import { useAppSelector, useAppDispatch } from '../custom-hooks/reduxCustomHooks';
+import { loadAddressFromOrderLine, orderDataType } from '../redux/orders/orderThunk';
+
 interface Props {
-  data: { [key: string]: OrderData };
+  data: {
+    [key: string]: orderDataType;
+    imageUrl?: string | undefined;
+  };
 }
+
 const OrderDetailsContent = (props: Props) => {
+  const { data } = props;
+
   const object = {
     firstName: ' ',
     phone: ' ',
@@ -22,7 +27,7 @@ const OrderDetailsContent = (props: Props) => {
     province: ' ',
     country: ' '
   };
-  const { data } = props;
+
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
   console.log('The data from  api', data);
@@ -32,7 +37,7 @@ const OrderDetailsContent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadAddressFromOrderLine(orderNumber));
+    dispatch(loadAddressFromOrderLine(orderNumber!));
     setOrderBillingAddress(ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
   }, [data.id]);
@@ -61,8 +66,7 @@ const OrderDetailsContent = (props: Props) => {
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-12 col-xl-6" style={{ backgroundColor: '#f2f8ff', padding: '10px' }}>
-              <div className="row shipping-billing-container">
-              </div>
+              <div className="row shipping-billing-container"></div>
               <div className="row">
                 <div className="col-6">
                   <div className="large-input">
@@ -214,7 +218,7 @@ const OrderDetailsContent = (props: Props) => {
                   </div>
                 </div>
                 <div className="col-6 d-flex justify-content-center">
-                  <img src={Headphone} className="product-img" />
+                  <img src={data.imageUrl} className="product-img" />
                 </div>
                 <div className="col-12 mt-4">
                   <div className="sourceurl">
@@ -249,7 +253,7 @@ const OrderDetailsContent = (props: Props) => {
                       <Form.Control
                         className="blue-input"
                         type="text"
-                        value={JSON.stringify(data.sourcePrice)}
+                        value={JSON.stringify(data.sourcePrice) ? JSON.stringify(data.sourcePrice) : ' - '}
                         disabled
                       />
                     </div>
