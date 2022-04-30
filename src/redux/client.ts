@@ -9,14 +9,37 @@ export const client = axios.create({
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
 });
 
+// client.interceptors.request.use(
+//   async (req: AxiosRequestConfig) => {
+//     const channelId = localStorage.getItem('channelId');
+//     const token = localStorage.getItem('Authorization');
+//     if (token) {
+//       req.headers = {
+//         Authorization: `Bearer ${token}`,
+//         channel: channelId!,
+//         'Access-Control-Allow-Origin': '*',
+//         'Access-Control-Allow-Methods': '*',
+//         'Access-Control-Allow-Headers': '*',
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//         'Access-Control-Expose-Headers': '*',
+//         ...req.headers
+//       };
+//     }
+//     return req;
+//   },
+
+//   (error) => Promise.reject(error)
+// );
+
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
-    const channelId = localStorage.getItem('channelId');
+    const channelId = 590881;
     const token = localStorage.getItem('Authorization');
     if (token) {
       req.headers = {
         Authorization: `Bearer ${token}`,
-        channel: channelId!,
+        channel: channelId,
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
         'Access-Control-Allow-Headers': '*',
@@ -28,7 +51,6 @@ client.interceptors.request.use(
     }
     return req;
   },
-
   (error) => Promise.reject(error)
 );
 

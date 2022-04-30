@@ -7,7 +7,7 @@ import { t } from '../../utils/transShim';
 import '../../sass/listings.scss';
 import { ListingsItems } from '../common/ListingsData';
 import { PopupModal } from '../modals/PopupModal';
-import { EditSingleListing } from '../listings/EditSingleListing';
+// import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 
@@ -25,7 +25,6 @@ export const ListingsTable = (tableProps: props) => {
 
   const [AoDisabledModal, setAoDisabledModal] = useState<boolean>(false);
   const handleSingleListingModal = () => setOpen(!open);
-
   const modifiedData = useMemo(
     () =>
       bodyData.map((d) => {
@@ -60,9 +59,9 @@ export const ListingsTable = (tableProps: props) => {
 
   return (
     <div className="listings-table">
-      <PopupModal open={open} width={900} handleClose={handleSingleListingModal}>
-        <EditSingleListing />
-      </PopupModal>
+      {/* <PopupModal open={open} width={900} handleClose={handleSingleListingModal}>
+        <EditSingleListing selectedItems={myselectedRows} />
+      </PopupModal> */}
 
       <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
         <BulkEditListings selectedItems={selectedItems.length} />
