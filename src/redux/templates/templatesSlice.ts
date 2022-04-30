@@ -1,18 +1,17 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import { createSlice } from '@reduxjs/toolkit';
-import { getTemplates} from './templatesThunk';
+import { getTemplates } from './templatesThunk';
 
 export interface Template {
-    id: number;
-    userId: string;
-    html: ReactNode;
-    isDefault: boolean;
-    createdOn: Date;
-    name: string;
-    originalTemplateId: number;
-    channelOAuthId: number
+  id: number;
+  userId: string;
+  html: ReactNode;
+  isDefault: boolean;
+  createdOn: Date;
+  name: string;
+  originalTemplateId: number;
+  channelOAuthId: number;
 }
-
 
 const initialState = {
   templates: [] as Template[],

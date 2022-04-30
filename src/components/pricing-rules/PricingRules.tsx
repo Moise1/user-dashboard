@@ -1,6 +1,8 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Form, Input, Spin, Popconfirm } from 'antd';
+import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
@@ -11,10 +13,13 @@ import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { CloseIcon }   from  '../../small-components/CloseIcon';
+import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/pricing-rules.scss';
 
 export const PricingRules = () => {
+  const [current] = useState<number>(1);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+
   const { Item } = Form;
   const dispatch = useAppDispatch();
   const { rules, loading: rulesLoading } = useAppSelector((state) => state.pricingRules);
@@ -39,17 +44,26 @@ export const PricingRules = () => {
     dispatch(getRules());
   };
 
-  const removeRecord = async(id: Rule['id']) => {
-    await dispatch(deleteRule({id, active: true}));
-    dispatch(getRules());    
-  };
-
-  const updateStatus = async (id: Rule['id'], active: Rule['active']) => {
-    await dispatch(updateRule({id, active: !active}));
+  const removeRecord = async (id: Rule['id']) => {
+    await dispatch(deleteRule({ id, active: true }));
     dispatch(getRules());
   };
 
-  const columns = [
+  const updateStatus = async (id: Rule['id'], active: Rule['active']) => {
+    await dispatch(updateRule({ id, active: !active }));
+    dispatch(getRules());
+  };
+
+  const onSelectChange = (selectedRowKeys: Key[]) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange
+  };
+
+  const tableColumns = [
     {
       title: 'Source',
       dataIndex: 'sourceId',
@@ -76,16 +90,11 @@ export const PricingRules = () => {
       key: 'active',
       render: (value: boolean, record: Rule) =>
         value ? (
-          <TransparentBtn 
-            className="status-btn enabled" 
-            handleClick={() => updateStatus(record.id, record.active)}
-          >
+          <TransparentBtn className="status-btn enabled" handleClick={() => updateStatus(record.id, record.active)}>
             Enabled
           </TransparentBtn>
         ) : (
-          <TransparentBtn className="status-btn disabled" 
-            handleClick={() => updateStatus(record.id, record.active)}
-          >
+          <TransparentBtn className="status-btn disabled" handleClick={() => updateStatus(record.id, record.active)}>
             Disabled
           </TransparentBtn>
         )
@@ -104,6 +113,21 @@ export const PricingRules = () => {
       }
     }
   ];
+
+  const [columns, setColumns] = useState(tableColumns);
+
+  const handleCheckBox = (e: CheckboxChangeEvent): void => {
+    const cloneColumns = columns.map((col) => {
+      if (col.key === e.target.value) {
+        return { ...col, visible: e.target.checked };
+      } else {
+        return col;
+      }
+    });
+    setColumns(cloneColumns);
+  };
+
+  console.log(handleCheckBox);
 
   return (
     <Layout>
@@ -145,7 +169,10 @@ export const PricingRules = () => {
             dataSource={rules}
             columns={columns}
             pageSize={4}
-            total={rules.length}
+            current={current}
+            totalItems={rules.length}
+            rowSelection={rowSelection}
+            selectedRows={selectedRowKeys.length}
           />
         )}
       </div>

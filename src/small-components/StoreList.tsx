@@ -12,8 +12,8 @@ export const StoreList = () => {
   const { setChannelId } = useContext(AppContext);
   const selectedChannel = localStorage.getItem('selectedChannnel');
 
-  const provideChannelId = (value: string) => {
-    const selectedChannel = channels?.filter((c: Channel) => c.name === value);
+  const provideChannelId = (value: string | number) => {
+    const selectedChannel = channels?.filter((c: Channel) => c.id === value);
     const channelId = selectedChannel[0].id;
     localStorage.setItem('selectedChannnel', selectedChannel[0].name);
     setChannelId(JSON.stringify(channelId));
@@ -35,7 +35,7 @@ export const StoreList = () => {
           </>
         )}
       >
-        {channels?.map(({ name: value, isoCountry }: Channel) => ({ value, isoCountry }))}
+        {channels?.map(({ name: value, isoCountry, channelId, id }: Channel) => ({ value, isoCountry, channelId, id }))}
       </Selector>
     </div>
   );

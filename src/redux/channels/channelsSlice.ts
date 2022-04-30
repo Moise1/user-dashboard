@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getChannels, deleteChannel} from './channelsThunk';
+import { getChannels, deleteChannel } from './channelsThunk';
 
 export interface Channel {
   id: number;
@@ -9,7 +9,7 @@ export interface Channel {
   empty: boolean;
   isoCountry: number;
   name: string;
-  userId: string
+  userId: string;
   [key: string]: string | number | boolean;
 }
 
@@ -20,39 +20,37 @@ const initialState = {
   error: ''
 };
 
-
 export const channelsSlice = createSlice({
   name: 'channels',
   initialState: initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(getChannels.pending, (state)=>{
+  extraReducers: (builder) => {
+    builder.addCase(getChannels.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getChannels.fulfilled, (state, { payload })=>{
+    builder.addCase(getChannels.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.channels = payload;
     });
-    builder.addCase(getChannels.rejected, (state, { payload })=>{
+    builder.addCase(getChannels.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
 
-    builder.addCase(deleteChannel.pending, (state)=>{
+    builder.addCase(deleteChannel.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(deleteChannel.fulfilled, (state, { payload })=>{
+    builder.addCase(deleteChannel.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.channelDeleted= payload.ok;
+      state.channelDeleted = payload.ok;
     });
-    builder.addCase(deleteChannel.rejected, (state, { payload })=>{
+    builder.addCase(deleteChannel.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const {reducer: channelsReducer} = channelsSlice;
-
+export const { reducer: channelsReducer } = channelsSlice;

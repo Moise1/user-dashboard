@@ -36,8 +36,8 @@ export const Orders = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
+  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const handleOrderModal = () => setOrderModalOpen(!orderModalOpen);
 
@@ -54,7 +54,7 @@ export const Orders = () => {
         }))
     );
   }, [getOrders]);
-  
+
   console.log(setCurrent);
 
   const tableColumns = [

@@ -84,28 +84,23 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
-    const keysToRemove = [
-      'root',
-      'Authorization',
-      'channelId', 
-      'globalTheme', 
-      'isAuthenticated'
-    ];
+    const keysToRemove = ['root', 'Authorization', 'channelId', 'globalTheme', 'isAuthenticated'];
     dispatch(actions.logout());
-    keysToRemove.forEach(key => localStorage.removeItem(key));
+    keysToRemove.forEach((key) => localStorage.removeItem(key));
     persistor.purge();
     routeChange('/login');
   };
 
   const settingsListArray = [
-    {id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel')},
-    {id: 7 ,listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
-    {id: 8 ,listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    {id: 9,listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    {id: 10,listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    {id: 11,listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    {id: 12,listName: t('Menu.Templates'),  onClick: () => routeChange('/templates')},
-    { id: 13,
+    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
+    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
+    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
+    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
+    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
+    { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
+    { id: 12, listName: t('Menu.Templates'), onClick: () => routeChange('/templates') },
+    {
+      id: 13,
       listName: (
         <>
           <Switch
@@ -122,9 +117,9 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    {id: 17, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    {id: 18, listName: t('Menu.FAQ') },
-    {id: 19, listName: t('Menu.ListingServices') }
+    { id: 17, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 18, listName: t('Menu.FAQ') },
+    { id: 19, listName: t('Menu.ListingServices') }
   ];
 
   return (
@@ -232,7 +227,7 @@ export const Sidebar = (props: Props) => {
               icon={<SettingsIcon />}
               title={t('Menu.Settings')}
             >
-              {settingsListArray.map(obj => (
+              {settingsListArray.map((obj) => (
                 <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>
@@ -284,7 +279,7 @@ export const Sidebar = (props: Props) => {
               icon={<HelpIcon />}
               title={t('Menu.Help')}
             >
-              {helpListArray.map(obj => (
+              {helpListArray.map((obj) => (
                 <Item key={obj.id} onClick={obj.onClick}>
                   <MenuListItem listName={obj.listName} />
                 </Item>

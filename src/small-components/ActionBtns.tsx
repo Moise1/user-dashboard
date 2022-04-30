@@ -10,7 +10,6 @@ interface Props {
   handleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   id?: string;
   htmlType?: htmlType;
-
 }
 
 type htmlType = 'button' | 'submit' | 'reset';
@@ -22,12 +21,7 @@ export const SuccessBtn = ({ children, handleClose }: Props) => (
 );
 
 export const ConfirmBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
-  <Button 
-    className={`confirm-btn ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+  <Button className={`confirm-btn ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );
