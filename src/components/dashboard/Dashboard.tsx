@@ -6,6 +6,10 @@ import { Book } from 'react-feather';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import {faker} from '@faker-js/faker';
+
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -17,10 +21,6 @@ import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import '../../sass/dashboard.scss';
 
-interface GraphPadding {
-  padding: graphPaddingType;
-}
-
 interface ProductQuota {
   quota: number;
   used: number;
@@ -30,9 +30,8 @@ interface ProductQuota {
   pending: number;
   cancelled: boolean;
 }
-type graphPaddingType = number | 'auto' | number[] | undefined;
 
-export const Dashboard = ({ padding }: GraphPadding) => {
+export const Dashboard = () => {
   const { channels } = useAppSelector((state) => state.channels);
   const dispatch = useAppDispatch();
   const [, setIsCopied] = useState<boolean>(false);
@@ -62,20 +61,6 @@ export const Dashboard = ({ padding }: GraphPadding) => {
       }
     })();
   }, []);
-
-  const salesGraphConfig = {
-    data: [{ Date: '2021', sales: 2009 }],
-    padding,
-    xField: 'Date',
-    yField: 'sales',
-    xAxis: {
-      tickCount: 5
-    },
-    slider: {
-      start: 0.1,
-      end: 0.5
-    }
-  };
 
   const columns = [
     {
@@ -119,6 +104,39 @@ export const Dashboard = ({ padding }: GraphPadding) => {
     }, 1000);
   };
 
+  ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const
+      },
+      title: {
+        display: true,
+        text: 'Sales Chart'
+      }
+    }
+  };
+
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+      },
+      {
+        label: 'Dataset 2',
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        backgroundColor: 'rgba(53, 162, 235, 0.5)'
+      }
+    ]
+  };
+
   return (
     <div className="dashboard-container">
       <div className="general-section">
@@ -160,11 +178,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="sales-graph">
-
-            {/* Sales graph */}
-
-
-
+            <Bar options={options} data={data} />
           </div>
         </div>
       </div>
@@ -246,9 +260,7 @@ export const Dashboard = ({ padding }: GraphPadding) => {
             <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
           </div>
 
-          <div className="affiliates-graph">
-            {/* affiliates graph /> */}
-          </div>
+          <div className="affiliates-graph">{/* affiliates graph /> */}</div>
         </div>
       </div>
       <div className="social-media">
