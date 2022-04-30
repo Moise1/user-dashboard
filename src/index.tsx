@@ -14,7 +14,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'mini-alert/miniAlert.css';
 
-
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,
   es: locale_es as unknown as Record<string, string>

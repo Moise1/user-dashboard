@@ -37,7 +37,7 @@ type OrdersTypes = {
 
 export type TableDataTypes = ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant;
 interface Props {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[]; 
+  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<ListingsItems | OrdersTypes | Rule | SourceConfig | UserAssistant | Channel>;
   rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;

@@ -63,7 +63,6 @@ export const PricingRules = () => {
     onChange: onSelectChange
   };
 
-  
   const tableColumns = [
     {
       title: 'Source',
@@ -114,7 +113,7 @@ export const PricingRules = () => {
       }
     }
   ];
-  
+
   const [columns, setColumns] = useState(tableColumns);
 
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
@@ -129,8 +128,6 @@ export const PricingRules = () => {
   };
 
   console.log(handleCheckBox);
-
-
 
   return (
     <Layout>

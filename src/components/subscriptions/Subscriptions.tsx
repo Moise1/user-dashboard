@@ -5,8 +5,8 @@ import { CarouselRef } from 'antd/lib/carousel';
 import { StatusBar } from '../../small-components/StatusBar';
 import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import {getSubscriptions } from 'src/redux/subscriptions/subsThunk';
-import {Product} from '../../redux/subscriptions/subsSlice';
+import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
+import { Product } from '../../redux/subscriptions/subsSlice';
 import '../../sass/subscriptions.scss';
 
 export const Subscriptions = () => {
@@ -14,8 +14,8 @@ export const Subscriptions = () => {
   const [activeCurrency, setActiveCurrency] = useState<number>(0);
   const sliderRef = createRef<CarouselRef>();
   const dispatch = useAppDispatch();
-  const { products, loading} = useAppSelector((state) => state.subscriptions);
-  
+  const { products, loading } = useAppSelector((state) => state.subscriptions);
+
   useEffect(() => {
     dispatch(getSubscriptions());
   }, [getSubscriptions]);
@@ -24,11 +24,11 @@ export const Subscriptions = () => {
   const tabletScreen = window.matchMedia('(max-width: 1030px)');
   const mobileScreen = window.matchMedia('(max-width: 750px)');
 
-  const handleChangeCurrency = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
+  const handleChangeCurrency = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const elementId = e.currentTarget.id;
     setActiveCurrency(JSON.parse(elementId));
   };
- 
+
   const renderSlides = useMemo(() => {
     if (tabletScreen.matches) {
       setSlides(2);
@@ -43,29 +43,49 @@ export const Subscriptions = () => {
 
   return (
     <Layout className="subscriptions-container">
-      {loading ? <Spin/>: (
+      {loading ? (
+        <Spin />
+      ) : (
         <div className="carousel-container">
           <StatusBar>
             <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
             <p className="subscriptions-limit">
-            Subscription limit <span>110</span>
+              Subscription limit <span>110</span>
             </p>
             <p className="subscriptions-items">
-            Items<span>110</span>
+              Items<span>110</span>
             </p>
             <Button className="subscription-cancel">Request cancellation</Button>
           </StatusBar>
           <div className="currencies-container">
-            <TransparentBtn id="0" handleClick={handleChangeCurrency} className={activeCurrency === 0 ? 'active-currency':'' }>EUR</TransparentBtn>
-            <TransparentBtn id="1" handleClick={handleChangeCurrency} className={activeCurrency === 1 ? 'active-currency':'' }>USD</TransparentBtn>
-            <TransparentBtn id="2" handleClick={handleChangeCurrency} className={activeCurrency === 2 ? 'active-currency':'' }>GBP</TransparentBtn>
+            <TransparentBtn
+              id="0"
+              handleClick={handleChangeCurrency}
+              className={activeCurrency === 0 ? 'active-currency' : ''}
+            >
+              EUR
+            </TransparentBtn>
+            <TransparentBtn
+              id="1"
+              handleClick={handleChangeCurrency}
+              className={activeCurrency === 1 ? 'active-currency' : ''}
+            >
+              USD
+            </TransparentBtn>
+            <TransparentBtn
+              id="2"
+              handleClick={handleChangeCurrency}
+              className={activeCurrency === 2 ? 'active-currency' : ''}
+            >
+              GBP
+            </TransparentBtn>
           </div>
 
           <Carousel slidesToShow={renderSlides} className="carousel" dots={false} ref={sliderRef}>
             {products?.map((p: Product) => (
               <Card key={p.id} className="subscription">
                 <p className="listings-count">
-                  <strong>{p.name}</strong> 
+                  <strong>{p.name}</strong>
                 </p>
                 <h1 className="monthly-rate">monthly rate</h1>
 

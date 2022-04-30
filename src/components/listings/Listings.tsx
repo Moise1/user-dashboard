@@ -224,9 +224,10 @@ export const Listings = () => {
         handleSingleListingModal={handleSingleListingModal}
         handleBulkListingModal={handleBulkListingModal}
         columns={visibleCols}
-        dataSource={
-          activeListingsType === 'activeTabListings' ? listings : activeListingsType ==='pendingTabListing' ? list : activeListingsType === 'terminateTypeListing' ? terminateList : searchedArray.length > 0 ? searchedArray : listings
-        }
+        // dataSource={
+        //   activeListingsType === 'activeTabListings' ? listings : activeListingsType ==='pendingTabListing' ? list : activeListingsType === 'terminateTypeListing' ? terminateList : searchedArray.length > 0 ? searchedArray : listings
+        // }
+        dataSource={listings}
         rowSelection={rowSelection}
         selectedRows={selectedRowKeys.length}
         totalItems={0}

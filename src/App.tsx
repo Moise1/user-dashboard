@@ -1,10 +1,10 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import {CloseIcon} from './small-components/CloseIcon';
+import { CloseIcon } from './small-components/CloseIcon';
 import {
   UserLogin,
   UserRegister,
@@ -59,8 +59,6 @@ export const App = withRouter(({ history }) => {
     sidebar.style.display = 'none';
   };
 
-  
-
   return (
     <>
       {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
@@ -98,12 +96,12 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/va-profiles" component={VaProfiles} />
             <ProtectedRoute path="/get-started" component={GetStarted} />
             <ProtectedRoute path="/catalog" component={Catalog} />
-            <ProtectedRoute path="/templates" component={Templates}/>
+            <ProtectedRoute path="/templates" component={Templates} />
           </Switch>
         </Layout>
       </Layout>
       {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
-      <ToastContainer closeButton={<CloseIcon size='17'/>} theme="colored"/>
+      <ToastContainer closeButton={<CloseIcon size="17" />} theme="colored" />
     </>
   );
 });

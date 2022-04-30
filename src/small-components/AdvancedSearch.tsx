@@ -1,6 +1,6 @@
 import { Drawer } from 'antd';
 import { ReactNode } from 'react';
-import { CloseIcon }   from  '../small-components/CloseIcon';
+import { CloseIcon } from '../small-components/CloseIcon';
 
 export interface AdvancedSearchProps {
   visible?: boolean;

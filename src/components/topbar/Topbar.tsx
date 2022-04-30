@@ -3,14 +3,14 @@ import { Progress, Badge } from 'antd';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
 import bell from '../../assets/bell-icon.svg';
-import {StoreList} from '../../small-components/StoreList';
+import { StoreList } from '../../small-components/StoreList';
 import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
 import { DeleteAccount } from '../user/DeleteAccount';
-import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
-import {getNotifications} from '../../redux/notifications/notificationsThunk';
+import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { getNotifications } from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 
@@ -18,7 +18,7 @@ interface Props extends RouteComponentProps {
   handleSidebarMobile: () => void;
 }
 
-export const Topbar = withRouter((props: Props) =>{
+export const Topbar = withRouter((props: Props) => {
   const { handleSidebarMobile, history } = props;
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export const Topbar = withRouter((props: Props) =>{
   const [checked, setChecked] = useState<boolean>(false);
 
   const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user || {});
-  const {notifications} = useAppSelector((state) => state.notifications);
+  const { notifications } = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
 
@@ -38,20 +38,19 @@ export const Topbar = withRouter((props: Props) =>{
     history.push(route);
   };
 
-  const qoutaPercentage = (partial: number, total:number)=>{
-    if(quotaUsed && quotaAdded){
-      return Math.round((100  * partial) / total);
-    }else {
+  const qoutaPercentage = (partial: number, total: number) => {
+    if (quotaUsed && quotaAdded) {
+      return Math.round((100 * partial) / total);
+    } else {
       return 0;
     }
   };
 
-  const {channelId} = useContext(AppContext);
-  useEffect(() =>{
+  const { channelId } = useContext(AppContext);
+  useEffect(() => {
     dispatch(getNotifications());
-  },[getNotifications, channelId]);
+  }, [getNotifications, channelId]);
 
-  
   return (
     <div className="top-bar">
       <PopupModal open={openDeleteModal}>
@@ -63,13 +62,7 @@ export const Topbar = withRouter((props: Props) =>{
         />
       </PopupModal>
 
-      <PopupModal 
-        open={open} 
-        width={800} 
-        style={{ top: 20 }} 
-        bodyStyle={{ height: 600 }} 
-        handleClose={handleOpenModal}
-      >
+      <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
         <BuyTokens />
       </PopupModal>
       <div className="logo-container">
@@ -90,8 +83,7 @@ export const Topbar = withRouter((props: Props) =>{
               <p>{t('Topbar.Quota')}: &nbsp;</p>
             </strong>
             <span className="quota-progress">
-              {qoutaPercentage(quotaUsed, quotaAdded)}% 
-              ({quotaUsed}/{quotaAdded})
+              {qoutaPercentage(quotaUsed, quotaAdded)}% ({quotaUsed}/{quotaAdded})
             </span>
           </div>
           <Progress percent={qoutaPercentage(quotaUsed, quotaAdded)} showInfo={false} className="progress-bar" />
@@ -114,7 +106,7 @@ export const Topbar = withRouter((props: Props) =>{
           </Badge>
         </div>
       </div>
-      <StoreList/>
+      <StoreList />
     </div>
   );
 });

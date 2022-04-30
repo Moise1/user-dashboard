@@ -5,9 +5,9 @@ type isoCountryType = number | undefined | string | boolean | Date;
 export const countryFlag = (isoCountry: isoCountryType) => {
   switch (isoCountry) {
   case 1:
-    return <Flags.GB title="United Kingdom" className="flag"/>;
+    return <Flags.GB title="United Kingdom" className="flag" />;
   case 2:
-    return <Flags.US title="United States" className="flag"/>;
+    return <Flags.US title="United States" className="flag" />;
   case 3:
     return <Flags.ES title="Spain" className="flag" />;
   case 4:

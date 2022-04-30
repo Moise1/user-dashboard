@@ -63,9 +63,7 @@ export const userAssistantsSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
-
-
   }
 });
 
-export const {reducer: userAssistantsReducer }= userAssistantsSlice;
+export const { reducer: userAssistantsReducer } = userAssistantsSlice;

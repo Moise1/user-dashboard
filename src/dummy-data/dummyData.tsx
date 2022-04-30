@@ -3,9 +3,9 @@ import light_bulb_two from '../assets/catalog-imgs/light-bulb-2.jpg';
 import light_bulb_three from '../assets/catalog-imgs/light-bulb-3.jpg';
 import light_bulb_four from '../assets/catalog-imgs/light-bulb-4.jpg';
 
-export interface DummyData{
-  [key: string]: string | number; 
-  value: string,
+export interface DummyData {
+  [key: string]: string | number;
+  value: string;
   id: number;
 }
 export const dummyData = [
@@ -23,7 +23,7 @@ export const dummyData = [
 
 // type DumyUserPreview = ;
 
-export const dummyUsers: DummyData[]= [
+export const dummyUsers: DummyData[] = [
   {
     value: 'dad@gmail.com',
     id: 1,
@@ -114,7 +114,7 @@ export interface ICatalogData {
   cost: number;
   profit: number;
   source: string;
-  details: JSX.Element
+  details: JSX.Element;
 }
 export const catalogData = [
   {

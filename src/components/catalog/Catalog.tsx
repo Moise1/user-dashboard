@@ -1,9 +1,9 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Layout, Card } from 'antd';
 import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../../small-components/ActionBtns';
-import {FiltersBtn} from '../../small-components/TableActionBtns';
+import { FiltersBtn } from '../../small-components/TableActionBtns';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { SearchOptions } from '../../small-components/SearchOptions';
 import { PopupModal } from '../modals/PopupModal';
@@ -12,11 +12,9 @@ import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/CatalogSource';
 import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
-import { useAppDispatch, useAppSelector} from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import '../../sass/catalog.scss';
-
-
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -27,15 +25,15 @@ export const Catalog = () => {
   const [allProducts, setAllProducts] = useState<ICatalogData[]>([]);
   const [className, setClassName] = useState<string>('product-card');
   const dispatch = useAppDispatch();
-  
-  const {catalogProducts} = useAppSelector((state) => state.catalogProducts);
+
+  const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
   console.log('CATALOG PRODUCTS', catalogProducts);
   const { Meta } = Card;
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getCatalogProducts());
-  },[getCatalogProducts]);
-  
+  }, [getCatalogProducts]);
+
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
   const handleProductModal = () => setModalOpen(!modalOpen);
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
@@ -87,8 +85,8 @@ export const Catalog = () => {
         </div>
       </div>
 
-      <SearchOptions showSearchInput={false}/>
-      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}/>
+      <SearchOptions showSearchInput={false} />
+      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal} />
       <PopupModal
         open={modalOpen}
         handleClose={handleProductModal}

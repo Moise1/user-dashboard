@@ -10,9 +10,9 @@ export const UserLogin = withRouter(({ history }) => {
   const { loading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const onFinish = (values: UserData) => {
-    dispatch(userLogin({data: values, history}));
+    dispatch(userLogin({ data: values, history }));
   };
-  
+
   return (
     <div className="login-form-container">
       <h2 className="login-form-title">Login</h2>
@@ -39,7 +39,7 @@ export const UserLogin = withRouter(({ history }) => {
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password className="auth-input"  />
+          <Input.Password className="auth-input" />
         </Form.Item>
 
         {/* <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>

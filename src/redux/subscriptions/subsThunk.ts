@@ -6,6 +6,6 @@ export const getSubscriptions = createAsyncThunk('subscriptions/getSubscriptions
     const res = await client.get('/Products/Subscriptions/Get');
     return res.data.response_data.products;
   } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):') ;
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
   }
 });

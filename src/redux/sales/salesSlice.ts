@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getSales} from './salesThunk';
+import { getSales } from './salesThunk';
 
-export interface  Sale {
-    date: Date;
-    quantitySold: number;
-    revenue: number;
-    sourcePrice: number;
-    totalTax: number;
+export interface Sale {
+  date: Date;
+  quantitySold: number;
+  revenue: number;
+  sourcePrice: number;
+  totalTax: number;
 }
 
 const initialState = {
@@ -15,27 +15,25 @@ const initialState = {
   error: ''
 };
 
-
 export const salesSlice = createSlice({
   name: 'sales',
   initialState: initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // Get all rules
-    builder.addCase(getSales.pending, (state)=>{
+    builder.addCase(getSales.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getSales.fulfilled, (state, { payload })=>{
+    builder.addCase(getSales.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.sales = payload;
     });
-    builder.addCase(getSales.rejected, (state, { payload })=>{
+    builder.addCase(getSales.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const {reducer: pricingRulesReducer} = salesSlice;
-
+export const { reducer: pricingRulesReducer } = salesSlice;
