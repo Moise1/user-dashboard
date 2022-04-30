@@ -124,28 +124,28 @@ export const Orders = () => {
       dataIndex: '',
       key: '8',
       visible: true,
-      render: (record: OrderData) => <p>£{record.sourcePrice}</p>
+      render: (record: OrderData) => <p>{record.sourcePrice ? `£${record.sourcePrice}` : ' - '}</p>
     },
     {
       title: t('OrderTable.Fees'),
       dataIndex: '',
       key: '9',
       visible: true,
-      render: (record: OrderData) => <p>£{record.fees}</p>
+      render: (record: OrderData) => <p>{record.fees ? `£${record.fees}` : ' - '}</p>
     },
     {
       title: t('OrderTable.Profit'),
       dataIndex: '',
       key: '10',
       visible: true,
-      render: (record: OrderData) => <p>£{record.profit}</p>
+      render: (record: OrderData) => <p>{record.profit ? `${record.profit}£` : ' - '}</p>
     },
     {
       title: t('OrderTable.Margin'),
       dataIndex: '',
       key: '11',
-      visible: false,
-      render: (record: OrderData) => <p>£{record.margin}</p>
+      visible: true,
+      render: (record: OrderData) => <p>{record.margin ? `${record.margin}%` : ' - '}</p>
     },
     {
       title: t('OrderTable.DateOfOrder'),

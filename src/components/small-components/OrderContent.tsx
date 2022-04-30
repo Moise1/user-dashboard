@@ -22,8 +22,9 @@ import { t } from '../../utils/transShim';
 import '../../sass/order-state-modal.scss';
 import { loadProgressOfOrder } from '../../redux/orders/orderThunk';
 import { CrossModalIcon } from '../common/Icons';
-
 import { useEffect } from 'react';
+// import { AutoOrderingState } from '../orders/OrderStatus';
+
 // import { Button } from 'antd';
 interface Props {
   orderProgress: number;
@@ -56,7 +57,6 @@ export const OrderContent = (props: Props) => {
     dispatch(stopOrder(orderNumber));
   };
 
-  console.log(orderProgressStatus);
   const { orderProgress, data, OrderDetailsModal } = props;
   const now = 60;
 
@@ -64,6 +64,44 @@ export const OrderContent = (props: Props) => {
     dispatch(loadProgressOfOrder(id));
     setOrderProgressStatus(orderStatus);
   }, []);
+
+  console.log('The order progress status is', orderProgressStatus);
+
+  // let statusText: string;
+  // let orderProgressBar = 1;
+  // orderProgressStatus.map((curr: any) => {
+  //   if (curr.status == AutoOrderingState.AutoorderingDisabled) {
+  //     orderProgressBar = 0;
+  //     statusText = 'Paused';
+  //   } else if (curr.status == AutoOrderingState.ManuallyDispatched) {
+  //     orderProgressBar = 0;
+  //     statusText = 'Manually dispatched';
+  //   } else if (curr.status == AutoOrderingState.AutoorderingPrepared) {
+  //     orderProgressBar = 1;
+  //     statusText = 'Waiting to start';
+  //   } else if (
+  //     (curr.status > AutoOrderingState.AutoorderingPrepared && curr.status < AutoOrderingState.CompletedAutoOrder) ||
+  //     curr.status == AutoOrderingState.TemporaryError
+  //   ) {
+  //     //Processing
+  //     orderProgressBar = 2;
+  //     statusText = 'Checking out';
+  //   } else if (curr.status >= AutoOrderingState.CompletedAutoOrder && curr.status < AutoOrderingState.Completed) {
+  //     //LastSteps
+  //     orderProgressBar = 3;
+  //     statusText = 'Last steps';
+  //   } else if (curr.status >= AutoOrderingState.Completed && curr.status < AutoOrderingState.TemporaryError) {
+  //     //Completed
+  //     orderProgressBar = 4;
+  //     statusText = 'Completed';
+  //   } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
+  //     //Error
+  //     orderProgressBar = 0;
+  //     statusText = 'Error';
+  //   }
+  //   const percent = orderProgress * 25;
+  //   console.log(orderProgressBar, statusText, percent);
+  // });
 
   return (
     <div className="order-state-progress-modal">

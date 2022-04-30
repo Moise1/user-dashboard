@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap';
-// import Headphone from '../../assets/channel/modal_headphone_photo.png';
+import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { IconArrowModal } from '../common/Icons';
 import { t } from '../../utils/transShim';
 import { OrderData } from 'src/redux/orders/orderSlice';
@@ -25,9 +25,7 @@ const OrderDetailsContent = (props: Props) => {
   const { data } = props;
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
-  // const orderImage = data.imageUrl;
   console.log('The data from  api', data);
-
   const [orderNumber] = useState(data.id);
   const { ordersAddress } = useAppSelector((state) => state.orderAddress);
   console.log('The id is ', data.id);
@@ -64,30 +62,6 @@ const OrderDetailsContent = (props: Props) => {
           <div className="row justify-content-between">
             <div className="col-12 col-xl-6" style={{ backgroundColor: '#f2f8ff', padding: '10px' }}>
               <div className="row shipping-billing-container">
-                {/* SHIPPING ADDRESSS  */}
-                {/* <div className="col-6 col-lg-5">
-                  <div className="heading-addresses  ">
-                    <h3 className="heading-details">{t('OrderDetails.ShippingAddress')}</h3>
-                    <p className="heading-addresses"> {t('OrderDetails.StreetAddress')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                    <p className="heading-addresses"> {t('OrderDetails.City')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                    <p className="heading-addresses"> {t('OrderDetails.PostalCodeState')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                  </div>
-                </div> */}
-                {/* BILLING ADDRESSS  */}
-                {/* <div className="col-6 col-lg-6">
-                  <div className="heading-addresses">
-                    <h3 className="heading-details"> {t('OrderDetails.Billingaddress')}</h3>
-                    <p className="heading-addresses">{t('OrderDetails.StreetAddress')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                    <p className="heading-addresses">{t('OrderDetails.City')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                    <p className="heading-addresses">{t('OrderDetails.PostalCodeState')}</p>
-                    <Form.Control className="white-input" type="text" value="" />
-                  </div>
-                </div> */}
               </div>
               <div className="row">
                 <div className="col-6">
@@ -238,19 +212,9 @@ const OrderDetailsContent = (props: Props) => {
                     <h3 className="heading-details mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h3>
                     <Form.Control className="blue-input" type="text" value={JSON.stringify(data.title)} disabled />
                   </div>
-                  {/* <div className="d-flex mt-4 ">
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Quantity')}</h3>
-                      <Form.Control className="blue-input" type="text" value={JSON.stringify(data.quantity)} />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Sold')}</h3>
-                      <Form.Control className="blue-input" type="text" value="123" />
-                    </div>
-                  </div> */}
                 </div>
                 <div className="col-6 d-flex justify-content-center">
-                  {/* <img src={orderImage} className="product-img" /> */}
+                  <img src={Headphone} className="product-img" />
                 </div>
                 <div className="col-12 mt-4">
                   <div className="sourceurl">
@@ -305,95 +269,6 @@ const OrderDetailsContent = (props: Props) => {
                 </div>
               </div>
             </div>
-            {/* <div className="row justify-content-between">
-              <div className="col-12 col-xl-5">
-                <div className="sourceurl">
-                  <h3 className="heading-details">{t('OrderDetails.SourceURL')}</h3>
-                  <a href="/">https://www.source-url.com/list/item/item-name</a>
-                </div>
-              </div>
-              <div className="col-12 col-xl-6 d-flex">
-                <div className="row">
-                  <div className="col col-lg-auto col-xl-2">
-                    <h3 className="heading-details">{t('OrderDetails.Sell')}</h3>
-                    <Form.Control className="blue-input" type="text" value="€40.00" />
-                  </div>
-                  <div className="col col-lg-auto col-xl-2">
-                    <h3 className="heading-details">{t('OrderDetails.Cost')}</h3>
-                    <Form.Control className="blue-input" type="text" value="123" />
-                  </div>
-                  <div className="col col-lg-auto col-xl-2">
-                    <h3 className="heading-details">{t('OrderDetails.Fees')}</h3>
-                    <Form.Control className="blue-input" type="text" value="€34.99" />
-                  </div>
-                  <div className="col col-lg-auto col-xl-2">
-                    <h3 className="heading-details">{t('OrderDetails.Profit')}</h3>
-                    <Form.Control className="blue-input" type="text" value="€1.00" />
-                  </div>
-                  <div className="col col-lg-auto col-xl-2">
-                    <h3 className="heading-details">{t('OrderDetails.Margin')}</h3>
-                    <Form.Control className="blue-input" type="text" value="123" />
-                  </div>
-
-                  <div className="d-flex mt-4 ">
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Quantity')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.quantity)}
-                        disabled
-                      />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Sold')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.channelPrice)}
-                        disabled
-                      />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Cost')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.sourcePrice)}
-                        disabled
-                      />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Fees')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.fees)}
-                        disabled
-                      />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Profit')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.quantity)}
-                        disabled
-                      />
-                    </div>
-                    <div className="small-input">
-                      <h3 className="heading-details">{t('OrderDetails.Margin')}</h3>
-                      <Form.Control
-                        className="blue-input"
-                        type="text"
-                        value={JSON.stringify(data.quantity)}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="row">
               <div className="go-back-orders-container col">
                 <IconArrowModal />

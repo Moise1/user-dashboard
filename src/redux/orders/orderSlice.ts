@@ -7,29 +7,6 @@ import {
   loadAddressFromOrderLine,
   loadProgressOfOrder
 } from './orderThunk';
-// export interface OrderData {
-//   id: number;
-//   channelOAuthId: number;
-//   createdOn: Date;
-//   lastProcessedOn: null;
-//   productSourceId: null;
-//   url: null;
-//   finishedOn: null;
-//   status: number;
-//   errorCode: null;
-//   errorMessage: null;
-//   title: null;
-//   listOOS: null;
-//   optimizeTitle: null;
-//   ignoreVero: null;
-//   needsReview: null;
-//   createdById: null;
-//   origin: null;
-//   dontListUntil: null;
-//   retries: number;
-//   channelListingId: null;
-//   batchId: string;
-// }
 
 export interface OrderData {
   channelOAuthIds: [number];

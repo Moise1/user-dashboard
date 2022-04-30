@@ -193,7 +193,7 @@
 
   "OrderButtons.ProcessOrders": "Process orders",
   "OrderButtons.StopOrders": "Stop orders",
-  "OrderButtons.MarkAsDispatched": "Dispatched orders",
+  "OrderButtons.MarkAsDispatched": "Dispatched order",
   "OrderButtons.DeleteOrders": "Delete orders",
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",
