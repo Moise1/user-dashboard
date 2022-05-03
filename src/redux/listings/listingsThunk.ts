@@ -33,7 +33,7 @@ export const getListings = createAsyncThunk(
       console.log('Set of Data',{arrayLists});
       return arrayLists;
     } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong! ):');
+      return rejectWithValue('Sorry! Something went wrong!!! ):');
     }
   }
 );
