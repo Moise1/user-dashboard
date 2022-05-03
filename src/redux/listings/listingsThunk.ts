@@ -30,7 +30,7 @@ export const getListings = createAsyncThunk(
       // console.log('this is rowSelection', { rv, arrayLists });
       // console.log('tested', res.data.response_data.sources);
       // return res.data.response_data;
-      console.log('Set of Data',{arrayLists});
+      console.log('Set of Data', { arrayLists });
       return arrayLists;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):');

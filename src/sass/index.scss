@@ -16,6 +16,11 @@ body {
       top: 50%;
     }
   }
+
+  .ant-modal-close-x {
+    width: 4000px;
+  }
+
   .ant-layout.ant-layout-has-sider {
     margin: 0px 5px 0px 80px;
   }
@@ -35,8 +40,6 @@ body {
       margin: 0 auto !important;
     }
   }
-
-
 }
 
 // Tablets and iPads scree sizes
@@ -52,8 +55,6 @@ body {
   background-color: $gray;
   border-radius: 5px;
 }
-
-
 
 // Ant pagination styles
 .ant-pagination-item,

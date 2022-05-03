@@ -16,6 +16,7 @@ export interface ListingsItems {
   created: Date;
   options: JSX.Element;
   checked: boolean;
+  [Key: string]: number | string | JSX.Element | boolean | Date;
 }
 
 export const listingsData = [

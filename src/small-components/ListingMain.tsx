@@ -1,30 +1,21 @@
 import { Row, Col, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { t } from '../../src/utils/transShim';
+import { t } from '../utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
-// import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { ListingData } from 'src/redux/listings/listingsSlice';
-interface Props {
-  selectedItems: ListingData;
-}
 
-// eslint-disable-next-line react/prop-types
-export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
-  console.log('seleted single item to edit', selectedItems);
-  // const { listings } = useAppSelector((state) => state.listings);
-  // console.log('Model Open', listings[1]);
+export const ListingMain = () => {
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">
       <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
-            <Input className="blue-input" value={selectedItems.title} />
+            <Input className="blue-input" value="2021 New Stylish Simplicity Print..." />
           </Form.Item>
 
           <Form.Item label="Quantity">
-            <Input className="blue-input" value={selectedItems.sourceQuantity} type="number" />
+            <Input className="blue-input" value="1" type="number" />
           </Form.Item>
 
           <Form.Item label="Notes">
@@ -34,11 +25,11 @@ export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
 
         <Col>
           <Form.Item label="Markup">
-            <Input className="blue-input" value={selectedItems.sourceId} />
+            <Input className="blue-input" value="Defined by settings(30)" />
           </Form.Item>
 
           <Form.Item label="Your Price">
-            <Input className="blue-input" value={selectedItems.sourcePrice} />
+            <Input className="blue-input" value="30.67" />
           </Form.Item>
 
           <Form.Item label="Mark up %">
@@ -46,7 +37,7 @@ export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
           </Form.Item>
 
           <Form.Item label="Profit">
-            <Input className="blue-input" value={selectedItems.price} />
+            <Input className="blue-input" value="3.09" />
           </Form.Item>
 
           <p>

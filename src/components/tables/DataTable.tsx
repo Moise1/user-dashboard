@@ -3,31 +3,44 @@ import { Pagination, Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
-import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
+import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
+import { OrderData } from 'src/redux/orders/orderSlice';
+import { ListingsItems } from '../common/ListingsData';
+import { Channel } from '../../redux/channels/channelsSlice';
 
-type OrdersTypes = {
-  id: number;
-  img: JSX.Element;
-  sale: string;
-  qty: number;
-  source: string;
-  title: string;
-  sold: number;
-  cost: number;
-  fees: number;
-  profit: number;
-  margin: string;
-  orderedOn: Date;
-  state: JSX.Element | string;
-};
+// export interface OrdersTypes {
+//   id: number;
+//   img: JSX.Element;
+//   sale: string;
+//   qty: number;
+//   source: string;
+//   // title: string;
+//   sold: number;
+//   cost: number;
+//   // fees: number;
+//   profit: number;
+//   margin: string;
+//   orderedOn: Date;
+//   state: JSX.Element | string;
 
-export type SeletedRowsType = (ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant | undefined)[];
+//   reference: string;
+//   channelItem: number;
+//   sourceItem: number;
+//   title: string;
+//   quantity: number;
+//   channelPrice: number;
+//   sourcePrice: number;
+//   fees: number;
+//   date: Date;
+//   status: number;
+// }
 
+export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<ListingData | OrdersTypes | Rule | SourceConfig | UserAssistant>;
-  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[], selectedRows: SeletedRowsType) => void };
+  dataSource: Array<TableDataTypes>;
+  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -40,6 +53,8 @@ interface Props {
   current?: number;
   pageSize?: number;
   pagination?: boolean;
+  rowClassName?: string;
+  onRow?: (record: TableDataTypes) => { onClick: () => void };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -54,14 +69,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     page,
     showTableInfo,
     onChange,
-    // total,
     current,
-    pageSize
+    pageSize,
+    onRow,
+    rowClassName
   } = props;
+
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
+    return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
+
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -87,7 +104,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           </div>
           <p className="total-items">
             <strong>
-              {totalItems} {page}s
+              {totalItems} {page}
             </strong>
           </p>
         </div>
@@ -101,6 +118,17 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           ...rowSelection
         }}
         pagination={false}
+        rowClassName={rowClassName}
+        onRow={onRow}
+      />
+      {/* console.log(rowSelection); */}
+      <Pagination
+        // onChange={rowSelection?.onChange}
+        onChange={onChange}
+        total={totalItems}
+        current={current}
+        pageSize={pageSize}
+        style={{ paddingBottom: '25px' }}
       />
       <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} />
     </div>
