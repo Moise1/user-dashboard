@@ -265,12 +265,12 @@ export const Orders = () => {
         current={current}
         // onChange={setCurrent}
         pagination={false}
-        rowClassName="table-row"
-        onRow={() => {
-          return {
-            onClick: () => handleOrderModal()
-          };
-        }}
+        // rowClassName="table-row"
+        // onRow={() => {
+        //   return {
+        //     onClick: () => handleOrderModal()
+        //   };
+        // }}
       />
     </Layout>
   );

@@ -46,8 +46,8 @@ export enum eChannelListingOrigin {
   Catalog = 64,
   WeListForYou = 128
 }
-interface HGRSearchData {
-  dummy: string;
+export interface HGRSearchData {
+  id: number;
 }
 export interface ActiveListing extends HGRSearchData {
   id: number;
