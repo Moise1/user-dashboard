@@ -168,13 +168,13 @@ export const TerminateListingsSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getTerminateListings.fulfilled, (state, { payload }) => {
-      // console.log('terminate', { terminate_listings: payload.listings });
+      // console.log('terminated', { terminate_listings: payload.listings });
       state.loading = false;
       state.terminate_listings = [...payload.listings];
       // console.log({ state });
     });
     builder.addCase(getTerminateListings.rejected, (state, { payload }) => {
-      // console.log('rejected');
+      // console.log('reject');
       state.loading = false;
       state.error = String(payload);
     });
