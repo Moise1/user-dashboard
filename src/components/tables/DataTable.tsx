@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
-import { Table, Pagination } from 'antd';
+import { Pagination, Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
-
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
@@ -60,7 +59,7 @@ interface Props {
 
 export const DataTable: React.FC<Props> = (props: Props) => {
   const {
-    columns,  
+    columns,
     dataSource,
     rowSelection,
     selectedRows,
@@ -70,19 +69,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     page,
     showTableInfo,
     onChange,
-    // total,
     current,
     pageSize,
-    rowClassName,
-    onRow
+    onRow,
+    rowClassName
   } = props;
-  // console.log({ dataSource });
+
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
-  // console.log('getData', getData(current, pageSize));
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -134,6 +130,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
       />
+      <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} />
     </div>
   );
 };

@@ -4,11 +4,11 @@ import { TypeOptions, ToastContent, ToastPosition } from 'react-toastify/dist/ty
 type DelayType = number | false | undefined;
 type PositionType = ToastPosition | undefined;
 
-export const toastAlert =  (
-  message: ToastContent, 
-  type: TypeOptions = 'default', 
-  delay: DelayType = 3000, 
-  position: PositionType = 'top-right',
+export const toastAlert = (
+  message: ToastContent,
+  type: TypeOptions = 'default',
+  delay: DelayType = 3000,
+  position: PositionType = 'top-right'
 ) => {
   const options = {
     position,
@@ -17,7 +17,7 @@ export const toastAlert =  (
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: undefined,
+    progress: undefined
   };
   type === 'default' ? toast(message, options) : toast[type](message, options);
 };

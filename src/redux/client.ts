@@ -11,8 +11,7 @@ export const client = axios.create({
 
 client.interceptors.request.use(
   async (req: AxiosRequestConfig) => {
-    // const channelId = localStorage.getItem('channelId');
-    const channelId = 590881;
+    const channelId = localStorage.getItem('channelId');
     const token = localStorage.getItem('Authorization');
     if (token) {
       req.headers = {

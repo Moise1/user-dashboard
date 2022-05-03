@@ -77,12 +77,7 @@ export const SourcesTable = () => {
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
-        <DataTable
-          columns={columns}
-          dataSource={sources}
-          pageSize={6}
-          total={sources?.length}
-        />
+        <DataTable columns={columns} dataSource={sources} pageSize={6} total={sources?.length} />
       </div>
     </Layout>
   );

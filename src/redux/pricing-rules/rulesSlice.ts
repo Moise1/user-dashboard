@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getRules, createRule, updateRule, deleteRule} from './rulesThunk';
+import { getRules, createRule, updateRule, deleteRule } from './rulesThunk';
 
-export interface  Rule {
+export interface Rule {
   id: number;
   userId?: string;
   sourceId: number | string;
@@ -11,7 +11,7 @@ export interface  Rule {
   createdOn?: Date;
   active?: boolean;
   channelOAuthId?: number;
-  [key: string]: string | number| Date | boolean | undefined
+  [key: string]: string | number | Date | boolean | undefined;
 }
 
 const initialState = {
@@ -23,69 +23,67 @@ const initialState = {
   error: ''
 };
 
-
 export const rulesSlice = createSlice({
   name: 'rules',
   initialState: initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     // Get all rules
-    builder.addCase(getRules.pending, (state)=>{
+    builder.addCase(getRules.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getRules.fulfilled, (state, { payload })=>{
+    builder.addCase(getRules.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.rules = payload.rules;
+      state.rules = payload;
     });
-    builder.addCase(getRules.rejected, (state, { payload })=>{
+    builder.addCase(getRules.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
 
     // Create a rule
-    builder.addCase(createRule.pending, (state)=>{
+    builder.addCase(createRule.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(createRule.fulfilled, (state, { payload })=>{
+    builder.addCase(createRule.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.ruleCreated = payload?.success;
     });
-    builder.addCase(createRule.rejected, (state, { payload })=>{
+    builder.addCase(createRule.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
 
-    // Update a rule 
-    builder.addCase(updateRule.pending, (state)=>{
+    // Update a rule
+    builder.addCase(updateRule.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(updateRule.fulfilled, (state, { payload })=>{
+    builder.addCase(updateRule.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.ruleUpdated = payload?.success;
     });
-    builder.addCase(updateRule.rejected, (state, { payload })=>{
+    builder.addCase(updateRule.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
 
     // Delete rule
-    builder.addCase(deleteRule.pending, (state)=>{
+    builder.addCase(deleteRule.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(deleteRule.fulfilled, (state, { payload })=>{
+    builder.addCase(deleteRule.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.ruleDeleted = payload?.success;
     });
-    builder.addCase(deleteRule.rejected, (state, { payload })=>{
+    builder.addCase(deleteRule.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
   }
 });
 
-export const {reducer: pricingRulesReducer} = rulesSlice;
-
+export const { reducer: pricingRulesReducer } = rulesSlice;

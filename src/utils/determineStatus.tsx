@@ -1,5 +1,5 @@
 // import { SuccessBtn,WarningBtn, CancelBtn } from '../components/small-components/ActionBtns';
-import { SuccessBtn, WarningBtn,ProgressBtn } from '../small-components/ActionBtns';
+import { SuccessBtn, WarningBtn, ProgressBtn } from '../small-components/ActionBtns';
 
 export const determineStatus = (statusValue: string | number) => {
   switch (statusValue) {

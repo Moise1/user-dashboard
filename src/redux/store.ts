@@ -1,15 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { configureStore, Reducer, AnyAction, createEntityAdapter } from '@reduxjs/toolkit';
-import { 
-  persistReducer, 
-  FLUSH,
-  REHYDRATE,
-  PAUSE, 
-  PERSIST, 
-  PURGE,
-  REGISTER 
-} from 'redux-persist';
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {persistStore} from 'redux-persist';
+import { persistStore } from 'redux-persist';
 import { allReducers } from './reducers';
 
 const persistConfig = {
@@ -21,23 +14,24 @@ const persistConfig = {
 //This RootState is required to use useSelector
 export type RootState = ReturnType<typeof store.getState> & ReturnType<typeof allReducers>;
 
-const rootReducer: Reducer = (state: RootState, action: AnyAction)=>{
-  if(action.type === 'user/logout'){
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+  if (action.type === 'user/logout') {
     state = {} as RootState;
     createEntityAdapter().removeAll(state);
   }
 
   return allReducers(state, action);
-}; 
+};
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
+      serializableCheck: false
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      // }
     })
 });
 
@@ -45,4 +39,4 @@ const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 
-export {store, persistor};
+export { store, persistor };

@@ -2,23 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getSubscriptions } from './subsThunk';
 
 export interface Subscription {
-    id: number;
-    platformId: string;
-    billingPeriodId: number;
-    currencyId: number;
-    price: number;
-    platformProductId: string;
-    productId: number;
-  
-  }
-export interface Product{
- id: number;
- name: string;
- prices: Subscription[]
- productOrder: number;
- type: number;
+  id: number;
+  platformId: string;
+  billingPeriodId: number;
+  currencyId: number;
+  price: number;
+  platformProductId: string;
+  productId: number;
 }
-
+export interface Product {
+  id: number;
+  name: string;
+  prices: Subscription[];
+  productOrder: number;
+  type: number;
+}
 
 const initialState = {
   products: [] as Product[],

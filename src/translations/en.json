@@ -3,31 +3,24 @@
   "acnt": "account",
   "acntchk": "*You need to have the Amazon Business seller program, not just sell on Amazon.",
   "addchan": "Add new channel",
-
   "AddNewChannel": "Add new channel",
-
   "Channel.Monitoring": "Monitoring",
   "Channel.Listing": "Listing",
   "Channel.Business": "Business",
   "Channel.Other": "Other",
-
   "Main": "Main",
   "Description": "Description",
   "Details": "Details",
   "Options": "Options",
-
   "ActiveListings": "Active Listings",
   "ActiveListingsShort": "Active",
-
   "PendingListings": "Pending Listings",
   "PendingListingsShort": "Pending",
   "TerminatedListings": "Terminated Listings",
   "TerminatedListingsShort": "Terminated",
   "Edit N Listings": "Edit <span className=\"fw-600\">{num}</span> Listings",
-
   "Listings.Column.Cost": "Cost",
-  "Listings.Column.Img": "Item",
-  "Listings.Column.Created on": "Created on",
+  "Listings.Column.Img": "Image",
   "Listings.Column.Item no.": "Item no.",
   "Listings.Column.Markup": "Markup",
   "Listings.Column.Profit": "Profit",
@@ -36,7 +29,9 @@
   "Listings.Column.Stock": "Stock",
   "Listings.Column.Title": "Title",
   "Listings.Column.Options": "Options",
-
+  "Listings.Column.Status": "Status",
+  "Listings.Column.Created On": "Created On",
+  "Listings.Column.Created By": "Created By",
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
   "Menu.Channel": "Channel",
@@ -53,11 +48,9 @@
   "Menu.Templates": "Templates",
   "Menu.VaProfiles": "VA Profiles",
   "Menu.Orders": "Orders",
-
   "Menu.FAQ": "FAQ",
   "Menu.ListingServices": "Listing Services",
   "Menu.Start": "Get Started",
-
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",
   "OrderTable.StreetAddress": "Street address",
@@ -99,14 +92,12 @@
   "OrderTable.Image": "Image",
   "OrderTable.Item": "Channel Item",
   "OrderTable.Status": "Status",
-
   "OrderTable.Options": "Options",
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
   "OrderTable.QTY": "QTY",
   "OrderTable.OrderedOn": "Ordered on",
   "OrderTable.State": "State",
-
   "OrderDetails.OrderState": "Order State",
   "OrderDetails.AOEnabled": "AO Enabled",
   "OrderDetails.HISTORY": "Order history",
@@ -140,12 +131,10 @@
   "OrderDetails.Fees": "Fees",
   "OrderDetails.Profit": "Profit",
   "OrderDetails.Margin": "Margin",
-
   "OrderDetails.ProcessOrder": "Process order",
   "OrderDetails.StopOrder": "Stop order",
   "OrderDetails.MarkAsDispatched": "Mark as dispatched",
   "OrderDetails.DeleteOrder": "Delete order",
-
   "SaveChanges": "Save Changes",
   "ApplyChanges": "Apply Changes",
   "Cancel": "Cancel",
@@ -155,7 +144,6 @@
   "Dismiss": "Dismisss",
   "AddToSelection": "Add to Selection",
   "AddSources": "Add Sources",
-
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
   "SourceConfigInputs.password": "password",
@@ -165,7 +153,6 @@
   "SourceConfigInputs.AddAccount": "Add account",
   "SourceConfigInputs.Disabled": "Disabled",
   "SourceConfigInputs.EnableDisableAutoOrdering": "Enable/Disable Auto-ordering",
-
   "SourceConfigInputs.DadAccount": "Dad account",
   "SourceConfigInputs.AccountConfiguration": "Account configuration",
   "SourceConfigInputs.ConfigureAutoordering": "Configure Autoordering (Beta)",
@@ -174,7 +161,6 @@
   "SourceConfigInputs.ObtainYourOTPCode": "Obtain your OTP code",
   "SourceConfigInputs.DeactivateYourAccountMessage": "If you deactivate this account, orders will be placed through the activated accounts.",
   "SourceConfigInputs.DeleteYourAccountMessage": " If you delete this account, you will have to set it up again and no payments will be made through this account.",
-
   "SourceTable.Provider": "Provider",
   "SourceTable.Markup": "Markup",
   "SourceTable.MonitorStock": "Monitor Stock",
@@ -190,7 +176,6 @@
   "SourceTable.Beta": "Beta",
   "SourceTable.AutoOrdering": "Auto ordering",
   "SourceTable.SourceTableHeadingLine": "All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel",
-
   "OrderButtons.ProcessOrders": "Process orders",
   "OrderButtons.StopOrders": "Stop orders",
   "OrderButtons.MarkAsDispatched": "Dispatched order",
@@ -198,11 +183,9 @@
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",
   "OrderButtons.Delete5Orders": "Delete 5 Orders",
-
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
   "Topbar.Quota": "Quota",
-
   "addAll": "Add All",
   "filters": "Filters",
   "advnc": "Advance",

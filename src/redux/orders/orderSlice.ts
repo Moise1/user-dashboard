@@ -38,7 +38,7 @@ export interface OrderData {
   buyReference: string;
   cancelRequested: boolean;
   profit?: number;
-  margin?:number;
+  margin?: number;
   //added on 26april
   orderLineId: number;
   id: number;

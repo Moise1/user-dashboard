@@ -18,4 +18,3 @@ export const MenuListItem = (props: Props) => {
     </div>
   );
 };
-

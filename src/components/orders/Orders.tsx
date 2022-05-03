@@ -20,9 +20,9 @@ import { determineStatus } from '../../utils/determineStatus';
 // import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
 // import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
-import { OrderContent } from 'src/small-components/OrderContent';
+import { OrderContent } from '../../small-components/OrderContent';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
-import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDrawers';
+import { OrdersAdvancedSearch } from '../../small-components/OrderAdvancedSearchDrawers';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
@@ -40,9 +40,9 @@ export const Orders = () => {
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
   const [selectedRecord, setSelectedRecord] = useState({});
-  const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);

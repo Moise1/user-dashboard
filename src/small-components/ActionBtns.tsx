@@ -10,63 +10,36 @@ interface Props {
   handleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   id?: string;
   htmlType?: htmlType;
-
 }
 
 type htmlType = 'button' | 'submit' | 'reset';
 
 export const ProgressBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
-  <Button 
-    className={`progress-btn  ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+  <Button className={`progress-btn  ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );
 
 export const WarningBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
-  <Button 
-    className={`warning-btn  ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+  <Button className={`warning-btn  ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );
 
 export const ConfirmBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
-  <Button 
-    className={`confirm-btn ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+  <Button className={`confirm-btn ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );
 
-export const SuccessBtn = ({ children, handleConfirm, className, disabled, htmlType}: Props) => (
-  <Button 
-    className={`success-btn ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+export const SuccessBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
+  <Button className={`success-btn ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );
-
 
 export const DangerBtn = ({ children, handleConfirm, className, disabled, htmlType }: Props) => (
-  <Button 
-    className={`danger-btn ${className}`}
-    onClick={handleConfirm} 
-    disabled={disabled}
-    htmlType={htmlType}
-  >
+  <Button className={`danger-btn ${className}`} onClick={handleConfirm} disabled={disabled} htmlType={htmlType}>
     {children}
   </Button>
 );

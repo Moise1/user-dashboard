@@ -3,11 +3,7 @@ interface SearchOptionsProps {
   showSearchInput: boolean;
 }
 
-export const SearchOptions = ({showSearchInput}: SearchOptionsProps) => {
+export const SearchOptions = ({ showSearchInput }: SearchOptionsProps) => {
   const onSearch = (value: string) => console.log('searched value', value);
-  return (
-    <div className="action-components">
-      {showSearchInput && <SearchInput onSearch={onSearch} />}
-    </div>
-  );
+  return <div className="action-components">{showSearchInput && <SearchInput onSearch={onSearch} />}</div>;
 };

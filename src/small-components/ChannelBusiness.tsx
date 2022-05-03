@@ -24,9 +24,7 @@ export const ChannelBusiness = () => {
           <h2>Returns</h2>
         </Col>
         <Col span={8}>
-          <Selector defaultValue="30 days">
-            {dummyDuration}
-          </Selector>
+          <Selector defaultValue="30 days">{dummyDuration}</Selector>
         </Col>
       </Row>
 
