@@ -121,7 +121,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         rowClassName={rowClassName}
         onRow={onRow}
       />
-      {/* console.log(rowSelection); */}
       <Pagination
         // onChange={rowSelection?.onChange}
         onChange={onChange}

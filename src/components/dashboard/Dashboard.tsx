@@ -8,8 +8,10 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+import { DatePicker, Space } from 'antd';
 
+// import { faker } from '@faker-js/faker';
+import months from 'months';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -19,7 +21,10 @@ import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
+import { Switch } from '../../small-components/Switch';
 import '../../sass/dashboard.scss';
+import { Moment } from 'moment';
+import { RangeValue } from 'rc-picker/lib/interface';
 
 interface ProductQuota {
   quota: number;
@@ -31,12 +36,16 @@ interface ProductQuota {
   cancelled: boolean;
 }
 
+const { RangePicker } = DatePicker;
+
 export const Dashboard = () => {
   const { channels } = useAppSelector((state) => state.channels);
   const dispatch = useAppDispatch();
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
+  const [daysPeriod, setDaysPeriod] = useState<boolean>(false);
+
   const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
 
@@ -44,6 +53,8 @@ export const Dashboard = () => {
     await dispatch(deleteChannel(id));
     dispatch(getChannels());
   };
+
+  const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
 
   useEffect(() => {
     localStorage.setItem('channelId', JSON.stringify(channelId));
@@ -119,24 +130,41 @@ export const Dashboard = () => {
     }
   };
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const daysLabel: string[] = [];
+  for (let i = 1; i < 32; i++) {
+    daysLabel.push(String(i));
+  }
+  const monthsLabel: string[] = months.map((m: string) => m.slice(0, 3));
 
+  // const chartData = (days: boolean) =>{
+  //   switch (days) {
+  //     case true:
+
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // }
   const data = {
-    labels,
+    labels: daysPeriod ? daysLabel : monthsLabel,
     datasets: [
       {
         label: 'Dataset 1',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        data: [],
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
-      },
-      {
-        label: 'Dataset 2',
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        backgroundColor: 'rgba(53, 162, 235, 0.5)'
       }
     ]
   };
 
+  const onChange = (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+  };
+
+  const onOk = (date: Moment | RangeValue<Moment>) => {
+    console.log('onOk: ', date);
+  };
   return (
     <div className="dashboard-container">
       <div className="general-section">
@@ -177,6 +205,32 @@ export const Dashboard = () => {
       <div className="sales-container">
         <h1>Your sales</h1>
         <div className="sales">
+          <div className="graph-cntrlers">
+            <Switch
+              className="toggle-period"
+              checked={daysPeriod}
+              onChange={handlePeriodChange}
+              checkedChildren="By day"
+              unCheckedChildren="By month"
+              aria-label="Dark mode toggle"
+            />
+            <Space direction="vertical" size={12} className="date-picker">
+              <RangePicker 
+                showTime={{ format: 'HH:mm' }} 
+                format="YYYY-MM-DD HH:mm" 
+                onChange={onChange} 
+                onOk={onOk}/>
+            </Space>
+
+            <Switch
+              className="toggle-period"
+              checked={daysPeriod}
+              onChange={handlePeriodChange}
+              checkedChildren="By day"
+              unCheckedChildren="By month"
+              aria-label="Dark mode toggle"
+            />
+          </div>
           <div className="sales-graph">
             <Bar options={options} data={data} />
           </div>

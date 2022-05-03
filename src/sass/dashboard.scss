@@ -7,7 +7,8 @@
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-  &::-webkit-scrollbar { /* Chrome and Safari */
+  &::-webkit-scrollbar {
+    /* Chrome and Safari */
     width: 0;
     height: 0;
   }
@@ -28,18 +29,18 @@
     justify-content: space-evenly;
     column-gap: 10px;
 
-    .container-numbers{
+    .container-numbers {
       display: grid;
       height: 80%;
       align-items: center;
-    align-content: center;
-    .numbers-info {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      text-align: center;
+      align-content: center;
+      .numbers-info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+      }
     }
-  }
     .products,
     .stores {
       box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
@@ -62,20 +63,27 @@
   }
 }
 
-.sales-container{
-margin-top: 2rem;
+.sales-container {
+  margin-top: 2rem;
   .sales {
     box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
     background: $corporative-color-dark;
     padding: 1rem;
     border-radius: 10px;
-    margin:1rem;
+    margin: 1rem;
+    .graph-cntrlers{
+      display: flex;
+      justify-content: space-between;
+      // margin: 0 1rem;
+      .toggle-period {
+        max-width: 120px;
+        height: 24px;
+      }
+    }
   }
 }
 
-
 .other-services {
-  
   margin: 2rem 0;
   .other-services-cols {
     display: flex;
@@ -155,11 +163,10 @@ margin-top: 2rem;
   border-radius: 10px;
 }
 
-
 // Mobile screen sizes
 
-@media only screen and (max-width: 750px){
-  .social-media{
+@media only screen and (max-width: 750px) {
+  .social-media {
     justify-content: center;
     margin-top: 2rem;
   }
