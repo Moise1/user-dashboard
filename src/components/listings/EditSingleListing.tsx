@@ -8,15 +8,20 @@ import { ListingDetails } from '../../small-components/ListingDetails';
 import { ListingOptions } from '../../small-components/ListingOptions';
 import '../../sass/edit-single-listing.scss';
 import { ExternalLink } from 'react-feather';
+import { ListingData } from 'src/redux/listings/listingsSlice';
 
-export const EditSingleListing = () => {
+interface Props {
+  selectedItems: ListingData;
+}
+
+export const EditSingleListing = ({ selectedItems }: Props) => {
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
-      return <ListingMain />;
+      return <ListingMain selectedItems={selectedItems}/>;
     case 1:
       return <ListingDescription />;
     case 2:

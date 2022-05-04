@@ -1,21 +1,25 @@
 import { Row, Col, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import { t } from '../utils/transShim';
+import { t } from '../../src/utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
+import { ListingData } from 'src/redux/listings/listingsSlice';
+interface Props {
+  selectedItems: ListingData;
+}
 
-export const ListingMain = () => {
+export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">
       <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
-            <Input className="blue-input" value="2021 New Stylish Simplicity Print..." />
+            <Input className="blue-input" value={selectedItems.title} />
           </Form.Item>
 
           <Form.Item label="Quantity">
-            <Input className="blue-input" value="1" type="number" />
+            <Input className="blue-input" value={selectedItems.sourceQuantity} type="number" />
           </Form.Item>
 
           <Form.Item label="Notes">
@@ -25,11 +29,11 @@ export const ListingMain = () => {
 
         <Col>
           <Form.Item label="Markup">
-            <Input className="blue-input" value="Defined by settings(30)" />
+            <Input className="blue-input" value={selectedItems.sourceId} />
           </Form.Item>
 
           <Form.Item label="Your Price">
-            <Input className="blue-input" value="30.67" />
+            <Input className="blue-input" value={selectedItems.sourcePrice} />
           </Form.Item>
 
           <Form.Item label="Mark up %">
@@ -37,7 +41,7 @@ export const ListingMain = () => {
           </Form.Item>
 
           <Form.Item label="Profit">
-            <Input className="blue-input" value="3.09" />
+            <Input className="blue-input" value={selectedItems.price} />
           </Form.Item>
 
           <p>

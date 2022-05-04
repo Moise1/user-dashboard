@@ -9,38 +9,14 @@ import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
-// export interface OrdersTypes {
-//   id: number;
-//   img: JSX.Element;
-//   sale: string;
-//   qty: number;
-//   source: string;
-//   // title: string;
-//   sold: number;
-//   cost: number;
-//   // fees: number;
-//   profit: number;
-//   margin: string;
-//   orderedOn: Date;
-//   state: JSX.Element | string;
-
-//   reference: string;
-//   channelItem: number;
-//   sourceItem: number;
-//   title: string;
-//   quantity: number;
-//   channelPrice: number;
-//   sourcePrice: number;
-//   fees: number;
-//   date: Date;
-//   status: number;
-// }
-
 export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<TableDataTypes>;
-  rowSelection?: { selectedRowKeys: Key[]; onChange: (selectedRowKeys: Key[]) => void };
+  rowSelection?: {
+    selectedRowKeys: Key[];
+    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
+  };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -52,7 +28,6 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
-  pagination?: boolean;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
 }
@@ -122,14 +97,13 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         onRow={onRow}
       />
       <Pagination
-        // onChange={rowSelection?.onChange}
         onChange={onChange}
         total={totalItems}
         current={current}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
       />
-      <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} />
+      {/* <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} /> */}
     </div>
   );
 };

@@ -14,12 +14,9 @@ import { PopupModal } from '../modals/PopupModal';
 import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-// import { OrderEditSingleListing } from '../orders/OrderEditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { determineStatus } from '../../utils/determineStatus';
-// import { SearchOptions } from '../small-components/SearchOptions';
 import moment from 'moment';
-// import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
 import { OrderContent } from '../../small-components/OrderContent';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import { OrdersAdvancedSearch } from '../../small-components/OrderAdvancedSearchDrawers';
@@ -38,7 +35,7 @@ export const Orders = () => {
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
-  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
+  const [, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
@@ -67,8 +64,6 @@ export const Orders = () => {
         }))
     );
   }, [getOrders]);
-
-  console.log(setCurrent);
 
   const tableColumns = [
     {
@@ -166,7 +161,6 @@ export const Orders = () => {
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
 
   const onSelectChange = (selectedRowKeys: Key[]) => {
-    // console.log({ selectedRowKeys });
     setSelectedRowKeys(selectedRowKeys);
   };
 
@@ -202,20 +196,12 @@ export const Orders = () => {
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
-  console.log('The selected column', showColumns);
-  // //For Searching
+
+  //For Searching
   useEffect(() => {
     setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
     setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
   }, [order, searchKey]);
-
-  // console.log(rowSelection);
-  console.log('The search Array ', searchFilterKey);
-  // console.log('The searchkey setter is', setSearchKey);
-  // console.log('The setShowColumn', setShowColumns);
-  // console.log('The setBulkEditOpen', setBulkEditOpen);
-  // console.log('setSingleEditOpen', setSingleEditOpen);
-  // console.log('setDrawerOpen', setDrawerOpen);
 
   return (
     <Layout className="orders-container">
@@ -293,7 +279,6 @@ export const Orders = () => {
         pageSize={10}
         current={current}
         onChange={setCurrent}
-        pagination={false}
         rowClassName="table-row"
         onRow={(record) => {
           return {
