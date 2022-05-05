@@ -27,6 +27,7 @@ import {
   Templates
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
+import { ListNow } from './components/listings/ListNow';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -86,6 +87,7 @@ export const App = withRouter(({ history }) => {
             <Route path="/register" component={UserRegister} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />
+            <ProtectedRoute path="/list-now" component={ListNow} />
             <ProtectedRoute path="/orders" component={Orders} />
             <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
             <ProtectedRoute path="/sources-table" component={SourcesTable} />
