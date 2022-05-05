@@ -152,11 +152,11 @@ h4 {
 }
 
 @mixin chevrons {
-  margin-top: $spacer * 0.25 !important;
-  background: $light-blue;
-  color: $primary-bg;
-  border-radius: 5px;
-  cursor: pointer;
+  // margin-top: $spacer * 0.25 !important;
+  // background: $light-blue;
+  // color: $primary-bg;
+  // border-radius: 5px;
+  // cursor: pointer;
 }
 
 .chevron-right,
@@ -194,6 +194,7 @@ h4 {
 
 .ant-popover-inner-content {
   padding: 0 1rem;
+  border: 2px solid red;
 }
 
 .flag {

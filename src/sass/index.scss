@@ -34,7 +34,7 @@ body {
       width: 68vw !important;
     }
   }
-
+  
   @media only screen and (max-width: 1030px) {
     .content-area-resized {
       margin: 0 auto !important;
@@ -113,5 +113,23 @@ button,
 @keyframes blinker {
   10% {
     opacity: 0;
+  }
+}
+
+
+// Range Picker' styles
+
+.ant-picker-date-panel {
+  .ant-picker-header {
+    display: flex;
+    padding: 0 8px;
+    color: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #f0f0f0;
+    justify-content: center;
+    margin: auto 90px;
+  }
+  .ant-picker-header-view {
+    display: flex;
+    padding: 0 40px;
   }
 }

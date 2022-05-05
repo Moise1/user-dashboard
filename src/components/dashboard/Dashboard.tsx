@@ -9,6 +9,7 @@ import { SocialIcon } from 'react-social-icons';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { DatePicker, Space } from 'antd';
+import { RangeValue } from 'rc-picker/lib/interface';
 
 // import { faker } from '@faker-js/faker';
 import months from 'months';
@@ -22,9 +23,8 @@ import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { Switch } from '../../small-components/Switch';
-import '../../sass/dashboard.scss';
 import { Moment } from 'moment';
-import { RangeValue } from 'rc-picker/lib/interface';
+import '../../sass/dashboard.scss';
 
 interface ProductQuota {
   quota: number;
@@ -55,7 +55,7 @@ export const Dashboard = () => {
   };
 
   const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
-
+  console.log(handlePeriodChange);
   useEffect(() => {
     localStorage.setItem('channelId', JSON.stringify(channelId));
   }, [channelId]);
@@ -214,14 +214,15 @@ export const Dashboard = () => {
               unCheckedChildren="By month"
               aria-label="Dark mode toggle"
             />
-            <Space direction="vertical" size={12} className="date-picker">
-              <RangePicker 
-                showTime={{ format: 'HH:mm' }} 
-                format="YYYY-MM-DD HH:mm" 
-                onChange={onChange} 
-                onOk={onOk}/>
+            <Space direction="vertical" className="date-picker-container">
+              <RangePicker
+                showTime={{ format: 'HH:mm' }}
+                format="YYYY-MM-DD HH:mm"
+                onChange={onChange}
+                onOk={onOk}
+                size="middle"
+              />
             </Space>
-
             <Switch
               className="toggle-period"
               checked={daysPeriod}
@@ -231,9 +232,7 @@ export const Dashboard = () => {
               aria-label="Dark mode toggle"
             />
           </div>
-          <div className="sales-graph">
-            <Bar options={options} data={data} />
-          </div>
+          <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
         </div>
       </div>
 
