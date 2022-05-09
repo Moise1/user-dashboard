@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Pagination, Table } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
@@ -60,8 +60,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   } = props;
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
+    let myData=[];
+    const data = dataSource.slice((current! - 1) * pageSize!, current! * pageSize!);
+    myData = data;
+    return myData;
   };
+  const [flag, setFlag]=useState(false);
+  useEffect(()=>{
+    setFlag((prev)=>!prev);
+  },[dataSource]);
+  console.log({flag, dataSource, columns});
   return (
     <div className="data-table">
       {showTableInfo && (

@@ -43,6 +43,8 @@ export const Listings = () => {
   const dispatch = useAppDispatch();
   const [list, setList] = useState([]);
   const [terminateList, setTerminateList] = useState([]);
+  
+  const [dataRender, setDataRender] = useState(false);
 
   const [singleRecordData, setSingleRecordData] = useState({
     imageUrl:
@@ -116,7 +118,6 @@ export const Listings = () => {
     } else {
       console.log(activeListingsType);
     }
-
     // console.log('The created on',list);
     // const t = listingSources?.sourceListings.length && listingSources?.sourceListings.map((item: any) => item.name);
     // setSource(t);
@@ -137,7 +138,7 @@ export const Listings = () => {
       title: t('Listings.Column.Img'),
       dataIndex: '',
       key: '2',
-      visible: activeListingsType === 'pendingTabListing' ? false : true,
+      visible: activeListingsType === 'pendingTabListing' ? true : false,
       render: (record: pending_listings) => (
         <div className="img-container">
           <img src={record.imageUrl} alt="image" className="record-img" />
@@ -149,7 +150,7 @@ export const Listings = () => {
       title: t('Listings.Column.Source'),
       dataIndex: 'name',
       key: '3',
-      visible: false
+      visible: activeListingsType === 'activeTabListings' ? true : false
     },
 
     {
@@ -163,32 +164,32 @@ export const Listings = () => {
       title: t('Listings.Column.Sell'),
       dataIndex: 'channelPrice',
       key: '5',
-      visible: true
+      visible: activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? false : true,
     },
     {
       title: t('Listings.Column.Cost'),
       dataIndex: 'sourcePrice',
       key: '6',
-      visible: false
+      visible: activeListingsType === 'activeTabListings' ? true : false
     },
     {
       title: t('Listings.Column.Profit'),
       dataIndex: 'price',
       key: '7',
-      visible: false
+      visible: activeListingsType === 'activeTabListings' ? true : false
     },
     {
       title: t('Listings.Column.Markup'),
       dataIndex: 'sourceId',
       key: '8',
-      visible: false
+      visible: activeListingsType === 'activeTabListings' ? true : false
     },
 
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'sourceQuantity',
       key: '9',
-      visible: false
+      visible: activeListingsType === 'activeTabListings' ? true : false
     },
     {
       title: t('Listings.Column.Options'),
@@ -200,19 +201,20 @@ export const Listings = () => {
       title: t('Listings.Column.Created On'),
       dataIndex: 'createdOn',
       key: '11',
-      visible: activeListingsType === 'pendingTabListing' ? false : true
+      visible: activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? true : false
     },
     {
       title: t('Listings.Column.Created By'),
       dataIndex: 'createdByName',
       key: '12',
-      visible: activeListingsType === 'pendingTabListing' ? false : true
+      visible: activeListingsType === 'pendingTabListing' ? true : false
     }
   ];
 
   // console.log('first', { tableColumns });
 
   const [columns, setColumns] = useState(tableColumns);
+
 
   const handleChangeTab = (e: React.MouseEvent): void => {
     const id = e.currentTarget.getAttribute('id');
@@ -226,8 +228,9 @@ export const Listings = () => {
     const id = e.currentTarget.getAttribute('id');
     setActiveTab(parseInt(id!));
     setActiveListingsType('pendingTabListing');
+    setDataRender((prev)=>!prev);
     dispatch(getPendingListing());
-    // console.log(activeListingsType);
+    // console.log('clicked');
   };
 
   const handleChangeTerminateTab = (e: React.MouseEvent): void => {
@@ -274,8 +277,14 @@ export const Listings = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
+  const [visibleCols, setVisibleCols] = useState(tableColumns);
 
-  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
+  useEffect(() =>{
+    const myCols= tableColumns.filter((col) => col.visible === true);
+    setVisibleCols(myCols);
+  } , [columns, activeListingsType]);
+
+  console.log({visibleCols, columns});
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
