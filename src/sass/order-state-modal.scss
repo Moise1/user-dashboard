@@ -65,6 +65,17 @@
     transform: rotate(180deg);
   }
 }
+
+//Added to order detail modal
+.go-back-orders-container {
+  margin-top: $spacer;
+  display: flex;
+  align-items: center;
+
+  & svg {
+    cursor: pointer;
+  }
+}
 .disabled-line {
   background-color: #7e7373;
   margin: 7px 0;

@@ -6,7 +6,6 @@ import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
-
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 

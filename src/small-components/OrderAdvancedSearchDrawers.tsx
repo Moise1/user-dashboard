@@ -1,16 +1,18 @@
 import { Moment } from 'moment';
 import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
+// import { Space, Button, Form, Input, Checkbox } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import '../sass/advanced-search.scss';
-
+import { useState } from 'react';
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
 }
 
 export const CatalogFilters = (props: Props) => {
   const { visible, onClose, openSourceModal } = props;
+
   return (
     <AdvancedSearch
       title="Search Criteria"
@@ -75,15 +77,50 @@ export const CatalogFilters = (props: Props) => {
   );
 };
 
-export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
-  const { RangePicker } = DatePicker;
+interface advancedSearchFieldTypes {
+  reference: string;
+  channelItem: string;
+  source: string;
+  title: string;
+  sold: string;
+  cost: string;
+  fees: string;
+  profit: string;
+  margin: string;
+}
 
+export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
+  const advanceSearchIntialTypes: advancedSearchFieldTypes = {
+    reference: '',
+    channelItem: '',
+    source: '',
+    title: '',
+    sold: '',
+    cost: '',
+    fees: '',
+    profit: '',
+    margin: ''
+  };
+
+  const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
+
+  const orderAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('the e value is e.target.value', e.target.value);
+    const { name, value } = e.target;
+    setOrderAdvancedSearchFormData({
+      ...orderAdvancedSearchFormData,
+      [name]: value
+    });
+  };
+
+  const { RangePicker } = DatePicker;
   const { visible, onClose } = props;
 
   const handleRangePicker = (value: RangeValue<Moment>, dateString: [string, string]) => {
     console.log(dateString);
     console.log(value);
   };
+
   return (
     <AdvancedSearch
       className="listings-advanced-search"
@@ -95,38 +132,121 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
       <div className="advanced-form-container">
         <Form layout="vertical" className="advanced-search-form">
           <div className="listings-search-inputs">
-            <Form.Item label="Asin">
-              <Input className="blue-input" />
+            <Form.Item label="Reference">
+              <Input
+                className="blue-input"
+                name="reference"
+                defaultValue={advanceSearchIntialTypes.reference}
+                onChange={orderAdvancedSearchOnChange}
+              />
             </Form.Item>
 
-            <Form.Item label="Sku">
-              <Input className="blue-input" />
+            <Form.Item label="Source">
+              <Input
+                className="blue-input"
+                name="source"
+                defaultValue={advanceSearchIntialTypes.source}
+                onChange={orderAdvancedSearchOnChange}
+              />
             </Form.Item>
 
-            <Form.Item label="Cost Price">
+            <Form.Item label="Quantity">
               <div className="cost-price-section">
                 <Input className="blue-input" placeholder="Min" />
                 <Input className="blue-input" placeholder="Max" />
               </div>
             </Form.Item>
 
-            <Form.Item label="Source">
-              <Input className="blue-input" />
+            <Form.Item label="Channel Item">
+              <Input
+                className="blue-input"
+                name="channelItem"
+                defaultValue={advanceSearchIntialTypes.channelItem}
+                onChange={orderAdvancedSearchOnChange}
+              />
             </Form.Item>
 
             <Form.Item label="Title">
-              <Input className="blue-input" />
+              <Input
+                className="blue-input"
+                name="title"
+                defaultValue={advanceSearchIntialTypes.title}
+                onChange={orderAdvancedSearchOnChange}
+              />
             </Form.Item>
 
-            <Form.Item label="Sell Price">
+            <Form.Item label="Sold">
+              <Input
+                className="blue-input"
+                name="sold"
+                defaultValue={advanceSearchIntialTypes.sold}
+                onChange={orderAdvancedSearchOnChange}
+              />
+            </Form.Item>
+
+            {/* <Form.Item label="Sell Price">
               <div className="sell-price-section">
                 <Input className="blue-input" placeholder="Min" />
                 <Input className="blue-input" placeholder="Max" />
               </div>
+            </Form.Item> */}
+          </div>
+          <div className="listings-search-inputs">
+            <Form.Item label="Cost">
+              <Input
+                className="blue-input"
+                name="cost"
+                defaultValue={advanceSearchIntialTypes.cost}
+                onChange={orderAdvancedSearchOnChange}
+              />
+            </Form.Item>
+
+            <Form.Item label="Profit">
+              <Input
+                className="blue-input"
+                name="profit"
+                defaultValue={advanceSearchIntialTypes.profit}
+                onChange={orderAdvancedSearchOnChange}
+              />
+            </Form.Item>
+
+            <Form.Item label="Fees">
+              <Input
+                className="blue-input"
+                name="fees"
+                defaultValue={advanceSearchIntialTypes.fees}
+                onChange={orderAdvancedSearchOnChange}
+              />
+            </Form.Item>
+
+            <Form.Item label="Margin">
+              <Input
+                className="blue-input"
+                name="margin"
+                defaultValue={advanceSearchIntialTypes.margin}
+                onChange={orderAdvancedSearchOnChange}
+              />
             </Form.Item>
           </div>
 
-          <div className="check-boxes">
+          <div className="listings-search-inputs">
+            <Form.Item label="Created On">
+              <RangePicker onChange={handleRangePicker} separator={<>-</>} className="date-picker" />
+            </Form.Item>
+
+            <Form.Item label="Status">
+              <Input
+                className="blue-input"
+                name="status"
+                defaultValue={advanceSearchIntialTypes.margin}
+                onChange={orderAdvancedSearchOnChange}
+              />
+            </Form.Item>
+          </div>
+
+          {/* other */}
+
+          {/* <div className="check-boxes">
             <Form.Item className="monitor-price-options" label="Monitor Price">
               <Checkbox checked className="checkbox">
                 Yes
@@ -138,9 +258,9 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
               <Checkbox className="checkbox">Yes</Checkbox>
               <Checkbox className="checkbox">No</Checkbox>
             </Form.Item>
-          </div>
+          </div> */}
 
-          <div className="extra-options">
+          {/* <div className="extra-options">
             <Form.Item label="Quantiy">
               <div className="quantiy-section">
                 <Input className="blue-input" placeholder="Min" />
@@ -174,7 +294,7 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
               <Checkbox className="checkbox">Yes</Checkbox>
               <Checkbox className="checkbox">No</Checkbox>
             </Form.Item>
-          </div>
+          </div> */}
           <div className="filters-section">
             <SuccessBtn>Apply filters</SuccessBtn>
           </div>
