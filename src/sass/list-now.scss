@@ -1,0 +1,301 @@
+@import 'general.config';
+// Large and extra large screens
+
+.ant-layout {
+  height: calc(100vh - 0px);
+}
+
+.choose-list {
+  text-align: center;
+  margin-top: 3rem;
+  display: grid;
+  row-gap: 0.6rem;
+  .list-check {
+    text-align: center;
+    color: $red;
+  }
+  .title {
+    text-align: center;
+  }
+
+  .list-card {
+    background-color: $primary-bg;
+    padding: 0 0.9rem;
+    padding-bottom: 10px;
+    margin: 0 auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: space-evenly;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 10px;
+    transition:0.2s;
+    margin-bottom: 30px;
+    &:hover {
+      border: 2px solid $corporative-color;
+    }
+    img {
+      max-width: 100px;
+      max-height: 100px;
+      width: 100%;
+      height: auto;
+    }
+    .checkbox {
+      display: none;
+    }
+  }
+
+  .card-info {
+    margin: 2rem 0;
+    p span a {
+      color: $corporative-color;
+      &:hover {
+        color: $corporative-color;
+      }
+    }
+  }
+}
+
+
+.stepper {
+  display: none;
+}
+.account {
+  display: grid;
+  place-items: center;
+  margin: 2rem 0;
+  .title,
+  .sub-title {
+    margin-bottom: 1rem;
+  }
+
+  .location-form {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+
+    .flags {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 1rem;
+    }
+
+    .select-country {
+      color: $red;
+    }
+  }
+
+  .account-connect {
+    display: flex;
+    padding: $spacer;
+    display: grid;
+    row-gap: 2rem;
+
+    .title,
+    .change-settings {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .with-api,
+    .no-api {
+      box-shadow: 0px 3px 6px #00000029;
+      padding: 2rem;
+      border-radius: 10px;
+
+      .content a {
+        color: $corporative-color;
+        &:hover {
+          color: $corporative-color;
+        }
+      }
+      .options-label {
+        display: flex;
+        justify-content: space-between;
+        .advance {
+          color: $primary !important;
+        }
+        p:nth-child(1) {
+          font-weight: bold;
+          color: $primary-txt;
+        }
+        p:nth-child(2) {
+          font-weight: bold;
+          color: $green;
+        }
+      }
+    }
+  }
+
+  .nav-btns {
+    width: 30%;
+    left: 15rem;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 2rem;
+    .ant-btn {
+      background: transparent !important;
+      color: $corporative-color;
+      outline: none !important;
+      font-weight: bold !important;
+    }
+  }
+}
+
+.right-section {
+  margin-top: 2rem;
+  height: 100vh;
+}
+// platforms component styles
+
+.card-input-element {
+  display: none;
+}
+
+.platforms-form {
+  display: flex;
+  padding: $spacer;
+
+  .new-description-area {
+    display: none;
+  }
+  .platforms-area {
+    padding: 10px;
+    margin-top: $spacer;
+    .sell-title {
+      margin-top: 1rem;
+      text-align: center;
+      color: $primary-txt;
+      font-weight: bold;
+    }
+
+    .cards-container {
+      margin-top: 3rem;
+      padding: 2rem;
+    }
+  }
+}
+
+.container{
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  padding-right:15px;
+  padding-left:15px
+}
+@media (min-width: 476px){
+  .container{
+    padding-right:15px;
+    padding-left:15px
+  }
+}
+@media (min-width: 768px){
+  .container{
+    padding-right:15px;
+    padding-left:15px
+  }
+}
+@media (min-width: 992px){
+  .container{
+    padding-right:15px;
+    padding-left:15px
+  }
+}
+@media (min-width: 1200px){
+  .container{
+    padding-right:15px;
+    padding-left:15px
+  }
+}
+@media (min-width: 476px){
+  .container{
+    width:100%
+  }
+}
+@media (min-width: 768px){
+  .container{
+    width:720px;
+    max-width:100%
+  }
+}
+@media (min-width: 992px){
+  .container{
+    width:960px;
+    max-width:100%
+  }
+}
+@media (min-width: 1200px){
+  .container{
+    width:1140px;
+    max-width:100%
+  }
+}
+@media (min-width: 1400px){
+  .container{
+    width:1340px;
+    max-width:100%
+  }
+}
+
+// Tablets screens
+
+@media only screen and (max-width: 1030px) {
+  // platforms  component styles
+
+  .platforms-form {
+    display: block;
+    padding: 0 !important;
+
+    .new-description-area {
+      display: grid;
+      place-items: center;
+      gap: 0;
+      margin-top: -8rem;
+      .market-place {
+        margin-top: -5rem;
+        font-weight: bold;
+      }
+
+      p {
+        margin-top: -10rem;
+        text-align: center;
+      }
+
+      .amazon-sub {
+        font-weight: bold;
+        margin-top: 0.4rem;
+        position: absolute;
+        margin-top: 170px;
+      }
+    }
+
+    .cards-container {
+      height: 60vh;
+      .platforms-card {
+        .card-input {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: auto;
+          padding: 10px !important;
+
+          .platform-img {
+            height: 20px;
+          }
+          .description-area {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// mobile phone screen;
+
+@media only screen and (max-width: 456px) {
+  h5{
+    font-size: 0.9 rem !important;
+  }
+}
