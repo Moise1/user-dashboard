@@ -306,7 +306,7 @@ export const Orders = () => {
             pageSize={10}
             current={current}
             onChange={setCurrent}
-            pagination={false}
+            /*pagination={false}*/
             rowClassName="table-row"
             onRow={(record) => {
               return {
