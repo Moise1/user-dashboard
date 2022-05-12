@@ -2,11 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getSales } from './salesThunk';
 
 export interface Sale {
-  date: Date;
-  quantitySold: number;
-  revenue: number;
-  sourcePrice: number;
-  totalTax: number;
+  date?: Date;
+  quantitySold?: number;
+  revenue?: number;
+  sourcePrice?: number;
+  totalTax?: number;
+  period: number;
+  from: string;
+  to?: string;
 }
 
 const initialState = {
@@ -36,4 +39,4 @@ export const salesSlice = createSlice({
   }
 });
 
-export const { reducer: pricingRulesReducer } = salesSlice;
+export const { reducer: salesReducer } = salesSlice;

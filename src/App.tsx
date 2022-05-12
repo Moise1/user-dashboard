@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { CloseIcon } from './small-components/CloseIcon';
@@ -37,11 +36,6 @@ export const App = withRouter(({ history }) => {
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
 
-  // useEffect(() => {
-  //   window.process = {
-  //     ...window.process,
-  //   };
-  // }, [])
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
