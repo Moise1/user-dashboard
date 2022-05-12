@@ -79,7 +79,7 @@ export const BrowserExtensions = () => {
       <div className="browser-extensions">
         <Row className="card-container" gutter={[0, { xs: 16, lg: 0 }]}>
           {data.map((d) => (
-            <Col xs={24} sm={12} xl={8} key={d.id}>
+            <Col sm={12} xl={8} key={d.id}>
               <Card className="card">
                 <div className="upper-section">
                   <h6 className="title">{d.title}</h6>

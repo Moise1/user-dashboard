@@ -31,7 +31,8 @@
     transition:0.2s;
     margin-bottom: 30px;
     &:hover {
-      border: 2px solid $corporative-color;
+      box-shadow: 0px 0px 6px $corporative-color;
+      cursor: pointer;
     }
     img {
       max-width: 100px;
@@ -182,120 +183,4 @@
   margin-right:auto;
   padding-right:15px;
   padding-left:15px
-}
-@media (min-width: 476px){
-  .container{
-    padding-right:15px;
-    padding-left:15px
-  }
-}
-@media (min-width: 768px){
-  .container{
-    padding-right:15px;
-    padding-left:15px
-  }
-}
-@media (min-width: 992px){
-  .container{
-    padding-right:15px;
-    padding-left:15px
-  }
-}
-@media (min-width: 1200px){
-  .container{
-    padding-right:15px;
-    padding-left:15px
-  }
-}
-@media (min-width: 476px){
-  .container{
-    width:100%
-  }
-}
-@media (min-width: 768px){
-  .container{
-    width:720px;
-    max-width:100%
-  }
-}
-@media (min-width: 992px){
-  .container{
-    width:960px;
-    max-width:100%
-  }
-}
-@media (min-width: 1200px){
-  .container{
-    width:1140px;
-    max-width:100%
-  }
-}
-@media (min-width: 1400px){
-  .container{
-    width:1340px;
-    max-width:100%
-  }
-}
-
-// Tablets screens
-
-@media only screen and (max-width: 1030px) {
-  // platforms  component styles
-
-  .platforms-form {
-    display: block;
-    padding: 0 !important;
-
-    .new-description-area {
-      display: grid;
-      place-items: center;
-      gap: 0;
-      margin-top: -8rem;
-      .market-place {
-        margin-top: -5rem;
-        font-weight: bold;
-      }
-
-      p {
-        margin-top: -10rem;
-        text-align: center;
-      }
-
-      .amazon-sub {
-        font-weight: bold;
-        margin-top: 0.4rem;
-        position: absolute;
-        margin-top: 170px;
-      }
-    }
-
-    .cards-container {
-      height: 60vh;
-      .platforms-card {
-        .card-input {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: auto;
-          padding: 10px !important;
-
-          .platform-img {
-            height: 20px;
-          }
-          .description-area {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-}
-
-// mobile phone screen;
-
-@media only screen and (max-width: 456px) {
-  h5{
-    font-size: 0.9 rem !important;
-  }
 }
