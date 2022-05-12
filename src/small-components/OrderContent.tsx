@@ -1,4 +1,5 @@
 import { ProgressBar } from 'react-bootstrap';
+import { Spin } from 'antd';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import {
   AoIconHead,
@@ -30,8 +31,8 @@ interface Props {
   orderProgress: number;
   data: { [key: string]: OrderData };
   // show: boolean;
-  handleClose: () => void;
-  OrderDetailsModal: () => void;
+  // handleClose: () => void;
+  OrderDetailsModalOpen: () => void;
   // setShow: (value: boolean) => void;
   // orderDetailsModalShow: boolean;
   // setOrderDetailsModalShow: (value: boolean) => void;
@@ -43,7 +44,6 @@ export const OrderContent = (props: Props) => {
   const [orderNumber] = useState(445378);
   const [id] = useState(445378);
   const orderStatus = useAppSelector((state) => state.orderProgress.orderProgress.states);
-
   const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
 
@@ -56,8 +56,9 @@ export const OrderContent = (props: Props) => {
   const handleStopOrder = () => {
     dispatch(stopOrder(orderNumber));
   };
+  const { loading } = useAppSelector((state) => state.orderProgress);
 
-  const { orderProgress, data, OrderDetailsModal } = props;
+  const { orderProgress, data, OrderDetailsModalOpen } = props;
   const now = 60;
 
   useEffect(() => {
@@ -113,7 +114,6 @@ export const OrderContent = (props: Props) => {
           {/* <span>{t('OrderDetails.AOEnabled')}</span> */}
           <span>Process</span>
         </button>
-
         <span
           className="close-modal-icon"
           onClick={() => {
@@ -124,101 +124,109 @@ export const OrderContent = (props: Props) => {
         </span>
       </div>
       <div className="order-state-body-container flex-lg-row my-4">
-        <div className="col-12 col-lg-5">
-          <div className="d-flex justify-content-between pb-3">
-            <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
-            {/* <a href="/" className="view-full-log">
-              {t('OrderDetails.viewFullLog')}
-            </a>{' '} */}
-          </div>
-          <div className="time-line-here">
-            {/* START ORDER  */}
-            <div className="d-flex">
-              <span className="d-flex flex-column align-items-center">
-                <span className={`${orderProgress <= 3 ? 'start-order-active-svg' : ''}`}>
-                  <RoundCircleCycleIcon />
-                </span>
-                <span className={`${orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}></span>
-              </span>
-              <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                <h4 className="mb-1">
-                  {t('OrderDetails.StartOrder')}
-                  {orderProgress === 1 ? (
-                    <span className="ml-2">
-                      <OrderProcessRoundedIcon />
+        {loading ? (
+          <Spin />
+        ) : (
+          <>
+            <div className="col-12 col-lg-5">
+              <div className="d-flex justify-content-between pb-3">
+                <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
+                {/* <a href="/" className="view-full-log">
+                {t('OrderDetails.viewFullLog')}
+              </a>{' '} */}
+              </div>
+              <div className="time-line-here">
+                {/* START ORDER  */}
+                <div className="d-flex">
+                  <span className="d-flex flex-column align-items-center">
+                    <span className={`${orderProgress <= 3 ? 'start-order-active-svg' : ''}`}>
+                      <RoundCircleCycleIcon />
                     </span>
-                  ) : (
-                    ''
-                  )}
-                </h4>
-                <p className="mb-0">{data.date}</p>
-                <span>Order was selected for purchase</span>
+                    <span className={`${orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}></span>
+                  </span>
+                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                    <h4 className="mb-1">
+                      {t('OrderDetails.StartOrder')}
+                      {orderProgress === 1 ? (
+                        <span className="ml-2">
+                          <OrderProcessRoundedIcon />
+                        </span>
+                      ) : (
+                        ''
+                      )}
+                    </h4>
+                    <p className="mb-0">{data.date}</p>
+                    <span>Order was selected for purchase</span>
+                  </div>
+                </div>
+                {/* CHECKOUT  */}
+                <div className="d-flex">
+                  <span className="d-flex flex-column align-items-center">
+                    <span className={`${orderProgress > 1 && orderProgress <= 3 ? 'order-checkout-icon' : ''}`}>
+                      <OrderCheckoutIcon />
+                    </span>
+                    <span
+                      className={`${orderProgress > 1 && orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}
+                    ></span>
+                  </span>
+                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                    <h4 className="mb-1">
+                      {' '}
+                      Checkout{' '}
+                      {orderProgress === 2 ? (
+                        <span className="ml-2">
+                          <OrderProcessRoundedIcon />
+                        </span>
+                      ) : (
+                        ''
+                      )}
+                    </h4>
+                    <p className="mb-0">{data.date}</p>
+                    <span>Order was selected for purchase</span>
+                  </div>
+                </div>
+                {/* LAST STEP  */}
+                <div className="d-flex">
+                  <span className="d-flex flex-column align-items-center">
+                    <span className={`${orderProgress === 3 ? 'last-step-order-icon' : ''}`}>
+                      <LastStepOrderIcon />
+                    </span>
+                  </span>
+                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                    <h4 className="mb-1">
+                      Last steps
+                      {orderProgress === 3 ? (
+                        <span className="ml-2">
+                          <OrderProcessRoundedIcon />
+                        </span>
+                      ) : (
+                        ''
+                      )}
+                    </h4>
+                    <p className="mb-0">{data.date}</p>
+                  </div>
+                </div>
+                <div className="progress-order mt-4 mb-3 mb-lg-0">
+                  <h2 className="mb-0">
+                    Progress: <h2 className="fw-400">in checkout</h2>{' '}
+                  </h2>
+                  <ProgressBar now={now} label={`${now}%`} />
+                </div>
               </div>
             </div>
-            {/* CHECKOUT  */}
-            <div className="d-flex">
-              <span className="d-flex flex-column align-items-center">
-                <span className={`${orderProgress > 1 && orderProgress <= 3 ? 'order-checkout-icon' : ''}`}>
-                  <OrderCheckoutIcon />
-                </span>
-                <span className={`${orderProgress > 1 && orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}></span>
-              </span>
-              <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                <h4 className="mb-1">
-                  {' '}
-                  Checkout{' '}
-                  {orderProgress === 2 ? (
-                    <span className="ml-2">
-                      <OrderProcessRoundedIcon />
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </h4>
-                <p className="mb-0">{data.date}</p>
-                <span>Order was selected for purchase</span>
+            <div className="col-12 col-lg-7" style={{ backgroundColor: '#f2f8ff' }}>
+              <div className="img-order-container">
+                <img className="img-order" src={amazonOrder} alt="amazonOrder" />
               </div>
             </div>
-            {/* LAST STEP  */}
-            <div className="d-flex">
-              <span className="d-flex flex-column align-items-center">
-                <span className={`${orderProgress === 3 ? 'last-step-order-icon' : ''}`}>
-                  <LastStepOrderIcon />
-                </span>
-              </span>
-              <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                <h4 className="mb-1">
-                  Last steps
-                  {orderProgress === 3 ? (
-                    <span className="ml-2">
-                      <OrderProcessRoundedIcon />
-                    </span>
-                  ) : (
-                    ''
-                  )}
-                </h4>
-                <p className="mb-0">{data.date}</p>
-              </div>
-            </div>
-            <div className="progress-order mt-4 mb-3 mb-lg-0">
-              <h2 className="mb-0">
-                Progress: <h2 className="fw-400">in checkout</h2>{' '}
-              </h2>
-              <ProgressBar now={now} label={`${now}%`} />
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-lg-7" style={{ backgroundColor: '#f2f8ff' }}>
-          <div className="img-order-container">
-            <img className="img-order" src={amazonOrder} alt="amazonOrder" />
-          </div>
-        </div>
+          </>
+        )}
       </div>
       <div className="row">
         <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
           <div className="row">
             <div className="go-back-details-container col">
-              <div onClick={OrderDetailsModal} className="go-back-details">
+              <div onClick={OrderDetailsModalOpen} className="go-back-details">
                 <span> {t('OrderDetails.OrderDetails')}</span>
               </div>
               <LeftBackArrowIcon />
@@ -229,19 +237,19 @@ export const OrderContent = (props: Props) => {
           <div className="modal-buttons-block">
             <div className="modal-button-row-mt5">
               {/* <Button className="process-btn action-btn">
-                <ProcessOrderIcon />
-                <div className="btn-text">
-                  <span>{t('OrderTable.Process')}</span>
-                  <span>Orders</span>
-                </div>
-              </Button>
-              <Button className="stop-btn action-btn">
-                <HandStopOrderIcon />
-                <div className="btn-tetx">
-                  <span>{t('OrderTable.Stop')}</span>
-                  <span>Orders</span>
-                </div>
-              </Button> */}
+                  <ProcessOrderIcon />
+                  <div className="btn-text">
+                    <span>{t('OrderTable.Process')}</span>
+                    <span>Orders</span>
+                  </div>
+                </Button>
+                <Button className="stop-btn action-btn">
+                  <HandStopOrderIcon />
+                  <div className="btn-tetx">
+                    <span>{t('OrderTable.Stop')}</span>
+                    <span>Orders</span>
+                  </div>
+                </Button> */}
               <WarningBtn handleConfirm={handleManuallyDispatch}>
                 <HandStopOrderIcon />
                 <span>{t('OrderTable.Stop')} order</span>
@@ -254,19 +262,19 @@ export const OrderContent = (props: Props) => {
 
             <div className="modal-button-row-mt5 ">
               {/* <Button className="process-btn action-btn">
-                <ProcessOrderIcon />
-                <div className="btn-text">
-                  <span>{t('OrderTable.Process')}</span>
-                  <span>Orders</span>
-                </div>
-              </Button>
-              <Button className="stop-btn action-btn">
-                <HandStopOrderIcon />
-                <div className="btn-tetx">
-                  <span>{t('OrderTable.Stop')}</span>
-                  <span>Orders</span>
-                </div>
-              </Button> */}
+                  <ProcessOrderIcon />
+                  <div className="btn-text">
+                    <span>{t('OrderTable.Process')}</span>
+                    <span>Orders</span>
+                  </div>
+                </Button>
+                <Button className="stop-btn action-btn">
+                  <HandStopOrderIcon />
+                  <div className="btn-tetx">
+                    <span>{t('OrderTable.Stop')}</span>
+                    <span>Orders</span>
+                  </div>
+                </Button> */}
               <SuccessBtn handleConfirm={handleStopOrder}>
                 <CheckIcon />
                 <span>{t('OrderButtons.MarkAsDispatched')}</span>
@@ -277,15 +285,15 @@ export const OrderContent = (props: Props) => {
               </DangerBtn>
             </div>
             {/* <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
-                   <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
-                      <TrashIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
-                    </button>
-                    <button className=" btn disabled-btn mark-dispatch-modal-btn-style">
-                      <CheckIcon />
-                      <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
-                    </button>
-                  </div> */}
+                     <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
+                        <TrashIcon />
+                        <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
+                      </button>
+                      <button className=" btn disabled-btn mark-dispatch-modal-btn-style">
+                        <CheckIcon />
+                        <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
+                      </button>
+                    </div> */}
           </div>
         </div>
       </div>
