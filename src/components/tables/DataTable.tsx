@@ -1,10 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Pagination, Table } from 'antd';
+import { Pagination, Table, Dropdown, Space } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from 'src/redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
+import { DownOutlined } from '@ant-design/icons';
+// import { Channel } from '../../redux/channels/channelsSlice';
+// import { OrderData } from 'src/redux/orders/orderSlice';
 
 type OrdersTypes = {
   id: number;
@@ -69,7 +72,22 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   useEffect(()=>{
     setFlag((prev)=>!prev);
   },[dataSource]);
-  console.log({flag, dataSource, columns});
+  console.log({flag});
+  
+  const menu = (
+    <ul className="list">
+      <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
+      Edit <strong>{selectedRows}</strong> {page}(s)
+      </li>
+      <li className="list-item">
+      Copy <strong>{selectedRows}</strong> {page}(s)
+      </li>
+      <li className="list-item">
+      Optimize <strong>{selectedRows}</strong> {page}(s)
+      </li>
+    </ul>
+  );
+  
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -79,19 +97,14 @@ export const DataTable: React.FC<Props> = (props: Props) => {
             <strong>{selectedRows}</strong> selected
           </p>
           <div className="selected-options">
-            <ul className="list">
-              <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-                Edit <strong>{selectedRows}</strong> {page}(s)
-              </li>
-              <div className="horizontal-divider" />
-              <li className="list-item">
-                Copy <strong>{selectedRows}</strong> {page}(s)
-              </li>
-              <div className="horizontal-divider" />
-              <li className="list-item">
-                Optimize <strong>{selectedRows}</strong> {page}(s)
-              </li>
-            </ul>
+            <Dropdown overlay={menu} trigger={['click']} className="button-list">
+              <a onClick={e => e.preventDefault()}>
+                <Space>
+                  Bulk Action
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
           </div>
           <p className="total-items">
             <strong>

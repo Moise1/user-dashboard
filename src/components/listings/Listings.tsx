@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo, useEffect } from 'react';
-import { Card, Checkbox, Row, Col, Layout, Input } from 'antd';
+import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { StatusBar } from '../../small-components/StatusBar';
 // import { StatusBtn } from '../BulkEditDescriptionsmall-components/StatusBtn';
@@ -35,13 +35,14 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const { listings } = useAppSelector((state) => state.listings);
+  const { listings, loading } = useAppSelector((state) => state.listings);
   const { pending_listings } = useAppSelector((state) => state.pendingListings);
   const { terminate_listings } = useAppSelector((state) => state.terminateListings);
   // const { listingSources } = useAppSelector((state) => state);
   const [activeListingsType, setActiveListingsType] = useState('activeTabListings');
   const dispatch = useAppDispatch();
-  const [list, setList] = useState([]);
+  // const [activeListing, setActiveListing] = useState([]);
+  const [listPending, setPendingList] = useState([]);
   const [terminateList, setTerminateList] = useState([]);
   
   const [dataRender, setDataRender] = useState(false);
@@ -81,7 +82,7 @@ export const Listings = () => {
     updatedOn: 'Thu Apr 21 2022 14:51:58 GMT+0500 (Pakistan Standard Time)',
     userProductSourceChannelId: 1879059,
     views: 0,
-    watches: 0
+    watches: 0,
   });
   // console.log({ listings });
   // console.log('the state', pending_listings);
@@ -95,7 +96,15 @@ export const Listings = () => {
     dispatch(getPendingListing());
     dispatch(getTerminateListings());
 
-    setList(
+    // setActiveListing(
+    //   listings.length &&
+    //   listings.map((item: ListingData) => ({
+    //     ...item,
+    //     createdOn: moment(item.createdOn).format('DD/MM/YY/ hh:mm')
+    //   }))
+    // );
+
+    setPendingList(
       pending_listings.length &&
         pending_listings.map((item: pending_listings) => ({
           ...item,
@@ -151,6 +160,7 @@ export const Listings = () => {
       dataIndex: 'name',
       key: '3',
       visible: activeListingsType === 'activeTabListings' ? true : false
+
     },
 
     {
@@ -164,25 +174,28 @@ export const Listings = () => {
       title: t('Listings.Column.Sell'),
       dataIndex: 'channelPrice',
       key: '5',
-      visible: activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? false : true,
+      visible: activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? false : true
     },
     {
       title: t('Listings.Column.Cost'),
       dataIndex: 'sourcePrice',
       key: '6',
       visible: activeListingsType === 'activeTabListings' ? true : false
+
     },
     {
       title: t('Listings.Column.Profit'),
       dataIndex: 'price',
       key: '7',
       visible: activeListingsType === 'activeTabListings' ? true : false
+
     },
     {
       title: t('Listings.Column.Markup'),
       dataIndex: 'sourceId',
       key: '8',
       visible: activeListingsType === 'activeTabListings' ? true : false
+
     },
 
     {
@@ -190,6 +203,7 @@ export const Listings = () => {
       dataIndex: 'sourceQuantity',
       key: '9',
       visible: activeListingsType === 'activeTabListings' ? true : false
+
     },
     {
       title: t('Listings.Column.Options'),
@@ -202,12 +216,14 @@ export const Listings = () => {
       dataIndex: 'createdOn',
       key: '11',
       visible: activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? true : false
+
     },
     {
       title: t('Listings.Column.Created By'),
       dataIndex: 'createdByName',
       key: '12',
       visible: activeListingsType === 'pendingTabListing' ? true : false
+
     }
   ];
 
@@ -242,11 +258,11 @@ export const Listings = () => {
 
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: SeletedRowsType) => {
     // console.log(selectedRowKeys);
-    // console.log(selectedRows);
+    console.log('your row is selected', selectedRows);
     setMySelectedRows(selectedRows);
     setSelectedRowKeys(selectedRowKeys);
     const selectedRow = listings.filter((r: ListingData) => r.id === selectedRows[0]?.id)[0];
-    console.log('to checked ID', selectedRow);
+    // console.log('to checked ID', selectedRow);
     setSingleRecordData(selectedRow);
   };
 
@@ -284,8 +300,6 @@ export const Listings = () => {
     setVisibleCols(myCols);
   } , [columns, activeListingsType]);
 
-  console.log({visibleCols, columns});
-
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
@@ -300,116 +314,126 @@ export const Listings = () => {
   const [current, setCurrent] = useState<number>(1);
 
   return (
+
     <Layout className="listings-container">
-      <PopupModal open={showColumns} handleClose={handleClose} width={900}>
-        <h5 className="cols-display-title">Select columns to display</h5>
-        <p className="description">Display columns in the listing table that suit your interests.</p>
-        <Card className="listings-card">
-          <Row className="listings-cols">
-            <Col>
-              <ul className="cols-list">
-                {columns.map((col) => (
-                  <li key={col.key}>
-                    <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
-                      {col.title}
-                    </Checkbox>
-                  </li>
-                ))}
-              </ul>
-            </Col>
-            <Col>
-              <div className="cols-amount">
-                <p>Amount of columns on your listings table</p>
-                <h3>{visibleCols.length}</h3>
-              </div>
-            </Col>
-          </Row>
-          <div className="show-columns-action-btns">
-            <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
-            <SuccessBtn handleClose={handleApplyChanges}>
-              <CheckIcon />
-              {t('ApplyChanges')}
-            </SuccessBtn>
-          </div>
-        </Card>
-      </PopupModal>
+      {loading ?
+        ( <Spin/> )
+        :
+        (
+          <>
+            <PopupModal open={showColumns} handleClose={handleClose} width={900}>
+              <h5 className="cols-display-title">Select columns to display</h5>
+              <p className="description">Display columns in the listing table that suit your interests.</p>
+              <Card className="listings-card">
+                <Row className="listings-cols">
+                  <Col>
+                    <ul className="cols-list">
+                      {columns.map((col) => (
+                        <li key={col.key}>
+                          <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
+                            {col.title}
+                          </Checkbox>
+                        </li>
+                      ))}
+                    </ul>
+                  </Col>
+                  <Col>
+                    <div className="cols-amount">
+                      <p>Amount of columns on your listings table</p>
+                      <h3>{visibleCols.length}</h3>
+                    </div>
+                  </Col>
+                </Row>
+                <div className="show-columns-action-btns">
+                  <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
+                  <SuccessBtn handleClose={handleApplyChanges}>
+                    <CheckIcon />
+                    {t('ApplyChanges')}
+                  </SuccessBtn>
+                </div>
+              </Card>
+            </PopupModal>
 
-      {selectedRowKeys.length > 1 ? (
-        <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
-          <BulkEditListings selectedItems={selectedRowKeys.length} />
-        </PopupModal>
-      ) : (
-        <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-          <EditSingleListing selectedItems={singleRecordData} />
-        </PopupModal>
-      )}
+            {selectedRowKeys.length > 1 ? (
+              <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
+                <BulkEditListings selectedItems={selectedRowKeys.length} />
+              </PopupModal>
+            ) : (
+              <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal} >
+                <EditSingleListing selectedItems={singleRecordData} />
+              </PopupModal>
+            )}
 
-      <div className="search-options-area">
-        <Input
-          autoFocus
-          placeholder="Search....."
-          onChange={(e) => {
-            setSearchKey(e.target.value ? e.target.value : '');
-          }}
-        ></Input>
-        <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
-        <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
-          {t('AdvancedSearch')}
-        </TableActionBtns>
-      </div>
+            <div className="search-options-area">
+              <Input
+                autoFocus
+                placeholder="Search....."
+                onChange={(e) => {
+                  setSearchKey(e.target.value ? e.target.value : '');
+                }}
+              ></Input>
+              <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
+              <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
+                {t('AdvancedSearch')}
+              </TableActionBtns>
+            </div>
 
-      <StatusBar>
-        <StatusBtn
-          title={`${t('ActiveListings')}`}
-          changeTab={handleChangeTab}
-          className={activeTab === 0 ? 'active-tab' : ''}
-          id="0"
-        />
-        <StatusBtn
-          title={`${t('PendingListings')}`}
-          changeTab={handleChangePendingTab}
-          className={activeTab === 1 ? 'active-tab' : ''}
-          id="1"
-        />
-        <StatusBtn
-          title={`${t('TerminatedListings')}`}
-          changeTab={handleChangeTerminateTab}
-          className={activeTab === 2 ? 'active-tab' : ''}
-          id="2"
-        />
-      </StatusBar>
+            <StatusBar>
+              <StatusBtn
+                title={`${t('ActiveListings')}`}
+                changeTab={handleChangeTab}
+                className={activeTab === 0 ? 'active-tab' : ''}
+                id="0"
+              />
+              <StatusBtn
+                title={`${t('PendingListings')}`}
+                changeTab={handleChangePendingTab}
+                className={activeTab === 1 ? 'active-tab' : ''}
+                id="1"
+              />
+              <StatusBtn
+                title={`${t('TerminatedListings')}`}
+                changeTab={handleChangeTerminateTab}
+                className={activeTab === 2 ? 'active-tab' : ''}
+                id="2"
+              />
+            </StatusBar>
 
-      <DataTable
-        page="listing"
-        handleSingleListingModal={handleSingleListingModal}
-        handleBulkListingModal={handleBulkListingModal}
-        columns={visibleCols}
-        dataSource={
-          activeListingsType === 'activeTabListings'
-            ? listings
-            : activeListingsType === 'pendingTabListing'
-              ? list
-              : activeListingsType === 'terminateTypeListing'
-                ? terminateList
-                : searchedArray.length > 0
-                  ? searchedArray
-                  : listings
-        }
-        rowSelection={rowSelection}
-        selectedRows={selectedRowKeys.length}
-        totalItems={
-          activeListingsType === 'pendingTabListing'
-            ? pending_listings.length
-            : activeListingsType === 'terminateTypeListing'
-              ? terminate_listings.length
-              : listings.length
-        }
-        pageSize={5}
-        showTableInfo={true}
-        current={current}
-        onChange={setCurrent}
-        pagination={false}
-      />
+            <DataTable
+              page="listing"
+              handleSingleListingModal={handleSingleListingModal}
+              handleBulkListingModal={handleBulkListingModal}
+              columns={visibleCols}
+              dataSource={
+                activeListingsType === 'activeTabListings'
+                  ? listings
+                  : activeListingsType === 'pendingTabListing'
+                    ? listPending
+                    : activeListingsType === 'terminateTypeListing'
+                      ? terminateList
+                      : searchedArray.length > 0
+                        ? searchedArray
+                        : listings
+              }
+              rowSelection={rowSelection}
+              selectedRows={selectedRowKeys.length}
+              totalItems={
+                activeListingsType === 'pendingTabListing'
+                  ? pending_listings.length
+                  : activeListingsType === 'terminateTypeListing'
+                    ? terminate_listings.length
+                    : listings.length
+              }
+              pageSize={5}
+              showTableInfo={true}
+              current={current}
+              onChange={setCurrent}
+              pagination={false}
+            />
+            {console.log({rowSelection})}
+          </>
+        )
+      }
     </Layout>
   );
 };

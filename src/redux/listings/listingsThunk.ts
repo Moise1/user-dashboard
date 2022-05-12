@@ -8,7 +8,7 @@ export const getListings = createAsyncThunk(
   'listings/getListings',
   async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
     try {
-      // console.log('calling listing api');
+      console.log('calling listing api');
       const res = await client.get('/SearchProduct/GetActiveListings');
       const iter = unmap(res.data.response_data?.data as compArray);
       // console.log(res.data.response_data);
@@ -30,7 +30,7 @@ export const getListings = createAsyncThunk(
       // console.log('this is rowSelection', { rv, arrayLists });
       // console.log('tested', res.data.response_data.sources);
       // return res.data.response_data;
-      // console.log('Set of Data', { arrayLists });
+      console.log('Set of Data', { arrayLists });
       return arrayLists;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong!!! ):');
