@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Row } from 'antd';
+import { Button, Col, Form, Input, Popconfirm, Row, Space } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { DatePicker, Space } from 'antd';
+import { Chart as ChartJS, Title, Tooltip, Legend,  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
-
 // import { faker } from '@faker-js/faker';
 import months from 'months';
+import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -20,11 +23,15 @@ import { DataTable } from '../tables/DataTable';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
+import { getSales } from '../../redux/sales/salesThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { Switch } from '../../small-components/Switch';
 import { Moment } from 'moment';
 import '../../sass/dashboard.scss';
+import { Sale } from 'src/redux/sales/salesSlice';
+// import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+// import { Key } from 'antd/lib/table/interface';
 
 interface ProductQuota {
   quota: number;
@@ -39,12 +46,18 @@ interface ProductQuota {
 const { RangePicker } = DatePicker;
 
 export const Dashboard = () => {
-  const { channels } = useAppSelector((state) => state.channels);
   const dispatch = useAppDispatch();
+  const { channels } = useAppSelector((state) => state.channels);
+  const { sales } = useAppSelector((state) => state.sales);
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [daysPeriod, setDaysPeriod] = useState<boolean>(false);
+  const [fromDate, setFromDate] = useState<string>('');
+  const [toDate, setToDate] = useState<string>('');
+  const [current] = useState<number>(1);
+  // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+
 
   const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
@@ -55,7 +68,6 @@ export const Dashboard = () => {
   };
 
   const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
-  console.log(handlePeriodChange);
   useEffect(() => {
     localStorage.setItem('channelId', JSON.stringify(channelId));
   }, [channelId]);
@@ -77,7 +89,7 @@ export const Dashboard = () => {
     {
       title: 'Channel Name',
       dataIndex: '',
-      key: '',
+      key: 'name',
       render: (record: Channel) => (
         <>
           {shopLogo(record.channelId)}
@@ -100,6 +112,30 @@ export const Dashboard = () => {
     }
   ];
 
+  // const onSelectChange = (selectedRowKeys: Key[]) => {
+  //   setSelectedRowKeys(selectedRowKeys);
+  // };
+
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange
+  // };
+
+  // const [columns, setColumns] = useState(tableColumns);
+
+  // const handleCheckBox = (e: CheckboxChangeEvent): void => {
+  //   const cloneColumns = columns.map((col) => {
+  //     if (col.key === e.target.value) {
+  //       return { ...col, visible: e.target.checked };
+  //     } else {
+  //       return col;
+  //     }
+  //   });
+  //   setColumns(cloneColumns);
+  // };
+
+  // console.log(handleCheckBox);
+
   const onCopyText = () => {
     setIsCopied(true);
     miniAlert({
@@ -115,17 +151,28 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+  ChartJS.register(Title, Tooltip, Legend,  CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,);
 
   const options = {
     responsive: true,
     plugins: {
       legend: {
+        display: true,
         position: 'top' as const
       },
       title: {
         display: true,
         text: 'Sales Chart'
+      },
+      tooltip: {
+        callbacks: {
+          afterTitle: () => {
+            return moment(sales[0].date).format('YYYY-MM-DD HH:mm A');
+          }
+        }
       }
     }
   };
@@ -136,35 +183,56 @@ export const Dashboard = () => {
   }
   const monthsLabel: string[] = months.map((m: string) => m.slice(0, 3));
 
-  // const chartData = (days: boolean) =>{
-  //   switch (days) {
-  //     case true:
-
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // }
   const data = {
     labels: daysPeriod ? daysLabel : monthsLabel,
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)'
-      }
+        label: 'Revenue',
+        data: sales.map((d: Sale)=> d.revenue),
+        backgroundColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 1  ,
+      },
     ]
   };
 
-  const onChange = (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
+  // type dateValueType = Moment | null | undefined | string | undefined;
+  // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
+  // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
+
+  const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+    if (Array.isArray(dateString)) {
+      setFromDate(dateString[0]);
+      setToDate(dateString[1]);
+    } else {
+      setFromDate(dateString);
+    }
   };
 
-  const onOk = (date: Moment | RangeValue<Moment>) => {
-    console.log('onOk: ', date);
+  const submit = async () => {
+    if (toDate === '') {
+      await dispatch(
+        getSales({
+          period: daysPeriod ? 3 : 4,
+          from: fromDate
+        })
+      );
+      localStorage.setItem('initialDatePickerValue', fromDate);
+    } else {
+      await dispatch(
+        getSales({
+          period: daysPeriod ? 3 : 4,
+          from: fromDate,
+          to: toDate
+        })
+      );
+      localStorage.setItem(
+        'initialRangerPickerValue',
+        JSON.stringify([fromDate, toDate])
+      );
+    }
   };
+
   return (
     <div className="dashboard-container">
       <div className="general-section">
@@ -194,7 +262,15 @@ export const Dashboard = () => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
+            <DataTable 
+              current={current}
+              dataSource={channels} 
+              columns={columns} 
+              pageSize={2} 
+              total={channels.length}
+              // rowSelection={rowSelection}
+              // selectedRows={selectedRowKeys.length}
+            />
             <Link to="/add-channel" className="alternative-link">
               Add new channel
             </Link>
@@ -214,15 +290,15 @@ export const Dashboard = () => {
               unCheckedChildren="By month"
               aria-label="Dark mode toggle"
             />
-            <Space direction="vertical" className="date-picker-container">
-              <RangePicker
-                showTime={{ format: 'HH:mm' }}
-                format="YYYY-MM-DD HH:mm"
-                onChange={onChange}
-                onOk={onOk}
-                size="middle"
-              />
-            </Space>
+
+            <Form onFinish={submit}>
+              <Space>
+                {daysPeriod ? 
+                  <DatePicker onChange={onChange}/> :
+                  <RangePicker onChange={onChange}/>}
+                <ConfirmBtn htmlType="submit">Apply</ConfirmBtn>
+              </Space>
+            </Form>
             <Switch
               className="toggle-period"
               checked={daysPeriod}
@@ -232,7 +308,7 @@ export const Dashboard = () => {
               aria-label="Dark mode toggle"
             />
           </div>
-          <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
+          <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
         </div>
       </div>
 

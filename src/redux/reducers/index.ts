@@ -15,6 +15,7 @@ import { catalogProductsReducer } from '../catalog/catalogSlice';
 import { ordersReducer } from '../orders/orderSlice';
 import { orderAddressReducer } from '../orders/orderSlice';
 import { orderProgressReducer } from '../orders/orderSlice';
+import { salesReducer } from '../sales/salesSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -32,5 +33,6 @@ export const allReducers = combineReducers({
   catalogProducts: catalogProductsReducer,
   orders: ordersReducer,
   orderAddress: orderAddressReducer,
-  orderProgress: orderProgressReducer
+  orderProgress: orderProgressReducer,
+  sales: salesReducer,
 });
