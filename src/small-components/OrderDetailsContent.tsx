@@ -66,7 +66,7 @@ const OrderDetailsContent = (props: Props) => {
       <div className=" modals-inputs">
         <div className="container">
           {loading ? (
-            <Spin />
+            <Spin className="ant-spin-spinnings" />
           ) : (
             <>
               <div className="row justify-content-between">

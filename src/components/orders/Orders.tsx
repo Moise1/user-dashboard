@@ -4,7 +4,6 @@ import { t } from 'src/utils/transShim';
 import { Key } from 'antd/lib/table/interface';
 import { useState, useMemo, useEffect } from 'react';
 import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
-
 import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
@@ -213,7 +212,9 @@ export const Orders = () => {
   }, [order, searchKey]);
 
   // console.log(rowSelection);
-  console.log('The search Array ', searchFilterKey);
+  console.log('The searchFilterKey is ', searchFilterKey);
+  console.log('The searchedArray is ', searchedArray);
+  console.log('the number of keys selected', selectedRowKeys);
   // console.log('The searchkey setter is', setSearchKey);
   // console.log('The setShowColumn', setShowColumns);
   // console.log('The setBulkEditOpen', setBulkEditOpen);
@@ -285,9 +286,15 @@ export const Orders = () => {
               }}
             ></Input>
 
-            {/* furqan bhai <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} orders={orders} setSearchKey={setSearchKey} /> */}
-            <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
-
+            <OrdersAdvancedSearch
+              visible={drawerOpen}
+              onClose={handleSideDrawer}
+              order={order}
+              setSearchKey={setSearchKey}
+              setSearchedArray={setSearchedArray}
+              setSearchFilterKey={setSearchFilterKey}
+            />
+            {/* <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} /> */}
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
               {t('AdvancedSearch')}
             </TableActionBtns>

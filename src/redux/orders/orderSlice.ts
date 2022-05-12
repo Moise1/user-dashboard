@@ -38,11 +38,10 @@ export interface OrderData {
   buyReference: string;
   cancelRequested: boolean;
   profit?: number;
-  margin?:number;
+  margin?: number;
   //added on 26april
   orderLineId: number;
   id: number;
-
   firstName: string;
   lastName: string;
   address1: string;
@@ -54,6 +53,9 @@ export interface OrderData {
   country: string;
   countryCode: string;
   provinceCode: string;
+  //Added for advance search
+  sold: string;
+  cost: string;
 }
 
 const initialState = {
@@ -80,7 +82,7 @@ export const orderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getOrders.pending, (state) => {
-      state.loading = true;
+      state.loading = false;
       state.error = '';
     });
     builder.addCase(getOrders.fulfilled, (state, { payload }) => {

@@ -1,111 +1,123 @@
 import { Moment } from 'moment';
-import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
+import { Form, Input, DatePicker } from 'antd';
+// import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
 // import { Space, Button, Form, Input, Checkbox } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
-import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
-import { SuccessBtn, TransparentBtn } from './ActionBtns';
+import { AdvancedSearch } from './AdvancedSearch';
+// import { SuccessBtn, TransparentBtn } from './ActionBtns';
+import { SuccessBtn } from './ActionBtns';
 import '../sass/advanced-search.scss';
 import { useState } from 'react';
-interface Props extends AdvancedSearchProps {
-  openSourceModal?: () => void;
+import { OrderData } from '../redux/orders/orderSlice';
+
+// interface Props extends AdvancedSearchProps {
+//   openSourceModal?: () => void;
+// }
+// export const CatalogFilters = (props: Props) => {
+//   const { visible, onClose, openSourceModal } = props;
+//   return (
+//     <AdvancedSearch
+//       title="Search Criteria"
+//       placement="right"
+//       onClose={onClose}
+//       visible={visible}
+//       extra={
+//         <Space>
+//           <Button className="clear-filters">Close filters</Button>
+//         </Space>
+//       }
+//     >
+//       <div className="advanced-form-container">
+//         <h5>
+//           <strong>Choose your suppliers</strong>
+//         </h5>
+//         <Button className="supplier-one" onClick={openSourceModal}>
+//           1 supplier
+//         </Button>
+//         <Form layout="vertical" className="advanced-search-form">
+//           <div className="catalog-filters-inputs">
+//             <Form.Item label="Min source price">
+//               <Input className="blue-input" value="50" />
+//             </Form.Item>
+//             <Form.Item label="Min Profit">
+//               <Input className="blue-input" value="Mini" />
+//             </Form.Item>
+//             <Form.Item label="Max source price">
+//               <Input className="blue-input" value="100" />
+//             </Form.Item>
+//             <Form.Item label="Max Profit">
+//               <Input className="blue-input" value="Max" />
+//             </Form.Item>
+//           </div>
+//           <div className="prime-options">
+//             <p className="amazon-prime">
+//               <strong>Amazon Prime</strong>
+//             </p>
+//             <div className="checkboxes">
+//               <Checkbox checked className="checkbox">
+//                 Only Prime
+//               </Checkbox>
+//               <Checkbox className="checkbox">All Items</Checkbox>
+//             </div>
+//           </div>
+//           <Form.Item label="Title">
+//             <Input className="blue-input" placeholder="Contains..." />
+//           </Form.Item>
+//           <Form.Item label="Order By">
+//             <Input className="blue-input" value="Default" />
+//           </Form.Item>
+//           <div className="action-btns">
+//             <TransparentBtn>Clear filters</TransparentBtn>
+//             <SuccessBtn>Apply filters</SuccessBtn>
+//           </div>
+//         </Form>
+//       </div>
+//     </AdvancedSearch>
+//   );
+// };
+
+interface Props {
+  visible?: boolean;
+  onClose?: () => void;
+  order: Array<OrderData>;
+  setSearchKey?: (searchKey: string) => void;
+  setSearchedArray?: (searchedArray: []) => void | unknown;
+  setSearchFilterKey?: (searchedArray: []) => void;
 }
 
-export const CatalogFilters = (props: Props) => {
-  const { visible, onClose, openSourceModal } = props;
-
-  return (
-    <AdvancedSearch
-      title="Search Criteria"
-      placement="right"
-      onClose={onClose}
-      visible={visible}
-      extra={
-        <Space>
-          <Button className="clear-filters">Close filters</Button>
-        </Space>
-      }
-    >
-      <div className="advanced-form-container">
-        <h5>
-          <strong>Choose your suppliers</strong>
-        </h5>
-        <Button className="supplier-one" onClick={openSourceModal}>
-          1 supplier
-        </Button>
-        <Form layout="vertical" className="advanced-search-form">
-          <div className="catalog-filters-inputs">
-            <Form.Item label="Min source price">
-              <Input className="blue-input" value="50" />
-            </Form.Item>
-
-            <Form.Item label="Min Profit">
-              <Input className="blue-input" value="Mini" />
-            </Form.Item>
-            <Form.Item label="Max source price">
-              <Input className="blue-input" value="100" />
-            </Form.Item>
-            <Form.Item label="Max Profit">
-              <Input className="blue-input" value="Max" />
-            </Form.Item>
-          </div>
-
-          <div className="prime-options">
-            <p className="amazon-prime">
-              <strong>Amazon Prime</strong>
-            </p>
-            <div className="checkboxes">
-              <Checkbox checked className="checkbox">
-                Only Prime
-              </Checkbox>
-              <Checkbox className="checkbox">All Items</Checkbox>
-            </div>
-          </div>
-
-          <Form.Item label="Title">
-            <Input className="blue-input" placeholder="Contains..." />
-          </Form.Item>
-          <Form.Item label="Order By">
-            <Input className="blue-input" value="Default" />
-          </Form.Item>
-          <div className="action-btns">
-            <TransparentBtn>Clear filters</TransparentBtn>
-            <SuccessBtn>Apply filters</SuccessBtn>
-          </div>
-        </Form>
-      </div>
-    </AdvancedSearch>
-  );
-};
-
-interface advancedSearchFieldTypes {
-  reference: string;
-  channelItem: string;
-  source: string;
-  title: string;
-  sold: string;
-  cost: string;
-  fees: string;
-  profit: string;
-  margin: string;
+interface AdvancedSearchFieldTypes {
+  reference?: string | undefined;
+  channelItem?: string | undefined;
+  title?: string | undefined;
+  sold?: string | undefined;
+  cost?: string | undefined;
+  fees?: number | undefined;
+  profit?: number | undefined;
+  margin?: number | undefined;
+  status?: string | undefined;
 }
 
-export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
-  const advanceSearchIntialTypes: advancedSearchFieldTypes = {
-    reference: '',
-    channelItem: '',
-    source: '',
-    title: '',
-    sold: '',
-    cost: '',
-    fees: '',
-    profit: '',
-    margin: ''
+export const OrdersAdvancedSearch = (props: Props) => {
+  const { order, setSearchKey, setSearchedArray, setSearchFilterKey } = props;
+  const advanceSearchIntialTypes: AdvancedSearchFieldTypes | undefined = {
+    reference: 'abc',
+    channelItem: 'abc',
+    title: 'abc',
+    sold: 'abc',
+    cost: 'abc',
+    fees: 0,
+    profit: 0,
+    margin: 0,
+    status: 'abc'
   };
 
-  const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
+  console.log(setSearchKey);
+  console.log(setSearchedArray);
+  console.log(setSearchFilterKey);
 
+  const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
+  // const [advSearchedArray, setAdvSearchArray] = useState([]);
   const orderAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('the e value is e.target.value', e.target.value);
     const { name, value } = e.target;
     setOrderAdvancedSearchFormData({
       ...orderAdvancedSearchFormData,
@@ -121,6 +133,21 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
     console.log(value);
   };
 
+  const handleFilterSubmit = () => {
+    console.log(
+      order.filter(
+        (e: OrderData) =>
+          e.channelItem === orderAdvancedSearchFormData.channelItem ||
+          e.title === orderAdvancedSearchFormData.title ||
+          e.reference === orderAdvancedSearchFormData.reference ||
+          e.sold === orderAdvancedSearchFormData.sold ||
+          e.cost === orderAdvancedSearchFormData.cost
+      )
+    );
+    // setSearchedArray(orders.filter((e: advancedSearchFieldTypes) => e.channelItem === String(orderAdvancedSearchFormData.channelItem)));
+    // setSearchFilterKey(orders.filter((e: advancedSearchFieldTypes) => e.channelItem === String(orderAdvancedSearchFormData.channelItem)));
+  };
+
   return (
     <AdvancedSearch
       className="listings-advanced-search"
@@ -130,7 +157,7 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
       visible={visible}
     >
       <div className="advanced-form-container">
-        <Form layout="vertical" className="advanced-search-form">
+        <Form layout="vertical" className="advanced-search-form" onFinish={handleFilterSubmit}>
           <div className="listings-search-inputs">
             <Form.Item label="Reference">
               <Input
@@ -141,14 +168,14 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
               />
             </Form.Item>
 
-            <Form.Item label="Source">
+            {/* <Form.Item label="Source">
               <Input
                 className="blue-input"
                 name="source"
                 defaultValue={advanceSearchIntialTypes.source}
                 onChange={orderAdvancedSearchOnChange}
               />
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item label="Quantity">
               <div className="cost-price-section">
@@ -238,7 +265,7 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
               <Input
                 className="blue-input"
                 name="status"
-                defaultValue={advanceSearchIntialTypes.margin}
+                defaultValue={advanceSearchIntialTypes.status}
                 onChange={orderAdvancedSearchOnChange}
               />
             </Form.Item>
@@ -296,7 +323,7 @@ export const OrdersAdvancedSearch = (props: AdvancedSearchProps) => {
             </Form.Item>
           </div> */}
           <div className="filters-section">
-            <SuccessBtn>Apply filters</SuccessBtn>
+            <SuccessBtn htmlType="submit">Apply filters</SuccessBtn>
           </div>
         </Form>
       </div>
