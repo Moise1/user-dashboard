@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Form, Input, Popconfirm, Row, Space } from 'antd';
+import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
-import { Chart as ChartJS, Title, Tooltip, Legend,  CategoryScale,
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
   LinearScale,
   PointElement,
-  LineElement } from 'chart.js';
+  LineElement,
+  TooltipItem,
+  ChartType
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
@@ -28,8 +36,8 @@ import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { Switch } from '../../small-components/Switch';
 import { Moment } from 'moment';
-import '../../sass/dashboard.scss';
 import { Sale } from 'src/redux/sales/salesSlice';
+import '../../sass/dashboard.scss';
 // import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 // import { Key } from 'antd/lib/table/interface';
 
@@ -58,19 +66,13 @@ export const Dashboard = () => {
   const [current] = useState<number>(1);
   // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
-
-  const channelId = channels[0]?.id;
   const onSearch = (value: string) => console.log('searched value', value);
 
   const removeRecord = async (id: Channel['id']) => {
     await dispatch(deleteChannel(id));
     dispatch(getChannels());
   };
-
   const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
-  useEffect(() => {
-    localStorage.setItem('channelId', JSON.stringify(channelId));
-  }, [channelId]);
 
   useEffect(() => {
     (async () => {
@@ -151,10 +153,7 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend,  CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,);
+  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 
   const options = {
     responsive: true,
@@ -169,8 +168,9 @@ export const Dashboard = () => {
       },
       tooltip: {
         callbacks: {
-          afterTitle: () => {
-            return moment(sales[0].date).format('YYYY-MM-DD HH:mm A');
+          afterTitle: (context: TooltipItem<ChartType>[]) => {
+            const date = sales.filter((s: Sale) => s.revenue === context[0]!.raw)[0].date;
+            return moment(date).format('YYYY-MM-DD | HH:mm A');
           }
         }
       }
@@ -188,26 +188,19 @@ export const Dashboard = () => {
     datasets: [
       {
         label: 'Revenue',
-        data: sales.map((d: Sale)=> d.revenue),
+        data: sales?.map((d: Sale) => d.revenue),
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 1  ,
-      },
+        borderWidth: 1
+      }
     ]
   };
 
-  // type dateValueType = Moment | null | undefined | string | undefined;
-  // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
-  // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
+  const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
+  const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
 
-  const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
-    if (Array.isArray(dateString)) {
-      setFromDate(dateString[0]);
-      setToDate(dateString[1]);
-    } else {
-      setFromDate(dateString);
-    }
-  };
+  console.log('DATE 1', initialDatePickerValue);
+  console.log('DATE 2', initialRangePickerValue);
 
   const submit = async () => {
     if (toDate === '') {
@@ -226,11 +219,17 @@ export const Dashboard = () => {
           to: toDate
         })
       );
-      localStorage.setItem(
-        'initialRangerPickerValue',
-        JSON.stringify([fromDate, toDate])
-      );
+      localStorage.setItem('initialRangerPickerValue', JSON.stringify([fromDate, toDate]));
     }
+  };
+  const onChange = (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+    if (Array.isArray(dateString)) {
+      setFromDate(dateString[0]);
+      setToDate(dateString[1]);
+    } else {
+      setFromDate(dateString);
+    }
+    submit();
   };
 
   return (
@@ -262,11 +261,11 @@ export const Dashboard = () => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable 
+            <DataTable
               current={current}
-              dataSource={channels} 
-              columns={columns} 
-              pageSize={2} 
+              dataSource={channels}
+              columns={columns}
+              pageSize={2}
               total={channels.length}
               // rowSelection={rowSelection}
               // selectedRows={selectedRowKeys.length}
@@ -291,14 +290,10 @@ export const Dashboard = () => {
               aria-label="Dark mode toggle"
             />
 
-            <Form onFinish={submit}>
-              <Space>
-                {daysPeriod ? 
-                  <DatePicker onChange={onChange}/> :
-                  <RangePicker onChange={onChange}/>}
-                <ConfirmBtn htmlType="submit">Apply</ConfirmBtn>
-              </Space>
-            </Form>
+            {daysPeriod ? 
+              <DatePicker onChange={onChange} /> : 
+              <RangePicker onChange={onChange} />
+            }
             <Switch
               className="toggle-period"
               checked={daysPeriod}
