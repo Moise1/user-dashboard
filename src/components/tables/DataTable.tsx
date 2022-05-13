@@ -69,6 +69,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     return myData;
   };
   const [flag, setFlag]=useState(false);
+  console.log({columns});
   useEffect(()=>{
     setFlag((prev)=>!prev);
   },[dataSource]);

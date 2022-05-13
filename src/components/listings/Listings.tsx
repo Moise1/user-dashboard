@@ -271,16 +271,7 @@ export const Listings = () => {
     onChange: onSelectChange
   };
 
-  const handleCheckBox = (e: CheckboxChangeEvent): void => {
-    const cloneColumns = columns.map((col) => {
-      if (col.key === e.target.value) {
-        return { ...col, visible: e.target.checked };
-      } else {
-        return col;
-      }
-    });
-    setColumns(cloneColumns);
-  };
+ 
 
   const handleClose = () => {
     setColumns(tableColumns);
@@ -293,10 +284,15 @@ export const Listings = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
+
+  // const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
+
   const [visibleCols, setVisibleCols] = useState(tableColumns);
+
 
   useEffect(() =>{
     const myCols= tableColumns.filter((col) => col.visible === true);
+    console.log('use eeffect',{columns,myCols});
     setVisibleCols(myCols);
   } , [columns, activeListingsType]);
 
@@ -305,7 +301,22 @@ export const Listings = () => {
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
 
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
-
+  const handleCheckBox = (e: CheckboxChangeEvent): void => {
+    console.log({event:e.target.value,chek:e.target.checked});
+    const cloneColumns = tableColumns.map((col) => {
+      if (col.key === e.target.value) {
+        console.log('in if',{c:col});
+        console.log('eeeeeeeeee',e);
+        return { ...col, visible: e.target.checked };
+      } else {
+        console.log('in else',{col}); 
+        return col;
+      }
+    });
+    console.log({cloneColumns});
+    setVisibleCols(cloneColumns);
+    // setColumns(cloneColumns);
+  };
   useEffect(() => {
     setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchKey)));
     setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchKey)));
@@ -328,7 +339,7 @@ export const Listings = () => {
                 <Row className="listings-cols">
                   <Col>
                     <ul className="cols-list">
-                      {columns.map((col) => (
+                      {tableColumns.map((col) => (
                         <li key={col.key}>
                           <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
                             {col.title}
@@ -430,7 +441,6 @@ export const Listings = () => {
               onChange={setCurrent}
               pagination={false}
             />
-            {console.log({rowSelection})}
           </>
         )
       }
