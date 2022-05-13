@@ -138,8 +138,9 @@
 
   .horizontal-divider {
     display: block !important;
-    width: 15vw;
-    margin-bottom: 0.3rem;
+    width: 31vw;
+    margin-bottom: 1.3rem;
+    margin-top: 1.7rem;
     border-top: 1px solid #222;
   }
 }
@@ -152,6 +153,18 @@
   a:hover {
     color: $corporative-color;
   }
+}
+
+.ant-modal-close-x {
+  margin: 0 0 0 auto;
+}
+
+.horizontal-divider {
+  display: block !important;
+  width: 31vw;
+  margin-bottom: 1.3rem;
+  margin-top: 1.7rem;
+  border-top: 1px solid rgb(179, 179, 179);
 }
 
 // Phone and tablets screen size.

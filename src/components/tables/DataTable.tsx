@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Pagination, Table, Dropdown, Space } from 'antd';
+import { Pagination, Table, Dropdown, Space, Select, Modal, Progress } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
@@ -46,6 +46,49 @@ interface Props {
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
+
+  let progressInterval: NodeJS.Timeout;
+
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [progressBar, setProgressBar] = useState(0);
+  const { Option, OptGroup } = Select;
+
+  useEffect(() => {
+    progressInterval = setInterval(() => {
+      setProgressBar(prev => prev + 1);
+    }, 100);
+  }, []);
+
+  useEffect(() => {
+    if(progressBar >= 100) {
+      clearInterval(progressInterval);
+    }
+  }, [progressBar]);
+  // const [modalText, setModalText] = useState('Content of the modal');
+  
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = () => {
+    // setModalText(`Copy ${selectedRows} listings`);
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setVisible(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+  
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setVisible(false);
+  };
   const {
     columns,
     dataSource,
@@ -80,7 +123,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
       Edit <strong>{selectedRows}</strong> {page}(s)
       </li>
-      <li className="list-item">
+      <li className="list-item" onClick={showModal}>
       Copy <strong>{selectedRows}</strong> {page}(s)
       </li>
       <li className="list-item">
@@ -125,6 +168,31 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         pagination={false}
       />
       <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} />
+      <Modal
+        title={`Copy ${selectedRows} Listings`}
+        visible={visible}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <Progress percent={progressBar} status="active" />
+        <h4>Target</h4>
+        <Select defaultValue="online_store" style={{ width: 470 }} onChange={handleChange}>
+          <OptGroup>
+            <Option value="online_store">online_store</Option>
+          </OptGroup>
+        </Select>
+        <div className="horizontal-divider"></div>
+        <h4>Template</h4>
+        <Select defaultValue="Do not change it" style={{ width: 470 }} onChange={handleChange}>
+          <OptGroup>
+            <Option value="Do not change it">Do not change it</Option>
+          </OptGroup>
+          <OptGroup label="Engineer">
+            <Option value="Yiminghe">yiminghe</Option>
+          </OptGroup>
+        </Select>
+      </Modal>
     </div>
   );
 };
