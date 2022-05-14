@@ -20,7 +20,6 @@ export const getOrders = createAsyncThunk(
         key
       }));
       return data;
-
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
     }
@@ -64,9 +63,9 @@ export const loadAddressFromOrderLine = createAsyncThunk(
   'sales/loadAddressFromOrderLine',
   async (orderLineId: orderDataType, thunkAPI) => {
     try {
+      console.log('The orderlineid', orderLineId);
       const res = await client.post('Sales/LoadAddressesFromOrderLine', { orderLineId });
       console.log('The load address api response is', res.data.response_data);
-
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');

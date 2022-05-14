@@ -11,19 +11,13 @@ import {
 export interface OrderData {
   channelOAuthIds: [number];
   date: Date;
-  reference: string;
-  title: string;
   imageUrl: string;
   sourceId: number;
   sourceItem: string;
   channelItem: string;
-  quantity: number;
-  channelPrice: number;
   channelShipping: string;
   channelCurrency: string;
-  sourcePrice: null;
   sourceCurrencyId: null;
-  status: string;
   shippingAddressId: number;
   billingAddressId: number;
   channelTax: number;
@@ -32,14 +26,10 @@ export interface OrderData {
   sourceVAT: null;
   sourceShipping: null;
   sourcePath: string;
-  fees: number;
   storeStatus: number;
   hgrTrackingNumber: null;
   buyReference: string;
   cancelRequested: boolean;
-  profit?: number;
-  margin?: number;
-  //added on 26april
   orderLineId: number;
   id: number;
   firstName: string;
@@ -54,8 +44,17 @@ export interface OrderData {
   countryCode: string;
   provinceCode: string;
   //Added for advance search
+  reference: string;
+  quantity: number;
+  title: string;
   sold: string;
   cost: string;
+  fees: number;
+  profit?: number;
+  margin?: number;
+  status: string;
+  sourcePrice: number;
+  channelPrice: number;
 }
 
 const initialState = {

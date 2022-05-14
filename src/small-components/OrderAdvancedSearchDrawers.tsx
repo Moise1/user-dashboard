@@ -1,14 +1,11 @@
 import { Moment } from 'moment';
 import { Form, Input, DatePicker } from 'antd';
-// import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
-// import { Space, Button, Form, Input, Checkbox } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { AdvancedSearch } from './AdvancedSearch';
-// import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import { SuccessBtn } from './ActionBtns';
-import '../sass/advanced-search.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OrderData } from '../redux/orders/orderSlice';
+import '../sass/advanced-search.scss';
 
 // interface Props extends AdvancedSearchProps {
 //   openSourceModal?: () => void;
@@ -81,7 +78,7 @@ interface Props {
   onClose?: () => void;
   order: Array<OrderData>;
   setSearchKey?: (searchKey: string) => void;
-  setSearchedArray?: (searchedArray: []) => void | unknown;
+  setSearchedArray?: React.Dispatch<React.SetStateAction<OrderData[]>>;
   setSearchFilterKey?: (searchedArray: []) => void;
 }
 
@@ -89,26 +86,32 @@ interface AdvancedSearchFieldTypes {
   reference?: string | undefined;
   channelItem?: string | undefined;
   title?: string | undefined;
-  sold?: string | undefined;
-  cost?: string | undefined;
   fees?: number | undefined;
+  sold?: number | undefined;
+  cost?: number | undefined;
   profit?: number | undefined;
   margin?: number | undefined;
   status?: string | undefined;
+  min?: number | undefined;
+  max?: number | undefined;
 }
 
 export const OrdersAdvancedSearch = (props: Props) => {
   const { order, setSearchKey, setSearchedArray, setSearchFilterKey } = props;
-  const advanceSearchIntialTypes: AdvancedSearchFieldTypes | undefined = {
-    reference: 'abc',
-    channelItem: 'abc',
-    title: 'abc',
-    sold: 'abc',
-    cost: 'abc',
-    fees: 0,
-    profit: 0,
-    margin: 0,
-    status: 'abc'
+
+  useEffect(() => {
+    console.log('i render');
+  }, [setSearchedArray]);
+  const advanceSearchIntialTypes: AdvancedSearchFieldTypes = {
+    reference: '',
+    channelItem: '',
+    title: '',
+    // fees: 0,
+    // sold: 0,
+    // cost: 0,
+    // profit: 0,
+    // margin: 0,
+    status: ''
   };
 
   console.log(setSearchKey);
@@ -116,8 +119,8 @@ export const OrdersAdvancedSearch = (props: Props) => {
   console.log(setSearchFilterKey);
 
   const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
-  // const [advSearchedArray, setAdvSearchArray] = useState([]);
   const orderAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('the e', e.target);
     const { name, value } = e.target;
     setOrderAdvancedSearchFormData({
       ...orderAdvancedSearchFormData,
@@ -134,18 +137,24 @@ export const OrdersAdvancedSearch = (props: Props) => {
   };
 
   const handleFilterSubmit = () => {
-    console.log(
-      order.filter(
-        (e: OrderData) =>
-          e.channelItem === orderAdvancedSearchFormData.channelItem ||
-          e.title === orderAdvancedSearchFormData.title ||
-          e.reference === orderAdvancedSearchFormData.reference ||
-          e.sold === orderAdvancedSearchFormData.sold ||
-          e.cost === orderAdvancedSearchFormData.cost
-      )
+    let result;
+    console.log('the order', order);
+    console.log('The result', result);
+    result = order.filter(
+      (e: OrderData) =>
+        e.reference === orderAdvancedSearchFormData.reference ||
+        e.channelItem === orderAdvancedSearchFormData.channelItem ||
+        e.title === orderAdvancedSearchFormData.title ||
+        e.fees == orderAdvancedSearchFormData.fees ||
+        e.profit == orderAdvancedSearchFormData.profit ||
+        e.channelPrice == orderAdvancedSearchFormData.sold ||
+        e.sourcePrice == orderAdvancedSearchFormData.cost ||
+        e.margin == orderAdvancedSearchFormData.margin ||
+        (e.quantity == orderAdvancedSearchFormData.min && orderAdvancedSearchFormData.max)
+      // Filtering Left: (1) Source (2) Quanitity (3) Created on
     );
-    // setSearchedArray(orders.filter((e: advancedSearchFieldTypes) => e.channelItem === String(orderAdvancedSearchFormData.channelItem)));
-    // setSearchFilterKey(orders.filter((e: advancedSearchFieldTypes) => e.channelItem === String(orderAdvancedSearchFormData.channelItem)));
+    setSearchedArray?.(result);
+    result = [];
   };
 
   return (
@@ -168,19 +177,19 @@ export const OrdersAdvancedSearch = (props: Props) => {
               />
             </Form.Item>
 
-            {/* <Form.Item label="Source">
+            <Form.Item label="Source">
               <Input
                 className="blue-input"
                 name="source"
-                defaultValue={advanceSearchIntialTypes.source}
-                onChange={orderAdvancedSearchOnChange}
+                // defaultValue={advanceSearchIntialTypes.reference}
+                // onChange={orderAdvancedSearchOnChange}
               />
-            </Form.Item> */}
+            </Form.Item>
 
             <Form.Item label="Quantity">
               <div className="cost-price-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
+                <Input className="blue-input" placeholder="Min" value={advanceSearchIntialTypes.min} />
+                <Input className="blue-input" placeholder="Max" value={advanceSearchIntialTypes.max} />
               </div>
             </Form.Item>
 
@@ -210,7 +219,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
                 onChange={orderAdvancedSearchOnChange}
               />
             </Form.Item>
-
             {/* <Form.Item label="Sell Price">
               <div className="sell-price-section">
                 <Input className="blue-input" placeholder="Min" />
@@ -241,18 +249,15 @@ export const OrdersAdvancedSearch = (props: Props) => {
               <Input
                 className="blue-input"
                 name="fees"
+                // defaultValue={JSON.stringify(advanceSearchIntialTypes.fees)}
                 defaultValue={advanceSearchIntialTypes.fees}
                 onChange={orderAdvancedSearchOnChange}
+                // type="number"
               />
             </Form.Item>
 
             <Form.Item label="Margin">
-              <Input
-                className="blue-input"
-                name="margin"
-                defaultValue={advanceSearchIntialTypes.margin}
-                onChange={orderAdvancedSearchOnChange}
-              />
+              <Input className="blue-input" name="margin" defaultValue={advanceSearchIntialTypes.margin} />
             </Form.Item>
           </div>
 
@@ -262,17 +267,11 @@ export const OrdersAdvancedSearch = (props: Props) => {
             </Form.Item>
 
             <Form.Item label="Status">
-              <Input
-                className="blue-input"
-                name="status"
-                defaultValue={advanceSearchIntialTypes.status}
-                onChange={orderAdvancedSearchOnChange}
-              />
+              <Input className="blue-input" name="status" />
             </Form.Item>
           </div>
 
           {/* other */}
-
           {/* <div className="check-boxes">
             <Form.Item className="monitor-price-options" label="Monitor Price">
               <Checkbox checked className="checkbox">
