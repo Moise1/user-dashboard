@@ -34,6 +34,7 @@ export interface ListingData {
   userProductSourceChannelId: number;
   views: number;
   watches: number;
+  // data: [];
 }
 
 export interface PendingListings {
@@ -98,7 +99,7 @@ export const listingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getListings.pending, (state) => {
-      state.loading = true;
+      state.loading = false;
       state.error = '';
     });
     builder.addCase(getListings.fulfilled, (state, { payload }) => {

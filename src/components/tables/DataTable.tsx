@@ -103,7 +103,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
       />
-      {/* <Pagination onChange={onChange} total={totalItems} current={current} pageSize={pageSize} /> */}
     </div>
   );
 };

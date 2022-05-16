@@ -25,7 +25,7 @@ export const EditSingleListing = ({ selectedItems }: Props) => {
     case 1:
       return <ListingDescription />;
     case 2:
-      return <ListingDetails />;
+      return <ListingDetails selectedItems={selectedItems} />;
 
     case 3:
       return <ListingOptions />;

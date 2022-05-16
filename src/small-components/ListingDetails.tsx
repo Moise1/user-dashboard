@@ -2,18 +2,22 @@ import { SuccessBtn, WarningBtn, DeleteBtn } from './ActionBtns';
 import { t } from 'src/utils/transShim';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
 import '../sass/listing-details.scss';
+import { ListingData } from 'src/redux/listings/listingsSlice';
+interface Props {
+  selectedItems: ListingData;
+}
 
-export const ListingDetails = () => {
+export const ListingDetails: React.FC<Props> = ({ selectedItems }: Props) => {
   return (
     <div className="listing-details">
       <ul>
         <li>
           <p>Create by</p>
-          <p>Admin</p>
+          <p>{selectedItems.createdByName}</p>
         </li>
         <li>
           <p>Created on</p>
-          <p>07/13/2021 12:55 PM</p>
+          <p>{selectedItems.createdOn}</p>
         </li>
         <li>
           <p>Monitored on</p>
