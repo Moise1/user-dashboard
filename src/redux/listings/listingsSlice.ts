@@ -37,7 +37,7 @@ export interface ListingData {
   // data: [];
 }
 
-export interface pending_listings {
+export interface PendingListings {
   categoryId: number;
   channelOAuthId: number;
   createdById: number;
@@ -51,6 +51,8 @@ export interface pending_listings {
   title: string;
   pending: boolean;
 }
+
+export type TerminatedListings = PendingListings;
 
 export interface ListingsSource {
   id: number;
@@ -103,7 +105,6 @@ export const listingsSlice = createSlice({
     builder.addCase(getListings.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.listings = payload;
-      // console.log('listing', { payload });
     });
     builder.addCase(getListings.rejected, (state, { payload }) => {
       state.loading = false;
@@ -123,7 +124,6 @@ export const getListingsSourceSlice = createSlice({
     });
     builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
       state.loading = false;
-      // console.log({ mypayload: payload });
       state.sourceListings = payload;
     });
     builder.addCase(getListingsSource.rejected, (state, { payload }) => {
@@ -139,19 +139,15 @@ export const PendingListingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getPendingListing.pending, (state) => {
-      // console.log('in pending', { state });
       state.loading = true;
       state.error = '';
     });
     builder.addCase(getPendingListing.fulfilled, (state, { payload }) => {
-      // console.log('pending', { pending_listings: payload.listings });
       state.loading = false;
       state.pending_listings = [...payload.listings];
       state.sourceListings = payload.sources;
-      // console.log({ state });
     });
     builder.addCase(getPendingListing.rejected, (state, { payload }) => {
-      // console.log('rejected');
       state.loading = false;
       state.error = String(payload);
     });
@@ -164,18 +160,14 @@ export const TerminateListingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getTerminateListings.pending, (state) => {
-      // console.log('in pending', { state });
       state.loading = true;
       state.error = '';
     });
     builder.addCase(getTerminateListings.fulfilled, (state, { payload }) => {
-      // console.log('terminated', { terminate_listings: payload.listings });
       state.loading = false;
       state.terminate_listings = [...payload.listings];
-      // console.log({ state });
     });
     builder.addCase(getTerminateListings.rejected, (state, { payload }) => {
-      // console.log('reject');
       state.loading = false;
       state.error = String(payload);
     });

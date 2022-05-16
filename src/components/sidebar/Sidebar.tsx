@@ -193,7 +193,7 @@ export const Sidebar = (props: Props) => {
             </Item>
             <Item
               className="menu-item"
-              onClick={() => routeChange('/sources')}
+              onClick={() => routeChange('/list-now')}
               style={{ fontSize: '18px', fontWeight: 'bold' }}
               key="3"
               icon={<ListNowIcon />}

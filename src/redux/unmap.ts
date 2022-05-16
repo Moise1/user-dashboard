@@ -50,7 +50,6 @@ export interface HGRSearchData {
   id: number;
 }
 export interface ActiveListing extends HGRSearchData {
-  id: number;
   userProductSourceChannelId: number;
   channelListingId: number;
   channelOAuthId: number;
@@ -83,7 +82,6 @@ export interface ActiveListing extends HGRSearchData {
   buyBoxPrice?: number;
   origin: eChannelListingOrigin;
   variationAtributes: ChannelListingVariationAttributeOption[];
-  // eslint-disable-next-line semi
 }
 
 interface cacheMap {
@@ -101,7 +99,6 @@ type Partial<T> = {
 };
 
 export default function* unmap(comp: compArray) {
-  //   console.log({ comp });
   const cm = comp[0][0] as unknown as cacheMap;
   function dupSource(nv: number | string) {
     return cm.commonBase[nv as number];
@@ -127,12 +124,8 @@ export default function* unmap(comp: compArray) {
   }
   const cb = cm.commonBase as compArray;
   for (let i = 0; i < cb.length; i++) {
-    //for (const co of cm.commonBase as []) {
-    // price to createdbyName - 19 -> 50  ( - 19)
     const itm = cb[i];
-    //itm[0]
     const objectFragment = {
-      //Partial<ActiveListing>
       createdById: di(itm[0]),
       createdByName: ds(itm[1]),
       status: itm[2],

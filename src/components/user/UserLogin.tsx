@@ -42,9 +42,6 @@ export const UserLogin = withRouter(({ history }) => {
           <Input.Password className="auth-input" />
         </Form.Item>
 
-        {/* <Form.Item name="rememberMe" valuePropName="checked" wrapperCol={{ offset: 7, span: 14 }}>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item> */}
         <Form.Item className="alternative" wrapperCol={{ offset: 6, span: 14 }}>
           No account?{' '}
           <span>

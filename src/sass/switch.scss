@@ -7,8 +7,9 @@
   }
 }
 
-.ant-switch-checked {
+.ant-switch-checked, .ant-switch {
   background-color: $corporative-color !important;
+  background-image: none !important;
 }
 
 .ant-click-animating-node {

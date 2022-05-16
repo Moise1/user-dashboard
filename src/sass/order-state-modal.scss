@@ -21,6 +21,7 @@
 .order-state-body-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .modal-title {
@@ -63,6 +64,17 @@
   & svg {
     cursor: pointer;
     transform: rotate(180deg);
+  }
+}
+
+//Added to order detail modal
+.go-back-orders-container {
+  margin-top: $spacer;
+  display: flex;
+  align-items: center;
+
+  & svg {
+    cursor: pointer;
   }
 }
 .disabled-line {
@@ -170,9 +182,9 @@
   justify-content: space-between;
 }
 
-button {
-  width: 45%;
-}
+// button {
+//   width: 45%;
+// }
 
 @media (max-width: 400px) {
   .modal-buttons-block {

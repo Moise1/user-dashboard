@@ -12,6 +12,10 @@ import { terminateListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { catalogProductsReducer } from '../catalog/catalogSlice';
+import { ordersReducer } from '../orders/orderSlice';
+import { orderAddressReducer } from '../orders/orderSlice';
+import { orderProgressReducer } from '../orders/orderSlice';
+import { salesReducer } from '../sales/salesSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -26,5 +30,9 @@ export const allReducers = combineReducers({
   listingSources: listingsSourceReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
-  catalogProducts: catalogProductsReducer
+  catalogProducts: catalogProductsReducer,
+  orders: ordersReducer,
+  orderAddress: orderAddressReducer,
+  orderProgress: orderProgressReducer,
+  sales: salesReducer,
 });

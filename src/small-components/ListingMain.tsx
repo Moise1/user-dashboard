@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import { t } from '../../src/utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
-// import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 interface Props {
   selectedItems: ListingData;
 }
 
-// eslint-disable-next-line react/prop-types
 export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
-  console.log('seleted single item to edit', selectedItems);
-  // const { listings } = useAppSelector((state) => state.listings);
-  // console.log('Model Open', listings[1]);
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">

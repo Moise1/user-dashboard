@@ -10,5 +10,9 @@ export const Templates = () => {
     dispatch(getTemplates());
   }, [getTemplates]);
 
-  return <div>Templates</div>;
+  return (
+    <div className="templates-container">
+      <h1>Templates</h1>
+    </div>
+  );
 };

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { CloseIcon } from './small-components/CloseIcon';
@@ -27,6 +26,7 @@ import {
   Templates
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
+import { ListNow } from './components/listings/ListNow';
 
 export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -36,11 +36,6 @@ export const App = withRouter(({ history }) => {
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
 
-  // useEffect(() => {
-  //   window.process = {
-  //     ...window.process,
-  //   };
-  // }, [])
 
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
@@ -84,6 +79,7 @@ export const App = withRouter(({ history }) => {
             <Route path="/register" component={UserRegister} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />
+            <ProtectedRoute path="/list-now" component={ListNow} />
             <ProtectedRoute path="/orders" component={Orders} />
             <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
             <ProtectedRoute path="/sources-table" component={SourcesTable} />
