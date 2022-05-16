@@ -111,7 +111,9 @@ export const OrdersAdvancedSearch = (props: Props) => {
     // cost: 0,
     // profit: 0,
     // margin: 0,
-    status: ''
+    status: '',
+    // min:0;
+    // max:0;
   };
 
   console.log(setSearchKey);
@@ -132,8 +134,8 @@ export const OrdersAdvancedSearch = (props: Props) => {
   const { visible, onClose } = props;
 
   const handleRangePicker = (value: RangeValue<Moment>, dateString: [string, string]) => {
-    console.log(dateString);
-    console.log(value);
+    console.log('The value from date picker is',value);
+    console.log('The dateString from date picker is',dateString);
   };
 
   const handleFilterSubmit = () => {
@@ -143,16 +145,18 @@ export const OrdersAdvancedSearch = (props: Props) => {
     result = order.filter(
       (e: OrderData) =>
         e.reference === orderAdvancedSearchFormData.reference ||
-        e.channelItem === orderAdvancedSearchFormData.channelItem ||
+        e.channelItem === orderAdvancedSearchFormData.channelItem || 
         e.title === orderAdvancedSearchFormData.title ||
-        e.fees == orderAdvancedSearchFormData.fees ||
-        e.profit == orderAdvancedSearchFormData.profit ||
-        e.channelPrice == orderAdvancedSearchFormData.sold ||
-        e.sourcePrice == orderAdvancedSearchFormData.cost ||
-        e.margin == orderAdvancedSearchFormData.margin ||
-        (e.quantity == orderAdvancedSearchFormData.min && orderAdvancedSearchFormData.max)
-      // Filtering Left: (1) Source (2) Quanitity (3) Created on
+        String(e.fees) === String(orderAdvancedSearchFormData.fees) ||
+        String(e.profit) === String(orderAdvancedSearchFormData.profit) ||
+        String(e.channelPrice) === String(orderAdvancedSearchFormData.sold) ||
+        String(e.sourcePrice) === String(orderAdvancedSearchFormData.cost) ||
+        String(e.margin) === String(orderAdvancedSearchFormData.margin) ||
+    String(e.quantity) < String(orderAdvancedSearchFormData.max) && String(e.quantity) > String(orderAdvancedSearchFormData.min)
     );
+
+    // Filtering Left: (1) Source (2) Quanitity (3) Created on
+    console.log('The object value is',orderAdvancedSearchFormData);
     setSearchedArray?.(result);
     result = [];
   };
@@ -188,8 +192,8 @@ export const OrdersAdvancedSearch = (props: Props) => {
 
             <Form.Item label="Quantity">
               <div className="cost-price-section">
-                <Input className="blue-input" placeholder="Min" value={advanceSearchIntialTypes.min} />
-                <Input className="blue-input" placeholder="Max" value={advanceSearchIntialTypes.max} />
+                <Input className="blue-input" placeholder="Min" name="min" value={advanceSearchIntialTypes.min} onChange={orderAdvancedSearchOnChange}/>
+                <Input className="blue-input" placeholder="Max" name="max" value={advanceSearchIntialTypes.max}  onChange={orderAdvancedSearchOnChange}/>
               </div>
             </Form.Item>
 
