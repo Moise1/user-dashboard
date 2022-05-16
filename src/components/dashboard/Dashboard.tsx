@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Row } from 'antd';
+import { Button, Col, Input, Popconfirm, Progress, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
@@ -22,8 +22,10 @@ import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
 // import { faker } from '@faker-js/faker';
-import months from 'months';
+// import months from 'months';
 import moment from 'moment';
+import 'chartjs-adapter-date-fns';
+import { enGB } from 'date-fns/locale';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -61,6 +63,7 @@ export const Dashboard = () => {
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [daysPeriod, setDaysPeriod] = useState<boolean>(false);
+  const [showSales, setShowSales] = useState<boolean>(true);
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
   const [current] = useState<number>(1);
@@ -73,6 +76,7 @@ export const Dashboard = () => {
     dispatch(getChannels());
   };
   const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
+  const handleSalesChange = () => setShowSales(!showSales);
 
   useEffect(() => {
     (async () => {
@@ -157,10 +161,22 @@ export const Dashboard = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      x: {
+        adapters: {
+          date: {locale: enGB},
+          type: 'time',
+          time: {
+            unit: 'day',
+            stepSize: 30
+          }
+        }
+      }
+    },
     plugins: {
       legend: {
-        display: true,
-        position: 'top' as const
+        display: false
       },
       title: {
         display: true,
@@ -168,9 +184,11 @@ export const Dashboard = () => {
       },
       tooltip: {
         callbacks: {
-          afterTitle: (context: TooltipItem<ChartType>[]) => {
+          title: (context: TooltipItem<ChartType>[]) => {
+            const contextObj: { label?: string } = { ...context[0] };
+            delete contextObj['label'];
             const date = sales.filter((s: Sale) => s.revenue === context[0]!.raw)[0].date;
-            return moment(date).format('YYYY-MM-DD | HH:mm A');
+            return moment(date).utc().format('YYYY-MM-DD | hh:mm A');
           }
         }
       }
@@ -181,13 +199,12 @@ export const Dashboard = () => {
   for (let i = 1; i < 32; i++) {
     daysLabel.push(String(i));
   }
-  const monthsLabel: string[] = months.map((m: string) => m.slice(0, 3));
+  const monthsLabel = sales.map((d: Sale) => moment(d.date).utc().format('YYYY-MM'));
 
   const data = {
     labels: daysPeriod ? daysLabel : monthsLabel,
     datasets: [
       {
-        label: 'Revenue',
         data: sales?.map((d: Sale) => d.revenue),
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
@@ -196,11 +213,11 @@ export const Dashboard = () => {
     ]
   };
 
-  const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
-  const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
+  // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
+  // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
 
-  console.log('DATE 1', initialDatePickerValue);
-  console.log('DATE 2', initialRangePickerValue);
+  // console.log('DATE 1', initialDatePickerValue);
+  // console.log('DATE 2', initialRangePickerValue);
 
   const submit = async () => {
     if (toDate === '') {
@@ -231,6 +248,11 @@ export const Dashboard = () => {
     }
     submit();
   };
+
+  const totalProfit = sales.reduce((total: number, sale: Sale) => {
+    total = sale.revenue! - (sale.sourcePrice! + sale.totalTax!);
+    return total.toFixed(2);
+  });
 
   return (
     <div className="dashboard-container">
@@ -290,20 +312,30 @@ export const Dashboard = () => {
               aria-label="Dark mode toggle"
             />
 
-            {daysPeriod ? 
-              <DatePicker onChange={onChange} /> : 
-              <RangePicker onChange={onChange} />
-            }
+            {daysPeriod ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
             <Switch
-              className="toggle-period"
-              checked={daysPeriod}
-              onChange={handlePeriodChange}
-              checkedChildren="By day"
-              unCheckedChildren="By month"
-              aria-label="Dark mode toggle"
+              className="toggle-sales"
+              checked={showSales}
+              onChange={handleSalesChange}
+              checkedChildren="Sales"
+              unCheckedChildren="Profit"
+              aria-label="Profit and sales toggle"
             />
           </div>
-          <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
+          <Row className="graph-progress-container">
+            <Col span={18}>
+              <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
+            </Col>
+            <Col>
+              <h4>Total {showSales ? 'sales' : 'profit'}</h4>
+              <Progress
+                percent={showSales ? sales.length : totalProfit}
+                format={(percent) => (showSales ? `${percent} %` : `€ ${percent}`)}
+                type="circle"
+                width={150}
+              />
+            </Col>
+          </Row>
         </div>
       </div>
 
@@ -395,5 +427,3 @@ export const Dashboard = () => {
     </div>
   );
 };
-
-// Merge into  master

@@ -4,7 +4,7 @@
 
 .drop-down{
   cursor: pointer;
-}
+};
 .dashboard-container {
   margin: 0 2rem;
   overflow-y: scroll;
@@ -77,11 +77,16 @@
     .graph-cntrlers {
       display: flex;
       justify-content: space-between;
-      .toggle-period {
-        max-width: 120px;
+      .toggle-period, .toggle-sales {
+        max-width: 130px;
         height: 24px;
       }
     }
+  };
+
+  .graph-progress-container{
+    display: flex;
+    justify-content: space-between;
   }
 }
 
