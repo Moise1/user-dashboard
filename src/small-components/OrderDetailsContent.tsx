@@ -17,7 +17,7 @@ interface Props {
 
 const OrderDetailsContent = (props: Props) => {
   const { data, OrderContentModalOpen } = props;
-
+  console.log('the data in modal is',data);
   const object = {
     firstName: ' ',
     phone: ' ',
@@ -34,14 +34,15 @@ const OrderDetailsContent = (props: Props) => {
   console.log('The data from  api', data);
   const [orderNumber] = useState(data.id);
   const { ordersAddress, loading } = useAppSelector((state) => state.orderAddress);
+  console.log('The states are', useAppSelector((state) => state));
   console.log('The id is ', data.id);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadAddressFromOrderLine(orderNumber!));
+    dispatch(loadAddressFromOrderLine(orderNumber));
     setOrderBillingAddress(ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
-  }, [data.id]);
+  }, [orderNumber]);
 
   console.log('The billingModalAddress ', orderBillingAddress.phone);
   console.log('The shippingModalAddress ', orderShippingAddress);

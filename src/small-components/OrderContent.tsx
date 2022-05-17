@@ -2,7 +2,7 @@ import { ProgressBar } from 'react-bootstrap';
 import { Spin } from 'antd';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import {
-  AoIconHead,
+  // AoIconHead,
   // CheckIcon,
   // TrashIcon,
   LastStepOrderIcon,
@@ -41,8 +41,12 @@ interface Props {
 }
 
 export const OrderContent = (props: Props) => {
-  const [orderNumber] = useState(445378);
-  const [id] = useState(445378);
+
+  const { orderProgress, data, OrderDetailsModalOpen } = props;
+  const {id} = data;
+  console.log('The data id is',data.id);
+  const [orderNumber] = useState(id);
+  // const [iddd] = useState(445378);
   const orderStatus = useAppSelector((state) => state.orderProgress.orderProgress.states);
   const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
@@ -58,10 +62,10 @@ export const OrderContent = (props: Props) => {
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
 
-  const { orderProgress, data, OrderDetailsModalOpen } = props;
   const now = 60;
 
   useEffect(() => {
+    // dispatch(loadProgressOfOrder(iddd));
     dispatch(loadProgressOfOrder(id));
     setOrderProgressStatus(orderStatus);
   }, []);
@@ -109,11 +113,11 @@ export const OrderContent = (props: Props) => {
     <div className="order-state-progress-modal">
       <div className="flex-sm-row order-state-header">
         <h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>
-        <button className="autoordering-state">
+        {/* <button className="autoordering-state"> //This button for future use on the order modal content
           <AoIconHead />
-          {/* <span>{t('OrderDetails.AOEnabled')}</span> */}
+         <span>{t('OrderDetails.AOEnabled')}</span> 
           <span>Process</span>
-        </button>
+        </button> */}
         <span
           className="close-modal-icon"
           onClick={() => {

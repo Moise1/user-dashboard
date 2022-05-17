@@ -3,7 +3,6 @@ import '../../sass/medium-button.scss';
 import { t } from 'src/utils/transShim';
 import { Key } from 'antd/lib/table/interface';
 import { useState, useMemo, useEffect } from 'react';
-import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
 import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
@@ -11,44 +10,39 @@ import { OrderData } from '../../redux/orders/orderSlice';
 import { DataTable } from '../tables/DataTable';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
+import { BulkEditListings } from '../listings/BulkEditListings';
+import { determineStatus } from '../../utils/determineStatus';
+import { OrderContent } from 'src/small-components/OrderContent';
+import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
 import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { BulkEditListings } from '../listings/BulkEditListings';
-import { determineStatus } from '../../utils/determineStatus';
-// import { SearchOptions } from '../small-components/SearchOptions';
-// import OrderStateProgressModal from '../small-components/OrderStateProgressModal';
-import { OrderContent } from 'src/small-components/OrderContent';
-import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDrawers';
+import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
-  console.log('The loading is', loading);
-
   const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(445379);
+  const [orderNumber] = useState(445379); //Only use in order action btns
   const [order, setOrder] = useState([]);
-  const [searchedArray, setSearchedArray] = useState([]);
+  const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [selectedRecord, setSelectedRecord] = useState({});
+  console.log('The loading is', loading);
 
   //For modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
-  // const [orderModalOpen, setOrderModalOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
-
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSingleOrderDetailModal = () => setOrderDetailsOpen(!orderDetailsOpen);
-  // const handleOrderModal = () => setOrderModalOpen(!orderModalOpen);
 
   const handleOrderDetailsOpen = () => {
     handleSingleListingModal();
@@ -59,20 +53,6 @@ export const Orders = () => {
     handleSingleListingModal();
     setOrderDetailsOpen(!orderDetailsOpen);
   };
-
-  //Get Orders
-  useEffect(() => {
-    dispatch(getOrders({ channelOAuthIds: [590881] }));
-    setOrder(
-      orders?.orders.length &&
-        orders?.orders.map((item: OrderData): unknown => ({
-          ...item,
-          profit: item.channelPrice - item.channelPrice - item.fees,
-          margin: (item.profit! / item.channelPrice) * 100,
-          date: moment(item.date).format('DD/MM/YY/ hh:mm')
-        }))
-    );
-  }, [getOrders]);
 
   const tableColumns = [
     {
@@ -167,6 +147,22 @@ export const Orders = () => {
     }
   ];
 
+  //Get Orders
+  useEffect(() => {
+    const newChannel = JSON.parse(localStorage.getItem('channelId') || ' ');
+    dispatch(getOrders({ channelOAuthIds: [newChannel] }));
+    setOrder(
+      orders?.orders.length &&
+        orders?.orders.map((item: OrderData): unknown => ({
+          ...item,
+          profit: item.channelPrice - item.channelPrice - item.fees,
+          margin: (item.profit! / item.channelPrice) * 100,
+          date: moment(item.date).format('DD/MM/YY/ hh:mm')
+        }))
+    );
+  }, [getOrders]);
+  console.log(setCurrent);
+
   //How many columns to show modal
   const [columns, setColumns] = useState(tableColumns);
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
@@ -200,21 +196,27 @@ export const Orders = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
-  //For Searching
+  console.log('The selected column', showColumns);
+
+  // //For Searching
   useEffect(() => {
-    setSearchedArray(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
+    setSearchedArray(
+      order.filter(
+        (e: OrderData) =>
+          e.channelItem === String(searchKey) ||
+          e.title === String(searchKey) ||
+          e.reference === String(searchKey) ||
+          String(e.fees) === String(searchKey) ||
+          String(e.profit) === String(searchKey) ||
+          String(e.sold) === String(searchKey)
+      )
+    );
     setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
   }, [order, searchKey]);
 
-  // console.log(rowSelection);
   console.log('The searchFilterKey is ', searchFilterKey);
   console.log('The searchedArray is ', searchedArray);
   console.log('the number of keys selected', selectedRowKeys);
-  // console.log('The searchkey setter is', setSearchKey);
-  // console.log('The setShowColumn', setShowColumns);
-  // console.log('The setBulkEditOpen', setBulkEditOpen);
-  // console.log('setSingleEditOpen', setSingleEditOpen);
-  // console.log('setDrawerOpen', setDrawerOpen);
 
   return (
     <Layout className="orders-container">
@@ -280,7 +282,6 @@ export const Orders = () => {
                 setSearchKey(e.target.value ? e.target.value : '');
               }}
             ></Input>
-
             <OrdersAdvancedSearch
               visible={drawerOpen}
               onClose={handleSideDrawer}
