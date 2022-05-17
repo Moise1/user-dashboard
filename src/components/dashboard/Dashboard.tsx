@@ -250,9 +250,8 @@ export const Dashboard = () => {
   };
 
   const totalProfit = sales.reduce((total: number, sale: Sale) => {
-    total = sale.revenue! - (sale.sourcePrice! + sale.totalTax!);
-    return total.toFixed(2);
-  });
+    return total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!);
+  },0);
 
   return (
     <div className="dashboard-container">
@@ -328,12 +327,14 @@ export const Dashboard = () => {
             </Col>
             <Col>
               <h4>Total {showSales ? 'sales' : 'profit'}</h4>
-              <Progress
-                percent={showSales ? sales.length : totalProfit}
-                format={(percent) => (showSales ? `${percent} %` : `€ ${percent}`)}
-                type="circle"
+              {showSales ? <Progress
+                percent={sales.length}
+                type='circle'
                 width={150}
-              />
+              />: 
+                <div className='profit-circle'>
+                  &euro; {totalProfit.toFixed(2)}
+                </div>}
             </Col>
           </Row>
         </div>

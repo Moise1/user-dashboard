@@ -5,6 +5,19 @@
 .drop-down{
   cursor: pointer;
 };
+
+.profit-circle{
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  padding: 8px;
+  font-size: $font-large;
+  border: 10px solid $green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+
 .dashboard-container {
   margin: 0 2rem;
   overflow-y: scroll;
