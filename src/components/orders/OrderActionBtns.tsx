@@ -61,7 +61,6 @@ export const OrderActionBtns = (typeBtnProps: props) => {
       <DangerBtn disabled={disabled}>
         <TrashIcon />
         <span>
-          {' '}
           {t('OrderTable.Delete')} {selectedRows > 0 ? selectedRows : ''} orders{' '}
         </span>
       </DangerBtn>

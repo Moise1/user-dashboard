@@ -22,6 +22,7 @@ import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
 
 export const Orders = () => {
+
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
@@ -40,7 +41,6 @@ export const Orders = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
-
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSingleOrderDetailModal = () => setOrderDetailsOpen(!orderDetailsOpen);
@@ -150,7 +150,8 @@ export const Orders = () => {
 
   //Get Orders
   useEffect(() => {
-    dispatch(getOrders({ channelOAuthIds: [590881] }));
+    const newChannel = JSON.parse(localStorage.getItem('channelId') || ' ');
+    dispatch(getOrders({ channelOAuthIds: [newChannel] }));
     setOrder(
       orders?.orders.length &&
         orders?.orders.map((item: OrderData): unknown => ({

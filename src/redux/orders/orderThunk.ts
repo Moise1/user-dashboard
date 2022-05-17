@@ -26,9 +26,11 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const processOrders = createAsyncThunk('sales/processOrder', async (orderLineId: number, thunkAPI) => {
+export const processOrders = createAsyncThunk('sales/processOrder', async (orderLineId: OrderData | number, thunkAPI) => {
   try {
-    const res = await client.post('Sales/ProcessOrderLine', { orderLineId });
+    console.log('the orderLineId',orderLineId);
+
+    const res = await client.post('/Sales/ProcessOrderLine', { orderLineId });
     console.log('The process order api responsed', res);
 
     return res;
@@ -37,7 +39,7 @@ export const processOrders = createAsyncThunk('sales/processOrder', async (order
   }
 });
 
-export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async (orderLineId: number, thunkAPI) => {
+export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async (orderLineId: OrderData | number, thunkAPI) => {
   try {
     const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
     console.log('The manually dispatch api responsed', res);
@@ -48,7 +50,7 @@ export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async
   }
 });
 
-export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: number, thunkAPI) => {
+export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: OrderData | number, thunkAPI) => {
   try {
     const res = await client.post('/Sales/StopOrderLine', { orderLineId });
     console.log('The stop order api responsed', res);
@@ -64,7 +66,7 @@ export const loadAddressFromOrderLine = createAsyncThunk(
   async (orderLineId: orderDataType, thunkAPI) => {
     try {
       console.log('The orderlineid', orderLineId);
-      const res = await client.post('Sales/LoadAddressesFromOrderLine', { orderLineId });
+      const res = await client.post('/Sales/LoadAddressesFromOrderLine', { orderLineId });
       console.log('The load address api response is', res.data.response_data);
       return res.data.response_data;
     } catch (error) {
@@ -73,7 +75,7 @@ export const loadAddressFromOrderLine = createAsyncThunk(
   }
 );
 
-export const loadProgressOfOrder = createAsyncThunk('salessss/loadProgressOfTheOrder', async (id: number, thunkAPI) => {
+export const loadProgressOfOrder = createAsyncThunk('salessss/loadProgressOfTheOrder', async (id: OrderData | number, thunkAPI) => {
   try {
     const res = await client.post('/Sales/LoadProgress', { id });
     console.log('To see the progress of order', res.data.response_data.orderProgress);
