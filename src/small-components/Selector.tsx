@@ -8,6 +8,7 @@ import { countryFlag } from '../utils/countryFlag';
 import { shopLogo } from '../utils/shopLogo';
 import '../sass/selector.scss';
 
+
 interface Props {
   children: Array<DummyData | Rule | SourceConfig | Channel>;
   defaultValue?: string;
@@ -21,17 +22,31 @@ interface Props {
   loading?: boolean;
   style?: CSSProperties;
   showFlags?: boolean;
+  className?: string;
+  isListingsTable?: boolean;
 }
 
 const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, onChange, dropdownRender, loading, style, size, showFlags } = props;
+  const {
+    children,
+    defaultValue, 
+    onChange, 
+    dropdownRender,
+    loading,
+    style, 
+    size, 
+    showFlags, 
+  } = props;
 
+  
   const options = children?.map((c) => {
     return (
-      <Option key={c.id} value={showFlags ? c.id : c.value}>
+      <Option 
+        key={c.id}
+        value={showFlags ? c.id : c.value}>
         {showFlags && shopLogo(c.channelId)}
         {showFlags && countryFlag(c.isoCountry)}
         {c.value}
@@ -42,7 +57,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
   return (
     <Select
       style={style}
-      className="selector"
+      className='selector'
       allowClear={false}
       onChange={onChange}
       showSearch

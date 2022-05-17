@@ -1,6 +1,16 @@
 @import 'general.config';
 
 // Extra large screens
+
+.actions-dropdown {
+  margin-left: 1rem;
+  margin-top: -0.5rem;
+}
+
+.action-option {
+  color: $black;
+  cursor: pointer;
+}
 .listings-container {
   .status-bar {
     margin-top: $spacer;

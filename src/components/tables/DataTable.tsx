@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { Pagination, Table } from 'antd';
+import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
@@ -30,6 +31,7 @@ interface Props {
   pageSize?: number;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
+  isListingsTable?: boolean;
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -47,13 +49,62 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     current,
     pageSize,
     onRow,
-    rowClassName
+    rowClassName,
+    isListingsTable
   } = props;
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
+  const anyTable = (
+    <div className="selected-options">
+      <ul className="list">
+        <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
+          Edit <strong>{selectedRows}</strong> {page}(s)
+        </li>
+        <div className="horizontal-divider" />
+        <li className="list-item">
+          Copy <strong>{selectedRows}</strong> {page}(s)
+        </li>
+        <div className="horizontal-divider" />
+        <li className="list-item">
+          Optimize <strong>{selectedRows}</strong> {page}(s)
+        </li>
+      </ul>
+    </div>
+  );
+
+  const actionsDropdownMenu = (
+    <Menu
+      items={[
+        {
+          type: 'group',
+          label: (
+            <div className='action-option'>
+              Edit <strong>{selectedRows}</strong> {page}(s)
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className='action-option'>
+              Copy <strong>{selectedRows}</strong> {page}(s)
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className='action-option'>
+              Optimize <strong>{selectedRows}</strong> {page}(s)
+            </div>
+          )
+        }
+      ]}
+    />
+  );
   return (
     <div className="data-table">
       {showTableInfo && (
@@ -62,21 +113,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
             {' '}
             <strong>{selectedRows}</strong> selected
           </p>
-          <div className="selected-options">
-            <ul className="list">
-              <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-                Edit <strong>{selectedRows}</strong> {page}(s)
-              </li>
-              <div className="horizontal-divider" />
-              <li className="list-item">
-                Copy <strong>{selectedRows}</strong> {page}(s)
-              </li>
-              <div className="horizontal-divider" />
-              <li className="list-item">
-                Optimize <strong>{selectedRows}</strong> {page}(s)
-              </li>
-            </ul>
-          </div>
+          {isListingsTable ? (
+            <Dropdown overlay={actionsDropdownMenu} className='actions-dropdown'>
+              <Space>
+                Bulk Action
+                <DownOutlined />
+              </Space>
+            </Dropdown>
+          ) : (
+            { anyTable }
+          )}
           <p className="total-items">
             <strong>
               {totalItems} {page}
