@@ -51,13 +51,11 @@ export const Listings = () => {
   const [singleRecordData, setSingleRecordData] = useState({} as ListingData);
   const [_, setDataRender] = useState(false);
 
-
   useEffect(() => {
     dispatch(getListings());
     dispatch(getListingsSource());
     dispatch(getPendingListing());
     dispatch(getTerminateListings());
-
 
     setPendingList(
       pending_listings.length &&
@@ -303,6 +301,7 @@ export const Listings = () => {
 
           <DataTable
             page="listing"
+            isListingsTable={true}
             handleSingleListingModal={handleSingleListingModal}
             handleBulkListingModal={handleBulkListingModal}
             columns={visibleCols}

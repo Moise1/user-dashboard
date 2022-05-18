@@ -165,7 +165,7 @@ export const Dashboard = () => {
     scales: {
       x: {
         adapters: {
-          date: {locale: enGB},
+          date: { locale: enGB },
           type: 'time',
           time: {
             unit: 'day',
@@ -250,8 +250,8 @@ export const Dashboard = () => {
   };
 
   const totalProfit = sales.reduce((total: number, sale: Sale) => {
-    return total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!);
-  },0);
+    return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
+  }, 0);
 
   return (
     <div className="dashboard-container">
@@ -327,14 +327,11 @@ export const Dashboard = () => {
             </Col>
             <Col>
               <h4>Total {showSales ? 'sales' : 'profit'}</h4>
-              {showSales ? <Progress
-                percent={sales.length}
-                type='circle'
-                width={150}
-              />: 
-                <div className='profit-circle'>
-                  &euro; {totalProfit.toFixed(2)}
-                </div>}
+              {showSales ? (
+                <Progress percent={sales.length} type="circle" width={150} />
+              ) : (
+                <div className="profit-circle">&euro; {totalProfit.toFixed(2)}</div>
+              )}
             </Col>
           </Row>
         </div>

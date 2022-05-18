@@ -21,7 +21,7 @@ export const EditSingleListing = ({ selectedItems }: Props) => {
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
-      return <ListingMain selectedItems={selectedItems}/>;
+      return <ListingMain selectedItems={selectedItems} />;
     case 1:
       return <ListingDescription />;
     case 2:

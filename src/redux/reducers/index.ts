@@ -34,5 +34,5 @@ export const allReducers = combineReducers({
   orders: ordersReducer,
   orderAddress: orderAddressReducer,
   orderProgress: orderProgressReducer,
-  sales: salesReducer,
+  sales: salesReducer
 });

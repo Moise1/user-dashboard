@@ -20,9 +20,13 @@ export interface channel {
 
 export const ListNow = (/*props: props*/) => {
   const history = useHistory();
-  const allChannels = JSON.parse(JSON.parse(localStorage.getItem('persist:root') ?? '')['channels'])['channels'] as channel[];
+  const allChannels = JSON.parse(JSON.parse(localStorage.getItem('persist:root') ?? '')['channels'])[
+    'channels'
+  ] as channel[];
   const selectedChannel = localStorage.getItem('channelId');
-  const channel = allChannels.filter(function (data) { return data.id.toString() == selectedChannel; })[0];
+  const channel = allChannels.filter(function (data) {
+    return data.id.toString() == selectedChannel;
+  })[0];
   const weList4u = channel.channelId != 4;
 
   const routeChange = (route: string) => {
@@ -30,7 +34,7 @@ export const ListNow = (/*props: props*/) => {
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <h2 className="title">{t('listnowhead')}</h2>
       <div className="choose-list">
         <Row>
@@ -88,7 +92,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
         </Row>
 
-        {weList4u &&
+        {weList4u && (
           <Row>
             <h3 className="title">{t('list4u')}</h3>
             <Col span={24}>
@@ -109,7 +113,8 @@ export const ListNow = (/*props: props*/) => {
                 </div>
               </div>
             </Col>
-          </Row>}
+          </Row>
+        )}
       </div>
     </div>
   );

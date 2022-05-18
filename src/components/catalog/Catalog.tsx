@@ -27,7 +27,7 @@ export const Catalog = () => {
   const dispatch = useAppDispatch();
 
   const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
-  
+
   console.log('CATALOG PRODUCTS', catalogProducts);
   const { Meta } = Card;
 

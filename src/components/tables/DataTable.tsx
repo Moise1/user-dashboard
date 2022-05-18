@@ -81,7 +81,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className='action-option'>
+            <div className="action-option">
               Edit <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
@@ -89,7 +89,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className='action-option'>
+            <div className="action-option">
               Copy <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
@@ -97,7 +97,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className='action-option'>
+            <div className="action-option">
               Optimize <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
@@ -114,15 +114,13 @@ export const DataTable: React.FC<Props> = (props: Props) => {
             <strong>{selectedRows}</strong> selected
           </p>
           {isListingsTable ? (
-            <Dropdown overlay={actionsDropdownMenu} className='actions-dropdown'>
+            <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
                 Bulk Action
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : (
-            { anyTable }
-          )}
+          ) : anyTable  }
           <p className="total-items">
             <strong>
               {totalItems} {page}

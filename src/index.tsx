@@ -1,4 +1,3 @@
-
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
@@ -13,7 +12,6 @@ import { toastAlert } from './utils/toastAlert';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'mini-alert/miniAlert.css';
-
 
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,
