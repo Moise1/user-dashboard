@@ -5,14 +5,16 @@
 .drop-down{
   cursor: pointer;
 };
-
+.sales-profit-container{
+  margin-top: 2rem;
+};
 .profit-circle{
   border-radius: 50%;
   width: 150px;
   height: 150px;
   padding: 8px;
   font-size: $font-large;
-  border: 10px solid $green;
+  border: 10px solid $light-blue;
   display: flex;
   justify-content: center;
   align-items: center;

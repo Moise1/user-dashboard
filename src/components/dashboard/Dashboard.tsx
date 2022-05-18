@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Progress, Row } from 'antd';
+import { Button, Col, Input, Popconfirm, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
@@ -24,8 +24,8 @@ import { RangeValue } from 'rc-picker/lib/interface';
 // import { faker } from '@faker-js/faker';
 // import months from 'months';
 import moment from 'moment';
-import 'chartjs-adapter-date-fns';
-import { enGB } from 'date-fns/locale';
+// import 'chartjs-adapter-date-fns';
+// import { enGB } from 'date-fns/locale';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -162,18 +162,6 @@ export const Dashboard = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: true,
-    scales: {
-      x: {
-        adapters: {
-          date: { locale: enGB },
-          type: 'time',
-          time: {
-            unit: 'day',
-            stepSize: 30
-          }
-        }
-      }
-    },
     plugins: {
       legend: {
         display: false
@@ -186,7 +174,7 @@ export const Dashboard = () => {
         callbacks: {
           title: (context: TooltipItem<ChartType>[]) => {
             const contextObj: { label?: string } = { ...context[0] };
-            delete contextObj['label'];
+            if(!daysPeriod) delete contextObj['label'];
             const date = sales.filter((s: Sale) => s.revenue === context[0]!.raw)[0].date;
             return moment(date).utc().format('YYYY-MM-DD | hh:mm A');
           }
@@ -199,15 +187,14 @@ export const Dashboard = () => {
   for (let i = 1; i < 32; i++) {
     daysLabel.push(String(i));
   }
-  const monthsLabel = sales?.map((d: Sale) => moment(d.date).utc().format('YYYY-MM'));
-
+  const monthsLabel = sales?.map((d: Sale) => moment(d.date).utc().format('MMMM'));
   const data = {
     labels: daysPeriod ? daysLabel : monthsLabel,
     datasets: [
       {
         data: sales?.map((d: Sale) => d.revenue),
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        backgroundColor: '#5e84db',
+        borderColor: '#5e84db',
         borderWidth: 1
       }
     ]
@@ -325,13 +312,11 @@ export const Dashboard = () => {
             <Col span={18}>
               <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
             </Col>
-            <Col>
-              <h4>Total {showSales ? 'sales' : 'profit'}</h4>
-              {showSales ? (
-                <Progress percent={sales.length} type="circle" width={150} />
-              ) : (
-                <div className="profit-circle">&euro; {totalProfit.toFixed(2)}</div>
-              )}
+            <Col span={4} className='sales-profit-container'>
+              <h4>Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today': 'this month'}</h4>
+              <div className="profit-circle">
+                {showSales? sales.length : <>&euro; {totalProfit.toFixed(2)} </>}
+              </div>
             </Col>
           </Row>
         </div>
