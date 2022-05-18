@@ -236,7 +236,7 @@ export const Dashboard = () => {
     submit();
   };
 
-  const totalProfit = sales.reduce((total: number, sale: Sale) => {
+  const totalProfit = sales?.reduce((total: number, sale: Sale) => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
 
