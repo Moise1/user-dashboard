@@ -199,7 +199,7 @@ export const Dashboard = () => {
   for (let i = 1; i < 32; i++) {
     daysLabel.push(String(i));
   }
-  const monthsLabel = sales.map((d: Sale) => moment(d.date).utc().format('YYYY-MM'));
+  const monthsLabel = sales?.map((d: Sale) => moment(d.date).utc().format('YYYY-MM'));
 
   const data = {
     labels: daysPeriod ? daysLabel : monthsLabel,
