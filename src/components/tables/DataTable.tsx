@@ -10,13 +10,10 @@ import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
 export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<TableDataTypes>;
-  rowSelection?: {
-    selectedRowKeys: Key[];
-    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
-  };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -28,8 +25,13 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  setPostPerPage?: (postPerPage: number) => void;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
+  rowSelection?: {
+    selectedRowKeys: Key[];
+    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
+  };
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
@@ -47,11 +49,16 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     current,
     pageSize,
     onRow,
+    setPostPerPage,
     rowClassName
   } = props;
 
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    setPostPerPage?.(pageSize);
+  };
+
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
+    if (dataSource.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
   return (
@@ -102,6 +109,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         current={current}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
       />
     </div>
   );

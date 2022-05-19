@@ -16,7 +16,16 @@
 //   }
 // };
 
-.img-container img {
+//To fix Catalog UI, done by suleman on 18/May
+// .img-container img {
+//   max-width: 60px;
+//   max-height: 60px;
+//   object-fit: contain;
+// }
+
+//order-imgs-container done by suleman on 18/May
+.order-img-container
+{
   max-width: 60px;
   max-height: 60px;
   object-fit: contain;

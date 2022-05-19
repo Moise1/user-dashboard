@@ -44,8 +44,6 @@ const OrderDetailsContent = (props: Props) => {
     setOrderShippingAddress(ordersAddress.shippingAddress);
   }, [orderNumber]);
 
-  console.log('The billingModalAddress ', orderBillingAddress.phone);
-  console.log('The shippingModalAddress ', orderShippingAddress);
 
   return (
     <div className="modal-first">

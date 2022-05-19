@@ -26,16 +26,16 @@ export const Orders = () => {
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
   const [current, setCurrent] = useState<number>(1);
-  const [orderNumber] = useState(445379); //Only use in order action btns
+  const [selectedRecord, setSelectedRecord] = useState({});
+  const [orderNumber] = useState(selectedRecord && selectedRecord); //Only use in order action btns
   const [order, setOrder] = useState([]);
   const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  const [selectedRecord, setSelectedRecord] = useState({});
+  const [postPerPage, setPostPerPage] = useState<number>(10);
   console.log('The loading is', loading);
-
   //For modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export const Orders = () => {
       key: '1',
       visible: true,
       render: (record: OrderData) => (
-        <div className="img-container">
+        <div className="order-img-container">
           <img src={record.imageUrl} alt="image" className="record-img" />
         </div>
       )
@@ -148,9 +148,9 @@ export const Orders = () => {
   ];
 
   //Get Orders
-  useEffect(() => {
-    const newChannel = JSON.parse(localStorage.getItem('channelId') || ' ');
-    dispatch(getOrders({ channelOAuthIds: [newChannel] }));
+  const newChannel = JSON.parse(localStorage.getItem('channelId') || '590881');
+
+  useEffect(()=>{
     setOrder(
       orders?.orders.length &&
         orders?.orders.map((item: OrderData): unknown => ({
@@ -160,9 +160,16 @@ export const Orders = () => {
           date: moment(item.date).format('DD/MM/YY/ hh:mm')
         }))
     );
-  }, [getOrders]);
-  console.log(setCurrent);
+  },[orders.orders,newChannel]);
 
+  useEffect(() => {
+    console.log({ newChannel });
+    dispatch(getOrders({ channelOAuthIds: [newChannel] }));
+  
+  }, [getOrders,newChannel]);
+  console.log(setCurrent);
+  console.log({orders,order,searchedArray});
+  
   //How many columns to show modal
   const [columns, setColumns] = useState(tableColumns);
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
@@ -200,19 +207,21 @@ export const Orders = () => {
 
   // //For Searching
   useEffect(() => {
-    setSearchedArray(
-      order.filter(
-        (e: OrderData) =>
-          e.channelItem === String(searchKey) ||
-          e.title === String(searchKey) ||
-          e.reference === String(searchKey) ||
-          String(e.fees) === String(searchKey) ||
-          String(e.profit) === String(searchKey) ||
-          String(e.sold) === String(searchKey)
-      )
-    );
-    setSearchFilterKey(order.filter((e: OrderData) => e.channelItem === String(searchKey)));
-  }, [order, searchKey]);
+    if (order.length) {
+      setSearchedArray(
+        order?.filter(
+          (e: OrderData) =>
+            e.channelItem === String(searchKey) ||
+            e.title === String(searchKey) ||
+            e.reference === String(searchKey) ||
+            String(e.fees) === String(searchKey) ||
+            String(e.profit) === String(searchKey) ||
+            String(e.sold) === String(searchKey)
+        )
+      );
+      setSearchFilterKey(order?.filter((e: OrderData) => e.channelItem === String(searchKey)));
+    }
+  }, [searchKey,orders]);
 
   console.log('The searchFilterKey is ', searchFilterKey);
   console.log('The searchedArray is ', searchedArray);
@@ -296,7 +305,6 @@ export const Orders = () => {
             </TableActionBtns>
           </div>
           <OrderActionBtns orderNumber={orderNumber} selectedRows={selectedRowKeys.length} />
-
           <DataTable
             page="order"
             columns={visibleCols}
@@ -304,7 +312,8 @@ export const Orders = () => {
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
             totalItems={order.length}
-            pageSize={10}
+            pageSize={postPerPage}
+            setPostPerPage={setPostPerPage}
             current={current}
             onChange={setCurrent}
             /*pagination={false}*/
