@@ -160,7 +160,7 @@ export const stopOrderSlice = createSlice({
 });
 
 export const loadAddressOrderLineSlice = createSlice({
-  name: 'stopOrder',
+  name: 'loadAddress',
   initialState: initiallState,
   reducers: {},
   extraReducers: (builder) => {
