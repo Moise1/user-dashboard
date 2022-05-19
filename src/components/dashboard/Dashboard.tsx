@@ -240,6 +240,11 @@ export const Dashboard = () => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
 
+  const salesOrProfit = () =>{
+    if(showSales && sales?.length) return sales.length;
+    if(!showSales && totalProfit !== 0) return <>&euro; {totalProfit.toFixed(2)} </>;
+    return 0;
+  };
   return (
     <div className="dashboard-container">
       <div className="general-section">
@@ -315,7 +320,7 @@ export const Dashboard = () => {
             <Col span={4} className='sales-profit-container'>
               <h4>Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today': 'this month'}</h4>
               <div className="profit-circle">
-                {showSales? sales.length : <>&euro; {totalProfit.toFixed(2)} </>}
+                {salesOrProfit()}
               </div>
             </Col>
           </Row>
