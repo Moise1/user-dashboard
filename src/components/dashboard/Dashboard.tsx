@@ -16,7 +16,7 @@ import {
   PointElement,
   LineElement,
   TooltipItem,
-  ChartType
+  ChartType,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
@@ -54,7 +54,6 @@ interface ProductQuota {
 }
 
 const { RangePicker } = DatePicker;
-
 export const Dashboard = () => {
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
@@ -91,6 +90,8 @@ export const Dashboard = () => {
     })();
   }, []);
 
+  /*eslint-disable @typescript-eslint/no-empty-function*/
+  useEffect(() => {}, [getSales]);
   const columns = [
     {
       title: 'Channel Name',
@@ -161,7 +162,6 @@ export const Dashboard = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false
@@ -174,13 +174,24 @@ export const Dashboard = () => {
         callbacks: {
           title: (context: TooltipItem<ChartType>[]) => {
             const contextObj: { label?: string } = { ...context[0] };
-            if(!daysPeriod) delete contextObj['label'];
+            if (!daysPeriod) delete contextObj['label'];
             const date = sales.filter((s: Sale) => s.revenue === context[0]!.raw)[0].date;
             return moment(date).utc().format('YYYY-MM-DD | hh:mm A');
           }
         }
+      },
+      scales: {
+        x: {
+          ticks: {
+            callback: (val: string) =>{
+              console.log('tick val', val);
+              return val;
+            }
+          }
+        }
       }
-    }
+    },
+    
   };
 
   const daysLabel: string[] = [];
@@ -192,7 +203,7 @@ export const Dashboard = () => {
     labels: daysPeriod ? daysLabel : monthsLabel,
     datasets: [
       {
-        data: sales?.map((d: Sale) => d.revenue),
+        data: sales?.map((s: Sale) => s.revenue),
         backgroundColor: '#5e84db',
         borderColor: '#5e84db',
         borderWidth: 1
@@ -200,6 +211,7 @@ export const Dashboard = () => {
     ]
   };
 
+ 
   // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
   // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
 
@@ -240,9 +252,9 @@ export const Dashboard = () => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
 
-  const salesOrProfit = () =>{
-    if(showSales && sales?.length) return sales.length;
-    if(!showSales && totalProfit !== 0) return <>&euro; {totalProfit.toFixed(2)} </>;
+  const salesOrProfit = () => {
+    if (showSales && sales?.length) return sales.length;
+    if (!showSales && totalProfit !== 0) return <>&euro; {totalProfit.toFixed(2)} </>;
     return 0;
   };
   return (
@@ -315,13 +327,13 @@ export const Dashboard = () => {
           </div>
           <Row className="graph-progress-container">
             <Col span={18}>
-              <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
+              <Line  options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }}/>
             </Col>
-            <Col span={4} className='sales-profit-container'>
-              <h4>Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today': 'this month'}</h4>
-              <div className="profit-circle">
-                {salesOrProfit()}
-              </div>
+            <Col span={4} className="sales-profit-container">
+              <h4>
+                Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today' : 'this month'}
+              </h4>
+              <div className="profit-circle">{salesOrProfit()}</div>
             </Col>
           </Row>
         </div>
