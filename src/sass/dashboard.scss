@@ -2,13 +2,13 @@
 
 // large ad extra large screens.
 
-.drop-down{
+.drop-down {
   cursor: pointer;
-};
-.sales-profit-container{
+}
+.sales-profit-container {
   margin-top: 2rem;
-};
-.profit-circle{
+}
+.profit-circle {
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-};
+}
 
 .dashboard-container {
   margin: 0 2rem;
@@ -92,14 +92,15 @@
     .graph-cntrlers {
       display: flex;
       justify-content: space-between;
-      .toggle-period, .toggle-sales {
+      .toggle-period,
+      .toggle-sales {
         max-width: 130px;
         height: 24px;
       }
     }
-  };
+  }
 
-  .graph-progress-container{
+  .graph-progress-container {
     display: flex;
     justify-content: space-between;
   }
@@ -191,5 +192,11 @@
   .social-media {
     justify-content: center;
     margin-top: 2rem;
+  };
+  .profit-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 0;
+    -webkit-appearance: none;
   }
 }

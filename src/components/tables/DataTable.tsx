@@ -81,7 +81,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className="action-option">
+            <div className="action-option" onClick={selectedRows! === 1 ? handleSingleListingModal: handleBulkListingModal}>
               Edit <strong>{selectedRows}</strong> {page}(s)
             </div>
           )

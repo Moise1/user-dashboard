@@ -16,7 +16,7 @@ import {
   PointElement,
   LineElement,
   TooltipItem,
-  ChartType,
+  ChartType
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
@@ -159,6 +159,7 @@ export const Dashboard = () => {
   };
 
   ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
+  // console.log('CHARTJS PROPS', ChartJS.instances[0]);
 
   const options = {
     responsive: true,
@@ -179,19 +180,13 @@ export const Dashboard = () => {
             return moment(date).utc().format('YYYY-MM-DD | hh:mm A');
           }
         }
-      },
-      scales: {
-        x: {
-          ticks: {
-            callback: (val: string) =>{
-              console.log('tick val', val);
-              return val;
-            }
-          }
-        }
       }
     },
-    
+    scales: {
+      x: {
+        display: sales.length > 50 && false,
+      }
+    }
   };
 
   const daysLabel: string[] = [];
@@ -211,7 +206,6 @@ export const Dashboard = () => {
     ]
   };
 
- 
   // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
   // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
 
@@ -254,7 +248,7 @@ export const Dashboard = () => {
 
   const salesOrProfit = () => {
     if (showSales && sales?.length) return sales.length;
-    if (!showSales && totalProfit !== 0) return <>&euro; {totalProfit.toFixed(2)} </>;
+    if (!showSales && totalProfit !== 0) return <>&euro; {totalProfit?.toFixed(2)} </>;
     return 0;
   };
   return (
@@ -327,7 +321,7 @@ export const Dashboard = () => {
           </div>
           <Row className="graph-progress-container">
             <Col span={18}>
-              <Line  options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }}/>
+              <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
             </Col>
             <Col span={4} className="sales-profit-container">
               <h4>
