@@ -36,7 +36,6 @@ export const App = withRouter(({ history }) => {
   const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
 
-
   const handleSidebarMobile = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);

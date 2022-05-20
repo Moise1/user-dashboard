@@ -41,10 +41,9 @@ interface Props {
 }
 
 export const OrderContent = (props: Props) => {
-
   const { orderProgress, data, OrderDetailsModalOpen } = props;
-  const {id} = data;
-  console.log('The data id is',data.id);
+  const { id } = data;
+  console.log('The data id is', data.id);
   const [orderNumber] = useState(id);
   // const [iddd] = useState(445378);
   const orderStatus = useAppSelector((state) => state.orderProgress.orderProgress.states);
