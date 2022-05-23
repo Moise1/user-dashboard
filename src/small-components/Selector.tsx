@@ -21,6 +21,8 @@ interface Props {
   loading?: boolean;
   style?: CSSProperties;
   showFlags?: boolean;
+  className?: string;
+  isListingsTable?: boolean;
 }
 
 const { Option } = Select;

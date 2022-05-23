@@ -24,29 +24,35 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const processOrders = createAsyncThunk('sales/processOrder', async (orderLineId: OrderData | number, thunkAPI) => {
-  try {
-    console.log('the orderLineId',orderLineId);
+export const processOrders = createAsyncThunk(
+  'sales/processOrder',
+  async (orderLineId: OrderData | number, thunkAPI) => {
+    try {
+      console.log('the orderLineId', orderLineId);
 
-    const res = await client.post('/Sales/ProcessOrderLine', { orderLineId });
-    console.log('The process order api responsed', res);
+      const res = await client.post('/Sales/ProcessOrderLine', { orderLineId });
+      console.log('The process order api responsed', res);
 
-    return res;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
   }
-});
+);
 
-export const manuallyDispatch = createAsyncThunk('sales/manuallyDispatch', async (orderLineId: OrderData | number, thunkAPI) => {
-  try {
-    const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
-    console.log('The manually dispatch api responsed', res);
+export const manuallyDispatch = createAsyncThunk(
+  'sales/manuallyDispatch',
+  async (orderLineId: OrderData | number, thunkAPI) => {
+    try {
+      const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
+      console.log('The manually dispatch api responsed', res);
 
-    return res;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
   }
-});
+);
 
 export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: OrderData | number, thunkAPI) => {
   try {
@@ -73,13 +79,16 @@ export const loadAddressFromOrderLine = createAsyncThunk(
   }
 );
 
-export const loadProgressOfOrder = createAsyncThunk('salessss/loadProgressOfTheOrder', async (id: OrderData | number, thunkAPI) => {
-  try {
-    const res = await client.post('/Sales/LoadProgress', { id });
-    console.log('To see the progress of order', res.data.response_data);
+export const loadProgressOfOrder = createAsyncThunk(
+  'salessss/loadProgressOfTheOrder',
+  async (id: OrderData | number, thunkAPI) => {
+    try {
+      const res = await client.post('/Sales/LoadProgress', { id });
+      console.log('To see the progress of order', res.data.response_data);
 
-    return res.data.response_data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
   }
-});
+);

@@ -8,7 +8,7 @@ export const getListings = createAsyncThunk(
     try {
       const res = await client.get('/SearchProduct/GetActiveListings');
       const iter = unmap(res.data.response_data?.data as compArray);
-      
+
       const rv: ActiveListing[] = [];
       let status = iter.next();
       while (!status.done) {
@@ -42,17 +42,15 @@ export const getListingsSource = createAsyncThunk(
   }
 );
 
-export const getPendingListing = createAsyncThunk(
-  'listings/getPendingListing', 
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await client.get('/SearchProduct/getPendingListings');
-      const data = res?.data?.response_data;
-      return data;
-    } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong ):');
-    }
-  });
+export const getPendingListing = createAsyncThunk('listings/getPendingListing', async (_, { rejectWithValue }) => {
+  try {
+    const res = await client.get('/SearchProduct/getPendingListings');
+    const data = res?.data?.response_data;
+    return data;
+  } catch (error) {
+    return rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
 
 export const getTerminateListings = createAsyncThunk(
   'listings/getTerminatedListings',

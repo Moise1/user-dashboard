@@ -84,7 +84,7 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
-    const keysToRemove = ['root', 'Authorization', 'channelId', 'globalTheme', 'isAuthenticated'];
+    const keysToRemove = ['root', 'Authorization', 'globalTheme', 'isAuthenticated'];
     dispatch(actions.logout());
     keysToRemove.forEach((key) => localStorage.removeItem(key));
     persistor.purge();
