@@ -40,6 +40,7 @@ import { Switch } from '../../small-components/Switch';
 import { Moment } from 'moment';
 import { Sale } from 'src/redux/sales/salesSlice';
 import '../../sass/dashboard.scss';
+import '../../sass/action-btns.scss';
 // import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 // import { Key } from 'antd/lib/table/interface';
 
@@ -184,7 +185,7 @@ export const Dashboard = () => {
     },
     scales: {
       x: {
-        display: sales.length > 50 && false,
+        display: sales.length > 50 && false
       }
     }
   };
@@ -272,7 +273,9 @@ export const Dashboard = () => {
 
               <div className="plan">
                 <p>Free Plan</p>
-                <SuccessBtn>Upgrade your plan</SuccessBtn>
+                <Link className="redirection-link" to="/subscriptions">
+                  Upgrade your plan
+                </Link>
               </div>
             </div>
           </Col>
@@ -323,8 +326,8 @@ export const Dashboard = () => {
             <Col span={18}>
               <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
             </Col>
-            <Col span={4} className="sales-profit-container">
-              <h4>
+            <Col xs={24} lg={4} className="sales-profit-container">
+              <h4 className="sales-profit-container">
                 Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today' : 'this month'}
               </h4>
               <div className="profit-circle">{salesOrProfit()}</div>

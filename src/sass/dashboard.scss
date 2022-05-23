@@ -188,15 +188,18 @@
 
 // Mobile screen sizes
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1030px) {
   .social-media {
     justify-content: center;
     margin-top: 2rem;
-  };
+  }
+  .sales-profit-container {
+    text-align: center;
+  }
   .profit-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 0;
-    -webkit-appearance: none;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
   }
 }

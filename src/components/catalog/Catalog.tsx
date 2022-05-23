@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Layout, Card } from 'antd';
 import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
@@ -15,6 +15,8 @@ import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import '../../sass/catalog.scss';
+
+export type ProductElementEvent = React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<SVGElement, MouseEvent>;
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -40,8 +42,9 @@ export const Catalog = () => {
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProudctsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
 
-  const handleSelectProduct = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  const handleSelectProduct = (e: ProductElementEvent): void => {
     const cardElement = e.currentTarget;
+    console.log('card element clicked', cardElement);
     const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
@@ -49,17 +52,16 @@ export const Catalog = () => {
       setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
       cardElement.classList.add('selected-product-card');
-      setAllProducts((prevState) => [...prevState, selectedProductData]);
+      setAllProducts(prevState => [...prevState, selectedProductData]);
     }
   };
 
   const selectedProduct = catalogData.filter((d) => d.id === productId)[0];
 
-  const handleAddAllProducts = (): void => {
+  const handleSelectAllProducts = (): void => {
     setClassName(className + ' ' + 'selected-product-card');
     setAllProducts(catalogData);
   };
-
   const handleClearAllSelectedProducts = (): void => {
     setClassName('product-card');
     setAllProducts([]);
@@ -131,13 +133,15 @@ export const Catalog = () => {
         bodyStyle={{ height: 500 }}
         closable={false}
       >
-        <AllProducts>{allProducts}</AllProducts>
+        <AllProducts removeProduct={handleSelectProduct} className={className}>
+          {allProducts}
+        </AllProducts>
       </PopupModal>
 
       <div className="catalog-cards">
         <div className="cards-container-catalog">
           {catalogData.map((d) => (
-            <Card key={d.id} className={className} onClick={handleSelectProduct} id={`${JSON.stringify(d.id)}`}>
+            <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
               <Meta
                 description={
                   <div className="product-description">
@@ -183,7 +187,7 @@ export const Catalog = () => {
         <div className="pagination-addall-container">
           <div className="adall-container">
             {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
-            <ConfirmBtn handleClick={handleAddAllProducts}>{t('addAll')}</ConfirmBtn>
+            <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
           </div>
         </div>
       </div>
