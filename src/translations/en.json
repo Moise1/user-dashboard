@@ -51,6 +51,7 @@
   "Menu.FAQ": "FAQ",
   "Menu.ListingServices": "Listing Services",
   "Menu.Start": "Get Started",
+  "Menu.AutoOrderingConfiguration": "Auto Ordering",
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",
   "OrderTable.StreetAddress": "Street address",
@@ -183,6 +184,12 @@
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",
   "OrderButtons.Delete5Orders": "Delete 5 Orders",
+
+  "AutoOrderingConfiguration.Supplier": "Supplier",
+  "AutoOrderingConfiguration.Free": "Free",
+  "AutoOrderingConfiguration.FreePercentage": "% Free",
+  "AutoOrderingConfiguration.Status": "Status",
+
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
   "Topbar.Quota": "Quota",

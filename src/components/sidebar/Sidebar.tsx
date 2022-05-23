@@ -24,7 +24,6 @@ import { TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import '../../sass/side-bar.scss';
-
 const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
 
@@ -113,6 +112,11 @@ export const Sidebar = (props: Props) => {
           />
         </>
       )
+    },
+    {
+      id: 14,
+      listName: t('Menu.AutoOrderingConfiguration'),
+      onClick: () => routeChange('/auto-ordering-configuration')
     }
   ];
 
