@@ -17,38 +17,37 @@ interface Props {
 
 const OrderDetailsContent = (props: Props) => {
   const { data, OrderContentModalOpen } = props;
+  console.log('The id in the order detail content modal is', data.id);
+
   console.log('the data in modal is', data);
   const object = {
-    firstName: ' ',
-    phone: ' ',
-    address1: ' ',
-    address2: ' ',
-    city: ' ',
-    zip: ' ',
-    province: ' ',
-    country: ' '
+    firstName: '',
+    phone: '',
+    address1: '',
+    address2: '',
+    city: '',
+    zip: '',
+    province: '',
+    country: ''
   };
 
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
-  console.log('The data from  api', data);
-  const [orderNumber] = useState(data.id);
   const { ordersAddress, loading } = useAppSelector((state) => state.orderAddress);
   console.log(
     'The states are',
     useAppSelector((state) => state)
   );
-  console.log('The id is ', data.id);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadAddressFromOrderLine(orderNumber));
+    dispatch(loadAddressFromOrderLine(data.id));
+    console.log('!st time render and the ordressAddress is ', ordersAddress);
     setOrderBillingAddress(ordersAddress.billingAddress);
+    console.log('the orderBillingAddress', ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
-  }, [orderNumber]);
-
-  console.log('The billingModalAddress ', orderBillingAddress.phone);
-  console.log('The shippingModalAddress ', orderShippingAddress);
+    console.log('the orderBillingAddress', ordersAddress.shippingAddress);
+  }, [dispatch, orderBillingAddress, orderShippingAddress, data.id]);
 
   return (
     <div className="modal-first">
