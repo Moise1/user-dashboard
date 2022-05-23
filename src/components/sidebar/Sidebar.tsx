@@ -326,3 +326,5 @@ export const Sidebar = (props: Props) => {
     </div>
   );
 };
+
+// Adding a change
