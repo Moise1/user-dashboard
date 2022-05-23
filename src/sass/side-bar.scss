@@ -202,7 +202,15 @@
 @media only screen and (max-width: 1030px) {
   .sider {
     display: none;
-    z-index: 3;
+  }
+  .ant-drawer-content-wrapper {
+    border: 2px solid red;
+    width: 25% !important;
+    .sider {
+      display: block;
+      filter: none;
+      position: static;
+    }
   }
 
   .overlay-sidebar-mobile {

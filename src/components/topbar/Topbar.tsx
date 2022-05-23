@@ -15,11 +15,11 @@ import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 
 interface Props extends RouteComponentProps {
-  handleSidebarMobile: () => void;
+  showMobileSider: () => void;
 }
 
 export const Topbar = withRouter((props: Props) => {
-  const { handleSidebarMobile, history } = props;
+  const { showMobileSider, history } = props;
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -71,7 +71,7 @@ export const Topbar = withRouter((props: Props) => {
           <h1 className="logo-text">HGR</h1>
         </a>
       </div>
-      <div className="menu-burger" onClick={() => handleSidebarMobile()}>
+      <div className="menu-burger" onClick={showMobileSider}>
         <span className="first"></span>
         <span className="second"></span>
         <span className="thrid"></span>

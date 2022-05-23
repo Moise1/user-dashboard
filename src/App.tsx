@@ -29,43 +29,48 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/listings/ListNow';
 
 export const App = withRouter(({ history }) => {
+  const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
   const isAuthenticated = localStorage.getItem('isAuthenticated');
-  const toggleCollapse = () => setCollapsed(!collapsed);
-  const toggleStaticValue = () => setStaticValue(!staticValue);
+  // const toggleCollapse = () => setCollapsed(!collapsed);
+  // const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
 
-  const handleSidebarMobile = () => {
+  const showMobileSider = () => {
     setStaticValue(!staticValue);
+    setVisible(!visible);
     setCollapsed(!collapsed);
-    const sidebar = document.querySelector('.sider') as HTMLElement;
-    sidebar.style.display = 'block';
-    sidebar.style.position = 'fixed';
-    sidebar.style.top = '0';
-    sidebar.style.height = '100vh !important';
-  };
+    // const sidebar = document.querySelector('.sider') as HTMLElement;
+    // sidebar.style.display = 'block';
+    // sidebar.style.position = 'fixed';
+    // sidebar.style.top = '0';
+    // sidebar.style.height = '100vh !important';
+  };  
 
+  const closeMobileSider = () => setVisible(!visible);
   const collapseSideBar = () => {
     setStaticValue(!staticValue);
     setCollapsed(!collapsed);
-    const sidebar = document.querySelector('.sider') as HTMLElement;
-    sidebar.style.display = 'none';
+    // const sidebar = document.querySelector('.sider') as HTMLElement;
+    // sidebar.style.display = 'none';
   };
 
   return (
     <>
-      {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar handleSidebarMobile={handleSidebarMobile} />}
+      {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar showMobileSider={showMobileSider} />}
       <Layout className="layout">
         {pathname === '/new-channel' || !isAuthenticated ? null : (
           <Sidebar
             className="sider"
+            mobileSiderVisible={visible}
+            closeMobileSider={closeMobileSider}
             setCollapsed={setCollapsed}
-            staticValue={staticValue}
-            togglestatic={toggleStaticValue}
-            toggle={toggleCollapse}
+            // staticValue={staticValue}
+            // togglestatic={toggleStaticValue}
+            // toggle={toggleCollapse}
             collapsed={collapsed}
-            handleSidebarMobile={handleSidebarMobile}
+            // handleSidebarMobile={handleSidebarMobile}
             collapseSideBar={collapseSideBar}
           />
         )}
@@ -95,7 +100,6 @@ export const App = withRouter(({ history }) => {
           </Switch>
         </Layout>
       </Layout>
-      {staticValue && <div className="overlay-sidebar-mobile" onClick={collapseSideBar} />}
       <ToastContainer closeButton={<CloseIcon size="17" />} theme="colored" />
     </>
   );
