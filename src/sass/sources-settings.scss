@@ -29,6 +29,7 @@
     display: none;
   }
 }
+
 .control-section {
   position: absolute;
   right: 2%;
@@ -49,6 +50,30 @@
 .settings-list {
   margin-top: $spacer;
   justify-content: space-between;
+}
+
+#container {
+    width: 100%;
+}
+
+#left {
+    float: left;
+    width: 100px;
+    height: 20px;
+}
+
+#right {
+    float: right;
+    width: 100px;
+    height: 20px;
+}
+
+.rowStyle {
+    padding: 10px;
+}
+
+.divStyle {
+    padding: 50px;
 }
 
 @media only screen and(max-width: 1030px) {

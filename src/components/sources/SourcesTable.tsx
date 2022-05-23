@@ -18,13 +18,19 @@ export const SourcesTable = () => {
     dispatch(getSources());
   }, [getSources]);
 
+
+  function parentToChild(value: string): void {
+    localStorage.setItem('selectedSource', value);
+  }
+
+
   const columns = [
     {
       title: t('SourceTable.Provider'),
       dataIndex: 'sourceName',
       key: 'sourceName',
       render: (value: string) => (
-        <Link to={'/sources-settings/' + value  } className="back-link">
+        <Link to={'/sources-settings/'} onClick={() => parentToChild(value)} className="back-link">
           {value}
         </Link>
       )

@@ -29,7 +29,7 @@ const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, onChange, dropdownRender, loading, style, size, showFlags } = props;
+  const { children, defaultValue, value, onChange, dropdownRender, loading, style, size, showFlags } = props;
 
   const options = children?.map((c) => {
     return (
@@ -50,6 +50,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
       showSearch
       placeholder="Select..."
       defaultValue={defaultValue}
+      value={value}
       dropdownRender={dropdownRender}
       loading={loading}
       size={size}

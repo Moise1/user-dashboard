@@ -2,7 +2,7 @@ import { Switch as Toggle } from 'antd';
 import '../sass/switch.scss';
 
 interface Props {
-  onChange?: () => void;
+  onChange?: (value: boolean) => void;
   checkedChildren?: string;
   unCheckedChildren?: string;
   checked?: boolean;

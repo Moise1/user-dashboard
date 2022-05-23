@@ -22,7 +22,7 @@ interface Props {
 type sizeType = 'large' | 'small' | 'middle';
 
 export const SimpleSelect: React.FC<Props> = (props: Props) => {
-  const {children, defaultValue, onChange, dropdownRender, loading, style, size } = props;
+  const { children, defaultValue, value, onChange, dropdownRender, loading, style, size } = props;
 
   return (
     <Select
@@ -32,6 +32,7 @@ export const SimpleSelect: React.FC<Props> = (props: Props) => {
       onChange={onChange}
       showSearch
       placeholder="Select..."
+      value={value}
       defaultValue={defaultValue}
       dropdownRender={dropdownRender}
       loading={loading}
