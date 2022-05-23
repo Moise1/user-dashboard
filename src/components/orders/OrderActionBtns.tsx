@@ -8,8 +8,9 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
+import {OrderData} from 'src/redux/orders/orderSlice';
 interface props {
-  orderNumber: number;
+  orderNumber:{ [key: string]: OrderData };
   // channelId: number;
   selectedRows: number;
 }
@@ -31,15 +32,15 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   // console.log('The channelId is', channelId);
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(orderNumber));
+    dispatch(processOrders(orderNumber.id));
   };
 
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(orderNumber));
+    dispatch(manuallyDispatch(orderNumber.id));
   };
 
   const handleStopOrder = () => {
-    dispatch(stopOrder(orderNumber));
+    dispatch(stopOrder(orderNumber.id));
   };
 
   return (

@@ -11,13 +11,10 @@ import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
 export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<TableDataTypes>;
-  rowSelection?: {
-    selectedRowKeys: Key[];
-    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
-  };
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -29,8 +26,13 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
+  setPostPerPage?: (postPerPage: number) => void;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
+  rowSelection?: {
+    selectedRowKeys: Key[];
+    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
+  };
   isListingsTable?: boolean;
 }
 
@@ -49,12 +51,17 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     current,
     pageSize,
     onRow,
+    setPostPerPage,
     rowClassName,
     isListingsTable
   } = props;
 
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    setPostPerPage?.(pageSize);
+  };
+
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
+    if (dataSource.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
   const anyTable = (
@@ -81,7 +88,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className="action-option" onClick={selectedRows! === 1 ? handleSingleListingModal: handleBulkListingModal}>
+            <div
+              className="action-option"
+              onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
+            >
               Edit <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
@@ -120,7 +130,9 @@ export const DataTable: React.FC<Props> = (props: Props) => {
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : anyTable  }
+          ) : (
+            anyTable
+          )}
           <p className="total-items">
             <strong>
               {totalItems} {page}
@@ -146,6 +158,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         current={current}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
       />
     </div>
   );
