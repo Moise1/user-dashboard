@@ -2,6 +2,36 @@
 
 // large ad extra large screens.
 
+.no-api-title {
+  display: flex;
+  justify-content: space-between;
+};
+.footer-link {
+  font-weight: normal;
+  font-size: 15px;
+  bottom: 0;
+  margin-bottom: 0;
+  border: 2px solid red;
+  &:hover {
+    color: $corporative-color;
+  }
+}
+.item-description {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  .service-quantity,
+  .next-payment {
+    color: $black;
+  }
+  .setup-link {
+    font-weight: normal;
+    font-size: 15px;
+    &:hover {
+      color: $corporative-color;
+    }
+  }
+}
 .drop-down {
   cursor: pointer;
 }

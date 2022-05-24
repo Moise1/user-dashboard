@@ -44,7 +44,6 @@ export const Catalog = () => {
 
   const handleSelectProduct = (e: ProductElementEvent): void => {
     const cardElement = e.currentTarget;
-    console.log('card element clicked', cardElement);
     const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
@@ -71,13 +70,13 @@ export const Catalog = () => {
     <Layout className="catalog-container">
       <div className="actions-section">
         <div className="view-clear-all">
-          <p className="all-selected-products" onClick={handleAllProudctsModal}>
+          <span className="all-selected-products" onClick={handleAllProudctsModal}>
             View all selected products
-          </p>
+          </span>
           <div className="clear-list-container">
-            <p className="clear-all" onClick={handleClearAllSelectedProducts}>
+            <span className="clear-all" onClick={handleClearAllSelectedProducts}>
               Clear all
-            </p>
+            </span>
             {!!allProducts.length && (
               <SuccessBtn className="list-btn-mobile">List {allProducts.length} product(s)</SuccessBtn>
             )}

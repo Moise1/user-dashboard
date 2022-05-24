@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Row } from 'antd';
+import { Button, Col, Input, Popconfirm, Row, List } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
@@ -21,11 +21,8 @@ import {
 import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
-// import { faker } from '@faker-js/faker';
 // import months from 'months';
 import moment from 'moment';
-// import 'chartjs-adapter-date-fns';
-// import { enGB } from 'date-fns/locale';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
@@ -39,10 +36,12 @@ import { shopLogo } from '../../utils/shopLogo';
 import { Switch } from '../../small-components/Switch';
 import { Moment } from 'moment';
 import { Sale } from 'src/redux/sales/salesSlice';
+import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
+import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-// import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-// import { Key } from 'antd/lib/table/interface';
+import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
+import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 
 interface ProductQuota {
   quota: number;
@@ -58,6 +57,9 @@ const { RangePicker } = DatePicker;
 export const Dashboard = () => {
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
+  const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
+  const { listingServicesResult } = useAppSelector((state) => state.listingServices);
+
   const { sales } = useAppSelector((state) => state.sales);
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
@@ -67,6 +69,7 @@ export const Dashboard = () => {
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
   const [current] = useState<number>(1);
+
   // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const onSearch = (value: string) => console.log('searched value', value);
@@ -91,8 +94,15 @@ export const Dashboard = () => {
     })();
   }, []);
 
+  console.log('NO API SERVERS', noApiServersResult);
+  console.log('LISTING SERVICES', listingServicesResult);
+
   /*eslint-disable @typescript-eslint/no-empty-function*/
-  useEffect(() => {}, [getSales]);
+  useEffect(() => {
+    dispatch(getNoApiServers());
+    dispatch(getListingServices());
+  }, []);
+
   const columns = [
     {
       title: 'Channel Name',
@@ -160,7 +170,6 @@ export const Dashboard = () => {
   };
 
   ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
-  // console.log('CHARTJS PROPS', ChartJS.instances[0]);
 
   const options = {
     responsive: true,
@@ -252,6 +261,22 @@ export const Dashboard = () => {
     if (!showSales && totalProfit !== 0) return <>&euro; {totalProfit?.toFixed(2)} </>;
     return 0;
   };
+
+  const noApiServerSubscription = (
+    <div className="subscribe">
+      <p>Do you want to keep your NO API extension running 24/7?</p>
+      <p>We can do it for you for only 9GBP/month.</p>
+      <SuccessBtn>Subscribe</SuccessBtn>
+    </div>
+  );
+
+  const listingServicesSubscription = (
+    <div className="list-permission">
+      <p>Not sure what to list? We can help you find good selling items.</p>
+      <p> We choose the best products and list them for you</p>
+      <SuccessBtn>Yes! List for me</SuccessBtn>
+    </div>
+  );
   return (
     <div className="dashboard-container">
       <div className="general-section">
@@ -344,11 +369,28 @@ export const Dashboard = () => {
               <h6>Listing Service</h6>
               <Book />
             </div>
-            <div className="list-permission">
-              <p>Not sure what to list? We can help you find good selling items.</p>
-              <p> We choose the best products and list them for you</p>
-              <SuccessBtn>Yes! List for me</SuccessBtn>
-            </div>
+            {listingServicesResult.length ? (
+              <List
+                itemLayout="horizontal"
+                dataSource={listingServicesResult}
+                header="Active Services"
+                footer={<a href="#" className='footer-link'>Manage listing services</a>}
+                renderItem={() =>
+                  listingServicesResult.map((l: ListingService) => (
+                    <div key={l.id}>
+                      <div className="item-description">
+                        <div className="service-quantity">{l.quantity} listing services</div>
+                        <a href="/setup-preferences" className="setup-link">
+                          Set up your preferences
+                        </a>
+                      </div>
+                    </div>
+                  ))
+                }
+              />
+            ) : (
+              listingServicesSubscription
+            )}
           </Col>
 
           <Col className="no-api-server" xs={24} lg={10}>
@@ -356,11 +398,35 @@ export const Dashboard = () => {
               <h6>No API Server</h6>
               <Book />
             </div>
-            <div className="subscribe">
-              <p>Do you want to keep your NO API extension running 24/7?</p>
-              <p>We can do it for you for only 9GBP/month.</p>
-              <SuccessBtn>Subscribe</SuccessBtn>
-            </div>
+            {noApiServersResult.length ? (
+              <List
+                itemLayout="horizontal"
+                header={
+                  <div className="no-api-title">
+                    <div>Connected Channels</div>
+                    <div>Next Payment</div>
+                  </div>
+                }
+                footer={<a href="#" className='footer-link'>Add more servers</a>}
+                dataSource={listingServicesResult}
+                renderItem={() =>
+                  noApiServersResult.map((s: NoApiServer) => (
+                    <div key={s.id}>
+                      <div className="item-description">
+                        <a href="/setup-preferences" className="setup-link">
+                          Choose your channel
+                        </a>
+                        <div className="next-payment">
+                          {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              />
+            ) : (
+              noApiServerSubscription
+            )}
           </Col>
 
           <Col className="tokens" xs={24} lg={10}>
