@@ -1,20 +1,19 @@
-import { useState } from 'react';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ICatalogData } from '../../dummy-data/dummyData';
+import { ProductElementEvent } from './Catalog';
 import '../../sass/all-products.scss';
 
 interface Props {
   children: ICatalogData[];
+  removeProduct: (e: ProductElementEvent) => void;
+  className: string;
 }
 
-export const AllProducts = ({ children }: Props) => {
-  const [modalData, setModalData] = useState<ICatalogData[]>(children);
-  const removeProduct = (id: number): void => setModalData(modalData.filter((c) => c.id !== id));
-
+export const AllProducts = ({ children, removeProduct, className }: Props) => {
   return (
     <div className="selected-products-modal">
-      {modalData.length ? (
-        modalData.map((c) => (
+      {children.length ? (
+        children?.map((c) => (
           <div className="product-card" key={c.id}>
             <img src={c.img} alt="" className="product-img" />
             <div className="product-info-area">
@@ -46,7 +45,7 @@ export const AllProducts = ({ children }: Props) => {
                 </div>
               </div>
             </div>
-            <CloseIcon className="close-icon" onClick={() => removeProduct(c.id)} />
+            <CloseIcon className={`close-icon ${className}`} onClick={removeProduct} id={JSON.stringify(c.id)} />
           </div>
         ))
       ) : (

@@ -18,18 +18,15 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
     padding: $spacer;
-
     .view-clear-all {
       display: flex;
-      column-gap: 1rem;
-      width: 100%;
+      justify-content: space-between;
+      width: 40vw;
       .clear-list-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
         .success-btn {
           display: none;
         }
@@ -223,10 +220,20 @@
   .actions-section {
     display: flex;
     justify-content: space-between;
-    width: 100%;
     .view-clear-all {
       display: grid !important;
-      white-space: nowrap;
+      width: 50% !important;
+      .clear-list-container{
+        margin-top: 0.8rem;
+        row-gap: 1rem;
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    };
+
+    .filters-container{
+      width: auto !important;
+      margin-left: auto;
     }
   }
   .pagination-addall-container {

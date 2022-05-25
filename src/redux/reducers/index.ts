@@ -16,6 +16,8 @@ import { ordersReducer } from '../orders/orderSlice';
 import { orderAddressReducer } from '../orders/orderSlice';
 import { orderProgressReducer } from '../orders/orderSlice';
 import { salesReducer } from '../sales/salesSlice';
+import { listingServicesReducer } from '../dashboard/listingServicesSlice';
+import { noApiServersReducer } from '../dashboard/noApiServersSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -34,5 +36,7 @@ export const allReducers = combineReducers({
   orders: ordersReducer,
   orderAddress: orderAddressReducer,
   orderProgress: orderProgressReducer,
-  sales: salesReducer
+  sales: salesReducer,
+  listingServices: listingServicesReducer,
+  noApiServers: noApiServersReducer
 });

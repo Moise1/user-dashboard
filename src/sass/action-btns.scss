@@ -31,6 +31,7 @@
   width: auto;
 }
 
+.redirection-link,
 .success-btn,
 .confirm-btn,
 .reset-btn,
@@ -42,7 +43,7 @@
   @include action-btn;
 }
 
-.success-btn {
+.success-btn, .redirection-link {
   min-width: 170px;
   background: $green;
   &:hover,
