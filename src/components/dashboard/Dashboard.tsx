@@ -410,7 +410,7 @@ export const Dashboard = () => {
                 }
                 footer={
                   <div className="add-servers">
-                    <PlusCircleOutlined />
+                    <PlusCircleOutlined style={{fontSize: '19px'}}/>
                     <a href="#" className="footer-link">
                        Add more servers
                     </a>
