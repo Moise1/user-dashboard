@@ -307,7 +307,6 @@ export const Orders = () => {
             setPostPerPage={setPostPerPage}
             current={current}
             onChange={setCurrent}
-            /*pagination={false}*/
             rowClassName="table-row"
             onRow={(record) => {
               return {
