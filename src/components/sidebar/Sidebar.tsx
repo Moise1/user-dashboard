@@ -56,11 +56,12 @@ export const Sidebar = (props: Props) => {
     closeMobileSider
   } = props;
   const [isDark, setIsDark] = useState<boolean>(false);
-  const history = useHistory();
-  const dispatch = useAppDispatch();
-  const { setTheme } = useContext(AppContext);
-  const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
+
+  const { setTheme } = useContext(AppContext);
+  const dispatch = useAppDispatch();
+  const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
+  const history = useHistory();
 
   const handleThemeChange = () => {
     setIsDark(!isDark);
@@ -91,9 +92,7 @@ export const Sidebar = (props: Props) => {
 
   const routeChange = (route: string) => {
     history.push(route);
-    if (mobileScreenSize.matches) {
-      collapseSideBar();
-    }
+    if (mobileScreenSize.matches) closeMobileSider();
   };
 
   const handleLogout = () => {
@@ -165,13 +164,13 @@ export const Sidebar = (props: Props) => {
               </button>
             </div>
             <div className="sidebar-control-btns">
-              {staticValue ? (
+              {staticValue && !mobileScreenSize.matches ? (
                 <ChevronLeft
                   className="chevron-left"
-                  onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
+                  onClick={mobileScreenSize.matches ? collapseSideBar : togglestatic}
                 />
               ) : (
-                <img src={pin} className="pin-icon" onClick={togglestatic} />
+                !mobileScreenSize.matches && <img src={pin} className="pin-icon" onClick={togglestatic} />
               )}
             </div>
           </div>
@@ -288,11 +287,11 @@ export const Sidebar = (props: Props) => {
             </Item>
           ))}
         </SubMenu>
+        <TransparentBtn className={!collapsed ? 'collapsed-logout-btn' : 'logout-btn'} handleClick={handleLogout}>
+          <img src={logout} />
+          <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
+        </TransparentBtn>
       </Menu>
-      <TransparentBtn className={!collapsed ? 'collapsed-logout-btn' : 'logout-btn'} handleClick={handleLogout}>
-        <img src={logout} />
-        <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
-      </TransparentBtn>
     </div>
   );
   const largeScreenSider = (
@@ -326,5 +325,3 @@ export const Sidebar = (props: Props) => {
     </div>
   );
 };
-
-// Adding a change
