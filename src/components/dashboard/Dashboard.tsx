@@ -191,7 +191,7 @@ export const Dashboard = () => {
     },
     scales: {
       x: {
-        display: sales.length > 50 && false
+        display: sales?.length > 50 && false
       }
     }
   };
@@ -366,7 +366,7 @@ export const Dashboard = () => {
               <h6>Listing Service</h6>
               <Book />
             </div>
-            {listingServicesResult.length ? (
+            {listingServicesResult?.length ? (
               <List
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
@@ -399,7 +399,7 @@ export const Dashboard = () => {
               <h6>No API Server</h6>
               <Book />
             </div>
-            {noApiServersResult.length ? (
+            {noApiServersResult?.length ? (
               <List
                 itemLayout="horizontal"
                 header={
@@ -410,7 +410,7 @@ export const Dashboard = () => {
                 }
                 footer={
                   <div className="add-servers">
-                    <PlusCircleOutlined />
+                    <PlusCircleOutlined style={{fontSize: '19px'}}/>
                     <a href="#" className="footer-link">
                        Add more servers
                     </a>
