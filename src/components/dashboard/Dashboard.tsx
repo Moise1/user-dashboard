@@ -42,6 +42,7 @@ import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 interface ProductQuota {
   quota: number;
@@ -94,10 +95,6 @@ export const Dashboard = () => {
     })();
   }, []);
 
-  console.log('NO API SERVERS', noApiServersResult);
-  console.log('LISTING SERVICES', listingServicesResult);
-
-  /*eslint-disable @typescript-eslint/no-empty-function*/
   useEffect(() => {
     dispatch(getNoApiServers());
     dispatch(getListingServices());
@@ -374,7 +371,11 @@ export const Dashboard = () => {
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
                 header="Active Services"
-                footer={<a href="#" className='footer-link'>Manage listing services</a>}
+                footer={
+                  <a href="#" className="footer-link">
+                    Manage listing services
+                  </a>
+                }
                 renderItem={() =>
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
@@ -407,7 +408,14 @@ export const Dashboard = () => {
                     <div>Next Payment</div>
                   </div>
                 }
-                footer={<a href="#" className='footer-link'>Add more servers</a>}
+                footer={
+                  <div className="add-servers">
+                    <PlusCircleOutlined />
+                    <a href="#" className="footer-link">
+                       Add more servers
+                    </a>
+                  </div>
+                }
                 dataSource={listingServicesResult}
                 renderItem={() =>
                   noApiServersResult.map((s: NoApiServer) => (
