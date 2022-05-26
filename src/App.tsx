@@ -33,28 +33,21 @@ export const App = withRouter(({ history }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
   const isAuthenticated = localStorage.getItem('isAuthenticated');
-  // const toggleCollapse = () => setCollapsed(!collapsed);
-  // const toggleStaticValue = () => setStaticValue(!staticValue);
+  const toggleStaticValue = () => setStaticValue(!staticValue);
   const { pathname } = history.location;
 
   const showMobileSider = () => {
     setStaticValue(!staticValue);
     setVisible(!visible);
     setCollapsed(!collapsed);
-    // const sidebar = document.querySelector('.sider') as HTMLElement;
-    // sidebar.style.display = 'block';
-    // sidebar.style.position = 'fixed';
-    // sidebar.style.top = '0';
-    // sidebar.style.height = '100vh !important';
   };  
 
   const closeMobileSider = () => setVisible(!visible);
-  const collapseSideBar = () => {
-    setStaticValue(!staticValue);
-    setCollapsed(!collapsed);
-    // const sidebar = document.querySelector('.sider') as HTMLElement;
-    // sidebar.style.display = 'none';
-  };
+
+  // const collapseSideBar = () => {
+  //   setStaticValue(!staticValue);
+  //   setCollapsed(!collapsed);
+  // };
 
   return (
     <>
@@ -66,12 +59,10 @@ export const App = withRouter(({ history }) => {
             mobileSiderVisible={visible}
             closeMobileSider={closeMobileSider}
             setCollapsed={setCollapsed}
-            // staticValue={staticValue}
-            // togglestatic={toggleStaticValue}
-            // toggle={toggleCollapse}
+            staticValue={staticValue}
+            togglestatic={toggleStaticValue}
             collapsed={collapsed}
-            // handleSidebarMobile={handleSidebarMobile}
-            collapseSideBar={collapseSideBar}
+            // collapseSideBar={collapseSideBar}
           />
         )}
         <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>

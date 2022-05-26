@@ -5,21 +5,21 @@ import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 interface Props {
-  selectedItems: ListingData;
+  selectedRecordData: ListingData;
 }
 
-export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
+export const ListingMain: React.FC<Props> = ({ selectedRecordData }: Props) => {
   const { TextArea } = Input;
   return (
     <Form layout="vertical" className="form">
       <Row gutter={[70, 0]} className="row">
         <Col>
           <Form.Item label="Title">
-            <Input className="blue-input" value={selectedItems.title} />
+            <Input className="blue-input" value={selectedRecordData.title} />
           </Form.Item>
 
           <Form.Item label="Quantity">
-            <Input className="blue-input" value={selectedItems.sourceQuantity} type="number" />
+            <Input className="blue-input" value={selectedRecordData.sourceQuantity} type="number" />
           </Form.Item>
 
           <Form.Item label="Notes">
@@ -29,11 +29,11 @@ export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
 
         <Col>
           <Form.Item label="Markup">
-            <Input className="blue-input" value={selectedItems.sourceId} />
+            <Input className="blue-input" value={selectedRecordData.sourceId} />
           </Form.Item>
 
           <Form.Item label="Your Price">
-            <Input className="blue-input" value={selectedItems.sourcePrice} />
+            <Input className="blue-input" value={selectedRecordData.sourcePrice} />
           </Form.Item>
 
           <Form.Item label="Mark up %">
@@ -41,7 +41,7 @@ export const ListingMain: React.FC<Props> = ({ selectedItems }: Props) => {
           </Form.Item>
 
           <Form.Item label="Profit">
-            <Input className="blue-input" value={selectedItems.price} />
+            <Input className="blue-input" value={selectedRecordData.price} />
           </Form.Item>
 
           <p>
