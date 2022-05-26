@@ -2,7 +2,10 @@
 
 // Large and extra large screens
 
-.ant-drawer-body{
+.chevron-left {
+  cursor: pointer;
+}
+.ant-drawer-body {
   padding: 0;
 }
 
@@ -94,9 +97,13 @@
     }
   }
 
-  .sidebar-icon {
+  .sidebar-icon,
+  .logout-icon {
     margin-left: -0.3rem;
-    // border: 2px solid red;
+  }
+
+  .logout-txt {
+    color: $red;
   }
   .sidebar-icon > * {
     stroke: $primary !important;
@@ -165,7 +172,6 @@
 
     .menu-container {
       .list-submenu-item {
-        border: 2px solid blue;
         margin-bottom: 2rem;
       }
     }
@@ -182,21 +188,6 @@
 
       .pin-icon {
         cursor: pointer;
-      }
-    }
-
-    .collapsed-logout-btn {
-      width: 40%;
-      margin: 1rem 0 0 1rem;
-      display: flex;
-      justify-content: space-between;
-      .hide-logout-text {
-        display: none;
-      }
-    }
-    .logout-btn {
-      .hide-logout-text {
-        display: none;
       }
     }
   }
@@ -231,10 +222,9 @@
   .ant-drawer-content-wrapper {
     width: 90% !important;
     min-width: 250px;
-
   }
-  .side-menu-container{
+
+  .side-menu-container {
     padding: 1rem;
   }
-  
 }
