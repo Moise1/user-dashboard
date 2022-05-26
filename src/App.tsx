@@ -43,13 +43,9 @@ export const App = withRouter(({ history }) => {
     setVisible(!visible);
     setCollapsed(!collapsed);
   };  
-
   const closeMobileSider = () => setVisible(!visible);
 
-  // const collapseSideBar = () => {
-  //   setStaticValue(!staticValue);
-  //   setCollapsed(!collapsed);
-  // };
+ 
 
   return (
     <>
@@ -64,7 +60,6 @@ export const App = withRouter(({ history }) => {
             staticValue={staticValue}
             togglestatic={toggleStaticValue}
             collapsed={collapsed}
-            // collapseSideBar={collapseSideBar}
           />
         )}
         <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>
