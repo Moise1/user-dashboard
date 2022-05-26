@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Row, List } from 'antd';
+import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import { Book } from 'react-feather';
@@ -275,7 +275,7 @@ export const Dashboard = () => {
     </div>
   );
   return (
-    <div className="dashboard-container">
+    <Layout className="dashboard-container">
       <div className="general-section">
         <h1>General</h1>
         <Row className="general-cols" gutter={[0, 15]}>
@@ -410,9 +410,9 @@ export const Dashboard = () => {
                 }
                 footer={
                   <div className="add-servers">
-                    <PlusCircleOutlined style={{fontSize: '19px'}}/>
+                    <PlusCircleOutlined style={{ fontSize: '19px' }} />
                     <a href="#" className="footer-link">
-                       Add more servers
+                      Add more servers
                     </a>
                   </div>
                 }
@@ -495,6 +495,6 @@ export const Dashboard = () => {
         <SocialIcon network="instagram" style={{ height: 30, width: 30 }} />
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
-    </div>
+    </Layout>
   );
 };
