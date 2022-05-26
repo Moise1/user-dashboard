@@ -2,6 +2,10 @@
 
 // Large and extra large screens
 
+.ant-drawer-body{
+  padding: 0;
+}
+
 .ant-menu-item .ant-menu-title-content {
   padding-left: 26px;
 }
@@ -225,6 +229,12 @@
 
 @media only screen and (max-width: 750px) {
   .ant-drawer-content-wrapper {
-    width: 80vw !important;
+    width: 90% !important;
+    min-width: 250px;
+
   }
+  .side-menu-container{
+    padding: 1rem;
+  }
+  
 }
