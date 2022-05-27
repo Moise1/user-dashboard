@@ -19,6 +19,7 @@ export const AutoOrderingConfiguration = () => {
   const [rawSetting, setRawSetting] = useState<rawSettingInterface[]>([]);
   const dispatch = useAppDispatch();
   const { configureStore, loading } = useAppSelector((state) => state.getAutoOrdering);
+  console.log('the configureStore is', configureStore);
   console.log('the rawSetting is ', rawSetting);
   useEffect(() => {
     setRawSetting([

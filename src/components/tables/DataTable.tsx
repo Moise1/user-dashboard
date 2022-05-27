@@ -14,7 +14,7 @@ export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | So
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<TableDataTypes>;
+  dataSource?: Array<TableDataTypes>;
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -61,7 +61,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
   };
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    if (dataSource.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
+    if (dataSource?.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
   const anyTable = (
@@ -92,7 +92,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
               className="action-option"
               onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
             >
-              Edit <strong>{selectedRows}</strong>{page}(s)
+              Edit <strong>{selectedRows}</strong>
+              {page}(s)
             </div>
           )
         },
