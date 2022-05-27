@@ -32,10 +32,10 @@ export const Orders = () => {
   const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
   const [showColumns, setShowColumns] = useState<boolean>(false);
-  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
+  const [, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [postPerPage, setPostPerPage] = useState<number>(10);
-  console.log('The loading is', loading);
+
   //For modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -163,12 +163,10 @@ export const Orders = () => {
   },[orders.orders,newChannel]);
 
   useEffect(() => {
-    console.log({ newChannel });
     dispatch(getOrders({ channelOAuthIds: [newChannel] }));
   
   }, [getOrders,newChannel]);
-  console.log(setCurrent);
-  console.log({orders,order,searchedArray});
+ 
   
   //How many columns to show modal
   const [columns, setColumns] = useState(tableColumns);
@@ -194,7 +192,6 @@ export const Orders = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
-  console.log(current);
   const handleApplyChanges = () => setShowColumns(!showColumns);
   const handleCancelChanges = () => {
     setColumns(tableColumns);
@@ -203,7 +200,6 @@ export const Orders = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
 
-  console.log('The selected column', showColumns);
 
   // //For Searching
   useEffect(() => {
@@ -222,10 +218,6 @@ export const Orders = () => {
       setSearchFilterKey(order?.filter((e: OrderData) => e.channelItem === String(searchKey)));
     }
   }, [searchKey,orders]);
-
-  console.log('The searchFilterKey is ', searchFilterKey);
-  console.log('The searchedArray is ', searchedArray);
-  console.log('the number of keys selected', selectedRowKeys);
 
   return (
     <Layout className="orders-container">
@@ -283,7 +275,6 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
           <div className="search-options-area">
-            {/* <SearchOptions showSearchInput /> */}
             <Input
               autoFocus
               placeholder="Search....."
@@ -316,7 +307,6 @@ export const Orders = () => {
             setPostPerPage={setPostPerPage}
             current={current}
             onChange={setCurrent}
-            /*pagination={false}*/
             rowClassName="table-row"
             onRow={(record) => {
               return {

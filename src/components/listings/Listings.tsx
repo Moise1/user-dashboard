@@ -48,7 +48,7 @@ export const Listings = () => {
 
   const dispatch = useAppDispatch();
 
-  const [singleRecordData, setSingleRecordData] = useState({} as ListingData);
+  const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
   const [_, setDataRender] = useState(false);
 
   useEffect(() => {
@@ -171,8 +171,8 @@ export const Listings = () => {
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: TableDataTypes[] | undefined) => {
     setMySelectedRows(selectedRows!);
     setSelectedRowKeys(selectedRowKeys);
-    const selectedRow = listings.filter((r: ListingData) => r.id === selectedRows![0].id)[0];
-    setSingleRecordData(selectedRow);
+    const selectedRow = listings?.filter((r: ListingData) => r.id === selectedRows![0].id)[0];
+    setSelectedRecordData(selectedRow);
   };
 
   const rowSelection = {
@@ -259,12 +259,11 @@ export const Listings = () => {
             </PopupModal>
           ) : (
             <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-              <EditSingleListing selectedItems={singleRecordData} />
+              <EditSingleListing selectedRecordData={selectedRecordData}/>
             </PopupModal>
           )}
 
           <div className="search-options-area">
-            {/* <SearchOptions showSearchInput /> */}
             <Input
               autoFocus
               placeholder="Search....."
@@ -329,6 +328,15 @@ export const Listings = () => {
             showTableInfo={true}
             current={current}
             onChange={setCurrent}
+            rowClassName="table-row"
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  setSelectedRecordData(record as ListingData);
+                  handleSingleListingModal();
+                }
+              };
+            }}
           />
         </Fragment>
       )}

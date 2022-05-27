@@ -34,7 +34,6 @@ export interface ListingData {
   userProductSourceChannelId: number;
   views: number;
   watches: number;
-  // data: [];
 }
 
 export interface PendingListings {

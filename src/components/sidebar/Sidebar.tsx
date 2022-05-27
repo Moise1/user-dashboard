@@ -3,7 +3,7 @@ import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../utils/transShim';
-import logout from '../../assets/logout.svg';
+// import logout from '../../assets/logout.svg';
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -12,7 +12,8 @@ import {
   ServiceIcon,
   SettingsIcon,
   HelpIcon,
-  OrdersIcon
+  OrdersIcon,
+  LogoutIcon
 } from '../common/Icons';
 import { MenuListItem } from './MenuListItem';
 import { actions } from '../../redux/user/userSlice';
@@ -20,11 +21,12 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../../small-components/Switch';
 import pin from '../../assets/pin.svg';
-import { TransparentBtn } from '../../small-components/ActionBtns';
+// import { TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
 import '../../sass/side-bar.scss';
+// import { LogoutOutlined } from '@ant-design/icons';
 
 const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
@@ -37,7 +39,7 @@ interface Props {
   staticValue?: boolean;
   togglestatic?: () => void;
   handleSidebarMobile?: () => void;
-  collapseSideBar: () => void;
+  // collapseSideBar: () => void;
   mobileSiderVisible: boolean;
   closeMobileSider: () => void;
 }
@@ -51,16 +53,17 @@ export const Sidebar = (props: Props) => {
     togglestatic,
     className,
     setCollapsed,
-    collapseSideBar,
+    // collapseSideBar,
     mobileSiderVisible,
     closeMobileSider
   } = props;
   const [isDark, setIsDark] = useState<boolean>(false);
-  const history = useHistory();
-  const dispatch = useAppDispatch();
-  const { setTheme } = useContext(AppContext);
-  const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
+
+  const { setTheme } = useContext(AppContext);
+  const dispatch = useAppDispatch();
+  const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
+  const history = useHistory();
 
   const handleThemeChange = () => {
     setIsDark(!isDark);
@@ -91,9 +94,7 @@ export const Sidebar = (props: Props) => {
 
   const routeChange = (route: string) => {
     history.push(route);
-    if (mobileScreenSize.matches) {
-      collapseSideBar();
-    }
+    if (mobileScreenSize.matches) closeMobileSider();
   };
 
   const handleLogout = () => {
@@ -165,13 +166,13 @@ export const Sidebar = (props: Props) => {
               </button>
             </div>
             <div className="sidebar-control-btns">
-              {staticValue ? (
+              {staticValue || mobileScreenSize.matches ? (
                 <ChevronLeft
                   className="chevron-left"
-                  onClick={window.screen.width <= 1030 ? collapseSideBar : togglestatic}
+                  onClick={mobileScreenSize.matches ? closeMobileSider : togglestatic}
                 />
               ) : (
-                <img src={pin} className="pin-icon" onClick={togglestatic} />
+                !mobileScreenSize.matches && <img src={pin} className="pin-icon" onClick={togglestatic} />
               )}
             </div>
           </div>
@@ -222,7 +223,6 @@ export const Sidebar = (props: Props) => {
           {t('Menu.Orders')}
         </Item>
 
-        {/* SETTINGS LIST ITEMS .  */}
         <SubMenu
           className="submenu-item"
           key="sub1"
@@ -264,7 +264,6 @@ export const Sidebar = (props: Props) => {
           </SubMenu>
         </SubMenu>
 
-        {/* SERVICES  */}
         <Item
           className="menu-item"
           style={{ fontSize: '18px', fontWeight: 'bold' }}
@@ -288,11 +287,16 @@ export const Sidebar = (props: Props) => {
             </Item>
           ))}
         </SubMenu>
+        <Item
+          className="menu-item logout-txt"
+          style={{ fontSize: '18px', fontWeight: 'bold' }}
+          key="20"
+          icon={<LogoutIcon />}
+          onClick={handleLogout}
+        >
+          <span>Logout</span>
+        </Item>
       </Menu>
-      <TransparentBtn className={!collapsed ? 'collapsed-logout-btn' : 'logout-btn'} handleClick={handleLogout}>
-        <img src={logout} />
-        <span className={collapsed ? 'hide-logout-text' : 'logout-text'}> {t('Menu.Logout')}</span>
-      </TransparentBtn>
     </div>
   );
   const largeScreenSider = (
@@ -326,5 +330,3 @@ export const Sidebar = (props: Props) => {
     </div>
   );
 };
-
-// Adding a change

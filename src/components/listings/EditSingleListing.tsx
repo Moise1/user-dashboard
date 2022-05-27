@@ -11,21 +11,20 @@ import { ExternalLink } from 'react-feather';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 
 interface Props {
-  selectedItems: ListingData;
+  selectedRecordData: ListingData;
 }
 
-export const EditSingleListing = ({ selectedItems }: Props) => {
+export const EditSingleListing = ({ selectedRecordData }: Props) => {
   const [index, setIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<number>(0);
-
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
-      return <ListingMain selectedItems={selectedItems} />;
+      return <ListingMain selectedRecordData={selectedRecordData} />;
     case 1:
       return <ListingDescription />;
     case 2:
-      return <ListingDetails selectedItems={selectedItems} />;
+      return <ListingDetails selectedRecordData={selectedRecordData} />;
 
     case 3:
       return <ListingOptions />;
@@ -44,7 +43,7 @@ export const EditSingleListing = ({ selectedItems }: Props) => {
   return (
     <>
       <div className="upper-section">
-        <h3>Editing listing: 20000</h3>
+        <h3>Editing listing: {selectedRecordData.id}</h3>
         <div className="external-links">
           <a href="#">
             View price Changes{' '}

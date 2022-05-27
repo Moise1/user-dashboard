@@ -14,11 +14,7 @@
 .confirm-text {
   color: $corporative-color;
 }
-.listings-container {
-  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-  width: -moz-available; /* WebKit-based browsers will ignore this. */
-  width: fill-available;
-}
+
 
 .danger-text {
   color: $red;
