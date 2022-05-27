@@ -6,6 +6,8 @@ body {
   overflow: auto;
   line-height: 1.5715;
   box-sizing: border-box;
+  background: $secondary-bg;
+
   .ant-layout {
     width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
     width: -moz-available; /* WebKit-based browsers will ignore this. */
@@ -37,7 +39,7 @@ body {
       width: 68vw !important;
     }
   }
-  
+
   @media only screen and (max-width: 1030px) {
     .content-area-resized {
       margin: 0 auto !important;
@@ -118,7 +120,6 @@ button,
     opacity: 0;
   }
 }
-
 
 // Range Picker' styles
 

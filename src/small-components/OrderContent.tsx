@@ -46,7 +46,7 @@ export const OrderContent = (props: Props) => {
   console.log('The data id is', data.id);
   const [orderNumber] = useState(id);
   // const [iddd] = useState(445378);
-  const orderStatus = useAppSelector((state) => state.orderProgress.orderProgress.states);
+  const orderStatus = useAppSelector((state) => state.orderProgress.states);
   const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
 

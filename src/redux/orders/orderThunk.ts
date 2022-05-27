@@ -28,11 +28,7 @@ export const processOrders = createAsyncThunk(
   'sales/processOrder',
   async (orderLineId: OrderData | number, thunkAPI) => {
     try {
-      console.log('the orderLineId', orderLineId);
-
       const res = await client.post('/Sales/ProcessOrderLine', { orderLineId });
-      console.log('The process order api responsed', res);
-
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -45,8 +41,6 @@ export const manuallyDispatch = createAsyncThunk(
   async (orderLineId: OrderData | number, thunkAPI) => {
     try {
       const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
-      console.log('The manually dispatch api responsed', res);
-
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -57,8 +51,6 @@ export const manuallyDispatch = createAsyncThunk(
 export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: OrderData | number, thunkAPI) => {
   try {
     const res = await client.post('/Sales/StopOrderLine', { orderLineId });
-    console.log('The stop order api responsed', res);
-
     return res;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -69,9 +61,7 @@ export const loadAddressFromOrderLine = createAsyncThunk(
   'sales/loadAddressFromOrderLine',
   async (orderLineId: orderDataType, thunkAPI) => {
     try {
-      console.log('The orderlineid', orderLineId);
       const res = await client.post('/Sales/LoadAddressesFromOrderLine', { orderLineId });
-      console.log('The load address api response is', res.data.response_data);
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -84,8 +74,6 @@ export const loadProgressOfOrder = createAsyncThunk(
   async (id: OrderData | number, thunkAPI) => {
     try {
       const res = await client.post('/Sales/LoadProgress', { id });
-      console.log('To see the progress of order', res.data.response_data);
-
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');

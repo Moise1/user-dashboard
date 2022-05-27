@@ -146,6 +146,7 @@ h4 {
 
 .blue-input {
   @include custom-input($secondary-bg);
+  border: none; //Added by suleman
 }
 
 .auth-input {
@@ -201,5 +202,4 @@ h4 {
   border-radius: 50%;
   width: 20px;
   margin: 0 0.5rem;
-};
-
+}

@@ -85,7 +85,6 @@ export const orderSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getOrders.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.orders = payload;
     });
@@ -106,7 +105,6 @@ export const processOrdersSlice = createSlice({
       state.error = '';
     });
     builder.addCase(processOrders.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.orders = payload;
     });
@@ -127,7 +125,6 @@ export const manuallyDispatchSlice = createSlice({
       state.error = '';
     });
     builder.addCase(manuallyDispatch.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.orders = payload;
     });
@@ -148,7 +145,6 @@ export const stopOrderSlice = createSlice({
       state.error = '';
     });
     builder.addCase(stopOrder.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.orders = payload;
     });
@@ -169,7 +165,6 @@ export const loadAddressOrderLineSlice = createSlice({
       state.error = '';
     });
     builder.addCase(loadAddressFromOrderLine.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.ordersAddress = payload;
     });
@@ -190,7 +185,6 @@ export const loadOrderProgressSlice = createSlice({
       state.error = '';
     });
     builder.addCase(loadProgressOfOrder.fulfilled, (state, { payload }) => {
-      console.log({ payload });
       state.loading = false;
       state.orderProgress = payload;
     });
