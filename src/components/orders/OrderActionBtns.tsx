@@ -8,18 +8,16 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
-import {OrderData} from 'src/redux/orders/orderSlice';
+import { OrderData } from 'src/redux/orders/orderSlice';
 interface props {
-  orderNumber:{ [key: string]: OrderData };
+  orderNumber: { [key: string]: OrderData };
   // channelId: number;
   selectedRows: number;
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
   const { orderNumber, selectedRows } = typeBtnProps;
-  console.log('The selected rows', selectedRows);
   const [disabled, setDisabled] = useState<boolean>(true);
-  console.log('The disabled', disabled);
   useEffect(() => {
     selectedRows > 0 && setDisabled(false);
     selectedRows == 0 && setDisabled(true);
@@ -27,9 +25,6 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   const dispatch = useAppDispatch();
 
   // const { orderNumber, channelId } = typeBtnProps;
-
-  console.log('The orderNumber is', orderNumber);
-  // console.log('The channelId is', channelId);
 
   const handleProcessOrders = () => {
     dispatch(processOrders(orderNumber.id));

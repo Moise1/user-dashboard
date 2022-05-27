@@ -105,7 +105,6 @@
   "OrderDetails.viewFullLog": "View full log",
   "OrderDetails.StartOrder": "Order started",
   "OrderDetails.OrderDetails": "Order details",
-
   "OrderDetails.Name": "Name",
   "OrderDetails.ShippingAddress": "Shipping address",
   "OrderDetails.Billingaddress": "Billing address",
@@ -118,7 +117,6 @@
   "OrderDetails.AddressLineTwo": "Address Line 2",
   "OrderDetails.State": "State/Province",
   "OrderDetails.Country": "Country",
-
   "OrderDetails.ChannelItem": "Channel item",
   "OrderDetails.Reference": "Reference",
   "OrderDetails.BuyerUsername": "Buyer username",
@@ -153,7 +151,10 @@
   "SourceConfigInputs.RemoveAccount": "Remove account",
   "SourceConfigInputs.AddAccount": "Add account",
   "SourceConfigInputs.Disabled": "Disabled",
+  "SourceConfigInputs.Enable": "Enable",
   "SourceConfigInputs.EnableDisableAutoOrdering": "Enable/Disable Auto-ordering",
+  "SourceConfigInputs.MarkAsShippedOnYourStore": "Mark as shipped on your store",
+  "SourceConfigInputs.SetTrackingNumber": "Set tracking number",
   "SourceConfigInputs.DadAccount": "Dad account",
   "SourceConfigInputs.AccountConfiguration": "Account configuration",
   "SourceConfigInputs.ConfigureAutoordering": "Configure Autoordering (Beta)",
@@ -184,12 +185,10 @@
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",
   "OrderButtons.Delete5Orders": "Delete 5 Orders",
-
   "AutoOrderingConfiguration.Supplier": "Supplier",
   "AutoOrderingConfiguration.Free": "Free",
   "AutoOrderingConfiguration.FreePercentage": "% Free",
   "AutoOrderingConfiguration.Status": "Status",
-
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
   "Topbar.Quota": "Quota",

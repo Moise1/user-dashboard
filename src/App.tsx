@@ -23,9 +23,10 @@ import {
   SourcesTable,
   Dashboard,
   SourcesSettings,
-  Templates
+  Templates,
+  AutoOrderingConfiguration,
+  AutoOrdering
 } from './components';
-import { AutoOrderingConfiguration } from './components/auto-ordering/AutoOrderingConfiguration';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/listings/ListNow';
 
@@ -94,6 +95,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/catalog" component={Catalog} />
             <ProtectedRoute path="/templates" component={Templates} />
             <ProtectedRoute path="/auto-ordering-configuration" component={AutoOrderingConfiguration} />
+            <ProtectedRoute path="/auto-ordering-configuration-query" component={AutoOrdering} />
           </Switch>
         </Layout>
       </Layout>

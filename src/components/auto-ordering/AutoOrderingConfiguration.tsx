@@ -1,20 +1,35 @@
-import { useEffect } from 'react';
-import { Layout } from 'antd';
+import { useEffect, useState } from 'react';
+import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
 import { DataTable } from '../tables/DataTable';
 import { SearchOptions } from '../../small-components/SearchOptions';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { saveAutoOrdering, getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 
+interface rawSettingInterface {
+  key: number;
+  value: string;
+}
 export const AutoOrderingConfiguration = () => {
+  const [channelOAuthId] = useState(590881);
+  const [supplierId] = useState(333);
+  const [sourceId] = useState(1);
+  const [rawSetting, setRawSetting] = useState<rawSettingInterface[]>([]);
   const dispatch = useAppDispatch();
-  const { sources, loading } = useAppSelector((state) => state.sources);
-
+  const { configureStore, loading } = useAppSelector((state) => state.getAutoOrdering);
+  console.log('the rawSetting is ', rawSetting);
   useEffect(() => {
-    dispatch(getSources());
-  }, [getSources]);
+    setRawSetting([
+      { key: 1, value: 'false' },
+      { key: 5, value: 'test' },
+      { key: 6, value: 'testo' },
+      { key: 8, value: 'fake' }
+    ]);
+    dispatch(getAutoOrdering());
+    dispatch(saveAutoOrdering({ channelOAuthId, supplierId, sourceId }));
+  }, []);
 
   const columns = [
     {
@@ -41,13 +56,18 @@ export const AutoOrderingConfiguration = () => {
 
   return (
     <Layout className="sources-container">
-      <div className="search-options-area">
-        <SearchOptions showSearchInput />
-      </div>
-      {loading && 'Please wait a moment...'}
-      <div className="sources-table-container">
-        <DataTable columns={columns} dataSource={sources} pageSize={6} total={sources?.length} />
-      </div>
+      {loading ? (
+        <Spin />
+      ) : (
+        <>
+          <div className="search-options-area">
+            <SearchOptions showSearchInput />
+          </div>
+          <div className="sources-table-container">
+            <DataTable columns={columns} dataSource={configureStore} pageSize={6} total={configureStore?.length} />
+          </div>
+        </>
+      )}
     </Layout>
   );
 };

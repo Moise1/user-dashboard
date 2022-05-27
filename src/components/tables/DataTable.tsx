@@ -120,7 +120,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       {showTableInfo && (
         <div className="table-info">
           <p className="total-selected">
-            {' '}
             <strong>{selectedRows}</strong> selected
           </p>
           {isListingsTable ? (

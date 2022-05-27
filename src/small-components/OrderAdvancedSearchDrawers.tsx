@@ -122,7 +122,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
 
   const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
   const orderAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('the e', e.target);
     const { name, value } = e.target;
     setOrderAdvancedSearchFormData({
       ...orderAdvancedSearchFormData,
@@ -140,8 +139,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
 
   const handleFilterSubmit = () => {
     let result;
-    console.log('the order', order);
-    console.log('The result', result);
     result = order.filter(
       (e: OrderData) =>
         e.reference === orderAdvancedSearchFormData.reference ||

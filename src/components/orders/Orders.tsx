@@ -27,7 +27,7 @@ export const Orders = () => {
   const { status, loading } = useAppSelector((state) => state.orders);
   const [current, setCurrent] = useState<number>(1);
   const [selectedRecord, setSelectedRecord] = useState({});
-  const [orderNumber] = useState(selectedRecord && selectedRecord); //Only use in order action btns
+  const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState([]);
   const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
@@ -35,22 +35,21 @@ export const Orders = () => {
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [postPerPage, setPostPerPage] = useState<number>(10);
-  console.log('The loading is', loading);
   //For modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
-  const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
-  const handleSingleListingModal = () => setSingleEditOpen(!singleEditOpen);
+  const handleBulkOrderModal = () => setBulkEditOpen(!bulkEditOpen);
+  const handleSingleOrderModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSingleOrderDetailModal = () => setOrderDetailsOpen(!orderDetailsOpen);
 
   const handleOrderDetailsOpen = () => {
-    handleSingleListingModal();
+    handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
   };
 
   const handleOrderContentOpen = () => {
-    handleSingleListingModal();
+    handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
   };
 
@@ -147,10 +146,9 @@ export const Orders = () => {
     }
   ];
 
-  //Get Orders
   const newChannel = JSON.parse(localStorage.getItem('channelId') || '590881');
 
-  useEffect(()=>{
+  useEffect(() => {
     setOrder(
       orders?.orders.length &&
         orders?.orders.map((item: OrderData): unknown => ({
@@ -160,17 +158,13 @@ export const Orders = () => {
           date: moment(item.date).format('DD/MM/YY/ hh:mm')
         }))
     );
-  },[orders.orders,newChannel]);
+  }, [orders.orders, newChannel]);
 
   useEffect(() => {
-    console.log({ newChannel });
     dispatch(getOrders({ channelOAuthIds: [newChannel] }));
-  
-  }, [getOrders,newChannel]);
-  console.log(setCurrent);
-  console.log({orders,order,searchedArray});
-  
-  //How many columns to show modal
+  }, [getOrders, newChannel]);
+
+  //How many columns to show
   const [columns, setColumns] = useState(tableColumns);
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
   const onSelectChange = (selectedRowKeys: Key[]) => {
@@ -194,7 +188,6 @@ export const Orders = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
-  console.log(current);
   const handleApplyChanges = () => setShowColumns(!showColumns);
   const handleCancelChanges = () => {
     setColumns(tableColumns);
@@ -202,9 +195,7 @@ export const Orders = () => {
   };
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-
-  console.log('The selected column', showColumns);
-
+  console.log(searchFilterKey);
   // //For Searching
   useEffect(() => {
     if (order.length) {
@@ -221,11 +212,7 @@ export const Orders = () => {
       );
       setSearchFilterKey(order?.filter((e: OrderData) => e.channelItem === String(searchKey)));
     }
-  }, [searchKey,orders]);
-
-  console.log('The searchFilterKey is ', searchFilterKey);
-  console.log('The searchedArray is ', searchedArray);
-  console.log('the number of keys selected', selectedRowKeys);
+  }, [searchKey, orders]);
 
   return (
     <Layout className="orders-container">
@@ -235,7 +222,7 @@ export const Orders = () => {
         <>
           <PopupModal open={showColumns} handleClose={handleClose} width={900}>
             <h5 className="cols-display-title">Select columns to display</h5>
-            <p className="description">Display columns in the listing table that suit your interests.</p>
+            <p className="description">Display columns in the order table that suit your interests.</p>
             <Card className="listings-card">
               <Row className="listings-cols">
                 <Col>
@@ -251,7 +238,7 @@ export const Orders = () => {
                 </Col>
                 <Col>
                   <div className="cols-amount">
-                    <p>Amount of columns on your listings table</p>
+                    <p>Amount of columns on your orders table</p>
                     <h3>{visibleCols.length}</h3>
                   </div>
                 </Col>
@@ -266,11 +253,11 @@ export const Orders = () => {
             </Card>
           </PopupModal>
           {selectedRowKeys.length > 1 ? (
-            <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
+            <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkOrderModal}>
               <BulkEditListings selectedItems={selectedRowKeys.length} />
             </PopupModal>
           ) : (
-            <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
+            <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleOrderModal}>
               <OrderContent
                 orderProgress={status}
                 data={selectedRecord}
@@ -322,7 +309,7 @@ export const Orders = () => {
               return {
                 onClick: () => {
                   setSelectedRecord(record);
-                  handleSingleListingModal();
+                  handleSingleOrderModal();
                 }
               };
             }}

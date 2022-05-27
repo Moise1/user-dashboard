@@ -9,17 +9,15 @@
       margin-top: 0.8rem;
     }
   }
- 
 
-  
   .select-account {
-    width: 50%;
-    border: 2px solid red;
-    display: flex; 
+    width: 100%;
+    // border: 2px solid red; Done by suleman
+    display: flex;
     flex-direction: column;
     align-items: flex-start !important;
     .ant-select-selector {
-       border: 2px solid blue;
+      border: 2px solid blue;
     }
     .account-config {
       font-weight: bold;
@@ -46,9 +44,9 @@
         display: flex;
         justify-content: space-evenly;
 
-        & > * {
-          margin-left: 1rem;
-        }
+        // & > * {
+        //   // margin-left: 1rem;
+        // }
       }
 
       .account-form-input {
@@ -89,17 +87,128 @@
 }
 
 .main-container {
- 
-  
   @include auto-ordering;
   display: flex;
   flex-direction: column;
-  .ant-select-dropdown{
+  .ant-select-dropdown {
     border: 2px solid red;
-  };
+  }
 }
 
 .adjusted-main-container {
   @include auto-ordering;
   width: 85%;
+}
+
+//New Added By Suleman
+
+.auto-ordering-container {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  background: #fff;
+  padding: 20px;
+}
+
+.auto-ordering-left {
+  flex-basis: 55%;
+}
+
+.auto-ordering-right {
+  flex-basis: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.ml-1rem {
+  margin-left: 1rem;
+}
+
+.ant-form-item-label > label {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.auto-ordering-p {
+  font-size: 0.9rem;
+  display: inline;
+}
+
+.auto-ordering-a {
+  display: inline !important;
+  font-size: 0.8rem !important;
+  margin-left: 2px !important;
+}
+
+.auto-ordering-p-secondary {
+  font-size: 0.8rem;
+  color: #a9a9a9;
+}
+
+.mt-2 {
+  margin-top: 2px;
+}
+
+.mt-4 {
+  margin-top: 4px;
+}
+
+.mt-22 {
+  margin-top: 22px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.mtb-20 {
+  margin: 20px 0px;
+}
+
+.m-trbl {
+  margin: 7px 0px 0px 15%;
+}
+
+.platfrom-creds {
+  input {
+    width: 92%;
+  }
+}
+
+.paymentSelector {
+  width: 92%;
+}
+
+.giftSelector {
+  width: 48%;
+}
+
+.heading-style {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.right-btn-wrapper {
+  margin: 60vh 0vh 0vh 0vh;
+}
+
+.auto-ordering-btn {
+  position: sticky;
+  top: 67px;
+  z-index: 2;
+  height: 55px;
+  width: 143%;
+  border-radius: 11px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.mr-4 {
+  margin-right: 4px;
 }

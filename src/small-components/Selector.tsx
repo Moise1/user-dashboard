@@ -23,13 +23,14 @@ interface Props {
   showFlags?: boolean;
   className?: string;
   isListingsTable?: boolean;
+  disabled?: boolean;
 }
 
 const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, onChange, dropdownRender, loading, style, size, showFlags } = props;
+  const { children, defaultValue, onChange, dropdownRender, loading, style, size, showFlags, disabled } = props;
 
   const options = children?.map((c) => {
     return (
@@ -43,12 +44,13 @@ export const Selector: React.FC<Props> = (props: Props) => {
 
   return (
     <Select
+      disabled={disabled}
       style={style}
       className="selector"
       allowClear={false}
       onChange={onChange}
       showSearch
-      placeholder="Select..."
+      placeholder="Select or add account"
       defaultValue={defaultValue}
       dropdownRender={dropdownRender}
       loading={loading}

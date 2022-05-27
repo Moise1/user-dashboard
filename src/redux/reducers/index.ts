@@ -16,7 +16,8 @@ import { ordersReducer } from '../orders/orderSlice';
 import { orderAddressReducer } from '../orders/orderSlice';
 import { orderProgressReducer } from '../orders/orderSlice';
 import { salesReducer } from '../sales/salesSlice';
-
+import { saveAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
+import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
@@ -34,5 +35,7 @@ export const allReducers = combineReducers({
   orders: ordersReducer,
   orderAddress: orderAddressReducer,
   orderProgress: orderProgressReducer,
-  sales: salesReducer
+  sales: salesReducer,
+  saveAutoOrdering: saveAutoOrderingReducer,
+  getAutoOrdering: getAutoOrderingReducer
 });

@@ -100,6 +100,16 @@ export const Sidebar = (props: Props) => {
     { id: 12, listName: t('Menu.Templates'), onClick: () => routeChange('/templates') },
     {
       id: 13,
+      listName: t('Menu.AutoOrderingConfiguration'),
+      onClick: () => routeChange('/auto-ordering-configuration')
+    },
+    {
+      id: 20,
+      listName: t('Menu.AutoOrderingConfiguration'),
+      onClick: () => routeChange('/auto-ordering-configuration-query')
+    },
+    {
+      id: 14,
       listName: (
         <>
           <Switch
@@ -112,11 +122,6 @@ export const Sidebar = (props: Props) => {
           />
         </>
       )
-    },
-    {
-      id: 14,
-      listName: t('Menu.AutoOrderingConfiguration'),
-      onClick: () => routeChange('/auto-ordering-configuration')
     }
   ];
 
