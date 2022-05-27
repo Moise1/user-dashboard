@@ -168,7 +168,7 @@ export const PricingRules = () => {
           <DataTable
             dataSource={rules}
             columns={columns}
-            pageSize={4}
+            pageSize={10}
             current={current}
             totalItems={rules.length}
             rowSelection={rowSelection}

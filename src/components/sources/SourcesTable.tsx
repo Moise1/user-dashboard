@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
-import { DataTable } from '../tables/DataTable';
+import { SimpleTable } from '../tables/SimpleTable';
 import { SearchOptions } from '../../small-components/SearchOptions';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
@@ -12,10 +12,17 @@ import '../../sass/popover.scss';
 export const SourcesTable = () => {
   const dispatch = useAppDispatch();
   const { sources, loading } = useAppSelector((state) => state.sources);
+  const [current, setCurrent] = useState<number>(1);
 
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
+
+
+  function parentToChild(value: string): void {
+    localStorage.setItem('selectedSource', value);
+  }
+
 
   const columns = [
     {
@@ -23,7 +30,7 @@ export const SourcesTable = () => {
       dataIndex: 'sourceName',
       key: 'sourceName',
       render: (value: string) => (
-        <Link to="/sources-settings" className="back-link">
+        <Link to={'/sources-settings/'} onClick={() => parentToChild(value)} className="back-link">
           {value}
         </Link>
       )
@@ -77,7 +84,10 @@ export const SourcesTable = () => {
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
-        <DataTable columns={columns} dataSource={sources} pageSize={6} total={sources?.length} />
+        <SimpleTable
+          current={current}
+          onChange={setCurrent}
+          columns={columns} dataSource={sources} pageSize={10} totalItems={sources?.length} />
       </div>
     </Layout>
   );

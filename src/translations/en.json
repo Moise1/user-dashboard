@@ -192,7 +192,7 @@
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
   "Topbar.Quota": "Quota",
-  "addAll": "Add All",
+  "selectAll": "Select All",
   "filters": "Filters",
   "advnc": "Advance",
   "advsearch": "Advanced Search",

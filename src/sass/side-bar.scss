@@ -2,6 +2,13 @@
 
 // Large and extra large screens
 
+.chevron-left {
+  cursor: pointer;
+}
+.ant-drawer-body {
+  padding: 0;
+}
+
 .ant-menu-item .ant-menu-title-content {
   padding-left: 26px;
 }
@@ -90,9 +97,13 @@
     }
   }
 
-  .sidebar-icon {
+  .sidebar-icon,
+  .logout-icon {
     margin-left: -0.3rem;
-    // border: 2px solid red;
+  }
+
+  .logout-txt {
+    color: $red;
   }
   .sidebar-icon > * {
     stroke: $primary !important;
@@ -161,7 +172,6 @@
 
     .menu-container {
       .list-submenu-item {
-        border: 2px solid blue;
         margin-bottom: 2rem;
       }
     }
@@ -180,21 +190,6 @@
         cursor: pointer;
       }
     }
-
-    .collapsed-logout-btn {
-      width: 40%;
-      margin: 1rem 0 0 1rem;
-      display: flex;
-      justify-content: space-between;
-      .hide-logout-text {
-        display: none;
-      }
-    }
-    .logout-btn {
-      .hide-logout-text {
-        display: none;
-      }
-    }
   }
 }
 
@@ -202,7 +197,14 @@
 @media only screen and (max-width: 1030px) {
   .sider {
     display: none;
-    z-index: 3;
+  }
+  .ant-drawer-content-wrapper {
+    width: 30vw !important;
+    .sider {
+      display: block;
+      filter: none;
+      position: static;
+    }
   }
 
   .overlay-sidebar-mobile {
@@ -213,5 +215,16 @@
     background-color: rgba(0, 0, 0, 0.4);
     height: 100%;
     z-index: 2;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .ant-drawer-content-wrapper {
+    width: 90% !important;
+    min-width: 250px;
+  }
+
+  .side-menu-container {
+    padding: 1rem;
   }
 }

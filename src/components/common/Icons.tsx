@@ -1348,69 +1348,61 @@ export const PlusIcon = () => {
     </>
   );
 };
-export const LogOutIcon = () => {
-  return (
-    <>
-      <svg
-        id="Group_84"
-        data-name="Group 84"
-        xmlns="http://www.w3.org/2000/svg"
-        width="26"
-        height="26"
-        viewBox="0 0 31.622 31.622"
-      >
-        <path id="Path_17" data-name="Path 17" d="M0,0H31.622V31.622H0Z" fill="none" />
-        <path
-          id="Path_18"
-          data-name="Path 18"
-          d="M17.494,9.27V6.635A2.635,2.635,0,0,0,14.858,4H5.635A2.635,2.635,0,0,0,3,6.635V22.446a2.635,2.635,0,0,0,2.635,2.635h9.223a2.635,2.635,0,0,0,2.635-2.635V19.811"
-          transform="translate(0.953 1.27)"
-          fill="none"
-          stroke="#ef6092"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-        <path
-          id="Path_19"
-          data-name="Path 19"
-          d="M7,12.953H25.446L21.494,9m0,7.906,3.953-3.953"
-          transform="translate(2.223 2.858)"
-          fill="none"
-          stroke="#ef6092"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-      </svg>
-    </>
-  );
-};
-
-export const UpdownIcon = () => {
-  return (
-    <>
-      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19.5" viewBox="0 0 10 19.5">
-        <g id="sorter" transform="translate(-1715.5 -316.5)">
-          <path
-            id="Polygon_16"
-            data-name="Polygon 16"
-            d="M4.152,1.357a1,1,0,0,1,1.7,0l3.2,5.113A1,1,0,0,1,8.2,8H1.8A1,1,0,0,1,.956,6.47Z"
-            transform="translate(1725.5 336) rotate(180)"
-            fill="#262e80"
-          />
-          <path
-            id="Polygon_17"
-            data-name="Polygon 17"
-            d="M4.152,1.357a1,1,0,0,1,1.7,0l3.2,5.113A1,1,0,0,1,8.2,8H1.8A1,1,0,0,1,.956,6.47Z"
-            transform="translate(1715.5 316.5)"
-            fill="#262e80"
-          />
-        </g>
-      </svg>
-    </>
-  );
-};
+export const LogoutIcon = () => (
+  <svg
+    className="logout-icon"
+    id="Group_84"
+    data-name="Group 84"
+    xmlns="http://www.w3.org/2000/svg"
+    width="23"
+    height="23"
+    viewBox="0 0 31.622 31.622"
+  >
+    <path id="Path_17" data-name="Path 17" d="M0,0H31.622V31.622H0Z" fill="none" />
+    <path
+      id="Path_18"
+      data-name="Path 18"
+      d="M17.494,9.27V6.635A2.635,2.635,0,0,0,14.858,4H5.635A2.635,2.635,0,0,0,3,6.635V22.446a2.635,2.635,0,0,0,2.635,2.635h9.223a2.635,2.635,0,0,0,2.635-2.635V19.811"
+      transform="translate(0.953 1.27)"
+      fill="none"
+      stroke="#ef6092"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
+    <path
+      id="Path_19"
+      data-name="Path 19"
+      d="M7,12.953H25.446L21.494,9m0,7.906,3.953-3.953"
+      transform="translate(2.223 2.858)"
+      fill="none"
+      stroke="#ef6092"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
+  </svg>
+);
+export const UpdownIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19.5" viewBox="0 0 10 19.5">
+    <g id="sorter" transform="translate(-1715.5 -316.5)">
+      <path
+        id="Polygon_16"
+        data-name="Polygon 16"
+        d="M4.152,1.357a1,1,0,0,1,1.7,0l3.2,5.113A1,1,0,0,1,8.2,8H1.8A1,1,0,0,1,.956,6.47Z"
+        transform="translate(1725.5 336) rotate(180)"
+        fill="#262e80"
+      />
+      <path
+        id="Polygon_17"
+        data-name="Polygon 17"
+        d="M4.152,1.357a1,1,0,0,1,1.7,0l3.2,5.113A1,1,0,0,1,8.2,8H1.8A1,1,0,0,1,.956,6.47Z"
+        transform="translate(1715.5 316.5)"
+        fill="#262e80"
+      />
+    </g>
+  </svg>
+);
 
 export const IconEdit = () => {
   return (

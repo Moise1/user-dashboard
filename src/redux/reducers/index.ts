@@ -18,6 +18,9 @@ import { orderProgressReducer } from '../orders/orderSlice';
 import { salesReducer } from '../sales/salesSlice';
 import { saveAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
+import { listingServicesReducer } from '../dashboard/listingServicesSlice';
+import { noApiServersReducer } from '../dashboard/noApiServersSlice';
+
 export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
@@ -37,5 +40,7 @@ export const allReducers = combineReducers({
   orderProgress: orderProgressReducer,
   sales: salesReducer,
   saveAutoOrdering: saveAutoOrderingReducer,
-  getAutoOrdering: getAutoOrderingReducer
+  getAutoOrdering: getAutoOrderingReducer,
+  listingServices: listingServicesReducer,
+  noApiServers: noApiServersReducer
 });

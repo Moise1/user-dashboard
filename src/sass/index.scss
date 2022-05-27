@@ -9,6 +9,9 @@ body {
   background: $secondary-bg;
 
   .ant-layout {
+    width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+    width: -moz-available; /* WebKit-based browsers will ignore this. */
+    width: fill-available;
     margin-top: 0.5rem;
     padding: 0.3rem;
     background: $secondary-bg;

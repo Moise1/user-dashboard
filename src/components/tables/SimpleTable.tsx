@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
@@ -11,7 +10,6 @@ import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
 
 export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
-
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<TableDataTypes>;
@@ -26,21 +24,15 @@ interface Props {
   total?: number;
   current?: number;
   pageSize?: number;
-  setPostPerPage?: (postPerPage: number) => void;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
-  rowSelection?: {
-    selectedRowKeys: Key[];
-    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
-  };
   isListingsTable?: boolean;
 }
 
-export const DataTable: React.FC<Props> = (props: Props) => {
+export const SimpleTable: React.FC<Props> = (props: Props) => {
   const {
     columns,
     dataSource,
-    rowSelection,
     selectedRows,
     totalItems,
     handleBulkListingModal,
@@ -51,17 +43,12 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     current,
     pageSize,
     onRow,
-    setPostPerPage,
     rowClassName,
     isListingsTable
   } = props;
 
-  const onShowSizeChange = (current: number, pageSize: number) => {
-    setPostPerPage?.(pageSize);
-  };
-
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    if (dataSource.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
+    return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
   };
 
   const anyTable = (
@@ -88,11 +75,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div
-              className="action-option"
-              onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
-            >
-              Edit <strong>{selectedRows}</strong>{page}(s)
+            <div className="action-option" onClick={selectedRows! === 1 ? handleSingleListingModal: handleBulkListingModal}>
+              Edit <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
         },
@@ -120,6 +104,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
       {showTableInfo && (
         <div className="table-info">
           <p className="total-selected">
+            {' '}
             <strong>{selectedRows}</strong> selected
           </p>
           {isListingsTable ? (
@@ -129,12 +114,10 @@ export const DataTable: React.FC<Props> = (props: Props) => {
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : (
-            anyTable
-          )}
+          ) : anyTable  }
           <p className="total-items">
             <strong>
-              {totalItems} {page} (s)
+              {totalItems} {page}
             </strong>
           </p>
         </div>
@@ -143,10 +126,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         className="table"
         columns={columns}
         dataSource={getData(current, pageSize)}
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection
-        }}
         pagination={false}
         rowClassName={rowClassName}
         onRow={onRow}
@@ -157,8 +136,6 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         current={current}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
-        showSizeChanger
-        onShowSizeChange={onShowSizeChange}
       />
     </div>
   );

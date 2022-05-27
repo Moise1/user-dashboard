@@ -270,7 +270,6 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
           <div className="search-options-area">
-            {/* <SearchOptions showSearchInput /> */}
             <Input
               autoFocus
               placeholder="Search....."
@@ -303,7 +302,6 @@ export const Orders = () => {
             setPostPerPage={setPostPerPage}
             current={current}
             onChange={setCurrent}
-            /*pagination={false}*/
             rowClassName="table-row"
             onRow={(record) => {
               return {
