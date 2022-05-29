@@ -78,7 +78,7 @@ export const CatalogFilters = (props: Props) => {
 export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
   const { RangePicker } = DatePicker;
 
-  const { visible, onClose } = props;
+  const { visible, onClose , closable} = props;
 
   const handleRangePicker = (value: RangeValue<Moment>, dateString: [string, string]) => {
     console.log(dateString);
@@ -91,6 +91,7 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
       placement="right"
       onClose={onClose}
       visible={visible}
+      closable={closable}
     >
       <div className="advanced-form-container">
         <Form layout="vertical" className="advanced-search-form">

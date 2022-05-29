@@ -15,6 +15,7 @@ import { BulkEditListings } from '../listings/BulkEditListings';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import moment from 'moment';
 import {
   getListings,
   getListingsSource,
@@ -22,12 +23,14 @@ import {
   getTerminateListings
 } from 'src/redux/listings/listingsThunk';
 import { ListingData, PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
-import moment from 'moment';
+import {useTableSearch} from '../../custom-hooks/useTableSearch';
 import '../../sass/listings.scss';
+import { ActiveListing } from 'src/redux/unmap';
+
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-  const [searchKey, setSearchKey] = useState<string>('');
+  const [searchTxt, setSearchTxt] = useState<null | string>(null);
   const [, setSearchFilterKey] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -39,13 +42,27 @@ export const Listings = () => {
   const { pending_listings } = useAppSelector((state) => state.pendingListings);
   const { terminate_listings } = useAppSelector((state) => state.terminateListings);
   const [activeListingsType, setActiveListingsType] = useState('activeTabListings');
-  const [listPending, setPendingList] = useState([]);
+  const [
+    ,
+    // listPending,
+    setPendingList
+  ] = useState([]);
 
-  const [terminatedList, setTerminatedList] = useState([]);
+  const { Search } = Input;
+  const [
+    ,
+    // terminatedList,
+    setTerminatedList
+  ] = useState([]);
   const [current, setCurrent] = useState<number>(1);
-  const [searchedArray, setSearchedArray] = useState([]);
+  const [
+    ,
+    // searchedArray,
+    setSearchedArray
+  ] = useState([]);
   const [, setMySelectedRows] = useState<TableDataTypes[]>([]);
 
+  const { filteredData } = useTableSearch({ searchTxt,listings});
   const dispatch = useAppDispatch();
 
   const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
@@ -210,9 +227,10 @@ export const Listings = () => {
   };
 
   useEffect(() => {
-    setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchKey)));
-    setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchKey)));
-  }, [listings, searchKey]);
+    setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchTxt)));
+    setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchTxt)));
+  }, [listings, searchTxt]);
+
 
   return (
     <Layout className="listings-container">
@@ -259,19 +277,17 @@ export const Listings = () => {
             </PopupModal>
           ) : (
             <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-              <EditSingleListing selectedRecordData={selectedRecordData}/>
+              <EditSingleListing selectedRecordData={selectedRecordData} />
             </PopupModal>
           )}
 
           <div className="search-options-area">
-            <Input
+            <Search
               autoFocus
               placeholder="Search....."
-              onChange={(e) => {
-                setSearchKey(e.target.value ? e.target.value : '');
-              }}
+              onChange={(e)=> setSearchTxt(e.target.value)}
             />
-            <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} />
+            <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} closable />
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
               {t('AdvancedSearch')}
             </TableActionBtns>
@@ -305,24 +321,26 @@ export const Listings = () => {
             handleBulkListingModal={handleBulkListingModal}
             columns={visibleCols}
             dataSource={
-              activeListingsType === 'activeTabListings'
-                ? listings
-                : activeListingsType === 'pendingTabListing'
-                  ? listPending
-                  : activeListingsType === 'terminateTypeListing'
-                    ? terminatedList
-                    : searchedArray.length > 0
-                      ? searchedArray
-                      : listings
+              // activeListingsType === 'activeTabListings'
+              //   ? listings
+              //   : activeListingsType === 'pendingTabListing'
+              //     ? listPending
+              //     : activeListingsType === 'terminateTypeListing'
+              //       ? terminatedList
+              //       : searchedArray.length > 0
+              //         ? searchedArray
+              //         : listings
+              filteredData as ActiveListing[]
             }
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
             totalItems={
-              activeListingsType === 'pendingTabListing'
-                ? pending_listings.length
-                : activeListingsType === 'terminateTypeListing'
-                  ? terminate_listings.length
-                  : listings.length
+              // activeListingsType === 'pendingTabListing'
+              //   ? pending_listings.length
+              //   : activeListingsType === 'terminateTypeListing'
+              //     ? terminate_listings.length
+              //     : listings.length
+              listings.length
             }
             pageSize={5}
             showTableInfo={true}
