@@ -94,9 +94,9 @@ export const ListNow = (/*props: props*/) => {
 
         {weList4u && (
           <Row>
-            <h3 className="title">{t('list4u')}</h3>
             <Col span={24}>
               <div className="list-card" onClick={() => window.open('https://hustlegotreal.com/en/listing-service/')}>
+                <h3 className="title">{t('list4u')}</h3>
                 <img src={we_icon} alt="icon" />
 
                 <div className="card-info">
