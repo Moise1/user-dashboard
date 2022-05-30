@@ -1,22 +1,24 @@
+// import { AsyncThunk } from '@reduxjs/toolkit';
 import { useState, useEffect } from 'react';
+import { PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
 import { ActiveListing } from 'src/redux/unmap';
 
 interface Props {
   searchTxt: string | null;
-  listings: ActiveListing[];
+  dataSource: () => Array<ListingsStatusType>;
 }
-
+export type ListingsStatusType = ActiveListing | PendingListings | TerminatedListings;
 type KeyType = string | number | null | undefined | ActiveListing;
 
-export const useTableSearch = ({ searchTxt, listings }: Props) => {
-  const [filteredData, setFilteredData] = useState<(ActiveListing | null)[]>([]);
-  const [origData, setOrigData] = useState<ActiveListing[]>([]);
+export const useTableSearch = ({searchTxt, dataSource}: Props) => {
+  const [filteredData, setFilteredData] = useState<(ListingsStatusType | null)[]>([]);
+  const [origData, setOrigData] = useState<ListingsStatusType[]>([]);
   const [searchIndex, setSearchIndex] = useState<{ allValues: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
-    const crawl = (record: ActiveListing, allValues?: string[]) => {
+    const crawl = (record: ListingsStatusType, allValues?: string[]) => {
       if (!allValues) allValues = [];
       for (const key in record) {
         if (typeof record[key as keyof KeyType] === 'object') crawl(record[key as keyof KeyType], allValues);
@@ -25,19 +27,19 @@ export const useTableSearch = ({ searchTxt, listings }: Props) => {
       return allValues;
     };
     const fetchData = async () => {
-      setOrigData(listings);
-      setFilteredData(listings);
-      const searchInd = listings.map((record: ActiveListing) => {
+      setOrigData(dataSource());
+      setFilteredData(dataSource());
+      const searchInd = dataSource().map((record: ListingsStatusType) => {
         const allValues = crawl(record);
         return {
           allValues: allValues.toString()
         };
       });
       setSearchIndex(searchInd);
-      if (listings) setLoading(false);
+      if (dataSource()) setLoading(false);
     };
     fetchData();
-  }, [listings]);
+  }, [dataSource]);
 
   useEffect(() => {
     if (searchTxt) {
@@ -45,7 +47,6 @@ export const useTableSearch = ({ searchTxt, listings }: Props) => {
         if (record.allValues.toLowerCase().indexOf(searchTxt.toLowerCase()) >= 0) {
           return origData[index];
         }
-
         return null;
       });
       setFilteredData(

@@ -1,5 +1,5 @@
 import { Drawer } from 'antd';
-import { ReactNode } from 'react';
+import { ReactNode, Dispatch, SetStateAction} from 'react';
 
 export interface AdvancedSearchProps {
   visible?: boolean;
@@ -11,6 +11,8 @@ export interface AdvancedSearchProps {
   extra?: ReactNode;
   width?: number | string;
   className?: string;
+  setSearchTxt?: Dispatch<SetStateAction<string | null>>;
+
 }
 
 type DrawerPlacement = 'right' | 'top' | 'left' | 'bottom';

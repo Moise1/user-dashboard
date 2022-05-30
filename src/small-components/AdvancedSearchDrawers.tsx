@@ -1,6 +1,5 @@
-import { Moment } from 'moment';
-import { Space, Button, Form, Input, Checkbox, DatePicker } from 'antd';
-import { RangeValue } from 'rc-picker/lib/interface';
+import moment from 'moment';
+import { Space, Button, Form, Input, Checkbox, DatePicker, DatePickerProps } from 'antd';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import '../sass/advanced-search.scss';
@@ -76,14 +75,14 @@ export const CatalogFilters = (props: Props) => {
 };
 
 export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
-  const { RangePicker } = DatePicker;
+  const { Search } = Input;
 
-  const { visible, onClose , closable} = props;
-
-  const handleRangePicker = (value: RangeValue<Moment>, dateString: [string, string]) => {
-    console.log(dateString);
-    console.log(value);
+  const { visible, onClose, closable, setSearchTxt } = props;
+  const handleDateChange: DatePickerProps['onChange'] = (date) => {
+    const dateValue = moment(date).format('YYYY-MM-DD');
+    setSearchTxt!(dateValue);
   };
+
   return (
     <AdvancedSearch
       className="listings-advanced-search"
@@ -97,32 +96,32 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
         <Form layout="vertical" className="advanced-search-form">
           <div className="listings-search-inputs">
             <Form.Item label="Asin">
-              <Input className="blue-input" />
+              <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} />
             </Form.Item>
 
             <Form.Item label="Sku">
-              <Input className="blue-input" />
+              <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} />
             </Form.Item>
 
             <Form.Item label="Cost Price">
               <div className="cost-price-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Min" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Max" />
               </div>
             </Form.Item>
 
             <Form.Item label="Source">
-              <Input className="blue-input" />
+              <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} />
             </Form.Item>
 
             <Form.Item label="Title">
-              <Input className="blue-input" />
+              <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} />
             </Form.Item>
 
             <Form.Item label="Sell Price">
               <div className="sell-price-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Min" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Max" />
               </div>
             </Form.Item>
           </div>
@@ -144,30 +143,30 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
           <div className="extra-options">
             <Form.Item label="Quantiy">
               <div className="quantiy-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Min" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Max" />
               </div>
             </Form.Item>
 
             <Form.Item label="Out of stock days">
               <div className="out-of-stock-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />{' '}
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Min" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Max" />{' '}
               </div>
             </Form.Item>
 
             <Form.Item label="Created On">
-              <RangePicker onChange={handleRangePicker} separator={<>-</>} className="date-picker" />
+              <DatePicker className="date-picker" onChange={handleDateChange} />
             </Form.Item>
 
             <Form.Item label="Created by">
-              <Input className="blue-input" placeholder="Contains..." />
+              <Search onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Contains..." />
             </Form.Item>
 
             <Form.Item label="Unsold days">
               <div className="unsold-days-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />{' '}
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Min" />
+                <Search className="" onChange={(e) => setSearchTxt!(e.target.value)} placeholder="Max" />{' '}
               </div>
             </Form.Item>
 
@@ -175,9 +174,6 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
               <Checkbox className="checkbox">Yes</Checkbox>
               <Checkbox className="checkbox">No</Checkbox>
             </Form.Item>
-          </div>
-          <div className="filters-section">
-            <SuccessBtn>Apply filters</SuccessBtn>
           </div>
         </Form>
       </div>

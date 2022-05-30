@@ -42,7 +42,7 @@ export const getListingsSource = createAsyncThunk(
   }
 );
 
-export const getPendingListing = createAsyncThunk(
+export const getPendingListings = createAsyncThunk(
   'listings/getPendingListing', 
   async (_, { rejectWithValue }) => {
     try {
@@ -54,7 +54,7 @@ export const getPendingListing = createAsyncThunk(
     }
   });
 
-export const getTerminateListings = createAsyncThunk(
+export const getTerminatedListings = createAsyncThunk(
   'listings/getTerminatedListings',
   async (_, { rejectWithValue }) => {
     try {

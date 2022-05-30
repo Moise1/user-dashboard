@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, Fragment } from 'react';
+import React, { useState, useMemo, useEffect, Fragment, useCallback } from 'react';
 import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { StatusBar } from '../../small-components/StatusBar';
@@ -11,7 +11,6 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { EditSingleListing } from '../listings/EditSingleListing';
 import { BulkEditListings } from '../listings/BulkEditListings';
-// import { SearchOptions } from '../../small-components/SearchOptions';
 import { CheckIcon } from '../common/Icons';
 import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
@@ -19,84 +18,49 @@ import moment from 'moment';
 import {
   getListings,
   getListingsSource,
-  getPendingListing,
-  getTerminateListings
+  getPendingListings,
+  getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import { ListingData, PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
-import {useTableSearch} from '../../custom-hooks/useTableSearch';
-import '../../sass/listings.scss';
+import { ListingData, PendingListings } from 'src/redux/listings/listingsSlice';
+import { ListingsStatusType, useTableSearch } from '../../custom-hooks/useTableSearch';
 import { ActiveListing } from 'src/redux/unmap';
+import '../../sass/listings.scss';
 
+const { Search } = Input;
 
 export const Listings = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [searchTxt, setSearchTxt] = useState<null | string>(null);
-  const [, setSearchFilterKey] = useState<Key[]>([]);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
 
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(1);
   const { listings, loading } = useAppSelector((state) => state.listings);
-  const { pending_listings } = useAppSelector((state) => state.pendingListings);
-  const { terminate_listings } = useAppSelector((state) => state.terminateListings);
-  const [activeListingsType, setActiveListingsType] = useState('activeTabListings');
-  const [
-    ,
-    // listPending,
-    setPendingList
-  ] = useState([]);
-
-  const { Search } = Input;
-  const [
-    ,
-    // terminatedList,
-    setTerminatedList
-  ] = useState([]);
+  const { pendingListings } = useAppSelector((state) => state.pendingListings);
+  const { terminatedListings } = useAppSelector((state) => state.terminatedListings);
+  const [tabStatus, setTabStatus] = useState('activeTab');
   const [current, setCurrent] = useState<number>(1);
-  const [
-    ,
-    // searchedArray,
-    setSearchedArray
-  ] = useState([]);
   const [, setMySelectedRows] = useState<TableDataTypes[]>([]);
 
-  const { filteredData } = useTableSearch({ searchTxt,listings});
   const dispatch = useAppDispatch();
 
   const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
-  const [_, setDataRender] = useState(false);
 
   useEffect(() => {
     dispatch(getListings());
     dispatch(getListingsSource());
-    dispatch(getPendingListing());
-    dispatch(getTerminateListings());
-
-    setPendingList(
-      pending_listings.length &&
-        pending_listings.map((item: PendingListings) => ({
-          ...item,
-          createdOn: moment(item.createdOn).format('DD/MM/YY/ hh:mm')
-        }))
-    );
-
-    setTerminatedList(
-      terminate_listings.length &&
-        terminate_listings.map((item: TerminatedListings) => ({
-          ...item,
-          createdOn: moment(item.createdOn).format('DD/MM/YY/ hh:mm')
-        }))
-    );
-  }, [getListings, getListingsSource, getPendingListing, activeListingsType]);
+    dispatch(getPendingListings());
+    dispatch(getTerminatedListings());
+  }, [getListings, getListingsSource, getPendingListings, tabStatus]);
 
   const tableColumns = [
     {
       title: t('Listings.Column.Img'),
       dataIndex: '',
       key: '1',
-      visible: activeListingsType === 'pendingTabListing' ? false : true,
+      visible: tabStatus === 'pendingTab' ? false : true,
       render: (record: PendingListings) => (
         <div className="img-container">
           {record.imageUrl ? <img src={record.imageUrl} alt="image" className="record-img" /> : 'N/A'}
@@ -108,7 +72,8 @@ export const Listings = () => {
       title: t('Listings.Column.Source'),
       dataIndex: 'sourcePath',
       key: '2',
-      visible: true
+      visible: true,
+      width: 70
     },
     {
       title: t('Listings.Column.Item no.'),
@@ -127,12 +92,11 @@ export const Listings = () => {
       title: t('Listings.Column.Sell'),
       dataIndex: 'sell',
       key: '5',
-      visible:
-        activeListingsType === 'terminateTypeListing' || activeListingsType === 'pendingTabListing' ? false : true
+      visible: tabStatus === 'terminateTypeListing' || tabStatus === 'pendingTabListing' ? false : true
     },
     {
       title: t('Listings.Column.Cost'),
-      dataIndex: 'cost',
+      dataIndex: 'price',
       key: '6',
       visible: true
     },
@@ -151,39 +115,62 @@ export const Listings = () => {
     {
       title: t('Listings.Column.Stock'),
       dataIndex: 'stock',
-      key: '9',
-      visible: activeListingsType === 'activeTabListings' ? true : false
+      key: '10',
+      visible: tabStatus === 'activeTab' ? true : false
     },
     {
       title: t('Listings.Column.Options'),
       dataIndex: 'options',
-      key: '10',
+      key: '11',
+      visible: false
+    },
+    {
+      title: t('Listings.Column.CreatedOn'),
+      dataIndex: '',
+      key: '12',
+      render: (record: ActiveListing) => moment(record.createdOn).format('DD-MM-YYYY'),
       visible: false
     }
   ];
   const [columns, setColumns] = useState(tableColumns);
 
   const handleChangeTab = (e: React.MouseEvent): void => {
-    const id = e.currentTarget.getAttribute('id');
-    setActiveTab(parseInt(id!));
-    setActiveListingsType('activeTabListings');
-    dispatch(getListings());
+    const id = parseInt(e.currentTarget.getAttribute('id')!);
+    switch (id) {
+    case 1:
+      setActiveTab(id);
+      setTabStatus('activeTab');
+      dispatch(getListings());
+      break;
+    case 2:
+      setActiveTab(id);
+      setTabStatus('pendingTab');
+      dispatch(getPendingListings());
+      break;
+    case 3:
+      setActiveTab(id);
+      setTabStatus('terminatedTab');
+      dispatch(getTerminatedListings());
+      break;
+    default:
+      break;
+    }
   };
 
-  const handleChangePendingTab = (e: React.MouseEvent): void => {
-    const id = e.currentTarget.getAttribute('id');
-    setActiveTab(parseInt(id!));
-    setActiveListingsType('pendingTabListing');
-    setDataRender((prev) => !prev);
-    dispatch(getPendingListing());
-  };
+  const dataSource = useCallback(() => {
+    switch (tabStatus) {
+    case 'activeTab':
+      return listings;
+    case 'pendingTab':
+      return pendingListings;
+    case 'terminatedTab':
+      return terminatedListings;
+    default:
+      break;
+    }
+  }, [tabStatus]);
 
-  const handleChangeTerminateTab = (e: React.MouseEvent): void => {
-    const id = e.currentTarget.getAttribute('id');
-    setActiveTab(parseInt(id!));
-    setActiveListingsType('terminateTypeListing');
-    dispatch(getTerminateListings());
-  };
+  const { filteredData } = useTableSearch({ searchTxt, dataSource });
 
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: TableDataTypes[] | undefined) => {
     setMySelectedRows(selectedRows!);
@@ -216,21 +203,18 @@ export const Listings = () => {
   const handleBulkListingModal = () => setBulkEditOpen(!bulkEditOpen);
 
   const handleCheckBox = (e: CheckboxChangeEvent): void => {
-    const cloneColumns = tableColumns.map((col) => {
+    const cloneColumns = columns.map((col) => {
       if (col.key === e.target.value) {
-        return { ...col, visible: e.target.checked };
+        return {
+          ...col,
+          visible: !col.visible
+        };
       } else {
         return col;
       }
     });
     setColumns(cloneColumns);
   };
-
-  useEffect(() => {
-    setSearchedArray(listings.filter((e: ListingData) => e.id === Number(searchTxt)));
-    setSearchFilterKey(listings.filter((e: ListingData) => e.id === Number(searchTxt)));
-  }, [listings, searchTxt]);
-
 
   return (
     <Layout className="listings-container">
@@ -245,7 +229,7 @@ export const Listings = () => {
               <Row className="listings-cols">
                 <Col>
                   <ul className="cols-list">
-                    {tableColumns.map((col) => (
+                    {columns.map((col) => (
                       <li key={col.key}>
                         <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
                           {col.title}
@@ -263,7 +247,7 @@ export const Listings = () => {
               </Row>
               <div className="show-columns-action-btns">
                 <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
-                <SuccessBtn handleClose={handleApplyChanges}>
+                <SuccessBtn handleConfirm={handleApplyChanges}>
                   <CheckIcon />
                   {t('ApplyChanges')}
                 </SuccessBtn>
@@ -282,12 +266,13 @@ export const Listings = () => {
           )}
 
           <div className="search-options-area">
-            <Search
-              autoFocus
-              placeholder="Search....."
-              onChange={(e)=> setSearchTxt(e.target.value)}
+            <Search autoFocus placeholder="Search....." onChange={(e) => setSearchTxt(e.target.value)} />
+            <ListingsAdvancedSearch
+              visible={drawerOpen}
+              onClose={handleSideDrawer}
+              closable
+              setSearchTxt={setSearchTxt}
             />
-            <ListingsAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} closable />
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
               {t('AdvancedSearch')}
             </TableActionBtns>
@@ -297,20 +282,20 @@ export const Listings = () => {
             <StatusBtn
               title={`${t('ActiveListings')}`}
               changeTab={handleChangeTab}
-              className={activeTab === 0 ? 'active-tab' : ''}
-              id="0"
-            />
-            <StatusBtn
-              title={`${t('PendingListings')}`}
-              changeTab={handleChangePendingTab}
               className={activeTab === 1 ? 'active-tab' : ''}
               id="1"
             />
             <StatusBtn
-              title={`${t('TerminatedListings')}`}
-              changeTab={handleChangeTerminateTab}
+              title={`${t('PendingListings')}`}
+              changeTab={handleChangeTab}
               className={activeTab === 2 ? 'active-tab' : ''}
               id="2"
+            />
+            <StatusBtn
+              title={`${t('TerminatedListings')}`}
+              changeTab={handleChangeTab}
+              className={activeTab === 3 ? 'active-tab' : ''}
+              id="3"
             />
           </StatusBar>
 
@@ -320,28 +305,10 @@ export const Listings = () => {
             handleSingleListingModal={handleSingleListingModal}
             handleBulkListingModal={handleBulkListingModal}
             columns={visibleCols}
-            dataSource={
-              // activeListingsType === 'activeTabListings'
-              //   ? listings
-              //   : activeListingsType === 'pendingTabListing'
-              //     ? listPending
-              //     : activeListingsType === 'terminateTypeListing'
-              //       ? terminatedList
-              //       : searchedArray.length > 0
-              //         ? searchedArray
-              //         : listings
-              filteredData as ActiveListing[]
-            }
+            dataSource={filteredData as ListingsStatusType[]}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
-            totalItems={
-              // activeListingsType === 'pendingTabListing'
-              //   ? pending_listings.length
-              //   : activeListingsType === 'terminateTypeListing'
-              //     ? terminate_listings.length
-              //     : listings.length
-              listings.length
-            }
+            totalItems={listings.length}
             pageSize={5}
             showTableInfo={true}
             current={current}
