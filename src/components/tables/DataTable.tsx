@@ -9,8 +9,16 @@ import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
+import { ListingsStatusType } from 'src/custom-hooks/useTableSearch';
 
-export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+export type TableDataTypes = 
+ListingsItems |
+ListingData | 
+OrderData | 
+Rule | 
+SourceConfig | 
+UserAssistant |
+Channel | ListingsStatusType;
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];

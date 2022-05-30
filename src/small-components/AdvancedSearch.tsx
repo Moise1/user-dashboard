@@ -1,9 +1,9 @@
 import { Drawer } from 'antd';
-import { ReactNode } from 'react';
-import { CloseIcon } from '../small-components/CloseIcon';
+import { ReactNode, Dispatch, SetStateAction} from 'react';
 
 export interface AdvancedSearchProps {
   visible?: boolean;
+  closable?: boolean;
   placement?: DrawerPlacement;
   onClose?: () => void;
   title?: string;
@@ -11,12 +11,14 @@ export interface AdvancedSearchProps {
   extra?: ReactNode;
   width?: number | string;
   className?: string;
+  setSearchTxt?: Dispatch<SetStateAction<string | null>>;
+
 }
 
 type DrawerPlacement = 'right' | 'top' | 'left' | 'bottom';
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
-  const { visible, placement, onClose, title, children, extra, width, className } = props;
+  const { visible, placement, onClose, title, children, extra, width, className, closable } = props;
   return (
     <Drawer
       className={className}
@@ -24,7 +26,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
       visible={visible}
       placement={placement}
       onClose={onClose}
-      closeIcon={<CloseIcon />}
+      closable={closable}
       extra={extra}
       width={width}
     >

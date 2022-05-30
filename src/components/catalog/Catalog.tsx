@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Card } from 'antd';
 import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
@@ -16,7 +16,9 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import '../../sass/catalog.scss';
 
-export type ProductElementEvent = React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<SVGElement, MouseEvent>;
+export type ProductElementEvent =
+  | React.MouseEvent<HTMLDivElement, MouseEvent>
+  | React.MouseEvent<SVGElement, MouseEvent>;
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -51,7 +53,7 @@ export const Catalog = () => {
       setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
       cardElement.classList.add('selected-product-card');
-      setAllProducts(prevState => [...prevState, selectedProductData]);
+      setAllProducts((prevState) => [...prevState, selectedProductData]);
     }
   };
 
@@ -82,6 +84,9 @@ export const Catalog = () => {
             )}
           </div>
         </div>
+        <a href="https://hustlegotreal.com/en/listing-service/" target="_blank" className="list-link" rel="noreferrer">
+          Not sure what to list?  We do it for you.
+        </a>
         <div className="filters-container">
           <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
         </div>
@@ -123,7 +128,7 @@ export const Catalog = () => {
       >
         <CatalogSource handleClose={handleSourceModal} />
       </PopupModal>
-
+      
       <PopupModal
         open={allProductsModalOpen}
         handleClose={handleAllProudctsModal}
