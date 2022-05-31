@@ -182,6 +182,12 @@ export const Listings = () => {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange
+    // hideSelectAll: true,
+    // getCheckboxProps: () =>{
+    //   return {
+    //     style: {display: 'none'}
+    //   };
+    // },
   };
 
   const handleClose = () => {
@@ -213,9 +219,31 @@ export const Listings = () => {
         return col;
       }
     });
+    localStorage.setItem('cloneCols', JSON.stringify(cloneColumns));
     setColumns(cloneColumns);
   };
 
+  
+  const displayCols = () => {
+    const cloneCols = localStorage.getItem('cloneCols');
+    if (JSON.parse(cloneCols!)?.length) {
+      return JSON.parse(cloneCols!)?.map((col: { title: string; dataIndex: string; key: string; visible: boolean }) => (
+        <li key={col.key}>
+          <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
+            {col.title}
+          </Checkbox>
+        </li>
+      ));
+    } else {
+      return columns.map((col) => (
+        <li key={col.key}>
+          <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
+            {col.title}
+          </Checkbox>
+        </li>
+      ));
+    }
+  };
   return (
     <Layout className="listings-container">
       {loading ? (
@@ -228,15 +256,7 @@ export const Listings = () => {
             <Card className="listings-card">
               <Row className="listings-cols">
                 <Col>
-                  <ul className="cols-list">
-                    {columns.map((col) => (
-                      <li key={col.key}>
-                        <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
-                          {col.title}
-                        </Checkbox>
-                      </li>
-                    ))}
-                  </ul>
+                  <ul className="cols-list">{displayCols()}</ul>
                 </Col>
                 <Col>
                   <div className="cols-amount">
