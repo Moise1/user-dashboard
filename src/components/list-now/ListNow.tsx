@@ -6,7 +6,7 @@ import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { Button, Row, Col } from 'antd';
 import { ArrowRight } from 'react-feather';
-import '../../sass/list-now.scss';
+import '../../sass/list-now/list-now.scss';
 import { useHistory } from 'react-router-dom';
 
 export interface state {

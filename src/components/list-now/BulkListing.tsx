@@ -2,7 +2,7 @@
 import { t } from '../../utils/transShim';
 import { Row, Col } from 'antd';
 import { ArrowRight } from 'react-feather';
-import '../../sass/list-now.scss';
+import '../../sass/list-now/list-now.scss';
 
 export const BulkListing = (/*props: props*/) => {
   return (
