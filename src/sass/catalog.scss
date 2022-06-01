@@ -16,27 +16,27 @@
     border-radius: 25px 25px 0px 0px;
     background: $primary-bg;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: $spacer;
+    .list-link {
+      font-weight: normal;
+      &:hover {
+        color: $corporative-color;
+      }
+    }
     .view-clear-all {
       display: flex;
-      justify-content: space-between;
+      column-gap: 5rem;
       width: 40vw;
-      .clear-list-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .success-btn {
-          display: none;
-        }
+      .success-btn {
+        display: none;
       }
     }
 
     .filters-container {
       display: flex;
       justify-content: flex-end;
-      width: 100%;
     }
 
     .all-selected-products,
@@ -223,15 +223,15 @@
     .view-clear-all {
       display: grid !important;
       width: 50% !important;
-      .clear-list-container{
+      .clear-list-container {
         margin-top: 0.8rem;
         row-gap: 1rem;
         display: flex;
         flex-direction: column-reverse;
       }
-    };
+    }
 
-    .filters-container{
+    .filters-container {
       width: auto !important;
       margin-left: auto;
     }
