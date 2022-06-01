@@ -21,7 +21,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
-// import months from 'months';
 import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
@@ -38,11 +37,11 @@ import { Moment } from 'moment';
 import { Sale } from 'src/redux/sales/salesSlice';
 import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
-import '../../sass/dashboard.scss';
-import '../../sass/action-btns.scss';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import '../../sass/dashboard.scss';
+import '../../sass/action-btns.scss';
 
 interface ProductQuota {
   quota: number;
@@ -70,8 +69,6 @@ export const Dashboard = () => {
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
   const [current] = useState<number>(1);
-
-  // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const onSearch = (value: string) => console.log('searched value', value);
 
@@ -127,29 +124,6 @@ export const Dashboard = () => {
     }
   ];
 
-  // const onSelectChange = (selectedRowKeys: Key[]) => {
-  //   setSelectedRowKeys(selectedRowKeys);
-  // };
-
-  // const rowSelection = {
-  //   selectedRowKeys,
-  //   onChange: onSelectChange
-  // };
-
-  // const [columns, setColumns] = useState(tableColumns);
-
-  // const handleCheckBox = (e: CheckboxChangeEvent): void => {
-  //   const cloneColumns = columns.map((col) => {
-  //     if (col.key === e.target.value) {
-  //       return { ...col, visible: e.target.checked };
-  //     } else {
-  //       return col;
-  //     }
-  //   });
-  //   setColumns(cloneColumns);
-  // };
-
-  // console.log(handleCheckBox);
 
   const onCopyText = () => {
     setIsCopied(true);
@@ -301,7 +275,6 @@ export const Dashboard = () => {
               </div>
             </div>
           </Col>
-
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
@@ -311,8 +284,6 @@ export const Dashboard = () => {
               columns={columns}
               pageSize={2}
               total={channels.length}
-              // rowSelection={rowSelection}
-              // selectedRows={selectedRowKeys.length}
             />
             <Link to="/add-channel" className="alternative-link">
               Add new channel

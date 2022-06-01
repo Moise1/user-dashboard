@@ -34,9 +34,9 @@ export const SourcesSettings = () => {
   const [markup, setMarkup] = useState<number | null | undefined>();
   const [markupSelect, setMarkupSelect] = useState<string | null | undefined>();
   const [templateId, setTemplateId] = useState<number | null | undefined>();
-  const [monitorStock, setMonitorStock] = useState<boolean | null | undefined>();
-  const [monitorPrice, setMonitorPrice] = useState<boolean | null | undefined>();
-  const [monitorPriceDecrease, setMonitorPriceDecrease] = useState<boolean | null | undefined>();
+  const [monitorStock, setMonitorStock] = useState<string | null | undefined>();
+  const [monitorPrice, setMonitorPrice] = useState<string | null | undefined>();
+  const [monitorPriceDecrease, setMonitorPriceDecrease] = useState<string | null | undefined>();
   const [monitorPriceDecreasePercentage, setmonitorPriceDecreasePercentage] = useState<number | undefined>();
   const [returns, setReturns] = useState<string | null | undefined>();
   const [dispatchDays, setDispatchDays] = useState<number | null>();
@@ -46,7 +46,6 @@ export const SourcesSettings = () => {
   const [defaultLocationCountry, setDefaultLocationCountry] = useState<string | null | undefined>();
   const [maxDeliveryDays, setMaxDeliveryDays] = useState<number | null | undefined>();
   const [primeOnly, setPrimeOnly] = useState<boolean | null | undefined>();
-
 
   const initialStateSourceSettings = () => {
     setSelectedAccount('Select Supplier');
@@ -72,7 +71,7 @@ export const SourcesSettings = () => {
   });
 
   //const shippings = sources.shippingOptions[3];
-  localStorage.setItem('shipping', sources);
+  //localStorage.setItem('shipping', sources);
 
   //const shippings = shipping;
   //.map((c: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined) => {
@@ -113,7 +112,6 @@ export const SourcesSettings = () => {
   const handleTemplateChange = (value: string) => {
     setTemplateId(Number(value));
   };
-
 
   function loadDefault() {
 
@@ -198,14 +196,24 @@ export const SourcesSettings = () => {
         setTemplateId(c.templateId ? c.templateId : undefined);
 
         // monitor stock
-        setMonitorStock(c.monitorStock);
+        if (c.monitorStock === false) {
+          setMonitorStock('false');
+        } else if (c.monitorStock === true) {
+          setMonitorStock('true');
+        }
 
         // monitor price
-        setMonitorPrice(c.monitorPrice);
-
+        if (c.monitorPrice === false) {
+          setMonitorPrice('false');
+        } else if (c.monitorStock === true) {
+          setMonitorPrice('true');
+        }
         // monitor price decrease
-        setMonitorPriceDecrease(c.monitorPriceDecrease);
-        
+        if (c.monitorPriceDecrease === false) {
+          setMonitorPriceDecrease('false');
+        } else if (c.monitorStock === true) {
+          setMonitorPriceDecrease('true');
+        }
         // monitor price decrease Percentage
         setmonitorPriceDecreasePercentage(c.monitorPriceDecreasePercentage);
         if (c.monitorPriceDecreasePercentage) {
@@ -250,21 +258,37 @@ export const SourcesSettings = () => {
   };
 
   function save() {
-    //if (primeOnly) {
+    
+    let _monitorPrice;
+    if (monitorPrice === 'true') {
+      _monitorPrice = true;
+    } else if (monitorPrice === 'false') {
+      _monitorPrice = false;
+    }
 
-    //}
-    //else {
+    let _monitorPriceDecrease;
+    if (monitorPriceDecrease === 'true') {
+      _monitorPriceDecrease = true;
+    } else if (monitorPriceDecrease === 'false') {
+      _monitorPriceDecrease = false;
+    }
 
-    //}
+    let _monitorStock;
+    if (monitorStock === 'true') {
+      _monitorStock = true;
+    } else if (monitorStock === 'false') {
+      _monitorStock = false;
+    }
+
     const value: SourceConfigSave[] = [{
       sourceId: sourceId ? sourceId : 0,
       userId: userId ? userId : '',
       sourceName: sourceName ? sourceName : '',
       markup: markup ? markup : undefined,
-      monitorPrice: monitorPrice ? monitorPrice : undefined,
-      monitorPriceDecrease: monitorPriceDecrease ? monitorPriceDecrease : undefined,
+      monitorPrice: _monitorPrice ? _monitorPrice : undefined,
+      monitorPriceDecrease: _monitorPriceDecrease ? _monitorPriceDecrease : undefined,
       monitorPriceDecreasePercentage: monitorPriceDecreasePercentage,
-      monitorStock: monitorStock ? monitorStock : undefined,
+      monitorStock: _monitorStock ? _monitorStock : undefined,
       dispatchDays: dispatchDays ? dispatchDays : undefined,
       defaultLocationPostcode: defaultLocationPostcode ? defaultLocationPostcode : '',
       maxDeliveryDays: maxDeliveryDays ? maxDeliveryDays : undefined,
@@ -272,12 +296,13 @@ export const SourcesSettings = () => {
       templateId: templateId ? templateId : undefined,
       defaultLocationCity: defaultLocationCity ? defaultLocationCity : '',
       defaultLocationCountry: defaultLocationCountry ? defaultLocationCountry : '',
-      defaultShipping: ''
+      defaultShipping: '',
+      globalShippingProgram: globalShippingProgram ? globalShippingProgram : undefined,
+      primeOnly: primeOnly ? primeOnly : undefined
     }];
 
     onSave(value);
   }
-
 
   const handleOptionChange = (value: string) => {
     loadSource(value);
@@ -294,16 +319,15 @@ export const SourcesSettings = () => {
   const handleMonitorStock = (value: string) => {
     if (value === 'false') {
       setHideMonitorStock(true);
-      setMonitorStock(false);
     }
     else {
       setHideMonitorStock(false);
-      setMonitorStock(true);
     }
+    setMonitorStock(value);
   };
 
   const handlMonitorPrice = (value: string) => {
-    setMonitorPrice(Boolean(value));
+    setMonitorPrice(value);
   };
 
   const handlePriceChange = (value: string) => {
@@ -313,7 +337,7 @@ export const SourcesSettings = () => {
     else {
       setHidePriceDecrease(false);
     }
-    setMonitorPriceDecrease(Boolean(value));
+    setMonitorPriceDecrease(value);
   };
 
   const handleCustomPriceChange = (value: string) => {
@@ -428,7 +452,7 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handleMonitorStock} value={monitorStock ? 'true' : 'Defined by Settings(Yes)'}>
+            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handleMonitorStock} value={monitorStock ? monitorStock : 'Defined by Settings(Yes)'}>
               <Option key="0">Defined by Settings(Yes)</Option>
               <Option value="true" key="1">Yes</Option>
               <Option value="false" key="2">No</Option>
@@ -445,7 +469,7 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect defaultValue="Defined by Settings(yes)" value={monitorPrice ? 'true' : 'Defined by Settings(Yes)'} onChange={handlMonitorPrice}>
+            <SimpleSelect defaultValue="Defined by Settings(yes)" value={monitorPrice ? monitorPrice : 'Defined by Settings(Yes)'} onChange={handlMonitorPrice}>
               <Option key="0">Defined by Settings(Yes)</Option>
               <Option value="true" key="1">Yes</Option>
               <Option value="false" key="2">No</Option>
@@ -474,7 +498,7 @@ export const SourcesSettings = () => {
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
             <br />
-            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handlePriceChange} value={monitorPriceDecrease ? 'true' : 'Defined by Settings(yes)'}>
+            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handlePriceChange} value={monitorPriceDecrease ? monitorPriceDecrease : 'Defined by Settings(yes)'}>
               <Option key="0">Defined by Settings(Yes)</Option>
               <Option value="true" key="1">Yes</Option>
               <Option value="false" key="2">No</Option>
@@ -609,7 +633,7 @@ export const SourcesSettings = () => {
           {sourceOptions}
         </SimpleSelect>
         <div className="action-btns">
-          <Button onClick={save}>{t('SaveChanges')}</Button>
+          <Button type="primary" onClick={save}>{t('SaveChanges')}</Button>
           <Button onClick={loadDefault}>{t('ResetToDefault')}</Button>
         </div>
       </div>

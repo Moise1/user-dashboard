@@ -9,8 +9,18 @@ import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
+import { ListingsStatusType } from 'src/custom-hooks/useTableSearch';
+import '../../sass/data-table.scss';
 
-export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+export type TableDataTypes =
+  | ListingsItems
+  | ListingData
+  | OrderData
+  | Rule
+  | SourceConfig
+  | UserAssistant
+  | Channel
+  | ListingsStatusType;
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
@@ -31,6 +41,7 @@ interface Props {
   onRow?: (record: TableDataTypes) => { onClick: () => void };
   rowSelection?: {
     selectedRowKeys: Key[];
+    type?: 'checkbox'
     onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
   };
   isListingsTable?: boolean;
@@ -53,7 +64,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     onRow,
     setPostPerPage,
     rowClassName,
-    isListingsTable
+    isListingsTable,
   } = props;
 
   const onShowSizeChange = (current: number, pageSize: number) => {
@@ -117,7 +128,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     />
   );
   return (
-    <div className="data-table">
+    <div className="data-table-container">
       {showTableInfo && (
         <div className="table-info">
           <p className="total-selected">
@@ -144,15 +155,13 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         className="table"
         columns={columns}
         dataSource={getData(current, pageSize)}
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection
-        }}
+        rowSelection={rowSelection}
         pagination={false}
         rowClassName={rowClassName}
         onRow={onRow}
       />
       <Pagination
+        className="pagination"
         onChange={onChange}
         total={totalItems}
         current={current}
@@ -164,3 +173,4 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     </div>
   );
 };
+
