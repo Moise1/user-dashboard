@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { saveAutoOrdering, getAutoOrdering } from './autoOrderingThunk';
 
-export interface autoOrderingData {
-  channelOAuthIds?: number;
-  supplierId?: number;
-  sourceId?: number;
+export interface AutoOrderingData {
+  channelOAuthIds?: string | number;
+  supplierId?: string | number;
+  sourceId?: string | number;
+  supplier?: string | number;
+  feepercentage?: number;
+  id?: string | number;
+  fee?: number;
+  name?: string;
+  url?: string;
+  enabled?: boolean;
 }
 
 const autoOrderingIntialState = {

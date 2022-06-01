@@ -9,8 +9,16 @@ import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
-
-export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
+export type TableDataTypes =
+  | ListingsItems
+  | ListingData
+  | OrderData
+  | Rule
+  | SourceConfig
+  | UserAssistant
+  | Channel
+  | AutoOrderingData;
 
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
@@ -55,6 +63,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     rowClassName,
     isListingsTable
   } = props;
+
+  console.log('The data coming is', dataSource);
 
   const onShowSizeChange = (current: number, pageSize: number) => {
     setPostPerPage?.(pageSize);
@@ -140,6 +150,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           </p>
         </div>
       )}
+
       <Table
         className="table"
         columns={columns}
@@ -152,6 +163,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         rowClassName={rowClassName}
         onRow={onRow}
       />
+
       <Pagination
         onChange={onChange}
         total={totalItems}

@@ -1,57 +1,187 @@
 import { useEffect, useState } from 'react';
 import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
+import { CheckOutlined } from '@ant-design/icons';
 import { DataTable } from '../tables/DataTable';
-import { SearchOptions } from '../../small-components/SearchOptions';
-import { saveAutoOrdering, getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
+import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
+import { eCountry } from './eCountry';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 
-interface rawSettingInterface {
-  key: number;
-  value: string;
-}
 export const AutoOrderingConfiguration = () => {
-  const [channelOAuthId] = useState(590881);
-  const [supplierId] = useState(333);
-  const [sourceId] = useState(1);
-  const [rawSetting, setRawSetting] = useState<rawSettingInterface[]>([]);
   const dispatch = useAppDispatch();
-  const { configureStore, loading } = useAppSelector((state) => state.getAutoOrdering);
-  console.log('the configureStore is', configureStore);
-  console.log('the rawSetting is ', rawSetting);
+  const [current, setCurrent] = useState<number>(1);
+  const [postPerPage, setPostPerPage] = useState<number>(10);
+  const { loading } = useAppSelector((state) => state.getAutoOrdering);
+
   useEffect(() => {
-    setRawSetting([
-      { key: 1, value: 'false' },
-      { key: 5, value: 'test' },
-      { key: 6, value: 'testo' },
-      { key: 8, value: 'fake' }
-    ]);
     dispatch(getAutoOrdering());
-    dispatch(saveAutoOrdering({ channelOAuthId, supplierId, sourceId }));
   }, []);
 
-  const columns = [
+  const dataSource = [
+    {
+      id: 1,
+      name: 'Amazon',
+      url: 'www.amazon.co.uk',
+      isoCountry: eCountry.UK,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 30,
+      name: 'Amazon',
+      url: 'www.amazon.com',
+      isoCountry: eCountry.US,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 140,
+      name: 'Amazon',
+      url: 'www.amazon.com.au',
+      isoCountry: eCountry.AU,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 141,
+      name: 'Amazon',
+      url: 'www.amazon.de',
+      isoCountry: eCountry.DE,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 3,
+      name: 'Costco',
+      url: 'www.costco.co.uk',
+      isoCountry: eCountry.UK,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 78,
+      name: 'Costco',
+      url: 'www.costco.com',
+      isoCountry: eCountry.US,
+      fee: 1,
+      enabled: true
+    },
+    {
+      id: 10,
+      name: 'Robert Dyas',
+      url: 'www.robertdyas.co.uk',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 5,
+      name: 'UK Banggood',
+      url: 'uk.banggood.com',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 56,
+      name: 'US Banggood',
+      url: 'us.banggood.com',
+      isoCountry: eCountry.US,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 57,
+      name: 'Banggood Com',
+      url: 'www.banggood.com',
+      isoCountry: eCountry.US,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 70,
+      name: 'Banggood Com',
+      url: 'www.banggood.com',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 59,
+      name: 'Costway',
+      url: 'www.costway.co.uk',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 31,
+      name: 'Walmart',
+      url: 'www.walmart.com',
+      isoCountry: eCountry.US,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 221,
+      name: 'SaleYee',
+      url: 'www.saleyee.com',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 222,
+      name: 'SaleYee',
+      url: 'www.saleyee.com',
+      isoCountry: eCountry.US,
+      fee: 0,
+      enabled: true
+    },
+    {
+      id: 185,
+      name: 'Dropship Traders',
+      url: 'www.dropship-traders.co.uk',
+      isoCountry: eCountry.UK,
+      fee: 0,
+      enabled: false
+    }
+  ];
+  //To not show the duplicated suppliers and to sort autoOrders data alphabetically
+  const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values());
+  uniqueData.sort((a, b) => a.name.localeCompare(b.name));
+  const tableColumns = [
     {
       title: t('AutoOrderingConfiguration.Supplier'),
-      dataIndex: 'markup',
-      key: 'markup'
+      dataIndex: 'name',
+      key: 'name'
     },
     {
       title: t('AutoOrderingConfiguration.Free'),
-      dataIndex: 'monitorStock',
-      key: 'monitorStock'
+      dataIndex: '',
+      key: 'free',
+      render: (render: AutoOrderingData) => (
+        <p className="fs-14">{render.fee === 0 ? <CheckOutlined className="free-icon" /> : ' '}</p>
+      )
     },
     {
-      title: t('AutoOrderingConfiguration.FreePercentage'),
-      dataIndex: 'monitorPrice',
-      key: 'monitorPrice'
+      title: t('AutoOrderingConfiguration.FeePercentage'),
+      dataIndex: '',
+      key: 'feepercentage',
+      render: (render: AutoOrderingData) => <p className="fs-14">{render.fee === 1 ? `${render.fee}%` : ' '} </p>
     },
     {
       title: t('AutoOrderingConfiguration.Status'),
-      dataIndex: 'monitorDecrease',
-      key: 'monitorDecrease'
+      dataIndex: '',
+      key: 'status',
+      render: (render: AutoOrderingData) => (
+        <span className={render.enabled === true ? 'enableBtn' : 'disableBtn'}>
+          {render.enabled === true ? 'Enabled' : 'Disabled'}
+        </span>
+      )
     }
   ];
 
@@ -61,11 +191,18 @@ export const AutoOrderingConfiguration = () => {
         <Spin />
       ) : (
         <>
-          <div className="search-options-area">
-            <SearchOptions showSearchInput />
-          </div>
           <div className="sources-table-container">
-            <DataTable columns={columns} dataSource={configureStore} pageSize={6} total={configureStore?.length} />
+            <DataTable
+              page="autoordering"
+              columns={tableColumns}
+              dataSource={uniqueData}
+              totalItems={uniqueData?.length}
+              pageSize={postPerPage}
+              setPostPerPage={setPostPerPage}
+              current={current}
+              onChange={setCurrent}
+              rowClassName="table-row"
+            />
           </div>
         </>
       )}
