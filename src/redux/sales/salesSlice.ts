@@ -7,7 +7,7 @@ export interface Sale {
   revenue?: number;
   sourcePrice?: number;
   totalTax?: number;
-  period: number;
+  period: number | string;
   from: string;
   to?: string;
 }

@@ -1,9 +1,12 @@
 @import 'general.config';
 
 // large ad extra large screens.
-.data-table-container{
-  height: auto;
-}
+.stores {
+  .data-table-container {
+    height: auto;
+  }
+};
+
 .no-api-title {
   display: flex;
   justify-content: space-between;
@@ -15,12 +18,12 @@
     color: $corporative-color;
     text-decoration: underline;
   }
-};
-.add-servers{
+}
+.add-servers {
   align-items: center;
   display: inline;
-  column-gap: .3rem;
-  .footer-link{
+  column-gap: 0.3rem;
+  .footer-link {
     margin-left: 2px;
   }
 }
@@ -132,6 +135,15 @@
     .graph-cntrlers {
       display: flex;
       justify-content: space-between;
+      border: 2px solid red;
+      margin-bottom: 1rem;
+      .selector{
+        border: 2px solid red;
+        width: auto;
+        .ant-select-selector{
+          border: 2px solid blue;
+        }
+      };
       .toggle-period,
       .toggle-sales {
         max-width: 130px;

@@ -8,17 +8,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
 import {
   Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  CategoryScale,
-  LinearScale,
   PointElement,
-  LineElement,
   TooltipItem,
   ChartType
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
 import moment from 'moment';
@@ -42,6 +42,7 @@ import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
+import { Selector } from 'src/small-components/Selector';
 
 interface ProductQuota {
   quota: number;
@@ -64,11 +65,11 @@ export const Dashboard = () => {
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
-  const [daysPeriod, setDaysPeriod] = useState<boolean>(false);
   const [showSales, setShowSales] = useState<boolean>(true);
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
   const [current] = useState<number>(1);
+  const [selectedPeriod, setSelectedPeriod] = useState<number | string>(4);
 
   const onSearch = (value: string) => console.log('searched value', value);
 
@@ -76,10 +77,9 @@ export const Dashboard = () => {
     await dispatch(deleteChannel(id));
     dispatch(getChannels());
   };
-  const handlePeriodChange = () => setDaysPeriod(!daysPeriod);
   const handleSalesChange = () => setShowSales(!showSales);
 
-  useEffect(() => {
+  useEffect(() => { 
     (async () => {
       try {
         const quotaRes = await client.get('/Dashboard/GetProductQuotaSummary');
@@ -140,32 +140,38 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
+  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement,  BarElement);
 
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        display: false
+        display: true,
+        position: 'top' as const
       },
       title: {
         display: true,
-        text: 'Sales Chart'
+        text: 'Sales and Profit Chart'
       },
       tooltip: {
         callbacks: {
           title: (context: TooltipItem<ChartType>[]) => {
-            const contextObj: { label?: string } = { ...context[0] };
-            if (!daysPeriod) delete contextObj['label'];
-            const date = sales.filter((s: Sale) => s.revenue === context[0]!.raw)[0].date;
-            return moment(date).utc().format('YYYY-MM-DD | hh:mm A');
+            return context[0].label;
           }
         }
       }
     },
     scales: {
       x: {
-        display: sales?.length > 50 && false
+        display: true,
+        title: {
+          text: 'Period in years and months',
+          display: true
+        }
+      },
+      y: {
+        min: 0,
+        max: 1000
       }
     }
   };
@@ -174,14 +180,25 @@ export const Dashboard = () => {
   for (let i = 1; i < 32; i++) {
     daysLabel.push(String(i));
   }
-  const monthsLabel = sales?.map((d: Sale) => moment(d.date).utc().format('MMMM'));
+  const monthsLabel = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
   const data = {
-    labels: daysPeriod ? daysLabel : monthsLabel,
+    labels: selectedPeriod === 3 ? daysLabel : monthsLabel,
     datasets: [
       {
-        data: sales?.map((s: Sale) => s.revenue),
-        backgroundColor: '#5e84db',
-        borderColor: '#5e84db',
+        label: 'Sales',
+        data: sales?.map((s: Sale) => s.quantitySold),
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 1
+      },
+      {
+        label:'Profit',
+        data: sales?.map((s: Sale) => {
+          const profit = s.revenue! - s.sourcePrice! + s.totalTax!.toFixed(2);
+          return parseInt(profit).toFixed(2);
+        }),
+        backgroundColor: '#16537e',
+        borderColor: '#16537e',
         borderWidth: 1
       }
     ]
@@ -193,11 +210,18 @@ export const Dashboard = () => {
   // console.log('DATE 1', initialDatePickerValue);
   // console.log('DATE 2', initialRangePickerValue);
 
+  const periodOptions = [
+    {id: 0, value: 3 },
+    {id: 1, value: 4}
+  ];
+  const onSelectOption = (value: string) =>{
+    setSelectedPeriod(value);
+  };
   const submit = async () => {
     if (toDate === '') {
       await dispatch(
         getSales({
-          period: daysPeriod ? 3 : 4,
+          period: selectedPeriod,
           from: fromDate
         })
       );
@@ -205,7 +229,7 @@ export const Dashboard = () => {
     } else {
       await dispatch(
         getSales({
-          period: daysPeriod ? 3 : 4,
+          period: selectedPeriod,
           from: fromDate,
           to: toDate
         })
@@ -296,16 +320,12 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Switch
-              className="toggle-period"
-              checked={daysPeriod}
-              onChange={handlePeriodChange}
-              checkedChildren="By day"
-              unCheckedChildren="By month"
-              aria-label="Dark mode toggle"
-            />
-
-            {daysPeriod ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
+            <Selector 
+              defaultValue='Select period'
+              onChange={onSelectOption}>
+              {periodOptions}
+            </Selector>
+            {selectedPeriod === 3 ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
             <Switch
               className="toggle-sales"
               checked={showSales}
@@ -317,11 +337,11 @@ export const Dashboard = () => {
           </div>
           <Row className="graph-progress-container">
             <Col span={18}>
-              <Line options={options} data={data} className="sales-graph" style={{ maxHeight: 450 }} />
+              <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 470 }} />
             </Col>
             <Col xs={24} lg={4} className="sales-profit-container">
               <h4 className="sales-profit-container">
-                Total {showSales ? 'sales' : 'profit'} {daysPeriod ? 'today' : 'this month'}
+                Total {showSales ? 'sales' : 'profit'} {selectedPeriod === 3 ? 'today' : 'this month'}
               </h4>
               <div className="profit-circle">{salesOrProfit()}</div>
             </Col>

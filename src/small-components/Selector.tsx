@@ -8,8 +8,13 @@ import { countryFlag } from '../utils/countryFlag';
 import { shopLogo } from '../utils/shopLogo';
 import '../sass/selector.scss';
 
+interface AnyOtherProps {
+  id: number;
+  value: string | number;
+  [key: string]: number | string;
+}
 interface Props {
-  children: Array<DummyData | Rule | SourceConfig | Channel>;
+  children: Array<DummyData | Rule | SourceConfig | Channel | AnyOtherProps>;
   defaultValue?: string;
   addAccount?: boolean;
   onChange?: (value: string) => void;
@@ -24,13 +29,25 @@ interface Props {
   className?: string;
   isListingsTable?: boolean;
   disabled?: boolean;
+  showSearch?: boolean;
 }
 
 const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { children, defaultValue, value, onChange, dropdownRender, loading, style, size, showFlags, disabled } = props;
+  const { 
+    children, 
+    defaultValue,
+    value, 
+    onChange, 
+    dropdownRender, 
+    loading, 
+    style, 
+    size,
+    showFlags,
+    showSearch,
+    disabled } = props;
 
   const options = children?.map((c) => {
     return (
@@ -49,7 +66,7 @@ export const Selector: React.FC<Props> = (props: Props) => {
       className="selector"
       allowClear={false}
       onChange={onChange}
-      showSearch
+      showSearch={showSearch}
       placeholder="Select or add account"
       defaultValue={defaultValue}
       value={value}

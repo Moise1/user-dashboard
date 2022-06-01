@@ -22,6 +22,7 @@ export const StoreList = () => {
     <div className="store-list-container">
       <Selector
         size="large"
+        showSearch={false}
         defaultValue={selectedChannel ? selectedChannel : 'Select a store'}
         onChange={provideChannelId}
         showFlags={true}
@@ -40,3 +41,4 @@ export const StoreList = () => {
     </div>
   );
 };
+
