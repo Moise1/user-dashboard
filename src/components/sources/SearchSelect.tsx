@@ -34,6 +34,10 @@ const SearchSelect = (myProps: props) => {
     setShowOrdering(true);
   };
 
+  const onSearch = (value: string) => {
+    console.log(value);
+  };
+
   // const handleSearch = (value: string) => {
   //   setInputSearchValue(inputSearchValue);
   //   const filteredSearch = arrayLists.filter((obj) => obj.value.toLowerCase().includes(value.toLowerCase()));
@@ -53,7 +57,7 @@ const SearchSelect = (myProps: props) => {
 
         {showDropDown ? (
           <div className="shows-search-drop-list">
-            <SearchInput />
+            <SearchInput onSearch={onSearch} />
             <div className="react-list-data-here">
               {supplierData.map((list) => (
                 <li key={list.id} onClick={() => handleSelectValue(list.value)}>

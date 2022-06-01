@@ -87,14 +87,14 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-                <h1 className="monthly-rate">monthly rate</h1>
+                <h1 className="monthly-rate">24</h1>
 
                 <Divider className="divider" />
                 <div className="discount">
                   <p className="twenty-off">20% off</p>
                   <div className="rate-details">
                     <span className="euro">&euro;</span>
-                    <h1 className="monthly-rate">first discount</h1>
+                    <h1 className="monthly-rate">19.2</h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(6 months)</span>
@@ -104,7 +104,7 @@ export const Subscriptions = () => {
                   <p className="forty-off">40% off</p>
                   <div className="rate-details">
                     <span className="euro">&euro;</span>
-                    <h1 className="monthly-rate">second discount</h1>
+                    <h1 className="monthly-rate">14.4</h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(1 year)</span>

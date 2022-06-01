@@ -23,7 +23,7 @@ interface TableActionBtnsProps {
 
 export interface InputProps {
   value?: string;
-  onSearch?: (value: string) => void;
+  onSearch: (value: string) => void;
 }
 
 interface FiltersProps {
@@ -35,7 +35,7 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
   const { Search } = Input;
   const searchComponent = t('search');
   const search = RDS.renderToString(searchComponent as ReactElement);
-  return <Search placeholder={search} onSearch={onSearch} value={value} suffix={<SearchIcon size="15" />} />;
+  return <Search placeholder={search} onSearch={onSearch} onKeyUp={(event) => onSearch(event.currentTarget.value)} value={value} suffix={<SearchIcon size="15" />} />;
 };
 
 export const TableActionBtns = (props: TableActionBtnsProps) => {
