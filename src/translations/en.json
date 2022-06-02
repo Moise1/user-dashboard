@@ -19,6 +19,28 @@
   "TerminatedListings": "Terminated Listings",
   "TerminatedListingsShort": "Terminated",
   "Edit N Listings": "Edit <span className=\"fw-600\">{num}</span> Listings",
+
+  "Channel.Setting.Description.Ending99": "When enabled, the prices for all the items will end in .99 .",
+  "Channel.Setting.Description.Markup": "Percentage added to supplier’s price, which will determine the price of your products. For example, a 40% markup means that a product that costs £100 will be on sale for £140.",
+  "Channel.Setting.Description.MinQuantity": "HGR will maintain this minimun quantity while the item is in stock.",
+  "Channel.Setting.Description.MonitorPrice": "If the supplier changes the price of a product, we will automatically update accordingly to keep your profit with the corresponding markup.",
+  "Channel.Setting.Description.MonitorPriceDecrease.1": "If the supplier reduces the price of a product, we will also reduce it in your store. If you turn this off, we will only update the price when it goes up in the supplier's catalog.",
+  "Channel.Setting.Description.MonitorPriceDecrease.2": "No limit: If the price on the supplier goes down, your price will go down too.",
+  "Channel.Setting.Description.MonitorPriceDecrease.3": "Example: (limit 20%) Your price will be updated only if the price at the source is reduced less thank 20%. If the price at the source lowers 21% or more, your price will not be updated.",
+  "Channel.Setting.Description.MonitorStock": "If the supplier is out of stock of a product, we will prevent people from buying it on your store. When it is available again, we will automatically update your store again.",
+  "Channel.Setting.Description.OutOfStockAction": "When an item is Out Of Stock at the source the quantity of the product is set to 0. You can also choose the option to increase the price to make sure the product is not sold if there is no stock available.",
+  "Channel.Setting.Name.Ending99": "Price ending in .99",
+  "Channel.Setting.Name.Markup": "Markup %",
+  "Channel.Setting.Name.MinQuantity": "Min Quantity",
+  "Channel.Setting.Name.MonitorPrice": "Monitor Price",
+  "Channel.Setting.Name.MonitorPriceDecrease": "Monitor Price Decrease",
+  "Channel.Setting.Name.MonitorPriceDecrease.Limit": "Limit %",
+  "Channel.Setting.Name.MonitorPriceDecrease.NoLimit": "No Limit",
+  "Channel.Setting.Name.MonitorStock": "Monitor Stock",
+  "Channel.Setting.Name.OutOfStockAction": "Out of stock action",
+  "Channel.Setting.Name.OutOfStockAction.Increase": "Increase price by",
+  "Channel.Setting.Name.OutOfStockAction.Quantity0": "Set available quantity to 0",
+
   "Listings.Column.Cost": "Cost",
   "Listings.Column.Img": "Image",
   "Listings.Column.Item no.": "Item no.",
@@ -32,6 +54,7 @@
   "Listings.Column.Status": "Status",
   "Listings.Column.Created On": "Created On",
   "Listings.Column.Created By": "Created By",
+
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
   "Menu.Channel": "Channel",
@@ -52,6 +75,7 @@
   "Menu.ListingServices": "Listing Services",
   "Menu.Start": "Get Started",
   "Menu.AutoOrderingConfiguration": "Auto Ordering",
+
   "OrderTable.OrderTable": "Order Details",
   "OrderTable.ShippingAddress": "Shipping Address",
   "OrderTable.StreetAddress": "Street address",
@@ -99,6 +123,7 @@
   "OrderTable.QTY": "QTY",
   "OrderTable.OrderedOn": "Ordered on",
   "OrderTable.State": "State",
+
   "OrderDetails.OrderState": "Order State",
   "OrderDetails.AOEnabled": "AO Enabled",
   "OrderDetails.HISTORY": "Order history",
@@ -134,6 +159,7 @@
   "OrderDetails.StopOrder": "Stop order",
   "OrderDetails.MarkAsDispatched": "Mark as dispatched",
   "OrderDetails.DeleteOrder": "Delete order",
+
   "SaveChanges": "Save Changes",
   "ApplyChanges": "Apply Changes",
   "Cancel": "Cancel",
@@ -143,6 +169,7 @@
   "Dismiss": "Dismisss",
   "AddToSelection": "Add to Selection",
   "AddSources": "Add Sources",
+
   "SourceConfigInputs.Alias": "Alias",
   "SourceConfigInputs.login": "login",
   "SourceConfigInputs.password": "password",
@@ -163,6 +190,7 @@
   "SourceConfigInputs.ObtainYourOTPCode": "Obtain your OTP code",
   "SourceConfigInputs.DeactivateYourAccountMessage": "If you deactivate this account, orders will be placed through the activated accounts.",
   "SourceConfigInputs.DeleteYourAccountMessage": " If you delete this account, you will have to set it up again and no payments will be made through this account.",
+
   "SourceTable.Provider": "Provider",
   "SourceTable.Markup": "Markup",
   "SourceTable.MonitorStock": "Monitor Stock",
@@ -178,6 +206,7 @@
   "SourceTable.Beta": "Beta",
   "SourceTable.AutoOrdering": "Auto ordering",
   "SourceTable.SourceTableHeadingLine": "All the settings established under Settings &gt; Sources will prevail over Settings &gt; Channel",
+
   "OrderButtons.ProcessOrders": "Process orders",
   "OrderButtons.StopOrders": "Stop orders",
   "OrderButtons.MarkAsDispatched": "Dispatched order",
@@ -185,13 +214,16 @@
   "OrderButtons.Process5Orders": "Process 5 Orders",
   "OrderButtons.Stop5Orders": "Stop 5 Orders",
   "OrderButtons.Delete5Orders": "Delete 5 Orders",
+
   "AutoOrderingConfiguration.Supplier": "Supplier",
   "AutoOrderingConfiguration.Free": "Free",
   "AutoOrderingConfiguration.FreePercentage": "% Free",
   "AutoOrderingConfiguration.Status": "Status",
+
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
   "Topbar.Quota": "Quota",
+
   "selectAll": "Select All",
   "filters": "Filters",
   "advnc": "Advance",
