@@ -1,7 +1,9 @@
 @import 'general.config';
 
 // large ad extra large screens.
-
+.data-table-container{
+  height: auto;
+}
 .no-api-title {
   display: flex;
   justify-content: space-between;

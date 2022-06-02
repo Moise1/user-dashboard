@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getSources } from './sourcesThunk';
 
+
 export interface SourceConfig {
   sourceId: number;
   sourceName: string;
@@ -9,6 +10,27 @@ export interface SourceConfig {
   defaultLocationCity: string;
   defaultLocationCountry: string;
   [key: string]: string | number;
+}
+
+export interface SourceConfigSave {
+  userId: string;
+  sourceId: number;
+  sourceName: string;
+  markup?: number;
+  globalShippingProgram?: boolean;
+  monitorPrice?: boolean;
+  monitorPriceDecrease?: boolean;
+  monitorPriceDecreasePercentage?: number;
+  monitorStock?: boolean;
+  dispatchDays?: number;
+  returns?: string;
+  templateId?: number;
+  defaultShipping?: string;
+  defaultLocationCity?: string;
+  defaultLocationPostcode?: string;
+  defaultLocationCountry?: string;
+  primeOnly?: boolean;
+  maxDeliveryDays?: number;
 }
 
 export interface ShippingOption {

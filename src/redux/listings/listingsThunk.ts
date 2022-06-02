@@ -42,17 +42,19 @@ export const getListingsSource = createAsyncThunk(
   }
 );
 
-export const getPendingListing = createAsyncThunk('listings/getPendingListing', async (_, { rejectWithValue }) => {
-  try {
-    const res = await client.get('/SearchProduct/getPendingListings');
-    const data = res?.data?.response_data;
-    return data;
-  } catch (error) {
-    return rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
+export const getPendingListings = createAsyncThunk(
+  'listings/getPendingListing', 
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await client.get('/SearchProduct/getPendingListings');
+      const data = res?.data?.response_data;
+      return data;
+    } catch (error) {
+      return rejectWithValue('Sorry! Something went wrong ):');
+    }
+  });
 
-export const getTerminateListings = createAsyncThunk(
+export const getTerminatedListings = createAsyncThunk(
   'listings/getTerminatedListings',
   async (_, { rejectWithValue }) => {
     try {

@@ -17,6 +17,7 @@
 }
 
 .advanced-search-form {
+  margin: 1rem 2rem;
   height: auto;
   [title="Min source price"],
   [title="Max source price"],
@@ -67,11 +68,6 @@
     .checkbox {
       color: $corporative-color;
     }
-  }
-
-  .filters-section {
-    display: flex;
-    justify-content: flex-end;
   }
 }
 
