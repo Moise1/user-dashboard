@@ -1,4 +1,4 @@
-@import 'general.config';
+@import '../general.config';
 // Large and extra large screens
 
 
@@ -18,7 +18,7 @@
 
   .list-card {
     background-color: $primary-bg;
-    padding: 0 0.9rem;
+    padding: 1rem;
     padding-bottom: 10px;
     margin: 0 auto;
     margin-left: 15px;

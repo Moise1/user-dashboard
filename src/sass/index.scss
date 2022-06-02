@@ -107,6 +107,21 @@ button,
 .table th {
   vertical-align: unset !important;
 }
+
+// Form labels custom
+
+.ant-row .ant-form-item {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: center;
+}
+
+.ant-form-item-label > label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
 //MISSING TRANSLATION STYLES
 
 .missingTranslation {
