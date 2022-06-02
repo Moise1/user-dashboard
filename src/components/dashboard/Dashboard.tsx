@@ -79,7 +79,7 @@ export const Dashboard = () => {
   };
   const handleSalesChange = () => setShowSales(!showSales);
 
-  useEffect(() => { 
+  useEffect(() => {
     (async () => {
       try {
         const quotaRes = await client.get('/Dashboard/GetProductQuotaSummary');
@@ -124,7 +124,6 @@ export const Dashboard = () => {
     }
   ];
 
-
   const onCopyText = () => {
     setIsCopied(true);
     miniAlert({
@@ -140,7 +139,7 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement,  BarElement);
+  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement);
 
   const options = {
     responsive: true,
@@ -165,7 +164,7 @@ export const Dashboard = () => {
       x: {
         display: true,
         title: {
-          text: 'Period in years and months',
+          text: selectedPeriod === 4 ? 'Period in months of a year' : 'Period in days of a month',
           display: true
         }
       },
@@ -192,7 +191,7 @@ export const Dashboard = () => {
         borderWidth: 1
       },
       {
-        label:'Profit',
+        label: 'Profit',
         data: sales?.map((s: Sale) => {
           const profit = s.revenue! - s.sourcePrice! + s.totalTax!.toFixed(2);
           return parseInt(profit).toFixed(2);
@@ -211,10 +210,10 @@ export const Dashboard = () => {
   // console.log('DATE 2', initialRangePickerValue);
 
   const periodOptions = [
-    {id: 0, value: 3 },
-    {id: 1, value: 4}
+    { id: 0, value: 3 },
+    { id: 1, value: 4 }
   ];
-  const onSelectOption = (value: string) =>{
+  const onSelectOption = (value: string) => {
     setSelectedPeriod(value);
   };
   const submit = async () => {
@@ -302,13 +301,7 @@ export const Dashboard = () => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable
-              current={current}
-              dataSource={channels}
-              columns={columns}
-              pageSize={2}
-              total={channels.length}
-            />
+            <DataTable current={current} dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
             <Link to="/add-channel" className="alternative-link">
               Add new channel
             </Link>
@@ -320,32 +313,29 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector 
-              defaultValue='Select period'
-              onChange={onSelectOption}>
+            <Selector defaultValue="Select period" onChange={onSelectOption}>
               {periodOptions}
             </Selector>
             {selectedPeriod === 3 ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
-            <Switch
-              className="toggle-sales"
-              checked={showSales}
-              onChange={handleSalesChange}
-              checkedChildren="Sales"
-              unCheckedChildren="Profit"
-              aria-label="Profit and sales toggle"
-            />
-          </div>
-          <Row className="graph-progress-container">
-            <Col span={18}>
-              <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 470 }} />
-            </Col>
-            <Col xs={24} lg={4} className="sales-profit-container">
-              <h4 className="sales-profit-container">
-                Total {showSales ? 'sales' : 'profit'} {selectedPeriod === 3 ? 'today' : 'this month'}
+            <div className="sales-profit-area">
+              <div className="digits">{salesOrProfit()}</div>
+              <h4 className="sales-profit-numbers">
+                total {showSales ? 'sales' : 'profit'} {selectedPeriod === 3 ? 'today' : 'this month'}
               </h4>
-              <div className="profit-circle">{salesOrProfit()}</div>
-            </Col>
-          </Row>
+              <Switch
+                className="toggle-sales"
+                checked={showSales}
+                onChange={handleSalesChange}
+                checkedChildren="Sales"
+                unCheckedChildren="Profit"
+                aria-label="Profit and sales toggle"
+              />
+            </div>
+          </div>
+
+          <div className="graph-container">
+            <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 470 }} />
+          </div>
         </div>
       </div>
 
