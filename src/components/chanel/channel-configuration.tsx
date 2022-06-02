@@ -19,22 +19,22 @@ export const ChannelConfiguration = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   const dispatch = useAppDispatch();
-  const { settings, loading: settingsLoading } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
-  const { savingSettings: savingSettingsState } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
+  const {
+    settings,
+    loading: settingsLoading,
+    savingSettings: savingSettingsState
+  } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
 
   useEffect(() => {
     dispatch(getChannelConfiguration());
   }, [getChannelConfiguration]);
 
   const SaveSetting = async (key: eChannelSettings, value:string) => {
-    const p = await dispatch(saveChannelSetting({ key: key, value: value }));
-    console.log(p);
-    console.log('done');
-    //dispatch(getChannelConfiguration());
+    await dispatch(saveChannelSetting({ key: key, value: value }));
   };
 
   const configuration = new Map(settings?.map(x => [x.key, x.value]) ?? []);
-  const savingSetting= new Map(savingSettingsState?.map(x => [x.key, x]));
+  const savingSetting = new Map(savingSettingsState?.map(x => [x.data.key, x]));
 
   const RenderSettingTwoOptionsTwo = (setting: ChannelSetting) => {
     const valueC = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
@@ -94,10 +94,12 @@ export const ChannelConfiguration = () => {
   };
 
   const RenderSettingNumber = (setting: ChannelSetting) => {
+    const savingState = savingSetting.get(setting.Fields[0]);
     const value = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
+
     return (
       <Col span={8} className='input-container'>
-        <SettingNumber value={value} onChange={v => SaveSetting(setting.Fields[0], v)} />
+        <SettingNumber value={value} onChange={v => SaveSetting(setting.Fields[0], v)} key={setting.Fields[0]} loading={savingState?.loading ?? false} />
       </Col>
     );
   };
@@ -112,7 +114,7 @@ export const ChannelConfiguration = () => {
   };
 
   const RenderSetting = (setting: ChannelSetting) => {
-    let input: JSX.Element = <></>;
+    let input: JSX.Element;
     switch (setting.Type) {
     default:
     case SettingType.Number:
@@ -136,20 +138,20 @@ export const ChannelConfiguration = () => {
     const isSavingLoading = statusSaving.some(x => x?.loading);
 
     return (
-      <Row className='description-and-controls'>
+      <Row className='description-and-controls' key={setting.Fields[0]}>
         <Col span={11} className='description-area'>
           <h2>{t(setting.Labels[0])}</h2>
           {setting.Description.map((x, i) => <p key={i}>{t(x)}</p>)}
         </Col>
         {input}
-        <col span={1}>
+        <Col span={1}>
           {isSavingLoading && <div><Spin /></div>}
-        </col>
+        </Col>
       </Row>
     );
   };
 
-  const RenderSettings = (section: ChannelSettingSection) => {
+  const RenderSettings = (section: ChannelSettingSection): JSX.Element => {
     const settings = ChannelSettings.filter(x => x.Section == section);
     return <>
       {settings.map(x => RenderSetting(x))}
@@ -161,7 +163,7 @@ export const ChannelConfiguration = () => {
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
     case 0:
-      return <ChannelMonitoring />;
+      return ChannelMonitoring();
     case 1:
       return <ChannelListing />;
     case 2:
@@ -210,7 +212,6 @@ export const ChannelConfiguration = () => {
           id='3'
         />
       </StatusBar>
-
       <Row className='content'>
         {renderContent(index)}
       </Row>

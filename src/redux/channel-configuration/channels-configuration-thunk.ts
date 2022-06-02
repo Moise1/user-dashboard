@@ -13,7 +13,6 @@ export const getChannelConfiguration = createAsyncThunk( 'channelConfiguration/g
   }
 );
 
-
 export const saveChannelSetting = createAsyncThunk('channelConfiguration/SaveOneString',
   async (data: SettingKey) => {
     try {

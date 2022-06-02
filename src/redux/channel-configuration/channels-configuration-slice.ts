@@ -63,9 +63,9 @@ export interface SettingKey {
 
 export interface SavingSetting {
   loading: boolean;
-  key: eChannelSettings;
   success: boolean;
   updatedOn: Date;
+  data: SettingKey;
 }
 
 export interface ChannelConfigurationState {
@@ -105,29 +105,39 @@ export const channelConfigurationSlice = createSlice({
     builder.addCase(saveChannelSetting.pending, (state, { meta }) => {
       if (!state.savingSettings)
         state.savingSettings = [];
-      const prv = state.savingSettings.find(x => x.key == meta.arg.key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {
         prv.loading = true;
+        prv.data = meta.arg;
+        prv.updatedOn = new Date();
+        prv.success = false;
       } else {
         state.savingSettings.push({
           loading: true,
-          key: meta.arg.key,
+          data: meta.arg,
           success: false,
           updatedOn: new Date()
         });
       }
     });
     builder.addCase(saveChannelSetting.fulfilled, (state, { payload, meta }) => {
-      const prv = state.savingSettings.find(x => x.key == meta.arg.key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = payload?.success;
-        prv.success = payload?.success;
         prv.updatedOn = new Date();
+      }
+      if (payload?.success && state.settings) {
+        const vk = state.settings.find(x => x.key == meta.arg.key);
+        if (vk) {
+          vk.value = meta.arg.value;
+        } else {
+          state.settings.push(meta.arg);
+        }
       }
     });
     builder.addCase(saveChannelSetting.rejected, (state, { meta }) => {
-      const prv = state.savingSettings.find(x => x.key == meta.arg.key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = false;
