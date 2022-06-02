@@ -6,7 +6,7 @@ import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { Button, Row, Col } from 'antd';
 import { ArrowRight } from 'react-feather';
-import '../../sass/list-now.scss';
+import '../../sass/list-now/list-now.scss';
 import { useHistory } from 'react-router-dom';
 
 export interface state {
@@ -56,7 +56,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/')}>
+            <div className="list-card" onClick={() => routeChange('/manual-listing')}>
               <img src={manual_icon} alt="icon" />
 
               <div className="card-info">
@@ -74,7 +74,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/')}>
+            <div className="list-card" onClick={() => routeChange('/bulk-listing')}>
               <img src={bulk_icon} alt="icon" className={'w-md-100 filter-white'} />
 
               <div className="card-info">
@@ -94,9 +94,9 @@ export const ListNow = (/*props: props*/) => {
 
         {weList4u && (
           <Row>
-            <h3 className="title">{t('list4u')}</h3>
             <Col span={24}>
               <div className="list-card" onClick={() => window.open('https://hustlegotreal.com/en/listing-service/')}>
+                <h3 className="title">{t('list4u')}</h3>
                 <img src={we_icon} alt="icon" />
 
                 <div className="card-info">
