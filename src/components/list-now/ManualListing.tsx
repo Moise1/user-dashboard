@@ -63,7 +63,7 @@ export const ManualListing = (/*props: props*/) => {
           <div className="card-supplier">
             {loading && 'Please wait a moment...'}
             <img alt="sourcelogo"></img>
-            <h3>Amazon</h3>
+            <h3>asd</h3>
           </div>
         </div>
       </div>

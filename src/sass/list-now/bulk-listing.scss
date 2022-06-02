@@ -1,0 +1,69 @@
+@import '../general.config';
+// Large and extra large screens
+.bulk-list-content {
+  h1 {
+    width: 100%;
+    align-self: flex-start;
+  }
+  margin-top: 1rem;
+  width: 90%;
+  display: grid;
+  justify-items: center;
+  .sections-container {
+    width: 90% !important;
+    .bulk-sections {
+      display: flex;
+      justify-content: space-between;
+      .options-container {
+        .bulk-options {
+          min-width: 600px;
+          margin-right: 1rem;
+          .bulk-form {
+            display: grid;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+      }
+    }
+    .table-container {
+      width: 100%;
+      height: fit-content;
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        align-content: center;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .bulk-sections {
+    .options-container {
+      .bulk-options {
+        min-width: 400px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .bulk-sections {
+    display: grid !important;
+    justify-content: center !important;
+    width: 100% !important;
+    .options-container {
+      .bulk-options {
+        min-width: 0px !important;
+        margin-right: 0px !important;
+      }
+    }
+  }
+}
