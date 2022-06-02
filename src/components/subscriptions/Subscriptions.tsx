@@ -11,7 +11,8 @@ import '../../sass/subscriptions.scss';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
-  const [activeCurrency, setActiveCurrency] = useState<number>(0);
+  const [activeCurrency, setActiveCurrency] = useState<number>(1);
+  const [currency, setCurrency] = useState('\u20AC');
   const sliderRef = createRef<CarouselRef>();
   const dispatch = useAppDispatch();
   const { products, loading } = useAppSelector((state) => state.subscriptions);
@@ -27,6 +28,16 @@ export const Subscriptions = () => {
   const handleChangeCurrency = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const elementId = e.currentTarget.id;
     setActiveCurrency(JSON.parse(elementId));
+    if (elementId === '1') {
+      setCurrency('\u20AC');
+    }
+    else if (elementId === '2') {
+      setCurrency('\u0024');
+    }
+    else if (elementId === '3') {
+      setCurrency('\u00A3');
+    }
+
   };
 
   const renderSlides = useMemo(() => {
@@ -59,23 +70,23 @@ export const Subscriptions = () => {
           </StatusBar>
           <div className="currencies-container">
             <TransparentBtn
-              id="0"
-              handleClick={handleChangeCurrency}
-              className={activeCurrency === 0 ? 'active-currency' : ''}
-            >
-              EUR
-            </TransparentBtn>
-            <TransparentBtn
               id="1"
               handleClick={handleChangeCurrency}
               className={activeCurrency === 1 ? 'active-currency' : ''}
             >
-              USD
+              EUR
             </TransparentBtn>
             <TransparentBtn
               id="2"
               handleClick={handleChangeCurrency}
               className={activeCurrency === 2 ? 'active-currency' : ''}
+            >
+              USD
+            </TransparentBtn>
+            <TransparentBtn
+              id="3"
+              handleClick={handleChangeCurrency}
+              className={activeCurrency === 3 ? 'active-currency' : ''}
             >
               GBP
             </TransparentBtn>
@@ -87,14 +98,24 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-                <h1 className="monthly-rate">24</h1>
+                <h1 className="monthly-rate">{p.prices.map(prc => {
+                  if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 0) { return prc.price; }
+                })
+                }</h1>
+                <div className="rate-details">
+                  <span className="euro">{currency}</span>
+                  <span className="frequency">/mo</span>
+                </div>
 
                 <Divider className="divider" />
                 <div className="discount">
                   <p className="twenty-off">20% off</p>
                   <div className="rate-details">
-                    <span className="euro">&euro;</span>
-                    <h1 className="monthly-rate">19.2</h1>
+                    <span className="euro">{currency}</span>
+                    <h1 className="monthly-rate">{p.prices.map(prc => {
+                      if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 1) { return (prc.price / 6).toFixed(1); }
+                    })
+                    }</h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(6 months)</span>
@@ -103,8 +124,11 @@ export const Subscriptions = () => {
                 <div className="discount">
                   <p className="forty-off">40% off</p>
                   <div className="rate-details">
-                    <span className="euro">&euro;</span>
-                    <h1 className="monthly-rate">14.4</h1>
+                    <span className="euro">{currency}</span>
+                    <h1 className="monthly-rate">{p.prices.map(prc => {
+                      if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 2) { return (prc.price / 12).toFixed(1); }
+                    })
+                    }</h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(1 year)</span>
