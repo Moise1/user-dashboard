@@ -8642,11 +8642,6 @@ moment@^2.29.2:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
   integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
 
-months@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/months/-/months-2.1.0.tgz#9385ae1968b84313dff223b11080058d1ec326fd"
-  integrity sha512-2M9gdDB/uVt304/hJ3k2UIquJhOV5dRjp9BovHmZSINaRp7pdJuHXxOcuSjmJaKNomFyYyu0y3LBigdWiAUEmQ==
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
