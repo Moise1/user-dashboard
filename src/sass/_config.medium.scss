@@ -1,5 +1,38 @@
 @media only screen and (max-width: 1440px) {
   :root {
+    $font-xl: 1.5rem;
     $font-large: 1rem;
+    $font-medium: 0.8rem;
+    $font-small: 0.7rem;
+
+    // Custom font-sizes for elements
+    p {
+      font-size: $font-small;
+    }
+
+    h1 {
+      font-size: $font-xl;
+    }
+
+    h2 {
+      font-size: $font-large;
+      font-weight: $bold;
+    }
+
+    h3 {
+      font-size: $font-large;
+    }
+
+    h4 {
+      font-size: $font-medium;
+    }
+
+    h5 {
+      font-size: $font-medium;
+    }
+
+    a {
+      font-size: $font-medium;
+    }
   }
 }

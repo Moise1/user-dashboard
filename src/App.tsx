@@ -31,6 +31,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/list-now/ListNow';
 import { ManualListing } from './components/list-now/ManualListing';
 import { BulkListing } from './components/list-now/BulkListing';
+import { Checkout } from './components/subscriptions/Checkout';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -44,7 +45,7 @@ export const App = withRouter(({ history }) => {
     setStaticValue(!staticValue);
     setVisible(!visible);
     setCollapsed(!collapsed);
-  };  
+  };
   const closeMobileSider = () => setVisible(!visible);
 
   return (
@@ -81,6 +82,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/new-channel" component={NewChannel} />
             <ProtectedRoute path="/services" component={Services} />
             <ProtectedRoute path="/subscriptions" component={Subscriptions} />
+            <ProtectedRoute path="/checkout" component={Checkout} />
             <ProtectedRoute path="/pricing-rules" component={PricingRules} />
             <ProtectedRoute path="/browser-extensions" component={BrowserExtensions} />
             <ProtectedRoute path="/va-profiles" component={VaProfiles} />

@@ -1,0 +1,45 @@
+@use '../general.config';
+@import '../general.config';
+
+.checkout-content {
+  .checkout-sections-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    .first-section-container {
+      background-color: $primary-bg;
+      padding: 2rem;
+      width: 30%;
+      box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+      border-radius: 1rem;
+      .extras {
+        .first-extra,
+        .second-extra {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        display: grid;
+        h4 {
+          font-weight: bold;
+          color: $corporative-color;
+        }
+
+        .checkbox {
+          margin-left: 0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .second-section-container {
+      width: 40%;
+      background-color: $primary-bg;
+      padding: 2rem;
+      box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+      border-radius: 1rem;
+    }
+  }
+}
