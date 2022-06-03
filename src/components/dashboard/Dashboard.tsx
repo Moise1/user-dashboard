@@ -153,7 +153,6 @@ export const Dashboard = () => {
       tooltip: {
         callbacks: {
           title: (context: TooltipItem<ChartType>[]) => {
-            console.log('current context', context[0]);
             return context[0].label;
           }
         }
@@ -192,8 +191,8 @@ export const Dashboard = () => {
       {
         label: 'Profit',
         data: sales?.map((s: Sale) => {
-          const profit = s.revenue! - s.sourcePrice! + s.totalTax!.toFixed(2);
-          return parseInt(profit).toFixed(2);
+          const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
+          return profit;
         }),
         backgroundColor: '#16537e',
         borderColor: '#16537e',

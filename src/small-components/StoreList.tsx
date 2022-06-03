@@ -32,6 +32,7 @@ export const StoreList = () => {
       isoCountry: selectedChannel[0].isoCountry,
       shopName: selectedChannel[0].name
     }));
+    window.location.reload();
   };
 
   return (
