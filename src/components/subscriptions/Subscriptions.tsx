@@ -30,11 +30,9 @@ export const Subscriptions = () => {
     setActiveCurrency(JSON.parse(elementId));
     if (elementId === '1') {
       setCurrency('\u20AC');
-    }
-    else if (elementId === '2') {
+    } else if (elementId === '2') {
       setCurrency('\u0024');
-    }
-    else if (elementId === '3') {
+    } else if (elementId === '3') {
       setCurrency('\u00A3');
     }
   };
@@ -97,37 +95,49 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-                <h1 className="monthly-rate">{p.prices.map(prc => {
-                  if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 0) { return prc.price; }
-                })
-                }</h1>
-                <div className="rate-details">
-                  <span className="euro">{currency}</span>
-                  <span className="frequency">/mo</span>
+
+                <div className="container-sub">
+                  <div className="rate-details">
+                    <span className="euro">{currency}</span>
+                    <h1 className="monthly-rate">
+                      {p.prices.map((prc) => {
+                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 0) {
+                          return prc.price;
+                        }
+                      })}
+                    </h1>
+                    <span className="frequency">/mo</span>
+                  </div>
                 </div>
 
                 <Divider className="divider" />
-                <div className="discount">
+                <div className="container-sub">
                   <p className="twenty-off">20% off</p>
                   <div className="rate-details">
                     <span className="euro">{currency}</span>
-                    <h1 className="monthly-rate">{p.prices.map(prc => {
-                      if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 1) { return (prc.price / 6).toFixed(1); }
-                    })
-                    }</h1>
+                    <h1 className="monthly-rate">
+                      {p.prices.map((prc) => {
+                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 1) {
+                          return (prc.price / 6).toFixed(1);
+                        }
+                      })}
+                    </h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(6 months)</span>
                 </div>
                 <Divider className="divider" />
-                <div className="discount">
+                <div className="container-sub">
                   <p className="forty-off">40% off</p>
                   <div className="rate-details">
                     <span className="euro">{currency}</span>
-                    <h1 className="monthly-rate">{p.prices.map(prc => {
-                      if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 2) { return (prc.price / 12).toFixed(1); }
-                    })
-                    }</h1>
+                    <h1 className="monthly-rate">
+                      {p.prices.map((prc) => {
+                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 2) {
+                          return (prc.price / 12).toFixed(1);
+                        }
+                      })}
+                    </h1>
                     <span className="frequency">/mo</span>
                   </div>
                   <span className="duration">(1 year)</span>
