@@ -43,7 +43,6 @@ export const BulkListing = (/*props: props*/) => {
   return (
     <Layout className="bulk-list-content">
       <div className="sections-container">
-        <h1>Bulk Listing</h1>
         <div className="bulk-sections">
           <div className="options-container">
             <StatusBar className="bulk-options">

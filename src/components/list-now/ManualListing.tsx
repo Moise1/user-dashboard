@@ -23,7 +23,6 @@ export const ManualListing = (/*props: props*/) => {
   return (
     <div className="manual-list-content">
       <div className="container-manual-listing">
-        <h1>Manual Listing</h1>
         <div className="list-card">
           <Row>
             <Col md={12} xs={24}>
