@@ -95,6 +95,7 @@ export const channelConfigurationSlice = createSlice({
     builder.addCase(getChannelConfiguration.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.settings = payload.settings as SettingKey[];
+      state.savingSettings = [];
     });
     builder.addCase(getChannelConfiguration.rejected, (state, { payload }) => {
       state.loading = false;
@@ -134,6 +135,7 @@ export const channelConfigurationSlice = createSlice({
         } else {
           state.settings.push(meta.arg);
         }
+        //toastAlert(t('error.saving.configuration'),'error');
       }
     });
     builder.addCase(saveChannelSetting.rejected, (state, { meta }) => {

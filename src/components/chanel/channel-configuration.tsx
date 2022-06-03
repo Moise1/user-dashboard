@@ -10,9 +10,10 @@ import '../../sass/channel-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getChannelConfiguration, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { ChannelConfigurationState, eChannelSettings } from '../../redux/channel-configuration/channels-configuration-slice';
-import { ChannelSetting, ChannelSettings, ChannelSettingSection, SettingType } from './configuration/settings';
+import { ChannelSetting, ChannelSettings, SettingType } from './configuration/settings';
 import { SettingBoolean } from '../../small-components/settings/setting-boolean';
 import { SettingNumber } from '../../small-components/settings/setting-number';
+import { ChannelSettingsSections, ChannelSettingSection } from './configuration/sections';
 
 export const ChannelConfiguration = () => {
   const [index, setIndex] = useState<number>(0);
@@ -29,8 +30,11 @@ export const ChannelConfiguration = () => {
     dispatch(getChannelConfiguration());
   }, [getChannelConfiguration]);
 
-  const SaveSetting = async (key: eChannelSettings, value:string) => {
-    await dispatch(saveChannelSetting({ key: key, value: value }));
+  const SaveSetting = async (key: eChannelSettings, value: string) => {
+    const rp = await dispatch(saveChannelSetting({ key: key, value: value }));
+    if (!rp.payload) {
+      dispatch(getChannelConfiguration());
+    }
   };
 
   const configuration = new Map(settings?.map(x => [x.key, x.value]) ?? []);
@@ -105,10 +109,11 @@ export const ChannelConfiguration = () => {
   };
 
   const RenderSettingBoolean = (setting: ChannelSetting) => {
-    const value = (configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0]);
+    const savingState = savingSetting.get(setting.Fields[0]);
+    const value = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
     return (
       <Col span={8} className='switch-container'>
-        <SettingBoolean value={value}/>
+        <SettingBoolean value={value} onChange={v => SaveSetting(setting.Fields[0], v)} loading={savingState?.loading ?? false}/>
       </Col>
     );
   };
@@ -134,19 +139,16 @@ export const ChannelConfiguration = () => {
       break;
     }
 
-    const statusSaving = setting.Fields.map(x => savingSetting.get(x));
-    const isSavingLoading = statusSaving.some(x => x?.loading);
+    //const statusSaving = setting.Fields.map(x => savingSetting.get(x));
+    //const isSavingLoading = statusSaving.some(x => x?.loading);
 
     return (
       <Row className='description-and-controls' key={setting.Fields[0]}>
-        <Col span={11} className='description-area'>
+        <Col span={12} className='description-area'>
           <h2>{t(setting.Labels[0])}</h2>
           {setting.Description.map((x, i) => <p key={i}>{t(x)}</p>)}
         </Col>
         {input}
-        <Col span={1}>
-          {isSavingLoading && <div><Spin /></div>}
-        </Col>
       </Row>
     );
   };
@@ -187,30 +189,15 @@ export const ChannelConfiguration = () => {
   return (
     <Layout className='channel-settings'>
       <StatusBar>
-        <StatusBtn
-          title={`${t('Channel.Monitoring')}`}
-          changeTab={(e) => handleChangeTab(e, 0)}
-          className={activeTab === 0 ? 'active-tab' : ''}
-          id='0'
-        />
-        <StatusBtn
-          title={`${t('Channel.Listing')}`}
-          changeTab={(e) => handleChangeTab(e, 1)}
-          className={activeTab === 1 ? 'active-tab' : ''}
-          id='1'
-        />
-        <StatusBtn
-          title={`${t('Channel.Business')}`}
-          changeTab={(e) => handleChangeTab(e, 2)}
-          className={activeTab === 2 ? 'active-tab' : ''}
-          id='2'
-        />
-        <StatusBtn
-          title={`${t('Channel.Other')}`}
-          changeTab={(e) => handleChangeTab(e, 3)}
-          className={activeTab === 3 ? 'active-tab' : ''}
-          id='3'
-        />
+        {ChannelSettingsSections.map((x,i) => 
+          <StatusBtn
+            key={i}
+            title={t(x.Label) as string}
+            changeTab={(e) => handleChangeTab(e, x.Type)}
+            className={activeTab == x.Type ? 'active-tab' : ''}
+            id={i.toString()}
+          />
+        )}
       </StatusBar>
       <Row className='content'>
         {renderContent(index)}

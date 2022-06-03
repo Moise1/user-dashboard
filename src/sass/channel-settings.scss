@@ -18,6 +18,10 @@
       flex-direction: column;
     }
 
+    .blue-input {
+        max-width:200px;
+    }
+
     .text-section {
       margin-bottom: 5rem;
     }
@@ -30,9 +34,6 @@
       .stock-area {
         margin-top: 1rem;
         width: 100%;
-        .blue-input {
-          width: 50vw;
-        }
         .limit,
         .stock {
           display: flex;

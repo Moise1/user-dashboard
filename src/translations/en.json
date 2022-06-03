@@ -41,6 +41,8 @@
   "Channel.Setting.Name.OutOfStockAction.Increase": "Increase price by",
   "Channel.Setting.Name.OutOfStockAction.Quantity0": "Set available quantity to 0",
 
+  "Error.Saving.Configuration": "Error saving configuration",
+
   "Listings.Column.Cost": "Cost",
   "Listings.Column.Img": "Image",
   "Listings.Column.Item no.": "Item no.",

@@ -1,12 +1,10 @@
 ﻿import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
+import { ChannelSettingSection } from './sections';
 
 export enum SettingType {
   Number, Boolean, TwoOptions, SwitchTwoOptions, TwoOptionsTwo
 }
 
-export enum ChannelSettingSection {
-  Monitoring
-}
 export interface ChannelSetting {
   Labels: string[];
   Description: string[];

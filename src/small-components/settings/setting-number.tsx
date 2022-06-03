@@ -1,4 +1,4 @@
-﻿import { Input } from 'antd';
+﻿import { Input, Spin } from 'antd';
 import { useState } from 'react';
 
 interface SettingNumberProps {
@@ -26,8 +26,10 @@ export const SettingNumber = (props: SettingNumberProps) => {
         delayToSave ?? 1000
       )
     );
-
   };
 
-  return <Input defaultValue={value} type='number' className='blue-input' onChange={OnChange} disabled={loading} />;
+  return <div>
+    <Input defaultValue={value} type='number' className='blue-input' onChange={OnChange} disabled={loading} />
+    <Spin />
+  </div>;
 };
