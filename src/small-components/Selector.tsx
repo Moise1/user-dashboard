@@ -15,11 +15,11 @@ interface AnyOtherProps {
 }
 interface Props {
   children: Array<DummyData | Rule | SourceConfig | Channel | AnyOtherProps>;
-  defaultValue?: string;
+  defaultValue?: string | JSX.Element | number;
   addAccount?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (value: { value: string; label: React.ReactNode }) => void;
   size?: sizeType;
-  value?: string;
+  value?: string | number;
   dropdownRender?: (
     menu: ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>
   ) => ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>;
@@ -30,24 +30,26 @@ interface Props {
   isListingsTable?: boolean;
   disabled?: boolean;
   showSearch?: boolean;
+  labelInValue?: boolean;
 }
 
 const { Option } = Select;
 type sizeType = 'large' | 'small' | 'middle';
 
 export const Selector: React.FC<Props> = (props: Props) => {
-  const { 
-    children, 
+  const {
+    children,
     defaultValue,
-    value, 
-    onChange, 
-    dropdownRender, 
-    loading, 
-    style, 
+    onChange,
+    dropdownRender,
+    loading,
+    style,
     size,
     showFlags,
     showSearch,
-    disabled } = props;
+    disabled,
+    labelInValue,
+  } = props;
 
   const options = children?.map((c) => {
     return (
@@ -59,17 +61,17 @@ export const Selector: React.FC<Props> = (props: Props) => {
     );
   });
 
+  
   return (
     <Select
+      labelInValue={labelInValue}
       disabled={disabled}
       style={style}
       className="selector"
       allowClear={false}
       onChange={onChange}
       showSearch={showSearch}
-      placeholder="Select or add account"
-      defaultValue={defaultValue}
-      value={value}
+      defaultValue={{value: 'select', label: defaultValue}}
       dropdownRender={dropdownRender}
       loading={loading}
       size={size}

@@ -3,7 +3,9 @@
 // Large and extra large screens
 
 // Manage(delete/keep) accounts
-
+.shop-identity {
+  border: 2px solid red;
+}
 .menu{
   margin-bottom: 1rem;
 }
@@ -118,8 +120,7 @@
   background: $primary-bg;
 
   .store-list-container {
-    width: 30%;
-    max-width: 200px;
+    max-width: 230px;
     margin-right: 0.2rem;
   }
 

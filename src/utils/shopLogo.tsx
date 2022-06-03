@@ -1,7 +1,6 @@
 import ebay from '../assets/online-shops/ebay.svg';
 import ebayNoApi from '../assets/online-shops/ebay-no-api.svg';
 
-// import amazon from '../assets/online-shops/amazon.svg';
 import shopify from '../assets/online-shops/shopify.svg';
 
 type channelIdType = number | undefined | string | boolean | Date;

@@ -40,9 +40,9 @@ import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Selector } from 'src/small-components/Selector';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-import { Selector } from 'src/small-components/Selector';
 
 interface ProductQuota {
   quota: number;
@@ -66,8 +66,6 @@ export const Dashboard = () => {
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [showSales, setShowSales] = useState<boolean>(true);
-  const [fromDate, setFromDate] = useState<string>('');
-  const [toDate, setToDate] = useState<string>('');
   const [current] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number | string>(4);
 
@@ -95,7 +93,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(getNoApiServers());
     dispatch(getListingServices());
-  }, []);
+  },[]);
 
   const columns = [
     {
@@ -155,6 +153,7 @@ export const Dashboard = () => {
       tooltip: {
         callbacks: {
           title: (context: TooltipItem<ChartType>[]) => {
+            console.log('current context', context[0]);
             return context[0].label;
           }
         }
@@ -170,7 +169,7 @@ export const Dashboard = () => {
       },
       y: {
         min: 0,
-        max: 1000
+        max: 10000
       }
     }
   };
@@ -213,37 +212,27 @@ export const Dashboard = () => {
     { id: 0, value: 3 },
     { id: 1, value: 4 }
   ];
-  const onSelectOption = (value: string) => {
-    setSelectedPeriod(value);
+  const onSelectOption = (value: { value: string | number; label: React.ReactNode }) => {
+    setSelectedPeriod(value['value']);
   };
-  const submit = async () => {
-    if (toDate === '') {
-      await dispatch(
-        getSales({
-          period: selectedPeriod,
-          from: fromDate
-        })
-      );
-      localStorage.setItem('initialDatePickerValue', fromDate);
-    } else {
-      await dispatch(
-        getSales({
-          period: selectedPeriod,
-          from: fromDate,
-          to: toDate
-        })
-      );
-      localStorage.setItem('initialRangerPickerValue', JSON.stringify([fromDate, toDate]));
-    }
-  };
-  const onChange = (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+  const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
     if (Array.isArray(dateString)) {
-      setFromDate(dateString[0]);
-      setToDate(dateString[1]);
+      await dispatch(
+        getSales({
+          period: selectedPeriod,
+          from: dateString[0],
+          to: dateString[1]
+        })
+      );
     } else {
-      setFromDate(dateString);
+      await dispatch(
+        getSales({
+          period: selectedPeriod,
+          from: dateString
+        })
+      );
+      
     }
-    submit();
   };
 
   const totalProfit = sales?.reduce((total: number, sale: Sale) => {
@@ -313,7 +302,10 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector defaultValue="Select period" onChange={onSelectOption}>
+            <Selector
+              labelInValue
+              defaultValue='Select a period'
+              onChange={onSelectOption}>
               {periodOptions}
             </Selector>
             {selectedPeriod === 3 ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}

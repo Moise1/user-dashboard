@@ -52,8 +52,8 @@ export const AutoOrdering = () => {
 
   // const [, setCopied] = useState<boolean>(false);
 
-  const handleOptionChange = (value: string) => {
-    setAccountConfig(value);
+  const handleOptionChange = (value: { value: string; label: React.ReactNode }) => {
+    setAccountConfig(value['value']);
     setBtnEnableDisable(!btnEnableDisable);
     buttonRef.current?.style.backgroundColor === '#228b22';
   };
