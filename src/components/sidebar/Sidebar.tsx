@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../utils/transShim';
-// import logout from '../../assets/logout.svg';
 import {
   DashBoardIcon,
   CatalogIcon,
@@ -21,12 +20,10 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../../small-components/Switch';
 import pin from '../../assets/pin.svg';
-// import { TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
 import '../../sass/side-bar.scss';
-// import { LogoutOutlined } from '@ant-design/icons';
 
 const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
@@ -39,7 +36,6 @@ interface Props {
   staticValue?: boolean;
   togglestatic?: () => void;
   handleSidebarMobile?: () => void;
-  // collapseSideBar: () => void;
   mobileSiderVisible: boolean;
   closeMobileSider: () => void;
 }
@@ -47,16 +43,7 @@ interface Props {
 const mobileScreenSize = window.matchMedia('(max-width: 1030px)');
 
 export const Sidebar = (props: Props) => {
-  const {
-    collapsed,
-    staticValue,
-    togglestatic,
-    className,
-    setCollapsed,
-    // collapseSideBar,
-    mobileSiderVisible,
-    closeMobileSider
-  } = props;
+  const { collapsed, staticValue, togglestatic, className, setCollapsed, mobileSiderVisible, closeMobileSider } = props;
   const [isDark, setIsDark] = useState<boolean>(false);
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
 
@@ -118,11 +105,11 @@ export const Sidebar = (props: Props) => {
       listName: t('Menu.AutoOrderingConfiguration'),
       onClick: () => routeChange('/auto-ordering-configuration')
     },
-    {
-      id: 20,
-      listName: t('Menu.AutoOrderingConfiguration'),
-      onClick: () => routeChange('/auto-ordering-configuration-query')
-    },
+    // {
+    //   id: 20,
+    //   listName: t('Menu.AutoOrderingConfiguration'),
+    //   onClick: () => routeChange('/auto-ordering-configuration-query')
+    // },
     {
       id: 14,
       listName: (

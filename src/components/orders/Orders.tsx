@@ -214,6 +214,7 @@ export const Orders = () => {
     }
   }, [searchKey, orders]);
 
+  console.log('The selectedRecord is', selectedRecord);
   return (
     <Layout className="orders-container">
       {loading ? (
@@ -261,7 +262,6 @@ export const Orders = () => {
               <OrderContent
                 orderProgress={status}
                 data={selectedRecord}
-                // handleClose={handleOrderModal}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
               />
             </PopupModal>
@@ -285,7 +285,6 @@ export const Orders = () => {
               setSearchedArray={setSearchedArray}
               setSearchFilterKey={setSearchFilterKey}
             />
-            {/* <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} /> */}
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
               {t('AdvancedSearch')}
             </TableActionBtns>

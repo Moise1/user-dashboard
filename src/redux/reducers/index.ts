@@ -8,7 +8,7 @@ import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
-import { terminateListingsReducer } from '../listings/listingsSlice';
+import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { catalogProductsReducer } from '../catalog/catalogSlice';
@@ -20,6 +20,7 @@ import { saveAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
+import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -30,7 +31,7 @@ export const allReducers = combineReducers({
   channels: channelsReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
-  terminateListings: terminateListingsReducer,
+  terminatedListings: terminatedListingsReducer,
   listingSources: listingsSourceReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
@@ -42,5 +43,6 @@ export const allReducers = combineReducers({
   saveAutoOrdering: saveAutoOrderingReducer,
   getAutoOrdering: getAutoOrderingReducer,
   listingServices: listingServicesReducer,
-  noApiServers: noApiServersReducer
+  noApiServers: noApiServersReducer,
+  deleteAutoOrders: deleteAutoOrderingReducer
 });

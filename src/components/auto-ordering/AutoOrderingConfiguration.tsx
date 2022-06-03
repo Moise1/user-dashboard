@@ -1,20 +1,41 @@
 import { useEffect, useState } from 'react';
 import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
+import '../../sass/sources-table.scss';
+import '../../sass/popover.scss';
+import { useHistory } from 'react-router';
+import { eCountry } from './eCountry';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable } from '../tables/DataTable';
+import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
-import { eCountry } from './eCountry';
-import '../../sass/sources-table.scss';
-import '../../sass/popover.scss';
 
 export const AutoOrderingConfiguration = () => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state) => state.getAutoOrdering);
   const [current, setCurrent] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(10);
-  const { loading } = useAppSelector((state) => state.getAutoOrdering);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [selectedRecord, setSelectedRecord] = useState({});
+
+  const onSelectChange = (selectedRowKeys: Key[]) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+  console.log('The selected record is', selectedRecord);
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+    hideSelectAll: true,
+    getCheckboxProps: () => {
+      return {
+        style: { display: 'none' }
+      };
+    }
+  };
 
   useEffect(() => {
     dispatch(getAutoOrdering());
@@ -150,9 +171,11 @@ export const AutoOrderingConfiguration = () => {
       enabled: false
     }
   ];
+
   //To not show the duplicated suppliers and to sort autoOrders data alphabetically
   const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values());
   uniqueData.sort((a, b) => a.name.localeCompare(b.name));
+
   const tableColumns = [
     {
       title: t('AutoOrderingConfiguration.Supplier'),
@@ -202,6 +225,15 @@ export const AutoOrderingConfiguration = () => {
               current={current}
               onChange={setCurrent}
               rowClassName="table-row"
+              rowSelection={rowSelection}
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    setSelectedRecord(record);
+                    history.push({ pathname: '/auto-ordering-configuration-query', state: record });
+                  }
+                };
+              }}
             />
           </div>
         </>

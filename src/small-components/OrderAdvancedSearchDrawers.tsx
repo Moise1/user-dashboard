@@ -7,72 +7,6 @@ import { useEffect, useState } from 'react';
 import { OrderData } from '../redux/orders/orderSlice';
 import '../sass/advanced-search.scss';
 
-// interface Props extends AdvancedSearchProps {
-//   openSourceModal?: () => void;
-// }
-// export const CatalogFilters = (props: Props) => {
-//   const { visible, onClose, openSourceModal } = props;
-//   return (
-//     <AdvancedSearch
-//       title="Search Criteria"
-//       placement="right"
-//       onClose={onClose}
-//       visible={visible}
-//       extra={
-//         <Space>
-//           <Button className="clear-filters">Close filters</Button>
-//         </Space>
-//       }
-//     >
-//       <div className="advanced-form-container">
-//         <h5>
-//           <strong>Choose your suppliers</strong>
-//         </h5>
-//         <Button className="supplier-one" onClick={openSourceModal}>
-//           1 supplier
-//         </Button>
-//         <Form layout="vertical" className="advanced-search-form">
-//           <div className="catalog-filters-inputs">
-//             <Form.Item label="Min source price">
-//               <Input className="blue-input" value="50" />
-//             </Form.Item>
-//             <Form.Item label="Min Profit">
-//               <Input className="blue-input" value="Mini" />
-//             </Form.Item>
-//             <Form.Item label="Max source price">
-//               <Input className="blue-input" value="100" />
-//             </Form.Item>
-//             <Form.Item label="Max Profit">
-//               <Input className="blue-input" value="Max" />
-//             </Form.Item>
-//           </div>
-//           <div className="prime-options">
-//             <p className="amazon-prime">
-//               <strong>Amazon Prime</strong>
-//             </p>
-//             <div className="checkboxes">
-//               <Checkbox checked className="checkbox">
-//                 Only Prime
-//               </Checkbox>
-//               <Checkbox className="checkbox">All Items</Checkbox>
-//             </div>
-//           </div>
-//           <Form.Item label="Title">
-//             <Input className="blue-input" placeholder="Contains..." />
-//           </Form.Item>
-//           <Form.Item label="Order By">
-//             <Input className="blue-input" value="Default" />
-//           </Form.Item>
-//           <div className="action-btns">
-//             <TransparentBtn>Clear filters</TransparentBtn>
-//             <SuccessBtn>Apply filters</SuccessBtn>
-//           </div>
-//         </Form>
-//       </div>
-//     </AdvancedSearch>
-//   );
-// };
-
 interface Props {
   visible?: boolean;
   onClose?: () => void;
@@ -97,28 +31,18 @@ interface AdvancedSearchFieldTypes {
 }
 
 export const OrdersAdvancedSearch = (props: Props) => {
-  const { order, setSearchKey, setSearchedArray, setSearchFilterKey } = props;
+  const { order, setSearchedArray } = props;
 
-  useEffect(() => {
-    console.log('i render');
-  }, [setSearchedArray]);
+  /*eslint-disable @typescript-eslint/no-empty-function */
+  useEffect(() => {}, [setSearchedArray]);
+
   const advanceSearchIntialTypes: AdvancedSearchFieldTypes = {
     reference: '',
     channelItem: '',
     title: '',
-    // fees: 0,
-    // sold: 0,
-    // cost: 0,
-    // profit: 0,
-    // margin: 0,
     status: ''
-    // min:0;
-    // max:0;
   };
 
-  console.log(setSearchKey);
-  console.log(setSearchedArray);
-  console.log(setSearchFilterKey);
 
   const [orderAdvancedSearchFormData, setOrderAdvancedSearchFormData] = useState(advanceSearchIntialTypes);
   const orderAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,7 +78,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
     );
 
     // Filtering Left: (1) Source (2) Quanitity (3) Created on
-    console.log('The object value is', orderAdvancedSearchFormData);
     setSearchedArray?.(result);
     result = [];
   };
@@ -183,8 +106,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
               <Input
                 className="blue-input"
                 name="source"
-                // defaultValue={advanceSearchIntialTypes.reference}
-                // onChange={orderAdvancedSearchOnChange}
               />
             </Form.Item>
 
@@ -233,12 +154,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
                 onChange={orderAdvancedSearchOnChange}
               />
             </Form.Item>
-            {/* <Form.Item label="Sell Price">
-              <div className="sell-price-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
-              </div>
-            </Form.Item> */}
           </div>
           <div className="listings-search-inputs">
             <Form.Item label="Cost">
@@ -263,10 +178,8 @@ export const OrdersAdvancedSearch = (props: Props) => {
               <Input
                 className="blue-input"
                 name="fees"
-                // defaultValue={JSON.stringify(advanceSearchIntialTypes.fees)}
                 defaultValue={advanceSearchIntialTypes.fees}
                 onChange={orderAdvancedSearchOnChange}
-                // type="number"
               />
             </Form.Item>
 
@@ -284,57 +197,6 @@ export const OrdersAdvancedSearch = (props: Props) => {
               <Input className="blue-input" name="status" />
             </Form.Item>
           </div>
-
-          {/* other */}
-          {/* <div className="check-boxes">
-            <Form.Item className="monitor-price-options" label="Monitor Price">
-              <Checkbox checked className="checkbox">
-                Yes
-              </Checkbox>
-              <Checkbox className="checkbox">No</Checkbox>
-            </Form.Item>
-
-            <Form.Item className="price-decrease-options" label="Price Decrease">
-              <Checkbox className="checkbox">Yes</Checkbox>
-              <Checkbox className="checkbox">No</Checkbox>
-            </Form.Item>
-          </div> */}
-
-          {/* <div className="extra-options">
-            <Form.Item label="Quantiy">
-              <div className="quantiy-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />
-              </div>
-            </Form.Item>
-
-            <Form.Item label="Out of stock days">
-              <div className="out-of-stock-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />{' '}
-              </div>
-            </Form.Item>
-
-            <Form.Item label="Created On">
-              <RangePicker onChange={handleRangePicker} separator={<>-</>} className="date-picker" />
-            </Form.Item>
-
-            <Form.Item label="Created by">
-              <Input className="blue-input" placeholder="Contains..." />
-            </Form.Item>
-
-            <Form.Item label="Unsold days">
-              <div className="unsold-days-section">
-                <Input className="blue-input" placeholder="Min" />
-                <Input className="blue-input" placeholder="Max" />{' '}
-              </div>
-            </Form.Item>
-
-            <Form.Item label="Ignore Rules">
-              <Checkbox className="checkbox">Yes</Checkbox>
-              <Checkbox className="checkbox">No</Checkbox>
-            </Form.Item>
-          </div> */}
           <div className="filters-section">
             <SuccessBtn htmlType="submit">Apply filters</SuccessBtn>
           </div>

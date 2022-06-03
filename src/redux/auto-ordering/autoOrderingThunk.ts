@@ -28,7 +28,6 @@ export const saveAutoOrdering = createAsyncThunk(
         sourceId,
         rawSettings
       });
-      console.log('The api of save auto ordering response is', res);
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -44,3 +43,27 @@ export const getAutoOrdering = createAsyncThunk('sales/getAutoOrder', async () =
     console.log('The error is ', error);
   }
 });
+
+export const deleteAutoOrdering = createAsyncThunk(
+  'sales/deleteAutoOrder',
+  async (
+    {
+      channelOAuthId,
+      supplierId
+    }: {
+      channelOAuthId: autoOrderingType;
+      supplierId: autoOrderingType;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const res = await client.post('/SourceConfiguration/RemoveAutoordering', {
+        channelOAuthId,
+        supplierId
+      });
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);
