@@ -13,7 +13,14 @@ export interface Channel {
   [key: string]: string | number | boolean;
 }
 
-const initialState = {
+export interface ChannelsState {
+  channels: Channel[];
+  channelDeleted: boolean;
+  loading: boolean;
+  error: string;
+}
+
+const initialState: ChannelsState = {
   channels: [] as Channel[],
   channelDeleted: false,
   loading: false,

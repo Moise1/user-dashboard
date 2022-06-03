@@ -5,6 +5,11 @@ export enum SettingType {
   Number, Boolean, TwoOptions, SwitchTwoOptions, TwoOptionsTwo
 }
 
+interface Ancestor {
+  Field: eChannelSettings;
+  Value: string;
+}
+
 export interface ChannelSetting {
   Labels: string[];
   Description: string[];
@@ -12,6 +17,7 @@ export interface ChannelSetting {
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
   DefaultValues: string[];
+  Ancestors?: Ancestor[];
 }
 
 export const ChannelSettings: ChannelSetting[] = [
@@ -21,7 +27,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Number,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.Markup],
-    DefaultValues: ['30']
+    DefaultValues: ['30'],
   },
   {
     Labels: ['Channel.Setting.Name.MonitorStock'],
@@ -37,7 +43,11 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Boolean,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MonitorPrice],
-    DefaultValues: ['1']
+    DefaultValues: ['1'],
+    Ancestors: [{
+      Field: eChannelSettings.MonitorStock,
+      Value:'1'
+    }]
   },
   {
     Labels: [

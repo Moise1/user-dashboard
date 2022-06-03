@@ -1,5 +1,6 @@
 ﻿import { Input, Spin } from 'antd';
 import { useState } from 'react';
+import '../../sass/settings.scss';
 
 interface SettingNumberProps {
   value: string;
@@ -28,8 +29,8 @@ export const SettingNumber = (props: SettingNumberProps) => {
     );
   };
 
-  return <div>
+  return <div className="setting setting-number">
     <Input defaultValue={value} type='number' className='blue-input' onChange={OnChange} disabled={loading} />
-    <Spin />
+    {loading && <Spin />}
   </div>;
 };

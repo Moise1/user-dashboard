@@ -3,9 +3,6 @@ import { Layout, Row, Col, Input, Spin, Switch, Radio } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
-import { ChannelListing } from '../../small-components/ChannelListing';
-import { ChannelBusiness } from '../../small-components/ChannelBusiness';
-import { ChannelOther } from '../../small-components/ChannelOther';
 import '../../sass/channel-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getChannelConfiguration, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
@@ -14,10 +11,17 @@ import { ChannelSetting, ChannelSettings, SettingType } from './configuration/se
 import { SettingBoolean } from '../../small-components/settings/setting-boolean';
 import { SettingNumber } from '../../small-components/settings/setting-number';
 import { ChannelSettingsSections, ChannelSettingSection } from './configuration/sections';
+import { ChannelsState } from '../../redux/channels/channelsSlice';
 
 export const ChannelConfiguration = () => {
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
   const [activeTab, setActiveTab] = useState<number>(0);
+
+  const selectedChannel = (()=>{
+    const { channels } = useAppSelector((state) => state.channels as ChannelsState);
+    const selectedChannelId = parseInt(localStorage.getItem('channelId') ?? '');
+    return channels.find(x => x.id == selectedChannelId);
+  })();
 
   const dispatch = useAppDispatch();
   const {
@@ -139,9 +143,6 @@ export const ChannelConfiguration = () => {
       break;
     }
 
-    //const statusSaving = setting.Fields.map(x => savingSetting.get(x));
-    //const isSavingLoading = statusSaving.some(x => x?.loading);
-
     return (
       <Row className='description-and-controls' key={setting.Fields[0]}>
         <Col span={12} className='description-area'>
@@ -160,22 +161,7 @@ export const ChannelConfiguration = () => {
     </>;
   };
 
-  const ChannelMonitoring = () => RenderSettings(ChannelSettingSection.Monitoring);
-
-  const renderContent = (index: number): JSX.Element => {
-    switch (index) {
-    case 0:
-      return ChannelMonitoring();
-    case 1:
-      return <ChannelListing />;
-    case 2:
-      return <ChannelBusiness />;
-    case 3:
-      return <ChannelOther />;
-    default:
-      return <></>;
-    }
-  };
+  const RenderContent = (index: ChannelSettingSection): JSX.Element => RenderSettings(index);
 
   const handleChangeTab = (e: React.MouseEvent, index: number): void => {
     const id = e.currentTarget.getAttribute('id');
@@ -189,7 +175,7 @@ export const ChannelConfiguration = () => {
   return (
     <Layout className='channel-settings'>
       <StatusBar>
-        {ChannelSettingsSections.map((x,i) => 
+        {ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0)).map((x, i) => 
           <StatusBtn
             key={i}
             title={t(x.Label) as string}
@@ -200,7 +186,7 @@ export const ChannelConfiguration = () => {
         )}
       </StatusBar>
       <Row className='content'>
-        {renderContent(index)}
+        {RenderContent(index)}
       </Row>
     </Layout>
   );
