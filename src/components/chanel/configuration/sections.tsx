@@ -5,7 +5,7 @@
 interface ChannelSettingSectionsInfo {
   Type: ChannelSettingSection;
   Label: string;
-  ChannelIds?: number[]
+  ChannelIds?: number[]//If undefined it accepts all the channels
 }
 
 export const ChannelSettingsSections: ChannelSettingSectionsInfo[] = [

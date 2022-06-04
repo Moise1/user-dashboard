@@ -17,6 +17,7 @@ export interface ChannelSetting {
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
   DefaultValues: string[];
+  ChannelIds?: number[];//If undefined it accepts all the channels
   Ancestors?: Ancestor[];
 }
 
@@ -63,7 +64,17 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.SwitchTwoOptions,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MonitorPriceDecrease, eChannelSettings.MonitorPriceDecreasePercentage],
-    DefaultValues: ['1','0','0', '30']
+    DefaultValues: ['1', '0', '0', '30'],
+    Ancestors: [
+      {
+        Field: eChannelSettings.MonitorStock,
+        Value: '1'
+      },
+      {
+        Field: eChannelSettings.MonitorPrice,
+        Value: '1'
+      }
+    ]
   },
   {
     Labels: ['Channel.Setting.Name.MinQuantity'],

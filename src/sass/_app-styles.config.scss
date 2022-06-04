@@ -203,3 +203,11 @@ h4 {
   width: 20px;
   margin: 0 0.5rem;
 }
+
+.disabled {
+    color: $ash-gray;
+
+    &:hover {
+        color: $ash-gray;
+    }
+}

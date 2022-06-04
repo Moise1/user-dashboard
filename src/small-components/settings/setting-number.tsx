@@ -7,10 +7,11 @@ interface SettingNumberProps {
   loading: boolean;
   delayToSave?: number;
   onChange: (value: string) => void;
+  disabled?: boolean;
 }
 
 export const SettingNumber = (props: SettingNumberProps) => {
-  const { value, delayToSave, onChange, loading } = props;
+  const { value, delayToSave, onChange, loading, disabled } = props;
 
   const [delayTimer, setDelayTimer] = useState<number>(-1);
 
@@ -30,7 +31,7 @@ export const SettingNumber = (props: SettingNumberProps) => {
   };
 
   return <div className="setting setting-number">
-    <Input defaultValue={value} type='number' className='blue-input' onChange={OnChange} disabled={loading} />
+    <Input defaultValue={value} type='number' className='blue-input' onChange={OnChange} disabled={loading || disabled} />
     {loading && <Spin />}
   </div>;
 };
