@@ -1,24 +1,26 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Row, Col } from 'antd';
-
 import '../../sass/list-now/manual-listing.scss';
 import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { useEffect } from 'react';
+import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 
 export const ManualListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
-  const { sources, loading } = useAppSelector((state) => state.sources);
+  //const { sources, loading } = useAppSelector((state) => state.sources);
+  const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
 
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
 
-  console.log('The value of showAccConfig', loading);
-  console.log('The value of showAccConfig', sources);
+  useEffect(() => {
+    dispatch(getManualListings());
+  }, [getManualListings]);
 
-  console.log('test', sources?.sourceName);
+  //console.log('test', sources?.sourceName);
 
   return (
     <div className="manual-list-content">
@@ -60,11 +62,30 @@ export const ManualListing = (/*props: props*/) => {
         </div>
         <div className="section-sources">
           <h2>Suported suppliers</h2>
-          <div className="card-supplier">
-            {loading && 'Please wait a moment...'}
-            <img alt="sourcelogo"></img>
-            <h3>asd</h3>
-          </div>
+          <Row gutter={[16, 8]}>
+            {/*{sources.map((itm: { sourceId: number | undefined; sourceBaseUrl: string | undefined; sourceName: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {*/}
+            {/*  return <Col span={6} key={itm.sourceId}>*/}
+            {/*    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.sourceBaseUrl} target="_blank" rel="noreferrer">*/}
+            {/*      <div className="list-card"> {loading}*/}
+            {/*        <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.sourceId + '.png').default} ></img>*/}
+            {/*        <br />*/}
+            {/*        <h3>{itm.sourceName}</h3>*/}
+            {/*      </div>*/}
+            {/*    </a>*/}
+            {/*  </Col>;*/}
+            {/*})}*/}
+            {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
+              return <Col span={6} key={itm.id}>
+                <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
+                  <div className="list-card"> {loadings}
+                    <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
+                    <br />
+                    <h3>{itm.name}</h3>
+                  </div>
+                </a>
+              </Col>;
+            })}
+          </Row>
         </div>
       </div>
     </div>
