@@ -46,7 +46,7 @@
   position: fixed;
   left: 0;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   ::-webkit-scrollbar {
     display: none;
@@ -205,16 +205,6 @@
       filter: none;
       position: static;
     }
-  }
-
-  .overlay-sidebar-mobile {
-    position: fixed;
-    right: 0;
-    top: 0;
-    left: 29%;
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 100%;
-    z-index: 2;
   }
 }
 

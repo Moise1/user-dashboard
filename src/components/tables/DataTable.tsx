@@ -9,6 +9,7 @@ import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
+import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { ListingsStatusType } from 'src/custom-hooks/useTableSearch';
 import '../../sass/data-table.scss';
 
@@ -20,6 +21,7 @@ export type TableDataTypes =
   | SourceConfig
   | UserAssistant
   | Channel
+  | AutoOrderingData
   | ListingsStatusType;
 
 interface Props {
@@ -41,7 +43,7 @@ interface Props {
   onRow?: (record: TableDataTypes) => { onClick: () => void };
   rowSelection?: {
     selectedRowKeys: Key[];
-    type?: 'checkbox'
+    type?: 'checkbox';
     onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
   };
   isListingsTable?: boolean;
@@ -64,7 +66,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     onRow,
     setPostPerPage,
     rowClassName,
-    isListingsTable,
+    isListingsTable
   } = props;
 
   const onShowSizeChange = (current: number, pageSize: number) => {
@@ -151,6 +153,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
           </p>
         </div>
       )}
+
       <Table
         className="table"
         columns={columns}
@@ -160,6 +163,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         rowClassName={rowClassName}
         onRow={onRow}
       />
+
       <Pagination
         className="pagination"
         onChange={onChange}
@@ -173,4 +177,3 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     </div>
   );
 };
-

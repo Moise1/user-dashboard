@@ -43,15 +43,7 @@ interface Props {
 const mobileScreenSize = window.matchMedia('(max-width: 1030px)');
 
 export const Sidebar = (props: Props) => {
-  const {
-    collapsed,
-    staticValue,
-    togglestatic,
-    className,
-    setCollapsed,
-    mobileSiderVisible,
-    closeMobileSider
-  } = props;
+  const { collapsed, staticValue, togglestatic, className, setCollapsed, mobileSiderVisible, closeMobileSider } = props;
   const [isDark, setIsDark] = useState<boolean>(false);
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
 
@@ -93,7 +85,7 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
-    const keysToRemove = ['root', 'Authorization', 'globalTheme', 'isAuthenticated'];
+    const keysToRemove = ['root', 'Authorization', 'globalTheme', 'isAuthenticated', 'initialDate'];
     dispatch(actions.logout());
     keysToRemove.forEach((key) => localStorage.removeItem(key));
     persistor.purge();
@@ -113,11 +105,11 @@ export const Sidebar = (props: Props) => {
       listName: t('Menu.AutoOrderingConfiguration'),
       onClick: () => routeChange('/auto-ordering-configuration')
     },
-    {
-      id: 20,
-      listName: t('Menu.AutoOrderingConfiguration'),
-      onClick: () => routeChange('/auto-ordering-configuration-query')
-    },
+    // {
+    //   id: 20,
+    //   listName: t('Menu.AutoOrderingConfiguration'),
+    //   onClick: () => routeChange('/auto-ordering-configuration-query')
+    // },
     {
       id: 14,
       listName: (

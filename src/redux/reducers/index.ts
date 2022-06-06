@@ -7,6 +7,7 @@ import { sourcesConfigReducer } from '../source-config/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
+import { manualListingsReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
 import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
@@ -20,6 +21,7 @@ import { saveAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
+import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -32,6 +34,7 @@ export const allReducers = combineReducers({
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,
   listingSources: listingsSourceReducer,
+  manualListings: manualListingsReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,
@@ -42,5 +45,6 @@ export const allReducers = combineReducers({
   saveAutoOrdering: saveAutoOrderingReducer,
   getAutoOrdering: getAutoOrderingReducer,
   listingServices: listingServicesReducer,
-  noApiServers: noApiServersReducer
+  noApiServers: noApiServersReducer,
+  deleteAutoOrders: deleteAutoOrderingReducer
 });

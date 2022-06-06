@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings, getListingsSource, getPendingListings, getTerminatedListings } from './listingsThunk';
+import { getListings, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
 export interface ListingData {
   imageUrl: string;
   asin: null;
@@ -80,6 +80,7 @@ export interface ListingsSource {
 const initialState = {
   listings: <unknown>[],
   pendingListings: <unknown>[],
+  manualListings: <unknown>[],
   terminatedListings: <unknown>[],
   loading: false,
   error: '',
@@ -106,6 +107,26 @@ export const listingsSlice = createSlice({
       state.listings = payload;
     });
     builder.addCase(getListings.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+export const getManualListingsSlice = createSlice({
+  name: 'manualListings',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getManualListings.pending, (state) => {
+      state.loading = false;
+      state.error = '';
+    });
+    builder.addCase(getManualListings.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.manualListings = payload.responseObject;
+    });
+    builder.addCase(getManualListings.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
@@ -175,5 +196,6 @@ export const TerminateListingsSlice = createSlice({
 
 export const { reducer: listingsReducer } = listingsSlice;
 export const { reducer: listingsSourceReducer } = getListingsSourceSlice;
+export const { reducer: manualListingsReducer } = getManualListingsSlice;
 export const { reducer: pendingListingsReducer } = PendingListingsSlice;
 export const { reducer: terminatedListingsReducer } = TerminateListingsSlice;

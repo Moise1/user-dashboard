@@ -5,19 +5,33 @@ import { Layout, Form, Input } from 'antd';
 import '../../sass/list-now/bulk-listing.scss';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { SimpleTable } from '../tables/SimpleTable';
+//import { SimpleTable } from '../tables/SimpleTable';
 import { Selector } from '../../small-components/Selector';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { StatusBar } from 'src/small-components/StatusBar';
 import { dummyDeliver } from 'src/dummy-data/dummyData';
+import Spreadsheet from 'react-spreadsheet';
 
 const { Item } = Form;
 
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   const { sources } = useAppSelector((state) => state.sources);
+
+  const [data, setData] = useState([
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }],
+  ]);
 
   useEffect(() => {
     dispatch(getSources());
@@ -27,18 +41,20 @@ export const BulkListing = (/*props: props*/) => {
 
   console.log('test', sources?.sourceName);
 
-  const columns = [
-    {
-      title: 'Source URL',
-      dataIndex: 'sourceurl',
-      key: 'sourceurl'
-    },
-    {
-      title: 'Listings title (Optional)',
-      dataIndex: 'listingstitle',
-      key: 'listingstitle'
-    }
-  ];
+  const lables = ['Source URL', 'Listing Title (Optional)'];
+
+  //const columns = [
+  //  {
+  //    title: 'Source URL',
+  //    dataIndex: 'sourceurl',
+  //    key: 'sourceurl'
+  //  },
+  //  {
+  //    title: 'Listings title (Optional)',
+  //    dataIndex: 'listingstitle',
+  //    key: 'listingstitle'
+  //  }
+  //];
 
   return (
     <Layout className="bulk-list-content">
@@ -75,7 +91,9 @@ export const BulkListing = (/*props: props*/) => {
           </div>
 
           <div className="table-container">
-            <SimpleTable columns={columns} dataSource={sources} pageSize={10} totalItems={sources?.length} />
+            <Spreadsheet data={data} onChange={() => setData} columnLabels={lables}  />
+
+            {/*<SimpleTable columns={columns} dataSource={sources} pageSize={10} totalItems={sources?.length} />*/}
 
             <div className="button-container">
               <Item>
