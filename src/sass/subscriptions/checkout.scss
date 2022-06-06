@@ -2,11 +2,23 @@
 @import '../general.config';
 
 .checkout-content {
+  display: flex;
+  .title-container {
+    margin-bottom: 1rem;
+    align-self: center;
+    width: 80%;
+    h1 {
+      font-weight: 600;
+      margin: 0;
+    }
+    h3 {
+      color: $gray;
+      margin: 0;
+    }
+  }
   .checkout-sections-container {
     display: flex;
-    width: 100%;
     justify-content: space-around;
-
     .first-section-container {
       background-color: $primary-bg;
       padding: 2rem;
@@ -14,11 +26,13 @@
       box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
       border-radius: 1rem;
       .extras {
-        .first-extra,
-        .second-extra {
+        .extra-container {
           display: flex;
           align-items: center;
           justify-content: space-between;
+        }
+        .price-extra {
+          white-space: nowrap;
         }
 
         display: grid;
@@ -40,6 +54,41 @@
       padding: 2rem;
       box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
       border-radius: 1rem;
+      .title-ordersum {
+        color: $light-primary;
+        font-weight: 600;
+      }
+      .order-products {
+        display: flex;
+        .order-products-lines {
+          width: 50%;
+          .product-order-line {
+            .title-orderdetails {
+              color: $gray;
+            }
+          }
+          .order-sum {
+            display: grid;
+            align-content: center;
+            align-items: center;
+          }
+        }
+        .order-products-price {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .checkout-content {
+    .checkout-sections-container {
+      display: grid !important;
+      .first-section-container,
+      .second-section-container {
+        width: 100% !important;
+      }
     }
   }
 }
