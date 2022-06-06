@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { SimpleTable } from '../tables/SimpleTable';
-import { SearchOptions } from '../../small-components/SearchOptions';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
+import { X, Check } from 'react-feather';
+import { SearchInput } from '../../small-components/TableActionBtns';
 
 export const SourcesTable = () => {
   const dispatch = useAppDispatch();
@@ -18,11 +19,17 @@ export const SourcesTable = () => {
     dispatch(getSources());
   }, [getSources]);
 
+  const [data, setData] = useState(sources);
 
   function parentToChild(value: string): void {
     localStorage.setItem('selectedSource', value);
   }
 
+  const onSearch = (value: string) => {
+    console.log('search: ' + value);
+    const tempData = sources.filter((src: { sourceName: string; }) => src.sourceName.toLowerCase().includes(value.toLowerCase()));
+    setData(tempData);
+  };
 
   const columns = [
     {
@@ -38,27 +45,36 @@ export const SourcesTable = () => {
     {
       title: t('SourceTable.Markup'),
       dataIndex: 'markup',
-      key: 'markup'
+      key: 'markup',
     },
     {
       title: t('SourceTable.MonitorStock'),
       dataIndex: 'monitorStock',
-      key: 'monitorStock'
+      key: 'monitorStock',
+      render: (value: boolean) => {
+        return value ? <Check /> : <X />;
+      }
     },
     {
       title: t('SourceTable.MonitorPrice'),
       dataIndex: 'monitorPrice',
-      key: 'monitorPrice'
+      key: 'monitorPrice',
+      render: (value: boolean) => {
+        return value ? <Check /> : '';
+      }
     },
     {
       title: t('SourceTable.PriceDecrease'),
-      dataIndex: 'monitorDecrease',
-      key: 'monitorDecrease'
+      dataIndex: 'monitorPriceDecrease',
+      key: 'monitorPriceDecrease',
+      render: (value: boolean) => {
+        return value ? <Check /> : '';
+      }
     },
     {
       title: t('SourceTable.DecreaseLimit'),
-      dataIndex: 'decreaseLimit',
-      key: 'decreaseLimit'
+      dataIndex: 'monitorPriceDecreasePercentage',
+      key: 'monitorPriceDecreasePercentage'
     },
     {
       title: t('SourceTable.Template'),
@@ -67,27 +83,28 @@ export const SourcesTable = () => {
     },
     {
       title: t('SourceTable.ShippingPolicy'),
-      dataIndex: 'shippingPolicy',
-      key: 'shippingPolicy'
+      dataIndex: 'defaultShipping',
+      key: 'defaultShipping'
     },
     {
       title: t('SourceTable.ReturnPolicy'),
-      dataIndex: 'returnPolicy',
-      key: 'returnPolicy'
+      dataIndex: 'returns',
+      key: 'returns'
     }
   ];
 
   return (
     <Layout className="sources-container">
       <div className="search-options-area">
-        <SearchOptions showSearchInput />
+        <SearchInput onSearch={onSearch} />
+        {/*<SearchOptions showSearchInput />*/}
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
         <SimpleTable
           current={current}
           onChange={setCurrent}
-          columns={columns} dataSource={sources} pageSize={10} totalItems={sources?.length} />
+          columns={columns} dataSource={data} pageSize={10} totalItems={sources?.length} />
       </div>
     </Layout>
   );

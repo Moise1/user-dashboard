@@ -7,6 +7,7 @@ import { sourcesConfigReducer } from '../source-config/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
+import { manualListingsReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
 import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
@@ -33,6 +34,7 @@ export const allReducers = combineReducers({
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,
   listingSources: listingsSourceReducer,
+  manualListings: manualListingsReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,

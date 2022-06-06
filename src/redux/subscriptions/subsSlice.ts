@@ -3,7 +3,7 @@ import { getSubscriptions } from './subsThunk';
 
 export interface Subscription {
   id: number;
-  platformId: string;
+  platformId: number;
   billingPeriodId: number;
   currencyId: number;
   price: number;

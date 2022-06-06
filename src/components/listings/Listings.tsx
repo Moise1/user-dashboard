@@ -182,12 +182,6 @@ export const Listings = () => {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange
-    // hideSelectAll: true,
-    // getCheckboxProps: () =>{
-    //   return {
-    //     style: {display: 'none'}
-    //   };
-    // },
   };
 
   const handleClose = () => {
