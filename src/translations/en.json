@@ -187,7 +187,7 @@
   "OrderButtons.Delete5Orders": "Delete 5 Orders",
   "AutoOrderingConfiguration.Supplier": "Supplier",
   "AutoOrderingConfiguration.Free": "Free",
-  "AutoOrderingConfiguration.FreePercentage": "% Free",
+  "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Update": "Update",
