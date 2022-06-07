@@ -42,7 +42,7 @@ import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-import { SelectorPlain } from '../../small-components/form/selector-plain';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 interface ProductQuota {
   quota: number;
@@ -211,7 +211,7 @@ export const Dashboard = () => {
     { value: 0, label: '3' },
     { value: 1, label: '4' }
   ];
-  const onSelectOption = (value: React.Key) => {
+  const onSelectOption = (value: SelectorValue) => {
     setSelectedPeriod(value as number);
   };
   const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
@@ -301,11 +301,11 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <SelectorPlain
-              defaultValue='Select a period'
+            <Selector
+              placeHolder='Select a period'
               onChange={onSelectOption}>
               {periodOptions}
-            </SelectorPlain>
+            </Selector>
             {selectedPeriod === 3 ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
             <div className="sales-profit-area">
               <div className="digits">{salesOrProfit()}</div>

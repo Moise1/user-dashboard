@@ -6,11 +6,11 @@ const { Option } = Select;
 export type SelectorSizeType = 'large' | 'small' | 'middle';
 
 export type SelectorLabel = string | JSX.Element;
+export type SelectorValue = React.Key;
 export interface SelectorData {
-  value: React.Key;
+  value: SelectorValue;
   label: SelectorLabel;
 }
-export type SelectorValue = React.Key | SelectorData | null | undefined;
 
 interface Props {
   children: SelectorData | SelectorData[];
@@ -27,7 +27,7 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   showSearch?: boolean;
-  labelInValue?: boolean;
+  placeHolder?: string | JSX.Element;
 }
 
 export const Selector = (props: Props) => {
@@ -44,36 +44,45 @@ export const Selector = (props: Props) => {
     size,
     disabled,
     showSearch,
-    labelInValue
+    placeHolder
   } = props;
 
-  const options = Array.isArray(children) ?
-    (
-      children.map(c => {
-        return (
-          <Option key={c.value} value={c.value}>
-            {c.label}
-          </Option>
-        );
-      })
-    ) : (
-      <Option key = { children.value } value = { children.value } >
-        {children.label}
-      </Option> 
-    );
+  const childrens = (Array.isArray(children) ? children : [children]);
+
+  const options =
+    childrens.map(c => {
+      return (
+        <Option key={c.value} value={c.value}>
+          {c.label}
+        </Option>
+      );
+    });
+
+  const OnChange = (val: SelectorData) => {
+    if (onChange) {
+      onChange(val.value);
+    }
+  };
+
+  const dv = childrens.find(x => x.value == defaultValue);
+  const v = childrens.find(x => x.value == value);
+  const placeHolderU = (!dv && !v) ? {
+    value: '',
+    label: placeHolder
+  } as SelectorData : undefined;
 
   return (
     <Select
-      labelInValue={labelInValue}
+      labelInValue={true}
       disabled={disabled}
       style={style}
       className={'selector ' + (className ?? '')}
       allowClear={false}
-      onChange={onChange}
+      onChange={OnChange}
       showSearch={showSearch}
       placeholder={placeholder}
-      defaultValue={defaultValue}
-      value={value}
+      defaultValue={dv ?? placeHolderU}
+      value={v}
       dropdownRender={dropdownRender}
       loading={loading}
       size={size}

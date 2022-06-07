@@ -10,9 +10,9 @@ import { ListingsData } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Key, useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
-import { SimpleSelect } from '../../small-components/SimpleSelect';
 import { StatusBar } from 'src/small-components/StatusBar';
 import Spreadsheet, { Matrix } from 'react-spreadsheet';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 const { Item } = Form;
 
@@ -84,20 +84,20 @@ export const BulkListing = (/*props: props*/) => {
     );
   });
 
-  const handleAssistantChange = (value: string) => {
-    setCreatedBy(value);
+  const handleAssistantChange = (value: SelectorValue) => {
+    setCreatedBy(value as string);
   };
 
-  const handleIgnoreVeroChange = (value: string) => {
-    setIgnoreVero(value);
+  const handleIgnoreVeroChange = (value: SelectorValue) => {
+    setIgnoreVero(value as string);
   };
 
-  const handleIgnoreOOSChange = (value: string) => {
-    setIgnoreOOS(value);
+  const handleIgnoreOOSChange = (value: SelectorValue) => {
+    setIgnoreOOS(value as string);
   };
 
-  const handleReviewBeforePublishing = (value: string) => {
-    setReviewBeforePublishing(value);
+  const handleReviewBeforePublishing = (value: SelectorValue) => {
+    setReviewBeforePublishing(value as string);
   };
 
   const handleListFrequencyMinutes = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,47 +117,56 @@ export const BulkListing = (/*props: props*/) => {
   };
 
   return (
-    <Layout className="bulk-list-content">
-      <div className="sections-container">
+    <Layout className='bulk-list-content'>
+      <div className='sections-container'>
         <h1>Bulk Listing</h1>
         <Row>
           <Col span={24}>
-            <div className="bulk-sections">
-              <div className="options-container">
-                <StatusBar className="bulk-options">
+            <div className='bulk-sections'>
+              <div className='options-container'>
+                <StatusBar className='bulk-options'>
                   <> </>
-                  <Form className="bulk-form" layout={'horizontal'}>
-                    <Item label="Create As" name="createdBy">{VAloading}
-                      <SimpleSelect defaultValue="select" value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>{TempOptions}</SimpleSelect>
+                  <Form className='bulk-form' layout={'horizontal'}>
+                    <Item label='Create As' name='createdBy'>{VAloading}
+                      <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>{TempOptions}</Selector>
                     </Item>
                     <p>VA Profile selected as the creator of the listing</p>
-                    <Item label="List Vero Items" name="ignoreVero">
-                      <SimpleSelect defaultValue="false" value={ignoreVero ? ignoreVero : 'false'} onChange={handleIgnoreVeroChange}>
-                        <Option value="true" key="1">Yes</Option>
-                        <Option value="false" key="2">No</Option>
-                      </SimpleSelect>
+                    <Item label='List Vero Items' name='ignoreVero'>
+                      <Selector defaultValue='false'
+                        value={ignoreVero ? ignoreVero : 'false'}
+                        onChange={handleIgnoreVeroChange}
+                      >
+                        {[
+                          { label:'Yes', value:'true' },
+                          { label:'No', value:'false' }
+                        ]}
+                      </Selector>
                     </Item>
                     <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
-                    <Item label="List Out of Stock Items" name="ignoreOOS">
-                      <SimpleSelect defaultValue="false" value={ignoreOOS ? ignoreOOS : 'false'} onChange={handleIgnoreOOSChange}>
-                        <Option value="true" key="1">Yes</Option>
-                        <Option value="false" key="2">No</Option>
-                      </SimpleSelect>
+                    <Item label='List Out of Stock Items' name='ignoreOOS'>
+                      <Selector defaultValue='false' value={ignoreOOS ? ignoreOOS : 'false'} onChange={handleIgnoreOOSChange}>
+                        {[
+                          { label: 'Yes', value: 'true' },
+                          { label: 'No', value: 'false' }
+                        ]}
+                      </Selector>
                     </Item>
                     <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
-                    <Item label="Don't list until" name="dontListUntil">
+                    <Item label="Don't list until" name='dontListUntil'>
                       <DatePicker showTime={{ format: 'hh:mm A' }}
-                        format="YYYY-MM-DD hh:mm A" onChange={onChange} onOk={onOk} />
+                        format='YYYY-MM-DD hh:mm A' onChange={onChange} onOk={onOk} />
                     </Item>
-                    <Item label="Listing frequency" name="listFrequencyMinutes">
-                      <Input className="blue-input" type="number" value={listFrequencyMinutes} placeholder="0" onChange={handleListFrequencyMinutes} />
+                    <Item label='Listing frequency' name='listFrequencyMinutes'>
+                      <Input className='blue-input' type='number' value={listFrequencyMinutes} placeholder='0' onChange={handleListFrequencyMinutes} />
                     </Item>
                     <p>The system will automatically list an item every X minutes.</p>
-                    <Item label="Review listings" name="reviewBeforePublishing">
-                      <SimpleSelect defaultValue="false" value={reviewBeforePublishing ? reviewBeforePublishing : 'false'} onChange={handleReviewBeforePublishing}>
-                        <Option value="true" key="1">Yes</Option>
-                        <Option value="false" key="2">No</Option>
-                      </SimpleSelect>
+                    <Item label='Review listings' name='reviewBeforePublishing'>
+                      <Selector defaultValue='false' value={reviewBeforePublishing ? reviewBeforePublishing : 'false'} onChange={handleReviewBeforePublishing}>
+                        {[
+                          { label: 'Yes', value: 'true' },
+                          { label: 'No', value: 'false' }
+                        ]}
+                      </Selector>
                     </Item>
                     <p>Yes: Review each listing before updating it on my store<br />
                       No: List items automatically on my store.</p>
@@ -169,28 +178,28 @@ export const BulkListing = (/*props: props*/) => {
         </Row>
         <Row>
           <Col span={24}>
-            <Spreadsheet data={data} onChange={setData} columnLabels={lables} className="spreadsheet" />
+            <Spreadsheet data={data} onChange={setData} columnLabels={lables} className='spreadsheet' />
             <Button onClick={addRows} >Add 10 rows</Button>
-            <div className="table-container">
+            <div className='table-container'>
 
-              <div className="button-container">
+              <div className='button-container'>
                 <Item>
-                  <Button type="primary" onClick={onListItems}>List items</Button>
+                  <Button type='primary' onClick={onListItems}>List items</Button>
                 </Item>
               </div>
             </div>
           </Col>
         </Row>
-        <div className="manual-list-content">
-          <div className="container-manual-listing">
-            <div className="section-sources">
+        <div className='manual-list-content'>
+          <div className='container-manual-listing'>
+            <div className='section-sources'>
               <h2>Suported suppliers</h2>
               <Row gutter={[16, 8]}>
                 {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
                   return <Col span={6} key={itm.id}>
-                    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
-                      <div className="list-card"> {loadings}
-                        <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
+                    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
+                      <div className='list-card'> {loadings}
+                        <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
                         <br />
                         <h3>{itm.name}</h3>
                       </div>

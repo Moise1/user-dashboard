@@ -4,13 +4,13 @@ import { Layout, Form, /*(needed for extras) Checkbox, */ Spin } from 'antd';
 
 import '../../sass/subscriptions/checkout.scss';
 
-import { SelectorPlain } from '../../small-components/form/selector-plain';
 import { OrderSummary } from './OrderSummary';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
 
 import { Product } from 'src/redux/subscriptions/subsSlice';
+import { Selector } from '../../small-components/form/selector';
 
 const { Item } = Form;
 
@@ -44,7 +44,7 @@ export const Checkout = (/*props: props*/) => {
             <Item label="Select your listings amount" name="sourceId">
               <SelectorPlain defaultValue={pId?.toString()} loading={loading}>
                 {products?.map(({ name: label, id: value }: Product) => ({ value, label }))}
-              </SelectorPlain>
+              </Selector>
             </Item>
           </Form>
 
