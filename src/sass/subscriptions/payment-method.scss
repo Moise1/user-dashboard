@@ -1,0 +1,48 @@
+@use '../general.config';
+@import '../general.config';
+
+.checkout-content {
+  display: flex;
+  .title-container {
+    margin-bottom: 1rem;
+    align-self: center;
+    width: 80%;
+    h3 {
+      font-weight: 600;
+      margin: 0;
+    }
+    h4 {
+      color: $gray;
+      margin: 0;
+    }
+  }
+  .payment-sections-container {
+    display: flex;
+    justify-content: space-around;
+    .billing-container {
+      display: grid;
+      .billing-section-container {
+        background-color: $primary-bg;
+        padding: 2rem;
+        width: 100%;
+        box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+        border-radius: 1rem;
+      }
+    }
+    .order-summary {
+      width: 40%;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .checkout-content {
+    .checkout-sections-container {
+      display: grid !important;
+      .first-section-container,
+      .order-summary {
+        width: 100% !important;
+      }
+    }
+  }
+}

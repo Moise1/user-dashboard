@@ -57,8 +57,8 @@ export const dummyDuration: DummyData[] = [
 ];
 
 export const dummyDeliver = [
-  { value: '30 days', id: 1 },
-  { value: 'Test return', id: 2 }
+  { label: '30 days', value: 1 },
+  { label: 'Test return', value: 2 }
 ];
 
 export const dummyPricingRulesOptions = [

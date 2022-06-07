@@ -1,29 +1,42 @@
-// ES modules
 import { ReactNode } from 'react';
-//import ReactDOMServer from 'react-dom/server';
 
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-export function t(key: string, values?: Record<string, PrimitiveType>): string | ReactNode {
-  //return key;
-  const intl = useIntl();
-  const v = intl.formatMessage(
-    {
-      id: key,
-      description: '', // Description should be a string literal
-      defaultMessage: '{errorKey}' // Message should be a string literal
-    },
-    { ...values, key, errorKey: <span className="missingTranslation">{key}</span> } // Values should be an object literal, but not necessarily every value inside
-  );
+const functions = {
+  GetSystemValues: function (recursiveCount = 0): Record<string, PrimitiveType | JSX.Element> {
+    if (recursiveCount > 2) {
+      return {};
+    }
 
-  return v;
-  // if(typeof(v) === 'string')
-  //   return v;
+    recursiveCount++;
+    return {
+      channel_platform_name: 'eBay',//TODO: Get selected channel and put here eBay, Amazon or Shopify
+      sources_table_link: <a href='/sources-table'>{this.T('Menu.SourcesTable', {}, recursiveCount)}</a>
+    };
+  },
+  T: function (key: string, values?: Record<string, PrimitiveType | JSX.Element>, recursiveCount = 0): string | ReactNode {
+    if (!key) {
+      return '';
+    }
 
-  // const str = ReactDOMServer.renderToString(v as ReactElement);
-  // return str;
+    const intl = useIntl();
+    const v = intl.formatMessage(
+      {
+        id: key,
+        description: '', // Description should be a string literal
+        defaultMessage: '{errorKey}' // Message should be a string literal
+      },
+      { ...this.GetSystemValues(recursiveCount), ...values, key, errorKey: <span className="missingTranslation">{key}</span> } // Values should be an object literal, but not necessarily every value inside
+    );
+
+    return v;
+  }
+};
+
+export function t(key: string, values?: Record<string, PrimitiveType | JSX.Element>): string | ReactNode {
+  return functions.T(key, values, 0);
 }
+
 export function tm(key: string) {
   return <FormattedMessage id={key} defaultMessage="Translation missing for {key}" description="Welcome message" />;
 }

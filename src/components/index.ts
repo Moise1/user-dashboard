@@ -11,7 +11,7 @@ export { Subscriptions } from './subscriptions/Subscriptions';
 export { PricingRules } from './pricing-rules/PricingRules';
 export { BrowserExtensions } from './browser-extensions/BrowserExtensions';
 export { VaProfiles } from './va-profiles/VaProfiles';
-export { ChannelSettings } from './chanel/ChannelSettings';
+export { ChannelConfiguration } from './chanel/channel-configuration';
 export { SourcesSettings } from './sources/SourcesSettings';
 export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
