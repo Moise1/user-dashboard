@@ -10,7 +10,11 @@ import { SelectorChannel } from './form/selector-channel';
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
   const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
-  const { setChannelId, channelId } = useContext(AppContext);
+  const { channelId, setChannelId } = useContext(AppContext);
+
+  if (channels.length > 0 && (!channelId || channelId <= 0)) {
+    setChannelId(channels[0].id);
+  }
 
   return (
     <div className="store-list-container">
