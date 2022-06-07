@@ -8,26 +8,35 @@ export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
   const [channelId, setChannelId] = useState<number>(initialAppContext.channelId);
 
+  const SetChannelId = (newChannelId: number) => {
+    if (newChannelId != channelId) {
+      localStorage.setItem('channelId', newChannelId?.toString());
+      setChannelId(newChannelId);
+    }
+  };
+  const SetTheme = (newTheme: string) => {
+    if (newTheme != theme) {
+      localStorage.setItem('globalTheme', newTheme);
+      setTheme(newTheme);
+    }
+  };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
-    const sId = localStorage.getItem('channelId');
-    const savedChannelId = sId ? parseInt(sId) : undefined;
-    if (savedTheme) {
-      setTheme(savedTheme);
+    if (savedTheme != theme) {
+      setTheme(savedTheme ?? '');
     }
-    if (savedChannelId) {
-      setChannelId(savedChannelId);
+
+    const sId = localStorage.getItem('channelId');
+    const nId = sId ? parseInt(sId) : -1;
+    if (nId != channelId) {
+      setChannelId(nId);
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('globalTheme', theme);
-    localStorage.setItem('channelId', channelId?.toString() ?? '');
-  }, [theme, channelId]);
-
+  console.log('>>>>>>>>>>' + channelId + '_' + theme);
   return (
-    <AppContext.Provider value={{ theme, setTheme, channelId, setChannelId }}>
-      <div data-theme={theme} className="theme-provider">
+    <AppContext.Provider value={{ theme, setTheme: SetTheme, channelId, setChannelId:SetChannelId }}>
+      <div data-theme={theme} className="theme-provider" key={channelId + '_' + theme}>
         {children}
       </div>
     </AppContext.Provider>

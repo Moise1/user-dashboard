@@ -15,20 +15,13 @@ export const StoreList = () => {
   const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
   const { setChannelId, channelId } = useContext(AppContext);
 
-  const shopIdentity = channels.find(x => x.id == channelId) ?? channels[0];
-
-  const provideChannelId = (value: number) => {
-    setChannelId(value);
-    window.location.reload();
-  };
-
   return (
     <div className="store-list-container">
       <SelectorChannel
         size="large"
         showSearch={false}
-        defaultValue={shopIdentity.id}
-        onChange={provideChannelId}
+        value={channelId}
+        onChange={setChannelId}
         showFlags={showFlags}
         dropdownRender={(menu: ReactNode) => (
           <>

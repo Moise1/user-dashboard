@@ -10,7 +10,7 @@ type AppContextType = {
 export const initialAppContext: AppContextType = {
   theme: 'light',
   channelId: parseInt(localStorage.getItem('channelId') ?? '-1'),
-  setChannelId: (channelId) => localStorage.setItem('channelId', channelId.toString()),
+  setChannelId: () => null,
   setTheme: () => null
 };
 
