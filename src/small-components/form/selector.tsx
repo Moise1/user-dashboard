@@ -27,7 +27,7 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   showSearch?: boolean;
-  placeHolder?: string;
+  placeHolder?: string | JSX.Element;
 }
 
 export const Selector = (props: Props) => {

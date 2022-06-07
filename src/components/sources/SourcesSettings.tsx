@@ -7,13 +7,13 @@ import { ChevronLeft } from 'react-feather';
 import { t } from '../../utils/transShim';
 //import { SuccessBtn } from '../../small-components/ActionBtns';
 import { CountrySelector } from '../../small-components/CountrySelector';
-import { SimpleSelect } from '../../small-components/SimpleSelect';
 import { Switch } from '../../small-components/Switch';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { getSources, saveSources } from '../../redux/source-config/sourcesThunk';
 import { SourceConfigSave } from '../../redux/source-config/sourceSlice';
 //import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import '../../sass/sources-settings.scss';
+import { Selector } from '../../small-components/form/selector';
 
 export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
@@ -23,7 +23,6 @@ export const SourcesSettings = () => {
   //const { shippingOptions } = useAppSelector((state) => state.sources.shippingOptions);
   const { templates } = useAppSelector((state) => state.templates);
   const history = useHistory();
-  const { Option } = Select;
   const selectedSource = localStorage.getItem('selectedSource');
   //const [source, setSource] = useState();
   const { sources, sourcesLoading } = useAppSelector((state) => state.sources);
@@ -54,21 +53,8 @@ export const SourcesSettings = () => {
     setTo('/sources');
   };
 
-  const TempOptions = templates?.map((c: { id: Key | null | undefined; name: string | null | undefined }) => {
-    return (
-      <Option key={c.id} value={c.id?.toString()}>
-        {c.name}
-      </Option>
-    );
-  });
-
-  const sourceOptions = sources?.map((c: { sourceId: Key | null | undefined; sourceName: string | null | undefined }) => {
-    return (
-      <Option key={c.sourceId} value={c.sourceId}>
-        {c.sourceName}
-      </Option>
-    );
-  });
+  const TempOptions = templates?.map((c: { id: Key | null | undefined; name: string | null | undefined }) => { return { label: c.name, value: c.id };});
+  const sourceOptions = sources?.map((c: { sourceId: Key | null | undefined; sourceName: string | null | undefined }) => { return { label: c.sourceName, value: c.sourceId };});
 
   //const shippings = sources.shippingOptions[3];
   //localStorage.setItem('shipping', sources);
@@ -100,8 +86,8 @@ export const SourcesSettings = () => {
   const [hidePriceDecrease, setHidePriceDecrease] = useState(false);
   const [hideCustomPrice, setHideCustomPrice] = useState(true);
   const [customPriceDecreaseDRD, setCustomPriceDecreaseDRD] = useState('custom');
-  const handleMarkupChange = (value: string) => {
-    setMarkupSelect(value);
+  const handleMarkupChange = (value: React.Key) => {
+    setMarkupSelect(value as string);
     if (value === 'custom') {
       setHideMarkupInput(false);
     }
@@ -109,8 +95,8 @@ export const SourcesSettings = () => {
       setHideMarkupInput(true);
     }
   };
-  const handleTemplateChange = (value: string) => {
-    setTemplateId(Number(value));
+  const handleTemplateChange = (value: React.Key) => {
+    setTemplateId(value as number);
   };
 
   function loadDefault() {
@@ -304,8 +290,8 @@ export const SourcesSettings = () => {
     onSave(value);
   }
 
-  const handleOptionChange = (value: string) => {
-    loadSource(value);
+  const handleOptionChange = (value: React.Key) => {
+    loadSource(value as string);
   };
 
   const handleMarkupValue = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -316,18 +302,18 @@ export const SourcesSettings = () => {
     setmonitorPriceDecreasePercentage(Number(event.target.value));
   };
 
-  const handleMonitorStock = (value: string) => {
+  const handleMonitorStock = (value: React.Key) => {
     if (value === 'false') {
       setHideMonitorStock(true);
     }
     else {
       setHideMonitorStock(false);
     }
-    setMonitorStock(value);
+    setMonitorStock(value as string);
   };
 
-  const handlMonitorPrice = (value: string) => {
-    setMonitorPrice(value);
+  const handlMonitorPrice = (value: React.Key) => {
+    setMonitorPrice(value as string);
   };
 
   const handlePriceChange = (value: string) => {
@@ -418,10 +404,17 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect value={markupSelect ? markupSelect : 'default'} defaultValue="Defined by Settings(30)" onChange={handleMarkupChange}>
-              <Option value="default" key="0">Defined by Settings(30)</Option>
-              <Option value="custom" key="1">Custom</Option>
-            </SimpleSelect>
+            <Selector
+              value={markupSelect ? markupSelect : 'default'}
+              defaultValue="Defined by Settings(30)"
+              onChange={handleMarkupChange}>
+              {
+                [
+                  { label: 'Defined by Settings(30)', value:'default' },
+                  { label: 'Custom', value:'custom' }
+                ]
+              }
+            </Selector>
 
             <div className="input-control" >
               <Input value={markup ? markup : undefined} hidden={hideMarkupInput} type="number" name="markup" onChange={handleMarkupValue} />
@@ -439,7 +432,7 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect value={templateId ? templateId.toString() : undefined} onChange={handleTemplateChange}>{TempOptions}</SimpleSelect>
+            <Selector value={templateId ? templateId.toString() : undefined} onChange={handleTemplateChange}>{TempOptions}</Selector>
           </Col>
         </Row>
 
@@ -452,11 +445,15 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handleMonitorStock} value={monitorStock ? monitorStock : 'Defined by Settings(Yes)'}>
-              <Option key="0">Defined by Settings(Yes)</Option>
-              <Option value="true" key="1">Yes</Option>
-              <Option value="false" key="2">No</Option>
-            </SimpleSelect>
+            <Selector defaultValue="0" onChange={handleMonitorStock} value={monitorStock ? monitorStock : 'Defined by Settings(Yes)'}>
+              {
+                [
+                  { label: 'Defined by Settings(Yes)', value: '0' },
+                  { label: 'Yes', value: 'true' },
+                  { label: 'No', value: 'false' }
+                ]
+              }
+            </Selector>
           </Col>
         </Row>
 
@@ -469,11 +466,15 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect defaultValue="Defined by Settings(yes)" value={monitorPrice ? monitorPrice : 'Defined by Settings(Yes)'} onChange={handlMonitorPrice}>
-              <Option key="0">Defined by Settings(Yes)</Option>
-              <Option value="true" key="1">Yes</Option>
-              <Option value="false" key="2">No</Option>
-            </SimpleSelect>
+            <Selector defaultValue="0" value={monitorPrice ? monitorPrice : 'Defined by Settings(Yes)'} onChange={handlMonitorPrice}>
+              {
+                [
+                  { label: 'Defined by Settings(Yes)', value: '0' },
+                  { label: 'Yes', value: 'true' },
+                  { label: 'No', value: 'false' }
+                ]
+              }
+            </Selector>
           </Col>
         </Row>
 
@@ -498,16 +499,24 @@ export const SourcesSettings = () => {
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
             <br />
-            <SimpleSelect defaultValue="Defined by Settings(yes)" onChange={handlePriceChange} value={monitorPriceDecrease ? monitorPriceDecrease : 'Defined by Settings(yes)'}>
-              <Option key="0">Defined by Settings(Yes)</Option>
-              <Option value="true" key="1">Yes</Option>
-              <Option value="false" key="2">No</Option>
-            </SimpleSelect>
+            <Select defaultValue="0" onChange={handlePriceChange} value={monitorPriceDecrease ? monitorPriceDecrease : 'Defined by Settings(yes)'}>
+              {
+                [
+                  { label: 'Defined by Settings(Yes)', value: '0' },
+                  { label: 'Yes', value: 'true' },
+                  { label: 'No', value: 'false' }
+                ]
+              }
+            </Select>
             <div className="divPadding" hidden={hidePriceDecrease}>
-              <SimpleSelect defaultValue="Defined by Settings(0)" onChange={handleCustomPriceChange} value={customPriceDecreaseDRD ? customPriceDecreaseDRD : ''}>
-                <Option key="0" value="default">Defined by Settings(0)</Option>
-                <Option value="custom" key="1">Custom</Option>
-              </SimpleSelect>
+              <Select defaultValue="0" onChange={handleCustomPriceChange} value={customPriceDecreaseDRD ? customPriceDecreaseDRD : ''}>
+                {
+                  [
+                    { label: 'Defined by Settings(0)', value: '0' },
+                    { label: 'custom', value: 'custom' },
+                  ]
+                }
+              </Select>
             </div>
             <div className="input-control divPadding" hidden={hidePriceDecrease || hideCustomPrice}>
               <Radio.Group onChange={onChange} value={limitValue}>
@@ -531,12 +540,16 @@ export const SourcesSettings = () => {
             <h2>Returns</h2>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect defaultValue="Select" value={returns ? returns : 'Select'} onChange={handleReturnsChange}>
-              <Option value="Days_14" key="0">14 Days</Option>
-              <Option value="Days_30" key="1">30 Days</Option>
-              <Option value="Days_60" key="2">60 Days</Option>
-              <Option value="No_Returns" key="3">No Return</Option>
-            </SimpleSelect>
+            <Select defaultValue="Days_14" value={returns ? returns : 'Select'} onChange={handleReturnsChange}>
+              {
+                [
+                  { label: 'Days_14', value: '14 Days' },
+                  { label: 'Days_30', value: '30 Days' },
+                  { label: 'Days_60', value: '60 Days' },
+                  { label: 'No_Returns', value: 'No Return' },
+                ]
+              }
+            </Select>
           </Col>
         </Row>
 
@@ -629,9 +642,9 @@ export const SourcesSettings = () => {
       </main>
 
       <div className="control-section">
-        <SimpleSelect defaultValue={selectedSource ? selectedSource : 'Select Supplier'} loading={sourcesLoading} onChange={handleOptionChange}>
+        <Selector defaultValue={selectedSource ? selectedSource : 'Select Supplier'} loading={sourcesLoading} onChange={handleOptionChange}>
           {sourceOptions}
-        </SimpleSelect>
+        </Selector>
         <div className="action-btns">
           <Button type="primary" onClick={save}>{t('SaveChanges')}</Button>
           <Button onClick={loadDefault}>{t('ResetToDefault')}</Button>

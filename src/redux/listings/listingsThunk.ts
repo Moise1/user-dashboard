@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
 import unmap, { ActiveListing, compArray } from '../../redux/unmap';
+import { toastAlert } from '../../utils/toastAlert';
+import { ListingsData } from './listingsSlice';
 
 export const getListings = createAsyncThunk(
   'listings/getListings',
@@ -79,3 +81,14 @@ export const getManualListings = createAsyncThunk(
     }
   }
 );
+
+
+export const SaveAutolist = createAsyncThunk('Listing/SaveAutolist', async (data: ListingsData[], thunkAPI) => {
+  try {
+    const res = await client.post('Listing/SaveAutolist', data);
+    if (res.status === 200) toastAlert('Source updated successfully!', 'success');
+    return res.data.response_data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
