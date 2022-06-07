@@ -18,8 +18,7 @@ export const StoreList = () => {
   const shopIdentity = channels.find(x => x.id == channelId) ?? channels[0];
 
   const provideChannelId = (value: number) => {
-    const selectedChannel = channels?.find((c: Channel) => c.id === value);
-    setChannelId(selectedChannel?.id ?? -1);
+    setChannelId(value);
     window.location.reload();
   };
 

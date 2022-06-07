@@ -6,7 +6,7 @@ interface Props {
 }
 export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
-  const [channelId, setChannelId] = useState<number | undefined>(initialAppContext.channelId);
+  const [channelId, setChannelId] = useState<number>(initialAppContext.channelId);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
