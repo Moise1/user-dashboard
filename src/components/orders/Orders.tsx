@@ -35,7 +35,7 @@ export const Orders = () => {
   const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [postPerPage, setPostPerPage] = useState<number>(10);
-  //For modal
+  //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState<boolean>(false);
@@ -214,6 +214,7 @@ export const Orders = () => {
     }
   }, [searchKey, orders]);
 
+  console.log('The selectedRecord is', selectedRecord);
   return (
     <Layout className="orders-container">
       {loading ? (
@@ -261,7 +262,6 @@ export const Orders = () => {
               <OrderContent
                 orderProgress={status}
                 data={selectedRecord}
-                // handleClose={handleOrderModal}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
               />
             </PopupModal>
@@ -285,7 +285,6 @@ export const Orders = () => {
               setSearchedArray={setSearchedArray}
               setSearchFilterKey={setSearchFilterKey}
             />
-            {/* <OrdersAdvancedSearch visible={drawerOpen} onClose={handleSideDrawer} /> */}
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
               {t('AdvancedSearch')}
             </TableActionBtns>

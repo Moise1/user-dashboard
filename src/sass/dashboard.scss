@@ -1,6 +1,11 @@
 @import 'general.config';
 
 // large ad extra large screens.
+.stores {
+  .data-table-container {
+    height: auto;
+  }
+}
 
 .no-api-title {
   display: flex;
@@ -13,12 +18,12 @@
     color: $corporative-color;
     text-decoration: underline;
   }
-};
-.add-servers{
+}
+.add-servers {
   align-items: center;
   display: inline;
-  column-gap: .3rem;
-  .footer-link{
+  column-gap: 0.3rem;
+  .footer-link {
     margin-left: 2px;
   }
 }
@@ -42,20 +47,6 @@
 }
 .drop-down {
   cursor: pointer;
-}
-.sales-profit-container {
-  margin-top: 2rem;
-}
-.profit-circle {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  padding: 8px;
-  font-size: $font-large;
-  border: 10px solid $light-blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .dashboard-container {
@@ -122,25 +113,44 @@
 .sales-container {
   margin-top: 2rem;
   .sales {
-    box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
     background: $corporative-color-dark;
+    box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
     padding: 1rem;
     border-radius: 10px;
-    margin: 1rem;
     .graph-cntrlers {
       display: flex;
       justify-content: space-between;
-      .toggle-period,
-      .toggle-sales {
-        max-width: 130px;
-        height: 24px;
+      margin: 0 2rem;
+      .selector {
+        width: auto;
+      }
+      .ant-picker {
+        max-height: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        margin-left: 5rem;
+        max-height: 3rem;
+      }
+      .sales-profit-area {
+        display: flex;
+        column-gap: 1rem;
+        margin: 0.5rem 0;
+        .toggle-sales {
+          width: 80px;
+          height: 24px;
+          background: $corporative-color !important;
+        }
+        max-height: 2rem;
+        .digits {
+          font-size: $font-medium;
+          font-weight: 1000;
+        }
       }
     }
-  }
 
-  .graph-progress-container {
-    display: flex;
-    justify-content: space-between;
+    .graph-container {
+      margin: 1rem 2rem;
+    }
   }
 }
 
@@ -231,13 +241,11 @@
     justify-content: center;
     margin-top: 2rem;
   }
-  .sales-profit-container {
+  .sales-profit-numbers {
     text-align: center;
-  }
-  .profit-circle {
-    margin: 0 auto;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
+  };
+  .graph-cntrlers{
+    width: 100%;
+    margin: 0 auto !important;
   }
 }

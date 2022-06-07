@@ -24,10 +24,26 @@ interface Props {
   className?: string;
   disabled?: boolean;
   placeholder?: string;
+  showSearch?: boolean;
+  labelInValue?: boolean;
 }
 
 export const Selector = (props: Props) => {
-  const { children, className, placeholder, defaultValue, value, onChange, dropdownRender, loading, style, size, disabled } = props;
+  const {
+    children,
+    className,
+    placeholder,
+    defaultValue,
+    value,
+    onChange,
+    dropdownRender,
+    loading,
+    style,
+    size,
+    disabled,
+    showSearch,
+    labelInValue
+  } = props;
 
   const options = Array.isArray(children) ?
     (
@@ -46,12 +62,13 @@ export const Selector = (props: Props) => {
 
   return (
     <Select
+      labelInValue={labelInValue}
       disabled={disabled}
       style={style}
       className={'selector ' + (className ?? '')}
       allowClear={false}
       onChange={onChange}
-      showSearch
+      showSearch={showSearch}
       placeholder={placeholder}
       defaultValue={defaultValue}
       value={value}

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings, getListingsSource, getPendingListing, getTerminateListings } from './listingsThunk';
+import { getListings, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
 export interface ListingData {
   imageUrl: string;
   asin: null;
@@ -10,7 +10,7 @@ export interface ListingData {
   channelQuantity: number;
   createdById: number;
   createdByName: string;
-  createdOn: string;
+  createdOn: Date;
   endsOn: null;
   id: number;
   isLowestPrice: null;
@@ -79,8 +79,9 @@ export interface ListingsSource {
 
 const initialState = {
   listings: <unknown>[],
-  pending_listings: <unknown>[],
-  terminate_listings: <unknown>[],
+  pendingListings: <unknown>[],
+  manualListings: <unknown>[],
+  terminatedListings: <unknown>[],
   loading: false,
   error: '',
   sourceListings: <unknown>{}
@@ -112,6 +113,26 @@ export const listingsSlice = createSlice({
   }
 });
 
+export const getManualListingsSlice = createSlice({
+  name: 'manualListings',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getManualListings.pending, (state) => {
+      state.loading = false;
+      state.error = '';
+    });
+    builder.addCase(getManualListings.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.manualListings = payload.responseObject;
+    });
+    builder.addCase(getManualListings.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const getListingsSourceSlice = createSlice({
   name: 'sourceListings',
   initialState: initialStatee,
@@ -137,16 +158,16 @@ export const PendingListingsSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPendingListing.pending, (state) => {
+    builder.addCase(getPendingListings.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getPendingListing.fulfilled, (state, { payload }) => {
+    builder.addCase(getPendingListings.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.pending_listings = [...payload.listings];
+      state.pendingListings = [...payload.listings];
       state.sourceListings = payload.sources;
     });
-    builder.addCase(getPendingListing.rejected, (state, { payload }) => {
+    builder.addCase(getPendingListings.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
@@ -158,15 +179,15 @@ export const TerminateListingsSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getTerminateListings.pending, (state) => {
+    builder.addCase(getTerminatedListings.pending, (state) => {
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(getTerminateListings.fulfilled, (state, { payload }) => {
+    builder.addCase(getTerminatedListings.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.terminate_listings = [...payload.listings];
+      state.terminatedListings = [...payload.listings];
     });
-    builder.addCase(getTerminateListings.rejected, (state, { payload }) => {
+    builder.addCase(getTerminatedListings.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
@@ -175,5 +196,6 @@ export const TerminateListingsSlice = createSlice({
 
 export const { reducer: listingsReducer } = listingsSlice;
 export const { reducer: listingsSourceReducer } = getListingsSourceSlice;
+export const { reducer: manualListingsReducer } = getManualListingsSlice;
 export const { reducer: pendingListingsReducer } = PendingListingsSlice;
-export const { reducer: terminateListingsReducer } = TerminateListingsSlice;
+export const { reducer: terminatedListingsReducer } = TerminateListingsSlice;

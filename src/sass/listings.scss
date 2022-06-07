@@ -1,11 +1,15 @@
 @import 'general.config';
 
 // Extra large screens
-
+.record-img{
+  width: 100px;
+  height: 100px
+}
 .actions-dropdown {
   margin-left: 1rem;
   margin-top: -0.5rem;
-}
+};
+
 
 .action-option {
   color: $black;
@@ -35,10 +39,6 @@
   }
 }
 
-.table {
-  height: 100%;
-  overflow: scroll;
-}
 
 .listings-card {
   .listings-cols {

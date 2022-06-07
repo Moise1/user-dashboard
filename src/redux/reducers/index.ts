@@ -7,8 +7,9 @@ import { sourcesConfigReducer } from '../source-config/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
+import { manualListingsReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
-import { terminateListingsReducer } from '../listings/listingsSlice';
+import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { catalogProductsReducer } from '../catalog/catalogSlice';
@@ -20,6 +21,7 @@ import { saveAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
+import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 
 export const allReducers = combineReducers({
@@ -32,8 +34,9 @@ export const allReducers = combineReducers({
   channelConfiguration: channelConfigurationReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
-  terminateListings: terminateListingsReducer,
+  terminatedListings: terminatedListingsReducer,
   listingSources: listingsSourceReducer,
+  manualListings: manualListingsReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,
@@ -44,5 +47,6 @@ export const allReducers = combineReducers({
   saveAutoOrdering: saveAutoOrderingReducer,
   getAutoOrdering: getAutoOrderingReducer,
   listingServices: listingServicesReducer,
-  noApiServers: noApiServersReducer
+  noApiServers: noApiServersReducer,
+  deleteAutoOrders: deleteAutoOrderingReducer
 });

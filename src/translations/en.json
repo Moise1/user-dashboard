@@ -67,9 +67,8 @@
   "Listings.Column.Title": "Title",
   "Listings.Column.Options": "Options",
   "Listings.Column.Status": "Status",
-  "Listings.Column.Created On": "Created On",
-  "Listings.Column.Created By": "Created By",
-
+  "Listings.Column.CreatedOn": "Created On",
+  "Listings.Column.CreatedBy": "Created By",
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
   "Menu.Channel": "Channel",
@@ -232,7 +231,7 @@
 
   "AutoOrderingConfiguration.Supplier": "Supplier",
   "AutoOrderingConfiguration.Free": "Free",
-  "AutoOrderingConfiguration.FreePercentage": "% Free",
+  "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
 
   "Topbar.Notifications": "{count} Notifications",

@@ -5,12 +5,13 @@ import { ChevronLeft } from 'react-feather';
 // import AutoOrdering from '../auto-ordering/AutoOrdering';
 //import { /*SourcesSettingsContents*/ } from './SourcesSettingsContents';
 import { t } from '../../utils/transShim';
-import { SuccessBtn } from '../../small-components/ActionBtns';
+//import { SuccessBtn } from '../../small-components/ActionBtns';
 import { CountrySelector } from '../../small-components/CountrySelector';
 import { SimpleSelect } from '../../small-components/SimpleSelect';
 import { Switch } from '../../small-components/Switch';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources, saveSources } from '../../redux/source-config/sourcesThunk';
+import { SourceConfigSave } from '../../redux/source-config/sourceSlice';
 //import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import '../../sass/sources-settings.scss';
 
@@ -27,21 +28,24 @@ export const SourcesSettings = () => {
   //const [source, setSource] = useState();
   const { sources, sourcesLoading } = useAppSelector((state) => state.sources);
   // Source Fields
+  const [userId, setUserId] = useState<string>();
+  const [sourceId, setSourceId] = useState<number>();
+  const [sourceName, setSourceName] = useState<string>();
   const [markup, setMarkup] = useState<number | null | undefined>();
   const [markupSelect, setMarkupSelect] = useState<string | null | undefined>();
-  const [templateId, setTemplateId] = useState<string | null | undefined>();
+  const [templateId, setTemplateId] = useState<number | null | undefined>();
   const [monitorStock, setMonitorStock] = useState<string | null | undefined>();
   const [monitorPrice, setMonitorPrice] = useState<string | null | undefined>();
   const [monitorPriceDecrease, setMonitorPriceDecrease] = useState<string | null | undefined>();
-  const [monitorPriceDecreasePercentage, setmonitorPriceDecreasePercentage] = useState<number | null | undefined>();
+  const [monitorPriceDecreasePercentage, setmonitorPriceDecreasePercentage] = useState<number | undefined>();
   const [returns, setReturns] = useState<string | null | undefined>();
-  const [dispatchDays, setDispatchDays] = useState<number | null | undefined>();
-  const [globalShippingProgram, setGlobalShippingProgram] = useState<boolean | null | undefined>();
+  const [dispatchDays, setDispatchDays] = useState<number | null>();
+  const [globalShippingProgram, setGlobalShippingProgram] = useState<boolean | null>(false);
   const [defaultLocationPostcode, setDefaultLocationPostcode] = useState<string | null | undefined>();
   const [defaultLocationCity, setDefaultLocationCity] = useState<string | null | undefined>();
+  const [defaultLocationCountry, setDefaultLocationCountry] = useState<string | null | undefined>();
   const [maxDeliveryDays, setMaxDeliveryDays] = useState<number | null | undefined>();
   const [primeOnly, setPrimeOnly] = useState<boolean | null | undefined>();
-
 
   const initialStateSourceSettings = () => {
     setSelectedAccount('Select Supplier');
@@ -67,7 +71,7 @@ export const SourcesSettings = () => {
   });
 
   //const shippings = sources.shippingOptions[3];
-  localStorage.setItem('shipping', sources);
+  //localStorage.setItem('shipping', sources);
 
   //const shippings = shipping;
   //.map((c: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined) => {
@@ -91,9 +95,11 @@ export const SourcesSettings = () => {
   };
 
   const [hideMarkupInput, setHideMarkupInput] = useState(true);
+  const [selectLimit, setSelectLimit] = useState(true);
   const [hideMonitorStock, setHideMonitorStock] = useState(false);
   const [hidePriceDecrease, setHidePriceDecrease] = useState(false);
   const [hideCustomPrice, setHideCustomPrice] = useState(true);
+  const [customPriceDecreaseDRD, setCustomPriceDecreaseDRD] = useState('custom');
   const handleMarkupChange = (value: string) => {
     setMarkupSelect(value);
     if (value === 'custom') {
@@ -104,9 +110,8 @@ export const SourcesSettings = () => {
     }
   };
   const handleTemplateChange = (value: string) => {
-    setTemplateId(value);
+    setTemplateId(Number(value));
   };
-
 
   function loadDefault() {
 
@@ -125,7 +130,7 @@ export const SourcesSettings = () => {
     setMonitorPriceDecrease(null);
 
     // monitor price decrease Percentage
-    setmonitorPriceDecreasePercentage(null);
+    setmonitorPriceDecreasePercentage(undefined);
 
     // return days
     setReturns(null);
@@ -143,6 +148,9 @@ export const SourcesSettings = () => {
     setDefaultLocationCity(null);
 
     // Default Location City
+    setDefaultLocationCountry(null);
+
+    // Default Location City
     setMaxDeliveryDays(null);
 
     // Default Prime Only 
@@ -150,10 +158,10 @@ export const SourcesSettings = () => {
 
   }
 
-
   function loadSource(selectedSource: string | null) {
     sources.map((c: {
-      sourceId: Key | null | undefined;
+      userId: string | undefined;
+      sourceId: number | null | undefined;
       sourceName: string;
       markup: number | undefined;
       templateId: number | undefined;
@@ -163,14 +171,21 @@ export const SourcesSettings = () => {
       monitorPriceDecreasePercentage: number | undefined;
       returns: string | undefined;
       dispatchDays: number | undefined;
-      globalShippingProgram: boolean | undefined;
+      globalShippingProgram: boolean;
       defaultLocationPostcode: string | undefined;
       defaultLocationCity: string | undefined;
+      defaultLocationCountry: string | undefined;
       maxDeliveryDays: number | undefined;
       primeOnly: boolean | undefined;
     }) => {
 
-      if (c.sourceId === selectedSource || c.sourceName === selectedSource) {
+      if (c.sourceId === Number(selectedSource) || c.sourceName === selectedSource) {
+
+        setSourceId(Number(c.sourceId));
+
+        setUserId(c.userId);
+
+        setSourceName(c.sourceName);
 
         //markup business logic implements
         setMarkup(c.markup ? c.markup : undefined);
@@ -178,19 +193,33 @@ export const SourcesSettings = () => {
         setHideMarkupInput(c.markup ? false : true);
 
         // selected template
-        setTemplateId(c.templateId ? c.templateId.toString() : 'Defined by Settings(Plain)');
+        setTemplateId(c.templateId ? c.templateId : undefined);
 
         // monitor stock
-        setMonitorStock(c.monitorStock?.toString());
+        if (c.monitorStock === false) {
+          setMonitorStock('false');
+        } else if (c.monitorStock === true) {
+          setMonitorStock('true');
+        }
 
         // monitor price
-        setMonitorPrice(c.monitorPrice?.toString());
-
+        if (c.monitorPrice === false) {
+          setMonitorPrice('false');
+        } else if (c.monitorStock === true) {
+          setMonitorPrice('true');
+        }
         // monitor price decrease
-        setMonitorPriceDecrease(c.monitorPriceDecrease?.toString());
-
+        if (c.monitorPriceDecrease === false) {
+          setMonitorPriceDecrease('false');
+        } else if (c.monitorStock === true) {
+          setMonitorPriceDecrease('true');
+        }
         // monitor price decrease Percentage
         setmonitorPriceDecreasePercentage(c.monitorPriceDecreasePercentage);
+        if (c.monitorPriceDecreasePercentage) {
+          setHideCustomPrice(false);
+          setSelectLimit(true);
+        }
 
         // return days
         setReturns(c.returns?.toString());
@@ -207,7 +236,10 @@ export const SourcesSettings = () => {
         // Default Location City
         setDefaultLocationCity(c.defaultLocationCity);
 
-        // Default Location City
+        // Default Location Country
+        setDefaultLocationCountry(c.defaultLocationCountry);
+
+        // Max Delivery Days
         setMaxDeliveryDays(c.maxDeliveryDays);
 
         // Default Prime Only 
@@ -216,6 +248,60 @@ export const SourcesSettings = () => {
         setSupplierValue(c.sourceName);
       }
     });
+  }
+
+  const onSave = async (values: SourceConfigSave[]) => {
+    await dispatch(
+      saveSources(values)
+    );
+    dispatch(getSources());
+  };
+
+  function save() {
+    
+    let _monitorPrice;
+    if (monitorPrice === 'true') {
+      _monitorPrice = true;
+    } else if (monitorPrice === 'false') {
+      _monitorPrice = false;
+    }
+
+    let _monitorPriceDecrease;
+    if (monitorPriceDecrease === 'true') {
+      _monitorPriceDecrease = true;
+    } else if (monitorPriceDecrease === 'false') {
+      _monitorPriceDecrease = false;
+    }
+
+    let _monitorStock;
+    if (monitorStock === 'true') {
+      _monitorStock = true;
+    } else if (monitorStock === 'false') {
+      _monitorStock = false;
+    }
+
+    const value: SourceConfigSave[] = [{
+      sourceId: sourceId ? sourceId : 0,
+      userId: userId ? userId : '',
+      sourceName: sourceName ? sourceName : '',
+      markup: markup ? markup : undefined,
+      monitorPrice: _monitorPrice ? _monitorPrice : undefined,
+      monitorPriceDecrease: _monitorPriceDecrease ? _monitorPriceDecrease : undefined,
+      monitorPriceDecreasePercentage: monitorPriceDecreasePercentage,
+      monitorStock: _monitorStock ? _monitorStock : undefined,
+      dispatchDays: dispatchDays ? dispatchDays : undefined,
+      defaultLocationPostcode: defaultLocationPostcode ? defaultLocationPostcode : '',
+      maxDeliveryDays: maxDeliveryDays ? maxDeliveryDays : undefined,
+      returns: returns ? returns : '',
+      templateId: templateId ? templateId : undefined,
+      defaultLocationCity: defaultLocationCity ? defaultLocationCity : '',
+      defaultLocationCountry: defaultLocationCountry ? defaultLocationCountry : '',
+      defaultShipping: '',
+      globalShippingProgram: globalShippingProgram ? globalShippingProgram : undefined,
+      primeOnly: primeOnly ? primeOnly : undefined
+    }];
+
+    onSave(value);
   }
 
   const handleOptionChange = (value: string) => {
@@ -255,6 +341,9 @@ export const SourcesSettings = () => {
   };
 
   const handleCustomPriceChange = (value: string) => {
+
+    console.log('handleCustomPriceChange: ' + value);
+    setCustomPriceDecreaseDRD(value);
     if (value === 'custom') {
       setHideCustomPrice(false);
     }
@@ -281,6 +370,10 @@ export const SourcesSettings = () => {
 
   const handleDefaultLocationCity = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDefaultLocationCity(event.target.value);
+  };
+
+  const handleDefaultLocationCountry = (value: string) => {
+    setDefaultLocationCountry(value);
   };
 
   const handleMaxDeliveryDays = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -346,7 +439,7 @@ export const SourcesSettings = () => {
             </p>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <SimpleSelect value={templateId ? templateId : ''} onChange={handleTemplateChange}>{TempOptions}</SimpleSelect>
+            <SimpleSelect value={templateId ? templateId.toString() : undefined} onChange={handleTemplateChange}>{TempOptions}</SimpleSelect>
           </Col>
         </Row>
 
@@ -411,8 +504,8 @@ export const SourcesSettings = () => {
               <Option value="false" key="2">No</Option>
             </SimpleSelect>
             <div className="divPadding" hidden={hidePriceDecrease}>
-              <SimpleSelect defaultValue="Defined by Settings(0)" onChange={handleCustomPriceChange} value={limitValue ? 'custom' : ''}>
-                <Option key="0">Defined by Settings(0)</Option>
+              <SimpleSelect defaultValue="Defined by Settings(0)" onChange={handleCustomPriceChange} value={customPriceDecreaseDRD ? customPriceDecreaseDRD : ''}>
+                <Option key="0" value="default">Defined by Settings(0)</Option>
                 <Option value="custom" key="1">Custom</Option>
               </SimpleSelect>
             </div>
@@ -422,7 +515,7 @@ export const SourcesSettings = () => {
                 <br />
                 <div id="container">
                   <div id="left">
-                    <Radio value="Limit" key="2">Limit % </Radio>
+                    <Radio value="Limit" key="2" checked={selectLimit}>Limit % </Radio>
                   </div>
                   <div id="right">
                     <Input disabled={disableRadioLimit} type="number" size="small" value={monitorPriceDecreasePercentage ? monitorPriceDecreasePercentage : undefined} onChange={handleMonitorPriceDecreasePercentage} />
@@ -462,7 +555,7 @@ export const SourcesSettings = () => {
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
             <div className="input-control" >
-              <Input type="number" value={dispatchDays ? dispatchDays: undefined} onChange={handleDispatchDays} />
+              <Input type="number" value={dispatchDays ? dispatchDays : undefined} onChange={handleDispatchDays} />
             </div>
           </Col>
         </Row>
@@ -495,7 +588,7 @@ export const SourcesSettings = () => {
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
             <div className="input-control" >
-              <Input type="text" value={defaultLocationCity ? defaultLocationCity: undefined} onChange={handleDefaultLocationCity} />
+              <Input type="text" value={defaultLocationCity ? defaultLocationCity : undefined} onChange={handleDefaultLocationCity} />
             </div>
           </Col>
         </Row>
@@ -505,7 +598,7 @@ export const SourcesSettings = () => {
             <h2>Overwrite Item Country Code</h2>
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
-            <CountrySelector defaultValue="Default"></CountrySelector>
+            <CountrySelector defaultValue="Default" value={defaultLocationCountry ? defaultLocationCountry : 'Default'} onChange={handleDefaultLocationCountry}></CountrySelector>
           </Col>
         </Row>
 
@@ -518,7 +611,7 @@ export const SourcesSettings = () => {
           </Col>
           <Col className="selector-container" xs={7} lg={6}>
             <div className="input-control" >
-              <Input type="text" value={maxDeliveryDays ? maxDeliveryDays: undefined} onChange={handleMaxDeliveryDays} />
+              <Input type="text" value={maxDeliveryDays ? maxDeliveryDays : undefined} onChange={handleMaxDeliveryDays} />
             </div>
           </Col>
         </Row>
@@ -540,7 +633,7 @@ export const SourcesSettings = () => {
           {sourceOptions}
         </SimpleSelect>
         <div className="action-btns">
-          <SuccessBtn>{t('SaveChanges')}</SuccessBtn>
+          <Button type="primary" onClick={save}>{t('SaveChanges')}</Button>
           <Button onClick={loadDefault}>{t('ResetToDefault')}</Button>
         </div>
       </div>

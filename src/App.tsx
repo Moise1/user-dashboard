@@ -28,7 +28,9 @@ import {
   AutoOrdering
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
-import { ListNow } from './components/listings/ListNow';
+import { ListNow } from './components/list-now/ListNow';
+import { ManualListing } from './components/list-now/ManualListing';
+import { BulkListing } from './components/list-now/BulkListing';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -43,13 +45,7 @@ export const App = withRouter(({ history }) => {
     setVisible(!visible);
     setCollapsed(!collapsed);
   };  
-
   const closeMobileSider = () => setVisible(!visible);
-
-  // const collapseSideBar = () => {
-  //   setStaticValue(!staticValue);
-  //   setCollapsed(!collapsed);
-  // };
 
   return (
     <>
@@ -64,7 +60,6 @@ export const App = withRouter(({ history }) => {
             staticValue={staticValue}
             togglestatic={toggleStaticValue}
             collapsed={collapsed}
-            // collapseSideBar={collapseSideBar}
           />
         )}
         <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>
@@ -77,6 +72,8 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <ProtectedRoute path="/listings" component={Listings} />
             <ProtectedRoute path="/list-now" component={ListNow} />
+            <ProtectedRoute path="/manual-listing" component={ManualListing} />
+            <ProtectedRoute path="/bulk-listing" component={BulkListing} />
             <ProtectedRoute path="/orders" component={Orders} />
             <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
             <ProtectedRoute path="/sources-table" component={SourcesTable} />

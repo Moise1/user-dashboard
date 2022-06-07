@@ -20,10 +20,27 @@ interface SelectorChannelProps {
   className?: string;
   disabled?: boolean;
   placeholder?: string;
+  showSearch?: boolean;
+  labelInValue?: boolean;
 }
 
 export const SelectorChannel = (props: SelectorChannelProps) => {
-  const { children, defaultValue, placeholder, className, value, onChange, dropdownRender, loading, style, size, showFlags, disabled } = props;
+  const {
+    children,
+    defaultValue,
+    placeholder,
+    className,
+    value,
+    onChange,
+    dropdownRender,
+    loading,
+    style,
+    size,
+    showFlags,
+    disabled,
+    showSearch,
+    labelInValue
+  } = props;
 
   return <Selector
     disabled={disabled}
@@ -36,6 +53,8 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
     size={size}
     placeholder={placeholder}
     className={className}
+    showSearch={showSearch}
+    labelInValue={labelInValue}
   >
     {
       children.map(c => {
