@@ -75,7 +75,7 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
   if (value != undefined && value != null) {
     const c = children.find(x => x.id == value);
     if (c) {
-      dV = CreateValue(c);
+      v = CreateValue(c);
     }
   }
 
