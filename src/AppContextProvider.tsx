@@ -33,7 +33,6 @@ export const AppContextProvider = ({ children }: Props) => {
       setChannelId(nId);
     }
   }, []);
-  console.log('>>>>>>>>>>' + channelId + '_' + theme);
   return (
     <AppContext.Provider value={{ theme, setTheme: SetTheme, channelId, setChannelId:SetChannelId }}>
       <div data-theme={theme} className="theme-provider" key={channelId + '_' + theme}>
