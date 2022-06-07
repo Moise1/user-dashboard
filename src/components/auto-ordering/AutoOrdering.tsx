@@ -13,7 +13,7 @@ import '../../sass/auto-ordering.scss';
 // import copy from '../../assets/copy.svg';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useLocation } from 'react-router-dom';
-import { SelectorPlain } from '../../small-components/form/selector-plain';
+import { Selector } from '../../small-components/form/selector';
 
 export interface rawSettingInterface {
   key: number;
@@ -347,7 +347,7 @@ export const AutoOrdering = () => {
                         {t('SourceConfigInputs.AccountConfiguration')} :
                         <span className="account-alias">{accountData?.alias}</span>
                       </h3>
-                      <SelectorPlain
+                      <Selector
                         size="large"
                         disabled={disable}
                         onChange={handleOptionChange}
@@ -375,7 +375,7 @@ export const AutoOrdering = () => {
                         )}
                       >
                         {dummyUsers.map(x => { return { value: x.id, label: x.value }; })}
-                      </SelectorPlain>
+                      </Selector>
                     </div>
                   </>
                 )}

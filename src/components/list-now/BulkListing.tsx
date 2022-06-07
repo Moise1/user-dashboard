@@ -12,7 +12,7 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { StatusBar } from 'src/small-components/StatusBar';
 import { dummyDeliver } from 'src/dummy-data/dummyData';
 import Spreadsheet from 'react-spreadsheet';
-import { SelectorPlain } from '../../small-components/form/selector-plain';
+import { Selector } from '../../small-components/form/selector';
 
 const { Item } = Form;
 
@@ -66,26 +66,26 @@ export const BulkListing = (/*props: props*/) => {
               <> </>
               <Form className="bulk-form" layout={'horizontal'}>
                 <Item label="Create As" name="sourceId">
-                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
+                  <Selector defaultValue={1}>{dummyDeliver}</Selector>
                 </Item>
                 <p>VA Profile selected as the creator of the listing</p>
                 <Item label="List Vero Items" name="sourceId">
-                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
+                  <Selector defaultValue={1}>{dummyDeliver}</Selector>
                 </Item>
                 <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
                 <Item label="List Out of Stock Items" name="sourceId">
-                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
+                  <Selector defaultValue={1}>{dummyDeliver}</Selector>
                 </Item>
                 <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
                 <Item label="Don't list until" name="sourceId">
-                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
+                  <Selector defaultValue={1}>{dummyDeliver}</Selector>
                 </Item>
                 <Item label="Listing frequency" name="markup">
                   <Input className="blue-input" type="text" placeholder="0" />
                 </Item>
                 <p>The system will automatically list an item every X minutes.</p>
                 <Item label="Review listings" name="sourceId">
-                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
+                  <Selector defaultValue={1}>{dummyDeliver}</Selector>
                 </Item>
               </Form>
             </StatusBar>

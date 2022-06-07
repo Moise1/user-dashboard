@@ -42,10 +42,9 @@ export const SelectorChannel = (props: Props) => {
 
   const OnChange = (value: SelectorValue) => {
     if (onChange) {
-      onChange((value as SelectorData).value as number);
+      onChange(value as number);
     }
   };
-
 
   const CreateLabel = (c: Channel) => {
     return <>
@@ -70,15 +69,14 @@ export const SelectorChannel = (props: Props) => {
     disabled={disabled}
     style={style}
     onChange={OnChange}
-    defaultValue={options.find(x => x.value == defaultValue) }
-    value={options.find(x => x.value == value) }
+    defaultValue={defaultValue}
+    value={value}
     dropdownRender={dropdownRender}
     loading={loading}
     size={size}
     placeholder={placeholder}
     className={className}
     showSearch={showSearch}
-    labelInValue={true}
   >
     {options}
   </Selector>;
