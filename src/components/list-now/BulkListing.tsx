@@ -12,7 +12,7 @@ import { Key, useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
 import { StatusBar } from 'src/small-components/StatusBar';
 import Spreadsheet, { Matrix } from 'react-spreadsheet';
-import { Selector } from '../../small-components/form/selector';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 const { Item } = Form;
 
@@ -84,19 +84,19 @@ export const BulkListing = (/*props: props*/) => {
     );
   });
 
-  const handleAssistantChange = (value: React.Key) => {
+  const handleAssistantChange = (value: SelectorValue) => {
     setCreatedBy(value as string);
   };
 
-  const handleIgnoreVeroChange = (value: React.Key) => {
+  const handleIgnoreVeroChange = (value: SelectorValue) => {
     setIgnoreVero(value as string);
   };
 
-  const handleIgnoreOOSChange = (value: React.Key) => {
+  const handleIgnoreOOSChange = (value: SelectorValue) => {
     setIgnoreOOS(value as string);
   };
 
-  const handleReviewBeforePublishing = (value: React.Key) => {
+  const handleReviewBeforePublishing = (value: SelectorValue) => {
     setReviewBeforePublishing(value as string);
   };
 

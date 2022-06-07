@@ -13,7 +13,7 @@ import '../../sass/auto-ordering.scss';
 // import copy from '../../assets/copy.svg';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useLocation } from 'react-router-dom';
-import { Selector } from '../../small-components/form/selector';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 export interface rawSettingInterface {
   key: number;
@@ -144,7 +144,7 @@ export const AutoOrdering = () => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [newAccount, setNewAccount] = useState({ value: '' });
   // const [, setCopied] = useState<boolean>(false);
-  const handleOptionChange = (value: React.Key) => {
+  const handleOptionChange = (value: SelectorValue) => {
     setAccountConfig(value as string);
     setBtnEnableDisable(!btnEnableDisable);
     buttonRef.current?.style.backgroundColor === '#228b22';

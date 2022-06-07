@@ -13,7 +13,7 @@ import { getSources, saveSources } from '../../redux/source-config/sourcesThunk'
 import { SourceConfigSave } from '../../redux/source-config/sourceSlice';
 //import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import '../../sass/sources-settings.scss';
-import { Selector } from '../../small-components/form/selector';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
@@ -86,7 +86,7 @@ export const SourcesSettings = () => {
   const [hidePriceDecrease, setHidePriceDecrease] = useState(false);
   const [hideCustomPrice, setHideCustomPrice] = useState(true);
   const [customPriceDecreaseDRD, setCustomPriceDecreaseDRD] = useState('custom');
-  const handleMarkupChange = (value: React.Key) => {
+  const handleMarkupChange = (value: SelectorValue) => {
     setMarkupSelect(value as string);
     if (value === 'custom') {
       setHideMarkupInput(false);
@@ -95,7 +95,7 @@ export const SourcesSettings = () => {
       setHideMarkupInput(true);
     }
   };
-  const handleTemplateChange = (value: React.Key) => {
+  const handleTemplateChange = (value: SelectorValue) => {
     setTemplateId(value as number);
   };
 
@@ -290,7 +290,7 @@ export const SourcesSettings = () => {
     onSave(value);
   }
 
-  const handleOptionChange = (value: React.Key) => {
+  const handleOptionChange = (value: SelectorValue) => {
     loadSource(value as string);
   };
 
@@ -302,7 +302,7 @@ export const SourcesSettings = () => {
     setmonitorPriceDecreasePercentage(Number(event.target.value));
   };
 
-  const handleMonitorStock = (value: React.Key) => {
+  const handleMonitorStock = (value: SelectorValue) => {
     if (value === 'false') {
       setHideMonitorStock(true);
     }
@@ -312,7 +312,7 @@ export const SourcesSettings = () => {
     setMonitorStock(value as string);
   };
 
-  const handlMonitorPrice = (value: React.Key) => {
+  const handlMonitorPrice = (value: SelectorValue) => {
     setMonitorPrice(value as string);
   };
 

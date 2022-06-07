@@ -211,7 +211,7 @@ export const Dashboard = () => {
     { value: 0, label: '3' },
     { value: 1, label: '4' }
   ];
-  const onSelectOption = (value: React.Key) => {
+  const onSelectOption = (value: SelectorValue) => {
     setSelectedPeriod(value as number);
   };
   const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {

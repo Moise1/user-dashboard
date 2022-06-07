@@ -1,5 +1,5 @@
 ﻿import '../../sass/settings.scss';
-import { Selector } from '../form/selector';
+import { Selector, SelectorValue } from '../form/selector';
 
 interface ListData {
   value: string;
@@ -17,7 +17,7 @@ interface Props {
 export const SettingList = (props: Props) => {
   const { defaultValue, onChange, loading, disabled, listData} = props;
 
-  const OnChange = (value: React.Key) => onChange(value as string);
+  const OnChange = (value: SelectorValue) => onChange(value as string);
 
   return <div className="setting setting-list">
     <Selector defaultValue={defaultValue} disabled={disabled} onChange={OnChange} loading={loading} size="large">{listData}</Selector>
