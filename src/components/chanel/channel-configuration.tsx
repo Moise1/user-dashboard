@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Layout, Row, Col, Spin } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
@@ -21,6 +21,7 @@ import { SettingBooleanNumber } from '../../small-components/settings/setting-bo
 import { SettingBooleanString } from '../../small-components/settings/setting-boolean-string';
 import { SettingBooleanStringNull } from '../../small-components/settings/setting-boolean-string-null';
 import { SettingButton } from '../../small-components/settings/setting-button';
+import { AppContext } from '../../contexts/AppContext';
 
 export const ChannelConfiguration = () => {
   const [index, setIndex] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
@@ -28,7 +29,7 @@ export const ChannelConfiguration = () => {
 
   const selectedChannel = (()=>{
     const { channels } = useAppSelector((state) => state.channels as ChannelsState);
-    const selectedChannelId = parseInt(localStorage.getItem('channelId') ?? '');
+    const { channelId: selectedChannelId  } = useContext(AppContext);
     return channels.find(x => x.id == selectedChannelId);
   })();
 

@@ -12,14 +12,14 @@ import { SelectorChannel } from './form/selector-channel';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
-  const { channels } = useAppSelector((state) => state.channels);
-  const { setChannelId } = useContext(AppContext);
-  const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!) as Channel ?? channels[0];
+  const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
+  const { setChannelId, channelId } = useContext(AppContext);
+
+  const shopIdentity = channels.find(x => x.id == channelId) ?? channels[0];
 
   const provideChannelId = (value: number) => {
     const selectedChannel = channels?.find((c: Channel) => c.id === value);
-    setChannelId(selectedChannel?.id);
-    localStorage.setItem('shopIdentity', JSON.stringify(selectedChannel));
+    setChannelId(selectedChannel?.id ?? -1);
     window.location.reload();
   };
 
