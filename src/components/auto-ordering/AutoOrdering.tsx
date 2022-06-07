@@ -4,13 +4,13 @@ import { t } from '../../utils/transShim';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PlusCircle } from 'react-feather';
 import { Switch } from '../../small-components/Switch';
-import { Selector } from '../../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 // import hand from '../../assets/hand.svg';
 // import copy from '../../assets/copy.svg';
 import '../../sass/switch.scss';
 import '../../sass/auto-ordering.scss';
+import { Selector } from '../../small-components/form/selector';
 
 export const AutoOrdering = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -131,7 +131,6 @@ export const AutoOrdering = () => {
                   <Selector
                     size="large"
                     disabled={disable}
-                    addAccount={true}
                     onChange={handleOptionChange}
                     dropdownRender={(menu: ReactNode) => (
                       <div className="dropdown-content mb-5">
@@ -156,7 +155,7 @@ export const AutoOrdering = () => {
                       </div>
                     )}
                   >
-                    {dummyUsers}
+                    {dummyUsers.map(u => { return { key: u.id, value: u.alias.toString() }; })}
                   </Selector>
                 </div>
               </>

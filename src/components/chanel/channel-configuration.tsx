@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Layout, Row, Col, Input, Spin, Switch, Radio } from 'antd';
+import { Layout, Row, Col, Spin } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -7,11 +7,20 @@ import '../../sass/channel-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getChannelConfiguration, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { ChannelConfigurationState, eChannelSettings } from '../../redux/channel-configuration/channels-configuration-slice';
-import { ChannelSetting, ChannelSettings, SettingType } from './configuration/settings';
+import { ChannelSetting, ChannelSettingExtra, ChannelSettings, SettingType } from './configuration/settings';
 import { SettingBoolean } from '../../small-components/settings/setting-boolean';
 import { SettingNumber } from '../../small-components/settings/setting-number';
 import { ChannelSettingsSections, ChannelSettingSection } from './configuration/sections';
 import { ChannelsState } from '../../redux/channels/channelsSlice';
+import { SettingTwoOptions } from '../../small-components/settings/settings-two-options';
+import { SettingBooleanTwoOptions } from '../../small-components/settings/settings-boolean-two-options';
+import { SettingString } from '../../small-components/settings/setting-string';
+import { SettingList } from '../../small-components/settings/setting-list';
+import { SettingWordList } from '../../small-components/settings/setting-word-list';
+import { SettingBooleanNumber } from '../../small-components/settings/setting-boolean-number';
+import { SettingBooleanString } from '../../small-components/settings/setting-boolean-string';
+import { SettingBooleanStringNull } from '../../small-components/settings/setting-boolean-string-null';
+import { SettingButton } from '../../small-components/settings/setting-button';
 
 export const ChannelConfiguration = () => {
   const [index, setIndex] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
@@ -46,7 +55,7 @@ export const ChannelConfiguration = () => {
       } else {//User doesn't have defined a value for this setting, so we will get the default value
         for (const cs of ChannelSettings) {
           for (let i = 0; i < cs.Fields.length; i++) {//O(n^3)... not the best but it is a small quantity of data, no problem
-            if (cs.Fields[i] == se.Field && cs.DefaultValues[i] != se.Value) {//Field[n] and DefaultValues[n] should be related
+            if (cs.Fields[i] == se.Field && cs.Values[i] != se.Value) {//Field[n] and DefaultValues[n] should be related
               return true;
             }
           }
@@ -57,7 +66,7 @@ export const ChannelConfiguration = () => {
     return false;
   };
 
-  const SaveSetting = async (key: eChannelSettings, value: string) => {
+  const SaveSetting = async (key: eChannelSettings, value: string | null) => {
     const rp = await dispatch(saveChannelSetting({ key: key, value: value }));
     if (!rp.payload) {
       dispatch(getChannelConfiguration());
@@ -67,87 +76,225 @@ export const ChannelConfiguration = () => {
   const configuration = new Map(settings?.map(x => [x.key, x.value]) ?? []);
   const savingSetting = new Map(savingSettingsState?.map(x => [x.data.key, x]));
 
-  const RenderSettingTwoOptionsTwo = (setting: ChannelSetting, disabled: boolean) => {
-    const valueC = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
-    const valueV = configuration?.get(setting.Fields[1]) ?? setting.DefaultValues[1];
-    const check1 = setting.DefaultValues[2];
-    const check2 = setting.DefaultValues[3];
-    return (
-      <Col span={8} className='limit-section'>
-        <div className='limit-area'>
-          <Radio className='radio' defaultChecked={valueC == check1} disabled={disabled}>{t(setting.Labels[1])}</Radio>
-          <div className='limit'>
-            <Radio className='radio' defaultChecked={valueC == check2} disabled={disabled}>{t(setting.Labels[2])}</Radio>
-            <Input defaultValue={valueV} className='blue-input limit-input' disabled={disabled} />
-          </div>
-        </div>
-      </Col>
-    );
-  };
-
   const RenderSettingTwoOptions = (setting: ChannelSetting, disabled: boolean) => {
-    const defaultFValue = setting.DefaultValues[0];
-    const value = configuration?.get(setting.Fields[0]) ?? defaultFValue;
-    const defaultSValue = setting.DefaultValues[1];
+    const value1 = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
+    const value2 = configuration?.get(setting.Fields[1]) ?? setting.Values[1];
+    const check1Value = setting.Values[2];
+    const check2Value = setting.Values[3];
+    const label1 = setting.Labels[1];
+    const label2 = setting.Labels[2];
+    const savingState1 = savingSetting.get(setting.Fields[0]);
+    const savingState2 = savingSetting.get(setting.Fields[1]);
     return (
       <Col span={8} className='limit-section'>
-        <div className='limit-area'>
-          <Radio className='radio' defaultChecked={value == defaultFValue} disabled={disabled} >{t(setting.Labels[1])}</Radio>
-          <div className='limit'>
-            <Radio className='radio' defaultChecked={value != defaultFValue} disabled={disabled} >{t(setting.Labels[2])}</Radio>
-            <Input defaultValue={value == defaultFValue ? defaultSValue : value} className='blue-input limit-input' disabled={disabled} />
-          </div>
-        </div>
+        <SettingTwoOptions
+          value1={value1 ?? ''}
+          value2={value2 ?? ''}
+          check1Value={check1Value ?? ''}
+          check2Value={check2Value ?? ''}
+          label1={t(label1)}
+          label2={t(label2)}
+          onChange1={v => SaveSetting(setting.Fields[0], v)}
+          onChange2={v => SaveSetting(setting.Fields[1], v)}
+          disabled={disabled}
+          loading1={savingState1?.loading ?? false}
+          loading2={savingState2?.loading ?? false}
+        />
       </Col>
     );
   };
 
   const RenderSettingSwitchTwoOptions = (setting: ChannelSetting, disabled: boolean) => {
-    const value = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
-    const valueSubvalue = configuration?.get(setting.Fields[1]) ?? setting.DefaultValues[1];
-    const valueFirstCheck = setting.DefaultValues[2];
-    const valueSecondCheck = setting.DefaultValues[3];
-    const switchOn = (value == '1' || value.toLowerCase() == 'true');
+    const value1 = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
+    const value2 = configuration?.get(setting.Fields[1]) ?? setting.Values[1];
+    const check1Value = setting.Values[2];
+    const defaultNumberValue = setting.Values[3];
+    const label1 = setting.Labels[1];
+    const label2 = setting.Labels[2];
+    const savingState1 = savingSetting.get(setting.Fields[0]);
+    const savingState2 = savingSetting.get(setting.Fields[1]);
     return (
       <Col span={8} className='limit-section'>
-        <div className='switch-container'>
-          <Switch defaultChecked={switchOn} disabled={disabled}/>
-        </div>
-        <div className='limit-area'>
-          <Radio className='radio' disabled={!switchOn || disabled} defaultChecked={valueSubvalue == valueFirstCheck}>{t(setting.Labels[1])}</Radio>
-          <div className='limit'>
-            <Radio className='radio' disabled={!switchOn || disabled} defaultChecked={valueSubvalue != valueFirstCheck}>{t(setting.Labels[2])}</Radio>
-            <Input defaultValue={valueSubvalue == valueFirstCheck ? valueSecondCheck : valueSubvalue} className='blue-input limit-input' disabled={disabled} />
-          </div>
-        </div>
+        <SettingBooleanTwoOptions
+          defaultValue1={value1 ?? ''}
+          defaultValue2={value2 ?? ''}
+          defaultNumberValue1={check1Value ?? ''}
+          defaultNumberValue2={defaultNumberValue ?? ''}
+          label1={t(label1)}
+          label2={t(label2)}
+          onChange1={v => SaveSetting(setting.Fields[0], v)}
+          onChange2={v => SaveSetting(setting.Fields[1], v)}
+          disabled={disabled}
+          loading1={savingState1?.loading ?? false}
+          loading2={savingState2?.loading ?? false}
+        />
       </Col>
     );
   };
 
-
   const RenderSettingNumber = (setting: ChannelSetting, disabled: boolean) => {
     const savingState = savingSetting.get(setting.Fields[0]);
-    const value = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
+    const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
 
     return (
       <Col span={8} className='input-container'>
-        <SettingNumber value={value} onChange={v => SaveSetting(setting.Fields[0], v)} key={setting.Fields[0]} loading={savingState?.loading ?? false} disabled={disabled} />
+        <SettingNumber
+          defaultValue={value ?? ''}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          key={setting.Fields[0]}
+          loading={savingState?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderSettingString = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState = savingSetting.get(setting.Fields[0]);
+    const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingString
+          defaultValue={value ?? ''}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          key={setting.Fields[0]}
+          loading={savingState?.loading ?? false}
+          disabled={disabled} />
       </Col>
     );
   };
 
   const RenderSettingBoolean = (setting: ChannelSetting, disabled: boolean) => {
     const savingState = savingSetting.get(setting.Fields[0]);
-    const value = configuration?.get(setting.Fields[0]) ?? setting.DefaultValues[0];
+    const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
     return (
       <Col span={8} className='switch-container'>
-        <SettingBoolean value={value} onChange={v => SaveSetting(setting.Fields[0], v)} loading={savingState?.loading ?? false} disabled={disabled}/>
+        <SettingBoolean
+          defaultValue={value ?? '0'}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          loading={savingState?.loading ?? false}
+          disabled={disabled}
+        />
       </Col>
     );
   };
 
+  const RenderBooleanNumber = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState1 = savingSetting.get(setting.Fields[0]);
+    const savingState2 = savingSetting.get(setting.Fields[1]);
+    const defaultValue1 = setting.Values[0];
+    const defaultValue2 = setting.Values[1];
+    const value1 = configuration?.get(setting.Fields[0]) ?? defaultValue1;
+    const value2 = configuration?.get(setting.Fields[1]) ?? defaultValue2;
+    return (
+      <Col span={8} className='switch-container'>
+        <SettingBooleanNumber
+          defaultValue1={value1 ?? ''}
+          defaultValue2={value2 ?? ''}
+          onChange1={v => SaveSetting(setting.Fields[0], v)}
+          onChange2={v => SaveSetting(setting.Fields[1], v)}
+          loading1={savingState1?.loading ?? false}
+          loading2={savingState2?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderBooleanString = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState1 = savingSetting.get(setting.Fields[0]);
+    const savingState2 = savingSetting.get(setting.Fields[1]);
+    const defaultValue1 = setting.Values[0];
+    const defaultValue2 = setting.Values[1];
+    const value1 = configuration?.get(setting.Fields[0]) ?? defaultValue1;
+    const value2 = configuration?.get(setting.Fields[1]) ?? defaultValue2;
+    return (
+      <Col span={8} className='switch-container'>
+        <SettingBooleanString
+          defaultValue1={value1 ?? ''}
+          defaultValue2={value2 ?? ''}
+          onChange1={v => SaveSetting(setting.Fields[0], v)}
+          onChange2={v => SaveSetting(setting.Fields[1], v)}
+          loading1={savingState1?.loading ?? false}
+          loading2={savingState2?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderBooleanStringNull = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState = savingSetting.get(setting.Fields[0]);
+    const defaultValue = setting.Values[0];
+    const defaultStringValue = setting.Values[1];
+    const value = configuration?.get(setting.Fields[0]) ?? defaultValue;
+    return (
+      <Col span={8} className='switch-container'>
+        <SettingBooleanStringNull
+          defaultValue={value}
+          defaultStringValue={defaultStringValue ?? ''}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          loading={savingState?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderSettingList = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState = savingSetting.get(setting.Fields[0]);
+    const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
+
+    const listValues: {key: string, value: string}[] = [];
+    for (let i = 1; i < setting.Values.length; i += 2) {
+      listValues.push({ key: setting.Values[i] ?? '', value: t(setting.Values[i + 1] ?? '') as string });
+    }
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingList
+          defaultValue={value ?? ''}
+          listData={listValues}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          key={setting.Fields[0]}
+          loading={savingState?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderWordList = (setting: ChannelSetting, disabled: boolean) => {
+    const savingState = savingSetting.get(setting.Fields[0]);
+    const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingWordList
+          defaultValue={value ?? ''}
+          onChange={v => SaveSetting(setting.Fields[0], v)}
+          key={setting.Fields[0]}
+          loading={savingState?.loading ?? false}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderButton = (setting: ChannelSetting, disabled: boolean) => {
+    switch (setting.Extra![0]) {
+    case ChannelSettingExtra.RefreshPolicies:
+      break;
+    }
+
+    return <SettingButton label={t(setting.Values[0] ?? '') as string} loading={false} disabled={disabled} onClick={() => { return null;}} />;
+  };
+
   const RenderSetting = (setting: ChannelSetting) => {
     const disabled = DisabledAncestors(setting);
+    if (disabled && setting.AncestorsHide)
+      return <></>;
 
     let input: JSX.Element;
     switch (setting.Type) {
@@ -158,15 +305,32 @@ export const ChannelConfiguration = () => {
     case SettingType.Boolean:
       input = RenderSettingBoolean(setting, disabled);
       break;
+    case SettingType.String:
+      input = RenderSettingString(setting, disabled);
+      break;
+    case SettingType.List:
+      input = RenderSettingList(setting, disabled);
+      break;
     case SettingType.TwoOptions:
       input = RenderSettingTwoOptions(setting, disabled);
-      break;
-    case SettingType.TwoOptionsTwo:
-      input = RenderSettingTwoOptionsTwo(setting, disabled);
       break;
     case SettingType.SwitchTwoOptions:
       input = RenderSettingSwitchTwoOptions(setting, disabled);
       break;
+    case SettingType.WordList:
+      input = RenderWordList(setting, disabled);
+      break;
+    case SettingType.BooleanNumber:
+      input = RenderBooleanNumber(setting, disabled);
+      break;
+    case SettingType.BooleanString:
+      input = RenderBooleanString(setting, disabled);
+      break;
+    case SettingType.BooleanStringNull:
+      input = RenderBooleanStringNull(setting, disabled);
+      break;
+    case SettingType.Button:
+      input = RenderButton(setting, disabled);
     }
 
     return (
@@ -181,7 +345,10 @@ export const ChannelConfiguration = () => {
   };
 
   const RenderSettings = (section: ChannelSettingSection): JSX.Element => {
-    const settings = ChannelSettings.filter(x => x.Section == section);
+    const settings = ChannelSettings.filter(
+      x => x.Section == section
+      && (!x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0))
+    );
     return <>
       {settings.map(x => RenderSetting(x))}
     </>;
@@ -211,7 +378,7 @@ export const ChannelConfiguration = () => {
           />
         )}
       </StatusBar>
-      <Row className='content'>
+      <Row className="content">
         {RenderContent(index)}
       </Row>
     </Layout>

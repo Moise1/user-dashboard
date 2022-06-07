@@ -2,7 +2,12 @@
 import { ChannelSettingSection } from './sections';
 
 export enum SettingType {
-  Number, Boolean, TwoOptions, SwitchTwoOptions, TwoOptionsTwo
+  Number, Boolean, String, List, WordList, BooleanNumber, BooleanString, BooleanStringNull, SwitchTwoOptions, TwoOptions, Button
+}
+
+//When it is something special, like a list with values that come from the API or a different call to store that
+export enum ChannelSettingExtra {
+  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, NoApiName, RefreshPolicies
 }
 
 interface Ancestor {
@@ -16,9 +21,11 @@ export interface ChannelSetting {
   Type: SettingType;
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
-  DefaultValues: string[];
+  Values: (string | null)[];
   ChannelIds?: number[];//If undefined it accepts all the channels
   Ancestors?: Ancestor[];
+  AncestorsHide?: boolean;
+  Extra?: ChannelSettingExtra[];
 }
 
 export const ChannelSettings: ChannelSetting[] = [
@@ -28,7 +35,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Number,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.Markup],
-    DefaultValues: ['30'],
+    Values: ['30'],
   },
   {
     Labels: ['Channel.Setting.Name.MonitorStock'],
@@ -36,7 +43,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Boolean,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MonitorStock],
-    DefaultValues: ['1']
+    Values: ['1']
   },
   {
     Labels: ['Channel.Setting.Name.MonitorPrice'],
@@ -44,7 +51,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Boolean,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MonitorPrice],
-    DefaultValues: ['1'],
+    Values: ['1'],
     Ancestors: [{
       Field: eChannelSettings.MonitorStock,
       Value:'1'
@@ -64,7 +71,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.SwitchTwoOptions,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MonitorPriceDecrease, eChannelSettings.MonitorPriceDecreasePercentage],
-    DefaultValues: ['1', '0', '0', '30'],
+    Values: ['1', '0', '0', '30'],
     Ancestors: [
       {
         Field: eChannelSettings.MonitorStock,
@@ -82,7 +89,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Number,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.MinQuantity],
-    DefaultValues: ['1']
+    Values: ['1']
   },
   {
     Labels: ['Channel.Setting.Name.Ending99'],
@@ -90,7 +97,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Boolean,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.TransformPrice],
-    DefaultValues: ['0']
+    Values: ['0']
   },
   {
     Labels: [
@@ -101,9 +108,288 @@ export const ChannelSettings: ChannelSetting[] = [
     Description: [
       'Channel.Setting.Description.OutOfStockAction',
     ],
-    Type: SettingType.TwoOptionsTwo,
+    Type: SettingType.TwoOptions,
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.OutOfStockAction, eChannelSettings.OutOfStockActionPriceIncreaseAmount],
-    DefaultValues: ['1', '100', '1', '2']
+    Values: ['1', '100', '1', '2']
+  },
+  {
+    Labels: ['Channel.Setting.Name.MonitorCompareAtPrice'],
+    Description: ['Channel.Setting.Description.MonitorCompareAtPrice.1','Channel.Setting.Description.MonitorCompareAtPrice.2'],
+    Type: SettingType.Boolean,
+    Section: ChannelSettingSection.Monitoring,
+    Fields: [eChannelSettings.CompareAtPrice],
+    Values: ['0'],
+    ChannelIds:[2]
+  },
+
+
+
+  {
+    Labels: ['Channel.Setting.Name.ForbiddenWords'],
+    Description: ['Channel.Setting.Description.ForbiddenWords'],
+    Type: SettingType.WordList,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.ForbiddenWords],
+    Values: ['']
+  },
+  {
+    Labels: ['Channel.Setting.Name.ForbiddenWordsUrl'],
+    Description: ['Channel.Setting.Description.ForbiddenWordsUrl'],
+    Type: SettingType.Boolean,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.ForbiddenWordsInUrl],
+    Values: ['0']
+  },
+  {
+    Labels: ['Channel.Setting.Name.ListingsDuration'],
+    Description: ['Channel.Setting.Description.ListingsDuration'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.ListingDuration],
+    Values: ['GTC', 'GTC', 'Channel.Setting.Option.GTC', 'Days_30', 'Channel.Setting.Option.Days30'],
+    ChannelIds: [1,3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.TerminateOOS'],
+    Description: ['Channel.Setting.Description.TerminateOOS.1', 'Channel.Setting.Description.TerminateOOS.2'],
+    Type: SettingType.BooleanNumber,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.ActiveTerminateOosDays, eChannelSettings.TerminateOosDays],
+    Values: ['0','60']
+  },
+  {
+    Labels: ['Channel.Setting.Name.MinTitleLength'],
+    Description: ['Channel.Setting.Description.MinTitleLength'],
+    Type: SettingType.Number,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.MinTitleLength],
+    Values: ['10']
+  },
+  {
+    Labels: ['Channel.Setting.Name.TitleSuggestions'],
+    Description: ['Channel.Setting.Description.TitleSuggestions'],
+    Type: SettingType.Boolean,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.TitleSuggestions],
+    Values: ['1']
+  },
+  {
+    Labels: ['Channel.Setting.Name.DefaultTemplate'],
+    Description: ['Channel.Setting.Description.DefaultTemplate'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.TemplateId],
+    Values: ['0'],
+    Extra: [ChannelSettingExtra.TemplateList]
+  },
+  {
+    Labels: ['Channel.Setting.Name.DefaultEAN'],
+    Description: ['Channel.Setting.Description.DefaultEAN'],
+    Type: SettingType.String,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.DefaultEAN],
+    Values: ['Does not apply']
+  },
+  {
+    Labels: ['Channel.Setting.Name.DefaultMPN'],
+    Description: ['Channel.Setting.Description.DefaultMPN'],
+    Type: SettingType.String,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.DefaultMpn],
+    Values: ['Does not apply']
+  },
+  {
+    Labels: ['Channel.Setting.Name.DefaultQuantity'],
+    Description: ['Channel.Setting.Description.DefaultQuantity'],
+    Type: SettingType.Number,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.DefaultQuantity],
+    Values: ['1']
+  },
+  {
+    Labels: ['Channel.Setting.Name.MinImages'],
+    Description: ['Channel.Setting.Description.MinImages'],
+    Type: SettingType.Number,
+    Section: ChannelSettingSection.Listing,
+    Fields: [eChannelSettings.MinImages],
+    Values: ['1']
+  },
+
+
+
+
+  {
+    Labels: ['Channel.Setting.Name.UseBusiness'],
+    Description: ['Channel.Setting.Description.UseBusiness'],
+    Type: SettingType.Boolean,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.UseBusinessPolicies],
+    Values: ['0'],
+    ChannelIds:[1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.PolicyReturns'],
+    Description: ['Channel.Setting.Description.PolicyReturns'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.ReturnsPolicy],
+    Values: [
+      '30 Days',
+      'Days_14', 'Channel.Setting.Option.Days14',
+      'Days_30', 'Channel.Setting.Option.Days30',
+      'Days_60', 'Channel.Setting.Option.Days60',
+      'No_Returns', 'Channel.Setting.Option.NoReturns'
+    ],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value:'0'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.PolicyDelivery'],
+    Description: ['Channel.Setting.Description.PolicyDelivery'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.DefaultShipping],
+    Values: ['0'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '0'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3],
+    Extra: [ChannelSettingExtra.PolicyDelivery]
+  },
+  {
+    Labels: ['Channel.Setting.Name.PolicyDispatchDays'],
+    Description: ['Channel.Setting.Description.PolicyDispatchDays'],
+    Type: SettingType.Number,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.DispatchDays],
+    Values: ['1'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '0'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.GSP'],
+    Description: ['Channel.Setting.Description.GSP'],
+    Type: SettingType.Boolean,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.Gsp],
+    Values: ['0'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '0'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.BusinessShipping'],
+    Description: ['Channel.Setting.Description.BusinessShipping'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.ShippingProfileId],
+    Values: ['0'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '1'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3],
+    Extra: [ChannelSettingExtra.BusinessShipping]
+  },
+  {
+    Labels: ['Channel.Setting.Name.BusinessReturn'],
+    Description: ['Channel.Setting.Description.BusinessReturn'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.ReturnProfileId],
+    Values: ['0'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '1'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3],
+    Extra: [ChannelSettingExtra.BusinessReturn]
+  },
+  {
+    Labels: ['Channel.Setting.Name.BusinessPayment'],
+    Description: ['Channel.Setting.Description.BusinessPayment'],
+    Type: SettingType.List,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.PaymentProfileId],
+    Values: ['0'],
+    Ancestors: [{
+      Field: eChannelSettings.UseBusinessPolicies,
+      Value: '1'
+    }],
+    AncestorsHide: true,
+    ChannelIds: [1, 3],
+    Extra: [ChannelSettingExtra.BusinessPayment]
+  },
+  {
+    Labels: ['Channel.Setting.Name.BusinessPostcode'],
+    Description: ['Channel.Setting.Description.BusinessPostcode'],
+    Type: SettingType.String,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.ItemLocationPostcode],
+    Values: [''],
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.BusinessCity'],
+    Description: ['Channel.Setting.Description.BusinessCity'],
+    Type: SettingType.String,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.ItemLocationCity],
+    Values: [''],
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: ['Channel.Setting.Name.PaymentMethod'],
+    Description: ['Channel.Setting.Description.PaymentMethod'],
+    Type: SettingType.BooleanStringNull,
+    Section: ChannelSettingSection.Business,
+    Fields: [eChannelSettings.PaypalEmail],
+    Values: [null,'example@email.com'],
+    ChannelIds: [1, 3]
+  },
+  {
+    Labels: [''],
+    Description: [''],
+    Type: SettingType.Button,
+    Section: ChannelSettingSection.Business,
+    Fields: [],
+    Values: ['Channel.Setting.Name.RefreshPolicies'],
+    ChannelIds: [1, 3],
+    Extra: [ChannelSettingExtra.RefreshPolicies]
+  },
+
+  {
+    Labels: ['Channel.Setting.Name.NoApiName'],
+    Description: ['Channel.Setting.Description.NoApiName'],
+    Type: SettingType.String,
+    Section: ChannelSettingSection.Other,
+    Fields: [],
+    Values: [''],
+    ChannelIds: [3, 4],
+    Extra: [ChannelSettingExtra.NoApiName]
+  },
+  {
+    Labels: ['Channel.Setting.Name.FeePercentage'],
+    Description: ['Channel.Setting.Description.FeePercentage'],
+    Type: SettingType.Number,
+    Section: ChannelSettingSection.Other,
+    Fields: [eChannelSettings.FeePercentage],
+    Values: ['']
   },
 ];

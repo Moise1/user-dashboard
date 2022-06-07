@@ -10,6 +10,7 @@
     margin-top: 2rem;
     padding: 2rem;
     background: $primary-bg;
+
     .action-btns {
       position: fixed;
       right: 2%;
@@ -37,7 +38,6 @@
         .limit,
         .stock {
           display: flex;
-          justify-content: space-between;
         }
       }
     }

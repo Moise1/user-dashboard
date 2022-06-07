@@ -58,7 +58,7 @@ export enum eChannelSettings {
 
 export interface SettingKey {
   key: eChannelSettings;
-  value: string;
+  value: string | null;
 }
 
 export interface SavingSetting {

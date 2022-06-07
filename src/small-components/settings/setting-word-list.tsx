@@ -13,7 +13,7 @@ interface Props {
   onChangeNoDelay?: (value: string) => void;
 }
 
-export const SettingNumber = (props: Props) => {
+export const SettingWordList = (props: Props) => {
   const { defaultValue, delayToSave, onChange, loading, disabled, value, onChangeNoDelay } = props;
 
   const [delayTimer, setDelayTimer] = useState<number>(-1);
@@ -37,7 +37,7 @@ export const SettingNumber = (props: Props) => {
     );
   };
   return <div className="setting setting-number">
-    <Input defaultValue={defaultValue} type='number' className='blue-input' onChange={OnChange} disabled={loading || disabled} value={value} />
+    <Input defaultValue={defaultValue} type='text' className='blue-input' onChange={OnChange} disabled={loading || disabled} value={value} />
     {loading && <Spin />}
   </div>;
 };

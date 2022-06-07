@@ -4,8 +4,8 @@ import { PlusCircle } from 'react-feather';
 import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
-import { Selector } from './Selector';
 import { AppContext } from '../contexts/AppContext';
+import { SelectorChannel } from './form/selector-channel';
 
 export const StoreList = () => {
   const { channels } = useAppSelector((state) => state.channels);
@@ -20,7 +20,7 @@ export const StoreList = () => {
   };
   return (
     <div className="store-list-container">
-      <Selector
+      <SelectorChannel
         size="large"
         defaultValue={selectedChannel ? selectedChannel : 'Select a store'}
         onChange={provideChannelId}
@@ -36,7 +36,7 @@ export const StoreList = () => {
         )}
       >
         {channels?.map(({ name: value, isoCountry, channelId, id }: Channel) => ({ value, isoCountry, channelId, id }))}
-      </Selector>
+      </SelectorChannel>
     </div>
   );
 };
