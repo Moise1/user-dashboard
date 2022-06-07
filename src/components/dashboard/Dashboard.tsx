@@ -42,7 +42,7 @@ import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-import { Selector } from '../../small-components/form/selector';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 interface ProductQuota {
   quota: number;
