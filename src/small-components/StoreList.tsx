@@ -5,31 +5,24 @@ import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
-//import { Space } from 'antd';
-//import { shopLogo } from 'src/utils/shopLogo';
-//import { countryFlag } from 'src/utils/countryFlag';
 import { SelectorChannel } from './form/selector-channel';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
-  const { channels } = useAppSelector((state) => state.channels);
-  const { setChannelId } = useContext(AppContext);
-  const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!) as Channel ?? channels[0];
+  const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
+  const { channelId, setChannelId } = useContext(AppContext);
 
-  const provideChannelId = (value: number) => {
-    const selectedChannel = channels?.find((c: Channel) => c.id === value);
-    setChannelId(selectedChannel?.id);
-    localStorage.setItem('shopIdentity', JSON.stringify(selectedChannel));
-    window.location.reload();
-  };
+  if (channels.length > 0 && !channels.find(x => x.id == channelId)) {
+    setChannelId(channels[0].id);
+  }
 
   return (
     <div className="store-list-container">
       <SelectorChannel
         size="large"
         showSearch={false}
-        defaultValue={shopIdentity.id}
-        onChange={provideChannelId}
+        value={channelId}
+        onChange={setChannelId}
         showFlags={showFlags}
         dropdownRender={(menu: ReactNode) => (
           <>

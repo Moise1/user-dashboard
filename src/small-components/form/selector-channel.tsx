@@ -5,7 +5,7 @@ import { shopLogo } from '../../utils/shopLogo';
 import { Selector, SelectorData, SelectorValue, SelectorSizeType } from './selector';
 
 
-interface SelectorChannelProps {
+interface Props {
   children: Channel[];
   defaultValue?: number;
   onChange?: (value: number) => void;
@@ -23,7 +23,7 @@ interface SelectorChannelProps {
   showSearch?: boolean;
 }
 
-export const SelectorChannel = (props: SelectorChannelProps) => {
+export const SelectorChannel = (props: Props) => {
   const {
     children,
     defaultValue,
@@ -41,8 +41,9 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
   } = props;
 
   const OnChange = (value: SelectorValue) => {
-    if (onChange)
+    if (onChange) {
       onChange((value as SelectorData).value as number);
+    }
   };
 
 
@@ -63,29 +64,14 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
     };
   };
 
-  let dV: SelectorValue;
-  if (defaultValue != undefined && defaultValue != null) {
-    const c = children.find(x => x.id == defaultValue);
-    if (c) {
-      dV = CreateValue(c);
-    }
-  }
-
-  let v: SelectorValue;
-  if (value != undefined && value != null) {
-    const c = children.find(x => x.id == value);
-    if (c) {
-      v = CreateValue(c);
-    }
-  }
-
+  const options = children.map(CreateValue);
 
   return <Selector
     disabled={disabled}
     style={style}
     onChange={OnChange}
-    defaultValue={dV}
-    value={v}
+    defaultValue={options.find(x => x.value == defaultValue) }
+    value={options.find(x => x.value == value) }
     dropdownRender={dropdownRender}
     loading={loading}
     size={size}
@@ -94,6 +80,6 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
     showSearch={showSearch}
     labelInValue={true}
   >
-    {children.map(CreateValue)}
+    {options}
   </Selector>;
 };
