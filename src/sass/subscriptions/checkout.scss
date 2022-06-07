@@ -1,0 +1,68 @@
+@use '../general.config';
+@import '../general.config';
+
+.checkout-content {
+  display: flex;
+  .title-container {
+    margin-bottom: 1rem;
+    align-self: center;
+    width: 80%;
+    h3 {
+      font-weight: 600;
+      margin: 0;
+    }
+    h4 {
+      color: $gray;
+      margin: 0;
+    }
+  }
+  .checkout-sections-container {
+    display: flex;
+    justify-content: space-around;
+    .first-section-container {
+      height: fit-content;
+      background-color: $primary-bg;
+      padding: 2rem;
+      width: 40%;
+      box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+      border-radius: 1rem;
+      .extras {
+        .extra-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .price-extra {
+          white-space: nowrap;
+        }
+
+        display: grid;
+        h4 {
+          font-weight: bold;
+          color: $corporative-color;
+        }
+
+        .checkbox {
+          margin-left: 0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .order-summary {
+      width: 40%;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .checkout-content {
+    .checkout-sections-container {
+      display: grid !important;
+      .first-section-container,
+      .order-summary {
+        width: 100% !important;
+      }
+    }
+  }
+}
