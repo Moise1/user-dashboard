@@ -23,6 +23,7 @@ import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
 import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
+import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -48,5 +49,6 @@ export const allReducers = combineReducers({
   getAutoOrdering: getAutoOrderingReducer,
   listingServices: listingServicesReducer,
   noApiServers: noApiServersReducer,
-  deleteAutoOrders: deleteAutoOrderingReducer
+  deleteAutoOrders: deleteAutoOrderingReducer,
+  affiliatesStats: affiliatesStatsReducer
 });
