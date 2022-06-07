@@ -42,7 +42,7 @@ export const Checkout = (/*props: props*/) => {
         <div className="first-section-container">
           <Form className="bulk-form" layout={'vertical'}>
             <Item label="Select your listings amount" name="sourceId">
-              <SelectorPlain defaultValue={pId?.toString()} loading={loading}>
+              <Selector defaultValue={pId?.toString()} loading={loading}>
                 {products?.map(({ name: label, id: value }: Product) => ({ value, label }))}
               </Selector>
             </Item>

@@ -39,8 +39,8 @@ export const Subscriptions = () => {
     }
   };
 
-  function parentToChild(value: string, billing: number): void {
-    localStorage.setItem('productId', value);
+  function parentToChild(value: number, billing: number): void {
+    localStorage.setItem('productId', value.toString());
     localStorage.setItem('billing', billing.toString());
     localStorage.setItem('currencyId', activeCurrency.toString());
   }
@@ -104,7 +104,7 @@ export const Subscriptions = () => {
                   <strong>{p.name}</strong>
                 </p>
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.name, 0)} key={p.id}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 0)} key={p.id}>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
                       <h1 className="monthly-rate">
@@ -120,7 +120,7 @@ export const Subscriptions = () => {
                 </div>
                 <Divider className="divider" />
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.name, 1)}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 1)}>
                     <p className="twenty-off">20% off</p>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
@@ -138,7 +138,7 @@ export const Subscriptions = () => {
                 </div>
                 <Divider className="divider" />
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.name, 2)}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 2)}>
                     <p className="forty-off">40% off</p>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
