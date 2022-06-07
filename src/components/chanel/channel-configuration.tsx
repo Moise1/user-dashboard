@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Layout, Row, Col, Spin } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -363,24 +363,30 @@ export const ChannelConfiguration = () => {
     setIndex(index);
   };
 
-  if (settingsLoading || !settings)
-    return <Spin />;
+  const loading = settingsLoading || !settings;
 
   return (
     <Layout className='channel-settings'>
       <StatusBar>
-        {ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0)).map((x, i) => 
-          <StatusBtn
-            key={i}
-            title={t(x.Label) as string}
-            changeTab={(e) => handleChangeTab(e, x.Type)}
-            className={activeTab == x.Type ? 'active-tab' : ''}
-            id={i.toString()}
-          />
-        )}
+        <>
+          {!loading && <>
+            {
+              ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0)).map((x, i) =>
+                <StatusBtn
+                  key={i}
+                  title={t(x.Label) as string}
+                  changeTab={(e) => handleChangeTab(e, x.Type)}
+                  className={activeTab == x.Type ? 'active-tab' : ''}
+                  id={i.toString()}
+                />
+              )
+            }
+          </>
+          }
+        </>
       </StatusBar>
       <Row className="content">
-        {RenderContent(index)}
+        {!loading && RenderContent(index)}
       </Row>
     </Layout>
   );

@@ -5,9 +5,6 @@ import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
-//import { Space } from 'antd';
-//import { shopLogo } from 'src/utils/shopLogo';
-//import { countryFlag } from 'src/utils/countryFlag';
 import { SelectorChannel } from './form/selector-channel';
 
 export const StoreList = () => {
