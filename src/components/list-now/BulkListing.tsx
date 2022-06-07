@@ -8,11 +8,11 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { useEffect, useState } from 'react';
 
 //import { SimpleTable } from '../tables/SimpleTable';
-import { Selector } from '../../small-components/Selector';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { StatusBar } from 'src/small-components/StatusBar';
 import { dummyDeliver } from 'src/dummy-data/dummyData';
 import Spreadsheet from 'react-spreadsheet';
+import { SelectorPlain } from '../../small-components/form/selector-plain';
 
 const { Item } = Form;
 
@@ -65,26 +65,26 @@ export const BulkListing = (/*props: props*/) => {
               <> </>
               <Form className="bulk-form" layout={'horizontal'}>
                 <Item label="Create As" name="sourceId">
-                  <Selector defaultValue="Yes">{dummyDeliver}</Selector>
+                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
                 </Item>
                 <p>VA Profile selected as the creator of the listing</p>
                 <Item label="List Vero Items" name="sourceId">
-                  <Selector defaultValue="Yes">{dummyDeliver}</Selector>
+                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
                 </Item>
                 <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
                 <Item label="List Out of Stock Items" name="sourceId">
-                  <Selector defaultValue="Yes">{dummyDeliver}</Selector>
+                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
                 </Item>
                 <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
                 <Item label="Don't list until" name="sourceId">
-                  <Selector defaultValue="Yes">{dummyDeliver}</Selector>
+                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
                 </Item>
                 <Item label="Listing frequency" name="markup">
                   <Input className="blue-input" type="text" placeholder="0" />
                 </Item>
                 <p>The system will automatically list an item every X minutes.</p>
                 <Item label="Review listings" name="sourceId">
-                  <Selector defaultValue="Yes">{dummyDeliver}</Selector>
+                  <SelectorPlain defaultValue="Yes">{dummyDeliver}</SelectorPlain>
                 </Item>
               </Form>
             </StatusBar>

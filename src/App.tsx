@@ -17,7 +17,7 @@ import {
   PricingRules,
   BrowserExtensions,
   VaProfiles,
-  ChannelSettings,
+  ChannelConfiguration,
   GetStarted,
   Catalog,
   SourcesTable,
@@ -78,7 +78,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/orders" component={Orders} />
             <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
             <ProtectedRoute path="/sources-table" component={SourcesTable} />
-            <ProtectedRoute path="/channel" component={ChannelSettings} />
+            <ProtectedRoute path="/channel" component={ChannelConfiguration} />
             <ProtectedRoute path="/new-channel" component={NewChannel} />
             <ProtectedRoute path="/services" component={Services} />
             <ProtectedRoute path="/subscriptions" component={Subscriptions} />

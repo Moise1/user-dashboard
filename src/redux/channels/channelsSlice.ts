@@ -10,10 +10,16 @@ export interface Channel {
   isoCountry: number;
   name: string;
   userId: string;
-  [key: string]: string | number | boolean;
 }
 
-const initialState = {
+export interface ChannelsState {
+  channels: Channel[];
+  channelDeleted: boolean;
+  loading: boolean;
+  error: string;
+}
+
+const initialState: ChannelsState = {
   channels: [] as Channel[],
   channelDeleted: false,
   loading: false,

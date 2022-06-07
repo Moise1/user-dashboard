@@ -22,6 +22,7 @@ import { getAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
 import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
+import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -30,6 +31,7 @@ export const allReducers = combineReducers({
   vaProfiles: userAssistantsReducer,
   sources: sourcesConfigReducer,
   channels: channelsReducer,
+  channelConfiguration: channelConfigurationReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,

@@ -6,11 +6,12 @@ interface Props {
 }
 export const AppContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<string>(initialAppContext.theme);
-  const [channelId, setChannelId] = useState<string>(initialAppContext.channelId);
+  const [channelId, setChannelId] = useState<number | undefined>(initialAppContext.channelId);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('globalTheme');
-    const savedChannelId = localStorage.getItem('channelId');
+    const sId = localStorage.getItem('channelId');
+    const savedChannelId = sId ? parseInt(sId) : undefined;
     if (savedTheme) {
       setTheme(savedTheme);
     }
@@ -21,7 +22,7 @@ export const AppContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     localStorage.setItem('globalTheme', theme);
-    localStorage.setItem('channelId', channelId);
+    localStorage.setItem('channelId', channelId?.toString() ?? '');
   }, [theme, channelId]);
 
   return (

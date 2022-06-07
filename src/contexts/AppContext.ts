@@ -1,17 +1,18 @@
 import { createContext } from 'react';
 
-export const initialAppContext = {
+type initialAppContextType = {
+  theme: string;
+  channelId: number | undefined;
+  setChannelId: (channelId: number) => void;
+  setTheme: (theme: string) => void;
+};
+
+export const initialAppContext: initialAppContextType = {
   theme: 'light',
-  channelId: '',
+  channelId: undefined,
   setChannelId: () => null,
   setTheme: () => null
 };
 
-type initialAppContextType = {
-  theme: string;
-  channelId: string | null;
-  setChannelId: (channelId: string) => void;
-  setTheme: (theme: string) => void;
-};
 
 export const AppContext = createContext<initialAppContextType>(initialAppContext);
