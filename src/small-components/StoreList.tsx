@@ -5,7 +5,9 @@ import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
-import { SelectorChannel } from './form/selector-channel';
+import { shopLogo } from '../utils/shopLogo';
+import { countryFlag } from '../utils/countryFlag';
+import { Selector, SelectorValue } from './form/selector';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
@@ -16,14 +18,37 @@ export const StoreList = () => {
     setChannelId(channels[0].id);
   }
 
+
+  const CreateLabel = (c: Channel) => {
+    return <>
+      {showFlags && shopLogo(c.channelId)}
+      {showFlags && countryFlag(c.isoCountry)}
+      {c.name}
+    </>;
+  };
+
+  const CreateValue = (c: Channel) => {
+    return {
+      value: c.id,
+      label: <>
+        {CreateLabel(c)}
+      </>
+    };
+  };
+
+  const options = channels.map(CreateValue);
+
+  const OnChange = (value: SelectorValue) => {
+    setChannelId(value as number);
+  };
+
   return (
     <div className="store-list-container">
-      <SelectorChannel
+      <Selector
         size="large"
         showSearch={false}
         value={channelId}
-        onChange={setChannelId}
-        showFlags={showFlags}
+        onChange={OnChange}
         dropdownRender={(menu: ReactNode) => (
           <>
             <div className="menu">{menu}</div>
@@ -34,8 +59,8 @@ export const StoreList = () => {
           </>
         )}
       >
-        {channels}
-      </SelectorChannel>
+        {options}
+      </Selector>
     </div>
   );
 };
