@@ -15,13 +15,6 @@ export const StoreList = () => {
   const { channels } = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
   const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!) as Channel ?? channels[0];
-  //const showShopIdentity = (
-  //  <Space direction="horizontal">
-  //    {shopLogo(shopIdentity?.channelId)}
-  //    {countryFlag(shopIdentity?.isoCountry)}
-  //    {shopIdentity?.shopName}
-  //  </Space>
-  //);
 
   const provideChannelId = (value: number) => {
     const selectedChannel = channels?.filter((c: Channel) => c.id === value);
