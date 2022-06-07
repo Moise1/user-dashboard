@@ -21,6 +21,12 @@ export const Checkout = (/*props: props*/) => {
     dispatch(getSubscriptions());
   }, [getSubscriptions]);
 
+  const pId = localStorage.getItem('productId');
+  const billlingId = localStorage.getItem('billing');
+  const currencyId = localStorage.getItem('currencyId');
+
+  console.log(pId + ' -- ' + billlingId + '  --  ' + currencyId); // "bar"
+
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   console.log({ products });
   return loading ? (
@@ -36,7 +42,7 @@ export const Checkout = (/*props: props*/) => {
         <div className="first-section-container">
           <Form className="bulk-form" layout={'vertical'}>
             <Item label="Select your listings amount" name="sourceId">
-              <SelectorPlain defaultValue="{Selected subscription}" loading={loading}>
+              <SelectorPlain defaultValue={pId?.toString()} loading={loading}>
                 {products?.map(({ name: label, id: value }: Product) => ({ value, label }))}
               </SelectorPlain>
             </Item>

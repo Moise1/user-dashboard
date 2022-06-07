@@ -1,10 +1,14 @@
 @use '../general.config';
 @import '../general.config';
 
+.container-sub:hover {
+    color: darkblue;
+    background-color: lightblue;
+    border: 1px dashed blue; 
+}
 // Extra big screens;
-
 .ant-spin-spinning {
-  margin-top: 20%;
+    margin-top: 20%;
 }
 
 .ant-spin-spinnings {
