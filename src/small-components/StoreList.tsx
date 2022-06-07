@@ -17,9 +17,8 @@ export const StoreList = () => {
   const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!) as Channel ?? channels[0];
 
   const provideChannelId = (value: number) => {
-    const selectedChannel = channels?.filter((c: Channel) => c.id === value);
-    const channelId = selectedChannel[0].id;
-    setChannelId(JSON.stringify(channelId));
+    const selectedChannel = channels?.find((c: Channel) => c.id === value);
+    setChannelId(selectedChannel?.id);
     localStorage.setItem('shopIdentity', JSON.stringify(selectedChannel));
     window.location.reload();
   };
