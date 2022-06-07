@@ -21,6 +21,7 @@
   "Edit N Listings": "Edit <span className=\"fw-600\">{num}</span> Products",
 
   "Channel.Setting.Description.Ending99": "When enabled, the prices for all the items will end in .99 .",
+  "Channel.Setting.Description.ForbiddenWords": "Prevent any listing from being submitted if it contains any of the words below. Comma separated list. You can add words referencing prohibited items. The software will scan the description and title of the listing to validate it before submitting it.",
   "Channel.Setting.Description.Markup": "Percentage added to supplier’s price, which will determine the price of your products. For example, a 40% markup means that a product that costs £100 will be on sale for £140.",
   "Channel.Setting.Description.MinQuantity": "HGR will maintain this minimun quantity while the item is in stock.",
   "Channel.Setting.Description.MonitorCompareAtPrice.1": "If enabled, Compare At Price will be changed proportionally, so if the current Compare at Price is, for example, 20% higher than the price and price changes, new Compare At Price will be also 20% higher.",
@@ -34,6 +35,7 @@
   "Channel.Setting.Description.PolicyReturns": "",
   "Channel.Setting.Description.UseBusiness": "Use your {channel_platform_name} seller profiles for shipping, returns and payments. If enabled, please configure the values for every source under {sources_table_link}.",
   "Channel.Setting.Name.Ending99": "Price ending in .99",
+  "Channel.Setting.Name.ForbiddenWords": "Forbidden Words",
   "Channel.Setting.Name.Markup": "Markup %",
   "Channel.Setting.Name.MinQuantity": "Min Quantity",
   "Channel.Setting.Name.MonitorCompareAtPrice": "Monitor Compare at price",

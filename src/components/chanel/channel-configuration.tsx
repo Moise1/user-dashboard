@@ -25,13 +25,21 @@ import { AppContext } from '../../contexts/AppContext';
 
 export const ChannelConfiguration = () => {
   const [index, setIndex] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
 
-  const selectedChannel = (()=>{
+  const selectedChannel = (() => {
     const { channels } = useAppSelector((state) => state.channels as ChannelsState);
-    const { channelId: selectedChannelId  } = useContext(AppContext);
+    const { channelId: selectedChannelId } = useContext(AppContext);
     return channels.find(x => x.id == selectedChannelId);
   })();
+
+  const sections = ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
+  {
+    const activeTabStored = parseInt(localStorage.getItem('ChannelConfiguration.activeTab') ?? '0');
+    if (sections.find(x => x.Type == activeTabStored) && activeTabStored && activeTabStored != activeTab) {
+      setActiveTab(activeTabStored);
+    }
+  }
 
   const dispatch = useAppDispatch();
   const {
@@ -357,10 +365,10 @@ export const ChannelConfiguration = () => {
 
   const RenderContent = (index: ChannelSettingSection): JSX.Element => RenderSettings(index);
 
-  const handleChangeTab = (e: React.MouseEvent, index: number): void => {
-    const id = e.currentTarget.getAttribute('id');
-    setActiveTab(parseInt(id!));
-    setIndex(index);
+  const ChangeTab = (id: ChannelSettingSection): void => {
+    localStorage.setItem('ChannelConfiguration.activeTab', id.toString());
+    setActiveTab(id);
+    setIndex(id);
   };
 
   const loading = settingsLoading || !settings;
@@ -371,11 +379,11 @@ export const ChannelConfiguration = () => {
         <>
           {!loading && <>
             {
-              ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0)).map((x, i) =>
+              sections.map((x, i) =>
                 <StatusBtn
                   key={i}
                   title={t(x.Label) as string}
-                  changeTab={(e) => handleChangeTab(e, x.Type)}
+                  changeTab={_ => ChangeTab(x.Type)}
                   className={activeTab == x.Type ? 'active-tab' : ''}
                   id={i.toString()}
                 />

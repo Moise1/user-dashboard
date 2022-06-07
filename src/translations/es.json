@@ -13,6 +13,7 @@
   "Channel.Other": "Otro",
 
   "Channel.Setting.Description.Ending99": "Si se activa, los precios de todos los artículos terminarán en .99 .",
+  "Channel.Setting.Description.ForbiddenWords": "Evite que se envíe cualquier listado si contiene alguna de las palabras a continuación. Lista separada por comas. Puede agregar palabras que hagan referencia a elementos prohibidos. El software escaneará la descripción y el título del listado para validarlo antes de enviarlo.",
   "Channel.Setting.Description.Markup": "Porcentaje añadido al precio del proveedor, que determinará el precio de tus productos. Por ejemplo, un margen del 40% significa que un producto que cuesta 100€ estará a la venta por 140€.",
   "Channel.Setting.Description.MinQuantity": "HGR mantendrá esta cantidad mínima mientras el artículo esté en stock.",
   "Channel.Setting.Description.MonitorCompareAtPrice.1": "Si está habilitado, Precio de comparación se cambiará proporcionalmente, por lo que si el Precio de comparación actual es, por ejemplo, un 20% más alto que el precio y el precio cambia, el nuevo Precio de comparación también será un 20% más alto.",
@@ -25,6 +26,7 @@
   "Channel.Setting.Description.OutOfStockAction": "Cuando un artículo está agotado en el origen, la cantidad del producto se establece en 0. También puede elegir la opción de aumentar el precio para asegurarse de que el producto no se venda si no hay stock disponible.",
   "Channel.Setting.Description.UseBusiness": "Utilice sus perfiles de vendedor de {channel_platform_name} para envíos, devoluciones y pagos. Si está habilitado, configure los valores para cada fuente en {sources_table_link}.",
   "Channel.Setting.Name.Ending99": "Precios acabados en .99",
+  "Channel.Setting.Name.ForbiddenWords": "Palabras prohibidas",
   "Channel.Setting.Name.Markup": "Margen %",
   "Channel.Setting.Name.MinQuantity": "Cantidad mínima",
   "Channel.Setting.Name.MonitorCompareAtPrice": "Sincronizar precio de comparación",
