@@ -50,7 +50,7 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
     return <>
       {showFlags && shopLogo(c.channelId)}
       {showFlags && countryFlag(c.isoCountry)}
-      {c.value}
+      {c.name}
     </>;
   };
 

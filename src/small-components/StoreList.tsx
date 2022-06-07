@@ -41,7 +41,7 @@ export const StoreList = () => {
           </>
         )}
       >
-        {channels?.map(({ name: value, isoCountry, channelId, id }: Channel) => ({ value, isoCountry, channelId, id }))}
+        {channels}
       </SelectorChannel>
     </div>
   );
