@@ -32,6 +32,7 @@ import { ListNow } from './components/list-now/ListNow';
 import { ManualListing } from './components/list-now/ManualListing';
 import { BulkListing } from './components/list-now/BulkListing';
 import { Checkout } from './components/subscriptions/Checkout';
+import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -83,6 +84,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/services" component={Services} />
             <ProtectedRoute path="/subscriptions" component={Subscriptions} />
             <ProtectedRoute path="/checkout" component={Checkout} />
+            <ProtectedRoute path="/payment-method" component={PaymentMethod} />
             <ProtectedRoute path="/pricing-rules" component={PricingRules} />
             <ProtectedRoute path="/browser-extensions" component={BrowserExtensions} />
             <ProtectedRoute path="/va-profiles" component={VaProfiles} />
