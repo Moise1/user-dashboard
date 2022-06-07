@@ -146,7 +146,7 @@ export const Orders = () => {
     }
   ];
 
-  const newChannel = JSON.parse(localStorage.getItem('channelId') || '590881');
+  const newChannel = JSON.parse(localStorage.getItem('channelId') || ' 0 ');
 
   useEffect(() => {
     setOrder(
@@ -158,11 +158,11 @@ export const Orders = () => {
           date: moment(item.date).format('DD/MM/YY/ hh:mm')
         }))
     );
-  }, [orders.orders, newChannel]);
+  }, [orders.orders]);
 
   useEffect(() => {
     dispatch(getOrders({ channelOAuthIds: [newChannel] }));
-  }, [getOrders, newChannel]);
+  }, [getOrders]);
 
   //How many columns to show
   const [columns, setColumns] = useState(tableColumns);

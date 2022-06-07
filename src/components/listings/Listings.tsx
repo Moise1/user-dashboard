@@ -25,10 +25,15 @@ import { ListingData, PendingListings } from 'src/redux/listings/listingsSlice';
 import { ListingsStatusType, useTableSearch } from '../../custom-hooks/useTableSearch';
 import { ActiveListing } from 'src/redux/unmap';
 import '../../sass/listings.scss';
-
+import {ListNow} from '../list-now/ListNow';
 const { Search } = Input;
 
 export const Listings = () => {
+
+	
+  const channel = localStorage.getItem('channelId');
+  console.log('The channel', channel);
+
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [searchTxt, setSearchTxt] = useState<null | string>(null);
   const [showColumns, setShowColumns] = useState<boolean>(false);
@@ -53,7 +58,7 @@ export const Listings = () => {
     dispatch(getListingsSource());
     dispatch(getPendingListings());
     dispatch(getTerminatedListings());
-  }, [getListings, getListingsSource, getPendingListings, tabStatus]);
+  }, [getListings, getListingsSource, getPendingListings, tabStatus,channel]);
 
   const tableColumns = [
     {
@@ -242,7 +247,7 @@ export const Listings = () => {
     <Layout className="listings-container">
       {loading ? (
         <Spin />
-      ) : (
+      ) :  listings.length ? (
         <Fragment>
           <PopupModal open={showColumns} handleClose={handleClose} width={900}>
             <h5 className="cols-display-title">Select columns to display</h5>
@@ -338,6 +343,8 @@ export const Listings = () => {
             }}
           />
         </Fragment>
+      ) : (
+        <ListNow/>
       )}
     </Layout>
   );

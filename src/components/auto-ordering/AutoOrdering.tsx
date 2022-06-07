@@ -147,6 +147,8 @@ export const AutoOrdering = () => {
   const handleOptionChange = (value: { value: string; label: React.ReactNode }) => {
     setAccountConfig(value['value']);
     setBtnEnableDisable(!btnEnableDisable);
+    console.log('The vaulues of showAccConfig', showAccConfig);
+    console.log('The value of accountConfig', accountConfig);
     buttonRef.current?.style.backgroundColor === '#228b22';
   };
   const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
@@ -265,8 +267,6 @@ export const AutoOrdering = () => {
   };
 
   const btnDisabler = () => {
-    console.log('The btnEnableDisable', btnEnableDisable);
-    console.log('The btnEnableDisable', aliasBtnEnableDisable);
     if (btnEnableDisable === false && aliasBtnEnableDisable === true) {
       return false;
     } else {
