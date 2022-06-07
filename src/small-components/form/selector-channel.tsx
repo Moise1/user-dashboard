@@ -73,7 +73,7 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
 
   let v: SelectorValue;
   if (value != undefined && value != null) {
-    const c = children.find(x => x.id == defaultValue);
+    const c = children.find(x => x.id == value);
     if (c) {
       dV = CreateValue(c);
     }
