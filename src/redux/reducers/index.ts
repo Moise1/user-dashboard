@@ -26,7 +26,7 @@ export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
   subscriptions: subscriptionsReducer,
-  vaProfiles: userAssistantsReducer,
+  userAssistants: userAssistantsReducer,
   sources: sourcesConfigReducer,
   channels: channelsReducer,
   listings: listingsReducer,

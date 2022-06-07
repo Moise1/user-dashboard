@@ -62,18 +62,18 @@ export const ManualListing = (/*props: props*/) => {
         </div>
         <div className="section-sources">
           <h2>Suported suppliers</h2>
+          {/*{sources.map((itm: { sourceId: number | undefined; sourceBaseUrl: string | undefined; sourceName: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {*/}
+          {/*  return <Col span={6} key={itm.sourceId}>*/}
+          {/*    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.sourceBaseUrl} target="_blank" rel="noreferrer">*/}
+          {/*      <div className="list-card"> {loading}*/}
+          {/*        <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.sourceId + '.png').default} ></img>*/}
+          {/*        <br />*/}
+          {/*        <h3>{itm.sourceName}</h3>*/}
+          {/*      </div>*/}
+          {/*    </a>*/}
+          {/*  </Col>;*/}
+          {/*})}*/}
           <Row gutter={[16, 8]}>
-            {/*{sources.map((itm: { sourceId: number | undefined; sourceBaseUrl: string | undefined; sourceName: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {*/}
-            {/*  return <Col span={6} key={itm.sourceId}>*/}
-            {/*    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.sourceBaseUrl} target="_blank" rel="noreferrer">*/}
-            {/*      <div className="list-card"> {loading}*/}
-            {/*        <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.sourceId + '.png').default} ></img>*/}
-            {/*        <br />*/}
-            {/*        <h3>{itm.sourceName}</h3>*/}
-            {/*      </div>*/}
-            {/*    </a>*/}
-            {/*  </Col>;*/}
-            {/*})}*/}
             {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
               return <Col span={6} key={itm.id}>
                 <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
