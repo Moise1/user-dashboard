@@ -246,9 +246,9 @@ export const ChannelConfiguration = () => {
     const savingState = savingSetting.get(setting.Fields[0]);
     const value = configuration?.get(setting.Fields[0]) ?? setting.Values[0];
 
-    const listValues: {key: string, value: string}[] = [];
+    const listValues: {value: string, label: string}[] = [];
     for (let i = 1; i < setting.Values.length; i += 2) {
-      listValues.push({ key: setting.Values[i] ?? '', value: t(setting.Values[i + 1] ?? '') as string });
+      listValues.push({ value: setting.Values[i] ?? '', label: t(setting.Values[i + 1] ?? '') as string });
     }
 
     return (

@@ -3,19 +3,21 @@ import { Select } from 'antd';
 import '../../sass/selector.scss';
 
 const { Option } = Select;
-export type sizeType = 'large' | 'small' | 'middle';
+export type SelectorSizeType = 'large' | 'small' | 'middle';
 
-interface SelectorData {
-  key: string | number;
-  value: string | JSX.Element;
+export type SelectorLabel = string | JSX.Element;
+export interface SelectorData {
+  value: React.Key;
+  label: SelectorLabel;
 }
+export type SelectorValue = React.Key | SelectorData | null | undefined;
 
 interface Props {
   children: SelectorData | SelectorData[];
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  size?: sizeType;
-  value?: string;
+  defaultValue?: SelectorValue;
+  onChange?: (value: SelectorValue) => void;
+  size?: SelectorSizeType;
+  value?: SelectorValue;
   dropdownRender?: (
     menu: ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>
   ) => ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>;
@@ -49,14 +51,14 @@ export const Selector = (props: Props) => {
     (
       children.map(c => {
         return (
-          <Option key={c.key} value={c.key}>
-            {c.value}
+          <Option key={c.value} value={c.value}>
+            {c.label}
           </Option>
         );
       })
     ) : (
-      <Option key = { children.key } value = { children.key } >
-        {children.value}
+      <Option key = { children.value } value = { children.value } >
+        {children.label}
       </Option> 
     );
 

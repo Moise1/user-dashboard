@@ -2,15 +2,15 @@
 import { Channel } from '../../redux/channels/channelsSlice';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
-import { Selector, sizeType } from './selector';
+import { Selector, SelectorData, SelectorValue, SelectorSizeType } from './selector';
 
 
 interface SelectorChannelProps {
   children: Channel[];
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  size?: sizeType;
-  value?: string;
+  defaultValue?: number;
+  onChange?: (value: number) => void;
+  size?: SelectorSizeType;
+  value?: number;
   dropdownRender?: (
     menu: ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>
   ) => ReactElement<ReactNode, string | JSXElementConstructor<ReactNode>>;
@@ -21,7 +21,6 @@ interface SelectorChannelProps {
   disabled?: boolean;
   placeholder?: string;
   showSearch?: boolean;
-  labelInValue?: boolean;
 }
 
 export const SelectorChannel = (props: SelectorChannelProps) => {
@@ -38,36 +37,63 @@ export const SelectorChannel = (props: SelectorChannelProps) => {
     size,
     showFlags,
     disabled,
-    showSearch,
-    labelInValue
+    showSearch
   } = props;
+
+  const OnChange = (value: SelectorValue) => {
+    if (onChange)
+      onChange((value as SelectorData).value as number);
+  };
+
+
+  const CreateLabel = (c: Channel) => {
+    return <>
+      {showFlags && shopLogo(c.channelId)}
+      {showFlags && countryFlag(c.isoCountry)}
+      {c.value}
+    </>;
+  };
+
+  const CreateValue = (c: Channel) => {
+    return {
+      value: c.id,
+      label: <>
+        {CreateLabel(c)}
+      </>
+    };
+  };
+
+  let dV: SelectorValue;
+  if (defaultValue != undefined && defaultValue != null) {
+    const c = children.find(x => x.id == defaultValue);
+    if (c) {
+      dV = CreateValue(c);
+    }
+  }
+
+  let v: SelectorValue;
+  if (value != undefined && value != null) {
+    const c = children.find(x => x.id == defaultValue);
+    if (c) {
+      dV = CreateValue(c);
+    }
+  }
+
 
   return <Selector
     disabled={disabled}
     style={style}
-    onChange={onChange}
-    defaultValue={defaultValue}
-    value={value}
+    onChange={OnChange}
+    defaultValue={dV}
+    value={v}
     dropdownRender={dropdownRender}
     loading={loading}
     size={size}
     placeholder={placeholder}
     className={className}
     showSearch={showSearch}
-    labelInValue={labelInValue}
+    labelInValue={true}
   >
-    {
-      children.map(c => {
-        return {
-          key: c.id,
-          value: <>
-            {showFlags && shopLogo(c.channelId)}
-            {showFlags && countryFlag(c.isoCountry)}
-            {c.value}
-          </>
-        };
-      }
-      )
-    }
+    {children.map(CreateValue)}
   </Selector>;
 };
