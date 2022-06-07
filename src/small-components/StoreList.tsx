@@ -12,7 +12,7 @@ export const StoreList = () => {
   const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
   const { channelId, setChannelId } = useContext(AppContext);
 
-  if (channels.length > 0 && (!channelId || channelId <= 0)) {
+  if (channels.length > 0 && !channels.find(x => x.id == channelId)) {
     setChannelId(channels[0].id);
   }
 
