@@ -14,7 +14,7 @@ export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
   const { channels } = useAppSelector((state) => state.channels);
   const { setChannelId } = useContext(AppContext);
-  const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!);
+  const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!) as Channel ?? channels[0];
   //const showShopIdentity = (
   //  <Space direction="horizontal">
   //    {shopLogo(shopIdentity?.channelId)}
@@ -27,11 +27,7 @@ export const StoreList = () => {
     const selectedChannel = channels?.filter((c: Channel) => c.id === value);
     const channelId = selectedChannel[0].id;
     setChannelId(JSON.stringify(channelId));
-    localStorage.setItem('shopIdentity', JSON.stringify({
-      channelId: selectedChannel[0].channelId,
-      isoCountry: selectedChannel[0].isoCountry,
-      shopName: selectedChannel[0].name
-    }));
+    localStorage.setItem('shopIdentity', JSON.stringify(selectedChannel));
     window.location.reload();
   };
 
@@ -40,7 +36,7 @@ export const StoreList = () => {
       <SelectorChannel
         size="large"
         showSearch={false}
-        defaultValue={shopIdentity?.channelId ?? 'Select a store'}
+        defaultValue={shopIdentity.id}
         onChange={provideChannelId}
         showFlags={showFlags}
         dropdownRender={(menu: ReactNode) => (
