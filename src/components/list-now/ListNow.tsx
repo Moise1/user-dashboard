@@ -1,4 +1,3 @@
-/*import { useState } from 'react';*/
 import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
@@ -27,7 +26,7 @@ export const ListNow = (/*props: props*/) => {
   const channel = allChannels.filter(function (data) {
     return data.id.toString() == selectedChannel;
   })[0];
-  const weList4u = channel.channelId != 4;
+  const weList4u = channel?.channelId != 4;
 
   const routeChange = (route: string) => {
     history.push(route);
