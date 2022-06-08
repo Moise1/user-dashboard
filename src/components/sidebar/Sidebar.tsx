@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { ChevronLeft } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../utils/transShim';
 import {
@@ -19,10 +18,10 @@ import { actions } from '../../redux/user/userSlice';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
 import { Switch } from '../../small-components/Switch';
-import pin from '../../assets/pin.svg';
 import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
+import { LeftOutlined, PushpinOutlined } from '@ant-design/icons';
 import '../../sass/side-bar.scss';
 
 const { SubMenu, Item } = Menu;
@@ -164,12 +163,15 @@ export const Sidebar = (props: Props) => {
             </div>
             <div className="sidebar-control-btns">
               {staticValue || mobileScreenSize.matches ? (
-                <ChevronLeft
-                  className="chevron-left"
+                <LeftOutlined
+                  style={{ fontSize: '19px' }}
                   onClick={mobileScreenSize.matches ? closeMobileSider : togglestatic}
                 />
               ) : (
-                !mobileScreenSize.matches && <img src={pin} className="pin-icon" onClick={togglestatic} />
+                !mobileScreenSize.matches && 
+                <PushpinOutlined
+                  style={{ fontSize: '19px' }}
+                  onClick={togglestatic} />
               )}
             </div>
           </div>

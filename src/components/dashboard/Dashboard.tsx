@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
-import { Book } from 'react-feather';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
@@ -37,12 +36,12 @@ import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import '../../sass/dashboard.scss';
-import '../../sass/action-btns.scss';
+import { BookOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { affiliatesGraphConfig, salesGraphConfig } from 'src/utils/graphConfig';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
+import '../../sass/dashboard.scss';
+import '../../sass/action-btns.scss';
 
 interface ProductQuota {
   quota: number;
@@ -149,6 +148,7 @@ export const Dashboard = () => {
     { value: 1, label: '4' }
   ];
   const onSelectOption = (value: SelectorValue) => {
+    value = value ===  0 ? 3 : 4;
     setSelectedPeriod(value as number);
   };
   const salesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
@@ -294,7 +294,7 @@ export const Dashboard = () => {
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
               <h6>Listing Service</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             {listingServicesResult?.length ? (
               <List
@@ -327,7 +327,7 @@ export const Dashboard = () => {
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
               <h6>No API Server</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             {noApiServersResult?.length ? (
               <List
@@ -382,7 +382,7 @@ export const Dashboard = () => {
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
               <h6>Auto Ordering</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             <div className="use-auto-ordering">
               <p>Do you want to keep your NO API extension running 24/7?</p>
@@ -401,7 +401,7 @@ export const Dashboard = () => {
         <div className="affiliates-contents">
           <div className="affiliates-title">
             <h2>Your affiliate link</h2>
-            <Book />
+            <BookOutlined  style={{ fontSize: '19px' }}/>
           </div>
           <div className="affiliates-benefits">
             <p>Get money each time your referrals purchase any service from us</p>
@@ -419,7 +419,7 @@ export const Dashboard = () => {
 
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
-              <Selector  defaultValue="Select a period" onChange={onSelectOption}>
+              <Selector placeHolder="Select a period" onChange={onSelectOption}>
                 {periodOptions}
               </Selector>
               {selectedPeriod === 3 ? (

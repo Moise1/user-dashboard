@@ -2,9 +2,10 @@
 
 // Large and extra large screens
 
-// Manage(delete/keep) accounts
-.shop-identity {
-  border: 2px solid red;
+.redirect-link{
+  display: flex;
+  column-gap: .5rem;
+  align-items: center;
 }
 .menu{
   margin-bottom: 1rem;

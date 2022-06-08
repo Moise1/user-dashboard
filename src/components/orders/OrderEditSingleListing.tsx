@@ -7,7 +7,6 @@
 // import { ListingDetails } from '../small-components/ListingDetails';
 // import { ListingOptions } from '../small-components/ListingOptions';
 import '../../sass/edit-single-listing.scss';
-// import { ExternalLink } from 'react-feather';
 
 export const OrderEditSingleListing = () => {
   // const [index, setIndex] = useState<number>(0);

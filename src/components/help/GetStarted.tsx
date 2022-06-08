@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import { ChevronLeft } from 'react-feather';
 import { Row, Col } from 'antd';
 import { RedLogo, GreenLogo } from '../common/Icons';
 import '../../sass/get-started.scss';
 import youtube from '../../assets/social-media/youtube.png';
 import instagram from '../../assets/social-media/instagram.png';
 import facebook from '../../assets/social-media/facebook.png';
+import { LeftOutlined } from '@ant-design/icons';
 
 export const GetStarted = () => {
   return (
     <div className="main-container">
       <Link to="/dashboard" className="back-to-dashboard">
         <span>
-          <ChevronLeft />
+          <LeftOutlined style={{fontSize: '19px'}} />
         </span>
         Back to dashboard
       </Link>

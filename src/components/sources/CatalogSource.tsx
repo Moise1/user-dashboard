@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Divider } from 'antd';
-import { PlusCircle, MinusCircle } from 'react-feather';
 import amazon from '../../assets/catalog-sources/amazon.png';
 import banggood from '../../assets/catalog-sources/bangood.png';
 import costco from '../../assets/catalog-sources/costco.png';
@@ -12,6 +11,7 @@ import garden_line from '../../assets/catalog-sources/garden-line.png';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/catalog-source.scss';
 
 interface Props {
@@ -79,7 +79,7 @@ export const CatalogSource = ({ handleClose }: Props) => {
           addedSources.map((s) => (
             <div key={s.id} className="source">
               <img src={s.img} alt="" className="source-img" />
-              <MinusCircle className="remove-source-icon" size="18" onClick={() => removeSource(s.id)} />
+              <MinusCircleOutlined className="remove-source-icon"  onClick={() => removeSource(s.id)} />
             </div>
           ))
         )}
@@ -91,7 +91,7 @@ export const CatalogSource = ({ handleClose }: Props) => {
           {pendingSources.map((s) => (
             <div key={s.id} className="source">
               <img src={s.img} alt="" className="source-img" />
-              <PlusCircle className="pending-source-icon" size="18" onClick={() => addSource(s.id)} />
+              <PlusCircleOutlined className="pending-source-icon"  onClick={() => addSource(s.id)} />
             </div>
           ))}
         </div>

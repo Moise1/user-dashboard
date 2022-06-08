@@ -1,6 +1,5 @@
 import { ReactNode, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PlusCircle } from 'react-feather';
 import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
@@ -8,6 +7,7 @@ import { AppContext } from '../contexts/AppContext';
 import { shopLogo } from '../utils/shopLogo';
 import { countryFlag } from '../utils/countryFlag';
 import { Selector, SelectorValue } from './form/selector';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
@@ -53,7 +53,7 @@ export const StoreList = () => {
           <>
             <div className="menu">{menu}</div>
             <Link to="/new-channel" className="redirect-link">
-              <PlusCircle />
+              <PlusCircleOutlined style={{ fontSize: '19px' }}/>
               <span>{t('AddNewChannel')}</span>
             </Link>
           </>
