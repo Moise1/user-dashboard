@@ -56,9 +56,10 @@ export enum eChannelSettings {
   CompareAtPrice = 51
 }
 
+export type SettingsValue = string | null;
 export interface SettingKey {
   key: eChannelSettings;
-  value: string | null;
+  value: SettingsValue;
 }
 
 export interface SavingSetting {

@@ -1,42 +1,53 @@
 import { ReactNode } from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
+import { PlatformIndo } from '../data/platforms';
 
-const functions = {
-  GetSystemValues: function (recursiveCount = 0): Record<string, PrimitiveType | JSX.Element> {
-    if (recursiveCount > 2) {
-      return {};
-    }
+export type TransValue = string | ReactNode;
+type ValueTypeValue = PrimitiveType | ReactNode;
 
-    recursiveCount++;
-    return {
-      channel_platform_name: 'eBay',//TODO: Get selected channel and put here eBay, Amazon or Shopify
-      sources_table_link: <a href='/sources-table'>{this.T('Menu.SourcesTable', {}, recursiveCount)}</a>
-    };
-  },
-  T: function (key: string, values?: Record<string, PrimitiveType | JSX.Element>, recursiveCount = 0): string | ReactNode {
-    if (!key) {
-      return '';
-    }
-
-    const intl = useIntl();
-    const v = intl.formatMessage(
-      {
-        id: key,
-        description: '', // Description should be a string literal
-        defaultMessage: '{errorKey}' // Message should be a string literal
-      },
-      { ...this.GetSystemValues(recursiveCount), ...values, key, errorKey: <span className="missingTranslation">{key}</span> } // Values should be an object literal, but not necessarily every value inside
-    );
-
-    return v;
+export function t(key: string, values?: Record<string, ValueTypeValue>): TransValue {
+  if(!key) {
+    return '';
   }
-};
 
-export function t(key: string, values?: Record<string, PrimitiveType | JSX.Element>): string | ReactNode {
-  return functions.T(key, values, 0);
+  const intl = useIntl();
+  const v = intl.formatMessage(
+    {
+      id: key,
+      description: '', // Description should be a string literal
+      defaultMessage: '{errorKey}' // Message should be a string literal
+    },
+    { ...values, key, errorKey: <span className="missingTranslation">{key}</span> } // Values should be an object literal, but not necessarily every value inside
+  );
+
+  return v;
 }
 
 export function tm(key: string) {
   return <FormattedMessage id={key} defaultMessage="Translation missing for {key}" description="Welcome message" />;
 }
+
+export interface TransPlatformValues extends Record <string, ValueTypeValue> {
+  channel_platform_name: ValueTypeValue,
+  channel_noapi_username: ValueTypeValue
+}
+export interface TransLinksValues extends Record<string, ValueTypeValue> {
+  sources_table_link: ValueTypeValue,
+  templates_link: ValueTypeValue
+}
+
+export const TransUtils = {
+  GetPlatformValues: (platform: PlatformIndo): TransPlatformValues => {
+    return {
+      channel_platform_name: platform.storeName,
+      channel_noapi_username: t('Platform.' + platform.storeName + '.NoApi.Username', {})
+    };
+  },
+  GetLinksValues: () => {
+    return {
+      sources_table_link: <a href='/sources-table'>{t('Menu.SourcesTable', {})}</a>,
+      templates_link: <a href='/templates'>{t('Menu.Templates', {})}</a>,
+    };
+  }
+};
