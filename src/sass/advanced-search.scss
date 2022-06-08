@@ -16,8 +16,11 @@
   }
 }
 
-.advanced-search-form {
+.listings.advanced-form-container, .catalog.advanced-form-container{
   margin: 1rem 2rem;
+};
+
+.advanced-search-form {
   height: auto;
   [title="Min source price"],
   [title="Max source price"],
@@ -25,11 +28,6 @@
   [title="Max Profit"],
   [title="Title"], 
   [title="Order By"]
-  // [title="Asin"],
-  // [title="Source"],
-  // [title="Sku"],
-  // [title="Cost Price"],
-  // [title="Sell Price"]
   {
     font-weight: $bold;
   }

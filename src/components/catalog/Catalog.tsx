@@ -16,9 +16,10 @@ import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
 
-export type ProductElementEvent =
+export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
-  | React.MouseEvent<SVGElement, MouseEvent>;
+  | React.MouseEvent<SVGElement, MouseEvent>
+  | React.MouseEvent<HTMLSpanElement, MouseEvent>;
 
 export const Catalog = () => {
 
@@ -46,7 +47,7 @@ export const Catalog = () => {
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProudctsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
 
-  const handleSelectProduct = (e: ProductElementEvent): void => {
+  const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
     setProductId(JSON.parse(cardElement.id));
