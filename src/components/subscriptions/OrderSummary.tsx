@@ -57,7 +57,7 @@ export const OrderSummary = (props: props) => {
               <div className="order-products">
                 <div className="order-products-lines">
                   <div className="product-order-line">
-                    <h2 className="title-orderdetails">{p.name}</h2>
+                    <h4 className="title-orderdetails">{p.name}</h4>
                   </div>
                   {/*           <div className="product-order-line">
             <h5 className="title-orderdetails">No api server</h5>
@@ -68,7 +68,7 @@ export const OrderSummary = (props: props) => {
                 </div>
                 <div className="order-products-price">
                   <div className="price-extra">
-                    <h5>{currency?.toString()}
+                    <h4>{currency?.toString()}
                       {p.prices.map((prc) => {
                         if (prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1 && prc.billingPeriodId.toString() === billingId?.toString()) {
                           if (prc.billingPeriodId === 0)
@@ -79,10 +79,10 @@ export const OrderSummary = (props: props) => {
                             return (prc.price / 12).toFixed(1);
                         }
                       })}
-                      /month</h5>
+                      /month</h4>
 
                     {billingId?.toString() === '1' ? <p className="twenty-off">20% off</p> : ''}
-                    {billingId?.toString() === '2' ? <p className="twenty-off">40% off</p> : ''}
+                    {billingId?.toString() === '2' ? <p className="forty-off">40% off</p> : ''}
                   </div>
                   {/*           <div className="price-extra">
             <h5>£12.99/month</h5>
@@ -95,7 +95,7 @@ export const OrderSummary = (props: props) => {
               <Divider />
               <div className="order-sum" onClick={() => routeChange('/payment-method')}>
                 <h2>Total to pay:</h2>
-                <h1>{currency?.toString()} {p.prices.map((prc) => {
+                <h1>{currency?.toString()}{p.prices.map((prc) => {
                   if (prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1 && prc.billingPeriodId.toString() === billingId?.toString()) {
                     return prc.price;
                   }

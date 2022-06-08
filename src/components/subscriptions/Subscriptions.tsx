@@ -103,7 +103,7 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-                <div className="container-sub">
+                <div className="container-sub topper">
                   <Link to="/checkout" onClick={() => parentToChild(p.id, 0)} key={p.id}>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
@@ -132,8 +132,8 @@ export const Subscriptions = () => {
                         })}
                       </h1>
                       <span className="frequency">/mo</span>
+                      <span className="duration">(6 months)</span>
                     </div>
-                    <span className="duration">(6 months)</span>
                   </Link>
                 </div>
                 <Divider className="divider" />
@@ -150,8 +150,8 @@ export const Subscriptions = () => {
                         })}
                       </h1>
                       <span className="frequency">/mo</span>
+                      <span className="duration">(1 year)</span>
                     </div>
-                    <span className="duration">(1 year)</span>
                   </Link>
                 </div>
               </Card>
