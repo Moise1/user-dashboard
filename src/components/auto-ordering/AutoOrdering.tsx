@@ -116,11 +116,11 @@ export const AutoOrdering = () => {
 
   //Form States For Toggle
   const { Option } = Select;
+  const [labelValueBoolean] = useState<boolean>(true);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
   const [btnEnableDisable, setBtnEnableDisable] = useState<boolean>(true);
   const [aliasBtnEnableDisable, setAliasEnableDisable] = useState<boolean>(false);
-  const [accountConfig, setAccountConfig] = useState<string>('');
   const [showAccConfig] = useState<boolean>(true); //For opening the accountConfig
   const [showEnabledAccount, setShowEnabledAccount] = useState<boolean>(false); //To display enabled accounts
   const showAccounts = (): void => setShowEnabledAccount(!showEnabledAccount); //To display enabled accounts
@@ -144,6 +144,10 @@ export const AutoOrdering = () => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [newAccount, setNewAccount] = useState({ value: '' });
   // const [, setCopied] = useState<boolean>(false);
+
+  const [accountConfig, setAccountConfig] = useState<string>('');
+
+
   const handleOptionChange = (value: { value: string; label: React.ReactNode }) => {
     setAccountConfig(value['value']);
     setBtnEnableDisable(!btnEnableDisable);
@@ -347,6 +351,7 @@ export const AutoOrdering = () => {
                         size="large"
                         disabled={disable}
                         addAccount={true}
+                        labelInValue={labelValueBoolean}
                         onChange={handleOptionChange}
                         dropdownRender={(menu: ReactNode) => (
                           <div className="dropdown-content mb-5">

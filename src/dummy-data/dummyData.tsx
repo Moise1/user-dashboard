@@ -116,7 +116,7 @@ export interface ICatalogData {
   source: string;
   details: JSX.Element;
 }
-export const catalogData = [
+export const catalogData: ICatalogData[] = [
   {
     id: 1,
     img: light_bulb_one,
@@ -162,7 +162,7 @@ export const catalogData = [
   {
     id: 3,
     img: light_bulb_three,
-    title: 'Lamp 1',
+    title: 'Lamp 2',
     sell: 49.61,
     cost: 38.16,
     profit: 5.45,
