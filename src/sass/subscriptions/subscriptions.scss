@@ -1,17 +1,6 @@
 @use '../general.config';
 @import '../general.config';
 
-
-
-.ant-card-body {
-    padding: 24px 0 !important;
-}
-
-.container-sub:hover {
-    color: darkblue;
-    background-color: lightblue;
-    border: 1px dashed blue;
-}
 // Extra big screens;
 .ant-spin-spinning {
     margin-top: 20%;
@@ -87,6 +76,10 @@
         padding: 0 !important;
         width: auto;
 
+        .ant-card-body {
+            padding: 24px 0 !important;
+        }
+
         .subscription {
             background: $primary-bg;
             display: grid;
@@ -124,6 +117,12 @@
                     right: 25%;
                     font-size: $font-small;
                 }
+            }
+
+            .container-sub:hover {
+                color: darkblue;
+                background-color: lightblue;
+                border: 1px dashed blue;
             }
 
             .divider {
