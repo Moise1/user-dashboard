@@ -1,16 +1,6 @@
 @use '../general.config';
 @import '../general.config';
 
-.twenty-off,
-.forty-off {
-    right: 0;
-    padding: 0 3px;
-    background: $light-gray;
-    font-weight: bold;
-    border-radius: 5px;
-    color: $green;
-}
-
 .second-section-container {
   width: 100%;
   background-color: $primary-bg;
@@ -38,6 +28,17 @@
     }
     .order-products-price {
       width: 50%;
+      .price-extra {
+        .twenty-off,
+        .forty-off {
+          right: 0;
+          padding: 0 3px;
+          background: $light-gray;
+          font-weight: bold;
+          border-radius: 5px;
+          color: $green;
+        }
+      }
     }
   }
 }
