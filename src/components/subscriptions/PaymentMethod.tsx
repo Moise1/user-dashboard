@@ -37,7 +37,7 @@ export const PaymentMethod = (/*props: props*/) => {
           </div>
         </div>
         <div className="order-summary">
-          <OrderSummary />
+          <OrderSummary productId={null} billingId={null} currencyId={null} />
         </div>
       </div>
     </Layout>
