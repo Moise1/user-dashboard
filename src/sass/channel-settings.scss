@@ -10,12 +10,17 @@
     margin-top: 2rem;
     padding: 2rem;
     background: $primary-bg;
+
     .action-btns {
       position: fixed;
       right: 2%;
       top: 29%;
       display: flex;
       flex-direction: column;
+    }
+
+    .blue-input {
+        max-width:200px;
     }
 
     .text-section {
@@ -25,18 +30,14 @@
       margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
-      width: 50vw;
+      width: 100vw;
       .limit-area,
       .stock-area {
         margin-top: 1rem;
         width: 100%;
-        .blue-input {
-          width: 50vw;
-        }
         .limit,
         .stock {
           display: flex;
-          justify-content: space-between;
         }
       }
     }

@@ -6,7 +6,6 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
-import { Selector } from '../../small-components/Selector';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
@@ -15,6 +14,7 @@ import { SourceConfig } from '../../redux/source-config/sourceSlice';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/pricing-rules.scss';
+import { Selector } from '../../small-components/form/selector';
 
 export const PricingRules = () => {
   const [current] = useState<number>(1);
@@ -142,8 +142,8 @@ export const PricingRules = () => {
           </div>
           <Form className="form" layout="vertical" onFinish={onFinish}>
             <Item label="Source" name="sourceId">
-              <Selector defaultValue="Select a source" loading={sourcesLoading}>
-                {sources?.map(({ sourceName: value, sourceId: id }: SourceConfig) => ({ value, id }))}
+              <Selector placeHolder="Select a source" loading={sourcesLoading}>
+                {sources?.map(({ sourceName: label, sourceId: value }: SourceConfig) => ({ value, label }))}
               </Selector>
             </Item>
             <Item label="Price From" name="priceFrom">

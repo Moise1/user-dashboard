@@ -1,0 +1,43 @@
+@use '../general.config';
+@import '../general.config';
+
+.twenty-off,
+.forty-off {
+    right: 0;
+    padding: 0 3px;
+    background: $light-gray;
+    font-weight: bold;
+    border-radius: 5px;
+    color: $green;
+}
+
+.second-section-container {
+  width: 100%;
+  background-color: $primary-bg;
+  padding: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+  border-radius: 1rem;
+  .title-ordersum {
+    color: $light-primary;
+    font-weight: 600;
+  }
+  .order-products {
+    display: flex;
+    .order-products-lines {
+      width: 50%;
+      .product-order-line {
+        .title-orderdetails {
+          color: $gray;
+        }
+      }
+      .order-sum {
+        display: grid;
+        align-content: center;
+        align-items: center;
+      }
+    }
+    .order-products-price {
+      width: 50%;
+    }
+  }
+}

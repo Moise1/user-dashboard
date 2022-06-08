@@ -44,6 +44,15 @@
   }
 }
 
+.spreadsheet {
+    width: 100%;
+    justify-content: center;
+    display: grid;
+    .Spreadsheet__table{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 1300px) {
   .bulk-sections {
     .options-container {

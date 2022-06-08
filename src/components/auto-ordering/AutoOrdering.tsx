@@ -3,17 +3,17 @@ import { Form, Input, Button, Alert, Select, Spin, Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { PlusCircle } from 'react-feather';
 import { Switch } from '../../small-components/Switch';
-import { Selector } from '../../small-components/Selector';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { saveAutoOrdering, deleteAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
+import { saveAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import '../../sass/switch.scss';
 import '../../sass/auto-ordering.scss';
 // import hand from '../../assets/hand.svg';
 // import copy from '../../assets/copy.svg';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useLocation } from 'react-router-dom';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 export interface rawSettingInterface {
   key: number;
@@ -116,6 +116,8 @@ export const AutoOrdering = () => {
 
   //Form States For Toggle
   const { Option } = Select;
+  const [accountConfig, setAccountConfig] = useState<string>('');
+
   const [labelValueBoolean] = useState<boolean>(true);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
@@ -144,12 +146,8 @@ export const AutoOrdering = () => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [newAccount, setNewAccount] = useState({ value: '' });
   // const [, setCopied] = useState<boolean>(false);
-
-  const [accountConfig, setAccountConfig] = useState<string>('');
-
-
-  const handleOptionChange = (value: { value: string; label: React.ReactNode }) => {
-    setAccountConfig(value['value']);
+  const handleOptionChange = (value: SelectorValue) => {
+    setAccountConfig(value as string);
     setBtnEnableDisable(!btnEnableDisable);
     console.log('The vaulues of showAccConfig', showAccConfig);
     console.log('The value of accountConfig', accountConfig);
@@ -167,9 +165,13 @@ export const AutoOrdering = () => {
     setNewAccount({ value: '' });
   };
 
+  const deleteAutoOrdering = () => {
+    throw new Error('Function not implemented.');
+  };
+
   const removeAccount = () => {
     confirm('Are you sure you want to remove this account? ');
-    dispatch(deleteAutoOrdering({ channelOAuthId, supplierId }));
+    dispatch(deleteAutoOrdering(/*{ channelOAuthId, supplierId }*/));
   };
 
   const aliasHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -350,8 +352,6 @@ export const AutoOrdering = () => {
                       <Selector
                         size="large"
                         disabled={disable}
-                        addAccount={true}
-                        labelInValue={labelValueBoolean}
                         onChange={handleOptionChange}
                         dropdownRender={(menu: ReactNode) => (
                           <div className="dropdown-content mb-5">
@@ -376,7 +376,7 @@ export const AutoOrdering = () => {
                           </div>
                         )}
                       >
-                        {dummyUsers}
+                        {dummyUsers.map(x => { return { value: x.id, label: x.value }; })}
                       </Selector>
                     </div>
                   </>

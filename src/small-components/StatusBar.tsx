@@ -1,7 +1,7 @@
 import '../sass/status-bar.scss';
 
 interface StatusBarProps {
-  children: JSX.Element[];
+  children: JSX.Element | JSX.Element[];
   className?: string;
 }
 export const StatusBar = ({ className, children }: StatusBarProps) => {

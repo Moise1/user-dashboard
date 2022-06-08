@@ -4,46 +4,51 @@ import { PlusCircle } from 'react-feather';
 import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel } from 'src/redux/channels/channelsSlice';
-import { Selector } from './Selector';
 import { AppContext } from '../contexts/AppContext';
-import { Space } from 'antd';
-import { shopLogo } from 'src/utils/shopLogo';
-import { countryFlag } from 'src/utils/countryFlag';
+import { shopLogo } from '../utils/shopLogo';
+import { countryFlag } from '../utils/countryFlag';
+import { Selector, SelectorValue } from './form/selector';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
-  const { channels } = useAppSelector((state) => state.channels);
-  const { setChannelId } = useContext(AppContext);
-  const shopIdentity = JSON.parse(localStorage.getItem('shopIdentity')!);
-  const showShopIdentity = (
-    <Space direction="horizontal">
-      {shopLogo(shopIdentity?.channelId)}
-      {countryFlag(shopIdentity?.isoCountry)}
-      {shopIdentity?.shopName}
-    </Space>
-  );
+  const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
+  const { channelId, setChannelId } = useContext(AppContext);
 
-  const provideChannelId = (value: { value: string | number; label: React.ReactNode }) => {
-    const selectedChannel = channels?.filter((c: Channel) => c.id === value['value']);
-    const channelId = selectedChannel[0].id;
-    setChannelId(JSON.stringify(channelId));
-    localStorage.setItem('shopIdentity', JSON.stringify({
-      channelId: selectedChannel[0].channelId,
-      isoCountry: selectedChannel[0].isoCountry,
-      shopName: selectedChannel[0].name
-    }));
-    window.location.reload();
+  if (channels.length > 0 && !channels.find(x => x.id == channelId)) {
+    setChannelId(channels[0].id);
+  }
+
+
+  const CreateLabel = (c: Channel) => {
+    return <>
+      {showFlags && shopLogo(c.channelId)}
+      {showFlags && countryFlag(c.isoCountry)}
+      {c.name}
+    </>;
+  };
+
+  const CreateValue = (c: Channel) => {
+    return {
+      value: c.id,
+      label: <>
+        {CreateLabel(c)}
+      </>
+    };
+  };
+
+  const options = channels.map(CreateValue);
+
+  const OnChange = (value: SelectorValue) => {
+    setChannelId(value as number);
   };
 
   return (
     <div className="store-list-container">
       <Selector
         size="large"
-        labelInValue
         showSearch={false}
-        defaultValue={ shopIdentity ? showShopIdentity : 'Select a store'}
-        onChange={provideChannelId}
-        showFlags={showFlags}
+        value={channelId}
+        onChange={OnChange}
         dropdownRender={(menu: ReactNode) => (
           <>
             <div className="menu">{menu}</div>
@@ -54,7 +59,7 @@ export const StoreList = () => {
           </>
         )}
       >
-        {channels?.map(({ name: value, isoCountry, channelId, id }: Channel) => ({ value, isoCountry, channelId, id }))}
+        {options}
       </Selector>
     </div>
   );

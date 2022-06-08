@@ -40,9 +40,9 @@ import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Selector } from 'src/small-components/Selector';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 interface ProductQuota {
   quota: number;
@@ -67,7 +67,7 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [showSales, setShowSales] = useState<boolean>(true);
   const [current] = useState<number>(1);
-  const [selectedPeriod, setSelectedPeriod] = useState<number | string>(4);
+  const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
 
   const onSearch = (value: string) => console.log('searched value', value);
 
@@ -208,11 +208,11 @@ export const Dashboard = () => {
   // console.log('DATE 2', initialRangePickerValue);
 
   const periodOptions = [
-    { id: 0, value: 3 },
-    { id: 1, value: 4 }
+    { value: 0, label: '3' },
+    { value: 1, label: '4' }
   ];
-  const onSelectOption = (value: { value: string | number; label: React.ReactNode }) => {
-    setSelectedPeriod(value['value']);
+  const onSelectOption = (value: SelectorValue) => {
+    setSelectedPeriod(value as number);
   };
   const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
     if (Array.isArray(dateString)) {
@@ -302,8 +302,7 @@ export const Dashboard = () => {
         <div className="sales">
           <div className="graph-cntrlers">
             <Selector
-              labelInValue
-              defaultValue='Select a period'
+              placeHolder='Select a period'
               onChange={onSelectOption}>
               {periodOptions}
             </Selector>

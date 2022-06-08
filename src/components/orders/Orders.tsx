@@ -2,7 +2,7 @@ import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
 import { t } from 'src/utils/transShim';
 import { Key } from 'antd/lib/table/interface';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useContext } from 'react';
 import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
@@ -20,6 +20,7 @@ import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHo
 import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDrawers';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
+import { AppContext } from '../../contexts/AppContext';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
@@ -146,23 +147,23 @@ export const Orders = () => {
     }
   ];
 
-  const newChannel = JSON.parse(localStorage.getItem('channelId') || ' 0 ');
+  const { channelId: newChannel } = useContext(AppContext);
 
   useEffect(() => {
     setOrder(
       orders?.orders.length &&
-        orders?.orders.map((item: OrderData): unknown => ({
-          ...item,
-          profit: item.channelPrice - item.channelPrice - item.fees,
-          margin: (item.profit! / item.channelPrice) * 100,
-          date: moment(item.date).format('DD/MM/YY/ hh:mm')
-        }))
+      orders?.orders.map((item: OrderData): unknown => ({
+        ...item,
+        profit: item.channelPrice - item.channelPrice - item.fees,
+        margin: (item.profit! / item.channelPrice) * 100,
+        date: moment(item.date).format('DD/MM/YY/ hh:mm')
+      }))
     );
   }, [orders.orders]);
 
   useEffect(() => {
-    dispatch(getOrders({ channelOAuthIds: [newChannel] }));
-  }, [getOrders]);
+    dispatch(getOrders({ channelOAuthIds: [newChannel as number] }));
+  }, [getOrders, newChannel]);
 
   //How many columns to show
   const [columns, setColumns] = useState(tableColumns);
