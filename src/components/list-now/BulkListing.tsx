@@ -1,4 +1,4 @@
-import { Layout, Form, Input, Select, Button, DatePicker } from 'antd';
+import { Layout, Form, Input, Button, DatePicker } from 'antd';
 import { Row, Col } from 'antd';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 
@@ -8,11 +8,12 @@ import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
 import { getManualListings, SaveAutolist } from '../../redux/listings/listingsThunk';
 import { ListingsData } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { Key, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
 import { StatusBar } from 'src/small-components/StatusBar';
 import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 
 const { Item } = Form;
 
@@ -20,7 +21,6 @@ export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
   const { userAssistants, VAloading } = useAppSelector((state) => state.userAssistants);
-  const { Option } = Select;
   const lables = ['Source URL', 'Listing Title (Optional)'];
 
   // props for form
@@ -76,14 +76,6 @@ export const BulkListing = (/*props: props*/) => {
     setData(olddata => [...olddata, [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }]]);
   }
 
-  const TempOptions = userAssistants?.map((c: { id: Key | null | undefined; name: string | null | undefined }) => {
-    return (
-      <Option key={c.id} value={c.id?.toString()}>
-        {c.name}
-      </Option>
-    );
-  });
-
   const handleAssistantChange = (value: SelectorValue) => {
     setCreatedBy(value as string);
   };
@@ -128,7 +120,9 @@ export const BulkListing = (/*props: props*/) => {
                   <> </>
                   <Form className='bulk-form' layout={'horizontal'}>
                     <Item label='Create As' name='createdBy'>{VAloading}
-                      <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>{TempOptions}</Selector>
+                      <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>
+                        {userAssistants?.map(({ name: label, id: value }: UserAssistant) => ({ value, label }))}
+                      </Selector>
                     </Item>
                     <p>VA Profile selected as the creator of the listing</p>
                     <Item label='List Vero Items' name='ignoreVero'>
