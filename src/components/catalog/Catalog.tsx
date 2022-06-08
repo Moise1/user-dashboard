@@ -21,6 +21,8 @@ export type ProductElementEvent =
   | React.MouseEvent<SVGElement, MouseEvent>;
 
 export const Catalog = () => {
+
+
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -93,7 +95,9 @@ export const Catalog = () => {
       </div>
 
       <SearchOptions showSearchInput={false} />
-      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal} />
+      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
+        catalogData={catalogData} setAllProducts={setAllProducts}
+      />
       <PopupModal
         open={modalOpen}
         handleClose={handleProductModal}
@@ -128,7 +132,7 @@ export const Catalog = () => {
       >
         <CatalogSource handleClose={handleSourceModal} />
       </PopupModal>
-      
+
       <PopupModal
         open={allProductsModalOpen}
         handleClose={handleAllProudctsModal}

@@ -112,7 +112,7 @@ export const listingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getListings.pending, (state) => {
-      state.loading = false;
+      state.loading = true;
       state.error = '';
     });
     builder.addCase(getListings.fulfilled, (state, { payload }) => {
@@ -132,7 +132,7 @@ export const getManualListingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getManualListings.pending, (state) => {
-      state.loading = false;
+      state.loading = true;
       state.error = '';
     });
     builder.addCase(getManualListings.fulfilled, (state, { payload }) => {
