@@ -7,25 +7,31 @@
   padding: 2rem;
   box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
   border-radius: 1rem;
+
   .title-ordersum {
     color: $light-primary;
     font-weight: 600;
   }
+
   .order-products {
     display: flex;
+
     .order-products-lines {
       width: 50%;
+
       .product-order-line {
         .title-orderdetails {
           color: $gray;
         }
       }
+
       .order-sum {
         display: grid;
         align-content: center;
         align-items: center;
       }
     }
+
     .order-products-price {
       width: 50%;
       .price-extra {

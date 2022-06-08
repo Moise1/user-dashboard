@@ -103,9 +103,9 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-                <div className="container-sub topper">
+                <div className="container-sub">
                   <Link to="/checkout" onClick={() => parentToChild(p.id, 0)} key={p.id}>
-                    <div className="rate-details">
+                    <div className="rate-details top-most">
                       <span className="euro">{currency}</span>
                       <h1 className="monthly-rate">
                         {p.prices.map((prc) => {
