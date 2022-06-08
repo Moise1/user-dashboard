@@ -118,7 +118,6 @@ export const AutoOrdering = () => {
   const { Option } = Select;
   const [accountConfig, setAccountConfig] = useState<string>('');
 
-  const [labelValueBoolean] = useState<boolean>(true);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
   const [btnEnableDisable, setBtnEnableDisable] = useState<boolean>(true);
