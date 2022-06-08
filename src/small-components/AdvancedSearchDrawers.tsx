@@ -16,7 +16,7 @@ interface catalogAdvancedSearchFieldTypes {
   title: string;
   minSourcePrice?: number | undefined;
   minProfile?: number | undefined;
-  maxSourcePrice?: number | undefined;
+  maxSourcePrice?: number;
   maxProfile?: number | undefined;
   orderBy?: string | undefined
 }
@@ -27,6 +27,7 @@ export const CatalogFilters = (props: Props) => {
 
   const catalogAdvanceSearchIntialTypes: catalogAdvancedSearchFieldTypes = {
     title: '',
+
     orderBy: 'Default'
   };
 
@@ -48,8 +49,22 @@ export const CatalogFilters = (props: Props) => {
 
     const filterResult = catalogData?.filter(product => {
       console.log('The search.title', product.title);
-      return product.title == catalogAdvancedSearchFormData.title;
-      // (String(e.cost) < String(catalogAdvancedSearchFormData.maxSourcePrice)) ||
+      if (product.title == catalogAdvancedSearchFormData.title) {
+        return product.title == catalogAdvancedSearchFormData.title;
+      }
+      if (product.cost == catalogAdvancedSearchFormData.maxSourcePrice) {
+        return product.cost == catalogAdvancedSearchFormData.maxSourcePrice;
+      }
+      if (product.cost == catalogAdvancedSearchFormData.minSourcePrice) {
+        return product.cost == catalogAdvancedSearchFormData.minSourcePrice;
+      }
+      if (product.profit == catalogAdvancedSearchFormData.maxProfile) {
+        return product.cost == catalogAdvancedSearchFormData.maxProfile;
+      }
+      if (product.profit == catalogAdvancedSearchFormData.minProfile) {
+        return product.profit == catalogAdvancedSearchFormData.minProfile;
+      }
+      // (String(product.cost) < String(catalogAdvancedSearchFormData.maxSourcePrice))
       // (String(e.cost) > String(catalogAdvancedSearchFormData.minSourcePrice)) ||
       // (String(e.profit) > String(catalogAdvancedSearchFormData.maxProfile)) ||
       // (String(e.profit) > String(catalogAdvancedSearchFormData.minProfile));
