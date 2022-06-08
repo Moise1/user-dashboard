@@ -152,14 +152,14 @@ export const Orders = () => {
   useEffect(() => {
     setOrder(
       orders?.orders.length &&
-        orders?.orders.map((item: OrderData): unknown => ({
-          ...item,
-          profit: item.channelPrice - item.channelPrice - item.fees,
-          margin: (item.profit! / item.channelPrice) * 100,
-          date: moment(item.date).format('DD/MM/YY/ hh:mm')
-        }))
+      orders?.orders.map((item: OrderData): unknown => ({
+        ...item,
+        profit: item.channelPrice - item.channelPrice - item.fees,
+        margin: (item.profit! / item.channelPrice) * 100,
+        date: moment(item.date).format('DD/MM/YY/ hh:mm')
+      }))
     );
-  }, [orders.orders, newChannel]);
+  }, [orders.orders]);
 
   useEffect(() => {
     dispatch(getOrders({ channelOAuthIds: [newChannel as number] }));

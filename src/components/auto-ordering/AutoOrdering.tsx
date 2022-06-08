@@ -116,11 +116,12 @@ export const AutoOrdering = () => {
 
   //Form States For Toggle
   const { Option } = Select;
+  const [accountConfig, setAccountConfig] = useState<string>('');
+
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
   const [btnEnableDisable, setBtnEnableDisable] = useState<boolean>(true);
   const [aliasBtnEnableDisable, setAliasEnableDisable] = useState<boolean>(false);
-  const [accountConfig, setAccountConfig] = useState<string>('');
   const [showAccConfig] = useState<boolean>(true); //For opening the accountConfig
   const [showEnabledAccount, setShowEnabledAccount] = useState<boolean>(false); //To display enabled accounts
   const showAccounts = (): void => setShowEnabledAccount(!showEnabledAccount); //To display enabled accounts
@@ -147,6 +148,8 @@ export const AutoOrdering = () => {
   const handleOptionChange = (value: SelectorValue) => {
     setAccountConfig(value as string);
     setBtnEnableDisable(!btnEnableDisable);
+    console.log('The vaulues of showAccConfig', showAccConfig);
+    console.log('The value of accountConfig', accountConfig);
     buttonRef.current?.style.backgroundColor === '#228b22';
   };
   const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
@@ -269,8 +272,6 @@ export const AutoOrdering = () => {
   };
 
   const btnDisabler = () => {
-    console.log('The btnEnableDisable', btnEnableDisable);
-    console.log('The btnEnableDisable', aliasBtnEnableDisable);
     if (btnEnableDisable === false && aliasBtnEnableDisable === true) {
       return false;
     } else {

@@ -1,15 +1,63 @@
 import moment from 'moment';
+import { useState } from 'react';
 import { Space, Button, Form, Input, Checkbox, DatePicker, DatePickerProps } from 'antd';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import '../sass/advanced-search.scss';
+import { ICatalogData } from '../dummy-data/dummyData';
 
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
+  setAllProducts?: React.Dispatch<React.SetStateAction<ICatalogData[]>>;
+  catalogData?: ICatalogData[];
+}
+
+interface catalogAdvancedSearchFieldTypes {
+  title: string;
+  minSourcePrice?: number | undefined;
+  minProfile?: number | undefined;
+  maxSourcePrice?: number | undefined;
+  maxProfile?: number | undefined;
+  orderBy?: string | undefined
 }
 
 export const CatalogFilters = (props: Props) => {
-  const { visible, onClose, openSourceModal } = props;
+
+  const { visible, onClose, openSourceModal, catalogData } = props;
+
+  const catalogAdvanceSearchIntialTypes: catalogAdvancedSearchFieldTypes = {
+    title: '',
+    orderBy: 'Default'
+  };
+
+  const [catalogAdvancedSearchFormData, setCatalogAdvancedSearchFormData] = useState(catalogAdvanceSearchIntialTypes);
+
+  const catalogAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCatalogAdvancedSearchFormData({
+      ...catalogAdvancedSearchFormData,
+      [name]: value
+    });
+  };
+
+  const clearFilterHandler = () => {
+    setCatalogAdvancedSearchFormData(catalogAdvanceSearchIntialTypes);
+  };
+
+  const handleFilterSubmit = () => {
+
+    const filterResult = catalogData?.filter(product => {
+      console.log('The search.title', product.title);
+      return product.title == catalogAdvancedSearchFormData.title;
+      // (String(e.cost) < String(catalogAdvancedSearchFormData.maxSourcePrice)) ||
+      // (String(e.cost) > String(catalogAdvancedSearchFormData.minSourcePrice)) ||
+      // (String(e.profit) > String(catalogAdvancedSearchFormData.maxProfile)) ||
+      // (String(e.profit) > String(catalogAdvancedSearchFormData.minProfile));
+    }
+    );
+    console.log('The filterResult ', filterResult);
+  };
+
   return (
     <AdvancedSearch
       title="Search Criteria"
@@ -29,20 +77,38 @@ export const CatalogFilters = (props: Props) => {
         <Button className="supplier-one" onClick={openSourceModal}>
           1 supplier
         </Button>
-        <Form layout="vertical" className="advanced-search-form">
+        <Form layout="vertical" className="advanced-search-form" onFinish={handleFilterSubmit}>
           <div className="catalog-filters-inputs">
             <Form.Item label="Min source price">
-              <Input className="blue-input" value="50" />
+              <Input className="blue-input"
+                name="minSourcePrice"
+                defaultValue={catalogAdvancedSearchFormData.minSourcePrice}
+                onChange={catalogAdvancedSearchOnChange}
+              />
             </Form.Item>
 
             <Form.Item label="Min Profit">
-              <Input className="blue-input" value="Mini" />
+              <Input className="blue-input"
+                name="minProfile"
+                onChange={catalogAdvancedSearchOnChange}
+                defaultValue={catalogAdvancedSearchFormData.minProfile}
+              />
             </Form.Item>
+
             <Form.Item label="Max source price">
-              <Input className="blue-input" value="100" />
+              <Input className="blue-input"
+                name="maxSourcePrice"
+                onChange={catalogAdvancedSearchOnChange}
+                defaultValue={catalogAdvancedSearchFormData.maxSourcePrice}
+              />
             </Form.Item>
+
             <Form.Item label="Max Profit">
-              <Input className="blue-input" value="Max" />
+              <Input className="blue-input"
+                name="maxProfile"
+                onChange={catalogAdvancedSearchOnChange}
+                defaultValue={catalogAdvancedSearchFormData.maxProfile}
+              />
             </Form.Item>
           </div>
 
@@ -51,22 +117,33 @@ export const CatalogFilters = (props: Props) => {
               <strong>Amazon Prime</strong>
             </p>
             <div className="checkboxes">
-              <Checkbox checked className="checkbox">
+              <Checkbox checked className="checkbox" >
                 Only Prime
               </Checkbox>
-              <Checkbox className="checkbox">All Items</Checkbox>
+              <Checkbox className="checkbox"
+              >All Items</Checkbox>
             </div>
           </div>
 
           <Form.Item label="Title">
-            <Input className="blue-input" placeholder="Contains..." />
+            <Input className="blue-input" placeholder="Contains..." name="title"
+              defaultValue={catalogAdvancedSearchFormData.title}
+              onChange={catalogAdvancedSearchOnChange}
+            />
           </Form.Item>
           <Form.Item label="Order By">
-            <Input className="blue-input" value="Default" />
+
+            <Input className="blue-input"
+              defaultValue={catalogAdvancedSearchFormData.orderBy}
+              onChange={catalogAdvancedSearchOnChange}
+              name="orderBy"
+            />
           </Form.Item>
           <div className="action-btns">
-            <TransparentBtn>Clear filters</TransparentBtn>
-            <SuccessBtn>Apply filters</SuccessBtn>
+            <TransparentBtn
+              handleClick={clearFilterHandler}
+            >Clear filters</TransparentBtn>
+            <SuccessBtn htmlType='submit'> Apply filters</SuccessBtn>
           </div>
         </Form>
       </div>
