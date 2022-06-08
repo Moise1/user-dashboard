@@ -1,13 +1,12 @@
-/*import { useState } from 'react';*/
 import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { Button, Row, Col } from 'antd';
-import { ArrowRight } from 'react-feather';
-import '../../sass/list-now/list-now.scss';
 import { useHistory } from 'react-router-dom';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import '../../sass/list-now/list-now.scss';
 
 export interface state {
   platform: platformType;
@@ -27,7 +26,7 @@ export const ListNow = (/*props: props*/) => {
   const channel = allChannels.filter(function (data) {
     return data.id.toString() == selectedChannel;
   })[0];
-  const weList4u = channel.channelId != 4;
+  const weList4u = channel?.channelId != 4;
 
   const routeChange = (route: string) => {
     history.push(route);
@@ -47,7 +46,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('catapara')}{' '}
                   <span>
                     <a>
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -65,7 +64,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('manualpara')}{' '}
                   <span>
                     <a href="#">
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -83,7 +82,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('bulkpara')}{' '}
                   <span>
                     <a href="#">
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -105,7 +104,7 @@ export const ListNow = (/*props: props*/) => {
                     {t('welistpara')}
                     <span>
                       <a href="#">
-                        <ArrowRight />
+                        <ArrowRightOutlined style={{fontSize: '19px'}}/>
                       </a>
                     </span>
                   </p>

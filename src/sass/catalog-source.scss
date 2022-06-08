@@ -27,15 +27,18 @@
       @mixin action-icon {
         margin-right: 1rem;
         cursor: pointer;
-        stroke: $primary-bg;
       }
-      .remove-source-icon {
+      .anticon-minus-circle {
         @include action-icon;
-        fill: $red;
+        svg {
+          fill: $red;
+        }
       }
-      .pending-source-icon {
+      .anticon-plus-circle {
         @include action-icon;
-        fill: $green;
+        svg {
+          fill: $green;
+        }
       }
 
       .source-img {

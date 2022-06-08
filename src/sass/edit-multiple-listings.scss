@@ -1,67 +1,10 @@
-/*@import 'general.config';
+@import 'general.config';
 
 // Large and extra large screens;
-.upper-section {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  h3 {
-    color: $corporative-color;
-  }
-  .external-links,
-  .warning {
-    background: $light-gray;
-    padding: 0.5rem;
-    border-radius: 19px;
-
-    & > a {
-      margin-left: 2rem;
-      color: $corporative-color;
-
-      &:hover {
-        color: $corporative-color;
-      }
-    }
+.upper-section .warning{
+  display: flex; 
+  column-gap: .6rem;
+  p{
+    font-size: $font-medium;
   }
 }
-.form {
-  margin-top: 2rem;
-}
-
-.content {
-  .description-and-controls {
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    width: 50vw;
-    .limit-area,
-    .stock-area {
-      margin-top: 1rem;
-      width: 100%;
-      .radio {
-        width: 100%;
-      }
-      .stock-input {
-        width: 5vw !important;
-      }
-      .limit,
-      .stock {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-  }
-}
-
-// Small screen sizes
-
-@media only screen and (max-width: 750px) {
-  .upper-section {
-    display: flex;
-    flex-direction: column-reverse;
-    & > * {
-      margin-bottom: 1rem;
-    }
-  }
-}
-*/

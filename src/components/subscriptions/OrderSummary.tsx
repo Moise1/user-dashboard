@@ -1,13 +1,12 @@
-/*import { useState } from 'react';*/
-/*import { t } from '../../utils/transShim';*/
+
 import { Divider, Spin } from 'antd';
-import '../../sass/subscriptions/order-summary.scss';
-import { ArrowRight } from 'react-feather';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Product } from '../../redux/subscriptions/subsSlice';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import '../../sass/subscriptions/order-summary.scss';
 
 interface props {
   productId: string | null;
@@ -59,12 +58,7 @@ export const OrderSummary = (props: props) => {
                   <div className="product-order-line">
                     <h4 className="title-orderdetails">{p.name}</h4>
                   </div>
-                  {/*           <div className="product-order-line">
-            <h5 className="title-orderdetails">No api server</h5>
-          </div>
-          <div className="product-order-line">
-            <h5 className="title-orderdetails">10 Listings service</h5>
-          </div> */}
+                
                 </div>
                 <div className="order-products-price">
                   <div className="price-extra">
@@ -84,12 +78,7 @@ export const OrderSummary = (props: props) => {
                     {billingId?.toString() === '1' ? <p className="twenty-off">20% off</p> : ''}
                     {billingId?.toString() === '2' ? <p className="forty-off">40% off</p> : ''}
                   </div>
-                  {/*           <div className="price-extra">
-            <h5>£12.99/month</h5>
-          </div>
-          <div className="price-extra">
-            <h5>£9.99</h5>
-          </div> */}
+                
                 </div>
               </div>
               <Divider />
@@ -101,12 +90,33 @@ export const OrderSummary = (props: props) => {
                   }
                 })}</h1>
                 <ConfirmBtn htmlType="submit">
-                  Payment method <ArrowRight />
+                  Payment method <ArrowRightOutlined style={{fontSize: '19px'}}/>
                 </ConfirmBtn>
               </div>
             </div>;
           }
         })}
+      <div className="order-products">
+        <div className="order-products-lines">
+          <div className="product-order-line">
+            <h5 className="title-orderdetails">Up to 300 active listings</h5>
+          </div>
+        </div>
+        <div className="order-products-price">
+          <div className="price-extra">
+            <h5>£19.00/month</h5>
+          </div>
+        </div>
+      </div>
+
+      <Divider />
+      <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+        <h2>Total to pay:</h2>
+        <h1>£19.00</h1>
+        <ConfirmBtn htmlType="submit">
+          Payment method <ArrowRightOutlined style={{ fontSize: '19px'}} />
+        </ConfirmBtn>
+      </div>
     </div>
   );
 };

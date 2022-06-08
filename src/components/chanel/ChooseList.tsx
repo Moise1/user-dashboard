@@ -4,7 +4,7 @@ import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { Button } from 'antd';
-import { ArrowRight } from 'react-feather';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 export interface chooseListValues {
   platform: platformType;
@@ -37,7 +37,7 @@ export const ChooseList = (props: props) => {
             {t('catapara')}{' '}
             <span>
               <a href="#">
-                <ArrowRight />
+                <ArrowRightOutlined style={{fontSize: '19px'}} />
               </a>
             </span>
           </p>
@@ -53,7 +53,7 @@ export const ChooseList = (props: props) => {
             {t('manualpara')}{' '}
             <span>
               <a href="#">
-                <ArrowRight />
+                <ArrowRightOutlined style={{fontSize: '19px'}} />
               </a>
             </span>
           </p>
@@ -69,7 +69,7 @@ export const ChooseList = (props: props) => {
             {t('bulkpara')}{' '}
             <span>
               <a href="#">
-                <ArrowRight />
+                <ArrowRightOutlined style={{fontSize: '19px'}} />
               </a>
             </span>
           </p>
@@ -85,7 +85,7 @@ export const ChooseList = (props: props) => {
             {t('welistpara')}
             <span>
               <a href="#">
-                <ArrowRight />
+                <ArrowRightOutlined style={{fontSize: '19px'}} />
               </a>
             </span>
           </p>

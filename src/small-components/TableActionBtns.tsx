@@ -1,11 +1,11 @@
 import { ReactElement, ReactNode } from 'react';
 import { Input, Button } from 'antd';
-import { Search as SearchIcon } from 'react-feather';
 import advancedSearchIcon from '../assets/listsearch.svg';
 import column_img from '../assets/columnimg.svg';
 import RDS from 'react-dom/server';
 import { t } from '../utils/transShim';
 import '../sass/table-action-btns.scss';
+import { SearchOutlined } from '@ant-design/icons';
 
 interface TableActionBtnsProps {
   showColumns?: boolean;
@@ -35,7 +35,13 @@ export const SearchInput = ({ value, onSearch }: InputProps) => {
   const { Search } = Input;
   const searchComponent = t('search');
   const search = RDS.renderToString(searchComponent as ReactElement);
-  return <Search placeholder={search} onSearch={onSearch} onKeyUp={(event) => onSearch(event.currentTarget.value)} value={value} suffix={<SearchIcon size="15" />} />;
+  return (
+    <Search 
+      placeholder={search} 
+      onSearch={onSearch} 
+      onKeyUp={(event) => onSearch(event.currentTarget.value)} 
+      value={value} suffix={<SearchOutlined />}/>
+  );
 };
 
 export const TableActionBtns = (props: TableActionBtnsProps) => {
