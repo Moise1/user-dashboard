@@ -89,7 +89,7 @@ a {
   color: $corporative-color;
   font-weight: $bold;
   &:hover {
-    color: $cta-color;
+    color: $light-primary;
     transition: 0.5s;
   }
 }
@@ -205,9 +205,9 @@ h4 {
 }
 
 .disabled {
-    color: $ash-gray;
+  color: $ash-gray;
 
-    &:hover {
-        color: $ash-gray;
-    }
+  &:hover {
+    color: $ash-gray;
+  }
 }
