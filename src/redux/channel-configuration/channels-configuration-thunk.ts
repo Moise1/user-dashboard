@@ -23,3 +23,35 @@ export const saveChannelSetting = createAsyncThunk('channelConfiguration/SaveOne
     }
   }
 );
+
+export const refreshBusinessPolicies = createAsyncThunk('channelConfiguration/refreshBusinessPolicies',
+  async () => {
+    try {
+      const res = await client.post('/channelConfiguration/refreshBusinessPolicies');
+      return res.data.response_data;
+    } catch (error) {
+      return { success: false };
+    }
+  }
+);
+
+export const loadBusinessPolicies = createAsyncThunk('channelConfiguration/LoadBusinessPolicies',
+  async () => {
+    try {
+      const res = await client.get('/channelConfiguration/LoadBusinessPolicies');
+      return res.data.response_data;
+    } catch (error) {
+      return { success: false };
+    }
+  }
+);
+export const loadShipping = createAsyncThunk('channelConfiguration/LoadShipping',
+  async () => {
+    try {
+      const res = await client.get('/channelConfiguration/LoadShipping');
+      return res.data.response_data;
+    } catch (error) {
+      return { success: false };
+    }
+  }
+);

@@ -90,6 +90,7 @@
   "Channel.Setting.Option.Days60": "60 días",
   "Channel.Setting.Option.GTC": "Sin caducidad",
   "Channel.Setting.Option.NoReturns": "Sin devoluciones",
+  "Channel.Setting.Option.PoliciesWillUpdate": "Las políticas se actualizarán en unos minutos",
   "Channel.Setting.Value.DoesNotApply": "No Aplica",
 
   "Error.Saving.Configuration": "Error guardando preferencias",

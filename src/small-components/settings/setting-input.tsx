@@ -1,7 +1,7 @@
 ﻿import { Col, Row } from 'antd';
 import { ReactNode } from 'react';
 import { ChannelSetting, ChannelSettingExtra, ChannelSettings, SettingType } from '../../components/chanel/configuration/settings';
-import { eChannelSettings, SavingSetting, SettingsValue } from '../../redux/channel-configuration/channels-configuration-slice';
+import { BusinessPolicy, BusinessPolicyType, eChannelSettings, SavingSetting, SettingsValue, ShippingOption } from '../../redux/channel-configuration/channels-configuration-slice';
 import { Template } from '../../redux/templates/templatesSlice';
 import '../../sass/settings.scss';
 import { t as trans, TransLinksValues, TransPlatformValues } from '../../utils/transShim';
@@ -18,12 +18,15 @@ import { SettingBooleanTwoOptions } from './settings-boolean-two-options';
 import { SettingTwoOptions } from './settings-two-options';
 
 interface SettingDataBagData<T> {
-  data: T;
+  data: T | undefined;
   loading: boolean;
 }
 
 export interface SettingDataBag {
   templates?: SettingDataBagData<Template[]>;
+  refreshBussiness?: SettingDataBagData<boolean>;
+  shipping ?: SettingDataBagData<ShippingOption[]>;
+  business ?: SettingDataBagData<BusinessPolicy[]>;
 }
 
 interface Props {
@@ -33,10 +36,11 @@ interface Props {
   onSave: (key: eChannelSettings, value: SettingsValue) => void;
   translationValues: TransPlatformValues | TransLinksValues;
   dataBag?: SettingDataBag
+  onButtonClick : () => void
 }
 
 export const SettingInput = (props: Props) => {
-  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag} = props;
+  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag, onButtonClick} = props;
 
   const t = (c:string) => trans(c, translationValues);
 
@@ -232,7 +236,7 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean) => {
+  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag | undefined) => {
     const savingState = savingSetting.get(fields[0]);
     let value = configuration?.get(fields[0]) ?? values[0];
 
@@ -242,19 +246,36 @@ export const SettingInput = (props: Props) => {
     }
 
     let loadingData = false;
+
+    const AA = (data: SettingDataBagData<({ id: number | string, name: string })[]> | undefined) => {
+      loadingData = loadingData || (data?.loading ?? false);
+      if (!data?.loading ?? false) {
+        const ds = data?.data ?? [];
+        if (ds.length > 0) {
+          listValues.push(...(ds.map(x => ({ label: x.name, value: x.id?.toString() })) ?? []));
+          if (value == values[0]) {
+            value = ds[0].id.toString();
+          }
+        }
+      }
+    };
+
     for (const e of extra ?? []) {
       switch (e) {
       case ChannelSettingExtra.TemplateList:
-        loadingData = loadingData || (dataBag?.templates?.loading ?? false);
-        if (!dataBag?.templates?.loading ?? false) {
-          const ds = dataBag?.templates?.data ?? [];
-          if (ds.length > 0) {
-            listValues.push(...(ds.map(x => ({ label: x.name, value: x.id.toString() })) ?? []));
-            if (value == values[0]) {
-              value = ds[0].id.toString();
-            }
-          }
-        }
+        AA(dataBag?.templates);
+        break;
+      case ChannelSettingExtra.BusinessPayment:
+        AA({ loading: dataBag?.business?.loading ?? false, data: dataBag?.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
+        break;
+      case ChannelSettingExtra.BusinessReturn:
+        AA({ loading: dataBag?.business?.loading ?? false, data: dataBag?.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
+        break;
+      case ChannelSettingExtra.BusinessShipping:
+        AA({ loading: dataBag?.business?.loading ?? false, data: dataBag?.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
+        break;
+      case ChannelSettingExtra.PolicyDelivery:
+        AA({ loading: dataBag?.business?.loading ?? false, data: dataBag?.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
         break;
       }
     }
@@ -291,15 +312,21 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderButton = (values: SettingsValue[], extra: ChannelSettingExtra[], disabled: boolean) => {
-    //for (const f of extra) {
-    //  switch (f) {
-    //  case ChannelSettingExtra.RefreshPolicies:
-    //    break;
-    //  }
-    //}
-
-    return <SettingButton label={t(values[0] ?? '') as string} loading={false} disabled={disabled} onClick={() => { return null; }} />;
+  const RenderButton = (values: SettingsValue[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag | undefined) => {
+    let loading = false;
+    let label = t(values[0] ?? '');
+    for (const e of extra ?? []) {
+      switch (e) {
+      case ChannelSettingExtra.RefreshPolicies:
+        loading = loading || (dataBag?.refreshBussiness?.loading ?? false);
+        if (dataBag?.refreshBussiness?.data ?? false) {
+          label = t('Channel.Setting.Option.PoliciesWillUpdate');
+          disabled = true;
+        }
+        break;
+      }
+    }
+    return <SettingButton label={label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
   };
 
   const values = ((setting: ChannelSetting) => {
@@ -334,7 +361,7 @@ export const SettingInput = (props: Props) => {
     input = RenderSettingString(values, setting.Fields, disabled);
     break;
   case SettingType.List:
-    input = RenderSettingList(values, setting.Fields, setting.Extra, disabled);
+    input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
     break;
   case SettingType.TwoOptions:
     input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
@@ -355,7 +382,7 @@ export const SettingInput = (props: Props) => {
     input = RenderBooleanStringNull(values, setting.Fields, disabled);
     break;
   case SettingType.Button:
-    input = RenderButton(values, setting.Extra!, disabled);
+    input = RenderButton(values, setting.Extra!, disabled, dataBag);
   }
 
   const CapitalizeFirstLetter = (s: string | ReactNode) => {

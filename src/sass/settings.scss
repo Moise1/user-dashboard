@@ -35,6 +35,12 @@
         }
     }
 
+    &.setting-button {
+        .ant-spin-spinning {
+            margin-top:0;
+        }
+    }
+
     &.setting-two-options, &.setting-switch-two-options, &.setting-two-options-two {
         position: relative;
         height: fit-content;

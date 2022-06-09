@@ -98,6 +98,7 @@
   "Channel.Setting.Option.Days60": "60 Days",
   "Channel.Setting.Option.GTC": "GTC - Good Till Cancelled",
   "Channel.Setting.Option.NoReturns": "No Returns",
+  "Channel.Setting.Option.PoliciesWillUpdate": "Policies will be updated in a few minutes",
   "Channel.Setting.Value.DoesNotApply": "Does not apply",
 
   "Error.Saving.Configuration": "Error saving configuration",

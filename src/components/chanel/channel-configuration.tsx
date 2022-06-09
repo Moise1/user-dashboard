@@ -5,14 +5,13 @@ import { StatusBtn } from '../../small-components/StatusBtn';
 import { t, TransUtils } from '../../utils/transShim';
 import '../../sass/channel-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getChannelConfiguration, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
+import { getChannelConfiguration, loadBusinessPolicies, loadShipping, refreshBusinessPolicies, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { ChannelConfigurationState, eChannelSettings, SettingsValue } from '../../redux/channel-configuration/channels-configuration-slice';
 import { ChannelSetting, ChannelSettingExtra, ChannelSettings } from './configuration/settings';
 import { ChannelSettingsSections, ChannelSettingSection } from './configuration/sections';
 import { SettingDataBag, SettingInput } from '../../small-components/settings/setting-input';
 import { ReactUtils } from '../../utils/react-utils';
 import { Platforms } from '../../data/platforms';
-import { useDispatch } from 'react-redux';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
 
@@ -24,33 +23,27 @@ export const ChannelConfiguration = () => {
   const [activeTab, setActiveTab] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
   const sections = ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
 
+  const bag: SettingDataBag = {};
+
   //Load from api------------------------------------------------------------
   const dispatch = useAppDispatch();
   const {
     settings,
     loading: settingsLoading,
-    savingSettings: savingSettingsState
+    savingSettings: savingSettingsState,
+    refreshBusinessInProgress,
+    refreshBusinessLoading,
+    businessPolicies,
+    loadingBusiness,
+    loadingShipping,
+    shipping
   } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
 
   useEffect(() => {
     dispatch(getChannelConfiguration());
   }, [getChannelConfiguration]);
 
-
-  let loadTemplate = false;
-  const allExtras = ([] as ChannelSettingExtra[]).concat.apply([], ChannelSettings.filter(x => !!x.Extra).map(x => x.Extra!));
-  for (const e of allExtras ?? []) {
-    switch (e) {
-    case ChannelSettingExtra.TemplateList:
-      loadTemplate = true;
-      break;
-    }
-  }
-
-  const bag: SettingDataBag = {};
-
-  if (loadTemplate) {//We can do this inside an if because ChannelSettings doesn't change
-    const dispatch = useDispatch();
+  const LoadTemplate = () => {//We can do this inside an if because ChannelSettings doesn't change
     const {
       templates,
       loading: tLoading
@@ -64,6 +57,49 @@ export const ChannelConfiguration = () => {
     useEffect(() => {
       dispatch(getTemplates());
     }, [getTemplates]);
+  };
+
+  const LoadPolicies = () => {
+    bag.refreshBussiness = {
+      loading: refreshBusinessLoading,
+      data: refreshBusinessInProgress
+    };
+    bag.business = {
+      data: businessPolicies,
+      loading: loadingBusiness
+    };
+    bag.shipping = {
+      data: shipping,
+      loading: loadingShipping
+    };
+
+    useEffect(() => {
+      dispatch(loadShipping());
+    }, [loadShipping]);
+
+    useEffect(() => {
+      dispatch(loadBusinessPolicies());
+    }, [loadBusinessPolicies]);
+  };
+  
+  const allExtras = ([] as ChannelSettingExtra[]).concat.apply([], ChannelSettings.filter(x => !!x.Extra).map(x => x.Extra!));
+  let policies = false;
+  for (const e of allExtras ?? []) {
+    switch (e) {
+    case ChannelSettingExtra.TemplateList:
+      LoadTemplate();
+      break;
+    case ChannelSettingExtra.BusinessPayment:
+    case ChannelSettingExtra.BusinessReturn:
+    case ChannelSettingExtra.BusinessShipping:
+    case ChannelSettingExtra.PolicyDelivery:
+    case ChannelSettingExtra.RefreshPolicies:
+      policies = true;
+      break;
+    }
+  }
+  if (policies) {
+    LoadPolicies();
   }
   //---------------------------------------------------------------------
 
@@ -71,6 +107,16 @@ export const ChannelConfiguration = () => {
     const rp = await dispatch(saveChannelSetting({ key: key, value: value }));
     if (!rp.payload) {
       dispatch(getChannelConfiguration());
+    }
+  };
+
+  const OnButtonClick = async (setting: ChannelSetting) => {
+    for (const e of setting.Extra ?? []) {
+      switch (e) {
+      case ChannelSettingExtra.RefreshPolicies:
+        dispatch(refreshBusinessPolicies());
+        break;
+      }
     }
   };
 
@@ -86,6 +132,7 @@ export const ChannelConfiguration = () => {
       onSave={SaveSetting}
       translationValues={translationValues}
       dataBag={bag}
+      onButtonClick={() => OnButtonClick(setting)}
     />;
   };
 
