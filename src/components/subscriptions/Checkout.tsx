@@ -8,9 +8,12 @@ import { OrderSummary } from './OrderSummary';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
+import { useHistory } from 'react-router-dom';
 
 import { Product } from 'src/redux/subscriptions/subsSlice';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 const { Item } = Form;
 
@@ -22,25 +25,32 @@ const { Item } = Form;
 
 export const Checkout = (/*props: props*/) => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
   }, [getSubscriptions]);
 
+  const routeChange = (route: string) => {
+    history.push(route);
+  };
   const [productId, setProductId] = useState(localStorage.getItem('productId'));
   const [billingId, setBillingId] = useState(localStorage.getItem('billing'));
   const [currencyId, setCurrencyId] = useState(localStorage.getItem('currencyId'));
 
   const handleProductChange = (value: SelectorValue) => {
     setProductId(value as string);
+    localStorage.setItem('productId', value as string);
   };
 
   const handleBillingChange = (value: SelectorValue) => {
     setBillingId(value as string);
+    localStorage.setItem('billing', value as string);
   };
 
   const handleCurrencyChange = (value: SelectorValue) => {
     setCurrencyId(value as string);
+    localStorage.setItem('currencyId', value as string);
   };
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
@@ -111,8 +121,16 @@ export const Checkout = (/*props: props*/) => {
           </div> */}
         </div>
         <div className="order-summary">
-          <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
+          <div className="second-section-container">
+            <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
+            <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+              <ConfirmBtn htmlType="submit">
+                Payment method <ArrowRightOutlined />
+              </ConfirmBtn>
+            </div>
+          </div>
         </div>
+
       </div>
     </Layout>
   );

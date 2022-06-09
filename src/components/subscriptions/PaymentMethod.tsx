@@ -5,16 +5,28 @@ import { Layout, Radio, Spin } from 'antd';
 import '../../sass/subscriptions/payment-method.scss';
 
 import { OrderSummary } from './OrderSummary';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
+import { useHistory } from 'react-router';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
   }, [getSubscriptions]);
+
+  const routeChange = (route: string) => {
+    history.push(route);
+  };
+
+  const [productId] = useState(localStorage.getItem('productId'));
+  const [billingId] = useState(localStorage.getItem('billing'));
+  const [currencyId] = useState(localStorage.getItem('currencyId'));
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   console.log({ products });
@@ -65,8 +77,16 @@ export const PaymentMethod = (/*props: props*/) => {
           */}
         </div>
         <div className="order-summary">
-          <OrderSummary productId={null} billingId={null} currencyId={null} />
+          <div className="second-section-container">
+            <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
+            <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+              <ConfirmBtn htmlType="submit">
+                Finish Payment <ArrowRightOutlined />
+              </ConfirmBtn>
+            </div>
+          </div>
         </div>
+
       </div>
     </Layout>
   );

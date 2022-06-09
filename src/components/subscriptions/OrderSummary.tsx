@@ -1,10 +1,7 @@
 import { Divider, Spin } from 'antd';
-import { ConfirmBtn } from '../../small-components/ActionBtns';
-import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Product } from '../../redux/subscriptions/subsSlice';
-import { ArrowRightOutlined } from '@ant-design/icons';
 import '../../sass/subscriptions/order-summary.scss';
 
 interface props {
@@ -14,11 +11,7 @@ interface props {
 }
 
 export const OrderSummary = (props: props) => {
-  const history = useHistory();
 
-  const routeChange = (route: string) => {
-    history.push(route);
-  };
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   const [currency, setCurrency] = useState('\u20AC');
@@ -47,7 +40,7 @@ export const OrderSummary = (props: props) => {
   }, [props.productId, props.billingId, props.currencyId, loadOrder]);
 
   return (
-    <div className="second-section-container">
+    <div>
       <h3 className="title-ordersum">Your order:</h3>
       {loading ? (
         <Spin />
@@ -71,37 +64,32 @@ export const OrderSummary = (props: props) => {
                   </div>
                   <div className="order-products-price">
                     <div className="price-extra">
-                      {billingId?.toString() === '1' ? (
-                        <div className="discounts">
-                          <h4 className="old-price">€24/month</h4>
-                          <p className="twenty-off">20% off</p>
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                      {billingId?.toString() === '2' ? (
-                        <div className="discounts">
-                          <h4 className="old-price">€24/month</h4>
-                          <p className="forty-off">40% off</p>
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                      <h4>
-                        {currency?.toString()}
-                        {p.prices.map((prc) => {
-                          if (
-                            prc.currencyId.toString() === currencyId?.toString() &&
-                            prc.platformId === 1 &&
-                            prc.billingPeriodId.toString() === billingId?.toString()
-                          ) {
-                            if (prc.billingPeriodId === 0) return prc.price;
-                            else if (prc.billingPeriodId === 1) return (prc.price / 6).toFixed(1);
-                            else if (prc.billingPeriodId === 2) return (prc.price / 12).toFixed(1);
-                          }
-                        })}
-                        /month
-                      </h4>
+
+                      {p.prices.map((prc) => {
+
+                        if (billingId?.toString() === '1' && prc.billingPeriodId.toString() === '0' && prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1) {
+                          return <div className="discounts">
+                            <h4 className="old-price">{currency?.toString() + prc.price} /month</h4> &nbsp;
+                            <p className="twenty-off"> 20% off</p>
+                          </div>;
+                        }
+                        else if (billingId?.toString() === '2' && prc.billingPeriodId.toString() === '0' && prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1) {
+                          return <div className="discounts">
+                            <h4 className="old-price">{currency?.toString() + prc.price} /month </h4> &nbsp;
+                            <p className="forty-off"> 40% off</p>
+                          </div>;
+                        }
+
+                        if (
+                          prc.currencyId.toString() === currencyId?.toString() &&
+                          prc.platformId === 1 &&
+                          prc.billingPeriodId.toString() === billingId?.toString()
+                        ) {
+                          if (prc.billingPeriodId === 0) return <h4>{currency?.toString() + prc.price} /month</h4>;
+                          else if (prc.billingPeriodId === 1) return <h4>{currency?.toString() + (prc.price / 6).toFixed(1)} /month</h4>;
+                          else if (prc.billingPeriodId === 2) return <h4>{currency?.toString() + (prc.price / 12).toFixed(1)} /month</h4>;
+                        }
+                      })}
                     </div>
                     {/* NEW FUNCTIONALITY */}
                     {/*           <div className="price-extra">
@@ -113,7 +101,7 @@ export const OrderSummary = (props: props) => {
                   </div>
                 </div>
                 <Divider />
-                <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+                <div className="order-sum">
                   <h2>Total to pay:</h2>
                   <h1>
                     {currency?.toString()}
@@ -127,9 +115,6 @@ export const OrderSummary = (props: props) => {
                       }
                     })}
                   </h1>
-                  <ConfirmBtn htmlType="submit">
-                    Payment method <ArrowRightOutlined />
-                  </ConfirmBtn>
                 </div>
               </div>
             );
