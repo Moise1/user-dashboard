@@ -1,6 +1,6 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
-import { Layout, Spin } from 'antd';
+import { Layout, Radio, Spin } from 'antd';
 
 import '../../sass/subscriptions/payment-method.scss';
 
@@ -21,20 +21,48 @@ export const PaymentMethod = (/*props: props*/) => {
   return loading ? (
     <Spin />
   ) : (
-    <Layout className="checkout-content">
+    <Layout className="paymentmethod-content">
       <div className="title-container">
-        <h3>Checkout</h3>
-        <h4>Payment method</h4>
+        <h2>Checkout</h2>
+        <h3>Payment method</h3>
       </div>
 
       <div className="payment-sections-container">
-        <div className="billing-container">
-          <div className="billing-section-container">
-            <h1>Payment method</h1>
+        <div className="payments-container">
+          <div className="section-payment">
+            <div className="section-container">
+              <h3>Select your preferred payment method</h3>
+              <div className="cards-payments">
+                <Radio className="card-payment-section">
+                  <h3>Credit card</h3>
+                </Radio>
+                <Radio className="card-payment-section">
+                  <h3>Paypal</h3>
+                </Radio>
+              </div>
+            </div>
           </div>
-          <div className="billing-section-container">
-            <h1>Billing details</h1>
+          {/*Future functionality*/}
+          {/*
+          <div className="section-payment">
+            <h3 className="title-card">Billing details</h3>
+            <div className="section-container">
+              <div className="billing-details">
+                <div className="address-details">
+                  <h3>Address</h3>
+                  <h4>John McGregor</h4>
+                  <h4>7 Queensway</h4>
+                  <h4>WC17 8BQ, London</h4>
+                  <h4>United Kingdom</h4>
+                </div>
+                <div className="address-details">
+                  <h3>VAT Number</h3>
+                  <h4>466345544</h4>
+                </div>
+              </div>
+            </div>
           </div>
+          */}
         </div>
         <div className="order-summary">
           <OrderSummary productId={null} billingId={null} currencyId={null} />

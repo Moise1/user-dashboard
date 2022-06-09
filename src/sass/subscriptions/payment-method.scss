@@ -1,17 +1,17 @@
 @use '../general.config';
 @import '../general.config';
 
-.checkout-content {
+.paymentmethod-content {
   display: flex;
   .title-container {
     margin-bottom: 1rem;
     align-self: center;
     width: 80%;
-    h3 {
+    h2 {
       font-weight: 600;
       margin: 0;
     }
-    h4 {
+    h3 {
       color: $gray;
       margin: 0;
     }
@@ -19,14 +19,57 @@
   .payment-sections-container {
     display: flex;
     justify-content: space-around;
-    .billing-container {
+    .payments-container {
+      width: 40%;
       display: grid;
-      .billing-section-container {
-        background-color: $primary-bg;
-        padding: 2rem;
-        width: 100%;
-        box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
-        border-radius: 1rem;
+      .section-payment {
+        &:nth-child(2) {
+          margin-top: 2rem;
+        }
+        .title-card {
+          color: $light-primary;
+        }
+        .section-container {
+          background-color: $primary-bg;
+          padding: 2rem;
+          width: 100%;
+          box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+          border-radius: 1rem;
+
+          .cards-payments {
+            .card-payment-section {
+              margin-top: 1rem;
+              height: 4rem;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              background-color: $primary-bg;
+              box-shadow: rgba(149, 157, 165, 0.2) 0px 0px 9px;
+              border-radius: 10px;
+              cursor: pointer;
+              &:hover {
+                box-shadow: rgba(114, 147, 255, 0.603) 0px 0px 9px;
+              }
+              span {
+                margin-left: 10px;
+              }
+              h3 {
+                margin: 0;
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+        .billing-details {
+          display: flex;
+          justify-content: space-around;
+          width: 100%;
+          .address-details {
+            h4 {
+              color: $gray;
+            }
+          }
+        }
       }
     }
     .order-summary {

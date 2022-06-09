@@ -44,16 +44,24 @@ export const Checkout = (/*props: props*/) => {
   };
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
-  const billings = [{ label: 'Per Month', value: 0 }, { label: 'Per 6 Months - 20% OFF', value: 1 }, { label: 'Per Year - 40% OFF', value: 2 }];
-  const currency = [{ label: 'EUR \u20AC', value: 1 }, { label: 'USD \u0024', value: 2 }, { label: 'GBP \u00A3', value: 3 }];
+  const billings = [
+    { label: 'Per Month', value: 0 },
+    { label: 'Per 6 Months - 20% OFF', value: 1 },
+    { label: 'Per Year - 40% OFF', value: 2 }
+  ];
+  const currency = [
+    { label: 'EUR \u20AC', value: 1 },
+    { label: 'USD \u0024', value: 2 },
+    { label: 'GBP \u00A3', value: 3 }
+  ];
   console.log({ products });
   return loading ? (
     <Spin />
   ) : (
     <Layout className="checkout-content">
       <div className="title-container">
-        <h3>Checkout</h3>
-        <h4>Choose to add more to your current order</h4>
+        <h2>Checkout</h2>
+        <h3>Choose to add more to your current order</h3>
       </div>
 
       <div className="checkout-sections-container">
