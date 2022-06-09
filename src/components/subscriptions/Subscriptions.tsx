@@ -114,7 +114,7 @@ export const Subscriptions = () => {
                           }
                         })}
                       </h1>
-                      <span className="frequency">/mo</span>
+                      <h4 className="frequency">/mo</h4>
                     </div>
                   </Link>
                 </div>
@@ -131,8 +131,8 @@ export const Subscriptions = () => {
                           }
                         })}
                       </h1>
-                      <span className="frequency">/mo</span>
-                      <span className="duration">(6 months)</span>
+                      <h4 className="frequency">/mo</h4>
+                      <h4 className="duration">(6 months)</h4>
                     </div>
                   </Link>
                 </div>
@@ -149,8 +149,8 @@ export const Subscriptions = () => {
                           }
                         })}
                       </h1>
-                      <span className="frequency">/mo</span>
-                      <span className="duration">(1 year)</span>
+                      <h4 className="frequency">/mo</h4>
+                      <h4 className="duration">(1 year)</h4>
                     </div>
                   </Link>
                 </div>

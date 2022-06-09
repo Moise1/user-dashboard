@@ -63,6 +63,7 @@ export const OrderSummary = (props: props) => {
                     <div className="product-order-line">
                       <h4 className="title-orderdetails">{p.name}</h4>
                     </div>
+                    {/* NEW FUNCTIONALITY */}
                     {/*           <div className="product-order-line">
             <h5 className="title-orderdetails">No api server</h5>
           </div>
@@ -104,6 +105,7 @@ export const OrderSummary = (props: props) => {
                         /month
                       </h4>
                     </div>
+                    {/* NEW FUNCTIONALITY */}
                     {/*           <div className="price-extra">
             <h5>£12.99/month</h5>
           </div>
