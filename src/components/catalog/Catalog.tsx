@@ -39,7 +39,7 @@ export const Catalog = () => {
   const { Meta } = Card;
 
   useEffect(() => {
-    dispatch(getCatalogProducts());
+    dispatch(getCatalogProducts({sessionId: 0}));
   }, [getCatalogProducts]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);

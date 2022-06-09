@@ -1,5 +1,6 @@
-import { useContext, useState } from 'react';
+import { CSSProperties, useContext, useState } from 'react';
 import { Layout, Menu } from 'antd';
+import type { MenuProps } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { t } from '../../utils/transShim';
 import {
@@ -24,9 +25,7 @@ import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
 import { LeftOutlined, PushpinOutlined } from '@ant-design/icons';
 import '../../sass/side-bar.scss';
 
-const { SubMenu, Item } = Menu;
 const { Sider } = Layout;
-
 interface Props {
   className: string;
   collapsed: boolean;
@@ -40,6 +39,8 @@ interface Props {
 }
 
 const mobileScreenSize = window.matchMedia('(max-width: 1030px)');
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, mobileSiderVisible, closeMobileSider } = props;
@@ -127,10 +128,122 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 17, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
-    { id: 18, listName: t('Menu.FAQ') },
-    { id: 19, listName: t('Menu.ListingServices') }
+    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 19, listName: t('Menu.FAQ') },
+    { id: 20, listName: t('Menu.ListingServices') }
   ];
+
+  const getItem = (
+    key: React.Key,
+    className?: string,
+    style?: CSSProperties,
+    label?: React.ReactNode,
+    icon?: React.ReactNode,
+    children?: MenuItem[] | undefined,
+    onClick?: (route?: string) => void,
+    type?: 'group' | undefined
+  ): MenuItem => {
+    return {
+      key,
+      className,
+      style,
+      label,
+      icon,
+      children,
+      onClick,
+      type
+    } as MenuItem;
+  };
+
+
+  const menuItems: MenuItem[] = [
+    getItem(
+      '1',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Dashboard'),
+      <DashBoardIcon />,
+      undefined,
+      () => routeChange('/dashboard')
+
+    ),
+    getItem(
+      '2',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Catalog'),
+      <CatalogIcon />,
+      undefined,
+      () => routeChange('/catalog')
+    ),
+    getItem(
+      '3',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.ListNow'),
+      <ListNowIcon />,
+      undefined,
+      () => routeChange('/listings'),
+
+    ),
+    getItem(
+      '4',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Listings'),
+      <ListingsIcon />,
+      undefined,
+      () => routeChange('/listings'),
+    ),
+    getItem(
+      '5',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Orders'),
+      <OrdersIcon />,
+      undefined,
+      () => routeChange('/orders'),
+    ),
+    getItem(
+      'sub1',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Settings'),
+      <SettingsIcon />,
+      settingsListArray.map((item) => {
+        return getItem(item.id, '', {}, <MenuListItem key={item.id} onClick={item.onClick} listName={item.listName} />);
+      })
+    ),
+    getItem(
+      '17',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Services'),
+      <ServiceIcon />,
+      undefined,
+      () => routeChange('/services'),
+    ),
+    getItem(
+      'sub2',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      t('Menu.Help'),
+      <HelpIcon />,
+      helpListArray.map((item) => {
+        return getItem(item.id, '', {}, <MenuListItem key={item.id} onClick={item.onClick} listName={item.listName} />);
+      })
+    ),
+    getItem(
+      '21',
+      'menu-item',
+      { fontSize: '18px', fontWeight: 'bold' },
+      'Logout',
+      <LogoutIcon />,
+      undefined,
+      handleLogout,
+    )
+  ];
+
 
   const siderMenu = (
     <div className="side-menu-container">
@@ -141,6 +254,7 @@ export const Sidebar = (props: Props) => {
         defaultSelectedKeys={['1']}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
+        items={menuItems}
       >
         {!collapsed && (
           <div className="sidebar-overhead">
@@ -168,136 +282,15 @@ export const Sidebar = (props: Props) => {
                   onClick={mobileScreenSize.matches ? closeMobileSider : togglestatic}
                 />
               ) : (
-                !mobileScreenSize.matches && 
-                <PushpinOutlined
-                  style={{ fontSize: '19px' }}
-                  onClick={togglestatic} />
+                !mobileScreenSize.matches && <PushpinOutlined style={{ fontSize: '19px' }} onClick={togglestatic} />
               )}
             </div>
           </div>
         )}
-        <Item
-          className="menu-item"
-          onClick={() => routeChange('/dashboard')}
-          key="1"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          icon={<DashBoardIcon />}
-        >
-          {t('Menu.Dashboard')}
-        </Item>
-        <Item
-          className="menu-item"
-          onClick={() => routeChange('/catalog')}
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          key="2"
-          icon={<CatalogIcon />}
-        >
-          <span className="sidebar_element">{t('Menu.Catalog')}</span>
-        </Item>
-        <Item
-          className="menu-item"
-          onClick={() => routeChange('/list-now')}
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          key="3"
-          icon={<ListNowIcon />}
-        >
-          {t('Menu.ListNow')}
-        </Item>
-        <Item
-          className="menu-item"
-          onClick={() => routeChange('/listings')}
-          key="4"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          icon={<ListingsIcon />}
-        >
-          {t('Menu.Listings')}
-        </Item>
-        <Item
-          className="menu-item"
-          onClick={() => routeChange('/orders')}
-          key="5"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          icon={<OrdersIcon />}
-        >
-          {t('Menu.Orders')}
-        </Item>
-
-        <SubMenu
-          className="submenu-item"
-          key="sub1"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          icon={<SettingsIcon />}
-          title={t('Menu.Settings')}
-        >
-          {settingsListArray.map((obj) => (
-            <Item key={obj.id} onClick={obj.onClick}>
-              <MenuListItem listName={obj.listName} />
-            </Item>
-          ))}
-
-          <SubMenu
-            className="secondary-submenu-item"
-            key="sub2"
-            style={{ fontSize: '18px', fontWeight: 'bold' }}
-            title="Item's Submenu"
-          >
-            <Item
-              className="menu-item"
-              onClick={() => routeChange('/dashboard')}
-              key="14"
-              style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={<DashBoardIcon />}
-            >
-              Another Menu Item
-            </Item>
-
-            <Item
-              className="menu-item"
-              onClick={() => routeChange('/dashboard')}
-              key="15"
-              style={{ fontSize: '18px', fontWeight: 'bold' }}
-              icon={<DashBoardIcon />}
-            >
-              Another Menu Item
-            </Item>
-          </SubMenu>
-        </SubMenu>
-
-        <Item
-          className="menu-item"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          key="16"
-          icon={<ServiceIcon />}
-          onClick={() => routeChange('/services')}
-        >
-          <span>{t('Menu.Services')}</span>
-        </Item>
-
-        <SubMenu
-          className="submenu-item"
-          key="sub3"
-          style={{ color: '#000', fontSize: '18px', fontWeight: 'bold' }}
-          icon={<HelpIcon />}
-          title={t('Menu.Help')}
-        >
-          {helpListArray.map((obj) => (
-            <Item key={obj.id} onClick={obj.onClick}>
-              <MenuListItem listName={obj.listName} />
-            </Item>
-          ))}
-        </SubMenu>
-        <Item
-          className="menu-item logout-txt"
-          style={{ fontSize: '18px', fontWeight: 'bold' }}
-          key="20"
-          icon={<LogoutIcon />}
-          onClick={handleLogout}
-        >
-          <span>Logout</span>
-        </Item>
       </Menu>
     </div>
   );
+
   const largeScreenSider = (
     <Sider
       theme="light"
