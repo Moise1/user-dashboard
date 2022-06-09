@@ -219,6 +219,7 @@ export const BulkListing = (/*props: props*/) => {
                   return <Col span={6} key={itm.id}>
                     <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
                       <div className='list-card'> {loadings}
+                        {/* eslint-disable @typescript-eslint/no-var-requires */}
                         <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
                         <br />
                         <h3>{itm.name}</h3>

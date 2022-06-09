@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card } from 'antd';
-import { Search } from 'react-feather';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../../small-components/ActionBtns';
 import { FiltersBtn } from '../../small-components/TableActionBtns';
@@ -14,11 +13,13 @@ import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
+import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
 
-export type ProductElementEvent =
+export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
-  | React.MouseEvent<SVGElement, MouseEvent>;
+  | React.MouseEvent<SVGElement, MouseEvent>
+  | React.MouseEvent<HTMLSpanElement, MouseEvent>;
 
 export const Catalog = () => {
 
@@ -46,7 +47,7 @@ export const Catalog = () => {
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProudctsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
 
-  const handleSelectProduct = (e: ProductElementEvent): void => {
+  const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
     setProductId(JSON.parse(cardElement.id));
@@ -160,7 +161,7 @@ export const Catalog = () => {
                       <div className="header">
                         <p className="product-title">{d.title}</p>
                         <p className="source">by {d.source}</p>
-                        <Search className="view-details" onClick={handleProductModal} />
+                        <SearchOutlined className="view-details" onClick={handleProductModal} style={{fontSize: '19px'}}/>
                       </div>
                       <div className="transaction-details">
                         <div>

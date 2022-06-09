@@ -1,31 +1,26 @@
 import { useState, useEffect, Key } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Layout, Row, Col, Select, Input, Radio, RadioChangeEvent, Button } from 'antd';
-import { ChevronLeft } from 'react-feather';
-// import AutoOrdering from '../auto-ordering/AutoOrdering';
-//import { /*SourcesSettingsContents*/ } from './SourcesSettingsContents';
 import { t } from '../../utils/transShim';
-//import { SuccessBtn } from '../../small-components/ActionBtns';
 import { CountrySelector } from '../../small-components/CountrySelector';
 import { Switch } from '../../small-components/Switch';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { getSources, saveSources } from '../../redux/source-config/sourcesThunk';
 import { SourceConfigSave } from '../../redux/source-config/sourceSlice';
-//import { SourceConfig } from '../../redux/source-config/sourceSlice';
-import '../../sass/sources-settings.scss';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { LeftOutlined } from '@ant-design/icons';
+import '../../sass/sources-settings.scss';
 
 export const SourcesSettings = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const [to, setTo] = useState<string>('');
   const dispatch = useAppDispatch();
-  //const { shippingOptions } = useAppSelector((state) => state.sources.shippingOptions);
   const { templates } = useAppSelector((state) => state.templates);
   const history = useHistory();
   const selectedSource = localStorage.getItem('selectedSource');
-  //const [source, setSource] = useState();
   const { sources, sourcesLoading } = useAppSelector((state) => state.sources);
+
   // Source Fields
   const [userId, setUserId] = useState<string>();
   const [sourceId, setSourceId] = useState<number>();
@@ -56,17 +51,6 @@ export const SourcesSettings = () => {
   const TempOptions = templates?.map((c: { id: Key | null | undefined; name: string | null | undefined }) => { return { label: c.name, value: c.id };});
   const sourceOptions = sources?.map((c: { sourceId: Key | null | undefined; sourceName: string | null | undefined }) => { return { label: c.sourceName, value: c.sourceId };});
 
-  //const shippings = sources.shippingOptions[3];
-  //localStorage.setItem('shipping', sources);
-
-  //const shippings = shipping;
-  //.map((c: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined) => {
-  //  return (
-  //    <Option key="1">
-  //      {c}
-  //    </Option>
-  //  );
-  //});
 
   const [disableRadioLimit, setDisableRadioLimit] = useState(true);
   const [limitValue, setLimitValue] = useState('NoLimit');
@@ -383,7 +367,7 @@ export const SourcesSettings = () => {
       <div className="sources-description">
         <Link to={to} className="back-link" onClick={() => initialStateSourceSettings()}>
           <span className="back-arrow">
-            <ChevronLeft />
+            <LeftOutlined style={{fontSize: '19px'}} />
           </span>
           Back to suppliers overview
         </Link>
@@ -556,9 +540,6 @@ export const SourcesSettings = () => {
         <Row gutter={[{ xs: 32, lg: 50 }, 0]} className="row rowStyle">
           <Col className="description-area" xs={16} lg={12}>
             <h2>Shipping</h2>
-          </Col>
-          <Col className="selector-container" xs={7} lg={6}>
-            {/*<SimpleSelect defaultValue="Select" loading={loading}>{shippings}</SimpleSelect>*/}
           </Col>
         </Row>
 

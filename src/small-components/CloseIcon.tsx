@@ -1,12 +1,12 @@
-import { X } from 'react-feather';
-import { ProductElementEvent } from 'src/components/catalog/Catalog';
+import { CloseOutlined } from '@ant-design/icons';
+import { ElementEventType } from 'src/components/catalog/Catalog';
 
 interface Props {
   className?: string;
-  onClick?: (e: ProductElementEvent) => void;
+  onClick?: (e: ElementEventType) => void;
   size?: string;
   id?: string;
 }
-export const CloseIcon = ({ className, onClick, size, id }: Props) => (
-  <X className={className} onClick={(e) => onClick!(e)} size={size} id={id}/>
+export const CloseIcon = ({ className, onClick, id }: Props) => (
+  <CloseOutlined className={className} onClick={(e) => onClick!(e)} id={id} style={{fontSize: '19px'}}/>
 );

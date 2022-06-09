@@ -1,11 +1,11 @@
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ICatalogData } from '../../dummy-data/dummyData';
-import { ProductElementEvent } from './Catalog';
+import { ElementEventType } from './Catalog';
 import '../../sass/all-products.scss';
 
 interface Props {
   children: ICatalogData[];
-  removeProduct: (e: ProductElementEvent) => void;
+  removeProduct: (e: ElementEventType) => void;
   className: string;
 }
 
