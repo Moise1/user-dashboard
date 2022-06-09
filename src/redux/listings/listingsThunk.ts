@@ -83,7 +83,7 @@ export const getManualListings = createAsyncThunk(
 );
 
 
-export const SaveAutolist = createAsyncThunk('Listing/SaveAutolist', async (data: ListingsData[], thunkAPI) => {
+export const SaveAutolist = createAsyncThunk('Listing/SaveAutolist', async (data: ListingsData, thunkAPI) => {
   try {
     const res = await client.post('Listing/SaveAutolist', data);
     if (res.status === 200) toastAlert('Source updated successfully!', 'success');

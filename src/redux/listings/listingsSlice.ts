@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Matrix } from 'react-spreadsheet';
 import { getListings, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
 export interface ListingData {
   imageUrl: string;
@@ -56,13 +55,13 @@ export type TerminatedListings = PendingListings;
 
 
 export interface ListingsData {
-  createdBy: string;
-  ignoreVero: string;
-  ignoreOOS: string;
-  reviewBeforePublishing: string;
+  createdBy: number;
+  ignoreVero: boolean | undefined;
+  ignoreOOS: boolean | undefined;
+  reviewBeforePublishing: boolean | undefined;
   listFrequencyMinutes: number;
-  dontListUntil?: string;
-  data: Matrix<{ value: string }>;
+  dontListUntil?: Date;
+  listings: string[][];
 }
 
 
