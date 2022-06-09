@@ -1,25 +1,40 @@
-﻿import '../../sass/settings.scss';
+﻿import { Spin } from 'antd';
+import { useState } from 'react';
+import '../../sass/settings.scss';
 import { Selector, SelectorValue } from '../form/selector';
 
-interface ListData {
+export interface ListData {
   value: string;
   label: string;
 }
 
 interface Props {
   defaultValue?: string;
-  loading: boolean;
+  loading: boolean;//saving
+  loadingData: boolean;
   onChange: (value: string) => void;
   disabled?: boolean;
-  listData: ListData[]
+  listData: ListData[];
 }
 
 export const SettingList = (props: Props) => {
-  const { defaultValue, onChange, loading, disabled, listData} = props;
+  const { defaultValue, onChange, loadingData, disabled, listData, loading } = props;
 
-  const OnChange = (value: SelectorValue) => onChange(value as string);
+  const [currentValue, setCurrentValue] = useState<string | undefined>(defaultValue);
+  const [wasLoadingData, setWasLoadingData] = useState<boolean>(loadingData);
+
+  const OnChange = (value: SelectorValue) => {
+    setCurrentValue(value as string);
+    onChange(value as string);
+  };
+
+  if (wasLoadingData && !loadingData) {
+    setWasLoadingData(false);
+    setCurrentValue(defaultValue);
+  }
 
   return <div className="setting setting-list">
-    <Selector defaultValue={defaultValue} disabled={disabled} onChange={OnChange} loading={loading} size="large">{listData}</Selector>
+    <Selector value={currentValue} disabled={disabled || loading || loadingData} onChange={OnChange} loading={loadingData} size="large">{listData}</Selector>
+    {(loading || loadingData) && <Spin/>}
   </div>;
 };

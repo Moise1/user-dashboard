@@ -2,6 +2,7 @@
 import { ReactNode } from 'react';
 import { ChannelSetting, ChannelSettingExtra, ChannelSettings, SettingType } from '../../components/chanel/configuration/settings';
 import { eChannelSettings, SavingSetting, SettingsValue } from '../../redux/channel-configuration/channels-configuration-slice';
+import { Template } from '../../redux/templates/templatesSlice';
 import '../../sass/settings.scss';
 import { t as trans, TransLinksValues, TransPlatformValues } from '../../utils/transShim';
 import { SettingBoolean } from './setting-boolean';
@@ -9,12 +10,21 @@ import { SettingBooleanNumber } from './setting-boolean-number';
 import { SettingBooleanString } from './setting-boolean-string';
 import { SettingBooleanStringNull } from './setting-boolean-string-null';
 import { SettingButton } from './setting-button';
-import { SettingList } from './setting-list';
+import { ListData, SettingList } from './setting-list';
 import { SettingNumber } from './setting-number';
 import { SettingString } from './setting-string';
 import { SettingWordList } from './setting-word-list';
 import { SettingBooleanTwoOptions } from './settings-boolean-two-options';
 import { SettingTwoOptions } from './settings-two-options';
+
+interface SettingDataBagData<T> {
+  data: T;
+  loading: boolean;
+}
+
+export interface SettingDataBag {
+  templates?: SettingDataBagData<Template[]>;
+}
 
 interface Props {
   setting: ChannelSetting;
@@ -22,10 +32,11 @@ interface Props {
   savingSetting: Map<eChannelSettings, SavingSetting>;
   onSave: (key: eChannelSettings, value: SettingsValue) => void;
   translationValues: TransPlatformValues | TransLinksValues;
+  dataBag?: SettingDataBag
 }
 
 export const SettingInput = (props: Props) => {
-  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues } = props;
+  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag} = props;
 
   const t = (c:string) => trans(c, translationValues);
 
@@ -221,13 +232,31 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
+  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean) => {
     const savingState = savingSetting.get(fields[0]);
-    const value = configuration?.get(fields[0]) ?? values[0];
+    let value = configuration?.get(fields[0]) ?? values[0];
 
-    const listValues: { value: string, label: string }[] = [];
+    const listValues: ListData[] = [];
     for (let i = 1; i < values.length; i += 2) {
       listValues.push({ value: values[i] ?? '', label: t(values[i + 1] ?? '') as string });
+    }
+
+    let loadingData = false;
+    for (const e of extra ?? []) {
+      switch (e) {
+      case ChannelSettingExtra.TemplateList:
+        loadingData = loadingData || (dataBag?.templates?.loading ?? false);
+        if (!dataBag?.templates?.loading ?? false) {
+          const ds = dataBag?.templates?.data ?? [];
+          if (ds.length > 0) {
+            listValues.push(...(ds.map(x => ({ label: x.name, value: x.id.toString() })) ?? []));
+            if (value == values[0]) {
+              value = ds[0].id.toString();
+            }
+          }
+        }
+        break;
+      }
     }
 
     return (
@@ -237,6 +266,7 @@ export const SettingInput = (props: Props) => {
           listData={listValues}
           onChange={v => onSave(fields[0], v)}
           key={fields[0]}
+          loadingData={loadingData}
           loading={savingState?.loading ?? false}
           disabled={disabled}
         />
@@ -304,7 +334,7 @@ export const SettingInput = (props: Props) => {
     input = RenderSettingString(values, setting.Fields, disabled);
     break;
   case SettingType.List:
-    input = RenderSettingList(values, setting.Fields, disabled);
+    input = RenderSettingList(values, setting.Fields, setting.Extra, disabled);
     break;
   case SettingType.TwoOptions:
     input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
