@@ -1,5 +1,4 @@
 import { createRef, useState, useEffect, useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'react-feather';
 import { Card, Divider, Carousel, Button, Space, Layout, Spin } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 import { StatusBar } from '../../small-components/StatusBar';
@@ -7,6 +6,7 @@ import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
 import { Product } from '../../redux/subscriptions/subsSlice';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import '../../sass/subscriptions/subscriptions.scss';
 //import { Checkout } from './Checkout';
 import { Link } from 'react-router-dom';
@@ -158,8 +158,8 @@ export const Subscriptions = () => {
             ))}
           </Carousel>
           <Space className="control-btns-container">
-            <ChevronLeft onClick={handlePrev} className="chevron-left" />
-            <ChevronRight onClick={handleNext} className="chevron-right" />
+            <LeftOutlined onClick={handlePrev} style={{fontSize: '19px'}}/>
+            <RightOutlined onClick={handleNext} style={{fontSize: '19px'}}/>
           </Space>
         </div>
       )}

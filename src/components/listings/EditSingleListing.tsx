@@ -6,9 +6,12 @@ import { ListingMain } from '../../small-components/ListingMain';
 import { ListingDescription } from '../../small-components/ListingDescription';
 import { ListingDetails } from '../../small-components/ListingDetails';
 import { ListingOptions } from '../../small-components/ListingOptions';
-import '../../sass/edit-single-listing.scss';
-import { ExternalLink } from 'react-feather';
 import { ListingData } from 'src/redux/listings/listingsSlice';
+import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
+import Icon from '@ant-design/icons';
+
+import '../../sass/edit-single-listing.scss';
+import { ExternalLinkSvg } from '../common/Icons';
 
 interface Props {
   selectedRecordData: ListingData;
@@ -40,6 +43,11 @@ export const EditSingleListing = ({ selectedRecordData }: Props) => {
     setIndex(index);
   };
 
+  const ExternalLinkOutlined = (props: Partial<CustomIconComponentProps>) =>(
+    <Icon component={ExternalLinkSvg} {...props} />
+  );
+   
+
   return (
     <>
       <div className="upper-section">
@@ -48,13 +56,13 @@ export const EditSingleListing = ({ selectedRecordData }: Props) => {
           <a href="#">
             View price Changes{' '}
             <span>
-              <ExternalLink size="20" />
+              <ExternalLinkOutlined/>
             </span>
           </a>
           <a href="#">
             View stock changes{' '}
             <span>
-              <ExternalLink size="20" />
+              <ExternalLinkOutlined/>
             </span>
           </a>
         </div>

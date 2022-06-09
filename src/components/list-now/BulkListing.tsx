@@ -24,12 +24,12 @@ export const BulkListing = (/*props: props*/) => {
   const lables = ['Source URL', 'Listing Title (Optional)'];
 
   // props for form
-  const [createdBy, setCreatedBy] = useState<string>();
-  const [ignoreVero, setIgnoreVero] = useState<string>();
-  const [ignoreOOS, setIgnoreOOS] = useState<string>();
-  const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>();
+  const [createdBy, setCreatedBy] = useState<number>();
+  const [ignoreVero, setIgnoreVero] = useState<string>('false');
+  const [ignoreOOS, setIgnoreOOS] = useState<string>('true');
+  const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>('false');
   const [listFrequencyMinutes, setListFrequencyMinutes] = useState<number>();
-  const [dontListUntil, setDontListUntil] = useState<string>();
+  const [dontListUntil, setDontListUntil] = useState<Date>();
 
   const [data, setData] = useState<Matrix<{ value: string }>>([
     [{ value: '' }, { value: '' }],
@@ -49,27 +49,51 @@ export const BulkListing = (/*props: props*/) => {
     dispatch(getUserAssistants());
   }, [getManualListings, getUserAssistants]);
 
-  const onSave = async (values: ListingsData[]) => {
+  const onSave = async (values: ListingsData) => {
     await dispatch(
       SaveAutolist(values)
     );
   };
+  const [listing] = useState<string[][]>([]);
 
   function onListItems() {
+    let _ignoreVero;
+    if (ignoreVero === 'true') {
+      _ignoreVero = true;
+    } else if (ignoreVero === 'false') {
+      _ignoreVero = false;
+    }
+    let _ignoreOOS;
+    if (ignoreOOS === 'true') {
+      _ignoreOOS = true;
+    } else if (ignoreOOS === 'false') {
+      _ignoreOOS = false;
+    }
+    let _reviewBeforePublishing;
+    if (reviewBeforePublishing === 'true') {
+      _reviewBeforePublishing = true;
+    } else if (reviewBeforePublishing === 'false') {
+      _reviewBeforePublishing = false;
+    }
 
-    const value: ListingsData[] = [{
-      createdBy: createdBy ? createdBy : '',
-      ignoreVero: ignoreVero ? ignoreVero : '',
-      ignoreOOS: ignoreOOS ? ignoreOOS : '',
-      dontListUntil: dontListUntil ? dontListUntil : '',
-      reviewBeforePublishing: reviewBeforePublishing ? reviewBeforePublishing : '',
-      listFrequencyMinutes: listFrequencyMinutes ? listFrequencyMinutes : 0,
-      data: data
-    }];
+    data.map(item => {
+      if (item[0]?.value || item[1]?.value) {
+        const val1 = item[0]?.value ? item[0]?.value : '';
+        const val2 = item[1]?.value ? item[1]?.value : '';
+        listing.push([val1, val2]);
+      }
+    });
 
+    const value: ListingsData = {
+      createdBy: createdBy as number,
+      ignoreVero: _ignoreVero,
+      ignoreOOS: _ignoreOOS,
+      dontListUntil: dontListUntil,
+      reviewBeforePublishing: _reviewBeforePublishing,
+      listFrequencyMinutes: listFrequencyMinutes as number,
+      listings: listing
+    };
     onSave(value);
-
-    console.log('List Items: ' + data);
   }
 
   function addRows() {
@@ -77,7 +101,7 @@ export const BulkListing = (/*props: props*/) => {
   }
 
   const handleAssistantChange = (value: SelectorValue) => {
-    setCreatedBy(value as string);
+    setCreatedBy(value as number);
   };
 
   const handleIgnoreVeroChange = (value: SelectorValue) => {
@@ -100,7 +124,9 @@ export const BulkListing = (/*props: props*/) => {
     value: DatePickerProps['value'] | RangePickerProps['value'],
     dateString: string,
   ) => {
-    setDontListUntil(dateString);
+    const date = new Date(dateString);
+
+    setDontListUntil(date);
     console.log('Selected Time: ', dontListUntil);
   };
 
@@ -126,19 +152,19 @@ export const BulkListing = (/*props: props*/) => {
                     </Item>
                     <p>VA Profile selected as the creator of the listing</p>
                     <Item label='List Vero Items' name='ignoreVero'>
-                      <Selector defaultValue='false'
-                        value={ignoreVero ? ignoreVero : 'false'}
+                      <Selector defaultValue={ignoreVero}
+                        value={ignoreVero}
                         onChange={handleIgnoreVeroChange}
                       >
                         {[
-                          { label:'Yes', value:'true' },
-                          { label:'No', value:'false' }
+                          { label: 'Yes', value: 'true' },
+                          { label: 'No', value: 'false' }
                         ]}
                       </Selector>
                     </Item>
                     <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
                     <Item label='List Out of Stock Items' name='ignoreOOS'>
-                      <Selector defaultValue='false' value={ignoreOOS ? ignoreOOS : 'false'} onChange={handleIgnoreOOSChange}>
+                      <Selector defaultValue={ignoreOOS} value={ignoreOOS} onChange={handleIgnoreOOSChange}>
                         {[
                           { label: 'Yes', value: 'true' },
                           { label: 'No', value: 'false' }
@@ -155,7 +181,7 @@ export const BulkListing = (/*props: props*/) => {
                     </Item>
                     <p>The system will automatically list an item every X minutes.</p>
                     <Item label='Review listings' name='reviewBeforePublishing'>
-                      <Selector defaultValue='false' value={reviewBeforePublishing ? reviewBeforePublishing : 'false'} onChange={handleReviewBeforePublishing}>
+                      <Selector defaultValue={reviewBeforePublishing} value={reviewBeforePublishing} onChange={handleReviewBeforePublishing}>
                         {[
                           { label: 'Yes', value: 'true' },
                           { label: 'No', value: 'false' }
@@ -193,6 +219,7 @@ export const BulkListing = (/*props: props*/) => {
                   return <Col span={6} key={itm.id}>
                     <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
                       <div className='list-card'> {loadings}
+                        {/* eslint-disable @typescript-eslint/no-var-requires */}
                         <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
                         <br />
                         <h3>{itm.name}</h3>

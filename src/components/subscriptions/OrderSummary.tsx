@@ -1,13 +1,11 @@
-/*import { useState } from 'react';*/
-/*import { t } from '../../utils/transShim';*/
 import { Divider, Spin } from 'antd';
-import '../../sass/subscriptions/order-summary.scss';
-import { ArrowRight } from 'react-feather';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Product } from '../../redux/subscriptions/subsSlice';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import '../../sass/subscriptions/order-summary.scss';
 
 interface props {
   productId: string | null;
@@ -130,7 +128,7 @@ export const OrderSummary = (props: props) => {
                     })}
                   </h1>
                   <ConfirmBtn htmlType="submit">
-                    Payment method <ArrowRight />
+                    Payment method <ArrowRightOutlined />
                   </ConfirmBtn>
                 </div>
               </div>

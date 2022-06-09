@@ -5,10 +5,10 @@ import { t } from '../../utils/transShim';
 import { SimpleTable } from '../tables/SimpleTable';
 import { getSources } from '../../redux/source-config/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { SearchInput } from '../../small-components/TableActionBtns';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
-import { X, Check } from 'react-feather';
-import { SearchInput } from '../../small-components/TableActionBtns';
 
 export const SourcesTable = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorStock',
       key: 'monitorStock',
       render: (value: boolean) => {
-        return value ? <Check /> : <X />;
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : <CloseOutlined />;
       }
     },
     {
@@ -60,7 +60,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorPrice',
       key: 'monitorPrice',
       render: (value: boolean) => {
-        return value ? <Check /> : '';
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : '';
       }
     },
     {
@@ -68,7 +68,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorPriceDecrease',
       key: 'monitorPriceDecrease',
       render: (value: boolean) => {
-        return value ? <Check /> : '';
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : '';
       }
     },
     {
@@ -97,7 +97,6 @@ export const SourcesTable = () => {
     <Layout className="sources-container">
       <div className="search-options-area">
         <SearchInput onSearch={onSearch} />
-        {/*<SearchOptions showSearchInput />*/}
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">

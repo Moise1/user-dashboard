@@ -1459,3 +1459,32 @@ c0 393 -1 714 -2 713 -2 0 -174 -99 -383 -219z m245 -1124 c-5 -5 -222 -132
     </g>
   </svg>
 );
+
+export const CircleWarningSvg = () => (
+  <svg
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+  >
+    <g id="web-app" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g id="warning" fill="#000000" fillRule="nonzero">
+        <path
+          d="M12,20 C16.418278,20 20,16.418278 20,12 C20,7.581722 16.418278,4 12,4 C7.581722,4 4,7.581722 4,12 C4,16.418278 7.581722,20 12,20 Z M12,22 C6.4771525,22 2,17.5228475 2,12 C2,6.4771525 6.4771525,2 12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 Z M11,16 L13,16 L13,18 L11,18 L11,16 Z M11,6 L13,6 L13,14 L11,14 L11,6 Z"
+          id="Shape"
+        ></path>
+      </g>
+    </g>
+  </svg>
+);
+
+export const ExternalLinkSvg = () => (
+  <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <path fill="none" d="M0 0h24v24H0z" />
+      <path d="M10 6v2H5v11h11v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z" />
+    </g>
+  </svg>
+);
