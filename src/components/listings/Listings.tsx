@@ -26,13 +26,11 @@ import { ListingsStatusType, useTableSearch } from '../../custom-hooks/useTableS
 import { ActiveListing } from 'src/redux/unmap';
 import '../../sass/listings.scss';
 import {ListNow} from '../list-now/ListNow';
+import { ReactUtils } from '../../utils/react-utils';
 const { Search } = Input;
 
 export const Listings = () => {
-
-	
-  const channel = localStorage.getItem('channelId');
-  console.log('The channel', channel);
+  const selectedChannel = ReactUtils.GetSelectedChannel();
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
   const [searchTxt, setSearchTxt] = useState<null | string>(null);
@@ -58,7 +56,7 @@ export const Listings = () => {
     dispatch(getListingsSource());
     dispatch(getPendingListings());
     dispatch(getTerminatedListings());
-  }, [getListings, getListingsSource, getPendingListings, tabStatus,channel]);
+  }, [getListings, getListingsSource, getPendingListings, tabStatus, selectedChannel?.id]);
 
   const tableColumns = [
     {
@@ -173,7 +171,7 @@ export const Listings = () => {
     default:
       break;
     }
-  }, [tabStatus]);
+  }, [tabStatus, selectedChannel?.id]);
 
   const { filteredData } = useTableSearch({ searchTxt, dataSource });
 
