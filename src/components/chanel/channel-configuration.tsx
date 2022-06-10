@@ -82,25 +82,31 @@ export const ChannelConfiguration = () => {
       dispatch(loadBusinessPolicies());
     }, [loadBusinessPolicies]);
   };
-  
-  const allExtras = ([] as ChannelSettingExtra[]).concat.apply([], ChannelSettings.filter(x => !!x.Extra).map(x => x.Extra!));
-  let policies = false;
-  for (const e of allExtras ?? []) {
-    switch (e) {
-    case ChannelSettingExtra.TemplateList:
-      LoadTemplate();
-      break;
-    case ChannelSettingExtra.BusinessPayment:
-    case ChannelSettingExtra.BusinessReturn:
-    case ChannelSettingExtra.BusinessShipping:
-    case ChannelSettingExtra.PolicyDelivery:
-    case ChannelSettingExtra.RefreshPolicies:
-      policies = true;
-      break;
+
+  {
+    const allExtras = ([] as ChannelSettingExtra[]).concat.apply([], ChannelSettings.filter(x => !!x.Extra).map(x => x.Extra!));
+    let policies = false;
+    let templates = false;
+    for (const e of allExtras ?? []) {
+      switch (e) {
+      case ChannelSettingExtra.TemplateList:
+        templates = true;
+        break;
+      case ChannelSettingExtra.BusinessPayment:
+      case ChannelSettingExtra.BusinessReturn:
+      case ChannelSettingExtra.BusinessShipping:
+      case ChannelSettingExtra.PolicyDelivery:
+      case ChannelSettingExtra.RefreshPolicies:
+        policies = true;
+        break;
+      }
     }
-  }
-  if (policies) {
-    LoadPolicies();
+    if (templates) {
+      LoadTemplate();
+    }
+    if (policies) {
+      LoadPolicies();
+    }
   }
   //---------------------------------------------------------------------
 
