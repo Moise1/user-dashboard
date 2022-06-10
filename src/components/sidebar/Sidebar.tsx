@@ -182,7 +182,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.ListNow'),
       <ListNowIcon />,
       undefined,
-      () => routeChange('/list-now'),
+      () => routeChange('/publish-now'),
 
     ),
     getItem(
@@ -192,7 +192,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Listings'),
       <ListingsIcon />,
       undefined,
-      () => routeChange('/listings'),
+      () => routeChange('/products'),
     ),
     getItem(
       '5',
