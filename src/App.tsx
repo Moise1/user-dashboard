@@ -20,9 +20,9 @@ import {
   ChannelConfiguration,
   GetStarted,
   Catalog,
-  SourcesTable,
+  SourcesConfiuration,
   Dashboard,
-  SourcesSettings,
+  SourceConfiguration,
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering
@@ -77,8 +77,8 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/manual-publish" component={ManualListing} />
             <ProtectedRoute path="/bulk-publish" component={BulkListing} />
             <ProtectedRoute path="/orders" component={Orders} />
-            <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
-            <ProtectedRoute path="/sources-table" component={SourcesTable} />
+            <ProtectedRoute path="/sources-settings" component={SourceConfiguration} />
+            <ProtectedRoute path="/sources-table" component={SourcesConfiuration} />
             <ProtectedRoute path="/channel" component={ChannelConfiguration} />
             <ProtectedRoute path="/new-channel" component={NewChannel} />
             <ProtectedRoute path="/services" component={Services} />

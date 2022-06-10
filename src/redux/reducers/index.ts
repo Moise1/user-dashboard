@@ -3,7 +3,7 @@ import { pricingRulesReducer } from '../pricing-rules/rulesSlice';
 import { subscriptionsReducer } from '../subscriptions/subsSlice';
 import { userAssistantsReducer } from '../va-profiles/vaProfilesSlice';
 import { userReducer } from '../user/userSlice';
-import { sourcesConfigReducer } from '../source-config/sourceSlice';
+import { sourcesConfigReducer } from '../source-configuration/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';

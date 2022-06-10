@@ -244,7 +244,7 @@ export const SettingInput = (props: Props) => {
 
   const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     const savingState = savingSetting.get(fields[0]);
-    let value = configuration?.get(fields[0]) ?? values[0];
+    const value = configuration?.get(fields[0]) ?? values[0];
 
     const listValues: ListData[] = [];
     for (let i = 1; i < values.length; i += 2) {
@@ -259,9 +259,6 @@ export const SettingInput = (props: Props) => {
         const ds = data?.data ?? [];
         if (ds.length > 0) {
           listValues.push(...(ds.map(x => ({ label: x.name, value: x.id?.toString() })) ?? []));
-          if (value == values[0]) {
-            value = ds[0].id.toString();
-          }
         }
       }
     };
@@ -296,6 +293,7 @@ export const SettingInput = (props: Props) => {
           loadingData={loadingData}
           loading={savingState?.loading ?? false}
           disabled={disabled}
+          placeHolder={setting.PlaceHolder}
         />
       </Col>
     );
