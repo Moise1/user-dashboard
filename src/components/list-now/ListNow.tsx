@@ -55,7 +55,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/manual-listing')}>
+            <div className="list-card" onClick={() => routeChange('/manual-publish')}>
               <img src={manual_icon} alt="icon" />
 
               <div className="card-info">
@@ -73,7 +73,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/bulk-listing')}>
+            <div className="list-card" onClick={() => routeChange('/bulk-publish')}>
               <img src={bulk_icon} alt="icon" className={'w-md-100 filter-white'} />
 
               <div className="card-info">
