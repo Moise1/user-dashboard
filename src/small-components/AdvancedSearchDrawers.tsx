@@ -48,7 +48,6 @@ export const CatalogFilters = (props: Props) => {
   const handleFilterSubmit = () => {
 
     const filterResult = catalogData?.filter(product => {
-      console.log('The search.title', product.title);
       if (product.title == catalogAdvancedSearchFormData.title) {
         return product.title == catalogAdvancedSearchFormData.title;
       }

@@ -21,8 +21,6 @@ export type ProductElementEvent =
   | React.MouseEvent<SVGElement, MouseEvent>;
 
 export const Catalog = () => {
-
-
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -31,14 +29,14 @@ export const Catalog = () => {
   const [allProducts, setAllProducts] = useState<ICatalogData[]>([]);
   const [className, setClassName] = useState<string>('product-card');
   const dispatch = useAppDispatch();
-
-  const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
-
-  console.log('CATALOG PRODUCTS', catalogProducts);
   const { Meta } = Card;
 
+  const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
+  console.log('catalogProducts', catalogProducts);
+  const [sessionId] = useState<number>(0);
+
   useEffect(() => {
-    dispatch(getCatalogProducts());
+    dispatch(getCatalogProducts({sessionId}));
   }, [getCatalogProducts]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);

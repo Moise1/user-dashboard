@@ -33,7 +33,7 @@ import { ManualListing } from './components/list-now/ManualListing';
 import { BulkListing } from './components/list-now/BulkListing';
 import { Checkout } from './components/subscriptions/Checkout';
 import { PaymentMethod } from './components/subscriptions/PaymentMethod';
-
+import ManageServer from './components/manage-servers/ManageServer';
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(true);
@@ -93,6 +93,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path="/templates" component={Templates} />
             <ProtectedRoute path="/auto-ordering-configuration" component={AutoOrderingConfiguration} />
             <ProtectedRoute path="/auto-ordering-configuration-query" component={AutoOrdering} />
+            <ProtectedRoute path="/manage-servers" component={ManageServer} />
           </Switch>
         </Layout>
       </Layout>

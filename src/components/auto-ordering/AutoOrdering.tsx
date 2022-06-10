@@ -114,12 +114,11 @@ export const AutoOrdering = () => {
     { key: 22, value: rawSettingIntialValues.oGift }
   ]);
 
-  //Form States For Toggle
   const { Option } = Select;
-  const [accountConfig, setAccountConfig] = useState<string>('');
-
+ 
+  const [accountConfig, setAccountConfig] = useState<string>(''); //Value for account
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
+  const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector 
   const [btnEnableDisable, setBtnEnableDisable] = useState<boolean>(true);
   const [aliasBtnEnableDisable, setAliasEnableDisable] = useState<boolean>(false);
   const [showAccConfig] = useState<boolean>(true); //For opening the accountConfig
@@ -148,8 +147,6 @@ export const AutoOrdering = () => {
   const handleOptionChange = (value: SelectorValue) => {
     setAccountConfig(value as string);
     setBtnEnableDisable(!btnEnableDisable);
-    console.log('The vaulues of showAccConfig', showAccConfig);
-    console.log('The value of accountConfig', accountConfig);
     buttonRef.current?.style.backgroundColor === '#228b22';
   };
   const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
@@ -267,7 +264,6 @@ export const AutoOrdering = () => {
       { key: 21, value: rawSettingIntialValues.oPayment },
       { key: 22, value: rawSettingIntialValues.oGift }
     ]);
-    console.log('The rawSetting before using saveAutoOrdering Dispatch', rawSettings);
     dispatch(saveAutoOrdering({ channelOAuthId, supplierId, sourceId, rawSettings }));
   };
 
@@ -278,7 +274,6 @@ export const AutoOrdering = () => {
       return true;
     }
   };
-  console.log('The value of btnDisabler', btnDisabler());
   return (
     <Layout className="orders-container">
       {loading || deleteLoading ? (

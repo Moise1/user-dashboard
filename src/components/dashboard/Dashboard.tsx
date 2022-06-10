@@ -43,7 +43,6 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
-
 interface ProductQuota {
   quota: number;
   used: number;
@@ -56,6 +55,12 @@ interface ProductQuota {
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
+
+  //For pagination add by suleman ahmad 
+  const [postPerPage, setPostPerPage] = useState<number>(2);
+  const [current, setCurrent] = useState<number>(1);
+  const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
+  //
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
@@ -66,10 +71,17 @@ export const Dashboard = () => {
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [showSales, setShowSales] = useState<boolean>(true);
-  const [current] = useState<number>(1);
+  // const [current] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
 
-  const onSearch = (value: string) => console.log('searched value', value);
+  const onSearch = (value: string) => {
+    setSearchedChannels(channels?.filter((pro: Channel) => {
+      if (pro.name === value) {
+        return pro.name === value;
+      }
+    })
+    );
+  };
 
   const removeRecord = async (id: Channel['id']) => {
     await dispatch(deleteChannel(id));
@@ -93,7 +105,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(getNoApiServers());
     dispatch(getListingServices());
-  },[]);
+  }, []);
 
   const columns = [
     {
@@ -230,7 +242,7 @@ export const Dashboard = () => {
           from: dateString
         })
       );
-      
+
     }
   };
 
@@ -289,7 +301,14 @@ export const Dashboard = () => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable current={current} dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
+            <DataTable
+              dataSource={searchedChannels.length ? searchedChannels : channels} columns={columns} totalItems={channels.length}
+              pageSize={postPerPage}
+              setPostPerPage={setPostPerPage}
+              current={current}
+              onChange={setCurrent}
+            />
+
             <Link to="/add-channel" className="alternative-link">
               Add new channel
             </Link>

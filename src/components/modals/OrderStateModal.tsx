@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
 import { AoIconHead, CrossModalIcon } from '../common/Icons';
 import { t } from '../../utils/transShim';
 
@@ -13,7 +12,7 @@ const OrderStateModal = (props: Props) => {
 
   return (
     <>
-      <Modal
+      {/* <Modal
         show={AoDisabledModal}
         onHide={() => setAoDisabledModal(false)}
         size="xl"
@@ -44,7 +43,7 @@ const OrderStateModal = (props: Props) => {
             </div>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 };
