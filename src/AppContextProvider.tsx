@@ -35,7 +35,7 @@ export const AppContextProvider = ({ children }: Props) => {
   }, []);
   return (
     <AppContext.Provider value={{ theme, setTheme: SetTheme, channelId, setChannelId:SetChannelId }}>
-      <div data-theme={theme} className="theme-provider" key={channelId + '_' + theme}>
+      <div data-theme={theme} className="theme-provider" key={channelId}>
         {children}
       </div>
     </AppContext.Provider>
