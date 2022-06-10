@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getTemplates } from './templatesThunk';
 
 export interface Template {
+  templates: Template[];
+  loading: boolean;
   id: number;
   userId: string;
   html: ReactNode;
@@ -15,7 +17,7 @@ export interface Template {
 
 export interface TemplateState {
   templates: Template[];
-  loading: boolean
+  loading: boolean;
   error: string;
 }
 
