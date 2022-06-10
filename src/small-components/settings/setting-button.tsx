@@ -1,8 +1,9 @@
 ﻿import { Button, Spin } from 'antd';
+import { ReactNode } from 'react';
 import '../../sass/settings.scss';
 
 interface Props {
-  label: string;
+  label: string | ReactNode;
   onClick: () => void;
   loading: boolean;
   disabled?: boolean;

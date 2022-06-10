@@ -72,10 +72,10 @@ export const App = withRouter(({ history }) => {
             <Route path="/login" component={UserLogin} />
             <Route path="/register" component={UserRegister} />
             <ProtectedRoute path="/dashboard" component={Dashboard} />
-            <ProtectedRoute path="/listings" component={Listings} />
+            <ProtectedRoute path="/products" component={Listings} />
             <ProtectedRoute path="/list-now" component={ListNow} />
-            <ProtectedRoute path="/manual-listing" component={ManualListing} />
-            <ProtectedRoute path="/bulk-listing" component={BulkListing} />
+            <ProtectedRoute path="/manual-publish" component={ManualListing} />
+            <ProtectedRoute path="/bulk-publish" component={BulkListing} />
             <ProtectedRoute path="/orders" component={Orders} />
             <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
             <ProtectedRoute path="/sources-table" component={SourcesTable} />
