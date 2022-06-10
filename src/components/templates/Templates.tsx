@@ -1,3 +1,4 @@
+import { Layout } from 'antd';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { getTemplates } from '../../redux/templates/templatesThunk';
@@ -11,8 +12,8 @@ export const Templates = () => {
   }, [getTemplates]);
 
   return (
-    <div className="templates-container">
+    <Layout className="templates-container">
       <h1>Templates</h1>
-    </div>
+    </Layout>
   );
 };
