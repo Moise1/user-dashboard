@@ -13,10 +13,10 @@ export const getChannelConfiguration = createAsyncThunk( 'channelConfiguration/g
   }
 );
 
-export const saveChannelSetting = createAsyncThunk('channelConfiguration/SaveOneString',
+export const saveChannelSetting = createAsyncThunk('channelConfiguration/SaveOne',
   async (data: SettingKey) => {
     try {
-      const res = await client.post('/channelConfiguration/SaveOneString', data);
+      const res = await client.post('/channelConfiguration/SaveOne', data);
       return res.data.response_data;
     } catch (error) {
       return { success : false };

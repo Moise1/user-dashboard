@@ -7,7 +7,7 @@ export enum SettingType {
 
 //When it is something special, like a list with values that come from the API or a different call to store that
 export enum ChannelSettingExtra {
-  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, NoApiName, RefreshPolicies, TranslateDefaultValue
+  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, RefreshPolicies, TranslateDefaultValue
 }
 
 interface Ancestor {
@@ -381,10 +381,9 @@ export const ChannelSettings: ChannelSetting[] = [
     Description: ['Channel.Setting.Description.NoApiName'],
     Type: SettingType.String,
     Section: ChannelSettingSection.Other,
-    Fields: [],
+    Fields: [eChannelSettings.NoApiName],
     Values: [''],
-    ChannelIds: [3, 4],
-    Extra: [ChannelSettingExtra.NoApiName]
+    ChannelIds: [3, 4]
   },
   {
     Labels: ['Channel.Setting.Name.FeePercentage'],

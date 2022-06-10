@@ -53,7 +53,9 @@ export enum eChannelSettings {
 
   MaxAvailableStock = 50, //Used by Compelia
 
-  CompareAtPrice = 51
+  CompareAtPrice = 51,
+
+  NoApiName = 52//Special setting used to modify the name but it is not a real setting
 }
 
 export enum BusinessPolicyType {

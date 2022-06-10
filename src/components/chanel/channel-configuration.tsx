@@ -14,6 +14,7 @@ import { ReactUtils } from '../../utils/react-utils';
 import { Platforms } from '../../data/platforms';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
+import { getChannels } from '../../redux/channels/channelsThunk';
 
 export const ChannelConfiguration = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
@@ -23,7 +24,7 @@ export const ChannelConfiguration = () => {
   const [activeTab, setActiveTab] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
   const sections = ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
 
-  const bag: SettingDataBag = {};
+  const bag: SettingDataBag = { selectedChannel };
 
   //Load from api------------------------------------------------------------
   const dispatch = useAppDispatch();
@@ -105,8 +106,12 @@ export const ChannelConfiguration = () => {
 
   const SaveSetting = async (key: eChannelSettings, value: SettingsValue) => {
     const rp = await dispatch(saveChannelSetting({ key: key, value: value }));
-    if (!rp.payload) {
+    if (!rp.payload?.success) {
       dispatch(getChannelConfiguration());
+    } else {
+      if (key == eChannelSettings.NoApiName) {
+        await dispatch(getChannels());
+      }
     }
   };
 
