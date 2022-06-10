@@ -2,6 +2,11 @@ import { ReactNode } from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { getTemplates } from './templatesThunk';
 
+export interface TemplateList {
+  id: number;
+  name: string;
+}
+
 export interface Template {
   id: number;
   userId: string;
