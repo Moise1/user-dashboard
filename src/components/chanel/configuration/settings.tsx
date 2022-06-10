@@ -391,6 +391,6 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Number,
     Section: ChannelSettingSection.Other,
     Fields: [eChannelSettings.FeePercentage],
-    Values: ['']
+    Values: ['13']
   },
 ];
