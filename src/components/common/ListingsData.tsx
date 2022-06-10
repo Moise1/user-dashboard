@@ -1,5 +1,5 @@
+import { MoreOutlined } from '@ant-design/icons';
 import dataoneimg from '../../assets/data1img.png';
-import { MoreVertical } from 'react-feather';
 
 export interface ListingsItems {
   id: number;
@@ -42,7 +42,7 @@ export const listingsData = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical />,
+    options: <MoreOutlined style={{fontSize: '19px'}}/>,
     checked: false
   },
   {
@@ -67,7 +67,7 @@ export const listingsData = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical />,
+    options: <MoreOutlined style={{fontSize: '19px'}}/>,
     checked: false
   },
   {
@@ -92,7 +92,7 @@ export const listingsData = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical />,
+    options: <MoreOutlined style={{fontSize: '19px'}}/>,
     checked: false
   },
   {
@@ -117,7 +117,7 @@ export const listingsData = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical />,
+    options: <MoreOutlined style={{fontSize: '19px'}}/>,
     checked: false
   },
   {
@@ -142,7 +142,7 @@ export const listingsData = [
       </div>
     ),
     created: new Date(),
-    options: <MoreVertical />,
+    options: <MoreOutlined style={{fontSize: '19px'}}/>,
     checked: false
   }
 ];

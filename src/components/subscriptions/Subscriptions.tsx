@@ -1,5 +1,4 @@
 import { createRef, useState, useEffect, useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'react-feather';
 import { Card, Divider, Carousel, Button, Space, Layout, Spin } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 import { StatusBar } from '../../small-components/StatusBar';
@@ -7,7 +6,10 @@ import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
 import { Product } from '../../redux/subscriptions/subsSlice';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import '../../sass/subscriptions/subscriptions.scss';
+//import { Checkout } from './Checkout';
+import { Link } from 'react-router-dom';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
@@ -36,6 +38,12 @@ export const Subscriptions = () => {
       setCurrency('\u00A3');
     }
   };
+
+  function parentToChild(value: number, billing: number): void {
+    localStorage.setItem('productId', value.toString());
+    localStorage.setItem('billing', billing.toString());
+    localStorage.setItem('currencyId', activeCurrency.toString());
+  }
 
   const renderSlides = useMemo(() => {
     if (tabletScreen.matches) {
@@ -95,59 +103,63 @@ export const Subscriptions = () => {
                 <p className="listings-count">
                   <strong>{p.name}</strong>
                 </p>
-
                 <div className="container-sub">
-                  <div className="rate-details">
-                    <span className="euro">{currency}</span>
-                    <h1 className="monthly-rate">
-                      {p.prices.map((prc) => {
-                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 0) {
-                          return prc.price;
-                        }
-                      })}
-                    </h1>
-                    <span className="frequency">/mo</span>
-                  </div>
-                </div>
-
-                <Divider className="divider" />
-                <div className="container-sub">
-                  <p className="twenty-off">20% off</p>
-                  <div className="rate-details">
-                    <span className="euro">{currency}</span>
-                    <h1 className="monthly-rate">
-                      {p.prices.map((prc) => {
-                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 1) {
-                          return (prc.price / 6).toFixed(1);
-                        }
-                      })}
-                    </h1>
-                    <span className="frequency">/mo</span>
-                  </div>
-                  <span className="duration">(6 months)</span>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 0)} key={p.id}>
+                    <div className="rate-details top-most">
+                      <span className="euro">{currency}</span>
+                      <h1 className="monthly-rate">
+                        {p.prices.map((prc) => {
+                          if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 0) {
+                            return prc.price;
+                          }
+                        })}
+                      </h1>
+                      <h4 className="frequency">/mo</h4>
+                    </div>
+                  </Link>
                 </div>
                 <Divider className="divider" />
                 <div className="container-sub">
-                  <p className="forty-off">40% off</p>
-                  <div className="rate-details">
-                    <span className="euro">{currency}</span>
-                    <h1 className="monthly-rate">
-                      {p.prices.map((prc) => {
-                        if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 2) {
-                          return (prc.price / 12).toFixed(1);
-                        }
-                      })}
-                    </h1>
-                    <span className="frequency">/mo</span>
-                  </div>
-                  <span className="duration">(1 year)</span>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 1)}>
+                    <p className="twenty-off">20% off</p>
+                    <div className="rate-details">
+                      <span className="euro">{currency}</span>
+                      <h1 className="monthly-rate">
+                        {p.prices.map((prc) => {
+                          if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 1) {
+                            return (prc.price / 6).toFixed(1);
+                          }
+                        })}
+                      </h1>
+                      <h4 className="frequency">/mo</h4>
+                      <h4 className="duration">(6 months)</h4>
+                    </div>
+                  </Link>
+                </div>
+                <Divider className="divider" />
+                <div className="container-sub">
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 2)}>
+                    <p className="forty-off">40% off</p>
+                    <div className="rate-details">
+                      <span className="euro">{currency}</span>
+                      <h1 className="monthly-rate">
+                        {p.prices.map((prc) => {
+                          if (prc.currencyId === activeCurrency && prc.platformId === 1 && prc.billingPeriodId === 2) {
+                            return (prc.price / 12).toFixed(1);
+                          }
+                        })}
+                      </h1>
+                      <h4 className="frequency">/mo</h4>
+                      <h4 className="duration">(1 year)</h4>
+                    </div>
+                  </Link>
                 </div>
               </Card>
             ))}
           </Carousel>
           <Space className="control-btns-container">
-            <ChevronLeft onClick={handlePrev} className="chevron-left" />
-            <ChevronRight onClick={handleNext} className="chevron-right" />
+            <LeftOutlined onClick={handlePrev} style={{fontSize: '19px'}}/>
+            <RightOutlined onClick={handleNext} style={{fontSize: '19px'}}/>
           </Space>
         </div>
       )}

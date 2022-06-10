@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { configureStore, Reducer, AnyAction, createEntityAdapter } from '@reduxjs/toolkit';
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { persistStore } from 'redux-persist';
 import { allReducers } from './reducers';
@@ -27,11 +27,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    })
+    getDefaultMiddleware({serializableCheck:false})
 });
 
 const persistor = persistStore(store);

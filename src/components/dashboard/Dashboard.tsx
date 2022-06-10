@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
-import { Book } from 'react-feather';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
@@ -14,9 +13,7 @@ import {
   Title,
   Tooltip,
   Legend,
-  PointElement,
-  TooltipItem,
-  ChartType
+  PointElement
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
@@ -39,10 +36,12 @@ import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { BookOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { affiliatesGraphConfig, salesGraphConfig } from 'src/utils/graphConfig';
+import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-import { Selector, SelectorValue } from '../../small-components/form/selector';
 
 interface ProductQuota {
   quota: number;
@@ -58,6 +57,7 @@ const { RangePicker } = DatePicker;
 export const Dashboard = () => {
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
+  const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
   const { listingServicesResult } = useAppSelector((state) => state.listingServices);
 
@@ -69,6 +69,10 @@ export const Dashboard = () => {
   const [current] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
 
+  const monthsLabels = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
+
+  const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
+  const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
   const onSearch = (value: string) => console.log('searched value', value);
 
   const removeRecord = async (id: Channel['id']) => {
@@ -93,7 +97,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(getNoApiServers());
     dispatch(getListingServices());
-  },[]);
+  }, []);
 
   const columns = [
     {
@@ -139,82 +143,15 @@ export const Dashboard = () => {
 
   ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement);
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top' as const
-      },
-      title: {
-        display: true,
-        text: 'Sales and Profit Chart'
-      },
-      tooltip: {
-        callbacks: {
-          title: (context: TooltipItem<ChartType>[]) => {
-            return context[0].label;
-          }
-        }
-      }
-    },
-    scales: {
-      x: {
-        display: true,
-        title: {
-          text: selectedPeriod === 4 ? 'Period in months of a year' : 'Period in days of a month',
-          display: true
-        }
-      },
-      y: {
-        min: 0,
-        max: 10000
-      }
-    }
-  };
-
-  const daysLabel: string[] = [];
-  for (let i = 1; i < 32; i++) {
-    daysLabel.push(String(i));
-  }
-  const monthsLabel = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
-  const data = {
-    labels: selectedPeriod === 3 ? daysLabel : monthsLabel,
-    datasets: [
-      {
-        label: 'Sales',
-        data: sales?.map((s: Sale) => s.quantitySold),
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        borderWidth: 1
-      },
-      {
-        label: 'Profit',
-        data: sales?.map((s: Sale) => {
-          const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
-          return profit;
-        }),
-        backgroundColor: '#16537e',
-        borderColor: '#16537e',
-        borderWidth: 1
-      }
-    ]
-  };
-
-  // const initialRangePickerValue = localStorage.getItem('initialRangerPickerValue');
-  // const initialDatePickerValue = localStorage.getItem('initialDatePickerValue');
-
-  // console.log('DATE 1', initialDatePickerValue);
-  // console.log('DATE 2', initialRangePickerValue);
-
   const periodOptions = [
     { value: 0, label: '3' },
     { value: 1, label: '4' }
   ];
   const onSelectOption = (value: SelectorValue) => {
+    value = value ===  0 ? 3 : 4;
     setSelectedPeriod(value as number);
   };
-  const onChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+  const salesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getSales({
@@ -230,10 +167,30 @@ export const Dashboard = () => {
           from: dateString
         })
       );
-      
     }
   };
 
+  const affiliatesDateChange = async (
+    value: Moment | null | RangeValue<Moment>,
+    dateString: string | [string, string]
+  ) => {
+    if (Array.isArray(dateString)) {
+      await dispatch(
+        getAffiliatesStats({
+          period: selectedPeriod,
+          from: dateString[0],
+          to: dateString[1]
+        })
+      );
+    } else {
+      await dispatch(
+        getAffiliatesStats({
+          period: selectedPeriod,
+          from: dateString
+        })
+      );
+    }
+  };
   const totalProfit = sales?.reduce((total: number, sale: Sale) => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
@@ -301,12 +258,14 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector
-              placeHolder='Select a period'
-              onChange={onSelectOption}>
+            <Selector  placeHolder="Select a period" onChange={onSelectOption}>
               {periodOptions}
             </Selector>
-            {selectedPeriod === 3 ? <DatePicker onChange={onChange} /> : <RangePicker onChange={onChange} />}
+            {selectedPeriod === 3 ? (
+              <DatePicker onChange={salesDateChange} />
+            ) : (
+              <RangePicker onChange={salesDateChange} />
+            )}
             <div className="sales-profit-area">
               <div className="digits">{salesOrProfit()}</div>
               <h4 className="sales-profit-numbers">
@@ -324,7 +283,7 @@ export const Dashboard = () => {
           </div>
 
           <div className="graph-container">
-            <Bar options={options} data={data} className="sales-graph" style={{ maxHeight: 470 }} />
+            <Bar options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
           </div>
         </div>
       </div>
@@ -335,7 +294,7 @@ export const Dashboard = () => {
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
               <h6>Listing Service</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             {listingServicesResult?.length ? (
               <List
@@ -368,7 +327,7 @@ export const Dashboard = () => {
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
               <h6>No API Server</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             {noApiServersResult?.length ? (
               <List
@@ -423,7 +382,7 @@ export const Dashboard = () => {
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
               <h6>Auto Ordering</h6>
-              <Book />
+              <BookOutlined  style={{ fontSize: '19px' }}/>
             </div>
             <div className="use-auto-ordering">
               <p>Do you want to keep your NO API extension running 24/7?</p>
@@ -442,7 +401,7 @@ export const Dashboard = () => {
         <div className="affiliates-contents">
           <div className="affiliates-title">
             <h2>Your affiliate link</h2>
-            <Book />
+            <BookOutlined  style={{ fontSize: '19px' }}/>
           </div>
           <div className="affiliates-benefits">
             <p>Get money each time your referrals purchase any service from us</p>
@@ -458,7 +417,40 @@ export const Dashboard = () => {
             <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
           </div>
 
-          <div className="affiliates-graph">{/* affiliates graph /> */}</div>
+          <div className="affiliates-graph">
+            <div className="graph-cntrlers">
+              <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                {periodOptions}
+              </Selector>
+              {selectedPeriod === 3 ? (
+                <DatePicker onChange={affiliatesDateChange} />
+              ) : (
+                <RangePicker onChange={affiliatesDateChange} />
+              )}
+              {/* <div className="sales-profit-area">
+                <div className="digits">{salesOrProfit()}</div>
+                <h4 className="sales-profit-numbers">
+                  total {showSales ? 'sales' : 'profit'} {selectedPeriod === 3 ? 'today' : 'this month'}
+                </h4>
+                <Switch
+                  className="toggle-sales"
+                  checked={showSales}
+                  onChange={handleSalesChange}
+                  checkedChildren="Sales"
+                  unCheckedChildren="Profit"
+                  aria-label="Profit and sales toggle"
+                />
+              </div> */}
+            </div>
+            <div className="graph-container">
+              <Bar
+                options={affiliatesOptions}
+                data={affiliatesData}
+                className="sales-graph"
+                style={{ maxHeight: 470 }}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="social-media">

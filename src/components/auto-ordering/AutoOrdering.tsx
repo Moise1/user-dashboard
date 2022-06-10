@@ -1,7 +1,6 @@
 import React, { ReactNode, useState, useRef } from 'react';
 import { Form, Input, Button, Alert, Select, Spin, Layout } from 'antd';
 import { t } from '../../utils/transShim';
-import { PlusCircle } from 'react-feather';
 import { Switch } from '../../small-components/Switch';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
@@ -14,6 +13,7 @@ import '../../sass/auto-ordering.scss';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useLocation } from 'react-router-dom';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export interface rawSettingInterface {
   key: number;
@@ -116,11 +116,12 @@ export const AutoOrdering = () => {
 
   //Form States For Toggle
   const { Option } = Select;
+  const [accountConfig, setAccountConfig] = useState<string>('');
+
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector
   const [btnEnableDisable, setBtnEnableDisable] = useState<boolean>(true);
   const [aliasBtnEnableDisable, setAliasEnableDisable] = useState<boolean>(false);
-  const [accountConfig, setAccountConfig] = useState<string>('');
   const [showAccConfig] = useState<boolean>(true); //For opening the accountConfig
   const [showEnabledAccount, setShowEnabledAccount] = useState<boolean>(false); //To display enabled accounts
   const showAccounts = (): void => setShowEnabledAccount(!showEnabledAccount); //To display enabled accounts
@@ -147,6 +148,8 @@ export const AutoOrdering = () => {
   const handleOptionChange = (value: SelectorValue) => {
     setAccountConfig(value as string);
     setBtnEnableDisable(!btnEnableDisable);
+    console.log('The vaulues of showAccConfig', showAccConfig);
+    console.log('The value of accountConfig', accountConfig);
     buttonRef.current?.style.backgroundColor === '#228b22';
   };
   const accountData = dummyUsers.filter((user) => user.alias === accountConfig)[0];
@@ -269,8 +272,6 @@ export const AutoOrdering = () => {
   };
 
   const btnDisabler = () => {
-    console.log('The btnEnableDisable', btnEnableDisable);
-    console.log('The btnEnableDisable', aliasBtnEnableDisable);
     if (btnEnableDisable === false && aliasBtnEnableDisable === true) {
       return false;
     } else {
@@ -363,7 +364,7 @@ export const AutoOrdering = () => {
                                     onChange={handleChange}
                                   />
                                   <a onClick={handleSubmit}>
-                                    <PlusCircle className="add-icon" size="35" />
+                                    <PlusCircleOutlined style={{fontSize: '19px'}}/>
                                   </a>
                                 </div>
                               ) : (

@@ -4,7 +4,9 @@ import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { BulkEditMain } from '../../small-components/BulkEditMain';
 import { BulkEditDescription } from '../../small-components/BulkEditDescription';
-import { AlertCircle } from 'react-feather';
+import Icon from '@ant-design/icons';
+import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
+import {CircleWarningSvg} from '../../components/common/Icons';
 import '../../sass/edit-multiple-listings.scss';
 
 interface Props {
@@ -30,13 +32,14 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
     setIndex(index);
   };
 
+  const WarningOutlined = (props: Partial<CustomIconComponentProps>) => <Icon component={CircleWarningSvg} {...props} />;
   return (
     <>
       <div className="upper-section">
         <h3>Edit {selectedItems} listings</h3>
         <div className="warning">
-          <AlertCircle />{' '}
-          <span>Be careful, by editing these values you will set this to all the selected listings.</span>
+          <WarningOutlined/>
+          <p>Be careful, by editing these values you will set this to all the selected listings.</p>
         </div>
       </div>
 

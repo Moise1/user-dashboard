@@ -2,7 +2,6 @@
 @import '../general.config';
 
 // Extra big screens;
-
 .ant-spin-spinning {
   margin-top: 20%;
 }
@@ -11,6 +10,7 @@
   margin: 0 auto;
   width: 100%;
 }
+
 .carousel-container {
   display: block;
   width: 100%;
@@ -38,12 +38,17 @@
     justify-content: center;
   }
 
+  .top-most {
+    padding-top: 20px;
+  }
+
   .subscription-cancel {
     color: $primary-txt;
     background: $secondary-bg;
     border-radius: 5px;
     font-weight: bold;
     width: auto;
+
     &:hover {
       color: $primary-txt;
     }
@@ -70,22 +75,30 @@
     margin: 2rem 13rem;
     padding: 0 !important;
     width: auto;
+
+    .ant-card-body {
+      padding: 24px 0 !important;
+    }
+
     .subscription {
       background: $primary-bg;
       display: grid;
       place-items: center;
       border-radius: 10px;
-      padding: 0.3rem 0.3rem;
+      /*padding: 0.3rem 0.3rem;*/
       transition: 0.3s ease-in-out;
       width: 89% !important;
+
       .container-sub {
         width: 100%;
         position: relative;
+        min-height: 95px;
 
         .twenty-off,
         .forty-off {
           position: absolute;
-          right: 0;
+          top: 8px;
+          right: 15px;
           padding: 0 3px;
           background: $light-gray;
           font-weight: bold;
@@ -107,9 +120,16 @@
         }
       }
 
+      .container-sub:hover {
+        background-color: $light-gray;
+      }
+
       .divider {
         width: 100% !important;
+        padding: 1px !important;
+        margin: 0 !important;
       }
+
       .monthly-rate {
         margin-top: 0.8rem;
         text-align: center;
@@ -130,6 +150,7 @@
       }
     }
   }
+
   .control-btns-container {
     width: 75%;
     left: 14.5%;
@@ -138,8 +159,11 @@
     display: flex;
     justify-content: space-between;
   }
+
   .duration {
+    top: 48px;
     position: absolute;
+    bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
@@ -152,6 +176,7 @@
     .ant-spin-spinning {
       margin-top: 90%;
     }
+
     .status-bar {
       display: flex;
       flex-direction: column;
@@ -160,24 +185,29 @@
 
     .slick-slide.slick-active.slick-current {
       margin: 0 auto !important;
+
       .subscription {
         padding-bottom: 1rem !important;
         width: 100% !important;
       }
     }
+
     .control-btns-container {
       top: 75%;
       left: 10%;
       width: 82%;
     }
+
     .slick-list {
       width: 60vw !important;
       margin-left: -9rem !important;
     }
+
     .twenty-off,
     .forty-off {
       margin-top: -20px;
     }
+
     .frequency {
       right: 10%;
     }
