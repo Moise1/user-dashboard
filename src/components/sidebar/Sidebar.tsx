@@ -24,6 +24,7 @@ import { persistor } from 'src/redux/store';
 import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
 import { LeftOutlined, PushpinOutlined } from '@ant-design/icons';
 import '../../sass/side-bar.scss';
+import { Links } from '../../links';
 
 const { Sider } = Layout;
 interface Props {
@@ -89,26 +90,26 @@ export const Sidebar = (props: Props) => {
     dispatch(actions.logout());
     keysToRemove.forEach((key) => localStorage.removeItem(key));
     persistor.purge();
-    routeChange('/login');
+    routeChange(Links.Login);
   };
 
   const settingsListArray = [
-    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange('/channel') },
-    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange('/sources-table') },
-    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange('/pricing-rules') },
-    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange('/browser-extensions') },
-    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange('/subscriptions') },
-    { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange('/va-profiles') },
-    { id: 12, listName: t('Menu.Templates'), onClick: () => routeChange('/templates') },
+    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange(Links.ChannelSettings) },
+    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange(Links.SourcesSettingsTable) },
+    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange(Links.PricingRules) },
+    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange(Links.BrowserExtension) },
+    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange(Links.Subscriptions) },
+    { id: 11, listName: t('Menu.VaProfiles'), onClick: () => routeChange(Links.VaProfiles) },
+    { id: 12, listName: t('Menu.Templates'), onClick: () => routeChange(Links.Templates) },
     {
       id: 13,
       listName: t('Menu.AutoOrderingConfiguration'),
-      onClick: () => routeChange('/auto-ordering-configuration')
+      onClick: () => routeChange(Links.AutoOrderConfiguration)
     },
     // {
     //   id: 20,
     //   listName: t('Menu.AutoOrderingConfiguration'),
-    //   onClick: () => routeChange('/auto-ordering-configuration-query')
+    //   onClick: () => routeChange(Links.AutoOrderConfiguration)
     // },
     {
       id: 14,
@@ -128,7 +129,7 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange('/get-started') },
+    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange(Links.GetStarted) },
     { id: 19, listName: t('Menu.FAQ') },
     { id: 20, listName: t('Menu.ListingServices') }
   ];
@@ -163,7 +164,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Dashboard'),
       <DashBoardIcon />,
       undefined,
-      () => routeChange('/dashboard')
+      () => routeChange(Links.Dashboard)
 
     ),
     getItem(
@@ -173,7 +174,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Catalog'),
       <CatalogIcon />,
       undefined,
-      () => routeChange('/catalog')
+      () => routeChange(Links.Catalog)
     ),
     getItem(
       '3',
@@ -182,8 +183,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.ListNow'),
       <ListNowIcon />,
       undefined,
-      () => routeChange('/publish-now'),
-
+      () => routeChange(Links.PublishNow)
     ),
     getItem(
       '4',
@@ -192,7 +192,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Listings'),
       <ListingsIcon />,
       undefined,
-      () => routeChange('/products'),
+      () => routeChange(Links.Products),
     ),
     getItem(
       '5',
@@ -201,7 +201,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Orders'),
       <OrdersIcon />,
       undefined,
-      () => routeChange('/orders'),
+      () => routeChange(Links.Orders)
     ),
     getItem(
       'sub1',
@@ -220,7 +220,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Services'),
       <ServiceIcon />,
       undefined,
-      () => routeChange('/services'),
+      () => routeChange(Links.Services),
     ),
     getItem(
       'sub2',

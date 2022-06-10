@@ -6,11 +6,12 @@ import youtube from '../../assets/social-media/youtube.png';
 import instagram from '../../assets/social-media/instagram.png';
 import facebook from '../../assets/social-media/facebook.png';
 import { LeftOutlined } from '@ant-design/icons';
+import { Links } from '../../links';
 
 export const GetStarted = () => {
   return (
     <div className="main-container">
-      <Link to="/dashboard" className="back-to-dashboard">
+      <Link to={Links.Dashboard} className="back-to-dashboard">
         <span>
           <LeftOutlined style={{fontSize: '19px'}} />
         </span>

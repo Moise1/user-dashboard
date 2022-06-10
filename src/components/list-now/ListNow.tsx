@@ -7,6 +7,7 @@ import { Button, Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import '../../sass/list-now/list-now.scss';
+import { Links } from '../../links';
 
 export interface state {
   platform: platformType;
@@ -38,7 +39,7 @@ export const ListNow = (/*props: props*/) => {
       <div className="choose-list">
         <Row>
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/catalog')}>
+            <div className="list-card" onClick={() => routeChange(Links.Catalog)}>
               <img src={catalog_icon} alt="icon" className={'w-md-100 filter-white'} />
               <div className="card-info">
                 <h5>{t('cata')}</h5>
@@ -55,7 +56,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/manual-publish')}>
+            <div className="list-card" onClick={() => routeChange(Links.ManualPublish)}>
               <img src={manual_icon} alt="icon" />
 
               <div className="card-info">
@@ -73,7 +74,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/bulk-publish')}>
+            <div className="list-card" onClick={() => routeChange(Links.BulkPublish)}>
               <img src={bulk_icon} alt="icon" className={'w-md-100 filter-white'} />
 
               <div className="card-info">
@@ -94,7 +95,7 @@ export const ListNow = (/*props: props*/) => {
         {weList4u && (
           <Row>
             <Col span={24}>
-              <div className="list-card" onClick={() => window.open('https://hustlegotreal.com/en/listing-service/')}>
+              <div className="list-card" onClick={() => window.open(Links.ListingService)}>
                 <h3 className="title">{t('list4u')}</h3>
                 <img src={we_icon} alt="icon" />
 

@@ -9,6 +9,7 @@ import { SearchInput } from '../../small-components/TableActionBtns';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
+import { Links } from '../../links';
 
 export const SourcesConfiuration = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +38,7 @@ export const SourcesConfiuration = () => {
       dataIndex: 'sourceName',
       key: 'sourceName',
       render: (value: string) => (
-        <Link to={'/sources-settings/'} onClick={() => parentToChild(value)} className="back-link">
+        <Link to={Links.SourceSettings} onClick={() => parentToChild(value)} className="back-link">
           {value}
         </Link>
       )
