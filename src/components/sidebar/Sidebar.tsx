@@ -155,7 +155,6 @@ export const Sidebar = (props: Props) => {
     } as MenuItem;
   };
 
-
   const menuItems: MenuItem[] = [
     getItem(
       '1',
@@ -183,7 +182,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.ListNow'),
       <ListNowIcon />,
       undefined,
-      () => routeChange('/listings'),
+      () => routeChange('/list-now'),
 
     ),
     getItem(
@@ -247,22 +246,14 @@ export const Sidebar = (props: Props) => {
 
   const siderMenu = (
     <div className="side-menu-container">
-      <Menu
-        className="menu-container"
-        theme="light"
-        mode="inline"
-        defaultSelectedKeys={['1']}
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        items={menuItems}
-      >
-        {!collapsed && (
+      {
+        !collapsed && (
           <div className="sidebar-overhead">
             <div className="logo-container">
               <img className="logo" src={Logo} alt="logo" />
               <h1 className="logo-text">HGR</h1>
             </div>
-
+      
             <div className="quota-container">
               <div className="quota">
                 <strong className="quota-text">
@@ -270,7 +261,7 @@ export const Sidebar = (props: Props) => {
                 </strong>
                 <span className="quota-progress">45% (12/13)</span>
               </div>
-
+      
               <button type="button" className="update-btn">
                 {t('Topbar.Update')}
               </button>
@@ -286,8 +277,17 @@ export const Sidebar = (props: Props) => {
               )}
             </div>
           </div>
-        )}
-      </Menu>
+        )
+      }
+      <Menu
+        className="menu-container"
+        theme="light"
+        mode="inline"
+        defaultSelectedKeys={['1']}
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        items={menuItems}
+      />
     </div>
   );
 
