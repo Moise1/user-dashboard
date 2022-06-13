@@ -4,12 +4,13 @@ import { Space, Button, Form, Input, Checkbox, DatePicker, DatePickerProps } fro
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
 import '../sass/advanced-search.scss';
-import { ICatalogData } from '../dummy-data/dummyData';
+// import { ICatalogData } from '../dummy-data/dummyData';
+import { CatalogProduct } from '../redux/catalog/catalogSlice';
 
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
-  setAllProducts?: React.Dispatch<React.SetStateAction<ICatalogData[]>>;
-  catalogData?: ICatalogData[];
+  catalogData?: CatalogProduct[];
+  setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
 }
 
 interface catalogAdvancedSearchFieldTypes {
@@ -24,10 +25,9 @@ interface catalogAdvancedSearchFieldTypes {
 export const CatalogFilters = (props: Props) => {
 
   const { visible, onClose, openSourceModal, catalogData } = props;
-
+  console.log('The catalog data coming from api', catalogData);
   const catalogAdvanceSearchIntialTypes: catalogAdvancedSearchFieldTypes = {
     title: '',
-
     orderBy: 'Default'
   };
 
@@ -46,30 +46,7 @@ export const CatalogFilters = (props: Props) => {
   };
 
   const handleFilterSubmit = () => {
-
-    const filterResult = catalogData?.filter(product => {
-      if (product.title == catalogAdvancedSearchFormData.title) {
-        return product.title == catalogAdvancedSearchFormData.title;
-      }
-      if (product.cost == catalogAdvancedSearchFormData.maxSourcePrice) {
-        return product.cost == catalogAdvancedSearchFormData.maxSourcePrice;
-      }
-      if (product.cost == catalogAdvancedSearchFormData.minSourcePrice) {
-        return product.cost == catalogAdvancedSearchFormData.minSourcePrice;
-      }
-      if (product.profit == catalogAdvancedSearchFormData.maxProfile) {
-        return product.cost == catalogAdvancedSearchFormData.maxProfile;
-      }
-      if (product.profit == catalogAdvancedSearchFormData.minProfile) {
-        return product.profit == catalogAdvancedSearchFormData.minProfile;
-      }
-      // (String(product.cost) < String(catalogAdvancedSearchFormData.maxSourcePrice))
-      // (String(e.cost) > String(catalogAdvancedSearchFormData.minSourcePrice)) ||
-      // (String(e.profit) > String(catalogAdvancedSearchFormData.maxProfile)) ||
-      // (String(e.profit) > String(catalogAdvancedSearchFormData.minProfile));
-    }
-    );
-    console.log('The filterResult ', filterResult);
+    console.log('The data to send in catalogAdvancedSearchFormData', catalogAdvancedSearchFormData);
   };
 
   return (
@@ -157,7 +134,9 @@ export const CatalogFilters = (props: Props) => {
             <TransparentBtn
               handleClick={clearFilterHandler}
             >Clear filters</TransparentBtn>
-            <SuccessBtn htmlType='submit'> Apply filters</SuccessBtn>
+            <SuccessBtn htmlType='submit'
+              handleClick={handleFilterSubmit}
+            > Apply filters</SuccessBtn>
           </div>
         </Form>
       </div>
@@ -167,7 +146,6 @@ export const CatalogFilters = (props: Props) => {
 
 export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
   const { Search } = Input;
-
   const { visible, onClose, closable, setSearchTxt } = props;
   const handleDateChange: DatePickerProps['onChange'] = (date) => {
     const dateValue = moment(date).format('YYYY-MM-DD');

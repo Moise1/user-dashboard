@@ -1,6 +1,6 @@
-import React from 'react';
-import { AoIconHead, CrossModalIcon } from '../common/Icons';
-import { t } from '../../utils/transShim';
+// import React from 'react';
+// import { AoIconHead, CrossModalIcon } from '../common/Icons';
+// import { t } from '../../utils/transShim';
 
 interface Props {
   AoDisabledModal: boolean;
@@ -9,7 +9,8 @@ interface Props {
 
 const OrderStateModal = (props: Props) => {
   const { AoDisabledModal, setAoDisabledModal } = props;
-
+  console.log("The AoDisabledModal", AoDisabledModal);
+  console.log("The setAoDisabledModal", setAoDisabledModal)
   return (
     <>
       {/* <Modal

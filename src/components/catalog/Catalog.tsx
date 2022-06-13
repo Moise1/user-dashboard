@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
-
+import { CatalogProduct } from '../../redux/catalog/catalogSlice';
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
   | React.MouseEvent<SVGElement, MouseEvent>
@@ -33,11 +33,12 @@ export const Catalog = () => {
   const { Meta } = Card;
 
   const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
-  console.log('catalogProducts', catalogProducts);
+  const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
+    setAllCatalogProducts(catalogProducts);
   }, [getCatalogProducts]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
@@ -95,7 +96,7 @@ export const Catalog = () => {
 
       <SearchOptions showSearchInput={false} />
       <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
-        catalogData={catalogData} setAllProducts={setAllProducts}
+        catalogData={allCatalogProducts} setAllProducts={setAllCatalogProducts}
       />
       <PopupModal
         open={modalOpen}
@@ -147,18 +148,18 @@ export const Catalog = () => {
 
       <div className="catalog-cards">
         <div className="cards-container-catalog">
-          {catalogData.map((d) => (
+          {allCatalogProducts.map((d: CatalogProduct) => (
             <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
               <Meta
                 description={
                   <div className="product-description">
                     <div className="img-container">
-                      <img src={d.img} className="product-img" />
+                      <img src={d.imageUrl} className="product-img" />
                     </div>
                     <div className="product-info-area">
                       <div className="header">
                         <p className="product-title">{d.title}</p>
-                        <p className="source">by {d.source}</p>
+                        <p className="source">by {d.sourceId}</p>
                         <SearchOutlined className="view-details" onClick={handleProductModal} style={{ fontSize: '19px' }} />
                       </div>
                       <div className="transaction-details">
@@ -166,14 +167,14 @@ export const Catalog = () => {
                           <p className="transaction-type">Sell</p>
                           <p className="transaction-amount sell">
                             <span>&pound;</span>
-                            {d.sell}
+                            {d.sold}
                           </p>
                         </div>
                         <div>
                           <p className="transaction-type">Cost</p>
                           <p className="transaction-amount cost">
                             <span>&pound;</span>
-                            {d.cost}
+                            {d.sourcePrice}
                           </p>
                         </div>
                         <div>
