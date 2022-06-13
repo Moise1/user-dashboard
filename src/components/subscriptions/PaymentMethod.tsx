@@ -101,10 +101,10 @@ export const PaymentMethod = (/*props: props*/) => {
     };
 
     const response: CreateCheckoutSessionResponse = await CreateCheckoutSession(request);
-
+    console.log('response.checkoutSessionId');
+    console.log(response.checkoutSessionId);
     const stripe = await loadStripe(subscriptionConfiguration.stripeConfig.publishableKey);
     await stripe?.redirectToCheckout({ sessionId: response.checkoutSessionId });
-
   }
 
   function handlePayPal() {
