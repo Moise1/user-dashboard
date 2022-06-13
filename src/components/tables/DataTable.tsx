@@ -37,6 +37,8 @@ interface Props {
   current?: number;
   pageSize?: number;
   setPostPerPage?: (postPerPage: number) => void;
+  setRulesPerPage?: (rulesPerPage: number) => void;
+  setListingsPerPage?: (listingsPerPage: number) => void;
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
   rowSelection?: {
@@ -48,6 +50,9 @@ interface Props {
 }
 
 export const DataTable: React.FC<Props> = (props: Props) => {
+
+  const pageSizeOptionArray = [2, 10, 20, 50, 100];
+
   const {
     columns,
     dataSource,
@@ -63,12 +68,14 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     pageSize,
     onRow,
     setPostPerPage,
+    setListingsPerPage,
     rowClassName,
     isListingsTable
   } = props;
-
   const onShowSizeChange = (current: number, pageSize: number) => {
     setPostPerPage?.(pageSize);
+    setListingsPerPage?.(pageSize);
+    setListingsPerPage?.(pageSize);
   };
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
@@ -171,6 +178,7 @@ export const DataTable: React.FC<Props> = (props: Props) => {
         style={{ paddingBottom: '25px' }}
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
+        pageSizeOptions={pageSizeOptionArray}
       />
     </div>
   );

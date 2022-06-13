@@ -143,7 +143,8 @@ export const catalogData: ICatalogData[] = [
     img: light_bulb_two,
     title: 'Lamp 1',
     sell: 49.61,
-    cost: 38.16,
+    // cost: 38.16,
+    cost: 40.16,
     profit: 5.45,
     source: 'Lights4Living',
     details: (
@@ -164,7 +165,7 @@ export const catalogData: ICatalogData[] = [
     img: light_bulb_three,
     title: 'Lamp 2',
     sell: 49.61,
-    cost: 38.16,
+    cost: 30.16,
     profit: 5.45,
     source: 'Lights4Living',
     details: (

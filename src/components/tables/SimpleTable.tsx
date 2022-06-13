@@ -27,9 +27,11 @@ interface Props {
   rowClassName?: string;
   onRow?: (record: TableDataTypes) => { onClick: () => void };
   isListingsTable?: boolean;
+  setSourcesPerPage?: (sourcesPerPage: number) => void;
 }
 
 export const SimpleTable: React.FC<Props> = (props: Props) => {
+  const pageSizeOptionArray = [2, 10, 20, 50, 100];
   const {
     columns,
     dataSource,
@@ -44,8 +46,14 @@ export const SimpleTable: React.FC<Props> = (props: Props) => {
     pageSize,
     onRow,
     rowClassName,
-    isListingsTable
+    isListingsTable,
+    setSourcesPerPage
   } = props;
+
+
+  const onShowSizeChange = (current: number, sourcesPerPage: number) => {
+    setSourcesPerPage?.(sourcesPerPage);
+  };
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
     return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
@@ -75,7 +83,7 @@ export const SimpleTable: React.FC<Props> = (props: Props) => {
         {
           type: 'group',
           label: (
-            <div className="action-option" onClick={selectedRows! === 1 ? handleSingleListingModal: handleBulkListingModal}>
+            <div className="action-option" onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}>
               Edit <strong>{selectedRows}</strong> {page}(s)
             </div>
           )
@@ -114,7 +122,7 @@ export const SimpleTable: React.FC<Props> = (props: Props) => {
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : anyTable  }
+          ) : anyTable}
           <p className="total-items">
             <strong>
               {totalItems} {page}
@@ -131,11 +139,15 @@ export const SimpleTable: React.FC<Props> = (props: Props) => {
         onRow={onRow}
       />
       <Pagination
+        className="pagination"
         onChange={onChange}
         total={totalItems}
         current={current}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
+        pageSizeOptions={pageSizeOptionArray}
       />
     </div>
   );

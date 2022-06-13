@@ -16,6 +16,8 @@ export const SourcesConfigurationTable = () => {
   const dispatch = useAppDispatch();
   const { sources, loading } = useAppSelector((state) => state.sources as SourceState);
   const [current, setCurrent] = useState<number>(1);
+  const [sourcesPerPage, setSourcesPerPage] = useState<number>(10);
+
 
   useEffect(() => {
     dispatch(getSources());
@@ -103,14 +105,16 @@ export const SourcesConfigurationTable = () => {
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">
         <SimpleTable
+          setSourcesPerPage={setSourcesPerPage}
           current={current}
           onChange={setCurrent}
           columns={columns}
           dataSource={data}
-          pageSize={10}
+          pageSize={sourcesPerPage}
           totalItems={sources?.length}
         />
       </div>
     </Layout>
   );
 };
+//

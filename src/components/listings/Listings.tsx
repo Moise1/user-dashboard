@@ -25,11 +25,16 @@ import { ListingData, PendingListings } from 'src/redux/listings/listingsSlice';
 import { ListingsStatusType, useTableSearch } from '../../custom-hooks/useTableSearch';
 import { ActiveListing } from 'src/redux/unmap';
 import '../../sass/listings.scss';
-import {ListNow} from '../list-now/ListNow';
+import { ListNow } from '../list-now/ListNow';
 import { ReactUtils } from '../../utils/react-utils';
-const { Search } = Input;
+
 
 export const Listings = () => {
+  const [listingsPerPage, setListingsPerPage] = useState<number>(10);
+  const channel = localStorage.getItem('channelId');
+  const { Search } = Input;
+
+
   const selectedChannel = ReactUtils.GetSelectedChannel();
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
@@ -56,7 +61,7 @@ export const Listings = () => {
     dispatch(getListingsSource());
     dispatch(getPendingListings());
     dispatch(getTerminatedListings());
-  }, [getListings, getListingsSource, getPendingListings, tabStatus, selectedChannel?.id]);
+  }, [getListings, getListingsSource, getPendingListings, tabStatus, channel,selectedChannel?.id]);
 
   const tableColumns = [
     {
@@ -220,7 +225,7 @@ export const Listings = () => {
     setColumns(cloneColumns);
   };
 
-  
+
   const displayCols = () => {
     const cloneCols = localStorage.getItem('cloneCols');
     if (JSON.parse(cloneCols!)?.length) {
@@ -245,7 +250,7 @@ export const Listings = () => {
     <Layout className="listings-container">
       {loading ? (
         <Spin />
-      ) :  listings.length ? (
+      ) : listings.length ? (
         <Fragment>
           <PopupModal open={showColumns} handleClose={handleClose} width={900}>
             <h5 className="cols-display-title">Select columns to display</h5>
@@ -326,7 +331,8 @@ export const Listings = () => {
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
             totalItems={listings.length}
-            pageSize={5}
+            pageSize={listingsPerPage}
+            setListingsPerPage={setListingsPerPage}
             showTableInfo={true}
             current={current}
             onChange={setCurrent}
@@ -342,7 +348,7 @@ export const Listings = () => {
           />
         </Fragment>
       ) : (
-        <ListNow/>
+        <ListNow />
       )}
     </Layout>
   );

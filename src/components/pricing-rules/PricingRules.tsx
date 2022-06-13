@@ -17,7 +17,9 @@ import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source } from '../../redux/sources/sourceSlice';
 
 export const PricingRules = () => {
-  const [current] = useState<number>(1);
+
+  const [rulesPerPage, setRulesPerPage] = useState<number>(10);
+  const [current, setCurrent] = useState<number>(1);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const { Item } = Form;
@@ -166,10 +168,12 @@ export const PricingRules = () => {
           <Spin />
         ) : (
           <DataTable
+            pageSize={rulesPerPage}
+            setPostPerPage={setRulesPerPage}
+            current={current}
+            onChange={setCurrent}
             dataSource={rules}
             columns={columns}
-            pageSize={10}
-            current={current}
             totalItems={rules.length}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
