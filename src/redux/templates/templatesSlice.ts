@@ -13,8 +13,14 @@ export interface Template {
   channelOAuthId: number;
 }
 
-const initialState = {
-  templates: [] as Template[],
+export interface TemplateState {
+  templates: Template[];
+  loading: boolean
+  error: string;
+}
+
+const initialState: TemplateState = {
+  templates: [],
   loading: false,
   error: ''
 };

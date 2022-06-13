@@ -7,7 +7,7 @@ export enum SettingType {
 
 //When it is something special, like a list with values that come from the API or a different call to store that
 export enum ChannelSettingExtra {
-  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, NoApiName, RefreshPolicies
+  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, RefreshPolicies, TranslateDefaultValue
 }
 
 interface Ancestor {
@@ -26,6 +26,7 @@ export interface ChannelSetting {
   Ancestors?: Ancestor[];
   AncestorsHide?: boolean;
   Extra?: ChannelSettingExtra[];
+  PlaceHolder?: string;
 }
 
 export const ChannelSettings: ChannelSetting[] = [
@@ -189,7 +190,8 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.String,
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.DefaultEAN],
-    Values: ['Does not apply']
+    Values: ['Channel.Setting.Value.DoesNotApply'],
+    Extra: [ChannelSettingExtra.TranslateDefaultValue]
   },
   {
     Labels: ['Channel.Setting.Name.DefaultMPN'],
@@ -197,7 +199,8 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.String,
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.DefaultMpn],
-    Values: ['Does not apply']
+    Values: ['Channel.Setting.Value.DoesNotApply'],
+    Extra: [ChannelSettingExtra.TranslateDefaultValue]
   },
   {
     Labels: ['Channel.Setting.Name.DefaultQuantity'],
@@ -254,7 +257,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.DefaultShipping],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '0'
@@ -297,7 +300,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ShippingProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'
@@ -312,7 +315,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ReturnProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'
@@ -327,7 +330,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.PaymentProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'
@@ -379,10 +382,9 @@ export const ChannelSettings: ChannelSetting[] = [
     Description: ['Channel.Setting.Description.NoApiName'],
     Type: SettingType.String,
     Section: ChannelSettingSection.Other,
-    Fields: [],
+    Fields: [eChannelSettings.NoApiName],
     Values: [''],
-    ChannelIds: [3, 4],
-    Extra: [ChannelSettingExtra.NoApiName]
+    ChannelIds: [3, 4]
   },
   {
     Labels: ['Channel.Setting.Name.FeePercentage'],
@@ -390,6 +392,6 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.Number,
     Section: ChannelSettingSection.Other,
     Fields: [eChannelSettings.FeePercentage],
-    Values: ['']
+    Values: ['13']
   },
 ];

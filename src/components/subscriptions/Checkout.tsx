@@ -14,6 +14,7 @@ import { Product } from 'src/redux/subscriptions/subsSlice';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { Links } from '../../links';
 
 const { Item } = Form;
 
@@ -123,7 +124,7 @@ export const Checkout = (/*props: props*/) => {
         <div className="order-summary">
           <div className="second-section-container">
             <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
-            <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+            <div className="order-sum" onClick={() => routeChange(Links.PaymentMethod)}>
               <ConfirmBtn htmlType="submit">
                 Payment method <ArrowRightOutlined />
               </ConfirmBtn>

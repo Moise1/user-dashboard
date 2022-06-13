@@ -1,7 +1,7 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Row, Col } from 'antd';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';

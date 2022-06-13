@@ -11,6 +11,7 @@ import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
+import { Links } from '../../links';
 
 export const AutoOrderingConfiguration = () => {
   const history = useHistory();
@@ -24,7 +25,6 @@ export const AutoOrderingConfiguration = () => {
   const onSelectChange = (selectedRowKeys: Key[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
-  console.log('The selected record is', selectedRecord);
 
   const rowSelection = {
     selectedRowKeys,
@@ -172,6 +172,7 @@ export const AutoOrderingConfiguration = () => {
     }
   ];
 
+  console.log(selectedRecord);
   //To not show the duplicated suppliers and to sort autoOrders data alphabetically
   const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values());
   uniqueData.sort((a, b) => a.name.localeCompare(b.name));
@@ -230,7 +231,7 @@ export const AutoOrderingConfiguration = () => {
                 return {
                   onClick: () => {
                     setSelectedRecord(record);
-                    history.push({ pathname: '/auto-ordering-configuration-query', state: record });
+                    history.push({ pathname: Links.AutoOrderConfigurationQuery, state: record });
                   }
                 };
               }}

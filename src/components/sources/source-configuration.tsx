@@ -5,13 +5,13 @@ import { t } from '../../utils/transShim';
 import { CountrySelector } from '../../small-components/CountrySelector';
 import { Switch } from '../../small-components/Switch';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
-import { getSources, saveSources } from '../../redux/source-config/sourcesThunk';
-import { SourceConfigSave } from '../../redux/source-config/sourceSlice';
+import { getSources, saveSources } from '../../redux/source-configuration/sourcesThunk';
+import { SourceConfigSave } from '../../redux/source-configuration/sourceSlice';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { LeftOutlined } from '@ant-design/icons';
 import '../../sass/sources-settings.scss';
 
-export const SourcesSettings = () => {
+export const SourceConfiguration = () => {
   const [supplierValue, setSupplierValue] = useState('Supplier');
   const [, setSelectedAccount] = useState<string>(supplierValue ? supplierValue : 'Select Supplier');
   const [to, setTo] = useState<string>('');

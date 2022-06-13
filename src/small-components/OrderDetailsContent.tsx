@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Input } from 'antd';
 // import Headphone from '../../assets/channel/modal_headphone_photo.png';
 import { IconArrowModal, CrossModalIcon } from '../components/common/Icons';
 import { t } from '../utils/transShim';
@@ -7,6 +7,7 @@ import '../sass/order-state-modal.scss';
 import { useAppSelector, useAppDispatch } from '../custom-hooks/reduxCustomHooks';
 import { loadAddressFromOrderLine, orderDataType } from '../redux/orders/orderThunk';
 import { Spin } from 'antd';
+
 interface Props {
   data: {
     [key: string]: orderDataType;
@@ -17,9 +18,7 @@ interface Props {
 
 const OrderDetailsContent = (props: Props) => {
   const { data, OrderContentModalOpen } = props;
-  console.log('The id in the order detail content modal is', data.id);
 
-  console.log('the data in modal is', data);
   const object = {
     firstName: '',
     phone: '',
@@ -34,19 +33,12 @@ const OrderDetailsContent = (props: Props) => {
   const [orderBillingAddress, setOrderBillingAddress] = useState(object);
   const [orderShippingAddress, setOrderShippingAddress] = useState(object);
   const { ordersAddress, loading } = useAppSelector((state) => state.orderAddress);
-  console.log(
-    'The states are',
-    useAppSelector((state) => state)
-  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(loadAddressFromOrderLine(data.id));
-    console.log('!st time render and the ordressAddress is ', ordersAddress);
     setOrderBillingAddress(ordersAddress.billingAddress);
-    console.log('the orderBillingAddress', ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
-    console.log('the orderBillingAddress', ordersAddress.shippingAddress);
   }, [dispatch, orderBillingAddress, orderShippingAddress, data.id]);
 
   return (
@@ -72,6 +64,7 @@ const OrderDetailsContent = (props: Props) => {
             <Spin className="ant-spin-spinnings" />
           ) : (
             <>
+
               <div className="row justify-content-between">
                 <div className="col-12 col-xl-6" style={{ backgroundColor: '#f2f8ff', padding: '10px' }}>
                   <div className="row shipping-billing-container"></div>
@@ -80,24 +73,28 @@ const OrderDetailsContent = (props: Props) => {
                       <div className="large-input">
                         <h3 className="heading-details">{t('OrderDetails.ShippingAddress')}</h3>
                         <p className="heading-addresses">{t('OrderDetails.Name')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderBillingAddress.firstName}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            defaultValue={orderBillingAddress.firstName}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <h3 className="heading-details">{t('OrderDetails.Billingaddress')}</h3>
                         <p className="heading-addresses">{t('OrderDetails.Name')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderShippingAddress.firstName}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderShippingAddress.firstName}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -105,13 +102,17 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.Phone')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderBillingAddress.phone} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderBillingAddress.phone} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.Phone')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderShippingAddress.phone} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderShippingAddress.phone} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -120,23 +121,25 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.AddressLineOne')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderBillingAddress.address1}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input className="blue-input"
+                            type="text"
+                            value={orderBillingAddress.address1}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.AddressLineOne')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderShippingAddress.address1}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderShippingAddress.address1}
+                            disabled />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -145,23 +148,27 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.AddressLineTwo')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderBillingAddress.address2}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderBillingAddress.address2}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.AddressLineTwo')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderShippingAddress.address2}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderShippingAddress.address2}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -170,13 +177,17 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.City')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderBillingAddress.city} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderBillingAddress.city} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.City')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderShippingAddress.city} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderShippingAddress.city} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -185,13 +196,17 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.PostalCodeState')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderBillingAddress.zip} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderBillingAddress.zip} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.PostalCodeState')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderShippingAddress.zip} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderShippingAddress.zip} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -200,23 +215,26 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.State')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderBillingAddress.province}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input className="blue-input"
+                            type="text"
+                            value={orderBillingAddress.province}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.State')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderShippingAddress.province}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderShippingAddress.province}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                     </div>
                   </div>
@@ -225,18 +243,23 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.Country')}</p>
-                        <Form.Control className="blue-input" type="text" value={orderBillingAddress.country} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={orderBillingAddress.country} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="large-input">
                         <p className="heading-addresses">{t('OrderDetails.Country')}</p>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={orderShippingAddress.country}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={orderShippingAddress.country}
+                            disabled
+                          />
+                        </Form.Item>
+
                       </div>
                     </div>
                   </div>
@@ -248,31 +271,39 @@ const OrderDetailsContent = (props: Props) => {
                     <div className="col-6">
                       <div className="large-input mt-2">
                         <h3 className="heading-addresses">{t('OrderDetails.Reference')}</h3>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={JSON.stringify(data.reference)}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={JSON.stringify(data.reference)}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
                       <div className="large-input mt-2">
                         <h3 className="heading-details">{t('OrderDetails.DateOfOrder')} </h3>
-                        <Form.Control className="blue-input" type="text" value={JSON.stringify(data.date)} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={JSON.stringify(data.date)} disabled />
+                        </Form.Item>
                       </div>
 
                       <div className="large-input mt-2">
                         <h3 className="heading-details mt-4 mt-xl-0">{t('OrderDetails.ChannelItem')}</h3>
-                        <Form.Control
-                          className="blue-input"
-                          type="text"
-                          value={JSON.stringify(data.channelItem)}
-                          disabled
-                        />
+                        <Form.Item>
+                          <Input
+                            className="blue-input"
+                            type="text"
+                            value={JSON.stringify(data.channelItem)}
+                            disabled
+                          />
+                        </Form.Item>
                       </div>
 
                       <div className="large-input mt-2">
                         <h3 className="heading-details mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h3>
-                        <Form.Control className="blue-input" type="text" value={JSON.stringify(data.title)} disabled />
+                        <Form.Item>
+                          <Input className="blue-input" type="text" value={JSON.stringify(data.title)} disabled />
+                        </Form.Item>
                       </div>
                     </div>
                     <div className="col-6 d-flex justify-content-center">
@@ -282,12 +313,14 @@ const OrderDetailsContent = (props: Props) => {
                       <div className="sourceurl">
                         <h3 className="heading-details">{t('OrderDetails.SourceURL')}</h3>
                         <a href="/">
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value="https://www.source-url.com/list/item/item-name"
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value="https://www.source-url.com/list/item/item-name"
+                              disabled
+                            />
+                          </Form.Item>
                         </a>
                       </div>
                     </div>
@@ -295,58 +328,74 @@ const OrderDetailsContent = (props: Props) => {
                       <div className="d-flex mt-4 ">
                         <div className="small-input">
                           <h3 className="heading-details">{t('OrderDetails.Quantity')}</h3>
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value={JSON.stringify(data.quantity)}
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value={JSON.stringify(data.quantity)}
+                              disabled
+                            />
+                          </Form.Item>
+
                         </div>
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Sold')}</h3>
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value={JSON.stringify(data.channelPrice)}
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value={JSON.stringify(data.channelPrice)}
+                              disabled
+                            />
+                          </Form.Item>
+
                         </div>
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Cost')}</h3>
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value={JSON.stringify(data.sourcePrice) ? JSON.stringify(data.sourcePrice) : ' - '}
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value={JSON.stringify(data.sourcePrice) ? JSON.stringify(data.sourcePrice) : ' - '}
+                              disabled
+                            />
+                          </Form.Item>
+
                         </div>
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Fees')}</h3>
-                          <Form.Control className="blue-input" type="text" value={JSON.stringify(data.fees)} disabled />
+                          <Form.Item>
+                            <Input className="blue-input" type="text" value={JSON.stringify(data.fees)} disabled />
+                          </Form.Item>
+
                         </div>
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Profit')}</h3>
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value={JSON.stringify(data.quantity)}
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value={JSON.stringify(data.quantity)}
+                              disabled
+                            />
+                          </Form.Item>
+
                         </div>
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Margin')}</h3>
-                          <Form.Control
-                            className="blue-input"
-                            type="text"
-                            value={JSON.stringify(data.quantity)}
-                            disabled
-                          />
+                          <Form.Item>
+                            <Input
+                              className="blue-input"
+                              type="text"
+                              value={JSON.stringify(data.quantity)}
+                              disabled
+                            />
+                          </Form.Item>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
                 <div className="row">
                   <div className="go-back-orders-container  col">
                     <div onClick={OrderContentModalOpen} className="go-back-details">
@@ -360,7 +409,7 @@ const OrderDetailsContent = (props: Props) => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 export default OrderDetailsContent;

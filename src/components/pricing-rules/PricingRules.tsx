@@ -4,20 +4,22 @@ import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
-import { SourceConfig } from '../../redux/source-config/sourceSlice';
+import { SourceConfig } from '../../redux/source-configuration/sourceSlice';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/pricing-rules.scss';
 import { Selector } from '../../small-components/form/selector';
 
 export const PricingRules = () => {
-  const [current] = useState<number>(1);
+
+  const [rulesPerPage, setRulesPerPage] = useState<number>(10);
+  const [current, setCurrent] = useState<number>(1);
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const { Item } = Form;
@@ -166,10 +168,12 @@ export const PricingRules = () => {
           <Spin />
         ) : (
           <DataTable
+            pageSize={rulesPerPage}
+            setPostPerPage={setRulesPerPage}
+            current={current}
+            onChange={setCurrent}
             dataSource={rules}
             columns={columns}
-            pageSize={10}
-            current={current}
             totalItems={rules.length}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}

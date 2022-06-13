@@ -14,19 +14,7 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { CreateCheckoutSessionRequest, CreateCheckoutSessionResponse } from './models/types';
 import { rq } from '../common/rq';
-
-//import {
-//  BillingPeriod,
-//  CreateCheckoutSessionRequest,
-//  CreateCheckoutSessionResponse,
-//  PayPalConfig,
-//  Platform,
-//  UserSubscriptionProduct,
-//  Product,
-//  ProductPrice,
-//  StripeConfig,
-//  ProductType
-//} from './models/types';
+import { Links } from '../../links';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -177,7 +165,7 @@ export const PaymentMethod = (/*props: props*/) => {
         <div className="order-summary">
           <div className="second-section-container">
             <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
-            <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+            <div className="order-sum" onClick={() => routeChange(Links.PaymentMethod)}>
               <ConfirmBtn htmlType="submit">
                 Finish Payment <ArrowRightOutlined />
               </ConfirmBtn>

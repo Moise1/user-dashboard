@@ -1,36 +1,39 @@
-import { Dropdown } from 'react-bootstrap';
-import { TrashIcon, CheckIcon, HandStopOrderIcon, ProcessOrderIcon, ThreeDotsColumnIcon } from '../common/Icons';
-import { t } from '../../utils/transShim';
+import { Dropdown, Menu } from 'antd';
+// import { TrashIcon, CheckIcon, HandStopOrderIcon, ProcessOrderIcon, ThreeDotsColumnIcon } from '../common/Icons';
+// import { t } from '../../utils/transShim';
 import '../../sass/orders-dropdown.scss';
 import '../../sass/orders.scss';
 
 function OrdersDropdown() {
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: '1',
+          label: (
+            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+              1st menu item
+            </a>
+          ),
+        },
+        {
+          key: '2',
+          label: (
+            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+              2nd menu item
+            </a>
+          ),
+        },
+      ]}
+    />
+  );
+
   return (
     <>
-      <Dropdown className="dropdown-orders-button">
-        <Dropdown.Toggle id="dropdown-basic">
-          <ThreeDotsColumnIcon />
-        </Dropdown.Toggle>
-        <Dropdown.Menu className="dropdown-box">
-          <Dropdown.Item className="dropdown-item">
-            <ProcessOrderIcon />
-            <span className="dropdown-text"> {t('OrderDetails.ProcessOrder')}</span>
-          </Dropdown.Item>
-          <Dropdown.Item className="dropdown-item">
-            <span>
-              <HandStopOrderIcon />
-              <span className="dropdown-text">{t('OrderDetails.StopOrder')} </span>
-            </span>
-          </Dropdown.Item>
-          <Dropdown.Item className="dropdown-item">
-            <CheckIcon />
-            <span className="dropdown-text"> {t('OrderDetails.MarkAsDispatched')}</span>
-          </Dropdown.Item>
-          <Dropdown.Item className="dropdown-item">
-            <TrashIcon />
-            <span className="dropdown-text">{t('OrderDetails.DeleteOrder')} </span>
-          </Dropdown.Item>
-        </Dropdown.Menu>
+      <Dropdown overlay={menu} className="dropdown-orders-button">
+        <p>one</p>
+        <p>one</p>
       </Dropdown>
     </>
   );

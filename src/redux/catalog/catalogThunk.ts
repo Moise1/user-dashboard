@@ -3,12 +3,14 @@ import { client } from '../client';
 
 export const getCatalogProducts = createAsyncThunk(
   'catalog/getCatalogProducts',
-  async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
+  async ({sessionId} : {sessionId: number}, thunkAPI) => {
     try {
-      const res = await client.get('/Listing/Bulk/Catalog/GetProducts');
+      console.log('The session Id is', sessionId);
+      const res = await client.post('/Catalog/GetProducts',{data:sessionId} );
+      // const res = await client.get('/Catalog/GetProducts', {sessionId}) ;
       return res.data.response_data.products;
     } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong ):');
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
     }
   }
 );
