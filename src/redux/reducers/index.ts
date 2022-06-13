@@ -4,7 +4,7 @@ import { subscriptionsReducer} from '../subscriptions/subsSlice';
 import { getConfigReducer } from '../subscriptions/subsSlice';
 import { userAssistantsReducer } from '../va-profiles/vaProfilesSlice';
 import { userReducer } from '../user/userSlice';
-import { sourcesConfigReducer } from '../source-configuration/sourceSlice';
+import { sourcesConfigReducer } from '../source-configuration/source-configuration-slice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';

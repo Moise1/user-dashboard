@@ -2,14 +2,14 @@ import { ReactNode } from 'react';
 import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { SourceConfig } from '../../redux/source-configuration/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import { ListingsItems } from '../common/ListingsData';
 import { Channel } from '../../redux/channels/channelsSlice';
+import { Source } from '../../redux/sources/sourceSlice';
 
-export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | SourceConfig | UserAssistant | Channel;
+export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | UserAssistant | Channel | Source;
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
   dataSource: Array<TableDataTypes>;
