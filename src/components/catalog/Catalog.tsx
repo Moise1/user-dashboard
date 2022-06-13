@@ -19,7 +19,8 @@ import { CatalogProduct } from '../../redux/catalog/catalogSlice';
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
   | React.MouseEvent<SVGElement, MouseEvent>
-  | React.MouseEvent<HTMLSpanElement, MouseEvent>;
+  | React.MouseEvent<HTMLSpanElement, MouseEvent>
+  | React.MouseEvent
 
 export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);

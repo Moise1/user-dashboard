@@ -1,90 +1,76 @@
-// import aus_flag from '../../assets/channel/flags/AU.png';
-// import ger_flag from '../../assets/channel/flags/DE.png';
-// import sp_flag from '../../assets/channel/flags/ES.png';
-// import fr_flag from '../../assets/channel/flags/FR.png';
+import aus_flag from '../../assets/channel/flags/AU.png';
+import ger_flag from '../../assets/channel/flags/DE.png';
+import sp_flag from '../../assets/channel/flags/ES.png';
+import fr_flag from '../../assets/channel/flags/FR.png';
 import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
 import { t } from '../../utils/transShim';
-import { Flag, FlagProps } from './Flag';
+import { eCountry } from '../../utils/eCountry';
+import { Flag } from './Flag';
+
 
 interface values {
   storeLocation: string;
 }
 export interface StoreLocationProps {
-  platform: platformType;
+  platform: number;
   step: number;
-  handleChangeLocation: (newLocation: string) => void;
-  values: values;
+  handleChangeLocation: (newLocation:  number) => void;
+  values?: values;
 }
 
-const flags: FlagProps[] = [
-  // {
-  //   name: 'Australia',
-  //   path: aus_flag,
-  //   platform: 'ebay',
-  //   slug: 'australia'
-  // },
-  // {
-  //   name: 'Germany',
-  //   path: ger_flag,
-  //   platform: 'ebay',
-  //   slug: 'germany'
-  // },
-  // {
-  //   name: 'Spain',
-  //   path: sp_flag,
-  //   platform: 'amazon',
-  //   slug: 'spain'
-  // },
-  // {
-  //   name: 'France',
-  //   path: fr_flag,
-  //   platform: 'ebay',
-  //   slug: 'france'
-  // },
-  // {
-  //   name: 'Italy',
-  //   path: it_flag,
-  //   platform: 'ebay',
-  //   slug: 'italy'
-  // },
+const flags = [
   {
-    name: 'United Kingdom',
+    name: 'UK',
     path: uk_flag,
     platform: 'amazon',
-    slug: 'uk'
+    slug: 'uk',
+    code: eCountry.UK,
   },
   {
-    name: 'United States of America',
+    name: 'USA',
     path: us_flag,
     platform: 'amazon',
-    slug: 'us'
+    slug: 'us',
+    code: eCountry.US,
   },
   {
-    name: 'United Kingdom',
-    path: uk_flag,
+    name: 'Spain',
+    path: sp_flag,
     platform: 'amazon',
-    slug: 'uv'
+    slug: 'es',
+    code: 3,
   },
   {
-    name: 'United States of America',
-    path: us_flag,
-    platform: 'amazon',
-    slug: 'un'
+    name: 'France',
+    path: fr_flag,
+    platform: 'ebay',
+    slug: 'fr',
+    code: eCountry.FR,
   },
-  // {
-  //   name: 'United States of America',
-  //   path: us_flag,
-  //   platform: 'amazon',
-  //   slug: 'um'
-  // },
+  {
+    name: 'Germany',
+    path: ger_flag,
+    platform: 'ebay',
+    slug: 'de',
+    code: eCountry.DE,
+  },
+  {
+    name: 'Australia',
+    path: aus_flag,
+    platform: 'ebay',
+    slug: 'au',
+    code: eCountry.AU,
+  },
   {
     name: 'Italy',
     path: it_flag,
     platform: 'ebay',
-    slug: 'italy'
-  }
+    slug: 'it',
+    code: eCountry.IT,
+  },
+
 ];
 
 export const StoreLocation = (props: StoreLocationProps) => {
@@ -94,24 +80,26 @@ export const StoreLocation = (props: StoreLocationProps) => {
     <form className="location-form">
       <h5 className="title">{t('bar2')}?</h5>
       <h6 className="sub-title">
-        {platform == 'ebay' ? t('storebay') : platform == 'amazon' ? t('storamz') : t('storshp')}
+        {platform == 1 ? t('storebay') : platform == 3 ? t('storamz') : t('storshp')}
       </h6>
       <div className="flags">
         {flags.map((i) => (
           <Flag
-            platform={platform}
-            currentPlatform={i.platform}
+            key={i.name}
+            // platform={platform}
+            // currentPlatform={i.platform}
             flag={i.path}
             name={i.name}
-            key={i.slug}
-            location={values.storeLocation}
+            code={i.code}
+            // key={i.slug}
+            // location={values.storeLocation}
             handleChangeLocation={handleChangeLocation}
           />
         ))}
       </div>
       <p className="select-country">
         {' '}
-        {values.storeLocation == '' ? '*Please select a country in order to proceed' : null}
+        {values?.storeLocation == '' ? '*Please select a country in order to proceed' : null}
       </p>
     </form>
   );

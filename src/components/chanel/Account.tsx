@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface props {
   step: number;
-  platform: platformType;
-
+  platform: number;
   handleChangeApi: (newApi: string) => void;
 }
 export const Account = (props: props) => {
@@ -15,9 +14,9 @@ export const Account = (props: props) => {
       <h5 className="title"> {`Do you have a ${platform} account?`}</h5>
       <h6 className="sub-title">{`No ${platform} store yet? We will happily show you how to get started!`}</h6>
       <div className="">
-        {platform == 'ebay' ? (
+        {platform == 1 ? (
           t('ebayacntslct')
-        ) : platform == 'amazon' ? (
+        ) : platform == 3 ? (
           t('amznacntslct')
         ) : (
           <>
@@ -29,9 +28,9 @@ export const Account = (props: props) => {
         )}
       </div>
       <p className="">
-        {platform == 'ebay' ? <>{t('ebay1')}</> : platform == 'shopify' ? t('shppara3') : t('amznpara1')}
+        {platform == 1 ? <>{t('ebay1')}</> : platform == 2 ? t('shppara3') : t('amznpara1')}
       </p>
-      <p className="">{platform == 'amazon' ? <>{t('amznpara2')}</> : ''}</p>
+      <p className="">{platform == 3 ? <>{t('amznpara2')}</> : ''}</p>
       <Link to="/become-a-seller" className="become-seller">
         How to be come a {platform} seller
       </Link>

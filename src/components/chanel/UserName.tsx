@@ -8,7 +8,7 @@ interface props {
   step: number;
   user: string;
   values: values;
-  platform: platformType;
+  platform: number;
   handleChangeUser: (newUser: string) => void;
 }
 
@@ -33,7 +33,7 @@ export const UserName = (props: props) => {
           aria-describedby="emailHelp"
           value={user}
           placeholder={
-            platform == 'ebay' ? ' EBay username' : platform == 'amazon' ? ' Amazon username' : ' Shopify username'
+            platform === 1 ? ' EBay username' : platform === 3 ? ' Amazon username' : ' Shopify username'
           }
           onChange={(e) => handleChangeUser(e.target.value)}
         />
@@ -44,7 +44,7 @@ export const UserName = (props: props) => {
         >
           <i>
             {t('fill')}
-            {platform == 'ebay' ? ' EBay ' : platform == 'amazon' ? ' Amazon ' : ' Shopify '} {t('username')}
+            {platform === 1 ? ' EBay ' : platform === 3 ? ' Amazon ' : ' Shopify '} {t('username')}
           </i>
         </div>
       </div>

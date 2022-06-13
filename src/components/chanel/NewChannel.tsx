@@ -9,11 +9,14 @@ import { UserName } from './UserName';
 import { Stepper } from './Stepper';
 import { ProgressBar } from './ProgressBar';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import { getLinkAccount } from 'src/redux/new-channel/newChannelThunk';
+import { eShop } from 'src/utils/eShop';
 import '../../sass/new-channel.scss';
 
 interface state {
-  platform: platformType;
-  storeLocation: string;
+  platform: number;
+  storeLocation: string | number | null;
   flag: string;
   location: string;
   api: string;
@@ -30,10 +33,14 @@ export const NewChannel = ({ _ignored }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
+  const {url} = useAppSelector(state => state.linkAccount);
+  const dispatch = useAppDispatch();
+
+  console.log('URL', url);
 
   const [data, setData] = useState<state>({
-    platform: 'ebay',
-    storeLocation: '',
+    platform: eShop.eBay,
+    storeLocation: null,
     flag: '',
     location: '',
     api: '',
@@ -42,21 +49,26 @@ export const NewChannel = ({ _ignored }: Props) => {
     list: ''
   });
 
+
   const handlePrev = () => setStep((prevState) => prevState - 1);
   const handleNext = () => {
+    if(url){
+      window.open(url,'', 'width=600, height=600, margin: auto')!.focus();
+    }
     setStep((prevState) => prevState + 1);
     setShowPrev(true);
   };
 
-  const handleChangePlatform = (value: platformType) => {
+  const handleChangePlatform = (value: number) => {
     setData({ ...data, platform: value });
     setShowNext(true);
   };
-  const handleChangeLocation = (value: string) => {
+  const handleChangeLocation = (value: number | string) => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
     setData({ ...data, api: value });
+    value === 'easy' && dispatch(getLinkAccount({shop: data.platform, site: data.storeLocation as number}));
   };
   const handleChangeExtension = (value: string) => {
     setData({ ...data, extension: value });
@@ -68,16 +80,16 @@ export const NewChannel = ({ _ignored }: Props) => {
     setData({ ...data, list: value });
   };
 
-  const { platform, storeLocation, api, user, list, extension } = data;
-  const values: chooseListValues = { platform, storeLocation, api, user, list, extension };
+  const { platform, api, user, list, extension } = data;
+  const values: chooseListValues = { platform, api, user, list, extension };
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
     case 1:
       return (
         <PlatForm
-          platform={data.platform || 'ebay'}
-          values={values}
+          platform={data.platform}
+          // values={values}
           step={step}
           handleChangePlatform={handleChangePlatform}
         />
@@ -86,7 +98,7 @@ export const NewChannel = ({ _ignored }: Props) => {
       return (
         <StoreLocation
           platform={data.platform}
-          values={values}
+          // values={values}
           step={step}
           handleChangeLocation={handleChangeLocation}
         />
@@ -139,12 +151,12 @@ export const NewChannel = ({ _ignored }: Props) => {
           <div className="nav-btns">
             {showPrev && (
               <Button className="" onClick={handlePrev}>
-                <ArrowLeftOutlined style={{fontSize: '19px'}}/> Previous Step
+                <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
               </Button>
             )}
             {showNext && (
               <Button onClick={handleNext}>
-                <ArrowRightOutlined style={{fontSize: '19px'}}/>
+                <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 {step === 6 ? 'Finish' : 'Next'}{' '}
               </Button>
             )}

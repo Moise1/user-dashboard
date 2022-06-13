@@ -7,8 +7,8 @@ import { Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 
 export interface chooseListValues {
-  platform: platformType;
-  storeLocation: string;
+  platform: number;
+  storeLocation?: string;
   api: string;
   user: string;
   list: string;
@@ -19,7 +19,7 @@ interface props {
   handleChangeList?: (key: string) => void;
   values: chooseListValues;
   step: number;
-  platform: platformType;
+  platform: number;
   list: string;
 }
 
