@@ -4,18 +4,22 @@ import { getCatalogProducts } from './catalogThunk';
 export interface CatalogProduct {
   id: number;
   sourceId: number;
-  imageUrl: null;
-  sourcePrice: null;
-  title: null;
-  url: null;
-  profit: null;
-  channelPrice: null;
+  imageUrl: string;
+  sourcePrice: number;
+  title: string;
+  url: string;
+  profit: number;
+  channelPrice: number;
   options: number;
   competition: number;
   sold: number;
   priority: number;
   quantityListed: number;
   [key: string]: number | string | boolean | null;
+  page: number;
+  totalResults: number;
+  pageSize: number;
+  sessionId:number;
 }
 
 const initialState = {

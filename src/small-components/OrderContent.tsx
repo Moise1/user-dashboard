@@ -1,4 +1,3 @@
-import { ProgressBar } from 'react-bootstrap';
 import { Spin } from 'antd';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import {
@@ -12,6 +11,8 @@ import {
   LeftBackArrowIcon
 } from '../components/common/Icons';
 import { useState } from 'react';
+import { t } from '../utils/transShim';
+import '../sass/order-state-modal.scss';
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../components/common/Icons';
 import { ConfirmBtn, WarningBtn, DangerBtn, SuccessBtn } from './ActionBtns';
 import { useAppDispatch, useAppSelector } from '../custom-hooks/reduxCustomHooks';
@@ -19,13 +20,10 @@ import { processOrders } from '../redux/orders/orderThunk';
 import { manuallyDispatch } from '../redux/orders/orderThunk';
 import { stopOrder } from '../redux/orders/orderThunk';
 import amazonOrder from '../../src/assets/amazon-order-ss.png';
-import { t } from '../utils/transShim';
-import '../sass/order-state-modal.scss';
 import { loadProgressOfOrder } from '../redux/orders/orderThunk';
 import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
 // import { AutoOrderingState } from '../orders/OrderStatus';
-
 // import { Button } from 'antd';
 interface Props {
   orderProgress: number;
@@ -43,7 +41,6 @@ interface Props {
 export const OrderContent = (props: Props) => {
   const { orderProgress, data, OrderDetailsModalOpen } = props;
   const { id } = data;
-  console.log('The data id is', data.id);
   const [orderNumber] = useState(id);
   // const [iddd] = useState(445378);
   const orderStatus = useAppSelector((state) => state.orderProgress.states);
@@ -61,15 +58,13 @@ export const OrderContent = (props: Props) => {
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
 
-  const now = 60;
-
   useEffect(() => {
     // dispatch(loadProgressOfOrder(iddd));
     dispatch(loadProgressOfOrder(id));
     setOrderProgressStatus(orderStatus);
   }, []);
 
-  console.log('The order progress status is', orderProgressStatus);
+  console.log(orderProgressStatus);
 
   //To check status, working on it -Suleman Ahmad-
   // let statusText: string;
@@ -213,7 +208,8 @@ export const OrderContent = (props: Props) => {
                   <h2 className="mb-0">
                     Progress: <h2 className="fw-400">in checkout</h2>{' '}
                   </h2>
-                  <ProgressBar now={now} label={`${now}%`} />
+                  {/* Add progress bar from ant design*/}
+                  {/* <ProgressBar now={now} label={`${now}%`} /> */}
                 </div>
               </div>
             </div>
