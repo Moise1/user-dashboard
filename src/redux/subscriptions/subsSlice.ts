@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getSubscriptions } from './subsThunk';
+import { getPaymentConfig, getSubscriptions } from './subsThunk';
 
 export interface Subscription {
   id: number;
@@ -17,6 +17,32 @@ export interface Product {
   productOrder: number;
   type: number;
 }
+
+export interface PayPalConfig {
+  userId: string;
+}
+
+export interface StripeConfig {
+  publishableKey: string;
+  secretKey: string;
+}
+
+export interface SubscriptionConfiguration {
+  payPalConfig: PayPalConfig;
+  stripeConfig: StripeConfig;
+  usedQuota: number;
+  limit: number;
+  totalQuota: number;
+  currentSubscriptionProduct: string;
+  upgrade: boolean;
+}
+
+const initialStateConfig = {
+  loading: false,
+  subscriptionConfiguration: [] as SubscriptionConfiguration[],
+  error: ''
+};
+
 
 const initialState = {
   products: [] as Product[],
@@ -44,4 +70,25 @@ export const subscriptionsSlice = createSlice({
   }
 });
 
+export const getConfigSlice = createSlice({
+  name: 'subscriptionConfiguration',
+  initialState: initialStateConfig,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getPaymentConfig.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getPaymentConfig.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.subscriptionConfiguration = payload;
+    });
+    builder.addCase(getPaymentConfig.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const subscriptionsReducer = subscriptionsSlice.reducer;
+export const getConfigReducer = getConfigSlice.reducer;

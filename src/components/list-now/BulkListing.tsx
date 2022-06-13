@@ -1,4 +1,4 @@
-import { Layout, Form, Input, Button, DatePicker } from 'antd';
+import { Layout, Form, Input, Button, DatePicker, Spin } from 'antd';
 import { Row, Col } from 'antd';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 
@@ -45,8 +45,11 @@ export const BulkListing = (/*props: props*/) => {
   ]);
 
   useEffect(() => {
+    console.log('useEffet called');
     dispatch(getManualListings());
     dispatch(getUserAssistants());
+    console.log('useEffet called after');
+
   }, [getManualListings, getUserAssistants]);
 
   const onSave = async (values: ListingsData) => {
@@ -136,102 +139,106 @@ export const BulkListing = (/*props: props*/) => {
 
   return (
     <Layout className='bulk-list-content'>
-      <div className='sections-container'>
-        <h1>Bulk Listing</h1>
-        <Row>
-          <Col span={24}>
-            <div className='bulk-sections'>
-              <div className='options-container'>
-                <StatusBar className='bulk-options'>
-                  <> </>
-                  <Form className='bulk-form' layout={'horizontal'}>
-                    <Item label='Create As' name='createdBy'>{VAloading}
-                      <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>
-                        {userAssistants?.map(({ name: label, id: value }: UserAssistant) => ({ value, label }))}
-                      </Selector>
-                    </Item>
-                    <p>VA Profile selected as the creator of the listing</p>
-                    <Item label='List Vero Items' name='ignoreVero'>
-                      <Selector defaultValue={ignoreVero}
-                        value={ignoreVero}
-                        onChange={handleIgnoreVeroChange}
-                      >
-                        {[
-                          { label: 'Yes', value: 'true' },
-                          { label: 'No', value: 'false' }
-                        ]}
-                      </Selector>
-                    </Item>
-                    <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
-                    <Item label='List Out of Stock Items' name='ignoreOOS'>
-                      <Selector defaultValue={ignoreOOS} value={ignoreOOS} onChange={handleIgnoreOOSChange}>
-                        {[
-                          { label: 'Yes', value: 'true' },
-                          { label: 'No', value: 'false' }
-                        ]}
-                      </Selector>
-                    </Item>
-                    <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
-                    <Item label="Don't list until" name='dontListUntil'>
-                      <DatePicker showTime={{ format: 'hh:mm A' }}
-                        format='YYYY-MM-DD hh:mm A' onChange={onChange} onOk={onOk} />
-                    </Item>
-                    <Item label='Listing frequency' name='listFrequencyMinutes'>
-                      <Input className='blue-input' type='number' value={listFrequencyMinutes} placeholder='0' onChange={handleListFrequencyMinutes} />
-                    </Item>
-                    <p>The system will automatically list an item every X minutes.</p>
-                    <Item label='Review listings' name='reviewBeforePublishing'>
-                      <Selector defaultValue={reviewBeforePublishing} value={reviewBeforePublishing} onChange={handleReviewBeforePublishing}>
-                        {[
-                          { label: 'Yes', value: 'true' },
-                          { label: 'No', value: 'false' }
-                        ]}
-                      </Selector>
-                    </Item>
-                    <p>Yes: Review each listing before updating it on my store<br />
-                      No: List items automatically on my store.</p>
-                  </Form>
-                </StatusBar>
+      {loadings && VAloading ? (
+        <Spin />
+      ) :
+        <div className='sections-container'>
+          <h1>Bulk Listing</h1>
+          <Row>
+            <Col span={24}>
+              <div className='bulk-sections'>
+                <div className='options-container'>
+                  <StatusBar className='bulk-options'>
+                    <> </>
+                    <Form className='bulk-form' layout={'horizontal'}>
+                      <Item label='Create As' name='createdBy'>{VAloading}
+                        <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>
+                          {userAssistants?.map(({ name: label, id: value }: UserAssistant) => ({ value, label }))}
+                        </Selector>
+                      </Item>
+                      <p>VA Profile selected as the creator of the listing</p>
+                      <Item label='List Vero Items' name='ignoreVero'>
+                        <Selector defaultValue={ignoreVero}
+                          value={ignoreVero}
+                          onChange={handleIgnoreVeroChange}
+                        >
+                          {[
+                            { label: 'Yes', value: 'true' },
+                            { label: 'No', value: 'false' }
+                          ]}
+                        </Selector>
+                      </Item>
+                      <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
+                      <Item label='List Out of Stock Items' name='ignoreOOS'>
+                        <Selector defaultValue={ignoreOOS} value={ignoreOOS} onChange={handleIgnoreOOSChange}>
+                          {[
+                            { label: 'Yes', value: 'true' },
+                            { label: 'No', value: 'false' }
+                          ]}
+                        </Selector>
+                      </Item>
+                      <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
+                      <Item label="Don't list until" name='dontListUntil'>
+                        <DatePicker showTime={{ format: 'hh:mm A' }}
+                          format='YYYY-MM-DD hh:mm A' onChange={onChange} onOk={onOk} />
+                      </Item>
+                      <Item label='Listing frequency' name='listFrequencyMinutes'>
+                        <Input className='blue-input' type='number' value={listFrequencyMinutes} placeholder='0' onChange={handleListFrequencyMinutes} />
+                      </Item>
+                      <p>The system will automatically list an item every X minutes.</p>
+                      <Item label='Review listings' name='reviewBeforePublishing'>
+                        <Selector defaultValue={reviewBeforePublishing} value={reviewBeforePublishing} onChange={handleReviewBeforePublishing}>
+                          {[
+                            { label: 'Yes', value: 'true' },
+                            { label: 'No', value: 'false' }
+                          ]}
+                        </Selector>
+                      </Item>
+                      <p>Yes: Review each listing before updating it on my store<br />
+                        No: List items automatically on my store.</p>
+                    </Form>
+                  </StatusBar>
+                </div>
               </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24}>
-            <Spreadsheet data={data} onChange={setData} columnLabels={lables} className='spreadsheet' />
-            <Button onClick={addRows} >Add 10 rows</Button>
-            <div className='table-container'>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24}>
+              <Spreadsheet data={data} onChange={setData} columnLabels={lables} className='spreadsheet' />
+              <Button onClick={addRows} >Add 10 rows</Button>
+              <div className='table-container'>
 
-              <div className='button-container'>
-                <Item>
-                  <Button type='primary' onClick={onListItems}>List items</Button>
-                </Item>
+                <div className='button-container'>
+                  <Item>
+                    <Button type='primary' onClick={onListItems}>List items</Button>
+                  </Item>
+                </div>
               </div>
-            </div>
-          </Col>
-        </Row>
-        <div className='manual-list-content'>
-          <div className='container-manual-listing'>
-            <div className='section-sources'>
-              <h2>Suported suppliers</h2>
-              <Row gutter={[16, 8]}>
-                {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
-                  return <Col span={6} key={itm.id}>
-                    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
-                      <div className='list-card'> {loadings}
-                        {/* eslint-disable @typescript-eslint/no-var-requires */}
-                        <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
-                        <br />
-                        <h3>{itm.name}</h3>
-                      </div>
-                    </a>
-                  </Col>;
-                })}
-              </Row>
+            </Col>
+          </Row>
+          <div className='manual-list-content'>
+            <div className='container-manual-listing'>
+              <div className='section-sources'>
+                <h2>Suported suppliers</h2>
+                <Row gutter={[16, 8]}>
+                  {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
+                    return <Col span={6} key={itm.id}>
+                      <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
+                        <div className='list-card'> {loadings}
+                          {/* eslint-disable @typescript-eslint/no-var-requires */}
+                          <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
+                          <br />
+                          <h3>{itm.name}</h3>
+                        </div>
+                      </a>
+                    </Col>;
+                  })}
+                </Row>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     </Layout>
   );
 };

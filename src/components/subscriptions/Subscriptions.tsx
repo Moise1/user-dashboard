@@ -39,10 +39,12 @@ export const Subscriptions = () => {
     }
   };
 
-  function parentToChild(value: number, billing: number): void {
+  function parentToChild(value: number, billing: number, type: number): void {
     localStorage.setItem('productId', value.toString());
     localStorage.setItem('billing', billing.toString());
     localStorage.setItem('currencyId', activeCurrency.toString());
+    localStorage.setItem('upgradingSubscription', 'false');
+    localStorage.setItem('type', type.toString());
   }
 
   const renderSlides = useMemo(() => {
@@ -104,7 +106,7 @@ export const Subscriptions = () => {
                   <strong>{p.name}</strong>
                 </p>
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.id, 0)} key={p.id}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 0, p.type)} key={p.id}>
                     <div className="rate-details top-most">
                       <span className="euro">{currency}</span>
                       <h1 className="monthly-rate">
@@ -120,7 +122,7 @@ export const Subscriptions = () => {
                 </div>
                 <Divider className="divider" />
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.id, 1)}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 1, p.type)}>
                     <p className="twenty-off">20% off</p>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
@@ -138,7 +140,7 @@ export const Subscriptions = () => {
                 </div>
                 <Divider className="divider" />
                 <div className="container-sub">
-                  <Link to="/checkout" onClick={() => parentToChild(p.id, 2)}>
+                  <Link to="/checkout" onClick={() => parentToChild(p.id, 2, p.type)}>
                     <p className="forty-off">40% off</p>
                     <div className="rate-details">
                       <span className="euro">{currency}</span>
@@ -158,8 +160,8 @@ export const Subscriptions = () => {
             ))}
           </Carousel>
           <Space className="control-btns-container">
-            <LeftOutlined onClick={handlePrev} style={{fontSize: '19px'}}/>
-            <RightOutlined onClick={handleNext} style={{fontSize: '19px'}}/>
+            <LeftOutlined onClick={handlePrev} style={{ fontSize: '19px' }} />
+            <RightOutlined onClick={handleNext} style={{ fontSize: '19px' }} />
           </Space>
         </div>
       )}
