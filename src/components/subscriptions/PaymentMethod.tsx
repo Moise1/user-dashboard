@@ -11,6 +11,7 @@ import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
 import { useHistory } from 'react-router';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { Links } from '../../links';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -79,7 +80,7 @@ export const PaymentMethod = (/*props: props*/) => {
         <div className="order-summary">
           <div className="second-section-container">
             <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
-            <div className="order-sum" onClick={() => routeChange('/payment-method')}>
+            <div className="order-sum" onClick={() => routeChange(Links.PaymentMethod)}>
               <ConfirmBtn htmlType="submit">
                 Finish Payment <ArrowRightOutlined />
               </ConfirmBtn>

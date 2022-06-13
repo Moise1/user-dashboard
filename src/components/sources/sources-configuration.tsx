@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { SimpleTable } from '../tables/SimpleTable';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
+import { Links } from '../../links';
 
-export const SourcesTable = () => {
+export const SourcesConfiuration = () => {
   const dispatch = useAppDispatch();
   const { sources, loading } = useAppSelector((state) => state.sources);
   const [current, setCurrent] = useState<number>(1);
@@ -37,7 +38,7 @@ export const SourcesTable = () => {
       dataIndex: 'sourceName',
       key: 'sourceName',
       render: (value: string) => (
-        <Link to={'/sources-settings/'} onClick={() => parentToChild(value)} className="back-link">
+        <Link to={Links.SourceSettings} onClick={() => parentToChild(value)} className="back-link">
           {value}
         </Link>
       )

@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { PlatformIndo } from '../data/platforms';
+import { Links } from '../links';
 
 export type TransValue = string | ReactNode;
 type ValueTypeValue = PrimitiveType | ReactNode;
@@ -46,8 +48,8 @@ export const TransUtils = {
   },
   GetLinksValues: () => {
     return {
-      sources_table_link: <a href='/sources-table'>{t('Menu.SourcesTable', {})}</a>,
-      templates_link: <a href='/templates'>{t('Menu.Templates', {})}</a>,
+      sources_table_link: <Link to={Links.SourcesSettingsTable}>{t('Menu.SourcesTable', {})}</Link>,
+      templates_link: <Link to={Links.Templates}>{t('Menu.Templates', {})}</Link>,
     };
   }
 };

@@ -6,6 +6,7 @@ import { toastAlert } from '../../utils/toastAlert';
 import { getChannels } from '../channels/channelsThunk';
 
 import dotenv from 'dotenv';
+import { Links } from '../../links';
 
 dotenv.config();
 interface Props {
@@ -21,7 +22,7 @@ export const userLogin = createAsyncThunk('user/userLogin', async ({ data, histo
       localStorage.setItem('Authorization', res.data.response_data.token);
       await dispatch(getChannels());
       toastAlert('Successfully logged in.', 'success');
-      history.push('/dashboard');
+      history.push(Links.Dashboard);
     }
     return res.data.response_data;
   } catch (error) {
@@ -36,7 +37,7 @@ export const userRegister = createAsyncThunk(
       const res = await client.post('/register/user', data);
       if (res.status === 201) {
         localStorage.setItem('isAuthenticated', 'true');
-        history.push('/dashboard');
+        history.push(Links.Dashboard);
       }
       return res.data;
     } catch (error) {

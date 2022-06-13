@@ -26,6 +26,7 @@ export interface ChannelSetting {
   Ancestors?: Ancestor[];
   AncestorsHide?: boolean;
   Extra?: ChannelSettingExtra[];
+  PlaceHolder?: string;
 }
 
 export const ChannelSettings: ChannelSetting[] = [
@@ -256,7 +257,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.DefaultShipping],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '0'
@@ -299,7 +300,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ShippingProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'
@@ -314,7 +315,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ReturnProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'
@@ -329,7 +330,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Type: SettingType.List,
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.PaymentProfileId],
-    Values: ['0'],
+    Values: [null],
     Ancestors: [{
       Field: eChannelSettings.UseBusinessPolicies,
       Value: '1'

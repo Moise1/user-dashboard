@@ -20,6 +20,8 @@
   "TerminatedListingsShort": "Terminated",
   "Edit N Listings": "Edit <span className=\"fw-600\">{num}</span> Products",
 
+  "Select": "Select",
+
   "Channel.Setting.Description.BusinessCity": "City to use as the location of your items.Required.",
   "Channel.Setting.Description.BusinessPayment": " ",
   "Channel.Setting.Description.BusinessPostcode": "Postal code to use as the location of your items.",

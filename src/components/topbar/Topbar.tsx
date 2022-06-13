@@ -13,6 +13,7 @@ import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHo
 import { getNotifications } from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
+import { Links } from '../../links';
 
 interface Props extends RouteComponentProps {
   showMobileSider: () => void;
@@ -87,7 +88,7 @@ export const Topbar = withRouter((props: Props) => {
             </span>
           </div>
           <Progress percent={qoutaPercentage(quotaUsed, quotaAdded)} showInfo={false} className="progress-bar" />
-          <button type="button" onClick={() => routeChange('/subscriptions')} className="update-btn">
+          <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="update-btn">
             {t('Topbar.Update')}
           </button>
         </div>
