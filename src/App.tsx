@@ -20,7 +20,7 @@ import {
   ChannelConfiguration,
   GetStarted,
   Catalog,
-  SourcesConfiuration,
+  SourcesTable,
   Dashboard,
   SourceConfiguration,
   Templates,
@@ -79,7 +79,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
             <ProtectedRoute path={Links.SourceSettings} component={SourceConfiguration} />
-            <ProtectedRoute path={Links.SourcesSettingsTable} component={SourcesConfiuration} />
+            <ProtectedRoute path={Links.SourcesSettingsTable} component={SourcesTable} />
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute path={Links.Services} component={Services} />

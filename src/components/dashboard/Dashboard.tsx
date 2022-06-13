@@ -42,7 +42,6 @@ import { affiliatesGraphConfig, salesGraphConfig } from 'src/utils/graphConfig';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
-
 interface ProductQuota {
   quota: number;
   used: number;
@@ -55,6 +54,13 @@ interface ProductQuota {
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
+
+  //For pagination add by suleman ahmad 
+  const [postPerPage, setPostPerPage] = useState<number>(2);
+  const [current, setCurrent] = useState<number>(1);
+  const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
+  //
+  console.log('The setSearchedChannels',setSearchedChannels);
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
@@ -66,7 +72,7 @@ export const Dashboard = () => {
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [showSales, setShowSales] = useState<boolean>(true);
-  const [current] = useState<number>(1);
+  // const [current] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
 
   const monthsLabels = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
@@ -148,7 +154,7 @@ export const Dashboard = () => {
     { value: 1, label: '4' }
   ];
   const onSelectOption = (value: SelectorValue) => {
-    value = value ===  0 ? 3 : 4;
+    value = value === 0 ? 3 : 4;
     setSelectedPeriod(value as number);
   };
   const salesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
@@ -246,7 +252,14 @@ export const Dashboard = () => {
           <Col className="stores" xs={24} lg={10}>
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
-            <DataTable current={current} dataSource={channels} columns={columns} pageSize={2} total={channels.length} />
+            <DataTable
+              dataSource={searchedChannels.length ? searchedChannels : channels} columns={columns} totalItems={channels.length}
+              pageSize={postPerPage}
+              setPostPerPage={setPostPerPage}
+              current={current}
+              onChange={setCurrent}
+            />
+
             <Link to="/add-channel" className="alternative-link">
               Add new channel
             </Link>
@@ -258,7 +271,7 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector  placeHolder="Select a period" onChange={onSelectOption}>
+            <Selector placeHolder="Select a period" onChange={onSelectOption}>
               {periodOptions}
             </Selector>
             {selectedPeriod === 3 ? (
@@ -294,7 +307,7 @@ export const Dashboard = () => {
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
               <h6>Listing Service</h6>
-              <BookOutlined  style={{ fontSize: '19px' }}/>
+              <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {listingServicesResult?.length ? (
               <List
@@ -327,7 +340,7 @@ export const Dashboard = () => {
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
               <h6>No API Server</h6>
-              <BookOutlined  style={{ fontSize: '19px' }}/>
+              <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {noApiServersResult?.length ? (
               <List
@@ -382,7 +395,7 @@ export const Dashboard = () => {
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
               <h6>Auto Ordering</h6>
-              <BookOutlined  style={{ fontSize: '19px' }}/>
+              <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             <div className="use-auto-ordering">
               <p>Do you want to keep your NO API extension running 24/7?</p>
@@ -401,7 +414,7 @@ export const Dashboard = () => {
         <div className="affiliates-contents">
           <div className="affiliates-title">
             <h2>Your affiliate link</h2>
-            <BookOutlined  style={{ fontSize: '19px' }}/>
+            <BookOutlined style={{ fontSize: '19px' }} />
           </div>
           <div className="affiliates-benefits">
             <p>Get money each time your referrals purchase any service from us</p>

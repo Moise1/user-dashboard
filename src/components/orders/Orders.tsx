@@ -297,12 +297,14 @@ export const Orders = () => {
             dataSource={searchedArray.length > 0 ? searchedArray : order}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
+            rowClassName="table-row"
+            //Below the props are for pagination
             totalItems={order.length}
             pageSize={postPerPage}
             setPostPerPage={setPostPerPage}
             current={current}
             onChange={setCurrent}
-            rowClassName="table-row"
+            //
             onRow={(record) => {
               return {
                 onClick: () => {
