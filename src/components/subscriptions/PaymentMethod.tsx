@@ -1,33 +1,25 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Layout, Radio, Spin } from 'antd';
-
 import '../../sass/subscriptions/payment-method.scss';
 import { loadStripe } from '@stripe/stripe-js';
-
 import { OrderSummary } from './OrderSummary';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions, getPaymentConfig } from 'src/redux/subscriptions/subsThunk';
-import { useHistory } from 'react-router';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { CreateCheckoutSessionRequest, CreateCheckoutSessionResponse } from './models/types';
-import { rq } from '../common/rq';
-import { Links } from '../../links';
+import { CreateCheckoutSessionRequest } from './models/types';
+import { CreateCheckoutSession } from 'src/redux/payment/paymentThunk';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  //const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
     dispatch(getPaymentConfig());
   }, [getSubscriptions, getPaymentConfig]);
-
-  const routeChange = (route: string) => {
-    history.push(route);
-  };
 
   const [productId] = useState(localStorage.getItem('productId'));
   const [billingId] = useState(localStorage.getItem('billing'));
@@ -38,14 +30,10 @@ export const PaymentMethod = (/*props: props*/) => {
   //const [type] = useState(localStorage.getItem('type'));
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   const [loadings, setLoadings] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState<number>();
   const { subscriptionConfiguration } = useAppSelector((state) => state.subscriptionConfiguration);
   //const [stripeConfig] = useAppSelector((state) => state.paymentConfig.stripeConfig);
   console.log({ products });
-
-  async function CreateCheckoutSession(request: CreateCheckoutSessionRequest) {
-    console.log('checkoutsessionrequest');
-    return rq.postJson<CreateCheckoutSessionResponse>(subscriptionConfiguration.stripeConfig.createCheckoutSessionUrl, request);
-  }
 
   function setReturnUrl(url: string, returnUrl: string): string {
     let paramsStart = url.indexOf('?');
@@ -72,7 +60,7 @@ export const PaymentMethod = (/*props: props*/) => {
     console.log(baseUrl);
     let successUrl = subscriptionConfiguration.successUrl;
     console.log('successUrl: ' + successUrl);
-    successUrl = successUrl ??  'https://app.hustlegotreal.com/Home';
+    successUrl = successUrl ?? 'https://app.hustlegotreal.com/Home';
     successUrl = setReturnUrl(successUrl as string, 'https://app.hustlegotreal.com/Home');
 
     const url = new URL(successUrl);
@@ -89,6 +77,10 @@ export const PaymentMethod = (/*props: props*/) => {
   }
 
 
+  function setValue(arg0: number) {
+    setSelectedMethod(arg0);
+  }
+
   async function handleStripe() {
 
     setLoadings(true);
@@ -100,11 +92,9 @@ export const PaymentMethod = (/*props: props*/) => {
       upgradingSubscription: subscriptionConfiguration.upgrade as unknown as boolean
     };
 
-    const response: CreateCheckoutSessionResponse = await CreateCheckoutSession(request);
-    console.log('response.checkoutSessionId');
-    console.log(response.checkoutSessionId);
+    const rp = await dispatch(CreateCheckoutSession(request));
     const stripe = await loadStripe(subscriptionConfiguration.stripeConfig.publishableKey);
-    await stripe?.redirectToCheckout({ sessionId: response.checkoutSessionId });
+    await stripe?.redirectToCheckout({ sessionId: rp.payload.responseObject.checkoutSessionId });
   }
 
   function handlePayPal() {
@@ -114,6 +104,18 @@ export const PaymentMethod = (/*props: props*/) => {
       '&custom=' +
       subscriptionConfiguration.payPalConfig.userId;
   }
+
+  const routeChange = () => {
+    if (selectedMethod && selectedMethod === 1) {
+      handlePayPal();
+    }
+    else if (selectedMethod && selectedMethod === 2) {
+      handleStripe();
+    }
+    else {
+      alert('Please select a payment method');
+    }
+  };
 
 
   return loading || loadings ? (
@@ -127,19 +129,21 @@ export const PaymentMethod = (/*props: props*/) => {
 
       <div className="payment-sections-container">
         <div className="payments-container">
-          <div className="section-payment">
-            <div className="section-container">
-              <h3>Select your preferred payment method</h3>
-              <div className="cards-payments">
-                <Radio className="card-payment-section" onClick={handleStripe}>
-                  <h3>Credit card</h3>
-                </Radio>
-                <Radio className="card-payment-section" onClick={handlePayPal}>
-                  <h3>Paypal</h3>
-                </Radio>
+          <Radio.Group name="paymentMethod" defaultValue="0">
+            <div className="section-payment">
+              <div className="section-container">
+                <h3>Select your preferred payment method</h3>
+                <div className="cards-payments">
+                  <Radio className="card-payment-section" value="2" name="paymentMethod" onClick={() => setValue(2)}>
+                    <h3>Credit card</h3>
+                  </Radio>
+                  <Radio className="card-payment-section" value="1" name="paymentMethod" onClick={() => setValue(1)}>
+                    <h3>Paypal</h3>
+                  </Radio>
+                </div>
               </div>
             </div>
-          </div>
+          </Radio.Group>
           {/*Future functionality*/}
           {/*
           <div className="section-payment">
@@ -165,7 +169,7 @@ export const PaymentMethod = (/*props: props*/) => {
         <div className="order-summary">
           <div className="second-section-container">
             <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
-            <div className="order-sum" onClick={() => routeChange(Links.PaymentMethod)}>
+            <div className="order-sum" onClick={() => routeChange()}>
               <ConfirmBtn htmlType="submit">
                 Finish Payment <ArrowRightOutlined />
               </ConfirmBtn>
