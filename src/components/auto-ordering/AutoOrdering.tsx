@@ -1,7 +1,6 @@
 import React, { ReactNode, useState, useRef } from 'react';
 import { Form, Input, Button, Alert, Select, Spin, Layout } from 'antd';
 import { t } from '../../utils/transShim';
-import { PlusCircle } from 'react-feather';
 import { Switch } from '../../small-components/Switch';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
@@ -9,11 +8,12 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { saveAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import '../../sass/switch.scss';
 import '../../sass/auto-ordering.scss';
-import { useLocation } from 'react-router-dom';
-import { Selector, SelectorValue } from '../../small-components/form/selector';
 // import hand from '../../assets/hand.svg';
 // import copy from '../../assets/copy.svg';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useLocation } from 'react-router-dom';
+import { Selector, SelectorValue } from '../../small-components/form/selector';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 export interface rawSettingInterface {
   key: number;
@@ -115,7 +115,7 @@ export const AutoOrdering = () => {
   ]);
 
   const { Option } = Select;
- 
+
   const [accountConfig, setAccountConfig] = useState<string>(''); //Value for account
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector 
@@ -359,7 +359,7 @@ export const AutoOrdering = () => {
                                     onChange={handleChange}
                                   />
                                   <a onClick={handleSubmit}>
-                                    <PlusCircle className="add-icon" size="35" />
+                                    <PlusCircleOutlined style={{ fontSize: '19px' }} />
                                   </a>
                                 </div>
                               ) : (

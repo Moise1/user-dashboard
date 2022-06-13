@@ -1,44 +1,93 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
-import { Layout, Spin } from 'antd';
+import { Layout, Radio, Spin } from 'antd';
 
 import '../../sass/subscriptions/payment-method.scss';
 
 import { OrderSummary } from './OrderSummary';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
+import { useHistory } from 'react-router';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import { Links } from '../../links';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
   }, [getSubscriptions]);
+
+  const routeChange = (route: string) => {
+    history.push(route);
+  };
+
+  const [productId] = useState(localStorage.getItem('productId'));
+  const [billingId] = useState(localStorage.getItem('billing'));
+  const [currencyId] = useState(localStorage.getItem('currencyId'));
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   console.log({ products });
   return loading ? (
     <Spin />
   ) : (
-    <Layout className="checkout-content">
+    <Layout className="paymentmethod-content">
       <div className="title-container">
-        <h3>Checkout</h3>
-        <h4>Payment method</h4>
+        <h2>Checkout</h2>
+        <h3>Payment method</h3>
       </div>
 
       <div className="payment-sections-container">
-        <div className="billing-container">
-          <div className="billing-section-container">
-            <h1>Payment method</h1>
+        <div className="payments-container">
+          <div className="section-payment">
+            <div className="section-container">
+              <h3>Select your preferred payment method</h3>
+              <div className="cards-payments">
+                <Radio className="card-payment-section">
+                  <h3>Credit card</h3>
+                </Radio>
+                <Radio className="card-payment-section">
+                  <h3>Paypal</h3>
+                </Radio>
+              </div>
+            </div>
           </div>
-          <div className="billing-section-container">
-            <h1>Billing details</h1>
+          {/*Future functionality*/}
+          {/*
+          <div className="section-payment">
+            <h3 className="title-card">Billing details</h3>
+            <div className="section-container">
+              <div className="billing-details">
+                <div className="address-details">
+                  <h3>Address</h3>
+                  <h4>John McGregor</h4>
+                  <h4>7 Queensway</h4>
+                  <h4>WC17 8BQ, London</h4>
+                  <h4>United Kingdom</h4>
+                </div>
+                <div className="address-details">
+                  <h3>VAT Number</h3>
+                  <h4>466345544</h4>
+                </div>
+              </div>
+            </div>
           </div>
+          */}
         </div>
         <div className="order-summary">
-          <OrderSummary productId={null} billingId={null} currencyId={null} />
+          <div className="second-section-container">
+            <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
+            <div className="order-sum" onClick={() => routeChange(Links.PaymentMethod)}>
+              <ConfirmBtn htmlType="submit">
+                Finish Payment <ArrowRightOutlined />
+              </ConfirmBtn>
+            </div>
+          </div>
         </div>
+
       </div>
     </Layout>
   );

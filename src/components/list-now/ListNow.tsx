@@ -1,13 +1,13 @@
-/*import { useState } from 'react';*/
 import catalog_icon from '../../assets/channel/list/Group 2.png';
 import manual_icon from '../../assets/channel/list/Group 147.png';
 import bulk_icon from '../../assets/channel/list/Group 4.png';
 import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { Button, Row, Col } from 'antd';
-import { ArrowRight } from 'react-feather';
-import '../../sass/list-now/list-now.scss';
 import { useHistory } from 'react-router-dom';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import '../../sass/list-now/list-now.scss';
+import { Links } from '../../links';
 
 export interface state {
   platform: platformType;
@@ -27,7 +27,7 @@ export const ListNow = (/*props: props*/) => {
   const channel = allChannels.filter(function (data) {
     return data.id.toString() == selectedChannel;
   })[0];
-  const weList4u = channel.channelId != 4;
+  const weList4u = channel?.channelId != 4;
 
   const routeChange = (route: string) => {
     history.push(route);
@@ -39,7 +39,7 @@ export const ListNow = (/*props: props*/) => {
       <div className="choose-list">
         <Row>
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/catalog')}>
+            <div className="list-card" onClick={() => routeChange(Links.Catalog)}>
               <img src={catalog_icon} alt="icon" className={'w-md-100 filter-white'} />
               <div className="card-info">
                 <h5>{t('cata')}</h5>
@@ -47,7 +47,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('catapara')}{' '}
                   <span>
                     <a>
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -56,7 +56,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/manual-listing')}>
+            <div className="list-card" onClick={() => routeChange(Links.ManualPublish)}>
               <img src={manual_icon} alt="icon" />
 
               <div className="card-info">
@@ -65,7 +65,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('manualpara')}{' '}
                   <span>
                     <a href="#">
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -74,7 +74,7 @@ export const ListNow = (/*props: props*/) => {
           </Col>
 
           <Col md={8} xs={24}>
-            <div className="list-card" onClick={() => routeChange('/bulk-listing')}>
+            <div className="list-card" onClick={() => routeChange(Links.BulkPublish)}>
               <img src={bulk_icon} alt="icon" className={'w-md-100 filter-white'} />
 
               <div className="card-info">
@@ -83,7 +83,7 @@ export const ListNow = (/*props: props*/) => {
                   {t('bulkpara')}{' '}
                   <span>
                     <a href="#">
-                      <ArrowRight />
+                      <ArrowRightOutlined style={{fontSize: '19px'}}/>
                     </a>
                   </span>
                 </p>
@@ -95,7 +95,7 @@ export const ListNow = (/*props: props*/) => {
         {weList4u && (
           <Row>
             <Col span={24}>
-              <div className="list-card" onClick={() => window.open('https://hustlegotreal.com/en/listing-service/')}>
+              <div className="list-card" onClick={() => window.open(Links.ListingService)}>
                 <h3 className="title">{t('list4u')}</h3>
                 <img src={we_icon} alt="icon" />
 
@@ -105,7 +105,7 @@ export const ListNow = (/*props: props*/) => {
                     {t('welistpara')}
                     <span>
                       <a href="#">
-                        <ArrowRight />
+                        <ArrowRightOutlined style={{fontSize: '19px'}}/>
                       </a>
                     </span>
                   </p>

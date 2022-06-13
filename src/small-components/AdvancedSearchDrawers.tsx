@@ -84,7 +84,7 @@ export const CatalogFilters = (props: Props) => {
         </Space>
       }
     >
-      <div className="advanced-form-container">
+      <div className="catalog advanced-form-container">
         <h5>
           <strong>Choose your suppliers</strong>
         </h5>
@@ -183,7 +183,7 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
       visible={visible}
       closable={closable}
     >
-      <div className="advanced-form-container">
+      <div className="listings advanced-form-container">
         <Form layout="vertical" className="advanced-search-form">
           <div className="listings-search-inputs">
             <Form.Item label="Asin">

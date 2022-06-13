@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getChannelConfiguration, saveChannelSetting } from './channels-configuration-thunk';
+import { getChannelConfiguration, loadBusinessPolicies, loadShipping, refreshBusinessPolicies, saveChannelSetting } from './channels-configuration-thunk';
 
 export enum eChannelSettings {
   None = 0,
@@ -53,18 +53,35 @@ export enum eChannelSettings {
 
   MaxAvailableStock = 50, //Used by Compelia
 
-  CompareAtPrice = 51
+  CompareAtPrice = 51,
+
+  NoApiName = 52//Special setting used to modify the name but it is not a real setting
 }
 
+export enum BusinessPolicyType {
+  Shipping = 0,
+  Payment = 1,
+  Returns= 2
+}
+
+export interface BusinessPolicy {
+  id: number;
+  name: string;
+  policyType: BusinessPolicyType;
+  details: string;
+}
+
+export type ShippingOption = {text:string, value:string};
+
+export type SettingsValue = string | null;
 export interface SettingKey {
   key: eChannelSettings;
-  value: string | null;
+  value: SettingsValue;
 }
 
 export interface SavingSetting {
   loading: boolean;
   success: boolean;
-  updatedOn: Date;
   data: SettingKey;
 }
 
@@ -73,13 +90,31 @@ export interface ChannelConfigurationState {
   loading: boolean;
   error: string;
   savingSettings: SavingSetting[];
+
+  refreshBusinessInProgress: boolean;
+  refreshBusinessLoading: boolean;
+
+  loadingBusiness: boolean;
+  businessPolicies: BusinessPolicy[] | undefined;
+
+  loadingShipping: boolean;
+  shipping: ShippingOption[] | undefined;
 }
 
 const initialState: ChannelConfigurationState = {
   settings: null,
   loading: true,
   error: '',
-  savingSettings:[]
+  savingSettings: [],
+
+  refreshBusinessInProgress: false,
+  refreshBusinessLoading: false,
+
+  loadingBusiness: false,
+  businessPolicies: undefined,
+
+  loadingShipping: false,
+  shipping: undefined
 };
 
 export const channelConfigurationSlice = createSlice({
@@ -96,6 +131,8 @@ export const channelConfigurationSlice = createSlice({
       state.loading = false;
       state.settings = payload.settings as SettingKey[];
       state.savingSettings = [];
+      state.refreshBusinessLoading = false;
+      state.refreshBusinessInProgress = false;
     });
     builder.addCase(getChannelConfiguration.rejected, (state, { payload }) => {
       state.loading = false;
@@ -110,14 +147,12 @@ export const channelConfigurationSlice = createSlice({
       if (prv) {
         prv.loading = true;
         prv.data = meta.arg;
-        prv.updatedOn = new Date();
         prv.success = false;
       } else {
         state.savingSettings.push({
           loading: true,
           data: meta.arg,
           success: false,
-          updatedOn: new Date()
         });
       }
     });
@@ -126,7 +161,6 @@ export const channelConfigurationSlice = createSlice({
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = payload?.success;
-        prv.updatedOn = new Date();
       }
       if (payload?.success && state.settings) {
         const vk = state.settings.find(x => x.key == meta.arg.key);
@@ -143,8 +177,45 @@ export const channelConfigurationSlice = createSlice({
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = false;
-        prv.updatedOn = new Date();
       }
+    });
+
+    //REFRESH POLICIES
+    builder.addCase(refreshBusinessPolicies.pending, (state) => {
+      state.refreshBusinessLoading = true;
+      state.refreshBusinessInProgress = false;
+    });
+    builder.addCase(refreshBusinessPolicies.fulfilled, (state, { payload }) => {
+      state.refreshBusinessLoading = false;
+      state.refreshBusinessInProgress = payload.success ?? true;
+    });
+    builder.addCase(refreshBusinessPolicies.rejected, (state) => {
+      state.refreshBusinessLoading = false;
+      state.refreshBusinessInProgress = false;
+    });
+
+    //GET BUSINESSS POLICIES
+    builder.addCase(loadBusinessPolicies.pending, (state) => {
+      state.loadingBusiness = true;
+    });
+    builder.addCase(loadBusinessPolicies.fulfilled, (state, { payload }) => {
+      state.loadingBusiness = false;
+      state.businessPolicies = payload?.policies;
+    });
+    builder.addCase(loadBusinessPolicies.rejected, (state) => {
+      state.loadingBusiness = false;
+    });
+
+    //GET SHIPPINGS
+    builder.addCase(loadShipping.pending, (state) => {
+      state.loadingShipping = true;
+    });
+    builder.addCase(loadShipping.fulfilled, (state, { payload }) => {
+      state.loadingShipping = false;
+      state.shipping = payload?.options;
+    });
+    builder.addCase(loadShipping.rejected, (state) => {
+      state.loadingShipping = false;
     });
   }
 });

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button, Row, Col } from 'antd';
-import { ArrowLeft, ArrowRight } from 'react-feather';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
 import { ChooseList, chooseListValues } from './ChooseList';
@@ -9,6 +8,7 @@ import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';
 import { Stepper } from './Stepper';
 import { ProgressBar } from './ProgressBar';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import '../../sass/new-channel.scss';
 
 interface state {
@@ -139,12 +139,12 @@ export const NewChannel = ({ _ignored }: Props) => {
           <div className="nav-btns">
             {showPrev && (
               <Button className="" onClick={handlePrev}>
-                <ArrowLeft /> Previous Step
+                <ArrowLeftOutlined style={{fontSize: '19px'}}/> Previous Step
               </Button>
             )}
             {showNext && (
               <Button onClick={handleNext}>
-                <ArrowRight />
+                <ArrowRightOutlined style={{fontSize: '19px'}}/>
                 {step === 6 ? 'Finish' : 'Next'}{' '}
               </Button>
             )}

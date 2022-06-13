@@ -1,13 +1,8 @@
-/*import { useState } from 'react';*/
-/*import { t } from '../../utils/transShim';*/
 import { Divider, Spin } from 'antd';
-import '../../sass/subscriptions/order-summary.scss';
-import { ArrowRight } from 'react-feather';
-import { ConfirmBtn } from '../../small-components/ActionBtns';
-import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Product } from '../../redux/subscriptions/subsSlice';
+import '../../sass/subscriptions/order-summary.scss';
 
 interface props {
   productId: string | null;
@@ -16,11 +11,7 @@ interface props {
 }
 
 export const OrderSummary = (props: props) => {
-  const history = useHistory();
 
-  const routeChange = (route: string) => {
-    history.push(route);
-  };
 
   const { products, loading } = useAppSelector((state) => state.subscriptions);
   const [currency, setCurrency] = useState('\u20AC');
@@ -39,6 +30,8 @@ export const OrderSummary = (props: props) => {
     }
   };
 
+  console.log(products);
+
   useEffect(() => {
     setCurrencyId(props.currencyId);
     setBillingId(props.billingId);
@@ -46,67 +39,88 @@ export const OrderSummary = (props: props) => {
     loadOrder();
   }, [props.productId, props.billingId, props.currencyId, loadOrder]);
 
-
   return (
-    <div className="second-section-container">
+    <div>
       <h3 className="title-ordersum">Your order:</h3>
-      {loading ? <Spin /> :
+      {loading ? (
+        <Spin />
+      ) : (
         products?.map((p: Product) => {
           if (p.id.toString() === productId?.toString()) {
-            return <div>
-              <div className="order-products">
-                <div className="order-products-lines">
-                  <div className="product-order-line">
-                    <h4 className="title-orderdetails">{p.name}</h4>
-                  </div>
-                  {/*           <div className="product-order-line">
+            return (
+              <div>
+                <div className="order-products">
+                  <div className="order-products-lines">
+                    <div className="product-order-line">
+                      <h4 className="title-orderdetails">{p.name}</h4>
+                    </div>
+                    {/* NEW FUNCTIONALITY */}
+                    {/*           <div className="product-order-line">
             <h5 className="title-orderdetails">No api server</h5>
           </div>
           <div className="product-order-line">
             <h5 className="title-orderdetails">10 Listings service</h5>
           </div> */}
-                </div>
-                <div className="order-products-price">
-                  <div className="price-extra">
-                    <h4>{currency?.toString()}
+                  </div>
+                  <div className="order-products-price">
+                    <div className="price-extra">
+
                       {p.prices.map((prc) => {
-                        if (prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1 && prc.billingPeriodId.toString() === billingId?.toString()) {
-                          if (prc.billingPeriodId === 0)
-                            return prc.price;
-                          else if (prc.billingPeriodId === 1)
-                            return (prc.price / 6).toFixed(1);
-                          else if (prc.billingPeriodId === 2)
-                            return (prc.price / 12).toFixed(1);
+
+                        if (billingId?.toString() === '1' && prc.billingPeriodId.toString() === '0' && prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1) {
+                          return <div className="discounts">
+                            <h4 className="old-price">{currency?.toString() + prc.price} /month</h4> &nbsp;
+                            <p className="twenty-off"> 20% off</p>
+                          </div>;
+                        }
+                        else if (billingId?.toString() === '2' && prc.billingPeriodId.toString() === '0' && prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1) {
+                          return <div className="discounts">
+                            <h4 className="old-price">{currency?.toString() + prc.price} /month </h4> &nbsp;
+                            <p className="forty-off"> 40% off</p>
+                          </div>;
+                        }
+
+                        if (
+                          prc.currencyId.toString() === currencyId?.toString() &&
+                          prc.platformId === 1 &&
+                          prc.billingPeriodId.toString() === billingId?.toString()
+                        ) {
+                          if (prc.billingPeriodId === 0) return <h4>{currency?.toString() + prc.price} /month</h4>;
+                          else if (prc.billingPeriodId === 1) return <h4>{currency?.toString() + (prc.price / 6).toFixed(1)} /month</h4>;
+                          else if (prc.billingPeriodId === 2) return <h4>{currency?.toString() + (prc.price / 12).toFixed(1)} /month</h4>;
                         }
                       })}
-                      /month</h4>
-
-                    {billingId?.toString() === '1' ? <p className="twenty-off">20% off</p> : ''}
-                    {billingId?.toString() === '2' ? <p className="forty-off">40% off</p> : ''}
-                  </div>
-                  {/*           <div className="price-extra">
+                    </div>
+                    {/* NEW FUNCTIONALITY */}
+                    {/*           <div className="price-extra">
             <h5>£12.99/month</h5>
           </div>
           <div className="price-extra">
             <h5>£9.99</h5>
           </div> */}
+                  </div>
+                </div>
+                <Divider />
+                <div className="order-sum">
+                  <h2>Total to pay:</h2>
+                  <h1>
+                    {currency?.toString()}
+                    {p.prices.map((prc) => {
+                      if (
+                        prc.currencyId.toString() === currencyId?.toString() &&
+                        prc.platformId === 1 &&
+                        prc.billingPeriodId.toString() === billingId?.toString()
+                      ) {
+                        return prc.price;
+                      }
+                    })}
+                  </h1>
                 </div>
               </div>
-              <Divider />
-              <div className="order-sum" onClick={() => routeChange('/payment-method')}>
-                <h2>Total to pay:</h2>
-                <h1>{currency?.toString()}{p.prices.map((prc) => {
-                  if (prc.currencyId.toString() === currencyId?.toString() && prc.platformId === 1 && prc.billingPeriodId.toString() === billingId?.toString()) {
-                    return prc.price;
-                  }
-                })}</h1>
-                <ConfirmBtn htmlType="submit">
-                  Payment method <ArrowRight />
-                </ConfirmBtn>
-              </div>
-            </div>;
+            );
           }
-        })}
+        })
+      )}
     </div>
   );
 };

@@ -22,7 +22,7 @@ import {
   Catalog,
   SourcesTable,
   Dashboard,
-  SourcesSettings,
+  SourceConfiguration,
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering
@@ -33,7 +33,8 @@ import { ManualListing } from './components/list-now/ManualListing';
 import { BulkListing } from './components/list-now/BulkListing';
 import { Checkout } from './components/subscriptions/Checkout';
 import { PaymentMethod } from './components/subscriptions/PaymentMethod';
-import ManageServer from './components/manage-servers/ManageServer';
+import { Links } from './links';
+
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(true);
@@ -51,9 +52,9 @@ export const App = withRouter(({ history }) => {
 
   return (
     <>
-      {pathname === '/new-channel' || !isAuthenticated ? null : <Topbar showMobileSider={showMobileSider} />}
+      {pathname === Links.NewChannel || !isAuthenticated ? null : <Topbar showMobileSider={showMobileSider} />}
       <Layout className="layout">
-        {pathname === '/new-channel' || !isAuthenticated ? null : (
+        {pathname === Links.NewChannel || !isAuthenticated ? null : (
           <Sidebar
             className="sider"
             mobileSiderVisible={visible}
@@ -67,33 +68,32 @@ export const App = withRouter(({ history }) => {
         <Layout className={staticValue ? 'content-area-resized' : 'content-area'}>
           <Switch>
             <Route exact path="/">
-              <Redirect to="/dashboard" />
+              <Redirect to={Links.Dashboard} />
             </Route>
-            <Route path="/login" component={UserLogin} />
-            <Route path="/register" component={UserRegister} />
-            <ProtectedRoute path="/dashboard" component={Dashboard} />
-            <ProtectedRoute path="/listings" component={Listings} />
-            <ProtectedRoute path="/list-now" component={ListNow} />
-            <ProtectedRoute path="/manual-listing" component={ManualListing} />
-            <ProtectedRoute path="/bulk-listing" component={BulkListing} />
-            <ProtectedRoute path="/orders" component={Orders} />
-            <ProtectedRoute path="/sources-settings" component={SourcesSettings} />
-            <ProtectedRoute path="/sources-table" component={SourcesTable} />
-            <ProtectedRoute path="/channel" component={ChannelConfiguration} />
-            <ProtectedRoute path="/new-channel" component={NewChannel} />
-            <ProtectedRoute path="/services" component={Services} />
-            <ProtectedRoute path="/subscriptions" component={Subscriptions} />
-            <ProtectedRoute path="/checkout" component={Checkout} />
-            <ProtectedRoute path="/payment-method" component={PaymentMethod} />
-            <ProtectedRoute path="/pricing-rules" component={PricingRules} />
-            <ProtectedRoute path="/browser-extensions" component={BrowserExtensions} />
-            <ProtectedRoute path="/va-profiles" component={VaProfiles} />
-            <ProtectedRoute path="/get-started" component={GetStarted} />
-            <ProtectedRoute path="/catalog" component={Catalog} />
-            <ProtectedRoute path="/templates" component={Templates} />
-            <ProtectedRoute path="/auto-ordering-configuration" component={AutoOrderingConfiguration} />
-            <ProtectedRoute path="/auto-ordering-configuration-query" component={AutoOrdering} />
-            <ProtectedRoute path="/manage-servers" component={ManageServer} />
+            <Route path={Links.Login} component={UserLogin} />
+            <Route path={Links.Register} component={UserRegister} />
+            <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
+            <ProtectedRoute path={Links.Products} component={Listings} />
+            <ProtectedRoute path={Links.PublishNow} component={ListNow} />
+            <ProtectedRoute path={Links.ManualPublish} component={ManualListing} />
+            <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
+            <ProtectedRoute path={Links.Orders} component={Orders} />
+            <ProtectedRoute path={Links.SourceSettings} component={SourceConfiguration} />
+            <ProtectedRoute path={Links.SourcesSettingsTable} component={SourcesTable} />
+            <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
+            <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
+            <ProtectedRoute path={Links.Services} component={Services} />
+            <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />
+            <ProtectedRoute path={Links.Checkout} component={Checkout} />
+            <ProtectedRoute path={Links.PaymentMethod} component={PaymentMethod} />
+            <ProtectedRoute path={Links.PricingRules} component={PricingRules} />
+            <ProtectedRoute path={Links.BrowserExtension} component={BrowserExtensions} />
+            <ProtectedRoute path={Links.VaProfiles} component={VaProfiles} />
+            <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
+            <ProtectedRoute path={Links.Catalog} component={Catalog} />
+            <ProtectedRoute path={Links.Templates} component={Templates} />
+            <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
+            <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />
           </Switch>
         </Layout>
       </Layout>

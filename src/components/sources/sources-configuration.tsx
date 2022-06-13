@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import { t } from '../../utils/transShim';
 import { SimpleTable } from '../tables/SimpleTable';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { SearchInput } from '../../small-components/TableActionBtns';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
-import { X, Check } from 'react-feather';
-import { SearchInput } from '../../small-components/TableActionBtns';
+import { Links } from '../../links';
 
 export const SourcesTable = () => {
 
@@ -41,7 +42,7 @@ export const SourcesTable = () => {
       dataIndex: 'sourceName',
       key: 'sourceName',
       render: (value: string) => (
-        <Link to={'/sources-settings/'} onClick={() => parentToChild(value)} className="back-link">
+        <Link to={Links.SourceSettings} onClick={() => parentToChild(value)} className="back-link">
           {value}
         </Link>
       )
@@ -56,7 +57,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorStock',
       key: 'monitorStock',
       render: (value: boolean) => {
-        return value ? <Check /> : <X />;
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : <CloseOutlined />;
       }
     },
     {
@@ -64,7 +65,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorPrice',
       key: 'monitorPrice',
       render: (value: boolean) => {
-        return value ? <Check /> : '';
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : '';
       }
     },
     {
@@ -72,7 +73,7 @@ export const SourcesTable = () => {
       dataIndex: 'monitorPriceDecrease',
       key: 'monitorPriceDecrease',
       render: (value: boolean) => {
-        return value ? <Check /> : '';
+        return value ? <CheckOutlined style={{ fontSize: '19px'}} /> : '';
       }
     },
     {
@@ -101,7 +102,6 @@ export const SourcesTable = () => {
     <Layout className="sources-container">
       <div className="search-options-area">
         <SearchInput onSearch={onSearch} />
-        {/*<SearchOptions showSearchInput />*/}
       </div>
       {loading && 'Please wait a moment...'}
       <div className="sources-table-container">

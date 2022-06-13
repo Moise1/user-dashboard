@@ -23,6 +23,24 @@
         }
     }
 
+    &.setting-list {
+        position: relative;
+        height: fit-content;
+
+        .ant-spin-spinning {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -10px;
+        }
+    }
+
+    &.setting-button {
+        .ant-spin-spinning {
+            margin-top:0;
+        }
+    }
+
     &.setting-two-options, &.setting-switch-two-options, &.setting-two-options-two {
         position: relative;
         height: fit-content;

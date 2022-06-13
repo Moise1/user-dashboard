@@ -11,6 +11,7 @@ import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
+import { Links } from '../../links';
 
 export const AutoOrderingConfiguration = () => {
   const history = useHistory();
@@ -230,7 +231,7 @@ export const AutoOrderingConfiguration = () => {
                 return {
                   onClick: () => {
                     setSelectedRecord(record);
-                    history.push({ pathname: '/auto-ordering-configuration-query', state: record });
+                    history.push({ pathname: Links.AutoOrderConfigurationQuery, state: record });
                   }
                 };
               }}

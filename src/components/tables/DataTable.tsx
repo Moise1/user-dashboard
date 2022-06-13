@@ -3,7 +3,7 @@ import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Key } from 'antd/lib/table/interface';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { SourceConfig } from '../../redux/source-config/sourceSlice';
+import { SourceConfig } from '../../redux/source-configuration/sourceSlice';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ListingData } from 'src/redux/listings/listingsSlice';
 import { OrderData } from 'src/redux/orders/orderSlice';

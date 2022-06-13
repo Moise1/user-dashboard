@@ -1,11 +1,11 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Row, Col } from 'antd';
-import '../../sass/list-now/manual-listing.scss';
-import { getSources } from '../../redux/source-config/sourcesThunk';
+import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
+import '../../sass/list-now/manual-listing.scss';
 
 export const ManualListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -76,8 +76,10 @@ export const ManualListing = (/*props: props*/) => {
             {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
               return <Col span={6} key={itm.id}>
                 <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
-                  <div className="list-card"> {loadings}
-                    <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
+                  <div className="list-card">
+                    {loadings}
+                    {/*eslint-disable @typescript-eslint/no-var-requires */}
+                    <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.id + '.png').default}/>
                     <br />
                     <h3>{itm.name}</h3>
                   </div>
