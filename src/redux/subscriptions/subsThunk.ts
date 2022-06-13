@@ -9,3 +9,12 @@ export const getSubscriptions = createAsyncThunk('subscriptions/getSubscriptions
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
   }
 });
+
+export const getPaymentConfig = createAsyncThunk('subscriptions/getPaymentConfig', async (_, thunkAPI) => {
+  try {
+    const res = await client.get('/Products/Subscriptions/GetPaymentConfig/');
+    return res.data.response_data.subscriptionConfiguration;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});

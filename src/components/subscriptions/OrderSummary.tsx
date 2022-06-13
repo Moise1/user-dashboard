@@ -20,6 +20,15 @@ export const OrderSummary = (props: props) => {
   const [currencyId, setCurrencyId] = useState(props.currencyId);
   const [billingId, setBillingId] = useState(props.billingId);
 
+  function setPlatformProductId(value: string) {
+    console.log('setPlatformProductId: ' + value);
+    localStorage.setItem('platformProductId', value);
+  }
+
+  function setStripeProductId(value: string) {
+    localStorage.setItem('stripePlatformProductId', value);
+  }
+
   const loadOrder = () => {
     if (currencyId?.toString() === '1') {
       setCurrency('\u20AC');
@@ -29,6 +38,7 @@ export const OrderSummary = (props: props) => {
       setCurrency('\u00A3');
     }
   };
+
 
   console.log(products);
 
@@ -85,9 +95,17 @@ export const OrderSummary = (props: props) => {
                           prc.platformId === 1 &&
                           prc.billingPeriodId.toString() === billingId?.toString()
                         ) {
+                          setPlatformProductId(prc.platformProductId);
                           if (prc.billingPeriodId === 0) return <h4>{currency?.toString() + prc.price} /month</h4>;
                           else if (prc.billingPeriodId === 1) return <h4>{currency?.toString() + (prc.price / 6).toFixed(1)} /month</h4>;
                           else if (prc.billingPeriodId === 2) return <h4>{currency?.toString() + (prc.price / 12).toFixed(1)} /month</h4>;
+                        }
+                        else if (
+                          prc.currencyId.toString() === currencyId?.toString() &&
+                          prc.platformId === 2 &&
+                          prc.billingPeriodId.toString() === billingId?.toString()
+                        ) {
+                          setStripeProductId(prc.platformProductId);
                         }
                       })}
                     </div>

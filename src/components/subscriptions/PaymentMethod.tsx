@@ -3,14 +3,17 @@
 import { Layout, Radio, Spin } from 'antd';
 
 import '../../sass/subscriptions/payment-method.scss';
+import { loadStripe } from '@stripe/stripe-js';
 
 import { OrderSummary } from './OrderSummary';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getSubscriptions } from 'src/redux/subscriptions/subsThunk';
+import { getSubscriptions, getPaymentConfig } from 'src/redux/subscriptions/subsThunk';
 import { useHistory } from 'react-router';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { CreateCheckoutSessionRequest, CreateCheckoutSessionResponse } from './models/types';
+import { rq } from '../common/rq';
 import { Links } from '../../links';
 
 export const PaymentMethod = (/*props: props*/) => {
@@ -19,7 +22,8 @@ export const PaymentMethod = (/*props: props*/) => {
 
   useEffect(() => {
     dispatch(getSubscriptions());
-  }, [getSubscriptions]);
+    dispatch(getPaymentConfig());
+  }, [getSubscriptions, getPaymentConfig]);
 
   const routeChange = (route: string) => {
     history.push(route);
@@ -28,10 +32,91 @@ export const PaymentMethod = (/*props: props*/) => {
   const [productId] = useState(localStorage.getItem('productId'));
   const [billingId] = useState(localStorage.getItem('billing'));
   const [currencyId] = useState(localStorage.getItem('currencyId'));
-
+  const [platformProductId] = useState(localStorage.getItem('platformProductId'));
+  const [stripePlatformProductId] = useState(localStorage.getItem('stripePlatformProductId'));
+  /*const [upgradingSubscription] = useState(localStorage.getItem('upgradingSubscription'));*/
+  //const [type] = useState(localStorage.getItem('type'));
   const { products, loading } = useAppSelector((state) => state.subscriptions);
+  const [loadings, setLoadings] = useState(false);
+  const { subscriptionConfiguration } = useAppSelector((state) => state.subscriptionConfiguration);
+  //const [stripeConfig] = useAppSelector((state) => state.paymentConfig.stripeConfig);
   console.log({ products });
-  return loading ? (
+
+  async function CreateCheckoutSession(request: CreateCheckoutSessionRequest) {
+    console.log('checkoutsessionrequest');
+    return rq.postJson<CreateCheckoutSessionResponse>(subscriptionConfiguration.stripeConfig.createCheckoutSessionUrl, request);
+  }
+
+  function setReturnUrl(url: string, returnUrl: string): string {
+    let paramsStart = url.indexOf('?');
+    let params = '';
+    if (paramsStart !== -1) {
+      params = url.substr(paramsStart);
+    } else {
+      paramsStart = url.length;
+    }
+    const urlParams = new URLSearchParams(params);
+
+    if (urlParams.has('returnUrl')) {
+      urlParams.set('returnUrl', returnUrl.toString());
+    } else {
+      urlParams.append('returnUrl', returnUrl.toString());
+    }
+
+    return url.substr(0, paramsStart) + '?' + urlParams.toString();
+  }
+
+  function GetSuccesUrl() {
+    const location = window.location;
+    const baseUrl = location.protocol + '//' + location.host;
+    console.log(baseUrl);
+    let successUrl = subscriptionConfiguration.successUrl;
+    console.log('successUrl: ' + successUrl);
+    successUrl = successUrl ??  'https://app.hustlegotreal.com/Home';
+    successUrl = setReturnUrl(successUrl as string, 'https://app.hustlegotreal.com/Home');
+
+    const url = new URL(successUrl);
+    url.searchParams.append('bp', billingId as string);
+    url.searchParams.append('pid', productId as string);
+    return url.toString();
+  }
+
+  function GetCancelUrl() {
+    const url = new URL(subscriptionConfiguration.cancelUrl as unknown as string);
+    url.searchParams.append('bp', billingId as string);
+    url.searchParams.append('pid', productId as string);
+    return url.toString();
+  }
+
+
+  async function handleStripe() {
+
+    setLoadings(true);
+    const request: CreateCheckoutSessionRequest = {
+      lineItems: [{ platformProductId: stripePlatformProductId ?? '', quantity: 1 }],
+      mode: billingId as unknown as number < 3 ? 'subscription' : 'payment',
+      successUrl: GetSuccesUrl(),
+      cancelUrl: GetCancelUrl(),
+      upgradingSubscription: subscriptionConfiguration.upgrade as unknown as boolean
+    };
+
+    const response: CreateCheckoutSessionResponse = await CreateCheckoutSession(request);
+
+    const stripe = await loadStripe(subscriptionConfiguration.stripeConfig.publishableKey);
+    await stripe?.redirectToCheckout({ sessionId: response.checkoutSessionId });
+
+  }
+
+  function handlePayPal() {
+    window.location.href =
+      'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' +
+      platformProductId +
+      '&custom=' +
+      subscriptionConfiguration.payPalConfig.userId;
+  }
+
+
+  return loading || loadings ? (
     <Spin />
   ) : (
     <Layout className="paymentmethod-content">
@@ -46,10 +131,10 @@ export const PaymentMethod = (/*props: props*/) => {
             <div className="section-container">
               <h3>Select your preferred payment method</h3>
               <div className="cards-payments">
-                <Radio className="card-payment-section">
+                <Radio className="card-payment-section" onClick={handleStripe}>
                   <h3>Credit card</h3>
                 </Radio>
-                <Radio className="card-payment-section">
+                <Radio className="card-payment-section" onClick={handlePayPal}>
                   <h3>Paypal</h3>
                 </Radio>
               </div>
