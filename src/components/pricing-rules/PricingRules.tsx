@@ -4,17 +4,17 @@ import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
-import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
 import { DataTable } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
-import { SourceConfig } from '../../redux/source-configuration/sourceSlice';
 import { Rule } from '../../redux/pricing-rules/rulesSlice';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/pricing-rules.scss';
 import { Selector } from '../../small-components/form/selector';
+import { getSources } from '../../redux/sources/sourcesThunk';
+import { Source } from '../../redux/sources/sourceSlice';
 
 export const PricingRules = () => {
   const [current] = useState<number>(1);
@@ -34,7 +34,7 @@ export const PricingRules = () => {
   }, [getRules, channelId]);
 
   const onFinish = async (values: Rule) => {
-    const source = sources.filter((s: SourceConfig) => s.sourceName === values.sourceId);
+    const source = sources.filter((s: Source) => s.name === values.sourceId);
     await dispatch(
       createRule({
         ...values,
@@ -143,7 +143,7 @@ export const PricingRules = () => {
           <Form className="form" layout="vertical" onFinish={onFinish}>
             <Item label="Source" name="sourceId">
               <Selector placeHolder="Select a source" loading={sourcesLoading}>
-                {sources?.map(({ sourceName: label, sourceId: value }: SourceConfig) => ({ value, label }))}
+                {sources?.map(({ name: label, id: value }: Source) => ({ value, label }))}
               </Selector>
             </Item>
             <Item label="Price From" name="priceFrom">

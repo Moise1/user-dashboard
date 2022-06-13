@@ -1,11 +1,11 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Row, Col } from 'antd';
-import { getSources } from '../../redux/source-configuration/sourcesThunk';
 import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 import '../../sass/list-now/manual-listing.scss';
+import { getSources } from '../../redux/sources/sourcesThunk';
 
 export const ManualListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
