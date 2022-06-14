@@ -45,11 +45,8 @@ export const BulkListing = (/*props: props*/) => {
   ]);
 
   useEffect(() => {
-    console.log('useEffet called');
     dispatch(getManualListings());
     dispatch(getUserAssistants());
-    console.log('useEffet called after');
-
   }, [getManualListings, getUserAssistants]);
 
   const onSave = async (values: ListingsData) => {

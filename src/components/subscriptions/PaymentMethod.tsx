@@ -1,5 +1,3 @@
-/*import { useState } from 'react';*/
-/*import { t } from '../../utils/transShim';*/
 import { Layout, Radio, Spin } from 'antd';
 import '../../sass/subscriptions/payment-method.scss';
 import { loadStripe } from '@stripe/stripe-js';
@@ -11,10 +9,10 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { CreateCheckoutSessionRequest } from './models/types';
 import { CreateCheckoutSession } from 'src/redux/payment/paymentThunk';
+import { toastAlert } from '../../utils/toastAlert';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
-  //const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
@@ -50,7 +48,6 @@ export const PaymentMethod = (/*props: props*/) => {
     } else {
       urlParams.append('returnUrl', returnUrl.toString());
     }
-
     return url.substr(0, paramsStart) + '?' + urlParams.toString();
   }
 
@@ -62,7 +59,6 @@ export const PaymentMethod = (/*props: props*/) => {
     console.log('successUrl: ' + successUrl);
     successUrl = successUrl ?? 'https://app.hustlegotreal.com/Home';
     successUrl = setReturnUrl(successUrl as string, 'https://app.hustlegotreal.com/Home');
-
     const url = new URL(successUrl);
     url.searchParams.append('bp', billingId as string);
     url.searchParams.append('pid', productId as string);
@@ -75,7 +71,6 @@ export const PaymentMethod = (/*props: props*/) => {
     url.searchParams.append('pid', productId as string);
     return url.toString();
   }
-
 
   function setValue(arg0: number) {
     setSelectedMethod(arg0);
@@ -98,6 +93,7 @@ export const PaymentMethod = (/*props: props*/) => {
   }
 
   function handlePayPal() {
+    setLoadings(true);
     window.location.href =
       'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' +
       platformProductId +
@@ -105,18 +101,17 @@ export const PaymentMethod = (/*props: props*/) => {
       subscriptionConfiguration.payPalConfig.userId;
   }
 
-  const routeChange = () => {
-    if (selectedMethod && selectedMethod === 1) {
+  const finishPayment = () => {
+    if (selectedMethod === 1) {
       handlePayPal();
     }
-    else if (selectedMethod && selectedMethod === 2) {
+    else if (selectedMethod === 2) {
       handleStripe();
     }
     else {
-      alert('Please select a payment method');
+      toastAlert('Please select a payment method', 'error');
     }
   };
-
 
   return loading || loadings ? (
     <Spin />
@@ -137,7 +132,7 @@ export const PaymentMethod = (/*props: props*/) => {
                   <Radio className="card-payment-section" value="2" name="paymentMethod" onClick={() => setValue(2)}>
                     <h3>Credit card</h3>
                   </Radio>
-                  <Radio className="card-payment-section" value="1" name="paymentMethod" onClick={() => setValue(1)}>
+                  <Radio className="card-payment-section" autoFocus value="1" name="paymentMethod" onClick={() => setValue(1)}>
                     <h3>Paypal</h3>
                   </Radio>
                 </div>
@@ -169,14 +164,13 @@ export const PaymentMethod = (/*props: props*/) => {
         <div className="order-summary">
           <div className="second-section-container">
             <OrderSummary productId={productId} billingId={billingId} currencyId={currencyId} />
-            <div className="order-sum" onClick={() => routeChange()}>
+            <div className="order-sum" onClick={() => finishPayment()}>
               <ConfirmBtn htmlType="submit">
                 Finish Payment <ArrowRightOutlined />
               </ConfirmBtn>
             </div>
           </div>
         </div>
-
       </div>
     </Layout>
   );
