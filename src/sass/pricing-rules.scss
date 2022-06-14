@@ -1,5 +1,4 @@
 @import 'general.config';
-@import 'config.large';
 
 // Extra large screens
 .status-btn {
@@ -35,76 +34,76 @@
   }
 }
 .pricing-rules {
-    width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-    width: -moz-available; /* WebKit-based browsers will ignore this. */
-    width: fill-available;
+  width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available; /* WebKit-based browsers will ignore this. */
+  width: fill-available;
+  margin: auto;
+  margin-top: 0rem;
+
+  .disabled {
+    color: $red;
+
+    &:hover {
+      color: $red;
+    }
+  }
+
+  .ant-spin-spinning {
+    margin: 10% 0 0 50%;
+  }
+
+  .pricing-rules-bar {
+    display: block;
+    padding: auto 2rem;
+
+    .form {
+      display: flex;
+      justify-content: space-evenly;
+      padding: -1rem 0 !important;
+      margin: 0.1rem;
+      height: auto !important;
+
+      & > * {
+        margin-left: 1rem !important;
+      }
+
+      [title='Source'],
+      [title='Price From'],
+      [title='Price To'],
+      [title='Markup'] {
+        font-weight: bold;
+      }
+
+      .ant-select {
+        width: 16vw;
+      }
+
+      .-ant-select {
+        width: 18%;
+        border-radius: 10px;
+        margin-top: 1.8rem;
+      }
+
+      .confirm-btn {
+        margin-top: 2rem;
+      }
+    }
+  }
+
+  .spiner {
+    border: 2px solid;
+    width: 30%;
     margin: auto;
-    margin-top: 0rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .disabled {
-        color: $red;
-
-        &:hover {
-            color: $red;
-        }
-    }
-
-    .ant-spin-spinning {
-        margin: 10% 0 0 50%;
-    }
-
-    .pricing-rules-bar {
-        display: block;
-        padding: auto 2rem;
-
-        .form {
-            display: flex;
-            justify-content: space-evenly;
-            padding: -1rem 0 !important;
-            margin: 0.1rem;
-            height: auto !important;
-
-            & > * {
-                margin-left: 1rem !important;
-            }
-
-            [title='Source'],
-            [title='Price From'],
-            [title='Price To'],
-            [title='Markup'] {
-                font-weight: bold;
-            }
-
-            .ant-select {
-                width: 16vw;
-            }
-
-            .-ant-select {
-                width: 18%;
-                border-radius: 10px;
-                margin-top: 1.8rem;
-            }
-
-            .confirm-btn {
-                margin-top: 2rem;
-            }
-        }
-    }
-
-    .spiner {
-        border: 2px solid;
-        width: 30%;
-        margin: auto;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .table {
-        width: 100%;
-        border-radius: 5px;
-        margin-top: 4rem;
-        height: 43vh;
-    }
+  .table {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 4rem;
+    height: 43vh;
+  }
 }
 
 @media only screen and (max-width: 1030px) {

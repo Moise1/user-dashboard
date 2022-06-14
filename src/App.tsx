@@ -34,6 +34,10 @@ import { BulkListing } from './components/list-now/BulkListing';
 import { Checkout } from './components/subscriptions/Checkout';
 import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 import { Links } from './links';
+import { EditTemplate } from './components/templates/EditTemplate';
+import { ConfigureNoapi } from './components/NoApi/ConfigureNoapi';
+import { PriceWarrior } from './components/services/PriceWarrior';
+import { PrivateSupplier } from './components/services/PrivateSupplier';
 import { OurServices } from './components/subscriptions/OurServices';
 
 export const App = withRouter(({ history }) => {
@@ -84,6 +88,8 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute path={Links.Services} component={Services} />
+            <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
+            <ProtectedRoute path={Links.PrivateSupplier} component={PrivateSupplier} />
             <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />
             <ProtectedRoute path={Links.OurServices} component={OurServices} />
             <ProtectedRoute path={Links.Checkout} component={Checkout} />
@@ -91,9 +97,11 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.PricingRules} component={PricingRules} />
             <ProtectedRoute path={Links.BrowserExtension} component={BrowserExtensions} />
             <ProtectedRoute path={Links.VaProfiles} component={VaProfiles} />
+            <ProtectedRoute path={Links.ConfigureNoapi} component={ConfigureNoapi} />
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
+            <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />
           </Switch>

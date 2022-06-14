@@ -1,0 +1,20 @@
+@use './general.config';
+@import './general.config';
+
+.template-name {
+  h4 {
+    font-weight: bold;
+  }
+}
+
+.default-template {
+  .default {
+    font-weight: bold;
+    color: $light-primary;
+  }
+  .not-default {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $primary;
+  }
+}

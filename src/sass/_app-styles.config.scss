@@ -68,7 +68,7 @@ $input-background-secondary: #f2f8ff;
 $font-xl: 1.6rem;
 $font-large: 1.2rem;
 $font-medium: 1rem;
-$font-small: 0.75rem;
+$font-small: 0.8rem;
 
 // Spacers & margins
 
@@ -90,12 +90,15 @@ a {
   font-weight: $bold;
   &:hover {
     color: $light-primary;
-    transition: 0.5s;
   }
 }
 
 // Custom font-sizes for elements
 p {
+  font-size: $font-small;
+}
+
+li {
   font-size: $font-small;
 }
 
