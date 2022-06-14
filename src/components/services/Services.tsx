@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import '../../sass/services.scss';
+import '../../sass/services/services.scss';
 import serviceImg from '../../assets/services/listing-service.png';
 import { Layout } from 'antd';
 
