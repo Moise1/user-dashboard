@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { pricingRulesReducer } from '../pricing-rules/rulesSlice';
 import { subscriptionsReducer} from '../subscriptions/subsSlice';
+import { servicesReducer} from '../subscriptions/subsSlice';
 import { getConfigReducer } from '../subscriptions/subsSlice';
 import { userAssistantsReducer } from '../va-profiles/vaProfilesSlice';
 import { userReducer } from '../user/userSlice';
@@ -31,6 +32,7 @@ export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
   subscriptions: subscriptionsReducer,
+  services: servicesReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
   sources: sourcesConfigReducer,

@@ -11,6 +11,7 @@
   NewChannel: '/new-channel',
   Services: '/services',
   Subscriptions: '/subscriptions',
+  OurServices: '/our-services',
   Checkout: '/checkout',
   PaymentMethod: '/payment-method',
   PricingRules: '/pricing-rules',

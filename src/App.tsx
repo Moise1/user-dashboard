@@ -34,6 +34,7 @@ import { BulkListing } from './components/list-now/BulkListing';
 import { Checkout } from './components/subscriptions/Checkout';
 import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 import { Links } from './links';
+import { OurServices } from './components/subscriptions/OurServices';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -84,6 +85,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute path={Links.Services} component={Services} />
             <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />
+            <ProtectedRoute path={Links.OurServices} component={OurServices} />
             <ProtectedRoute path={Links.Checkout} component={Checkout} />
             <ProtectedRoute path={Links.PaymentMethod} component={PaymentMethod} />
             <ProtectedRoute path={Links.PricingRules} component={PricingRules} />

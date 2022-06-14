@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getPaymentConfig, getSubscriptions } from './subsThunk';
+import { getPaymentConfig, getServices, getSubscriptions } from './subsThunk';
 
 export interface Subscription {
   id: number;
@@ -50,6 +50,13 @@ const initialState = {
   error: ''
 };
 
+const initialsState = {
+  services: [] as Product[],
+  loading: false,
+  error: ''
+};
+
+
 export const subscriptionsSlice = createSlice({
   name: 'products',
   initialState: initialState,
@@ -69,6 +76,27 @@ export const subscriptionsSlice = createSlice({
     });
   }
 });
+
+export const servicesSlice = createSlice({
+  name: 'services',
+  initialState: initialsState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getServices.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getServices.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.services = payload;
+    });
+    builder.addCase(getServices.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 
 export const getConfigSlice = createSlice({
   name: 'subscriptionConfiguration',
@@ -91,4 +119,5 @@ export const getConfigSlice = createSlice({
 });
 
 export const subscriptionsReducer = subscriptionsSlice.reducer;
+export const servicesReducer = servicesSlice.reducer;
 export const getConfigReducer = getConfigSlice.reducer;

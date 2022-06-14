@@ -13,6 +13,7 @@ import { toastAlert } from '../../utils/toastAlert';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();
+  //const history = useHistory();
 
   useEffect(() => {
     dispatch(getSubscriptions());
