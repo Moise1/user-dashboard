@@ -4,7 +4,6 @@ import { ElementEventType } from 'src/components/catalog/Catalog';
 interface Props {
   className?: string;
   onClick?: (e: ElementEventType) => void;
-  size?: string;
   id?: string;
 }
 export const CloseIcon = ({ className, onClick, id }: Props) => (

@@ -1,5 +1,4 @@
 import { Layout, Radio, Spin } from 'antd';
-import '../../sass/subscriptions/payment-method.scss';
 import { loadStripe } from '@stripe/stripe-js';
 import { OrderSummary } from './OrderSummary';
 import { useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { CreateCheckoutSessionRequest } from './models/types';
 import { CreateCheckoutSession } from 'src/redux/payment/paymentThunk';
 import { toastAlert } from '../../utils/toastAlert';
+import '../../sass/subscriptions/payment-method.scss';
 
 export const PaymentMethod = (/*props: props*/) => {
   const dispatch = useAppDispatch();

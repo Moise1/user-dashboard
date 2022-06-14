@@ -29,14 +29,24 @@ interface Props {
   _ignored?: boolean;
 }
 
+const  popupWindow = (url: string, windowName: string, win: Window & typeof globalThis, w: number, h: number) => {
+  const t = win!.top!.outerHeight / 2 + win!.top!.screenY - ( h / 2);
+  const l = win!.top!.outerWidth / 2 + win!.top!.screenX - ( w / 2);
+  return win.open(url, windowName, `
+  toolbar=no, location=no, directories=no,
+  status=no, menubar=no, scrollbars=no,
+  resizable=no, copyhistory=no, 
+  width=${w}, height=${h}, top=${t}, left=${l}`
+  )?.focus();
+};
 export const NewChannel = ({ _ignored }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const {url} = useAppSelector(state => state.linkAccount);
+  const [ebayUrl, setEbayUrl] = useState<string>(url);
   const dispatch = useAppDispatch();
 
-  console.log('URL', url);
 
   const [data, setData] = useState<state>({
     platform: eShop.eBay,
@@ -49,11 +59,15 @@ export const NewChannel = ({ _ignored }: Props) => {
     list: ''
   });
 
-
-  const handlePrev = () => setStep((prevState) => prevState - 1);
+  const handlePrev = () => {
+    setStep((prevState) => prevState - 1);
+    setEbayUrl('');
+  };
   const handleNext = () => {
-    if(url){
-      window.open(url,'', 'width=600, height=600, margin: auto')!.focus();
+    if(url !== '' && step === 4 && data.api === 'easy'){
+      setEbayUrl(url);
+      popupWindow(ebayUrl, 'Ebay Account', window, 800, 600);
+      return;
     }
     setStep((prevState) => prevState + 1);
     setShowPrev(true);

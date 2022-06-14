@@ -57,7 +57,6 @@ export const Dashboard = () => {
 
   //For pagination add by suleman ahmad 
   const [postPerPage, setPostPerPage] = useState<number>(2);
-  const [current, setCurrent] = useState<number>(1);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   //
   console.log('The setSearchedChannels',setSearchedChannels);
@@ -72,7 +71,7 @@ export const Dashboard = () => {
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [showSales, setShowSales] = useState<boolean>(true);
-  // const [current] = useState<number>(1);
+  const [current, setCurrent] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
 
   const monthsLabels = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];

@@ -14,8 +14,9 @@ import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
-import '../../sass/catalog.scss';
 import { CatalogProduct } from '../../redux/catalog/catalogSlice';
+import '../../sass/catalog.scss';
+
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
   | React.MouseEvent<SVGElement, MouseEvent>
@@ -30,6 +31,7 @@ export const Catalog = () => {
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
   const [allProducts, setAllProducts] = useState<ICatalogData[]>([]);
   const [className, setClassName] = useState<string>('product-card');
+  const [sourcesIds, setSourcesIds] = useState<number[]>([]);
   const dispatch = useAppDispatch();
   const { Meta } = Card;
 
@@ -71,6 +73,9 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
+  const getSourcesData = (ids: number[]) => {
+    setSourcesIds(ids);
+  };
   return (
     <Layout className="catalog-container">
       <div className="actions-section">
@@ -96,9 +101,13 @@ export const Catalog = () => {
       </div>
 
       <SearchOptions showSearchInput={false} />
-      <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
-        catalogData={allCatalogProducts} setAllProducts={setAllCatalogProducts}
-      />
+      <CatalogFilters 
+        visible={drawerOpen} 
+        onClose={handleSideDrawer} 
+        openSourceModal={handleSourceModal}
+        catalogData={allCatalogProducts} 
+        setAllProducts={setAllCatalogProducts}
+        suppliersCount={sourcesIds}/>
       <PopupModal
         open={modalOpen}
         handleClose={handleProductModal}
@@ -131,7 +140,7 @@ export const Catalog = () => {
           </div>
         }
       >
-        <CatalogSource handleClose={handleSourceModal} />
+        <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData}/>
       </PopupModal>
 
       <PopupModal

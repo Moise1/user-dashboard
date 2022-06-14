@@ -11,7 +11,7 @@ import '../../sass/va-profiles.scss';
 export const VaProfiles = () => {
   const [current] = useState<number>(1);
   const dispatch = useAppDispatch();
-  const { userAssistants, loading } = useAppSelector((state) => state.vaProfiles);
+  const { userAssistants, loading } = useAppSelector((state) => state.userAssistants);  
 
   useEffect(() => {
     dispatch(getUserAssistants());
