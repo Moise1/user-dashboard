@@ -7,10 +7,16 @@ import { DataTable } from '../tables/DataTable';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { EditOutlined } from '@ant-design/icons';
 import '../../sass/templates.scss';
+import { Link } from 'react-router-dom';
+import { Links } from '../../links';
 
 export const Templates = () => {
   const dispatch = useAppDispatch();
   const [current] = useState<number>(1);
+
+  function parentToChild(value: string): void {
+    localStorage.setItem('EditTemplate', value);
+  }
 
   const updateStatus = async (id: Template['id'], active: Template['isDefault']) => {
     await dispatch(setDefault({ id, active: !active }));
@@ -60,12 +66,12 @@ export const Templates = () => {
       title: 'Edit template',
       dataIndex: 'id',
       key: 'id',
-      render: () => (
-        <div className="edit-template">
+      render: (value: string) => (
+        <Link to={Links.EditTemplate} onClick={() => parentToChild(value)} className="edit-template">
           <h4>
             Edit template <EditOutlined />
           </h4>
-        </div>
+        </Link>
       )
     }
   ];
