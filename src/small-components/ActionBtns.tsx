@@ -60,8 +60,8 @@ export const ResetBtn = ({ children }: Props) => <Button className="reset-btn">{
 // export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
 export const DeleteBtn = ({ children }: Props) => <Button className="delete-btn">{children}</Button>;
 // export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;
-export const TransparentBtn = ({ id, children, className, handleClick }: Props) => (
-  <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick}>
+export const TransparentBtn = ({ id, children, className, handleClick, htmlType }: Props) => (
+  <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick} htmlType={htmlType}>
     {children}
   </Button>
 );

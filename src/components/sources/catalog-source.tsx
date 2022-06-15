@@ -60,6 +60,7 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
     const addedSource = pendingSources.filter((s) => s.id === id)[0];
     setAddedSources((prevState) => [...prevState, addedSource]);
     setPendingSources((prevState) => prevState.filter((s) => s.id !== id));
+    console.log('the addedSources', addedSources);
   };
 
   const removeSource = (id: number): void => {
@@ -83,7 +84,7 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
           addedSources.map((s) => (
             <div key={s.id} className="source">
               <img src={s.img} alt="" className="source-img" />
-              <MinusCircleOutlined className="remove-source-icon"  onClick={() => removeSource(s.id)} />
+              <MinusCircleOutlined className="remove-source-icon" onClick={() => removeSource(s.id)} />
             </div>
           ))
         )}
@@ -95,7 +96,7 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
           {pendingSources.map((s) => (
             <div key={s.id} className="source">
               <img src={s.img} alt="" className="source-img" />
-              <PlusCircleOutlined className="pending-source-icon"  onClick={() => addSource(s.id)} />
+              <PlusCircleOutlined className="pending-source-icon" onClick={() => addSource(s.id)} />
             </div>
           ))}
         </div>

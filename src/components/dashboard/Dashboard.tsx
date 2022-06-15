@@ -59,7 +59,7 @@ export const Dashboard = () => {
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   //
-  console.log('The setSearchedChannels',setSearchedChannels);
+  console.log('The setSearchedChannels', setSearchedChannels);
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
@@ -78,7 +78,13 @@ export const Dashboard = () => {
 
   const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
   const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
-  const onSearch = (value: string) => console.log('searched value', value);
+  const onSearch = (value: string) => {
+    setSearchedChannels(channels?.filter((channel: Channel) => {
+      if (channel.name === value) {
+        return channel.name === value;
+      }
+    }));
+  };
 
   const removeRecord = async (id: Channel['id']) => {
     await dispatch(deleteChannel(id));

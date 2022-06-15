@@ -1,53 +1,125 @@
 import moment from 'moment';
-import { useState } from 'react';
-import { Space, Button, Form, Input, Checkbox, DatePicker, DatePickerProps } from 'antd';
+import { useEffect, useState, ReactNode } from 'react';
+import { Space, Button, Form, Input, Checkbox, Radio, DatePicker, DatePickerProps } from 'antd';
+import type { RadioChangeEvent } from 'antd';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
-import '../sass/advanced-search.scss';
-// import { ICatalogData } from '../dummy-data/dummyData';
 import { CatalogProduct } from '../redux/catalog/catalogSlice';
+import { getCatalogProductsSearching } from '../redux/catalog/catalogThunk';
+import { useAppDispatch, useAppSelector } from '../custom-hooks/reduxCustomHooks';
+import { Selector, SelectorValue } from '../small-components/form/selector';
+import '../sass/advanced-search.scss';
 
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
-  catalogData?: CatalogProduct[];
+  // catalogData?: CatalogProduct[];
   setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
   suppliersCount: number[];
+  setAllCatalogProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
 }
 
-interface catalogAdvancedSearchFieldTypes {
-  title: string;
-  minSourcePrice?: number | undefined;
-  minProfile?: number | undefined;
-  maxSourcePrice?: number;
-  maxProfile?: number | undefined;
-  orderBy?: string | undefined
+interface catalogInputFieldTypes {
+  titleContains: string;
+  priceFrom?: number | undefined;
+  priceTo?: number | undefined;
+  profitFrom?: number | undefined;
+  profitTo?: number | undefined;
 }
 
 export const CatalogFilters = (props: Props) => {
+  const orders = [
+    {
+      label: 'Default',
+      value: '0',
+    },
+    {
+      label: 'Source Price Asc',
+      value: '1',
+    },
+    {
+      label: 'Source Price Desc',
+      value: '2',
+    },
+    {
+      label: 'Profit Asc',
+      value: '3',
+    },
+    {
+      label: 'Profit Desc',
+      value: '4',
+    },
+    {
+      label: 'Title Asc',
+      value: '5',
+    },
+    {
+      label: 'Title Desc',
+      value: '6',
+    }
+  ];
 
-  const { visible, onClose, openSourceModal, catalogData, suppliersCount } = props;
-  console.log('The catalog data coming from api', catalogData);
-  const catalogAdvanceSearchIntialTypes: catalogAdvancedSearchFieldTypes = {
-    title: '',
-    orderBy: 'Default'
+  const { visible, onClose, openSourceModal, suppliersCount, setAllCatalogProducts } = props;
+
+  const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProductReducer);
+  const [sessionId] = useState<number>(0);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setAllCatalogProducts?.(catalogSearchedProducts);
+  }, [catalogSearchedProducts]);
+
+  const catalogInputIntialTypes: catalogInputFieldTypes = {
+    titleContains: '',
+    priceFrom: undefined,
+    priceTo: undefined,
+    profitFrom: undefined,
+    profitTo: undefined,
   };
 
-  const [catalogAdvancedSearchFormData, setCatalogAdvancedSearchFormData] = useState(catalogAdvanceSearchIntialTypes);
-
+  const [catalogFormInput, setCatalogFormInput] = useState(catalogInputIntialTypes);
   const catalogAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCatalogAdvancedSearchFormData({
-      ...catalogAdvancedSearchFormData,
+    setCatalogFormInput({
+      ...catalogFormInput,
       [name]: value
     });
   };
 
+  const [order, setOrder] = useState<number>(0);
+  const ordersChangeHandler = (value: SelectorValue) => {
+    setOrder(Number(value));
+  };
+
+  const [options, setOptions] = useState();
+  const onOptionsChange = (e: RadioChangeEvent) => {
+    setOptions(e.target.value);
+  };
+
   const clearFilterHandler = () => {
-    setCatalogAdvancedSearchFormData(catalogAdvanceSearchIntialTypes);
+    console.log('i was click ');
+    setCatalogFormInput({ ...catalogInputIntialTypes });
+    console.log('The values after clear filter ', catalogFormInput);
   };
 
   const handleFilterSubmit = () => {
-    console.log('The data to send in catalogAdvancedSearchFormData', catalogAdvancedSearchFormData);
+    const { titleContains } = catalogFormInput;
+    const { priceFrom } = catalogFormInput;
+    const { priceTo } = catalogFormInput;
+    const { profitFrom } = catalogFormInput;
+    const { profitTo } = catalogFormInput;
+    dispatch(getCatalogProductsSearching(
+      {
+        sessionId,
+        titleContains,
+        priceFrom,
+        priceTo,
+        profitFrom,
+        profitTo,
+        options,
+        order,
+        suppliersCount,
+      }
+    ));
   };
 
   return (
@@ -58,7 +130,7 @@ export const CatalogFilters = (props: Props) => {
       visible={visible}
       extra={
         <Space>
-          <Button className="clear-filters">Close filters</Button>
+          <Button className="clear-filters" onClick={onClose}>Close filters</Button>
         </Space>
       }
     >
@@ -73,33 +145,33 @@ export const CatalogFilters = (props: Props) => {
           <div className="catalog-filters-inputs">
             <Form.Item label="Min source price">
               <Input className="blue-input"
-                name="minSourcePrice"
-                defaultValue={catalogAdvancedSearchFormData.minSourcePrice}
+                name="priceFrom"
+                defaultValue={catalogFormInput.priceFrom}
                 onChange={catalogAdvancedSearchOnChange}
               />
             </Form.Item>
 
             <Form.Item label="Min Profit">
               <Input className="blue-input"
-                name="minProfile"
+                name="profitFrom"
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogAdvancedSearchFormData.minProfile}
+                defaultValue={catalogFormInput.profitFrom}
               />
             </Form.Item>
 
             <Form.Item label="Max source price">
               <Input className="blue-input"
-                name="maxSourcePrice"
+                name="priceTo"
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogAdvancedSearchFormData.maxSourcePrice}
+                defaultValue={catalogFormInput.priceTo}
               />
             </Form.Item>
 
             <Form.Item label="Max Profit">
               <Input className="blue-input"
-                name="maxProfile"
+                name="profitTo"
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogAdvancedSearchFormData.maxProfile}
+                defaultValue={catalogFormInput.profitTo}
               />
             </Form.Item>
           </div>
@@ -109,30 +181,36 @@ export const CatalogFilters = (props: Props) => {
               <strong>Amazon Prime</strong>
             </p>
             <div className="checkboxes">
-              <Checkbox checked className="checkbox" >
-                Only Prime
-              </Checkbox>
-              <Checkbox className="checkbox"
-              >All Items</Checkbox>
+              <Radio.Group onChange={onOptionsChange} value={options}>
+                <Radio value={0}>Only Prime</Radio>
+                <Radio value={1}>All Items</Radio>
+              </Radio.Group>
             </div>
           </div>
 
           <Form.Item label="Title">
-            <Input className="blue-input" placeholder="Contains..." name="title"
-              defaultValue={catalogAdvancedSearchFormData.title}
+            <Input className="blue-input" placeholder="Contains..." name="titleContains"
+              defaultValue={catalogFormInput.titleContains}
               onChange={catalogAdvancedSearchOnChange}
             />
           </Form.Item>
           <Form.Item label="Order By">
-
-            <Input className="blue-input"
-              defaultValue={catalogAdvancedSearchFormData.orderBy}
-              onChange={catalogAdvancedSearchOnChange}
-              name="orderBy"
-            />
+            <Selector
+              size="large"
+              onChange={ordersChangeHandler}
+              placeHolder="Default"
+              dropdownRender={(menu: ReactNode) => (
+                <div className="dropdown-content mb-5">
+                  {menu}
+                </div>
+              )}
+            >
+              {orders.map(x => { return { value: x.value, label: x.label }; })}
+            </Selector>
           </Form.Item>
+
           <div className="action-btns">
-            <TransparentBtn
+            <TransparentBtn htmlType='submit'
               handleClick={clearFilterHandler}
             >Clear filters</TransparentBtn>
             <SuccessBtn htmlType='submit'
@@ -152,7 +230,6 @@ export const ListingsAdvancedSearch = (props: AdvancedSearchProps) => {
     const dateValue = moment(date).format('YYYY-MM-DD');
     setSearchTxt!(dateValue);
   };
-
   return (
     <AdvancedSearch
       className="listings-advanced-search"
