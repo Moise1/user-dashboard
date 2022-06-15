@@ -7,7 +7,7 @@ import '../../sass/progress-bar.scss';
 
 interface props {
   step: number;
-  platform: platformType;
+  platform: number;
 }
 
 export const ProgressBar = (props: props) => {
@@ -35,11 +35,11 @@ export const ProgressBar = (props: props) => {
         <div className="d-flex align-items-center">
           <img height="30" src={` ${props.step > 2 ? progress_done : progress_remain} `} alt="progress" />{' '}
           <div className={` ${props.step > 3 ? 'text-success' : ''} font-weight-bold m-auto`}>
-            {props.platform == 'ebay'
+            {props.platform === 1
               ? ' Ebay '
-              : props.platform == 'amazon'
+              : props.platform === 3
                 ? ' Amazon '
-                : props.platform == 'shopify'
+                : props.platform === 2
                   ? ' Shopify '
                   : 'Ebay '}
             {t('acnt')}
@@ -64,7 +64,7 @@ export const ProgressBar = (props: props) => {
 
           <div className={` ${props.step > 5 ? 'text-success' : ''} font-weight-bold m-auto`}>
             {t('lnk')}
-            {props.platform == 'ebay' ? ' Ebay ' : props.platform == 'amazon' ? ' Amazon ' : ' Shopify '} {t('acnt')}
+            {props.platform === 1 ? ' Ebay ' : props.platform === 3 ? ' Amazon ' : ' Shopify '} {t('acnt')}
           </div>
         </div>
       </div>

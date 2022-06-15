@@ -3,7 +3,6 @@ import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { CloseIcon } from './small-components/CloseIcon';
 import {
   UserLogin,
   UserRegister,
@@ -107,7 +106,7 @@ export const App = withRouter(({ history }) => {
           </Switch>
         </Layout>
       </Layout>
-      <ToastContainer closeButton={<CloseIcon size="17" />} theme="colored" />
+      <ToastContainer closeButton={true} theme="colored" />
     </>
   );
 });

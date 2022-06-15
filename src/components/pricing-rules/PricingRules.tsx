@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react';
 import { Form, Input, Spin, Popconfirm } from 'antd';
 import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+// import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
 import { DataTable } from '../tables/DataTable';
@@ -116,20 +116,20 @@ export const PricingRules = () => {
     }
   ];
 
-  const [columns, setColumns] = useState(tableColumns);
+  const [columns, 
+    // setColumns
+  ] = useState(tableColumns);
 
-  const handleCheckBox = (e: CheckboxChangeEvent): void => {
-    const cloneColumns = columns.map((col) => {
-      if (col.key === e.target.value) {
-        return { ...col, visible: e.target.checked };
-      } else {
-        return col;
-      }
-    });
-    setColumns(cloneColumns);
-  };
-
-  console.log(handleCheckBox);
+  // const handleCheckBox = (e: CheckboxChangeEvent): void => {
+  //   const cloneColumns = columns.map((col) => {
+  //     if (col.key === e.target.value) {
+  //       return { ...col, visible: e.target.checked };
+  //     } else {
+  //       return col;
+  //     }
+  //   });
+  //   setColumns(cloneColumns);
+  // };
 
   return (
     <Layout>
