@@ -259,7 +259,7 @@ export const Dashboard = () => {
               onChange={setCurrent}
             />
 
-            <Link to="/add-channel" className="alternative-link">
+            <Link to="/new-channel" className="alternative-link">
               Add new channel
             </Link>
           </Col>
