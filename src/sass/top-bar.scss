@@ -64,25 +64,23 @@
   display: flex;
 
   .tokens-container {
+    padding-right: .4rem;
     color: $primary-txt;
     display: flex;
     align-items: center;
     line-height: 1px;
     cursor: pointer;
     margin: auto;
-
     justify-content: center;
-
     .token-icon {
       width: 30px;
-    }
+    };
 
     .token-number {
       font-size: $font-medium;
       font-weight: $semibold;
       margin: 0 $spacer * 0.25;
     }
-
     .tokens {
       display: inline;
       font-size: $font-medium;
@@ -91,10 +89,8 @@
 
   .notifications-container {
     display: flex;
-
     line-height: 1px;
     cursor: pointer;
-
     width: fit-content;
     justify-content: center;
     .notifications {
@@ -271,13 +267,14 @@
 }
 
 //Hover elements effect
-
 .tokens-container:hover,
 .notifications-container:hover {
   transition: all 0.5s ease;
   background: $light-gray;
   border-radius: 25px;
 }
+
+
 
 // Tablets and iPads screen
 

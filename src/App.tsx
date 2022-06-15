@@ -3,8 +3,6 @@ import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { Links } from './links';
-import { ProtectedRoute } from './ProtectedRoute';
 import {
   UserLogin,
   UserRegister,
@@ -27,18 +25,20 @@ import {
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
-  ConfigureNoapi,
   ConfigureListingService,
-  ListNow,
+  AllServices,
+  PriceWarrior,
+  EditTemplate,
+  ConfigureNoapi,
+  PaymentMethod,
+  OurServices,
+  Checkout,
   ManualListing,
   BulkListing,
-  Checkout,
-  PaymentMethod,
-  EditTemplate,
-  OurServices,
-  AllServices,
-  PriceWarrior
+  ListNow
 } from './components';
+import { ProtectedRoute } from './ProtectedRoute';
+import { Links } from './links';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
