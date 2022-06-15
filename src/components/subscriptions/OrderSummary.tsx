@@ -20,14 +20,13 @@ export const OrderSummary = (props: props) => {
   const [currencyId, setCurrencyId] = useState(props.currencyId);
   const [billingId, setBillingId] = useState(props.billingId);
 
-  function setPlatformProductId(value: string) {
-    console.log('setPlatformProductId: ' + value);
+  const setPlatformProductId = (value: string) => {
     localStorage.setItem('platformProductId', value);
-  }
+  };
 
-  function setStripeProductId(value: string) {
+  const setStripeProductId = (value: string) => {
     localStorage.setItem('stripePlatformProductId', value);
-  }
+  };
 
   const loadOrder = () => {
     if (currencyId?.toString() === '1') {
@@ -39,8 +38,6 @@ export const OrderSummary = (props: props) => {
     }
   };
 
-
-  console.log(products);
 
   useEffect(() => {
     setCurrencyId(props.currencyId);

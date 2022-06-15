@@ -34,7 +34,7 @@ export const PaymentMethod = (/*props: props*/) => {
   //const [stripeConfig] = useAppSelector((state) => state.paymentConfig.stripeConfig);
   console.log({ products });
 
-  function setReturnUrl(url: string, returnUrl: string): string {
+  const setReturnUrl = (url: string, returnUrl: string): string => {
     let paramsStart = url.indexOf('?');
     let params = '';
     if (paramsStart !== -1) {
@@ -50,9 +50,9 @@ export const PaymentMethod = (/*props: props*/) => {
       urlParams.append('returnUrl', returnUrl.toString());
     }
     return url.substr(0, paramsStart) + '?' + urlParams.toString();
-  }
+  };
 
-  function GetSuccesUrl() {
+  const GetSuccesUrl = () => {
     const location = window.location;
     const baseUrl = location.protocol + '//' + location.host;
     console.log(baseUrl);
@@ -64,20 +64,20 @@ export const PaymentMethod = (/*props: props*/) => {
     url.searchParams.append('bp', billingId as string);
     url.searchParams.append('pid', productId as string);
     return url.toString();
-  }
+  };
 
-  function GetCancelUrl() {
+  const GetCancelUrl = () => {
     const url = new URL(subscriptionConfiguration.cancelUrl as unknown as string);
     url.searchParams.append('bp', billingId as string);
     url.searchParams.append('pid', productId as string);
     return url.toString();
-  }
+  };
 
-  function setValue(arg0: number) {
+  const setValue = (arg0: number) => {
     setSelectedMethod(arg0);
-  }
+  };
 
-  async function handleStripe() {
+  const handleStripe = async () => {
 
     setLoadings(true);
     const request: CreateCheckoutSessionRequest = {
@@ -91,16 +91,16 @@ export const PaymentMethod = (/*props: props*/) => {
     const rp = await dispatch(CreateCheckoutSession(request));
     const stripe = await loadStripe(subscriptionConfiguration.stripeConfig.publishableKey);
     await stripe?.redirectToCheckout({ sessionId: rp.payload.responseObject.checkoutSessionId });
-  }
+  };
 
-  function handlePayPal() {
+  const handlePayPal = () => {
     setLoadings(true);
     window.location.href =
       'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=' +
       platformProductId +
       '&custom=' +
       subscriptionConfiguration.payPalConfig.userId;
-  }
+  };
 
   const finishPayment = () => {
     if (selectedMethod === 1) {

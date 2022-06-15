@@ -39,13 +39,13 @@ export const Subscriptions = () => {
     }
   };
 
-  function parentToChild(value: number, billing: number, type: number): void {
+  const parentToChild = (value: number, billing: number, type: number): void => {
     localStorage.setItem('productId', value.toString());
     localStorage.setItem('billing', billing.toString());
     localStorage.setItem('currencyId', activeCurrency.toString());
     localStorage.setItem('upgradingSubscription', 'false');
     localStorage.setItem('type', type.toString());
-  }
+  };
 
   const renderSlides = useMemo(() => {
     if (tabletScreen.matches) {

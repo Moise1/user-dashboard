@@ -10,6 +10,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import '../../sass/subscriptions/subscriptions.scss';
 //import { Checkout } from './Checkout';
 import { Link } from 'react-router-dom';
+import { BillingPeriod } from './models/types';
 
 export const OurServices = () => {
   const [slides, setSlides] = useState<number>(3);
@@ -27,6 +28,41 @@ export const OurServices = () => {
   const tabletScreen = window.matchMedia('(max-width: 1030px)');
   const mobileScreen = window.matchMedia('(max-width: 750px)');
 
+  const getBillingPeriodDiscount = (billingPeriodId: number) => {
+    switch (billingPeriodId) {
+    case BillingPeriod.Monthly:
+      return '';
+    case BillingPeriod.Biannually:
+      return '20% off';
+    case BillingPeriod.Yearly:
+      return '40% off';
+    }
+  };
+
+  const getBillingPeriodText = (billingPeriodId: number) => {
+    switch (billingPeriodId) {
+    case BillingPeriod.Monthly:
+      return '';
+    case BillingPeriod.Biannually:
+      return '(6 months)';
+    case BillingPeriod.Yearly:
+      return '(1 year)';
+    }
+  };
+
+  const getBillingPeriodMonths = (billingPeriodId: number) => {
+    switch (billingPeriodId) {
+    case BillingPeriod.Monthly:
+      return 1;
+    case BillingPeriod.Biannually:
+      return 6;
+    case BillingPeriod.Yearly:
+      return 12;
+    default:
+      return 1;
+    }
+  };
+
   const handleChangeCurrency = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const elementId = e.currentTarget.id;
     setActiveCurrency(JSON.parse(elementId));
@@ -39,13 +75,13 @@ export const OurServices = () => {
     }
   };
 
-  function parentToChild(value: number, billing: number, type: number): void {
+  const parentToChild = (value: number, billing: number, type: number): void => {
     localStorage.setItem('productId', value.toString());
     localStorage.setItem('billing', billing.toString());
     localStorage.setItem('currencyId', activeCurrency.toString());
     localStorage.setItem('upgradingSubscription', 'false');
     localStorage.setItem('type', type.toString());
-  }
+  };
 
   const renderSlides = useMemo(() => {
     if (tabletScreen.matches) {
@@ -107,15 +143,20 @@ export const OurServices = () => {
 
                 {p.prices.map((prc) => {
                   if (prc.currencyId === activeCurrency && prc.platformId === 2 && prc.billingPeriodId <= 2) {
+                    const months = getBillingPeriodMonths(prc.billingPeriodId);
                     return <div className="container-sub">
                       <Link to="/checkout" onClick={() => parentToChild(p.id, 0, p.type)} key={p.id}>
                         <div className="rate-details top-most">
                           <span className="euro">{currency}</span>
                           <h1 className="monthly-rate">
-                            {prc.price}
+                            {(prc.price / months).toFixed(2) }
                           </h1>
                           <h3 className="frequency">/mo</h3>
                         </div>
+                        <p className="forty-off">
+                          {getBillingPeriodDiscount(prc.billingPeriodId)}
+                        </p>
+                        <h4 className="duration-services">{getBillingPeriodText(prc.billingPeriodId)}</h4>
                       </Link>
                     </div>;
                   }
@@ -123,8 +164,8 @@ export const OurServices = () => {
                     return <div className="container-sub">
                       <Link to="/checkout" onClick={() => parentToChild(p.id, 0, p.type)} key={p.id}>
                         <div className="rate-details top-most">
+                          <span className="euro">{currency}</span>
                           <h1 className="monthly-rate">
-                            <span className="euro">{currency}</span>
                             {prc.price}
                           </h1>
                         </div>
