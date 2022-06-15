@@ -1,4 +1,4 @@
-﻿import { eCountry } from '../components/auto-ordering/eCountry';
+﻿import { eCountry } from '../utils/eCountry';
 
 export interface PlatformIndo {
   name: string;//Example: "eBay No Api"

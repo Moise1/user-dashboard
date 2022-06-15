@@ -4,7 +4,7 @@ import { t } from '../../utils/transShim';
 import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
-import { eCountry } from './eCountry';
+import { eCountry } from '../../utils/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable } from '../tables/DataTable';
 import { Key } from 'antd/lib/table/interface';

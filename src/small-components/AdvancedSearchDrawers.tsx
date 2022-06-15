@@ -11,6 +11,7 @@ interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
   catalogData?: CatalogProduct[];
   setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
+  suppliersCount: number[];
 }
 
 interface catalogAdvancedSearchFieldTypes {
@@ -24,7 +25,7 @@ interface catalogAdvancedSearchFieldTypes {
 
 export const CatalogFilters = (props: Props) => {
 
-  const { visible, onClose, openSourceModal, catalogData } = props;
+  const { visible, onClose, openSourceModal, catalogData, suppliersCount } = props;
   console.log('The catalog data coming from api', catalogData);
   const catalogAdvanceSearchIntialTypes: catalogAdvancedSearchFieldTypes = {
     title: '',
@@ -66,7 +67,7 @@ export const CatalogFilters = (props: Props) => {
           <strong>Choose your suppliers</strong>
         </h5>
         <Button className="supplier-one" onClick={openSourceModal}>
-          1 supplier
+          {suppliersCount.length}
         </Button>
         <Form layout="vertical" className="advanced-search-form" onFinish={handleFilterSubmit}>
           <div className="catalog-filters-inputs">

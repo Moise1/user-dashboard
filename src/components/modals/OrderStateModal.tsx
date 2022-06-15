@@ -9,8 +9,8 @@ interface Props {
 
 const OrderStateModal = (props: Props) => {
   const { AoDisabledModal, setAoDisabledModal } = props;
-  console.log("The AoDisabledModal", AoDisabledModal);
-  console.log("The setAoDisabledModal", setAoDisabledModal)
+  console.log('The AoDisabledModal', AoDisabledModal);
+  console.log('The setAoDisabledModal', setAoDisabledModal);
   return (
     <>
       {/* <Modal
