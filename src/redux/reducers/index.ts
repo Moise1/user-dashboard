@@ -14,8 +14,8 @@ import { pendingListingsReducer } from '../listings/listingsSlice';
 import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
-import { catalogProductsReducer } from '../catalog/catalogSlice';
 import { paymentReducer } from '../payment/paymentSlice';
+import { catalogProductsReducer , catalogSearchProductReducer} from '../catalog/catalogSlice';
 import { ordersReducer } from '../orders/orderSlice';
 import { orderAddressReducer } from '../orders/orderSlice';
 import { orderProgressReducer } from '../orders/orderSlice';
@@ -48,6 +48,7 @@ export const allReducers = combineReducers({
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,
+  catalogSearchProductReducer:catalogSearchProductReducer,
   orders: ordersReducer,
   orderAddress: orderAddressReducer,
   orderProgress: orderProgressReducer,

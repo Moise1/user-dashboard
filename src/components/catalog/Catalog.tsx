@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card } from 'antd';
+import { Layout, Card, Spin } from 'antd';
 import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../../small-components/ActionBtns';
 import { FiltersBtn } from '../../small-components/TableActionBtns';
@@ -24,6 +24,7 @@ export type ElementEventType =
   | React.MouseEvent
 
 export const Catalog = () => {
+
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -35,7 +36,8 @@ export const Catalog = () => {
   const dispatch = useAppDispatch();
   const { Meta } = Card;
 
-  const { catalogProducts } = useAppSelector((state) => state.catalogProducts);
+  const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
+  // const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProductReducer)
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
 
@@ -73,142 +75,169 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
+
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
   };
+
   return (
     <Layout className="catalog-container">
-      <div className="actions-section">
-        <div className="view-clear-all">
-          <span className="all-selected-products" onClick={handleAllProudctsModal}>
-            View all selected products
-          </span>
-          <div className="clear-list-container">
-            <span className="clear-all" onClick={handleClearAllSelectedProducts}>
-              Clear all
-            </span>
-            {!!allProducts.length && (
-              <SuccessBtn className="list-btn-mobile">List {allProducts.length} product(s)</SuccessBtn>
-            )}
+      {loading ? (
+        <Spin />
+      ) : (
+        <>
+          <div className="actions-section">
+            <div className="view-clear-all">
+              <span className="all-selected-products" onClick={handleAllProudctsModal}>
+                View all selected products
+              </span>
+              <div className="clear-list-container">
+                <span className="clear-all" onClick={handleClearAllSelectedProducts}>
+                  Clear all
+                </span>
+                {!!allProducts.length && (
+                  <SuccessBtn className="list-btn-mobile">List {allProducts.length} product(s)</SuccessBtn>
+                )}
+              </div>
+            </div>
+            <a href="https://hustlegotreal.com/en/listing-service/" target="_blank" className="list-link" rel="noreferrer">
+              Not sure what to list?  We do it for you.
+            </a>
+            <div className="filters-container">
+              <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
+            </div>
           </div>
-        </div>
-        <a href="https://hustlegotreal.com/en/listing-service/" target="_blank" className="list-link" rel="noreferrer">
-          Not sure what to list?  We do it for you.
-        </a>
-        <div className="filters-container">
-          <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
-        </div>
-      </div>
 
-      <SearchOptions showSearchInput={false} />
-      <CatalogFilters 
-        visible={drawerOpen} 
-        onClose={handleSideDrawer} 
-        openSourceModal={handleSourceModal}
-        catalogData={allCatalogProducts} 
-        setAllProducts={setAllCatalogProducts}
-        suppliersCount={sourcesIds}/>
-      <PopupModal
-        open={modalOpen}
-        handleClose={handleProductModal}
-        width={900}
-        title={
-          <div className="modal-title">
-            <h1 className="title">{selectedProduct?.title}</h1>
-            <p className="source">{selectedProduct?.source}</p>
-          </div>
-        }
-      >
-        <ProductDetails
-          img={selectedProduct?.img}
-          details={selectedProduct?.details}
-          profit={selectedProduct?.profit}
-          cost={selectedProduct?.cost}
-          sell={selectedProduct?.sell}
-          handleClose={handleProductModal}
-        />
-      </PopupModal>
+          <SearchOptions showSearchInput={false} />
+          <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
+            setAllCatalogProducts={setAllCatalogProducts} suppliersCount={sourcesIds}
+          />
+          <PopupModal
+            open={modalOpen}
+            handleClose={handleProductModal}
+            width={900}
+            title={
+              <div className="modal-title">
+                <h1 className="title">{selectedProduct?.title}</h1>
+                <p className="source">{selectedProduct?.source}</p>
+              </div>
+            }
+          >
+            <ProductDetails
+              img={selectedProduct?.img}
+              details={selectedProduct?.details}
+              profit={selectedProduct?.profit}
+              cost={selectedProduct?.cost}
+              sell={selectedProduct?.sell}
+              handleClose={handleProductModal}
+            />
+          </PopupModal>
 
-      <PopupModal
-        open={sourceModalOpen}
-        handleClose={handleSourceModal}
-        width={800}
-        title={
-          <div className="modal-title">
-            <h1 className="title">Select Sources</h1>
-            <p className="source">Include or exclude selected sources to refine the catalog</p>
-          </div>
-        }
-      >
-        <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData}/>
-      </PopupModal>
+          <PopupModal
+            open={sourceModalOpen}
+            handleClose={handleSourceModal}
+            width={800}
+            title={
+              <div className="modal-title">
+                <h1 className="title">Select Sources</h1>
+                <p className="source">Include or exclude selected sources to refine the catalog</p>
+              </div>
+            }
+          >
+            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} />
+          </PopupModal>
 
-      <PopupModal
-        open={allProductsModalOpen}
-        handleClose={handleAllProudctsModal}
-        width={600}
-        style={{ overflowY: 'scroll' }}
-        bodyStyle={{ height: 500 }}
-        closable={false}
-      >
-        <AllProducts removeProduct={handleSelectProduct} className={className}>
-          {allProducts}
-        </AllProducts>
-      </PopupModal>
+          <PopupModal
+            open={allProductsModalOpen}
+            handleClose={handleAllProudctsModal}
+            width={600}
+            style={{ overflowY: 'scroll' }}
+            bodyStyle={{ height: 500 }}
+            closable={false}
+          >
+            <AllProducts removeProduct={handleSelectProduct} className={className}>
+              {allProducts}
+            </AllProducts>
+          </PopupModal>
 
-      <div className="catalog-cards">
-        <div className="cards-container-catalog">
-          {allCatalogProducts.map((d: CatalogProduct) => (
-            <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
-              <Meta
-                description={
-                  <div className="product-description">
-                    <div className="img-container">
-                      <img src={d.imageUrl} className="product-img" />
-                    </div>
-                    <div className="product-info-area">
-                      <div className="header">
-                        <p className="product-title">{d.title}</p>
-                        <p className="source">by {d.sourceId}</p>
-                        <SearchOutlined className="view-details" onClick={handleProductModal} style={{ fontSize: '19px' }} />
+          <div className="catalog-cards">
+            <div className="cards-container-catalog">
+              {allCatalogProducts.map((d: CatalogProduct) => (
+                <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
+                  <Meta
+                    description={
+                      <div className="product-description">
+                        <div className="img-container">
+                          <img src={d.imageUrl} className="product-img" />
+                        </div>
+                        <div className="product-info-area">
+                          <div className="header">
+                            <p className="product-title">{d.title}</p>
+                            {/* <p className="source">by &nbsp;
+                              {d.sourceId === 1 && 'Amazon'
+                                || d.sourceId === 30 && 'Amazon'
+                                || d.sourceId === 140 && 'Amazon'
+                                || d.sourceId === 141 && 'Amazon'
+                                || d.sourceId === 3 && 'Costco'
+                                || d.sourceId === 78 && 'Costco'
+                                || d.sourceId === 10 && 'Robert Dyas'
+                                || d.sourceId === 5 && 'UK Banggodd'
+                                || d.sourceId === 56 && 'US Banggood'
+                                || d.sourceId === 57 && 'Banggood Com'
+                                || d.sourceId === 70 && 'Banggood Com'
+                                || d.sourceId === 59 && 'Costway'
+                                || d.sourceId === 31 && 'Walmart'
+                                || d.sourceId === 221 && 'SaleYee' ||
+                                d.sourceId === 222 && 'SaleYee'
+                                || d.sourceId === 185 && 'DropShip Traders'
+                                || d.sourceId === 216 && 'Vidaxl spain'
+                              }</p> */}
+
+                            <p className="source">by &nbsp;
+                              {d.sourceId}
+                            </p>
+
+                            <SearchOutlined className="view-details"
+                              onClick={handleProductModal} style={{ fontSize: '19px' }} />
+                          </div>
+                          <div className="transaction-details">
+                            <div>
+                              <p className="transaction-type">Sell</p>
+                              <p className="transaction-amount sell">
+                                <span>&pound;</span>
+                                {d.channelPrice}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="transaction-type">Cost</p>
+                              <p className="transaction-amount cost">
+                                <span>&pound;</span>
+                                {d.sourcePrice}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="transaction-type">Profit</p>
+                              <p className="transaction-amount profit">
+                                <span>&pound;</span>
+                                {d.profit}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="transaction-details">
-                        <div>
-                          <p className="transaction-type">Sell</p>
-                          <p className="transaction-amount sell">
-                            <span>&pound;</span>
-                            {d.sold}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="transaction-type">Cost</p>
-                          <p className="transaction-amount cost">
-                            <span>&pound;</span>
-                            {d.sourcePrice}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="transaction-type">Profit</p>
-                          <p className="transaction-amount profit">
-                            <span>&pound;</span>
-                            {d.profit}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                }
-              />
-            </Card>
-          ))}
-        </div>
-        <div className="pagination-addall-container">
-          <div className="adall-container">
-            {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
-            <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
+                    }
+                  />
+                </Card>
+              ))}
+            </div>
+            <div className="pagination-addall-container">
+              <div className="adall-container">
+                {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
+                <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>)}
     </Layout>
   );
 };
