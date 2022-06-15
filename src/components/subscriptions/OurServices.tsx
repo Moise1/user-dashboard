@@ -1,7 +1,6 @@
 import { createRef, useState, useEffect, useMemo } from 'react';
-import { Card, Carousel, Button, Space, Layout, Spin } from 'antd';
+import { Card, Carousel, Space, Layout, Spin } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
-import { StatusBar } from '../../small-components/StatusBar';
 import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getServices } from 'src/redux/subscriptions/subsThunk';
@@ -101,16 +100,6 @@ export const OurServices = () => {
         <Spin />
       ) : (
         <div className="carousel-container">
-          <StatusBar>
-            <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
-            <p className="subscriptions-limit">
-              Subscription limit <span>110</span>
-            </p>
-            <p className="subscriptions-items">
-              Items<span>110</span>
-            </p>
-            <Button className="subscription-cancel">Request cancellation</Button>
-          </StatusBar>
           <div className="currencies-container">
             <TransparentBtn
               id="1"
