@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Divider } from 'antd';
 import amazon from '../../assets/catalog-sources/amazon.png';
 import banggood from '../../assets/catalog-sources/bangood.png';
@@ -18,7 +18,7 @@ interface Props {
   handleClose: () => void;
   getSourcesData: (ids: number[]) => void;
 }
-export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
+export const CatalogSource = ({ handleClose,getSourcesData }: Props) => {
   const onSearch = (value: string) => console.log('searched value', value);
   const [addedSources, setAddedSources] = useState<{ id: number; img: string }[]>([]);
   const [pendingSources, setPendingSources] = useState<{ id: number; img: string }[]>([

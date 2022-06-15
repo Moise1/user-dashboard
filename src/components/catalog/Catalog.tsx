@@ -24,6 +24,7 @@ export type ElementEventType =
   | React.MouseEvent
 
 export const Catalog = () => {
+
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -74,9 +75,11 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
+
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
   };
+
   return (
     <Layout className="catalog-container">
       {loading ? (
@@ -106,12 +109,9 @@ export const Catalog = () => {
           </div>
 
           <SearchOptions showSearchInput={false} />
-          <CatalogFilters
-            visible={drawerOpen}
-            onClose={handleSideDrawer}
-            openSourceModal={handleSourceModal}
-            setAllCatalogProducts={setAllCatalogProducts}
-            suppliersCount={sourcesIds} />
+          <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
+            setAllCatalogProducts={setAllCatalogProducts} suppliersCount={sourcesIds}
+          />
           <PopupModal
             open={modalOpen}
             handleClose={handleProductModal}

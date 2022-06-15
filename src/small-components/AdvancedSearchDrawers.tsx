@@ -16,6 +16,7 @@ interface Props extends AdvancedSearchProps {
   setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
   suppliersCount: number[];
   setAllCatalogProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
+
 }
 
 interface catalogInputFieldTypes {
@@ -58,12 +59,11 @@ export const CatalogFilters = (props: Props) => {
     }
   ];
 
-  const { visible, onClose, openSourceModal, suppliersCount, setAllCatalogProducts } = props;
-
+  const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount } = props;
   const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProductReducer);
   const [sessionId] = useState<number>(0);
   const dispatch = useAppDispatch();
-
+  console.log('The number of suppliers count', suppliersCount);
   useEffect(() => {
     setAllCatalogProducts?.(catalogSearchedProducts);
   }, [catalogSearchedProducts]);
@@ -118,6 +118,7 @@ export const CatalogFilters = (props: Props) => {
         options,
         order,
         suppliersCount,
+
       }
     ));
   };
@@ -139,7 +140,7 @@ export const CatalogFilters = (props: Props) => {
           <strong>Choose your suppliers</strong>
         </h5>
         <Button className="supplier-one" onClick={openSourceModal}>
-          {suppliersCount.length}
+          {suppliersCount.length} suppliers
         </Button>
         <Form layout="vertical" className="advanced-search-form" onFinish={handleFilterSubmit}>
           <div className="catalog-filters-inputs">

@@ -38,7 +38,7 @@ export const getCatalogProductsSearching = createAsyncThunk(
       profitTo: number | undefined;
       options:number | undefined;
       order:number ;
-      suppliersCount:number[];
+      suppliersCount:  number[]
     },
     thunkAPI) => {
     try {
@@ -51,7 +51,7 @@ export const getCatalogProductsSearching = createAsyncThunk(
         profitTo,
         options,
         order,
-        sourceIds:suppliersCount
+        sourceIds :suppliersCount,
       } );
       return res.data.response_data.products;
     } catch (error) {
