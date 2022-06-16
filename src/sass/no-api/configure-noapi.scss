@@ -9,4 +9,14 @@
     width: 100%;
     background-color: rgb(255, 255, 255);
   }
+
+  .nosuscribed-container {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    .nosuscribed {
+      padding: 5rem 0;
+    }
+  }
 }

@@ -24,11 +24,23 @@ export const ConfigureNoapi = () => {
 
   console.log(noApiServersResult);
 
-  const noApiServerSubscription = (
-    <div className="subscribe">
-      <p>Do you want to keep your NO API extension running 24/7?</p>
-      <p>We can do it for you for only 12.99GBP/month.</p>
-      <ConfirmBtn>Read more</ConfirmBtn>
+  const noSuscribed = (
+    <div className="nosuscribed-container">
+      <div className="nosuscribed">
+        <h3>{"Oops it looks like you don't have any no api server contracted."}</h3>
+        <p>Do you want to keep your NO API extension running 24/7?</p>
+        <p>We can do it for you for only 12.99GBP/month.</p>
+        <ConfirmBtn>
+          <a
+            href="https://hustlegotreal.com/en/no-api-server/"
+            rel="noreferrer"
+            target="_blank"
+            className="footer-link"
+          >
+            Read more
+          </a>
+        </ConfirmBtn>
+      </div>
     </div>
   );
 
@@ -86,7 +98,7 @@ export const ConfigureNoapi = () => {
             totalItems={noApiServersResult?.length}
           />
         ) : (
-          noApiServerSubscription
+          noSuscribed
         )}
       </div>
     </div>
