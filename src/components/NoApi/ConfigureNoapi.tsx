@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 /*import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';*/
 import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
-import { SuccessBtn } from 'src/small-components/ActionBtns';
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/no-api/configure-noapi.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 
@@ -27,8 +27,8 @@ export const ConfigureNoapi = () => {
   const noApiServerSubscription = (
     <div className="subscribe">
       <p>Do you want to keep your NO API extension running 24/7?</p>
-      <p>We can do it for you for only 9GBP/month.</p>
-      <SuccessBtn>Subscribe</SuccessBtn>
+      <p>We can do it for you for only 12.99GBP/month.</p>
+      <ConfirmBtn>Read more</ConfirmBtn>
     </div>
   );
 
@@ -58,7 +58,7 @@ export const ConfigureNoapi = () => {
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="username" className="blue-input" />;
+        return <Input name="username" className="blue-input" placeholder="Your store username" />;
       }
     },
     {
@@ -66,7 +66,7 @@ export const ConfigureNoapi = () => {
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="storePasswd" className="blue-input" />;
+        return <Input name="storePasswd" className="blue-input" placeholder="*************" />;
       }
     }
   ];

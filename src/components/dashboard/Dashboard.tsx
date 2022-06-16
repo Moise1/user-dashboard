@@ -54,8 +54,7 @@ interface ProductQuota {
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
-
-  //For pagination add by suleman ahmad 
+  //For pagination add by suleman ahmad
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   //
@@ -79,11 +78,13 @@ export const Dashboard = () => {
   const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
   const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
   const onSearch = (value: string) => {
-    setSearchedChannels(channels?.filter((channel: Channel) => {
-      if (channel.name === value) {
-        return channel.name === value;
-      }
-    }));
+    setSearchedChannels(
+      channels?.filter((channel: Channel) => {
+        if (channel.name === value) {
+          return channel.name === value;
+        }
+      })
+    );
   };
 
   const removeRecord = async (id: Channel['id']) => {
@@ -258,7 +259,9 @@ export const Dashboard = () => {
             <h6>Your stores</h6>
             <SearchInput onSearch={onSearch} />
             <DataTable
-              dataSource={searchedChannels.length ? searchedChannels : channels} columns={columns} totalItems={channels.length}
+              dataSource={searchedChannels.length ? searchedChannels : channels}
+              columns={columns}
+              totalItems={channels.length}
               pageSize={postPerPage}
               setPostPerPage={setPostPerPage}
               current={current}
@@ -359,7 +362,12 @@ export const Dashboard = () => {
                 footer={
                   <div className="add-servers">
                     <PlusCircleOutlined style={{ fontSize: '19px' }} />
-                    <a href="#" className="footer-link">
+                    <a
+                      href="https://hustlegotreal.com/en/no-api-server/"
+                      rel="noreferrer"
+                      target="_blank"
+                      className="footer-link"
+                    >
                       Add more servers
                     </a>
                   </div>
@@ -369,7 +377,7 @@ export const Dashboard = () => {
                   noApiServersResult.map((s: NoApiServer) => (
                     <div key={s.id}>
                       <div className="item-description">
-                        <a href="/setup-preferences" className="setup-link">
+                        <a href="/configure-no-api-server" className="setup-link">
                           Choose your channel
                         </a>
                         <div className="next-payment">
