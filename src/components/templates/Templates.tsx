@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { getTemplates, setDefault } from '../../redux/templates/templatesThunk';
 import { Template } from 'src/redux/templates/templatesSlice';
 import { DataTable } from '../tables/DataTable';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+
 import { EditOutlined } from '@ant-design/icons';
 import '../../sass/templates.scss';
 import { Link } from 'react-router-dom';
@@ -76,21 +76,6 @@ export const Templates = () => {
     }
   ];
 
-  const [columns, setColumns] = useState(tableColumns);
-
-  const handleCheckBox = (e: CheckboxChangeEvent): void => {
-    const cloneColumns = columns.map((col) => {
-      if (col.key === e.target.value) {
-        return { ...col, visible: e.target.checked };
-      } else {
-        return col;
-      }
-    });
-    setColumns(cloneColumns);
-  };
-
-  console.log(handleCheckBox);
-
   return (
     <Layout className="templates-container">
       <h1>Templates</h1>
@@ -99,7 +84,7 @@ export const Templates = () => {
       ) : (
         <DataTable
           dataSource={templates}
-          columns={columns}
+          columns={tableColumns}
           pageSize={10}
           current={current}
           totalItems={templates.length}

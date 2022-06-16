@@ -1,63 +1,105 @@
-import { Link } from 'react-router-dom';
-import { Row, Col } from 'antd';
-import { RedLogo, GreenLogo } from '../common/Icons';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+/*import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';*/
+import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/no-api/configure-noapi.scss';
-import { LeftOutlined } from '@ant-design/icons';
-import { Links } from '../../links';
+import { Channel } from 'src/redux/channels/channelsSlice';
+
+import { Selector } from 'src/small-components/form/selector';
+import { SimpleTable } from '../tables/SimpleTable';
+
+import { Input } from 'antd';
 
 export const ConfigureNoapi = () => {
-  return (
-    <div className="main-container">
-      <Link to={Links.Dashboard} className="back-to-dashboard">
-        <span>
-          <LeftOutlined style={{ fontSize: '19px' }} />
-        </span>
-        Back to dashboard
-      </Link>
-      <div className="get-started-container">
-        <Row className="intro-area">
-          <Col className="intro-vid-container" xs={24} md={24} lg={8}>
-            <h5 className="how-to-list">
-              <strong>How to list your item?</strong>
-            </h5>
-            <div className="get-started-vid">
-              <iframe
-                className="intro-vid"
-                src={'https://www.youtube.com/embed/P-CjSHtd4mQ'}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </Col>
+  const dispatch = useAppDispatch();
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+  const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
+  const [noApiServersPage, setnoApiServersPage] = useState<number>(10);
+  const [current, setCurrent] = useState<number>(1);
 
-          <Col className="description-area" xs={24} lg={12}>
-            <p>
-              The extension will automatically change its color depending on whether the item has already been listed or
-              not.
-            </p>
-            <ul className="description-list">
-              <li className="list-item">
-                <GreenLogo />
-                <div className="description">
-                  <p>
-                    <strong>Green</strong>
-                  </p>
-                  <p>You have not listed this item</p>
-                </div>
-              </li>
-              <li className="list-item">
-                <RedLogo />
-                <div className="description">
-                  <p>
-                    <strong>Red</strong>
-                  </p>
-                  <p>You have already listed this item</p>
-                </div>
-              </li>
-            </ul>
-          </Col>
-        </Row>
+  useEffect(() => {
+    dispatch(getNoApiServers());
+  }, [getNoApiServers]);
+
+  console.log(noApiServersResult);
+
+  const noSuscribed = (
+    <div className="nosuscribed-container">
+      <div className="nosuscribed">
+        <h3>{"Oops it looks like you don't have any no api server contracted."}</h3>
+        <p>Do you want to keep your NO API extension running 24/7?</p>
+        <p>We can do it for you for only 12.99GBP/month.</p>
+        <ConfirmBtn>
+          <a
+            href="https://hustlegotreal.com/en/no-api-server/"
+            rel="noreferrer"
+            target="_blank"
+            className="footer-link"
+          >
+            Read more
+          </a>
+        </ConfirmBtn>
+      </div>
+    </div>
+  );
+
+  const columns = [
+    {
+      title: 'Subscription',
+      dataIndex: '',
+      key: 'name',
+      render: () => {
+        return <h4 className="no-api-title">No api server</h4>;
+      }
+    },
+    {
+      title: 'Channel',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return (
+          <Selector placeHolder="Select a channel">
+            {channels?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
+          </Selector>
+        );
+      }
+    },
+    {
+      title: 'Username',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return <Input name="username" className="blue-input" placeholder="Your store username" />;
+      }
+    },
+    {
+      title: 'Store password',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return <Input name="storePasswd" className="blue-input" placeholder="*************" />;
+      }
+    }
+  ];
+
+  return (
+    <div className="configure-noapi-container">
+      <h1>Configure No api server</h1>
+      <div className="no-api-servers">
+        {noApiServersResult?.length ? (
+          <SimpleTable
+            setSourcesPerPage={setnoApiServersPage}
+            current={current}
+            onChange={setCurrent}
+            columns={columns}
+            dataSource={noApiServersResult}
+            pageSize={noApiServersPage}
+            totalItems={noApiServersResult?.length}
+          />
+        ) : (
+          noSuscribed
+        )}
       </div>
     </div>
   );

@@ -39,6 +39,12 @@
     outline: none !important;
     height: 40px !important;
     align-items: center !important;
-  
+    max-width: 200px !important;
   }
+}
+.ant-select,
+.selector,
+.ant-select-single,
+.ant-select-show-arrow {
+  max-width: 200px !important;
 }
