@@ -58,7 +58,7 @@ export const ConfigureNoapi = () => {
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="giftMessage" className="blue-input" />;
+        return <Input name="username" className="blue-input" />;
       }
     },
     {
@@ -66,7 +66,7 @@ export const ConfigureNoapi = () => {
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="giftMessage" className="blue-input" />;
+        return <Input name="storePasswd" className="blue-input" />;
       }
     }
   ];
