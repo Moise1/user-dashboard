@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
+import { getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
 export interface ListingData {
   imageUrl: string;
   asin: null;
@@ -206,8 +206,29 @@ export const TerminateListingsSlice = createSlice({
   }
 });
 
+export const GetListingsImagesSlice = createSlice({
+  name: 'activeListingsImages',
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getListingsImages.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getListingsImages.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.terminatedListings = [...payload.listings];
+    });
+    builder.addCase(getListingsImages.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const { reducer: listingsReducer } = listingsSlice;
 export const { reducer: listingsSourceReducer } = getListingsSourceSlice;
 export const { reducer: manualListingsReducer } = getManualListingsSlice;
 export const { reducer: pendingListingsReducer } = PendingListingsSlice;
 export const { reducer: terminatedListingsReducer } = TerminateListingsSlice;
+export const { reducer: GetListingsImagesSliceReducer } = GetListingsImagesSlice;
