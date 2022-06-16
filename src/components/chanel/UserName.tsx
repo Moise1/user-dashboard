@@ -1,6 +1,6 @@
 import { t } from '../../utils/transShim';
 import { Input } from 'antd';
-
+import {eShop} from '../../utils/eShop';
 interface values {
   user: string;
 }
@@ -14,12 +14,11 @@ interface props {
 
 export const UserName = (props: props) => {
   const { handleChangeUser, values, platform, user } = props;
-
   return (
     <form className="username-form">
       <h5 className="title">
         {' '}
-        {t('whatsur')} {platform} &apos;s {t('username')}?{' '}
+        {t('whatsur')} {eShop[platform]} &apos;s {t('username')}?{' '}
       </h5>
       <p>
         {t('makesure')}

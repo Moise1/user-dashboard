@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Radio } from 'antd';
 import { t } from '../../utils/transShim';
 import { ElementEventType } from '../catalog/Catalog';
+import { eShop } from 'src/utils/eShop';
 
 interface values {
   extension: string;
@@ -21,23 +22,17 @@ export const AccountConnect = (props: props) => {
   const { handleChangeApi, platform, handleChangeExtension, extension } = props;
   const [, _setEnable] = useState(false); // ignored setEnable
 
-
   const onSelectAccount = (e: ElementEventType) => {
     const target = e.currentTarget;
     const selectedApi = target.getAttribute('id');
-    if (target.classList.contains('selected-account')) {
-      target.classList.remove('selected-account');
-    } else {
-      target.classList.add('selected-account');
-      handleChangeApi(String(selectedApi));
-    }
+    handleChangeApi(String(selectedApi));
   };
 
   return (
     <form className="account-connect">
-      <h5 className="title">How do you want HGR to connect to your {platform} account?</h5>
+      <h5 className="title">How do you want HGR to connect to your {eShop[platform]} account?</h5>
       <p className="change-settings">{t('changeset')}</p>
-      <div className="with-api" key="1" id="easy" onClick={onSelectAccount}>
+      <div className="with-api" key="1" id="easy" onClick={onSelectAccount} tabIndex={1}>
         <div>
           <div className="options-label">
             <p>{t('wapi')}</p>
@@ -54,7 +49,7 @@ export const AccountConnect = (props: props) => {
         </div>
       </div>
 
-      <div className="no-api" key="2" id="advance" onClick={onSelectAccount}>
+      <div className="no-api" key="2" id="advance" onClick={onSelectAccount} tabIndex={1}>
         <div className="options-label">
           <p>{t('napi')}</p>
           <p className="advance">{t('advnc')}</p>

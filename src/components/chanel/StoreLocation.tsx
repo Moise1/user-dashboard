@@ -9,7 +9,6 @@ import { t } from '../../utils/transShim';
 import { eCountry } from '../../utils/eCountry';
 import { Flag } from './Flag';
 
-
 interface values {
   storeLocation: string;
 }
@@ -78,7 +77,7 @@ export const StoreLocation = (props: StoreLocationProps) => {
 
   return (
     <form className="location-form">
-      <h5 className="title">{t('bar2')}?</h5>
+      <h5 className="title">{t('store-base')}?</h5>
       <h6 className="sub-title">
         {platform == 1 ? t('storebay') : platform == 3 ? t('storamz') : t('storshp')}
       </h6>
@@ -86,13 +85,9 @@ export const StoreLocation = (props: StoreLocationProps) => {
         {flags.map((i) => (
           <Flag
             key={i.name}
-            // platform={platform}
-            // currentPlatform={i.platform}
             flag={i.path}
             name={i.name}
             code={i.code}
-            // key={i.slug}
-            // location={values.storeLocation}
             handleChangeLocation={handleChangeLocation}
           />
         ))}

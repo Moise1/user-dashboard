@@ -1,5 +1,6 @@
 import { t } from '../../utils/transShim';
 import { Link } from 'react-router-dom';
+import { eShop } from 'src/utils/eShop';
 
 interface props {
   step: number;
@@ -11,7 +12,7 @@ export const Account = (props: props) => {
 
   return (
     <form className="account">
-      <h5 className="title"> {`Do you have a ${platform} account?`}</h5>
+      <h5 className="title"> {`Do you have a ${eShop[platform]} account?`}</h5>
       <h6 className="sub-title">{`No ${platform} store yet? We will happily show you how to get started!`}</h6>
       <div className="">
         {platform == 1 ? (

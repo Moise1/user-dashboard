@@ -7,7 +7,7 @@ import { PlatForm } from './PlatForm';
 import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';
 import { Stepper } from './Stepper';
-import { ProgressBar } from './ProgressBar';
+import { SideProgressBar } from './SideProgressBar';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { getLinkAccount } from 'src/redux/new-channel/newChannelThunk';
@@ -29,24 +29,28 @@ interface Props {
   _ignored?: boolean;
 }
 
-const  popupWindow = (url: string, windowName: string, win: Window & typeof globalThis, w: number, h: number) => {
-  const t = win!.top!.outerHeight / 2 + win!.top!.screenY - ( h / 2);
-  const l = win!.top!.outerWidth / 2 + win!.top!.screenX - ( w / 2);
-  return win.open(url, windowName, `
+const popupWindow = (url: string, windowName: string, win: Window & typeof globalThis, w: number, h: number) => {
+  const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
+  const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
+  return win
+    .open(
+      url,
+      windowName,
+      `
   toolbar=no, location=no, directories=no,
   status=no, menubar=no, scrollbars=no,
   resizable=no, copyhistory=no, 
   width=${w}, height=${h}, top=${t}, left=${l}`
-  )?.focus();
+    )
+    ?.focus();
 };
 export const NewChannel = ({ _ignored }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const {url} = useAppSelector(state => state.linkAccount);
+  const { url } = useAppSelector((state) => state.linkAccount);
   const [ebayUrl, setEbayUrl] = useState<string>(url);
   const dispatch = useAppDispatch();
-
 
   const [data, setData] = useState<state>({
     platform: eShop.eBay,
@@ -64,7 +68,7 @@ export const NewChannel = ({ _ignored }: Props) => {
     setEbayUrl('');
   };
   const handleNext = () => {
-    if(url !== '' && step === 4 && data.api === 'easy'){
+    if (url !== '' && step === 4 && data.api === 'easy') {
       setEbayUrl(url);
       popupWindow(ebayUrl, 'Ebay Account', window, 800, 600);
       return;
@@ -82,7 +86,7 @@ export const NewChannel = ({ _ignored }: Props) => {
   };
   const handleChangeApi = (value: string) => {
     setData({ ...data, api: value });
-    value === 'easy' && dispatch(getLinkAccount({shop: data.platform, site: data.storeLocation as number}));
+    data.api === 'easy' && dispatch(getLinkAccount({ shop: data.platform, site: data.storeLocation as number }));
   };
   const handleChangeExtension = (value: string) => {
     setData({ ...data, extension: value });
@@ -101,24 +105,25 @@ export const NewChannel = ({ _ignored }: Props) => {
     switch (step) {
     case 1:
       return (
-        <PlatForm
+        <PlatForm 
           platform={data.platform}
-          // values={values}
           step={step}
-          handleChangePlatform={handleChangePlatform}
-        />
+          handleChangePlatform={handleChangePlatform} />
       );
     case 2:
       return (
-        <StoreLocation
-          platform={data.platform}
-          // values={values}
-          step={step}
-          handleChangeLocation={handleChangeLocation}
-        />
+        <StoreLocation 
+          platform={data.platform} 
+          step={step} 
+          handleChangeLocation={handleChangeLocation} />
       );
     case 3:
-      return <Account platform={data.platform} handleChangeApi={handleChangeApi} step={step} />;
+      return (
+        <Account 
+          platform={data.platform} 
+          handleChangeApi={handleChangeApi} 
+          step={step} />
+      );
     case 4:
       return (
         <AccountConnect
@@ -177,7 +182,7 @@ export const NewChannel = ({ _ignored }: Props) => {
           </div>
         </Col>
         <Col lg={6} className="right-section">
-          <ProgressBar platform={data.platform} step={step} />
+          <SideProgressBar platform={data.platform} step={step} />
         </Col>
       </Row>
     </div>
