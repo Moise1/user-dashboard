@@ -24,7 +24,8 @@ import {
   SourceConfiguration,
   Templates,
   AutoOrderingConfiguration,
-  AutoOrdering
+  AutoOrdering,
+  AllServices
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/list-now/ListNow';
@@ -87,6 +88,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute path={Links.Services} component={Services} />
+            <ProtectedRoute path={Links.AllServices} component={AllServices} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
             <ProtectedRoute path={Links.PrivateSupplier} component={PrivateSupplier} />
             <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />

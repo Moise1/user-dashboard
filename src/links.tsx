@@ -10,6 +10,7 @@
   ChannelSettings: '/channel-configuration',
   NewChannel: '/new-channel',
   Services: '/services',
+  AllServices: '/all-services',
   PriceWarrior: '/price-warrior',
   PrivateSupplier: '/private-supplier',
   Subscriptions: '/subscriptions',
