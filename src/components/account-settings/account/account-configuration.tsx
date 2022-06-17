@@ -9,7 +9,7 @@ import { getAccountConfiguration, saveAccountSetting } from '../../../redux/acco
 import { AccountConfigurationState, eAccountSettings, SettingsValue } from '../../../redux/account-configuration/account-configuration-slice';
 import { AccountSetting, AccountSettings } from '../configuration/settings';
 import { AccountSettingSections, AccountSettingSection } from '../configuration/sections';
-import { SettingDataBag, SettingInput } from '../../../small-components/settings/setting-input-2';
+import { SettingDataBag, SettingInput } from '../../../small-components/settings/setting-input';
 import { ReactUtils } from '../../../utils/react-utils';
 import { Platforms } from '../../../data/platforms';
 
