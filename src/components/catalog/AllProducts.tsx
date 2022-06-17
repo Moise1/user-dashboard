@@ -1,10 +1,10 @@
 import { CloseIcon } from '../../small-components/CloseIcon';
-import { ICatalogData } from '../../dummy-data/dummyData';
+import { CatalogProduct } from 'src/redux/catalog/catalogSlice';
 import { ElementEventType } from './Catalog';
 import '../../sass/all-products.scss';
 
 interface Props {
-  children: ICatalogData[];
+  children: CatalogProduct[];
   removeProduct: (e: ElementEventType) => void;
   className: string;
 }
@@ -15,25 +15,25 @@ export const AllProducts = ({ children, removeProduct, className }: Props) => {
       {children.length ? (
         children?.map((c) => (
           <div className="product-card" key={c.id}>
-            <img src={c.img} alt="" className="product-img" />
+            <img src={c.imageUrl} alt="" className="product-img" />
             <div className="product-info-area">
               <div className="header">
                 <p>{c.title}</p>
-                <p className="source">by {c.source}</p>
+                <p className="source">by {c.sourceId}</p>
               </div>
               <div className="transaction-details">
                 <div>
                   <p className="transaction-type">Sell</p>
                   <p className="transaction-amount sell">
                     <span>&pound;</span>
-                    {c.sell}
+                    {c.channelPrice}
                   </p>
                 </div>
                 <div>
                   <p className="transaction-type">Cost</p>
                   <p className="transaction-amount cost">
                     <span>&pound;</span>
-                    {c.cost}
+                    {c.sourcePrice}
                   </p>
                 </div>
                 <div>
