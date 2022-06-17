@@ -4,23 +4,22 @@ import { t } from '../../utils/transShim';
 import '../../sass/product-details.scss';
 
 interface Props {
-  img: string;
-  details: JSX.Element;
-  sell: number;
-  cost: number;
+  imageUrl: string;
+  channelPrice: number;
   profit: number;
+  sourcePrice: number;
   handleClose: () => void;
 }
 export const ProductDetails = (props: Props) => {
-  const { img, details, sell, cost, profit, handleClose } = props;
+  const { imageUrl, profit, sourcePrice, channelPrice, handleClose } = props;
   return (
     <div className="product-details">
       <Row gutter={[32, 0]}>
         <Col lg={8}>
-          <img src={img} alt="" className="product-img" />
+          <img src={imageUrl} alt="" className="product-img" />
         </Col>
         <Col lg={14}>
-          {details}
+          {/* {title} */}
           <div className="transaction-details">
             <div className="transaction-type">
               <p>
@@ -30,18 +29,18 @@ export const ProductDetails = (props: Props) => {
                 <strong>Cost</strong>
               </p>
               <p>
-                <strong>Cost</strong>
+                <strong>Profit</strong>
               </p>
             </div>
             <div className="transaction-amount">
               <p>
                 <strong>
-                  <span>&pound;</span> {sell}
+                  <span>&pound;</span> {channelPrice}
                 </strong>
               </p>
               <p>
                 <strong>
-                  <span>&pound;</span> {cost}
+                  <span>&pound;</span> {sourcePrice}
                 </strong>
               </p>
               <p>

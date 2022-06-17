@@ -8,7 +8,6 @@ export const getCatalogProducts = createAsyncThunk(
     try {
       const res = await client.post('/Catalog/GetProducts',{data:sessionId} );
       // const res = await client.get('/Catalog/GetProducts', {sessionId}) ;
-      console.log('The catalog render and api response was ',res);
       return res.data.response_data.products;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');

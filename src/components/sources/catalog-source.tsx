@@ -13,12 +13,15 @@ import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/catalog-source.scss';
+import { getSources } from 'src/redux/sources/sourcesThunk';
+import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 
 interface Props {
   handleClose: () => void;
   getSourcesData: (ids: number[]) => void;
 }
-export const CatalogSource = ({ handleClose,getSourcesData }: Props) => {
+export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
+  const dispatch = useAppDispatch();
   const onSearch = (value: string) => console.log('searched value', value);
   const [addedSources, setAddedSources] = useState<{ id: number; img: string }[]>([]);
   const [pendingSources, setPendingSources] = useState<{ id: number; img: string }[]>([
@@ -55,12 +58,12 @@ export const CatalogSource = ({ handleClose,getSourcesData }: Props) => {
       img: zoo_plus
     }
   ]);
+  console.log('The all states', useAppSelector((state) => state));
 
   const addSource = (id: number): void => {
     const addedSource = pendingSources.filter((s) => s.id === id)[0];
     setAddedSources((prevState) => [...prevState, addedSource]);
     setPendingSources((prevState) => prevState.filter((s) => s.id !== id));
-    console.log('the addedSources', addedSources);
   };
 
   const removeSource = (id: number): void => {
@@ -69,8 +72,47 @@ export const CatalogSource = ({ handleClose,getSourcesData }: Props) => {
     setAddedSources((prevState) => prevState.filter((s) => s.id !== id));
   };
 
-  useEffect(() =>{
+  const cancelFiltering = () => {
+    setAddedSources([]);
+    setPendingSources([
+      {
+        id: 1,
+        img: amazon
+      },
+      {
+        id: 2,
+        img: banggood
+      },
+      {
+        id: 3,
+        img: cox
+      },
+      {
+        id: 4,
+        img: garden_street
+      },
+      {
+        id: 5,
+        img: garden_line
+      },
+      {
+        id: 6,
+        img: robert_dyas
+      },
+      {
+        id: 7,
+        img: costco
+      },
+      {
+        id: 8,
+        img: zoo_plus
+      }
+    ]);
+  };
+
+  useEffect(() => {
     getSourcesData(addedSources.map(item => item.id));
+    dispatch(getSources());
   }, [addedSources]);
   return (
     <div className="catalog-source">
@@ -103,7 +145,7 @@ export const CatalogSource = ({ handleClose,getSourcesData }: Props) => {
       </div>
       <Divider />
       <div className="action-btns">
-        <CancelBtn handleClose={handleClose}>{t('Cancel')}</CancelBtn>
+        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Cancel')}</CancelBtn>
         <SuccessBtn>{t('AddSources')}</SuccessBtn>
       </div>
     </div>
