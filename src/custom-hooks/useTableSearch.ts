@@ -57,6 +57,7 @@ export const useTableSearch = ({ searchTxt, dataSource, tabStatus }: Props) => {
         })
       );
     } else setFilteredData(origData);
+    console.log(tabStatus);
 
     // these needs to be finished later... don't remove it
 
@@ -71,7 +72,6 @@ export const useTableSearch = ({ searchTxt, dataSource, tabStatus }: Props) => {
     //    console.log(list);
     //  }
     //}
-
   }, [searchTxt, origData, searchIndex]);
 
   return { filteredData, loading };
