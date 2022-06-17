@@ -75,7 +75,6 @@ export const Listings = () => {
         </div>
       )
     },
-
     {
       title: t('Listings.Column.Source'),
       dataIndex: 'sourcePath',
@@ -98,13 +97,13 @@ export const Listings = () => {
     },
     {
       title: t('Listings.Column.Sell'),
-      dataIndex: 'sell',
+      dataIndex: 'channelPrice',
       key: '5',
       visible: tabStatus === 'terminateTypeListing' || tabStatus === 'pendingTabListing' ? false : true
     },
     {
       title: t('Listings.Column.Cost'),
-      dataIndex: 'price',
+      dataIndex: 'sourcePrice',
       key: '6',
       visible: true
     },
@@ -178,7 +177,7 @@ export const Listings = () => {
     }
   }, [tabStatus, selectedChannel?.id]);
 
-  const { filteredData } = useTableSearch({ searchTxt, dataSource });
+  const { filteredData } = useTableSearch({ searchTxt, dataSource, tabStatus });
 
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: TableDataTypes[] | undefined) => {
     setMySelectedRows(selectedRows!);

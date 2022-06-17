@@ -12,6 +12,7 @@ import { listingsSourceReducer } from '../listings/listingsSlice';
 import { manualListingsReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
 import { terminatedListingsReducer } from '../listings/listingsSlice';
+import { GetListingsImagesSliceReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { paymentReducer } from '../payment/paymentSlice';
@@ -43,6 +44,7 @@ export const allReducers = combineReducers({
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,
+  activeListingsImages: GetListingsImagesSliceReducer,
   listingSources: listingsSourceReducer,
   manualListings: manualListingsReducer,
   notifications: notificationsReducer,
