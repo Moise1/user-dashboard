@@ -177,7 +177,7 @@ export const Listings = () => {
     }
   }, [tabStatus, selectedChannel?.id]);
 
-  const { filteredData } = useTableSearch({ searchTxt, dataSource });
+  const { filteredData } = useTableSearch({ searchTxt, dataSource, tabStatus });
 
   const onSelectChange = (selectedRowKeys: Key[], selectedRows: TableDataTypes[] | undefined) => {
     setMySelectedRows(selectedRows!);

@@ -49,6 +49,7 @@ export interface PendingListings {
   status: number;
   title: string;
   pending: boolean;
+  channelListingId: number;
 }
 
 export type TerminatedListings = PendingListings;

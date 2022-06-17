@@ -6,11 +6,12 @@ import { ActiveListing } from 'src/redux/unmap';
 interface Props {
   searchTxt: string | null;
   dataSource: () => Array<ListingsStatusType>;
+  tabStatus: string | null;
 }
 export type ListingsStatusType = ActiveListing | PendingListings | TerminatedListings;
 type KeyType = string | number | null | undefined | ActiveListing;
 
-export const useTableSearch = ({searchTxt, dataSource}: Props) => {
+export const useTableSearch = ({ searchTxt, dataSource, tabStatus }: Props) => {
   const [filteredData, setFilteredData] = useState<(ListingsStatusType | null)[]>([]);
   const [origData, setOrigData] = useState<ListingsStatusType[]>([]);
   const [searchIndex, setSearchIndex] = useState<{ allValues: string }[]>([]);
@@ -56,6 +57,21 @@ export const useTableSearch = ({searchTxt, dataSource}: Props) => {
         })
       );
     } else setFilteredData(origData);
+
+    // these needs to be finished later... don't remove it
+
+    //if (tabStatus === 'activeTab') {
+    //  const [list, setList] = useState<number[]>([]);
+    //  filteredData.map(item => {
+    //    if (item?.channelListingId)
+    //      setList(old => [...old, item?.channelListingId]);
+    //  });
+    //  if (list.length > 0) {
+    //    // load the images here
+    //    console.log(list);
+    //  }
+    //}
+
   }, [searchTxt, origData, searchIndex]);
 
   return { filteredData, loading };
