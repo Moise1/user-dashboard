@@ -10,6 +10,7 @@ interface Props {
   handleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   id?: string;
   htmlType?: htmlType;
+  cancelFiltering?: () => void;
 }
 
 type htmlType = 'button' | 'submit' | 'reset';
@@ -44,8 +45,8 @@ export const DangerBtn = ({ children, handleConfirm, className, disabled, htmlTy
   </Button>
 );
 
-export const CancelBtn = ({ children, handleClose, disabled }: Props) => (
-  <Button className="cancel-btn" onClick={handleClose} disabled={disabled}>
+export const CancelBtn = ({ children, disabled, cancelFiltering }: Props) => (
+  <Button className="cancel-btn" onClick={cancelFiltering} disabled={disabled} >
     {children}
   </Button>
 );

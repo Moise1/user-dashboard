@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card, Spin } from 'antd';
-import { catalogData, ICatalogData } from '../../dummy-data/dummyData';
 import { SuccessBtn } from '../../small-components/ActionBtns';
 import { FiltersBtn } from '../../small-components/TableActionBtns';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
@@ -16,6 +15,7 @@ import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
 import { CatalogProduct } from '../../redux/catalog/catalogSlice';
 import '../../sass/catalog.scss';
+import { getSources } from 'src/redux/sources/sourcesThunk';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -30,30 +30,32 @@ export const Catalog = () => {
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
   const [productId, setProductId] = useState<number>();
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
-  const [allProducts, setAllProducts] = useState<ICatalogData[]>([]);
+  const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [className, setClassName] = useState<string>('product-card');
   const [sourcesIds, setSourcesIds] = useState<number[]>([]);
   const dispatch = useAppDispatch();
   const { Meta } = Card;
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
-  // const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProductReducer)
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
     setAllCatalogProducts(catalogProducts);
+    dispatch(getSources());
   }, [getCatalogProducts]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
   const handleProductModal = () => setModalOpen(!modalOpen);
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
-  const handleAllProudctsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
+  const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
 
   const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
-    const selectedProductData = catalogData.filter((d) => d.id === JSON.parse(cardElement.id))[0];
+
+    const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
+
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
       cardElement.classList.remove('selected-product-card');
@@ -64,17 +66,16 @@ export const Catalog = () => {
     }
   };
 
-  const selectedProduct = catalogData.filter((d) => d.id === productId)[0];
+  const selectedProduct = allCatalogProducts.filter((d) => d.id === productId)[0];
 
   const handleSelectAllProducts = (): void => {
     setClassName(className + ' ' + 'selected-product-card');
-    setAllProducts(catalogData);
+    setAllProducts(allCatalogProducts);
   };
   const handleClearAllSelectedProducts = (): void => {
     setClassName('product-card');
     setAllProducts([]);
   };
-
 
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
@@ -88,7 +89,7 @@ export const Catalog = () => {
         <>
           <div className="actions-section">
             <div className="view-clear-all">
-              <span className="all-selected-products" onClick={handleAllProudctsModal}>
+              <span className="all-selected-products" onClick={handleAllProductsModal}>
                 View all selected products
               </span>
               <div className="clear-list-container">
@@ -124,11 +125,10 @@ export const Catalog = () => {
             }
           >
             <ProductDetails
-              img={selectedProduct?.img}
-              details={selectedProduct?.details}
+              channelPrice={selectedProduct?.channelPrice}
+              imageUrl={selectedProduct?.imageUrl}
               profit={selectedProduct?.profit}
-              cost={selectedProduct?.cost}
-              sell={selectedProduct?.sell}
+              sourcePrice={selectedProduct?.sourcePrice}
               handleClose={handleProductModal}
             />
           </PopupModal>
@@ -149,7 +149,7 @@ export const Catalog = () => {
 
           <PopupModal
             open={allProductsModalOpen}
-            handleClose={handleAllProudctsModal}
+            handleClose={handleAllProductsModal}
             width={600}
             style={{ overflowY: 'scroll' }}
             bodyStyle={{ height: 500 }}
