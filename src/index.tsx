@@ -12,6 +12,7 @@ import { toastAlert } from './utils/toastAlert';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'mini-alert/miniAlert.css';
+import 'suneditor/dist/css/suneditor.min.css';
 
 const locales: Record<string, Record<string, string>> = {
   en: locale_en as unknown as Record<string, string>,

@@ -21,7 +21,6 @@ interface state {
   location: string;
   api: string;
   extension: string;
-  user: string;
   list: string;
 }
 
@@ -36,11 +35,9 @@ const popupWindow = (url: string, windowName: string, win: Window & typeof globa
     .open(
       url,
       windowName,
-      `
-  toolbar=no, location=no, directories=no,
-  status=no, menubar=no, scrollbars=no,
-  resizable=no, copyhistory=no, 
-  width=${w}, height=${h}, top=${t}, left=${l}`
+      `toolbar=no, location=no, directories=no,
+      status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
+      width=${w}, height=${h}, top=${t}, left=${l}`
     )
     ?.focus();
 };
@@ -48,7 +45,7 @@ export const NewChannel = ({ _ignored }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const { url } = useAppSelector((state) => state.linkAccount);
+  const { url } = useAppSelector((state) => state.newChannel);
   const [ebayUrl, setEbayUrl] = useState<string>(url);
   const dispatch = useAppDispatch();
 
@@ -59,7 +56,6 @@ export const NewChannel = ({ _ignored }: Props) => {
     location: '',
     api: '',
     extension: '',
-    user: '',
     list: ''
   });
 
@@ -86,20 +82,22 @@ export const NewChannel = ({ _ignored }: Props) => {
   };
   const handleChangeApi = (value: string) => {
     setData({ ...data, api: value });
-    data.api === 'easy' && dispatch(getLinkAccount({ shop: data.platform, site: data.storeLocation as number }));
+    data.api === 'easy' && dispatch(getLinkAccount({
+      data: {
+        shop: data.platform, site: data.storeLocation as number
+      }
+    } ));
   };
   const handleChangeExtension = (value: string) => {
     setData({ ...data, extension: value });
   };
-  const handleChangeUser = (value: string) => {
-    setData({ ...data, user: value });
-  };
+  
   const handleChangeList = (value: string) => {
     setData({ ...data, list: value });
   };
 
-  const { platform, api, user, list, extension } = data;
-  const values: chooseListValues = { platform, api, user, list, extension };
+  const { platform, api, list, extension } = data;
+  const values: chooseListValues = { platform, api, list, extension };
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
@@ -125,25 +123,36 @@ export const NewChannel = ({ _ignored }: Props) => {
           step={step} />
       );
     case 4:
-      return (
-        <AccountConnect
-          api={data.api}
-          extension={data.extension}
-          platform={data.platform}
-          handleChangeApi={handleChangeApi}
-          handleChangeExtension={handleChangeExtension}
-          values={values}
-          step={step}
-        />
-      );
+      if(data.platform === 1 || data.platform === 1 ){
+        return (
+          <AccountConnect
+            api={data.api}
+            extension={data.extension}
+            platform={data.platform}
+            handleChangeApi={handleChangeApi}
+            handleChangeExtension={handleChangeExtension}
+            values={values}
+            step={step}
+          />
+        );
+      }else {
+        return (
+          <UserName
+            platform={data.platform}
+            step={step}
+            storeLocation={data.storeLocation}
+            handleNext={handleNext}
+          />
+        );
+      }
     case 5:
       return (
         <UserName
           platform={data.platform}
-          user={data.user}
-          handleChangeUser={handleChangeUser}
-          values={values}
           step={step}
+          storeLocation={data.storeLocation}
+          handleNext={handleNext}
+
         />
       );
     case 6:

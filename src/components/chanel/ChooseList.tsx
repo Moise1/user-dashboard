@@ -10,7 +10,6 @@ export interface chooseListValues {
   platform: number;
   storeLocation?: string;
   api: string;
-  user: string;
   list: string;
   extension: string;
 }

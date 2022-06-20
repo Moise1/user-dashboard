@@ -13,7 +13,7 @@ export const Account = (props: props) => {
   return (
     <form className="account">
       <h5 className="title"> {`Do you have a ${eShop[platform]} account?`}</h5>
-      <h6 className="sub-title">{`No ${platform} store yet? We will happily show you how to get started!`}</h6>
+      <h6 className="sub-title">{`No ${eShop[platform]}'s store yet? We will happily show you how to get started!`}</h6>
       <div className="">
         {platform == 1 ? (
           t('ebayacntslct')
@@ -33,7 +33,7 @@ export const Account = (props: props) => {
       </p>
       <p className="">{platform == 3 ? <>{t('amznpara2')}</> : ''}</p>
       <Link to="/become-a-seller" className="become-seller">
-        How to be come a {platform} seller
+        How to be come a {eShop[platform]} seller
       </Link>
     </form>
   );

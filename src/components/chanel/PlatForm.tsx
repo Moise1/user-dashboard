@@ -33,13 +33,6 @@ export const PlatForm = (props: props) => {
             </div>
           </div>
 
-          <div className="platform-card" onClick={onSelectPlatform} id='2' tabIndex={2}>
-            <img src={shopify_logo} className="platform-img" alt="shopify logo" />
-            <div className="description-area">
-              <div className="market-place">{t('ownStore')}</div>
-              <p>{t('shopslctd')}</p>
-            </div>
-          </div>
 
           <div className="platform-card" onClick={onSelectPlatform} id='3' tabIndex={3}>
             <img src={amazon_logo} className="platform-img" alt="amazon logo" />
@@ -50,6 +43,14 @@ export const PlatForm = (props: props) => {
                 {' '}
                 <i>{t('amzsub')}</i>
               </p>
+            </div>
+          </div>
+
+          <div className="platform-card" onClick={onSelectPlatform} id='2' tabIndex={2}>
+            <img src={shopify_logo} className="platform-img" alt="shopify logo" />
+            <div className="description-area">
+              <div className="market-place">{t('ownStore')}</div>
+              <p>{t('shopslctd')}</p>
             </div>
           </div>
           <div className="new-description-area"></div>

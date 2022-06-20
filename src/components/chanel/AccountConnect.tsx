@@ -32,22 +32,24 @@ export const AccountConnect = (props: props) => {
     <form className="account-connect">
       <h5 className="title">How do you want HGR to connect to your {eShop[platform]} account?</h5>
       <p className="change-settings">{t('changeset')}</p>
-      <div className="with-api" key="1" id="easy" onClick={onSelectAccount} tabIndex={1}>
-        <div>
-          <div className="options-label">
-            <p>{t('wapi')}</p>
-            <p>{t('easy')}</p>
-          </div>
-          <div className="panel-body">
-            <p>We automatically connect to {platform} using their official API.</p>
-            <ul>
-              <li>{t('easier')}</li>
-              <li>{t('automated')}</li>
-              <li>{t('support')}</li>
-            </ul>
+      {platform === 1 && (
+        <div className="with-api" key="1" id="easy" onClick={onSelectAccount} tabIndex={1}>
+          <div>
+            <div className="options-label">
+              <p>{t('wapi')}</p>
+              <p>{t('easy')}</p>
+            </div>
+            <div className="panel-body">
+              <p>We automatically connect to {platform} using their official API.</p>
+              <ul>
+                <li>{t('easier')}</li>
+                <li>{t('automated')}</li>
+                <li>{t('support')}</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="no-api" key="2" id="advance" onClick={onSelectAccount} tabIndex={1}>
         <div className="options-label">
@@ -56,7 +58,7 @@ export const AccountConnect = (props: props) => {
         </div>
         <div className="content">
           <p>
-            {t('step4para1')} {platform} &apos; s {t('api')}
+            {t('we-update-txt')} {eShop[platform]} &apos; s {t('api')}
           </p>
           <div className="computer-extension">
             <Radio
@@ -69,8 +71,7 @@ export const AccountConnect = (props: props) => {
           </div>
           <p>
             <i>
-              {t('oncomputer')} {platform}
-              {t('acnt')}.
+              {t('oncomputer')} {eShop[platform]} {t('account')}.
             </i>
           </p>
           <div className="server-extension">

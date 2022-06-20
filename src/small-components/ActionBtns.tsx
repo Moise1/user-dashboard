@@ -58,11 +58,9 @@ export const ShowVisibleColBtn = ({ children, handleClose, disabled }: Props) =>
 );
 
 export const ResetBtn = ({ children }: Props) => <Button className="reset-btn">{children}</Button>;
-// export const DangerBtn = ({ children }: Props) => <Button className="danger-btn">{children}</Button>;
 export const DeleteBtn = ({ children }: Props) => <Button className="delete-btn">{children}</Button>;
-// export const WarningBtn = ({ children }: Props) => <Button className="warning-btn">{children}</Button>;
-export const TransparentBtn = ({ id, children, className, handleClick, htmlType }: Props) => (
-  <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick} htmlType={htmlType}>
+export const TransparentBtn = ({ id, children, className, handleClick }: Props) => (
+  <Button id={id} className={`transparent-btn ${className}`} onClick={handleClick}>
     {children}
   </Button>
 );

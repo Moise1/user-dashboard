@@ -32,7 +32,7 @@
       padding: 1rem;
       .title {
         width: auto;
-        margin: .6rem 0;
+        margin: 0.6rem 0;
       }
       .flags {
         display: grid;
@@ -44,10 +44,14 @@
           place-items: center;
           .flag-img {
             cursor: pointer;
+            &:focus{
+              border-radius: 50%;
+              padding: .2rem;
+              border: 2px solid $corporative-color;
+            }
           }
         }
       }
-      
       .select-country {
         color: $red;
       }
@@ -98,6 +102,17 @@
       }
     }
 
+    .username-form-container{
+      margin-top: 1rem;
+      .title, .ensure-warning{
+        text-align: center;
+        width: 100%;
+      };
+      .username-form{
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
     .choose-list {
       margin-top: 3rem;
       display: grid;

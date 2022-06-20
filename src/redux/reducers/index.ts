@@ -70,5 +70,6 @@ export const allReducers = combineReducers({
   deleteAutoOrders: deleteAutoOrderingReducer,
   affiliatesStats: affiliatesStatsReducer,
   linkAccount: newChannelReducer,
-  managedServers: getManagedServersReducer
+  managedServers: getManagedServersReducer,
+  newChannel: newChannelReducer
 });

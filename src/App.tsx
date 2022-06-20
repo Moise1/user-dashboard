@@ -102,6 +102,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
+            <ProtectedRoute exact path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />
