@@ -24,7 +24,9 @@ import {
   SourceConfiguration,
   Templates,
   AutoOrderingConfiguration,
-  AutoOrdering
+  AutoOrdering,
+  ConfigureNoapi,
+  ConfigureListingService
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/list-now/ListNow';
@@ -34,7 +36,6 @@ import { Checkout } from './components/subscriptions/Checkout';
 import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 import { Links } from './links';
 import { EditTemplate } from './components/templates/EditTemplate';
-import { ConfigureNoapi } from './components/NoApi/ConfigureNoapi';
 import { PriceWarrior } from './components/services/PriceWarrior';
 import { PrivateSupplier } from './components/services/PrivateSupplier';
 import { OurServices } from './components/subscriptions/OurServices';
@@ -97,6 +98,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.BrowserExtension} component={BrowserExtensions} />
             <ProtectedRoute path={Links.VaProfiles} component={VaProfiles} />
             <ProtectedRoute path={Links.ConfigureNoapi} component={ConfigureNoapi} />
+            <ProtectedRoute path={Links.ConfigureListingService} component={ConfigureListingService} />
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />

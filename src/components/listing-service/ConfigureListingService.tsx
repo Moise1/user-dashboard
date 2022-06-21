@@ -1,0 +1,111 @@
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
+/*import { ListingService } from 'src/redux/dashboard/listingServicesSlice';*/
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
+import '../../sass/no-api/configure-noapi.scss';
+import { Channel } from 'src/redux/channels/channelsSlice';
+
+import { Selector } from 'src/small-components/form/selector';
+import { SimpleTable } from '../tables/SimpleTable';
+
+import { Input, Spin } from 'antd';
+
+export const ConfigureListingService = () => {
+  const dispatch = useAppDispatch();
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+  const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
+
+  const [ListingServicesPage, setListingServicesPage] = useState<number>(10);
+  const [current, setCurrent] = useState<number>(1);
+
+  useEffect(() => {
+    dispatch(getListingServices());
+  }, [getListingServices]);
+
+  console.log(listingServicesResult);
+
+  const noSuscribed = (
+    <div className="nosuscribed-container">
+      <div className="nosuscribed">
+        <h3>{"Oops it looks like you don't have any no api server contracted."}</h3>
+        <p>Do you want to keep your NO API extension running 24/7?</p>
+        <p>We can do it for you for only 12.99GBP/month.</p>
+        <ConfirmBtn>
+          <a
+            href="https://hustlegotreal.com/en/no-api-server/"
+            rel="noreferrer"
+            target="_blank"
+            className="footer-link"
+          >
+            Read more
+          </a>
+        </ConfirmBtn>
+      </div>
+    </div>
+  );
+
+  const columns = [
+    {
+      title: 'Subscription',
+      dataIndex: '',
+      key: 'name',
+      render: () => {
+        return <h4 className="no-api-title">Listing service</h4>;
+      }
+    },
+    {
+      title: 'Channel',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return (
+          <Selector placeHolder="Select a channel">
+            {channels?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
+          </Selector>
+        );
+      }
+    },
+    {
+      title: 'Username',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return <Input name="username" className="blue-input" placeholder="Your store username" />;
+      }
+    },
+    {
+      title: 'Store password',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return <Input name="storePasswd" className="blue-input" placeholder="*************" />;
+      }
+    }
+  ];
+
+  return (
+    <div className="configure-noapi-container">
+      <h1>Set up your preferences</h1>
+      {loading ? (
+        <Spin />
+      ) : (
+        <div className="no-api-servers">
+          {listingServicesResult?.length ? (
+            <SimpleTable
+              setSourcesPerPage={setListingServicesPage}
+              current={current}
+              onChange={setCurrent}
+              columns={columns}
+              dataSource={listingServicesResult}
+              pageSize={ListingServicesPage}
+              totalItems={listingServicesResult?.length}
+            />
+          ) : (
+            noSuscribed
+          )}
+        </div>
+      )}
+    </div>
+  );
+};

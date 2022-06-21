@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getListingServices } from './listingServicesThunk';
 
-export interface ListingService{ 
-    quantity: number;
-    id: number;
+export interface ListingService {
+  quantity: number;
+  id: number;
 }
 
 const initialState = {
@@ -11,8 +11,6 @@ const initialState = {
   loading: false,
   error: ''
 };
-
-
 
 export const listingServicesSlice = createSlice({
   name: 'dashboard-listing-services',
@@ -34,4 +32,4 @@ export const listingServicesSlice = createSlice({
   }
 });
 
-export const {reducer: listingServicesReducer} = listingServicesSlice;
+export const { reducer: listingServicesReducer } = listingServicesSlice;

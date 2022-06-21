@@ -18,5 +18,7 @@ export { Catalog } from './catalog/Catalog';
 export { SourcesConfigurationTable } from './sources/sources-configuration-table';
 export { Dashboard } from './dashboard/Dashboard';
 export { Templates } from './templates/Templates';
+export { ConfigureListingService } from './listing-service/ConfigureListingService';
+export { ConfigureNoapi } from './NoApi/ConfigureNoapi';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';
 export { AutoOrderingConfiguration } from './auto-ordering/AutoOrderingConfiguration';
