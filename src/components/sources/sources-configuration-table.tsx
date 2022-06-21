@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Layout } from 'antd';
-import { SourcesTable } from '../sources/configuration/sources-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import '../../sass/sources-table.scss';
@@ -18,6 +17,7 @@ import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { ePlatform } from '../../utils/ePlatform';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
+import { SimpleTable } from '../../small-components/simple-table';
 
 export const SourcesConfigurationTable = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +37,6 @@ export const SourcesConfigurationTable = () => {
 
   const [selectedSource, setSelectedSource] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
-  //const [data, setData] = useState(sources);
 
   useEffect(() => {
     dispatch(getSourceConfiguration());
@@ -165,14 +164,13 @@ export const SourcesConfigurationTable = () => {
         <SearchInput onSearch={onSearch} />
       </div>
       <div className="sources-table-container">
-        <SourcesTable
+        <SimpleTable
           setItemsPerPage={setItemsPerPage}
-          current={selectedSource}
-          onChange={setSelectedSource}
+          currentPage={selectedSource}
+          onPageChange={setSelectedSource}
           columns={columns}
           dataSource={loading ? [] : (settingsData || [])}
           pageSize={itemsPerPage}
-          totalItems={sources?.length}
         />
       </div>
     </Layout>
