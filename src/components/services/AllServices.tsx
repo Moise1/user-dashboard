@@ -68,27 +68,45 @@ export const AllServices = () => {
                 {AllServicesData.map((s) => {
                   if (activeService === 1 && s.id === 1) {
                     return (
-                      <>
+                      <div>
                         {s.paragraphs.map((x, index) => (
                           <p key={index}> {x} </p>
                         ))}
-                      </>
+
+                        <ul>
+                          {s.bulletPoints.map((x, index) => (
+                            <li key={index}> {x} </li>
+                          ))}
+                        </ul>
+                      </div>
                     );
                   } else if (activeService === 2 && s.id === 2)
                     return (
-                      <>
+                      <div>
                         {s.paragraphs.map((x, index) => (
                           <p key={index}> {x} </p>
                         ))}
-                      </>
+
+                        <ul>
+                          {s.bulletPoints.map((x, index) => (
+                            <li key={index}> {x} </li>
+                          ))}
+                        </ul>
+                      </div>
                     );
                   else if (activeService === 3 && s.id === 3)
                     return (
-                      <ul>
+                      <div>
                         {s.paragraphs.map((x, index) => (
-                          <li key={index}> {x} </li>
+                          <p key={index}> {x} </p>
                         ))}
-                      </ul>
+
+                        <ul>
+                          {s.bulletPoints.map((x, index) => (
+                            <li key={index}> {x} </li>
+                          ))}
+                        </ul>
+                      </div>
                     );
                 })}
               </div>
