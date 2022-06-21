@@ -3,9 +3,7 @@ import { Row, Col, Divider } from 'antd';
 import '../../sass/services/service.scss';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-//import { AllServicesData } from './ServicesData';
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react';
-//import { TransparentBtn } from 'src/small-components/ActionBtns';
 
 type LocationProps = {
   location: {
@@ -22,33 +20,8 @@ type LocationProps = {
 };
 
 export const AllServices = ({ location }: LocationProps) => {
-  //console.log(AllServicesData);
-
-  //const [, setActiveService] = useState(1);
-
-  //const [service, setService] = useState(AllServicesData);
-
-  //console.log(service);
-
-  //const handleChangeService = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-  //  const elementId = e.currentTarget.id;
-  //  setActiveService(JSON.parse(elementId));
-  //  setService([]);
-  //};
-
   return (
     <div className="main-container">
-      {/*<div className="currencies-container">*/}
-      {/*  <TransparentBtn id="1" handleClick={handleChangeService}>*/}
-      {/*    PRICE WARRIOR*/}
-      {/*  </TransparentBtn>*/}
-      {/*  <TransparentBtn id="2" handleClick={handleChangeService}>*/}
-      {/*    PRIVATE SUPPLIER*/}
-      {/*  </TransparentBtn>*/}
-      {/*  <TransparentBtn id="3" handleClick={handleChangeService}>*/}
-      {/*    NO API*/}
-      {/*  </TransparentBtn>*/}
-      {/*</div>*/}
       <Link to={Links.Services} className="back-to-services">
         <a>
           <LeftOutlined style={{ fontSize: '19px' }} />
@@ -70,14 +43,24 @@ export const AllServices = ({ location }: LocationProps) => {
               <h2 className="service-title">{location.state.title}</h2>
               <div className="service-advantages">
                 <div>
-                  {location.state.paragraphs.map((x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined, index: Key | null | undefined) => (
-                    <p key={index}> {x} </p>
-                  ))}
+                  {location.state.paragraphs.map(
+                    (
+                      x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined,
+                      index: Key | null | undefined
+                    ) => (
+                      <p key={index}> {x} </p>
+                    )
+                  )}
 
                   <ul>
-                    {location.state.bulletPoints.map((x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined, index: Key | null | undefined) => (
-                      <li key={index}> {x} </li>
-                    ))}
+                    {location.state.bulletPoints.map(
+                      (
+                        x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined,
+                        index: Key | null | undefined
+                      ) => (
+                        <li key={index}> {x} </li>
+                      )
+                    )}
                   </ul>
                 </div>
               </div>
