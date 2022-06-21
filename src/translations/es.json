@@ -97,6 +97,9 @@
 
   "Error.Saving.Configuration": "Error guardando preferencias",
 
+  "Account.BillingAddress": "Dirección de Envio",
+  "Account.PaymentMethod": "Método de pago",
+
   "Listings.Column.Item no.": "Item #",
   "Listings.Column.Source": "Fuente",
   "Listings.Column.Title": "Titulo",
@@ -111,6 +114,7 @@
   "Menu.BrowserExtensions": "Extensiones",
   "Menu.Catalog": "Catálogo",
   "Menu.Channel": "Canal",
+  "Menu.Account": "Acount",
   "Menu.Dashboard": "Tablero",
   "Menu.Help": "Ayuda",
   "Menu.Listings": "Productos",

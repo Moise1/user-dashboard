@@ -3,69 +3,66 @@ import { Layout, Row } from 'antd';
 import { StatusBar } from '../../../small-components/StatusBar';
 import { StatusBtn } from '../../../small-components/StatusBtn';
 import { t, TransUtils } from '../../../utils/transShim';
-import '../../../sass/channel-settings.scss';
+import '../../../sass/account-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../../custom-hooks/reduxCustomHooks';
 import { getAccountConfiguration, saveAccountSetting } from '../../../redux/account-configuration/account-configuration-thunk';
 import { AccountConfigurationState, eAccountSettings, SettingsValue } from '../../../redux/account-configuration/account-configuration-slice';
 import { AccountSetting, AccountSettings } from '../configuration/settings';
 import { AccountSettingSections, AccountSettingSection } from '../configuration/sections';
-import { SettingDataBag, SettingInput } from '../../../small-components/settings/setting-input';
+import { SettingDataBag, AccountSettingInput } from '../../../small-components/settings/account-setting-input';
 import { ReactUtils } from '../../../utils/react-utils';
 import { Platforms } from '../../../data/platforms';
 
-import { getChannels } from '../../../redux/channels/channelsThunk';
 
 export const AccountConfiguration = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const platformInfo = Platforms[selectedChannel?.channelId.toString() ?? '1'];
   const translationValues = { ...TransUtils.GetLinksValues(), ...TransUtils.GetPlatformValues(platformInfo) };
 
-  const [activeTab, setActiveTab] = useState<AccountSettingSection>(AccountSettingSection.Monitoring);
-  const sections = AccountSettingSections.filter(
-    (x) => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0)
-  );
+  const [activeTab, setActiveTab] = useState<AccountSettingSection>(AccountSettingSection.BillingAddress);
+  const sections = AccountSettingSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
 
-  const bag: SettingDataBag = { selectedChannel };
+  const bag: SettingDataBag = {
+    selectedAccount: undefined
+  };
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    console.log('called the account config');
+    dispatch(getAccountConfiguration());
+  }, [getAccountConfiguration]);
 
   //Load from api------------------------------------------------------------
-  const dispatch = useAppDispatch();
   const {
     settings,
     loading: settingsLoading,
     savingSettings: savingSettingsState
-  } = useAppSelector((state) => state.AccountConfiguration as AccountConfigurationState);
-
-  useEffect(() => {
-    dispatch(getAccountConfiguration());
-  }, [getAccountConfiguration]);
+  } = useAppSelector((state) => state.accountConfiguration as AccountConfigurationState);
 
   const SaveSetting = async (key: eAccountSettings, value: SettingsValue) => {
     const rp = await dispatch(saveAccountSetting({ key: key, value: value }));
     if (!rp.payload?.success) {
       dispatch(getAccountConfiguration());
-    } else {
-      if (key == eAccountSettings.NoApiName) {
-        await dispatch(getChannels());
-      }
     }
   };
 
-
-
   const configuration = new Map(settings?.map((x) => [x.key, x.value]) ?? []);
   const savingSetting = new Map(savingSettingsState?.map((x) => [x.data.key, x]));
+  const OnButtonClick = () => {
+    console.log('button clicked');
+  };
 
   const RenderSetting = (setting: AccountSetting) => {
     return (
-      <SettingInput
+      <AccountSettingInput
         key={setting.Fields[0]}
         setting={setting}
         savingSetting={savingSetting}
         currentSettingValues={configuration}
+        translationValues={translationValues }
         onSave={SaveSetting}
-        translationValues={translationValues}
         dataBag={bag}
-
+        onButtonClick={() => OnButtonClick()}
       />
     );
   };
@@ -82,7 +79,8 @@ export const AccountConfiguration = () => {
   const loading = settingsLoading || !settings;
 
   return (
-    <Layout className="channel-settings">
+    <Layout className="account-settings">
+      <h1>Accounts</h1>
       <StatusBar>
         <>
           {!loading && (

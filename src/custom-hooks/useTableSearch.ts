@@ -10,7 +10,7 @@ interface Props {
 export type ListingsStatusType = ActiveListing | PendingListings | TerminatedListings;
 type KeyType = string | number | null | undefined | ActiveListing;
 
-export const useTableSearch = ({searchTxt, dataSource}: Props) => {
+export const useTableSearch = ({ searchTxt, dataSource }: Props) => {
   const [filteredData, setFilteredData] = useState<(ListingsStatusType | null)[]>([]);
   const [origData, setOrigData] = useState<ListingsStatusType[]>([]);
   const [searchIndex, setSearchIndex] = useState<{ allValues: string }[]>([]);

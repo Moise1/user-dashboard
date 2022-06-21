@@ -105,6 +105,28 @@
 
   "Error.Saving.Configuration": "Error saving configuration",
 
+  "Account.Setting.Description.BusinessRegisteredCountry": "Select the country where your business is registered.",
+  "Account.Setting.Description.BusinessName": "Business Name, used to register with your state or deferal government",
+  "Account.Setting.Description.BusinessType": " ",
+  "Account.Setting.Description.Address": " ",
+  "Account.Setting.Description.City": " ",
+  "Account.Setting.Description.Postcode": " ",
+  "Account.Setting.Description.RegistrationNumber": " ",
+  "Account.Setting.Description.VATNumber": "Value-added tax identification number",
+
+
+  "Account.BillingAddress": "Billing Address",
+  "Account.PaymentMethod": "Payment Method",
+  "Account.Setting.Name.BusinessRegisteredCountry": "Business Registered Country",
+  "Account.Setting.Name.BusinessName": "Business Name",
+  "Account.Setting.Name.BusinessType": "Business Type",
+  "Account.Setting.Name.Address": "Address",
+  "Account.Setting.Name.City": "City",
+  "Account.Setting.Name.Postcode": "Postcode",
+  "Account.Setting.Name.RegistrationNumber": "Registration Number",
+  "Account.Setting.Name.VATNumber": "VAT Number (if applicable)",
+
+
   "Listings.Column.Cost": "Cost",
   "Listings.Column.Img": "Image",
   "Listings.Column.Item no.": "Item no.",
@@ -123,6 +145,7 @@
   "Menu.Subscriptions": "Subscriptions",
   "Menu.OurServices": "Services",
   "Menu.Channel": "Channel",
+  "Menu.Account": "Account",
   "Menu.Catalog": "Catalog",
   "Menu.Dashboard": "Dashboard",
   "Menu.Help": "Help",

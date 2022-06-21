@@ -1,61 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAccountConfiguration, saveAccountSetting } from './account-configuration-thunk';
 
+export interface Account {
+  country: string;
+  businessType: string;
+  name: string;
+  address1: string;
+  address2: string;
+  city: string;
+  postcode: string;
+  rn: string;
+  vat: string;
+  roi: boolean;
+  needInformation: boolean; 
+  iAmBusiness: boolean;
+}
+
 export enum eAccountSettings {
   None = 0,
-
-  PaypalEmail = 3,
-  ListingDuration = 4,
-  ItemLocationPostcode = 5,
-  ItemLocationCity = 6,
-  LocationCountry = 48,
-  TransformPrice = 8,
-  MinTitleLength = 9,
-  ForbiddenWords = 10,
-  OutOfStockAction = 11,
-  OutOfStockActionPriceIncreaseAmount = 12,
-  DefaultMpn = 13,
-  DefaultWeight = 14,
-  DefaultEAN = 15,
-  OutOfStockEbay = 16,
-
-  TerminateOosDays = 18,
-  UseBusinessPolicies = 19,
-  FeePercentage = 20,
-  DefaultQuantity = 21,
-  DefaultSite = 22,
-  Site = 23,
-  TitleSuggestions = 24,
-
-  MinImages = 26,
-  ForbiddenWordsInUrl = 27,
-
-  Markup = 31,
-  Gsp = 32,
-  DispatchDays = 33,
-  ReturnsPolicy = 34,
-  MonitorStock = 35,
-  MonitorPrice = 36,
-  MonitorPriceDecrease = 37,
-  MonitorPriceDecreasePercentage = 38,
-  DefaultShipping = 39,
-
-  ShippingProfileId = 41,
-  ReturnProfileId = 42,
-  PaymentProfileId = 43,
-  TemplateId = 44,
-
-  MinQuantity = 45,
-
-  EanAction = 46,
-  MaxDeliveryDays = 47,
-  ActiveTerminateOosDays = 49,
-
-  MaxAvailableStock = 50, //Used by Compelia
-
-  CompareAtPrice = 51,
-
-  NoApiName = 52 //Special setting used to modify the name but it is not a real setting
+  NeedInformation = 1,
+  IAmBusiness = 2,
+  Country = 3,
+  BusinessType = 4,
+  Name = 5,
+  Address1 = 6,
+  Address2 = 7,
+  City = 8,
+  Postcode = 9,
+  Rn = 10,
+  Vat = 11,
+  Roi = 12
 }
 
 export type SettingsValue = string | null;
@@ -96,7 +70,7 @@ export const AccountConfigurationSlice = createSlice({
     });
     builder.addCase(getAccountConfiguration.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.settings = payload.settings as SettingKey[];
+      state.settings = payload.result;
       state.savingSettings = [];
     });
     builder.addCase(getAccountConfiguration.rejected, (state, { payload }) => {
@@ -148,4 +122,4 @@ export const AccountConfigurationSlice = createSlice({
   }
 });
 
-export const { reducer: channelConfigurationReducer } = AccountConfigurationSlice;
+export const { reducer: accountConfigurationReducer } = AccountConfigurationSlice;

@@ -8,7 +8,7 @@
   SourceSettings: '/supplier-configuration',
   SourcesSettingsTable: '/suppliers',
   ChannelSettings: '/channel-configuration',
-  AccountConfiguration: '/account-settings',
+  AccountSettings: '/account-configuration',
   NewChannel: '/new-channel',
   Services: '/services',
   PriceWarrior: '/price-warrior',

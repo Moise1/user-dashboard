@@ -27,6 +27,7 @@ import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer } from '../dashboard/noApiServersSlice';
 import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
+import { accountConfigurationReducer } from '../account-configuration/account-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 
@@ -40,6 +41,7 @@ export const allReducers = combineReducers({
   sources: sourcesConfigReducer,
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
+  accountConfiguration: accountConfigurationReducer,
   responseObect: paymentReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
