@@ -233,6 +233,7 @@
   "ForceRefresh": "Force Refresh",
   "Dismiss": "Dismisss",
   "AddToSelection": "Add to Selection",
+  "RemoveFromSelection": "Remove from Selection",
   "AddSources": "Add Sources",
 
   "SourceConfigInputs.Alias": "Alias",
