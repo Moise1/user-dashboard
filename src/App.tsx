@@ -87,7 +87,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.SourcesSettingsTable} component={SourcesConfigurationTable} />
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
-            <ProtectedRoute path={Links.Services} component={Services} />
+            <ProtectedRoute exact path={Links.Services} component={Services} />
             <ProtectedRoute path={Links.AllServices} component={AllServices} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
             <ProtectedRoute path={Links.PrivateSupplier} component={PrivateSupplier} />

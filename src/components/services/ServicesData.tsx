@@ -24,7 +24,7 @@ export const AllServicesData: ServiceData[] = [
       'Price Warrior will update automatically, and you will have access to a report showing the status of all the listings being managed by Price Warrior.'
     ],
     image: '/static/media/price_warrior.a2c44660.png',
-    link: '/all-services'
+    link: '/services/price-warrior'
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export const AllServicesData: ServiceData[] = [
     ],
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image: '/static/media/logoHGR.27d62745.png',
-    link: '/all-services'
+    link: '/services/private-supplier'
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ export const AllServicesData: ServiceData[] = [
       'Avoid ebay bans'
     ],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/all-services'
+    link: '/services/'
   },
   {
     id: 4,
