@@ -1,4 +1,5 @@
 ﻿import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
+import { ePlatform } from '../../../utils/ePlatform';
 import { ChannelSettingSection } from './sections';
 
 export enum SettingType {
@@ -22,7 +23,7 @@ export interface ChannelSetting {
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
   Values: (string | null)[];
-  ChannelIds?: number[];//If undefined it accepts all the channels
+  ChannelIds?: ePlatform[];//If undefined it accepts all the channels
   Ancestors?: Ancestor[];
   AncestorsHide?: boolean;
   Extra?: ChannelSettingExtra[];
@@ -121,7 +122,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Monitoring,
     Fields: [eChannelSettings.CompareAtPrice],
     Values: ['0'],
-    ChannelIds:[2]
+    ChannelIds: [ePlatform.Shopify]
   },
 
 
@@ -149,7 +150,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.ListingDuration],
     Values: ['GTC', 'GTC', 'Channel.Setting.Option.GTC', 'Days_30', 'Channel.Setting.Option.Days30'],
-    ChannelIds: [1,3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.TerminateOOS'],
@@ -229,7 +230,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.UseBusinessPolicies],
     Values: ['0'],
-    ChannelIds:[1, 3]
+    ChannelIds:[ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.PolicyReturns'],
@@ -249,7 +250,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value:'0'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.PolicyDelivery'],
@@ -263,7 +264,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '0'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3],
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
     Extra: [ChannelSettingExtra.PolicyDelivery]
   },
   {
@@ -278,7 +279,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '0'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.GSP'],
@@ -292,7 +293,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '0'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.BusinessShipping'],
@@ -306,7 +307,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '1'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3],
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
     Extra: [ChannelSettingExtra.BusinessShipping]
   },
   {
@@ -321,7 +322,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '1'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3],
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
     Extra: [ChannelSettingExtra.BusinessReturn]
   },
   {
@@ -336,7 +337,7 @@ export const ChannelSettings: ChannelSetting[] = [
       Value: '1'
     }],
     AncestorsHide: true,
-    ChannelIds: [1, 3],
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
     Extra: [ChannelSettingExtra.BusinessPayment]
   },
   {
@@ -346,7 +347,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ItemLocationPostcode],
     Values: [''],
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.BusinessCity'],
@@ -355,7 +356,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.ItemLocationCity],
     Values: [''],
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: ['Channel.Setting.Name.PaymentMethod'],
@@ -364,7 +365,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Business,
     Fields: [eChannelSettings.PaypalEmail],
     Values: [null,'example@email.com'],
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Labels: [''],
@@ -373,7 +374,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Business,
     Fields: [],
     Values: ['Channel.Setting.Name.RefreshPolicies'],
-    ChannelIds: [1, 3],
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
     Extra: [ChannelSettingExtra.RefreshPolicies]
   },
 
@@ -384,7 +385,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Other,
     Fields: [eChannelSettings.NoApiName],
     Values: [''],
-    ChannelIds: [3, 4]
+    ChannelIds: [ePlatform.eBay, ePlatform.Amazon]
   },
   {
     Labels: ['Channel.Setting.Name.FeePercentage'],

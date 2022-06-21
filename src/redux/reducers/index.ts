@@ -29,6 +29,7 @@ import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
+import { sourcesReducer } from '../sources/sourceSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -37,9 +38,13 @@ export const allReducers = combineReducers({
   services: servicesReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
-  sources: sourcesConfigReducer,
+
+  sources: sourcesReducer,
+  sourcesConfiguration: sourcesConfigReducer,
+
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
+
   responseObect: paymentReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,

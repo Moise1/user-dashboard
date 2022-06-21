@@ -1,11 +1,13 @@
-﻿export enum ChannelSettingSection {
+﻿import { ePlatform } from '../../../utils/ePlatform';
+
+export enum ChannelSettingSection {
   Monitoring, Listing, Business, Other
 }
 
 interface ChannelSettingSectionsInfo {
   Type: ChannelSettingSection;
   Label: string;
-  ChannelIds?: number[]//If undefined it accepts all the channels
+  ChannelIds?: ePlatform[]//If undefined it accepts all the channels
 }
 
 export const ChannelSettingsSections: ChannelSettingSectionsInfo[] = [
@@ -20,7 +22,7 @@ export const ChannelSettingsSections: ChannelSettingSectionsInfo[] = [
   {
     Type: ChannelSettingSection.Business,
     Label: 'Channel.Business',
-    ChannelIds: [1, 3]
+    ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Type: ChannelSettingSection.Other,

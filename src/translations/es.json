@@ -112,9 +112,11 @@
   "Menu.Catalog": "Catálogo",
   "Menu.Channel": "Canal",
   "Menu.Dashboard": "Tablero",
+  "Menu.FAQ": "Preguntas frecuentes",
   "Menu.Help": "Ayuda",
   "Menu.Listings": "Productos",
   "Menu.ListNow": "Publicar",
+  "Menu.ListingServices": "Servicios de publicación",
   "Menu.Orders": "Pedidos",
   "Menu.PricingRules": "Reglas de precio",
   "Menu.Settings": "Preferencias",
@@ -122,11 +124,35 @@
   "Menu.SourcesTable": "Proveedores",
   "Menu.Subscriptions": "Subscripciones",
   "Menu.OurServices": "Services",
+  "Menu.Start": "Cómo empezar",
   "Menu.Templates": "Plantillas",
   "Menu.VaProfiles": "Asistentes",
 
   "Platform.Amazon.NoApi.Username": "nombre tienda en Amazon",
   "Platform.eBay.NoApi.Username": "usuario de eBay",
 
-  "Topbar.Quota": "Cuota"
+  "Sources.Table.Name.BusinessCity": "Ciudad",
+  "Sources.Table.Name.BusinessPayment": "Política de pagos",
+  "Sources.Table.Name.BusinessReturn": "Política de devoluciones",
+  "Sources.Table.Name.BusinessShipping": "Política de envío",
+  "Sources.Table.Name.BusinessPostcode": "Código postal",
+  "Sources.Table.Name.DecreaseLimit": "Limit %",
+  "Sources.Table.Name.LocationCountry": "Código pais",
+  "Sources.Table.Name.Markup": "Margen",
+  "Sources.Table.Name.MonitorPrice": "Sincronizar precio",
+  "Sources.Table.Name.MonitorStock": "Sincronizar inventario",
+  "Sources.Table.Name.PolicyDelivery": "Envío",
+  "Sources.Table.Name.PolicyReturns": "Devoluciones",
+  "Sources.Table.Name.PriceDecrease": "Sincronizar bajada de precio",
+  "Sources.Table.Name.Provider": "Proveedor",
+  "Sources.Table.Name.Template": "Plantilla",
+
+
+
+  "Topbar.Quota": "Cuota",
+
+
+
+
+  "search": "Buscar..."
 }

@@ -1,17 +1,15 @@
 import { ReactNode } from 'react';
 import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
-import { ListingData } from 'src/redux/listings/listingsSlice';
-import { OrderData } from 'src/redux/orders/orderSlice';
-import { ListingsItems } from '../common/ListingsData';
-import { Channel } from '../../redux/channels/channelsSlice';
 
-export type TableDataTypes = ListingsItems | ListingData | OrderData | Rule | UserAssistant | Channel;//Todo: This is absurd and unnacceptable
+type T = {
+  id: number,
+  [key: number]: string
+};
+
 interface Props {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: Array<TableDataTypes>;
+  dataSource: T[];
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -24,12 +22,12 @@ interface Props {
   current?: number;
   pageSize?: number;
   rowClassName?: string;
-  onRow?: (record: TableDataTypes) => { onClick: () => void };
+  onRow?: (record: T) => { onClick: () => void };
   isListingsTable?: boolean;
-  setItemsPerPage?: (itemsPerPage: number) => void;
+  setItemsPerPage?: (sourcesPerPage: number) => void;
 }
 
-export const SimpleTable: React.FC<Props> = (props: Props) => {
+export const SourcesTable: React.FC<Props> = (props: Props) => {
   const pageSizeOptionArray = [2, 10, 20, 50, 100];
   const {
     columns,
@@ -50,8 +48,8 @@ export const SimpleTable: React.FC<Props> = (props: Props) => {
   } = props;
 
 
-  const onShowSizeChange = (current: number, itemsPerPage: number) => {
-    setItemsPerPage?.(itemsPerPage);
+  const onShowSizeChange = (current: number, sourcesPerPage: number) => {
+    setItemsPerPage?.(sourcesPerPage);
   };
 
   const getData = (current: Props['current'], pageSize: Props['pageSize']) => {

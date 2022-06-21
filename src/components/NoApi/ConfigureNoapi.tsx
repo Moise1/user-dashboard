@@ -89,7 +89,7 @@ export const ConfigureNoapi = () => {
       <div className="no-api-servers">
         {noApiServersResult?.length ? (
           <SimpleTable
-            setSourcesPerPage={setnoApiServersPage}
+            setItemsPerPage={setnoApiServersPage}
             current={current}
             onChange={setCurrent}
             columns={columns}
