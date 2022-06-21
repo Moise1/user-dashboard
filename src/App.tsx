@@ -36,8 +36,6 @@ import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 import { Links } from './links';
 import { EditTemplate } from './components/templates/EditTemplate';
 import { ConfigureNoapi } from './components/NoApi/ConfigureNoapi';
-import { PriceWarrior } from './components/services/PriceWarrior';
-import { PrivateSupplier } from './components/services/PrivateSupplier';
 import { OurServices } from './components/subscriptions/OurServices';
 
 export const App = withRouter(({ history }) => {
@@ -88,9 +86,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute exact path={Links.Services} component={Services} />
-            <ProtectedRoute path={Links.AllServices} component={AllServices} />
-            <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
-            <ProtectedRoute path={Links.PrivateSupplier} component={PrivateSupplier} />
+            <ProtectedRoute exact path={Links.Services + '/:slug'} component={AllServices} />
             <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />
             <ProtectedRoute path={Links.OurServices} component={OurServices} />
             <ProtectedRoute path={Links.Checkout} component={Checkout} />

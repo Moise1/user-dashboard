@@ -3,38 +3,52 @@ import { Row, Col, Divider } from 'antd';
 import '../../sass/services/service.scss';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-import { AllServicesData } from './ServicesData';
-import { useState } from 'react';
-import { TransparentBtn } from 'src/small-components/ActionBtns';
+//import { AllServicesData } from './ServicesData';
+import { Key, ReactChild, ReactFragment, ReactPortal } from 'react';
+//import { TransparentBtn } from 'src/small-components/ActionBtns';
 
-export const AllServices = () => {
-  console.log(AllServicesData);
-
-  const [activeService, setActiveService] = useState(1);
-
-  const [service, setService] = useState(AllServicesData);
-
-  console.log(service);
-
-  const handleChangeService = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const elementId = e.currentTarget.id;
-    setActiveService(JSON.parse(elementId));
-    setService([]);
+type LocationProps = {
+  location: {
+    state: {
+      id: number;
+      title: string;
+      shortDescription: string;
+      paragraphs: string[];
+      bulletPoints: string[];
+      image: string;
+      link: string;
+    };
   };
+};
+
+export const AllServices = ({ location }: LocationProps) => {
+  //console.log(AllServicesData);
+
+  //const [, setActiveService] = useState(1);
+
+  //const [service, setService] = useState(AllServicesData);
+
+  //console.log(service);
+
+  //const handleChangeService = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  //  const elementId = e.currentTarget.id;
+  //  setActiveService(JSON.parse(elementId));
+  //  setService([]);
+  //};
 
   return (
     <div className="main-container">
-      <div className="currencies-container">
-        <TransparentBtn id="1" handleClick={handleChangeService}>
-          PRICE WARRIOR
-        </TransparentBtn>
-        <TransparentBtn id="2" handleClick={handleChangeService}>
-          PRIVATE SUPPLIER
-        </TransparentBtn>
-        <TransparentBtn id="3" handleClick={handleChangeService}>
-          NO API
-        </TransparentBtn>
-      </div>
+      {/*<div className="currencies-container">*/}
+      {/*  <TransparentBtn id="1" handleClick={handleChangeService}>*/}
+      {/*    PRICE WARRIOR*/}
+      {/*  </TransparentBtn>*/}
+      {/*  <TransparentBtn id="2" handleClick={handleChangeService}>*/}
+      {/*    PRIVATE SUPPLIER*/}
+      {/*  </TransparentBtn>*/}
+      {/*  <TransparentBtn id="3" handleClick={handleChangeService}>*/}
+      {/*    NO API*/}
+      {/*  </TransparentBtn>*/}
+      {/*</div>*/}
       <Link to={Links.Services} className="back-to-services">
         <a>
           <LeftOutlined style={{ fontSize: '19px' }} />
@@ -46,69 +60,26 @@ export const AllServices = () => {
           <Col className="col-services" xs={24} md={24} lg={8}>
             <div className="service-container">
               <div className="image-container">
-                {AllServicesData.map((s) => {
-                  if (activeService === 1 && s.id === 1) {
-                    return <img src={s.image} />;
-                  } else if (activeService === 2 && s.id === 2) return <img src={s.image} />;
-                  else if (activeService === 3 && s.id === 3) return <img src={s.image} />;
-                })}
+                <img src={location.state.image} />
               </div>
             </div>
           </Col>
 
           <Col className="col-services" xs={24} lg={12}>
             <div className="description-area">
-              {AllServicesData.map((s) => {
-                if (activeService === 1 && s.id === 1) {
-                  return <h2 className="service-title">{s.title}</h2>;
-                } else if (activeService === 2 && s.id === 2) return <h2 className="service-title">{s.title}</h2>;
-                else if (activeService === 3 && s.id === 3) return <h2 className="service-title">{s.title}</h2>;
-              })}
+              <h2 className="service-title">{location.state.title}</h2>
               <div className="service-advantages">
-                {AllServicesData.map((s) => {
-                  if (activeService === 1 && s.id === 1) {
-                    return (
-                      <div>
-                        {s.paragraphs.map((x, index) => (
-                          <p key={index}> {x} </p>
-                        ))}
+                <div>
+                  {location.state.paragraphs.map((x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined, index: Key | null | undefined) => (
+                    <p key={index}> {x} </p>
+                  ))}
 
-                        <ul>
-                          {s.bulletPoints.map((x, index) => (
-                            <li key={index}> {x} </li>
-                          ))}
-                        </ul>
-                      </div>
-                    );
-                  } else if (activeService === 2 && s.id === 2)
-                    return (
-                      <div>
-                        {s.paragraphs.map((x, index) => (
-                          <p key={index}> {x} </p>
-                        ))}
-
-                        <ul>
-                          {s.bulletPoints.map((x, index) => (
-                            <li key={index}> {x} </li>
-                          ))}
-                        </ul>
-                      </div>
-                    );
-                  else if (activeService === 3 && s.id === 3)
-                    return (
-                      <div>
-                        {s.paragraphs.map((x, index) => (
-                          <p key={index}> {x} </p>
-                        ))}
-
-                        <ul>
-                          {s.bulletPoints.map((x, index) => (
-                            <li key={index}> {x} </li>
-                          ))}
-                        </ul>
-                      </div>
-                    );
-                })}
+                  <ul>
+                    {location.state.bulletPoints.map((x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined, index: Key | null | undefined) => (
+                      <li key={index}> {x} </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <div className="service-pricing-container">
                 <div className="service-pricing-table">

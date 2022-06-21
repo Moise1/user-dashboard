@@ -14,7 +14,7 @@ export const Services = () => {
             <div className="card-info">
               <h1 className="service-title">{s.title}</h1>
               <p>{s.shortDescription}</p>
-              <Link to={s.link}>Read more</Link>
+              <Link to={{ pathname: s.link, state: s }}>Read more</Link>
             </div>
           </Card>
         ))}
