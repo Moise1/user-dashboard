@@ -37,6 +37,7 @@ export const SourcesConfigurationTable = () => {
 
   const [selectedSource, setSelectedSource] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [searchFilter, setSearchFilter] = useState<string>('');
 
   useEffect(() => {
     dispatch(getSourceConfiguration());
@@ -143,20 +144,15 @@ export const SourcesConfigurationTable = () => {
     })
   ];
 
-  //function parentToChild(value: string): void {
-  //  localStorage.setItem('selectedSource', value);
-  //}
-
   const onSearch = (value: string) => {
-    console.log('search: ' + value);
-    //const tempData = sources.filter(x => x.name.toLowerCase().includes(value.toLowerCase()));
-    //setData(tempData);
+    setSearchFilter(value);
   };
-
 
   const loading =
     loadingSources || loadingSourceConfiguration || settingsLoading
-  ;
+    ;
+
+  const filteredData = (settingsData ?? []).filter(x => x.name.toLocaleLowerCase().indexOf(searchFilter.toLocaleLowerCase()) >= 0);
 
   return (
     <Layout className="sources-container">
@@ -169,7 +165,7 @@ export const SourcesConfigurationTable = () => {
           currentPage={selectedSource}
           onPageChange={setSelectedSource}
           columns={columns}
-          dataSource={loading ? [] : (settingsData || [])}
+          dataSource={loading ? [] : filteredData}
           pageSize={itemsPerPage}
         />
       </div>
