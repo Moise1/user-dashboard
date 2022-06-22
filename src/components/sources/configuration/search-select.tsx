@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import dropicon from '../../assets/dropicon.svg';
+import dropicon from '../../../../assets/dropicon.svg';
 import { SearchInput } from '../../../small-components/TableActionBtns';
 
 interface props {

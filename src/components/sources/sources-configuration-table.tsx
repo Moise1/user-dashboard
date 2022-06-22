@@ -19,6 +19,8 @@ import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
 import { SimpleTable } from '../../small-components/simple-table';
 
+
+
 export const SourcesConfigurationTable = () => {
   const dispatch = useAppDispatch();
 

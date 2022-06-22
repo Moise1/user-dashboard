@@ -2,7 +2,7 @@
 
 // large and extra large screens
 
-.channel-settings {
+.channel-settings, .source-settings {
   .content {
     display: flex;
     justify-content: space-between;
@@ -10,14 +10,6 @@
     margin-top: 2rem;
     padding: 2rem;
     background: $primary-bg;
-
-    .action-btns {
-      position: fixed;
-      right: 2%;
-      top: 29%;
-      display: flex;
-      flex-direction: column;
-    }
 
     .blue-input {
       max-width: 200px;
@@ -31,8 +23,7 @@
       display: flex;
       justify-content: space-between;
       width: 100vw;
-      .limit-area,
-      .stock-area {
+      .limit-area{
         margin-top: 1rem;
         width: 100%;
         .limit,
@@ -50,34 +41,17 @@
 // Tablet's screen sizes
 
 @media only screen and(max-width: 1030px) {
-  .channel-settings {
-    .content {
-      .action-btns {
-        position: relative;
-        margin: 0 0 60% 0;
-        flex-direction: row !important;
-        column-gap: 0 !important;
-        width: 100% !important;
-        .success-btn {
-          margin-left: -1rem;
+    .channel-settings, .source-settings {
+        .content {
+            .limit-area{
+                width: 30%;
+                height: 100px;
+                position: relative;
+                .stock,
+                .limit {
+                    display: block !important;
+                }
+            }
         }
-      }
-
-      .limit-area,
-      .stock-area {
-        width: 30%;
-        height: 100px;
-        position: relative;
-        .stock,
-        .limit {
-          display: block !important;
-          .stock-input,
-          .limit-input {
-            margin-top: 0.4rem;
-            width: 17vw !important;
-          }
-        }
-      }
     }
-  }
 }
