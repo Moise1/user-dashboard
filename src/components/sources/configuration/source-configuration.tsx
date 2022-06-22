@@ -9,19 +9,22 @@ import { ReactUtils } from '../../../utils/react-utils';
 import { Platforms } from '../../../data/platforms';
 import { getChannels } from '../../../redux/channels/channelsThunk';
 import { ePlatform } from '../../../utils/ePlatform';
+import { SettingSectionsInfo } from '../../../../types/settings';
 
 interface Props {
-  Sections: number[],
+  Sections: SettingSectionsInfo[],
 
 }
 
 export const SourceConfiguration = (props: Props) => {
+  const { Sections } = props;
+
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const platformInfo = Platforms[selectedChannel?.channelId ?? ePlatform.eBay];
   const translationValues = { ...TransUtils.GetLinksValues(), ...TransUtils.GetPlatformValues(platformInfo) };
 
   const [activeTab, setActiveTab] = useState<ChannelSettingSection>(Sections);
-  const sections = SettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
+  const sections = Sections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
 
   const bag: SettingDataBag = { selectedChannel };
 

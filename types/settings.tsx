@@ -1,7 +1,7 @@
 ﻿import { ePlatform } from "../src/utils/ePlatform";
 
-type SettingSectionId = number;
-type SettingFieldId = number;
+export type SettingSectionId = number;
+export type SettingFieldId = number;
 
 export interface SettingSectionsInfo {
   Type: SettingSectionId;
