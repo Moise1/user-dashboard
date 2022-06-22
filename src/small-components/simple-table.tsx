@@ -6,10 +6,10 @@ interface Props<T> {
   dataSource: T[];
   onPageChange?: (page:number) => void;
   currentPage?: number;
-  pageSize?: number;
   rowClassName?: string;
   onRow?: (record: T) => { onClick: () => void };
-  setItemsPerPage?: (itemsPerPage: number) => void;
+  pageSize?: number;
+  setPageSize?: (itemsPerPage: number) => void;
   pageSizes?: number[];
 }
 
@@ -22,7 +22,7 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
     pageSize: cPageSize,
     onRow,
     rowClassName,
-    setItemsPerPage,
+    setPageSize,
     pageSizes
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
@@ -34,7 +34,7 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
   };
 
   const onShowPageSizeChange = (current: number, pageSize: number) => {
-    setItemsPerPage?.(pageSize);
+    setPageSize?.(pageSize);
   };
 
   return (
