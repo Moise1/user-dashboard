@@ -161,7 +161,7 @@ export const SourcesConfigurationTable = () => {
       </div>
       <div className="sources-table-container">
         <SimpleTable
-          setPageSize={setItemsPerPage}
+          onPageSizeChanged={setItemsPerPage}
           currentPage={selectedSource}
           onPageChange={setSelectedSource}
           columns={columns}

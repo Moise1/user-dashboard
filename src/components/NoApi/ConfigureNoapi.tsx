@@ -90,7 +90,7 @@ export const ConfigureNoapi = () => {
       <div className="no-api-servers">
         {noApiServersResult?.length ? (
           <SimpleTable
-            setPageSize={setnoApiServersPage}
+            onPageSizeChanged={setnoApiServersPage}
             currentPage={current}
             onPageChange={setCurrent}
             columns={columns}
