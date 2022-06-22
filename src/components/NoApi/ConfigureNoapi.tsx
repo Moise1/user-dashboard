@@ -5,8 +5,7 @@ import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/no-api/configure-noapi.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
-
-import { Selector } from 'src/small-components/form/selector';
+import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import { SimpleTable } from '../../small-components/simple-table';
 
 import { Input } from 'antd';
@@ -16,8 +15,14 @@ export const ConfigureNoapi = () => {
   const dispatch = useAppDispatch();
   const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
-  const [noApiServersPage, setnoApiServersPage] = useState<number>(10);
+  // const [noApiServersPage, setnoApiServersPage] = useState<number>(10);
+  const [noApiServersPage] = useState<number>(10);
+
   const [current, setCurrent] = useState<number>(1);
+  const [channelSelected, setChannelSelected] = useState<SelectorValue>(0);
+  const handleOptionChange = (value: SelectorValue) => {
+    setChannelSelected(value);
+  };
 
   useEffect(() => {
     dispatch(getNoApiServers());
@@ -60,7 +65,7 @@ export const ConfigureNoapi = () => {
       key: '',
       render: () => {
         return (
-          <Selector placeHolder="Select a channel">
+          <Selector placeHolder="Select a channel" onChange={handleOptionChange}>
             {channels?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
           </Selector>
         );
@@ -71,7 +76,7 @@ export const ConfigureNoapi = () => {
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="username" className="blue-input" placeholder="Your store username" />;
+        return <Input name="username" className="blue-input" disabled placeholder={channelSelected === 601975 ? 'yo' : 'no'} />;
       }
     },
     {
@@ -90,7 +95,7 @@ export const ConfigureNoapi = () => {
       <div className="no-api-servers">
         {noApiServersResult?.length ? (
           <SimpleTable
-            onPageSizeChanged={setnoApiServersPage}
+            // onPageSizeChanged={setnoApiServersPage}
             currentPage={current}
             onPageChange={setCurrent}
             columns={columns}

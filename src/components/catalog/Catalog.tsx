@@ -38,6 +38,7 @@ export const Catalog = () => {
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
   const { sources } = useAppSelector((state) => state.sourcesReducer);
+  console.log('the sources', sources);
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
   const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<
