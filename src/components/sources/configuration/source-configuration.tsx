@@ -8,7 +8,7 @@
 //import { Selector, SelectorValue } from '../../small-components/form/selector';
 //import { LeftOutlined } from '@ant-design/icons';
 //import { getSources } from '../../redux/sources/sourcesThunk';
-import '../../sass/sources-settings.scss';
+import '../../../sass/sources-settings.scss';
 
 export const SourceConfiguration = () => {
   return <></>;

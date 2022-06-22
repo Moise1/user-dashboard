@@ -7,9 +7,10 @@ import '../../sass/no-api/configure-noapi.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 
 import { Selector } from 'src/small-components/form/selector';
-import { SimpleTable } from '../tables/SimpleTable';
+import { SimpleTable } from '../../small-components/simple-table';
 
 import { Input } from 'antd';
+import { Link } from 'react-router-dom';
 
 export const ConfigureNoapi = () => {
   const dispatch = useAppDispatch();
@@ -31,14 +32,14 @@ export const ConfigureNoapi = () => {
         <p>Do you want to keep your NO API extension running 24/7?</p>
         <p>We can do it for you for only 12.99GBP/month.</p>
         <ConfirmBtn>
-          <a
-            href="https://hustlegotreal.com/en/no-api-server/"
+          <Link
+            to="https://hustlegotreal.com/en/no-api-server/"
             rel="noreferrer"
             target="_blank"
             className="footer-link"
           >
             Read more
-          </a>
+          </Link>
         </ConfirmBtn>
       </div>
     </div>
@@ -89,13 +90,12 @@ export const ConfigureNoapi = () => {
       <div className="no-api-servers">
         {noApiServersResult?.length ? (
           <SimpleTable
-            setSourcesPerPage={setnoApiServersPage}
-            current={current}
-            onChange={setCurrent}
+            setItemsPerPage={setnoApiServersPage}
+            currentPage={current}
+            onPageChange={setCurrent}
             columns={columns}
             dataSource={noApiServersResult}
             pageSize={noApiServersPage}
-            totalItems={noApiServersResult?.length}
           />
         ) : (
           noSuscribed

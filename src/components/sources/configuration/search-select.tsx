@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dropicon from '../../assets/dropicon.svg';
-import { SearchInput } from '../../small-components/TableActionBtns';
+import { SearchInput } from '../../../small-components/TableActionBtns';
 
 interface props {
   setShowOrdering: (arg0: boolean) => void;

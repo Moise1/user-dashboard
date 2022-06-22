@@ -38,9 +38,13 @@ export const allReducers = combineReducers({
   services: servicesReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
-  sources: sourcesConfigReducer,
+
+  // sources: sourcesReducer,
+  sourcesConfiguration: sourcesConfigReducer,
+
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
+
   responseObect: paymentReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
