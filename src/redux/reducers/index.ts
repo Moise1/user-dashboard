@@ -6,6 +6,7 @@ import { getConfigReducer } from '../subscriptions/subsSlice';
 import { userAssistantsReducer } from '../va-profiles/vaProfilesSlice';
 import { userReducer } from '../user/userSlice';
 import { sourcesConfigReducer } from '../source-configuration/source-configuration-slice';
+import { sourcesReducer } from '../sources/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
@@ -29,17 +30,21 @@ import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
-
 export const allReducers = combineReducers({
+  sourcesReducer:sourcesReducer,
   user: userReducer,
   pricingRules: pricingRulesReducer,
   subscriptions: subscriptionsReducer,
   services: servicesReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
-  sources: sourcesConfigReducer,
+
+  // sources: sourcesReducer,
+  sourcesConfiguration: sourcesConfigReducer,
+
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
+
   responseObect: paymentReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,

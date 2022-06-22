@@ -103,7 +103,7 @@ export interface ChannelConfigurationState {
 
 const initialState: ChannelConfigurationState = {
   settings: null,
-  loading: true,
+  loading: false,
   error: '',
   savingSettings: [],
 

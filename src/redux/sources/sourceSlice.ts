@@ -45,4 +45,4 @@ export const sourceSlice = createSlice({
   }
 });
 
-export const { reducer: sourcesConfigReducer } = sourceSlice;
+export const { reducer: sourcesReducer } = sourceSlice;

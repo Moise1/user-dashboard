@@ -1,4 +1,5 @@
-﻿import { eCountry } from '../utils/eCountry';
+﻿import { ePlatform } from '../utils/ePlatform';
+import { eCountry } from '../utils/eCountry';
 
 export interface PlatformIndo {
   name: string;//Example: "eBay No Api"
@@ -16,9 +17,9 @@ export interface PlatformIndo {
 }
 
 export const Platforms: {
-  [id: string]: PlatformIndo
+  [id: number]: PlatformIndo
 } = {
-  '1': {
+  [ePlatform.eBay]: {
     name: 'eBay',
     storeName: 'eBay',
     domain: {
@@ -72,7 +73,7 @@ export const Platforms: {
       [eCountry.IT]: true
     }
   },
-  '2': {
+  [ePlatform.Shopify]: {
     name: 'Shopify',
     storeName: 'Shopify',
     domain: {
@@ -110,7 +111,7 @@ export const Platforms: {
       [eCountry.IT]: true
     }
   },
-  '3': {
+  [ePlatform.eBayNoApi]: {
     name: 'eBay NO API',
     storeName: 'eBay',
     identifierName: 'id',
@@ -164,7 +165,7 @@ export const Platforms: {
       [eCountry.IT]: true
     }
   },
-  '4': {
+  [ePlatform.Amazon]: {
     name: 'Amazon NO API',
     storeName: 'Amazon',
     identifierName: 'sku',

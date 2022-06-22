@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { eCountry } from '../../utils/eCountry';
+import { ePlatform } from '../../utils/ePlatform';
 import { getChannels, deleteChannel } from './channelsThunk';
 
 export interface Channel {
   id: number;
-  channelId: number;
+  channelId: ePlatform;
   debug: boolean;
   disabled: boolean;
   empty: boolean;
-  isoCountry: number;
+  isoCountry: eCountry;
   name: string;
   userId: string;
 }

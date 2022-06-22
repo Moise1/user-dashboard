@@ -15,10 +15,11 @@ import { Platforms } from '../../data/platforms';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
 import { getChannels } from '../../redux/channels/channelsThunk';
+import { ePlatform } from '../../utils/ePlatform';
 
 export const ChannelConfiguration = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
-  const platformInfo = Platforms[selectedChannel?.channelId.toString() ?? '1'];
+  const platformInfo = Platforms[selectedChannel?.channelId ?? ePlatform.eBay];
   const translationValues = { ...TransUtils.GetLinksValues(), ...TransUtils.GetPlatformValues(platformInfo)};
 
   const [activeTab, setActiveTab] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
@@ -73,14 +74,10 @@ export const ChannelConfiguration = () => {
       data: shipping,
       loading: loadingShipping
     };
-
     useEffect(() => {
       dispatch(loadShipping());
-    }, [loadShipping]);
-
-    useEffect(() => {
       dispatch(loadBusinessPolicies());
-    }, [loadBusinessPolicies]);
+    }, [loadShipping, loadBusinessPolicies]);
   };
 
   {
