@@ -1,64 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Divider } from 'antd';
-import amazon from '../../assets/catalog-sources/amazon.png';
-import banggood from '../../assets/catalog-sources/bangood.png';
-import costco from '../../assets/catalog-sources/costco.png';
-import cox from '../../assets/catalog-sources/cox.png';
-import garden_street from '../../assets/catalog-sources/garden-street.png';
-import robert_dyas from '../../assets/catalog-sources/robert-dyas.png';
-import zoo_plus from '../../assets/catalog-sources/zooplus.png';
-import garden_line from '../../assets/catalog-sources/garden-line.png';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import '../../sass/catalog-source.scss';
 import { getSources } from 'src/redux/sources/sourcesThunk';
-import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import { useAppDispatch } from 'src/custom-hooks/reduxCustomHooks';
+import { Source } from '../../redux/sources/sourceSlice';
 
 interface Props {
   handleClose: () => void;
   getSourcesData: (ids: number[]) => void;
+  sources: Source[];
 }
-export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
+export const CatalogSource = ({ handleClose, getSourcesData, sources }: Props) => {
   const dispatch = useAppDispatch();
   const onSearch = (value: string) => console.log('searched value', value);
-  const [addedSources, setAddedSources] = useState<{ id: number; img: string }[]>([]);
-  const [pendingSources, setPendingSources] = useState<{ id: number; img: string }[]>([
-    {
-      id: 1,
-      img: amazon
-    },
-    {
-      id: 2,
-      img: banggood
-    },
-    {
-      id: 3,
-      img: cox
-    },
-    {
-      id: 4,
-      img: garden_street
-    },
-    {
-      id: 5,
-      img: garden_line
-    },
-    {
-      id: 6,
-      img: robert_dyas
-    },
-    {
-      id: 7,
-      img: costco
-    },
-    {
-      id: 8,
-      img: zoo_plus
-    }
-  ]);
-  console.log('The all states', useAppSelector((state) => state));
+  const [addedSources, setAddedSources] = useState<Source[]>([]);
+  const [pendingSources, setPendingSources] = useState<Source[]>(sources);
 
   const addSource = (id: number): void => {
     const addedSource = pendingSources.filter((s) => s.id === id)[0];
@@ -74,40 +34,9 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
 
   const cancelFiltering = () => {
     setAddedSources([]);
-    setPendingSources([
-      {
-        id: 1,
-        img: amazon
-      },
-      {
-        id: 2,
-        img: banggood
-      },
-      {
-        id: 3,
-        img: cox
-      },
-      {
-        id: 4,
-        img: garden_street
-      },
-      {
-        id: 5,
-        img: garden_line
-      },
-      {
-        id: 6,
-        img: robert_dyas
-      },
-      {
-        id: 7,
-        img: costco
-      },
-      {
-        id: 8,
-        img: zoo_plus
-      }
-    ]);
+    setPendingSources(
+      sources
+    );
   };
 
   useEffect(() => {
@@ -125,7 +54,10 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
         ) : (
           addedSources.map((s) => (
             <div key={s.id} className="source">
-              <img src={s.img} alt="" className="source-img" />
+              <img
+                className='source-img'
+                src={require('../../assets/logos/' + s.id + '.png').default}
+              />
               <MinusCircleOutlined className="remove-source-icon" onClick={() => removeSource(s.id)} />
             </div>
           ))
@@ -137,7 +69,10 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
         <div className="pending-sources-list">
           {pendingSources.map((s) => (
             <div key={s.id} className="source">
-              <img src={s.img} alt="" className="source-img" />
+              <img
+                className='source-img'
+                src={require('../../assets/logos/' + s.id + '.png').default}
+              />
               <PlusCircleOutlined className="pending-source-icon" onClick={() => addSource(s.id)} />
             </div>
           ))}
@@ -145,8 +80,8 @@ export const CatalogSource = ({ handleClose, getSourcesData }: Props) => {
       </div>
       <Divider />
       <div className="action-btns">
-        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Cancel')}</CancelBtn>
         <SuccessBtn>{t('AddSources')}</SuccessBtn>
+        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Cancel')}</CancelBtn>
       </div>
     </div>
   );

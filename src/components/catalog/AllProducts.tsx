@@ -18,7 +18,8 @@ export const AllProducts = ({ children, removeProduct, className }: Props) => {
             <img src={c.imageUrl} alt="" className="product-img" />
             <div className="product-info-area">
               <div className="header">
-                <p>{c.title}</p>
+                <p
+                  className="title">{c.title}</p>
                 <p className="source">by {c.sourceId}</p>
               </div>
               <div className="transaction-details">
