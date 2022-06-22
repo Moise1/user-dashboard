@@ -259,12 +259,12 @@ export const AccountSettingInput = (props: Props) => {
 
     for (const e of extra ?? []) {
       switch (e) {
-      case AccountSettingExtra.CountriesList:
-        AA({ data: countries });
-        break;
-      case AccountSettingExtra.BusinessTypeList:
-        AA({ data: businessTypes });
-        break;
+        case AccountSettingExtra.CountriesList:
+          AA({ data: countries });
+          break;
+        case AccountSettingExtra.BusinessTypeList:
+          AA({ data: businessTypes });
+          break;
       }
     }
 
@@ -303,19 +303,19 @@ export const AccountSettingInput = (props: Props) => {
 
   const RenderButton = (values: SettingsValue[], extra: AccountSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     let loading = false;
-    let label = t(values[0] ?? '');
+    let label = t(values[0] ?? 'Save All');
     for (const e of extra ?? []) {
       switch (e) {
-      case AccountSettingExtra.BusinessTypeList:
-        loading = loading || (dataBag.refreshBussiness?.loading ?? false);
-        if (dataBag.refreshBussiness?.data ?? false) {
-          label = t('Channel.Setting.Option.PoliciesWillUpdate');
-          disabled = true;
-        }
-        break;
+        case AccountSettingExtra.BusinessTypeList:
+          loading = loading || (dataBag.refreshBussiness?.loading ?? false);
+          if (dataBag.refreshBussiness?.data ?? false) {
+            label = t('Account.Setting.Name.SaveAll');
+            disabled = true;
+          }
+          break;
       }
     }
-    return <SettingButton label={label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
+    return <SettingButton label={'Save All ' + label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
   };
 
   const values = ((setting: AccountSetting) => {
@@ -339,39 +339,39 @@ export const AccountSettingInput = (props: Props) => {
 
   let input: JSX.Element;
   switch (setting.Type) {
-  default:
-  case SettingType.Number:
-    input = RenderSettingNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.Boolean:
-    input = RenderSettingBoolean(values, setting.Fields, disabled);
-    break;
-  case SettingType.String:
-    input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.List:
-    input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.TwoOptions:
-    input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.SwitchTwoOptions:
-    input = RenderSettingSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.WordList:
-    input = RenderWordList(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanNumber:
-    input = RenderBooleanNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanString:
-    input = RenderBooleanString(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanStringNull:
-    input = RenderBooleanStringNull(values, setting.Fields, disabled);
-    break;
-  case SettingType.Button:
-    input = RenderButton(values, setting.Extra!, disabled, dataBag);
+    default:
+    case SettingType.Number:
+      input = RenderSettingNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.Boolean:
+      input = RenderSettingBoolean(values, setting.Fields, disabled);
+      break;
+    case SettingType.String:
+      input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.List:
+      input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.TwoOptions:
+      input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.SwitchTwoOptions:
+      input = RenderSettingSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.WordList:
+      input = RenderWordList(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanNumber:
+      input = RenderBooleanNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanString:
+      input = RenderBooleanString(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanStringNull:
+      input = RenderBooleanStringNull(values, setting.Fields, disabled);
+      break;
+    case SettingType.Button:
+      input = RenderButton(values, setting.Extra!, disabled, dataBag);
   }
 
   const CapitalizeFirstLetter = (s: string | ReactNode) => {
@@ -387,13 +387,23 @@ export const AccountSettingInput = (props: Props) => {
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
 
-  return (
-    <Row className={'description-and-controls' + (disabled ? ' disabled' : '')} key={setting.Fields[0]}>
-      <Col span={12} className='description-area'>
-        <h2 className={disabled ? 'disabled' : ''}>{CapitalizeFirstLetter(t(setting.Labels[0]))}</h2>
-        {setting.Description.map((x, i) => <p key={i}>{t(x)}</p>)}
-      </Col>
-      {input}
-    </Row>
-  );
+  if (setting.Type === SettingType.Button) {
+    return (
+      <Row className={'description-and-controls' + (disabled ? ' disabled' : '')} key={setting.Fields[0]}>
+        <Col span={10} className='description-area'></Col>
+        {input}
+      </Row>
+    );
+  }
+  else {
+    return (
+      <Row className={'description-and-controls' + (disabled ? ' disabled' : '')} key={setting.Fields[0]}>
+        <Col span={12} className='description-area'>
+          <h2 className={disabled ? 'disabled' : ''}>{CapitalizeFirstLetter(t(setting.Labels[0]))}</h2>
+          {setting.Description.map((x, i) => <p key={i}>{t(x)}</p>)}
+        </Col>
+        {input}
+      </Row>
+    );
+  }
 };

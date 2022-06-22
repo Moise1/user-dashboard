@@ -36,8 +36,11 @@
     }
 
     &.setting-button {
+        position: relative;
+        height: fit-content;
+
         .ant-spin-spinning {
-            margin-top:0;
+            margin-top: 0;
         }
     }
 

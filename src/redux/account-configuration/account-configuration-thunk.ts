@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
-import { SettingKey } from './account-configuration-slice';
+import { Account } from './account-configuration-slice';
 
 export const getAccountConfiguration = createAsyncThunk(
   'AccountConfiguration/GetConfiguration',
@@ -14,9 +14,9 @@ export const getAccountConfiguration = createAsyncThunk(
   }
 );
 
-export const saveAccountSetting = createAsyncThunk('channelConfiguration/SaveOne', async (data: SettingKey) => {
+export const saveAccountSetting = createAsyncThunk('AccountConfiguration/SaveBusinessData', async (data: Account) => {
   try {
-    const res = await client.post('/channelConfiguration/SaveOne', data);
+    const res = await client.post('/AccountConfiguration/SaveBusinessData', data);
     return res.data.response_data;
   } catch (error) {
     return { success: false };

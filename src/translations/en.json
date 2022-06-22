@@ -125,7 +125,7 @@
   "Account.Setting.Name.Postcode": "Postcode",
   "Account.Setting.Name.RegistrationNumber": "Registration Number",
   "Account.Setting.Name.VATNumber": "VAT Number (if applicable)",
-
+  "Account.Setting.Name.SaveAll": "Save All",
 
   "Listings.Column.Cost": "Cost",
   "Listings.Column.Img": "Image",

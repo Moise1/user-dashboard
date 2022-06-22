@@ -19,7 +19,7 @@ import { getChannels } from '../../redux/channels/channelsThunk';
 export const ChannelConfiguration = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const platformInfo = Platforms[selectedChannel?.channelId.toString() ?? '1'];
-  const translationValues = { ...TransUtils.GetLinksValues(), ...TransUtils.GetPlatformValues(platformInfo)};
+  const translationValues = { ...TransUtils.GetLinksValues(), ...TransUtils.GetPlatformValues(platformInfo) };
 
   const [activeTab, setActiveTab] = useState<ChannelSettingSection>(ChannelSettingSection.Monitoring);
   const sections = ChannelSettingsSections.filter(x => !x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0));
@@ -89,16 +89,16 @@ export const ChannelConfiguration = () => {
     let templates = false;
     for (const e of allExtras ?? []) {
       switch (e) {
-      case ChannelSettingExtra.TemplateList:
-        templates = true;
-        break;
-      case ChannelSettingExtra.BusinessPayment:
-      case ChannelSettingExtra.BusinessReturn:
-      case ChannelSettingExtra.BusinessShipping:
-      case ChannelSettingExtra.PolicyDelivery:
-      case ChannelSettingExtra.RefreshPolicies:
-        policies = true;
-        break;
+        case ChannelSettingExtra.TemplateList:
+          templates = true;
+          break;
+        case ChannelSettingExtra.BusinessPayment:
+        case ChannelSettingExtra.BusinessReturn:
+        case ChannelSettingExtra.BusinessShipping:
+        case ChannelSettingExtra.PolicyDelivery:
+        case ChannelSettingExtra.RefreshPolicies:
+          policies = true;
+          break;
       }
     }
     if (templates) {
@@ -124,9 +124,9 @@ export const ChannelConfiguration = () => {
   const OnButtonClick = async (setting: ChannelSetting) => {
     for (const e of setting.Extra ?? []) {
       switch (e) {
-      case ChannelSettingExtra.RefreshPolicies:
-        dispatch(refreshBusinessPolicies());
-        break;
+        case ChannelSettingExtra.RefreshPolicies:
+          dispatch(refreshBusinessPolicies());
+          break;
       }
     }
   };
@@ -150,7 +150,7 @@ export const ChannelConfiguration = () => {
   const RenderSettings = (section: ChannelSettingSection): ReactNode => {
     const settings = ChannelSettings.filter(
       x => x.Section == section
-      && (!x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0))
+        && (!x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0))
     );
     return <>
       {settings.map(x => RenderSetting(x))}

@@ -2,18 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getAccountConfiguration, saveAccountSetting } from './account-configuration-thunk';
 
 export interface Account {
-  country: string;
-  businessType: string;
-  name: string;
-  address1: string;
-  address2: string;
-  city: string;
-  postcode: string;
-  rn: string;
-  vat: string;
-  roi: boolean;
-  needInformation: boolean; 
-  iAmBusiness: boolean;
+  country: string | undefined | null;
+  businessType: string | undefined | null;
+  name: string | undefined | null;
+  address1: string | undefined | null;
+  address2: string | undefined | null;
+  city: string | undefined | null;
+  postcode: string | undefined | null;
+  rn: string | undefined | null;
+  vat: string | undefined | null;
+  roi: boolean | undefined | null;
+  needInformation: boolean | undefined | null;
+  iAmBusiness: boolean  | undefined | null;
 }
 
 export enum eAccountSettings {
@@ -47,6 +47,7 @@ export interface SavingSetting {
 export interface AccountConfigurationState {
   settings: SettingKey[] | null;
   loading: boolean;
+  success: boolean;
   error: string;
   savingSettings: SavingSetting[];
 }
@@ -55,7 +56,8 @@ const initialState: AccountConfigurationState = {
   settings: null,
   loading: true,
   error: '',
-  savingSettings: []
+  savingSettings: [],
+  success: true
 };
 
 export const AccountConfigurationSlice = createSlice({
@@ -70,7 +72,7 @@ export const AccountConfigurationSlice = createSlice({
     });
     builder.addCase(getAccountConfiguration.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.settings = payload.result;
+      state.settings = payload;
       state.savingSettings = [];
     });
     builder.addCase(getAccountConfiguration.rejected, (state, { payload }) => {
@@ -79,45 +81,17 @@ export const AccountConfigurationSlice = createSlice({
     });
 
     //SAVE
-    builder.addCase(saveAccountSetting.pending, (state, { meta }) => {
-      if (!state.savingSettings) state.savingSettings = [];
-      const prv = state.savingSettings.find((x) => x.data.key == meta.arg.key);
-      if (prv) {
-        prv.loading = true;
-        prv.data = meta.arg;
-        prv.success = false;
-      } else {
-        state.savingSettings.push({
-          loading: true,
-          data: meta.arg,
-          success: false
-        });
-      }
+    builder.addCase(saveAccountSetting.pending, (state) => {
+      state.loading = true;
+      state.error = '';
     });
-    builder.addCase(saveAccountSetting.fulfilled, (state, { payload, meta }) => {
-      const prv = state.savingSettings.find((x) => x.data.key == meta.arg.key);
-      if (prv) {
-        //this should be always true
-        prv.loading = false;
-        prv.success = payload?.success;
-      }
-      if (payload?.success && state.settings) {
-        const vk = state.settings.find((x) => x.key == meta.arg.key);
-        if (vk) {
-          vk.value = meta.arg.value;
-        } else {
-          state.settings.push(meta.arg);
-        }
-        //toastAlert(t('error.saving.configuration'),'error');
-      }
+    builder.addCase(saveAccountSetting.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.success = payload?.success;
     });
-    builder.addCase(saveAccountSetting.rejected, (state, { meta }) => {
-      const prv = state.savingSettings.find((x) => x.data.key == meta.arg.key);
-      if (prv) {
-        //this should be always true
-        prv.loading = false;
-        prv.success = false;
-      }
+    builder.addCase(saveAccountSetting.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
     });
   }
 });

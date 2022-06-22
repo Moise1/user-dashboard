@@ -43,7 +43,7 @@ export interface AccountSetting {
 export const AccountSettings: AccountSetting[] = [
   {
     Labels: ['Account.Setting.Name.BusinessRegisteredCountry'],
-    Description: ['Account.Setting.Description.BillingAddress'],
+    Description: ['Account.Setting.Description.BusinessRegisteredCountry'],
     Type: SettingType.List, 
     Section: AccountSettingSection.BillingAddress,
     Fields: [eAccountSettings.Country],
@@ -105,6 +105,14 @@ export const AccountSettings: AccountSetting[] = [
     Type: SettingType.String,
     Section: AccountSettingSection.BillingAddress,
     Fields: [eAccountSettings.Vat],
+    Values: [''],
+  },
+  {
+    Labels: ['Account.Setting.Name.SaveAll'],
+    Description: [''],
+    Type: SettingType.Button,
+    Section: AccountSettingSection.BillingAddress,
+    Fields: [eAccountSettings.None],
     Values: [''],
   }
 ];
