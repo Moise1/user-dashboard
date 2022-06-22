@@ -1,6 +1,7 @@
 ﻿import { Col, Row } from 'antd';
 import { ReactNode } from 'react';
-import { ChannelSetting, ChannelSettingExtra, ChannelSettings, SettingType } from '../../components/chanel/configuration/settings';
+import { SettingExtra } from '../../../types/settings';
+import { ChannelSetting, ChannelSettings, SettingType } from '../../components/chanel/configuration/settings';
 import { BusinessPolicy, BusinessPolicyType, eChannelSettings, SavingSetting, SettingsValue, ShippingOption } from '../../redux/channel-configuration/channels-configuration-slice';
 import { Channel } from '../../redux/channels/channelsSlice';
 import { Template } from '../../redux/templates/templatesSlice';
@@ -145,7 +146,7 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingString = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderSettingString = (values: SettingsValue[], fields: eChannelSettings[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     const savingState = savingSetting.get(fields[0]);
     let value = configuration?.get(fields[0]) ?? values[0];
 
@@ -242,7 +243,7 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     const savingState = savingSetting.get(fields[0]);
     const value = configuration?.get(fields[0]) ?? values[0];
 
@@ -265,19 +266,19 @@ export const SettingInput = (props: Props) => {
 
     for (const e of extra ?? []) {
       switch (e) {
-      case ChannelSettingExtra.TemplateList:
+      case SettingExtra.TemplateList:
         AA(dataBag.templates);
         break;
-      case ChannelSettingExtra.BusinessPayment:
+        case SettingExtra.BusinessPayment:
         AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
         break;
-      case ChannelSettingExtra.BusinessReturn:
+        case SettingExtra.BusinessReturn:
         AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
         break;
-      case ChannelSettingExtra.BusinessShipping:
+        case SettingExtra.BusinessShipping:
         AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
         break;
-      case ChannelSettingExtra.PolicyDelivery:
+        case SettingExtra.PolicyDelivery:
         AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
         break;
       }
@@ -316,12 +317,12 @@ export const SettingInput = (props: Props) => {
     );
   };
 
-  const RenderButton = (values: SettingsValue[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderButton = (values: SettingsValue[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     let loading = false;
     let label = t(values[0] ?? '');
     for (const e of extra ?? []) {
       switch (e) {
-      case ChannelSettingExtra.RefreshPolicies:
+        case SettingExtra.RefreshPolicies:
         loading = loading || (dataBag.refreshBussiness?.loading ?? false);
         if (dataBag.refreshBussiness?.data ?? false) {
           label = t('Channel.Setting.Option.PoliciesWillUpdate');
@@ -336,7 +337,7 @@ export const SettingInput = (props: Props) => {
   const values = ((setting: ChannelSetting) => {
     let translate = false;
     for (const e of setting?.Extra ?? []) {
-      if (e == ChannelSettingExtra.TranslateDefaultValue) {
+      if (e == SettingExtra.TranslateDefaultValue) {
         translate = true;
         break;
       }

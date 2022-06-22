@@ -7,7 +7,7 @@ import '../../sass/channel-settings.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getChannelConfiguration, loadBusinessPolicies, loadShipping, refreshBusinessPolicies, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { ChannelConfigurationState, eChannelSettings, SettingsValue } from '../../redux/channel-configuration/channels-configuration-slice';
-import { ChannelSetting, ChannelSettingExtra, ChannelSettings } from './configuration/settings';
+import { ChannelSetting, ChannelSettings } from './configuration/settings';
 import { ChannelSettingsSections, ChannelSettingSection } from './configuration/sections';
 import { SettingDataBag, SettingInput } from '../../small-components/settings/setting-input';
 import { ReactUtils } from '../../utils/react-utils';

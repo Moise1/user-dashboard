@@ -1,4 +1,5 @@
-﻿import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
+﻿import { Ancestor, Setting, SettingExtra } from '../../../../types/settings';
+import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
 import { ePlatform } from '../../../utils/ePlatform';
 import { ChannelSettingSection } from './sections';
 
@@ -6,28 +7,15 @@ export enum SettingType {
   Number, Boolean, String, List, WordList, BooleanNumber, BooleanString, BooleanStringNull, SwitchTwoOptions, TwoOptions, Button
 }
 
-//When it is something special, like a list with values that come from the API or a different call to store that
-export enum ChannelSettingExtra {
-  TemplateList, PolicyDelivery, BusinessPayment, BusinessShipping, BusinessReturn, RefreshPolicies, TranslateDefaultValue
-}
-
-interface Ancestor {
+interface ChannelAncestor extends Ancestor {
   Field: eChannelSettings;
   Value: string;
 }
 
-export interface ChannelSetting {
-  Labels: string[];
-  Description: string[];
-  Type: SettingType;
+export interface ChannelSetting extends Setting {
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
-  Values: (string | null)[];
-  ChannelIds?: ePlatform[];//If undefined it accepts all the channels
-  Ancestors?: Ancestor[];
-  AncestorsHide?: boolean;
-  Extra?: ChannelSettingExtra[];
-  PlaceHolder?: string;
+  Ancestors?: ChannelAncestor[];
 }
 
 export const ChannelSettings: ChannelSetting[] = [
@@ -183,7 +171,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.TemplateId],
     Values: ['0'],
-    Extra: [ChannelSettingExtra.TemplateList]
+    Extra: [SettingExtra.TemplateList]
   },
   {
     Labels: ['Channel.Setting.Name.DefaultEAN'],
@@ -192,7 +180,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.DefaultEAN],
     Values: ['Channel.Setting.Value.DoesNotApply'],
-    Extra: [ChannelSettingExtra.TranslateDefaultValue]
+    Extra: [SettingExtra.TranslateDefaultValue]
   },
   {
     Labels: ['Channel.Setting.Name.DefaultMPN'],
@@ -201,7 +189,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Section: ChannelSettingSection.Listing,
     Fields: [eChannelSettings.DefaultMpn],
     Values: ['Channel.Setting.Value.DoesNotApply'],
-    Extra: [ChannelSettingExtra.TranslateDefaultValue]
+    Extra: [SettingExtra.TranslateDefaultValue]
   },
   {
     Labels: ['Channel.Setting.Name.DefaultQuantity'],
@@ -265,7 +253,7 @@ export const ChannelSettings: ChannelSetting[] = [
     }],
     AncestorsHide: true,
     ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
-    Extra: [ChannelSettingExtra.PolicyDelivery]
+    Extra: [SettingExtra.PolicyDelivery]
   },
   {
     Labels: ['Channel.Setting.Name.PolicyDispatchDays'],
@@ -308,7 +296,7 @@ export const ChannelSettings: ChannelSetting[] = [
     }],
     AncestorsHide: true,
     ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
-    Extra: [ChannelSettingExtra.BusinessShipping]
+    Extra: [SettingExtra.BusinessShipping]
   },
   {
     Labels: ['Channel.Setting.Name.BusinessReturn'],
@@ -323,7 +311,7 @@ export const ChannelSettings: ChannelSetting[] = [
     }],
     AncestorsHide: true,
     ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
-    Extra: [ChannelSettingExtra.BusinessReturn]
+    Extra: [SettingExtra.BusinessReturn]
   },
   {
     Labels: ['Channel.Setting.Name.BusinessPayment'],
@@ -338,7 +326,7 @@ export const ChannelSettings: ChannelSetting[] = [
     }],
     AncestorsHide: true,
     ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
-    Extra: [ChannelSettingExtra.BusinessPayment]
+    Extra: [SettingExtra.BusinessPayment]
   },
   {
     Labels: ['Channel.Setting.Name.BusinessPostcode'],
@@ -375,7 +363,7 @@ export const ChannelSettings: ChannelSetting[] = [
     Fields: [],
     Values: ['Channel.Setting.Name.RefreshPolicies'],
     ChannelIds: [ePlatform.eBay, ePlatform.eBayNoApi],
-    Extra: [ChannelSettingExtra.RefreshPolicies]
+    Extra: [SettingExtra.RefreshPolicies]
   },
 
   {
