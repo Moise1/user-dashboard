@@ -31,7 +31,6 @@ import { channelConfigurationReducer } from '../channel-configuration/channels-c
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 export const allReducers = combineReducers({
-  sourcesReducer:sourcesReducer,
   user: userReducer,
   pricingRules: pricingRulesReducer,
   subscriptions: subscriptionsReducer,
@@ -39,7 +38,7 @@ export const allReducers = combineReducers({
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
 
-  // sources: sourcesReducer,
+  sources: sourcesReducer,
   sourcesConfiguration: sourcesConfigReducer,
 
   channels: channelsReducer,

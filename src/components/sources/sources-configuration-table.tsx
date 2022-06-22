@@ -37,8 +37,8 @@ export const SourcesConfigurationTable = () => {
   const channelSettingsDic = new Map(channelSettings?.map(x => [x.key, x.value]) ?? []);
   const { templates } = useAppSelector((state) => state.templates as TemplateState);
 
-  const [selectedSource, setSelectedSource] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  //const [selectedSource, setSelectedSource] = useState<number>(1);
+  //const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [searchFilter, setSearchFilter] = useState<string>('');
 
   useEffect(() => {
@@ -163,12 +163,12 @@ export const SourcesConfigurationTable = () => {
       </div>
       <div className="sources-table-container">
         <SimpleTable
-          onPageSizeChanged={setItemsPerPage}
-          currentPage={selectedSource}
-          onPageChange={setSelectedSource}
+          //onPageSizeChanged={setItemsPerPage}
+          //currentPage={selectedSource}
+          //onPageChange={setSelectedSource}
           columns={columns}
           dataSource={loading ? [] : filteredData}
-          pageSize={itemsPerPage}
+          //pageSize={itemsPerPage}
         />
       </div>
     </Layout>
