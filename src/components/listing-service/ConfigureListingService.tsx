@@ -7,16 +7,16 @@ import '../../sass/no-api/configure-noapi.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 
 import { Selector } from 'src/small-components/form/selector';
-import { SimpleTable } from '../tables/SimpleTable';
 
 import { Input, Spin } from 'antd';
+import { DataTable } from '../tables/DataTable';
 
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
   const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
   const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
 
-  const [ListingServicesPage, setListingServicesPage] = useState<number>(10);
+  const [ListingServicesPage, onPageSizeChanged] = useState<number>(10);
   const [current, setCurrent] = useState<number>(1);
 
   useEffect(() => {
@@ -92,13 +92,13 @@ export const ConfigureListingService = () => {
       ) : (
         <div className="no-api-servers">
           {listingServicesResult?.length ? (
-            <SimpleTable
-              setSourcesPerPage={setListingServicesPage}
+            <DataTable
               current={current}
               onChange={setCurrent}
               columns={columns}
               dataSource={listingServicesResult}
               pageSize={ListingServicesPage}
+              onPageSizeChanged={ListingServicesPage}
               totalItems={listingServicesResult?.length}
             />
           ) : (
