@@ -1,0 +1,63 @@
+.configure-listingservice-container {
+  .listingservices-table {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .configuration-section {
+    margin-top: 1rem;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+
+    border-radius: 1rem;
+    .listingservice-configuration {
+      padding: 2rem;
+      .sources-options {
+        display: flex;
+        .sources {
+          margin-top: 2rem;
+          display: flex;
+          .included-sources {
+            font-weight: bold;
+          }
+        }
+        .sources-resume {
+          margin-top: 4rem;
+          display: flex;
+          .sourcecard {
+            padding: 6px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            height: fit-content;
+            box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            h4 {
+              margin: 0;
+            }
+            .remove-card {
+              svg {
+                height: 25px;
+                width: 25px;
+              }
+            }
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .nosuscribed-container {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    .nosuscribed {
+      padding: 5rem 0;
+    }
+  }
+}

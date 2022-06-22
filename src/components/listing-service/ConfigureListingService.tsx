@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
-/*import { ListingService } from 'src/redux/dashboard/listingServicesSlice';*/
+import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
-import '../../sass/no-api/configure-noapi.scss';
+import '../../sass/listing-service/configure-listing-service.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 
 import { Selector } from 'src/small-components/form/selector';
-
-import { Input, Spin } from 'antd';
-import { DataTable } from '../tables/DataTable';
+import { Divider, Radio, Spin } from 'antd';
+import { SimpleTable } from 'src/small-components/simple-table';
+import { CrossModalIcon } from '../common/Icons';
 
 export const ConfigureListingService = () => {
-  const dispatch = useAppDispatch();
   const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+
   const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
 
-  const [ListingServicesPage, onPageSizeChanged] = useState<number>(10);
-  const [current, setCurrent] = useState<number>(1);
+  const { sources } = useAppSelector((state) => state.sourcesReducer);
 
-  useEffect(() => {
-    dispatch(getListingServices());
-  }, [getListingServices]);
-
-  console.log(listingServicesResult);
+  console.log(sources);
 
   const noSuscribed = (
     <div className="nosuscribed-container">
@@ -47,60 +40,125 @@ export const ConfigureListingService = () => {
 
   const columns = [
     {
-      title: 'Subscription',
+      title: 'Account',
       dataIndex: '',
       key: 'name',
       render: () => {
-        return <h4 className="no-api-title">Listing service</h4>;
-      }
-    },
-    {
-      title: 'Channel',
-      dataIndex: '',
-      key: '',
-      render: () => {
         return (
-          <Selector placeHolder="Select a channel">
+          <Selector placeHolder="Select channel">
             {channels?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
           </Selector>
         );
       }
     },
     {
-      title: 'Username',
+      title: 'Criteria',
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="username" className="blue-input" placeholder="Your store username" />;
+        return (
+          <Selector placeHolder="No preferences">
+            {channels?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
+          </Selector>
+        );
       }
     },
     {
-      title: 'Store password',
+      title: 'Listings',
+      dataIndex: '',
+      key: '',
+      render: (s: ListingService) => <h4>{s.quantity}</h4>
+    },
+    {
+      title: 'Status',
       dataIndex: '',
       key: '',
       render: () => {
-        return <Input name="storePasswd" className="blue-input" placeholder="*************" />;
+        return <p>Waiting preferences...</p>;
       }
+    },
+    {
+      title: 'ACtions',
+      dataIndex: '',
+      key: '',
+      render: () => {
+        return <ConfirmBtn>Start listing</ConfirmBtn>;
+      }
+    },
+    {
+      title: 'Date',
+      dataIndex: '',
+      key: '',
+      render: (s: ListingService) => <h4>{s.quantity}</h4>
     }
   ];
 
   return (
-    <div className="configure-noapi-container">
-      <h1>Set up your preferences</h1>
+    <div className="configure-listingservice-container">
+      <h1>Configure listing services</h1>
+      <p>
+        We will carefully select the products to list in your account, we just need you to tell us which account you
+        would like us to use.
+      </p>
+      <p>
+        If you don{"'"}t have any specific preferences, we will choose the items according to our criteria to help you
+        sell as many of them as possible. Alternatively, you can select Your Criteria on Criteria column and enter your
+        preferences there.
+      </p>
       {loading ? (
         <Spin />
       ) : (
-        <div className="no-api-servers">
+        <div className="listingservices-table">
           {listingServicesResult?.length ? (
-            <DataTable
-              current={current}
-              onChange={setCurrent}
-              columns={columns}
-              dataSource={listingServicesResult}
-              pageSize={ListingServicesPage}
-              onPageSizeChanged={ListingServicesPage}
-              totalItems={listingServicesResult?.length}
-            />
+            <SimpleTable columns={columns} dataSource={listingServicesResult} />
+          ) : (
+            noSuscribed
+          )}
+        </div>
+      )}
+      {loading ? (
+        <Spin />
+      ) : (
+        <div className="configuration-section">
+          {listingServicesResult?.length ? (
+            <div className="listingservice-configuration">
+              <h3>Channel name</h3>
+              <div className="sources-options">
+                <div className="sources">
+                  <div className="included-sources">
+                    <label>Include sources </label>
+                    <Selector placeHolder="Select...">
+                      {sources?.map(({ name: label, id: value }: Channel) => ({ value, label }))}
+                    </Selector>
+                  </div>
+                </div>
+                <div className="sources-resume">
+                  <div className="sourcecard">
+                    <h4>Amazon</h4>
+                    <div className="remove-card">
+                      <CrossModalIcon />
+                    </div>
+                  </div>
+                  <div className="sourcecard">
+                    <h4>Robert Dyas</h4>
+                    <div className="remove-card">
+                      <CrossModalIcon />
+                    </div>
+                  </div>
+                  <div className="sourcecard">
+                    <h4>Vida XL B2B</h4>
+                    <div className="remove-card">
+                      <CrossModalIcon />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <Divider />
+              <div className="price-options">
+                <Radio>Source price preference</Radio>
+                <Radio>Profit preference</Radio>
+              </div>
+            </div>
           ) : (
             noSuscribed
           )}
