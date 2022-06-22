@@ -13,7 +13,7 @@ import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
-import { CatalogProduct } from '../../redux/catalog/catalogSlice';
+import { CatalogProduct, selectedProductDetailData } from '../../redux/catalog/catalogSlice';
 import '../../sass/catalog.scss';
 import { getSources } from 'src/redux/sources/sourcesThunk';
 
@@ -37,8 +37,27 @@ export const Catalog = () => {
   const { Meta } = Card;
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
+  const { sources } = useAppSelector((state) => state.sourcesReducer);
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
+  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<
+    selectedProductDetailData
+  >({
+    channelPrice: 0,
+    competition: 0,
+    id: 0,
+    imageUrl: '',
+    options: 0,
+    priority: 0,
+    profit: 0,
+    quantityListed: 0,
+    sold: 0,
+    sourceId: 0,
+    sourcePrice: 0,
+    title: '',
+    url: '',
+  }
+  );
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
@@ -47,17 +66,18 @@ export const Catalog = () => {
   }, [getCatalogProducts]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-  const handleProductModal = () => setModalOpen(!modalOpen);
+  const handleProductModal = (id: number) => {
+    setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === (id))[0]);
+    setModalOpen(!modalOpen);
+  };
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
-
   const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
-
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
-
     setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
+      setProductId(0);
       cardElement.classList.remove('selected-product-card');
       setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
@@ -66,7 +86,12 @@ export const Catalog = () => {
     }
   };
 
-  const selectedProduct = allCatalogProducts.filter((d) => d.id === productId)[0];
+  const removeSelectedProduct = (e: ElementEventType): void => {
+    const cardElement = e.currentTarget;
+    const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
+    console.log({ selectedProductData });
+    setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
+  };
 
   const handleSelectAllProducts = (): void => {
     setClassName(className + ' ' + 'selected-product-card');
@@ -76,7 +101,6 @@ export const Catalog = () => {
     setClassName('product-card');
     setAllProducts([]);
   };
-
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
   };
@@ -108,31 +132,31 @@ export const Catalog = () => {
               <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
             </div>
           </div>
-
           <SearchOptions showSearchInput={false} />
           <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
             setAllCatalogProducts={setAllCatalogProducts} suppliersCount={sourcesIds}
           />
           <PopupModal
             open={modalOpen}
-            handleClose={handleProductModal}
+            handleClose={() => setModalOpen(false)}
             width={900}
             title={
               <div className="modal-title">
-                <h1 className="title">{selectedProduct?.title}</h1>
-                <p className="source">{selectedProduct?.source}</p>
+                <h1 className="title">{selectedProductDataDetail?.title.length > 20 ? `${selectedProductDataDetail?.title.substring(0, 20)} ...` : selectedProductDataDetail?.title}</h1>
+                <h1 className="source"> By : {selectedProductDataDetail?.id}</h1>
               </div>
             }
           >
             <ProductDetails
-              channelPrice={selectedProduct?.channelPrice}
-              imageUrl={selectedProduct?.imageUrl}
-              profit={selectedProduct?.profit}
-              sourcePrice={selectedProduct?.sourcePrice}
-              handleClose={handleProductModal}
+              productId={productId}
+              selectedProductDataDetail={selectedProductDataDetail}
+              channelPrice={selectedProductDataDetail?.channelPrice}
+              imageUrl={selectedProductDataDetail?.imageUrl}
+              profit={selectedProductDataDetail?.profit}
+              sourcePrice={selectedProductDataDetail?.sourcePrice}
+              handleClose={() => setModalOpen(false)}
             />
           </PopupModal>
-
           <PopupModal
             open={sourceModalOpen}
             handleClose={handleSourceModal}
@@ -144,9 +168,9 @@ export const Catalog = () => {
               </div>
             }
           >
-            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} />
+            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} sources={sources}
+            />
           </PopupModal>
-
           <PopupModal
             open={allProductsModalOpen}
             handleClose={handleAllProductsModal}
@@ -155,79 +179,62 @@ export const Catalog = () => {
             bodyStyle={{ height: 500 }}
             closable={false}
           >
-            <AllProducts removeProduct={handleSelectProduct} className={className}>
+            <AllProducts removeProduct={removeSelectedProduct} className={className}>
               {allProducts}
             </AllProducts>
           </PopupModal>
-
           <div className="catalog-cards">
             <div className="cards-container-catalog">
               {allCatalogProducts.map((d: CatalogProduct) => (
-                <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
-                  <Meta
-                    description={
-                      <div className="product-description">
-                        <div className="img-container">
-                          <img src={d.imageUrl} className="product-img" />
-                        </div>
-                        <div className="product-info-area">
-                          <div className="header">
-                            <p className="product-title">{d.title}</p>
-                            {/* <p className="source">by &nbsp;
-                              {d.sourceId === 1 && 'Amazon'
-                                || d.sourceId === 30 && 'Amazon'
-                                || d.sourceId === 140 && 'Amazon'
-                                || d.sourceId === 141 && 'Amazon'
-                                || d.sourceId === 3 && 'Costco'
-                                || d.sourceId === 78 && 'Costco'
-                                || d.sourceId === 10 && 'Robert Dyas'
-                                || d.sourceId === 5 && 'UK Banggodd'
-                                || d.sourceId === 56 && 'US Banggood'
-                                || d.sourceId === 57 && 'Banggood Com'
-                                || d.sourceId === 70 && 'Banggood Com'
-                                || d.sourceId === 59 && 'Costway'
-                                || d.sourceId === 31 && 'Walmart'
-                                || d.sourceId === 221 && 'SaleYee' ||
-                                d.sourceId === 222 && 'SaleYee'
-                                || d.sourceId === 185 && 'DropShip Traders'
-                                || d.sourceId === 216 && 'Vidaxl spain'
-                              }</p> */}
-
-                            <p className="source">by &nbsp;
-                              {d.sourceId}
-                            </p>
-
-                            <SearchOutlined className="view-details"
-                              onClick={handleProductModal} style={{ fontSize: '19px' }} />
-                          </div>
-                          <div className="transaction-details">
-                            <div>
-                              <p className="transaction-type">Sell</p>
-                              <p className="transaction-amount sell">
-                                <span>&pound;</span>
-                                {d.channelPrice}
-                              </p>
+                <>
+                  <Card key={d.id} className={className} onClick={handleSelectProduct} id={JSON.stringify(d.id)}>
+                    <Meta
+                      description={
+                        <>
+                          <div className="product-description" >
+                            <div className="img-container">
+                              <img src={d.imageUrl} className="product-img" />
                             </div>
-                            <div>
-                              <p className="transaction-type">Cost</p>
-                              <p className="transaction-amount cost">
-                                <span>&pound;</span>
-                                {d.sourcePrice}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="transaction-type">Profit</p>
-                              <p className="transaction-amount profit">
-                                <span>&pound;</span>
-                                {d.profit}
-                              </p>
+                            <div className="product-info-area">
+                              <div className="header">
+                                <p className="product-title"
+                                >{d.title}</p>
+                                <p className="source">by &nbsp;
+                                  {d.sourceId}
+                                </p>
+                                <SearchOutlined className="view-details"
+                                  onClick={() => { handleProductModal(d.id); }} style={{ fontSize: '19px' }} />
+                              </div>
+                              <div className="transaction-details">
+                                <div>
+                                  <p className="transaction-type">Sell</p>
+                                  <p className="transaction-amount sell">
+                                    <span>&pound;</span>
+                                    {d.channelPrice}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="transaction-type">Cost</p>
+                                  <p className="transaction-amount cost">
+                                    <span>&pound;</span>
+                                    {d.sourcePrice}
+                                  </p>
+                                </div>
+                                <div>
+                                  <p className="transaction-type">Profit</p>
+                                  <p className="transaction-amount profit">
+                                    <span>&pound;</span>
+                                    {d.profit}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    }
-                  />
-                </Card>
+                        </>
+                      }
+                    />
+                  </Card>
+                </>
               ))}
             </div>
             <div className="pagination-addall-container">
