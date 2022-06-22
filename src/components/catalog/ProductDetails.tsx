@@ -4,14 +4,32 @@ import { t } from '../../utils/transShim';
 import '../../sass/product-details.scss';
 
 interface Props {
-  imageUrl: string;
-  channelPrice: number;
-  profit: number;
-  sourcePrice: number;
+  imageUrl?: string;
+  channelPrice?: number;
+  profit?: number;
+  sourcePrice?: number;
   handleClose: () => void;
+  productId?: unknown;
+  selectedProductDataDetail?: {
+    channelPrice?: number;
+    competition?: number;
+    id?: number;
+    imageUrl: string;
+    options: number;
+    priority: number;
+    profit: number;
+    quantityListed: number;
+    sold: number;
+    sourceId: number;
+    sourcePrice: number;
+    title: string;
+    url: string;
+  }
+
 }
 export const ProductDetails = (props: Props) => {
-  const { imageUrl, profit, sourcePrice, channelPrice, handleClose } = props;
+  const { imageUrl, profit, sourcePrice, channelPrice, handleClose, selectedProductDataDetail, productId } = props;
+  console.log(selectedProductDataDetail);
   return (
     <div className="product-details">
       <Row gutter={[32, 0]}>
@@ -53,8 +71,13 @@ export const ProductDetails = (props: Props) => {
           </div>
           <Divider />
           <div className="action-btns">
+            {
+              productId !== 0 ?
+                <SuccessBtn>{t('RemoveFromSelection')}</SuccessBtn>
+                :
+                <SuccessBtn>{t('AddToSelection')}</SuccessBtn>
+            }
             <CancelBtn handleClose={handleClose}>{t('Cancel')}</CancelBtn>
-            <SuccessBtn>{t('AddToSelection')}</SuccessBtn>
           </div>
         </Col>
       </Row>

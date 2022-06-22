@@ -45,8 +45,8 @@ export const DangerBtn = ({ children, handleConfirm, className, disabled, htmlTy
   </Button>
 );
 
-export const CancelBtn = ({ children, disabled, cancelFiltering }: Props) => (
-  <Button className="cancel-btn" onClick={cancelFiltering} disabled={disabled} >
+export const CancelBtn = ({ children, disabled, cancelFiltering, handleClose }: Props) => (
+  <Button className="cancel-btn" onClick={cancelFiltering ? cancelFiltering : handleClose} disabled={disabled}  >
     {children}
   </Button>
 );

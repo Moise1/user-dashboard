@@ -21,6 +21,25 @@ export interface CatalogProduct {
   pageSize: number;
   sessionId: number;
   option: number;
+  productId:number;
+}
+
+
+export interface selectedProductDetailData
+{
+  channelPrice?: number;
+  competition?: number;
+  id?: number;
+  imageUrl: string;
+  options: number;
+  priority: number;
+  profit: number;
+  quantityListed: number;
+  sold: number;
+  sourceId: number;
+  sourcePrice: number;
+  title: string;
+  url: string;
 }
 
 const initialState = {
