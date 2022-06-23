@@ -106,13 +106,14 @@ export const AccountSettings: AccountSetting[] = [
     Section: AccountSettingSection.BillingAddress,
     Fields: [eAccountSettings.Vat],
     Values: [''],
-  },
-  {
-    Labels: ['Account.Setting.Name.SaveAll'],
-    Description: [''],
-    Type: SettingType.Button,
-    Section: AccountSettingSection.BillingAddress,
-    Fields: [eAccountSettings.None],
-    Values: [''],
   }
+  //,
+  //{
+  //  Labels: ['Account.Setting.Name.SaveAll'],
+  //  Description: [''],
+  //  Type: SettingType.Button,
+  //  Section: AccountSettingSection.BillingAddress,
+  //  Fields: [eAccountSettings.None],
+  //  Values: [''],
+  //}
 ];

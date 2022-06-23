@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Layout, Row } from 'antd';
+import { Layout, Radio, RadioChangeEvent, Row, Button, Col } from 'antd';
 import { StatusBar } from '../../../small-components/StatusBar';
 import { StatusBtn } from '../../../small-components/StatusBtn';
 import { t, TransUtils } from '../../../utils/transShim';
@@ -12,6 +12,8 @@ import { AccountSettingSections, AccountSettingSection } from '../configuration/
 import { SettingDataBag, AccountSettingInput } from '../../../small-components/settings/account-setting-input';
 import { ReactUtils } from '../../../utils/react-utils';
 import { Platforms } from '../../../data/platforms';
+import { toastAlert } from '../../../utils/toastAlert';
+import { Link } from 'react-router-dom';
 
 
 export const AccountConfiguration = () => {
@@ -33,8 +35,6 @@ export const AccountConfiguration = () => {
     savingSettings: savingSettingsState
   } = useAppSelector((state) => state.accountConfiguration as AccountConfigurationState);
 
-  const [data, setData] = useState(settings ? settings : []);
-
   const initialModel: Account = {
     country: '',
     businessType: '',
@@ -51,13 +51,10 @@ export const AccountConfiguration = () => {
   };
 
   const [model, setModel] = useState<Account>(initialModel);
+  const [iAmBusiness, setIAMBusiness] = useState<boolean>();
+
 
   const SaveSetting = (key: eAccountSettings, value: SettingsValue) => {
-    const newData = data.map((x) => {
-      if (x.key === key)
-        return { ...x, value: value };
-      return x;
-    });
 
     switch (key) {
       case eAccountSettings.Address1: {
@@ -133,13 +130,15 @@ export const AccountConfiguration = () => {
         break;
       }
     }
-    setData(newData);
-    console.log(newData);
+
     console.log(model);
   };
-
+  const onChange = (e: RadioChangeEvent) => {
+    setIAMBusiness(e.target.value as unknown as boolean);
+    SaveSetting(eAccountSettings.IAmBusiness, e.target.value);
+    console.log(iAmBusiness);
+  };
   const InitializeModel = () => {
-    console.log('InitializeModel');
     settings?.map((x) => {
       switch (x.key) {
         case eAccountSettings.Address1: {
@@ -176,6 +175,7 @@ export const AccountConfiguration = () => {
           setModel({
             ...model, iAmBusiness: x.value as unknown as boolean
           });
+          setIAMBusiness(x.value === 'True' ? true : false);
           break;
         }
         case eAccountSettings.NeedInformation: {
@@ -219,7 +219,6 @@ export const AccountConfiguration = () => {
   };
 
   useEffect(() => {
-    console.log('called the account config');
     dispatch(getAccountConfiguration());
     InitializeModel();
   }, [getAccountConfiguration]);
@@ -228,14 +227,15 @@ export const AccountConfiguration = () => {
   const savingSetting = new Map(savingSettingsState?.map((x) => [x.data.key, x]));
 
   const OnButtonClick = async () => {
-    console.log('data: ' + data.length);
-    console.log(model);
-
     console.log(model);
     const rp = await dispatch(saveAccountSetting(model));
     console.log(rp);
-    if (!rp.payload?.success) {
+    if (rp.payload?.success) {
       dispatch(getAccountConfiguration());
+      toastAlert('Account successfully deleted', 'success');
+    }
+    else {
+      toastAlert(rp.payload.error[0].description, 'error');
     }
     dispatch(getAccountConfiguration());
   };
@@ -260,10 +260,50 @@ export const AccountConfiguration = () => {
       (x) => x.Section == section && (!x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0))
     );
     if (section === AccountSettingSection.BillingAddress) {
-      return <>
-        {settings.map((x) => RenderSetting(x))}
-      </>;
-
+      return <div>
+        <Radio.Group defaultValue={iAmBusiness} value={iAmBusiness} onChange={onChange}>
+          <Radio className='radio' checked={iAmBusiness} value={true}><h3>Business account</h3></Radio>
+          <h4> Business users will be able to download invoices and manage their billing details.</h4>
+          <h4> &nbsp; </h4>
+          <Row>
+            <Col span={2}>&nbsp;</Col>
+            <Col span={22}>
+              {iAmBusiness && settings.map((x) => RenderSetting(x))}
+            </Col>
+          </Row>
+          <h4> &nbsp; </h4>
+          <Radio className='radio' checked={iAmBusiness} value={false}><h3>Personal Account</h3></Radio>
+          <h4>Personal use only.If you are in the process of creating a business, please select the &quot;Business Account&quot; option above.</h4>
+        </Radio.Group>
+        <h4> &nbsp; </h4>
+        <Row>
+          <Col span={16}>&nbsp;</Col>
+          <Col span={8}>
+            <Button className='success-btn save-btn' onClick={OnButtonClick}>{t('Account.Setting.Name.SaveAll')}</Button>
+          </Col>
+        </Row>
+      </div>;
+    }
+    else if (section === AccountSettingSection.PaymentMethod) {
+      return <div>
+        <Row>
+          <h1>Subscription payment method</h1>
+        </Row>
+        <Row>
+          <h5>We accept PayPal and Card payments for our <Link to='/subscriptions'>subscription plans</Link>.</h5>
+        </Row>
+        <h3> &nbsp; </h3>
+        <Row>
+          <h1>Auto ordering payment method</h1>
+        </Row>
+        <Row>
+          <h5>We offer free auto ordering for Premium Suppliers. For suppliers which are not Premium, we charge a 1% commission on every sale. We will charge the card you choose on this section.</h5>
+        </Row>
+        <h6> &nbsp; </h6>
+        <Row>
+          <h5>View auto ordering commission payments</h5>
+        </Row>
+      </div>;
     }
     return <>{settings.map((x) => RenderSetting(x))}</>;
   };
@@ -274,7 +314,6 @@ export const AccountConfiguration = () => {
 
   return (
     <Layout className="account-settings">
-      <h1>Accounts</h1>
       <StatusBar>
         <>
           {!loading && (

@@ -43,7 +43,6 @@ interface Props {
 
 export const AccountSettingInput = (props: Props) => {
   const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag, onButtonClick } = props;
-  console.log(dataBag);
   const t = (c: string) => trans(c, translationValues);
 
   const disabled = ((setting: AccountSetting) => {
@@ -145,10 +144,9 @@ export const AccountSettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingString = (values: SettingsValue[], fields: eAccountSettings[], extra: AccountSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderSettingString = (values: SettingsValue[], fields: eAccountSettings[], extra: AccountSettingExtra[] | undefined, disabled: boolean) => {
     const savingState = savingSetting.get(fields[0]);
     const value = configuration?.get(fields[0]) ?? values[0];
-    console.log(dataBag);
     return (
       <Col span={8} className='input-container'>
         <SettingString
@@ -238,10 +236,9 @@ export const AccountSettingInput = (props: Props) => {
     );
   };
 
-  const RenderSettingList = (values: SettingsValue[], fields: eAccountSettings[], extra: AccountSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderSettingList = (values: SettingsValue[], fields: eAccountSettings[], extra: AccountSettingExtra[] | undefined, disabled: boolean) => {
     const savingState = savingSetting.get(fields[0]);
     const value = configuration?.get(fields[0]) ?? values[0];
-    console.log(dataBag);
 
     const listValues: ListData[] = [];
     for (let i = 1; i < values.length; i += 2) {
@@ -347,10 +344,10 @@ export const AccountSettingInput = (props: Props) => {
       input = RenderSettingBoolean(values, setting.Fields, disabled);
       break;
     case SettingType.String:
-      input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
+      input = RenderSettingString(values, setting.Fields, setting.Extra, disabled);
       break;
     case SettingType.List:
-      input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
+      input = RenderSettingList(values, setting.Fields, setting.Extra, disabled);
       break;
     case SettingType.TwoOptions:
       input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
