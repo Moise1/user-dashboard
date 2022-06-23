@@ -9,14 +9,12 @@ import { t } from '../../utils/transShim';
 import { eCountry } from '../../utils/eCountry';
 import { Flag } from './Flag';
 
-interface values {
-  storeLocation: string;
-}
+
 export interface StoreLocationProps {
   platform: number;
   step: number;
   handleChangeLocation: (newLocation:  number) => void;
-  values?: values;
+  location: string | number | null;
 }
 
 const flags = [
@@ -76,11 +74,10 @@ const flags = [
     slug: 'it',
     code: eCountry.IT,
   },
-
 ];
 
 export const StoreLocation = (props: StoreLocationProps) => {
-  const { platform, handleChangeLocation, values } = props;
+  const { platform, handleChangeLocation, location } = props;
 
   return (
     <form className="location-form">
@@ -100,10 +97,7 @@ export const StoreLocation = (props: StoreLocationProps) => {
           />
         ))}
       </div>
-      <p className="select-country">
-        {' '}
-        {values?.storeLocation == '' ? '*Please select a country in order to proceed' : null}
-      </p>
+      {!location && <p className="danger-txt list-check">*Please select a country in order to proceed</p>}
     </form>
   );
 };
