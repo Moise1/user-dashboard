@@ -1,6 +1,6 @@
 ﻿import { Spin } from 'antd';
 import { useState } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 import { t } from '../../utils/transShim';
 import { Selector, SelectorValue } from '../form/selector';
 

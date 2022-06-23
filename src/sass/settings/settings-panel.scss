@@ -1,8 +1,8 @@
-@import 'general.config';
+@import '../general.config';
 
 // large and extra large screens
 
-.channel-settings, .source-settings {
+.settings-panel {
   .content {
     display: flex;
     justify-content: space-between;
@@ -41,7 +41,7 @@
 // Tablet's screen sizes
 
 @media only screen and(max-width: 1030px) {
-    .channel-settings, .source-settings {
+    .settings-panel {
         .content {
             .limit-area{
                 width: 30%;

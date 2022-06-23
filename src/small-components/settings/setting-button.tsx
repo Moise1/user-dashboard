@@ -1,6 +1,6 @@
 ﻿import { Button, Spin } from 'antd';
 import { ReactNode } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 
 interface Props {
   label: string | ReactNode;

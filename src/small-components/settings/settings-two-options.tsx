@@ -1,6 +1,6 @@
 ﻿import { Radio, RadioChangeEvent, Spin } from 'antd';
 import { ReactNode, useState } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 import { SettingNumber } from './setting-number';
 
 interface Props {

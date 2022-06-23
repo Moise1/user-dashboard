@@ -5,7 +5,7 @@
   ManualPublish: '/manual-publish',
   BulkPublish: '/bulk-publish',
   Orders: '/orders',
-  SourcesSettingsTable: '/suppliers',
+  SourcesSettings: '/suppliers',
   ChannelSettings: '/channel-configuration',
   NewChannel: '/new-channel',
   Services: '/services',

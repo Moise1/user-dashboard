@@ -16,7 +16,7 @@ export { ChannelConfiguration } from './chanel/channel-configuration';
 export { SettingsPanel } from '../small-components/settings/settings-panel';
 export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
-export { SourcesConfigurationTable } from './sources/sources-configuration-table';
+export { SourcesConfiguration } from './sources/sources-configuration';
 export { Dashboard } from './dashboard/Dashboard';
 export { Templates } from './templates/Templates';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';

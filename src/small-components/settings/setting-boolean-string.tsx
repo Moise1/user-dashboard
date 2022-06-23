@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 import { SettingBoolean } from './setting-boolean';
 import { SettingString } from './setting-string';
 

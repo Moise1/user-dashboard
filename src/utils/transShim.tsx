@@ -48,7 +48,7 @@ export const TransUtils = {
   },
   GetLinksValues: () => {
     return {
-      sources_table_link: <Link to={Links.SourcesSettingsTable}>{t('Menu.SourcesTable', {})}</Link>,
+      sources_table_link: <Link to={Links.SourcesSettings}>{t('Menu.SourcesTable', {})}</Link>,
       templates_link: <Link to={Links.Templates}>{t('Menu.Templates', {})}</Link>,
     };
   }

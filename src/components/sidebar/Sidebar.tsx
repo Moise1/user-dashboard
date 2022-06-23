@@ -95,7 +95,7 @@ export const Sidebar = (props: Props) => {
 
   const settingsListArray = [
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange(Links.ChannelSettings) },
-    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange(Links.SourcesSettingsTable) },
+    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange(Links.SourcesSettings) },
     { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange(Links.PricingRules) },
     { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange(Links.BrowserExtension) },
     { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange(Links.Subscriptions) },

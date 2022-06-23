@@ -3,7 +3,7 @@ import { Layout, Row } from 'antd';
 import { StatusBar } from '../StatusBar';
 import { StatusBtn } from '../StatusBtn';
 import { t, TransUtils } from '../../utils/transShim';
-import '../../sass/channel-settings.scss';
+import '../../sass/settings/settings-panel.scss';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { loadBusinessPolicies, loadShipping, refreshBusinessPolicies, } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { SettingDataBag, SettingInput } from './setting-input';
@@ -12,15 +12,15 @@ import { Platforms } from '../../data/platforms';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
 import { ePlatform } from '../../utils/ePlatform';
-import { SettingData, SettingExtra, SettingInfo, SettingKey, SettingSectionId, SettingSectionsInfo, SettingValue } from '../../types/settings';
+import { SettingData, SettingExtra, SettingInfo, ChannelSettingKey, SettingSectionId, SettingSectionsInfo, SettingValue } from '../../types/settings';
 import { ChannelConfigurationState } from '../../redux/channel-configuration/channels-configuration-slice';
 
 interface Props {
   Sections?: SettingSectionsInfo[];
   SettingsData?: SettingData[] | null;
   SettingsInfo: SettingInfo[];
-  OnSaveSetting: (key: SettingKey, value: SettingValue) => void;
-  SettingsBeingSaved: Set<SettingKey>;
+  OnSaveSetting: (key: ChannelSettingKey, value: SettingValue) => void;
+  SettingsBeingSaved: Set<ChannelSettingKey>;
   Loading: boolean;
 }
 
@@ -88,16 +88,16 @@ export const SettingsPanel = (props: Props) => {
     let templates = false;
     for (const e of allExtras ?? []) {
       switch (e) {
-        case SettingExtra.TemplateList:
-          templates = true;
-          break;
-        case SettingExtra.BusinessPayment:
-        case SettingExtra.BusinessReturn:
-        case SettingExtra.BusinessShipping:
-        case SettingExtra.PolicyDelivery:
-        case SettingExtra.RefreshPolicies:
-          policies = true;
-          break;
+      case SettingExtra.TemplateList:
+        templates = true;
+        break;
+      case SettingExtra.BusinessPayment:
+      case SettingExtra.BusinessReturn:
+      case SettingExtra.BusinessShipping:
+      case SettingExtra.PolicyDelivery:
+      case SettingExtra.RefreshPolicies:
+        policies = true;
+        break;
       }
     }
     if (templates) {
@@ -112,14 +112,14 @@ export const SettingsPanel = (props: Props) => {
   const OnButtonClick = async (setting: SettingInfo) => {
     for (const e of setting.Extra ?? []) {
       switch (e) {
-        case SettingExtra.RefreshPolicies:
-          dispatch(refreshBusinessPolicies());
-          break;
+      case SettingExtra.RefreshPolicies:
+        dispatch(refreshBusinessPolicies());
+        break;
       }
     }
   };
 
-  const configuration = new Map(SettingsData?.map(x => [x.Key, x.Value]) ?? []);
+  const configuration = new Map(SettingsData?.map(x => [x.key, x.value]) ?? []);
 
   const RenderSetting = (setting: SettingInfo) => {
     return <SettingInput
@@ -149,7 +149,7 @@ export const SettingsPanel = (props: Props) => {
   const loading = Loading || !SettingsData;
 
   return (
-    <Layout className='channel-settings'>
+    <Layout className='settings-panel'>
       {(sections?.length ?? 0) > 0 &&
         <StatusBar>
           <>
@@ -169,7 +169,7 @@ export const SettingsPanel = (props: Props) => {
             }
           </>
         </StatusBar>
-        }
+      }
       <Row className="content">
         {!loading && RenderContent(activeTab)}
       </Row>

@@ -1,5 +1,5 @@
 ﻿import { Spin, Switch } from 'antd';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 
 interface Props{
   defaultValue: string;

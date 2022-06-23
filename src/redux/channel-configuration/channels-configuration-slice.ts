@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { SettingData, SettingValue } from '../../types/settings';
 import { getChannelConfiguration, loadBusinessPolicies, loadShipping, refreshBusinessPolicies, saveChannelSetting } from './channels-configuration-thunk';
 
-export enum eChannelSettings {
+export enum SettingKey {
   None = 0,
 
   PaypalEmail = 3,
@@ -75,8 +75,8 @@ export interface BusinessPolicy {
 export type ShippingOption = {text:string, value:string};
 
 export interface ChannelSettingData extends SettingData {
-  Key: eChannelSettings;
-  Value: SettingValue;
+  key: SettingKey;
+  value: SettingValue;
 }
 
 export interface SavingSetting {
@@ -143,7 +143,7 @@ export const channelConfigurationSlice = createSlice({
     builder.addCase(saveChannelSetting.pending, (state, { meta }) => {
       if (!state.savingSettings)
         state.savingSettings = [];
-      const prv = state.savingSettings.find(x => x.data.Key == meta.arg.Key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {
         prv.loading = true;
         prv.data = meta.arg;
@@ -157,15 +157,15 @@ export const channelConfigurationSlice = createSlice({
       }
     });
     builder.addCase(saveChannelSetting.fulfilled, (state, { payload, meta }) => {
-      const prv = state.savingSettings.find(x => x.data.Key == meta.arg.Key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = payload?.success;
       }
       if (payload?.success && state.settings) {
-        const vk = state.settings.find(x => x.Key == meta.arg.Key);
+        const vk = state.settings.find(x => x.key == meta.arg.key);
         if (vk) {
-          vk.Value = meta.arg.Value;
+          vk.value = meta.arg.value;
         } else {
           state.settings.push(meta.arg);
         }
@@ -173,7 +173,7 @@ export const channelConfigurationSlice = createSlice({
       }
     });
     builder.addCase(saveChannelSetting.rejected, (state, { meta }) => {
-      const prv = state.savingSettings.find(x => x.data.Key == meta.arg.Key);
+      const prv = state.savingSettings.find(x => x.data.key == meta.arg.key);
       if (prv) {//this should be always true
         prv.loading = false;
         prv.success = false;

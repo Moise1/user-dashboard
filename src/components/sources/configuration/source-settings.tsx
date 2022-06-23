@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getChannelConfiguration, saveChannelSetting } from '../../redux/channel-configuration/channels-configuration-thunk';
-import { ChannelConfigurationState, SettingKey } from '../../redux/channel-configuration/channels-configuration-slice';
-import { ChannelSettingsList } from './configuration/channel-settings';
-import { ChannelSettingsSections } from './configuration/channel-sections';
-import { getChannels } from '../../redux/channels/channelsThunk';
-import { SettingValue } from '../../types/settings';
-import { SettingsPanel } from '../../small-components/settings/settings-panel';
+﻿import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../custom-hooks/reduxCustomHooks';
+import { getChannelConfiguration, saveChannelSetting } from '../../../redux/channel-configuration/channels-configuration-thunk';
+import { ChannelConfigurationState, SettingKey } from '../../../redux/channel-configuration/channels-configuration-slice';
+import { getChannels } from '../../../redux/channels/channelsThunk';
+import { SettingValue } from '../../../types/settings';
+import { SettingsPanel } from '../../../small-components/settings/settings-panel';
+import { ChannelSettingsList } from '../../chanel/configuration/channel-settings';
+import { ChannelSettingsSections } from '../../chanel/configuration/channel-sections';
 
-export const ChannelConfiguration = () => {
+export const SourceSettings = () => {
   //Load from api------------------------------------------------------------
   const dispatch = useAppDispatch();
   const {
