@@ -34,7 +34,7 @@ export const SourcesConfigurationTable = () => {
     businessPolicies,
     shipping
   } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
-  const channelSettingsDic = new Map(channelSettings?.map(x => [x.key, x.value]) ?? []);
+  const channelSettingsDic = new Map(channelSettings?.map(x => [x.Key, x.Value]) ?? []);
   const { templates } = useAppSelector((state) => state.templates as TemplateState);
 
   //const [selectedSource, setSelectedSource] = useState<number>(1);

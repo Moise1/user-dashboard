@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
-import { SettingKey } from './channels-configuration-slice';
+import { ChannelSettingData } from './channels-configuration-slice';
 
 export const getChannelConfiguration = createAsyncThunk( 'channelConfiguration/get',
   async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
@@ -14,7 +14,7 @@ export const getChannelConfiguration = createAsyncThunk( 'channelConfiguration/g
 );
 
 export const saveChannelSetting = createAsyncThunk('channelConfiguration/SaveOne',
-  async (data: SettingKey) => {
+  async (data: ChannelSettingData) => {
     try {
       const res = await client.post('/channelConfiguration/SaveOne', data);
       return res.data.response_data;

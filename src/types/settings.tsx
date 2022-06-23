@@ -1,7 +1,13 @@
-﻿import { ePlatform } from "../src/utils/ePlatform";
+﻿import { ePlatform } from "../utils/ePlatform";
 
 export type SettingSectionId = number;
-export type SettingFieldId = number;
+export type SettingKey = number;
+export type SettingValue = string | null;
+
+export interface SettingData {
+  Key: SettingKey;
+  Value: SettingValue;
+}
 
 export interface SettingSectionsInfo {
   Type: SettingSectionId;
@@ -19,16 +25,16 @@ export enum SettingExtra {
 }
 
 export interface Ancestor {
-  Field: SettingFieldId;
+  Field: SettingKey;
   Value: string;
 }
 
-export interface Setting {
+export interface SettingInfo {
   Labels: string[];
   Description: string[];
   Type: SettingType;
   Section: SettingSectionId;
-  Fields: SettingFieldId[];
+  Fields: SettingKey[];
   Values: (string | null)[];
   ChannelIds?: ePlatform[];//If undefined it accepts all the channels
   Ancestors?: Ancestor[];

@@ -13,7 +13,7 @@ export { PricingRules } from './pricing-rules/PricingRules';
 export { BrowserExtensions } from './browser-extensions/BrowserExtensions';
 export { VaProfiles } from './va-profiles/VaProfiles';
 export { ChannelConfiguration } from './chanel/channel-configuration';
-export { SourceConfiguration } from './sources/configuration/source-configuration';
+export { SettingsPanel } from '../small-components/settings/settings-panel';
 export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
 export { SourcesConfigurationTable } from './sources/sources-configuration-table';

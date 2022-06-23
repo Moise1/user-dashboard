@@ -1,7 +1,7 @@
-﻿import { Ancestor, Setting, SettingExtra } from '../../../../types/settings';
+﻿import { Ancestor, SettingExtra, SettingInfo } from '../../../types/settings';
 import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
 import { ePlatform } from '../../../utils/ePlatform';
-import { ChannelSettingSection } from './sections';
+import { ChannelSettingSection } from './channel-sections';
 
 export enum SettingType {
   Number, Boolean, String, List, WordList, BooleanNumber, BooleanString, BooleanStringNull, SwitchTwoOptions, TwoOptions, Button
@@ -12,13 +12,13 @@ interface ChannelAncestor extends Ancestor {
   Value: string;
 }
 
-export interface ChannelSetting extends Setting {
+export interface ChannelSettingInfo extends SettingInfo {
   Section: ChannelSettingSection;
   Fields: eChannelSettings[];
   Ancestors?: ChannelAncestor[];
 }
 
-export const ChannelSettings: ChannelSetting[] = [
+export const ChannelSettingsList: ChannelSettingInfo[] = [
   {
     Labels: ['Channel.Setting.Name.Markup'],
     Description: ['Channel.Setting.Description.Markup'],
