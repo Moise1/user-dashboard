@@ -25,6 +25,7 @@
   ConfigureNoapi: '/configure-no-api-server',
   Login: '/login',
   Register: '/register',
+  PriceWarrior: '/price-warrior',
   ListingService: 'https://hustlegotreal.com/en/listing-service/',
   AutoOrderConfigurationQuery: '/auto-ordering-configuration-query' //<--What's this?
 };
