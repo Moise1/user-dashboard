@@ -262,8 +262,8 @@ export const AccountConfiguration = () => {
     if (section === AccountSettingSection.BillingAddress) {
       return <div>
         <Radio.Group defaultValue={iAmBusiness} value={iAmBusiness} onChange={onChange}>
-          <Radio className='radio' checked={iAmBusiness} value={true}><h3>Business account</h3></Radio>
-          <h4> Business users will be able to download invoices and manage their billing details.</h4>
+          <Radio className='radio' checked={iAmBusiness} value={true}><h3>{t('Account.Setting.BusinessAccount')}</h3></Radio>
+          <h4>{t('Account.Setting.Description.BusinessAccount')}</h4>
           <h4> &nbsp; </h4>
           <Row>
             <Col span={2}>&nbsp;</Col>
@@ -272,14 +272,15 @@ export const AccountConfiguration = () => {
             </Col>
           </Row>
           <h4> &nbsp; </h4>
-          <Radio className='radio' checked={iAmBusiness} value={false}><h3>Personal Account</h3></Radio>
-          <h4>Personal use only.If you are in the process of creating a business, please select the &quot;Business Account&quot; option above.</h4>
+          <Radio className='radio' checked={iAmBusiness} value={false}><h3>{t('Account.Setting.PersonalAccount')}</h3></Radio>
+          <h4>{t('Account.Setting.Description.PersonalAccount')}</h4>
+          <h4></h4>
         </Radio.Group>
         <h4> &nbsp; </h4>
         <Row>
           <Col span={16}>&nbsp;</Col>
           <Col span={8}>
-            <Button className='success-btn save-btn' onClick={OnButtonClick}>{t('Account.Setting.Name.SaveAll')}</Button>
+            <Button className='primary-btn save-btn' onClick={OnButtonClick}>{t('Account.Setting.Name.SaveAll')}</Button>
           </Col>
         </Row>
       </div>;
@@ -287,21 +288,24 @@ export const AccountConfiguration = () => {
     else if (section === AccountSettingSection.PaymentMethod) {
       return <div>
         <Row>
-          <h1>Subscription payment method</h1>
+          <h1>{t('Account.PaymentMethod.SubscriptionPaymentMethod')}</h1>
         </Row>
         <Row>
-          <h5>We accept PayPal and Card payments for our <Link to='/subscriptions'>subscription plans</Link>.</h5>
+          <h5>{t('Account.PaymentMethod.Description.SubscriptionPaymentMethod')}<Link to='/subscriptions'>{t('Account.PaymentMethod.Description.subscriptionplans')}</Link>.</h5>
         </Row>
         <h3> &nbsp; </h3>
         <Row>
-          <h1>Auto ordering payment method</h1>
+          <h1>{t('Account.PaymentMethod.AutoOrderingPM')}</h1>
         </Row>
         <Row>
-          <h5>We offer free auto ordering for Premium Suppliers. For suppliers which are not Premium, we charge a 1% commission on every sale. We will charge the card you choose on this section.</h5>
+          <h5>{t('Account.PaymentMethod.Description.AutoOrderingWOF')}<Link to='/services/auto-ordering'>{t('Account.PaymentMethod.PremiumSuppliers')}</Link>. {t('Account.PaymentMethod.Description.AutoOrderingFSP')}</h5>
         </Row>
         <h6> &nbsp; </h6>
         <Row>
-          <h5>View auto ordering commission payments</h5>
+          <h5>{t('Account.PaymentMethod.Description.VAOCP')}</h5>
+        </Row>
+        <Row>
+          <Button className='primary-btn save-btn'>{t('Account.PaymentMethod.AddPaymentMentod')}</Button>
         </Row>
       </div>;
     }
