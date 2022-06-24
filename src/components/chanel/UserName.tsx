@@ -2,10 +2,9 @@ import { t } from '../../utils/transShim';
 import { Input, Form } from 'antd';
 import { eShop } from '../../utils/eShop';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
-import { createNewChannel } from 'src/redux/new-channel/newChannelThunk';
-import { ConfirmBtn } from 'src/small-components/ActionBtns';
+import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/newChannelThunk';
+import { ConfirmBtn, SuccessBtn } from 'src/small-components/ActionBtns';
 import { popupWindow } from './NewChannel';
-// import { useState } from 'react';
 
 interface props {
   step: number;
@@ -15,25 +14,27 @@ interface props {
 
 export const UserName = (props: props) => {
   const { platform, storeLocation } = props;
-  // const [shopName, setShopName] = useState<string>('');
 
   const dispatch = useAppDispatch();
-  const {getLinkLoading, newChannelLoading} = useAppSelector((state) => state.newChannel);
+  const {getLinkLoading, newChannelLoading, url} = useAppSelector((state) => state.newChannel);
   const ebayShopIdentifier = 'My_Super_Shop';
   const amazonShopIdentifier = 'MySuperShop';
   const shopifyShopUrl = 'https://myshop.myshopify.com';
 
   const platformValue = eShop[platform];
-  const onFinish =  (values: { shopName: string }) => {
+  const onFinish = (values: { shopName: string }) => {
     if(platform === 2){
-      popupWindow(
-        `${values.shopName}/admin/auth/login`, 
-        window, 
-        800, 
-        600
+      dispatch(
+        getShopifyLinkAccount({data: {
+          shop: platform,
+          site: storeLocation as number,
+          shopName: values.shopName
+        }
+        })
       );
-      return;
+      return false;
     }
+
     dispatch(
       createNewChannel({
         isoCountry: storeLocation as number,
@@ -41,19 +42,20 @@ export const UserName = (props: props) => {
         channelStoreIdentifier: values.shopName
       })
     );
+  
   };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
-  //   setShopName(e.target.value);
-  //   dispatch(getShopifyLinkAccount({
-  //     data: {
-  //       shop: platform,
-  //       site: storeLocation as number,
-  //       shopName
-  //     }
-  //   }));
-  // };
-  
+  const shopifyLogin = () => {
+    if(url) {
+      popupWindow(
+        url, 
+        window, 
+        800, 
+        600
+      );
+    }
+  };
+
   return (
     <div className="username-form-container">
       <h5 className="title">
@@ -73,13 +75,13 @@ export const UserName = (props: props) => {
           <Input
             className="input-field"
             placeholder={platform === 1 ? ebayShopIdentifier : platform === 2 ? shopifyShopUrl : amazonShopIdentifier}
-            // onChange={handleChange}
           />
         </Form.Item>
         <ConfirmBtn htmlType="submit" 
           disabled={getLinkLoading || newChannelLoading}>
           {getLinkLoading || newChannelLoading ? 'Please wait...': 'Submit'}
         </ConfirmBtn>
+        {platform === 2 && url && <SuccessBtn handleConfirm={shopifyLogin}>Login with Shopify</SuccessBtn>}
       </Form>
     </div>
   );
