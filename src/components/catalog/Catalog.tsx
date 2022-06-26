@@ -37,7 +37,7 @@ export const Catalog = () => {
   const { Meta } = Card;
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
-  const { sources } = useAppSelector((state) => state.sourcesReducer);
+  const { sources } = useAppSelector((state) => state.sources);
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
   const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<

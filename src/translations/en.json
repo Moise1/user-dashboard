@@ -127,6 +127,7 @@
   "Menu.Dashboard": "Dashboard",
   "Menu.Help": "Help",
   "Menu.Listings": "Products",
+  "Menu.ConfigureListingService": "Listing Service",
   "Menu.ListNow": "Publish Now",
   "Menu.Logout": "Logout",
   "Menu.PricingRules": "Pricing Rules",

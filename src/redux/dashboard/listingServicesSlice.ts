@@ -2,7 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getListingServices } from './listingServicesThunk';
 
 export interface ListingService {
-  quantity: number;
+  id: number;
+  channelOAuthId?: number;
+  includedSources: string;
+  excludedSources: string;
+  minSourcePrice?: number;
+  maxSourcePrice?: number;
+  minProfit?: number;
+  maxProfit?: number;
+  notes: string;
+  userSubscriptionPaymentId: number;
+  updatedOn?: string;
+  startedOn?: string;
+  endedOn?: string;
+  userNotes: string;
+  listings: number;
+  purchasedOn?: Date;
+}
+
+export interface ListingPreferences {
+  label: string;
   id: number;
 }
 

@@ -1,16 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getSources } from './sourcesThunk';
+import { getSources, getSourcesForListing } from './sourcesThunk';
 
 
 export interface Source {
   id: number;
   baseUrl: string;
   name: string;
+  site: number;
   recommended: boolean;
   catalogAllowed: boolean;
   manualAllowed: boolean;
   bulkAllowed: boolean;
   privateSupplier: boolean;
+  listingServiceAllowed: number;
+}
+
+export interface ListingSource {
+  listingSource: Source[],
+  loading: boolean,
+  error: string
 }
 
 export interface SourceState {
@@ -21,6 +29,12 @@ export interface SourceState {
 
 const initialState: SourceState = {
   sources: [],
+  loading: false,
+  error: ''
+};
+
+const initialsState: ListingSource = {
+  listingSource: [],
   loading: false,
   error: ''
 };
@@ -45,4 +59,27 @@ export const sourceSlice = createSlice({
   }
 });
 
+export const listingSourceSlice = createSlice({
+  name: 'listingSource',
+  initialState: initialsState,
+  reducers: {},
+  extraReducers: (builder) => {
+
+    builder.addCase(getSourcesForListing.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getSourcesForListing.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.listingSource = payload?.sources;
+    });
+    builder.addCase(getSourcesForListing.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+
 export const { reducer: sourcesReducer } = sourceSlice;
+export const { reducer: listingSourceReducer } = listingSourceSlice;
