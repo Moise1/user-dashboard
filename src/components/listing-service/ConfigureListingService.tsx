@@ -76,32 +76,15 @@ export const ConfigureListingService = () => {
 
   const onOptionsChange = (e: RadioChangeEvent) => {
     setPricePreference(e.target.value);
-    if (e.target.value === 'source') {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: minimum, maxSourcePrice: maximum, minProfit: undefined, maxProfit: undefined }));
-    }
-    else {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: undefined, maxSourcePrice: undefined, minProfit: minimum, maxProfit: maximum }));
-    }
   };
 
   const onMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMinimum(parseFloat(e.target.value));
-    if (pricePreference === 'source') {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: minimum, maxSourcePrice: maximum, minProfit: undefined, maxProfit: undefined }));
-    }
-    else {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: undefined, maxSourcePrice: undefined, minProfit: minimum, maxProfit: maximum }));
-    }
   };
 
   const onMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMaximum(parseFloat(e.target.value));
-    if (pricePreference === 'source') {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: minimum, maxSourcePrice: maximum, minProfit: undefined, maxProfit: undefined }));
-    }
-    else {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: undefined, maxSourcePrice: undefined, minProfit: minimum, maxProfit: maximum }));
-    }
+
   };
 
   const getListingServiceStatus = (s: ListingService) => {
@@ -142,7 +125,12 @@ export const ConfigureListingService = () => {
   const showModal = () => {
     setIsModalVisible(true);
     const sdate = new Date();
-    setSelectedListing(old => ({ ...old, startedOn: sdate.toJSON() }));
+    if (pricePreference === 'profit') {
+      setSelectedListing(prev => ({ ...prev, minSourcePrice: undefined, maxSourcePrice: undefined, minProfit: minimum, maxProfit: maximum, startedOn: sdate.toJSON() }));
+    }
+    else {
+      setSelectedListing(prev => ({ ...prev, minSourcePrice: minimum, maxSourcePrice: maximum, minProfit: undefined, maxProfit: undefined, startedOn: sdate.toJSON() }));
+    }
   };
 
   const handleOk = async () => {
@@ -151,14 +139,14 @@ export const ConfigureListingService = () => {
     const rp = await dispatch(addListingService(selectedListing));
     if (!rp.payload?.success) {
       dispatch(getListingServices());
-    } 
+    }
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  const isDisabled = selectedListing.startedOn == undefined;
+  const isDisabled = selectedListing.startedOn !== undefined;
 
   const noSuscribed = (
     <div className="nosuscribed-container">
@@ -204,7 +192,7 @@ export const ConfigureListingService = () => {
       key: 'name',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? false : true}>
+          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? true : false}>
             {options}
           </Selector>
         );
@@ -216,7 +204,7 @@ export const ConfigureListingService = () => {
       key: '',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? false : true}>
+          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? true : false}>
             {criteriaOptions}
           </Selector>
         );
