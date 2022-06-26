@@ -23,7 +23,7 @@
   EditTemplate: '/templates/edit',
   AutoOrderConfiguration: '/auto-ordering-configuration',
   ConfigureNoapi: '/configure-no-api-server',
-  ConfigureListingService: '/configure-listing-service',
+  ConfigureListingService: '/setup-preferences',
   Login: '/login',
   Register: '/register',
   ListingService: 'https://hustlegotreal.com/en/listing-service/',
