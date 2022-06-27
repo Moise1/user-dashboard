@@ -220,6 +220,7 @@ export const ConfigureListingService = () => {
   useEffect(() => {
     setSources(SourceOptions);
     if (listingServicesResult[0].channelOAuthId && listingServicesResult[0].channelOAuthId != 0) {
+      setShowPreference(true);
       console.log('onAccountChange');
       onAccountChange(listingServicesResult[0].channelOAuthId);
       if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
@@ -327,7 +328,7 @@ export const ConfigureListingService = () => {
               </div>
               <Divider />
               <div className="price-options">
-                <Radio.Group value={pricePreference} onChange={onOptionsChange} disabled={isDisabled}>
+                <Radio.Group value={pricePreference} onChange={onOptionsChange}>
                   <Radio name="source" value="source">Source price preference</Radio>
                   <Radio name="profit" value="profit">Profit preference</Radio>
                 </Radio.Group>
