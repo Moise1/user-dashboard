@@ -24,7 +24,8 @@ import {
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
-  AllServices
+  AllServices,
+  PriceWarrior
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ListNow } from './components/list-now/ListNow';
@@ -96,6 +97,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
+            <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />
