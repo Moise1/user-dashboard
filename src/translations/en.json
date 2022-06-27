@@ -292,7 +292,7 @@
   "AutoOrderingConfiguration.Status": "Status",
 
   "Topbar.Notifications": "{count} Notifications",
-  "Topbar.Update": "Update",
+  "Topbar.Upgrade": "Upgrade",
   "Topbar.Quota": "Quota",
 
   "selectAll": "Select All",
