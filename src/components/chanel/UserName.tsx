@@ -3,7 +3,7 @@ import { Input, Form } from 'antd';
 import { eShop } from '../../utils/eShop';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/newChannelThunk';
-import { ConfirmBtn, SuccessBtn } from 'src/small-components/ActionBtns';
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import { popupWindow } from './NewChannel';
 
 interface props {
@@ -45,16 +45,7 @@ export const UserName = (props: props) => {
   
   };
 
-  const shopifyLogin = () => {
-    if(url) {
-      popupWindow(
-        url, 
-        window, 
-        800, 
-        600
-      );
-    }
-  };
+  if(url) popupWindow(url, window, 800, 600);
 
   return (
     <div className="username-form-container">
@@ -81,7 +72,6 @@ export const UserName = (props: props) => {
           disabled={getLinkLoading || newChannelLoading}>
           {getLinkLoading || newChannelLoading ? 'Please wait...': 'Submit'}
         </ConfirmBtn>
-        {platform === 2 && url && <SuccessBtn handleConfirm={shopifyLogin}>Login with Shopify</SuccessBtn>}
       </Form>
     </div>
   );

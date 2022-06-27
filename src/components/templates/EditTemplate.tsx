@@ -24,6 +24,8 @@ export const EditTemplate = () => {
     setCurrentTemplate(result?.html);
   }, [getTemplates, updateTemplate]);
 
+  const handleChange = (content: string) => setCurrentTemplate(content);
+
   const handleUpdate = () => {
     dispatch(updateTemplate({html: currentTemplate}));
   };
@@ -35,7 +37,11 @@ export const EditTemplate = () => {
         <Spin />
       ) : (
         <>
-          <SunEditor setContents={currentTemplate as string} height="400"/>
+          <SunEditor 
+            setContents={currentTemplate as string} 
+            onChange={handleChange}
+            height="400"
+          />
           <div className="action-btns-container">
             <SuccessBtn handleConfirm={handleUpdate}>Update</SuccessBtn>
             <ResetBtn>Reset</ResetBtn>
