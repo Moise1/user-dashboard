@@ -36,14 +36,14 @@
 .confirm-btn,
 .reset-btn,
 .cancel-btn,
-.selector,
 .danger-btn,
 .delete-btn,
 .warning-btn {
   @include action-btn;
 }
 
-.success-btn, .redirection-link {
+.success-btn,
+.redirection-link {
   min-width: 170px;
   background: $green;
   &:hover,

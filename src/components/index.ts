@@ -20,4 +20,5 @@ export { SourcesConfigurationTable } from './sources/sources-configuration-table
 export { Dashboard } from './dashboard/Dashboard';
 export { Templates } from './templates/Templates';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';
+export { PriceWarrior } from './services/PriceWarrior';
 export { AutoOrderingConfiguration } from './auto-ordering/AutoOrderingConfiguration';
