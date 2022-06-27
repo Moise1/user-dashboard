@@ -327,11 +327,6 @@ export const Dashboard = () => {
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
                 header="Active Services"
-                footer={
-                  <a href="#" className="footer-link">
-                    Manage listing services
-                  </a>
-                }
                 renderItem={() =>
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
