@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Row, Col, Divider } from 'antd';
+import { Row, Col, Divider, Spin } from 'antd';
 import '../../sass/services/service.scss';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-import { Key, ReactChild, ReactFragment, ReactPortal } from 'react';
+import { Key, ReactChild, ReactFragment, ReactPortal, useEffect, useState } from 'react';
+import { AllServicesData, ServiceData } from './ServicesData';
 
 type LocationProps = {
   location: {
@@ -16,11 +17,30 @@ type LocationProps = {
       image: string;
       link: string;
     };
+    pathname: string;
   };
 };
 
 export const AllServices = ({ location }: LocationProps) => {
-  return (
+
+  const [data, setData] = useState<ServiceData>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (location.state == undefined) {
+      const newState = AllServicesData.filter((s: ServiceData) => s.link == location.pathname);
+      setData(newState[0]);
+      setLoading(false);
+    }
+    else {
+      setData(location.state);
+      setLoading(false);
+    }
+  }, []);
+
+  return loading ? (
+    <Spin />
+  ) : (
     <div className="main-container">
       <Link to={Links.Services} className="back-to-services">
         <a>
@@ -33,17 +53,17 @@ export const AllServices = ({ location }: LocationProps) => {
           <Col className="col-services" xs={24} md={24} lg={8}>
             <div className="service-container">
               <div className="image-container">
-                <img src={location.state.image} />
+                <img src={data?.image} />
               </div>
             </div>
           </Col>
 
           <Col className="col-services" xs={24} lg={12}>
             <div className="description-area">
-              <h2 className="service-title">{location.state.title}</h2>
+              <h2 className="service-title">{data?.title}</h2>
               <div className="service-advantages">
                 <div>
-                  {location.state.paragraphs.map(
+                  {data?.paragraphs.map(
                     (
                       x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined,
                       index: Key | null | undefined
@@ -53,7 +73,7 @@ export const AllServices = ({ location }: LocationProps) => {
                   )}
 
                   <ul>
-                    {location.state.bulletPoints.map(
+                    {data?.bulletPoints.map(
                       (
                         x: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined,
                         index: Key | null | undefined
