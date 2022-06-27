@@ -18,7 +18,6 @@ import { shopLogo } from '../../utils/shopLogo';
 import { eCountry } from '../../utils/eCountry';
 
 export const ConfigureListingService = () => {
-
   const dispatch = useAppDispatch();
   const { listingServicesResult } = useAppSelector((state) => state.listingServices);
   const { listingSource, loading } = useAppSelector((state) => state.listingSource);
@@ -30,9 +29,11 @@ export const ConfigureListingService = () => {
   const [selectedChannel, setSelectedChannel] = useState<Channel>();
   const [selectedListing, setSelectedListing] = useState<ListingService>(listingServicesResult[0]);
   const [showPreference, setShowPreference] = useState(true);
-  const [pricePreference, setPricePreference] = useState('');
-  const [minimum, setMinimum] = useState<number>();
-  const [maximum, setMaximum] = useState<number>();
+  const [pricePreference, setPricePreference] = useState('source');
+  const [minSourcePrice, setMinSourcePrice] = useState<number>();
+  const [maxSourcePrice, setMaxSourcePrice] = useState<number>();
+  const [minProfit, setMinProfit] = useState<number>();
+  const [maxProfit, setMaxProfit] = useState<number>();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [sourcesList, setSourcesList] = useState([]);
   const [sources, setSources] = useState([]);
@@ -74,17 +75,36 @@ export const ConfigureListingService = () => {
     dispatch(getListingServices());
   }, [getSourcesForListing, getListingServices]);
 
+  const info = () => {
+    Modal.info({
+      title: 'Hustle Got Real',
+      content: (
+        <div>
+          <p>Your prefrences have been saved. Your Listings will be updated within the next 72 hours. Thank you for using our listing service!</p>
+        </div>
+      ),
+      onOk() { console.log('success'); },
+    });
+  };
+
   const onOptionsChange = (e: RadioChangeEvent) => {
     setPricePreference(e.target.value);
   };
 
+  const onMinProfitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMinProfit(parseFloat(e.target.value));
+  };
+
+  const onMaxProfitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxProfit(parseFloat(e.target.value));
+  };
+
   const onMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMinimum(parseFloat(e.target.value));
+    setMinSourcePrice(parseFloat(e.target.value));
   };
 
   const onMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMaximum(parseFloat(e.target.value));
-
+    setMaxSourcePrice(parseFloat(e.target.value));
   };
 
   const getListingServiceStatus = (s: ListingService) => {
@@ -98,6 +118,7 @@ export const ConfigureListingService = () => {
   const onSourceChange = (value: string) => {
     setSelectedListing(prev => ({ ...prev, includedSources: value }));
   };
+
   const onAccountChange = (value: Key) => {
     const chanel = channels.filter(x => x.id === value);
     if (selectedListing.channelOAuthId !== value) {
@@ -125,12 +146,7 @@ export const ConfigureListingService = () => {
   const showModal = () => {
     setIsModalVisible(true);
     const sdate = new Date();
-    if (pricePreference === 'profit') {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: undefined, maxSourcePrice: undefined, minProfit: minimum, maxProfit: maximum, startedOn: sdate.toJSON() }));
-    }
-    else {
-      setSelectedListing(prev => ({ ...prev, minSourcePrice: minimum, maxSourcePrice: maximum, minProfit: undefined, maxProfit: undefined, startedOn: sdate.toJSON() }));
-    }
+    setSelectedListing(prev => ({ ...prev, minSourcePrice: minSourcePrice, maxSourcePrice: maxSourcePrice, minProfit: minProfit, maxProfit: maxProfit, startedOn: sdate.toJSON() }));
   };
 
   const handleOk = async () => {
@@ -138,6 +154,7 @@ export const ConfigureListingService = () => {
     console.log(selectedListing);
     const rp = await dispatch(addListingService(selectedListing));
     if (!rp.payload?.success) {
+      info();
       dispatch(getListingServices());
     }
   };
@@ -176,13 +193,13 @@ export const ConfigureListingService = () => {
     onAccountChange(listingServicesResult[0].channelOAuthId);
     if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
       setPricePreference('source');
-      setMinimum(selectedListing.minSourcePrice);
-      setMaximum(selectedListing.maxSourcePrice);
+      setMinSourcePrice(selectedListing.minSourcePrice);
+      setMaxSourcePrice(selectedListing.maxSourcePrice);
     }
-    else if (selectedListing.minProfit || selectedListing.maxProfit) {
+    if (selectedListing.minProfit || selectedListing.maxProfit) {
       setPricePreference('profit');
-      setMinimum(selectedListing.minProfit);
-      setMaximum(selectedListing.maxProfit);
+      setMinProfit(selectedListing.minProfit);
+      setMaxProfit(selectedListing.maxProfit);
     }
   }, [loading]);
   const columns = [
@@ -270,9 +287,9 @@ export const ConfigureListingService = () => {
                     <Row>
                       <label>Include sources </label>
                     </Row>
-                    {true && <MultipleSelector style={{ width: '100%', }} className="multipleSelector" value={selectedListing.includedSources} disabled={isDisabled} onChange={(value: string) => onSourceChange(value)}>
+                    <MultipleSelector style={{ width: '100%', }} className="multipleSelector" value={selectedListing.includedSources} disabled={isDisabled} onChange={(value: string) => onSourceChange(value)}>
                       {sources}
-                    </MultipleSelector>}
+                    </MultipleSelector>
                   </div>
                 </div>
               </div>
@@ -282,16 +299,26 @@ export const ConfigureListingService = () => {
                   <Radio name="source" value="source">Source price preference</Radio>
                   <Radio name="profit" value="profit">Profit preference</Radio>
                 </Radio.Group>
-                <div className="inputs-container">
-                  <label>{pricePreference === 'profit' ? 'Profit' : 'Source price'}</label>
-                  <div className="inputs">
-                    <Input placeholder="Min" value={minimum} onChange={(e) => onMinChange(e)} className="blue-input" disabled={isDisabled} />
-                    <Input placeholder="Max" className="blue-input" value={maximum} onChange={(e) => onMaxChange(e)} disabled={isDisabled} />
+                {pricePreference === 'profit' ? (
+                  <div className="inputs-container">
+                    <label>Profit</label>
+                    <div className="inputs">
+                      <Input placeholder="Min" value={minProfit} onChange={(e) => onMinProfitChange(e)} className="blue-input" disabled={isDisabled} />
+                      <Input placeholder="Max" className="blue-input" value={maxProfit} onChange={(e) => onMaxProfitChange(e)} disabled={isDisabled} />
+                    </div>
                   </div>
+                ) : (
+                  <div className="inputs-container">
+                    <label>Source Price</label>
+                    <div className="inputs">
+                      <Input placeholder="Min" value={minSourcePrice} onChange={(e) => onMinChange(e)} className="blue-input" disabled={isDisabled} />
+                      <Input placeholder="Max" className="blue-input" value={maxSourcePrice} onChange={(e) => onMaxChange(e)} disabled={isDisabled} />
+                    </div>
+                  </div>
+                )}
+                <div onClick={showModal}>
+                  {!isDisabled && <ConfirmBtn className="list">Start listing service with selected preferences</ConfirmBtn>}
                 </div>
-              </div>
-              <div onClick={showModal}>
-                {!isDisabled && <ConfirmBtn className="list">Start listing service with selected preferences</ConfirmBtn>}
               </div>
             </div>
           ) : (
@@ -348,6 +375,6 @@ export const ConfigureListingService = () => {
       <Modal title="Start Listing" visible={isModalVisible} onOk={handleOk} okText="Yes, start listing!" onCancel={handleCancel} cancelText="Review Preferences">
         <p>Please make sure you have set your listing preferences. Once the team starts the listings they can NOT be modified.</p>
       </Modal>
-    </div>
+    </div >
   );
 };
