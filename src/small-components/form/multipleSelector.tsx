@@ -82,11 +82,8 @@ export const MultipleSelector = (props: Props) => {
   useEffect(() => {
 
     const selectedValues = value?.split(',');
-    console.log('value useEffect');
-    console.log(value);
     const childrens = (Array.isArray(props.children) ? props.children : [props.children]);
     const included = childrens.filter((o) => selectedValues?.includes(o.value.toString()));
-    console.log(included);
     setSelectedItems(included);
     setDefaultSelected(included);
     const filtered = childrens.filter((o) => !included.includes(o));

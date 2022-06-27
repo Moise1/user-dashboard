@@ -70,7 +70,9 @@ export const ConfigureListingService = () => {
   };
   const options = channels.map(CreateValue);
   const SourceOptions = listingSource.map(SourceValue);
-  const [selectedService] = useState<ListingService>(listingServicesResult[0]);
+  const [selectedService, setSelectedService] = useState<ListingService>(listingServicesResult[0]);
+  const [isDisabled, setIsDisabled] = useState(selectedService.startedOn ? true : false);
+
   useEffect(() => {
     dispatch(getSourcesForListing());
     dispatch(getListingServices());
@@ -126,14 +128,12 @@ export const ConfigureListingService = () => {
   };
 
   const onAccountChange = (value: Key) => {
-    console.log(value);
     const chanel = channels.filter((x) => x.id === value);
     if (selectedListing.channelOAuthId !== value) {
       setSelectedListing((prev) => ({ ...prev, includedSources: '' }));
     }
     setSelectedChannel(chanel[0]);
     const filtered = SourceOptions?.filter((x: { site: string }) => {
-      console.log(x.site + ' == ' + eCountry[chanel[0]?.isoCountry as unknown as number]);
       if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number]) return x;
     });
     setSources(filtered);
@@ -156,7 +156,10 @@ export const ConfigureListingService = () => {
     const rp = await dispatch(addListingService(selectedListing));
     if (!rp.payload?.success) {
       info();
-      dispatch(getListingServices());
+      const rs = dispatch(getListingServices());
+      const pl = (await rs).payload;
+      setSelectedService(pl[0]);
+      setIsDisabled(pl[0].startedOn ? true : false);
     }
   };
 
@@ -174,9 +177,6 @@ export const ConfigureListingService = () => {
     setIsModalVisible(false);
   };
 
-  const isDisabled = selectedService.startedOn ? true : false;
-  console.log(selectedListing.startedOn);
-  console.log(isDisabled);
   const noSuscribed = (
     <div className="nosuscribed-container">
       <div className="nosuscribed">
@@ -198,7 +198,6 @@ export const ConfigureListingService = () => {
   );
 
   const handleSubmit = () => {
-    console.log(selectedChannel);
     if (selectedChannel == undefined) {
       toastAlert('Please select the Account Channel', 'warning');
     }
@@ -221,7 +220,6 @@ export const ConfigureListingService = () => {
     setSources(SourceOptions);
     if (listingServicesResult[0].channelOAuthId && listingServicesResult[0].channelOAuthId != 0) {
       setShowPreference(true);
-      console.log('onAccountChange');
       onAccountChange(listingServicesResult[0].channelOAuthId);
       if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
         setPricePreference('source');
