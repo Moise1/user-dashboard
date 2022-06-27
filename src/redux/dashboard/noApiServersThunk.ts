@@ -12,3 +12,37 @@ export const getNoApiServers = createAsyncThunk(
     }
   }
 );
+
+export const getManagedServers = createAsyncThunk(
+  'manage/server',
+  async (_,{rejectWithValue})=>
+  {
+    try
+    {
+      const res = await client.get('/NoApiServer/GetManagedServer');
+      console.log('The managed server api ',res);
+      return res.data.response_data;
+    }
+    catch(error)
+    {
+      return rejectWithValue('Sorry! Something went wrong');
+    }
+  }
+);
+
+export const updateManagedServers = createAsyncThunk(
+  'manage/server',
+  async (newArray:unknown,thunkAPI)=>
+  {
+    try
+    {
+      const res = await client.post('/NoApiServer/UpdateManagedServer',newArray);
+      console.log('The managed server api ',res);
+      return res.data.response_data;
+    }
+    catch(error)
+    {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong');
+    }
+  }
+);

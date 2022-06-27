@@ -1,13 +1,123 @@
+#keyform
+{
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+
+div 
+{
+  min-width: 70%;
+  margin:0px 4px;
+}
+
+p
+{
+  margin:10px 2px;
+  font-size: 15px;
+  a{
+  font-size:12px;
+  }
+}
+
+}
+
 .configure-noapi-container {
+  width:80%;
+  margin:0 auto;
+  .no-api-servers
+  {
+   padding:0px 10px; 
+   width: 100%;
+   background-color: rgb(255, 255, 255);
+  }
+  button 
+  {
+    min-width:30%;
+    border-radius: 20px;
+    margin: 20px 32%;
+    background: #5e69db;
+    padding:5px 0px;
+    color:#fff;
+  }
+
   .no-api-title {
     font-weight: bold;
   }
+
   .blue-input {
     max-width: 200px;
   }
-  .no-api-servers {
+  
+  table{
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    tr
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin:0 5px;
+      padding:15px 10px;
+    }
+    th
+    {
+      font-size:15px;
+    }
+      tr td:first-child
+      {
+        width:15%;
+        h5
+        {
+          font-size:18px;
+        }
+      }
+      tr td:nth-child(2)
+      {
+        width:30%;
+        div
+        {
+          min-width:100%;
+        }
+      }
+      tr td:nth-child(3)
+      {
+        width:25%;
+        div
+        {
+          min-width:100%;
+        }
+      }
+      tr td:last-child
+      {
+        width:25%;
+        div
+        {
+          position: relative;
+          min-width:100%;
+          p
+          {
+            position: absolute;
+            bottom: 0px;
+            right: 20px;
+          }
+        }
+      }
+      tr th:first-child
+      {
+        width:15%;
+      }
+      tr th:nth-child(2)
+      {
+        width:30%;
+      }
+      tr th:nth-child(3)
+      {
+        width:25%;
+      }
+      tr th:last-child
+      {
+        width:25%;
+      }
   }
 
   .nosuscribed-container {
