@@ -16,6 +16,7 @@ import { getListingServices, addListingService } from '../../redux/dashboard/lis
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { eCountry } from '../../utils/eCountry';
+import { toastAlert } from '../../utils/toastAlert';
 
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
@@ -28,14 +29,13 @@ export const ConfigureListingService = () => {
   ];
   const [selectedChannel, setSelectedChannel] = useState<Channel>();
   const [selectedListing, setSelectedListing] = useState<ListingService>(listingServicesResult[0]);
-  const [showPreference, setShowPreference] = useState(true);
+  const [showPreference, setShowPreference] = useState(false);
   const [pricePreference, setPricePreference] = useState('source');
   const [minSourcePrice, setMinSourcePrice] = useState<number>();
   const [maxSourcePrice, setMaxSourcePrice] = useState<number>();
   const [minProfit, setMinProfit] = useState<number>();
   const [maxProfit, setMaxProfit] = useState<number>();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [sourcesList, setSourcesList] = useState([]);
   const [sources, setSources] = useState([]);
   const [showFlags] = useState<boolean>(true);
   const SourceLabel = (c: Source) => {
@@ -70,7 +70,7 @@ export const ConfigureListingService = () => {
   };
   const options = channels.map(CreateValue);
   const SourceOptions = listingSource.map(SourceValue);
-
+  const [selectedService] = useState<ListingService>(listingServicesResult[0]);
   useEffect(() => {
     dispatch(getSourcesForListing());
     dispatch(getListingServices());
@@ -126,16 +126,18 @@ export const ConfigureListingService = () => {
   };
 
   const onAccountChange = (value: Key) => {
+    console.log(value);
     const chanel = channels.filter((x) => x.id === value);
     if (selectedListing.channelOAuthId !== value) {
       setSelectedListing((prev) => ({ ...prev, includedSources: '' }));
     }
     setSelectedChannel(chanel[0]);
-    const filtered = sourcesList?.filter((x: { site: string }) => {
+    const filtered = SourceOptions?.filter((x: { site: string }) => {
+      console.log(x.site + ' == ' + eCountry[chanel[0]?.isoCountry as unknown as number]);
       if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number]) return x;
     });
     setSources(filtered);
-    setSelectedListing(prev => ({ ...prev, channelOAuthId: chanel[0].id }));
+    setSelectedListing(prev => ({ ...prev, channelOAuthId: chanel[0]?.id }));
   };
 
   const onChange = (value: Key) => {
@@ -148,19 +150,9 @@ export const ConfigureListingService = () => {
 
   const showModal = () => {
     setIsModalVisible(true);
-    const sdate = new Date();
-    setSelectedListing((prev) => ({
-      ...prev,
-      minSourcePrice: minSourcePrice,
-      maxSourcePrice: maxSourcePrice,
-      minProfit: minProfit,
-      maxProfit: maxProfit,
-      startedOn: sdate.toJSON()
-    }));
   };
 
-  const handleOk = async () => {
-    setIsModalVisible(false);
+  const saveData = async () => {
     const rp = await dispatch(addListingService(selectedListing));
     if (!rp.payload?.success) {
       info();
@@ -168,12 +160,23 @@ export const ConfigureListingService = () => {
     }
   };
 
+  const handleOk = () => {
+    setIsModalVisible(false);
+    const sdate = new Date();
+    setSelectedListing((prev) => ({
+      ...prev,
+      startedOn: sdate.toJSON()
+    }));
+    saveData();
+  };
+
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  const isDisabled = selectedListing.startedOn !== undefined;
-
+  const isDisabled = selectedService.startedOn ? true : false;
+  console.log(selectedListing.startedOn);
+  console.log(isDisabled);
   const noSuscribed = (
     <div className="nosuscribed-container">
       <div className="nosuscribed">
@@ -194,21 +197,43 @@ export const ConfigureListingService = () => {
     </div>
   );
 
+  const handleSubmit = () => {
+    console.log(selectedChannel);
+    if (selectedChannel == undefined) {
+      toastAlert('Please select the Account Channel', 'warning');
+    }
+    else {
+      showModal();
+    }
+    const sdate = new Date();
+    setSelectedListing((prev) => ({
+      ...prev,
+      minSourcePrice: minSourcePrice,
+      maxSourcePrice: maxSourcePrice,
+      minProfit: minProfit,
+      maxProfit: maxProfit,
+      startedOn: sdate.toJSON()
+    }));
+  };
+
+
   useEffect(() => {
-    const options = listingSource.map(SourceValue);
-    setSourcesList(options);
-    setSources(options);
-    onAccountChange(listingServicesResult[0].channelOAuthId);
-    if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
-      setPricePreference('source');
-      setMinSourcePrice(selectedListing.minSourcePrice);
-      setMaxSourcePrice(selectedListing.maxSourcePrice);
+    setSources(SourceOptions);
+    if (listingServicesResult[0].channelOAuthId && listingServicesResult[0].channelOAuthId != 0) {
+      console.log('onAccountChange');
+      onAccountChange(listingServicesResult[0].channelOAuthId);
+      if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
+        setPricePreference('source');
+        setMinSourcePrice(selectedListing.minSourcePrice);
+        setMaxSourcePrice(selectedListing.maxSourcePrice);
+      }
+      if (selectedListing.minProfit || selectedListing.maxProfit) {
+        setPricePreference('profit');
+        setMinProfit(selectedListing.minProfit);
+        setMaxProfit(selectedListing.maxProfit);
+      }
     }
-    if (selectedListing.minProfit || selectedListing.maxProfit) {
-      setPricePreference('profit');
-      setMinProfit(selectedListing.minProfit);
-      setMaxProfit(selectedListing.maxProfit);
-    }
+
   }, [loading]);
   const columns = [
     {
@@ -217,7 +242,7 @@ export const ConfigureListingService = () => {
       key: 'name',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? true : false}>
+          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={isDisabled}>
             {options}
           </Selector>
         );
@@ -229,7 +254,7 @@ export const ConfigureListingService = () => {
       key: '',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? true : false}>
+          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={isDisabled}>
             {criteriaOptions}
           </Selector>
         );
@@ -323,7 +348,7 @@ export const ConfigureListingService = () => {
                     </div>
                   </div>
                 )}
-                <div onClick={showModal}>
+                <div onClick={handleSubmit}>
                   {!isDisabled && <ConfirmBtn className="list">Start listing service with selected preferences</ConfirmBtn>}
                 </div>
               </div>
