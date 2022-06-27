@@ -15,12 +15,6 @@ export interface Source {
   listingServiceAllowed: number;
 }
 
-export interface ListingSource {
-  listingSource: Source[],
-  loading: boolean,
-  error: string
-}
-
 export interface SourceState {
   sources: Source[],
   loading: boolean,
@@ -33,9 +27,15 @@ const initialState: SourceState = {
   error: ''
 };
 
+export interface ListingSource {
+  listingSource: Source[],
+  sourcesLoading: boolean,
+  error: string
+}
+
 const initialsState: ListingSource = {
   listingSource: [],
-  loading: false,
+  sourcesLoading: false,
   error: ''
 };
 
@@ -66,15 +66,15 @@ export const listingSourceSlice = createSlice({
   extraReducers: (builder) => {
 
     builder.addCase(getSourcesForListing.pending, (state) => {
-      state.loading = true;
+      state.sourcesLoading = true;
       state.error = '';
     });
     builder.addCase(getSourcesForListing.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.sourcesLoading = false;
       state.listingSource = payload?.sources;
     });
     builder.addCase(getSourcesForListing.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.sourcesLoading = false;
       state.error = String(payload);
     });
   }

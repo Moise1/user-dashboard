@@ -93,7 +93,7 @@ export const AllServices = ({ location }: LocationProps) => {
                     <div className="service-rate-container">
                       <div className="rate-details">
                         <span className="euro">€</span>
-                        <h1 className="monthly-rate">200</h1>
+                        <h1 className="monthly-rate">{data?.price}</h1>
                       </div>
                       <div className="type-payment">
                         <h4>One off payment</h4>

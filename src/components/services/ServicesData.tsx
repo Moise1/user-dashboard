@@ -6,6 +6,8 @@ export interface ServiceData {
   bulletPoints: string[];
   image: string;
   link: string;
+  currency?: string;
+  price?: string;
 }
 
 export const AllServicesData: ServiceData[] = [
@@ -24,7 +26,9 @@ export const AllServicesData: ServiceData[] = [
       'Price Warrior will update automatically, and you will have access to a report showing the status of all the listings being managed by Price Warrior.'
     ],
     image: '/static/media/price_warrior.a2c44660.png',
-    link: '/services/price-warrior'
+    link: '/services/price-warrior',
+    currency: '€',
+    price: '17.99'
   },
   {
     id: 2,
@@ -39,7 +43,9 @@ export const AllServicesData: ServiceData[] = [
     ],
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image: '/static/media/logoHGR.27d62745.png',
-    link: '/services/private-supplier'
+    link: '/services/private-supplier',
+    currency: '£',
+    price: '200'
   },
   {
     id: 3,
@@ -55,7 +61,9 @@ export const AllServicesData: ServiceData[] = [
       'Avoid ebay bans'
     ],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/services/no-api-server'
+    link: '/services/no-api-server',
+    currency: '€',
+    price: '15.99'
   },
   {
     id: 4,
@@ -65,7 +73,9 @@ export const AllServicesData: ServiceData[] = [
     paragraphs: ['After purchasing the order, it will be marked as dispatched on your store.'],
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/services/auto-ordering'
+    link: '/services/auto-ordering',
+    currency: '',
+    price: ''
   },
   {
     id: 5,

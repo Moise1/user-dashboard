@@ -19,8 +19,8 @@ import { eCountry } from '../../utils/eCountry';
 
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
-  const { listingServicesResult } = useAppSelector((state) => state.listingServices);
-  const { listingSource, loading } = useAppSelector((state) => state.listingSource);
+  const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
+  const { listingSource, sourcesLoading } = useAppSelector((state) => state.listingSource);
   const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
   const criteriaOptions = [
     { value: 'hgr', label: 'No preferences' },
@@ -69,6 +69,7 @@ export const ConfigureListingService = () => {
     };
   };
   const options = channels.map(CreateValue);
+  const SourceOptions = listingSource.map(SourceValue);
 
   useEffect(() => {
     dispatch(getSourcesForListing());
@@ -131,7 +132,6 @@ export const ConfigureListingService = () => {
     });
     setSources(filtered);
     setSelectedListing(prev => ({ ...prev, channelOAuthId: chanel[0].id }));
-    console.log(filtered);
   };
 
   const onChange = (value: Key) => {
@@ -151,7 +151,6 @@ export const ConfigureListingService = () => {
 
   const handleOk = async () => {
     setIsModalVisible(false);
-    console.log(selectedListing);
     const rp = await dispatch(addListingService(selectedListing));
     if (!rp.payload?.success) {
       info();
@@ -163,7 +162,7 @@ export const ConfigureListingService = () => {
     setIsModalVisible(false);
   };
 
-  const isDisabled = selectedListing.startedOn !== undefined;
+  const isDisabled = selectedListing.startedOn == undefined;
 
   const noSuscribed = (
     <div className="nosuscribed-container">
@@ -189,7 +188,6 @@ export const ConfigureListingService = () => {
     const options = listingSource.map(SourceValue);
     setSourcesList(options);
     setSources(options);
-    console.log(options);
     onAccountChange(listingServicesResult[0].channelOAuthId);
     if (selectedListing.minSourcePrice || selectedListing.maxSourcePrice) {
       setPricePreference('source');
@@ -209,7 +207,7 @@ export const ConfigureListingService = () => {
       key: 'name',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? true : false}>
+          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? false : false}>
             {options}
           </Selector>
         );
@@ -221,7 +219,7 @@ export const ConfigureListingService = () => {
       key: '',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? true : false}>
+          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? false : false}>
             {criteriaOptions}
           </Selector>
         );
@@ -249,7 +247,9 @@ export const ConfigureListingService = () => {
     }
   ];
 
-  return (
+  return loading && sourcesLoading ? (
+    <Spin />
+  ) : (
     <div className="configure-listingservice-container">
       <h1>Configure listing services</h1>
       <p>
@@ -261,20 +261,15 @@ export const ConfigureListingService = () => {
         sell as many of them as possible. Alternatively, you can select Your Criteria on Criteria column and enter your
         preferences there.
       </p>
-      {loading ? (
-        <Spin />
-      ) : (
-        <div className="listingservices-table">
-          {listingServicesResult?.length ? (
-            <SimpleTable columns={columns} dataSource={listingServicesResult} hidePagination={true} />
-          ) : (
-            noSuscribed
-          )}
-        </div>
-      )}
-      {loading ? (
-        <Spin />
-      ) : (showPreference &&
+
+      <div className="listingservices-table">
+        {listingServicesResult?.length ? (
+          <SimpleTable columns={columns} dataSource={listingServicesResult} hidePagination={true} />
+        ) : (
+          noSuscribed
+        )}
+      </div>
+      {showPreference &&
         <div className="configuration-section">
           {listingServicesResult?.length ? (
             <div className="listingservice-configuration">
@@ -288,7 +283,7 @@ export const ConfigureListingService = () => {
                       <label>Include sources </label>
                     </Row>
                     <MultipleSelector style={{ width: '100%', }} className="multipleSelector" value={selectedListing.includedSources} disabled={isDisabled} onChange={(value: string) => onSourceChange(value)}>
-                      {sources}
+                      {sources.length > 0 ? sources : SourceOptions}
                     </MultipleSelector>
                   </div>
                 </div>
@@ -325,7 +320,7 @@ export const ConfigureListingService = () => {
             noSuscribed
           )}
         </div>
-      )}
+      }
       <div className="explanation-section">
         <h2>Is your store ready for us to start listing?</h2>
         <p>

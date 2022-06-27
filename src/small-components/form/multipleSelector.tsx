@@ -51,7 +51,7 @@ export const MultipleSelector = (props: Props) => {
   const selectedValues = value?.split(',');
   const [selectedItems, setSelectedItems] = useState<SelectorData[]>([]);
   const [filteredOptions, setFilteredOptions] = useState(childrens.filter((o) => !selectedItems.includes(o)));
-  const [defaultselected, setDefaultSelected] = useState<SelectorData[]>(childrens.filter((o) => selectedValues?.includes(o.value.toString())));
+  const [defaultselected, setDefaultSelected] = useState<SelectorData[]>(childrens?.filter((o) => selectedValues?.includes(o.value.toString())));
 
   const options =
     filteredOptions.map(c => {
