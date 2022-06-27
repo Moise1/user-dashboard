@@ -172,7 +172,7 @@ export const ConfigureListingService = () => {
     setIsModalVisible(false);
   };
 
-  const isDisabled = selectedListing.startedOn == undefined;
+  const isDisabled = selectedListing.startedOn !== undefined;
 
   const noSuscribed = (
     <div className="nosuscribed-container">
@@ -217,7 +217,7 @@ export const ConfigureListingService = () => {
       key: 'name',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? false : false}>
+          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={s.startedOn ? true : false}>
             {options}
           </Selector>
         );
@@ -229,7 +229,7 @@ export const ConfigureListingService = () => {
       key: '',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? false : false}>
+          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={s.startedOn ? true : false}>
             {criteriaOptions}
           </Selector>
         );
