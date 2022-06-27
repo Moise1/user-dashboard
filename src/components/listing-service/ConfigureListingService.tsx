@@ -39,33 +39,33 @@ export const ConfigureListingService = () => {
   const [sources, setSources] = useState([]);
   const [showFlags] = useState<boolean>(true);
   const SourceLabel = (c: Source) => {
-    return <>
-      {showFlags && countryFlag(eCountry[c.site])}
-      {c.name}
-    </>;
+    return (
+      <>
+        {showFlags && countryFlag(eCountry[c.site])}
+        {c.name}
+      </>
+    );
   };
   const SourceValue = (c: Source) => {
     return {
       value: c.id,
       site: c.site,
-      label: <>
-        {SourceLabel(c)}
-      </>
+      label: <>{SourceLabel(c)}</>
     };
   };
   const CreateLabel = (c: Channel) => {
-    return <>
-      {showFlags && shopLogo(c.channelId)}
-      {showFlags && countryFlag(c.isoCountry)}
-      {c.name}
-    </>;
+    return (
+      <>
+        {showFlags && shopLogo(c.channelId)}
+        {showFlags && countryFlag(c.isoCountry)}
+        {c.name}
+      </>
+    );
   };
   const CreateValue = (c: Channel) => {
     return {
       value: c.id,
-      label: <>
-        {CreateLabel(c)}
-      </>
+      label: <>{CreateLabel(c)}</>
     };
   };
   const options = channels.map(CreateValue);
@@ -81,10 +81,15 @@ export const ConfigureListingService = () => {
       title: 'Hustle Got Real',
       content: (
         <div>
-          <p>Your prefrences have been saved. Your Listings will be updated within the next 72 hours. Thank you for using our listing service!</p>
+          <p>
+            Your prefrences have been saved. Your Listings will be updated within the next 72 hours. Thank you for using
+            our listing service!
+          </p>
         </div>
       ),
-      onOk() { console.log('success'); },
+      onOk() {
+        console.log('success');
+      }
     });
   };
 
@@ -117,18 +122,17 @@ export const ConfigureListingService = () => {
   };
 
   const onSourceChange = (value: string) => {
-    setSelectedListing(prev => ({ ...prev, includedSources: value }));
+    setSelectedListing((prev) => ({ ...prev, includedSources: value }));
   };
 
   const onAccountChange = (value: Key) => {
-    const chanel = channels.filter(x => x.id === value);
+    const chanel = channels.filter((x) => x.id === value);
     if (selectedListing.channelOAuthId !== value) {
-      setSelectedListing(prev => ({ ...prev, includedSources: '' }));
+      setSelectedListing((prev) => ({ ...prev, includedSources: '' }));
     }
     setSelectedChannel(chanel[0]);
     const filtered = sourcesList?.filter((x: { site: string }) => {
-      if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number])
-        return x;
+      if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number]) return x;
     });
     setSources(filtered);
     setSelectedListing(prev => ({ ...prev, channelOAuthId: chanel[0].id }));
@@ -137,8 +141,7 @@ export const ConfigureListingService = () => {
   const onChange = (value: Key) => {
     if (value === 'user') {
       setShowPreference(true);
-    }
-    else {
+    } else {
       setShowPreference(false);
     }
   };
@@ -146,7 +149,14 @@ export const ConfigureListingService = () => {
   const showModal = () => {
     setIsModalVisible(true);
     const sdate = new Date();
-    setSelectedListing(prev => ({ ...prev, minSourcePrice: minSourcePrice, maxSourcePrice: maxSourcePrice, minProfit: minProfit, maxProfit: maxProfit, startedOn: sdate.toJSON() }));
+    setSelectedListing((prev) => ({
+      ...prev,
+      minSourcePrice: minSourcePrice,
+      maxSourcePrice: maxSourcePrice,
+      minProfit: minProfit,
+      maxProfit: maxProfit,
+      startedOn: sdate.toJSON()
+    }));
   };
 
   const handleOk = async () => {
@@ -243,7 +253,9 @@ export const ConfigureListingService = () => {
       title: 'Date',
       dataIndex: '',
       key: '',
-      render: (s: ListingService) => <h4>{s.purchasedOn && new Date(s.purchasedOn as unknown as string).toLocaleString()}</h4>
+      render: (s: ListingService) => (
+        <h4>{s.purchasedOn && new Date(s.purchasedOn as unknown as string).toLocaleString()}</h4>
+      )
     }
   ];
 
@@ -367,9 +379,19 @@ export const ConfigureListingService = () => {
         </p>
       </div>
 
-      <Modal title="Start Listing" visible={isModalVisible} onOk={handleOk} okText="Yes, start listing!" onCancel={handleCancel} cancelText="Review Preferences">
-        <p>Please make sure you have set your listing preferences. Once the team starts the listings they can NOT be modified.</p>
+      <Modal
+        title="Start Listing"
+        visible={isModalVisible}
+        onOk={handleOk}
+        okText="Yes, start listing!"
+        onCancel={handleCancel}
+        cancelText="Review Preferences"
+      >
+        <p>
+          Please make sure you have set your listing preferences. Once the team starts the listings they can NOT be
+          modified.
+        </p>
       </Modal>
-    </div >
+    </div>
   );
 };
