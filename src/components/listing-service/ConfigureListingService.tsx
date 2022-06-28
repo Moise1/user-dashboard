@@ -5,7 +5,7 @@ import '../../sass/listing-service/configure-listing-service.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { MultipleSelector } from 'src/small-components/form/multipleSelector';
 import { Selector } from 'src/small-components/form/selector';
-import { Divider, Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
+import { Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
 import { SimpleTable } from 'src/small-components/simple-table';
 //import { CrossModalIcon } from '../common/Icons';
 import { useEffect, useState } from 'react';
@@ -137,7 +137,7 @@ export const ConfigureListingService = () => {
       if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number]) return x;
     });
     setSources(filtered);
-    setSelectedListing(prev => ({ ...prev, channelOAuthId: chanel[0]?.id }));
+    setSelectedListing((prev) => ({ ...prev, channelOAuthId: chanel[0]?.id }));
   };
 
   const onChange = (value: Key) => {
@@ -200,8 +200,7 @@ export const ConfigureListingService = () => {
   const handleSubmit = () => {
     if (selectedChannel == undefined) {
       toastAlert('Please select the Account Channel', 'warning');
-    }
-    else {
+    } else {
       showModal();
     }
     const sdate = new Date();
@@ -214,7 +213,6 @@ export const ConfigureListingService = () => {
       startedOn: sdate.toJSON()
     }));
   };
-
 
   useEffect(() => {
     setSources(SourceOptions);
@@ -232,7 +230,6 @@ export const ConfigureListingService = () => {
         setMaxProfit(selectedListing.maxProfit);
       }
     }
-
   }, [loading]);
   const columns = [
     {
@@ -241,7 +238,12 @@ export const ConfigureListingService = () => {
       key: 'name',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="Select channel" defaultValue={s.channelOAuthId} onChange={onAccountChange} disabled={isDisabled}>
+          <Selector
+            placeHolder="Select channel"
+            defaultValue={s.channelOAuthId}
+            onChange={onAccountChange}
+            disabled={isDisabled}
+          >
             {options}
           </Selector>
         );
@@ -253,7 +255,12 @@ export const ConfigureListingService = () => {
       key: '',
       render: (s: ListingService) => {
         return (
-          <Selector placeHolder="No preferences" onChange={onChange} defaultValue={s.startedOn ? 'user' : 'hgr'} disabled={isDisabled}>
+          <Selector
+            placeHolder="No preferences"
+            onChange={onChange}
+            defaultValue={s.startedOn ? 'user' : 'hgr'}
+            disabled={isDisabled}
+          >
             {criteriaOptions}
           </Selector>
         );
@@ -280,6 +287,16 @@ export const ConfigureListingService = () => {
       render: (s: ListingService) => (
         <h4>{s.purchasedOn && new Date(s.purchasedOn as unknown as string).toLocaleString()}</h4>
       )
+    },
+    {
+      title: 'Actions',
+      dataIndex: '',
+      key: '',
+      render: (s: ListingService) => (
+        <div onClick={handleSubmit}>
+          {!isDisabled && <ConfirmBtn className="list">List {s.listings} products</ConfirmBtn>}
+        </div>
+      )
     }
   ];
 
@@ -305,50 +322,84 @@ export const ConfigureListingService = () => {
           noSuscribed
         )}
       </div>
-      {showPreference &&
+      {showPreference && (
         <div className="configuration-section">
           {listingServicesResult?.length ? (
             <div className="listingservice-configuration">
               <h3>
-                Configure {selectedListing.listings} listing service for the account: {selectedChannel?.name}
+                {selectedListing.listings} listing service ({selectedChannel?.name})
               </h3>
-              <div className="sources-options">
-                <div className="sources">
-                  <div className="included-sources">
-                    <Row>
-                      <label>Include sources </label>
-                    </Row>
-                    <MultipleSelector style={{ width: '100%', }} className="multipleSelector" value={selectedListing.includedSources} disabled={isDisabled} onChange={(value: string) => onSourceChange(value)}>
-                      {sources.length > 0 ? sources : SourceOptions}
-                    </MultipleSelector>
+              <div className="listingservice-configuration-container">
+                <div className="sources-options">
+                  <div className="sources">
+                    <div className="included-sources">
+                      <Row>
+                        <h3>Include sources </h3>
+                      </Row>
+                      <MultipleSelector
+                        placeHolder="Select your sources"
+                        style={{ width: '100%' }}
+                        className="multipleSelector"
+                        value={selectedListing.includedSources}
+                        disabled={isDisabled}
+                        onChange={(value: string) => onSourceChange(value)}
+                      >
+                        {sources.length > 0 ? sources : SourceOptions}
+                      </MultipleSelector>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <Divider />
-              <div className="price-options">
-                <Radio.Group value={pricePreference} onChange={onOptionsChange}>
-                  <Radio name="source" value="source">Source price preference</Radio>
-                  <Radio name="profit" value="profit">Profit preference</Radio>
-                </Radio.Group>
-                {pricePreference === 'profit' ? (
-                  <div className="inputs-container">
-                    <label>Profit</label>
-                    <div className="inputs">
-                      <Input placeholder="Min" value={minProfit} onChange={(e) => onMinProfitChange(e)} className="blue-input" disabled={isDisabled} />
-                      <Input placeholder="Max" className="blue-input" value={maxProfit} onChange={(e) => onMaxProfitChange(e)} disabled={isDisabled} />
+
+                <div className="price-options">
+                  <Radio.Group value={pricePreference} onChange={onOptionsChange}>
+                    <Radio name="source" value="source">
+                      Source price preference
+                    </Radio>
+                    <Radio name="profit" value="profit">
+                      Profit preference
+                    </Radio>
+                  </Radio.Group>
+                  {pricePreference === 'profit' ? (
+                    <div className="inputs-container">
+                      <label>Profit</label>
+                      <div className="inputs">
+                        <Input
+                          placeholder="Min"
+                          value={minProfit}
+                          onChange={(e) => onMinProfitChange(e)}
+                          className="blue-input"
+                          disabled={isDisabled}
+                        />
+                        <Input
+                          placeholder="Max"
+                          className="blue-input"
+                          value={maxProfit}
+                          onChange={(e) => onMaxProfitChange(e)}
+                          disabled={isDisabled}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="inputs-container">
-                    <label>Source Price</label>
-                    <div className="inputs">
-                      <Input placeholder="Min" value={minSourcePrice} onChange={(e) => onMinChange(e)} className="blue-input" disabled={isDisabled} />
-                      <Input placeholder="Max" className="blue-input" value={maxSourcePrice} onChange={(e) => onMaxChange(e)} disabled={isDisabled} />
+                  ) : (
+                    <div className="inputs-container">
+                      <label>Source Price</label>
+                      <div className="inputs">
+                        <Input
+                          placeholder="Min"
+                          value={minSourcePrice}
+                          onChange={(e) => onMinChange(e)}
+                          className="blue-input"
+                          disabled={isDisabled}
+                        />
+                        <Input
+                          placeholder="Max"
+                          className="blue-input"
+                          value={maxSourcePrice}
+                          onChange={(e) => onMaxChange(e)}
+                          disabled={isDisabled}
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-                <div onClick={handleSubmit}>
-                  {!isDisabled && <ConfirmBtn className="list">Start listing service with selected preferences</ConfirmBtn>}
+                  )}
                 </div>
               </div>
             </div>
@@ -356,7 +407,7 @@ export const ConfigureListingService = () => {
             noSuscribed
           )}
         </div>
-      }
+      )}
       <div className="explanation-section">
         <h2>Is your store ready for us to start listing?</h2>
         <p>

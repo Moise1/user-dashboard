@@ -1,102 +1,91 @@
 .configure-listingservice-container {
-    .listingservices-table {
-        width: 100%;
-        background-color: rgb(255, 255, 255);
-    }
+  .listingservices-table {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+  }
 
-    .configuration-section {
-        margin-top: 1rem;
-        width: 100%;
-        background-color: rgb(255, 255, 255);
-        border-radius: 1rem;
+  .configuration-section {
+    margin-top: 1rem;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
 
-        .listingservice-configuration {
-            padding: 2rem;
-
-            .sources-options {
-                display: flex;
-                width: 100%;
-
-                .sources {
-                    margin-top: 2rem;
-                    display: flex;
-                    width: 100%;
-
-                    .included-sources {
-                        font-weight: bold;
-                        width: 100%;
-                    }
-                }
-
-                .sources-resume {
-                    margin-top: 4rem;
-                    display: flex;
-
-                    .sourcecard {
-                        padding: 6px 15px;
-                        margin: 5px;
-                        border-radius: 5px;
-                        height: fit-content;
-                        box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
-                        background-color: white;
-                        display: flex;
-                        align-items: center;
-
-                        h4 {
-                            margin: 0;
-                        }
-
-                        .remove-card {
-                            svg {
-                                height: 25px;
-                                width: 25px;
-                            }
-                        }
-
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-
-            .price-options {
-                .inputs-container {
-                    margin: 2rem;
-
-                    .inputs {
-                        display: flex;
-
-                        .blue-input {
-                            max-width: 150px;
-                            margin-left: 1rem;
-                        }
-                    }
-                }
-            }
-        }
-
-        .list {
-            width: 80% !important;
-            margin-left: 10%;
-            margin-right: 10%;
-        }
-    }
-
-    .nosuscribed-container {
-        width: 100%;
+    .listingservice-configuration {
+      padding: 2rem;
+      .listingservice-configuration-container {
         display: flex;
-        text-align: center;
         justify-content: center;
+        align-items: center;
+        align-content: center;
+        .sources-options {
+          display: flex;
+          width: 50%;
+          .sources {
+            margin-top: 2rem;
+            display: flex;
+            width: 100%;
 
-        .nosuscribed {
-            padding: 5rem 0;
+            .included-sources {
+              font-weight: bold;
+              width: 100%;
+            }
+          }
         }
+      }
+
+      .price-options {
+        width: 50%;
+        .inputs-container {
+          margin: 2rem;
+
+          .inputs {
+            display: flex;
+
+            .blue-input {
+              max-width: 150px;
+              margin-left: 1rem;
+            }
+          }
+        }
+      }
     }
 
-    .explanation-section {
-        margin-top: 2rem;
-        padding: 2rem;
-        background-color: white;
+    .list {
+      width: 80% !important;
+      margin-left: 10%;
+      margin-right: 10%;
     }
+  }
+
+  .nosuscribed-container {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+    .nosuscribed {
+      padding: 5rem 0;
+    }
+  }
+
+  .explanation-section {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: white;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .configuration-section {
+    .listingservice-configuration {
+      .listingservice-configuration-container {
+        display: grid !important;
+
+        .sources-options,
+        .price-options {
+          width: 100% !important;
+        }
+      }
+    }
+  }
 }
