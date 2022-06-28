@@ -11,7 +11,7 @@ import { CatalogSource } from '../sources/catalog-source';
 import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
+import { getCatalogProducts, listProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
 import { CatalogProduct, selectedProductDetailData } from '../../redux/catalog/catalogSlice';
 import '../../sass/catalog.scss';
@@ -21,14 +21,15 @@ export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
   | React.MouseEvent<SVGElement, MouseEvent>
   | React.MouseEvent<HTMLSpanElement, MouseEvent>
-  | React.MouseEvent
+  | React.MouseEvent;
+
 
 export const Catalog = () => {
-
+  const [listProductsModal, setListProductModal] = useState<boolean>(true);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
-  const [productId, setProductId] = useState<number>();
+  const [productId, setProductId] = useState<number>(0);
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [className, setClassName] = useState<string>('product-card');
@@ -38,12 +39,10 @@ export const Catalog = () => {
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
   const { sources } = useAppSelector((state) => state.sources);
-  console.log('the sources', sources);
+
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
-  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<
-    selectedProductDetailData
-  >({
+  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<selectedProductDetailData>({
     channelPrice: 0,
     competition: 0,
     id: 0,
@@ -56,9 +55,8 @@ export const Catalog = () => {
     sourceId: 0,
     sourcePrice: 0,
     title: '',
-    url: '',
-  }
-  );
+    url: ''
+  });
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
@@ -68,11 +66,12 @@ export const Catalog = () => {
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
   const handleProductModal = (id: number) => {
-    setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === (id))[0]);
+    setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === id)[0]);
     setModalOpen(!modalOpen);
   };
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
+
   const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
@@ -90,7 +89,7 @@ export const Catalog = () => {
   const removeSelectedProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
-    console.log({ selectedProductData });
+    console.log(selectedProductData);
     setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
   };
 
@@ -106,6 +105,15 @@ export const Catalog = () => {
     setSourcesIds(ids);
   };
 
+  const listTheProducts = () => {
+    setListProductModal(!listProductsModal);
+    const products = allProducts.map((e: CatalogProduct) => {
+      const { sourceId, title } = e;
+      return { sourceId, title };
+    });
+    dispatch(listProducts(products));
+  };
+  console.log(listTheProducts);
   return (
     <Layout className="catalog-container">
       {loading ? (
@@ -126,16 +134,25 @@ export const Catalog = () => {
                 )}
               </div>
             </div>
-            <a href="https://hustlegotreal.com/en/listing-service/" target="_blank" className="list-link" rel="noreferrer">
-              Not sure what to list?  We do it for you.
+            <a
+              href="https://hustlegotreal.com/en/listing-service/"
+              target="_blank"
+              className="list-link"
+              rel="noreferrer"
+            >
+              Not sure what to list? We do it for you.
             </a>
             <div className="filters-container">
               <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
             </div>
           </div>
           <SearchOptions showSearchInput={false} />
-          <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
-            setAllCatalogProducts={setAllCatalogProducts} suppliersCount={sourcesIds}
+          <CatalogFilters
+            visible={drawerOpen}
+            onClose={handleSideDrawer}
+            openSourceModal={handleSourceModal}
+            setAllCatalogProducts={setAllCatalogProducts}
+            suppliersCount={sourcesIds}
           />
           <PopupModal
             open={modalOpen}
@@ -170,8 +187,7 @@ export const Catalog = () => {
               </div>
             }
           >
-            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} sources={sources}
-            />
+            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} sources={sources} />
           </PopupModal>
           <PopupModal
             open={allProductsModalOpen}
@@ -185,6 +201,16 @@ export const Catalog = () => {
               {allProducts}
             </AllProducts>
           </PopupModal>
+          <PopupModal
+            open={listProductsModal}
+            handleClose={() => setListProductModal(!listProductsModal)}
+            width={600}
+            style={{ overflowY: 'scroll' }}
+            bodyStyle={{ height: 500 }}
+            closable={false}
+          >
+            <h1> List the Product Now Modal </h1>
+          </PopupModal>
           <div className="catalog-cards">
             <div className="cards-container-catalog">
               {allCatalogProducts.map((d: CatalogProduct) => (
@@ -193,17 +219,17 @@ export const Catalog = () => {
                     <Meta
                       description={
                         <>
-                          <div className="product-description" >
+                          <div className="product-description">
                             <div className="img-container">
                               <img src={d.imageUrl} className="product-img" />
                             </div>
                             <div className="product-info-area">
                               <div className="header">
-                                <p className="product-title"
-                                >
+                                <p className="product-title">
                                   {d?.title.length > 20 ? `${d?.title.substring(0, 70)} ...` : d?.title}
                                 </p>
-                                <p className="source">by &nbsp;
+                                <p className="source">
+                                  by &nbsp;
                                   {d.sourceId}
                                 </p>
                               </div>
@@ -238,19 +264,24 @@ export const Catalog = () => {
                   </Card>
                   <div className="search-container">
                     <SearchOutlined
-                      onClick={() => { handleProductModal(d.id); }} className="search-child" />
+                      onClick={() => {
+                        handleProductModal(d.id);
+                      }}
+                      className="search-child"
+                    />
                   </div>
                 </>
               ))}
             </div>
             <div className="pagination-addall-container">
               <div className="adall-container">
-                {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
+                {!!allProducts.length && <SuccessBtn handleClick={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>}
                 <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
               </div>
             </div>
           </div>
-        </>)}
+        </>
+      )}
     </Layout>
   );
 };

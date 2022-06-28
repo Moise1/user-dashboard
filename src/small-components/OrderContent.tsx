@@ -1,9 +1,6 @@
 import { Spin } from 'antd';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import {
-  // AoIconHead,
-  // CheckIcon,
-  // TrashIcon,
   LastStepOrderIcon,
   OrderCheckoutIcon,
   OrderProcessRoundedIcon,
@@ -23,26 +20,16 @@ import amazonOrder from '../../src/assets/amazon-order-ss.png';
 import { loadProgressOfOrder } from '../redux/orders/orderThunk';
 import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
-// import { AutoOrderingState } from '../orders/OrderStatus';
-// import { Button } from 'antd';
 interface Props {
   orderProgress: number;
   data: { [key: string]: OrderData };
-  // show: boolean;
-  // handleClose: () => void;
   OrderDetailsModalOpen: () => void;
-  // setShow: (value: boolean) => void;
-  // orderDetailsModalShow: boolean;
-  // setOrderDetailsModalShow: (value: boolean) => void;
-  // handleCloseAllModals: () => void;
-  // }
 }
 
 export const OrderContent = (props: Props) => {
   const { orderProgress, data, OrderDetailsModalOpen } = props;
   const { id } = data;
   const [orderNumber] = useState(id);
-  // const [iddd] = useState(445378);
   const orderStatus = useAppSelector((state) => state.orderProgress.states);
   const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
@@ -107,11 +94,6 @@ export const OrderContent = (props: Props) => {
     <div className="order-state-progress-modal">
       <div className="flex-sm-row order-state-header">
         <h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>
-        {/* <button className="autoordering-state"> //This button for future use on the order modal content
-          <AoIconHead />
-         <span>{t('OrderDetails.AOEnabled')}</span> 
-          <span>Process</span>
-        </button> */}
         <span
           className="close-modal-icon"
           onClick={() => {
@@ -129,9 +111,6 @@ export const OrderContent = (props: Props) => {
             <div className="col-12 col-lg-5">
               <div className="d-flex justify-content-between pb-3">
                 <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
-                {/* <a href="/" className="view-full-log">
-                {t('OrderDetails.viewFullLog')}
-              </a>{' '} */}
               </div>
               <div className="time-line-here">
                 {/* START ORDER  */}

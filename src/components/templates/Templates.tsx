@@ -4,19 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { getTemplates, setDefault } from '../../redux/templates/templatesThunk';
 import { Template } from 'src/redux/templates/templatesSlice';
 import { DataTable } from '../tables/DataTable';
-
 import { EditOutlined } from '@ant-design/icons';
-import '../../sass/templates.scss';
 import { Link } from 'react-router-dom';
-import { Links } from '../../links';
+import '../../sass/templates.scss';
 
 export const Templates = () => {
   const dispatch = useAppDispatch();
   const [current] = useState<number>(1);
-
-  function parentToChild(value: string): void {
-    localStorage.setItem('EditTemplate', value);
-  }
 
   const updateStatus = async (id: Template['id'], active: Template['isDefault']) => {
     await dispatch(setDefault({ id, active: !active }));
@@ -29,7 +23,6 @@ export const Templates = () => {
     dispatch(getTemplates());
   }, [getTemplates]);
 
-  console.log(templates);
 
   const tableColumns = [
     {
@@ -67,7 +60,7 @@ export const Templates = () => {
       dataIndex: 'id',
       key: 'id',
       render: (value: string) => (
-        <Link to={Links.EditTemplate} onClick={() => parentToChild(value)} className="edit-template">
+        <Link to={`/templates/edit/${value}`}  className="edit-template">
           <h4>
             Edit template <EditOutlined />
           </h4>

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCatalogProducts,getCatalogProductsSearching } from './catalogThunk';
+import { getCatalogProducts,getCatalogProductsSearching ,listProducts} from './catalogThunk';
 
 export interface CatalogProduct {
   id: number;
@@ -95,5 +95,27 @@ export const catalogSearchSlice = createSlice({
   }
 });
 
+export const listProductSlice = createSlice({
+  name: 'catalogSearch',
+  initialState: searchInitialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(listProducts.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(listProducts.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      // state.catalogSearchedProducts = payload;
+      console.log('The payload from catalog list products',payload);
+    });
+    builder.addCase(listProducts.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
 export const { reducer: catalogProductsReducer } = catalogSlice;
 export const {reducer: catalogSearchProductReducer} = catalogSearchSlice;
+export const {reducer: listProductsReducers} = listProductSlice;

@@ -18,3 +18,14 @@
     color: $primary;
   }
 }
+
+.action-btns-container{
+  width: 40%;
+  margin: 2rem auto 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.se-toolbar.sun-editor-common{
+  z-index: 1 !important;
+}
