@@ -50,7 +50,7 @@ export const PriceWarrior = () => {
   };
 
   const noPWService = (<div className="price-warrior-container">
-    <h4> Currently! You don't have any price warrior service to configure.</h4>
+    <h4> Currently!You don&apos;t have any price warrior service to configure.</h4>
   </div>
   );
   const columns = [
