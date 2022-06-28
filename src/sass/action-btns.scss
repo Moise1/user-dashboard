@@ -52,7 +52,9 @@
     color: $primary-bg;
   }
 }
-
+.redirection-link {
+  min-width: 170px;
+}
 .showVisibleCol-btn {
   max-width: 170px !important;
   border-radius: 8% !important;
@@ -73,7 +75,9 @@
 }
 .reset-btn {
   background: $ash-gray;
-  &:hover {
+  color: $primary-bg;
+  &:hover,
+  &:focus {
     background: $ash-gray;
     color: $primary-bg;
   }

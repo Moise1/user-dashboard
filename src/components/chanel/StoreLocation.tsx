@@ -10,18 +10,16 @@ import { eCountry } from '../../utils/eCountry';
 import { Flag } from './Flag';
 
 
-interface values {
-  storeLocation: string;
-}
 export interface StoreLocationProps {
   platform: number;
   step: number;
   handleChangeLocation: (newLocation:  number) => void;
-  values?: values;
+  location: string | number | null;
 }
 
 const flags = [
   {
+    id: 1,
     name: 'UK',
     path: uk_flag,
     platform: 'amazon',
@@ -29,6 +27,7 @@ const flags = [
     code: eCountry.UK,
   },
   {
+    id: 2,
     name: 'USA',
     path: us_flag,
     platform: 'amazon',
@@ -36,6 +35,7 @@ const flags = [
     code: eCountry.US,
   },
   {
+    id: 3,
     name: 'Spain',
     path: sp_flag,
     platform: 'amazon',
@@ -43,6 +43,7 @@ const flags = [
     code: 3,
   },
   {
+    id: 4,
     name: 'France',
     path: fr_flag,
     platform: 'ebay',
@@ -50,6 +51,7 @@ const flags = [
     code: eCountry.FR,
   },
   {
+    id: 5,
     name: 'Germany',
     path: ger_flag,
     platform: 'ebay',
@@ -57,6 +59,7 @@ const flags = [
     code: eCountry.DE,
   },
   {
+    id: 6,
     name: 'Australia',
     path: aus_flag,
     platform: 'ebay',
@@ -64,43 +67,37 @@ const flags = [
     code: eCountry.AU,
   },
   {
+    id: 7,
     name: 'Italy',
     path: it_flag,
     platform: 'ebay',
     slug: 'it',
     code: eCountry.IT,
   },
-
 ];
 
 export const StoreLocation = (props: StoreLocationProps) => {
-  const { platform, handleChangeLocation, values } = props;
+  const { platform, handleChangeLocation, location } = props;
 
   return (
     <form className="location-form">
-      <h5 className="title">{t('bar2')}?</h5>
+      <h5 className="title">{t('store-base')}</h5>
       <h6 className="sub-title">
         {platform == 1 ? t('storebay') : platform == 3 ? t('storamz') : t('storshp')}
       </h6>
       <div className="flags">
         {flags.map((i) => (
           <Flag
+            index={i.id}
             key={i.name}
-            // platform={platform}
-            // currentPlatform={i.platform}
             flag={i.path}
             name={i.name}
             code={i.code}
-            // key={i.slug}
-            // location={values.storeLocation}
             handleChangeLocation={handleChangeLocation}
           />
         ))}
       </div>
-      <p className="select-country">
-        {' '}
-        {values?.storeLocation == '' ? '*Please select a country in order to proceed' : null}
-      </p>
+      {!location && <p className="danger-txt list-check">*Please select a country in order to proceed</p>}
     </form>
   );
 };

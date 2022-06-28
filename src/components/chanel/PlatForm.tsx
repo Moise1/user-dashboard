@@ -1,3 +1,4 @@
+import { Col, Row } from 'antd';
 import ebay_logo from '../../assets/channel/ebay.png';
 import shopify_logo from '../../assets/channel/shopify-2.png';
 import amazon_logo from '../../assets/channel/amazon-2.png';
@@ -7,53 +8,98 @@ import { ElementEventType } from '../catalog/Catalog';
 export interface props {
   handleChangePlatform: (newPlatform: number) => void;
   platform: number;
-  values?: platformType;
   step: number;
 }
 
 export const PlatForm = (props: props) => {
-  const { handleChangePlatform } = props;
+  const { handleChangePlatform, platform } = props;
+
   const onSelectPlatform = (e: ElementEventType) => {
     const target = e.currentTarget;
     const selectedPlatform = String(target.getAttribute('id'));
     handleChangePlatform(parseInt(selectedPlatform));
-    
   };
+  const mobileScreenSize = window.matchMedia('(max-width: 576px)');
 
+  const eBayPlatform = (
+    <div className="description-area">
+      <div className="market-place">{t('mrktplc')}</div>
+      <p>{t('ebayslctd')}</p>
+    </div>
+  );
+
+  const shopifyPlatform = (
+    <div className="description-area">
+      <div className="market-place">{t('ownStore')}</div>
+      <p>{t('shopslctd')}</p>
+    </div>
+  );
+
+  const amazonPlatform = (
+    <div className="description-area">
+      <div className="market-place">{t('mrktplc')}</div>
+      <p>{t('amzsltcd')}</p>
+      <p className="amazon-sub">
+        {' '}
+        <i>{t('amzsub')}</i>
+      </p>
+    </div>
+  );
+
+  const showPlatformInfo = (platform: number) => {
+    switch (platform) {
+    case 1:
+      return eBayPlatform;
+    case 2: 
+      return shopifyPlatform;
+    case 3: 
+      return amazonPlatform;
+    default:
+      break;
+    }
+  };
+  
   return (
     <form className="platforms-form">
       <div className="platforms-area">
         <h5 className="sell-title">{t('liketosell')} ?</h5>
-        <div className="cards-container">
-          <div className="platform-card" onClick={onSelectPlatform} id='1'>
+        <Row className="cards-container" gutter={[0, 12]}>
+          <Col className="platform-card" lg={9} onClick={onSelectPlatform} id="1" tabIndex={1}>
             <img src={ebay_logo} className="platform-img" alt="ebay logo" />
-            <div className="description-area">
-              <div className="market-place">{t('mrktplc')}</div>
-              <p>{t('ebayslctd')}</p>
-            </div>
-          </div>
+            {!mobileScreenSize.matches && (
+              <div className="description-area">
+                <div className="market-place">{t('mrktplc')}</div>
+                <p>{t('ebayslctd')}</p>
+              </div>
+            )}
+          </Col>
 
-          <div className="platform-card" onClick={onSelectPlatform} id='2'>
+          <Col className="platform-card" lg={9} onClick={onSelectPlatform} id="2" tabIndex={2}>
             <img src={shopify_logo} className="platform-img" alt="shopify logo" />
-            <div className="description-area">
-              <div className="market-place">{t('ownStore')}</div>
-              <p>{t('shopslctd')}</p>
-            </div>
-          </div>
+            {!mobileScreenSize.matches && (
+              <div className="description-area">
+                <div className="market-place">{t('ownStore')}</div>
+                <p>{t('shopslctd')}</p>
+              </div>
+            )}
+          </Col>
 
-          <div className="platform-card" onClick={onSelectPlatform} id='3'>
+          <Col className="platform-card" lg={20} onClick={onSelectPlatform} id="3" tabIndex={3}>
             <img src={amazon_logo} className="platform-img" alt="amazon logo" />
-            <div className="description-area">
-              <div className="market-place">{t('mrktplc')}</div>
-              <p>{t('amzsltcd')}</p>
-              <p className="amazon-sub">
-                {' '}
-                <i>{t('amzsub')}</i>
-              </p>
-            </div>
-          </div>
-          <div className="new-description-area"></div>
-        </div>
+            {!mobileScreenSize.matches && (
+              <div className="description-area">
+                <div className="market-place">{t('mrktplc')}</div>
+                <p>{t('amzsltcd')}</p>
+                <p className="amazon-sub">
+                  {' '}
+                  <i>{t('amzsub')}</i>
+                </p>
+              </div>
+            )}
+          </Col>
+          {mobileScreenSize.matches && <div className="platform-info">{showPlatformInfo(platform)}</div>}
+          {!platform && <p className="danger-txt">*Please select a store</p>}
+        </Row>
       </div>
     </form>
   );

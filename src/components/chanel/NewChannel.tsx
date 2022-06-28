@@ -1,72 +1,72 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Row, Col } from 'antd';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
-import { ChooseList, chooseListValues } from './ChooseList';
+import { ChooseList } from './ChooseList';
 import { PlatForm } from './PlatForm';
 import { StoreLocation } from './StoreLocation';
 import { UserName } from './UserName';
 import { Stepper } from './Stepper';
-import { ProgressBar } from './ProgressBar';
+import { SideProgressBar } from './SideProgressBar';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
-import { getLinkAccount } from 'src/redux/new-channel/newChannelThunk';
-import { eShop } from 'src/utils/eShop';
+import { getEbayLinkAccount } from 'src/redux/new-channel/newChannelThunk';
 import '../../sass/new-channel.scss';
 
-interface state {
-  platform: number;
+interface State {
+  platform: number | null;
   storeLocation: string | number | null;
   flag: string;
   location: string;
   api: string;
   extension: string;
-  user: string;
   list: string;
 }
 
-interface Props {
-  _ignored?: boolean;
-}
 
-const  popupWindow = (url: string, windowName: string, win: Window & typeof globalThis, w: number, h: number) => {
-  const t = win!.top!.outerHeight / 2 + win!.top!.screenY - ( h / 2);
-  const l = win!.top!.outerWidth / 2 + win!.top!.screenX - ( w / 2);
-  return win.open(url, windowName, `
-  toolbar=no, location=no, directories=no,
-  status=no, menubar=no, scrollbars=no,
-  resizable=no, copyhistory=no, 
-  width=${w}, height=${h}, top=${t}, left=${l}`
-  )?.focus();
+export const popupWindow = (
+  url: string,
+  win: Window & typeof globalThis,
+  w: number, 
+  h: number) => {
+  const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
+  const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
+  return win
+    .open(
+      url,
+      '_blank',
+      `toolbar=no, location=yes, directories=no,
+      status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
+      width=${w}, height=${h}, top=${t}, left=${l}`
+    );
 };
-export const NewChannel = ({ _ignored }: Props) => {
+export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const {url} = useAppSelector(state => state.linkAccount);
-  const [ebayUrl, setEbayUrl] = useState<string>(url);
+  const [ebayUrl, setEbayUrl] = useState<string>('');
+  const { url, getLinkLoading } = useAppSelector((state) => state.newChannel);
   const dispatch = useAppDispatch();
 
-
-  const [data, setData] = useState<state>({
-    platform: eShop.eBay,
+  const [data, setData] = useState<State>({
+    platform: null,
     storeLocation: null,
     flag: '',
     location: '',
     api: '',
     extension: '',
-    user: '',
     list: ''
   });
 
+ 
+
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
-    setEbayUrl('');
   };
+
   const handleNext = () => {
-    if(url !== '' && step === 4 && data.api === 'easy'){
-      setEbayUrl(url);
-      popupWindow(ebayUrl, 'Ebay Account', window, 800, 600);
+    if (ebayUrl !== '' && step === 4 && data.api === 'easy') {
+      popupWindow(ebayUrl, window, 800, 600);
       return;
     }
     setStep((prevState) => prevState + 1);
@@ -81,74 +81,97 @@ export const NewChannel = ({ _ignored }: Props) => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
-    setData({ ...data, api: value });
-    value === 'easy' && dispatch(getLinkAccount({shop: data.platform, site: data.storeLocation as number}));
+    setData({ ...data, api: value });      
   };
+
   const handleChangeExtension = (value: string) => {
     setData({ ...data, extension: value });
   };
-  const handleChangeUser = (value: string) => {
-    setData({ ...data, user: value });
-  };
+
   const handleChangeList = (value: string) => {
     setData({ ...data, list: value });
   };
 
-  const { platform, api, user, list, extension } = data;
-  const values: chooseListValues = { platform, api, user, list, extension };
+  useEffect(() => {
+    dispatch(
+      getEbayLinkAccount({
+        data: {
+          shop: data.platform!,
+          site: data.storeLocation as number
+        }
+      })
+    );
+    if(data.api === 'easy'){
+      setEbayUrl(url);
+    }else {
+      setEbayUrl('');
+    }
+  }, [data.api]);
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
     case 1:
       return (
-        <PlatForm
-          platform={data.platform}
-          // values={values}
-          step={step}
+        <PlatForm 
+          platform={data.platform!} 
+          step={step} 
           handleChangePlatform={handleChangePlatform}
         />
       );
     case 2:
       return (
         <StoreLocation
-          platform={data.platform}
-          // values={values}
+          platform={data.platform!}
           step={step}
           handleChangeLocation={handleChangeLocation}
+          location={data.storeLocation!}
         />
       );
     case 3:
-      return <Account platform={data.platform} handleChangeApi={handleChangeApi} step={step} />;
-    case 4:
       return (
-        <AccountConnect
-          api={data.api}
-          extension={data.extension}
-          platform={data.platform}
-          handleChangeApi={handleChangeApi}
-          handleChangeExtension={handleChangeExtension}
-          values={values}
-          step={step}
+        <Account 
+          platform={data.platform!} 
+          handleChangeApi={handleChangeApi} 
+          step={step} handleNext={handleNext}
         />
       );
+    case 4:
+      if (data.platform === 1 || data.platform === 1) {
+        return (
+          <AccountConnect
+            api={data.api}
+            extension={data.extension}
+            platform={data.platform}
+            handleChangeApi={handleChangeApi}
+            handleChangeExtension={handleChangeExtension}
+            step={step}
+          />
+        );
+      } else {
+        return (
+          <UserName
+            platform={data.platform!}
+            step={step}
+            storeLocation={data.storeLocation}
+            handleNext={handleNext}
+          />
+        );
+      }
     case 5:
       return (
-        <UserName
-          platform={data.platform}
-          user={data.user}
-          handleChangeUser={handleChangeUser}
-          values={values}
-          step={step}
+        <UserName 
+          platform={data.platform!} 
+          step={step} 
+          storeLocation={data.storeLocation}
+          handleNext={handleNext}
         />
       );
     case 6:
       return (
-        <ChooseList
-          platform={data.platform}
-          handleChangeList={handleChangeList}
-          values={values}
-          list={list}
-          step={step}
+        <ChooseList 
+          platform={data.platform!} 
+          handleChangeList={handleChangeList} 
+          list={data.list} step={step} 
         />
       );
     default:
@@ -156,30 +179,36 @@ export const NewChannel = ({ _ignored }: Props) => {
     }
   };
 
+  const isDisabled = () => {
+    if (!data.storeLocation && step === 2) return true;
+    if (!data.api && step === 4) return true;
+    if(getLinkLoading && step === 4) return true;
+  };
+
   return (
     <div className="new-channel-container">
-      <Stepper current={step} className="stepper" />
+      <Stepper current={step} platform={data.platform} className="stepper" />
       <Row gutter={[16, 0]}>
         <Col className="left-section" lg={15}>
           {stepDetector(step)}
-          <div className="nav-btns">
-            {showPrev && (
-              <Button className="" onClick={handlePrev}>
-                <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
-              </Button>
-            )}
-            {showNext && (
-              <Button onClick={handleNext}>
-                <ArrowRightOutlined style={{ fontSize: '19px' }} />
-                {step === 6 ? 'Finish' : 'Next'}{' '}
-              </Button>
-            )}
-          </div>
         </Col>
         <Col lg={6} className="right-section">
-          <ProgressBar platform={data.platform} step={step} />
+          <SideProgressBar platform={data.platform} step={step} />
         </Col>
       </Row>
+      <div className="nav-btns">
+        {showPrev && step >= 1 && (
+          <Button className="" onClick={handlePrev}>
+            <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
+          </Button>
+        )}
+        {showNext && step < 6 && (
+          <Button onClick={handleNext} disabled={isDisabled()} style={{ color: isDisabled() && '#cccc' }}>
+            <ArrowRightOutlined style={{ fontSize: '19px', color: isDisabled() && '#cccc' }} />
+            {step === 6 ? 'Finish' : 'Next'}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

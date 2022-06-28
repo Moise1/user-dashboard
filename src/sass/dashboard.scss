@@ -22,7 +22,7 @@
 .add-servers {
   align-items: center;
   display: inline;
-  column-gap: 0.3rem;
+  column-gap: 2 * $spacer;
   .footer-link {
     margin-left: 2px;
   }
@@ -74,7 +74,7 @@
   .general-cols {
     display: flex;
     justify-content: space-evenly;
-    column-gap: 10px;
+    column-gap: 2 * $spacer;
 
     .container-numbers {
       display: grid;
@@ -94,6 +94,8 @@
       background: $corporative-color-dark;
       padding: 1rem;
       border-radius: 10px;
+      flex-grow: 1;
+      max-width: 100%;
       .channels {
         list-style-type: none;
       }
@@ -117,7 +119,6 @@
     box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
     padding: 1rem;
     border-radius: 10px;
-    
   }
 }
 
@@ -137,7 +138,7 @@
   }
   .sales-profit-area {
     display: flex;
-    column-gap: 1rem;
+    column-gap: 2 * $spacer;
     margin: 0.5rem 0;
     .toggle-sales {
       width: 80px;
@@ -160,7 +161,7 @@
   .other-services-cols {
     display: flex;
     justify-content: space-evenly;
-    column-gap: 4px;
+    column-gap: 2 * $spacer;
     .listing-service,
     .no-api-server,
     .auto-ordering,
@@ -169,6 +170,8 @@
       background: $corporative-color-dark;
       padding: 1rem;
       border-radius: 10px;
+      flex-grow: 1;
+      max-width: 100%;
     }
     .listing-service-title,
     .no-api-server-title,
@@ -206,7 +209,7 @@
   .affiliates-benefits {
     margin-top: 4rem 0;
     width: 40%;
-    row-gap: 0.5rem;
+    row-gap: 2 * $spacer;
     margin: 0 auto;
     display: grid;
     place-items: center;
@@ -218,7 +221,7 @@
     }
     .copy-actions {
       display: flex;
-      column-gap: 1rem;
+      column-gap: 2 * $spacer;
     }
   }
 }
@@ -226,7 +229,7 @@
 .social-media {
   display: flex;
   justify-content: flex-end;
-  column-gap: 0.7rem;
+  column-gap: 2 * $spacer;
   margin: 1rem 0 4rem 0;
 }
 .affiliates-contents {
@@ -244,8 +247,8 @@
   }
   .sales-profit-numbers {
     text-align: center;
-  };
-  .graph-cntrlers{
+  }
+  .graph-cntrlers {
     width: 100%;
     margin: 0 auto !important;
   }
