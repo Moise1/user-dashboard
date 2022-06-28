@@ -24,3 +24,16 @@ export const setDefault = createAsyncThunk(
     }
   }
 );
+
+export const updateTemplate = createAsyncThunk(
+  'templates/updateTemplate',
+  async ({ html }: {html: string}, thunkAPI) => {
+    try {
+      const res = await client.post('/Templates/Update/', html);
+      if (res.status === 200) toastAlert('Template updated successfully!', 'success');
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);

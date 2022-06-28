@@ -3,8 +3,6 @@ import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { Links } from './links';
-import { ProtectedRoute } from './ProtectedRoute';
 import {
   UserLogin,
   UserRegister,
@@ -27,18 +25,20 @@ import {
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
-  ConfigureNoapi,
   ConfigureListingService,
-  ListNow,
-  ManualListing,
-  BulkListing,
-  Checkout,
-  PaymentMethod,
-  EditTemplate,
-  OurServices,
   AllServices,
-  PriceWarrior
+  PriceWarrior,
+  EditTemplate,
+  ConfigureNoapi,
+  PaymentMethod,
+  OurServices,
+  Checkout,
+  ManualPublish,
+  BulkListing,
+  ListNow
 } from './components';
+import { ProtectedRoute } from './ProtectedRoute';
+import { Links } from './links';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -80,7 +80,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
             <ProtectedRoute path={Links.Products} component={Listings} />
             <ProtectedRoute path={Links.PublishNow} component={ListNow} />
-            <ProtectedRoute path={Links.ManualPublish} component={ManualListing} />
+            <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
             <ProtectedRoute path={Links.SourceSettings} component={SourceConfiguration} />
@@ -102,6 +102,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
+            <ProtectedRoute exact path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />

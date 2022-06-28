@@ -4,10 +4,10 @@ import { Row, Col } from 'antd';
 import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
-import '../../sass/list-now/manual-listing.scss';
 import { getSources } from '../../redux/sources/sourcesThunk';
+import '../../sass/list-now/manual-listing.scss';
 
-export const ManualListing = (/*props: props*/) => {
+export const ManualPublish = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   //const { sources, loading } = useAppSelector((state) => state.sources);
   const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
@@ -73,7 +73,7 @@ export const ManualListing = (/*props: props*/) => {
           {/*  </Col>;*/}
           {/*})}*/}
           <Row gutter={[16, 8]}>
-            {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
+            {manualListings.moreSources?.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
               return <Col span={6} key={itm.id}>
                 <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
                   <div className="list-card">

@@ -20,7 +20,7 @@
   GetStarted: '/get-started',
   Catalog: '/catalog',
   Templates: '/templates',
-  EditTemplate: '/templates/edit',
+  EditTemplate: '/templates/edit/:id',
   AutoOrderConfiguration: '/auto-ordering-configuration',
   ConfigureNoapi: '/configure-no-api-server',
   ConfigureListingService: '/setup-preferences',

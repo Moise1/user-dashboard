@@ -14,6 +14,7 @@ import { getNotifications } from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 import { Links } from '../../links';
+import { getUserToken } from 'src/redux/user/userThunk';
 
 interface Props extends RouteComponentProps {
   showMobileSider: () => void;
@@ -26,7 +27,8 @@ export const Topbar = withRouter((props: Props) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
-  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user || {});
+  const { user, tokens } = useAppSelector((state) => state.user);
+  const {quotaUsed, quotaAdded} = user.user ?? {};
   const { notifications } = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
@@ -50,7 +52,8 @@ export const Topbar = withRouter((props: Props) => {
   const { channelId } = useContext(AppContext);
   useEffect(() => {
     dispatch(getNotifications());
-  }, [getNotifications, channelId]);
+    dispatch(getUserToken());
+  }, [getNotifications, channelId, getUserToken]);
 
   return (
     <div className="top-bar">
@@ -94,10 +97,10 @@ export const Topbar = withRouter((props: Props) => {
         </div>
       </div>
       <div className="top-bar-item">
-        <div className="tokens-container" role="button" onClick={handleOpenModal}>
+        <div className="tokens-container" onClick={handleOpenModal}>
           <img src={coinIcon} className="token-icon" alt="coinIcon" />
-          <span className="token-number">1232</span>
-          <span className="tokens">Tokens </span>
+          <span className="token-number">{tokens}</span>
+          <span className="tokens">tokens </span>
         </div>
       </div>
       <div className="top-bar-item">

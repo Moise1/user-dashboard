@@ -40,7 +40,9 @@ client.interceptors.response.use(
     } else if (res.status === 404) {
       toastAlert(res.data.response_errors.error.description, 'error');
     } else if (res.status === 409) {
-      toastAlert(res.data.response_errors.error[0].description, 'error');
+      toastAlert(
+        res.data.response_errors ?? 'This item already exists! Please try again.',
+        'error');
     }
     return res;
   },
