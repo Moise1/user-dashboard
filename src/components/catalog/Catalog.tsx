@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Spin } from 'antd';
+import { Layout, Card, Spin, Divider, Switch, DatePicker, Input, Checkbox } from 'antd';
 import { SuccessBtn } from '../../small-components/ActionBtns';
 import { FiltersBtn } from '../../small-components/TableActionBtns';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
@@ -23,7 +23,6 @@ export type ElementEventType =
   | React.MouseEvent<HTMLSpanElement, MouseEvent>
   | React.MouseEvent;
 
-
 export const Catalog = () => {
   const [listProductsModal, setListProductModal] = useState<boolean>(true);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -36,6 +35,9 @@ export const Catalog = () => {
   const [sourcesIds, setSourcesIds] = useState<number[]>([]);
   const dispatch = useAppDispatch();
   const { Meta } = Card;
+
+  const [frequency, setFrequency] = useState<boolean>(false); //To display the crediential form
+  const handleFrequency = (): void => setFrequency(!frequency);
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
   const { sources } = useAppSelector((state) => state.sources);
@@ -209,7 +211,68 @@ export const Catalog = () => {
             bodyStyle={{ height: 500 }}
             closable={false}
           >
-            <h1> List the Product Now Modal </h1>
+            <div className="catalog-list-modal">
+              <h1> Listing Settings </h1>
+              <Divider />
+              <div className="under-sections">
+                <div className="section-option-container">
+                  <div className="section-option">
+                    <div className="section-title-container">
+                      <h2>Optimize the titles of the products?</h2>
+                    </div>
+                    <div className="section-switch">
+                      <Switch />
+                    </div>
+                  </div>
+                  <div className="section-explanation">
+                    <ul>
+                      <li>Rank higher on eBay{"'"}s search results.</li>
+                      <li>We analyse sold items by category.</li>
+                      <li>Boost your sales.</li>
+                      <li>Get your listings in front of more potential buyers.</li>
+                      <li>Save time, we do the hard work for you.</li>
+                    </ul>
+                    <p>Cost: {allProducts.length} token(s) </p>
+                  </div>
+                </div>
+                <div className="section-option-container">
+                  <div className="section-option">
+                    <div className="section-title-container">
+                      <h2>Choose the frequency of the listings?</h2>
+                    </div>
+                    <div className="section-switch">
+                      <Switch onChange={handleFrequency} />
+                    </div>
+                  </div>
+                  {frequency && (
+                    <div className="section-explanation">
+                      <div className="frequency-container">
+                        <div className="select-date-container">
+                          <h3>Select the date</h3>
+                          <DatePicker className="date-picker" />
+                        </div>
+                        <Divider className="divider" type="vertical" />
+                        <div className="listings-frequency-container">
+                          <h3>Listings frequency</h3>
+                          <p>The system will automatically list an item every X minutes.</p>
+                          <Input className="blue-input" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="checkbox-section">
+                  <Checkbox />
+                  <p>
+                    Review listings individually before publishing. Your listings will appear under Pending listings
+                    section.
+                  </p>
+                </div>
+                <div className="list-button">
+                  <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>
+                </div>
+              </div>
+            </div>
           </PopupModal>
           <div className="catalog-cards">
             <div className="cards-container-catalog">
@@ -275,7 +338,9 @@ export const Catalog = () => {
             </div>
             <div className="pagination-addall-container">
               <div className="adall-container">
-                {!!allProducts.length && <SuccessBtn handleClick={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>}
+                {!!allProducts.length && (
+                  <SuccessBtn handleClick={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
+                )}
                 <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
               </div>
             </div>
