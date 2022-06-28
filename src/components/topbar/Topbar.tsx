@@ -88,8 +88,8 @@ export const Topbar = withRouter((props: Props) => {
             </span>
           </div>
           <Progress percent={qoutaPercentage(quotaUsed, quotaAdded)} showInfo={false} className="progress-bar" />
-          <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="update-btn">
-            {t('Topbar.Update')}
+          <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="upgrade-btn">
+            {t('Topbar.Upgrade')}
           </button>
         </div>
       </div>

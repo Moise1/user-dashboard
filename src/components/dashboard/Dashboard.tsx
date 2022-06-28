@@ -42,6 +42,8 @@ import { affiliatesGraphConfig, salesGraphConfig } from 'src/utils/graphConfig';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
+import { PopupModal } from '../modals/PopupModal';
+import { BuyTokens } from '../topbar/BuyTokens';
 interface ProductQuota {
   quota: number;
   used: number;
@@ -72,6 +74,9 @@ export const Dashboard = () => {
   const [showSales, setShowSales] = useState<boolean>(true);
   const [current, setCurrent] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
+
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpenModal = () => setOpen(!open);
 
   const monthsLabels = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
 
@@ -322,11 +327,6 @@ export const Dashboard = () => {
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
                 header="Active Services"
-                footer={
-                  <a href="#" className="footer-link">
-                    Manage listing services
-                  </a>
-                }
                 renderItem={() =>
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
@@ -394,13 +394,22 @@ export const Dashboard = () => {
           </Col>
 
           <Col className="tokens" xs={24} lg={10}>
+            <PopupModal
+              open={open}
+              width={800}
+              style={{ top: 20 }}
+              bodyStyle={{ height: 600 }}
+              handleClose={handleOpenModal}
+            >
+              <BuyTokens />
+            </PopupModal>
             <h6 className="tokens-title">Tokens - Title Optimization</h6>
             <div className="tokens-count">
               <p>Not sure what to list? We can help you find good selling items.</p>
               <p> We choose the best products and list them for you</p>
-              <SuccessBtn>Get more tokens</SuccessBtn>
-              <Link to="/optimize-listings" className="alternative-link">
-                Optimize your existing listings
+              <SuccessBtn handleConfirm={handleOpenModal}>Get more tokens</SuccessBtn>
+              <Link to="/products" className="alternative-link">
+                <p>Optimize your existing products</p>
               </Link>
             </div>
           </Col>
@@ -411,12 +420,16 @@ export const Dashboard = () => {
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             <div className="use-auto-ordering">
-              <p>Do you want to keep your NO API extension running 24/7?</p>
-              <p>We can do it for you for only 9GBP/month.</p>
-              <SuccessBtn>Use it!</SuccessBtn>
-              <Link to="/configure-auto-ordering" className="alternative-link">
-                Configure now our auto ordering systems
-              </Link>
+              <p>
+                Forget about processing your orders manually. They will now be processed automatically and you will be
+                able to configure and manage your auto ordering settings directly from your HGR account.
+              </p>
+
+              <SuccessBtn>
+                <Link to="/auto-ordering-configuration" className="alternative-link">
+                  Configure Auto Ordering
+                </Link>
+              </SuccessBtn>
             </div>
           </Col>
         </Row>
