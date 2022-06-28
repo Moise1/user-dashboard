@@ -23,7 +23,7 @@ export { AutoOrdering } from './auto-ordering/AutoOrdering';
 export { AutoOrderingConfiguration } from './auto-ordering/AutoOrderingConfiguration';
 
 export { ListNow } from './list-now/ListNow';
-export { ManualListing } from './list-now/ManualListing';
+export { ManualPublish } from './list-now/ManualPublish';
 export { BulkListing } from './list-now/BulkListing';
 export { Checkout } from './subscriptions/Checkout';
 export { PaymentMethod } from './subscriptions/PaymentMethod';

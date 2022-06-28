@@ -7,6 +7,7 @@ import we_icon from '../../assets/channel/list/Group 148.png';
 import { t } from '../../utils/transShim';
 import { SuccessBtn } from 'src/small-components/ActionBtns';
 import { Link } from 'react-router-dom';
+import { Links } from 'src/links';
 
 
 
@@ -78,9 +79,9 @@ export const ChooseList = (props: props) => {
             <p>
               {t('welistpara')}
               <span className="arrow-container">
-                <Link to="/we-list">
+                <a href={`${Links.ListingService}`}>
                   <ArrowRightOutlined style={{fontSize: '19px'}} />
-                </Link>
+                </a>
               </span>
             </p>
             <SuccessBtn>{t('btnlist')}</SuccessBtn>

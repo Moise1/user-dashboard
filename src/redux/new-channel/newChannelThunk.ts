@@ -41,7 +41,18 @@ export const createNewChannel = createAsyncThunk(
     try {
       const res = await client.post('/ChannelOAuth/CreateNoApiChannel', data);
       if (res.status === 200) toastAlert('New Channel successfully created.', 'success');
-      return res.data.response_data;
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong.');
+    }
+  }
+);
+
+export const paidHostExtension = createAsyncThunk(
+  'new-channel/hostExtension',
+  async (_, thunkAPI) => {
+    try {
+      await client.get('/api/Onboarding/SendHostExtensionEmail');
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong.');
     }

@@ -33,7 +33,7 @@ import {
   PaymentMethod,
   OurServices,
   Checkout,
-  ManualListing,
+  ManualPublish,
   BulkListing,
   ListNow
 } from './components';
@@ -80,7 +80,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
             <ProtectedRoute path={Links.Products} component={Listings} />
             <ProtectedRoute path={Links.PublishNow} component={ListNow} />
-            <ProtectedRoute path={Links.ManualPublish} component={ManualListing} />
+            <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
             <ProtectedRoute path={Links.SourceSettings} component={SourceConfiguration} />

@@ -10,6 +10,7 @@ interface props {
   step: number;
   platform: number;
   storeLocation: number | string | null;
+  handleNext: () => void;
 }
 
 export const UserName = (props: props) => {
@@ -22,7 +23,7 @@ export const UserName = (props: props) => {
   const shopifyShopUrl = 'https://myshop.myshopify.com';
 
   const platformValue = eShop[platform];
-  const onFinish = (values: { shopName: string }) => {
+  const onFinish = async (values: { shopName: string }) => {
     if(platform === 2){
       dispatch(
         getShopifyLinkAccount({data: {
@@ -35,14 +36,13 @@ export const UserName = (props: props) => {
       return false;
     }
 
-    dispatch(
+    await dispatch(
       createNewChannel({
         isoCountry: storeLocation as number,
         channel: platformValue === 'eBay' ? 3 : 4,
         channelStoreIdentifier: values.shopName
       })
     );
-  
   };
 
   if(url) popupWindow(url, window, 800, 600);

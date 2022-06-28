@@ -2,6 +2,9 @@ import { Col, Radio, Row } from 'antd';
 import { t } from '../../utils/transShim';
 import { ElementEventType } from '../catalog/Catalog';
 import { eShop } from 'src/utils/eShop';
+import {useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
+import { paidHostExtension } from '../../redux/new-channel/newChannelThunk';
+
 
 interface props {
   handleChangeApi: (newApi: string) => void;
@@ -14,11 +17,16 @@ interface props {
 
 export const AccountConnect = (props: props) => {
   const { handleChangeApi, platform, handleChangeExtension, extension, api } = props;
-
+  const dispatch = useAppDispatch();
   const onSelectAccount = (e: ElementEventType) => {
     const target = e.currentTarget;
     const selectedApi = target.getAttribute('id');
     handleChangeApi(String(selectedApi));
+  };
+
+  const handlePaidExtension = () =>{
+    handleChangeExtension('servers');
+    dispatch(paidHostExtension());
   };
 
   return (
@@ -75,7 +83,7 @@ export const AccountConnect = (props: props) => {
                 checked={extension === 'computer' && api === 'advance'}
                 onChange={() => handleChangeExtension('computer')}
               />
-              <span>{t('runext')}</span>
+              <span><strong>{t('runext')}</strong></span>
             </div>
             <p>
               <i>
@@ -87,9 +95,9 @@ export const AccountConnect = (props: props) => {
                 value={'ext'}
                 name="extension"
                 checked={extension === 'servers' && api === 'advance'}
-                onChange={() => handleChangeExtension('servers')}
+                onChange={handlePaidExtension}
               />
-              <span>{t('extpkg')}</span>
+              <span><strong>{t('extpkg')}</strong></span>
             </div>
             <p>
               <i>{t('keeppcon')}</i>

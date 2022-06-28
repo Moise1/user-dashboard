@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Row, Col } from 'antd';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
@@ -23,7 +23,12 @@ interface State {
   list: string;
 }
 
-export const popupWindow = (url: string, win: Window & typeof globalThis, w: number, h: number) => {
+
+export const popupWindow = (
+  url: string,
+  win: Window & typeof globalThis,
+  w: number, 
+  h: number) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
   return win
@@ -39,8 +44,8 @@ export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
+  const [ebayUrl, setEbayUrl] = useState<string>('');
   const { url, getLinkLoading } = useAppSelector((state) => state.newChannel);
-  const [ebayUrl, setEbayUrl] = useState<string>(url);
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -53,13 +58,14 @@ export const NewChannel = () => {
     list: ''
   });
 
+ 
+
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
-    setEbayUrl('');
   };
+
   const handleNext = () => {
-    if (url !== '' && step === 4 && data.api === 'easy') {
-      setEbayUrl(url);
+    if (ebayUrl !== '' && step === 4 && data.api === 'easy') {
       popupWindow(ebayUrl, window, 800, 600);
       return;
     }
@@ -75,17 +81,9 @@ export const NewChannel = () => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
-    setData({ ...data, api: value });
-    data.api === 'easy' &&
-      dispatch(
-        getEbayLinkAccount({
-          data: {
-            shop: data.platform!,
-            site: data.storeLocation as number
-          }
-        })
-      );
+    setData({ ...data, api: value });      
   };
+
   const handleChangeExtension = (value: string) => {
     setData({ ...data, extension: value });
   };
@@ -93,6 +91,22 @@ export const NewChannel = () => {
   const handleChangeList = (value: string) => {
     setData({ ...data, list: value });
   };
+
+  useEffect(() => {
+    dispatch(
+      getEbayLinkAccount({
+        data: {
+          shop: data.platform!,
+          site: data.storeLocation as number
+        }
+      })
+    );
+    if(data.api === 'easy'){
+      setEbayUrl(url);
+    }else {
+      setEbayUrl('');
+    }
+  }, [data.api]);
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
@@ -139,6 +153,7 @@ export const NewChannel = () => {
             platform={data.platform!}
             step={step}
             storeLocation={data.storeLocation}
+            handleNext={handleNext}
           />
         );
       }
@@ -148,6 +163,7 @@ export const NewChannel = () => {
           platform={data.platform!} 
           step={step} 
           storeLocation={data.storeLocation}
+          handleNext={handleNext}
         />
       );
     case 6:
@@ -181,15 +197,15 @@ export const NewChannel = () => {
         </Col>
       </Row>
       <div className="nav-btns">
-        {showPrev && step !== 1 && (
+        {showPrev && step >= 1 && (
           <Button className="" onClick={handlePrev}>
             <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
           </Button>
         )}
-        {showNext && (
+        {showNext && step < 6 && (
           <Button onClick={handleNext} disabled={isDisabled()} style={{ color: isDisabled() && '#cccc' }}>
             <ArrowRightOutlined style={{ fontSize: '19px', color: isDisabled() && '#cccc' }} />
-            {step === 6 ? 'Finish' : 'Next'}{' '}
+            {step === 6 ? 'Finish' : 'Next'}
           </Button>
         )}
       </div>

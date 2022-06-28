@@ -10,6 +10,7 @@ const initialState = {
   url: '',
   getLinkLoading: false,
   newChannelLoading: false,
+  statusCode: 0,
   success: false,
   error: ''
 };
@@ -51,15 +52,19 @@ export const newChannelSlice = createSlice({
     builder.addCase(createNewChannel.pending, (state) => {
       state.newChannelLoading = true;
       state.error = '';
+      state.statusCode = 0;
     });
     builder.addCase(createNewChannel.fulfilled, (state, { payload }) => {
       state.newChannelLoading = false;
-      state.success = payload?.success;
+      state.success = payload?.data.response_data;
+      state.statusCode = payload.status;
+
     });
     builder.addCase(createNewChannel.rejected, (state, { payload }) => {
       state.newChannelLoading = false;
       state.success = false;
       state.error = String(payload);
+      state.statusCode = 0;
     });
   }
 });
