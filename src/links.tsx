@@ -23,6 +23,7 @@
   EditTemplate: '/templates/edit',
   AutoOrderConfiguration: '/auto-ordering-configuration',
   ConfigureNoapi: '/configure-no-api-server',
+  ConfigureListingService: '/setup-preferences',
   Login: '/login',
   Register: '/register',
   PriceWarrior: '/price-warrior-configuration',

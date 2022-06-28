@@ -103,6 +103,12 @@ button,
   }
 }
 
+// Table
+
+.ant-table-wrapper {
+  overflow: auto;
+}
+
 .table td,
 .table th {
   vertical-align: unset !important;

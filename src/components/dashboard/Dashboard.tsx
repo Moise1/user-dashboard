@@ -331,7 +331,7 @@ export const Dashboard = () => {
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
                       <div className="item-description">
-                        <div className="service-quantity">{l.quantity} listing services</div>
+                        <div className="service-quantity">{l.listings} listing service</div>
                         <a href="/setup-preferences" className="setup-link">
                           Set up your preferences
                         </a>

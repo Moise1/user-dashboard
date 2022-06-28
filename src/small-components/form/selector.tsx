@@ -15,7 +15,7 @@ export interface SelectorData {
 interface Props {
   children: SelectorData | SelectorData[];
   defaultValue?: SelectorValue;
-  onChange?: (value: SelectorValue) => void;
+  onChange?: (value: SelectorValue, label?: SelectorLabel) => void;
   size?: SelectorSizeType;
   value?: SelectorValue;
   dropdownRender?: (
@@ -60,7 +60,8 @@ export const Selector = (props: Props) => {
 
   const OnChange = (val: SelectorData) => {
     if (onChange) {
-      onChange(val.value);
+      onChange(val.value, val.label);
+      console.log(val.label);
     }
   };
 
