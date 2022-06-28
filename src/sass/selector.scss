@@ -4,18 +4,22 @@
   display: flex;
   justify-content: space-between;
 }
+
 .action-ctrl {
   margin-bottom: 1rem;
+
   .new-acc-input {
     border-radius: 7px;
     border: 1px solid $ash-gray !important;
     outline: none !important;
     box-shadow: none !important;
     margin-left: 5px;
+
     &focus {
       border: $gray !important;
     }
   }
+
   .confirm-btn {
     width: 100%;
   }
@@ -27,24 +31,56 @@
 
 .selector {
   width: 100%;
+
   .ant-select-arrow {
     top: 50%;
     right: 18px;
   }
+
   .ant-select-selector {
     color: $primary-txt !important;
     border-radius: 7px !important;
     box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
     border: none !important;
     outline: none !important;
-    height: 40px !important;
+
     align-items: center !important;
     max-width: 200px !important;
   }
 }
+
+.selector,
+multipleSelector {
+  width: 100%;
+
+  .ant-select-arrow {
+    top: 50%;
+    right: 18px;
+  }
+
+  .ant-select-selector {
+    color: $primary-txt !important;
+    border-radius: 7px !important;
+    box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
+    border: none !important;
+    outline: none !important;
+
+    align-items: center !important;
+    max-width: 500px !important;
+  }
+
+  .dont-show .ant-select-selection-item {
+    display: none !important;
+  }
+}
+
 .ant-select,
 .selector,
 .ant-select-single,
 .ant-select-show-arrow {
   max-width: 200px !important;
+}
+
+.ant-select-multiple {
+  max-width: 500px !important;
 }

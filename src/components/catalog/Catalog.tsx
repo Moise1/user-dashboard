@@ -21,10 +21,9 @@ export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
   | React.MouseEvent<SVGElement, MouseEvent>
   | React.MouseEvent<HTMLSpanElement, MouseEvent>
-  | React.MouseEvent
+  | React.MouseEvent;
 
 export const Catalog = () => {
-
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -38,12 +37,10 @@ export const Catalog = () => {
 
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
   const { sources } = useAppSelector((state) => state.sources);
-  console.log('the sources', sources);
+
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
-  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<
-    selectedProductDetailData
-  >({
+  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<selectedProductDetailData>({
     channelPrice: 0,
     competition: 0,
     id: 0,
@@ -56,9 +53,8 @@ export const Catalog = () => {
     sourceId: 0,
     sourcePrice: 0,
     title: '',
-    url: '',
-  }
-  );
+    url: ''
+  });
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
@@ -68,7 +64,7 @@ export const Catalog = () => {
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
   const handleProductModal = (id: number) => {
-    setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === (id))[0]);
+    setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === id)[0]);
     setModalOpen(!modalOpen);
   };
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
@@ -126,16 +122,25 @@ export const Catalog = () => {
                 )}
               </div>
             </div>
-            <a href="https://hustlegotreal.com/en/listing-service/" target="_blank" className="list-link" rel="noreferrer">
-              Not sure what to list?  We do it for you.
+            <a
+              href="https://hustlegotreal.com/en/listing-service/"
+              target="_blank"
+              className="list-link"
+              rel="noreferrer"
+            >
+              Not sure what to list? We do it for you.
             </a>
             <div className="filters-container">
               <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
             </div>
           </div>
           <SearchOptions showSearchInput={false} />
-          <CatalogFilters visible={drawerOpen} onClose={handleSideDrawer} openSourceModal={handleSourceModal}
-            setAllCatalogProducts={setAllCatalogProducts} suppliersCount={sourcesIds}
+          <CatalogFilters
+            visible={drawerOpen}
+            onClose={handleSideDrawer}
+            openSourceModal={handleSourceModal}
+            setAllCatalogProducts={setAllCatalogProducts}
+            suppliersCount={sourcesIds}
           />
           <PopupModal
             open={modalOpen}
@@ -170,8 +175,7 @@ export const Catalog = () => {
               </div>
             }
           >
-            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} sources={sources}
-            />
+            <CatalogSource handleClose={handleSourceModal} getSourcesData={getSourcesData} sources={sources} />
           </PopupModal>
           <PopupModal
             open={allProductsModalOpen}
@@ -193,17 +197,17 @@ export const Catalog = () => {
                     <Meta
                       description={
                         <>
-                          <div className="product-description" >
+                          <div className="product-description">
                             <div className="img-container">
                               <img src={d.imageUrl} className="product-img" />
                             </div>
                             <div className="product-info-area">
                               <div className="header">
-                                <p className="product-title"
-                                >
+                                <p className="product-title">
                                   {d?.title.length > 20 ? `${d?.title.substring(0, 70)} ...` : d?.title}
                                 </p>
-                                <p className="source">by &nbsp;
+                                <p className="source">
+                                  by &nbsp;
                                   {d.sourceId}
                                 </p>
                               </div>
@@ -238,7 +242,11 @@ export const Catalog = () => {
                   </Card>
                   <div className="search-container">
                     <SearchOutlined
-                      onClick={() => { handleProductModal(d.id); }} className="search-child" />
+                      onClick={() => {
+                        handleProductModal(d.id);
+                      }}
+                      className="search-child"
+                    />
                   </div>
                 </>
               ))}
@@ -250,7 +258,8 @@ export const Catalog = () => {
               </div>
             </div>
           </div>
-        </>)}
+        </>
+      )}
     </Layout>
   );
 };
