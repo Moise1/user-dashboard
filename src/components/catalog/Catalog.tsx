@@ -11,7 +11,7 @@ import { CatalogSource } from '../sources/catalog-source';
 import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getCatalogProducts } from '../../redux/catalog/catalogThunk';
+import { getCatalogProducts, listProducts } from '../../redux/catalog/catalogThunk';
 import { SearchOutlined } from '@ant-design/icons';
 import { CatalogProduct, selectedProductDetailData } from '../../redux/catalog/catalogSlice';
 import '../../sass/catalog.scss';
@@ -23,12 +23,13 @@ export type ElementEventType =
   | React.MouseEvent<HTMLSpanElement, MouseEvent>
   | React.MouseEvent
 
-export const Catalog = () => {
 
+export const Catalog = () => {
+  const [listProductsModal, setListProductModal] = useState<boolean>(true);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
-  const [productId, setProductId] = useState<number>();
+  const [productId, setProductId] = useState<number>(0);
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [className, setClassName] = useState<string>('product-card');
@@ -73,6 +74,7 @@ export const Catalog = () => {
   };
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
+
   const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
@@ -90,7 +92,7 @@ export const Catalog = () => {
   const removeSelectedProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
-    console.log({ selectedProductData });
+    console.log(selectedProductData);
     setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
   };
 
@@ -106,6 +108,15 @@ export const Catalog = () => {
     setSourcesIds(ids);
   };
 
+  const listTheProducts = () => {
+    setListProductModal(!listProductsModal);
+    const products = allProducts.map((e: CatalogProduct) => {
+      const { sourceId, title } = e;
+      return { sourceId, title };
+    });
+    dispatch(listProducts(products));
+  };
+  console.log(listTheProducts);
   return (
     <Layout className="catalog-container">
       {loading ? (
@@ -185,6 +196,16 @@ export const Catalog = () => {
               {allProducts}
             </AllProducts>
           </PopupModal>
+          <PopupModal
+            open={listProductsModal}
+            handleClose={() => setListProductModal(!listProductsModal)}
+            width={600}
+            style={{ overflowY: 'scroll' }}
+            bodyStyle={{ height: 500 }}
+            closable={false}
+          >
+            <h1> List the Product Now Modal </h1>
+          </PopupModal>
           <div className="catalog-cards">
             <div className="cards-container-catalog">
               {allCatalogProducts.map((d: CatalogProduct) => (
@@ -245,7 +266,7 @@ export const Catalog = () => {
             </div>
             <div className="pagination-addall-container">
               <div className="adall-container">
-                {!!allProducts.length && <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>}
+                {!!allProducts.length && <SuccessBtn handleClick={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>}
                 <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
               </div>
             </div>

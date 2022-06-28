@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
-
 export const getCatalogProducts = createAsyncThunk(
   'catalog/getCatalogProducts',
   async ({sessionId} : {sessionId: number}, 
@@ -59,3 +58,17 @@ export const getCatalogProductsSearching = createAsyncThunk(
   }
 );
 
+
+export const listProducts = createAsyncThunk(
+  'catalog/listProducts',
+  async (products : { sourceId: number; title: string; }[], 
+    thunkAPI) => {
+    try {
+      const res = await client.post('/Catalog/SubmitCatalog',{products});
+      console.log('the res list product',res);
+      return res.data.response_data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+    }
+  }
+);
