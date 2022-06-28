@@ -29,14 +29,15 @@ import {
   AutoOrdering,
   ConfigureNoapi,
   ConfigureListingService,
-  AllServices,
   ListNow,
   ManualListing,
   BulkListing,
   Checkout,
   PaymentMethod,
   EditTemplate,
-  OurServices
+  OurServices,
+  AllServices,
+  PriceWarrior
 } from './components';
 
 export const App = withRouter(({ history }) => {
@@ -100,6 +101,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
+            <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />

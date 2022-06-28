@@ -22,6 +22,7 @@ export { Templates } from './templates/Templates';
 export { ConfigureListingService } from './listing-service/ConfigureListingService';
 export { ConfigureNoapi } from './NoApi/ConfigureNoapi';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';
+export { PriceWarrior } from './services/PriceWarrior';
 export { AutoOrderingConfiguration } from './auto-ordering/AutoOrderingConfiguration';
 export { ListNow } from './list-now/ListNow';
 export { ManualListing } from './list-now/ManualListing';
