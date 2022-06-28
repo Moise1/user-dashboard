@@ -2,6 +2,57 @@
 
 // large and extra large screens
 
+//list modal
+.catalog-list-modal {
+  .under-sections {
+    .section-option-container {
+      .section-option {
+        display: flex;
+        .section-switch {
+          margin-left: 1rem;
+        }
+      }
+      .section-explanation {
+        .frequency-container {
+          display: flex;
+          width: 100%;
+          justify-content: space-evenly;
+
+          .ant-divider,
+          .ant-divider-vertical {
+            border-left: 2px solid #c5c5c5;
+            height: 90px;
+            margin-top: 20px;
+          }
+          .select-date-container,
+          .listings-frequency-container {
+            h3 {
+              color: $gray;
+              font-weight: $bold;
+            }
+            margin-top: 0.5rem;
+            .blue-input {
+              max-width: 200px;
+            }
+          }
+        }
+      }
+    }
+    .checkbox-section {
+      margin-top: 1rem;
+      display: flex;
+      p {
+        margin-left: 1rem;
+      }
+    }
+    .list-button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
 .ant-modal-title {
   .source {
     color: $corporative-color;
@@ -69,11 +120,11 @@
     height: auto;
     overflow-y: scroll;
     .cards-container-catalog {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    // position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      // position: relative;
       padding: 3rem;
       width: auto;
       height: 100% !important;
@@ -118,7 +169,7 @@
               line-height: 25px;
               display: block;
               justify-content: space-between;
-              height:150px;
+              height: 150px;
               .view-details {
                 float: right;
                 margin-top: -2.8rem;
@@ -155,13 +206,11 @@
             }
           }
         }
-
       }
 
-      .search-icon
-      {
+      .search-icon {
         position: absolute;
-        bottom: 18.50%;
+        bottom: 18.5%;
         left: 141px;
       }
       .product-card {
@@ -194,6 +243,7 @@
       margin-right: 20px;
     }
   }
+
   @media screen and (max-width: 1030px) {
     .pagination-addall-container {
       width: 100% !important;
@@ -280,6 +330,26 @@
 }
 
 @media only screen and (max-width: 500px) {
+  //list modal responsive
+  .catalog-list-modal {
+    .under-sections {
+      .section-option-container {
+        .section-explanation {
+          .frequency-container {
+            display: grid;
+            width: 100%;
+            justify-content: space-evenly;
+
+            .ant-divider,
+            .ant-divider-vertical {
+              display: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .ant-card-body {
     padding: 5px !important;
   }
