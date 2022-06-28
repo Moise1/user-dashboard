@@ -15,11 +15,11 @@ const { Item } = Form;
 export const PriceWarrior = () => {
   const { priceWarrior, loading } = useAppSelector((state) => state.priceWarrior);
   const dispatch = useAppDispatch();
-  const [active] = useState<string>(priceWarrior?.settings.active.toString());
-  const [repricing] = useState<string>(priceWarrior?.settings.repricing.toString());
+  const [active] = useState<string>(priceWarrior?.settings?.active?.toString());
+  const [repricing] = useState<string>(priceWarrior?.settings?.repricing?.toString());
   const [minMarkup] = useState<number>(priceWarrior?.settings?.markup);
-  const [undercutBy] = useState<number>(priceWarrior?.settings.undercutBy);
-  const [threshold] = useState<number>(priceWarrior?.settings.threshold);
+  const [undercutBy] = useState<number>(priceWarrior?.settings?.undercutBy);
+  const [threshold] = useState<number>(priceWarrior?.settings?.threshold);
   const [data, setData] = useState<PWSetting>({ active: active as unknown as boolean, repricing: repricing as unknown as boolean, markup: minMarkup, threshold: threshold, undercutBy: undercutBy });
 
 
