@@ -30,11 +30,13 @@ import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
+import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
 export const allReducers = combineReducers({
   user: userReducer,
   pricingRules: pricingRulesReducer,
   subscriptions: subscriptionsReducer,
   services: servicesReducer,
+  priceWarrior: PriceWarriorReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
 
