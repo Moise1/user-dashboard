@@ -2,111 +2,113 @@
 
 // Large screens and extra large
 
-.ant-modal-body {
-  height: auto !important;
-}
-
-.buy-tokens-title,
-.buy-tokens-sub-title {
-  color: $corporative-color;
-}
-
-.buy-tokens-desc,
-.buy-tokens-sub-title .benefits {
-  font-weight: bold;
-}
-
-.benefits li {
-  list-style-type: none;
-  &:before {
-    content: '-';
-    margin-right: 1rem;
+.buy-tokens-container {
+  .ant-modal-body {
+    height: auto !important;
   }
-}
-.cards-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  padding: auto;
-  margin-top: 2rem;
-  transition: 0.3s;
 
-  .card {
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  .buy-tokens-title,
+  .buy-tokens-sub-title {
+    color: $corporative-color;
+  }
+
+  .buy-tokens-desc,
+  .buy-tokens-sub-title .benefits {
+    font-weight: bold;
+  }
+
+  .benefits li {
+    list-style-type: none;
+    &:before {
+      content: '-';
+      margin-right: 1rem;
+    }
+  }
+  .cards-container {
     display: flex;
     width: 100%;
-    margin: 0 0.7rem;
-    z-index: 0;
-    min-width: 200px;
-    transition: all 0.35s ease-in-out;
+    justify-content: space-evenly;
+    padding: auto;
+    margin-top: 2rem;
+    transition: 0.3s;
 
-    .coin {
-      width: 90px;
-    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      display: flex;
+      width: 100%;
+      margin: 0 0.7rem;
+      z-index: 0;
+      min-width: 200px;
+      transition: all 0.35s ease-in-out;
 
-    &:hover {
-      background: $corporative-color;
-      width: 120%;
-      z-index: 1;
-      transform: scale(1.15);
+      .coin {
+        width: 90px;
+      }
 
-      .card-info {
-        .tokens-count,
-        .euros-amount {
-          color: $primary-bg;
-        }
+      &:hover {
+        background: $corporative-color;
+        width: 120%;
+        z-index: 1;
+        transform: scale(1.15);
 
-        .euros-amount span,
-        .cents-amount {
-          color: rgba($primary-bg, 0.7);
-        }
+        .card-info {
+          .tokens-count,
+          .euros-amount {
+            color: $primary-bg;
+          }
 
-        .buy-btn {
-          background: $primary-bg;
-          color: $primary-txt;
-          &:hover {
-            background: $cta-color;
+          .euros-amount span,
+          .cents-amount {
+            color: rgba($primary-bg, 0.7);
+          }
+
+          .buy-btn {
+            background: $primary-bg;
+            color: $primary-txt;
+            &:hover {
+              background: $cta-color;
+            }
           }
         }
       }
-    }
-    .card-info {
-      width: 100%;
-      display: grid;
-      place-items: center;
+      .card-info {
+        width: 100%;
+        display: grid;
+        place-items: center;
 
-      .euros-amount:not(span) {
-        font-weight: bold;
-        font-size: $font-large;
-        span {
-          margin: -0.3rem 0 0 -1.5rem;
-          position: absolute;
+        .euros-amount:not(span) {
+          font-weight: bold;
+          font-size: $font-large;
+          span {
+            margin: -0.3rem 0 0 -1.5rem;
+            position: absolute;
+          }
         }
-      }
-      .euros-amount span,
-      .cents-amount {
-        color: rgba($primary-txt, 0.3);
-      }
+        .euros-amount span,
+        .cents-amount {
+          color: rgba($primary-txt, 0.3);
+        }
 
-      .buy-btn {
-        background: $light-primary;
-        color: $primary-bg;
-        border-radius: 5px;
+        .buy-btn {
+          background: $light-primary;
+          color: $primary-bg;
+          border-radius: 5px;
+        }
       }
     }
   }
-}
 
-@media screen and (max-width: 750px) {
-  .cards-container {
-    flex-wrap: wrap;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  @media screen and (max-width: 750px) {
+    .cards-container {
+      flex-wrap: wrap;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
 
-    .card {
-      margin-top: 20px;
+      .card {
+        margin-top: 20px;
+      }
     }
   }
 }
