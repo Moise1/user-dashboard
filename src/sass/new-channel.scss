@@ -183,7 +183,6 @@
     background-color: white;
     border-radius: 3rem;
     box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
-    padding: 10px;
     position: fixed;
     left: 30% !important;
     transform: translate(-30%, -30%);
@@ -408,7 +407,7 @@
       width: auto !important;
       left: 50% !important;
       transform: translate(-50%, -50%);
-      padding: 1px !important;
+
       span {
         font-size: small !important;
       }
