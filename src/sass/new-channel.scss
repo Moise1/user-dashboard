@@ -2,7 +2,7 @@
 // Large and extra large screens
 
 .ant-layout {
-  height: calc(100vh - 0px);
+  min-height: calc(100vh - 0px);
 }
 
 // new channel's parent component styles
@@ -16,6 +16,7 @@
     font-size: $font-medium;
   }
   .left-section {
+    overflow: scroll;
     border-radius: 25px !important;
     background: $primary-bg;
     margin: 1rem 3rem;
@@ -277,6 +278,9 @@
 // Tablets screens
 
 @media only screen and (max-width: 1030px) {
+  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+    padding-left: 0px !important;
+  }
   // platforms  component styles
   .new-channel-container {
     .nav-btns {
@@ -284,7 +288,7 @@
       transform: translate(-50%, -50%) !important;
     }
     .row-ant {
-      height: 100vh !important;
+      min-height: 100vh !important;
       display: grid !important;
       justify-items: center;
     }
@@ -293,7 +297,8 @@
     }
 
     .left-section {
-      width: 100%;
+      min-height: 100vh;
+      width: 90%;
     }
 
     .stepper {
@@ -356,14 +361,10 @@
   .content-area {
     overflow: hidden;
   }
-  .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
-    padding-left: 0px !important;
-  }
+
   .new-channel-container {
     .left-section {
       margin: 1rem 0 0 0 !important;
-      width: 100%;
-      height: 100vh;
       justify-content: center;
       .location-form {
         .flags {
@@ -385,8 +386,8 @@
       column-gap: 0.9rem;
       flex-direction: row;
       .platform-card {
-        width: 80px;
-        height: 40px;
+        width: 80px !important;
+        height: 40px !important;
         .platform-img {
           width: 50px;
           display: block;
