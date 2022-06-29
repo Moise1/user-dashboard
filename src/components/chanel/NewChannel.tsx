@@ -188,11 +188,11 @@ export const NewChannel = () => {
   return (
     <div className="new-channel-container">
       <Stepper current={step} platform={data.platform} className="stepper" />
-      <Row gutter={[16, 0]}>
-        <Col className="left-section" lg={15}>
+      <Row className='row-ant' gutter={[16, 0]}>
+        <Col className="left-section" md={24} lg={15}>
           {stepDetector(step)}
         </Col>
-        <Col lg={6} className="right-section">
+        <Col md={24} lg={6} className="right-section">
           <SideProgressBar platform={data.platform} step={step} />
         </Col>
       </Row>
