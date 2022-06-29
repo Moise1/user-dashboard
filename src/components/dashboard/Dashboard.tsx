@@ -284,14 +284,17 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector placeHolder="Select a period" onChange={onSelectOption}>
-              {periodOptions}
-            </Selector>
+            <div>
+              <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                {periodOptions}
+              </Selector>
+            </div>
             {selectedPeriod === 3 ? (
               <DatePicker onChange={salesDateChange} />
             ) : (
               <RangePicker onChange={salesDateChange} />
             )}
+
             <div className="sales-profit-area">
               <div className="digits">{salesOrProfit()}</div>
               <h4 className="sales-profit-numbers">
@@ -458,9 +461,11 @@ export const Dashboard = () => {
 
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
-              <Selector placeHolder="Select a period" onChange={onSelectOption}>
-                {periodOptions}
-              </Selector>
+              <div>
+                <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                  {periodOptions}
+                </Selector>
+              </div>
               {selectedPeriod === 3 ? (
                 <DatePicker onChange={affiliatesDateChange} />
               ) : (
