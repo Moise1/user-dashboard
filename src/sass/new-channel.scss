@@ -186,6 +186,7 @@
     padding: 10px;
     position: fixed;
     left: 30% !important;
+    transform: translate(-30%, -30%);
     width: auto;
     display: flex;
     justify-content: space-around;
@@ -279,7 +280,12 @@
 @media only screen and (max-width: 1030px) {
   // platforms  component styles
   .new-channel-container {
+    .nav-btns {
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
     .row-ant {
+      height: 100vh !important;
       display: grid !important;
       justify-items: center;
     }
@@ -343,12 +349,6 @@
         margin-top: 170px;
       }
     }
-  }
-  .nav-btns {
-    width: auto !important;
-    align-self: center;
-    left: 20% !important;
-    justify-content: space-evenly !important;
   }
 }
 
