@@ -14,6 +14,7 @@ import { StatusBar } from 'src/small-components/StatusBar';
 import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 
 const { Item } = Form;
 
@@ -30,6 +31,7 @@ export const BulkListing = (/*props: props*/) => {
   const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>('false');
   const [listFrequencyMinutes, setListFrequencyMinutes] = useState<number>();
   const [dontListUntil, setDontListUntil] = useState<Date>();
+  const [summary, setSummary] = useState();
 
   const [data, setData] = useState<Matrix<{ value: string }>>([
     [{ value: '' }, { value: '' }],
@@ -50,10 +52,12 @@ export const BulkListing = (/*props: props*/) => {
   }, [getManualListings, getUserAssistants]);
 
   const onSave = async (values: ListingsData) => {
-    await dispatch(
-      SaveAutolist(values)
-    );
+    const rs = await dispatch(SaveAutolist(values));
+    console.log(rs.payload);
+    setSummary(rs.payload);
+    console.log(summary);
   };
+
   const [listing] = useState<string[][]>([]);
 
   function onListItems() {
@@ -202,23 +206,25 @@ export const BulkListing = (/*props: props*/) => {
           <Row>
             <Col span={24}>
               <Spreadsheet data={data} onChange={setData} columnLabels={lables} className='spreadsheet' />
-              <Button onClick={addRows} >Add 10 rows</Button>
+              <Button onClick={addRows}>Add 10 rows</Button>
               <div className='table-container'>
-
                 <div className='button-container'>
                   <Item>
-                    <Button type='primary' onClick={onListItems}>List items</Button>
+                    <div onClick={onListItems}><ConfirmBtn>List items</ConfirmBtn></div>
                   </Item>
                 </div>
               </div>
             </Col>
           </Row>
+          {summary && <Row title='summary'>
+            <Col span={24}> <p><strong> urls are successfully being listed.</strong></p> </Col>
+          </Row>}
           <div className='manual-list-content'>
             <div className='container-manual-listing'>
               <div className='section-sources'>
                 <h2>Suported suppliers</h2>
                 <Row gutter={[16, 8]}>
-                  {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
+                  {manualListings?.moreSources?.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
                     return <Col span={6} key={itm.id}>
                       <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
                         <div className='list-card'> {loadings}
