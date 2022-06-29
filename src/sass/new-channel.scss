@@ -7,6 +7,12 @@
 
 // new channel's parent component styles
 .new-channel-container {
+  .title,
+  .sub-title {
+    margin-bottom: 1rem;
+    text-align: center !important;
+    width: 100%;
+  }
   .stepper {
     display: none;
   }
@@ -23,7 +29,9 @@
     box-shadow: 5px 15px 55px #00000029;
     width: 100%;
 
-    .account {
+    .have-account {
+      align-content: center;
+      height: 90%;
       display: grid;
       place-items: center;
       margin: 2rem 0;
@@ -31,11 +39,7 @@
       .confirm-btn {
         margin: 1rem 0;
       }
-      .title,
-      .sub-title {
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
+
       .alternative-link.become-seller {
         text-align: center;
         .anticon-arrow-right {
@@ -121,12 +125,11 @@
     }
 
     .username-form-container {
+      display: grid;
+      height: 90%;
+      align-content: center;
       margin-top: 1rem;
-      .title,
-      .ensure-warning {
-        text-align: center;
-        width: 100%;
-      }
+
       .username-form {
         display: flex;
         justify-content: space-evenly;

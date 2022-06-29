@@ -81,10 +81,10 @@ export const StoreLocation = (props: StoreLocationProps) => {
 
   return (
     <form className="location-form">
-      <h5 className="title">{t('store-base')}</h5>
-      <h6 className="sub-title">
+      <h2 className="title">{t('store-base')}</h2>
+      <p className="sub-title">
         {platform == 1 ? t('storebay') : platform == 3 ? t('storamz') : t('storshp')}
-      </h6>
+      </p>
       <div className="flags">
         {flags.map((i) => (
           <Flag

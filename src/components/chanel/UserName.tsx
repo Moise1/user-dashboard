@@ -17,20 +17,21 @@ export const UserName = (props: props) => {
   const { platform, storeLocation } = props;
 
   const dispatch = useAppDispatch();
-  const {getLinkLoading, newChannelLoading, url} = useAppSelector((state) => state.newChannel);
+  const { getLinkLoading, newChannelLoading, url } = useAppSelector((state) => state.newChannel);
   const ebayShopIdentifier = 'My_Super_Shop';
   const amazonShopIdentifier = 'MySuperShop';
   const shopifyShopUrl = 'https://myshop.myshopify.com';
 
   const platformValue = eShop[platform];
   const onFinish = async (values: { shopName: string }) => {
-    if(platform === 2){
+    if (platform === 2) {
       dispatch(
-        getShopifyLinkAccount({data: {
-          shop: platform,
-          site: storeLocation as number,
-          shopName: values.shopName
-        }
+        getShopifyLinkAccount({
+          data: {
+            shop: platform,
+            site: storeLocation as number,
+            shopName: values.shopName
+          }
         })
       );
       return false;
@@ -45,22 +46,22 @@ export const UserName = (props: props) => {
     );
   };
 
-  if(url) popupWindow(url, window, 800, 600);
+  if (url) popupWindow(url, window, 800, 600);
 
   return (
     <div className="username-form-container">
-      <h5 className="title">
+      <h2 className="title">
         {' '}
-        {t('username-request')} {eShop[platform]} store &apos;s {platform === 2 ? t('shop_url'): t('username')}?
-      </h5>
-      <p className="ensure-warning">
+        {t('username-request')} {eShop[platform]} store &apos;s {platform === 2 ? t('shop_url') : t('username')}?
+      </h2>
+      <p className="sub-title">
         {t('ensure-warning')}
         {eShop[platform]}
         <span className="username">{t('username')} </span> {t('notur')}
       </p>
       <Form className="username-form" layout="horizontal" name="basic" onFinish={onFinish} autoComplete="off">
-        <Form.Item 
-          rules={[{ required: true, message: `Please fill in your ${eShop[platform]}'s username` }, { type: 'string' }]} 
+        <Form.Item
+          rules={[{ required: true, message: `Please fill in your ${eShop[platform]}'s username` }, { type: 'string' }]}
           name="shopName"
         >
           <Input
@@ -68,9 +69,8 @@ export const UserName = (props: props) => {
             placeholder={platform === 1 ? ebayShopIdentifier : platform === 2 ? shopifyShopUrl : amazonShopIdentifier}
           />
         </Form.Item>
-        <ConfirmBtn htmlType="submit" 
-          disabled={getLinkLoading || newChannelLoading}>
-          {getLinkLoading || newChannelLoading ? 'Please wait...': 'Submit'}
+        <ConfirmBtn htmlType="submit" disabled={getLinkLoading || newChannelLoading}>
+          {getLinkLoading || newChannelLoading ? 'Please wait...' : 'Submit'}
         </ConfirmBtn>
       </Form>
     </div>
