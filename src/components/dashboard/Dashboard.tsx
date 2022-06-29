@@ -44,15 +44,7 @@ import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
-interface ProductQuota {
-  quota: number;
-  used: number;
-  price: number;
-  endsOn: Date;
-  currency: string;
-  pending: number;
-  cancelled: boolean;
-}
+import { ProductQuota } from 'src/redux/user/userSlice';
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {

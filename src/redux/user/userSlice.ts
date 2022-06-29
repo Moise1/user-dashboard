@@ -35,6 +35,16 @@ const initialState = {
   error: ''
 };
 
+export interface ProductQuota {
+  quota: number;
+  used: number;
+  price: number;
+  endsOn: Date;
+  currency: string;
+  pending: number;
+  cancelled: boolean;
+}
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,

@@ -46,16 +46,11 @@ export const userRegister = createAsyncThunk(
   }
 );
 
-
-export const getUserToken = createAsyncThunk(
-  'user/userToken',
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await client.get('/User/GetTokenBalance');
-      return res.data.response_data.tokens;
-    } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong ):');
-    }
+export const getUserToken = createAsyncThunk('user/userToken', async (_, { rejectWithValue }) => {
+  try {
+    const res = await client.get('/User/GetTokenBalance');
+    return res.data.response_data.tokens;
+  } catch (error) {
+    return rejectWithValue('Sorry! Something went wrong ):');
   }
-);
-
+});
