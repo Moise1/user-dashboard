@@ -9,8 +9,6 @@ import { SuccessBtn } from 'src/small-components/ActionBtns';
 import { Link } from 'react-router-dom';
 import { Links } from 'src/links';
 
-
-
 interface props {
   handleChangeList?: (key: string) => void;
   step: number;
@@ -23,7 +21,7 @@ export const ChooseList = (props: props) => {
 
   return (
     <div className="list-cards-container">
-      <h5 className="title">{t('step5h')}</h5>
+      <h2  className='title'>{t('step5h')}</h2>
       <Row gutter={[5, 16]}>
         <Col className="list-card" xs={10} lg={20}>
           <img src={catalog_icon} alt="icon" className={`${list == 'catalog' ? 'filter-white' : ''}`} />
@@ -33,7 +31,7 @@ export const ChooseList = (props: props) => {
               {t('catapara')}{' '}
               <span className="arrow-container">
                 <Link to="/catalog">
-                  <ArrowRightOutlined style={{fontSize: '19px'}} />
+                  <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 </Link>
               </span>
             </p>
@@ -49,7 +47,7 @@ export const ChooseList = (props: props) => {
               {t('manualpara')}{' '}
               <span className="arrow-container">
                 <Link to="/manual-publish">
-                  <ArrowRightOutlined style={{fontSize: '19px'}} />
+                  <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 </Link>
               </span>
             </p>
@@ -65,7 +63,7 @@ export const ChooseList = (props: props) => {
               {t('bulkpara')}{' '}
               <span className="arrow-container">
                 <Link to="/bulk-publish">
-                  <ArrowRightOutlined style={{fontSize: '19px'}} />
+                  <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 </Link>
               </span>
             </p>
@@ -80,7 +78,7 @@ export const ChooseList = (props: props) => {
               {t('welistpara')}
               <span className="arrow-container">
                 <a href={`${Links.ListingService}`}>
-                  <ArrowRightOutlined style={{fontSize: '19px'}} />
+                  <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 </a>
               </span>
             </p>

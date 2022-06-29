@@ -31,7 +31,7 @@ export const AccountConnect = (props: props) => {
 
   return (
     <form className="account-connect">
-      <h5 className="title">How do you want HGR to connect to your {eShop[platform]} account?</h5>
+      <h2  className='title'>How do you want HGR to connect to your {eShop[platform]} account?</h2>
       <p className="change-settings">{t('changeset')}</p>
       <Row className="api-type-container" gutter={[0, 0]}>
         {platform === 1 && (

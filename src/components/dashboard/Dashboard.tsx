@@ -44,15 +44,7 @@ import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
-interface ProductQuota {
-  quota: number;
-  used: number;
-  price: number;
-  endsOn: Date;
-  currency: string;
-  pending: number;
-  cancelled: boolean;
-}
+import { ProductQuota } from 'src/redux/user/userSlice';
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
@@ -284,14 +276,17 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector placeHolder="Select a period" onChange={onSelectOption}>
-              {periodOptions}
-            </Selector>
+            <div>
+              <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                {periodOptions}
+              </Selector>
+            </div>
             {selectedPeriod === 3 ? (
               <DatePicker onChange={salesDateChange} />
             ) : (
               <RangePicker onChange={salesDateChange} />
             )}
+
             <div className="sales-profit-area">
               <div className="digits">{salesOrProfit()}</div>
               <h4 className="sales-profit-numbers">
@@ -458,9 +453,11 @@ export const Dashboard = () => {
 
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
-              <Selector placeHolder="Select a period" onChange={onSelectOption}>
-                {periodOptions}
-              </Selector>
+              <div>
+                <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                  {periodOptions}
+                </Selector>
+              </div>
               {selectedPeriod === 3 ? (
                 <DatePicker onChange={affiliatesDateChange} />
               ) : (
