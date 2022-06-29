@@ -53,8 +53,8 @@ export const BulkListing = (/*props: props*/) => {
 
   const onSave = async (values: ListingsData) => {
     const rs = await dispatch(SaveAutolist(values));
-    console.log(rs.payload);
-    setSummary(rs.payload);
+    console.log(rs.payload.responseObject);
+    setSummary(rs.payload.responseObject);
     console.log(summary);
   };
 
@@ -235,11 +235,11 @@ export const BulkListing = (/*props: props*/) => {
                 <Spreadsheet data={data} onChange={setData} columnLabels={lables} className="spreadsheet" />
                 <Button onClick={addRows}>Add 10 rows</Button>
                 <div className="table-container">
-                  <div className="button-container">
+                  <div className="button-container" onClick={onListItems}>
                     <Item>
-                      <Button type="primary" onClick={onListItems}>
+                      <ConfirmBtn>
                         List items
-                      </Button>
+                      </ConfirmBtn>
                     </Item>
                   </div>
                 </div>
@@ -251,7 +251,7 @@ export const BulkListing = (/*props: props*/) => {
               <div className="section-sources">
                 <h2>Suported suppliers</h2>
                 <Row gutter={[16, 8]}>
-                  {manualListings.moreSources.map(
+                  {manualListings?.moreSources?.map(
                     (itm: {
                       id: number | undefined;
                       name: string | undefined;
