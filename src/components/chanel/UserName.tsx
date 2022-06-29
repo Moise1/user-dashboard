@@ -49,7 +49,6 @@ export const UserName = (props: props) => {
 
   };
 
-
   return (
     <div className="username-form-container">
       <h5 className="title">
