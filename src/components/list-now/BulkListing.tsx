@@ -1,5 +1,5 @@
 import { Layout, Form, Input, Button, DatePicker, Spin } from 'antd';
-import { Row, Col } from 'antd';
+import { Row, Col, Collapse } from 'antd';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 
 import '../../sass/list-now/manual-listing.scss';
@@ -17,6 +17,7 @@ import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 
 const { Item } = Form;
+const { Panel } = Collapse;
 
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -250,59 +251,50 @@ export const BulkListing = (/*props: props*/) => {
               <Col>
                 <div className="bulk-summary">
                   <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
-                    <p><strong>{summary.done} urls are successfully being listed.</strong></p>
+                    <h4><strong>{summary.done} urls are successfully being listed.</strong></h4>
+                    <Collapse>
 
-                    {summary.duplicatedUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseDU" aria-expanded="false" aria-controls="collapseDU">
-                          <span>View {summary.duplicatedUrls.length} duplicated products on your store.</span>
-                        </a>
-                        <div id="collapseDU" className="urlList collapse">
-                          {summary.duplicatedUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.duplicatedUrls?.length > 0 ? (
+                        <Panel header={'View ' + summary.duplicatedUrls.length + ' duplicated products on your store.'} key="1">
+                          <p>
+                            {summary.duplicatedUrls?.map(x => {
+                              return x + <br />;
+                            })}
+                          </p>
+                        </Panel>
+                      ) : ('')}
 
-                    {summary.existingListingUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseES" aria-expanded="false" aria-controls="collapseES">
-                          <span>View {summary.existingListingUrls.length} duplicated products on the list.</span>
-                        </a>
-                        <div id="collapseES" className="urlList collapse">
-                          {summary.existingListingUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.existingListingUrls?.length > 0 ? (
+                        <Panel header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'} key='1'>
+                          <p>
+                            {summary.existingListingUrls?.map(x => {
+                              return x + <br />;
+                            })}
+                          </p>
+                        </Panel>
+                      ) : ('')}
 
-                    {summary.forbiddenWordsUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseFW" aria-expanded="false" aria-controls="collapseFW">
-                          <span>View {summary.forbiddenWordsUrls.length} titles contains forbidden words.</span>
-                        </a>
-                        <div id="collapseFW" className="urlList collapse">
-                          {summary.forbiddenWordsUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.forbiddenWordsUrls?.length > 0 ? (
+                        <Panel header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'} key='1'>
+                          <p>
+                            {summary.forbiddenWordsUrls?.map(x => {
+                              return x + <br />;
+                            })}
+                          </p>
+                        </Panel>
+                      ) : ('')}
 
-                    {summary.invalidSourceUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseIS" aria-expanded="false" aria-controls="collapseIS">
-                          <span>View {summary.invalidSourceUrls.length} invalid urls.</span>
-                        </a>
-                        <div id="collapseIS" className="urlList collapse">
-                          {summary.invalidSourceUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.invalidSourceUrls?.length > 0 ? (
+                        <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key='1'>
+                          <p>
+                            {summary.invalidSourceUrls?.map(x => {
+                              return x + <br />;
+                            })}
+                          </p>
+                        </Panel>
+                      ) : ('')}
+
+                    </Collapse>
 
                     <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
 
