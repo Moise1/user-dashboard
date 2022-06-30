@@ -155,7 +155,7 @@ export const BulkListing = (/*props: props*/) => {
         <Spin />
       ) : (
         <div className="content-bulk">
-          <h1>Bulk Listing</h1>
+          <h1>Bulk Publish</h1>
           <div className="sections-container">
             <Row>
               <Col xs={{ span: 24, order: 2 }} md={{ span: 24, order: 2 }} lg={{ span: 12, order: 1 }}>
@@ -239,9 +239,7 @@ export const BulkListing = (/*props: props*/) => {
                 <div className="table-container">
                   <div className="button-container" onClick={onListItems}>
                     <Item>
-                      <ConfirmBtn>
-                        List items
-                      </ConfirmBtn>
+                      <ConfirmBtn>List items</ConfirmBtn>
                     </Item>
                   </div>
                 </div>

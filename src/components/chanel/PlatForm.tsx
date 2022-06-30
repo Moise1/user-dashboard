@@ -62,7 +62,7 @@ export const PlatForm = (props: props) => {
   return (
     <form className="platforms-form">
       <div className="platforms-area">
-        <h2 className='title'>{t('liketosell')} ?</h2>
+        <h2 className="title">{t('liketosell')} ?</h2>
         <Row className="cards-container" gutter={[0, 24]}>
           <Col className="platform-card" md={8} lg={8} onClick={onSelectPlatform} id="1" tabIndex={1}>
             <img src={ebay_logo} className="platform-img" alt="ebay logo" />
@@ -84,7 +84,7 @@ export const PlatForm = (props: props) => {
             )}
           </Col>
 
-          <Col className="platform-card" md={20} lg={20} onClick={onSelectPlatform} id="3" tabIndex={3}>
+          <Col className="platform-card" md={16} lg={16} onClick={onSelectPlatform} id="3" tabIndex={3}>
             <img src={amazon_logo} className="platform-img" alt="amazon logo" />
             {!mobileScreenSize.matches && (
               <div className="description-area">
@@ -98,8 +98,8 @@ export const PlatForm = (props: props) => {
             )}
           </Col>
           {mobileScreenSize.matches && <div className="platform-info">{showPlatformInfo(platform)}</div>}
-          {!platform && <p className="danger-txt">*Please select a store</p>}
         </Row>
+        {!platform && <p className="danger-txt">*Please select a store</p>}
       </div>
     </form>
   );

@@ -20,6 +20,8 @@
     color: $red;
     margin: 4rem 0;
     font-size: $font-medium;
+    width: 100%;
+    text-align: center;
   }
   .left-section {
     overflow: scroll;
@@ -140,9 +142,6 @@
       display: grid;
       row-gap: 0.6rem;
 
-      .danger-txt {
-        text-align: center;
-      }
       .title {
         text-align: center;
       }
@@ -369,7 +368,7 @@
       justify-content: center;
       .location-form {
         .flags {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     }

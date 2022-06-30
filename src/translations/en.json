@@ -121,13 +121,11 @@
 
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
-  "Menu.OurServices": "Services",
   "Menu.Channel": "Channel",
   "Menu.Catalog": "Catalog",
   "Menu.Dashboard": "Dashboard",
   "Menu.Help": "Help",
   "Menu.Listings": "Products",
-  "Menu.ConfigureListingService": "Listing Service",
   "Menu.ListNow": "Publish Now",
   "Menu.Logout": "Logout",
   "Menu.PricingRules": "Pricing Rules",

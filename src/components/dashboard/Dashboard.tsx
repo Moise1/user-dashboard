@@ -327,9 +327,9 @@ export const Dashboard = () => {
                     <div key={l.id}>
                       <div className="item-description">
                         <div className="service-quantity">{l.listings} listing service</div>
-                        <a href="/setup-preferences" className="setup-link">
+                        <Link to={'/setup-preferences'} className="setup-link">
                           Set up your preferences
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   ))
@@ -356,13 +356,13 @@ export const Dashboard = () => {
                 }
                 footer={
                   <div className="add-servers">
-                    <PlusCircleOutlined style={{ fontSize: '19px' }} />
                     <a
                       href="https://hustlegotreal.com/en/no-api-server/"
                       rel="noreferrer"
                       target="_blank"
                       className="footer-link"
                     >
+                      <PlusCircleOutlined style={{ fontSize: '19px' }} />
                       Add more servers
                     </a>
                   </div>
@@ -372,9 +372,9 @@ export const Dashboard = () => {
                   noApiServersResult.map((s: NoApiServer) => (
                     <div key={s.id}>
                       <div className="item-description">
-                        <a href="/configure-no-api-server" className="setup-link">
+                        <Link to={'/configure-no-api-server'} className="setup-link">
                           Choose your channel
-                        </a>
+                        </Link>
                         <div className="next-payment">
                           {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
                         </div>

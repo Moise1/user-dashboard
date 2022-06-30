@@ -99,8 +99,6 @@ export const Sidebar = (props: Props) => {
     { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange(Links.PricingRules) },
     { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange(Links.BrowserExtension) },
     { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange(Links.Subscriptions) },
-    { id: 11, listName: t('Menu.ConfigureListingService'), onClick: () => routeChange(Links.ConfigureListingService) },
-    { id: 12, listName: t('Menu.OurServices'), onClick: () => routeChange(Links.OurServices) },
     { id: 13, listName: t('Menu.VaProfiles'), onClick: () => routeChange(Links.VaProfiles) },
     { id: 14, listName: t('Menu.Templates'), onClick: () => routeChange(Links.Templates) },
     {
