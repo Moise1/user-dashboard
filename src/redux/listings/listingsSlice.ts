@@ -66,6 +66,18 @@ export interface ListingsData {
 }
 
 
+export interface ListingsSummary {
+  requestId: string;
+  done: number;
+  forbiddenWordsUrls: string[];
+  duplicatedUrls: string[];
+  existingListingUrls: string[];
+  invalidSourceUrls: string[];
+  noQuota: number;
+  notDone: number;
+}
+
+
 export interface ListingsSource {
   id: number;
   channelOAuthId: number;

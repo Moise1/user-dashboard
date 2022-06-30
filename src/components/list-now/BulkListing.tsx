@@ -6,7 +6,7 @@ import '../../sass/list-now/manual-listing.scss';
 import '../../sass/list-now/bulk-listing.scss';
 import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
 import { getManualListings, SaveAutolist } from '../../redux/listings/listingsThunk';
-import { ListingsData } from '../../redux/listings/listingsSlice';
+import { ListingsData, ListingsSummary } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
@@ -31,7 +31,7 @@ export const BulkListing = (/*props: props*/) => {
   const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>('false');
   const [listFrequencyMinutes, setListFrequencyMinutes] = useState<number>();
   const [dontListUntil, setDontListUntil] = useState<Date>();
-  const [summary, setSummary] = useState();
+  const [summary, setSummary] = useState<ListingsSummary>();
 
   const [data, setData] = useState<Matrix<{ value: string }>>([
     [{ value: '' }, { value: '' }],
@@ -97,6 +97,7 @@ export const BulkListing = (/*props: props*/) => {
       listFrequencyMinutes: listFrequencyMinutes as number,
       listings: listing
     };
+    console.log(listing);
     onSave(value);
   }
 
@@ -245,6 +246,70 @@ export const BulkListing = (/*props: props*/) => {
                 </div>
               </Col>
             </Row>
+            {summary && <Row>
+              <Col>
+                <div className="bulk-summary">
+                  <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
+                    <p><strong>{summary.done} urls are successfully being listed.</strong></p>
+
+                    {summary.duplicatedUrls?.length > 0 ? (
+                      <p>
+                        <a role="button" data-toggle="collapse" href="#collapseDU" aria-expanded="false" aria-controls="collapseDU">
+                          <span>View {summary.duplicatedUrls.length} duplicated products on your store.</span>
+                        </a>
+                        <div id="collapseDU" className="urlList collapse">
+                          {summary.duplicatedUrls?.map(x => {
+                            return x + <br />;
+                          })}
+                        </div>
+                      </p>
+                    ) : ('')}
+
+                    {summary.existingListingUrls?.length > 0 ? (
+                      <p>
+                        <a role="button" data-toggle="collapse" href="#collapseES" aria-expanded="false" aria-controls="collapseES">
+                          <span>View {summary.existingListingUrls.length} duplicated products on the list.</span>
+                        </a>
+                        <div id="collapseES" className="urlList collapse">
+                          {summary.existingListingUrls?.map(x => {
+                            return x + <br />;
+                          })}
+                        </div>
+                      </p>
+                    ) : ('')}
+
+                    {summary.forbiddenWordsUrls?.length > 0 ? (
+                      <p>
+                        <a role="button" data-toggle="collapse" href="#collapseFW" aria-expanded="false" aria-controls="collapseFW">
+                          <span>View {summary.forbiddenWordsUrls.length} titles contains forbidden words.</span>
+                        </a>
+                        <div id="collapseFW" className="urlList collapse">
+                          {summary.forbiddenWordsUrls?.map(x => {
+                            return x + <br />;
+                          })}
+                        </div>
+                      </p>
+                    ) : ('')}
+
+                    {summary.invalidSourceUrls?.length > 0 ? (
+                      <p>
+                        <a role="button" data-toggle="collapse" href="#collapseIS" aria-expanded="false" aria-controls="collapseIS">
+                          <span>View {summary.invalidSourceUrls.length} invalid urls.</span>
+                        </a>
+                        <div id="collapseIS" className="urlList collapse">
+                          {summary.invalidSourceUrls?.map(x => {
+                            return x + <br />;
+                          })}
+                        </div>
+                      </p>
+                    ) : ('')}
+
+                    <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+
+                  </div>
+                </div>
+              </Col>
+            </Row>}
           </div>
           <div className="manual-list-content">
             <div className="container-manual-listing">
