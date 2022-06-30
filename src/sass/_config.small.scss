@@ -9,7 +9,16 @@
     $font-medium: 0.8rem;
     $font-small: 0.7rem;
 
+    // Spacers & margins
+
+    $spacer: 0.2rem;
+
     // Custom font-sizes for elements
+
+    td {
+      font-size: $font-small;
+    }
+
     p {
       font-size: $font-small;
     }
@@ -43,8 +52,12 @@
       font-size: $font-small;
     }
 
-    span {
+    label {
       font-size: $font-small;
+    }
+
+    span {
+      font-size: $font-medium;
     }
   }
 }

@@ -93,6 +93,11 @@ a {
 }
 
 // Custom font-sizes for elements
+
+td {
+  font-size: $font-small;
+}
+
 p {
   font-size: $font-small;
 }
@@ -119,15 +124,19 @@ h4 {
 }
 
 h5 {
-  font-size: $font-small
+  font-size: $font-small;
 }
 
 h6 {
-  font-size: $font-small
+  font-size: $font-small;
+}
+
+label {
+  font-size: $font-small;
 }
 
 span {
-  font-size: $font-small
+  font-size: $font-medium;
 }
 
 // Checkbox styles

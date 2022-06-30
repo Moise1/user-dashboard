@@ -4,43 +4,56 @@
     $font-large: 1.1rem;
     $font-medium: 0.9rem;
     $font-small: 0.7rem;
-    
+
+    // Spacers & margins
+
+    $spacer: 0.5rem;
+
     // Custom font-sizes for elements
+
+    td {
+      font-size: $font-small;
+    }
+
     p {
       font-size: $font-small;
     }
-    
+
     li {
       font-size: $font-small;
     }
-    
+
     h1 {
       font-size: $font-xl;
     }
-    
+
     h2 {
       font-size: $font-large;
       font-weight: $bold;
     }
-    
+
     h3 {
       font-size: $font-large;
     }
-    
+
     h4 {
       font-size: $font-medium;
     }
-    
+
     h5 {
-      font-size: $font-small
+      font-size: $font-small;
     }
-    
+
     h6 {
-      font-size: $font-small
+      font-size: $font-small;
     }
-    
+
+    label {
+      font-size: $font-small;
+    }
+
     span {
-      font-size: $font-small
+      font-size: $font-medium;
     }
   }
 }
