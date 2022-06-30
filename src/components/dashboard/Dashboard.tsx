@@ -231,7 +231,7 @@ export const Dashboard = () => {
         <h1>General</h1>
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
-            <h6>Products</h6>
+            <h3>Products</h3>
             <div className="container-numbers">
               <div className="numbers-info">
                 <div className="listed-monitored">
@@ -253,7 +253,7 @@ export const Dashboard = () => {
             </div>
           </Col>
           <Col className="stores" xs={24} lg={10}>
-            <h6>Your stores</h6>
+            <h3>Your stores</h3>
             <SearchInput onSearch={onSearch} />
             <DataTable
               dataSource={searchedChannels.length ? searchedChannels : channels}
@@ -314,21 +314,23 @@ export const Dashboard = () => {
         <Row className="other-services-cols" gutter={[0, 15]}>
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
-              <h6>Listing Service</h6>
+              <h3>Listing Service</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {listingServicesResult?.length ? (
               <List
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
-                header="Active Services"
+                header={<h4>Active services</h4>}
                 renderItem={() =>
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
                       <div className="item-description">
-                        <div className="service-quantity">{l.listings} listing service</div>
+                        <div className="service-quantity">
+                          <h5>{l.listings} listing service</h5>
+                        </div>
                         <Link to={'/setup-preferences'} className="setup-link">
-                          Set up your preferences
+                          <h5>Set up your preferences</h5>
                         </Link>
                       </div>
                     </div>
@@ -342,7 +344,7 @@ export const Dashboard = () => {
 
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
-              <h6>No API Server</h6>
+              <h3>No API Server</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {noApiServersResult?.length ? (
@@ -350,8 +352,12 @@ export const Dashboard = () => {
                 itemLayout="horizontal"
                 header={
                   <div className="no-api-title">
-                    <div>Connected Channels</div>
-                    <div>Next Payment</div>
+                    <div>
+                      <h4>Connected channels</h4>
+                    </div>
+                    <div>
+                      <h4>Next Payment</h4>
+                    </div>
                   </div>
                 }
                 footer={
@@ -362,8 +368,8 @@ export const Dashboard = () => {
                       target="_blank"
                       className="footer-link"
                     >
-                      <PlusCircleOutlined style={{ fontSize: '19px' }} />
-                      Add more servers
+                      <PlusCircleOutlined style={{ fontSize: '16px' }} />
+                      <h4>Add more servers</h4>
                     </a>
                   </div>
                 }
@@ -373,10 +379,12 @@ export const Dashboard = () => {
                     <div key={s.id}>
                       <div className="item-description">
                         <Link to={'/configure-no-api-server'} className="setup-link">
-                          Choose your channel
+                          <h5>Choose your channel</h5>
                         </Link>
                         <div className="next-payment">
-                          {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                          <h5>
+                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                          </h5>
                         </div>
                       </div>
                     </div>
@@ -398,7 +406,7 @@ export const Dashboard = () => {
             >
               <BuyTokens />
             </PopupModal>
-            <h6 className="tokens-title">Tokens - Title Optimization</h6>
+            <h3 className="tokens-title">Tokens - Title Optimization</h3>
             <div className="tokens-count">
               <p>Not sure what to list? We can help you find good selling items.</p>
               <p> We choose the best products and list them for you</p>
@@ -411,7 +419,7 @@ export const Dashboard = () => {
 
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
-              <h6>Auto Ordering</h6>
+              <h3>Auto Ordering</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             <div className="use-auto-ordering">
@@ -434,7 +442,7 @@ export const Dashboard = () => {
         <h1>Affiliates</h1>
         <div className="affiliates-contents">
           <div className="affiliates-title">
-            <h2>Your affiliate link</h2>
+            <h3>Your affiliate link</h3>
             <BookOutlined style={{ fontSize: '19px' }} />
           </div>
           <div className="affiliates-benefits">
