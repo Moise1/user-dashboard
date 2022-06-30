@@ -26,7 +26,7 @@ interface SettingDataBagData<T> {
 export interface SettingDataBag {
   templates?: SettingDataBagData<Template[]>;
   refreshBussiness?: SettingDataBagData<boolean>;
-  shipping ?: SettingDataBagData<ShippingOption[]>;
+  shipping?: SettingDataBagData<ShippingOption[]>;
   business?: SettingDataBagData<BusinessPolicy[]>;
   selectedChannel: Channel | undefined;
 }
@@ -38,13 +38,13 @@ interface Props {
   onSave: (key: eChannelSettings, value: SettingsValue) => void;
   translationValues: TransPlatformValues | TransLinksValues;
   dataBag: SettingDataBag
-  onButtonClick : () => void
+  onButtonClick: () => void
 }
 
 export const SettingInput = (props: Props) => {
-  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag, onButtonClick} = props;
+  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag, onButtonClick } = props;
 
-  const t = (c:string) => trans(c, translationValues);
+  const t = (c: string) => trans(c, translationValues);
 
   const disabled = ((setting: ChannelSetting) => {
     if (!setting.Ancestors)
@@ -265,21 +265,21 @@ export const SettingInput = (props: Props) => {
 
     for (const e of extra ?? []) {
       switch (e) {
-      case ChannelSettingExtra.TemplateList:
-        AA(dataBag.templates);
-        break;
-      case ChannelSettingExtra.BusinessPayment:
-        AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
-        break;
-      case ChannelSettingExtra.BusinessReturn:
-        AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
-        break;
-      case ChannelSettingExtra.BusinessShipping:
-        AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
-        break;
-      case ChannelSettingExtra.PolicyDelivery:
-        AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
-        break;
+        case ChannelSettingExtra.TemplateList:
+          AA(dataBag.templates);
+          break;
+        case ChannelSettingExtra.BusinessPayment:
+          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
+          break;
+        case ChannelSettingExtra.BusinessReturn:
+          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
+          break;
+        case ChannelSettingExtra.BusinessShipping:
+          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
+          break;
+        case ChannelSettingExtra.PolicyDelivery:
+          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
+          break;
       }
     }
 
@@ -321,13 +321,13 @@ export const SettingInput = (props: Props) => {
     let label = t(values[0] ?? '');
     for (const e of extra ?? []) {
       switch (e) {
-      case ChannelSettingExtra.RefreshPolicies:
-        loading = loading || (dataBag.refreshBussiness?.loading ?? false);
-        if (dataBag.refreshBussiness?.data ?? false) {
-          label = t('Channel.Setting.Option.PoliciesWillUpdate');
-          disabled = true;
-        }
-        break;
+        case ChannelSettingExtra.RefreshPolicies:
+          loading = loading || (dataBag.refreshBussiness?.loading ?? false);
+          if (dataBag.refreshBussiness?.data ?? false) {
+            label = t('Channel.Setting.Option.PoliciesWillUpdate');
+            disabled = true;
+          }
+          break;
       }
     }
     return <SettingButton label={label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
@@ -354,39 +354,39 @@ export const SettingInput = (props: Props) => {
 
   let input: JSX.Element;
   switch (setting.Type) {
-  default:
-  case SettingType.Number:
-    input = RenderSettingNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.Boolean:
-    input = RenderSettingBoolean(values, setting.Fields, disabled);
-    break;
-  case SettingType.String:
-    input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.List:
-    input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.TwoOptions:
-    input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.SwitchTwoOptions:
-    input = RenderSettingSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.WordList:
-    input = RenderWordList(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanNumber:
-    input = RenderBooleanNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanString:
-    input = RenderBooleanString(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanStringNull:
-    input = RenderBooleanStringNull(values, setting.Fields, disabled);
-    break;
-  case SettingType.Button:
-    input = RenderButton(values, setting.Extra!, disabled, dataBag);
+    default:
+    case SettingType.Number:
+      input = RenderSettingNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.Boolean:
+      input = RenderSettingBoolean(values, setting.Fields, disabled);
+      break;
+    case SettingType.String:
+      input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.List:
+      input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.TwoOptions:
+      input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.SwitchTwoOptions:
+      input = RenderSettingSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.WordList:
+      input = RenderWordList(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanNumber:
+      input = RenderBooleanNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanString:
+      input = RenderBooleanString(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanStringNull:
+      input = RenderBooleanStringNull(values, setting.Fields, disabled);
+      break;
+    case SettingType.Button:
+      input = RenderButton(values, setting.Extra!, disabled, dataBag);
   }
 
   const CapitalizeFirstLetter = (s: string | ReactNode) => {

@@ -48,21 +48,21 @@ export const PlatForm = (props: props) => {
 
   const showPlatformInfo = (platform: number) => {
     switch (platform) {
-    case 1:
-      return eBayPlatform;
-    case 2: 
-      return shopifyPlatform;
-    case 3: 
-      return amazonPlatform;
-    default:
-      break;
+      case 1:
+        return eBayPlatform;
+      case 2:
+        return shopifyPlatform;
+      case 3:
+        return amazonPlatform;
+      default:
+        break;
     }
   };
-  
+
   return (
     <form className="platforms-form">
       <div className="platforms-area">
-        <h2  className='title'>{t('liketosell')} ?</h2>
+        <h2 className='title'>{t('liketosell')} ?</h2>
         <Row className="cards-container" gutter={[0, 24]}>
           <Col className="platform-card" md={8} lg={8} onClick={onSelectPlatform} id="1" tabIndex={1}>
             <img src={ebay_logo} className="platform-img" alt="ebay logo" />

@@ -27,7 +27,7 @@ interface State {
 export const popupWindow = (
   url: string,
   win: Window & typeof globalThis,
-  w: number, 
+  w: number,
   h: number) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
@@ -58,7 +58,7 @@ export const NewChannel = () => {
     list: ''
   });
 
- 
+
 
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
@@ -81,7 +81,7 @@ export const NewChannel = () => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
-    setData({ ...data, api: value });      
+    setData({ ...data, api: value });
   };
 
   const handleChangeExtension = (value: string) => {
@@ -101,53 +101,63 @@ export const NewChannel = () => {
         }
       })
     );
-    if(data.api === 'easy'){
+    if (data.api === 'easy') {
       setEbayUrl(url);
-    }else {
+    } else {
       setEbayUrl('');
     }
   }, [data.api]);
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
-    case 1:
-      return (
-        <PlatForm 
-          platform={data.platform!} 
-          step={step} 
-          handleChangePlatform={handleChangePlatform}
-        />
-      );
-    case 2:
-      return (
-        <StoreLocation
-          platform={data.platform!}
-          step={step}
-          handleChangeLocation={handleChangeLocation}
-          location={data.storeLocation!}
-        />
-      );
-    case 3:
-      return (
-        <Account 
-          platform={data.platform!} 
-          handleChangeApi={handleChangeApi} 
-          step={step} handleNext={handleNext}
-        />
-      );
-    case 4:
-      if (data.platform === 1 || data.platform === 1) {
+      case 1:
         return (
-          <AccountConnect
-            api={data.api}
-            extension={data.extension}
-            platform={data.platform}
-            handleChangeApi={handleChangeApi}
-            handleChangeExtension={handleChangeExtension}
+          <PlatForm
+            platform={data.platform!}
             step={step}
+            handleChangePlatform={handleChangePlatform}
           />
         );
-      } else {
+      case 2:
+        return (
+          <StoreLocation
+            platform={data.platform!}
+            step={step}
+            handleChangeLocation={handleChangeLocation}
+            location={data.storeLocation!}
+          />
+        );
+      case 3:
+        return (
+          <Account
+            platform={data.platform!}
+            handleChangeApi={handleChangeApi}
+            step={step} handleNext={handleNext}
+          />
+        );
+      case 4:
+        if (data.platform === 1 || data.platform === 1) {
+          return (
+            <AccountConnect
+              api={data.api}
+              extension={data.extension}
+              platform={data.platform}
+              handleChangeApi={handleChangeApi}
+              handleChangeExtension={handleChangeExtension}
+              step={step}
+            />
+          );
+        } else {
+          return (
+            <UserName
+              platform={data.platform!}
+              step={step}
+              storeLocation={data.storeLocation}
+              handleNext={handleNext}
+            />
+          );
+        }
+      case 5:
         return (
           <UserName
             platform={data.platform!}
@@ -156,33 +166,23 @@ export const NewChannel = () => {
             handleNext={handleNext}
           />
         );
-      }
-    case 5:
-      return (
-        <UserName 
-          platform={data.platform!} 
-          step={step} 
-          storeLocation={data.storeLocation}
-          handleNext={handleNext}
-        />
-      );
-    case 6:
-      return (
-        <ChooseList 
-          platform={data.platform!} 
-          handleChangeList={handleChangeList} 
-          list={data.list} step={step} 
-        />
-      );
-    default:
-      break;
+      case 6:
+        return (
+          <ChooseList
+            platform={data.platform!}
+            handleChangeList={handleChangeList}
+            list={data.list} step={step}
+          />
+        );
+      default:
+        break;
     }
   };
 
   const isDisabled = () => {
     if (!data.storeLocation && step === 2) return true;
     if (!data.api && step === 4) return true;
-    if(getLinkLoading && step === 4) return true;
+    if (getLinkLoading && step === 4) return true;
   };
 
   return (
