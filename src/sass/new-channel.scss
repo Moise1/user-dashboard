@@ -20,6 +20,8 @@
     color: $red;
     margin: 4rem 0;
     font-size: $font-medium;
+    width: 100%;
+    text-align: center;
   }
   .left-section {
     overflow: scroll;
@@ -140,9 +142,6 @@
       display: grid;
       row-gap: 0.6rem;
 
-      .danger-txt {
-        text-align: center;
-      }
       .title {
         text-align: center;
       }
