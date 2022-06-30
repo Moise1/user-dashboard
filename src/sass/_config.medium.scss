@@ -9,30 +9,38 @@
     p {
       font-size: $font-small;
     }
-
+    
+    li {
+      font-size: $font-small;
+    }
+    
     h1 {
       font-size: $font-xl;
     }
-
+    
     h2 {
       font-size: $font-large;
       font-weight: $bold;
     }
-
+    
     h3 {
       font-size: $font-large;
     }
-
+    
     h4 {
       font-size: $font-medium;
     }
-
+    
     h5 {
-      font-size: $font-medium;
+      font-size: $font-small
     }
-
-    a {
-      font-size: $font-medium;
+    
+    h6 {
+      font-size: $font-small
+    }
+    
+    span {
+      font-size: $font-small
     }
   }
 }
