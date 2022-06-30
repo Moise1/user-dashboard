@@ -1,6 +1,6 @@
 import ebay from '../assets/online-shops/ebay.svg';
 import ebayNoApi from '../assets/online-shops/ebay-no-api.svg';
-
+import amazon from '../assets/online-shops/amazon.svg';
 import shopify from '../assets/online-shops/shopify.svg';
 
 type channelIdType = number | undefined | string | boolean | Date;
@@ -13,6 +13,8 @@ export const shopLogo = (channelId: channelIdType) => {
       return <img src={shopify} className="shop-logo" title="Shopify" />;
     case 3:
       return <img src={ebayNoApi} className="shop-logo" title="Ebay No API" />;
+    case 4:
+      return <img src={amazon} className="shop-logo" title="Amazon" />;
     default:
       break;
   }
