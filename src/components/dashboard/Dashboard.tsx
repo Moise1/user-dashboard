@@ -245,9 +245,9 @@ export const Dashboard = () => {
               </div>
 
               <div className="plan">
-                <p>Free Plan</p>
-                <Link className="redirection-link" to="/subscriptions">
-                  Upgrade your plan
+                <h4>Free Plan</h4>
+                <Link className="redirection-link upgrade" to="/subscriptions">
+                  <h4 className="upgrade-txt">Upgrade your plan</h4>
                 </Link>
               </div>
             </div>
@@ -410,7 +410,9 @@ export const Dashboard = () => {
             <div className="tokens-count">
               <p>Not sure what to list? We can help you find good selling items.</p>
               <p> We choose the best products and list them for you</p>
-              <SuccessBtn handleConfirm={handleOpenModal}>Get more tokens</SuccessBtn>
+              <SuccessBtn handleConfirm={handleOpenModal}>
+                <strong>Get more tokens</strong>
+              </SuccessBtn>
               <Link to="/products" className="alternative-link">
                 <p>Optimize your existing products</p>
               </Link>

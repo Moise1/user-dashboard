@@ -111,9 +111,16 @@
     }
 
     .plan {
-      margin-top: 2rem;
+      margin-top: 3rem;
       display: grid;
       place-items: center;
+      .upgrade {
+        .upgrade-txt {
+          color: white;
+          margin: 0;
+          padding: 4px;
+        }
+      }
     }
   }
 }
