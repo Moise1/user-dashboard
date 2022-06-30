@@ -245,61 +245,80 @@ export const BulkListing = (/*props: props*/) => {
                 </div>
               </Col>
             </Row>
-            {summary && <Row>
-              <Col>
-                <div className="bulk-summary">
-                  <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
-                    <h4><strong>{summary.done} urls are successfully being listed.</strong></h4>
-                    <Collapse>
+            {summary && (
+              <Row>
+                <Col>
+                  <div className="bulk-summary">
+                    <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
+                      <h4>
+                        <strong>{summary.done} urls are successfully being listed.</strong>
+                      </h4>
+                      <Collapse>
+                        {summary.duplicatedUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.duplicatedUrls.length + ' duplicated products on your store.'}
+                            key="1"
+                          >
+                            <p>
+                              {summary.duplicatedUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
 
-                      {summary.duplicatedUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.duplicatedUrls.length + ' duplicated products on your store.'} key="1">
-                          <p>
-                            {summary.duplicatedUrls?.map(x => {
-                              return x + <br />;
-                            })}
-                          </p>
-                        </Panel>
-                      ) : ('')}
+                        {summary.existingListingUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'}
+                            key="2"
+                          >
+                            <p>
+                              {summary.existingListingUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
 
-                      {summary.existingListingUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'} key='2'>
-                          <p>
-                            {summary.existingListingUrls?.map(x => {
-                              return x + <br />;
-                            })}
-                          </p>
-                        </Panel>
-                      ) : ('')}
+                        {summary.forbiddenWordsUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'}
+                            key="3"
+                          >
+                            <p>
+                              {summary.forbiddenWordsUrls?.map((x) => {
+                                3;
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
 
-                      {summary.forbiddenWordsUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'} key='3'>
-                          <p>
-                            {summary.forbiddenWordsUrls?.map(x => {3
-                              return x + <br />;
-                            })}
-                          </p>
-                        </Panel>
-                      ) : ('')}
+                        {summary.invalidSourceUrls?.length > 0 ? (
+                          <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key="4">
+                            <p>
+                              {summary.invalidSourceUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
+                      </Collapse>
 
-                      {summary.invalidSourceUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key='4'>
-                          <p>
-                            {summary.invalidSourceUrls?.map(x => {
-                              return x + <br />;
-                            })}
-                          </p>
-                        </Panel>
-                      ) : ('')}
-
-                    </Collapse>
-
-                    <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
-
+                      <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>}
+                </Col>
+              </Row>
+            )}
           </div>
           <div className="manual-list-content">
             <div className="container-manual-listing">
