@@ -263,7 +263,7 @@ export const BulkListing = (/*props: props*/) => {
                       ) : ('')}
 
                       {summary.existingListingUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'} key='1'>
+                        <Panel header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'} key='2'>
                           <p>
                             {summary.existingListingUrls?.map(x => {
                               return x + <br />;
@@ -273,9 +273,9 @@ export const BulkListing = (/*props: props*/) => {
                       ) : ('')}
 
                       {summary.forbiddenWordsUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'} key='1'>
+                        <Panel header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'} key='3'>
                           <p>
-                            {summary.forbiddenWordsUrls?.map(x => {
+                            {summary.forbiddenWordsUrls?.map(x => {3
                               return x + <br />;
                             })}
                           </p>
@@ -283,7 +283,7 @@ export const BulkListing = (/*props: props*/) => {
                       ) : ('')}
 
                       {summary.invalidSourceUrls?.length > 0 ? (
-                        <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key='1'>
+                        <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key='4'>
                           <p>
                             {summary.invalidSourceUrls?.map(x => {
                               return x + <br />;
