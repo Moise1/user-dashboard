@@ -154,7 +154,7 @@ export const BulkListing = (/*props: props*/) => {
         <Spin />
       ) : (
         <div className="content-bulk">
-          <h1>Bulk Listing</h1>
+          <h1>Bulk Publish</h1>
           <div className="sections-container">
             <Row>
               <Col xs={{ span: 24, order: 2 }} md={{ span: 24, order: 2 }} lg={{ span: 12, order: 1 }}>
@@ -238,78 +238,111 @@ export const BulkListing = (/*props: props*/) => {
                 <div className="table-container">
                   <div className="button-container" onClick={onListItems}>
                     <Item>
-                      <ConfirmBtn>
-                        List items
-                      </ConfirmBtn>
+                      <ConfirmBtn>List items</ConfirmBtn>
                     </Item>
                   </div>
                 </div>
               </Col>
             </Row>
-            {summary && <Row>
-              <Col>
-                <div className="bulk-summary">
-                  <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
-                    <p><strong>{summary.done} urls are successfully being listed.</strong></p>
-
-                    {summary.duplicatedUrls?.length > 0 ? (
+            {summary && (
+              <Row>
+                <Col>
+                  <div className="bulk-summary">
+                    <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
                       <p>
-                        <a role="button" data-toggle="collapse" href="#collapseDU" aria-expanded="false" aria-controls="collapseDU">
-                          <span>View {summary.duplicatedUrls.length} duplicated products on your store.</span>
-                        </a>
-                        <div id="collapseDU" className="urlList collapse">
-                          {summary.duplicatedUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
+                        <strong>{summary.done} urls are successfully being listed.</strong>
                       </p>
-                    ) : ('')}
 
-                    {summary.existingListingUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseES" aria-expanded="false" aria-controls="collapseES">
-                          <span>View {summary.existingListingUrls.length} duplicated products on the list.</span>
-                        </a>
-                        <div id="collapseES" className="urlList collapse">
-                          {summary.existingListingUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.duplicatedUrls?.length > 0 ? (
+                        <p>
+                          <a
+                            role="button"
+                            data-toggle="collapse"
+                            href="#collapseDU"
+                            aria-expanded="false"
+                            aria-controls="collapseDU"
+                          >
+                            <span>View {summary.duplicatedUrls.length} duplicated products on your store.</span>
+                          </a>
+                          <div id="collapseDU" className="urlList collapse">
+                            {summary.duplicatedUrls?.map((x) => {
+                              return x + <br />;
+                            })}
+                          </div>
+                        </p>
+                      ) : (
+                        ''
+                      )}
 
-                    {summary.forbiddenWordsUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseFW" aria-expanded="false" aria-controls="collapseFW">
-                          <span>View {summary.forbiddenWordsUrls.length} titles contains forbidden words.</span>
-                        </a>
-                        <div id="collapseFW" className="urlList collapse">
-                          {summary.forbiddenWordsUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.existingListingUrls?.length > 0 ? (
+                        <p>
+                          <a
+                            role="button"
+                            data-toggle="collapse"
+                            href="#collapseES"
+                            aria-expanded="false"
+                            aria-controls="collapseES"
+                          >
+                            <span>View {summary.existingListingUrls.length} duplicated products on the list.</span>
+                          </a>
+                          <div id="collapseES" className="urlList collapse">
+                            {summary.existingListingUrls?.map((x) => {
+                              return x + <br />;
+                            })}
+                          </div>
+                        </p>
+                      ) : (
+                        ''
+                      )}
 
-                    {summary.invalidSourceUrls?.length > 0 ? (
-                      <p>
-                        <a role="button" data-toggle="collapse" href="#collapseIS" aria-expanded="false" aria-controls="collapseIS">
-                          <span>View {summary.invalidSourceUrls.length} invalid urls.</span>
-                        </a>
-                        <div id="collapseIS" className="urlList collapse">
-                          {summary.invalidSourceUrls?.map(x => {
-                            return x + <br />;
-                          })}
-                        </div>
-                      </p>
-                    ) : ('')}
+                      {summary.forbiddenWordsUrls?.length > 0 ? (
+                        <p>
+                          <a
+                            role="button"
+                            data-toggle="collapse"
+                            href="#collapseFW"
+                            aria-expanded="false"
+                            aria-controls="collapseFW"
+                          >
+                            <span>View {summary.forbiddenWordsUrls.length} titles contains forbidden words.</span>
+                          </a>
+                          <div id="collapseFW" className="urlList collapse">
+                            {summary.forbiddenWordsUrls?.map((x) => {
+                              return x + <br />;
+                            })}
+                          </div>
+                        </p>
+                      ) : (
+                        ''
+                      )}
 
-                    <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+                      {summary.invalidSourceUrls?.length > 0 ? (
+                        <p>
+                          <a
+                            role="button"
+                            data-toggle="collapse"
+                            href="#collapseIS"
+                            aria-expanded="false"
+                            aria-controls="collapseIS"
+                          >
+                            <span>View {summary.invalidSourceUrls.length} invalid urls.</span>
+                          </a>
+                          <div id="collapseIS" className="urlList collapse">
+                            {summary.invalidSourceUrls?.map((x) => {
+                              return x + <br />;
+                            })}
+                          </div>
+                        </p>
+                      ) : (
+                        ''
+                      )}
 
+                      <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>}
+                </Col>
+              </Row>
+            )}
           </div>
           <div className="manual-list-content">
             <div className="container-manual-listing">
