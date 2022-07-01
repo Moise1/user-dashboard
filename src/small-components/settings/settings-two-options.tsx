@@ -4,8 +4,8 @@ import '../../sass/settings/settings.scss';
 import { SettingNumber } from './setting-number';
 
 interface Props {
-  value1: string;
-  value2: string;
+  value1: string | null;
+  value2: string | null;
   check1Value: string;
   check2Value: string;
 
@@ -14,8 +14,8 @@ interface Props {
 
   loading1: boolean;
   loading2: boolean;
-  onChange1: (value: string) => void;
-  onChange2: (value: string) => void;
+  onChange1: (value: string | null) => void;
+  onChange2: (value: string | null) => void;
   delayToSave?: number;
 
   disabled?: boolean;
@@ -23,7 +23,7 @@ interface Props {
 
 export const SettingTwoOptions = (props: Props) => {
   const { value1, value2, check1Value, check2Value, label1, label2, delayToSave, onChange1, onChange2, loading1, loading2, disabled } = props;
-  const [currentValue1, setCurrentValue1] = useState<string>(value1);
+  const [currentValue1, setCurrentValue1] = useState<string | null>(value1);
 
   const OnChange1 = (evt: RadioChangeEvent) => {
     setCurrentValue1(evt.target.value);

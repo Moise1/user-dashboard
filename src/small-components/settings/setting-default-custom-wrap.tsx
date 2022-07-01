@@ -3,7 +3,7 @@ import '../../sass/settings/settings.scss';
 import { SettingList } from './setting-list';
 
 interface Props {
-  defaultValue: string | null;
+  defaultValue?: string | null;
   defautlSelectedValue: string;
   onChange: (value: string | null) => void;
   loading: boolean;
@@ -19,7 +19,7 @@ interface Props {
 export const SettingDefaultCustomWrap = (props: Props) => {
   const { defaultValue, defautlSelectedValue, onChange, loading, disabled, delayToSave, label1, label2, children } = props;
 
-  const [currentValue, setCurrentValue] = useState<string | null>(defaultValue);
+  const [currentValue, setCurrentValue] = useState<string | null | undefined>(defaultValue);
 
   const [delayBooleanTimer, setBooleanDelayTimer] = useState<number>(-1);
 
@@ -31,7 +31,7 @@ export const SettingDefaultCustomWrap = (props: Props) => {
     setBooleanDelayTimer(
       window.setTimeout(
         () => {
-          if (newValue != defaultValue && newValue != defautlSelectedValue) {
+          if (newValue != defaultValue) {
             onChange(newValue);
           }
         },
@@ -40,7 +40,7 @@ export const SettingDefaultCustomWrap = (props: Props) => {
     );
   };
 
-  const OnChangeBool = (v: string) => {
+  const OnChangeBool = (v: string | null) => {
     OnChange(v == '0' ? null : defautlSelectedValue);
   };
 

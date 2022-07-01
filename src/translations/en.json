@@ -266,7 +266,8 @@
   "RemoveFromSelection": "Remove from Selection",
   "AddSources": "Add Sources",
 
-  "Setting.DefinedBySettings": "Defined by shop ({value})",
+  "Setting.DefinedBySettings": "Defined by Store ({value})",
+  "Setting.DefinedBySettingsEmpty": "Defined by Store",
   "Setting.Custom": "Custom",
   "Setting.Yes": "Yes",
   "Setting.No": "No",

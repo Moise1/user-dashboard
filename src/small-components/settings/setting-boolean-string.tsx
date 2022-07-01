@@ -4,10 +4,10 @@ import { SettingBoolean } from './setting-boolean';
 import { SettingString } from './setting-string';
 
 interface Props{
-  defaultValue1: string;
-  defaultValue2: string;
-  onChange1: (value: string) => void;
-  onChange2: (value: string) => void;
+  defaultValue1: string | null;
+  defaultValue2: string | null;
+  onChange1: (value: string | null) => void;
+  onChange2: (value: string | null) => void;
   loading1: boolean;
   loading2: boolean;
   disabled?: boolean;
@@ -16,11 +16,11 @@ interface Props{
 export const SettingBooleanString = (props: Props) => {
   const { defaultValue1, defaultValue2, onChange1, onChange2, loading1, loading2, disabled } = props;
 
-  const [currentValue1, setCurrentValue1] = useState<string>(defaultValue1);
-  const booleanEnabled = currentValue1 == '1' || currentValue1.toLowerCase() == 'True';
+  const [currentValue1, setCurrentValue1] = useState<string | null>(defaultValue1);
+  const booleanEnabled = currentValue1 == '1' || currentValue1?.toLowerCase() == 'True';
 
-  const OnChangeBool = (v: string) => {
-    onChange1(v);
+  const OnChangeBool = (v: string | null) => {
+    onChange1?.(v);
     setCurrentValue1(v);
   };
 

@@ -37,7 +37,7 @@ export const SettingBooleanNumberNull = (props: Props) => {
     );
   };
 
-  const OnChangeBool = (v: string) => {
+  const OnChangeBool = (v: string | null) => {
     OnChange(v == '0' ? null : defaultNumberValue);
   };
 

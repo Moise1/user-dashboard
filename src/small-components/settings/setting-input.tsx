@@ -18,7 +18,6 @@ import { SettingWordList } from './setting-word-list';
 import { SettingBooleanTwoOptions } from './settings-boolean-two-options';
 import { SettingTwoOptions } from './settings-two-options';
 import { SettingBooleanNumberNull } from './setting-boolean-number-null';
-import { SettingDefaultCustomWrap } from './setting-default-custom-wrap';
 
 interface SettingDataBagData<T> {
   data: T | undefined;
@@ -91,12 +90,9 @@ export const SettingInput = (props: Props) => {
   };
   const GetSuperiorLabel = (superiorValue: SettingValue | undefined) => {
     if (superiorValue != null) {
-      return t('Sources.Setting.PlaceHolder.DefinedBySettings', { 'value': superiorValue }) as SettingValue;
+      return t('Setting.DefinedBySettings', { 'value': superiorValue }) as SettingValue;
     }
     return undefined;
-  };
-  const GetSuperiorLabelFromValue = (superior?: SettingKey) => {
-    return GetSuperiorLabel(GetSuperiorValue(superior));
   };
 
   const RenderNumber = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
@@ -106,33 +102,17 @@ export const SettingInput = (props: Props) => {
     const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
     const sValue = GetSuperiorValue(superior);
 
-    let input = <SettingNumber
-      defaultValue={value ?? sValue ?? ''}
-      onChange={v => onSave(fields[0], v)}
-      key={fields[0]}
-      loading={isBeingSaved}
-      disabled={disabled}
-    />;
-
-    if (superior != null) {
-      input= (
-        <SettingDefaultCustomWrap
-          defautlSelectedValue={sValue ?? ''}
-          defaultValue={value}
-          onChange={v => onSave(fields[0], v)}
-          loading={isBeingSaved}
-          disabled={disabled}
-          label1={t('Setting.DefinedBySettings', { value: sValue }) as string}
-          label2={t('Setting.Custom') as string}
-        >
-          {input}
-        </SettingDefaultCustomWrap>
-      );
-    }
-
     return (
       <Col span={8} className='input-container'>
-        {input}
+        <SettingNumber
+          defaultValue={value}
+          onChange={v => onSave(fields[0], v)}
+          key={fields[0]}
+          loading={isBeingSaved}
+          disabled={disabled}
+
+          superiorValue={sValue as string | undefined}
+        />
       </Col>
     );
   };
@@ -148,34 +128,17 @@ export const SettingInput = (props: Props) => {
     const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
     const sValue = GetSuperiorValue(superior);
 
-    let input = <SettingString
-      defaultValue={value ?? sValue ?? ''}
-      onChange={v => onSave(fields[0], v)}
-      key={fields[0]}
-      loading={isBeingSaved}
-      disabled={disabled}
-      placeholder={GetSuperiorLabelFromValue(superior) as string}
-    />;
-
-    if (superior != null) {
-      input = (
-        <SettingDefaultCustomWrap
-          defautlSelectedValue={sValue ?? ''}
-          defaultValue={value}
-          onChange={v => onSave(fields[0], v)}
-          loading={isBeingSaved}
-          disabled={disabled}
-          label1={t('Setting.DefinedBySettings', { value: sValue }) as string}
-          label2={t('Setting.Custom') as string}
-        >
-          {input}
-        </SettingDefaultCustomWrap>
-      );
-    }
-
     return (
       <Col span={8} className='input-container'>
-        {input}
+        <SettingString
+          defaultValue={value}
+          onChange={v => onSave(fields[0], v)}
+          key={fields[0]}
+          loading={isBeingSaved}
+          disabled={disabled}
+
+          superiorValue={sValue as string | undefined}
+        />
       </Col>
     );
   };
@@ -243,7 +206,7 @@ export const SettingInput = (props: Props) => {
       if (found) {
         placeHolder = GetSuperiorLabel(placeHolderV) as string;
       } else {
-        placeHolder = t('Sources.Setting.PlaceHolder.DefinedBySettingsEmpty') as string;
+        placeHolder = t('Setting.DefinedBySettingsEmpty') as string;
       }
       listValues.push({ value:null, label: placeHolder });
     }
@@ -271,7 +234,6 @@ export const SettingInput = (props: Props) => {
   const RenderBoolean = (values: SettingValue[], fields: SettingKey[], extra: SettingExtra[] | undefined, disabled: boolean) => {
     const isBeingSaved = settingsBeingSaved.has(fields[0]);
     const value = configuration?.get(fields[0]) ?? values[0];
-
 
     const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
     if (superior != null) {

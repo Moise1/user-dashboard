@@ -12,6 +12,7 @@
     &.setting-list {
         position: relative;
         height: fit-content;
+        margin-bottom: 10px;
 
         .ant-spin-spinning {
             position: absolute;
@@ -93,7 +94,6 @@
 
     &.setting-list-number-null {
         .setting-number {
-            margin-top: 10px;
         }
     }
 }

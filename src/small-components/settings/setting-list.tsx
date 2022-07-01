@@ -10,10 +10,10 @@ export interface ListData {
 }
 
 interface Props {
-  defaultValue?: string;
+  defaultValue?: string | null;
   loading: boolean;//saving
   loadingData: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string | null) => void;
   disabled?: boolean;
   listData: ListData[];
   placeHolder?: string;
@@ -22,7 +22,7 @@ interface Props {
 export const SettingList = (props: Props) => {
   const { defaultValue, onChange, loadingData, disabled, listData, loading, placeHolder } = props;
 
-  const [currentValue, setCurrentValue] = useState<string | undefined>(defaultValue);
+  const [currentValue, setCurrentValue] = useState<string | null | undefined>(defaultValue);
   const [wasLoadingData, setWasLoadingData] = useState<boolean>(loadingData);
 
   const OnChange = (value: SelectorValue) => {

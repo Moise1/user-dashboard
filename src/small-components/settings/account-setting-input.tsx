@@ -83,8 +83,8 @@ export const AccountSettingInput = (props: Props) => {
     return (
       <Col span={8} className='limit-section'>
         <SettingTwoOptions
-          value1={value1 ?? ''}
-          value2={value2 ?? ''}
+          value1={value1}
+          value2={value2}
           check1Value={check1Value ?? ''}
           check2Value={check2Value ?? ''}
           label1={t(label1)}

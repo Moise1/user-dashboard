@@ -133,7 +133,8 @@
   "Platform.Shopify.NoApi.Username": " ",
 
   "Setting.DefinedBySettings": "Definido por Tienda ({value})",
-  "Setting.Custom": "Custom",
+  "Setting.DefinedBySettingsEmpty": "Definido por Tienda",
+  "Setting.Custom": "Personalizado",
   "Setting.Yes": "Sí",
   "Setting.No": "No",
 

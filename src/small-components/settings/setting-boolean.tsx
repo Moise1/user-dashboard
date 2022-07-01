@@ -2,8 +2,8 @@
 import '../../sass/settings/settings.scss';
 
 interface Props{
-  defaultValue: string;
-  onChange: (value: string) => void;
+  defaultValue: string | null;
+  onChange: (value: string | null) => void;
   loading: boolean;
   disabled?: boolean;
   value?: string;
@@ -12,7 +12,7 @@ interface Props{
 export const SettingBoolean = (props: Props) => {
   const { defaultValue, value, onChange, loading, disabled } = props;
 
-  const defautlChecked = defaultValue == '1' || defaultValue.toLowerCase() == 'true';
+  const defautlChecked = defaultValue == '1' || defaultValue?.toLowerCase() == 'true';
   const checked = !value ? undefined : value == '1' || value.toLowerCase() == 'true';
 
   return <div className="setting setting-boolean">

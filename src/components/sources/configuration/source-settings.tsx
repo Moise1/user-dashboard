@@ -47,7 +47,7 @@ export const SourceSettings = (props:Props) => {
     Loading={settingsLoading || chSettingsLoading}
     OnSaveSetting={SaveSetting}
     SettingsBeingSaved={settingsBeingSaved}
-    SettingsData={settings}
+    SettingsData={settings?.filter(x => x.sourceId == sourceId)}
     SettingsInfo={SourceSettingsList.filter(x => !x.Sources || x.Sources.includes(sourceId))}
     Sections={[]}
     SuperiorData={chSettings}
