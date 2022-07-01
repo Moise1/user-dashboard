@@ -291,7 +291,6 @@ export const BulkListing = (/*props: props*/) => {
                           >
                             <p>
                               {summary.forbiddenWordsUrls?.map((x) => {
-                                3;
                                 return x + <br />;
                               })}
                             </p>

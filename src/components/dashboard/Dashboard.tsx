@@ -10,11 +10,13 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
   PointElement
 } from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
@@ -52,7 +54,6 @@ export const Dashboard = () => {
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   //
-  console.log('The setSearchedChannels', setSearchedChannels);
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
@@ -150,14 +151,13 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement);
+  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement, LineElement);
 
   const periodOptions = [
-    { value: 0, label: '3' },
-    { value: 1, label: '4' }
+    { value: 3, label: 'Daily basis' },
+    { value: 4, label: 'Monthly basis' }
   ];
   const onSelectOption = (value: SelectorValue) => {
-    value = value === 0 ? 3 : 4;
     setSelectedPeriod(value as number);
   };
   const salesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
@@ -277,7 +277,7 @@ export const Dashboard = () => {
         <div className="sales">
           <div className="graph-cntrlers">
             <div>
-              <Selector placeHolder="Select a period" onChange={onSelectOption}>
+              <Selector value={ selectedPeriod} placeHolder="Select a period" onChange={onSelectOption}>
                 {periodOptions}
               </Selector>
             </div>
@@ -304,7 +304,7 @@ export const Dashboard = () => {
           </div>
 
           <div className="graph-container">
-            <Bar options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
+            <Line options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
           </div>
         </div>
       </div>
