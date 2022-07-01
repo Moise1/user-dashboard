@@ -77,6 +77,64 @@ export interface ListingsSummary {
   notDone: number;
 }
 
+export enum BulkListingStatus {
+  UNKNOWN = 0,
+  INITIAL = 1,
+  PROCESSING = 20,
+  DONE = 200,
+  ERROR = 400,
+  TEMPORAL_ERROR = 401
+}
+
+export enum BulkListingError {
+  UNKOWN,
+  INVALID_ORDER,
+  SCRAPING,
+  INVALID_TOKEN,
+  NO_CATEGORY,
+  VERO,
+  ZERO_TOKENS,
+  OOS
+}
+
+export enum eChannelListingStatus {
+  Unknown = 0x0,
+  PreparedForFirstListing = 0x1,
+  QueuedForWork = 0x2,
+  TemporaryFailure = 0x4,
+  PermanentFailure = 0x8,
+  Retrying = 0x10,
+  InvalidUserCredentials = 0x20,
+  ListingCreatedSuccessfully = 0x40,
+  RetryingTwice = 0x80,
+  RetryingFinal = 0x100,
+  ExceptionThrown = 0x200,
+  CreatingListing = 0x400,
+  Removed = 0x800,
+  Terminated = 0x1000,
+  PendingForScraping = 0x2000,
+  PendingToReview = 0x4000,
+  BULK = 0x8000,
+  BulkScraping = 0x10000,
+  ImportedWaitingForChannelData = 0x20000,
+  PendingForRelist = 0x40000,
+  Relisted = 0x80000,
+  ListingInStore = 0x100000,
+  ListingVariation = 0x200000,
+  BulkApiCreated = -2147483648
+}
+
+export interface BulkListingLog {
+  id: number;
+  url: string;
+  status: BulkListingStatus;
+  createdOn?: Date;
+  ErrorCode?: BulkListingError;
+  channelItem: string;
+  channelListingStatus: eChannelListingStatus;
+  verifiedOn: Date;
+  listedOn: Date;
+}
 
 export interface ListingsSource {
   id: number;
