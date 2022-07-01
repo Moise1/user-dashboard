@@ -1,12 +1,12 @@
 import { Layout, Form, Input, Button, DatePicker, Spin } from 'antd';
-import { Row, Col } from 'antd';
+import { Row, Col, Collapse } from 'antd';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 
 import '../../sass/list-now/manual-listing.scss';
 import '../../sass/list-now/bulk-listing.scss';
 import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
 import { getManualListings, SaveAutolist } from '../../redux/listings/listingsThunk';
-import { ListingsData } from '../../redux/listings/listingsSlice';
+import { ListingsData, ListingsSummary } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
@@ -14,8 +14,10 @@ import { StatusBar } from 'src/small-components/StatusBar';
 import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 
 const { Item } = Form;
+const { Panel } = Collapse;
 
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -30,6 +32,7 @@ export const BulkListing = (/*props: props*/) => {
   const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>('false');
   const [listFrequencyMinutes, setListFrequencyMinutes] = useState<number>();
   const [dontListUntil, setDontListUntil] = useState<Date>();
+  const [summary, setSummary] = useState<ListingsSummary>();
 
   const [data, setData] = useState<Matrix<{ value: string }>>([
     [{ value: '' }, { value: '' }],
@@ -41,7 +44,7 @@ export const BulkListing = (/*props: props*/) => {
     [{ value: '' }, { value: '' }],
     [{ value: '' }, { value: '' }],
     [{ value: '' }, { value: '' }],
-    [{ value: '' }, { value: '' }],
+    [{ value: '' }, { value: '' }]
   ]);
 
   useEffect(() => {
@@ -50,10 +53,12 @@ export const BulkListing = (/*props: props*/) => {
   }, [getManualListings, getUserAssistants]);
 
   const onSave = async (values: ListingsData) => {
-    await dispatch(
-      SaveAutolist(values)
-    );
+    const rs = await dispatch(SaveAutolist(values));
+    console.log(rs.payload.responseObject);
+    setSummary(rs.payload.responseObject);
+    console.log(summary);
   };
+
   const [listing] = useState<string[][]>([]);
 
   function onListItems() {
@@ -76,7 +81,7 @@ export const BulkListing = (/*props: props*/) => {
       _reviewBeforePublishing = false;
     }
 
-    data.map(item => {
+    data.map((item) => {
       if (item[0]?.value || item[1]?.value) {
         const val1 = item[0]?.value ? item[0]?.value : '';
         const val2 = item[1]?.value ? item[1]?.value : '';
@@ -93,11 +98,24 @@ export const BulkListing = (/*props: props*/) => {
       listFrequencyMinutes: listFrequencyMinutes as number,
       listings: listing
     };
+    console.log(listing);
     onSave(value);
   }
 
   function addRows() {
-    setData(olddata => [...olddata, [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }], [{ value: '' }, { value: '' }]]);
+    setData((olddata) => [
+      ...olddata,
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }],
+      [{ value: '' }, { value: '' }]
+    ]);
   }
 
   const handleAssistantChange = (value: SelectorValue) => {
@@ -120,10 +138,7 @@ export const BulkListing = (/*props: props*/) => {
     setListFrequencyMinutes(Number(event.target.value));
   };
 
-  const onChange = (
-    value: DatePickerProps['value'] | RangePickerProps['value'],
-    dateString: string,
-  ) => {
+  const onChange = (value: DatePickerProps['value'] | RangePickerProps['value'], dateString: string) => {
     const date = new Date(dateString);
 
     setDontListUntil(date);
@@ -135,107 +150,213 @@ export const BulkListing = (/*props: props*/) => {
   };
 
   return (
-    <Layout className='bulk-list-content'>
+    <Layout className="bulk-list-content">
       {loadings && VAloading ? (
         <Spin />
-      ) :
-        <div className='sections-container'>
-          <h1>Bulk Listing</h1>
-          <Row>
-            <Col span={24}>
-              <div className='bulk-sections'>
-                <div className='options-container'>
-                  <StatusBar className='bulk-options'>
-                    <> </>
-                    <Form className='bulk-form' layout={'horizontal'}>
-                      <Item label='Create As' name='createdBy'>{VAloading}
-                        <Selector defaultValue='select' value={createdBy ? createdBy : 'select'} onChange={handleAssistantChange}>
-                          {userAssistants?.map(({ name: label, id: value }: UserAssistant) => ({ value, label }))}
-                        </Selector>
-                      </Item>
-                      <p>VA Profile selected as the creator of the listing</p>
-                      <Item label='List Vero Items' name='ignoreVero'>
-                        <Selector defaultValue={ignoreVero}
-                          value={ignoreVero}
-                          onChange={handleIgnoreVeroChange}
-                        >
-                          {[
-                            { label: 'Yes', value: 'true' },
-                            { label: 'No', value: 'false' }
-                          ]}
-                        </Selector>
-                      </Item>
-                      <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
-                      <Item label='List Out of Stock Items' name='ignoreOOS'>
-                        <Selector defaultValue={ignoreOOS} value={ignoreOOS} onChange={handleIgnoreOOSChange}>
-                          {[
-                            { label: 'Yes', value: 'true' },
-                            { label: 'No', value: 'false' }
-                          ]}
-                        </Selector>
-                      </Item>
-                      <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
-                      <Item label="Don't list until" name='dontListUntil'>
-                        <DatePicker showTime={{ format: 'hh:mm A' }}
-                          format='YYYY-MM-DD hh:mm A' onChange={onChange} onOk={onOk} />
-                      </Item>
-                      <Item label='Listing frequency' name='listFrequencyMinutes'>
-                        <Input className='blue-input' type='number' value={listFrequencyMinutes} placeholder='0' onChange={handleListFrequencyMinutes} />
-                      </Item>
-                      <p>The system will automatically list an item every X minutes.</p>
-                      <Item label='Review listings' name='reviewBeforePublishing'>
-                        <Selector defaultValue={reviewBeforePublishing} value={reviewBeforePublishing} onChange={handleReviewBeforePublishing}>
-                          {[
-                            { label: 'Yes', value: 'true' },
-                            { label: 'No', value: 'false' }
-                          ]}
-                        </Selector>
-                      </Item>
-                      <p>Yes: Review each listing before updating it on my store<br />
-                        No: List items automatically on my store.</p>
-                    </Form>
-                  </StatusBar>
+      ) : (
+        <div className="content-bulk">
+          <h1>Bulk Publish</h1>
+          <div className="sections-container">
+            <Row>
+              <Col xs={{ span: 24, order: 2 }} md={{ span: 24, order: 2 }} lg={{ span: 12, order: 1 }}>
+                <div className="bulk-sections">
+                  <div className="options-container">
+                    <StatusBar className="bulk-options">
+                      <> </>
+                      <Form className="bulk-form" layout={'horizontal'}>
+                        <Item label="Create As" name="createdBy">
+                          {VAloading}
+                          <Selector
+                            defaultValue="select"
+                            value={createdBy ? createdBy : 'select'}
+                            onChange={handleAssistantChange}
+                          >
+                            {userAssistants?.map(({ name: label, id: value }: UserAssistant) => ({ value, label }))}
+                          </Selector>
+                        </Item>
+                        <p>VA Profile selected as the creator of the listing</p>
+                        <Item label="List Vero Items" name="ignoreVero">
+                          <Selector defaultValue={ignoreVero} value={ignoreVero} onChange={handleIgnoreVeroChange}>
+                            {[
+                              { label: 'Yes', value: 'true' },
+                              { label: 'No', value: 'false' }
+                            ]}
+                          </Selector>
+                        </Item>
+                        <p>Yes: List VeRo items No: Do not list VeRo items (recommended) What is a VeRo item?</p>
+                        <Item label="List Out of Stock Items" name="ignoreOOS">
+                          <Selector defaultValue={ignoreOOS} value={ignoreOOS} onChange={handleIgnoreOOSChange}>
+                            {[
+                              { label: 'Yes', value: 'true' },
+                              { label: 'No', value: 'false' }
+                            ]}
+                          </Selector>
+                        </Item>
+                        <p>Yes: List items even if they are OOS No: Do not list OOS items</p>
+                        <Item label="Don't list until" name="dontListUntil">
+                          <DatePicker
+                            showTime={{ format: 'hh:mm A' }}
+                            format="YYYY-MM-DD hh:mm A"
+                            onChange={onChange}
+                            onOk={onOk}
+                          />
+                        </Item>
+                        <Item label="Listing frequency" name="listFrequencyMinutes">
+                          <Input
+                            className="blue-input"
+                            type="number"
+                            value={listFrequencyMinutes}
+                            placeholder="0"
+                            onChange={handleListFrequencyMinutes}
+                          />
+                        </Item>
+                        <p>The system will automatically list an item every X minutes.</p>
+                        <Item label="Review listings" name="reviewBeforePublishing">
+                          <Selector
+                            defaultValue={reviewBeforePublishing}
+                            value={reviewBeforePublishing}
+                            onChange={handleReviewBeforePublishing}
+                          >
+                            {[
+                              { label: 'Yes', value: 'true' },
+                              { label: 'No', value: 'false' }
+                            ]}
+                          </Selector>
+                        </Item>
+                        <p>
+                          Yes: Review each listing before updating it on my store
+                          <br />
+                          No: List items automatically on my store.
+                        </p>
+                      </Form>
+                    </StatusBar>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Spreadsheet data={data} onChange={setData} columnLabels={lables} className='spreadsheet' />
-              <Button onClick={addRows} >Add 10 rows</Button>
-              <div className='table-container'>
+              </Col>
+              <Col xs={{ span: 24, order: 1 }} md={{ span: 24, order: 1 }} lg={{ span: 12, order: 2 }}>
+                <Spreadsheet data={data} onChange={setData} columnLabels={lables} className="spreadsheet" />
+                <Button onClick={addRows}>Add 10 rows</Button>
+                <div className="table-container">
+                  <div className="button-container" onClick={onListItems}>
+                    <Item>
+                      <ConfirmBtn>List items</ConfirmBtn>
+                    </Item>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            {summary && (
+              <Row>
+                <Col>
+                  <div className="bulk-summary">
+                    <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
+                      <h4>
+                        <strong>{summary.done} urls are successfully being listed.</strong>
+                      </h4>
+                      <Collapse>
+                        {summary.duplicatedUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.duplicatedUrls.length + ' duplicated products on your store.'}
+                            key="1"
+                          >
+                            <p>
+                              {summary.duplicatedUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
 
-                <div className='button-container'>
-                  <Item>
-                    <Button type='primary' onClick={onListItems}>List items</Button>
-                  </Item>
-                </div>
-              </div>
-            </Col>
-          </Row>
-          <div className='manual-list-content'>
-            <div className='container-manual-listing'>
-              <div className='section-sources'>
+                        {summary.existingListingUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'}
+                            key="2"
+                          >
+                            <p>
+                              {summary.existingListingUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
+
+                        {summary.forbiddenWordsUrls?.length > 0 ? (
+                          <Panel
+                            header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'}
+                            key="3"
+                          >
+                            <p>
+                              {summary.forbiddenWordsUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
+
+                        {summary.invalidSourceUrls?.length > 0 ? (
+                          <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key="4">
+                            <p>
+                              {summary.invalidSourceUrls?.map((x) => {
+                                return x + <br />;
+                              })}
+                            </p>
+                          </Panel>
+                        ) : (
+                          ''
+                        )}
+                      </Collapse>
+
+                      <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            )}
+          </div>
+          <div className="manual-list-content">
+            <div className="container-manual-listing">
+              <div className="section-sources">
                 <h2>Suported suppliers</h2>
                 <Row gutter={[16, 8]}>
-                  {manualListings.moreSources.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
-                    return <Col span={6} key={itm.id}>
-                      <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target='_blank' rel='noreferrer'>
-                        <div className='list-card'> {loadings}
-                          {/* eslint-disable @typescript-eslint/no-var-requires */}
-                          <img width='159' height='38' alt='sourcelogo' src={require('../../assets/logos/' + itm.id + '.png').default} ></img>
-                          <br />
-                          <h3>{itm.name}</h3>
-                        </div>
-                      </a>
-                    </Col>;
-                  })}
+                  {manualListings?.moreSources?.map(
+                    (itm: {
+                      id: number | undefined;
+                      name: string | undefined;
+                      baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined;
+                    }) => {
+                      return (
+                        <Col span={6} key={itm.id}>
+                          <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
+                            <div className="list-card">
+                              {' '}
+                              {loadings}
+                              {/* eslint-disable @typescript-eslint/no-var-requires */}
+                              <img
+                                width="159"
+                                height="38"
+                                alt="sourcelogo"
+                                src={require('../../assets/logos/' + itm.id + '.png').default}
+                              ></img>
+                              <br />
+                              <h3>{itm.name}</h3>
+                            </div>
+                          </a>
+                        </Col>
+                      );
+                    }
+                  )}
                 </Row>
               </div>
             </div>
           </div>
         </div>
-      }
+      )}
     </Layout>
   );
 };

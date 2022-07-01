@@ -4,13 +4,26 @@
   //Default fonts
 
   :root {
-    $font-xl: 1rem;
-    $font-large: 0.8rem;
-    $font-medium: 0.7rem;
-    $font-small: 0.6rem;
+    $font-xl: 1.1rem;
+    $font-large: 0.9rem;
+    $font-medium: 0.8rem;
+    $font-small: 0.7rem;
+
+    // Spacers & margins
+
+    $spacer: 0.2rem;
 
     // Custom font-sizes for elements
+
+    td {
+      font-size: $font-small;
+    }
+
     p {
+      font-size: $font-small;
+    }
+
+    li {
       font-size: $font-small;
     }
 
@@ -32,10 +45,18 @@
     }
 
     h5 {
-      font-size: $font-medium;
+      font-size: $font-small;
     }
 
-    a {
+    h6 {
+      font-size: $font-small;
+    }
+
+    label {
+      font-size: $font-small;
+    }
+
+    span {
       font-size: $font-medium;
     }
   }

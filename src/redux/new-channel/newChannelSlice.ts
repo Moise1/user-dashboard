@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getLinkAccount } from './newChannelThunk';
+import { createNewChannel, getEbayLinkAccount, getShopifyLinkAccount } from './newChannelThunk';
 
 export interface LinkAccount {
   shop: number;
@@ -8,7 +8,10 @@ export interface LinkAccount {
 
 const initialState = {
   url: '',
-  loading: false,
+  getLinkLoading: false,
+  newChannelLoading: false,
+  statusCode: 0,
+  success: false,
   error: ''
 };
 
@@ -17,17 +20,51 @@ export const newChannelSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getLinkAccount.pending, (state) => {
-      state.loading = true;
+    // Get the eBay link account
+    builder.addCase(getEbayLinkAccount.pending, (state) => {
+      state.getLinkLoading = true;
       state.error = '';
     });
-    builder.addCase(getLinkAccount.fulfilled, (state, { payload }) => {
-      state.loading = false;
+    builder.addCase(getEbayLinkAccount.fulfilled, (state, { payload }) => {
+      state.getLinkLoading = false;
       state.url = payload;
     });
-    builder.addCase(getLinkAccount.rejected, (state, { payload }) => {
-      state.loading = false;
+    builder.addCase(getEbayLinkAccount.rejected, (state, { payload }) => {
+      state.getLinkLoading = false;
       state.error = String(payload);
+    });
+
+    // Get the Shopify link account
+    builder.addCase(getShopifyLinkAccount.pending, (state) => {
+      state.getLinkLoading = true;
+      state.error = '';
+    });
+    builder.addCase(getShopifyLinkAccount.fulfilled, (state, { payload }) => {
+      state.getLinkLoading = false;
+      state.url = payload;
+    });
+    builder.addCase(getShopifyLinkAccount.rejected, (state, { payload }) => {
+      state.getLinkLoading = false;
+      state.error = String(payload);
+    });
+
+    // Create new channel 
+    builder.addCase(createNewChannel.pending, (state) => {
+      state.newChannelLoading = true;
+      state.error = '';
+      state.statusCode = 0;
+    });
+    builder.addCase(createNewChannel.fulfilled, (state, { payload }) => {
+      state.newChannelLoading = false;
+      state.success = payload?.data.response_data;
+      state.statusCode = payload.status;
+
+    });
+    builder.addCase(createNewChannel.rejected, (state, { payload }) => {
+      state.newChannelLoading = false;
+      state.success = false;
+      state.error = String(payload);
+      state.statusCode = 0;
     });
   }
 });

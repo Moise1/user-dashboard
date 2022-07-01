@@ -13,6 +13,7 @@ interface Props<T> {
   pageSize?: number;
   onPageSizeChanged?: (itemsPerPage: number) => void;
   pageSizes?: number[];
+  hidePagination?: boolean;
 }
 
 export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) => {
@@ -61,7 +62,7 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
         rowClassName={rowClassName}
         onRow={onRow}
       />
-      <Pagination
+      {!props.hidePagination && <Pagination
         className="pagination"
         onChange={onPageChange}
         total={dataSource?.length}
@@ -71,7 +72,7 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
         showSizeChanger
         onShowSizeChange={onShowPageSizeChange}
         pageSizeOptions={pageSizeOptionArray}
-      />
+      />}
     </div>
   );
 };

@@ -68,6 +68,11 @@ body {
   transition: none !important;
   color: $corporative-color;
   border-radius: 8px !important;
+
+  svg {
+    margin-bottom: 5px !important;
+    margin-left: 1px !important;
+  }
   &:hover {
     color: $corporative-color;
     border-color: $corporative-color !important;
@@ -79,10 +84,7 @@ body {
 }
 
 //Ant buttons styles fixed
-.ant-input:placeholder-shown {
-  border-radius: 15px;
-  height: 35px;
-}
+
 button[ant-click-animating-without-extra-node]:after {
   border: 0 none;
   opacity: 0;
@@ -101,6 +103,13 @@ button,
   .ant-layout.ant-layout-has-sider {
     margin: 0px !important;
   }
+}
+
+// Table
+
+.ant-table-wrapper {
+  overflow: auto;
+  background-color: $primary-bg;
 }
 
 .table td,

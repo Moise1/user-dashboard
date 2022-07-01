@@ -24,19 +24,20 @@ import {
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
+  ConfigureListingService,
   AllServices,
-  PriceWarrior
+  PriceWarrior,
+  EditTemplate,
+  ConfigureNoapi,
+  PaymentMethod,
+  OurServices,
+  Checkout,
+  ManualPublish,
+  BulkListing,
+  ListNow
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
-import { ListNow } from './components/list-now/ListNow';
-import { ManualListing } from './components/list-now/ManualListing';
-import { BulkListing } from './components/list-now/BulkListing';
-import { Checkout } from './components/subscriptions/Checkout';
-import { PaymentMethod } from './components/subscriptions/PaymentMethod';
 import { Links } from './links';
-import { EditTemplate } from './components/templates/EditTemplate';
-import { ConfigureNoapi } from './components/NoApi/ConfigureNoapi';
-import { OurServices } from './components/subscriptions/OurServices';
 
 export const App = withRouter(({ history }) => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -78,7 +79,7 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
             <ProtectedRoute path={Links.Products} component={Listings} />
             <ProtectedRoute path={Links.PublishNow} component={ListNow} />
-            <ProtectedRoute path={Links.ManualPublish} component={ManualListing} />
+            <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
             <ProtectedRoute path={Links.SourcesSettings + '/:id?'} component={SourcesConfiguration} />
@@ -94,10 +95,12 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.BrowserExtension} component={BrowserExtensions} />
             <ProtectedRoute path={Links.VaProfiles} component={VaProfiles} />
             <ProtectedRoute path={Links.ConfigureNoapi} component={ConfigureNoapi} />
+            <ProtectedRoute path={Links.ConfigureListingService} component={ConfigureListingService} />
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
             <ProtectedRoute path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
+            <ProtectedRoute exact path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />
             <ProtectedRoute path={Links.AutoOrderConfigurationQuery} component={AutoOrdering} />

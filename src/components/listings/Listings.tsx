@@ -61,7 +61,7 @@ export const Listings = () => {
     dispatch(getListingsSource());
     dispatch(getPendingListings());
     dispatch(getTerminatedListings());
-  }, [getListings, getListingsSource, getPendingListings, tabStatus, channel,selectedChannel?.id]);
+  }, [getListings, getListingsSource, getPendingListings, tabStatus, channel, selectedChannel?.id]);
 
   const tableColumns = [
     {
@@ -144,36 +144,36 @@ export const Listings = () => {
   const handleChangeTab = (e: React.MouseEvent): void => {
     const id = parseInt(e.currentTarget.getAttribute('id')!);
     switch (id) {
-    case 1:
-      setActiveTab(id);
-      setTabStatus('activeTab');
-      dispatch(getListings());
-      break;
-    case 2:
-      setActiveTab(id);
-      setTabStatus('pendingTab');
-      dispatch(getPendingListings());
-      break;
-    case 3:
-      setActiveTab(id);
-      setTabStatus('terminatedTab');
-      dispatch(getTerminatedListings());
-      break;
-    default:
-      break;
+      case 1:
+        setActiveTab(id);
+        setTabStatus('activeTab');
+        dispatch(getListings());
+        break;
+      case 2:
+        setActiveTab(id);
+        setTabStatus('pendingTab');
+        dispatch(getPendingListings());
+        break;
+      case 3:
+        setActiveTab(id);
+        setTabStatus('terminatedTab');
+        dispatch(getTerminatedListings());
+        break;
+      default:
+        break;
     }
   };
 
   const dataSource = useCallback(() => {
     switch (tabStatus) {
-    case 'activeTab':
-      return listings;
-    case 'pendingTab':
-      return pendingListings;
-    case 'terminatedTab':
-      return terminatedListings;
-    default:
-      break;
+      case 'activeTab':
+        return listings;
+      case 'pendingTab':
+        return pendingListings;
+      case 'terminatedTab':
+        return terminatedListings;
+      default:
+        break;
     }
   }, [tabStatus, selectedChannel?.id]);
 

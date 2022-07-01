@@ -2,19 +2,22 @@ import { Steps } from 'antd';
 
 interface Props {
   current: number;
+  platform: number | null;
   className: string;
 }
 
-export const Stepper = ({ current, className }: Props) => {
+export const Stepper = ({ current, platform, className }: Props) => {
   const { Step } = Steps;
   return (
-    <Steps current={current} className={className}>
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-    </Steps>
+    <div className="mobile-stepper">
+      <Steps current={platform ? current: 0} className={className} direction='horizontal'>
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+      </Steps>
+    </div>
   );
 };

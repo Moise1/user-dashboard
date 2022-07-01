@@ -1,53 +1,78 @@
 import { t } from '../../utils/transShim';
-import { Input } from 'antd';
+import { Input, Form } from 'antd';
+import { eShop } from '../../utils/eShop';
+import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/newChannelThunk';
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
+import { popupWindow } from './NewChannel';
 
-interface values {
-  user: string;
-}
 interface props {
   step: number;
-  user: string;
-  values: values;
   platform: number;
-  handleChangeUser: (newUser: string) => void;
+  storeLocation: number | string | null;
+  handleNext: () => void;
 }
 
 export const UserName = (props: props) => {
-  const { handleChangeUser, values, platform, user } = props;
+  const { platform, storeLocation } = props;
+
+  const dispatch = useAppDispatch();
+  const { getLinkLoading, newChannelLoading, url } = useAppSelector((state) => state.newChannel);
+  const ebayShopIdentifier = 'My_Super_Shop';
+  const amazonShopIdentifier = 'MySuperShop';
+  const shopifyShopUrl = 'https://myshop.myshopify.com';
+
+  const platformValue = eShop[platform];
+  const onFinish = async (values: { shopName: string }) => {
+    if (platform === 2) {
+      dispatch(
+        getShopifyLinkAccount({
+          data: {
+            shop: platform,
+            site: storeLocation as number,
+            shopName: values.shopName
+          }
+        })
+      );
+      return false;
+    }
+
+    await dispatch(
+      createNewChannel({
+        isoCountry: storeLocation as number,
+        channel: platformValue === 'eBay' ? 3 : 4,
+        channelStoreIdentifier: values.shopName
+      })
+    );
+  };
+
+  if (url) popupWindow(url, window, 800, 600);
 
   return (
-    <form className="username-form">
-      <h5 className="title">
+    <div className="username-form-container">
+      <h2 className="title">
         {' '}
-        {t('whatsur')} {platform} &apos;s {t('username')}?{' '}
-      </h5>
-      <p>
-        {t('makesure')}
-        {platform}
+        {t('username-request')} {eShop[platform]} store &apos;s {platform === 2 ? t('shop_url') : t('username')}?
+      </h2>
+      <p className="sub-title">
+        {t('ensure-warning')}
+        {eShop[platform]}
         <span className="username">{t('username')} </span> {t('notur')}
       </p>
-      <div>
-        <Input
-          type="email"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          value={user}
-          placeholder={
-            platform === 1 ? ' EBay username' : platform === 3 ? ' Amazon username' : ' Shopify username'
-          }
-          onChange={(e) => handleChangeUser(e.target.value)}
-        />
-        <div
-          className={`text-left font-weight-bold
-            ${values.user == '' ? 'text-danger' : 'd-none'}
-            `}
+      <Form className="username-form" layout="horizontal" name="basic" onFinish={onFinish} autoComplete="off">
+        <Form.Item
+          rules={[{ required: true, message: `Please fill in your ${eShop[platform]}'s username` }, { type: 'string' }]}
+          name="shopName"
         >
-          <i>
-            {t('fill')}
-            {platform === 1 ? ' EBay ' : platform === 3 ? ' Amazon ' : ' Shopify '} {t('username')}
-          </i>
-        </div>
-      </div>
-    </form>
+          <Input
+            className="input-field"
+            placeholder={platform === 1 ? ebayShopIdentifier : platform === 2 ? shopifyShopUrl : amazonShopIdentifier}
+          />
+        </Form.Item>
+        <ConfirmBtn htmlType="submit" disabled={getLinkLoading || newChannelLoading}>
+          {getLinkLoading || newChannelLoading ? 'Please wait...' : 'Submit'}
+        </ConfirmBtn>
+      </Form>
+    </div>
   );
 };

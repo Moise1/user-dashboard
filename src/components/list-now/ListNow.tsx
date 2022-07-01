@@ -34,7 +34,7 @@ export const ListNow = (/*props: props*/) => {
   };
 
   return (
-    <div className="container">
+    <div className="listnow-container">
       <h2 className="title">{t('listnowhead')}</h2>
       <div className="choose-list">
         <Row>

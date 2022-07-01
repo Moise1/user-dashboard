@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogin, userRegister } from './userThunk';
+import { userLogin, userRegister, getUserToken } from './userThunk';
 export interface UserData {
   email: string;
   password: string;
@@ -30,13 +30,21 @@ export interface UserData {
 
 const initialState = {
   user: {} as UserData,
+  tokens: null,
   loading: false,
   error: ''
 };
 
-//   const reqOptions = {
+export interface ProductQuota {
+  quota: number;
+  used: number;
+  price: number;
+  endsOn: Date;
+  currency: string;
+  pending: number;
+  cancelled: boolean;
+}
 
-// };
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -68,6 +76,20 @@ export const userSlice = createSlice({
       state.user = payload;
     });
     builder.addCase(userRegister.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+
+    // Users's tokens
+    builder.addCase(getUserToken.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getUserToken.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.tokens = payload;
+    });
+    builder.addCase(getUserToken.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });

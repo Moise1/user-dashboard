@@ -34,7 +34,11 @@
     "@typescript-eslint/no-use-before-define": [ "error" ],
     "no-undef": "off",
     "import/no-unresolved": "error",
-    "indent": [ "error", 2 ],
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1 }
+    ],
     "linebreak-style": [ "warn", "windows" ],
     "no-unused-vars": "off",
     "no-use-before-define": "off",

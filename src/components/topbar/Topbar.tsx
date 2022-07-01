@@ -14,19 +14,36 @@ import { getNotifications } from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 import { Links } from '../../links';
+import { getUserToken } from 'src/redux/user/userThunk';
+import { client } from 'src/redux/client';
 
 interface Props extends RouteComponentProps {
   showMobileSider: () => void;
 }
 
 export const Topbar = withRouter((props: Props) => {
+  const [quotaused, setQuotaused] = useState<number>(0);
+  const [quotatotal, setQuotatotal] = useState<number>(0);
+  useEffect(() => {
+    (async () => {
+      try {
+        const quotaRes = await client.get('/Dashboard/GetProductQuotaSummary');
+        setQuotaused(quotaRes.data.response_data.used);
+        setQuotatotal(quotaRes.data.response_data.quota);
+      } catch (error) {
+        if (error) console.log('Product quota data failed to load');
+      }
+    })();
+  }, []);
+
   const { showMobileSider, history } = props;
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
 
-  const { quotaUsed, quotaAdded } = useAppSelector((state) => state.user.user.user || {});
+  const { tokens } = useAppSelector((state) => state.user);
+
   const { notifications } = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
@@ -40,7 +57,7 @@ export const Topbar = withRouter((props: Props) => {
   };
 
   const qoutaPercentage = (partial: number, total: number) => {
-    if (quotaUsed && quotaAdded) {
+    if (quotaused && quotatotal) {
       return Math.round((100 * partial) / total);
     } else {
       return 0;
@@ -50,7 +67,8 @@ export const Topbar = withRouter((props: Props) => {
   const { channelId } = useContext(AppContext);
   useEffect(() => {
     dispatch(getNotifications());
-  }, [getNotifications, channelId]);
+    dispatch(getUserToken());
+  }, [getNotifications, channelId, getUserToken]);
 
   return (
     <div className="top-bar">
@@ -84,20 +102,20 @@ export const Topbar = withRouter((props: Props) => {
               <p>{t('Topbar.Quota')}: &nbsp;</p>
             </strong>
             <span className="quota-progress">
-              {qoutaPercentage(quotaUsed, quotaAdded)}% ({quotaUsed}/{quotaAdded})
+              {qoutaPercentage(quotaused, quotatotal)}% ({quotaused}/{quotatotal})
             </span>
           </div>
-          <Progress percent={qoutaPercentage(quotaUsed, quotaAdded)} showInfo={false} className="progress-bar" />
-          <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="update-btn">
-            {t('Topbar.Update')}
+          <Progress percent={qoutaPercentage(quotaused, quotatotal)} showInfo={false} className="progress-bar" />
+          <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="upgrade-btn">
+            {t('Topbar.Upgrade')}
           </button>
         </div>
       </div>
       <div className="top-bar-item">
-        <div className="tokens-container" role="button" onClick={handleOpenModal}>
+        <div className="tokens-container" onClick={handleOpenModal}>
           <img src={coinIcon} className="token-icon" alt="coinIcon" />
-          <span className="token-number">1232</span>
-          <span className="tokens">Tokens </span>
+          <span className="token-number">{tokens}</span>
+          <span className="tokens">tokens </span>
         </div>
       </div>
       <div className="top-bar-item">

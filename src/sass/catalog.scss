@@ -2,9 +2,61 @@
 
 // large and extra large screens
 
+//list modal
+.catalog-list-modal {
+  .under-sections {
+    .section-option-container {
+      .section-option {
+        display: flex;
+        .section-switch {
+          margin-left: 1rem;
+        }
+      }
+      .section-explanation {
+        .frequency-container {
+          display: flex;
+          width: 100%;
+          justify-content: space-evenly;
+
+          .ant-divider,
+          .ant-divider-vertical {
+            border-left: 2px solid #c5c5c5;
+            height: 90px;
+            margin-top: 20px;
+          }
+          .select-date-container,
+          .listings-frequency-container {
+            h3 {
+              color: $gray;
+              font-weight: $bold;
+            }
+            margin-top: 0.5rem;
+            .blue-input {
+              max-width: 200px;
+            }
+          }
+        }
+      }
+    }
+    .checkbox-section {
+      margin-top: 1rem;
+      display: flex;
+      p {
+        margin-left: 1rem;
+      }
+    }
+    .list-button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
 .ant-modal-title {
   .source {
     color: $corporative-color;
+    text-align: center;
     font-size: $font-small;
   }
   .title {
@@ -68,12 +120,17 @@
     height: auto;
     overflow-y: scroll;
     .cards-container-catalog {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      // position: relative;
       padding: 3rem;
       width: auto;
       height: 100% !important;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
+      // display: grid;
+      // grid-template-columns: repeat(5, 1fr);
+      // gap: 1rem;
       @mixin product-card {
         border-radius: 10px;
         background: $primary-bg;
@@ -84,6 +141,8 @@
         cursor: pointer;
         box-shadow: 0px 3px 6px #00000029;
         transition: transform 0.4s;
+        margin-bottom: 50px;
+        min-height: 530px;
         &:hover {
           -ms-transform: scale(1.05); /* IE 9 */
           -webkit-transform: scale(1.05); /* Safari 3-8 */
@@ -110,6 +169,7 @@
               line-height: 25px;
               display: block;
               justify-content: space-between;
+              height: 150px;
               .view-details {
                 float: right;
                 margin-top: -2.8rem;
@@ -148,6 +208,11 @@
         }
       }
 
+      .search-icon {
+        position: absolute;
+        bottom: 18.5%;
+        left: 141px;
+      }
       .product-card {
         @include product-card;
       }
@@ -178,6 +243,7 @@
       margin-right: 20px;
     }
   }
+
   @media screen and (max-width: 1030px) {
     .pagination-addall-container {
       width: 100% !important;
@@ -198,24 +264,24 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  .cards-container-catalog {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
+  // .cards-container-catalog {
+  //   grid-template-columns: repeat(4, 1fr) !important;
+  // }
 }
 
 // tablet's screen sizes
 
 @media only screen and (max-width: 1150px) {
-  .cards-container-catalog {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
+  // .cards-container-catalog {
+  //   grid-template-columns: repeat(3, 1fr) !important;
+  // }
 }
 
 // small mobile  screen size
 @media only screen and (max-width: 750px) {
-  .cards-container-catalog {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  // .cards-container-catalog {
+  //   grid-template-columns: repeat(2, 1fr) !important;
+  // }
 
   .actions-section {
     display: flex;
@@ -252,7 +318,38 @@
   }
 }
 
+.search-container {
+  position: relative;
+
+  .search-child {
+    font-size: 20px;
+    position: absolute;
+    top: 30px;
+    right: 50px;
+  }
+}
+
 @media only screen and (max-width: 500px) {
+  //list modal responsive
+  .catalog-list-modal {
+    .under-sections {
+      .section-option-container {
+        .section-explanation {
+          .frequency-container {
+            display: grid;
+            width: 100%;
+            justify-content: space-evenly;
+
+            .ant-divider,
+            .ant-divider-vertical {
+              display: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .ant-card-body {
     padding: 5px !important;
   }
@@ -260,7 +357,8 @@
     padding: 0 !important;
   }
   .cards-container-catalog {
-    grid-template-columns: repeat(2, 1fr) !important;
+    display: flex;
+    // grid-template-columns: repeat(2, 1fr) !important;
     padding: 0 !important;
     padding-top: 2rem !important;
     .product-card {
