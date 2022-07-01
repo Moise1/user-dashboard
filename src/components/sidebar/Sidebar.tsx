@@ -94,6 +94,7 @@ export const Sidebar = (props: Props) => {
   };
 
   const settingsListArray = [
+    { id: 16, listName: t('Menu.Account'), onClick: () => routeChange(Links.AccountSettings) },
     { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange(Links.ChannelSettings) },
     { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange(Links.SourcesSettings) },
     { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange(Links.PricingRules) },

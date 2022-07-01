@@ -34,7 +34,8 @@ import {
   Checkout,
   ManualPublish,
   BulkListing,
-  ListNow
+  ListNow,
+  AccountConfiguration
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { Links } from './links';
@@ -84,6 +85,8 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.Orders} component={Orders} />
             <ProtectedRoute path={Links.SourcesSettings + '/:id?'} component={SourcesConfiguration} />
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
+            <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />
+            <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute exact path={Links.Services} component={Services} />
             <ProtectedRoute exact path={Links.Services + '/:slug'} component={AllServices} />

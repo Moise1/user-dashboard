@@ -7,6 +7,7 @@
   Orders: '/orders',
   SourcesSettings: '/suppliers',
   ChannelSettings: '/channel-configuration',
+  AccountSettings: '/account-configuration',
   NewChannel: '/new-channel',
   Services: '/services',
   Subscriptions: '/subscriptions',

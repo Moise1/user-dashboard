@@ -21,7 +21,7 @@ export { Templates } from './templates/Templates';
 export { ConfigureListingService } from './listing-service/ConfigureListingService';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';
 export { AutoOrderingConfiguration } from './auto-ordering/AutoOrderingConfiguration';
-
+export { AccountConfiguration } from './account-settings/account/account-configuration';
 export { ListNow } from './list-now/ListNow';
 export { ManualPublish } from './list-now/ManualPublish';
 export { BulkListing } from './list-now/BulkListing';
