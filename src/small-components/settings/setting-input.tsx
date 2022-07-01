@@ -210,21 +210,21 @@ export const SettingInput = (props: Props) => {
     //Business Settings, Templates, etc.
     for (const e of extra ?? []) {
       switch (e) {
-      case SettingExtra.TemplateList:
-        values = AA(dataBag.templates);
-        break;
-      case SettingExtra.BusinessPayment:
-        values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
-        break;
-      case SettingExtra.BusinessReturn:
-        values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
-        break;
-      case SettingExtra.BusinessShipping:
-        values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
-        break;
-      case SettingExtra.PolicyDelivery:
-        values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
-        break;
+        case SettingExtra.TemplateList:
+          values = AA(dataBag.templates);
+          break;
+        case SettingExtra.BusinessPayment:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
+          break;
+        case SettingExtra.BusinessReturn:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
+          break;
+        case SettingExtra.BusinessShipping:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
+          break;
+        case SettingExtra.PolicyDelivery:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
+          break;
       }
     }
 
@@ -467,13 +467,13 @@ export const SettingInput = (props: Props) => {
     let label = t(values[0] ?? '');
     for (const e of extra ?? []) {
       switch (e) {
-      case SettingExtra.RefreshPolicies:
-        loading = loading || (dataBag.refreshBussiness?.loading ?? false);
-        if (dataBag.refreshBussiness?.data ?? false) {
-          label = t('Channel.Setting.Option.PoliciesWillUpdate');
-          disabled = true;
-        }
-        break;
+        case SettingExtra.RefreshPolicies:
+          loading = loading || (dataBag.refreshBussiness?.loading ?? false);
+          if (dataBag.refreshBussiness?.data ?? false) {
+            label = t('Channel.Setting.Option.PoliciesWillUpdate');
+            disabled = true;
+          }
+          break;
       }
     }
     return <SettingButton label={label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
@@ -489,42 +489,42 @@ export const SettingInput = (props: Props) => {
 
   let input: JSX.Element;
   switch (setting.Type) {
-  default:
-  case SettingType.Number:
-    input = RenderNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.Boolean:
-    input = RenderBoolean(values, setting.Fields, setting.Extra, disabled);
-    break;
-  case SettingType.String:
-    input = RenderString(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.List:
-    input = RenderList(values, setting.Fields, setting.Extra, disabled, dataBag);
-    break;
-  case SettingType.TwoOptions:
-    input = RenderTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.SwitchTwoOptions:
-    input = RenderSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
-    break;
-  case SettingType.WordList:
-    input = RenderWordList(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanNumber:
-    input = RenderBooleanNumber(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanNumberNull:
-    input = RenderBooleanNumberNull(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanString:
-    input = RenderBooleanString(values, setting.Fields, disabled);
-    break;
-  case SettingType.BooleanStringNull:
-    input = RenderBooleanStringNull(values, setting.Fields, disabled);
-    break;
-  case SettingType.Button:
-    input = RenderButton(values, setting.Extra!, disabled, dataBag);
+    default:
+    case SettingType.Number:
+      input = RenderNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.Boolean:
+      input = RenderBoolean(values, setting.Fields, setting.Extra, disabled);
+      break;
+    case SettingType.String:
+      input = RenderString(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.List:
+      input = RenderList(values, setting.Fields, setting.Extra, disabled, dataBag);
+      break;
+    case SettingType.TwoOptions:
+      input = RenderTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.SwitchTwoOptions:
+      input = RenderSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      break;
+    case SettingType.WordList:
+      input = RenderWordList(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanNumber:
+      input = RenderBooleanNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanNumberNull:
+      input = RenderBooleanNumberNull(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanString:
+      input = RenderBooleanString(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanStringNull:
+      input = RenderBooleanStringNull(values, setting.Fields, disabled);
+      break;
+    case SettingType.Button:
+      input = RenderButton(values, setting.Extra!, disabled, dataBag);
   }
 
   const CapitalizeFirstLetter = (s: string | ReactNode) => {

@@ -93,16 +93,16 @@ export const SettingsPanel = (props: Props) => {
     let templates = false;
     for (const e of allExtras ?? []) {
       switch (e) {
-      case SettingExtra.TemplateList:
-        templates = true;
-        break;
-      case SettingExtra.BusinessPayment:
-      case SettingExtra.BusinessReturn:
-      case SettingExtra.BusinessShipping:
-      case SettingExtra.PolicyDelivery:
-      case SettingExtra.RefreshPolicies:
-        policies = true;
-        break;
+        case SettingExtra.TemplateList:
+          templates = true;
+          break;
+        case SettingExtra.BusinessPayment:
+        case SettingExtra.BusinessReturn:
+        case SettingExtra.BusinessShipping:
+        case SettingExtra.PolicyDelivery:
+        case SettingExtra.RefreshPolicies:
+          policies = true;
+          break;
       }
     }
     if (templates) {
@@ -117,9 +117,9 @@ export const SettingsPanel = (props: Props) => {
   const OnButtonClick = async (setting: SettingInfo) => {
     for (const e of setting.Extra ?? []) {
       switch (e) {
-      case SettingExtra.RefreshPolicies:
-        dispatch(refreshBusinessPolicies());
-        break;
+        case SettingExtra.RefreshPolicies:
+          dispatch(refreshBusinessPolicies());
+          break;
       }
     }
   };

@@ -57,10 +57,10 @@ export const SourcesTable = () => {
   };
 
   switch (selectedChannel?.channelId) {
-  case ePlatform.eBay:
-  case ePlatform.eBayNoApi:
-    LoadPolicies();
-    break;
+    case ePlatform.eBay:
+    case ePlatform.eBayNoApi:
+      LoadPolicies();
+      break;
   }
 
   const settingsDic = new Map<ChannelSettingKey, SourceSettingData[]>();
@@ -117,31 +117,31 @@ export const SourcesTable = () => {
             value = channelSettingsDic.get(x.ChannelSetting) as string;
           }
           switch (x.Style) {
-          default:
-            return value;
-          case ColumnStyle.Outlined:
-            return value == '1' ? <CheckOutlined style={{ fontSize: '19px' }} /> : (value == '0' ? <CloseOutlined /> : '');
-          case ColumnStyle.BusinessPayment:
-          case ColumnStyle.BusinessReturn:
-          case ColumnStyle.BusinessShipping:
-            if (!value) return '';
-            return businessPolicies?.find(x => x.id.toString() == value)?.name;
-          case ColumnStyle.PolicyReturns:
-            switch (value) {
-            default: return value;
-            case 'Days_30':
-              return t('Channel.Setting.Option.Days30');
-            case 'Days_14':
-              return t('Channel.Setting.Option.Days14');
-            case 'Days_60':
-              return t('Channel.Setting.Option.Days60');
-            }
-          case ColumnStyle.Template:
-            if (!value) return '';
-            return templates?.find(x => x.id.toString() == value)?.name;
-          case ColumnStyle.PolicyDelivery:
-            if (!value) return '';
-            return shipping?.find(x => x.value == value)?.text;
+            default:
+              return value;
+            case ColumnStyle.Outlined:
+              return value == '1' ? <CheckOutlined style={{ fontSize: '19px' }} /> : (value == '0' ? <CloseOutlined /> : '');
+            case ColumnStyle.BusinessPayment:
+            case ColumnStyle.BusinessReturn:
+            case ColumnStyle.BusinessShipping:
+              if (!value) return '';
+              return businessPolicies?.find(x => x.id.toString() == value)?.name;
+            case ColumnStyle.PolicyReturns:
+              switch (value) {
+                default: return value;
+                case 'Days_30':
+                  return t('Channel.Setting.Option.Days30');
+                case 'Days_14':
+                  return t('Channel.Setting.Option.Days14');
+                case 'Days_60':
+                  return t('Channel.Setting.Option.Days60');
+              }
+            case ColumnStyle.Template:
+              if (!value) return '';
+              return templates?.find(x => x.id.toString() == value)?.name;
+            case ColumnStyle.PolicyDelivery:
+              if (!value) return '';
+              return shipping?.find(x => x.value == value)?.text;
           }
         }
       };

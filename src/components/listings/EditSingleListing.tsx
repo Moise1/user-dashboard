@@ -6,12 +6,12 @@ import { ListingMain } from '../../small-components/ListingMain';
 import { ListingDescription } from '../../small-components/ListingDescription';
 import { ListingDetails } from '../../small-components/ListingDetails';
 import { ListingOptions } from '../../small-components/ListingOptions';
-import { ListingData } from 'src/redux/listings/listingsSlice';
 import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import Icon from '@ant-design/icons';
 
 import '../../sass/edit-single-listing.scss';
 import { ExternalLinkSvg } from '../common/Icons';
+import { ListingData } from '../../redux/listings/listingsSlice';
 
 interface Props {
   selectedRecordData: ListingData;

@@ -6,8 +6,7 @@ import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
 import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
-import { DataTable } from '../tables/DataTable';
-import { Key } from 'antd/lib/table/interface';
+import { DataTable, DataTableKey } from '../tables/DataTable';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
@@ -19,10 +18,10 @@ export const AutoOrderingConfiguration = () => {
   const { loading } = useAppSelector((state) => state.getAutoOrdering);
   const [current, setCurrent] = useState<number>(1);
   const [postPerPage, setPostPerPage] = useState<number>(10);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   const [selectedRecord, setSelectedRecord] = useState({});
 
-  const onSelectChange = (selectedRowKeys: Key[]) => {
+  const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
 
