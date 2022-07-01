@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 export const url = 'https://hgrapi.hustlegotreal.com';
-//export const url = 'https://localhost:5001';
 export const client = axios.create({
   baseURL: `${url}/api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500
@@ -41,7 +40,7 @@ client.interceptors.response.use(
       toastAlert(res.data.response_errors.error.description, 'error');
     } else if (res.status === 409) {
       toastAlert(
-        res.data.response_errors ?? 'This item already exists! Please try again.',
+        res.data.response_errors ?? 'This item already exists.',
         'error');
     }
     return res;

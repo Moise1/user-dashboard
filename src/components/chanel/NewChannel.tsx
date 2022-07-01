@@ -27,7 +27,7 @@ interface State {
 export const popupWindow = (
   url: string,
   win: Window & typeof globalThis,
-  w: number,
+  w: number, 
   h: number) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
@@ -44,8 +44,8 @@ export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const [ebayUrl, setEbayUrl] = useState<string>('');
-  const { url, getLinkLoading } = useAppSelector((state) => state.newChannel);
+  const [openUrl, setOpenUrl] = useState<boolean>(false);
+  const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -58,19 +58,20 @@ export const NewChannel = () => {
     list: ''
   });
 
-
+ 
 
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
   };
 
   const handleNext = () => {
-    if (ebayUrl !== '' && step === 4 && data.api === 'easy') {
+    if(openUrl && data.platform === 1 && ebayUrl) {
       popupWindow(ebayUrl, window, 800, 600);
-      return;
+      return false;
+    }else{
+      setStep((prevState) => prevState + 1);
+      setShowPrev(true);
     }
-    setStep((prevState) => prevState + 1);
-    setShowPrev(true);
   };
 
   const handleChangePlatform = (value: number) => {
@@ -81,7 +82,7 @@ export const NewChannel = () => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
-    setData({ ...data, api: value });
+    setData({ ...data, api: value });      
   };
 
   const handleChangeExtension = (value: string) => {
@@ -93,28 +94,30 @@ export const NewChannel = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      getEbayLinkAccount({
-        data: {
-          shop: data.platform!,
-          site: data.storeLocation as number
-        }
-      })
-    );
-    if (data.api === 'easy') {
-      setEbayUrl(url);
-    } else {
-      setEbayUrl('');
+    if(data.api === 'easy'){
+      dispatch(
+        getEbayLinkAccount({
+          data: {
+            shop: data.platform!,
+            site: data.storeLocation as number
+          }
+        })
+      );
+      setOpenUrl(true);
     }
-  }, [data.api]);
+    
+    if(data.api === 'advance') setOpenUrl(false);
+
+  }, [data.api, getEbayLinkAccount]);
+
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
       case 1:
         return (
-          <PlatForm
-            platform={data.platform!}
-            step={step}
+          <PlatForm 
+            platform={data.platform!} 
+            step={step} 
             handleChangePlatform={handleChangePlatform}
           />
         );
@@ -129,14 +132,15 @@ export const NewChannel = () => {
         );
       case 3:
         return (
-          <Account
-            platform={data.platform!}
-            handleChangeApi={handleChangeApi}
-            step={step} handleNext={handleNext}
+          <Account 
+            platform={data.platform!} 
+            handleChangeApi={handleChangeApi} 
+            step={step}
+            handleNext={handleNext}
           />
         );
       case 4:
-        if (data.platform === 1 || data.platform === 1) {
+        if (data.platform === 1 || data.platform === 3) {
           return (
             <AccountConnect
               api={data.api}
@@ -153,25 +157,23 @@ export const NewChannel = () => {
               platform={data.platform!}
               step={step}
               storeLocation={data.storeLocation}
-              handleNext={handleNext}
-            />
+            /> 
           );
         }
       case 5:
         return (
-          <UserName
-            platform={data.platform!}
-            step={step}
+          <UserName 
+            platform={data.platform!} 
+            step={step} 
             storeLocation={data.storeLocation}
-            handleNext={handleNext}
           />
         );
       case 6:
         return (
-          <ChooseList
-            platform={data.platform!}
-            handleChangeList={handleChangeList}
-            list={data.list} step={step}
+          <ChooseList 
+            platform={data.platform!} 
+            handleChangeList={handleChangeList} 
+            list={data.list} step={step} 
           />
         );
       default:
@@ -182,23 +184,23 @@ export const NewChannel = () => {
   const isDisabled = () => {
     if (!data.storeLocation && step === 2) return true;
     if (!data.api && step === 4) return true;
-    if (getLinkLoading && step === 4) return true;
+    if(getLinkLoading && step === 4) return true;
   };
 
   return (
     <div className="new-channel-container">
       <Stepper current={step} platform={data.platform} className="stepper" />
-      <Row className='row-ant' gutter={[16, 0]}>
-        <Col className="left-section" md={24} lg={15}>
+      <Row gutter={[16, 0]}>
+        <Col className="left-section" lg={15}>
           {stepDetector(step)}
         </Col>
-        <Col md={24} lg={6} className="right-section">
+        <Col lg={6} className="right-section">
           <SideProgressBar platform={data.platform} step={step} />
         </Col>
       </Row>
       <div className="nav-btns">
-        {showPrev && step >= 1 && (
-          <Button className="" onClick={handlePrev}>
+        {showPrev && step > 1 && (
+          <Button  onClick={handlePrev}>
             <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
           </Button>
         )}

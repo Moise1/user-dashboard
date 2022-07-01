@@ -49,11 +49,9 @@
   }
 }
 
-.selector,
-multipleSelector {
+.selector, multipleSelector {
   min-width: 180px;
   width: 100%;
-
   .ant-select-arrow {
     top: 50%;
     right: 18px;
