@@ -6,7 +6,7 @@ const { Option } = Select;
 export type SelectorSizeType = 'large' | 'small' | 'middle';
 
 export type SelectorLabel = string | JSX.Element;
-export type SelectorValue = React.Key;
+export type SelectorValue = React.Key | null;
 export interface SelectorData {
   value: SelectorValue;
   label: SelectorLabel;

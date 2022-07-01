@@ -8,13 +8,14 @@ interface Props {
   delayToSave?: number;
   onChange: (value: string) => void;
   disabled?: boolean;
+  placeholder?: string;
 
   value?: string;
   onChangeNoDelay?: (value: string) => void;
 }
 
 export const SettingNumber = (props: Props) => {
-  const { defaultValue, delayToSave, onChange, loading, disabled, value, onChangeNoDelay } = props;
+  const { defaultValue, delayToSave, onChange, loading, disabled, value, onChangeNoDelay, placeholder } = props;
 
   const [delayTimer, setDelayTimer] = useState<number>(-1);
 
@@ -37,7 +38,7 @@ export const SettingNumber = (props: Props) => {
     );
   };
   return <div className="setting setting-number">
-    <Input defaultValue={defaultValue} type='number' className='blue-input' onChange={OnChange} disabled={loading || disabled} value={value} />
+    <Input defaultValue={defaultValue} type='number' className='blue-input' onChange={OnChange} disabled={loading || disabled} value={value} placeholder={placeholder} />
     {loading && <Spin />}
   </div>;
 };

@@ -4,9 +4,10 @@ import { SourcesTable } from './configuration/sources-table';
 
 export const SourcesConfiguration = () => {
   const { id: selectedSource } = useParams<{ id?: string }>();
+  const soruceId = parseInt(selectedSource ?? '');
 
-  if (selectedSource != undefined) {
-    return <SourceSettings />;
+  if (selectedSource != undefined && !isNaN(soruceId)) {
+    return <SourceSettings sourceId={soruceId} />;
   }
   return <SourcesTable />;
 

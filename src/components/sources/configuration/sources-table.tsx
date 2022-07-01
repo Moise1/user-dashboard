@@ -7,19 +7,19 @@ import '../../../sass/popover.scss';
 import { getSources } from '../../../redux/sources/sourcesThunk';
 import { SourceState } from '../../../redux/sources/sourceSlice';
 import { getSourceConfiguration } from '../../../redux/source-configuration/sources.coonfiguration-thunk';
-import { SourceConfigurationState, SourceSetting } from '../../../redux/source-configuration/source-configuration-slice';
+import { SourceConfigurationState, SourceSettingData } from '../../../redux/source-configuration/source-configuration-slice';
 import { ReactUtils } from '../../../utils/react-utils';
-import { ChannelConfigurationState, SettingKey } from '../../../redux/channel-configuration/channels-configuration-slice';
+import { ChannelConfigurationState } from '../../../redux/channel-configuration/channels-configuration-slice';
 import { getChannelConfiguration, loadBusinessPolicies, loadShipping } from '../../../redux/channel-configuration/channels-configuration-thunk';
 import { ColumnChannelAncestor, Columns, ColumnStyle } from '../configuration/columns';
 import { t } from '../../../utils/transShim';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { ePlatform } from '../../../utils/ePlatform';
+import { ePlatform } from '../../../types/ePlatform';
 import { getTemplates } from '../../../redux/templates/templatesThunk';
 import { TemplateState } from '../../../redux/templates/templatesSlice';
 import { SimpleTable } from '../../../small-components/simple-table';
 import { useHistory } from 'react-router';
-import { SettingValue } from '../../../types/settings';
+import { ChannelSettingKey, SettingValue } from '../../../types/settings';
 import { Links } from '../../../links';
 
 type SourceTableData = { name: string, id: number, [key: number]: SettingValue };
@@ -63,8 +63,8 @@ export const SourcesTable = () => {
     break;
   }
 
-  const settingsDic = new Map<SettingKey, SourceSetting[]>();
-  for (const ss of (sourceSettings ?? []) as SourceSetting[]) {
+  const settingsDic = new Map<ChannelSettingKey, SourceSettingData[]>();
+  for (const ss of (sourceSettings ?? []) as SourceSettingData[]) {
     if (settingsDic.has(ss.sourceId)) {
       settingsDic.get(ss.sourceId)!.push(ss);
     } else {

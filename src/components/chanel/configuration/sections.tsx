@@ -1,4 +1,4 @@
-﻿import { ePlatform } from '../../../utils/ePlatform';
+﻿import { ePlatform } from '../../../types/ePlatform';
 
 export enum ChannelSettingSection {
   Monitoring, Listing, Business, Other

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { eCountry } from '../../utils/eCountry';
-import { ePlatform } from '../../utils/ePlatform';
+import { eCountry } from '../../types/eCountry';
+import { ePlatform } from '../../types/ePlatform';
 import { getChannels, deleteChannel } from './channelsThunk';
 
 export interface Channel {

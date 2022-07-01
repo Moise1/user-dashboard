@@ -1,4 +1,7 @@
 ﻿.setting {
+    width: 100%;
+    max-width: 300px;
+
     &.setting-boolean {
         .ant-spin-spinning {
             margin: 0 0 0 10px;
@@ -7,13 +10,8 @@
     }
 
     &.setting-list {
-        width: 100%;
-    }
-
-    &.setting-number, &.setting-string {
         position: relative;
         height: fit-content;
-        width: fit-content;
 
         .ant-spin-spinning {
             position: absolute;
@@ -23,7 +21,7 @@
         }
     }
 
-    &.setting-list {
+    &.setting-number, &.setting-string {
         position: relative;
         height: fit-content;
 
@@ -37,14 +35,13 @@
 
     &.setting-button {
         .ant-spin-spinning {
-            margin-top:0;
+            margin-top: 0;
         }
     }
 
     &.setting-two-options, &.setting-switch-two-options, &.setting-two-options-two {
         position: relative;
         height: fit-content;
-        width: fit-content;
 
         .ant-spin-spinning {
             position: absolute;
@@ -88,6 +85,12 @@
     &.setting-boolean-number, &.setting-boolean-number-null {
         .setting-boolean {
             min-height: 30px;
+        }
+    }
+
+    &.setting-list-number-null {
+        .setting-number {
+            margin-top: 10px;
         }
     }
 }

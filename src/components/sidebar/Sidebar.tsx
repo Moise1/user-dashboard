@@ -237,7 +237,7 @@ export const Sidebar = (props: Props) => {
       '21',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      'Logout',
+      t('Menu.Logout'),
       <LogoutIcon />,
       undefined,
       handleLogout,

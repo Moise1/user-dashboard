@@ -1,5 +1,5 @@
-﻿import { ePlatform } from '../utils/ePlatform';
-import { eCountry } from '../utils/eCountry';
+﻿import { ePlatform } from '../types/ePlatform';
+import { eCountry } from '../types/eCountry';
 
 export interface PlatformIndo {
   name: string;//Example: "eBay No Api"

@@ -5,7 +5,7 @@ import { t } from '../../utils/transShim';
 import { Selector, SelectorValue } from '../form/selector';
 
 export interface ListData {
-  value: string;
+  value: string | null;
   label: string;
 }
 
@@ -38,7 +38,17 @@ export const SettingList = (props: Props) => {
   const loadingT = loading || loadingData;
 
   return <div className="setting setting-list">
-    <Selector value={currentValue} disabled={disabled || loadingT} onChange={OnChange} loading={loadingData} size="large" placeHolder={loadingT ? '' : placeHolder ?? t('Select') as string}>{listData}</Selector>
-    {loadingT && <Spin/>}
+    <Selector
+      value={currentValue}
+      disabled={disabled || loadingT || loadingData}
+      onChange={OnChange}
+      loading={loadingData}
+      size="large"
+      placeHolder={loadingT ? '' : placeHolder ?? t('Select') as string}
+      key={loadingData.toString()}
+    >
+      {listData}
+    </Selector>
+    {(loadingT || loadingData) && <Spin/>}
   </div>;
 };

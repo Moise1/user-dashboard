@@ -11,21 +11,23 @@ import { ReactUtils } from '../../utils/react-utils';
 import { Platforms } from '../../data/platforms';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
-import { ePlatform } from '../../utils/ePlatform';
-import { SettingData, SettingExtra, SettingInfo, ChannelSettingKey, SettingSectionId, SettingSectionsInfo, SettingValue } from '../../types/settings';
+import { ePlatform } from '../../types/ePlatform';
+import { SettingData, SettingExtra, SettingInfo, SettingKey, SettingSectionId, SettingSectionsInfo, SettingValue } from '../../types/settings';
 import { ChannelConfigurationState } from '../../redux/channel-configuration/channels-configuration-slice';
 
 interface Props {
   Sections?: SettingSectionsInfo[];
   SettingsData?: SettingData[] | null;
   SettingsInfo: SettingInfo[];
-  OnSaveSetting: (key: ChannelSettingKey, value: SettingValue) => void;
-  SettingsBeingSaved: Set<ChannelSettingKey>;
+  OnSaveSetting: (key: SettingKey, value: SettingValue) => void;
+  SettingsBeingSaved: Set<SettingKey>;
   Loading: boolean;
+  SuperiorData?: SettingData[] | null;
+  SuperiorRelation?: Map<SettingKey, SettingKey>;
 }
 
 export const SettingsPanel = (props: Props) => {
-  const { Sections, SettingsData, SettingsInfo, OnSaveSetting, SettingsBeingSaved, Loading } = props;
+  const { Sections, SettingsData, SettingsInfo, OnSaveSetting, SettingsBeingSaved, Loading, SuperiorData, SuperiorRelation } = props;
 
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const platformInfo = Platforms[selectedChannel?.channelId ?? ePlatform.eBay];
@@ -36,6 +38,8 @@ export const SettingsPanel = (props: Props) => {
 
   const bag: SettingDataBag = { selectedChannel };
 
+  const superiorDataDic =  new Map<SettingKey, SettingValue>(SuperiorData?.map(x => [x.key, x.value]));
+
   //Load from api------------------------------------------------------------
   const dispatch = useAppDispatch();
   const {
@@ -44,17 +48,18 @@ export const SettingsPanel = (props: Props) => {
     businessPolicies,
     loadingBusiness,
     loadingShipping,
-    shipping
+    shipping,
+
   } = useAppSelector((state) => state.channelConfiguration as ChannelConfigurationState);
 
   const LoadTemplate = () => {//We can do this inside an if because ChannelSettings doesn't change
     const {
       templates,
-      loading: tLoading
+      loading: loadingTemplates
     } = useAppSelector((state) => state.templates as TemplateState);
 
     bag.templates = {
-      loading: tLoading,
+      loading: loadingTemplates,
       data: templates
     };
 
@@ -131,12 +136,15 @@ export const SettingsPanel = (props: Props) => {
       translationValues={translationValues}
       dataBag={bag}
       onButtonClick={() => OnButtonClick(setting)}
+      superiorData={superiorDataDic}
+      superiorRelation={SuperiorRelation}
     />;
   };
 
   const RenderSettings = (section: SettingSectionId): ReactNode => {
     const settings = SettingsInfo.filter(
-      x => x.Section == section
+      x => (
+        (sections?.length ?? 0) == 0 || x.Section == section)
         && (!x.ChannelIds || x.ChannelIds.includes(selectedChannel?.channelId ?? 0))
     );
     return <>

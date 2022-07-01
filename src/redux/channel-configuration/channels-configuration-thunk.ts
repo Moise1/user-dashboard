@@ -3,12 +3,12 @@ import { client } from '../client';
 import { ChannelSettingData } from './channels-configuration-slice';
 
 export const getChannelConfiguration = createAsyncThunk( 'channelConfiguration/get',
-  async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
+  async (_, /* destructured thunkAPI's prop */) => {
     try {
       const res = await client.get('/channelConfiguration/get');
       return res.data.response_data;
     } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong');
+      return { success: false };
     }
   }
 );
