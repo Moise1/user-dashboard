@@ -454,7 +454,7 @@ export const BulkListing = (/*props: props*/) => {
 
             {autoList?.logs && autoList.logs.length > Zero() && (
               <Row>
-                <Col span={24}>
+                <Col>
                   <div className="bulk-log">
                     <SimpleTable columns={columns} dataSource={autoList.logs} />
                   </div>
