@@ -72,6 +72,15 @@
             }
         }
 
+        .setting-list {
+            .ant-spin-spinning {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -10px;
+            }
+        }
+
         .limit-area {
             position: relative;
             width: fit-content;
