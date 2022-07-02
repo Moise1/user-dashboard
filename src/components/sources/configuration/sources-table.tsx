@@ -1,25 +1,30 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Layout } from 'antd';
-import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { SearchInput } from '../../small-components/TableActionBtns';
-import '../../sass/sources-table.scss';
-import '../../sass/popover.scss';
-import { getSources } from '../../redux/sources/sourcesThunk';
-import { SourceState } from '../../redux/sources/sourceSlice';
-import { getSourceConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
-import { SourceConfigurationState, SourceSetting } from '../../redux/source-configuration/source-configuration-slice';
-import { ReactUtils } from '../../utils/react-utils';
-import { ChannelConfigurationState } from '../../redux/channel-configuration/channels-configuration-slice';
-import { getChannelConfiguration, loadBusinessPolicies, loadShipping } from '../../redux/channel-configuration/channels-configuration-thunk';
-import { ColumnChannelAncestor, Columns, ColumnStyle } from './configuration/columns';
-import { t } from '../../utils/transShim';
+import { useAppDispatch, useAppSelector } from '../../../custom-hooks/reduxCustomHooks';
+import { SearchInput } from '../../../small-components/TableActionBtns';
+import '../../../sass/sources-table.scss';
+import '../../../sass/popover.scss';
+import { getSources } from '../../../redux/sources/sourcesThunk';
+import { SourceState } from '../../../redux/sources/sourceSlice';
+import { getSourceConfiguration } from '../../../redux/source-configuration/sources.coonfiguration-thunk';
+import { SourceConfigurationState, SourceSettingData } from '../../../redux/source-configuration/source-configuration-slice';
+import { ReactUtils } from '../../../utils/react-utils';
+import { ChannelConfigurationState } from '../../../redux/channel-configuration/channels-configuration-slice';
+import { getChannelConfiguration, loadBusinessPolicies, loadShipping } from '../../../redux/channel-configuration/channels-configuration-thunk';
+import { ColumnChannelAncestor, Columns, ColumnStyle } from '../configuration/columns';
+import { t } from '../../../utils/transShim';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { ePlatform } from '../../utils/ePlatform';
-import { getTemplates } from '../../redux/templates/templatesThunk';
-import { TemplateState } from '../../redux/templates/templatesSlice';
-import { SimpleTable } from '../../small-components/simple-table';
+import { ePlatform } from '../../../types/ePlatform';
+import { getTemplates } from '../../../redux/templates/templatesThunk';
+import { TemplateState } from '../../../redux/templates/templatesSlice';
+import { SimpleTable } from '../../../small-components/simple-table';
+import { useHistory } from 'react-router';
+import { ChannelSettingKey, SettingValue } from '../../../types/settings';
+import { Links } from '../../../links';
 
-export const SourcesConfigurationTable = () => {
+type SourceTableData = { name: string, id: number, [key: number]: SettingValue };
+
+export const SourcesTable = () => {
   const dispatch = useAppDispatch();
 
   const selectedChannel = ReactUtils.GetSelectedChannel()!;
@@ -35,8 +40,6 @@ export const SourcesConfigurationTable = () => {
   const channelSettingsDic = new Map(channelSettings?.map(x => [x.key, x.value]) ?? []);
   const { templates } = useAppSelector((state) => state.templates as TemplateState);
 
-  //const [selectedSource, setSelectedSource] = useState<number>(1);
-  //const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [searchFilter, setSearchFilter] = useState<string>('');
 
   useEffect(() => {
@@ -60,8 +63,8 @@ export const SourcesConfigurationTable = () => {
       break;
   }
 
-  const settingsDic = new Map<number, SourceSetting[]>();
-  for (const ss of (sourceSettings ?? []) as SourceSetting[]) {
+  const settingsDic = new Map<ChannelSettingKey, SourceSettingData[]>();
+  for (const ss of (sourceSettings ?? []) as SourceSettingData[]) {
     if (settingsDic.has(ss.sourceId)) {
       settingsDic.get(ss.sourceId)!.push(ss);
     } else {
@@ -69,9 +72,10 @@ export const SourcesConfigurationTable = () => {
     }
   }
 
-  const settingsData = sources?.map(x => {
+
+  const sourcesTableData: SourceTableData[] = sources?.map(x => {
     const settings = settingsDic?.get(x.id) ?? [];
-    const toRet: { name: string, id: number, [key: number]: string } = {
+    const toRet: SourceTableData = {
       name: x.name,
       id: x.id,
     };
@@ -152,7 +156,14 @@ export const SourcesConfigurationTable = () => {
     loadingSources || loadingSourceConfiguration || settingsLoading
     ;
 
-  const filteredData = (settingsData ?? []).filter(x => x.name.toLocaleLowerCase().indexOf(searchFilter.toLocaleLowerCase()) >= 0);
+  const filteredData = (sourcesTableData ?? []).filter(x => x.name.toLocaleLowerCase().indexOf(searchFilter.toLocaleLowerCase()) >= 0);
+
+  const history = useHistory();
+  const OnRow = (record: SourceTableData) => ({
+    onClick: () => {
+      history.push(Links.SourcesSettings + '/' + record.id);
+    }
+  });
 
   return (
     <Layout className="sources-container">
@@ -161,15 +172,11 @@ export const SourcesConfigurationTable = () => {
       </div>
       <div className="sources-table-container">
         <SimpleTable
-          //onPageSizeChanged={setItemsPerPage}
-          //currentPage={selectedSource}
-          //onPageChange={setSelectedSource}
           columns={columns}
           dataSource={loading ? [] : filteredData}
-        //pageSize={itemsPerPage}
+          onRow={OnRow}
         />
       </div>
     </Layout>
   );
 };
-//

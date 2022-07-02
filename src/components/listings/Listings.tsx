@@ -4,8 +4,6 @@ import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
-import { DataTable, TableDataTypes } from '../tables/DataTable';
-import { Key } from 'antd/lib/table/interface';
 import { PopupModal } from '../modals/PopupModal';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
@@ -21,13 +19,15 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import { ListingData, PendingListings } from 'src/redux/listings/listingsSlice';
-import { ListingsStatusType, useTableSearch } from '../../custom-hooks/useTableSearch';
+import { ListingData, PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
+import { useTableSearch } from '../../custom-hooks/useTableSearch';
 import { ActiveListing } from 'src/redux/unmap';
 import '../../sass/listings.scss';
 import { ListNow } from '../list-now/ListNow';
 import { ReactUtils } from '../../utils/react-utils';
+import { DataTable, DataTableKey } from '../tables/DataTable';
 
+type ListingsT = ActiveListing | PendingListings | TerminatedListings | ListingData;//TODO: This is a disaster but I am tired of fixing all your type mess
 
 export const Listings = () => {
   const [listingsPerPage, setListingsPerPage] = useState<number>(10);
@@ -37,7 +37,7 @@ export const Listings = () => {
 
   const selectedChannel = ReactUtils.GetSelectedChannel();
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   const [searchTxt, setSearchTxt] = useState<null | string>(null);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -49,8 +49,8 @@ export const Listings = () => {
   const { pendingListings } = useAppSelector((state) => state.pendingListings);
   const { terminatedListings } = useAppSelector((state) => state.terminatedListings);
   const [tabStatus, setTabStatus] = useState('activeTab');
-  const [current, setCurrent] = useState<number>(1);
-  const [, setMySelectedRows] = useState<TableDataTypes[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [, setMySelectedRows] = useState<ListingsT[]>([]);
 
   const dispatch = useAppDispatch();
 
@@ -179,7 +179,7 @@ export const Listings = () => {
 
   const { filteredData } = useTableSearch({ searchTxt, dataSource, tabStatus });
 
-  const onSelectChange = (selectedRowKeys: Key[], selectedRows: TableDataTypes[] | undefined) => {
+  const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: ListingsT[] | undefined) => {
     setMySelectedRows(selectedRows!);
     setSelectedRowKeys(selectedRowKeys);
     const selectedRow = listings?.filter((r: ListingData) => r.id === selectedRows![0].id)[0];
@@ -326,15 +326,15 @@ export const Listings = () => {
             handleSingleListingModal={handleSingleListingModal}
             handleBulkListingModal={handleBulkListingModal}
             columns={visibleCols}
-            dataSource={filteredData as ListingsStatusType[]}
+            dataSource={filteredData as ListingsT[]}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
             totalItems={listings.length}
             pageSize={listingsPerPage}
             setListingsPerPage={setListingsPerPage}
             showTableInfo={true}
-            current={current}
-            onChange={setCurrent}
+            current={currentPage}
+            onChange={setCurrentPage}
             rowClassName="table-row"
             onRow={(record) => {
               return {

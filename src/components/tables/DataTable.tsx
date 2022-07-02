@@ -1,30 +1,14 @@
 import { ReactNode } from 'react';
 import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Key } from 'antd/lib/table/interface';
-import { Rule } from '../../redux/pricing-rules/rulesSlice';
-import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
-import { ListingData } from 'src/redux/listings/listingsSlice';
-import { OrderData } from 'src/redux/orders/orderSlice';
-import { ListingsItems } from '../common/ListingsData';
-import { Channel } from '../../redux/channels/channelsSlice';
-import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
-import { ListingsStatusType } from 'src/custom-hooks/useTableSearch';
 import '../../sass/data-table.scss';
+import { TableRowSelection } from 'antd/lib/table/interface';
 
-export type TableDataTypes =
-  | ListingsItems
-  | ListingData
-  | OrderData
-  | Rule
-  | UserAssistant
-  | Channel
-  | AutoOrderingData
-  | ListingsStatusType;
+export type DataTableKey = React.Key;
 
-interface Props {
+interface Props<T> {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource?: Array<TableDataTypes>;
+  dataSource?: Array<T>;
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -40,16 +24,12 @@ interface Props {
   setRulesPerPage?: (rulesPerPage: number) => void;
   setListingsPerPage?: (listingsPerPage: number) => void;
   rowClassName?: string;
-  onRow?: (record: TableDataTypes) => { onClick: () => void };
-  rowSelection?: {
-    selectedRowKeys: Key[];
-    type?: 'checkbox';
-    onChange: (selectedRowKeys: Key[], selectedRows?: TableDataTypes[]) => void;
-  };
+  onRow?: (record: T) => { onClick: () => void };
+  rowSelection?: TableRowSelection<T>;
   isListingsTable?: boolean;
 }
 
-export const DataTable: React.FC<Props> = (props: Props) => {
+export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) => {
 
   const pageSizeOptionArray = [2, 10, 20, 50, 100];
 
@@ -78,8 +58,8 @@ export const DataTable: React.FC<Props> = (props: Props) => {
     setListingsPerPage?.(pageSize);
   };
 
-  const getData = (current: Props['current'], pageSize: Props['pageSize']) => {
-    if (dataSource?.length) return dataSource?.slice((current! - 1) * pageSize!, current! * pageSize!);
+  const getData = (current: number | undefined, pageSize: number | undefined) => {
+    if (dataSource?.length) return dataSource?.slice(((current ?? 1) - 1) * (pageSize ?? 1), (current ?? 1) * (pageSize ?? 1));
   };
 
   const anyTable = (

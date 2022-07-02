@@ -1,11 +1,11 @@
 ﻿import { Col, Row } from 'antd';
 import { ReactNode } from 'react';
-import { ChannelSetting, ChannelSettingExtra, ChannelSettings, SettingType } from '../../components/chanel/configuration/settings';
-import { BusinessPolicy, BusinessPolicyType, eChannelSettings, SavingSetting, SettingsValue, ShippingOption } from '../../redux/channel-configuration/channels-configuration-slice';
+import { SettingExtra, SettingInfo, SettingKey, SettingType, SettingValue } from '../../types/settings';
+import { BusinessPolicy, BusinessPolicyType, ShippingOption } from '../../redux/channel-configuration/channels-configuration-slice';
 import { Channel } from '../../redux/channels/channelsSlice';
 import { Template } from '../../redux/templates/templatesSlice';
-import '../../sass/settings.scss';
-import { t as trans, TransLinksValues, TransPlatformValues } from '../../utils/transShim';
+import '../../sass/settings/settings.scss';
+import { t as trans, TransLinksValues, TransPlatformValues, TransValueTypeValue } from '../../utils/transShim';
 import { SettingBoolean } from './setting-boolean';
 import { SettingBooleanNumber } from './setting-boolean-number';
 import { SettingBooleanString } from './setting-boolean-string';
@@ -17,6 +17,7 @@ import { SettingString } from './setting-string';
 import { SettingWordList } from './setting-word-list';
 import { SettingBooleanTwoOptions } from './settings-boolean-two-options';
 import { SettingTwoOptions } from './settings-two-options';
+import { SettingBooleanNumberNull } from './setting-boolean-number-null';
 
 interface SettingDataBagData<T> {
   data: T | undefined;
@@ -26,41 +27,53 @@ interface SettingDataBagData<T> {
 export interface SettingDataBag {
   templates?: SettingDataBagData<Template[]>;
   refreshBussiness?: SettingDataBagData<boolean>;
-  shipping?: SettingDataBagData<ShippingOption[]>;
+  shipping ?: SettingDataBagData<ShippingOption[]>;
   business?: SettingDataBagData<BusinessPolicy[]>;
   selectedChannel: Channel | undefined;
 }
 
 interface Props {
-  setting: ChannelSetting;
-  currentSettingValues: Map<eChannelSettings, SettingsValue>;
-  savingSetting: Map<eChannelSettings, SavingSetting>;
-  onSave: (key: eChannelSettings, value: SettingsValue) => void;
+  setting: SettingInfo;
+  currentSettingValues: Map<SettingKey, SettingValue>;
+  settingsBeingSaved: Set<SettingKey>;
+  onSave: (key: SettingKey, value: SettingValue) => void;
   translationValues: TransPlatformValues | TransLinksValues;
-  dataBag: SettingDataBag
-  onButtonClick: () => void
+  dataBag: SettingDataBag;
+  onButtonClick: () => void;
+  superiorData: Map<number, SettingValue>;
+  superiorRelation?: Map<SettingKey, SettingKey>;
 }
 
 export const SettingInput = (props: Props) => {
-  const { setting, currentSettingValues: configuration, savingSetting, onSave, translationValues, dataBag, onButtonClick } = props;
+  const { setting, currentSettingValues: configuration, settingsBeingSaved, onSave, translationValues, dataBag, onButtonClick, superiorData, superiorRelation} = props;
 
-  const t = (c: string) => trans(c, translationValues);
+  const t = (c: string, values?: Record<string, TransValueTypeValue>) => trans(c, {...translationValues, ...values});
 
-  const disabled = ((setting: ChannelSetting) => {
+  const TranslateV = (v: string | null) => {
+    if (!v?.startsWith('_t:'))
+      return v;
+    const s = v.substr(3);
+    const g = t(s) as string;
+    if (g === s)
+      return v;
+    return g;
+  };
+
+  const disabled = ((setting: SettingInfo) => {
     if (!setting.Ancestors)
       return false;
 
     for (const se of setting?.Ancestors) {
-      if (configuration.has(se.Field)) {
-        if (configuration.get(se.Field) != se.Value) {
-          return true;
+      if (se.Field != null) {
+        if (configuration.has(se.Field)) {
+          if (configuration.get(se.Field) != se.Value) {
+            return true;
+          }
         }
-      } else {//User doesn't have defined a value for this setting, so we will get the default value
-        for (const cs of ChannelSettings) {
-          for (let i = 0; i < cs.Fields.length; i++) {//O(n^3)... not the best but it is a small quantity of data, no problem
-            if (cs.Fields[i] == se.Field && cs.Values[i] != se.Value) {//Field[n] and DefaultValues[n] should be related
-              return true;
-            }
+      } else {//If Field is null/undefined Superior must have a value
+        if (configuration.has(se?.Superior ?? 0)) {
+          if (configuration.get(se?.Superior ?? 0) != se.Value) {
+            return true;
           }
         }
       }
@@ -72,15 +85,193 @@ export const SettingInput = (props: Props) => {
   if (disabled && setting.AncestorsHide)
     return <></>;
 
-  const RenderSettingTwoOptions = (labels: string[], values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
+  const GetSuperiorValue = (superior?: SettingKey) => {
+    return superiorData.get(superior ?? -1);
+  };
+  const GetSuperiorLabel = (superiorValue: SettingValue | undefined) => {
+    if (superiorValue != null) {
+      return t('Setting.DefinedBySettings', { 'value': superiorValue }) as SettingValue;
+    }
+    return undefined;
+  };
+
+  const RenderNumber = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isBeingSaved = settingsBeingSaved.has(fields[0]);
+    const value = configuration?.get(fields[0]) ?? values[0];
+
+    const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
+    const sValue = GetSuperiorValue(superior);
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingNumber
+          defaultValue={value}
+          onChange={v => onSave(fields[0], v)}
+          key={fields[0]}
+          loading={isBeingSaved}
+          disabled={disabled}
+
+          superiorValue={sValue as string | undefined}
+        />
+      </Col>
+    );
+  };
+
+  const RenderString = (values: SettingValue[], fields: SettingKey[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+    const isBeingSaved = settingsBeingSaved.has(fields[0]);
+    let value = configuration?.get(fields[0]) ?? values[0];
+
+    if (extra?.find(x => x == SettingExtra.NoApiName) ?? false) {
+      value = dataBag.selectedChannel?.name ?? value;
+    }
+
+    const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
+    const sValue = GetSuperiorValue(superior);
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingString
+          defaultValue={value}
+          onChange={v => onSave(fields[0], v)}
+          key={fields[0]}
+          loading={isBeingSaved}
+          disabled={disabled}
+
+          superiorValue={sValue as string | undefined}
+        />
+      </Col>
+    );
+  };
+
+  const RenderList = (values: SettingValue[], fields: SettingKey[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+    const isSaving = settingsBeingSaved.has(fields[0]);
+    const value = configuration?.get(fields[0]) ?? values[0];
+
+    const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
+    let placeHolderV = GetSuperiorValue(superior);
+
+
+    let loadingData = false;
+
+    const AA = (data: SettingDataBagData<({ id: number | string, name: string })[]> | undefined) => {
+      loadingData = loadingData || (data?.loading ?? false);
+      const retV: SettingValue[] = [...values];
+      if (!data?.loading ?? false) {
+        const ds = data?.data ?? [];
+        if (ds.length > 0) {
+          const vs = ds.map(x => [x.id?.toString() , x.name]);
+          for (const g of vs) {
+            for (const g2 of g) {
+              retV.push(g2);
+            }
+          }
+        }
+      }
+      return retV;
+    };
+
+    //Business Settings, Templates, etc.
+    for (const e of extra ?? []) {
+      switch (e) {
+        case SettingExtra.TemplateList:
+          values = AA(dataBag.templates);
+          break;
+        case SettingExtra.BusinessPayment:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
+          break;
+        case SettingExtra.BusinessReturn:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
+          break;
+        case SettingExtra.BusinessShipping:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
+          break;
+        case SettingExtra.PolicyDelivery:
+          values = AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
+          break;
+      }
+    }
+
+    //Source Settings (Defined by settings ())
+    const listValues: ListData[] = [];
+    if (placeHolderV != null) {
+      let found = false;
+      for (let i = 1; i < values.length; i += 2) {
+        found = placeHolderV == values[i];
+        if (found) {
+          placeHolderV = TranslateV(values[i + 1]);
+          break;
+        }
+      }
+      let placeHolder:string;
+      if (found) {
+        placeHolder = GetSuperiorLabel(placeHolderV) as string;
+      } else {
+        placeHolder = t('Setting.DefinedBySettingsEmpty') as string;
+      }
+      listValues.push({ value:null, label: placeHolder });
+    }
+    //List Values
+    for (let i = 1; i < values.length; i += 2) {
+      listValues.push({ value: values[i], label: TranslateV(values[i + 1]) as string });
+    }
+
+    return (
+      <Col span={8} className='input-container'>
+        <SettingList
+          defaultValue={value ?? ''}
+          listData={listValues}
+          onChange={v => onSave(fields[0], v)}
+          key={fields[0]}
+          loadingData={loadingData}
+          loading={isSaving}
+          disabled={disabled}
+          placeHolder={setting.PlaceHolder}
+        />
+      </Col>
+    );
+  };
+
+  const RenderBoolean = (values: SettingValue[], fields: SettingKey[], extra: SettingExtra[] | undefined, disabled: boolean) => {
+    const isBeingSaved = settingsBeingSaved.has(fields[0]);
+    const value = configuration?.get(fields[0]) ?? values[0];
+
+    const superior = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
+    if (superior != null) {
+      return RenderList(
+        [
+          values[0],
+          '0',
+          '_t:Setting.No',
+          '1',
+          '_t:Setting.Yes'
+        ],
+        fields,
+        extra,
+        disabled,
+        dataBag);
+    }
+
+    return (
+      <Col span={8} className='switch-container'>
+        <SettingBoolean
+          defaultValue={value ?? '0'}
+          onChange={v => onSave(fields[0], v)}
+          loading={isBeingSaved}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderTwoOptions = (labels: string[], values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
     const value1 = configuration?.get(fields[0]) ?? values[0];
     const value2 = configuration?.get(fields[1]) ?? values[1];
     const check1Value = values[2];
     const check2Value = values[3];
     const label1 = labels[1];
     const label2 = labels[2];
-    const savingState1 = savingSetting.get(fields[0]);
-    const savingState2 = savingSetting.get(fields[1]);
+    const is1Saving = settingsBeingSaved.has(fields[0]);
+    const is2Saving = settingsBeingSaved.has(fields[1]);
     return (
       <Col span={8} className='limit-section'>
         <SettingTwoOptions
@@ -93,27 +284,33 @@ export const SettingInput = (props: Props) => {
           onChange1={v => onSave(fields[0], v)}
           onChange2={v => onSave(fields[1], v)}
           disabled={disabled}
-          loading1={savingState1?.loading ?? false}
-          loading2={savingState2?.loading ?? false}
+          loading1={is1Saving}
+          loading2={is2Saving}
         />
       </Col>
     );
   };
 
-  const RenderSettingSwitchTwoOptions = (labels: string[], values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
+  const RenderSwitchTwoOptions = (labels: string[], values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
     const value1 = configuration?.get(fields[0]) ?? values[0];
     const value2 = configuration?.get(fields[1]) ?? values[1];
     const check1Value = values[2];
     const defaultNumberValue = values[3];
     const label1 = labels[1];
     const label2 = labels[2];
-    const savingState1 = savingSetting.get(fields[0]);
-    const savingState2 = savingSetting.get(fields[1]);
+    const is1Saving = settingsBeingSaved.has(fields[0]);
+    const is2Saving = settingsBeingSaved.has(fields[1]);
+
+    const superior1 = superiorRelation ? superiorRelation.get(fields[0]) : undefined;
+    const superior2 = superiorRelation ? superiorRelation.get(fields[1]) : undefined;
+    const sValue1 = GetSuperiorValue(superior1);
+    const sValue2 = GetSuperiorValue(superior2);
+
     return (
       <Col span={8} className='limit-section'>
         <SettingBooleanTwoOptions
-          defaultValue1={value1 ?? ''}
-          defaultValue2={value2 ?? ''}
+          defaultValue1={value1}
+          defaultValue2={value2}
           defaultNumberValue1={check1Value ?? ''}
           defaultNumberValue2={defaultNumberValue ?? ''}
           label1={t(label1)}
@@ -121,68 +318,18 @@ export const SettingInput = (props: Props) => {
           onChange1={v => onSave(fields[0], v)}
           onChange2={v => onSave(fields[1], v)}
           disabled={disabled}
-          loading1={savingState1?.loading ?? false}
-          loading2={savingState2?.loading ?? false}
+          loading1={is1Saving}
+          loading2={is2Saving}
+          superiorValue1={sValue1 as string | undefined}
+          superiorValue2={sValue2 as string | undefined}
         />
       </Col>
     );
   };
 
-  const RenderSettingNumber = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState = savingSetting.get(fields[0]);
-    const value = configuration?.get(fields[0]) ?? values[0];
-
-    return (
-      <Col span={8} className='input-container'>
-        <SettingNumber
-          defaultValue={value ?? ''}
-          onChange={v => onSave(fields[0], v)}
-          key={fields[0]}
-          loading={savingState?.loading ?? false}
-          disabled={disabled}
-        />
-      </Col>
-    );
-  };
-
-  const RenderSettingString = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
-    const savingState = savingSetting.get(fields[0]);
-    let value = configuration?.get(fields[0]) ?? values[0];
-
-    if (fields[0] == eChannelSettings.NoApiName) {
-      value = dataBag.selectedChannel?.name ?? value;
-    }
-
-    return (
-      <Col span={8} className='input-container'>
-        <SettingString
-          defaultValue={value ?? ''}
-          onChange={v => onSave(fields[0], v)}
-          key={fields[0]}
-          loading={savingState?.loading ?? false}
-          disabled={disabled} />
-      </Col>
-    );
-  };
-
-  const RenderSettingBoolean = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState = savingSetting.get(fields[0]);
-    const value = configuration?.get(fields[0]) ?? values[0];
-    return (
-      <Col span={8} className='switch-container'>
-        <SettingBoolean
-          defaultValue={value ?? '0'}
-          onChange={v => onSave(fields[0], v)}
-          loading={savingState?.loading ?? false}
-          disabled={disabled}
-        />
-      </Col>
-    );
-  };
-
-  const RenderBooleanNumber = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState1 = savingSetting.get(fields[0]);
-    const savingState2 = savingSetting.get(fields[1]);
+  const RenderBooleanNumber = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isBeingSaved1 = settingsBeingSaved.has(fields[0]);
+    const isBeingSaved2 = settingsBeingSaved.has(fields[1]);
     const defaultValue1 = values[0];
     const defaultValue2 = values[1];
     const value1 = configuration?.get(fields[0]) ?? defaultValue1;
@@ -194,17 +341,17 @@ export const SettingInput = (props: Props) => {
           defaultValue2={value2 ?? ''}
           onChange1={v => onSave(fields[0], v)}
           onChange2={v => onSave(fields[1], v)}
-          loading1={savingState1?.loading ?? false}
-          loading2={savingState2?.loading ?? false}
+          loading1={isBeingSaved1}
+          loading2={isBeingSaved2}
           disabled={disabled}
         />
       </Col>
     );
   };
 
-  const RenderBooleanString = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState1 = savingSetting.get(fields[0]);
-    const savingState2 = savingSetting.get(fields[1]);
+  const RenderBooleanString = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isBeingSaved1 = settingsBeingSaved.has(fields[0]);
+    const isBeingSaved2 = settingsBeingSaved.has(fields[1]);
     const defaultValue1 = values[0];
     const defaultValue2 = values[1];
     const value1 = configuration?.get(fields[0]) ?? defaultValue1;
@@ -216,16 +363,34 @@ export const SettingInput = (props: Props) => {
           defaultValue2={value2 ?? ''}
           onChange1={v => onSave(fields[0], v)}
           onChange2={v => onSave(fields[1], v)}
-          loading1={savingState1?.loading ?? false}
-          loading2={savingState2?.loading ?? false}
+          loading1={isBeingSaved1}
+          loading2={isBeingSaved2}
           disabled={disabled}
         />
       </Col>
     );
   };
 
-  const RenderBooleanStringNull = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState = savingSetting.get(fields[0]);
+  const RenderBooleanNumberNull = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isBeingSaved = settingsBeingSaved.has(fields[0]);
+    const defaultValue = values[0];
+    const defaultNumberValue = values[1];
+    const value = configuration?.get(fields[0]) ?? defaultValue;
+    return (
+      <Col span={8} className='switch-container'>
+        <SettingBooleanNumberNull
+          defaultValue={value}
+          defaultNumberValue={defaultNumberValue ?? ''}
+          onChange={v => onSave(fields[0], v)}
+          loading={isBeingSaved}
+          disabled={disabled}
+        />
+      </Col>
+    );
+  };
+
+  const RenderBooleanStringNull = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isBeingSaved = settingsBeingSaved.has(fields[0]);
     const defaultValue = values[0];
     const defaultStringValue = values[1];
     const value = configuration?.get(fields[0]) ?? defaultValue;
@@ -235,72 +400,15 @@ export const SettingInput = (props: Props) => {
           defaultValue={value}
           defaultStringValue={defaultStringValue ?? ''}
           onChange={v => onSave(fields[0], v)}
-          loading={savingState?.loading ?? false}
+          loading={isBeingSaved}
           disabled={disabled}
         />
       </Col>
     );
   };
 
-  const RenderSettingList = (values: SettingsValue[], fields: eChannelSettings[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
-    const savingState = savingSetting.get(fields[0]);
-    const value = configuration?.get(fields[0]) ?? values[0];
-
-    const listValues: ListData[] = [];
-    for (let i = 1; i < values.length; i += 2) {
-      listValues.push({ value: values[i] ?? '', label: t(values[i + 1] ?? '') as string });
-    }
-
-    let loadingData = false;
-
-    const AA = (data: SettingDataBagData<({ id: number | string, name: string })[]> | undefined) => {
-      loadingData = loadingData || (data?.loading ?? false);
-      if (!data?.loading ?? false) {
-        const ds = data?.data ?? [];
-        if (ds.length > 0) {
-          listValues.push(...(ds.map(x => ({ label: x.name, value: x.id?.toString() })) ?? []));
-        }
-      }
-    };
-
-    for (const e of extra ?? []) {
-      switch (e) {
-        case ChannelSettingExtra.TemplateList:
-          AA(dataBag.templates);
-          break;
-        case ChannelSettingExtra.BusinessPayment:
-          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Payment) });
-          break;
-        case ChannelSettingExtra.BusinessReturn:
-          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Returns) });
-          break;
-        case ChannelSettingExtra.BusinessShipping:
-          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.business?.data?.filter(x => x.policyType == BusinessPolicyType.Shipping) });
-          break;
-        case ChannelSettingExtra.PolicyDelivery:
-          AA({ loading: dataBag.business?.loading ?? false, data: dataBag.shipping?.data?.map(x => ({ id: x.value, name: x.text })) });
-          break;
-      }
-    }
-
-    return (
-      <Col span={8} className='input-container'>
-        <SettingList
-          defaultValue={value ?? ''}
-          listData={listValues}
-          onChange={v => onSave(fields[0], v)}
-          key={fields[0]}
-          loadingData={loadingData}
-          loading={savingState?.loading ?? false}
-          disabled={disabled}
-          placeHolder={setting.PlaceHolder}
-        />
-      </Col>
-    );
-  };
-
-  const RenderWordList = (values: SettingsValue[], fields: eChannelSettings[], disabled: boolean) => {
-    const savingState = savingSetting.get(fields[0]);
+  const RenderWordList = (values: SettingValue[], fields: SettingKey[], disabled: boolean) => {
+    const isSaving = settingsBeingSaved.has(fields[0]);
     const value = configuration?.get(fields[0]) ?? values[0];
 
     return (
@@ -309,19 +417,19 @@ export const SettingInput = (props: Props) => {
           defaultValue={value ?? ''}
           onChange={v => onSave(fields[0], v)}
           key={fields[0]}
-          loading={savingState?.loading ?? false}
+          loading={isSaving}
           disabled={disabled}
         />
       </Col>
     );
   };
 
-  const RenderButton = (values: SettingsValue[], extra: ChannelSettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
+  const RenderButton = (values: SettingValue[], extra: SettingExtra[] | undefined, disabled: boolean, dataBag: SettingDataBag) => {
     let loading = false;
     let label = t(values[0] ?? '');
     for (const e of extra ?? []) {
       switch (e) {
-        case ChannelSettingExtra.RefreshPolicies:
+        case SettingExtra.RefreshPolicies:
           loading = loading || (dataBag.refreshBussiness?.loading ?? false);
           if (dataBag.refreshBussiness?.data ?? false) {
             label = t('Channel.Setting.Option.PoliciesWillUpdate');
@@ -333,21 +441,10 @@ export const SettingInput = (props: Props) => {
     return <SettingButton label={label} loading={loading} disabled={disabled} onClick={onButtonClick} />;
   };
 
-  const values = ((setting: ChannelSetting) => {
-    let translate = false;
-    for (const e of setting?.Extra ?? []) {
-      if (e == ChannelSettingExtra.TranslateDefaultValue) {
-        translate = true;
-        break;
-      }
-    }
-    if (!translate) {
-      return setting.Values;
-    }
-
+  const values = ((setting: SettingInfo) => {
     const values = [...setting.Values];
     for (let i = 0; i < values.length; i++) {
-      values[i] = t(values[i] ?? '') as string;
+      values[i] = TranslateV(values[i]);
     }
     return values;
   })(setting);
@@ -356,28 +453,31 @@ export const SettingInput = (props: Props) => {
   switch (setting.Type) {
     default:
     case SettingType.Number:
-      input = RenderSettingNumber(values, setting.Fields, disabled);
+      input = RenderNumber(values, setting.Fields, disabled);
       break;
     case SettingType.Boolean:
-      input = RenderSettingBoolean(values, setting.Fields, disabled);
+      input = RenderBoolean(values, setting.Fields, setting.Extra, disabled);
       break;
     case SettingType.String:
-      input = RenderSettingString(values, setting.Fields, setting.Extra, disabled, dataBag);
+      input = RenderString(values, setting.Fields, setting.Extra, disabled, dataBag);
       break;
     case SettingType.List:
-      input = RenderSettingList(values, setting.Fields, setting.Extra, disabled, dataBag);
+      input = RenderList(values, setting.Fields, setting.Extra, disabled, dataBag);
       break;
     case SettingType.TwoOptions:
-      input = RenderSettingTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      input = RenderTwoOptions(setting.Labels, values, setting.Fields, disabled);
       break;
     case SettingType.SwitchTwoOptions:
-      input = RenderSettingSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
+      input = RenderSwitchTwoOptions(setting.Labels, values, setting.Fields, disabled);
       break;
     case SettingType.WordList:
       input = RenderWordList(values, setting.Fields, disabled);
       break;
     case SettingType.BooleanNumber:
       input = RenderBooleanNumber(values, setting.Fields, disabled);
+      break;
+    case SettingType.BooleanNumberNull:
+      input = RenderBooleanNumberNull(values, setting.Fields, disabled);
       break;
     case SettingType.BooleanString:
       input = RenderBooleanString(values, setting.Fields, disabled);

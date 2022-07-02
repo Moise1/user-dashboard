@@ -4,19 +4,18 @@ import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/listing-service/configure-listing-service.scss';
 import { Channel } from 'src/redux/channels/channelsSlice';
 import { MultipleSelector } from 'src/small-components/form/multipleSelector';
-import { Selector } from 'src/small-components/form/selector';
+import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import { Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
 import { SimpleTable } from 'src/small-components/simple-table';
 //import { CrossModalIcon } from '../common/Icons';
 import { useEffect, useState } from 'react';
-import { Key } from 'antd/lib/table/interface';
 import { getSourcesForListing } from '../../redux/sources/sourcesThunk';
 import { Source } from '../../redux/sources/sourceSlice';
 import { getListingServices, addListingService } from '../../redux/dashboard/listingServicesThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
-import { eCountry } from '../../utils/eCountry';
 import { toastAlert } from '../../utils/toastAlert';
+import { eCountry } from '../../types/eCountry';
 
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
@@ -127,7 +126,7 @@ export const ConfigureListingService = () => {
     setSelectedListing((prev) => ({ ...prev, includedSources: value }));
   };
 
-  const onAccountChange = (value: Key) => {
+  const onAccountChange = (value: SelectorValue) => {
     const chanel = channels.filter((x) => x.id === value);
     if (selectedListing.channelOAuthId !== value) {
       setSelectedListing((prev) => ({ ...prev, includedSources: '' }));
@@ -140,7 +139,7 @@ export const ConfigureListingService = () => {
     setSelectedListing((prev) => ({ ...prev, channelOAuthId: chanel[0]?.id }));
   };
 
-  const onChange = (value: Key) => {
+  const onChange = (value: SelectorValue) => {
     if (value === 'user') {
       setShowPreference(true);
     } else {

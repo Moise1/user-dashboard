@@ -49,7 +49,8 @@ export enum eChannelListingOrigin {
 export interface HGRSearchData {
   id: number;
 }
-export interface ActiveListing extends HGRSearchData {
+export type ActiveListing = {
+  id: number;
   userProductSourceChannelId: number;
   channelListingId: number;
   channelOAuthId: number;

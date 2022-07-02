@@ -1,13 +1,12 @@
 import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
 import { t } from 'src/utils/transShim';
-import { Key } from 'antd/lib/table/interface';
 import { useState, useMemo, useEffect, useContext } from 'react';
 import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
-import { DataTable } from '../tables/DataTable';
+import { DataTable, DataTableKey } from '../tables/DataTable';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -33,8 +32,8 @@ export const Orders = () => {
   const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
   const [searchKey, setSearchKey] = useState<string>('');
   const [showColumns, setShowColumns] = useState<boolean>(false);
-  const [searchFilterKey, setSearchFilterKey] = useState<Key[]>([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [searchFilterKey, setSearchFilterKey] = useState<DataTableKey[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   const [postPerPage, setPostPerPage] = useState<number>(10);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
@@ -168,7 +167,7 @@ export const Orders = () => {
   //How many columns to show
   const [columns, setColumns] = useState(tableColumns);
   const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
-  const onSelectChange = (selectedRowKeys: Key[]) => {
+  const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
   const rowSelection = {

@@ -6,7 +6,7 @@ import it_flag from '../../assets/channel/flags/IT.png';
 import uk_flag from '../../assets/channel/flags/UK.png';
 import us_flag from '../../assets/channel/flags/US.png';
 import { t } from '../../utils/transShim';
-import { eCountry } from '../../utils/eCountry';
+import { eCountry } from '../../types/eCountry';
 import { Flag } from './Flag';
 
 

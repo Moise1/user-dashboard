@@ -6,9 +6,9 @@ import { PlatformIndo } from '../data/platforms';
 import { Links } from '../links';
 
 export type TransValue = string | ReactNode;
-type ValueTypeValue = PrimitiveType | ReactNode;
+export type TransValueTypeValue = PrimitiveType | ReactNode;
 
-export function t(key: string, values?: Record<string, ValueTypeValue>): TransValue {
+export function t(key: string, values?: Record<string, TransValueTypeValue>): TransValue {
   if(!key) {
     return '';
   }
@@ -30,13 +30,13 @@ export function tm(key: string) {
   return <FormattedMessage id={key} defaultMessage="Translation missing for {key}" description="Welcome message" />;
 }
 
-export interface TransPlatformValues extends Record <string, ValueTypeValue> {
-  channel_platform_name: ValueTypeValue,
-  channel_noapi_username: ValueTypeValue
+export interface TransPlatformValues extends Record <string, TransValueTypeValue> {
+  channel_platform_name: TransValueTypeValue,
+  channel_noapi_username: TransValueTypeValue
 }
-export interface TransLinksValues extends Record<string, ValueTypeValue> {
-  sources_table_link: ValueTypeValue,
-  templates_link: ValueTypeValue
+export interface TransLinksValues extends Record<string, TransValueTypeValue> {
+  sources_table_link: TransValueTypeValue,
+  templates_link: TransValueTypeValue
 }
 
 export const TransUtils = {
@@ -48,7 +48,7 @@ export const TransUtils = {
   },
   GetLinksValues: () => {
     return {
-      sources_table_link: <Link to={Links.SourcesSettingsTable}>{t('Menu.SourcesTable', {})}</Link>,
+      sources_table_link: <Link to={Links.SourcesSettings}>{t('Menu.SourcesTable', {})}</Link>,
       templates_link: <Link to={Links.Templates}>{t('Menu.Templates', {})}</Link>,
     };
   }

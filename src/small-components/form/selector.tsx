@@ -6,7 +6,7 @@ const { Option } = Select;
 export type SelectorSizeType = 'large' | 'small' | 'middle';
 
 export type SelectorLabel = string | JSX.Element;
-export type SelectorValue = React.Key;
+export type SelectorValue = React.Key | null;
 export interface SelectorData {
   value: SelectorValue;
   label: SelectorLabel;
@@ -15,7 +15,7 @@ export interface SelectorData {
 interface Props {
   children: SelectorData | SelectorData[];
   defaultValue?: SelectorValue;
-  onChange?: (value: SelectorValue, label?: SelectorLabel) => void;
+  onChange?: (value: SelectorValue) => void;
   size?: SelectorSizeType;
   value?: SelectorValue;
   dropdownRender?: (
@@ -60,7 +60,7 @@ export const Selector = (props: Props) => {
 
   const OnChange = (val: SelectorData) => {
     if (onChange) {
-      onChange(val.value, val.label);
+      onChange(val.value);
       console.log(val.label);
     }
   };

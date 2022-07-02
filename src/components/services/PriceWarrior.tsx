@@ -1,6 +1,6 @@
 import { Form, Spin } from 'antd';
 import '../../sass/services/service.scss';
-import { Selector } from 'src/small-components/form/selector';
+import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import '../../sass/services/price-warrior-configuration.scss';
 import { SimpleTable } from 'src/small-components/simple-table';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
@@ -23,11 +23,11 @@ export const PriceWarrior = () => {
   const [data, setData] = useState<PWSetting>({ active: active as unknown as boolean, repricing: repricing as unknown as boolean, markup: minMarkup, threshold: threshold, undercutBy: undercutBy });
 
 
-  const onPriceWarriorChange = (value: React.Key) => {
+  const onPriceWarriorChange = (value: SelectorValue) => {
     setData(prev => ({ ...prev, active: value as unknown as boolean }));
   };
 
-  const onRepricingChange = (value: React.Key) => {
+  const onRepricingChange = (value: SelectorValue) => {
     setData(prev => ({ ...prev, repricing: value as unknown as boolean }));
   };
 

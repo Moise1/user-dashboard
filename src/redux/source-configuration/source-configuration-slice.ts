@@ -1,48 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getSourceConfiguration } from './sources.coonfiguration-thunk';
+import { SettingData, SettingValue, SourceSettingKey } from '../../types/settings';
+import { getSourceConfiguration, saveSourceSetting } from './sources.coonfiguration-thunk';
 
-export type SourceSetting = {
-  key: number;
-  value: string;
+export interface SourceSettingData extends SettingData {
+  key: SourceSettingKey;
+  value: SettingValue;
   sourceId: number;
-};
+}
 
-export enum eChannelOAuthSourceSettings {
-  Markup = 1,
-  DispatchDays = 2,
-  MonitorStock = 3,
-  MonitorPrice = 4,
-  MonitorPriceDecrease = 5,
-  MonitorPriceDecreasePercentage = 6,
-  TemplateId = 7,
-  DefaultShipping = 8,
-  ReturnsPolicy = 9,
-  GSP = 10,
-  ShippingProfileId = 11,
-  ReturnProfileId = 12,
-  PaymentProfileId = 13,
-  LocationCity = 14,
-  LocationPostcode = 15,
-  LocationCountry = 16,
-  PrimeOnly = 17,
-  MinQuantity = 18,
-  MaxDeliveryDays = 19,
-  AutoOrdering = 20,
-  AutoOrderingTrackingNumber = 21,
-  AutoOrderingMarkShipped = 22
+export interface SavingSetting {
+  loading: boolean;
+  success: boolean;
+  data: SourceSettingData;
 }
 
 export interface SourceConfigurationState {
   get: {
     loading: boolean;
-    settings?: SourceSetting[];
+    settings?: SourceSettingData[];
   };
+  saving: SavingSetting[],
 }
 
 const initialState: SourceConfigurationState = {
   get: {
-    loading: false
-  }
+    loading: false,
+    settings:[]
+  },
+  saving: []
 };
 
 export const sourceSlice = createSlice({
@@ -50,15 +35,57 @@ export const sourceSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    //GET
     builder.addCase(getSourceConfiguration.pending, (state) => {
       state.get.loading = true;
     });
     builder.addCase(getSourceConfiguration.fulfilled, (state, { payload }) => {
       state.get.loading = false;
       state.get.settings = payload.settings;
+      state.saving = [];
     });
     builder.addCase(getSourceConfiguration.rejected, (state) => {
       state.get.loading = false;
+    });
+
+    //SAVE
+    builder.addCase(saveSourceSetting.pending, (state, { meta }) => {
+      if (!state.saving)
+        state.saving = [];
+      const prv = state.saving.find(x => x.data.key == meta.arg.key && x.data.sourceId == meta.arg.sourceId);
+      if (prv) {
+        prv.loading = true;
+        prv.data = meta.arg;
+        prv.success = false;
+      } else {
+        state.saving.push({
+          loading: true,
+          data: meta.arg,
+          success: false,
+        });
+      }
+    });
+    builder.addCase(saveSourceSetting.fulfilled, (state, { payload, meta }) => {
+      const prv = state.saving.find(x => x.data.key == meta.arg.key && x.data.sourceId == meta.arg.sourceId);
+      if (prv) {//this should be always true
+        prv.loading = false;
+        prv.success = payload?.success;
+      }
+      if (payload?.success && state.get.settings) {
+        const vk = state.get.settings.find(x => x.key == meta.arg.key && x.sourceId == meta.arg.sourceId);
+        if (vk) {
+          vk.value = meta.arg.value;
+        } else {
+          state.get.settings.push(meta.arg);
+        }
+      }
+    });
+    builder.addCase(saveSourceSetting.rejected, (state, { meta }) => {
+      const prv = state.saving.find(x => x.data.key == meta.arg.key && x.data.sourceId == meta.arg.sourceId);
+      if (prv) {//this should be always true
+        prv.loading = false;
+        prv.success = false;
+      }
     });
   }
 });

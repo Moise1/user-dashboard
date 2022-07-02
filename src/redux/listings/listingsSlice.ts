@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAutolist, saveAutolist, getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
-
-export interface ListingData {
+export type ListingData = {
   imageUrl: string;
   asin: null;
   buyBoxPrice: null;
@@ -37,7 +36,7 @@ export interface ListingData {
   watches: number;
 }
 
-export interface PendingListings {
+export type PendingListings = {
   categoryId: number;
   channelOAuthId: number;
   createdById: number;
@@ -56,7 +55,7 @@ export interface PendingListings {
 export type TerminatedListings = PendingListings;
 
 
-export interface ListingsData {
+export type ListingsData = {
   createdBy: number;
   ignoreVero: boolean | undefined;
   ignoreOOS: boolean | undefined;
@@ -125,7 +124,7 @@ export enum eChannelListingStatus {
   BulkApiCreated = -2147483648
 }
 
-export interface BulkListingLog {
+export type BulkListingLog = {
   id: number;
   url: string;
   status: eBulkListingStatus;
@@ -161,7 +160,7 @@ export interface ListingsSource {
   batchId: string;
 }
 
-export interface Autolist {
+export type Autolist = {
   logs: BulkListingLog[];
   listFrequencyMinutes: null;
   request: string;

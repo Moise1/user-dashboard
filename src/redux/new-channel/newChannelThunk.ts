@@ -52,7 +52,7 @@ export const paidHostExtension = createAsyncThunk(
   'new-channel/hostExtension',
   async (_, thunkAPI) => {
     try {
-      await client.get('/api/Onboarding/SendHostExtensionEmail');
+      await client.get('/Onboarding/SendHostExtensionEmail');
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong.');
     }
