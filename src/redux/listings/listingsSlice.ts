@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAutolist, saveAutolist, getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
+
 export type ListingData = {
   imageUrl: string;
   asin: null;
@@ -54,7 +55,6 @@ export type PendingListings = {
 
 export type TerminatedListings = PendingListings;
 
-
 export type ListingsData = {
   createdBy: number;
   ignoreVero: boolean | undefined;
@@ -65,8 +65,7 @@ export type ListingsData = {
   listings: string[][];
 }
 
-
-export interface ListingsSummary {
+export type ListingsSummary = {
   requestId: string;
   done: number;
   forbiddenWordsUrls: string[];
@@ -136,7 +135,7 @@ export type BulkListingLog = {
   listedOn: Date;
 }
 
-export interface ListingsSource {
+export type ListingsSource = {
   id: number;
   channelOAuthId: number;
   createdOn: Date;
