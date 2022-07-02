@@ -34,9 +34,7 @@ export const Templates = () => {
           <div className="template-name">
             <h4>{record.name}</h4>
           </div>
-        ) : (
-          ''
-        )
+        ) : ''
     },
     {
       title: 'Defaul template',

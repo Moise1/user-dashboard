@@ -7,7 +7,8 @@ export interface LinkAccount {
 }
 
 const initialState = {
-  url: '',
+  ebayUrl: '',
+  shopifyUrl: '',
   getLinkLoading: false,
   newChannelLoading: false,
   statusCode: 0,
@@ -27,7 +28,7 @@ export const newChannelSlice = createSlice({
     });
     builder.addCase(getEbayLinkAccount.fulfilled, (state, { payload }) => {
       state.getLinkLoading = false;
-      state.url = payload;
+      state.ebayUrl = payload;
     });
     builder.addCase(getEbayLinkAccount.rejected, (state, { payload }) => {
       state.getLinkLoading = false;
@@ -41,7 +42,7 @@ export const newChannelSlice = createSlice({
     });
     builder.addCase(getShopifyLinkAccount.fulfilled, (state, { payload }) => {
       state.getLinkLoading = false;
-      state.url = payload;
+      state.shopifyUrl = payload;
     });
     builder.addCase(getShopifyLinkAccount.rejected, (state, { payload }) => {
       state.getLinkLoading = false;
