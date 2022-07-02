@@ -15,6 +15,15 @@
         width: 90%;
 
         .sections-container {
+            .div-danger {
+                color: red;
+                cursor: pointer;
+            }
+
+            .summary-heading {
+                padding: 20px 20px 10px 20px;
+            }
+
             .bulk-sections {
                 display: flex;
                 justify-content: space-between;

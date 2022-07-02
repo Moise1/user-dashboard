@@ -8,6 +8,7 @@ import { userReducer } from '../user/userSlice';
 import { sourcesConfigReducer } from '../source-configuration/source-configuration-slice';
 import { sourcesReducer } from '../sources/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
+import { autoListReducer } from '../listings/listingsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
 import { manualListingsReducer } from '../listings/listingsSlice';
@@ -51,6 +52,7 @@ export const allReducers = combineReducers({
   channelConfiguration: channelConfigurationReducer,
 
   responseObect: paymentReducer,
+  autoList: autoListReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,

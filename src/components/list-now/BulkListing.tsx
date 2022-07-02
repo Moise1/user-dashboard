@@ -1,12 +1,12 @@
-import { Layout, Form, Input, Button, DatePicker, Spin } from 'antd';
+import { Layout, Form, Input, Button, DatePicker, Spin, Modal, Tooltip } from 'antd';
 import { Row, Col, Collapse } from 'antd';
 import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 
 import '../../sass/list-now/manual-listing.scss';
 import '../../sass/list-now/bulk-listing.scss';
 import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
-import { getManualListings, SaveAutolist } from '../../redux/listings/listingsThunk';
-import { ListingsData, ListingsSummary } from '../../redux/listings/listingsSlice';
+import { getManualListings, saveAutolist, getAutolist } from '../../redux/listings/listingsThunk';
+import { BulkListingError, BulkListingLog, eBulkListingStatus, eChannelListingStatus, ListingsData } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
@@ -15,12 +15,16 @@ import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
+import { SimpleTable } from '../../small-components/simple-table';
+import moment from 'moment';
+import { Key } from 'antd/lib/table/interface';
 
 const { Item } = Form;
 const { Panel } = Collapse;
 
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
+  const { autoList } = useAppSelector((state) => state.autoList);
   const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
   const { userAssistants, VAloading } = useAppSelector((state) => state.userAssistants);
   const lables = ['Source URL', 'Listing Title (Optional)'];
@@ -32,7 +36,6 @@ export const BulkListing = (/*props: props*/) => {
   const [reviewBeforePublishing, setReviewBeforePublishing] = useState<string>('false');
   const [listFrequencyMinutes, setListFrequencyMinutes] = useState<number>();
   const [dontListUntil, setDontListUntil] = useState<Date>();
-  const [summary, setSummary] = useState<ListingsSummary>();
 
   const [data, setData] = useState<Matrix<{ value: string }>>([
     [{ value: '' }, { value: '' }],
@@ -50,18 +53,17 @@ export const BulkListing = (/*props: props*/) => {
   useEffect(() => {
     dispatch(getManualListings());
     dispatch(getUserAssistants());
-  }, [getManualListings, getUserAssistants]);
+    const data = { summary: null };
+    dispatch(getAutolist(data));
+  }, [getManualListings, getUserAssistants, getAutolist]);
 
   const onSave = async (values: ListingsData) => {
-    const rs = await dispatch(SaveAutolist(values));
-    console.log(rs.payload.responseObject);
-    setSummary(rs.payload.responseObject);
-    console.log(summary);
+    dispatch(saveAutolist(values));
   };
 
-  const [listing] = useState<string[][]>([]);
+  const [listing, setListing] = useState<string[][]>([]);
 
-  function onListItems() {
+  const onListItems = () => {
     let _ignoreVero;
     if (ignoreVero === 'true') {
       _ignoreVero = true;
@@ -81,6 +83,7 @@ export const BulkListing = (/*props: props*/) => {
       _reviewBeforePublishing = false;
     }
 
+    setListing([]);
     data.map((item) => {
       if (item[0]?.value || item[1]?.value) {
         const val1 = item[0]?.value ? item[0]?.value : '';
@@ -100,9 +103,9 @@ export const BulkListing = (/*props: props*/) => {
     };
     console.log(listing);
     onSave(value);
-  }
+  };
 
-  function addRows() {
+  const addRows = () => {
     setData((olddata) => [
       ...olddata,
       [{ value: '' }, { value: '' }],
@@ -116,7 +119,7 @@ export const BulkListing = (/*props: props*/) => {
       [{ value: '' }, { value: '' }],
       [{ value: '' }, { value: '' }]
     ]);
-  }
+  };
 
   const handleAssistantChange = (value: SelectorValue) => {
     setCreatedBy(value as number);
@@ -148,6 +151,134 @@ export const BulkListing = (/*props: props*/) => {
   const onOk = (value: DatePickerProps['value'] | RangePickerProps['value']) => {
     console.log('onOk: ', value);
   };
+
+  const EmptyGuid = () => {
+    return '00000000-0000-0000-0000-000000000000';
+  };
+
+  const Zero = () => {
+    return 0;
+  };
+
+  const ErrorDetail = (errorCode: BulkListingError | undefined) => {
+    switch (errorCode) {
+      case BulkListingError.UNKOWN:
+      case BulkListingError.INVALID_ORDER:
+        return <text>Unknown error</text>;
+      case BulkListingError.INVALID_TOKEN:
+        return <text>Account disconnected. Relink it again</text>;
+      case BulkListingError.SCRAPING:
+        return <text>It was impossible to obtain information from this url</text>;
+      case BulkListingError.NO_CATEGORY:
+        return <text>It was impossible to obtain a category for this product</text>;
+      case BulkListingError.VERO:
+        return <text>Product brand was in Vero List</text>;
+      case BulkListingError.ZERO_TOKENS:
+        return <text>Not enoguht tokens to optimize the title of this product</text>;
+      case BulkListingError.OOS:
+        return <text>Product was Out of Stock</text>;
+      default:
+        return errorCode;
+    }
+  };
+
+  const ShowModal = (errorCode: BulkListingError | undefined) => {
+    Modal.error({
+      title: 'Error details',
+      content: ErrorDetail(errorCode),
+      onOk() { console.log(''); },
+    });
+  };
+
+  const PublishingError = () => {
+    Modal.error({
+      title: 'Error details',
+      content: (
+        <p>You can see this error on the &quot;Listings Created&quot; section, where you will also be able to edit the listing and retry. <br />
+          Please note that for certain sources, listings with variations are not supported</p>
+      ),
+      onOk() { console.log(''); },
+    });
+  };
+
+  const columns = [
+    {
+      title: 'HGR Id',
+      dataIndex: 'id',
+      key: 'id'
+    },
+    {
+      title: 'Sent',
+      dataIndex: 'status',
+      key: 'status',
+      render: (s: eBulkListingStatus) => {
+        return eBulkListingStatus[s];
+      }
+    },
+    {
+      title: 'URL',
+      dataIndex: 'url',
+      key: 'url'
+    },
+    {
+      title: 'Status',
+      dataIndex: 'channelListingStatus',
+      key: 'channelListingStatus',
+      render: (s: eChannelListingStatus, record: BulkListingLog) => {
+        if (s && (s & eChannelListingStatus.Removed) != 0) {
+          return <span>Done</span>;
+        }
+        else if (record.status == eBulkListingStatus.ERROR) {
+          return <div className='div-danger' onClick={() => ShowModal(record.errorCode)}>Not published. Click for details.</div >;
+        }
+        else if (record.status == eBulkListingStatus.DONE && record.channelItem == null && record.channelListingStatus && record.channelListingStatus != eChannelListingStatus.PendingToReview && record.channelListingStatus != eChannelListingStatus.Removed) {
+          return <span>Listing <a href="/SearchProduct/PendingListings" target="_blank"><i className="fas fa-question-circle"></i></a>...</span>;
+        }
+        else if (record.status == eBulkListingStatus.INITIAL) {
+          return <span>Validating</span>;
+        }
+        else if (record.status == eBulkListingStatus.PROCESSING) {
+          return <span>Processing</span>;
+        }
+        else {
+          if (!record.channelItem) {
+            if (record.status == eBulkListingStatus.DONE && record.channelListingStatus && record.channelListingStatus == eChannelListingStatus.PendingToReview) {
+              return <Tooltip title="Since you selected the option to review your listings before they are published, you need to verify this product on the Listings Created section for it to be submitted"><span>Pending Review</span></Tooltip>;
+            }
+            else {
+              return <Tooltip title="Your listing will be published according to the schedule defined"><span>Scheduled</span></Tooltip>;
+            }
+          }
+          else {
+            if (record.channelItem) {
+              return <span><strong>Published</strong></span>;
+            }
+            else {
+              return <div className='div-danger' onClick={() => PublishingError()}>Error publishing</div >;
+            }
+          }
+        }
+      }
+    },
+    {
+      title: 'Created On',
+      dataIndex: 'createdOn',
+      key: 'createdOn',
+      render: (s: Date) => {
+        return moment(s).format('DD/MM/YY/ hh:mm');
+      }
+    },
+    {
+      title: 'Published On',
+      dataIndex: 'listedOn',
+      key: 'listedOn',
+      render: (s: Date, record: BulkListingLog) => {
+        if (record.verifiedOn && record.channelItem) {
+          return moment(s).format('DD/MM/YY/ hh:mm');
+        }
+      }
+    },
+  ];
 
   return (
     <Layout className="bulk-list-content">
@@ -245,23 +376,25 @@ export const BulkListing = (/*props: props*/) => {
                 </div>
               </Col>
             </Row>
-            {summary && (
+            {autoList && autoList.summary && autoList.summary.requestId !== EmptyGuid() && (
               <Row>
                 <Col>
                   <div className="bulk-summary">
-                    <div className={summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
+                    <div className={autoList.summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
                       <h4>
-                        <strong>{summary.done} urls are successfully being listed.</strong>
+                        <div className="summary-heading">
+                          <strong>{autoList.summary.done} urls are successfully being listed.</strong>
+                        </div>
                       </h4>
                       <Collapse>
-                        {summary.duplicatedUrls?.length > 0 ? (
+                        {autoList.summary.duplicatedUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + summary.duplicatedUrls.length + ' duplicated products on your store.'}
+                            header={'View ' + autoList.summary.duplicatedUrls.length + ' duplicated products on your store.'}
                             key="1"
                           >
                             <p>
-                              {summary.duplicatedUrls?.map((x) => {
-                                return x + <br />;
+                              {autoList.summary.duplicatedUrls?.map((x: string, key: Key) => {
+                                return <p key={key}>{x}</p>;
                               })}
                             </p>
                           </Panel>
@@ -269,14 +402,14 @@ export const BulkListing = (/*props: props*/) => {
                           ''
                         )}
 
-                        {summary.existingListingUrls?.length > 0 ? (
+                        {autoList.summary.existingListingUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + summary.existingListingUrls.length + ' duplicated products on the list.'}
+                            header={'View ' + autoList.summary.existingListingUrls.length + ' duplicated products on the list.'}
                             key="2"
                           >
                             <p>
-                              {summary.existingListingUrls?.map((x) => {
-                                return x + <br />;
+                              {autoList.summary.existingListingUrls?.map((x: string, key: Key) => {
+                                return <p key={key}>{x}</p>;
                               })}
                             </p>
                           </Panel>
@@ -284,14 +417,14 @@ export const BulkListing = (/*props: props*/) => {
                           ''
                         )}
 
-                        {summary.forbiddenWordsUrls?.length > 0 ? (
+                        {autoList.summary.forbiddenWordsUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'}
+                            header={'View ' + autoList.summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'}
                             key="3"
                           >
                             <p>
-                              {summary.forbiddenWordsUrls?.map((x) => {
-                                return x + <br />;
+                              {autoList.summary.forbiddenWordsUrls?.map((x: string, key: Key) => {
+                                return <p key={key}>{x}</p>;
                               })}
                             </p>
                           </Panel>
@@ -299,11 +432,11 @@ export const BulkListing = (/*props: props*/) => {
                           ''
                         )}
 
-                        {summary.invalidSourceUrls?.length > 0 ? (
-                          <Panel header={'View ' + summary.invalidSourceUrls.length + ' invalid urls.'} key="4">
+                        {autoList.summary.invalidSourceUrls?.length > 0 ? (
+                          <Panel header={'View ' + autoList.summary.invalidSourceUrls.length + ' invalid urls.'} key="4">
                             <p>
-                              {summary.invalidSourceUrls?.map((x) => {
-                                return x + <br />;
+                              {autoList.summary.invalidSourceUrls?.map((x: string, key: Key) => {
+                                return <p key={key}>{x}</p>;
                               })}
                             </p>
                           </Panel>
@@ -312,12 +445,23 @@ export const BulkListing = (/*props: props*/) => {
                         )}
                       </Collapse>
 
-                      <p>{summary.noQuota > 0 ? <span>No quota remaining by {summary.noQuota}.</span> : ''}</p>
+                      <p>{autoList.summary.noQuota > 0 ? <span>No quota remaining by {autoList.summary.noQuota}.</span> : ''}</p>
                     </div>
                   </div>
                 </Col>
               </Row>
             )}
+
+            {autoList?.logs && autoList.logs.length > Zero() && (
+              <Row>
+                <Col span={24}>
+                  <div className="bulk-log">
+                    <SimpleTable columns={columns} dataSource={autoList.logs} />
+                  </div>
+                </Col>
+              </Row>
+            )}
+
           </div>
           <div className="manual-list-content">
             <div className="container-manual-listing">
