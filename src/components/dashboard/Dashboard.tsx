@@ -48,6 +48,9 @@ import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
 import { ProductQuota } from 'src/redux/user/userSlice';
 //import { DateRangePicker } from 'react-date-range';
+import Chart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
@@ -226,6 +229,80 @@ export const Dashboard = () => {
       <SuccessBtn>Yes! List for me</SuccessBtn>
     </div>
   );
+  const saleData: number[] = sales?.map((s: Sale) => s.quantitySold);
+  const profitData: number[] = sales?.map((s: Sale) => {
+    const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
+    return profit.toFixed(1);
+  });
+  console.log(saleData);
+  console.log(profitData);
+  const chartData: ApexOptions = {
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2
+      },
+      toolbar: {
+        show: false
+      }
+    },
+    colors: ['#77B6EA', '#545454'],
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    title: {
+      text: 'Profit & Sales',
+      align: 'left'
+    },
+    grid: {
+      borderColor: '#e7e7e7',
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      },
+    },
+    markers: {
+      size: 1
+    },
+    xaxis: {
+      categories: monthsLabels,
+      title: {
+        text: 'Month'
+      }
+    },
+    yaxis: {
+      title: {
+        text: ''
+      }
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'right',
+      floating: true,
+      offsetY: -25,
+      offsetX: -5
+    },
+    series: [
+      {
+        name: 'Sales: ',
+        data: saleData
+      },
+      {
+        name: 'Profit: ',
+        data: profitData
+      }
+    ]
+  };
+
   return (
     <Layout className="dashboard-container">
       <div className="general-section">
@@ -278,7 +355,7 @@ export const Dashboard = () => {
         <div className="sales">
           <div className="graph-cntrlers">
             <div>
-              <Selector value={ selectedPeriod} placeHolder="Select a period" onChange={onSelectOption}>
+              <Selector value={selectedPeriod} placeHolder="Select a period" onChange={onSelectOption}>
                 {periodOptions}
               </Selector>
             </div>
@@ -305,6 +382,9 @@ export const Dashboard = () => {
           </div>
 
           <div className="graph-container">
+            <Chart options={chartData} series={chartData.series} type="line" width='100%' height={450} />
+            <br />
+            <h3>Old Chart</h3>
             <Line options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
           </div>
         </div>
