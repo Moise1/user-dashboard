@@ -254,7 +254,7 @@ export const Dashboard = () => {
     },
     colors: ['#77B6EA', '#545454'],
     dataLabels: {
-      enabled: true,
+      enabled: true
     },
     stroke: {
       curve: 'smooth'
@@ -268,7 +268,7 @@ export const Dashboard = () => {
       row: {
         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
         opacity: 0.5
-      },
+      }
     },
     markers: {
       size: 1
