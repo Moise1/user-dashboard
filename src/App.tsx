@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect, RouteComponentProps} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import {
   UserLogin,
@@ -19,9 +19,8 @@ import {
   ChannelConfiguration,
   GetStarted,
   Catalog,
-  SourcesConfigurationTable,
+  SourcesConfiguration,
   Dashboard,
-  SourceConfiguration,
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
@@ -35,12 +34,13 @@ import {
   Checkout,
   ManualPublish,
   BulkListing,
-  ListNow
+  ListNow,
+  AccountConfiguration
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { Links } from './links';
 
-export const App = withRouter(({ history }) => {
+export const App = withRouter(({ history }: {history: RouteComponentProps['history']}) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
@@ -83,9 +83,10 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
-            <ProtectedRoute path={Links.SourceSettings} component={SourceConfiguration} />
-            <ProtectedRoute path={Links.SourcesSettingsTable} component={SourcesConfigurationTable} />
+            <ProtectedRoute path={Links.SourcesSettings + '/:id?'} component={SourcesConfiguration} />
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
+            <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />
+            <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute exact path={Links.Services} component={Services} />
             <ProtectedRoute exact path={Links.Services + '/:slug'} component={AllServices} />
@@ -100,7 +101,6 @@ export const App = withRouter(({ history }) => {
             <ProtectedRoute path={Links.ConfigureListingService} component={ConfigureListingService} />
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
-            <ProtectedRoute path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
             <ProtectedRoute exact path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />

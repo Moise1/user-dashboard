@@ -44,8 +44,8 @@ export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
-  const [ebayUrl, setEbayUrl] = useState<string>('');
-  const { url, getLinkLoading } = useAppSelector((state) => state.newChannel);
+  const [openUrl, setOpenUrl] = useState<boolean>(false);
+  const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -65,12 +65,13 @@ export const NewChannel = () => {
   };
 
   const handleNext = () => {
-    if (ebayUrl !== '' && step === 4 && data.api === 'easy') {
+    if(openUrl && data.platform === 1 && ebayUrl) {
       popupWindow(ebayUrl, window, 800, 600);
-      return;
+      return false;
+    }else{
+      setStep((prevState) => prevState + 1);
+      setShowPrev(true);
     }
-    setStep((prevState) => prevState + 1);
-    setShowPrev(true);
   };
 
   const handleChangePlatform = (value: number) => {
@@ -93,89 +94,90 @@ export const NewChannel = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      getEbayLinkAccount({
-        data: {
-          shop: data.platform!,
-          site: data.storeLocation as number
-        }
-      })
-    );
     if(data.api === 'easy'){
-      setEbayUrl(url);
-    }else {
-      setEbayUrl('');
+      dispatch(
+        getEbayLinkAccount({
+          data: {
+            shop: data.platform!,
+            site: data.storeLocation as number
+          }
+        })
+      );
+      setOpenUrl(true);
     }
-  }, [data.api]);
+    
+    if(data.api === 'advance') setOpenUrl(false);
+
+  }, [data.api, getEbayLinkAccount]);
+
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
-    case 1:
-      return (
-        <PlatForm 
-          platform={data.platform!} 
-          step={step} 
-          handleChangePlatform={handleChangePlatform}
-        />
-      );
-    case 2:
-      return (
-        <StoreLocation
-          platform={data.platform!}
-          step={step}
-          handleChangeLocation={handleChangeLocation}
-          location={data.storeLocation!}
-        />
-      );
-    case 3:
-      return (
-        <Account 
-          platform={data.platform!} 
-          handleChangeApi={handleChangeApi} 
-          step={step} handleNext={handleNext}
-        />
-      );
-    case 4:
-      if (data.platform === 1 || data.platform === 1) {
+      case 1:
         return (
-          <AccountConnect
-            api={data.api}
-            extension={data.extension}
-            platform={data.platform}
-            handleChangeApi={handleChangeApi}
-            handleChangeExtension={handleChangeExtension}
-            step={step}
+          <PlatForm 
+            platform={data.platform!} 
+            step={step} 
+            handleChangePlatform={handleChangePlatform}
           />
         );
-      } else {
+      case 2:
         return (
-          <UserName
+          <StoreLocation
             platform={data.platform!}
             step={step}
-            storeLocation={data.storeLocation}
+            handleChangeLocation={handleChangeLocation}
+            location={data.storeLocation!}
+          />
+        );
+      case 3:
+        return (
+          <Account 
+            platform={data.platform!} 
+            handleChangeApi={handleChangeApi} 
+            step={step}
             handleNext={handleNext}
           />
         );
-      }
-    case 5:
-      return (
-        <UserName 
-          platform={data.platform!} 
-          step={step} 
-          storeLocation={data.storeLocation}
-          handleNext={handleNext}
-        />
-      );
-    case 6:
-      return (
-        <ChooseList 
-          platform={data.platform!} 
-          handleChangeList={handleChangeList} 
-          list={data.list} step={step} 
-        />
-      );
-    default:
-      break;
+      case 4:
+        if (data.platform === 1 || data.platform === 3) {
+          return (
+            <AccountConnect
+              api={data.api}
+              extension={data.extension}
+              platform={data.platform}
+              handleChangeApi={handleChangeApi}
+              handleChangeExtension={handleChangeExtension}
+              step={step}
+            />
+          );
+        } else {
+          return (
+            <UserName
+              platform={data.platform!}
+              step={step}
+              storeLocation={data.storeLocation}
+            /> 
+          );
+        }
+      case 5:
+        return (
+          <UserName 
+            platform={data.platform!} 
+            step={step} 
+            storeLocation={data.storeLocation}
+          />
+        );
+      case 6:
+        return (
+          <ChooseList 
+            platform={data.platform!} 
+            handleChangeList={handleChangeList} 
+            list={data.list} step={step} 
+          />
+        );
+      default:
+        break;
     }
   };
 
@@ -197,8 +199,8 @@ export const NewChannel = () => {
         </Col>
       </Row>
       <div className="nav-btns">
-        {showPrev && step >= 1 && (
-          <Button className="" onClick={handlePrev}>
+        {showPrev && step > 1 && (
+          <Button  onClick={handlePrev}>
             <ArrowLeftOutlined style={{ fontSize: '19px' }} /> Previous Step
           </Button>
         )}

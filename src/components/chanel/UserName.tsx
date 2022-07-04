@@ -3,29 +3,30 @@ import { Input, Form } from 'antd';
 import { eShop } from '../../utils/eShop';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/newChannelThunk';
-import { ConfirmBtn } from 'src/small-components/ActionBtns';
+import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { popupWindow } from './NewChannel';
+import { store } from '../../redux/store';
 
 interface props {
   step: number;
   platform: number;
   storeLocation: number | string | null;
-  handleNext: () => void;
 }
 
 export const UserName = (props: props) => {
   const { platform, storeLocation } = props;
 
   const dispatch = useAppDispatch();
-  const {getLinkLoading, newChannelLoading, url} = useAppSelector((state) => state.newChannel);
+  const {getLinkLoading, newChannelLoading } = useAppSelector((state) => state.newChannel);
   const ebayShopIdentifier = 'My_Super_Shop';
   const amazonShopIdentifier = 'MySuperShop';
   const shopifyShopUrl = 'https://myshop.myshopify.com';
 
   const platformValue = eShop[platform];
+
   const onFinish = async (values: { shopName: string }) => {
     if(platform === 2){
-      dispatch(
+      await dispatch(
         getShopifyLinkAccount({data: {
           shop: platform,
           site: storeLocation as number,
@@ -33,9 +34,11 @@ export const UserName = (props: props) => {
         }
         })
       );
+      const {shopifyUrl} = store.getState().newChannel;
+      popupWindow(shopifyUrl, window, 800, 600);
       return false;
     }
-
+    
     await dispatch(
       createNewChannel({
         isoCountry: storeLocation as number,
@@ -43,9 +46,8 @@ export const UserName = (props: props) => {
         channelStoreIdentifier: values.shopName
       })
     );
-  };
 
-  if(url) popupWindow(url, window, 800, 600);
+  };
 
   return (
     <div className="username-form-container">

@@ -1,17 +1,15 @@
 // import { AsyncThunk } from '@reduxjs/toolkit';
 import { useState, useEffect } from 'react';
-import { PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
 import { ActiveListing } from 'src/redux/unmap';
 
-interface Props {
+interface Props<ListingsStatusType> {
   searchTxt: string | null;
   dataSource: () => Array<ListingsStatusType>;
   tabStatus: string | null;
 }
-export type ListingsStatusType = ActiveListing | PendingListings | TerminatedListings;
 type KeyType = string | number | null | undefined | ActiveListing;
 
-export const useTableSearch = ({ searchTxt, dataSource, tabStatus }: Props) => {
+export const useTableSearch = <ListingsStatusType>({ searchTxt, dataSource, tabStatus }: Props<ListingsStatusType>) => {
   const [filteredData, setFilteredData] = useState<(ListingsStatusType | null)[]>([]);
   const [origData, setOrigData] = useState<ListingsStatusType[]>([]);
   const [searchIndex, setSearchIndex] = useState<{ allValues: string }[]>([]);

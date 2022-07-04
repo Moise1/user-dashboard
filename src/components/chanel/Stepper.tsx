@@ -9,13 +9,15 @@ interface Props {
 export const Stepper = ({ current, platform, className }: Props) => {
   const { Step } = Steps;
   return (
-    <Steps current={platform ? current: 0} className={className}>
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-      <Step />
-    </Steps>
+    <div className="mobile-stepper">
+      <Steps current={platform ? current: 0} className={className} direction='horizontal'>
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+        <Step />
+      </Steps>
+    </div>
   );
 };

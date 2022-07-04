@@ -1,6 +1,6 @@
 ﻿import { Button, Spin } from 'antd';
 import { ReactNode } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 
 interface Props {
   label: string | ReactNode;
@@ -13,7 +13,7 @@ export const SettingButton = (props: Props) => {
   const { label, onClick, loading, disabled } = props;
 
   return <div className="setting setting-button">
-    <Button className='warning-btn' onClick={onClick} disabled={disabled}>
+    <Button className='primary-btn' onClick={onClick} disabled={disabled}>
       {!loading && label}
       {loading && <Spin />}
     </Button>

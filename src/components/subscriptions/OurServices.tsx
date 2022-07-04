@@ -29,36 +29,36 @@ export const OurServices = () => {
 
   const getBillingPeriodDiscount = (billingPeriodId: number) => {
     switch (billingPeriodId) {
-    case BillingPeriod.Monthly:
-      return '';
-    case BillingPeriod.Biannually:
-      return '20% off';
-    case BillingPeriod.Yearly:
-      return '40% off';
+      case BillingPeriod.Monthly:
+        return '';
+      case BillingPeriod.Biannually:
+        return '20% off';
+      case BillingPeriod.Yearly:
+        return '40% off';
     }
   };
 
   const getBillingPeriodText = (billingPeriodId: number) => {
     switch (billingPeriodId) {
-    case BillingPeriod.Monthly:
-      return '';
-    case BillingPeriod.Biannually:
-      return '(6 months)';
-    case BillingPeriod.Yearly:
-      return '(1 year)';
+      case BillingPeriod.Monthly:
+        return '';
+      case BillingPeriod.Biannually:
+        return '(6 months)';
+      case BillingPeriod.Yearly:
+        return '(1 year)';
     }
   };
 
   const getBillingPeriodMonths = (billingPeriodId: number) => {
     switch (billingPeriodId) {
-    case BillingPeriod.Monthly:
-      return 1;
-    case BillingPeriod.Biannually:
-      return 6;
-    case BillingPeriod.Yearly:
-      return 12;
-    default:
-      return 1;
+      case BillingPeriod.Monthly:
+        return 1;
+      case BillingPeriod.Biannually:
+        return 6;
+      case BillingPeriod.Yearly:
+        return 12;
+      default:
+        return 1;
     }
   };
 
@@ -138,7 +138,7 @@ export const OurServices = () => {
                         <div className="rate-details top-most">
                           <span className="euro">{currency}</span>
                           <h1 className="monthly-rate">
-                            {(prc.price / months).toFixed(2) }
+                            {(prc.price / months).toFixed(2)}
                           </h1>
                           <h3 className="frequency">/mo</h3>
                         </div>

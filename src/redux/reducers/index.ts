@@ -8,6 +8,7 @@ import { userReducer } from '../user/userSlice';
 import { sourcesConfigReducer } from '../source-configuration/source-configuration-slice';
 import { sourcesReducer } from '../sources/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
+import { autoListReducer } from '../listings/listingsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
 import { manualListingsReducer } from '../listings/listingsSlice';
@@ -29,6 +30,7 @@ import { listingServicesReducer } from '../dashboard/listingServicesSlice';
 import { noApiServersReducer, getManagedServersReducer } from '../dashboard/noApiServersSlice';
 import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
+import { accountConfigurationReducer } from '../account-configuration/account-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
@@ -49,8 +51,9 @@ export const allReducers = combineReducers({
 
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
-
+  accountConfiguration: accountConfigurationReducer,
   responseObect: paymentReducer,
+  autoList: autoListReducer,
   listings: listingsReducer,
   pendingListings: pendingListingsReducer,
   terminatedListings: terminatedListingsReducer,

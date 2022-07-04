@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import '../../sass/list-now/manual-listing.scss';
+import { Link } from 'react-router-dom';
 
 export const ManualPublish = (/*props: props*/) => {
   const dispatch = useAppDispatch();
@@ -40,10 +41,10 @@ export const ManualPublish = (/*props: props*/) => {
                   <li>You are done! Your item will soon appear under your Active listing section.</li>
                 </h4>
 
-                <h4>
+                <p>
                   NOTE: If your listing comes up with an error you can check your{' '}
-                  <a href="#">My Listings{' > '}Pending Listings</a> and see further detail.
-                </h4>
+                  <Link to={'/products'}>Products{' > '}Pending products</Link> and see further detail.
+                </p>
               </div>
             </Col>
             <Col md={12} xs={24}>
@@ -73,19 +74,32 @@ export const ManualPublish = (/*props: props*/) => {
           {/*  </Col>;*/}
           {/*})}*/}
           <Row gutter={[16, 8]}>
-            {manualListings.moreSources?.map((itm: { id: number | undefined; name: string | undefined; baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }) => {
-              return <Col span={6} key={itm.id}>
-                <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
-                  <div className="list-card">
-                    {loadings}
-                    {/*eslint-disable @typescript-eslint/no-var-requires */}
-                    <img width="159" height="38" alt="sourcelogo" src={require('../../assets/logos/' + itm.id + '.png').default}/>
-                    <br />
-                    <h3>{itm.name}</h3>
-                  </div>
-                </a>
-              </Col>;
-            })}
+            {manualListings.moreSources?.map(
+              (itm: {
+                id: number | undefined;
+                name: string | undefined;
+                baseUrl: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined;
+              }) => {
+                return (
+                  <Col span={6} key={itm.id}>
+                    <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
+                      <div className="list-card">
+                        {loadings}
+                        {/*eslint-disable @typescript-eslint/no-var-requires */}
+                        <img
+                          width="159"
+                          height="38"
+                          alt="sourcelogo"
+                          src={require('../../assets/logos/' + itm.id + '.png').default}
+                        />
+                        <br />
+                        <h3>{itm.name}</h3>
+                      </div>
+                    </a>
+                  </Col>
+                );
+              }
+            )}
           </Row>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
-export interface ListingData {
+import { getAutolist, saveAutolist, getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
+
+export type ListingData = {
   imageUrl: string;
   asin: null;
   buyBoxPrice: null;
@@ -36,7 +37,7 @@ export interface ListingData {
   watches: number;
 }
 
-export interface PendingListings {
+export type PendingListings = {
   categoryId: number;
   channelOAuthId: number;
   createdById: number;
@@ -54,8 +55,7 @@ export interface PendingListings {
 
 export type TerminatedListings = PendingListings;
 
-
-export interface ListingsData {
+export type ListingsData = {
   createdBy: number;
   ignoreVero: boolean | undefined;
   ignoreOOS: boolean | undefined;
@@ -65,8 +65,77 @@ export interface ListingsData {
   listings: string[][];
 }
 
+export type ListingsSummary = {
+  requestId: string;
+  done: number;
+  forbiddenWordsUrls: string[];
+  duplicatedUrls: string[];
+  existingListingUrls: string[];
+  invalidSourceUrls: string[];
+  noQuota: number;
+  notDone: number;
+}
 
-export interface ListingsSource {
+export enum eBulkListingStatus {
+  UNKNOWN = 0,
+  INITIAL = 1,
+  PROCESSING = 20,
+  DONE = 200,
+  ERROR = 400,
+  TEMPORAL_ERROR = 401
+}
+
+export enum BulkListingError {
+  UNKOWN = 0,
+  INVALID_ORDER = 1,
+  SCRAPING = 2,
+  INVALID_TOKEN = 3,
+  NO_CATEGORY = 4,
+  VERO = 5,
+  ZERO_TOKENS = 6,
+  OOS = 7
+}
+
+export enum eChannelListingStatus {
+  Unknown = 0x0,
+  PreparedForFirstListing = 0x1,
+  QueuedForWork = 0x2,
+  TemporaryFailure = 0x4,
+  PermanentFailure = 0x8,
+  Retrying = 0x10,
+  InvalidUserCredentials = 0x20,
+  ListingCreatedSuccessfully = 0x40,
+  RetryingTwice = 0x80,
+  RetryingFinal = 0x100,
+  ExceptionThrown = 0x200,
+  CreatingListing = 0x400,
+  Removed = 0x800,
+  Terminated = 0x1000,
+  PendingForScraping = 0x2000,
+  PendingToReview = 0x4000,
+  BULK = 0x8000,
+  BulkScraping = 0x10000,
+  ImportedWaitingForChannelData = 0x20000,
+  PendingForRelist = 0x40000,
+  Relisted = 0x80000,
+  ListingInStore = 0x100000,
+  ListingVariation = 0x200000,
+  BulkApiCreated = -2147483648
+}
+
+export type BulkListingLog = {
+  id: number;
+  url: string;
+  status: eBulkListingStatus;
+  createdOn?: Date;
+  errorCode?: BulkListingError;
+  channelItem: string;
+  channelListingStatus: eChannelListingStatus;
+  verifiedOn: Date;
+  listedOn: Date;
+}
+
+export type ListingsSource = {
   id: number;
   channelOAuthId: number;
   createdOn: Date;
@@ -90,6 +159,23 @@ export interface ListingsSource {
   batchId: string;
 }
 
+export type Autolist = {
+  logs: BulkListingLog[];
+  listFrequencyMinutes: null;
+  request: string;
+  createdBy: null;
+  ignoreVero: null;
+  ignoreOOS: null;
+  reviewBeforePublishing: null;
+  channelOAuthId: null;
+  maxQuantityLimit: null;
+  rawUrls: null;
+  channelId: null;
+  Sources: null;
+  summary: ListingsSummary;
+  dontListUntil: null;
+}
+
 const initialState = {
   listings: <unknown>[],
   pendingListings: <unknown>[],
@@ -105,6 +191,44 @@ const initialStatee = {
   loading: false,
   error: ''
 };
+
+const autoListState = {
+  autoList: <unknown>[],
+  loading: false,
+  error: ''
+};
+
+export const autoListSlice = createSlice({
+  name: 'autoList',
+  initialState: autoListState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAutolist.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getAutolist.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.autoList = payload;
+    });
+    builder.addCase(getAutolist.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+    builder.addCase(saveAutolist.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(saveAutolist.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.autoList = payload;
+    });
+    builder.addCase(saveAutolist.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
 
 export const listingsSlice = createSlice({
   name: 'listings',
@@ -227,6 +351,7 @@ export const GetListingsImagesSlice = createSlice({
   }
 });
 
+export const { reducer: autoListReducer } = autoListSlice;
 export const { reducer: listingsReducer } = listingsSlice;
 export const { reducer: listingsSourceReducer } = getListingsSourceSlice;
 export const { reducer: manualListingsReducer } = getManualListingsSlice;

@@ -1,11 +1,10 @@
 import { useEffect, useContext, useState } from 'react';
 import { Form, Input, Spin, Popconfirm } from 'antd';
-import { Key } from 'antd/lib/table/interface';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 // import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
-import { DataTable } from '../tables/DataTable';
+import { DataTable, DataTableKey } from '../tables/DataTable';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
@@ -20,7 +19,7 @@ export const PricingRules = () => {
 
   const [rulesPerPage, setRulesPerPage] = useState<number>(10);
   const [current, setCurrent] = useState<number>(1);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
 
   const { Item } = Form;
   const dispatch = useAppDispatch();
@@ -56,7 +55,7 @@ export const PricingRules = () => {
     dispatch(getRules());
   };
 
-  const onSelectChange = (selectedRowKeys: Key[]) => {
+  const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
 

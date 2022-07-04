@@ -21,8 +21,14 @@
 }
 .add-servers {
   align-items: center;
-  display: inline;
+  display: flex;
   column-gap: 2 * $spacer;
+  h4 {
+    color: $primary;
+  }
+  a {
+    display: flex;
+  }
   .footer-link {
     margin-left: 2px;
   }
@@ -105,9 +111,16 @@
     }
 
     .plan {
-      margin-top: 2rem;
+      margin-top: 3rem;
       display: grid;
       place-items: center;
+      .upgrade {
+        .upgrade-txt {
+          color: white;
+          margin: 0;
+          padding: 4px;
+        }
+      }
     }
   }
 }

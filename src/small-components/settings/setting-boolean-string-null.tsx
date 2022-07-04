@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 import { SettingBoolean } from './setting-boolean';
 import { SettingString } from './setting-string';
 
@@ -37,7 +37,7 @@ export const SettingBooleanStringNull = (props: Props) => {
     );
   };
 
-  const OnChangeBool = (v: string) => {
+  const OnChangeBool = (v: string | null) => {
     OnChange(v == '0' ? null : defaultStringValue);
   };
 

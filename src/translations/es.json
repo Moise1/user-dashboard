@@ -1,11 +1,10 @@
 {
-  "AddNewChannel": "Añadir canal de venta",
+  "AddNewChannel": "Añadir tienda",
   "ActiveListings": "Productos Activos",
   "ActiveListingsShort": "Activos",
   "PendingListings": "Productos Pendientes",
   "PendingListingsShort": "Pendientes",
   "TerminatedListings": "Productos Terminados",
-  "TerminatedListingsShort": "Terminados",
 
   "Select": "Seleccionar",
 
@@ -22,7 +21,7 @@
   "Channel.Setting.Description.DefaultEAN": "Para ser utilizado cuando EAN/UPC no es detectado automáticamente al crear una producto. También puede ser \"No aplica\".",
   "Channel.Setting.Description.DefaultQuantity": "Número predeterminado de artículos a la venta al crear un producto. Este número todavía se puede cambiar en cada listado individual.",
   "Channel.Setting.Description.DefaultMPN": "Se utilizará cuando el MPN no es detectado automáticamente al crear un producto. Tanbueb puede ser \"No se aplica\".",
-  "Channel.Setting.Description.DefaultTemplate": "Defina la apariencia de sus productos. Puede ver diferentes opciones debajo del {templates_link}",
+  "Channel.Setting.Description.DefaultTemplate": "Defina la apariencia de sus productos. Puede ver diferentes opciones en {templates_link}",
   "Channel.Setting.Description.Ending99": "Si se activa, los precios de todos los productos terminarán en .99 .",
   "Channel.Setting.Description.FeePercentage": "Para calcular el beneficio obtenido en cada producto (eBay FVF, tarifa de PayPal...). Es solo una estimación y no afecta tus precios.",
   "Channel.Setting.Description.ForbiddenWords": "Evite que se envíe cualquier listado si contiene alguna de las palabras a continuación. Lista separada por comas. Puede agregar palabras que hagan referencia a elementos prohibidos. El software escaneará la descripción y el título del listado para validarlo antes de enviarlo.",
@@ -110,7 +109,8 @@
   "Menu.AutoOrderingConfiguration": "Auto Pedidos",
   "Menu.BrowserExtensions": "Extensiones",
   "Menu.Catalog": "Catálogo",
-  "Menu.Channel": "Canal",
+  "Menu.Account": "Cuenta",
+  "Menu.Channel": "Tienda",
   "Menu.Dashboard": "Tablero",
   "Menu.FAQ": "Preguntas frecuentes",
   "Menu.Help": "Ayuda",
@@ -123,14 +123,27 @@
   "Menu.Services": "Servicios",
   "Menu.SourcesTable": "Proveedores",
   "Menu.Subscriptions": "Subscripciones",
-  "Menu.OurServices": "Services",
   "Menu.Start": "Cómo empezar",
   "Menu.Templates": "Plantillas",
   "Menu.VaProfiles": "Asistentes",
+  "Menu.Logout": "Salir",
 
   "Platform.Amazon.NoApi.Username": "nombre tienda en Amazon",
   "Platform.eBay.NoApi.Username": "usuario de eBay",
+  "Platform.Shopify.NoApi.Username": " ",
 
+  "Setting.DefinedBySettings": "Definido por Tienda ({value})",
+  "Setting.DefinedBySettingsEmpty": "Definido por Tienda",
+  "Setting.Custom": "Personalizado",
+  "Setting.Yes": "Sí",
+  "Setting.No": "No",
+
+  "Sources.Setting.Description.MaxDeliveryDays": "Si el tiempo de entrega supera los días máximos de entrega, el artículo se marcará como Agotado",
+  "Sources.Setting.Description.OnlyPrime": " ",
+  "Sources.Setting.Name.MaxDeliveryDays": "Días máximos de entrega",
+  "Sources.Setting.Name.OnlyPrime": "Solo Prime",
+  "Sources.Setting.PlaceHolder.DefinedBySettings": "Definido por Tienda ({value})",
+  "Sources.Setting.PlaceHolder.DefinedBySettingsEmpty": "Definido por Tienda",
   "Sources.Table.Name.BusinessCity": "Ciudad",
   "Sources.Table.Name.BusinessPayment": "Política de pagos",
   "Sources.Table.Name.BusinessReturn": "Política de devoluciones",
@@ -150,7 +163,7 @@
 
 
   "Topbar.Quota": "Cuota",
-
+  "Topbar.Update": "Mejorar",
 
 
 

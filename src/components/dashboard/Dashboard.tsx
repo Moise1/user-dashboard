@@ -10,11 +10,13 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
   PointElement
 } from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 import { DatePicker } from 'antd';
 import { RangeValue } from 'rc-picker/lib/interface';
@@ -44,15 +46,11 @@ import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
-interface ProductQuota {
-  quota: number;
-  used: number;
-  price: number;
-  endsOn: Date;
-  currency: string;
-  pending: number;
-  cancelled: boolean;
-}
+import { ProductQuota } from 'src/redux/user/userSlice';
+//import { DateRangePicker } from 'react-date-range';
+import Chart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+
 
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
@@ -60,7 +58,6 @@ export const Dashboard = () => {
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   //
-  console.log('The setSearchedChannels', setSearchedChannels);
   const dispatch = useAppDispatch();
   const { channels } = useAppSelector((state) => state.channels);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
@@ -158,14 +155,13 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement);
+  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement, LineElement);
 
   const periodOptions = [
-    { value: 0, label: '3' },
-    { value: 1, label: '4' }
+    { value: 3, label: 'Daily basis' },
+    { value: 4, label: 'Monthly basis' }
   ];
   const onSelectOption = (value: SelectorValue) => {
-    value = value === 0 ? 3 : 4;
     setSelectedPeriod(value as number);
   };
   const salesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
@@ -233,13 +229,87 @@ export const Dashboard = () => {
       <SuccessBtn>Yes! List for me</SuccessBtn>
     </div>
   );
+  const saleData: number[] = sales?.map((s: Sale) => s.quantitySold);
+  const profitData: number[] = sales?.map((s: Sale) => {
+    const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
+    return profit.toFixed(1);
+  });
+  console.log(saleData);
+  console.log(profitData);
+  const chartData: ApexOptions = {
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2
+      },
+      toolbar: {
+        show: false
+      }
+    },
+    colors: ['#77B6EA', '#545454'],
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    title: {
+      text: 'Profit & Sales',
+      align: 'left'
+    },
+    grid: {
+      borderColor: '#e7e7e7',
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      },
+    },
+    markers: {
+      size: 1
+    },
+    xaxis: {
+      categories: monthsLabels,
+      title: {
+        text: 'Month'
+      }
+    },
+    yaxis: {
+      title: {
+        text: ''
+      }
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'right',
+      floating: true,
+      offsetY: -25,
+      offsetX: -5
+    },
+    series: [
+      {
+        name: 'Sales: ',
+        data: saleData
+      },
+      {
+        name: 'Profit: ',
+        data: profitData
+      }
+    ]
+  };
+
   return (
     <Layout className="dashboard-container">
       <div className="general-section">
         <h1>General</h1>
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
-            <h6>Products</h6>
+            <h3>Products</h3>
             <div className="container-numbers">
               <div className="numbers-info">
                 <div className="listed-monitored">
@@ -253,15 +323,15 @@ export const Dashboard = () => {
               </div>
 
               <div className="plan">
-                <p>Free Plan</p>
-                <Link className="redirection-link" to="/subscriptions">
-                  Upgrade your plan
+                <h4>Free Plan</h4>
+                <Link className="redirection-link upgrade" to="/subscriptions">
+                  <h4 className="upgrade-txt">Upgrade your plan</h4>
                 </Link>
               </div>
             </div>
           </Col>
           <Col className="stores" xs={24} lg={10}>
-            <h6>Your stores</h6>
+            <h3>Your stores</h3>
             <SearchInput onSearch={onSearch} />
             <DataTable
               dataSource={searchedChannels.length ? searchedChannels : channels}
@@ -284,14 +354,17 @@ export const Dashboard = () => {
         <h1>Your sales</h1>
         <div className="sales">
           <div className="graph-cntrlers">
-            <Selector placeHolder="Select a period" onChange={onSelectOption}>
-              {periodOptions}
-            </Selector>
+            <div>
+              <Selector value={selectedPeriod} placeHolder="Select a period" onChange={onSelectOption}>
+                {periodOptions}
+              </Selector>
+            </div>
             {selectedPeriod === 3 ? (
               <DatePicker onChange={salesDateChange} />
             ) : (
               <RangePicker onChange={salesDateChange} />
             )}
+
             <div className="sales-profit-area">
               <div className="digits">{salesOrProfit()}</div>
               <h4 className="sales-profit-numbers">
@@ -309,7 +382,10 @@ export const Dashboard = () => {
           </div>
 
           <div className="graph-container">
-            <Bar options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
+            <Chart options={chartData} series={chartData.series} type="line" width='100%' height={450} />
+            <br />
+            <h3>Old Chart</h3>
+            <Line options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
           </div>
         </div>
       </div>
@@ -319,22 +395,24 @@ export const Dashboard = () => {
         <Row className="other-services-cols" gutter={[0, 15]}>
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
-              <h6>Listing Service</h6>
+              <h3>Listing Service</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {listingServicesResult?.length ? (
               <List
                 itemLayout="horizontal"
                 dataSource={listingServicesResult}
-                header="Active Services"
+                header={<h4>Active services</h4>}
                 renderItem={() =>
                   listingServicesResult.map((l: ListingService) => (
                     <div key={l.id}>
                       <div className="item-description">
-                        <div className="service-quantity">{l.listings} listing service</div>
-                        <a href="/setup-preferences" className="setup-link">
-                          Set up your preferences
-                        </a>
+                        <div className="service-quantity">
+                          <h5>{l.listings} listing service</h5>
+                        </div>
+                        <Link to={'/setup-preferences'} className="setup-link">
+                          <h5>Set up your preferences</h5>
+                        </Link>
                       </div>
                     </div>
                   ))
@@ -347,7 +425,7 @@ export const Dashboard = () => {
 
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
-              <h6>No API Server</h6>
+              <h3>No API Server</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             {noApiServersResult?.length ? (
@@ -355,20 +433,24 @@ export const Dashboard = () => {
                 itemLayout="horizontal"
                 header={
                   <div className="no-api-title">
-                    <div>Connected Channels</div>
-                    <div>Next Payment</div>
+                    <div>
+                      <h4>Connected channels</h4>
+                    </div>
+                    <div>
+                      <h4>Next Payment</h4>
+                    </div>
                   </div>
                 }
                 footer={
                   <div className="add-servers">
-                    <PlusCircleOutlined style={{ fontSize: '19px' }} />
                     <a
                       href="https://hustlegotreal.com/en/no-api-server/"
                       rel="noreferrer"
                       target="_blank"
                       className="footer-link"
                     >
-                      Add more servers
+                      <PlusCircleOutlined style={{ fontSize: '16px' }} />
+                      <h4>Add more servers</h4>
                     </a>
                   </div>
                 }
@@ -377,11 +459,13 @@ export const Dashboard = () => {
                   noApiServersResult.map((s: NoApiServer) => (
                     <div key={s.id}>
                       <div className="item-description">
-                        <a href="/configure-no-api-server" className="setup-link">
-                          Choose your channel
-                        </a>
+                        <Link to={'/configure-no-api-server'} className="setup-link">
+                          <h5>Choose your channel</h5>
+                        </Link>
                         <div className="next-payment">
-                          {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                          <h5>
+                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                          </h5>
                         </div>
                       </div>
                     </div>
@@ -403,11 +487,13 @@ export const Dashboard = () => {
             >
               <BuyTokens />
             </PopupModal>
-            <h6 className="tokens-title">Tokens - Title Optimization</h6>
+            <h3 className="tokens-title">Tokens - Title Optimization</h3>
             <div className="tokens-count">
               <p>Not sure what to list? We can help you find good selling items.</p>
               <p> We choose the best products and list them for you</p>
-              <SuccessBtn handleConfirm={handleOpenModal}>Get more tokens</SuccessBtn>
+              <SuccessBtn handleConfirm={handleOpenModal}>
+                <strong>Get more tokens</strong>
+              </SuccessBtn>
               <Link to="/products" className="alternative-link">
                 <p>Optimize your existing products</p>
               </Link>
@@ -416,7 +502,7 @@ export const Dashboard = () => {
 
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
-              <h6>Auto Ordering</h6>
+              <h3>Auto Ordering</h3>
               <BookOutlined style={{ fontSize: '19px' }} />
             </div>
             <div className="use-auto-ordering">
@@ -439,7 +525,7 @@ export const Dashboard = () => {
         <h1>Affiliates</h1>
         <div className="affiliates-contents">
           <div className="affiliates-title">
-            <h2>Your affiliate link</h2>
+            <h3>Your affiliate link</h3>
             <BookOutlined style={{ fontSize: '19px' }} />
           </div>
           <div className="affiliates-benefits">
@@ -458,9 +544,11 @@ export const Dashboard = () => {
 
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
-              <Selector placeHolder="Select a period" onChange={onSelectOption}>
-                {periodOptions}
-              </Selector>
+              <div>
+                <Selector placeHolder="Select a period" onChange={onSelectOption}>
+                  {periodOptions}
+                </Selector>
+              </div>
               {selectedPeriod === 3 ? (
                 <DatePicker onChange={affiliatesDateChange} />
               ) : (

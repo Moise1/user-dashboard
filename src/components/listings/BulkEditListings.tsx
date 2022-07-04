@@ -6,7 +6,7 @@ import { BulkEditMain } from '../../small-components/BulkEditMain';
 import { BulkEditDescription } from '../../small-components/BulkEditDescription';
 import Icon from '@ant-design/icons';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
-import {CircleWarningSvg} from '../../components/common/Icons';
+import { CircleWarningSvg } from '../../components/common/Icons';
 import '../../sass/edit-multiple-listings.scss';
 
 interface Props {
@@ -18,12 +18,12 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
 
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
-    case 0:
-      return <BulkEditMain />;
-    case 1:
-      return <BulkEditDescription />;
-    default:
-      return <></>;
+      case 0:
+        return <BulkEditMain />;
+      case 1:
+        return <BulkEditDescription />;
+      default:
+        return <></>;
     }
   };
   const handleChangeTab = (e: React.MouseEvent, index: number): void => {
@@ -38,7 +38,7 @@ export const BulkEditListings = ({ selectedItems }: Props) => {
       <div className="upper-section">
         <h3>Edit {selectedItems} listings</h3>
         <div className="warning">
-          <WarningOutlined/>
+          <WarningOutlined />
           <p>Be careful, by editing these values you will set this to all the selected listings.</p>
         </div>
       </div>

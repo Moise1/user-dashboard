@@ -6,12 +6,12 @@ import { ListingMain } from '../../small-components/ListingMain';
 import { ListingDescription } from '../../small-components/ListingDescription';
 import { ListingDetails } from '../../small-components/ListingDetails';
 import { ListingOptions } from '../../small-components/ListingOptions';
-import { ListingData } from 'src/redux/listings/listingsSlice';
 import { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import Icon from '@ant-design/icons';
 
 import '../../sass/edit-single-listing.scss';
 import { ExternalLinkSvg } from '../common/Icons';
+import { ListingData } from '../../redux/listings/listingsSlice';
 
 interface Props {
   selectedRecordData: ListingData;
@@ -22,18 +22,18 @@ export const EditSingleListing = ({ selectedRecordData }: Props) => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const renderContent = (index: number): JSX.Element => {
     switch (index) {
-    case 0:
-      return <ListingMain selectedRecordData={selectedRecordData} />;
-    case 1:
-      return <ListingDescription />;
-    case 2:
-      return <ListingDetails selectedRecordData={selectedRecordData} />;
+      case 0:
+        return <ListingMain selectedRecordData={selectedRecordData} />;
+      case 1:
+        return <ListingDescription />;
+      case 2:
+        return <ListingDetails selectedRecordData={selectedRecordData} />;
 
-    case 3:
-      return <ListingOptions />;
+      case 3:
+        return <ListingOptions />;
 
-    default:
-      return <></>;
+      default:
+        return <></>;
     }
   };
 
@@ -43,10 +43,10 @@ export const EditSingleListing = ({ selectedRecordData }: Props) => {
     setIndex(index);
   };
 
-  const ExternalLinkOutlined = (props: Partial<CustomIconComponentProps>) =>(
+  const ExternalLinkOutlined = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={ExternalLinkSvg} {...props} />
   );
-   
+
 
   return (
     <>
@@ -56,13 +56,13 @@ export const EditSingleListing = ({ selectedRecordData }: Props) => {
           <a href="#">
             View price Changes{' '}
             <span>
-              <ExternalLinkOutlined/>
+              <ExternalLinkOutlined />
             </span>
           </a>
           <a href="#">
             View stock changes{' '}
             <span>
-              <ExternalLinkOutlined/>
+              <ExternalLinkOutlined />
             </span>
           </a>
         </div>

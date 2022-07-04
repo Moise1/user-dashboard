@@ -1,0 +1,57 @@
+@import '../general.config';
+
+// large and extra large screens
+
+.settings-panel {
+  .content {
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: $primary-bg;
+
+    .blue-input {
+        max-width: 300px;
+    }
+
+    .text-section {
+      margin-bottom: 5rem;
+    }
+    .description-and-controls {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      width: 100vw;
+      .limit-area{
+        margin-top: 1rem;
+        width: 100%;
+        .limit,
+        .stock {
+          display: flex;
+        }
+      }
+    }
+    .config-btns {
+      margin-top: 2rem;
+    }
+  }
+}
+
+// Tablet's screen sizes
+
+@media only screen and(max-width: 1030px) {
+    .settings-panel {
+        .content {
+            .limit-area{
+                width: 30%;
+                height: 100px;
+                position: relative;
+                .stock,
+                .limit {
+                    display: block !important;
+                }
+            }
+        }
+    }
+}

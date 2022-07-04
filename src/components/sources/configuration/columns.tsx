@@ -1,8 +1,7 @@
-﻿import { eChannelSettings } from '../../../redux/channel-configuration/channels-configuration-slice';
-import { eChannelOAuthSourceSettings } from '../../../redux/source-configuration/source-configuration-slice';
-import { ePlatform } from '../../../utils/ePlatform';
+﻿import { ePlatform } from '../../../types/ePlatform';
+import { ChannelSettingKey, SourceSettingKey } from '../../../types/settings';
 
-export type ColumnChannelAncestor = { Field: eChannelSettings, Value: string }
+export type ColumnChannelAncestor = { Field: ChannelSettingKey, Value: string }
 
 export enum ColumnStyle {
   Default,
@@ -17,93 +16,93 @@ export enum ColumnStyle {
 
 export interface Column {
   Title: string;
-  Key: eChannelOAuthSourceSettings;
+  Key: SourceSettingKey;
   Channels?: ePlatform[];
   Style?: ColumnStyle;
-  ChannelSetting?: eChannelSettings;//In case value is undefined, it will use this channelsetting as default value to show it
+  ChannelSetting?: ChannelSettingKey;//In case value is undefined, it will use this channelsetting as default value to show it
   ChannelSettingAncestors?: ColumnChannelAncestor[];
 }
 
 export const Columns: Column[] = [
   {
     Title: 'Sources.Table.Name.Markup',
-    Key: eChannelOAuthSourceSettings.Markup,
-    ChannelSetting: eChannelSettings.Markup
+    Key: SourceSettingKey.Markup,
+    ChannelSetting: ChannelSettingKey.Markup
   },
   {
     Title: 'Sources.Table.Name.MonitorStock',
-    Key: eChannelOAuthSourceSettings.MonitorStock,
+    Key: SourceSettingKey.MonitorStock,
     Style: ColumnStyle.Outlined,
-    ChannelSetting: eChannelSettings.MonitorStock
+    ChannelSetting: ChannelSettingKey.MonitorStock
   },
   {
     Title: 'Sources.Table.Name.MonitorPrice',
-    Key: eChannelOAuthSourceSettings.MonitorPrice,
+    Key: SourceSettingKey.MonitorPrice,
     Style: ColumnStyle.Outlined,
-    ChannelSetting: eChannelSettings.MonitorPrice
+    ChannelSetting: ChannelSettingKey.MonitorPrice
   },
   {
     Title: 'Sources.Table.Name.PriceDecrease',
-    Key: eChannelOAuthSourceSettings.MonitorPriceDecrease,
+    Key: SourceSettingKey.MonitorPriceDecrease,
     Style: ColumnStyle.Outlined
   },
   {
     Title: 'Sources.Table.Name.DecreaseLimit',
-    Key: eChannelOAuthSourceSettings.MonitorPriceDecreasePercentage
+    Key: SourceSettingKey.MonitorPriceDecreasePercentage
   },
   {
     Title: 'Sources.Table.Name.Template',
-    Key: eChannelOAuthSourceSettings.TemplateId,
+    Key: SourceSettingKey.TemplateId,
     Style: ColumnStyle.Template
   },
   {
     Title: 'Sources.Table.Name.PolicyDelivery',
-    Key: eChannelOAuthSourceSettings.DefaultShipping,
+    Key: SourceSettingKey.DefaultShipping,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi],
-    ChannelSettingAncestors: [{ Field: eChannelSettings.UseBusinessPolicies, Value: '0' }],
+    ChannelSettingAncestors: [{ Field: ChannelSettingKey.UseBusinessPolicies, Value: '0' }],
     Style: ColumnStyle.PolicyDelivery
   },
   {
     Title: 'Sources.Table.Name.PolicyReturns',
-    Key: eChannelOAuthSourceSettings.ReturnsPolicy,
+    Key: SourceSettingKey.ReturnsPolicy,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi],
-    ChannelSettingAncestors: [{ Field: eChannelSettings.UseBusinessPolicies, Value: '0' }],
+    ChannelSettingAncestors: [{ Field: ChannelSettingKey.UseBusinessPolicies, Value: '0' }],
     Style: ColumnStyle.PolicyReturns
   },
   {
     Title: 'Sources.Table.Name.BusinessPayment',
-    Key: eChannelOAuthSourceSettings.PaymentProfileId,
+    Key: SourceSettingKey.PaymentProfileId,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi],
-    ChannelSettingAncestors: [{ Field: eChannelSettings.UseBusinessPolicies, Value: '1' }],
+    ChannelSettingAncestors: [{ Field: ChannelSettingKey.UseBusinessPolicies, Value: '1' }],
     Style: ColumnStyle.BusinessPayment
   },
   {
     Title: 'Sources.Table.Name.BusinessReturn',
-    Key: eChannelOAuthSourceSettings.ReturnProfileId,
+    Key: SourceSettingKey.ReturnProfileId,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi],
-    ChannelSettingAncestors: [{ Field: eChannelSettings.UseBusinessPolicies, Value: '1' }],
+    ChannelSettingAncestors: [{ Field: ChannelSettingKey.UseBusinessPolicies, Value: '1' }],
     Style: ColumnStyle.BusinessReturn
   },
   {
     Title: 'Sources.Table.Name.BusinessShipping',
-    Key: eChannelOAuthSourceSettings.ShippingProfileId,
+    Key: SourceSettingKey.ShippingProfileId,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi],
-    ChannelSettingAncestors: [{ Field: eChannelSettings.UseBusinessPolicies, Value: '1' }],
+    ChannelSettingAncestors: [{ Field: ChannelSettingKey.UseBusinessPolicies, Value: '1' }],
     Style: ColumnStyle.BusinessShipping
   },
   {
     Title: 'Sources.Table.Name.BusinessCity',
-    Key: eChannelOAuthSourceSettings.LocationCity,
+    Key: SourceSettingKey.LocationCity,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Title: 'Sources.Table.Name.BusinessPostcode',
-    Key: eChannelOAuthSourceSettings.LocationPostcode,
+    Key: SourceSettingKey.LocationPostcode,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi]
   },
   {
     Title: 'Sources.Table.Name.LocationCountry',
-    Key: eChannelOAuthSourceSettings.LocationCountry,
+    Key: SourceSettingKey.LocationCountry,
     Channels: [ePlatform.eBay, ePlatform.eBayNoApi]
-  },
+  }
 ];

@@ -1,6 +1,6 @@
 ﻿import { Input, Spin } from 'antd';
 import { useState } from 'react';
-import '../../sass/settings.scss';
+import '../../sass/settings/settings.scss';
 
 interface Props {
   defaultValue?: string;

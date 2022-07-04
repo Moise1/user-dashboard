@@ -45,14 +45,13 @@
     outline: none !important;
 
     align-items: center !important;
-    max-width: 200px !important;
+    //max-width: 200px !important;
   }
 }
 
-.selector,
-multipleSelector {
+.selector, multipleSelector {
+  min-width: 180px;
   width: 100%;
-
   .ant-select-arrow {
     top: 50%;
     right: 18px;
@@ -78,7 +77,7 @@ multipleSelector {
 .selector,
 .ant-select-single,
 .ant-select-show-arrow {
-  max-width: 200px !important;
+  //max-width: 200px !important;
 }
 
 .ant-select-multiple {

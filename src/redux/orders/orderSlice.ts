@@ -8,7 +8,7 @@ import {
   loadProgressOfOrder
 } from './orderThunk';
 
-export interface OrderData {
+export type OrderData = {
   channelOAuthIds: [number];
   date: Date;
   imageUrl: string;
