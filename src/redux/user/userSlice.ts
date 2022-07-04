@@ -31,7 +31,7 @@ export interface UserData {
 const initialState = {
   user: {} as UserData,
   tokens: null,
-  quotta: null,
+  quota: null,
   loading: false,
   error: ''
 };
@@ -102,7 +102,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserQuota.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.quotta = payload;
+      state.quota = payload;
     });
     builder.addCase(getUserQuota.rejected, (state, { payload }) => {
       state.loading = false;

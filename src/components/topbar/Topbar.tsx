@@ -29,7 +29,7 @@ export const Topbar = withRouter((props: Props) => {
 
   const { tokens } = useAppSelector((state) => state.user);
 
-  const { quotta } = useAppSelector((state) => state.user);
+  const { quota } = useAppSelector((state) => state.user);
 
   const { notifications } = useAppSelector((state) => state.notifications);
   const handleCheck = () => setChecked(!checked);
@@ -86,10 +86,10 @@ export const Topbar = withRouter((props: Props) => {
               <p>{t('Topbar.Quota')}: &nbsp;</p>
             </strong>
             <span className="quota-progress">
-              {qoutaPercentage(quotta.used, quotta.quota)}% ({quotta.used}/{quotta.quota})
+              {qoutaPercentage(quota.used, quota.quota)}% ({quota.used}/{quota.quota})
             </span>
           </div>
-          <Progress percent={qoutaPercentage(quotta.used, quotta.quota)} showInfo={false} className="progress-bar" />
+          <Progress percent={qoutaPercentage(quota.used, quota.quota)} showInfo={false} className="progress-bar" />
           <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="upgrade-btn">
             {t('Topbar.Upgrade')}
           </button>
