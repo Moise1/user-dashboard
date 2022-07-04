@@ -12,10 +12,13 @@ import { t } from '../../utils/transShim';
 import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts, listProducts } from '../../redux/catalog/catalogThunk';
-import { SearchOutlined } from '@ant-design/icons';
-import { CatalogProduct, selectedProductDetailData } from '../../redux/catalog/catalogSlice';
-import '../../sass/catalog.scss';
+import { CatalogProduct, selectedProductDetailData, NewCatalogProduct } from '../../redux/catalog/catalogSlice';
 import { getSources } from 'src/redux/sources/sourcesThunk';
+import type { DatePickerProps } from 'antd';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { SearchOutlined } from '@ant-design/icons';
+import '../../sass/catalog.scss';
+import moment from 'moment';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -24,7 +27,10 @@ export type ElementEventType =
   | React.MouseEvent;
 
 export const Catalog = () => {
-  const [listProductsModal, setListProductModal] = useState<boolean>(true);
+  const { Meta } = Card;
+  const dispatch = useAppDispatch();
+  const { sources } = useAppSelector((state) => state.sources);
+  const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -33,15 +39,7 @@ export const Catalog = () => {
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [className, setClassName] = useState<string>('product-card');
   const [sourcesIds, setSourcesIds] = useState<number[]>([]);
-  const dispatch = useAppDispatch();
-  const { Meta } = Card;
-
   const [frequency, setFrequency] = useState<boolean>(false); //To display the crediential form
-  const handleFrequency = (): void => setFrequency(!frequency);
-
-  const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
-  const { sources } = useAppSelector((state) => state.sources);
-
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
   const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<selectedProductDetailData>({
@@ -60,13 +58,27 @@ export const Catalog = () => {
     url: ''
   });
 
+  //States for ListTheProductFunctionaity
+  const [products, setProducts] = useState<NewCatalogProduct[]>([]);
+  const [changeState, setChangeState] = useState<boolean>(false);
+  const [frequencyData, setFrequencyData] = useState<number>();
+  const [listProductsModal, setListProductModal] = useState<boolean>(false);
+  const [optimizeTitle, setOptimizeTitle] = useState<boolean>(false);
+  const [needsReview, setNeedsReview] = useState<boolean>(false);
+  const [checkDate, setCheckDate] = useState<boolean>(false);
+  //Dates
+  let myDate: Date;
+  const [newDate, setNewDate] = useState<Date>((new Date()));
+  const [publishNow, setPublishNow] = useState<Date | undefined>((new Date()));
+
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
     setAllCatalogProducts(catalogProducts);
     dispatch(getSources());
-  }, [getCatalogProducts]);
+  }, [getCatalogProducts, setNewDate, setPublishNow]);
 
   const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
+
   const handleProductModal = (id: number) => {
     setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === id)[0]);
     setModalOpen(!modalOpen);
@@ -99,23 +111,67 @@ export const Catalog = () => {
     setClassName(className + ' ' + 'selected-product-card');
     setAllProducts(allCatalogProducts);
   };
+
   const handleClearAllSelectedProducts = (): void => {
     setClassName('product-card');
     setAllProducts([]);
   };
+
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
   };
 
-  const listTheProducts = () => {
-    setListProductModal(!listProductsModal);
-    const products = allProducts.map((e: CatalogProduct) => {
-      const { sourceId, title } = e;
-      return { sourceId, title };
-    });
-    dispatch(listProducts(products));
+  const needReviewsOnChange = (e: CheckboxChangeEvent) => {
+    setNeedsReview(e.target.checked);
   };
-  console.log(listTheProducts);
+
+  const handleSetFrequencyData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFrequencyData(Number(event.target.value));
+    newDate ? setNewDate(newDate) : setNewDate((new Date()));
+  };
+
+  const dateOnChange: DatePickerProps['onChange'] = (dateString) => {
+    setCheckDate(true);
+    myDate = moment.utc(dateString).toDate();
+    setNewDate(myDate);
+    setPublishNow(newDate);
+  };
+
+  const listTheProducts = () => {
+    setChangeState(true);
+    dispatch(listProducts({ products, needsReview, optimizeTitle }));
+  };
+
+  useEffect(() => {
+    setProducts(allProducts.map((e: CatalogProduct) => {
+      const { sourceId, title } = e;
+      newDate && setPublishNow(newDate);
+      if (!checkDate === true && frequencyData == undefined) setPublishNow(undefined);
+      return { sourceId, title, publishNow };
+    }));
+
+    if ((frequencyData && newDate) && changeState) {
+      setPublishNow(newDate);
+      for (let i = 0; i <= allProducts.length; i++) {
+        if (allProducts.length > 0) {
+          const end = frequencyData * i;
+          newDate?.setMinutes(end);
+        }
+      }
+      return;
+    }
+
+    if (frequencyData && changeState) {
+      setPublishNow(newDate);
+      for (let i = 0; i <= allProducts.length; i++) {
+        if (allProducts.length > 0) {
+          const end = frequencyData * i;
+          newDate?.setMinutes(end);
+        }
+      }
+    }
+  }, [changeState, allProducts, newDate, publishNow, frequencyData]);
+
   return (
     <Layout className="catalog-container">
       {loading ? (
@@ -162,7 +218,6 @@ export const Catalog = () => {
             width={900}
             title={
               <div className="modal-title">
-                {/* <h1 className="title">{selectedProductDataDetail?.title.length > 20 ? `${selectedProductDataDetail?.title.substring(0, 20)} ...` : selectedProductDataDetail?.title}</h1> */}
                 <h5>{selectedProductDataDetail.title}</h5>
                 <h1 className="source"> By : {selectedProductDataDetail?.id}</h1>
               </div>
@@ -221,7 +276,7 @@ export const Catalog = () => {
                       <h2>Optimize the titles of the products?</h2>
                     </div>
                     <div className="section-switch">
-                      <Switch />
+                      <Switch onChange={() => setOptimizeTitle(!optimizeTitle)} />
                     </div>
                   </div>
                   <div className="section-explanation">
@@ -241,7 +296,7 @@ export const Catalog = () => {
                       <h2>Choose the frequency of the listings?</h2>
                     </div>
                     <div className="section-switch">
-                      <Switch onChange={handleFrequency} />
+                      <Switch onChange={() => setFrequency(!frequency)} />
                     </div>
                   </div>
                   {frequency && (
@@ -249,27 +304,27 @@ export const Catalog = () => {
                       <div className="frequency-container">
                         <div className="select-date-container">
                           <h3>Select the date</h3>
-                          <DatePicker className="date-picker" />
+                          <DatePicker className="date-picker" onChange={dateOnChange} />
                         </div>
                         <Divider className="divider" type="vertical" />
                         <div className="listings-frequency-container">
                           <h3>Listings frequency</h3>
                           <p>The system will automatically list an item every X minutes.</p>
-                          <Input className="blue-input" />
+                          <Input className="blue-input" type="number" value={frequencyData} onChange={handleSetFrequencyData} />
                         </div>
                       </div>
                     </div>
                   )}
                 </div>
                 <div className="checkbox-section">
-                  <Checkbox />
+                  <Checkbox onChange={needReviewsOnChange} />
                   <p>
                     Review listings individually before publishing. Your listings will appear under Pending listings
                     section.
                   </p>
                 </div>
                 <div className="list-button">
-                  <SuccessBtn>List {allProducts.length} product(s)</SuccessBtn>
+                  <SuccessBtn handleConfirm={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
                 </div>
               </div>
             </div>
@@ -339,7 +394,7 @@ export const Catalog = () => {
             <div className="pagination-addall-container">
               <div className="adall-container">
                 {!!allProducts.length && (
-                  <SuccessBtn handleClick={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
+                  <SuccessBtn handleConfirm={() => setListProductModal(!listProductsModal)}>List {allProducts.length} product(s)</SuccessBtn>
                 )}
                 <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
               </div>
