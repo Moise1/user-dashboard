@@ -86,10 +86,16 @@ export const Topbar = withRouter((props: Props) => {
               <p>{t('Topbar.Quota')}: &nbsp;</p>
             </strong>
             <span className="quota-progress">
-              {qoutaPercentage(quota.used, quota.quota)}% ({quota.used}/{quota.quota})
+              {quota && (
+                <>
+                  {qoutaPercentage(quota.used, quota.quota)}% ({quota.used}/{quota.quota})
+                </>
+              )}
             </span>
           </div>
-          <Progress percent={qoutaPercentage(quota.used, quota.quota)} showInfo={false} className="progress-bar" />
+          {quota && (
+            <Progress percent={qoutaPercentage(quota.used, quota.quota)} showInfo={false} className="progress-bar" />
+          )}
           <button type="button" onClick={() => routeChange(Links.Subscriptions)} className="upgrade-btn">
             {t('Topbar.Upgrade')}
           </button>
