@@ -6,7 +6,6 @@ export const getCatalogProducts = createAsyncThunk(
     thunkAPI) => {
     try {
       const res = await client.post('/Catalog/GetProducts',{data:sessionId} );
-      // const res = await client.get('/Catalog/GetProducts', {sessionId}) ;
       return res.data.response_data.products;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -61,11 +60,12 @@ export const getCatalogProductsSearching = createAsyncThunk(
 
 export const listProducts = createAsyncThunk(
   'catalog/listProducts',
-  async (products : { sourceId: number; title: string; }[], 
-    thunkAPI) => {
+  async ({products,needsReview, optimizeTitle}: {products? : { sourceId: number; title: string; publishNow:Date | undefined; }[], needsReview:boolean
+    optimizeTitle:boolean
+  }, 
+  thunkAPI) => {
     try {
-      const res = await client.post('/Catalog/SubmitCatalog',{products});
-      console.log('the res list product',res);
+      const res = await client.post('/Catalog/SubmitCatalog',{needsReview,products, optimizeTitle});
       return res.data.response_data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');

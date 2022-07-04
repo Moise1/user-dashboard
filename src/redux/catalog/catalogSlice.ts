@@ -24,6 +24,12 @@ export interface CatalogProduct {
   productId:number;
 }
 
+export interface NewCatalogProduct {
+  publishNow:Date | undefined;
+  sourceId: number;
+  title: string;
+}
+
 
 export interface selectedProductDetailData
 {
@@ -106,7 +112,6 @@ export const listProductSlice = createSlice({
     });
     builder.addCase(listProducts.fulfilled, (state, { payload }) => {
       state.loading = false;
-      // state.catalogSearchedProducts = payload;
       console.log('The payload from catalog list products',payload);
     });
     builder.addCase(listProducts.rejected, (state, { payload }) => {
