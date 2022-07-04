@@ -77,10 +77,10 @@ export const Subscriptions = () => {
           <StatusBar>
             <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
             <p className="subscriptions-limit">
-              Subscription limit <span>110</span>
+              Subscription limit <span>{quota.quota}</span>
             </p>
             <p className="subscriptions-items">
-              Items<span>110</span>
+              Active products:<span>{quota.used}</span>
             </p>
             <Button className="subscription-cancel">Request cancellation</Button>
           </StatusBar>
