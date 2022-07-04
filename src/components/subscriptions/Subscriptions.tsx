@@ -10,6 +10,7 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import '../../sass/subscriptions/subscriptions.scss';
 //import { Checkout } from './Checkout';
 import { Link } from 'react-router-dom';
+import { getUserQuota } from 'src/redux/user/userThunk';
 
 export const Subscriptions = () => {
   const [slides, setSlides] = useState<number>(3);
@@ -38,6 +39,14 @@ export const Subscriptions = () => {
       setCurrency('\u00A3');
     }
   };
+
+  useEffect(() => {
+    dispatch(getUserQuota());
+  }, [getUserQuota]);
+
+  const { quota } = useAppSelector((state) => state.user);
+
+  console.log(quota);
 
   const parentToChild = (value: number, billing: number, type: number): void => {
     localStorage.setItem('productId', value.toString());
@@ -68,10 +77,10 @@ export const Subscriptions = () => {
           <StatusBar>
             <h6 className="subscriptions-detail">Your subscription offers the following: </h6>
             <p className="subscriptions-limit">
-              Subscription limit <span>110</span>
+              Subscription limit <span>{quota.quota}</span>
             </p>
             <p className="subscriptions-items">
-              Items<span>110</span>
+              Active products:<span>{quota.used}</span>
             </p>
             <Button className="subscription-cancel">Request cancellation</Button>
           </StatusBar>

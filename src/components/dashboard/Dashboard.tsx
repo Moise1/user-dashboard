@@ -51,7 +51,6 @@ import { ProductQuota } from 'src/redux/user/userSlice';
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 
-
 const { RangePicker } = DatePicker;
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
@@ -234,8 +233,7 @@ export const Dashboard = () => {
     const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
     return profit.toFixed(1);
   });
-  console.log(saleData);
-  console.log(profitData);
+
   const chartData: ApexOptions = {
     chart: {
       height: 350,
@@ -254,7 +252,7 @@ export const Dashboard = () => {
     },
     colors: ['#77B6EA', '#545454'],
     dataLabels: {
-      enabled: true,
+      enabled: true
     },
     stroke: {
       curve: 'smooth'
@@ -268,7 +266,7 @@ export const Dashboard = () => {
       row: {
         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
         opacity: 0.5
-      },
+      }
     },
     markers: {
       size: 1
@@ -382,7 +380,7 @@ export const Dashboard = () => {
           </div>
 
           <div className="graph-container">
-            <Chart options={chartData} series={chartData.series} type="line" width='100%' height={450} />
+            <Chart options={chartData} series={chartData.series} type="line" width="100%" height={450} />
             <br />
             <h3>Old Chart</h3>
             <Line options={salesOptions} data={salesData} className="sales-graph" style={{ maxHeight: 470 }} />
