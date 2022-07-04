@@ -54,3 +54,12 @@ export const getUserToken = createAsyncThunk('user/userToken', async (_, { rejec
     return rejectWithValue('Sorry! Something went wrong ):');
   }
 });
+
+export const getUserQuota = createAsyncThunk('user/userQuota', async (_, thunkAPI) => {
+  try {
+    const res = await client.get('/Dashboard/GetProductQuotaSummary');
+    return res.data.response_data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
