@@ -250,11 +250,10 @@ export const Catalog = () => {
             open={allProductsModalOpen}
             handleClose={handleAllProductsModal}
             width={600}
-            style={{ overflowY: 'scroll' }}
-            bodyStyle={{ height: 500 }}
+            bodyStyle={{ height: 500, overflow: 'scroll' }}
             closable={false}
           >
-            <AllProducts removeProduct={removeSelectedProduct} className={className}>
+            <AllProducts removeProduct={removeSelectedProduct} className={className} >
               {allProducts}
             </AllProducts>
           </PopupModal>
