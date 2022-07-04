@@ -113,7 +113,7 @@ export const Sidebar = (props: Props) => {
     //   onClick: () => routeChange(Links.AutoOrderConfiguration)
     // },
     {
-      id: 16,
+      id: 26,
       listName: (
         <>
           <Switch
