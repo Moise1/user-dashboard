@@ -77,13 +77,11 @@ export const Dashboard = () => {
   //const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
   const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
   const onSearch = (value: string) => {
-    setSearchedChannels(
-      channels?.filter((channel: Channel) => {
-        if (channel.name === value) {
-          return channel.name === value;
-        }
-      })
-    );
+    setSearchedChannels(channels.filter((c: Channel) => {
+      if (c.name.toLowerCase().includes(value.toLowerCase())) {
+        return c;
+      }
+    }));
   };
 
   const removeRecord = async (id: Channel['id']) => {
@@ -408,7 +406,7 @@ export const Dashboard = () => {
             <DataTable
               dataSource={searchedChannels.length ? searchedChannels : channels}
               columns={columns}
-              totalItems={channels.length}
+              totalItems={searchedChannels.length ? searchedChannels.length : channels.length}
               pageSize={postPerPage}
               setPostPerPage={setPostPerPage}
               current={current}

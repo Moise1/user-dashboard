@@ -31,6 +31,7 @@ export const Catalog = () => {
   const dispatch = useAppDispatch();
   const { sources } = useAppSelector((state) => state.sources);
   const { catalogProducts, loading } = useAppSelector((state) => state.catalogProducts);
+  const { listProductLoading } = useAppSelector((state) => state.listProducts);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
@@ -172,6 +173,7 @@ export const Catalog = () => {
     }
   }, [changeState, allProducts, newDate, publishNow, frequencyData]);
 
+
   return (
     <Layout className="catalog-container">
       {loading ? (
@@ -262,70 +264,80 @@ export const Catalog = () => {
             handleClose={() => setListProductModal(!listProductsModal)}
             width={600}
             style={{ overflowY: 'scroll' }}
-            bodyStyle={{ height: 500 }}
+            bodyStyle={{ height: 530 }}
             closable={false}
           >
             <div className="catalog-list-modal">
               <h1> Listing Settings </h1>
               <Divider />
-              <div className="under-sections">
-                <div className="section-option-container">
-                  <div className="section-option">
-                    <div className="section-title-container">
-                      <h2>Optimize the titles of the products?</h2>
-                    </div>
-                    <div className="section-switch">
-                      <Switch onChange={() => setOptimizeTitle(!optimizeTitle)} />
-                    </div>
-                  </div>
-                  <div className="section-explanation">
-                    <ul>
-                      <li>Rank higher on eBay{"'"}s search results.</li>
-                      <li>We analyse sold items by category.</li>
-                      <li>Boost your sales.</li>
-                      <li>Get your listings in front of more potential buyers.</li>
-                      <li>Save time, we do the hard work for you.</li>
-                    </ul>
-                    <p>Cost: {allProducts.length} token(s) </p>
-                  </div>
+              {listProductLoading
+                ?
+                <div style={{ minWidth: '100%' }}>
+                  <Spin style={{ margin: '30% 50%' }} />
                 </div>
-                <div className="section-option-container">
-                  <div className="section-option">
-                    <div className="section-title-container">
-                      <h2>Choose the frequency of the listings?</h2>
-                    </div>
-                    <div className="section-switch">
-                      <Switch onChange={() => setFrequency(!frequency)} />
-                    </div>
-                  </div>
-                  {frequency && (
-                    <div className="section-explanation">
-                      <div className="frequency-container">
-                        <div className="select-date-container">
-                          <h3>Select the date</h3>
-                          <DatePicker className="date-picker" onChange={dateOnChange} />
+                :
+                (
+                  <>
+                    <div className="under-sections">
+                      <div className="section-option-container">
+                        <div className="section-option">
+                          <div className="section-title-container">
+                            <h2>Optimize the titles of the products?</h2>
+                          </div>
+                          <div className="section-switch">
+                            <Switch onChange={() => setOptimizeTitle(!optimizeTitle)} />
+                          </div>
                         </div>
-                        <Divider className="divider" type="vertical" />
-                        <div className="listings-frequency-container">
-                          <h3>Listings frequency</h3>
-                          <p>The system will automatically list an item every X minutes.</p>
-                          <Input className="blue-input" type="number" value={frequencyData} onChange={handleSetFrequencyData} />
+                        <div className="section-explanation">
+                          <ul>
+                            <li>Rank higher on eBay{"'"}s search results.</li>
+                            <li>We analyse sold items by category.</li>
+                            <li>Boost your sales.</li>
+                            <li>Get your listings in front of more potential buyers.</li>
+                            <li>Save time, we do the hard work for you.</li>
+                          </ul>
+                          <p>Cost: {allProducts.length} token(s) </p>
                         </div>
                       </div>
+                      <div className="section-option-container">
+                        <div className="section-option">
+                          <div className="section-title-container">
+                            <h2>Choose the frequency of the listings?</h2>
+                          </div>
+                          <div className="section-switch">
+                            <Switch onChange={() => setFrequency(!frequency)} />
+                          </div>
+                        </div>
+                        {frequency && (
+                          <div className="section-explanation">
+                            <div className="frequency-container">
+                              <div className="select-date-container">
+                                <h3>Select the date</h3>
+                                <DatePicker className="date-picker" onChange={dateOnChange} />
+                              </div>
+                              <Divider className="divider" type="vertical" />
+                              <div className="listings-frequency-container">
+                                <h3>Listings frequency</h3>
+                                <p>The system will automatically list an item every X minutes.</p>
+                                <Input className="blue-input" type="number" value={frequencyData} onChange={handleSetFrequencyData} />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="checkbox-section">
+                        <Checkbox onChange={needReviewsOnChange} />
+                        <p>
+                          Review listings individually before publishing. Your listings will appear under Pending listings
+                          section.
+                        </p>
+                      </div>
+                      <div className="list-button">
+                        <SuccessBtn handleConfirm={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
+                      </div>
                     </div>
-                  )}
-                </div>
-                <div className="checkbox-section">
-                  <Checkbox onChange={needReviewsOnChange} />
-                  <p>
-                    Review listings individually before publishing. Your listings will appear under Pending listings
-                    section.
-                  </p>
-                </div>
-                <div className="list-button">
-                  <SuccessBtn handleConfirm={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
-                </div>
-              </div>
+                  </>
+                )}
             </div>
           </PopupModal>
           <div className="catalog-cards">

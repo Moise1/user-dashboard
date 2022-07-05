@@ -60,7 +60,7 @@ export const CatalogFilters = (props: Props) => {
   ];
 
   const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount } = props;
-  const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProductReducer);
+  const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProduct);
   const [sessionId] = useState<number>(0);
   const dispatch = useAppDispatch();
   useEffect(() => {
