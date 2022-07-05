@@ -61,6 +61,11 @@ const searchInitialState = {
   error: ''
 };
 
+const listProduct = {
+  listProductLoading:false,
+  error:''
+};
+
 export const catalogSlice = createSlice({
   name: 'catalog',
   initialState: initialState,
@@ -103,19 +108,19 @@ export const catalogSearchSlice = createSlice({
 
 export const listProductSlice = createSlice({
   name: 'catalogSearch',
-  initialState: searchInitialState,
+  initialState: listProduct,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(listProducts.pending, (state) => {
-      state.loading = true;
+      state.listProductLoading = true;
       state.error = '';
     });
     builder.addCase(listProducts.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.listProductLoading = false;
       console.log('The payload from catalog list products',payload);
     });
     builder.addCase(listProducts.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.listProductLoading = false;
       state.error = String(payload);
     });
   }

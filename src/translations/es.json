@@ -6,7 +6,8 @@
   "PendingListingsShort": "Pendientes",
   "TerminatedListings": "Productos Terminados",
 
-  "Select": "Seleccionar",
+  "BulkListing.Name": "Publicar masivamente",
+  "Catalog.Name": "Catálogo",
 
   "Channel.Monitoring": "Sincronización",
   "Channel.Listing": "Publicación",
@@ -106,9 +107,17 @@
   "Listings.Column.Stock": "Stock",
   "Listings.Column.Created on": "Creado en",
 
+  "ListNow.Header": "Formas de publicar",
+  "ListNow.BulkListing.Description": "Publique tantos productos como desee añadiendo direcciones URL de diferentes proveedores.",
+  "ListNow.Catalog.Description": "Elige tu proveedor favorito y te recomendamos productos.",
+  "ListNow.ManualListing.Description": "Use nuestra extensión de navegador para agregar productos directamente desde el proveedor.",
+  "ListNow.ManualListing.Name": "Publicar manualmente",
+  "Listnow.WeListForYou.Button": "Por solo 12.99€",
+  "Listnow.WeListForYou.Description": "¿No tienes idea de qué publicar? ¡Escogeremos los productos más vendidos para tí!",
+  "Listnow.WeListForYou.Title": "¿No sabes qué publicar? Lo podemos hacer por tí",
+
   "Menu.AutoOrderingConfiguration": "Auto Pedidos",
   "Menu.BrowserExtensions": "Extensiones",
-  "Menu.Catalog": "Catálogo",
   "Menu.Account": "Cuenta",
   "Menu.Channel": "Tienda",
   "Menu.Dashboard": "Tablero",
@@ -137,6 +146,7 @@
   "Setting.Custom": "Personalizado",
   "Setting.Yes": "Sí",
   "Setting.No": "No",
+  "Setting.Select": "Seleccionar",
 
   "Sources.Setting.Description.MaxDeliveryDays": "Si el tiempo de entrega supera los días máximos de entrega, el artículo se marcará como Agotado",
   "Sources.Setting.Description.OnlyPrime": " ",
@@ -160,10 +170,12 @@
   "Sources.Table.Name.Provider": "Proveedor",
   "Sources.Table.Name.Template": "Plantilla",
 
+  "WeListForYou.Name": "Publicamos por ti",
 
 
   "Topbar.Quota": "Cuota",
-  "Topbar.Update": "Mejorar",
+  "Topbar.Notifications": "{count} notificaciones",
+  "Topbar.Upgrade": "Mejorar",
 
 
 
