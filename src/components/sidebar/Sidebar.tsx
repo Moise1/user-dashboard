@@ -172,7 +172,7 @@ export const Sidebar = (props: Props) => {
       '2',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Catalog'),
+      t('Catalog.Name'),
       <CatalogIcon />,
       undefined,
       () => routeChange(Links.Catalog)
