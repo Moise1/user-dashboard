@@ -177,13 +177,6 @@ export const Dashboard = () => {
           to: dateString[1]
         })
       );
-    } else {
-      await dispatch(
-        getSales({
-          period: value as unknown as number,
-          from: dateString
-        })
-      );
     }
   };
 
