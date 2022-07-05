@@ -111,6 +111,7 @@
 
         .graph-date-picker {
             text-align: right;
+            cursor: pointer;
         }
 
         .products, .stores {
@@ -145,6 +146,105 @@
         }
     }
 }
+
+.general-section-chart {
+    margin-top: 0rem;
+
+    .general-cols {
+        display: flex;
+        justify-content: space-evenly;
+        column-gap: 2 * $spacer;
+
+        .container-numbers {
+            display: grid;
+            height: 80%;
+            align-items: center;
+            align-content: center;
+
+            .numbers-info {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        .graph-date-picker {
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .products, .stores {
+            box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+            background: $corporative-color-dark;
+            padding: 1rem;
+            border-radius: 10px;
+            flex-grow: 1;
+            max-width: 100%;
+
+            .channels {
+                list-style-type: none;
+            }
+
+            .data-table {
+                margin: 1rem 0;
+            }
+        }
+
+        .plan {
+            margin-top: 3rem;
+            display: grid;
+            place-items: center;
+
+            .upgrade {
+                .upgrade-txt {
+                    color: white;
+                    margin: 0;
+                    padding: 4px;
+                }
+            }
+        }
+    }
+}
+
+.charts-header-section {
+    margin-top: 1rem;
+    
+    .general-cols {
+        display: flex;
+        justify-content: space-evenly;
+        column-gap: 2 * $spacer;
+
+        .container-numbers {
+            display: grid;
+            height: 80%;
+            align-items: center;
+            align-content: center;
+
+            .numbers-info {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        .graph-date-picker {
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .products, .stores {
+            /*box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+            background: $corporative-color-dark;*/
+            padding: 1rem 1rem 0 1rem;
+            border-radius: 10px;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+    }
+}
+
 
 .sales-container {
     margin-top: 2rem;

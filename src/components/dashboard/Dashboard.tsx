@@ -31,7 +31,7 @@ import { getSales } from '../../redux/sales/salesThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { Moment } from 'moment';
-import { Sale } from 'src/redux/sales/salesSlice';
+import { Sale, ePeriod } from 'src/redux/sales/salesSlice';
 import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
@@ -174,7 +174,7 @@ export const Dashboard = () => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getSales({
-          period: selectedPeriod,
+          period: value as unknown as number,
           from: dateString[0],
           to: dateString[1]
         })
@@ -182,7 +182,7 @@ export const Dashboard = () => {
     } else {
       await dispatch(
         getSales({
-          period: selectedPeriod,
+          period: value as unknown as number,
           from: dateString
         })
       );
@@ -229,11 +229,37 @@ export const Dashboard = () => {
       <SuccessBtn>Yes! List for me</SuccessBtn>
     </div>
   );
+
+  const getLabels = () => {
+    switch (selectedPeriod) {
+      case ePeriod.Hours:
+        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD hh:mm A').utc().format('hhA DD')))];
+      case ePeriod.Days: {
+        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+      }
+      case ePeriod.Weeks: {
+        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+      }
+      case ePeriod.Months: {
+        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
+      }
+      case ePeriod.Year: {
+        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('YYYY')))];
+      }
+
+      default:
+        break;
+    }
+
+    if (selectedPeriod)
+      return ['', '', '', '', '', '', '', '', '', '', '', ''];
+  };
+
   const saleData: number[] = sales?.map((s: Sale) => s.quantitySold);
 
   const profitData: number[] = sales?.map((s: Sale) => {
     const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
-    return profit.toFixed(1);
+    return profit.toFixed(0);
   });
 
   const orderChartData: ApexOptions = {
@@ -274,7 +300,7 @@ export const Dashboard = () => {
       size: 1
     },
     xaxis: {
-      categories: monthsLabels,
+      categories: getLabels(),
       title: {
         text: ''
       }
@@ -337,7 +363,7 @@ export const Dashboard = () => {
       size: 1
     },
     xaxis: {
-      categories: monthsLabels,
+      categories: getLabels(),
       title: {
         text: ''
       }
@@ -372,7 +398,37 @@ export const Dashboard = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    salesDateChange(selectedPeriod, Date.now.toString());
+    if (state[0]) {
+      const startDate: Date = state[0].startDate ? moment(state[0].startDate).add(1, 'days').toDate() : moment(Date.now.toString()).year(-1).toDate();
+      const endDate: Date = state[0].endDate ? moment(state[0].endDate).add(1, 'days').toDate() : moment(Date.now.toString()).toDate();
+      const diff = Math.abs(startDate.getTime() - endDate.getTime());
+      const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      console.log('days: ' + diffDays);
+      if (diffDays < 3) {
+        setSelectedPeriod(6);
+        salesDateChange(6, [startDate.toJSON(), endDate.toJSON()]);
+      }
+      else if (diffDays > 2 && diffDays < 31) {
+        setSelectedPeriod(3);
+        salesDateChange(3, [startDate.toJSON(), endDate.toJSON()]);
+      }
+      else if (diffDays > 30 && diffDays < 181) {
+        setSelectedPeriod(7);
+        salesDateChange(7, [startDate.toJSON(), endDate.toJSON()]);
+      }
+      else if (diffDays > 180 && diffDays < 400) {
+        setSelectedPeriod(4);
+        salesDateChange(4, [startDate.toJSON(), endDate.toJSON()]);
+      }
+      else {
+        setSelectedPeriod(5);
+        salesDateChange(5, [startDate.toJSON(), endDate.toJSON()]);
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -422,21 +478,28 @@ export const Dashboard = () => {
         </Row>
       </div>
 
-      <div className="general-section">
+      <div className='charts-header-section'>
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
-            <h1>Orders</h1>
-            <div className="graph-date-picker">
-              <Button onClick={() => setIsModalVisible(true)}>Select date for the Chart</Button>
+            <h1>Orders & Profit Chart</h1>
+          </Col>
+          <Col className="products" xs={24} lg={10}>
+            <div className="graph-date-picker" onClick={() => setIsModalVisible(true)}>
+              <ConfirmBtn>Select date for the Charts</ConfirmBtn>
             </div>
+          </Col>
+        </Row>
+      </div>
+
+      <div className="general-section-chart">
+        <Row className="general-cols" gutter={[0, 15]}>
+          <Col className="products" xs={24} lg={10}>
+            <h3>Orders</h3>
             <Chart options={orderChartData} series={orderChartData.series} type="line" width='100%' height={400} />
           </Col>
 
           <Col className="products" xs={24} lg={10}>
             <h1>Profit</h1>
-            <div className="graph-date-picker">
-              <Button onClick={() => setIsModalVisible(true)}>Select date for the Chart</Button>
-            </div>
             <Chart options={profitChartData} series={profitChartData.series} type="line" width='100%' height={400} />
           </Col>
         </Row>
@@ -640,11 +703,8 @@ export const Dashboard = () => {
       <Modal
         title=""
         visible={isModalVisible}
-        footer={[
-          <Button key="ok" type="primary" onClick={handleOk}>
-            OK
-          </Button>
-        ]}
+        onOk={handleOk}
+        onCancel={handleCancel}
         width={925}
       >
         <DateRangePicker

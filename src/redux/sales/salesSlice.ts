@@ -18,6 +18,19 @@ const initialState = {
   error: ''
 };
 
+export enum ePeriod {
+  Unknown = 0,
+  Seconds = 1,
+  Minutes = 2,
+  Days = 3,
+  Months = 4,
+  Year = 5,
+  Hours = 6,
+  Weeks = 7,
+  WholeHistory = 99
+}
+
+
 export const salesSlice = createSlice({
   name: 'sales',
   initialState: initialState,
