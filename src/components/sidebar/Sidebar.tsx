@@ -113,7 +113,7 @@ export const Sidebar = (props: Props) => {
     //   onClick: () => routeChange(Links.AutoOrderConfiguration)
     // },
     {
-      id: 16,
+      id: 26,
       listName: (
         <>
           <Switch
@@ -172,7 +172,7 @@ export const Sidebar = (props: Props) => {
       '2',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Catalog'),
+      t('Catalog.Name'),
       <CatalogIcon />,
       undefined,
       () => routeChange(Links.Catalog)

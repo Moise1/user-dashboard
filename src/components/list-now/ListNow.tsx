@@ -35,16 +35,16 @@ export const ListNow = (/*props: props*/) => {
 
   return (
     <div className="listnow-container">
-      <h2 className="title">{t('listnowhead')}</h2>
+      <h2 className="title">{t('ListNow.Header')}</h2>
       <div className="choose-list">
         <Row>
           <Col md={8} xs={24}>
             <div className="list-card" onClick={() => routeChange(Links.Catalog)}>
               <img src={catalog_icon} alt="icon" className={'w-md-100 filter-white'} />
               <div className="card-info">
-                <h5>{t('cata')}</h5>
+                <h5>{t('Catalog.Name')}</h5>
                 <p>
-                  {t('catapara')}{' '}
+                  {t('ListNow.Catalog.Description')}{' '}
                   <span>
                     <a>
                       <ArrowRightOutlined style={{fontSize: '19px'}}/>
@@ -60,9 +60,9 @@ export const ListNow = (/*props: props*/) => {
               <img src={manual_icon} alt="icon" />
 
               <div className="card-info">
-                <h5>{t('manual')}</h5>
+                <h5>{t('ListNow.ManualListing.Name')}</h5>
                 <p>
-                  {t('manualpara')}{' '}
+                  {t('ListNow.ManualListing.Description')}{' '}
                   <span>
                     <a href="#">
                       <ArrowRightOutlined style={{fontSize: '19px'}}/>
@@ -78,9 +78,9 @@ export const ListNow = (/*props: props*/) => {
               <img src={bulk_icon} alt="icon" className={'w-md-100 filter-white'} />
 
               <div className="card-info">
-                <h5>{t('bulk')}</h5>
+                <h5>{t('BulkListing.Name')}</h5>
                 <p>
-                  {t('bulkpara')}{' '}
+                  {t('ListNow.BulkListing.Description')}{' '}
                   <span>
                     <a href="#">
                       <ArrowRightOutlined style={{fontSize: '19px'}}/>
@@ -96,20 +96,20 @@ export const ListNow = (/*props: props*/) => {
           <Row>
             <Col span={24}>
               <div className="list-card" onClick={() => window.open(Links.ListingService)}>
-                <h3 className="title">{t('list4u')}</h3>
+                <h3 className="title">{t('Listnow.WeListForYou.Title')}</h3>
                 <img src={we_icon} alt="icon" />
 
                 <div className="card-info">
-                  <h5>{t('welist')}</h5>
+                  <h5>{t('WeListForYou.Name')}</h5>
                   <p>
-                    {t('welistpara')}
+                    {t('Listnow.WeListForYou.Description')}
                     <span>
                       <a href="#">
                         <ArrowRightOutlined style={{fontSize: '19px'}}/>
                       </a>
                     </span>
                   </p>
-                  <Button className="success-btn">{t('btnlist')} </Button>
+                  <Button className="success-btn">{t('Listnow.WeListForYou.Button')} </Button>
                 </div>
               </div>
             </Col>

@@ -44,7 +44,7 @@ export const SettingList = (props: Props) => {
       onChange={OnChange}
       loading={loadingData}
       size="large"
-      placeHolder={loadingT ? '' : placeHolder ?? t('Select') as string}
+      placeHolder={loadingT ? '' : placeHolder ?? t('Setting.Select') as string}
       key={loadingData.toString()}
     >
       {listData}

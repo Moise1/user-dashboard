@@ -1,9 +1,5 @@
 {
   "AddNewChannel": "Add new Store",
-  "Channel.Monitoring": "Monitoring",
-  "Channel.Listing": "Product",
-  "Channel.Business": "Business",
-  "Channel.Other": "Other",
   "Main": "Main",
   "Description": "Description",
   "Details": "Details",
@@ -14,7 +10,14 @@
   "PendingListingsShort": "Pending",
   "TerminatedListings": "Terminated Products",
 
-  "Select": "Select",
+
+  "BulkListing.Name": "Bulk Publish",
+  "Catalog.Name": "Catalog",
+
+  "Channel.Monitoring": "Monitoring",
+  "Channel.Listing": "Product",
+  "Channel.Business": "Business",
+  "Channel.Other": "Other",
 
   "Channel.Setting.Description.BusinessCity": "City to use as the location of your items.Required.",
   "Channel.Setting.Description.BusinessPayment": " ",
@@ -148,12 +151,21 @@
   "Listings.Column.CreatedOn": "Created On",
   "Listings.Column.CreatedBy": "Created By",
 
+  "ListNow.Header": "Ways to publish",
+  "ListNow.BulkListing.Description": "List as many items as you want by adding urls from different suppliers.",
+  "ListNow.Catalog.Description": "Choose your favourite supplier and we recommend products for you.",
+  "ListNow.ManualListing.Description": " Use our browser extension to add products directly from the supplier.",
+  "ListNow.ManualListing.Name": "Manual Publish",
+  "Listnow.WeListForYou.Button": "For only £9.99",
+  "Listnow.WeListForYou.Description": "No idea what to publish? We will pick the best selling items for you!",
+  "Listnow.WeListForYou.Title": "Don't know what to publish? We can do it for you",
+
+
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
   "Menu.OurServices": "Services",
   "Menu.Account": "Account",
   "Menu.Channel": "Store",
-  "Menu.Catalog": "Catalog",
   "Menu.Dashboard": "Dashboard",
   "Menu.Help": "Help",
   "Menu.Listings": "Products",
@@ -271,6 +283,7 @@
   "Setting.Custom": "Custom",
   "Setting.Yes": "Yes",
   "Setting.No": "No",
+  "Setting.Select": "Select",
 
   "Sources.Setting.Description.MaxDeliveryDays": "If the delivery time exceeds the maximum delivery days, the item will be marked as Out Of Stock",
   "Sources.Setting.Description.OnlyPrime": " ",
@@ -312,9 +325,15 @@
   "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
 
+  "Topbar.Quota": "Quota",
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Upgrade": "Upgrade",
-  "Topbar.Quota": "Quota",
+
+  "WeListForYou.Name": "We Publish For You",
+
+
+
+
 
   "selectAll": "Select All",
   "filters": "Filters",
@@ -332,12 +351,6 @@
   "selling-point": "Select where you’re selling from",
   "store-base": "Where is your store based?",
   "account-connection": "HGR account connection",
-  "btnlist": " For only £9.99",
-  "bulk": "Bulk Publish",
-  "bulkpara": "List as many items as you want by adding urls from different sources.",
-  "cat": "Catalog",
-  "cata": "Catalog",
-  "catapara": "Choose your favourite supplier and we recommend products for you.",
   "changeset": "*You can change this setting later on",
   "copy": "Copy",
   "Cost": "Cost",
@@ -363,8 +376,6 @@
   "keeppcon": "*you don’t need to worry about keeping your computer on.",
   "liketosell": "Where would you like to sell",
   "listcheck": "  *Please choose a way to list.",
-  "listnowhead": "Ways to list",
-  "list4u": "Don't know what to list? We can do it for you",
   "ln": "List now",
   "link": "Link",
   "account": "account",
@@ -372,8 +383,6 @@
   "ls": "Products",
   "product-options": "Products options",
   "ensure-warning": "Please make sure that you enter your",
-  "manual": "Manual Publish",
-  "manualpara": "  Use our browser extension to add products directly from the source.",
   "Markup": "Markup",
   "mrktplc": "Marketplace",
   "napi": "No API",
@@ -424,8 +433,6 @@
   "showColumns": "Show Columns",
   "hideColumns": "Hide Columns",
   "wapi": "  With API",
-  "welist": "We list for you",
-  "welistpara": "No idea what to list? We will pick the best selling items for you!",
   "username-request": "What is your",
   "whyext": "Why do we use this extension?"
 }

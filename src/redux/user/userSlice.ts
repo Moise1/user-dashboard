@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogin, userRegister, getUserToken } from './userThunk';
+import { userLogin, userRegister, getUserToken, getUserQuota } from './userThunk';
 export interface UserData {
   email: string;
   password: string;
@@ -31,6 +31,7 @@ export interface UserData {
 const initialState = {
   user: {} as UserData,
   tokens: null,
+  quota: null,
   loading: false,
   error: ''
 };
@@ -90,6 +91,20 @@ export const userSlice = createSlice({
       state.tokens = payload;
     });
     builder.addCase(getUserToken.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+
+    // Users's Quota
+    builder.addCase(getUserQuota.pending, (state) => {
+      state.loading = true;
+      state.error = '';
+    });
+    builder.addCase(getUserQuota.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.quota = payload;
+    });
+    builder.addCase(getUserQuota.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = String(payload);
     });
