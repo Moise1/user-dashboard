@@ -19,7 +19,9 @@ export const AllProducts = ({ children, removeProduct, className }: Props) => {
             <div className="product-info-area">
               <div className="header">
                 <p
-                  className="title">{c.title}</p>
+                  className="title">
+                  {c?.title.length > 20 ? `${c?.title.substring(0, 35)} ...` : c?.title}
+                </p>
                 <p className="source">by {c.sourceId}</p>
               </div>
               <div className="transaction-details">
