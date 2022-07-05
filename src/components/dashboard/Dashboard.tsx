@@ -213,7 +213,7 @@ export const Dashboard = () => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
 
-  const totalOrders = sales?.reduce((total: number, sale: { quantitySold: number; }) => total = total + sale.quantitySold, 0)
+  const totalOrders = sales?.reduce((total: number, sale: { quantitySold: number; }) => total = total + sale.quantitySold, 0);
 
   const noApiServerSubscription = (
     <div className="subscribe">
@@ -493,7 +493,7 @@ export const Dashboard = () => {
       <div className="general-section-chart">
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
-            <h3>Orders</h3>
+            <h1>Orders</h1>
             {totalOrders ? <h4>TOTAL ORDERS: {totalOrders}</h4> : ''}
             <Chart options={orderChartData} series={orderChartData.series} type="line" width='100%' height={400} />
           </Col>
