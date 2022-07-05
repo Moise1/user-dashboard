@@ -208,9 +208,12 @@ export const Dashboard = () => {
       );
     }
   };
-  //const totalProfit = sales?.reduce((total: number, sale: Sale) => {
-  //  return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
-  //}, 0);
+
+  const totalProfit = sales?.reduce((total: number, sale: Sale) => {
+    return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
+  }, 0);
+
+  const totalOrders = sales?.reduce((total: number, sale: { quantitySold: number; }) => total = total + sale.quantitySold, 0)
 
   const noApiServerSubscription = (
     <div className="subscribe">
@@ -229,28 +232,26 @@ export const Dashboard = () => {
   );
 
   const getLabels = () => {
-    switch (selectedPeriod) {
-      case ePeriod.Hours:
-        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD hh:mm A').utc().format('hhA DD')))];
-      case ePeriod.Days: {
-        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+    if (selectedPeriod) {
+      switch (selectedPeriod) {
+        case ePeriod.Hours:
+          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD hh:mm A').utc().format('hhA DD')))];
+        case ePeriod.Days: {
+          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+        }
+        case ePeriod.Weeks: {
+          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+        }
+        case ePeriod.Months: {
+          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
+        }
+        case ePeriod.Year: {
+          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('YYYY')))];
+        }
+        default:
+          break;
       }
-      case ePeriod.Weeks: {
-        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
-      }
-      case ePeriod.Months: {
-        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
-      }
-      case ePeriod.Year: {
-        return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('YYYY')))];
-      }
-
-      default:
-        break;
     }
-
-    if (selectedPeriod)
-      return ['', '', '', '', '', '', '', '', '', '', '', ''];
   };
 
   const saleData: number[] = sales?.map((s: Sale) => s.quantitySold);
@@ -493,11 +494,13 @@ export const Dashboard = () => {
         <Row className="general-cols" gutter={[0, 15]}>
           <Col className="products" xs={24} lg={10}>
             <h3>Orders</h3>
+            {totalOrders ? <h4>TOTAL ORDERS: {totalOrders}</h4> : ''}
             <Chart options={orderChartData} series={orderChartData.series} type="line" width='100%' height={400} />
           </Col>
 
           <Col className="products" xs={24} lg={10}>
             <h1>Profit</h1>
+            {totalProfit ? <h4>TOTAL PROFIT: {totalProfit.toFixed(0)}</h4> : ''}
             <Chart options={profitChartData} series={profitChartData.series} type="line" width='100%' height={400} />
           </Col>
         </Row>
