@@ -11,7 +11,13 @@
   "TerminatedListings": "Terminated Products",
 
 
+
+
   "BulkListing.Name": "Bulk Publish",
+
+  "Button.Cancel": "Cancel",
+  "Button.ApplyChanges": "Apply Changes",
+
   "Catalog.Name": "Catalog",
 
   "Channel.Monitoring": "Monitoring",
@@ -139,7 +145,7 @@
 
   "Listings.Column.Cost": "Cost",
   "Listings.Column.Img": "Image",
-  "Listings.Column.Item no.": "Item no.",
+  "Listings.Column.Id": "HGR Id",
   "Listings.Column.Markup": "Markup",
   "Listings.Column.Profit": "Profit",
   "Listings.Column.Sell": "Sell",
@@ -268,8 +274,6 @@
   "OrderDetails.DeleteOrder": "Delete order",
 
   "SaveChanges": "Save Changes",
-  "ApplyChanges": "Apply Changes",
-  "Cancel": "Cancel",
   "ResetToDefault": "Reset to Default",
   "TerminateItem": "Terminate Item",
   "ForceRefresh": "Force Refresh",
@@ -325,6 +329,9 @@
   "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
 
+  "Table.ShowColumns": "Show Columns",
+  "Table.AdvancedSearch": "Advanced Search",
+
   "Topbar.Quota": "Quota",
   "Topbar.Notifications": "{count} Notifications",
   "Topbar.Upgrade": "Upgrade",
@@ -338,8 +345,6 @@
   "selectAll": "Select All",
   "filters": "Filters",
   "advnc": "Advance",
-  "advsearch": "Advanced Search",
-  "AdvancedSearch": "Advanced Search",
   "amznacntslct": "What is the Amazon Business seller program? The Amazon Business seller program is a free upgrade to the Professional Selling plan allowing sellers to cater to the specific requirements of business customers by providing features optimized for business-to-business transactions",
   "amznpara1": " To get started, we set up a dedicated page that will show you all you need to Know in order to set up the Amazon account and the business seller program. ",
   "amznpara2": "To get started, we set up a dedicated page that will show you all you need to Know in order to set up the Amazon account and the business seller program. ",
@@ -430,7 +435,6 @@
   "upg": "Upgrade",
   "username": " username",
   "shop_url": "URL",
-  "showColumns": "Show Columns",
   "hideColumns": "Hide Columns",
   "wapi": "  With API",
   "username-request": "What is your",

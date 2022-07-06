@@ -7,7 +7,13 @@ import { TableRowSelection } from 'antd/lib/table/interface';
 export type DataTableKey = React.Key;
 
 interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
+  columns: {
+    //title: ReactNode;
+    //dataIndex: string;
+    //id: number;
+    //visible?: boolean;
+    key: string;
+  }[];
   dataSource?: Array<T>;
   selectedRows?: number;
   totalItems?: number;

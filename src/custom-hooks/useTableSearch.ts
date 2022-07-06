@@ -5,11 +5,10 @@ import { ActiveListing } from 'src/redux/unmap';
 interface Props<ListingsStatusType> {
   searchTxt: string | null;
   dataSource: () => Array<ListingsStatusType>;
-  tabStatus: string | null;
 }
 type KeyType = string | number | null | undefined | ActiveListing;
 
-export const useTableSearch = <ListingsStatusType>({ searchTxt, dataSource, tabStatus }: Props<ListingsStatusType>) => {
+export const useTableSearch = <ListingsStatusType>({ searchTxt, dataSource }: Props<ListingsStatusType>) => {
   const [filteredData, setFilteredData] = useState<(ListingsStatusType | null)[]>([]);
   const [origData, setOrigData] = useState<ListingsStatusType[]>([]);
   const [searchIndex, setSearchIndex] = useState<{ allValues: string }[]>([]);
@@ -55,7 +54,6 @@ export const useTableSearch = <ListingsStatusType>({ searchTxt, dataSource, tabS
         })
       );
     } else setFilteredData(origData);
-    console.log(tabStatus);
 
     // these needs to be finished later... don't remove it
 

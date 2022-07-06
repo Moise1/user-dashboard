@@ -81,7 +81,7 @@ export const CatalogSource = ({ handleClose, getSourcesData, sources }: Props) =
       <Divider />
       <div className="action-btns">
         <SuccessBtn>{t('AddSources')}</SuccessBtn>
-        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Cancel')}</CancelBtn>
+        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Button.Cancel')}</CancelBtn>
       </div>
     </div>
   );

@@ -7,6 +7,10 @@
   "TerminatedListings": "Productos Terminados",
 
   "BulkListing.Name": "Publicar masivamente",
+
+  "Button.Cancel": "Cancelar",
+  "Button.ApplyChanges": "Aplicar cambios",
+
   "Catalog.Name": "Catálogo",
 
   "Channel.Monitoring": "Sincronización",
@@ -97,7 +101,8 @@
 
   "Error.Saving.Configuration": "Error guardando preferencias",
 
-  "Listings.Column.Item no.": "Item #",
+  "Listings.Column.Img": "Imagen",
+  "Listings.Column.Id": "HGR Id",
   "Listings.Column.Source": "Fuente",
   "Listings.Column.Title": "Titulo",
   "Listings.Column.Sell": "Venta",
@@ -105,7 +110,9 @@
   "Listings.Column.Profit": "Ganancia",
   "Listings.Column.Markup": "Markup",
   "Listings.Column.Stock": "Stock",
-  "Listings.Column.Created on": "Creado en",
+  "Listings.Column.CreatedOn": "Creado en",
+  "Listings.Column.CreatedBy": "Creado por",
+  "Listings.Column.Options": "Opciones",
 
   "ListNow.Header": "Formas de publicar",
   "ListNow.BulkListing.Description": "Publique tantos productos como desee añadiendo direcciones URL de diferentes proveedores.",
@@ -172,6 +179,8 @@
 
   "WeListForYou.Name": "Publicamos por ti",
 
+  "Table.ShowColumns": "Mostrar Columnas",
+  "Table.AdvancedSearch": "Búsqueda Avanzada",
 
   "Topbar.Quota": "Cuota",
   "Topbar.Notifications": "{count} notificaciones",
