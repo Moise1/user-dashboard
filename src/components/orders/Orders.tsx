@@ -245,10 +245,10 @@ export const Orders = () => {
                 </Col>
               </Row>
               <div className="show-columns-action-btns">
-                <CancelBtn handleClose={handleCancelChanges}>{t('Cancel')}</CancelBtn>
+                <CancelBtn handleClose={handleCancelChanges}>{t('Button.Cancel')}</CancelBtn>
                 <ShowVisibleColBtn handleClose={handleApplyChanges}>
                   <CheckIcon />
-                  {t('ApplyChanges')}
+                  {t('Button.ApplyChanges')}
                 </ShowVisibleColBtn>
               </div>
             </Card>
@@ -286,7 +286,7 @@ export const Orders = () => {
               setSearchFilterKey={setSearchFilterKey}
             />
             <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
-              {t('AdvancedSearch')}
+              {t('Table.AdvancedSearch')}
             </TableActionBtns>
           </div>
           <OrderActionBtns orderNumber={orderNumber} selectedRows={selectedRowKeys.length} />

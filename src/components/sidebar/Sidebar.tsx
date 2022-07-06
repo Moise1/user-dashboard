@@ -264,7 +264,7 @@ export const Sidebar = (props: Props) => {
               </div>
       
               <button type="button" className="update-btn">
-                {t('Topbar.Update')}
+                {t('Topbar.Upgrade')}
               </button>
             </div>
             <div className="sidebar-control-btns">

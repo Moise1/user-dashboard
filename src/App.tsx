@@ -79,6 +79,8 @@ export const App = withRouter(({ history }: {history: RouteComponentProps['histo
             <Route path={Links.Register} component={UserRegister} />
             <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
             <ProtectedRoute path={Links.Products} component={Listings} />
+            <ProtectedRoute path={Links.ProductsTerminated} component={Listings} />
+            <ProtectedRoute path={Links.ProductsPending} component={Listings} />
             <ProtectedRoute path={Links.PublishNow} component={ListNow} />
             <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
