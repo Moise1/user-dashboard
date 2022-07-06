@@ -35,7 +35,7 @@ export const UserName = (props: props) => {
         })
       );
       const {shopifyUrl} = store.getState().newChannel;
-      popupWindow(shopifyUrl, window, 800, 600, undefined);
+      popupWindow(shopifyUrl, window, 800, 600);
       return false;
     }
     
