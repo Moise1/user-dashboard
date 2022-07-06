@@ -163,6 +163,7 @@ export const NewChannel = () => {
               platform={data.platform!}
               step={step}
               storeLocation={data.storeLocation}
+              setStep={setStep}
             /> 
           );
         }
@@ -172,6 +173,7 @@ export const NewChannel = () => {
             platform={data.platform!} 
             step={step} 
             storeLocation={data.storeLocation}
+            setStep={setStep}
           />
         );
       case 6:
