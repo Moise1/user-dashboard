@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Button, Row, Col } from 'antd';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
@@ -28,17 +28,24 @@ export const popupWindow = (
   url: string,
   win: Window & typeof globalThis,
   w: number, 
-  h: number) => {
+  h: number,
+  setStep?: Dispatch<SetStateAction<number>>
+) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
-  return win
-    .open(
-      url,
-      '_blank',
-      `toolbar=no, location=yes, directories=no,
-      status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
-      width=${w}, height=${h}, top=${t}, left=${l}`
-    );
+  const newWindow = win.open(
+    url,
+    '_blank',
+    `toolbar=no, location=yes, directories=no,
+    status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
+    width=${w}, height=${h}, top=${t}, left=${l}`
+  );
+  const timer = setInterval(() => { 
+    if(newWindow?.closed) {
+      clearInterval(timer);
+      setStep!(6);
+    }
+  }, 1000);
 };
 export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
@@ -46,6 +53,7 @@ export const NewChannel = () => {
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
   const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
+
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -58,15 +66,13 @@ export const NewChannel = () => {
     list: ''
   });
 
- 
-
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
   };
 
   const handleNext = () => {
     if(openUrl && data.platform === 1 && ebayUrl) {
-      popupWindow(ebayUrl, window, 800, 600);
+      popupWindow(ebayUrl, window, 800, 600, setStep);
       return false;
     }else{
       setStep((prevState) => prevState + 1);
