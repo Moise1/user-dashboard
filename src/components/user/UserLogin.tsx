@@ -7,7 +7,7 @@ import { UserData } from '../../redux/user/userSlice';
 import '../../sass/user-login.scss';
 
 export const UserLogin = withRouter(({ history }) => {
-  const { loading } = useAppSelector((state) => state.user);
+  const { userLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const onFinish = (values: UserData) => {
     dispatch(userLogin({ data: values, history }));
@@ -32,7 +32,7 @@ export const UserLogin = withRouter(({ history }) => {
             { type: 'email', message: 'Invalid e-mail address' }
           ]}
         >
-          <Input className="auth-input" />
+          <Input autoFocus={true} className="auth-input" />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -51,10 +51,9 @@ export const UserLogin = withRouter(({ history }) => {
             </Link>
           </span>
         </Form.Item>
-
         <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
-          <ConfirmBtn htmlType="submit" disabled={loading}>
-            {loading ? 'Please wait...' : 'Log In'}
+          <ConfirmBtn htmlType="submit" disabled={userLoading}>
+            {userLoading ? 'Please wait...' : 'Log In'}
           </ConfirmBtn>
         </Form.Item>
       </Form>
