@@ -1,6 +1,8 @@
 ﻿export const Links = {
   Dashboard: '/dashboard',
   Products: '/products',
+  ProductsPending: '/products/pending',
+  ProductsTerminated: '/products/terminated',
   PublishNow: '/list-now',
   ManualPublish: '/manual-publish',
   BulkPublish: '/bulk-publish',

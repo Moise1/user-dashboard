@@ -65,7 +65,7 @@ export const TableActionBtns = (props: TableActionBtnsProps) => {
       </Button>
       {showColumns && (
         <Button className="view-columns-btn" onClick={handleShowColumns}>
-          <img src={column_img} height="20" alt="" /> {t('showColumns')}
+          <img src={column_img} height="20" alt="" /> {t('Table.ShowColumns')}
         </Button>
       )}
 

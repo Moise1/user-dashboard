@@ -77,7 +77,7 @@ export const ProductDetails = (props: Props) => {
                 :
                 <SuccessBtn>{t('AddToSelection')}</SuccessBtn>
             }
-            <CancelBtn handleClose={handleClose}>{t('Cancel')}</CancelBtn>
+            <CancelBtn handleClose={handleClose}>{t('Button.Cancel')}</CancelBtn>
           </div>
         </Col>
       </Row>
