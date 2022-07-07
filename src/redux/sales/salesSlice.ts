@@ -10,6 +10,7 @@ export interface Sale {
   period: number | string;
   from: string;
   to?: string;
+  timeDiff?: number;
 }
 
 const initialState = {

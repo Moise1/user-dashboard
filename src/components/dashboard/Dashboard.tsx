@@ -113,7 +113,9 @@ export const Dashboard = () => {
     dispatch(
       getSales({
         period: selectedPeriod,
-        from: moment(Date.now.toString()).year(-1).toJSON()
+        from: moment.utc().month(-12).local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        to: moment.utc().local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        timeDiff: new Date().getTimezoneOffset()
       })
     );
   }, [getSales]);
@@ -180,7 +182,8 @@ export const Dashboard = () => {
         getSales({
           period: value as unknown as number,
           from: dateString[0],
-          to: dateString[1]
+          to: dateString[1],
+          timeDiff: new Date().getTimezoneOffset()
         })
       );
     }
@@ -237,18 +240,22 @@ export const Dashboard = () => {
     if (selectedPeriod) {
       switch (selectedPeriod) {
         case ePeriod.Hours:
-          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD hh:mm A').utc().format('hhA DD')))];
+          return [...new Set(sales?.map((d: Sale) => {
+            const date = new Date(d.date ? d.date : new Date());
+            const hours = (date.getUTCHours() % 12 || 12) + (date.getUTCHours() < 12 ? 'AM' : 'PM');
+            return hours + '-' + date.getUTCDate();
+          }))];
         case ePeriod.Days: {
-          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+          return [...new Set(sales?.map((d: Sale) => moment(d.date).format('DD-MMM')))];
         }
         case ePeriod.Weeks: {
-          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('DD-MMM')))];
+          return [...new Set(sales?.map((d: Sale) => moment(d.date).format('DD-MMM')))];
         }
         case ePeriod.Months: {
-          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
+          return [...new Set(sales?.map((d: Sale) => moment(d.date).format('MMM-YY')))];
         }
         case ePeriod.Year: {
-          return [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('YYYY')))];
+          return [...new Set(sales?.map((d: Sale) => moment(d.date).format('YYYY')))];
         }
         default:
           break;
@@ -400,30 +407,29 @@ export const Dashboard = () => {
   const handleOk = () => {
     setIsModalVisible(false);
     if (state[0]) {
-      const startDate: Date = state[0].startDate
-        ? moment(state[0].startDate).add(1, 'days').toDate()
-        : moment(Date.now.toString()).year(-1).toDate();
-      const endDate: Date = state[0].endDate
-        ? moment(state[0].endDate).add(1, 'days').toDate()
-        : moment(Date.now.toString()).toDate();
+      const startDate: Date = state[0].startDate ? state[0].startDate : moment.utc().month(-12).toDate();
+      const endDate: Date = state[0].endDate ? state[0].endDate : moment.utc().toDate();
       const diff = Math.abs(startDate.getTime() - endDate.getTime());
       const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
+      const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
+      console.log('from; ' + from + ';  to: ' + to);
       console.log('days: ' + diffDays);
       if (diffDays < 3) {
         setSelectedPeriod(6);
-        salesDateChange(6, [startDate.toJSON(), endDate.toJSON()]);
+        salesDateChange(6, [from, to]);
       } else if (diffDays > 2 && diffDays < 31) {
         setSelectedPeriod(3);
-        salesDateChange(3, [startDate.toJSON(), endDate.toJSON()]);
-      } else if (diffDays > 30 && diffDays < 181) {
+        salesDateChange(3, [from, to]);
+      } else if (diffDays > 30 && diffDays < 151) {
         setSelectedPeriod(7);
-        salesDateChange(7, [startDate.toJSON(), endDate.toJSON()]);
-      } else if (diffDays > 180 && diffDays < 400) {
+        salesDateChange(7, [from, to]);
+      } else if (diffDays > 150 && diffDays < 400) {
         setSelectedPeriod(4);
-        salesDateChange(4, [startDate.toJSON(), endDate.toJSON()]);
+        salesDateChange(4, [from, to]);
       } else {
         setSelectedPeriod(5);
-        salesDateChange(5, [startDate.toJSON(), endDate.toJSON()]);
+        salesDateChange(5, [from, to]);
       }
     }
   };
