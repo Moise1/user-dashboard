@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { toastAlert } from 'src/utils/toastAlert';
+import { logout } from 'src/utils/logout';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -36,6 +37,8 @@ client.interceptors.response.use(
   (res) => {
     if (res.status === 500) {
       toastAlert(res.data.response_errors.error.description, 'error');
+    } else if (res.status === 401) {
+      logout();
     } else if (res.status === 404) {
       toastAlert(res.data.response_errors.error.description, 'error');
     } else if (res.status === 409) {

@@ -33,6 +33,7 @@ const initialState = {
   tokens: null,
   quota: null,
   loading: false,
+  userLoading: false,
   error: ''
 };
 
@@ -55,15 +56,15 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     // User Login
     builder.addCase(userLogin.pending, (state) => {
-      state.loading = true;
+      state.userLoading = true;
       state.error = '';
     });
     builder.addCase(userLogin.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.userLoading = false;
       state.user = payload;
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.userLoading = false;
       state.error = String(payload);
     });
 

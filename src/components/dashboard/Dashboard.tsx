@@ -36,9 +36,9 @@ import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
-import { BookOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { BookOutlined, CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
-import { affiliatesGraphConfig, /*salesGraphConfig*/ } from 'src/utils/graphConfig';
+import { affiliatesGraphConfig /*salesGraphConfig*/ } from 'src/utils/graphConfig';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
@@ -77,11 +77,13 @@ export const Dashboard = () => {
   //const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
   const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
   const onSearch = (value: string) => {
-    setSearchedChannels(channels.filter((c: Channel) => {
-      if (c.name.toLowerCase().includes(value.toLowerCase())) {
-        return c;
-      }
-    }));
+    setSearchedChannels(
+      channels.filter((c: Channel) => {
+        if (c.name.toLowerCase().includes(value.toLowerCase())) {
+          return c;
+        }
+      })
+    );
   };
 
   const removeRecord = async (id: Channel['id']) => {
@@ -112,7 +114,8 @@ export const Dashboard = () => {
       getSales({
         period: selectedPeriod,
         from: moment(Date.now.toString()).year(-1).toJSON()
-      }));
+      })
+    );
   }, [getSales]);
 
   const columns = [
@@ -168,7 +171,10 @@ export const Dashboard = () => {
     setSelectedPeriod(value as number);
   };
 
-  const salesDateChange = async (value: Moment | null | RangeValue<Moment> | number, dateString: string | [string, string]) => {
+  const salesDateChange = async (
+    value: Moment | null | RangeValue<Moment> | number,
+    dateString: string | [string, string]
+  ) => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getSales({
@@ -206,7 +212,10 @@ export const Dashboard = () => {
     return (total += sale.revenue! - (sale.sourcePrice! + sale.totalTax!));
   }, 0);
 
-  const totalOrders = sales?.reduce((total: number, sale: { quantitySold: number; }) => total = total + sale.quantitySold, 0);
+  const totalOrders = sales?.reduce(
+    (total: number, sale: { quantitySold: number }) => (total = total + sale.quantitySold),
+    0
+  );
 
   const noApiServerSubscription = (
     <div className="subscribe">
@@ -261,16 +270,16 @@ export const Dashboard = () => {
       dropShadow: {
         enabled: true,
         color: '#000',
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2
+        top: 0,
+        left: 0,
+        blur: 5,
+        opacity: 0.1
       },
       toolbar: {
         show: false
       }
     },
-    colors: ['#77B6EA', '#545454'],
+    colors: ['#5e84db'],
     dataLabels: {
       enabled: true
     },
@@ -311,7 +320,7 @@ export const Dashboard = () => {
     },
     series: [
       {
-        name: 'Sale Orders: ',
+        name: 'Orders',
         data: saleData
       }
     ]
@@ -324,18 +333,18 @@ export const Dashboard = () => {
       dropShadow: {
         enabled: true,
         color: '#000',
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2
+        top: 0,
+        left: 0,
+        blur: 5,
+        opacity: 0.1
       },
       toolbar: {
         show: false
       }
     },
-    colors: ['#77B6EA', '#545454'],
+    colors: ['#228b22'],
     dataLabels: {
-      enabled: true,
+      enabled: true
     },
     stroke: {
       curve: 'smooth'
@@ -349,7 +358,7 @@ export const Dashboard = () => {
       row: {
         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
         opacity: 0.5
-      },
+      }
     },
     markers: {
       size: 1
@@ -374,7 +383,7 @@ export const Dashboard = () => {
     },
     series: [
       {
-        name: 'Profit: ',
+        name: 'Profit',
         data: profitData
       }
     ]
@@ -391,28 +400,28 @@ export const Dashboard = () => {
   const handleOk = () => {
     setIsModalVisible(false);
     if (state[0]) {
-      const startDate: Date = state[0].startDate ? moment(state[0].startDate).add(1, 'days').toDate() : moment(Date.now.toString()).year(-1).toDate();
-      const endDate: Date = state[0].endDate ? moment(state[0].endDate).add(1, 'days').toDate() : moment(Date.now.toString()).toDate();
+      const startDate: Date = state[0].startDate
+        ? moment(state[0].startDate).add(1, 'days').toDate()
+        : moment(Date.now.toString()).year(-1).toDate();
+      const endDate: Date = state[0].endDate
+        ? moment(state[0].endDate).add(1, 'days').toDate()
+        : moment(Date.now.toString()).toDate();
       const diff = Math.abs(startDate.getTime() - endDate.getTime());
       const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
       console.log('days: ' + diffDays);
       if (diffDays < 3) {
         setSelectedPeriod(6);
         salesDateChange(6, [startDate.toJSON(), endDate.toJSON()]);
-      }
-      else if (diffDays > 2 && diffDays < 31) {
+      } else if (diffDays > 2 && diffDays < 31) {
         setSelectedPeriod(3);
         salesDateChange(3, [startDate.toJSON(), endDate.toJSON()]);
-      }
-      else if (diffDays > 30 && diffDays < 181) {
+      } else if (diffDays > 30 && diffDays < 181) {
         setSelectedPeriod(7);
         salesDateChange(7, [startDate.toJSON(), endDate.toJSON()]);
-      }
-      else if (diffDays > 180 && diffDays < 400) {
+      } else if (diffDays > 180 && diffDays < 400) {
         setSelectedPeriod(4);
         salesDateChange(4, [startDate.toJSON(), endDate.toJSON()]);
-      }
-      else {
+      } else {
         setSelectedPeriod(5);
         salesDateChange(5, [startDate.toJSON(), endDate.toJSON()]);
       }
@@ -469,34 +478,26 @@ export const Dashboard = () => {
           </Col>
         </Row>
       </div>
+      <div className="general-section">
+        <div className="charts-sales">
+          <h1>Sales</h1>
+          <div className="date-picker" onClick={() => setIsModalVisible(true)}>
+            <h4>{moment().format('DD/MM/YYYY HH:MM')}</h4> <CalendarOutlined />
+          </div>
+          <Row className="general-cols" gutter={[0, 15]}>
+            <Col className="products" xs={24} lg={10}>
+              <h3>Total orders</h3>
+              {totalOrders ? <h2>{totalOrders}</h2> : ''}
+              <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" height={400} />
+            </Col>
 
-      <div className='charts-header-section'>
-        <Row className="general-cols" gutter={[0, 15]}>
-          <Col className="products" xs={24} lg={10}>
-            <h1>Orders & Profit Chart</h1>
-          </Col>
-          <Col className="products" xs={24} lg={10}>
-            <div className="graph-date-picker" onClick={() => setIsModalVisible(true)}>
-              <ConfirmBtn>Select date for the Charts</ConfirmBtn>
-            </div>
-          </Col>
-        </Row>
-      </div>
-
-      <div className="general-section-chart">
-        <Row className="general-cols" gutter={[0, 15]}>
-          <Col className="products" xs={24} lg={10}>
-            <h1>Orders</h1>
-            {totalOrders ? <h4>TOTAL ORDERS: {totalOrders}</h4> : ''}
-            <Chart options={orderChartData} series={orderChartData.series} type="line" width='100%' height={400} />
-          </Col>
-
-          <Col className="products" xs={24} lg={10}>
-            <h1>Profit</h1>
-            {totalProfit ? <h4>TOTAL PROFIT: {totalProfit.toFixed(0)}</h4> : ''}
-            <Chart options={profitChartData} series={profitChartData.series} type="line" width='100%' height={400} />
-          </Col>
-        </Row>
+            <Col className="products" xs={24} lg={10}>
+              <h3>Total profit</h3>
+              {totalProfit ? <h2>{'$' + totalProfit.toFixed(0)}</h2> : ''}
+              <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
+            </Col>
+          </Row>
+        </div>
       </div>
 
       <div className="other-services">
@@ -694,21 +695,15 @@ export const Dashboard = () => {
         <SocialIcon network="instagram" style={{ height: 30, width: 30 }} />
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
-      <Modal
-        title=""
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={925}
-      >
+      <Modal title="" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width={925}>
         <DateRangePicker
-          onChange={item => setState([item.selection])}
+          onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={state}
           direction="horizontal"
         />
       </Modal>
-    </Layout >
+    </Layout>
   );
 };
