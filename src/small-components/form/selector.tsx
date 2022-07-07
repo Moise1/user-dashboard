@@ -10,7 +10,7 @@ export type SelectorValue = React.Key | null;
 export interface SelectorData {
   value: SelectorValue;
   label: SelectorLabel;
-  searchTerm?: string;
+  title?: string;
 }
 
 interface Props {
@@ -53,7 +53,7 @@ export const Selector = (props: Props) => {
   const options =
     childrens.map(c => {
       return (
-        <Option key={c.value} value={c.value} title={c.searchTerm}>
+        <Option key={c.value} value={c.value} title={c.title}>
           {c.label}
         </Option>
       );
@@ -88,7 +88,7 @@ export const Selector = (props: Props) => {
       dropdownRender={dropdownRender}
       loading={loading}
       size={size}
-      filterOption={(input, option) => { console.log(option);  return option?.title?.toString().indexOf(input) > -1; }}
+      filterOption={(input, option) => option?.title?.toString().indexOf(input) > -1}
     >
       {options}
     </Select>
