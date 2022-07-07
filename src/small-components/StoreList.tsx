@@ -32,7 +32,8 @@ export const StoreList = () => {
       value: c.id,
       label: <>
         {CreateLabel(c)}
-      </>
+      </>,
+      searchTerm: c.name
     };
   };
 
@@ -46,7 +47,7 @@ export const StoreList = () => {
     <div className="store-list-container">
       <Selector
         size="large"
-        showSearch={false}
+        showSearch={true}
         value={channelId}
         onChange={OnChange}
         dropdownRender={(menu: ReactNode) => (
