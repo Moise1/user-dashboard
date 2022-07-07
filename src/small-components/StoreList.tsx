@@ -6,7 +6,7 @@ import { Channel } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
 import { shopLogo } from '../utils/shopLogo';
 import { countryFlag } from '../utils/countryFlag';
-import { Selector, SelectorValue } from './form/selector';
+import { Selector, SelectorData, SelectorValue } from './form/selector';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const StoreList = () => {
@@ -32,8 +32,9 @@ export const StoreList = () => {
       value: c.id,
       label: <>
         {CreateLabel(c)}
-      </>
-    };
+      </>,
+      title: c.name
+    } as SelectorData;
   };
 
   const options = channels.map(CreateValue);
@@ -46,7 +47,7 @@ export const StoreList = () => {
     <div className="store-list-container">
       <Selector
         size="large"
-        showSearch={false}
+        showSearch={true}
         value={channelId}
         onChange={OnChange}
         dropdownRender={(menu: ReactNode) => (
