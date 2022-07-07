@@ -67,6 +67,8 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [current, setCurrent] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
+  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
+  const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [open, setOpen] = useState<boolean>(false);
@@ -113,7 +115,7 @@ export const Dashboard = () => {
     dispatch(
       getSales({
         period: selectedPeriod,
-        from: moment.utc().month(-12).local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        from: moment.utc().add(-7, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
         to: moment.utc().local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
         timeDiff: new Date().getTimezoneOffset()
       })
@@ -413,18 +415,17 @@ export const Dashboard = () => {
       const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
       const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
       const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
-      console.log('from; ' + from + ';  to: ' + to);
-      console.log('days: ' + diffDays);
+
+      setStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
+      setEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+
       if (diffDays < 3) {
         setSelectedPeriod(6);
         salesDateChange(6, [from, to]);
       } else if (diffDays > 2 && diffDays < 31) {
         setSelectedPeriod(3);
         salesDateChange(3, [from, to]);
-      } else if (diffDays > 30 && diffDays < 151) {
-        setSelectedPeriod(7);
-        salesDateChange(7, [from, to]);
-      } else if (diffDays > 150 && diffDays < 400) {
+      } else if (diffDays > 30 && diffDays < 400) {
         setSelectedPeriod(4);
         salesDateChange(4, [from, to]);
       } else {
@@ -488,18 +489,18 @@ export const Dashboard = () => {
         <div className="charts-sales">
           <h1>Sales</h1>
           <div className="date-picker" onClick={() => setIsModalVisible(true)}>
-            <h4>{moment().format('DD/MM/YYYY HH:MM')}</h4> <CalendarOutlined />
+            <h4><strong>From </strong>{startFrom}  <strong> To </strong>  {endTo}</h4> <CalendarOutlined />
           </div>
           <Row className="general-cols" gutter={[0, 15]}>
             <Col className="products" xs={24} lg={10}>
               <h3>Total orders</h3>
-              {totalOrders ? <h2>{totalOrders}</h2> : ''}
+              <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
               <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" height={400} />
             </Col>
 
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
-              {totalProfit ? <h2>{'$' + totalProfit.toFixed(0)}</h2> : ''}
+              <h2>${totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}</h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
             </Col>
           </Row>
