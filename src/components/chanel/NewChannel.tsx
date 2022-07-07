@@ -23,6 +23,13 @@ interface State {
   list: string;
 }
 
+const fakeAPICall = () => {
+  return new Promise((resolve) => {
+    setTimeout(() =>{
+      resolve(localStorage.setItem('newChannelsuccess', 'true'));
+    }, Math.random() * 5000);
+  });
+};
 
 export const popupWindow = (
   url: string,
@@ -40,8 +47,11 @@ export const popupWindow = (
     status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
     width=${w}, height=${h}, top=${t}, left=${l}`
   );
+
+  fakeAPICall();
+  const newChannelSuccess = localStorage.getItem('newChannelsuccess');
   const timer = setInterval(() => { 
-    if(newWindow?.closed) {
+    if(newWindow?.closed && JSON.parse(newChannelSuccess!)) {
       clearInterval(timer);
       setStep!(6);
     }
@@ -53,6 +63,7 @@ export const NewChannel = () => {
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
   const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
+
 
   const dispatch = useAppDispatch();
 
@@ -117,6 +128,9 @@ export const NewChannel = () => {
   }, [data.api, getEbayLinkAccount]);
 
 
+  useEffect(() => {
+    localStorage.setItem('newChannelsuccess', 'false');
+  }, []);
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
       case 1:
