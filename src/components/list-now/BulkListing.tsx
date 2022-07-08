@@ -5,7 +5,6 @@ import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import '../../sass/list-now/manual-listing.scss';
 import '../../sass/list-now/bulk-listing.scss';
 import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
-import { getManualListings, saveAutolist, getAutolist } from '../../redux/listings/listingsThunk';
 import { BulkListingError, BulkListingLog, eBulkListingStatus, eChannelListingStatus, ListingsData } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
@@ -24,8 +23,8 @@ const { Panel } = Collapse;
 
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
-  const { autoList } = useAppSelector((state) => state.autoList);
-  const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
+  const { autoList } = useAppSelector((state) => state.autoList as AutoListState);
+  const { manualListings, loadings } = useAppSelector((state) => state.manualListings as ManualListingState);
   const { userAssistants, VAloading } = useAppSelector((state) => state.userAssistants);
   const lables = ['Source URL', 'Listing Title (Optional)'];
 
@@ -504,3 +503,15 @@ export const BulkListing = (/*props: props*/) => {
     </Layout>
   );
 };
+
+function getManualListings(): any {
+    throw new Error('Function not implemented.');
+}
+
+function getAutolist(data: { summary: null; }): any {
+    throw new Error('Function not implemented.');
+}
+
+function saveAutolist(values: ListingsData): any {
+    throw new Error('Function not implemented.');
+}

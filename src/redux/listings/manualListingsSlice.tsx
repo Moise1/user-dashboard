@@ -2,7 +2,7 @@
 import { getManualListings } from "./manualListingsThunk";
 
 export type ManualListingState = {
-  manualListings: unknown[];//TODO: Type! This is unnaceptable
+  manualListings: any[];//TODO: Type! This is unnaceptable
   loading: boolean;
   error: string;
 }
