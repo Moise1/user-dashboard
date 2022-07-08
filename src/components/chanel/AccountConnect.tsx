@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Col, Radio, Row } from 'antd';
 import { t } from '../../utils/transShim';
 import { ElementEventType } from '../catalog/Catalog';
@@ -29,6 +30,9 @@ export const AccountConnect = (props: props) => {
     dispatch(paidHostExtension());
   };
 
+  useEffect(() => {
+    localStorage.setItem('newChannelsuccess', 'false');
+  }, []);
   return (
     <form className="account-connect">
       <h2  className='title'>How do you want HGR to connect to your {eShop[platform]} account?</h2>

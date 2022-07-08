@@ -127,10 +127,6 @@ export const NewChannel = () => {
 
   }, [data.api, getEbayLinkAccount]);
 
-
-  useEffect(() => {
-    localStorage.setItem('newChannelsuccess', 'false');
-  }, []);
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
       case 1:
