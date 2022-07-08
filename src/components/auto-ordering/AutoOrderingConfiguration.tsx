@@ -6,7 +6,7 @@ import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
 import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
-import { DataTable, DataTableKey } from '../tables/DataTable';
+import { DataTable, DataTableKey } from '../../small-components/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
@@ -16,8 +16,6 @@ export const AutoOrderingConfiguration = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.getAutoOrdering);
-  const [current, setCurrent] = useState<number>(1);
-  const [postPerPage, setPostPerPage] = useState<number>(10);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   const [selectedRecord, setSelectedRecord] = useState({});
 
@@ -220,10 +218,6 @@ export const AutoOrderingConfiguration = () => {
               columns={tableColumns}
               dataSource={uniqueData}
               totalItems={uniqueData?.length}
-              pageSize={postPerPage}
-              setPostPerPage={setPostPerPage}
-              current={current}
-              onChange={setCurrent}
               rowClassName="table-row"
               rowSelection={rowSelection}
               onRow={(record) => {

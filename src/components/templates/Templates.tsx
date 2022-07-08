@@ -1,16 +1,15 @@
 import { Layout, Spin } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getTemplates, setDefault } from '../../redux/templates/templatesThunk';
 import { Template } from 'src/redux/templates/templatesSlice';
-import { DataTable } from '../tables/DataTable';
+import { DataTable } from '../../small-components/data-table';
 import { EditOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../../sass/templates.scss';
 
 export const Templates = () => {
   const dispatch = useAppDispatch();
-  const [current] = useState<number>(1);
 
   const updateStatus = async (id: Template['id'], active: Template['isDefault']) => {
     await dispatch(setDefault({ id, active: !active }));
@@ -76,8 +75,6 @@ export const Templates = () => {
         <DataTable
           dataSource={templates}
           columns={tableColumns}
-          pageSize={10}
-          current={current}
           totalItems={templates.length}
         />
       )}

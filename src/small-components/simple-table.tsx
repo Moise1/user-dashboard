@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Pagination, Table } from 'antd';
+import { TableRowSelection } from 'antd/lib/table/interface';
 
 interface Props<T> {
   columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
@@ -14,6 +15,7 @@ interface Props<T> {
   onPageSizeChanged?: (itemsPerPage: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
+  rowSelection?: TableRowSelection<T>;
 }
 
 export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) => {
@@ -26,7 +28,9 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
     onRow,
     rowClassName,
     onPageSizeChanged,
-    pageSizes
+    pageSizes,
+    hidePagination,
+    rowSelection
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
@@ -61,8 +65,9 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
         pagination={false}
         rowClassName={rowClassName}
         onRow={onRow}
+        rowSelection={rowSelection}
       />
-      {!props.hidePagination && <Pagination
+      {!hidePagination && <Pagination
         className="pagination"
         onChange={onPageChange}
         total={dataSource?.length}

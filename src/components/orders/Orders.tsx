@@ -6,7 +6,7 @@ import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
-import { DataTable, DataTableKey } from '../tables/DataTable';
+import { DataTable, DataTableKey } from '../../small-components/data-table';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -25,7 +25,6 @@ export const Orders = () => {
   const dispatch = useAppDispatch();
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
-  const [current, setCurrent] = useState<number>(1);
   const [selectedRecord, setSelectedRecord] = useState({});
   const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState([]);
@@ -34,7 +33,6 @@ export const Orders = () => {
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [searchFilterKey, setSearchFilterKey] = useState<DataTableKey[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
-  const [postPerPage, setPostPerPage] = useState<number>(10);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -299,10 +297,6 @@ export const Orders = () => {
             rowClassName="table-row"
             //Below the props are for pagination
             totalItems={order.length}
-            pageSize={postPerPage}
-            setPostPerPage={setPostPerPage}
-            current={current}
-            onChange={setCurrent}
             //
             onRow={(record) => {
               return {

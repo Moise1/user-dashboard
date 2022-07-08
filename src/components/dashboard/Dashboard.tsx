@@ -23,7 +23,7 @@ import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
-import { DataTable } from '../tables/DataTable';
+import { DataTable } from '../../small-components/data-table';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
@@ -65,7 +65,6 @@ export const Dashboard = () => {
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
   const [productQuota, setProductQuota] = useState<ProductQuota>();
-  const [current, setCurrent] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
   const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
@@ -471,8 +470,6 @@ export const Dashboard = () => {
               totalItems={searchedChannels.length ? searchedChannels.length : channels.length}
               pageSize={postPerPage}
               setPostPerPage={setPostPerPage}
-              current={current}
-              onChange={setCurrent}
             />
             <Link to="/new-channel" className="alternative-link">
               Add new channel

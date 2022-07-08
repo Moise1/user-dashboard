@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 // import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
-import { DataTable, DataTableKey } from '../tables/DataTable';
+import { DataTable, DataTableKey } from '../../small-components/data-table';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
@@ -17,8 +17,6 @@ import { Source } from '../../redux/sources/sourceSlice';
 
 export const PricingRules = () => {
 
-  const [rulesPerPage, setRulesPerPage] = useState<number>(10);
-  const [current, setCurrent] = useState<number>(1);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
 
   const { Item } = Form;
@@ -167,10 +165,6 @@ export const PricingRules = () => {
           <Spin />
         ) : (
           <DataTable
-            pageSize={rulesPerPage}
-            setPostPerPage={setRulesPerPage}
-            current={current}
-            onChange={setCurrent}
             dataSource={rules}
             columns={columns}
             totalItems={rules.length}
