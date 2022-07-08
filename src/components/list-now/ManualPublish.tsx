@@ -1,25 +1,25 @@
 /*import { useState } from 'react';*/
 /*import { t } from '../../utils/transShim';*/
 import { Row, Col } from 'antd';
-import { getManualListings } from '../../redux/listings/listingsThunk';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import '../../sass/list-now/manual-listing.scss';
 import { Link } from 'react-router-dom';
+import { SourcesState } from '../../redux/sources/sourceSlice';
 
 export const ManualPublish = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   //const { sources, loading } = useAppSelector((state) => state.sources);
-  const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
+  const { sources, loading } = useAppSelector((state) => state.sources as SourcesState);
 
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
 
   useEffect(() => {
-    dispatch(getManualListings());
-  }, [getManualListings]);
+    dispatch(getSources());
+  }, [getSources]);
 
   //console.log('test', sources?.sourceName);
 
@@ -74,7 +74,7 @@ export const ManualPublish = (/*props: props*/) => {
           {/*  </Col>;*/}
           {/*})}*/}
           <Row gutter={[16, 8]}>
-            {manualListings.moreSources?.map(
+            {sources?.map(
               (itm: {
                 id: number | undefined;
                 name: string | undefined;
@@ -84,7 +84,7 @@ export const ManualPublish = (/*props: props*/) => {
                   <Col span={6} key={itm.id}>
                     <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
                       <div className="list-card">
-                        {loadings}
+                        {loading}
                         {/*eslint-disable @typescript-eslint/no-var-requires */}
                         <img
                           width="159"

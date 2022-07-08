@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { t } from '../../src/utils/transShim';
 import { SuccessBtn, DeleteBtn, WarningBtn } from './ActionBtns';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
-import { ListingData } from 'src/redux/listings/listingsSlice';
+import { ActiveListing } from '../redux/listings/listingsSlice';
 interface Props {
-  selectedRecordData: ListingData;
+  selectedRecordData: ActiveListing;
 }
 
 export const ListingMain: React.FC<Props> = ({ selectedRecordData }: Props) => {

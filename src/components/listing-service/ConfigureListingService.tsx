@@ -9,7 +9,6 @@ import { Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
 import { SimpleTable } from 'src/small-components/simple-table';
 //import { CrossModalIcon } from '../common/Icons';
 import { useEffect, useState } from 'react';
-import { getSourcesForListing } from '../../redux/sources/sourcesThunk';
 import { Source } from '../../redux/sources/sourceSlice';
 import { getListingServices, addListingService } from '../../redux/dashboard/listingServicesThunk';
 import { countryFlag } from '../../utils/countryFlag';
@@ -73,9 +72,8 @@ export const ConfigureListingService = () => {
   const [isDisabled, setIsDisabled] = useState(selectedService.startedOn ? true : false);
 
   useEffect(() => {
-    dispatch(getSourcesForListing());
     dispatch(getListingServices());
-  }, [getSourcesForListing, getListingServices]);
+  }, [ getListingServices]);
 
   const info = () => {
     Modal.info({
