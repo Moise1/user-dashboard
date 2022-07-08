@@ -82,7 +82,7 @@ export const NewChannel = () => {
     setData({ ...data, storeLocation: value });
   };
   const handleChangeApi = (value: string) => {
-    setData({ ...data, api: value });      
+    setData({ ...data, api: value });
   };
 
   const handleChangeExtension = (value: string) => {

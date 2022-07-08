@@ -1,49 +1,71 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getListings, getListingsImages, getPendingListings, getTerminatedListings } from './listingsThunk';
+import { MiniSettings } from '../../types/mini-settings';
+import { getListings, getPendingListings, getTerminatedListings } from './listingsThunk';
 
-export type ListingData = {
-  imageUrl: string;
-  asin: null;
-  buyBoxPrice: null;
-  channelItem: string;
-  channelListingId: number;
-  channelPrice: number;
-  channelQuantity: number;
-  createdById: number;
-  createdByName: string;
-  createdOn: Date;
-  endsOn: null;
+export type ActiveListing = {
   id: number;
-  isLowestPrice: null;
-  key: number;
-  lastTimeInStock: string;
-  lastTimeSold: null;
-  lowestPrice: null;
-  origin: undefined;
-  overrides: undefined;
-  price: number;
-  productNotes: null;
-  productSourceId: number;
-  quantitySold: number;
-  sourceId: number;
-  sourcePath: string;
-  sourcePrice: number;
-  sourceQuantity: number;
-  status: number;
-  title: string;
-  updatedOn: string;
   userProductSourceChannelId: number;
+  channelListingId: number;
+  channelOAuthId: number;
+  channelItem: string; //Item Id
+  channelQuantity: number;
+  sourcePrice: number;
+  channelPrice: number;
+  title: string;
+  createdOn: Date;
+  status: number;
+  productSourceId: number;
+  lastTimeInStock: Date;
+  sourceQuantity: number;
   views: number;
   watches: number;
+  quantitySold: number;
+  lastTimeSold: Date;
+  productNotes: string;
+  overrides: MiniSettings;
+  sourceId: number;
+  sourcePath: string;
+  createdById: number;
+  createdByName: string;
+  updatedOn: Date;
+  price?: number;
+  endsOn: Date;
+  asin?: string;
+  isLowestPrice?: boolean;
+  lowestPrice?: number;
+  buyBoxPrice?: number;
+  origin: eChannelListingOrigin;
+  variationAtributes: ChannelListingVariationAttributeOption[];
+}
+export type ChannelListingVariationAttributeOption = {
+  id: number;
+  channelListingId: number;
+  attribute: string;
+  option: string;
 }
 
-export type PendingListings = {
+export enum eChannelListingOrigin {
+  Unknown = 0,
+  Extension = 1,
+  BulkLister = 2,
+  CompeliaImporter = 3,
+  ExistingChannelListing = 4,
+  RelistedDiscoveredBySync = 5,
+  SmartLister = 6,
+  Migration = 8,
+  Relisted = 16,
+  ManuallyByAnAdmin = 32,
+  Catalog = 64,
+  WeListForYou = 128
+}
+
+export type PendingListing = {
+  id: number;
   categoryId: number;
   channelOAuthId: number;
   createdById: number;
   createdByName: string;
   createdOn: Date;
-  id: number;
   imageUrl: string;
   path: string;
   sourceId: number;
@@ -53,48 +75,7 @@ export type PendingListings = {
   channelListingId: number;
 }
 
-export type TerminatedListings = PendingListings;
-
-export type ListingsData = {
-  createdBy: number;
-  ignoreVero: boolean | undefined;
-  ignoreOOS: boolean | undefined;
-  reviewBeforePublishing: boolean | undefined;
-  listFrequencyMinutes: number;
-  dontListUntil?: Date;
-  listings: string[][];
-}
-
-export type ListingsSummary = {
-  requestId: string;
-  done: number;
-  forbiddenWordsUrls: string[];
-  duplicatedUrls: string[];
-  existingListingUrls: string[];
-  invalidSourceUrls: string[];
-  noQuota: number;
-  notDone: number;
-}
-
-export enum eBulkListingStatus {
-  UNKNOWN = 0,
-  INITIAL = 1,
-  PROCESSING = 20,
-  DONE = 200,
-  ERROR = 400,
-  TEMPORAL_ERROR = 401
-}
-
-export enum BulkListingError {
-  UNKOWN = 0,
-  INVALID_ORDER = 1,
-  SCRAPING = 2,
-  INVALID_TOKEN = 3,
-  NO_CATEGORY = 4,
-  VERO = 5,
-  ZERO_TOKENS = 6,
-  OOS = 7
-}
+export type TerminatedListings = PendingListing;
 
 export enum eChannelListingStatus {
   Unknown = 0x0,
@@ -123,18 +104,6 @@ export enum eChannelListingStatus {
   BulkApiCreated = -2147483648
 }
 
-export type BulkListingLog = {
-  id: number;
-  url: string;
-  status: eBulkListingStatus;
-  createdOn?: Date;
-  errorCode?: BulkListingError;
-  channelItem: string;
-  channelListingStatus: eChannelListingStatus;
-  verifiedOn: Date;
-  listedOn: Date;
-}
-
 export type ListingsSource = {
   id: number;
   channelOAuthId: number;
@@ -159,124 +128,83 @@ export type ListingsSource = {
   batchId: string;
 }
 
-const initialState = {
-  listings: <unknown>[],
-  pendingListings: <unknown>[],
-  terminatedListings: <unknown>[],
-  loading: false,
-  error: ''
+export type ListingsState = {
+  activeListings: ActiveListing[] | null;
+  loadingActive: boolean;
+
+  pendingListings: PendingListing[] | null;
+  loadingPending: boolean;
+
+  terminatedListings: TerminatedListings[] | null;
+  loadingTerminated: boolean;
+
+}
+
+const initialState: ListingsState = {
+  activeListings: null,
+  pendingListings: null,
+  terminatedListings: null,
+  loadingActive: false,
+  loadingTerminated: false,
+  loadingPending: false
 };
 
-const initialStatee = {
-  sourceListings: <unknown>[],
-  loading: false,
-  error: ''
-};
 
 export const listingsSlice = createSlice({
   name: 'listings',
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
+    //ACTIVE
     builder.addCase(getListings.pending, (state) => {
-      state.loading = true;
-      state.error = '';
+      state.loadingActive = true;
     });
     builder.addCase(getListings.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.listings = payload;
+      state.loadingActive = false;
+      state.activeListings = payload;
     });
-    builder.addCase(getListings.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
+    builder.addCase(getListings.rejected, (state) => {
+      state.loadingActive = false;
     });
-  }
-});
 
-//export const getListingsSourceSlice = createSlice({
-//  name: 'sourceListings',
-//  initialState: initialStatee,
-//  reducers: {},
-//  extraReducers: (builder) => {
-//    builder.addCase(getListingsSource.pending, (state) => {
-//      state.loading = true;
-//      state.error = '';
-//    });
-//    builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
-//      state.loading = false;
-//      state.sourceListings = payload;
-//    });
-//    builder.addCase(getListingsSource.rejected, (state, { payload }) => {
-//      state.loading = false;
-//      state.error = String(payload);
-//    });
-//  }
-//});
-
-export const PendingListingsSlice = createSlice({
-  name: 'pendingListings',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
+    //PENDING
     builder.addCase(getPendingListings.pending, (state) => {
-      state.loading = true;
-      state.error = '';
+      state.loadingPending = true;
     });
     builder.addCase(getPendingListings.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.pendingListings = [...payload.listings];
+      state.loadingPending = false;
+      state.pendingListings = payload;
     });
-    builder.addCase(getPendingListings.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
+    builder.addCase(getPendingListings.rejected, (state) => {
+      state.loadingPending = false;
     });
-  }
-});
 
-export const TerminateListingsSlice = createSlice({
-  name: 'terminateListings',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
+    //TERMINATED
     builder.addCase(getTerminatedListings.pending, (state) => {
-      state.loading = true;
-      state.error = '';
+      state.loadingTerminated = true;
     });
     builder.addCase(getTerminatedListings.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.terminatedListings = [...payload.listings];
+      state.loadingTerminated = false;
+      state.terminatedListings = payload;
     });
-    builder.addCase(getTerminatedListings.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
+    builder.addCase(getTerminatedListings.rejected, (state) => {
+      state.loadingTerminated = false;
     });
+
+    //Load Image
+    //builder.addCase(getListingsImages.pending, (state) => {
+    //  state.loading = true;
+    //  state.error = '';
+    //});
+    //builder.addCase(getListingsImages.fulfilled, (state, { payload }) => {
+    //  state.loading = false;
+    //  state.terminatedListings = [...payload.listings];
+    //});
+    //builder.addCase(getListingsImages.rejected, (state, { payload }) => {
+    //  state.loading = false;
+    //  state.error = String(payload);
+    //});
   }
 });
 
-export const GetListingsImagesSlice = createSlice({
-  name: 'activeListingsImages',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getListingsImages.pending, (state) => {
-      state.loading = true;
-      state.error = '';
-    });
-    builder.addCase(getListingsImages.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.terminatedListings = [...payload.listings];
-    });
-    builder.addCase(getListingsImages.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
-    });
-  }
-});
-
-export const { reducer: autoListReducer } = autoListSlice;
 export const { reducer: listingsReducer } = listingsSlice;
-export const { reducer: listingsSourceReducer } = getListingsSourceSlice;
-export const { reducer: manualListingsReducer } = getManualListingsSlice;
-export const { reducer: pendingListingsReducer } = PendingListingsSlice;
-export const { reducer: terminatedListingsReducer } = TerminateListingsSlice;
-export const { reducer: GetListingsImagesSliceReducer } = GetListingsImagesSlice;

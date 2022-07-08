@@ -8,12 +8,7 @@ import { userReducer } from '../user/userSlice';
 import { sourcesConfigReducer } from '../source-configuration/source-configuration-slice';
 import { sourcesReducer } from '../sources/sourceSlice';
 import { channelsReducer } from '../channels/channelsSlice';
-import { autoListReducer } from '../listings/listingsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
-import { listingsSourceReducer } from '../listings/listingsSlice';
-import { pendingListingsReducer } from '../listings/listingsSlice';
-import { terminatedListingsReducer } from '../listings/listingsSlice';
-import { GetListingsImagesSliceReducer } from '../listings/listingsSlice';
 import { notificationsReducer } from '../notifications/notificationsSlice';
 import { templatesReducer } from '../templates/templatesSlice';
 import { paymentReducer } from '../payment/paymentSlice';
@@ -32,7 +27,7 @@ import { accountConfigurationReducer } from '../account-configuration/account-co
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
-import { listingSourceReducer } from '../sources/sourceSlice';
+import { autoListReducer } from '../listings/autoListSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -42,7 +37,6 @@ export const allReducers = combineReducers({
   priceWarrior: PriceWarriorReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
-  listingSource: listingSourceReducer,
 
   sources: sourcesReducer,
   sourcesConfiguration: sourcesConfigReducer,
@@ -53,11 +47,6 @@ export const allReducers = combineReducers({
   responseObect: paymentReducer,
   autoList: autoListReducer,
   listings: listingsReducer,
-  pendingListings: pendingListingsReducer,
-  terminatedListings: terminatedListingsReducer,
-  activeListingsImages: GetListingsImagesSliceReducer,
-  listingSources: listingsSourceReducer,
-  manualListings: manualListingsReducer,
   notifications: notificationsReducer,
   templates: templatesReducer,
   catalogProducts: catalogProductsReducer,

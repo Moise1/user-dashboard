@@ -1,15 +1,13 @@
-import React, { useState, useEffect, Fragment, useCallback } from 'react';
-import { Card, Row, Layout, Input, Spin } from 'antd';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Card, Row, Layout, Spin } from 'antd';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
 import { SuccessBtn, CancelBtn } from '../../small-components/ActionBtns';
-import { EditSingleListing } from '../listings/EditSingleListing';
-import { BulkEditListings } from '../listings/BulkEditListings';
 import { CheckIcon } from '../common/Icons';
-import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
+//import { ListingsAdvancedSearch } from '../../small-components/AdvancedSearchDrawers';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 
 import {
@@ -18,21 +16,20 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import { ListingData, PendingListings, TerminatedListings } from 'src/redux/listings/listingsSlice';
-import { useTableSearch } from '../../custom-hooks/useTableSearch';
-import { ActiveListing } from 'src/redux/unmap';
+import { ActiveListing, ListingsState, PendingListing, TerminatedListings } from 'src/redux/listings/listingsSlice';
+//import { useTableSearch } from '../../custom-hooks/useTableSearch';
 import '../../sass/listings.scss';
 import { ListNow } from '../list-now/ListNow';
 import { ReactUtils } from '../../utils/react-utils';
-import { DataTable, DataTableKey } from '../tables/DataTable';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { DataTable } from '../tables/DataTable';
+import { useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns } from './Columns/active-columns';
 import { ColumnData, ListingsColumns, TableColumnId } from './Columns/columns';
 import { PendingListingsColumns } from './Columns/pending-columns';
 import { TerminatedListingsColumns } from './Columns/terminated-columns';
 
-type ListingsT = ActiveListing | PendingListings | TerminatedListings | ListingData;//TODO: This is a disaster but I am tired of fixing all your type mess
+type ListingT = ActiveListing | PendingListing | TerminatedListings;//TODO: This is a disaster but I am tired of fixing all your type mess
 enum ListingTab {
   active, pending, terminated, import
 }
@@ -41,10 +38,10 @@ export const Listings = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
 
   const [listingsPerPage, setListingsPerPage] = useState<number>(10);
-  const { Search } = Input;
+  //const { Search } = Input;
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
-  const [searchTxt, setSearchTxt] = useState<null | string>(null);
+  //const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
+  //const [searchTxt, setSearchTxt] = useState<null | string>(null);
   const [showColumns, setShowColumns] = useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
@@ -62,29 +59,26 @@ export const Listings = () => {
   })();
 
   const { listings, loading } = (() => {
-    const { activeListings, loading: loadingActive } = useAppSelector((state) => state.listings);
-    const { pendingListings, loading: loadingPending } = useAppSelector((state) => state.pendingListings);
-    const { terminatedListings, loading: loadingTerminated } = useAppSelector((state) => state.terminatedListings);
+    const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated } = useAppSelector((state) => state.listings as ListingsState);
     switch (tab) {
       default:
       case ListingTab.active:
-        return { listings: activeListings, loading: loadingActive }
+        return { listings: activeListings as ListingT[], loading: loadingActive };
       case ListingTab.pending:
-        return { listings: pendingListings, loading: loadingPending }
+        return { listings: pendingListings as ListingT[], loading: loadingPending };
       case ListingTab.terminated:
-        return { listings: terminatedListings, loading: loadingTerminated }
+        return { listings: terminatedListings as ListingT[], loading: loadingTerminated };
     }
   })();
-
+  
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [, setMySelectedRows] = useState<ListingsT[]>([]);
+  //const [, setMySelectedRows] = useState<ListingT[]>([]);
 
   const dispatch = useAppDispatch();
 
-  const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
+  //const [selectedRecordData, setSelectedRecordData] = useState({} as ListingT);
 
   useEffect(() => {
-    console.log('rrrr');
     switch (tab) {
       case ListingTab.active:
         dispatch(getListings());
@@ -96,61 +90,55 @@ export const Listings = () => {
         dispatch(getTerminatedListings());
         break;
     }
-    //dispatch(getListingsSource());
   }, [getPendingListings, getTerminatedListings, getListings, selectedChannel?.id]);
 
   useEffect(() => {
-    console.log('ssss');
     if (listings)
       return;
     switch (tab) {
       case ListingTab.active:
-          console.log('ggg');
-          dispatch(getListings());
+        dispatch(getListings());
         break;
       case ListingTab.pending:
-          console.log('kkkk');
-          dispatch(getPendingListings());
+        dispatch(getPendingListings());
         break;
       case ListingTab.terminated:
-          console.log('oooo');
-          dispatch(getTerminatedListings());
+        dispatch(getTerminatedListings());
         break;
     }
   }, [tab]);
 
-  const history = useHistory();
+  //const history = useHistory();
   const handleChangeTab = (e: React.MouseEvent): void => {
-    switch (parseInt(e.currentTarget.getAttribute('id') ?? '0')) {
-      default:
-      case ListingTab.active:
-        history.push(Links.Products);
-        dispatch(getListings());
-        break;
-      case ListingTab.pending:
-        history.push(Links.ProductsPending);
-        dispatch(getPendingListings());
-        break;
-      case ListingTab.terminated:
-        history.push(Links.ProductsTerminated);
-        dispatch(getTerminatedListings());
-        break;
-    }
+    console.log(e);
+    //switch (parseInt(e.currentTarget.getAttribute('id') ?? '0')) {
+    //  default:
+    //  case ListingTab.active:
+    //    history.push(Links.Products);
+    //    dispatch(getListings());
+    //    break;
+    //  case ListingTab.pending:
+    //    history.push(Links.ProductsPending);
+    //    dispatch(getPendingListings());
+    //    break;
+    //  case ListingTab.terminated:
+    //    history.push(Links.ProductsTerminated);
+    //    dispatch(getTerminatedListings());
+    //    break;
+    //}
   };
 
-  const { filteredData } = useTableSearch({ searchTxt, listings });
+  //const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: ListingT[] | undefined) => {
+  //  setMySelectedRows(selectedRows!);
+  //  setSelectedRowKeys(selectedRowKeys);
+  //  const selectedRow = (listings as (ActiveListing | PendingListing)[])?.filter(x => x.id === selectedRows![0].id)[0];
+  //  setSelectedRecordData(selectedRow);
+  //};
 
-  const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: ListingsT[] | undefined) => {
-    setMySelectedRows(selectedRows!);
-    setSelectedRowKeys(selectedRowKeys);
-    const selectedRow = listings?.filter((r: ListingData) => r.id === selectedRows![0].id)[0];
-    setSelectedRecordData(selectedRow);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange
-  };
+  //const rowSelection = {
+  //  selectedRowKeys,
+  //  onChange: onSelectChange
+  //};
 
   const handleClose = () => {
     //setColumns(tableColumns);
@@ -218,6 +206,8 @@ export const Listings = () => {
   //  }
   //};
 
+  const filteredData = listings /*? useTableSearch(searchTxt, () => listings) : listings*/;
+  console.log('0tx');
   return (
     <Layout className="listings-container">
       <Fragment>
@@ -245,25 +235,26 @@ export const Listings = () => {
             </div>
           </Card>
         </PopupModal>
-
+        {/*
         {selectedRowKeys.length > 1 ? (
           <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>
             <BulkEditListings selectedItems={selectedRowKeys.length} />
           </PopupModal>
         ) : (
           <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>
-            <EditSingleListing selectedRecordData={selectedRecordData} />
+            <EditSingleListing selectedRecordData={selectedRecordData as ActiveListing} />
           </PopupModal>
         )}
+        */}
 
         <div className="search-options-area">
-          <Search autoFocus placeholder="Search....." onChange={(e) => setSearchTxt(e.target.value)} />
+          {/*<Search autoFocus placeholder="Search....." onChange={(e) => setSearchTxt(e.target.value)} />
           <ListingsAdvancedSearch
             visible={drawerOpen}
             onClose={handleSideDrawer}
             closable
             setSearchTxt={setSearchTxt}
-          />
+          />*/}
           <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
             {t('Table.AdvancedSearch')}
           </TableActionBtns>
@@ -296,31 +287,31 @@ export const Listings = () => {
           </Layout>
         )}
         {!loading && <>
-          {listings?.length > 0 &&
+          {(listings?.length ?? 0) > 0 &&
             <DataTable
               page="listing"
               isListingsTable={true}
               handleSingleListingModal={handleSingleListingModal}
               handleBulkListingModal={handleBulkListingModal}
               columns={columns}
-              dataSource={filteredData as ListingsT[]}
-              rowSelection={rowSelection}
-              selectedRows={selectedRowKeys.length}
-              totalItems={listings.length}
+              dataSource={filteredData as ListingT[]}
+              //rowSelection={rowSelection}
+              //selectedRows={selectedRowKeys.length}
+              totalItems={listings?.length}
               pageSize={listingsPerPage}
               setListingsPerPage={setListingsPerPage}
               showTableInfo={true}
               current={currentPage}
               onChange={setCurrentPage}
               rowClassName="table-row"
-              onRow={(record) => {
-                return {
-                  onClick: () => {
-                    setSelectedRecordData(record as ListingData);
-                    handleSingleListingModal();
-                  }
-                };
-              }}
+              //onRow={(record) => {
+              //  return {
+              //    onClick: () => {
+              //      //setSelectedRecordData(record);
+              //      handleSingleListingModal();
+              //    }
+              //  };
+              //}}
             />
           }
           {tab == ListingTab.active && listings?.length == 0 && <ListNow />}

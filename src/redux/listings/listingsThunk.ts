@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
-import unmap, { ActiveListing, compArray } from '../../redux/unmap';
+import { ActiveListing, PendingListing, TerminatedListings } from './listingsSlice';
+import unmap, { compArray } from './unmap';
 
 export const getListings = createAsyncThunk(
   'listings/getListings',
@@ -16,10 +17,10 @@ export const getListings = createAsyncThunk(
         rv.push(itm);
         status = iter.next();
       }
-      const arrayLists = rv.map((item, key) => {
-        return { ...item, key };
-      });
-      return arrayLists;
+      //const arrayLists = rv.map((item, key) => {
+      //  return { ...item, key };
+      //});
+      return rv;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong!!! ):');
     }
@@ -47,8 +48,8 @@ export const getPendingListings = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await client.get('/SearchProduct/getPendingListings');
-      const data = res?.data?.response_data;
-      return data;
+      const data = res?.data?.response_data?.listings;
+      return data as PendingListing[];
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):');
     }
@@ -59,8 +60,8 @@ export const getTerminatedListings = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await client.get('/SearchProduct/getTerminatedListings');
-      const data = res?.data?.response_data;
-      return data;
+      const data = res?.data?.response_data?.listings;
+      return data as TerminatedListings[];
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):');
     }
@@ -68,11 +69,11 @@ export const getTerminatedListings = createAsyncThunk(
 );
 
 
-export const getListingsImages = createAsyncThunk('SearchProduct/getListingsImages', async (ids: number[], thunkAPI) => {
-  try {
-    const res = await client.post('SearchProduct/getListingsImages', ids);
-    return res.data.response_data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
+//export const getListingsImages = createAsyncThunk('SearchProduct/getListingsImages', async (ids: number[], thunkAPI) => {
+//  try {
+//    const res = await client.post('SearchProduct/getListingsImages', ids);
+//    return res.data.response_data;
+//  } catch (error) {
+//    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+//  }
+//});

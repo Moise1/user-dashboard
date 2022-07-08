@@ -6,21 +6,20 @@ import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import '../../sass/list-now/manual-listing.scss';
 import { Link } from 'react-router-dom';
-import { ManualListingState } from '../../redux/listings/manualListingsSlice';
-import { getManualListings } from '../../redux/listings/manualListingsThunk';
+import { SourcesState } from '../../redux/sources/sourceSlice';
 
 export const ManualPublish = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   //const { sources, loading } = useAppSelector((state) => state.sources);
-  const { manualListings, loading } = useAppSelector((state) => state.manualListings as ManualListingState);
+  const { sources, loading } = useAppSelector((state) => state.sources as SourcesState);
 
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
 
   useEffect(() => {
-    dispatch(getManualListings());
-  }, [getManualListings]);
+    dispatch(getSources());
+  }, [getSources]);
 
   //console.log('test', sources?.sourceName);
 
@@ -75,7 +74,7 @@ export const ManualPublish = (/*props: props*/) => {
           {/*  </Col>;*/}
           {/*})}*/}
           <Row gutter={[16, 8]}>
-            {manualListings.moreSources?.map(
+            {sources?.map(
               (itm: {
                 id: number | undefined;
                 name: string | undefined;

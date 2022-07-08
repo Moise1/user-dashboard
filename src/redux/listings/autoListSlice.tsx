@@ -1,6 +1,16 @@
-﻿import { createSlice } from "@reduxjs/toolkit";
-import { getAutolist, saveAutolist } from "./autoListThunk";
-import { BulkListingLog, ListingsSummary } from "./listingsSlice";
+﻿import { createSlice } from '@reduxjs/toolkit';
+import { getAutolist, saveAutolist } from './autoListThunk';
+import { eChannelListingStatus } from './listingsSlice';
+
+export type BulkListingsDataToSave = {
+  createdBy: number;
+  ignoreVero: boolean | undefined;
+  ignoreOOS: boolean | undefined;
+  reviewBeforePublishing: boolean | undefined;
+  listFrequencyMinutes: number;
+  dontListUntil?: Date;
+  listings: string[][];
+}
 
 export type Autolist = {
   logs: BulkListingLog[];
@@ -20,17 +30,59 @@ export type Autolist = {
 }
 
 export type AutoListState = {
-  autoList: Autolist[],
+  autoList: Autolist | null,
   loading: boolean;
   error: string
 }
 
 const initialState: AutoListState = {
-  autoList: [],
+  autoList: null,
   loading: false,
   error: ''
 };
 
+export type BulkListingLog = {
+  id: number;
+  url: string;
+  status: eBulkListingStatus;
+  createdOn?: Date;
+  errorCode?: BulkListingError;
+  channelItem: string;
+  channelListingStatus: eChannelListingStatus;
+  verifiedOn: Date;
+  listedOn: Date;
+}
+
+export type ListingsSummary = {
+  requestId: string;
+  done: number;
+  forbiddenWordsUrls: string[];
+  duplicatedUrls: string[];
+  existingListingUrls: string[];
+  invalidSourceUrls: string[];
+  noQuota: number;
+  notDone: number;
+}
+
+export enum eBulkListingStatus {
+  UNKNOWN = 0,
+  INITIAL = 1,
+  PROCESSING = 20,
+  DONE = 200,
+  ERROR = 400,
+  TEMPORAL_ERROR = 401
+}
+
+export enum BulkListingError {
+  UNKOWN = 0,
+  INVALID_ORDER = 1,
+  SCRAPING = 2,
+  INVALID_TOKEN = 3,
+  NO_CATEGORY = 4,
+  VERO = 5,
+  ZERO_TOKENS = 6,
+  OOS = 7
+}
 
 export const autoListSlice = createSlice({
   name: 'autoList',
@@ -63,3 +115,6 @@ export const autoListSlice = createSlice({
     });
   }
 });
+
+
+export const { reducer: autoListReducer } = autoListSlice;

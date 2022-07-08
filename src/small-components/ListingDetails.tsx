@@ -3,9 +3,9 @@ import moment from 'moment';
 import { t } from 'src/utils/transShim';
 import { TrashIcon, CheckIcon, RefreshIcon } from '../components/common/Icons';
 import '../sass/listing-details.scss';
-import { ListingData } from 'src/redux/listings/listingsSlice';
+import { ActiveListing } from '../redux/listings/listingsSlice';
 interface Props {
-  selectedRecordData: ListingData;
+  selectedRecordData: ActiveListing;
 }
 
 export const ListingDetails: React.FC<Props> = ({ selectedRecordData }: Props) => {

@@ -5,7 +5,7 @@ import type { DatePickerProps, RangePickerProps } from 'antd/es/date-picker';
 import '../../sass/list-now/manual-listing.scss';
 import '../../sass/list-now/bulk-listing.scss';
 import { getUserAssistants } from '../../redux/va-profiles/vaProfilesThunk';
-import { BulkListingError, BulkListingLog, eBulkListingStatus, eChannelListingStatus, ListingsData } from '../../redux/listings/listingsSlice';
+import { eChannelListingStatus } from '../../redux/listings/listingsSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { useEffect, useState } from 'react';
 import { ReactChild, ReactFragment, ReactPortal } from 'react';
@@ -17,6 +17,10 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { SimpleTable } from '../../small-components/simple-table';
 import moment from 'moment';
 import { Key } from 'antd/lib/table/interface';
+import { AutoListState, BulkListingError, BulkListingLog, eBulkListingStatus, BulkListingsDataToSave } from '../../redux/listings/autoListSlice';
+import { getAutolist, saveAutolist } from '../../redux/listings/autoListThunk';
+import { getSources } from '../../redux/sources/sourcesThunk';
+import { SourcesState } from '../../redux/sources/sourceSlice';
 
 const { Item } = Form;
 const { Panel } = Collapse;
@@ -24,7 +28,7 @@ const { Panel } = Collapse;
 export const BulkListing = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   const { autoList } = useAppSelector((state) => state.autoList as AutoListState);
-  const { manualListings, loadings } = useAppSelector((state) => state.manualListings as ManualListingState);
+  const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourcesState);
   const { userAssistants, VAloading } = useAppSelector((state) => state.userAssistants);
   const lables = ['Source URL', 'Listing Title (Optional)'];
 
@@ -50,13 +54,13 @@ export const BulkListing = (/*props: props*/) => {
   ]);
 
   useEffect(() => {
-    dispatch(getManualListings());
+    dispatch(getSources());
     dispatch(getUserAssistants());
     const data = { summary: null };
     dispatch(getAutolist(data));
-  }, [getManualListings, getUserAssistants, getAutolist]);
+  }, [getSources, getUserAssistants, getAutolist]);
 
-  const onSave = async (values: ListingsData) => {
+  const onSave = async (values: BulkListingsDataToSave) => {
     dispatch(saveAutolist(values));
   };
 
@@ -91,7 +95,7 @@ export const BulkListing = (/*props: props*/) => {
       }
     });
 
-    const value: ListingsData = {
+    const value: BulkListingsDataToSave = {
       createdBy: createdBy as number,
       ignoreVero: _ignoreVero,
       ignoreOOS: _ignoreOOS,
@@ -281,7 +285,7 @@ export const BulkListing = (/*props: props*/) => {
 
   return (
     <Layout className="bulk-list-content">
-      {loadings && VAloading ? (
+      {loadingSources && VAloading ? (
         <Spin />
       ) : (
         <div className="content-bulk">
@@ -467,7 +471,7 @@ export const BulkListing = (/*props: props*/) => {
               <div className="section-sources">
                 <h2>Suported suppliers</h2>
                 <Row gutter={[16, 8]}>
-                  {manualListings?.moreSources?.map(
+                  {sources?.map(
                     (itm: {
                       id: number | undefined;
                       name: string | undefined;
@@ -478,7 +482,7 @@ export const BulkListing = (/*props: props*/) => {
                           <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
                             <div className="list-card">
                               {' '}
-                              {loadings}
+                              {loadingSources}
                               {/* eslint-disable @typescript-eslint/no-var-requires */}
                               <img
                                 width="159"
@@ -503,15 +507,3 @@ export const BulkListing = (/*props: props*/) => {
     </Layout>
   );
 };
-
-function getManualListings(): any {
-    throw new Error('Function not implemented.');
-}
-
-function getAutolist(data: { summary: null; }): any {
-    throw new Error('Function not implemented.');
-}
-
-function saveAutolist(values: ListingsData): any {
-    throw new Error('Function not implemented.');
-}
