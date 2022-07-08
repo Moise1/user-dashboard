@@ -90,15 +90,12 @@ export const Listings = () => {
       default:
       case ListingTab.active:
         history.push(Links.Products);
-        dispatch(getListings());
         break;
       case ListingTab.pending:
         history.push(Links.ProductsPending);
-        dispatch(getPendingListings());
         break;
       case ListingTab.terminated:
         history.push(Links.ProductsTerminated);
-        dispatch(getTerminatedListings());
         break;
     }
   };
@@ -118,7 +115,7 @@ export const Listings = () => {
   })();
 
   const filteredData = listings /*? useTableSearch(searchTxt, () => listings) : listings*/;
-  console.log('0tx');
+
   return (
     <Layout className="listings-container">
       <Fragment>
