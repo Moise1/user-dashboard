@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAutolist, saveAutolist, getListings, getListingsImages, getListingsSource, getManualListings, getPendingListings, getTerminatedListings } from './listingsThunk';
+import { getListings, getListingsImages, getPendingListings, getTerminatedListings } from './listingsThunk';
 
 export type ListingData = {
   imageUrl: string;
@@ -159,31 +159,12 @@ export type ListingsSource = {
   batchId: string;
 }
 
-export type Autolist = {
-  logs: BulkListingLog[];
-  listFrequencyMinutes: null;
-  request: string;
-  createdBy: null;
-  ignoreVero: null;
-  ignoreOOS: null;
-  reviewBeforePublishing: null;
-  channelOAuthId: null;
-  maxQuantityLimit: null;
-  rawUrls: null;
-  channelId: null;
-  Sources: null;
-  summary: ListingsSummary;
-  dontListUntil: null;
-}
-
 const initialState = {
   listings: <unknown>[],
   pendingListings: <unknown>[],
-  manualListings: <unknown>[],
   terminatedListings: <unknown>[],
   loading: false,
-  error: '',
-  sourceListings: <unknown>{}
+  error: ''
 };
 
 const initialStatee = {
@@ -191,44 +172,6 @@ const initialStatee = {
   loading: false,
   error: ''
 };
-
-const autoListState = {
-  autoList: <unknown>[],
-  loading: false,
-  error: ''
-};
-
-export const autoListSlice = createSlice({
-  name: 'autoList',
-  initialState: autoListState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getAutolist.pending, (state) => {
-      state.loading = true;
-      state.error = '';
-    });
-    builder.addCase(getAutolist.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.autoList = payload;
-    });
-    builder.addCase(getAutolist.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
-    });
-    builder.addCase(saveAutolist.pending, (state) => {
-      state.loading = true;
-      state.error = '';
-    });
-    builder.addCase(saveAutolist.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.autoList = payload;
-    });
-    builder.addCase(saveAutolist.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
-    });
-  }
-});
 
 export const listingsSlice = createSlice({
   name: 'listings',
@@ -250,45 +193,25 @@ export const listingsSlice = createSlice({
   }
 });
 
-export const getManualListingsSlice = createSlice({
-  name: 'manualListings',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getManualListings.pending, (state) => {
-      state.loading = true;
-      state.error = '';
-    });
-    builder.addCase(getManualListings.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.manualListings = payload.responseObject;
-    });
-    builder.addCase(getManualListings.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
-    });
-  }
-});
-
-export const getListingsSourceSlice = createSlice({
-  name: 'sourceListings',
-  initialState: initialStatee,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getListingsSource.pending, (state) => {
-      state.loading = true;
-      state.error = '';
-    });
-    builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.sourceListings = payload;
-    });
-    builder.addCase(getListingsSource.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.error = String(payload);
-    });
-  }
-});
+//export const getListingsSourceSlice = createSlice({
+//  name: 'sourceListings',
+//  initialState: initialStatee,
+//  reducers: {},
+//  extraReducers: (builder) => {
+//    builder.addCase(getListingsSource.pending, (state) => {
+//      state.loading = true;
+//      state.error = '';
+//    });
+//    builder.addCase(getListingsSource.fulfilled, (state, { payload }) => {
+//      state.loading = false;
+//      state.sourceListings = payload;
+//    });
+//    builder.addCase(getListingsSource.rejected, (state, { payload }) => {
+//      state.loading = false;
+//      state.error = String(payload);
+//    });
+//  }
+//});
 
 export const PendingListingsSlice = createSlice({
   name: 'pendingListings',
@@ -302,7 +225,6 @@ export const PendingListingsSlice = createSlice({
     builder.addCase(getPendingListings.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.pendingListings = [...payload.listings];
-      state.sourceListings = payload.sources;
     });
     builder.addCase(getPendingListings.rejected, (state, { payload }) => {
       state.loading = false;

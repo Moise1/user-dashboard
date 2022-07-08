@@ -50,15 +50,6 @@ export const Listings = () => {
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
 
-  const { listings, loading } = useAppSelector((state) => state.listings);
-  const { pendingListings } = useAppSelector((state) => state.pendingListings);
-  const { terminatedListings } = useAppSelector((state) => state.terminatedListings);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [, setMySelectedRows] = useState<ListingsT[]>([]);
-
-  const dispatch = useAppDispatch();
-
-  const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
 
   const tab = (() => {
     if (useRouteMatch(Links.ProductsPending))
@@ -66,27 +57,67 @@ export const Listings = () => {
     if (useRouteMatch(Links.ProductsTerminated))
       return ListingTab.terminated;
     //if (useRouteMatch(Links.ProductsImport))
-      //return ListingTab.import;
+    //return ListingTab.import;
     return ListingTab.active;
   })();
 
+  const { listings, loading } = (() => {
+    const { activeListings, loading: loadingActive } = useAppSelector((state) => state.listings);
+    const { pendingListings, loading: loadingPending } = useAppSelector((state) => state.pendingListings);
+    const { terminatedListings, loading: loadingTerminated } = useAppSelector((state) => state.terminatedListings);
+    switch (tab) {
+      default:
+      case ListingTab.active:
+        return { listings: activeListings, loading: loadingActive }
+      case ListingTab.pending:
+        return { listings: pendingListings, loading: loadingPending }
+      case ListingTab.terminated:
+        return { listings: terminatedListings, loading: loadingTerminated }
+    }
+  })();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [, setMySelectedRows] = useState<ListingsT[]>([]);
+
+  const dispatch = useAppDispatch();
+
+  const [selectedRecordData, setSelectedRecordData] = useState({} as ListingData);
+
   useEffect(() => {
+    console.log('rrrr');
     switch (tab) {
       case ListingTab.active:
-        if (!listings)
-          dispatch(getListings());
+        dispatch(getListings());
         break;
       case ListingTab.pending:
-        if (!pendingListings)
-          dispatch(getPendingListings());
+        dispatch(getPendingListings());
         break;
       case ListingTab.terminated:
-        if (!terminatedListings)
-          dispatch(getTerminatedListings());
+        dispatch(getTerminatedListings());
         break;
     }
     //dispatch(getListingsSource());
-  }, [tab, getPendingListings, getTerminatedListings, getListings, selectedChannel?.id]);
+  }, [getPendingListings, getTerminatedListings, getListings, selectedChannel?.id]);
+
+  useEffect(() => {
+    console.log('ssss');
+    if (listings)
+      return;
+    switch (tab) {
+      case ListingTab.active:
+          console.log('ggg');
+          dispatch(getListings());
+        break;
+      case ListingTab.pending:
+          console.log('kkkk');
+          dispatch(getPendingListings());
+        break;
+      case ListingTab.terminated:
+          console.log('oooo');
+          dispatch(getTerminatedListings());
+        break;
+    }
+  }, [tab]);
 
   const history = useHistory();
   const handleChangeTab = (e: React.MouseEvent): void => {
@@ -107,20 +138,7 @@ export const Listings = () => {
     }
   };
 
-  const dataSource = useCallback(() => {
-    switch (tab) {
-      case ListingTab.active:
-        return listings;
-      case ListingTab.pending:
-        return pendingListings;
-      case ListingTab.terminated:
-        return terminatedListings;
-      default:
-        break;
-    }
-  }, [tab, selectedChannel?.id]);
-
-  const { filteredData } = useTableSearch({ searchTxt, dataSource });
+  const { filteredData } = useTableSearch({ searchTxt, listings });
 
   const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: ListingsT[] | undefined) => {
     setMySelectedRows(selectedRows!);
@@ -278,7 +296,7 @@ export const Listings = () => {
           </Layout>
         )}
         {!loading && <>
-          {(tab != ListingTab.active || listings?.length > 0) &&
+          {listings?.length > 0 &&
             <DataTable
               page="listing"
               isListingsTable={true}

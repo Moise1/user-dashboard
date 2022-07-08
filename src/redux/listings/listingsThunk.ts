@@ -1,8 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
 import unmap, { ActiveListing, compArray } from '../../redux/unmap';
-import { toastAlert } from '../../utils/toastAlert';
-import { ListingsData } from './listingsSlice';
 
 export const getListings = createAsyncThunk(
   'listings/getListings',
@@ -28,21 +26,21 @@ export const getListings = createAsyncThunk(
   }
 );
 
-export const getListingsSource = createAsyncThunk(
-  'sources/getListingsSource',
-  async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
-    try {
-      const res = await client.get('/SearchProduct/GetActiveListings');
-      const array = [];
-      for (const x in res.data.response_data.sources) {
-        array.push(res.data.response_data.sources[x]);
-      }
-      return array;
-    } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong ):');
-    }
-  }
-);
+//export const getListingsSource = createAsyncThunk(
+//  'sources/getListingsSource',
+//  async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
+//    try {
+//      const res = await client.get('/SearchProduct/GetActiveListings');
+//      const array = [];
+//      for (const x in res.data.response_data.sources) {
+//        array.push(res.data.response_data.sources[x]);
+//      }
+//      return array;
+//    } catch (error) {
+//      return rejectWithValue('Sorry! Something went wrong ):');
+//    }
+//  }
+//);
 
 export const getPendingListings = createAsyncThunk(
   'listings/getPendingListing',
@@ -69,41 +67,10 @@ export const getTerminatedListings = createAsyncThunk(
   }
 );
 
-export const getManualListings = createAsyncThunk(
-  'Listing/ManualListing',
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await client.get('/Listing/ManualListing');
-      const data = res?.data?.response_data;
-      return data;
-    } catch (error) {
-      return rejectWithValue('Sorry! Something went wrong ):');
-    }
-  }
-);
-
-export const saveAutolist = createAsyncThunk('Listing/SaveAutolist', async (data: ListingsData, thunkAPI) => {
-  try {
-    const res = await client.post('Listing/SaveAutolist', data);
-    if (res.status === 200) toastAlert('Source updated successfully!', 'success');
-    return res.data.response_data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
 
 export const getListingsImages = createAsyncThunk('SearchProduct/getListingsImages', async (ids: number[], thunkAPI) => {
   try {
     const res = await client.post('SearchProduct/getListingsImages', ids);
-    return res.data.response_data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
-
-export const getAutolist = createAsyncThunk('Listing/Autolist', async (data: unknown, thunkAPI) => {
-  try {
-    const res = await client.post('Listing/Autolist', data);
     return res.data.response_data;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');

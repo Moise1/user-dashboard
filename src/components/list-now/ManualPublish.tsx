@@ -7,11 +7,12 @@ import { ReactChild, ReactFragment, ReactPortal, useEffect } from 'react';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import '../../sass/list-now/manual-listing.scss';
 import { Link } from 'react-router-dom';
+import { ManualListingState } from '../../redux/listings/manualListingsSlice';
 
 export const ManualPublish = (/*props: props*/) => {
   const dispatch = useAppDispatch();
   //const { sources, loading } = useAppSelector((state) => state.sources);
-  const { manualListings, loadings } = useAppSelector((state) => state.manualListings);
+  const { manualListings, loading } = useAppSelector((state) => state.manualListings as ManualListingState);
 
   useEffect(() => {
     dispatch(getSources());
@@ -84,7 +85,7 @@ export const ManualPublish = (/*props: props*/) => {
                   <Col span={6} key={itm.id}>
                     <a href={'ChannelListing/BuyNow?sourceUrl=' + itm.baseUrl} target="_blank" rel="noreferrer">
                       <div className="list-card">
-                        {loadings}
+                        {loading}
                         {/*eslint-disable @typescript-eslint/no-var-requires */}
                         <img
                           width="159"

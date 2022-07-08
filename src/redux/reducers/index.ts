@@ -11,7 +11,6 @@ import { channelsReducer } from '../channels/channelsSlice';
 import { autoListReducer } from '../listings/listingsSlice';
 import { listingsReducer } from '../listings/listingsSlice';
 import { listingsSourceReducer } from '../listings/listingsSlice';
-import { manualListingsReducer } from '../listings/listingsSlice';
 import { pendingListingsReducer } from '../listings/listingsSlice';
 import { terminatedListingsReducer } from '../listings/listingsSlice';
 import { GetListingsImagesSliceReducer } from '../listings/listingsSlice';
