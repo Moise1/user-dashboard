@@ -706,7 +706,7 @@ export const ListNowIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     width="20"
     height="20"
-    viewBox="0 0 30.103 30.103"
+    viewBox="0 0 29.103 29.103"
   >
     <path id="Path_7" data-name="Path 7" d="M0,0H30.1V30.1H0Z" fill="none" />
     <circle
@@ -829,9 +829,9 @@ export const ListingsIcon = () => (
 export const SettingsIcon = () => (
   <svg
     className="sidebar-icon"
-    width="24px"
-    height="24px"
-    viewBox="0 0 24 24"
+    width="20px"
+    height="20px"
+    viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-labelledby="controlsAltIconTitle"
@@ -1126,7 +1126,7 @@ export const HelpIcon = () => (
     xmlns="http://www.w3.org/2000/svg"
     width="20"
     height="20"
-    viewBox="0 0 30.103 30.103"
+    viewBox="0 0 29.103 29.103"
   >
     <path id="Path_12" data-name="Path 12" d="M0,0H30.1V30.1H0Z" fill="none" />
     <ellipse

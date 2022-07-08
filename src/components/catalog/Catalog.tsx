@@ -118,6 +118,13 @@ export const Catalog = () => {
     setAllProducts([]);
   };
 
+  const getSourceName = (id: number) => {
+    return sources?.map((x: { id: number; name: string; }) => {
+      if (x.id === id)
+        return x.name;
+    });
+  };
+
   const getSourcesData = (ids: number[]) => {
     setSourcesIds(ids);
   };
@@ -172,7 +179,6 @@ export const Catalog = () => {
       }
     }
   }, [changeState, allProducts, newDate, publishNow, frequencyData]);
-
 
   return (
     <Layout className="catalog-container">
@@ -359,7 +365,7 @@ export const Catalog = () => {
                                 </p>
                                 <p className="source">
                                   by &nbsp;
-                                  {d.sourceId}
+                                  {getSourceName(d.sourceId)}
                                 </p>
                               </div>
                               <div className="transaction-details">

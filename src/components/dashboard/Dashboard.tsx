@@ -115,7 +115,7 @@ export const Dashboard = () => {
     dispatch(
       getSales({
         period: selectedPeriod,
-        from: moment.utc().add(-7, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        from: moment.utc().add(-6, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
         to: moment.utc().local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
         timeDiff: new Date().getTimezoneOffset()
       })
@@ -191,10 +191,7 @@ export const Dashboard = () => {
     }
   };
 
-  const affiliatesDateChange = async (
-    value: Moment | null | RangeValue<Moment>,
-    dateString: string | [string, string]
-  ) => {
+  const affiliatesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getAffiliatesStats({
@@ -457,7 +454,6 @@ export const Dashboard = () => {
                   <h2>{productQuota?.quota}</h2>
                 </div>
               </div>
-
               <div className="plan">
                 <h4>Free Plan</h4>
                 <Link className="redirection-link upgrade" to="/subscriptions">
@@ -478,7 +474,6 @@ export const Dashboard = () => {
               current={current}
               onChange={setCurrent}
             />
-
             <Link to="/new-channel" className="alternative-link">
               Add new channel
             </Link>
@@ -497,7 +492,6 @@ export const Dashboard = () => {
               <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
               <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" height={400} />
             </Col>
-
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
               <h2>${totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}</h2>
