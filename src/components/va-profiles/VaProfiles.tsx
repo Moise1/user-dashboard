@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Row, Col, Card, Input, Form, Layout, Spin, Popconfirm } from 'antd';
-import { DataTable } from '../tables/DataTable';
+import { DataTable } from '../../small-components/data-table';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getUserAssistants, createUserAssistant, deleteUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
@@ -9,7 +9,6 @@ import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/va-profiles.scss';
 
 export const VaProfiles = () => {
-  const [current] = useState<number>(1);
   const dispatch = useAppDispatch();
   const { userAssistants, loading } = useAppSelector((state) => state.userAssistants);  
 
@@ -61,9 +60,6 @@ export const VaProfiles = () => {
             <DataTable
               dataSource={userAssistants}
               columns={columns}
-              pageSize={4}
-              current={current}
-              totalItems={userAssistants.length}
             />
           </Col>
           <Col xs={24} xl={8} md={12} className="form-container">

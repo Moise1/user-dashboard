@@ -11,14 +11,3 @@ export const getSources = createAsyncThunk(
       return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
     }
   });
-
-export const getSourcesForListing = createAsyncThunk(
-  'sources/getSourcesForListing',
-  async (_, rejectWithValue) => {
-    try {
-      const res = await client.get('/Sources/GetForListing');
-      return res.data.response_data;
-    } catch (error) {
-      return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
-    }
-  });

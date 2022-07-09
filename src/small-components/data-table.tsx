@@ -1,20 +1,16 @@
 import { ReactNode } from 'react';
-import { Dropdown, Menu, Pagination, Space, Table } from 'antd';
+import { Dropdown, Menu, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import '../../sass/data-table.scss';
+import '../sass/data-table.scss';
 import { TableRowSelection } from 'antd/lib/table/interface';
+import { SimpleTable } from './simple-table';
 
 export type DataTableKey = React.Key;
 
 interface Props<T> {
-  columns: {
-    //title: ReactNode;
-    //dataIndex: string;
-    //id: number;
-    //visible?: boolean;
-    key: string;
-  }[];
-  dataSource?: Array<T>;
+  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
+
+  dataSource: T[];
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -22,10 +18,7 @@ interface Props<T> {
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
-  onChange?: React.Dispatch<React.SetStateAction<number>>;
   total?: number;
-  current?: number;
-  pageSize?: number;
   setPostPerPage?: (postPerPage: number) => void;
   setRulesPerPage?: (rulesPerPage: number) => void;
   setListingsPerPage?: (listingsPerPage: number) => void;
@@ -33,11 +26,16 @@ interface Props<T> {
   onRow?: (record: T) => { onClick: () => void };
   rowSelection?: TableRowSelection<T>;
   isListingsTable?: boolean;
+
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
+  pageSize?: number;
+  onPageSizeChanged?: (itemsPerPage: number) => void;
+  pageSizes?: number[];
+  hidePagination?: boolean;
 }
 
 export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) => {
-
-  const pageSizeOptionArray = [2, 10, 20, 50, 100];
 
   const {
     columns,
@@ -49,24 +47,18 @@ export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) =>
     handleSingleListingModal,
     page,
     showTableInfo,
-    onChange,
-    current,
-    pageSize,
     onRow,
-    setPostPerPage,
-    setListingsPerPage,
     rowClassName,
-    isListingsTable
+    isListingsTable,
+    currentPage,
+    pageSize,
+    pageSizes,
+    onPageChange,
+    onPageSizeChanged,
+    hidePagination
   } = props;
-  const onShowSizeChange = (current: number, pageSize: number) => {
-    setPostPerPage?.(pageSize);
-    setListingsPerPage?.(pageSize);
-    setListingsPerPage?.(pageSize);
-  };
 
-  const getData = (current: number | undefined, pageSize: number | undefined) => {
-    if (dataSource?.length) return dataSource?.slice(((current ?? 1) - 1) * (pageSize ?? 1), (current ?? 1) * (pageSize ?? 1));
-  };
+  const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
   const anyTable = (
     <div className="selected-options">
@@ -138,32 +130,24 @@ export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) =>
           )}
           <p className="total-items">
             <strong>
-              {totalItems} {page} (s)
+              {totalItems ?? dataSource?.length ?? 0} {page} (s)
             </strong>
           </p>
         </div>
       )}
 
-      <Table
-        className="table"
+      <SimpleTable
         columns={columns}
-        dataSource={getData(current, pageSize)}
+        dataSource={dataSource}
         rowSelection={rowSelection}
-        pagination={false}
         rowClassName={rowClassName}
         onRow={onRow}
-      />
-
-      <Pagination
-        className="pagination"
-        onChange={onChange}
-        total={totalItems}
-        current={current}
+        currentPage={currentPage}
         pageSize={pageSize}
-        style={{ paddingBottom: '25px' }}
-        showSizeChanger
-        onShowSizeChange={onShowSizeChange}
-        pageSizeOptions={pageSizeOptionArray}
+        hidePagination={hidePagination}
+        onPageChange={onPageChange}
+        onPageSizeChanged={onPageSizeChanged}
+        pageSizes={pageSizeOptionArray}
       />
     </div>
   );

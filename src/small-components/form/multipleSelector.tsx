@@ -64,8 +64,6 @@ export const MultipleSelector = (props: Props) => {
 
   const OnChange = (val: SelectorData[]) => {
     setSelectedItems(val);
-    console.log('val');
-    console.log(val);
 
     if (onChange) {
       let values = '';
@@ -73,7 +71,6 @@ export const MultipleSelector = (props: Props) => {
         values = values === '' ? x.value.toString() : values + ',' + x.value;
       });
       onChange(values);
-      console.log(values);
     }
     const filtered = childrens.filter((o) => !selectedItems.includes(o));
     setFilteredOptions(filtered);

@@ -5,7 +5,7 @@ import { SearchInput } from '../../../small-components/TableActionBtns';
 import '../../../sass/sources-table.scss';
 import '../../../sass/popover.scss';
 import { getSources } from '../../../redux/sources/sourcesThunk';
-import { SourceState } from '../../../redux/sources/sourceSlice';
+import { SourcesState } from '../../../redux/sources/sourceSlice';
 import { getSourceConfiguration } from '../../../redux/source-configuration/sources.coonfiguration-thunk';
 import { SourceConfigurationState, SourceSettingData } from '../../../redux/source-configuration/source-configuration-slice';
 import { ReactUtils } from '../../../utils/react-utils';
@@ -29,7 +29,7 @@ export const SourcesTable = () => {
 
   const selectedChannel = ReactUtils.GetSelectedChannel()!;
 
-  const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourceState);
+  const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourcesState);
   const { get: { loading: loadingSourceConfiguration, settings: sourceSettings } } = useAppSelector((state) => state.sourcesConfiguration as SourceConfigurationState);
   const {
     settings: channelSettings,

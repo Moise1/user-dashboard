@@ -11,10 +11,10 @@ import Icon from '@ant-design/icons';
 
 import '../../sass/edit-single-listing.scss';
 import { ExternalLinkSvg } from '../common/Icons';
-import { ListingData } from '../../redux/listings/listingsSlice';
+import { ActiveListing } from '../../redux/listings/listingsSlice';
 
 interface Props {
-  selectedRecordData: ListingData;
+  selectedRecordData: ActiveListing;
 }
 
 export const EditSingleListing = ({ selectedRecordData }: Props) => {

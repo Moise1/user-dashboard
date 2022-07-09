@@ -62,7 +62,6 @@ export const Selector = (props: Props) => {
   const OnChange = (val: SelectorData) => {
     if (onChange) {
       onChange(val.value);
-      console.log(val.label);
     }
   };
 
