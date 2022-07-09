@@ -44,6 +44,7 @@ import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
 import Modal from 'antd/lib/modal/Modal';
+import { getCurrency } from '../../utils/getCurrency';
 
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
@@ -595,7 +596,7 @@ export const Dashboard = () => {
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
-              <h2>${totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}</h2>
+              <h2>{getCurrency()}{totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}</h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
             </Col>
           </Row>
