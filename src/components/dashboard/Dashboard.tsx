@@ -16,9 +16,6 @@ import {
   Legend,
   PointElement
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { DatePicker } from 'antd';
-import { RangeValue } from 'rc-picker/lib/interface';
 import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
@@ -30,15 +27,12 @@ import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { getSales } from '../../redux/sales/salesThunk';
 import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
-import { Moment } from 'moment';
 import { Sale, ePeriod } from 'src/redux/sales/salesSlice';
 import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { BookOutlined, CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Selector, SelectorValue } from '../../small-components/form/selector';
-import { affiliatesGraphConfig /*salesGraphConfig*/ } from 'src/utils/graphConfig';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/action-btns.scss';
@@ -51,7 +45,6 @@ import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
 import Modal from 'antd/lib/modal/Modal';
 
-const { RangePicker } = DatePicker;
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
   const [postPerPage, setPostPerPage] = useState<number>(2);
@@ -67,17 +60,17 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [current, setCurrent] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
+  const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
   const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
   const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
+  const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
+  const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
+  const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
 
   const [open, setOpen] = useState<boolean>(false);
   const handleOpenModal = () => setOpen(!open);
 
-  const monthsLabels = [...new Set(sales?.map((d: Sale) => moment(d.date, 'YYYY-MM-DD').utc().format('MMM-YY')))];
-
-  //const { salesOptions, salesData } = salesGraphConfig(selectedPeriod, sales, monthsLabels);
-  const { affiliatesOptions, affiliatesData } = affiliatesGraphConfig(selectedPeriod, affiliatesStats, monthsLabels);
   const onSearch = (value: string) => {
     setSearchedChannels(
       channels.filter((c: Channel) => {
@@ -166,23 +159,11 @@ export const Dashboard = () => {
 
   ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement, LineElement);
 
-  const periodOptions = [
-    { value: 3, label: 'Daily basis' },
-    { value: 4, label: 'Monthly basis' }
-  ];
-
-  const onSelectOption = (value: SelectorValue) => {
-    setSelectedPeriod(value as number);
-  };
-
-  const salesDateChange = async (
-    value: Moment | null | RangeValue<Moment> | number,
-    dateString: string | [string, string]
-  ) => {
+  const salesDateChange = async (value: number, dateString: [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getSales({
-          period: value as unknown as number,
+          period: value,
           from: dateString[0],
           to: dateString[1],
           timeDiff: new Date().getTimezoneOffset()
@@ -191,20 +172,14 @@ export const Dashboard = () => {
     }
   };
 
-  const affiliatesDateChange = async (value: Moment | null | RangeValue<Moment>, dateString: string | [string, string]) => {
+  const affiliatesDateChange = async (value: number, dateString: [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(
         getAffiliatesStats({
-          period: selectedPeriod,
+          period: value,
           from: dateString[0],
-          to: dateString[1]
-        })
-      );
-    } else {
-      await dispatch(
-        getAffiliatesStats({
-          period: selectedPeriod,
-          from: dateString
+          to: dateString[1],
+          timeDiff: new Date().getTimezoneOffset()
         })
       );
     }
@@ -216,6 +191,11 @@ export const Dashboard = () => {
 
   const totalOrders = sales?.reduce(
     (total: number, sale: { quantitySold: number }) => (total = total + sale.quantitySold),
+    0
+  );
+
+  const totalAffiliates = affiliatesStats?.reduce(
+    (total: number, sale: { quantity: number }) => (total = total + sale.quantity),
     0
   );
 
@@ -262,12 +242,27 @@ export const Dashboard = () => {
     }
   };
 
+  const getaffiliateChartLabels = () => {
+    if (affiliatePeriod) {
+      switch (affiliatePeriod) {
+        case ePeriod.Days:
+          return [...new Set(affiliatesStats?.map((d: { date: Date }) => moment(d.date).format('DD-MMM')))];
+        case ePeriod.Months:
+          return [...new Set(affiliatesStats?.map((d: { date: Date }) => moment(d.date).format('MMM-YY')))];
+        default:
+          break;
+      }
+    }
+  };
+
   const saleData: number[] = sales?.map((s: Sale) => s.quantitySold);
 
   const profitData: number[] = sales?.map((s: Sale) => {
     const profit = s.revenue! - (s.sourcePrice! + s.totalTax!);
     return profit.toFixed(0);
   });
+
+  const affiliateData: number[] = affiliatesStats?.map((s: { quantity: number }) => s.quantity);
 
   const orderChartData: ApexOptions = {
     chart: {
@@ -395,6 +390,77 @@ export const Dashboard = () => {
     ]
   };
 
+  const affiliateChartData: ApexOptions = {
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 0,
+        left: 0,
+        blur: 5,
+        opacity: 0.1
+      },
+      toolbar: {
+        show: false
+      }
+    },
+    colors: ['#228b22'],
+    dataLabels: {
+      enabled: true
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    //title: {
+    //  text: 'Profit',
+    //  align: 'left'
+    //},
+    grid: {
+      borderColor: '#e7e7e7',
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      }
+    },
+    markers: {
+      size: 1
+    },
+    xaxis: {
+      categories: getaffiliateChartLabels(),
+      title: {
+        text: ''
+      }
+    },
+    yaxis: {
+      title: {
+        text: ''
+      }
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'right',
+      floating: true,
+      offsetY: -25,
+      offsetX: -5
+    },
+    series: [
+      {
+        name: 'Affiliates',
+        data: affiliateData
+      }
+    ]
+  };
+
+  const [affiliateState, setAffiliateState] = useState<Range[]>([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: 'selection'
+    }
+  ]);
+
   const [state, setState] = useState<Range[]>([
     {
       startDate: new Date(),
@@ -403,8 +469,8 @@ export const Dashboard = () => {
     }
   ]);
 
-  const handleOk = () => {
-    setIsModalVisible(false);
+  const salesModalOk = () => {
+    setIsSalesModalVisible(false);
     if (state[0]) {
       const startDate: Date = state[0].startDate ? state[0].startDate : moment.utc().month(-12).toDate();
       const endDate: Date = state[0].endDate ? state[0].endDate : moment.utc().toDate();
@@ -432,8 +498,38 @@ export const Dashboard = () => {
     }
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const affiliateModalOk = () => {
+    setIsAffiliateModalVisible(false);
+    if (affiliateState[0]) {
+      const startDate: Date = affiliateState[0].startDate ? affiliateState[0].startDate : moment.utc().month(-12).toDate();
+      const endDate: Date = affiliateState[0].endDate ? affiliateState[0].endDate : moment.utc().toDate();
+      const diff = Math.abs(startDate.getTime() - endDate.getTime());
+      const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
+      const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
+
+      setAffiliateStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
+      setAffiliateEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+
+      if (diffDays < 31) {
+        setAffiliatePeriod(3);
+        affiliatesDateChange(3, [from, to]);
+      } else if (diffDays > 30 && diffDays < 400) {
+        setAffiliatePeriod(4);
+        affiliatesDateChange(4, [from, to]);
+      } else {
+        setAffiliatePeriod(5);
+        affiliatesDateChange(5, [from, to]);
+      }
+    }
+  };
+
+  const handleSalesCancel = () => {
+    setIsSalesModalVisible(false);
+  };
+
+  const handleAffiliateCancel = () => {
+    setIsAffiliateModalVisible(false);
   };
 
   return (
@@ -483,7 +579,7 @@ export const Dashboard = () => {
       <div className="general-section">
         <div className="charts-sales">
           <h1>Sales</h1>
-          <div className="date-picker" onClick={() => setIsModalVisible(true)}>
+          <div className="date-picker" onClick={() => setIsSalesModalVisible(true)}>
             <h4><strong>From </strong>{startFrom}  <strong> To </strong>  {endTo}</h4> <CalendarOutlined />
           </div>
           <Row className="general-cols" gutter={[0, 15]}>
@@ -631,7 +727,6 @@ export const Dashboard = () => {
           </Col>
         </Row>
       </div>
-
       <div className="affiliates-main-container">
         <h1>Affiliates</h1>
         <div className="affiliates-contents">
@@ -655,38 +750,14 @@ export const Dashboard = () => {
 
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
-              <div>
-                <Selector placeHolder="Select a period" onChange={onSelectOption}>
-                  {periodOptions}
-                </Selector>
+              <div className="date-picker" onClick={() => setIsAffiliateModalVisible(true)}>
+                <h4><strong>From </strong>{affiliateStartFrom}  <strong> To </strong>  {affiliateEndTo}</h4><CalendarOutlined />
               </div>
-              {selectedPeriod === 3 ? (
-                <DatePicker onChange={affiliatesDateChange} />
-              ) : (
-                <RangePicker onChange={affiliatesDateChange} />
-              )}
-              {/* <div className="sales-profit-area">
-                <div className="digits">{salesOrProfit()}</div>
-                <h4 className="sales-profit-numbers">
-                  total {showSales ? 'sales' : 'profit'} {selectedPeriod === 3 ? 'today' : 'this month'}
-                </h4>
-                <Switch
-                  className="toggle-sales"
-                  checked={showSales}
-                  onChange={handleSalesChange}
-                  checkedChildren="Sales"
-                  unCheckedChildren="Profit"
-                  aria-label="Profit and sales toggle"
-                />
-              </div> */}
             </div>
             <div className="graph-container">
-              <Bar
-                options={affiliatesOptions}
-                data={affiliatesData}
-                className="sales-graph"
-                style={{ maxHeight: 470 }}
-              />
+              <h3>Total affiliates</h3>
+              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+              <Chart options={affiliateChartData} series={affiliateChartData.series} type="line" width="100%" height={400} />
             </div>
           </div>
         </div>
@@ -696,12 +767,21 @@ export const Dashboard = () => {
         <SocialIcon network="instagram" style={{ height: 30, width: 30 }} />
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
-      <Modal title="" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width={925}>
-        <DateRangePicker
+      <Modal title="" key="salespickerModel" visible={isSalesModalVisible} onOk={salesModalOk} onCancel={handleSalesCancel} width={925}>
+        <DateRangePicker key="dpSales"
           onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={state}
+          direction="horizontal"
+        />
+      </Modal>
+      <Modal title="" key="affiliatePickerModal" visible={isAffiliateModalVisible} onOk={affiliateModalOk} onCancel={handleAffiliateCancel} width={925}>
+        <DateRangePicker key="dpAffiliate" 
+          onChange={(item) => setAffiliateState([item.selection])}
+          moveRangeOnFirstSelection={false}
+          months={2}
+          ranges={affiliateState}
           direction="horizontal"
         />
       </Modal>
