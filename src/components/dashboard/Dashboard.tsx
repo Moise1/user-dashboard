@@ -60,9 +60,9 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
-  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
+  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
   const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
-  const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(moment.utc().add(-6, 'months').format('DD MMM YYYY'));
+  const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
   const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
   const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
   const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
@@ -107,12 +107,20 @@ export const Dashboard = () => {
     dispatch(
       getSales({
         period: selectedPeriod,
-        from: moment.utc().add(-6, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        from: moment.utc().add(-7, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
         to: moment.utc().local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
         timeDiff: new Date().getTimezoneOffset()
       })
     );
-  }, [getSales]);
+    dispatch(
+      getAffiliatesStats({
+        period: affiliatePeriod,
+        from: moment.utc().add(-7, 'months').format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        to: moment.utc().local().format('YYYY-MM-DD') + 'T00:00:00.000Z',
+        timeDiff: new Date().getTimezoneOffset()
+      })
+    );
+  }, [getSales, getAffiliatesStats]);
 
   const columns = [
     {
@@ -774,7 +782,7 @@ export const Dashboard = () => {
         />
       </Modal>
       <Modal title="" key="affiliatePickerModal" visible={isAffiliateModalVisible} onOk={affiliateModalOk} onCancel={handleAffiliateCancel} width={925}>
-        <DateRangePicker key="dpAffiliate" 
+        <DateRangePicker key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
