@@ -157,10 +157,14 @@ export const Listings = () => {
         const vc = (!visibleColumns || visibleColumns.length == 0) ? ActiveListingsColumnsVisibleByDefault : visibleColumns;
         return GetColumns(ListingsColumns, ActiveListingsColumns, vc);
       }
-      case ListingTab.pending:
-        return GetColumns(ListingsColumns, PendingListingsColumns, visibleColumns ?? PendingListingsColumns);
-      case ListingTab.terminated:
-        return GetColumns(ListingsColumns, TerminatedListingsColumns, visibleColumns ?? TerminatedListingsColumns);
+      case ListingTab.pending: {
+        const vc = (!visibleColumns || visibleColumns.length == 0) ? PendingListingsColumns : visibleColumns;
+        return GetColumns(ListingsColumns, PendingListingsColumns, vc);
+      }
+      case ListingTab.terminated: {
+        const vc = (!visibleColumns || visibleColumns.length == 0) ? TerminatedListingsColumns : visibleColumns;
+        return GetColumns(ListingsColumns, TerminatedListingsColumns, vc);
+      }
     }
 
   })();
