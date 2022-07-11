@@ -181,20 +181,7 @@ span {
 }
 
 .auth-input {
-  @include custom-input($transparent);
-}
-
-@mixin chevrons {
-  // margin-top: $spacer * 0.25 !important;
-  // background: $light-blue;
-  // color: $primary-bg;
-  // border-radius: 5px;
-  // cursor: pointer;
-}
-
-.chevron-right,
-.chevron-left {
-  @include chevrons;
+  @include custom-input($primary-light-bg-color !important);
 }
 
 @mixin custom-btn-styles($bg-color: null, $color: null) {
