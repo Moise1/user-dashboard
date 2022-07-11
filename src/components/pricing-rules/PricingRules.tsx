@@ -62,11 +62,20 @@ export const PricingRules = () => {
     onChange: onSelectChange
   };
 
+  const getSourceName = (id: number) => {
+    return sources?.map((x: { id: number; name: string; }) => {
+      if (x.id === id)
+        return x.name;
+    });
+  };
+
   const tableColumns = [
     {
       title: 'Source',
       dataIndex: 'sourceId',
-      key: 'sourceId'
+      key: 'sourceId',
+      render: (value: number) =>
+        value ? getSourceName(value) : ''
     },
     {
       title: 'Price From',
@@ -113,7 +122,7 @@ export const PricingRules = () => {
     }
   ];
 
-  const [columns, 
+  const [columns,
     // setColumns
   ] = useState(tableColumns);
 

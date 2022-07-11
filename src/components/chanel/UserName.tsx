@@ -6,15 +6,21 @@ import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/n
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { popupWindow } from './NewChannel';
 import { store } from '../../redux/store';
+import { Dispatch, SetStateAction } from 'react';
 
 interface props {
   step: number;
   platform: number;
   storeLocation: number | string | null;
+  setStep: Dispatch<SetStateAction<number>>
 }
 
 export const UserName = (props: props) => {
-  const { platform, storeLocation } = props;
+  const { 
+    platform, 
+    storeLocation, 
+    setStep, 
+  } = props;
 
   const dispatch = useAppDispatch();
   const {getLinkLoading, newChannelLoading } = useAppSelector((state) => state.newChannel);
@@ -35,7 +41,13 @@ export const UserName = (props: props) => {
         })
       );
       const {shopifyUrl} = store.getState().newChannel;
-      popupWindow(shopifyUrl, window, 800, 600);
+      popupWindow(
+        shopifyUrl, 
+        window, 
+        800, 
+        600, 
+        setStep,
+      );
       return false;
     }
     
