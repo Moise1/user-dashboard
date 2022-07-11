@@ -9,15 +9,23 @@ import { paidHostExtension } from '../../redux/new-channel/newChannelThunk';
 
 interface props {
   handleChangeApi: (newApi: string) => void;
-  step: number;
   platform: number;
   api?: string;
   handleChangeExtension: (newExtension: string) => void;
   extension: string;
+  step: number;
+
 }
 
 export const AccountConnect = (props: props) => {
-  const { handleChangeApi, platform, handleChangeExtension, extension, api } = props;
+  const { 
+    handleChangeApi,
+    platform, 
+    handleChangeExtension, 
+    extension,
+    api,
+  } = props;
+
   const dispatch = useAppDispatch();
   const onSelectAccount = (e: ElementEventType) => {
     const target = e.currentTarget;
@@ -31,8 +39,10 @@ export const AccountConnect = (props: props) => {
   };
 
   useEffect(() => {
-    localStorage.setItem('newChannelsuccess', 'false');
-  }, []);
+    localStorage.setItem('newChannelSuccess', 'false');
+  }, [api]);
+
+  // console.log(localStorage.getItem('newChannelSuccess'));
   return (
     <form className="account-connect">
       <h2  className='title'>How do you want HGR to connect to your {eShop[platform]} account?</h2>

@@ -13,11 +13,14 @@ interface props {
   platform: number;
   storeLocation: number | string | null;
   setStep: Dispatch<SetStateAction<number>>
-
 }
 
 export const UserName = (props: props) => {
-  const { platform, storeLocation, setStep } = props;
+  const { 
+    platform, 
+    storeLocation, 
+    setStep, 
+  } = props;
 
   const dispatch = useAppDispatch();
   const {getLinkLoading, newChannelLoading } = useAppSelector((state) => state.newChannel);
@@ -38,7 +41,13 @@ export const UserName = (props: props) => {
         })
       );
       const {shopifyUrl} = store.getState().newChannel;
-      popupWindow(shopifyUrl, window, 800, 600, setStep);
+      popupWindow(
+        shopifyUrl, 
+        window, 
+        800, 
+        600, 
+        setStep,
+      );
       return false;
     }
     

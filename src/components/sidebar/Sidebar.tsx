@@ -91,7 +91,7 @@ export const Sidebar = (props: Props) => {
       'Authorization',
       'globalTheme', 
       'isAuthenticated', 
-      'newChannelsuccess'
+      'newChannelSuccess'
     ];
     dispatch(actions.logout());
     keysToRemove.forEach((key) => localStorage.removeItem(key));

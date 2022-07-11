@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Spin } from 'antd';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
 import { ChooseList } from './ChooseList';
@@ -26,17 +26,20 @@ interface State {
 const fakeAPICall = () => {
   return new Promise((resolve) => {
     setTimeout(() =>{
-      resolve(localStorage.setItem('newChannelsuccess', 'true'));
-    }, Math.random() * 5000);
+      resolve(localStorage.setItem('newChannelSuccess', 'true'));
+    },  Math.random() * 5000);
   });
 };
 
-export const popupWindow = (
+export const popupWindow = async (
   url: string,
   win: Window & typeof globalThis,
   w: number, 
   h: number,
-  setStep?: Dispatch<SetStateAction<number>>
+  setStep: Dispatch<SetStateAction<number>>,
+  newWindowOpen?: boolean,
+  setNewWindowOpen?: Dispatch<SetStateAction<boolean>>,
+
 ) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
@@ -48,23 +51,26 @@ export const popupWindow = (
     width=${w}, height=${h}, top=${t}, left=${l}`
   );
 
-  fakeAPICall();
-  const newChannelSuccess = localStorage.getItem('newChannelsuccess');
+  await fakeAPICall();
+  const newChannelSuccess = localStorage.getItem('newChannelSuccess');
   const timer = setInterval(() => { 
-    if(newWindow?.closed && JSON.parse(newChannelSuccess!)) {
+    if(newWindow?.closed && newChannelSuccess) {
       clearInterval(timer);
+      setNewWindowOpen!(!newWindowOpen);
       setStep!(6);
     }
   }, 1000);
+
 };
+  
 export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
+  const [newWindowOpen, setNewWindowOpen] = useState<boolean>(false);
   const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
-
-
+  
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -83,8 +89,16 @@ export const NewChannel = () => {
 
   const handleNext = () => {
     if(openUrl && data.platform === 1 && ebayUrl) {
-      popupWindow(ebayUrl, window, 800, 600, setStep);
-      return false;
+      popupWindow(
+        ebayUrl,
+        window,
+        800, 
+        600, 
+        setStep,
+        newWindowOpen,
+        setNewWindowOpen
+      );
+      setNewWindowOpen(!newWindowOpen);
     }else{
       setStep((prevState) => prevState + 1);
       setShowPrev(true);
@@ -123,7 +137,7 @@ export const NewChannel = () => {
       setOpenUrl(true);
     }
     
-    if(data.api === 'advance') setOpenUrl(false);
+    if(data.api === 'advance' || step !== 4) setOpenUrl(false);
 
   }, [data.api, getEbayLinkAccount]);
 
@@ -157,7 +171,7 @@ export const NewChannel = () => {
         );
       case 4:
         if (data.platform === 1 || data.platform === 3) {
-          return (
+          return newWindowOpen ? <Spin size='large'/> : (
             <AccountConnect
               api={data.api}
               extension={data.extension}
@@ -191,7 +205,8 @@ export const NewChannel = () => {
           <ChooseList 
             platform={data.platform!} 
             handleChangeList={handleChangeList} 
-            list={data.list} step={step} 
+            list={data.list}
+            step={step} 
           />
         );
       default:
