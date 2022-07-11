@@ -156,6 +156,7 @@
   "Listings.Column.Status": "Status",
   "Listings.Column.CreatedOn": "Created On",
   "Listings.Column.CreatedBy": "Created By",
+  "Listings.Column.ChannelItem": "Product ID",
 
   "ListNow.Header": "Ways to publish",
   "ListNow.BulkListing.Description": "List as many items as you want by adding urls from different suppliers.",

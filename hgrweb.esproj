@@ -17,6 +17,7 @@
     <Script Remove=".vs\**" />
     <Script Remove="build\**" />
     <Script Remove="githooks\**" />
+    <Script Remove="src\components\tables\**" />
   </ItemGroup>
   <ItemGroup>
     <Script Remove=".dockerignore" />
@@ -26,9 +27,6 @@
     <Script Remove="hgrweb.sln" />
     <Script Remove="nuget.config" />
     <Script Remove="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\components\tables\" />
   </ItemGroup>
   <!-- This target is copied from the ASP.NET SPA template in order to ensure node_modules are in place. -->
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
