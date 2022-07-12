@@ -22,8 +22,8 @@ import { PendingListingsColumns } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
 import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { VisibleColumnsPopup } from './Listings/visible-columns-popup';
-import { getActiveListingsVisibleColumns, getPendingListingsVisibleColumns, getTerminatedListingsVisibleColumns, saveActiveListingsVisibleColumns, savePendingListingsVisibleColumns, saveTerminatedListingsVisibleColumns } from '../../redux/ui-preferences/ui-preferences-state-thunk';
-import { UIPreferencesState } from '../../redux/ui-preferences/ui-preferences-state-slice';
+import { getActiveListingsPreferences, getPendingListingsPreferences, getTerminatedListingsPreferences, saveActiveListingsPreferences, savePendingListingsPreferences, saveTerminatedListingsPreferences } from '../../redux/ui-preferences/ui-preferences-state-thunk';
+import { UIPreferencesState, UITablePreference, UITablePreferenceL } from '../../redux/ui-preferences/ui-preferences-state-slice';
 
 type ListingT = ActiveListing | PendingListing | TerminatedListings;//TODO: This is a disaster but I am tired of fixing all your type mess
 enum ListingTab {
@@ -32,6 +32,7 @@ enum ListingTab {
 
 export const Listings = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
+  const dispatch = useAppDispatch();
 
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
@@ -45,20 +46,56 @@ export const Listings = () => {
   })();
   //------------------------------------------------------------------------------------------
 
-  //COLUMNS AND DATA--------------------------------------------------------------------------
-  const { visibleColumns, loading: loadingVisibleColumns } = (() => {
-    const { activeListingsColumns, pendingListingsColumns, terminatedListingsColumns } = useAppSelector((state) => state.UIPreferences as UIPreferencesState);
+
+  //UI----------------------------------------------------------------------------------------}
+  const uiPreferencesS = (() => {
+    const { activeListingsPreferences, pendingListingsPreferences, terminatedListingsPreferences } = useAppSelector((state) => state.UIPreferences as UIPreferencesState);
 
     switch (tab) {
       default:
       case ListingTab.active:
-        return { visibleColumns: activeListingsColumns?.columns, loading: activeListingsColumns?.loading ?? false };
+        return { columns: activeListingsPreferences?.columns, pageSize: activeListingsPreferences?.pageSize ?? 10 , loading: activeListingsPreferences?.loading ?? false };
       case ListingTab.pending:
-        return { visibleColumns: pendingListingsColumns?.columns, loading: pendingListingsColumns?.loading ?? false };
+        return { columns: pendingListingsPreferences?.columns, pageSize: pendingListingsPreferences?.pageSize ?? 10, loading: pendingListingsPreferences?.loading ?? false };
       case ListingTab.terminated:
-        return { visibleColumns: terminatedListingsColumns?.columns, loading: terminatedListingsColumns?.loading ?? false };
+        return { columns: terminatedListingsPreferences?.columns, pageSize: terminatedListingsPreferences?.pageSize ?? 10 , loading: terminatedListingsPreferences?.loading ?? false };
     }
   })();
+
+  const [uiPreferences, setUIPreferences] = useState<UITablePreferenceL>(uiPreferencesS);
+  useEffect(() => {
+    setUIPreferences(uiPreferencesS);
+  }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize]);
+
+  const SaveUIPreferences = (preferences: UITablePreference) => {
+    setUIPreferences({ ...preferences, loading: false });
+    switch (tab) {
+      case ListingTab.active:
+        dispatch(saveActiveListingsPreferences(preferences));
+        break;
+      case ListingTab.pending:
+        dispatch(savePendingListingsPreferences(preferences));
+        break;
+      case ListingTab.terminated:
+        dispatch(saveTerminatedListingsPreferences(preferences));
+        break;
+    }
+  };
+
+  ///POPUP VISIBLE COLUMNS--------------------------------------------------------------------
+  const [visibleColumnsPopupOpened, setVisibleColumnsPopupOpened] = useState<boolean>(false);
+  const CloseVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(false);
+  const OpenVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(true);
+  const SaveVisibleColumns = (columns: TableColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
+  //------------------------------------------------------------------------------------------
+  ///PAGE SIZE--------------------------------------------------------------------------------
+  const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
+  //------------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------------
+
+
+  //COLUMNS AND DATA--------------------------------------------------------------------------
+
   
   const { listings, loading } = (() => {
     const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated } = useAppSelector((state) => state.listings as ListingsState);
@@ -66,15 +103,13 @@ export const Listings = () => {
     switch (tab) {
       default:
       case ListingTab.active:
-        return { listings: activeListings as ListingT[], loading: loadingActive || loadingVisibleColumns };
+        return { listings: activeListings as ListingT[], loading: loadingActive || uiPreferences.loading };
       case ListingTab.pending:
         return { listings: pendingListings as ListingT[], loading: loadingPending };
       case ListingTab.terminated:
         return { listings: terminatedListings as ListingT[], loading: loadingTerminated };
     }
   })();
-  
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     switch (tab) {
@@ -88,21 +123,21 @@ export const Listings = () => {
         dispatch(getTerminatedListings());
         break;
     }
-  }, [getPendingListings, getTerminatedListings, getListings, getActiveListingsVisibleColumns, selectedChannel?.id]);
+  }, [getPendingListings, getTerminatedListings, getListings, getActiveListingsPreferences, selectedChannel?.id]);
 
   useEffect(() => {
-    if (visibleColumns)
+    if (uiPreferences)
       return;
 
     switch (tab) {
       case ListingTab.active:
-        dispatch(getActiveListingsVisibleColumns());
+        dispatch(getActiveListingsPreferences());
         break;
       case ListingTab.pending:
-        dispatch(getPendingListingsVisibleColumns());
+        dispatch(getPendingListingsPreferences());
         break;
       case ListingTab.terminated:
-        dispatch(getTerminatedListingsVisibleColumns());
+        dispatch(getTerminatedListingsPreferences());
         break;
     }
   }, [tab]);
@@ -141,7 +176,7 @@ export const Listings = () => {
 
   const { columns, allColumnsList, visibleColumnsList } = (() => {
 
-    const GetColumns = (cs: ColumnData[], ids: TableColumnId[], visibleColumns?: TableColumnId[] | null) => (
+    const GetColumns = (cs: ColumnData[], ids: TableColumnId[], visibleColumns?: TableColumnId[]) => (
       {
         columns: cs
           .filter(x => ids.includes(x.id) && (!visibleColumns || visibleColumns.length == 0 || visibleColumns.includes(x.id)))
@@ -154,15 +189,15 @@ export const Listings = () => {
     switch (tab) {
       default:
       case ListingTab.active: {
-        const vc = (!visibleColumns || visibleColumns.length == 0) ? ActiveListingsColumnsVisibleByDefault : visibleColumns;
+        const vc = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? ActiveListingsColumnsVisibleByDefault : uiPreferences.columns;
         return GetColumns(ListingsColumns, ActiveListingsColumns, vc);
       }
       case ListingTab.pending: {
-        const vc = (!visibleColumns || visibleColumns.length == 0) ? PendingListingsColumns : visibleColumns;
+        const vc = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? PendingListingsColumns : uiPreferences.columns;
         return GetColumns(ListingsColumns, PendingListingsColumns, vc);
       }
       case ListingTab.terminated: {
-        const vc = (!visibleColumns || visibleColumns.length == 0) ? TerminatedListingsColumns : visibleColumns;
+        const vc = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? TerminatedListingsColumns : uiPreferences.columns;
         return GetColumns(ListingsColumns, TerminatedListingsColumns, vc);
       }
     }
@@ -240,28 +275,6 @@ export const Listings = () => {
   //  }
   //};
 
-  ///POPUP VISIBLE COLUMNS--------------------------------------------------------------------
-  const [visibleColumnsPopupOpened, setVisibleColumnsPopupOpened] = useState<boolean>(false);
-  const CloseVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(false);
-  const OpenVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(true);
-  const SaveVisibleColumns = (columns: TableColumnId[]) => {
-    switch (tab) {
-      case ListingTab.active:
-        dispatch(saveActiveListingsVisibleColumns(columns));
-        dispatch(getActiveListingsVisibleColumns());
-        break;
-      case ListingTab.pending:
-        dispatch(savePendingListingsVisibleColumns(columns));
-        dispatch(getPendingListingsVisibleColumns());
-        break;
-      case ListingTab.terminated:
-        dispatch(saveTerminatedListingsVisibleColumns(columns));
-        dispatch(getTerminatedListingsVisibleColumns());
-        break;
-    }
-  };
-  //------------------------------------------------------------------------------------------
-
   return (
     <Layout className="listings-container">
       <Fragment>
@@ -292,7 +305,7 @@ export const Listings = () => {
           {/*  closable*/}
           {/*  setSearchTxt={setSearchTxt}*/}
           {/*/>*/}
-          <TableActionBtns showColumns={!loadingVisibleColumns} handleShowColumns={OpenVisibleColumnsPopup} handleSideDrawer={() => ({})}>
+          <TableActionBtns showColumns={!uiPreferences.loading} handleShowColumns={OpenVisibleColumnsPopup} handleSideDrawer={() => ({})}>
             {t('Table.AdvancedSearch')}
           </TableActionBtns>
         </div>
@@ -335,6 +348,8 @@ export const Listings = () => {
               totalItems={listings?.length}
               showTableInfo={true}
               rowClassName="table-row"
+              pageSize={uiPreferences.pageSize}
+              onPageSizeChanged={OnPageSizeChange}
             />
           }
           {tab == ListingTab.active && listings?.length == 0 && <ListNow />}

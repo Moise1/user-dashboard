@@ -1,16 +1,24 @@
 ﻿import { createSlice } from '@reduxjs/toolkit';
-import { getActiveListingsVisibleColumns, getPendingListingsVisibleColumns, getTerminatedListingsVisibleColumns } from './ui-preferences-state-thunk';
+import { getActiveListingsPreferences, getPendingListingsPreferences, getTerminatedListingsPreferences } from './ui-preferences-state-thunk';
+
+export interface UITablePreference {
+  columns?: number[];
+  pageSize?: number;
+}
+export interface UITablePreferenceL extends UITablePreference {
+  loading: boolean;
+}
 
 export interface UIPreferencesState {
-  activeListingsColumns: { columns?: number[] | null, loading: boolean };
-  pendingListingsColumns: { columns?: number[] | null, loading: boolean };
-  terminatedListingsColumns: { columns?: number[] | null, loading: boolean };
+  activeListingsPreferences: UITablePreferenceL;
+  pendingListingsPreferences: UITablePreferenceL;
+  terminatedListingsPreferences: UITablePreferenceL;
 }
 
 const initialState: UIPreferencesState = {
-  activeListingsColumns: { columns: null, loading: false },
-  pendingListingsColumns: { columns: null, loading: false },
-  terminatedListingsColumns: { columns: null, loading: false }
+  activeListingsPreferences: { loading: false },
+  pendingListingsPreferences: { loading: false },
+  terminatedListingsPreferences: { loading: false }
 };
 
 export const UIPreferencesSlice = createSlice({
@@ -19,40 +27,37 @@ export const UIPreferencesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     //Active
-    builder.addCase(getActiveListingsVisibleColumns.pending, (state) => {
-      state.activeListingsColumns = state.activeListingsColumns ?? {columns:null, loading: true};
-      state.activeListingsColumns.loading = true;
+    builder.addCase(getActiveListingsPreferences.pending, (state) => {
+      state.activeListingsPreferences = state.activeListingsPreferences ?? { loading: true };
+      state.activeListingsPreferences.loading = true;
     });
-    builder.addCase(getActiveListingsVisibleColumns.fulfilled, (state, { payload }) => {
-      state.activeListingsColumns.loading = false;
-      state.activeListingsColumns.columns = payload;
+    builder.addCase(getActiveListingsPreferences.fulfilled, (state, { payload }) => {
+      state.activeListingsPreferences = {...payload, loading:false};
     });
-    builder.addCase(getActiveListingsVisibleColumns.rejected, (state) => {
-      state.activeListingsColumns.loading = false;
+    builder.addCase(getActiveListingsPreferences.rejected, (state) => {
+      state.activeListingsPreferences.loading = false;
     });
     //Pending
-    builder.addCase(getPendingListingsVisibleColumns.pending, (state) => {
-      state.pendingListingsColumns = state.pendingListingsColumns ?? { columns: null, loading: true };
-      state.pendingListingsColumns.loading = true;
+    builder.addCase(getPendingListingsPreferences.pending, (state) => {
+      state.pendingListingsPreferences = state.activeListingsPreferences ?? { loading: true };
+      state.pendingListingsPreferences.loading = true;
     });
-    builder.addCase(getPendingListingsVisibleColumns.fulfilled, (state, { payload }) => {
-      state.pendingListingsColumns.loading = false;
-      state.pendingListingsColumns.columns = payload;
+    builder.addCase(getPendingListingsPreferences.fulfilled, (state, { payload }) => {
+      state.pendingListingsPreferences = { ...payload, loading: false };
     });
-    builder.addCase(getPendingListingsVisibleColumns.rejected, (state) => {
-      state.pendingListingsColumns.loading = false;
+    builder.addCase(getPendingListingsPreferences.rejected, (state) => {
+      state.pendingListingsPreferences.loading = false;
     });
     //Terminated
-    builder.addCase(getTerminatedListingsVisibleColumns.pending, (state) => {
-      state.terminatedListingsColumns = state.terminatedListingsColumns ?? { columns: null, loading: true };
-      state.terminatedListingsColumns.loading = true;
+    builder.addCase(getTerminatedListingsPreferences.pending, (state) => {
+      state.terminatedListingsPreferences = state.activeListingsPreferences ?? { loading: true };
+      state.terminatedListingsPreferences.loading = true;
     });
-    builder.addCase(getTerminatedListingsVisibleColumns.fulfilled, (state, { payload }) => {
-      state.terminatedListingsColumns.loading = false;
-      state.terminatedListingsColumns.columns = payload;
+    builder.addCase(getTerminatedListingsPreferences.fulfilled, (state, { payload }) => {
+      state.terminatedListingsPreferences = { ...payload, loading: false };
     });
-    builder.addCase(getTerminatedListingsVisibleColumns.rejected, (state) => {
-      state.terminatedListingsColumns.loading = false;
+    builder.addCase(getTerminatedListingsPreferences.rejected, (state) => {
+      state.terminatedListingsPreferences.loading = false;
     });
   }
 });
