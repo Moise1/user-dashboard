@@ -1,55 +1,62 @@
 @import 'general.config';
 
-// Large screens and extra large screens 
+// Large screens and extra large screens
 .login-form-container {
-  width: 20%;
+  width: 25%;
   margin: 5% auto 0 auto;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
   background: $primary-light-bg-color;
-  .alternative-link{
+  .alternative-link {
     text-decoration: underline;
-  }
-  .login-form-header{
+  };
+  .login-form-header {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     display: flex;
     justify-content: space-between;
     background: $light-primary;
     padding: 5px 10px;
-    .text-section > *, .alternative-link{
+    .text-section > *,
+    .alternative-link {
       color: $primary-light-bg-color;
-    };
-    .login-logo{
+    }
+    .logo {
       width: 30px;
       height: 30px;
     }
   }
-  .login-form{
+  .login-form {
     margin-top: 2rem;
     padding: 0 10px;
-    .password-input-label{
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      box-shadow:  0 0 0 30px white inset !important;
+    }
+    .password-input-label {
       display: flex;
-      align-items:center;
+      align-items: center;
       column-gap: 2rem;
-      .label-name{
+      .label-name {
         font-weight: 600;
         font-size: 16px;
       }
-      .alternative-link{
+      .alternative-link {
         font-size: $font-small;
       }
     }
     .confirm-btn {
       width: 100%;
     }
-  };
-
+  }
 }
 
 // Small screen device
-@media only screen and (max-width: 750px){
-  .login-form-container{
+@media only screen and (max-width: 750px) {
+  .login-form-container {
     width: 100%;
   }
 }

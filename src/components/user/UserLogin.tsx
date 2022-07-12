@@ -4,7 +4,7 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { userLogin } from 'src/redux/user/userThunk';
 import { UserData } from '../../redux/user/userSlice';
-import logo from '../../assets/logoHGR.png';
+import logo from '../../assets/hgr-logo.png';
 import '../../sass/user-login.scss';
 
 export const UserLogin = withRouter(({ history }: {history: RouteComponentProps['history']}) => {
@@ -21,13 +21,13 @@ export const UserLogin = withRouter(({ history }: {history: RouteComponentProps[
           <h2 className="login-form-title">Login</h2>
           <p>
             Don&apos;t have account yet?{' '}
-            <Link className="alternative-link" to="/signup">
-              Sign Up
+            <Link className="alternative-link" to="/register">
+              Register
             </Link>
           </p>
         </div>
         <div>
-          <img src={logo} alt="" className="login-logo" />
+          <img src={logo} alt="" className="logo" />
         </div>
       </div>
       <Form
@@ -46,7 +46,7 @@ export const UserLogin = withRouter(({ history }: {history: RouteComponentProps[
             { type: 'email', message: 'Invalid e-mail address' }
           ]}
         >
-          <Input autoFocus={true} className="auth-input" />
+          <Input className="auth-input" />
         </Form.Item>
 
         <Form.Item

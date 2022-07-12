@@ -150,8 +150,8 @@ span {
 // Checkbox styles
 
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: $light-primary !important;
-  border-color: $light-primary !important;
+  background: $light-primary !important;
+  border: $light-primary !important;
 }
 
 .redirect-link,
@@ -178,11 +178,11 @@ span {
 .blue-input {
   @include custom-input($secondary-bg);
   border: none; //Added by suleman
-}
+};
 
 .auth-input {
-  @include custom-input($primary-light-bg-color !important);
-}
+  @include custom-input($primary-light-bg-color);
+};
 
 @mixin custom-btn-styles($bg-color: null, $color: null) {
   margin: 1rem 0;
