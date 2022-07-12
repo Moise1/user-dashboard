@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
+import { Button, Col, Input, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
 import miniAlert from 'mini-alert';
@@ -34,9 +34,6 @@ import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { CalendarOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
-import '../../sass/dashboard.scss';
-import '../../sass/modal-datepicker.scss';
-import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
 import { ProductQuota } from 'src/redux/user/userSlice';
@@ -47,9 +44,13 @@ import { addDays } from 'date-fns';
 import Modal from 'antd/lib/modal/Modal';
 import { getCurrency } from '../../utils/getCurrency';
 import { Links } from '../../links';
+import { DeleteAccount } from '../user/DeleteAccount';
+import '../../sass/dashboard.scss';
+import '../../sass/modal-datepicker.scss';
+import '../../sass/action-btns.scss';
 
 export const Dashboard = () => {
-  //For pagination add by suleman ahmad
+
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   const dispatch = useAppDispatch();
@@ -71,10 +72,22 @@ export const Dashboard = () => {
   const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
   const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
   const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+
+  const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
+  const handleDeleteModelOpen = () => setOpenDeleteModal(!openDeleteModal);
 
   const [open, setOpen] = useState<boolean>(false);
   const handleOpenModal = () => setOpen(!open);
+  const handleCheck = () => setChecked(!checked);
 
+  const handleDelete = async (id: Channel['id']) => {
+    await dispatch(deleteChannel(id));
+    setOpenDeleteModal(!openDeleteModal);
+    dispatch(getChannels());
+    console.log('Delete Shop Action....');
+  };
   const onSearch = (value: string) => {
     setSearchedChannels(
       channels.filter((c: Channel) => {
@@ -85,10 +98,7 @@ export const Dashboard = () => {
     );
   };
 
-  const removeRecord = async (id: Channel['id']) => {
-    await dispatch(deleteChannel(id));
-    dispatch(getChannels());
-  };
+ 
 
   useEffect(() => {
     (async () => {
@@ -146,9 +156,18 @@ export const Dashboard = () => {
       key: '',
       render: (record: Channel) => {
         return (
-          <Popconfirm title="Sure to delete this record?" onConfirm={() => removeRecord(record.id)}>
-            <CloseIcon className="remove-rule" />
-          </Popconfirm>
+          <>
+            <PopupModal open={openDeleteModal} width={600}>
+              <DeleteAccount
+                selectedChannelId={record.id}
+                checked={checked}
+                handleCheck={handleCheck}
+                handleCancel={handleCancel}
+                handleDelete={() =>handleDelete(record.id)}
+              />
+            </PopupModal>
+            <CloseIcon className="remove-rule" onClick={handleDeleteModelOpen} />
+          </>
         );
       }
     }

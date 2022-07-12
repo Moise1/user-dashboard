@@ -43,21 +43,6 @@
     margin-left: 1rem;
   }
 }
-.action-btns {
-  display: flex !important;
-  height: auto !important;
-  justify-content: space-between;
-
-  .disabled {
-    background: rgba($light-primary, 0.2);
-    color: $primary-bg;
-    border-radius: 8px;
-    &:hover {
-      background: rgba($light-primary, 0.2);
-      color: $primary-bg;
-    }
-  }
-}
 
 .top-bar-item {
   margin: 0 1rem;
@@ -118,11 +103,6 @@
   .store-list-container {
     max-width: auto;
     margin-right: 0.2rem;
-  }
-
-  .action-btns {
-    display: flex;
-    justify-content: space-between;
   }
   .logo-container {
     display: flex;

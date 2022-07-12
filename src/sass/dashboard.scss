@@ -1,6 +1,30 @@
 @import 'general.config';
 
 // large ad extra large screens.
+
+
+// DELETE SHOP STYLES - START
+
+.action-btns {
+    margin-top: 1rem;
+    display: flex !important;
+    height: auto !important;
+    justify-content: space-between;
+  
+    .disabled {
+      background: rgba($light-primary, 0.2);
+      color: $primary-bg;
+      border-radius: 8px;
+      &:hover {
+        background: rgba($light-primary, 0.2);
+        color: $primary-bg;
+      }
+    }
+  }
+
+// DELETE SHOP STYLES - START
+
+
 .stores {
   .data-table-container {
     height: auto;
