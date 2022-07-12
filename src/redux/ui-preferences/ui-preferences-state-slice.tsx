@@ -1,5 +1,7 @@
 ﻿import { createSlice } from '@reduxjs/toolkit';
-import { getActiveListingsPreferences, getPendingListingsPreferences, getTerminatedListingsPreferences } from './ui-preferences-state-thunk';
+import { getPreferences } from './ui-preferences-state-thunk';
+
+export type UIIdentifier = string;
 
 export interface UITablePreference {
   columns?: number[];
@@ -10,15 +12,13 @@ export interface UITablePreferenceL extends UITablePreference {
 }
 
 export interface UIPreferencesState {
-  activeListingsPreferences: UITablePreferenceL;
-  pendingListingsPreferences: UITablePreferenceL;
-  terminatedListingsPreferences: UITablePreferenceL;
+  tablePreferences: {
+    [id: UIIdentifier]: UITablePreferenceL
+  }
 }
 
 const initialState: UIPreferencesState = {
-  activeListingsPreferences: { loading: false },
-  pendingListingsPreferences: { loading: false },
-  terminatedListingsPreferences: { loading: false }
+  tablePreferences: {}
 };
 
 export const UIPreferencesSlice = createSlice({
@@ -27,37 +27,17 @@ export const UIPreferencesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     //Active
-    builder.addCase(getActiveListingsPreferences.pending, (state) => {
-      state.activeListingsPreferences = state.activeListingsPreferences ?? { loading: true };
-      state.activeListingsPreferences.loading = true;
+    builder.addCase(getPreferences.pending, (state, { meta }) => {
+      state.tablePreferences = state.tablePreferences ?? {};
+      const prv = state.tablePreferences[meta.arg] ?? {};
+      state.tablePreferences[meta.arg] = { ...prv, loading: false };
     });
-    builder.addCase(getActiveListingsPreferences.fulfilled, (state, { payload }) => {
-      state.activeListingsPreferences = {...payload, loading:false};
+    builder.addCase(getPreferences.fulfilled, (state, { payload, meta }) => {
+      state.tablePreferences[meta.arg] = { ...payload, loading: false };
     });
-    builder.addCase(getActiveListingsPreferences.rejected, (state) => {
-      state.activeListingsPreferences.loading = false;
-    });
-    //Pending
-    builder.addCase(getPendingListingsPreferences.pending, (state) => {
-      state.pendingListingsPreferences = state.activeListingsPreferences ?? { loading: true };
-      state.pendingListingsPreferences.loading = true;
-    });
-    builder.addCase(getPendingListingsPreferences.fulfilled, (state, { payload }) => {
-      state.pendingListingsPreferences = { ...payload, loading: false };
-    });
-    builder.addCase(getPendingListingsPreferences.rejected, (state) => {
-      state.pendingListingsPreferences.loading = false;
-    });
-    //Terminated
-    builder.addCase(getTerminatedListingsPreferences.pending, (state) => {
-      state.terminatedListingsPreferences = state.activeListingsPreferences ?? { loading: true };
-      state.terminatedListingsPreferences.loading = true;
-    });
-    builder.addCase(getTerminatedListingsPreferences.fulfilled, (state, { payload }) => {
-      state.terminatedListingsPreferences = { ...payload, loading: false };
-    });
-    builder.addCase(getTerminatedListingsPreferences.rejected, (state) => {
-      state.terminatedListingsPreferences.loading = false;
+    builder.addCase(getPreferences.rejected, (state, { meta }) => {
+      const prv = state.tablePreferences[meta.arg] ?? {};
+      state.tablePreferences[meta.arg] = { ...prv, loading: false };
     });
   }
 });

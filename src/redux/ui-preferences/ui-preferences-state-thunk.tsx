@@ -1,55 +1,18 @@
 ﻿import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UITablePreference } from './ui-preferences-state-slice';
+import { UIIdentifier, UITablePreference } from './ui-preferences-state-slice';
 
-//SAVE
-export const getActiveListingsPreferences = createAsyncThunk('UI/GetActiveListingsVisibleColumns', async (_, rejectWithValue) => {
+export const getPreferences = createAsyncThunk('UI/GetPreferences', async (uiIdentifier: UIIdentifier, rejectWithValue) => {
   try {
     const channelId = localStorage.getItem('channelId');
-    return JSON.parse(localStorage.getItem('UI.VisibleColumns.' + channelId + '.active') ?? '{}') as UITablePreference;
+    return JSON.parse(localStorage.getItem('UI.Preferences.' + channelId + '.' + uiIdentifier) ?? '{}') as UITablePreference;
   } catch (error) {
     return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
   }
 });
-export const saveActiveListingsPreferences = createAsyncThunk('UI/SaveActiveListingsVisibleColumns', async (data: UITablePreference, rejectWithValue) => {
+export const savePreferences = createAsyncThunk('UI/SavePreferences', async (data: { uiIdentifier: UIIdentifier, data: UITablePreference }, rejectWithValue) => {
   try {
     const channelId = localStorage.getItem('channelId');
-    localStorage.setItem('UI.VisibleColumns.' + channelId + '.active', JSON.stringify(data));
-  } catch (error) {
-    return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
-
-//PENDING
-export const getPendingListingsPreferences = createAsyncThunk('UI/GetPendingListingsVisibleColumns', async (_, rejectWithValue) => {
-  try {
-    const channelId = localStorage.getItem('channelId');
-    return JSON.parse(localStorage.getItem('UI.VisibleColumns.' + channelId + '.pending') ?? '{}') as UITablePreference;
-  } catch (error) {
-    return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
-export const savePendingListingsPreferences = createAsyncThunk('UI/SavePendingListingsVisibleColumns', async (data: UITablePreference, rejectWithValue) => {
-  try {
-    const channelId = localStorage.getItem('channelId');
-    localStorage.setItem('UI.VisibleColumns.' + channelId + '.pending', JSON.stringify(data));
-  } catch (error) {
-    return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
-
-//TERMINATED
-export const getTerminatedListingsPreferences = createAsyncThunk('UI/GetTerminatedListingsVisibleColumns', async (_, rejectWithValue) => {
-  try {
-    const channelId = localStorage.getItem('channelId');
-    return JSON.parse(localStorage.getItem('UI.VisibleColumns.' + channelId + '.terminated') ?? '{}') as UITablePreference;
-  } catch (error) {
-    return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
-  }
-});
-export const saveTerminatedListingsPreferences = createAsyncThunk('UI/SaveTerminatedListingsVisibleColumns', async (data: UITablePreference, rejectWithValue) => {
-  try {
-    const channelId = localStorage.getItem('channelId');
-    localStorage.setItem('UI.VisibleColumns.' + channelId + '.terminated', JSON.stringify(data));
+    localStorage.setItem('UI.Preferences.' + channelId + '.' + data.uiIdentifier, JSON.stringify(data.data));
   } catch (error) {
     return rejectWithValue.rejectWithValue('Sorry! Something went wrong ):');
   }
