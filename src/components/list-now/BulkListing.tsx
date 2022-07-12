@@ -14,7 +14,7 @@ import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
-import { SimpleTable } from '../../small-components/simple-table';
+import { SimpleTable } from '../../small-components/tables/simple-table';
 import moment from 'moment';
 import { Key } from 'antd/lib/table/interface';
 import { AutoListState, BulkListingError, BulkListingLog, eBulkListingStatus, BulkListingsDataToSave } from '../../redux/listings/autoListSlice';

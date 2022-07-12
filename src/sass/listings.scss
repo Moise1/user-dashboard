@@ -20,24 +20,7 @@
     margin-top: $spacer;
   }
 }
-.search-options-area {
-  display: flex;
-  justify-content: space-between;
-  .action-components {
-    width: 100%;
-    margin-left: 0;
-    margin: auto;
-    .ant-input-wrapper {
-      width: 100% !important;
-    }
-  }
 
-  .search-bars-container {
-    display: flex;
-    margin: auto 0;
-    width: auto;
-  }
-}
 
 
 .listings-card {

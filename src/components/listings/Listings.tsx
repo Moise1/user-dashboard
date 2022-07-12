@@ -11,9 +11,10 @@ import {
 } from 'src/redux/listings/listingsThunk';
 import { ActiveListing, ListingsState, PendingListing, TerminatedListings } from 'src/redux/listings/listingsSlice';
 import '../../sass/listings.scss';
+import '../../sass/tables/complex-table.scss';
 import { ListNow } from '../list-now/ListNow';
 import { ReactUtils } from '../../utils/react-utils';
-import { DataTable } from '../../small-components/data-table';
+import { DataTable } from '../../small-components/tables/data-table';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './Listings/active-columns';
@@ -24,6 +25,7 @@ import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { VisibleColumnsPopup } from './Listings/visible-columns-popup';
 import { getActiveListingsPreferences, getPendingListingsPreferences, getTerminatedListingsPreferences, saveActiveListingsPreferences, savePendingListingsPreferences, saveTerminatedListingsPreferences } from '../../redux/ui-preferences/ui-preferences-state-thunk';
 import { UIPreferencesState, UITablePreference, UITablePreferenceL } from '../../redux/ui-preferences/ui-preferences-state-slice';
+import Search from 'antd/lib/input/Search';
 
 type ListingT = ActiveListing | PendingListing | TerminatedListings;//TODO: This is a disaster but I am tired of fixing all your type mess
 enum ListingTab {
@@ -275,85 +277,88 @@ export const Listings = () => {
   //  }
   //};
 
+  const OnChangeOmniSearch = (value: string) => {
+    console.log(value);
+  };
+
   return (
     <Layout className="listings-container">
+      <StatusBar>
+        <StatusBtn
+          title={`${t('ActiveListings')}`}
+          changeTab={handleChangeTab}
+          className={tab === ListingTab.active ? 'active-tab' : ''}
+          id={ListingTab.active.toString()}
+        />
+        <StatusBtn
+          title={`${t('PendingListings')}`}
+          changeTab={handleChangeTab}
+          className={tab === ListingTab.pending ? 'active-tab' : ''}
+          id={ListingTab.pending.toString()}
+        />
+        <StatusBtn
+          title={`${t('TerminatedListings')}`}
+          changeTab={handleChangeTab}
+          className={tab === ListingTab.terminated ? 'active-tab' : ''}
+          id={ListingTab.terminated.toString()}
+        />
+      </StatusBar>
       <Fragment>
-        {visibleColumnsList &&
-          <VisibleColumnsPopup
-            isVisible={visibleColumnsPopupOpened}
-            onClose={CloseVisibleColumnsPopup}
-            allColumns={allColumnsList}
-            visibleColumns={visibleColumnsList}
-            onChange={SaveVisibleColumns}
-          />
-        }
-        {/*{selectedRowKeys.length > 1 ? (*/}
-        {/*  <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>*/}
-        {/*    <BulkEditListings selectedItems={selectedRowKeys.length} />*/}
-        {/*  </PopupModal>*/}
-        {/*) : (*/}
-        {/*  <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>*/}
-        {/*    <EditSingleListing selectedRecordData={selectedRecordData} />*/}
-        {/*  </PopupModal>*/}
-        {/*)}*/}
-
-        <div className="search-options-area">
-          {/*<Search autoFocus placeholder="Search....." onChange={(e) => setSearchTxt(e.target.value)} />*/}
-          {/*<ListingsAdvancedSearch*/}
-          {/*  visible={drawerOpen}*/}
-          {/*  onClose={handleSideDrawer}*/}
-          {/*  closable*/}
-          {/*  setSearchTxt={setSearchTxt}*/}
-          {/*/>*/}
-          <TableActionBtns showColumns={!uiPreferences.loading} handleShowColumns={OpenVisibleColumnsPopup} handleSideDrawer={() => ({})}>
-            {t('Table.AdvancedSearch')}
-          </TableActionBtns>
-        </div>
-
-
-
-        <StatusBar>
-          <StatusBtn
-            title={`${t('ActiveListings')}`}
-            changeTab={handleChangeTab}
-            className={tab === ListingTab.active ? 'active-tab' : ''}
-            id={ListingTab.active.toString()}
-          />
-          <StatusBtn
-            title={`${t('PendingListings')}`}
-            changeTab={handleChangeTab}
-            className={tab === ListingTab.pending ? 'active-tab' : ''}
-            id={ListingTab.pending.toString()}
-          />
-          <StatusBtn
-            title={`${t('TerminatedListings')}`}
-            changeTab={handleChangeTab}
-            className={tab === ListingTab.terminated ? 'active-tab' : ''}
-            id={ListingTab.terminated.toString() }
-          />
-        </StatusBar>
-
-        {loading && (
-          <Layout className="listings-container">
-            <Spin />
-          </Layout>
-        )}
-        {!loading && <>
-          {(tab != ListingTab.active || (listings?.length ?? 0) > 0) &&
-            <DataTable
-              page="listing"
-              isListingsTable={true}
-              columns={columns}
-              dataSource={filteredData as ListingT[]}
-              totalItems={listings?.length}
-              showTableInfo={true}
-              rowClassName="table-row"
-              pageSize={uiPreferences.pageSize}
-              onPageSizeChanged={OnPageSizeChange}
+        <div className="complex-table">
+          {visibleColumnsList &&
+            <VisibleColumnsPopup
+              isVisible={visibleColumnsPopupOpened}
+              onClose={CloseVisibleColumnsPopup}
+              allColumns={allColumnsList}
+              visibleColumns={visibleColumnsList}
+              onChange={SaveVisibleColumns}
             />
           }
-          {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
-        </>}
+          {/*{selectedRowKeys.length > 1 ? (*/}
+          {/*  <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>*/}
+          {/*    <BulkEditListings selectedItems={selectedRowKeys.length} />*/}
+          {/*  </PopupModal>*/}
+          {/*) : (*/}
+          {/*  <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleListingModal}>*/}
+          {/*    <EditSingleListing selectedRecordData={selectedRecordData} />*/}
+          {/*  </PopupModal>*/}
+          {/*)}*/}
+
+          <div className="search-options-area">
+            <Search autoFocus placeholder="Search....." onChange={(e) => OnChangeOmniSearch(e.target.value)} />
+            {/*<ListingsAdvancedSearch*/}
+            {/*  visible={drawerOpen}*/}
+            {/*  onClose={handleSideDrawer}*/}
+            {/*  closable*/}
+            {/*  setSearchTxt={setSearchTxt}*/}
+            {/*/>*/}
+            <TableActionBtns showColumns={!uiPreferences.loading} handleShowColumns={OpenVisibleColumnsPopup} handleSideDrawer={() => ({})}>
+              {t('Table.AdvancedSearch')}
+            </TableActionBtns>
+          </div>
+
+          {loading && (
+            <Layout className="listings-container">
+              <Spin />
+            </Layout>
+          )}
+          {!loading && <>
+            {(tab != ListingTab.active || (listings?.length ?? 0) > 0) &&
+              <DataTable
+                page="listing"
+                isListingsTable={true}
+                columns={columns}
+                dataSource={filteredData as ListingT[]}
+                totalItems={listings?.length}
+                showTableInfo={true}
+                rowClassName="table-row"
+                pageSize={uiPreferences.pageSize}
+                onPageSizeChanged={OnPageSizeChange}
+              />
+            }
+            {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
+          </>}
+        </div>
       </Fragment>
     </Layout>
   );

@@ -6,7 +6,7 @@ import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
-import { DataTable, DataTableKey } from '../../small-components/data-table';
+import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';

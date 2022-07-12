@@ -178,8 +178,6 @@
   "Sources.Table.Name.Provider": "Proveedor",
   "Sources.Table.Name.Template": "Plantilla",
 
-  "WeListForYou.Name": "Publicamos por ti",
-
   "Table.ShowColumns": "Mostrar Columnas",
   "Table.AdvancedSearch": "Búsqueda Avanzada",
 
@@ -187,7 +185,14 @@
   "Topbar.Notifications": "{count} notificaciones",
   "Topbar.Upgrade": "Mejorar",
 
+  "VisibleColumnsPopup.Title": "Selecciona columnas para mostrar",
+  "VisibleColumnsPopup.Description": "Muestra columnas en la tabla que se adapten a tus intereses.",
+  "VisibleColumnsPopup.Amount": "Cantidad de columnas mostradas",
+
+  "WeListForYou.Name": "Publicamos por ti",
+
 
 
   "search": "Buscar..."
+
 }

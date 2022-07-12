@@ -47,8 +47,8 @@ export const VisibleColumnsPopup = (props: Props) => {
 
   return (
     <PopupModal handleClose={onClose} width={900} open={isVisible}>
-      <h5 className="cols-display-title">Select columns to display</h5>
-      <p className="description">Display columns in the listing table that suit your interests.</p>
+      <h5 className="cols-display-title">{t('VisibleColumnsPopup.Title')}</h5>
+      <p className="description">{t('VisibleColumnsPopup.Description')}</p>
       <Card className="listings-card">
         <Row className="listings-cols">
           <Col>
@@ -58,18 +58,11 @@ export const VisibleColumnsPopup = (props: Props) => {
           </Col>
           <Col>
             <div className="cols-amount">
-              <p>Amount of columns on your listings table</p>
+              <p>{t('VisibleColumnsPopup.Amount')}</p>
               <h3>{visibleColumns.length}</h3>
             </div>
           </Col>
         </Row>
-        {/* }<div className="show-columns-action-btns">
-              <CancelBtn handleClose={handleCancelChanges}>{t('Button.Cancel')}</CancelBtn>!
-              <SuccessBtn handleConfirm={handleApplyChanges}>
-                <CheckIcon />
-                {t('Button.ApplyChanges')}
-              </SuccessBtn>
-            </div>*/}
       </Card>
     </PopupModal>
   );

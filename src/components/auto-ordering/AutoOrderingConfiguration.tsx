@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
-import '../../sass/sources-table.scss';
 import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
 import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
-import { DataTable, DataTableKey } from '../../small-components/data-table';
+import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';

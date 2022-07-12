@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Row, Col, Card, Input, Form, Layout, Spin, Popconfirm } from 'antd';
-import { DataTable } from '../../small-components/data-table';
+import { DataTable } from '../../small-components/tables/data-table';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getUserAssistants, createUserAssistant, deleteUserAssistant } from 'src/redux/va-profiles/vaProfilesThunk';
