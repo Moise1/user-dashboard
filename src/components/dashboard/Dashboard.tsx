@@ -63,7 +63,9 @@ export const Dashboard = () => {
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
   const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
   const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
-  const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
+  const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(
+    moment.utc().add(-7, 'months').format('DD MMM YYYY')
+  );
   const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
   const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
   const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
@@ -227,11 +229,15 @@ export const Dashboard = () => {
     if (selectedPeriod) {
       switch (selectedPeriod) {
         case ePeriod.Hours:
-          return [...new Set(sales?.map((d: Sale) => {
-            const date = new Date(d.date ? d.date : new Date());
-            const hours = (date.getUTCHours() % 12 || 12) + (date.getUTCHours() < 12 ? 'AM' : 'PM');
-            return hours + '-' + date.getUTCDate();
-          }))];
+          return [
+            ...new Set(
+              sales?.map((d: Sale) => {
+                const date = new Date(d.date ? d.date : new Date());
+                const hours = (date.getUTCHours() % 12 || 12) + (date.getUTCHours() < 12 ? 'AM' : 'PM');
+                return hours + '-' + date.getUTCDate();
+              })
+            )
+          ];
         case ePeriod.Days: {
           return [...new Set(sales?.map((d: Sale) => moment(d.date).format('DD-MMM')))];
         }
@@ -414,7 +420,7 @@ export const Dashboard = () => {
         show: false
       }
     },
-    colors: ['#228b22'],
+    colors: ['#9694ff'],
     dataLabels: {
       enabled: true
     },
@@ -509,7 +515,9 @@ export const Dashboard = () => {
   const affiliateModalOk = () => {
     setIsAffiliateModalVisible(false);
     if (affiliateState[0]) {
-      const startDate: Date = affiliateState[0].startDate ? affiliateState[0].startDate : moment.utc().month(-12).toDate();
+      const startDate: Date = affiliateState[0].startDate
+        ? affiliateState[0].startDate
+        : moment.utc().month(-12).toDate();
       const endDate: Date = affiliateState[0].endDate ? affiliateState[0].endDate : moment.utc().toDate();
       const diff = Math.abs(startDate.getTime() - endDate.getTime());
       const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
@@ -586,7 +594,11 @@ export const Dashboard = () => {
         <div className="charts-sales">
           <h1>Sales</h1>
           <div className="date-picker" onClick={() => setIsSalesModalVisible(true)}>
-            <h4><strong>From </strong>{startFrom}  <strong> To </strong>  {endTo}</h4> <CalendarOutlined />
+            <h4>
+              <strong>From </strong>
+              {startFrom} <strong> To </strong> {endTo}
+            </h4>{' '}
+            <CalendarOutlined />
           </div>
           <Row className="general-cols" gutter={[0, 15]}>
             <Col className="products" xs={24} lg={10}>
@@ -596,7 +608,10 @@ export const Dashboard = () => {
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
-              <h2>{getCurrency()}{totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}</h2>
+              <h2>
+                {getCurrency()}
+                {totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}
+              </h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
             </Col>
           </Row>
@@ -757,13 +772,23 @@ export const Dashboard = () => {
           <div className="affiliates-graph">
             <div className="graph-cntrlers">
               <div className="date-picker" onClick={() => setIsAffiliateModalVisible(true)}>
-                <h4><strong>From </strong>{affiliateStartFrom}  <strong> To </strong>  {affiliateEndTo}</h4><CalendarOutlined />
+                <h4>
+                  <strong>From </strong>
+                  {affiliateStartFrom} <strong> To </strong> {affiliateEndTo}
+                </h4>
+                <CalendarOutlined />
               </div>
             </div>
             <div className="graph-container">
               <h3>Total affiliates</h3>
               <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
-              <Chart options={affiliateChartData} series={affiliateChartData.series} type="line" width="100%" height={400} />
+              <Chart
+                options={affiliateChartData}
+                series={affiliateChartData.series}
+                type="line"
+                width="100%"
+                height={400}
+              />
             </div>
           </div>
         </div>
@@ -773,8 +798,16 @@ export const Dashboard = () => {
         <SocialIcon network="instagram" style={{ height: 30, width: 30 }} />
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
-      <Modal title="" key="salespickerModel" visible={isSalesModalVisible} onOk={salesModalOk} onCancel={handleSalesCancel} width={925}>
-        <DateRangePicker key="dpSales"
+      <Modal
+        title=""
+        key="salespickerModel"
+        visible={isSalesModalVisible}
+        onOk={salesModalOk}
+        onCancel={handleSalesCancel}
+        width={925}
+      >
+        <DateRangePicker
+          key="dpSales"
           onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
@@ -782,8 +815,16 @@ export const Dashboard = () => {
           direction="horizontal"
         />
       </Modal>
-      <Modal title="" key="affiliatePickerModal" visible={isAffiliateModalVisible} onOk={affiliateModalOk} onCancel={handleAffiliateCancel} width={925}>
-        <DateRangePicker key="dpAffiliate"
+      <Modal
+        title=""
+        key="affiliatePickerModal"
+        visible={isAffiliateModalVisible}
+        onOk={affiliateModalOk}
+        onCancel={handleAffiliateCancel}
+        width={925}
+      >
+        <DateRangePicker
+          key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
