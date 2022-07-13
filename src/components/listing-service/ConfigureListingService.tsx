@@ -6,7 +6,7 @@ import { Channel } from 'src/redux/channels/channelsSlice';
 import { MultipleSelector } from 'src/small-components/form/multipleSelector';
 import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import { Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
-import { SimpleTable } from 'src/small-components/simple-table';
+import { SimpleTable } from 'src/small-components/tables/simple-table';
 //import { CrossModalIcon } from '../common/Icons';
 import { useEffect, useState } from 'react';
 import { Source } from '../../redux/sources/sourceSlice';

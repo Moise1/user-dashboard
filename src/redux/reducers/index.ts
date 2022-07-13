@@ -28,6 +28,7 @@ import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
 import { autoListReducer } from '../listings/autoListSlice';
+import { UIPreferences } from '../ui-preferences/ui-preferences-state-slice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -37,10 +38,8 @@ export const allReducers = combineReducers({
   priceWarrior: PriceWarriorReducer,
   subscriptionConfiguration: getConfigReducer,
   userAssistants: userAssistantsReducer,
-
   sources: sourcesReducer,
   sourcesConfiguration: sourcesConfigReducer,
-
   channels: channelsReducer,
   channelConfiguration: channelConfigurationReducer,
   accountConfiguration: accountConfigurationReducer,
@@ -64,5 +63,6 @@ export const allReducers = combineReducers({
   affiliatesStats: affiliatesStatsReducer,
   linkAccount: newChannelReducer,
   managedServers: getManagedServersReducer,
-  newChannel: newChannelReducer
+  newChannel: newChannelReducer,
+  UIPreferences: UIPreferences
 });

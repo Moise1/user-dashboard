@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Dropdown, Menu, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import '../sass/data-table.scss';
+import '../../sass/tables/data-table.scss';
 import { TableRowSelection } from 'antd/lib/table/interface';
 import { SimpleTable } from './simple-table';
 

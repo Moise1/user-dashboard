@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 // import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
-import { DataTable, DataTableKey } from '../../small-components/data-table';
+import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';

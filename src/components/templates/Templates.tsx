@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getTemplates, setDefault } from '../../redux/templates/templatesThunk';
 import { Template } from 'src/redux/templates/templatesSlice';
-import { DataTable } from '../../small-components/data-table';
+import { DataTable } from '../../small-components/tables/data-table';
 import { EditOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import '../../sass/templates.scss';

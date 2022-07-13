@@ -7,6 +7,9 @@
 
 // new channel's parent component styles
 .new-channel-container {
+  .ant-spin{
+    margin-left: 50%;
+  }
   .title,
   .sub-title {
     margin-bottom: 1rem;

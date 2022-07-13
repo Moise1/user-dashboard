@@ -9,7 +9,8 @@
   Markup = 8,
   Stock = 9,
   Options = 10,
-  CreatedOn = 11
+  CreatedOn = 11,
+  ChannelItem= 12
 }
 
 export type ColumnData = {
@@ -24,6 +25,12 @@ export const ListingsColumns: ColumnData[] = [
     id: TableColumnId.Image,
     title: 'Listings.Column.Img',
     dataIndex: 'imageUrl'
+  },
+  {
+    id: TableColumnId.ChannelItem,
+    title: 'Listings.Column.ChannelItem',
+    dataIndex: 'channelItem',
+    width: 70
   },
   {
     id: TableColumnId.Source,

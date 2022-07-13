@@ -20,7 +20,7 @@ import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { Channel } from '../../redux/channels/channelsSlice';
-import { DataTable } from '../../small-components/data-table';
+import { DataTable } from '../../small-components/tables/data-table';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';

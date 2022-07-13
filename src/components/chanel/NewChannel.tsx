@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Button, Row, Col } from 'antd';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Button, Row, Col, Spin } from 'antd';
 import { Account } from './Account';
 import { AccountConnect } from './AccountConnect';
 import { ChooseList } from './ChooseList';
@@ -23,29 +23,54 @@ interface State {
   list: string;
 }
 
+const fakeAPICall = () => {
+  return new Promise((resolve) => {
+    setTimeout(() =>{
+      resolve(localStorage.setItem('newChannelSuccess', 'true'));
+    },  Math.random() * 5000);
+  });
+};
 
-export const popupWindow = (
+export const popupWindow = async (
   url: string,
   win: Window & typeof globalThis,
   w: number, 
-  h: number) => {
+  h: number,
+  setStep: Dispatch<SetStateAction<number>>,
+  newWindowOpen?: boolean,
+  setNewWindowOpen?: Dispatch<SetStateAction<boolean>>,
+
+) => {
   const t = win!.top!.outerHeight / 2 + win!.top!.screenY - h / 2;
   const l = win!.top!.outerWidth / 2 + win!.top!.screenX - w / 2;
-  return win
-    .open(
-      url,
-      '_blank',
-      `toolbar=no, location=yes, directories=no,
-      status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
-      width=${w}, height=${h}, top=${t}, left=${l}`
-    );
+  const newWindow = win.open(
+    url,
+    '_blank',
+    `toolbar=no, location=yes, directories=no,
+    status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, 
+    width=${w}, height=${h}, top=${t}, left=${l}`
+  );
+
+  await fakeAPICall();
+  const newChannelSuccess = localStorage.getItem('newChannelSuccess');
+  const timer = setInterval(() => { 
+    if(newWindow?.closed && newChannelSuccess) {
+      clearInterval(timer);
+      setNewWindowOpen!(!newWindowOpen);
+      setStep!(6);
+    }
+  }, 1000);
+
 };
+  
 export const NewChannel = () => {
   const [step, setStep] = useState<number>(1);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [showPrev, setShowPrev] = useState<boolean>(false);
   const [openUrl, setOpenUrl] = useState<boolean>(false);
+  const [newWindowOpen, setNewWindowOpen] = useState<boolean>(false);
   const { ebayUrl, getLinkLoading } = useAppSelector((state) => state.newChannel);
+  
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<State>({
@@ -58,16 +83,22 @@ export const NewChannel = () => {
     list: ''
   });
 
- 
-
   const handlePrev = () => {
     setStep((prevState) => prevState - 1);
   };
 
   const handleNext = () => {
     if(openUrl && data.platform === 1 && ebayUrl) {
-      popupWindow(ebayUrl, window, 800, 600);
-      return false;
+      popupWindow(
+        ebayUrl,
+        window,
+        800, 
+        600, 
+        setStep,
+        newWindowOpen,
+        setNewWindowOpen
+      );
+      setNewWindowOpen(!newWindowOpen);
     }else{
       setStep((prevState) => prevState + 1);
       setShowPrev(true);
@@ -106,10 +137,9 @@ export const NewChannel = () => {
       setOpenUrl(true);
     }
     
-    if(data.api === 'advance') setOpenUrl(false);
+    if(data.api === 'advance' || step !== 4) setOpenUrl(false);
 
   }, [data.api, getEbayLinkAccount]);
-
 
   const stepDetector = (step: number): JSX.Element | undefined => {
     switch (step) {
@@ -141,7 +171,7 @@ export const NewChannel = () => {
         );
       case 4:
         if (data.platform === 1 || data.platform === 3) {
-          return (
+          return newWindowOpen ? <Spin size='large'/> : (
             <AccountConnect
               api={data.api}
               extension={data.extension}
@@ -157,6 +187,7 @@ export const NewChannel = () => {
               platform={data.platform!}
               step={step}
               storeLocation={data.storeLocation}
+              setStep={setStep}
             /> 
           );
         }
@@ -166,6 +197,7 @@ export const NewChannel = () => {
             platform={data.platform!} 
             step={step} 
             storeLocation={data.storeLocation}
+            setStep={setStep}
           />
         );
       case 6:
@@ -173,7 +205,8 @@ export const NewChannel = () => {
           <ChooseList 
             platform={data.platform!} 
             handleChangeList={handleChangeList} 
-            list={data.list} step={step} 
+            list={data.list}
+            step={step} 
           />
         );
       default:
