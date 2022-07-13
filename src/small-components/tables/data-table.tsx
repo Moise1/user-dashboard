@@ -3,14 +3,14 @@ import { Dropdown, Menu, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
 import { TableRowSelection } from 'antd/lib/table/interface';
-import { SimpleTable } from './simple-table';
+import { SimpleColumnsType, SimpleTable } from './simple-table';
 
 export type DataTableKey = React.Key;
 
-interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
+interface Props<RecordType> {
+  columns: SimpleColumnsType[];
 
-  dataSource: T[];
+  dataSource: RecordType[];
   selectedRows?: number;
   totalItems?: number;
   handleSingleListingModal?: () => void;
@@ -23,8 +23,8 @@ interface Props<T> {
   setRulesPerPage?: (rulesPerPage: number) => void;
   setListingsPerPage?: (listingsPerPage: number) => void;
   rowClassName?: string;
-  onRow?: (record: T) => { onClick: () => void };
-  rowSelection?: TableRowSelection<T>;
+  onRow?: (record: RecordType) => { onClick: () => void };
+  rowSelection?: TableRowSelection<RecordType>;
   isListingsTable?: boolean;
 
   currentPage?: number;
@@ -35,7 +35,7 @@ interface Props<T> {
   hidePagination?: boolean;
 }
 
-export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) => {
+export const DataTable = <RecordType extends Record<string, unknown>>(props: Props<RecordType>) => {
 
   const {
     columns,

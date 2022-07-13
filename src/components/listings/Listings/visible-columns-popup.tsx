@@ -2,14 +2,14 @@
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { t } from '../../../utils/transShim';
 import { PopupModal } from '../../modals/PopupModal';
-import { ListingsColumns, TableColumnId } from './columns';
+import { ListingsColumns, ListingColumnId } from './columns';
 
 interface Props {
   onClose: () => void;
   isVisible: boolean;
-  allColumns: TableColumnId[];
-  visibleColumns: TableColumnId[];
-  onChange: (newVisible: TableColumnId[]) => void;
+  allColumns: ListingColumnId[];
+  visibleColumns: ListingColumnId[];
+  onChange: (newVisible: ListingColumnId[]) => void;
 }
 
 export const VisibleColumnsPopup = (props: Props) => {
@@ -25,11 +25,11 @@ export const VisibleColumnsPopup = (props: Props) => {
       newVisibleC.delete(value);
     }
 
-    const result = Array.from(newVisibleC) as TableColumnId[];
+    const result = Array.from(newVisibleC) as ListingColumnId[];
     onChange(result);
   };
 
-  const ColumnRow = (id: TableColumnId) => {
+  const ColumnRow = (id: ListingColumnId) => {
     const col = dic.get(id);
     if (!col)
       return <></>;
@@ -39,7 +39,7 @@ export const VisibleColumnsPopup = (props: Props) => {
     return (
       <li key={col.id}>
         <Checkbox className="checkbox" checked={isVisible} value={col.id} onChange={handleCheckBox}>
-          {t(col.title)}
+          {typeof (col.title) === 'string' ? t(col.title) : col.title}
         </Checkbox>
       </li>
     );

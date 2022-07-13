@@ -1,9 +1,12 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { Pagination, Table } from 'antd';
 import { TableRowSelection } from 'antd/lib/table/interface';
+import { DataIndex } from 'rc-table/lib/interface';
+
+export type SimpleColumnsType = { title: React.ReactNode; dataIndex?: DataIndex | undefined; key: string; };
 
 interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
+  columns: SimpleColumnsType[];
   dataSource: T[];
   onRow?: (record: T) => { onClick: () => void };
 
