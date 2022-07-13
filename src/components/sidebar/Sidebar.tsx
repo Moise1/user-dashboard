@@ -52,23 +52,26 @@ export const Sidebar = (props: Props) => {
   const dispatch = useAppDispatch();
   const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   const history = useHistory();
+  const [isStick, setIsStick] = useState<boolean>(!collapsed);
 
   const handleThemeChange = () => {
     setIsDark(!isDark);
     isDark === false ? setTheme('dark') : setTheme('light');
   };
   const handleMouseEnter = () => {
-    if (!staticValue) {
-      setCollapsed(false);
+    if (staticValue) {
       return;
     }
+    setIsStick(!isStick);
+    setCollapsed(false);
   };
 
   const handleMouseLeave = () => {
-    if (!staticValue) {
-      setCollapsed(true);
+    if (staticValue) {
       return;
     }
+    setCollapsed(true);
+    setIsStick(!isStick);
   };
 
   const onOpenChange = (openKeysValue: string[]) => {
@@ -248,13 +251,13 @@ export const Sidebar = (props: Props) => {
   const siderMenu = (
     <div className="side-menu-container">
       {
-        !collapsed && (
+        (
           <div className="sidebar-overhead">
             <div className="logo-container">
               <img className="logo" src={Logo} alt="logo" />
               <h1 className="logo-text">HGR</h1>
             </div>
-      
+
             <div className="quota-container">
               <div className="quota">
                 <strong className="quota-text">
@@ -262,7 +265,7 @@ export const Sidebar = (props: Props) => {
                 </strong>
                 <span className="quota-progress">45% (12/13)</span>
               </div>
-      
+
               <button type="button" className="update-btn">
                 {t('Topbar.Upgrade')}
               </button>
