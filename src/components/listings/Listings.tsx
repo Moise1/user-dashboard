@@ -24,8 +24,9 @@ import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
+import { Channel } from '../../redux/channels/channelsSlice';
 
-type ListingT = (ActiveListing | PendingListing | TerminatedListings) & {source?: Source};
+type ListingT = (ActiveListing | PendingListing | TerminatedListings) & {source?: Source, channel?: Channel};
 enum ListingTab {
   active, pending, terminated, import
 }
@@ -91,7 +92,7 @@ export const Listings = () => {
     const AddExtraData = (data: ListingT[] | null | undefined) => {
       if (!data || !sourcesDic)
         return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId) } as ListingT));
+      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel } as ListingT));
     };
 
     switch (tab) {
