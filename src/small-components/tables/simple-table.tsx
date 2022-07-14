@@ -1,11 +1,11 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { Pagination, Table } from 'antd';
-import { TableRowSelection } from 'antd/lib/table/interface';
+import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
 
-interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: T[];
-  onRow?: (record: T) => { onClick: () => void };
+interface Props<RecordType> {
+  columns: ColumnType<RecordType>[];
+  dataSource: RecordType[];
+  onRow?: (record: RecordType) => { onClick: () => void };
 
   rowClassName?: string;
 
@@ -15,10 +15,10 @@ interface Props<T> {
   onPageSizeChanged?: (itemsPerPage: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
-  rowSelection?: TableRowSelection<T>;
+  rowSelection?: TableRowSelection<RecordType>;
 }
-
-export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) => {
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const SimpleTable = <RecordType extends object = any>(props: Props<RecordType>) => {
   const {
     columns,
     dataSource,
@@ -41,7 +41,7 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
   const pageSize = cPageSize ?? sPageSize;
 
 
-  const getData = (dataSource: T[], currentPage: number, currentPageSize: number) => {
+  const getData = (dataSource: RecordType[], currentPage: number, currentPageSize: number) => {
     return dataSource?.slice((currentPage! - 1) * currentPageSize!, currentPage! * currentPageSize!);
   };
 

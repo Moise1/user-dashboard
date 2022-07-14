@@ -1,7 +1,7 @@
 import { CSSProperties, useContext, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import type { MenuProps } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { t } from '../../utils/transShim';
 import {
   DashBoardIcon,
@@ -57,18 +57,19 @@ export const Sidebar = (props: Props) => {
     setIsDark(!isDark);
     isDark === false ? setTheme('dark') : setTheme('light');
   };
+
   const handleMouseEnter = () => {
-    if (!staticValue) {
-      setCollapsed(false);
+    if (staticValue) {
       return;
     }
+    setCollapsed(false);
   };
 
   const handleMouseLeave = () => {
-    if (!staticValue) {
-      setCollapsed(true);
+    if (staticValue) {
       return;
     }
+    setCollapsed(true);
   };
 
   const onOpenChange = (openKeysValue: string[]) => {
@@ -87,10 +88,10 @@ export const Sidebar = (props: Props) => {
 
   const handleLogout = () => {
     const keysToRemove = [
-      'root', 
+      'root',
       'Authorization',
-      'globalTheme', 
-      'isAuthenticated', 
+      'globalTheme',
+      'isAuthenticated',
       'newChannelSuccess'
     ];
     dispatch(actions.logout());
@@ -100,18 +101,18 @@ export const Sidebar = (props: Props) => {
   };
 
   const settingsListArray = [
-    { id: 16, listName: t('Menu.Account'), onClick: () => routeChange(Links.AccountSettings) },
-    { id: 6, listName: t('Menu.Channel'), onClick: () => routeChange(Links.ChannelSettings) },
-    { id: 7, listName: t('Menu.SourcesTable'), onClick: () => routeChange(Links.SourcesSettings) },
-    { id: 8, listName: t('Menu.PricingRules'), onClick: () => routeChange(Links.PricingRules) },
-    { id: 9, listName: t('Menu.BrowserExtensions'), onClick: () => routeChange(Links.BrowserExtension) },
-    { id: 10, listName: t('Menu.Subscriptions'), onClick: () => routeChange(Links.Subscriptions) },
-    { id: 13, listName: t('Menu.VaProfiles'), onClick: () => routeChange(Links.VaProfiles) },
-    { id: 14, listName: t('Menu.Templates'), onClick: () => routeChange(Links.Templates) },
+    { id: 16, listName: t('Menu.Account'), route: Links.AccountSettings },
+    { id: 6, listName: t('Menu.Channel'), route: Links.ChannelSettings },
+    { id: 7, listName: t('Menu.SourcesTable'), route: Links.SourcesSettings },
+    { id: 8, listName: t('Menu.PricingRules'), route: Links.PricingRules },
+    { id: 9, listName: t('Menu.BrowserExtensions'), route: Links.BrowserExtension },
+    { id: 10, listName: t('Menu.Subscriptions'), route:Links.Subscriptions },
+    { id: 13, listName: t('Menu.VaProfiles'), route: Links.VaProfiles },
+    { id: 14, listName: t('Menu.Templates'), route: Links.Templates },
     {
       id: 15,
       listName: t('Menu.AutoOrderingConfiguration'),
-      onClick: () => routeChange(Links.AutoOrderConfiguration)
+      route: Links.AutoOrderConfiguration
     },
     // {
     //   id: 20,
@@ -136,7 +137,7 @@ export const Sidebar = (props: Props) => {
   ];
 
   const helpListArray = [
-    { id: 18, listName: t('Menu.Start'), onClick: () => routeChange(Links.GetStarted) },
+    { id: 18, listName: t('Menu.Start'), route: Links.GetStarted },
     { id: 19, listName: t('Menu.FAQ') },
     { id: 20, listName: t('Menu.ListingServices') }
   ];
@@ -168,47 +169,41 @@ export const Sidebar = (props: Props) => {
       '1',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Dashboard'),
+      <Link to={Links.Dashboard}> {t('Menu.Dashboard')} </Link>,
       <DashBoardIcon />,
-      undefined,
-      () => routeChange(Links.Dashboard)
-
+      undefined
     ),
     getItem(
       '2',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Catalog.Name'),
+      <Link to={Links.Catalog}> {t('Catalog.Name')} </Link>,
       <CatalogIcon />,
-      undefined,
-      () => routeChange(Links.Catalog)
+      undefined
     ),
     getItem(
       '3',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.ListNow'),
+      <Link to={Links.PublishNow}> {t('Menu.ListNow')} </Link>,
       <ListNowIcon />,
-      undefined,
-      () => routeChange(Links.PublishNow)
+      undefined
     ),
     getItem(
       '4',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Listings'),
+      <Link to={Links.Products} > {t('Menu.Listings')} </Link>,
       <ListingsIcon />,
-      undefined,
-      () => routeChange(Links.Products),
+      undefined
     ),
     getItem(
       '5',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Orders'),
+      <Link to={Links.Orders} > {t('Menu.Orders')} </Link>,
       <OrdersIcon />,
-      undefined,
-      () => routeChange(Links.Orders)
+      undefined
     ),
     getItem(
       'sub1',
@@ -217,17 +212,16 @@ export const Sidebar = (props: Props) => {
       t('Menu.Settings'),
       <SettingsIcon />,
       settingsListArray.map((item) => {
-        return getItem(item.id, '', {}, <MenuListItem key={item.id} onClick={item.onClick} listName={item.listName} />);
+        return getItem(item.id, '', {}, <MenuListItem key={item.id} route={item.route} listName={item.listName} />);
       })
     ),
     getItem(
       '17',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      t('Menu.Services'),
+      <Link to={Links.Services} > {t('Menu.Services')} </Link>,
       <ServiceIcon />,
-      undefined,
-      () => routeChange(Links.Services),
+      undefined
     ),
     getItem(
       'sub2',
@@ -236,7 +230,7 @@ export const Sidebar = (props: Props) => {
       t('Menu.Help'),
       <HelpIcon />,
       helpListArray.map((item) => {
-        return getItem(item.id, '', {}, <MenuListItem key={item.id} onClick={item.onClick} listName={item.listName} />);
+        return getItem(item.id, '', {}, <MenuListItem key={item.id} route={item.route} listName={item.listName} />);
       })
     ),
     getItem(
@@ -254,13 +248,13 @@ export const Sidebar = (props: Props) => {
   const siderMenu = (
     <div className="side-menu-container">
       {
-        !collapsed && (
+        (
           <div className="sidebar-overhead">
             <div className="logo-container">
               <img className="logo" src={Logo} alt="logo" />
               <h1 className="logo-text">HGR</h1>
             </div>
-      
+
             <div className="quota-container">
               <div className="quota">
                 <strong className="quota-text">
@@ -268,7 +262,7 @@ export const Sidebar = (props: Props) => {
                 </strong>
                 <span className="quota-progress">45% (12/13)</span>
               </div>
-      
+
               <button type="button" className="update-btn">
                 {t('Topbar.Upgrade')}
               </button>

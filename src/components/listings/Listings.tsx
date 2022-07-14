@@ -86,7 +86,7 @@ export const Listings = () => {
           defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
           columnList: ActiveListingsColumns,
           hideWhenEmpty: true,
-          listings: activeListings as ListingT[],
+          listings: activeListings as ListingT[] | null | undefined,
           loading: loadingActive
         };
       case ListingTab.pending:
@@ -94,7 +94,7 @@ export const Listings = () => {
           defaultVisibleColumns: PendingListingsColumns,
           columnList: PendingListingsColumns,
           hideWhenEmpty: false,
-          listings: pendingListings as ListingT[],
+          listings: pendingListings as ListingT[] | null | undefined,
           loading: loadingPending
         };
       case ListingTab.terminated:
@@ -102,7 +102,7 @@ export const Listings = () => {
           defaultVisibleColumns: TerminatedListingsColumns,
           columnList: TerminatedListingsColumns,
           hideWhenEmpty: false,
-          listings: terminatedListings as ListingT[],
+          listings: terminatedListings as ListingT[] | null | undefined,
           loading: loadingTerminated
         };
     }
@@ -151,7 +151,7 @@ export const Listings = () => {
       <Fragment>
         <ComplexTable
           uiIdentifier={'listings_' + tab}
-          data={listings}
+          data={listings ?? []}
           allColumnData={ListingsColumns}
           columnList={columnList}
           defaultVisibleColumns={defaultVisibleColumns}

@@ -3,7 +3,6 @@
 import { Layout, Spin } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { useEffect, useState } from 'react';
-import { ColumnData, TableColumnId } from '../../components/listings/Listings/columns';
 import { VisibleColumnsPopup } from '../../components/listings/Listings/visible-columns-popup';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { UIPreferencesState, UITablePreference, UITablePreferenceL } from '../../redux/ui-preferences/ui-preferences-state-slice';
@@ -11,18 +10,20 @@ import { getPreferences, savePreferences } from '../../redux/ui-preferences/ui-p
 import { t } from '../../utils/transShim';
 import { TableActionBtns } from '../TableActionBtns';
 import { DataTable } from './data-table';
+import { SmartSearch } from './filter-data';
+import { ColumnData, ColumnId } from './types/columns';
 
-interface Props<T> {
+interface Props<RecordType> {
   uiIdentifier: string;
-  defaultVisibleColumns?: TableColumnId[];
-  allColumnData: ColumnData[];
-  columnList: TableColumnId[];
-  data: T[],
+  defaultVisibleColumns?: ColumnId[];
+  allColumnData: ColumnData<RecordType>[];
+  columnList: ColumnId[];
+  data: RecordType[],
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
 }
-
-export const ComplexTable = <T extends Record<string, unknown>>(props: Props<T>) => {
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
   const { uiIdentifier, defaultVisibleColumns, allColumnData, columnList, data, hideWhenEmpty, loadingData } = props;
   const dispatch = useAppDispatch();
 
@@ -52,38 +53,38 @@ export const ComplexTable = <T extends Record<string, unknown>>(props: Props<T>)
   const [visibleColumnsPopupOpened, setVisibleColumnsPopupOpened] = useState<boolean>(false);
   const CloseVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(false);
   const OpenVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(true);
-  const SaveVisibleColumns = (columns: TableColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
+  const SaveVisibleColumns = (columns: ColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
   const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
   //------------------------------------------------------------------------------------------
-  //OMNISEARCH--------------------------------------------------------------------------------
-  const OnChangeOmniSearch = (value: string) => {
-    console.log(value);
-  };
-  //------------------------------------------------------------------------------------------
-
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, allColumnsList, visibleColumnsList } = (() => {
+  const { columns, allVisibleColumns, allColumnsList, visibleColumnsList } = (() => {
 
-    const GetColumns = (cs: ColumnData[], ids: TableColumnId[], visibleColumns?: TableColumnId[]) => (
-      {
-        columns: cs
-          .filter(x => ids.includes(x.id) && (!visibleColumns || visibleColumns.length == 0 || visibleColumns.includes(x.id)))
-          .map(x => ({ ...x, title: t(x.title), key: x.id.toString() })),
-        allColumnsList: ids,
-        visibleColumnsList: visibleColumns
-      }
-    );
+    const allColumns = columnList.map(x => allColumnData.find(y => y.id == x)).filter(x => !!x) as ColumnData<RecordType>[];
+    const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
 
-    const vc = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
-    return GetColumns(allColumnData, columnList, vc);
+    const columns = allColumns
+      .filter(x => columnList.includes(x.id) && (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
+      .map(x => ({ ...x, title: typeof(x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
+
+    return {
+      columns,
+      allVisibleColumns: allColumns.filter(x => !!columns.find(y => y.id == x.id)),
+      allColumnsList: columnList,
+      visibleColumnsList
+    };
 
   })();
   //------------------------------------------------------------------------------------------
 
+  //OMNISEARCH--------------------------------------------------------------------------------
+  const [smartSearch, setSmartSearch] = useState<string | null>(null);
+  const OnChangeSmartSearch = (value: string) => setSmartSearch(value);
+  //------------------------------------------------------------------------------------------
   //FILTERING DATA----------------------------------------------------------------------------
-  const filteredData = data /*? useTableSearch(searchTxt, () => listings) : listings*/;
+  //const filteredData = data && omniSearch ? useTableSearch(omniSearch, data) : data;
+  const filteredData = SmartSearch(smartSearch, data, allVisibleColumns);
   //------------------------------------------------------------------------------------------
 
 
@@ -178,7 +179,7 @@ export const ComplexTable = <T extends Record<string, unknown>>(props: Props<T>)
       {/*)}*/}
 
       <div className='search-options-area'>
-        <Search autoFocus placeholder='Search.....' onChange={(e) => OnChangeOmniSearch(e.target.value)} />
+        <Search autoFocus placeholder='Search.....' onChange={(e) => OnChangeSmartSearch(e.target.value)} />
         {/*<ListingsAdvancedSearch*/}
         {/*  visible={drawerOpen}*/}
         {/*  onClose={handleSideDrawer}*/}
@@ -196,13 +197,13 @@ export const ComplexTable = <T extends Record<string, unknown>>(props: Props<T>)
         </Layout>
       )}
       {!loading && <>
-        {(!hideWhenEmpty || (data?.length ?? 0) > 0) &&
+        {(!hideWhenEmpty || data.length > 0) &&
           <DataTable
             page='listing'
             isListingsTable={true}
             columns={columns}
             dataSource={filteredData}
-            totalItems={data?.length}
+            totalItems={data.length}
             showTableInfo={true}
             rowClassName='table-row'
             pageSize={uiPreferences.pageSize}
