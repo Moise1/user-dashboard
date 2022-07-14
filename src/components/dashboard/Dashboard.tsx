@@ -771,7 +771,6 @@ export const Dashboard = () => {
 
           <div className="general-section">
             <div className="charts-sales">
-              <h1>Affiliates chart</h1>
               <div className="date-picker" onClick={() => setIsSalesModalVisible(true)}>
                 <h4>
                   <strong>From </strong>
@@ -779,19 +778,16 @@ export const Dashboard = () => {
                 </h4>{' '}
                 <CalendarOutlined />
               </div>
-              <Row className="general-cols" gutter={[0, 15]}>
-                <Col className="products" xs={24} lg={24}>
-                  <h3>Total affiliates</h3>
-                  <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
-                  <Chart
-                    options={affiliateChartData}
-                    series={affiliateChartData.series}
-                    type="line"
-                    width="100%"
-                    height={400}
-                  />
-                </Col>
-              </Row>
+
+              <h3>Total affiliates</h3>
+              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+              <Chart
+                options={affiliateChartData}
+                series={affiliateChartData.series}
+                type="line"
+                width="100%"
+                height={400}
+              />
             </div>
           </div>
         </div>
