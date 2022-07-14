@@ -1,6 +1,7 @@
 ﻿import { ColumnData } from './types/columns';
 
-export const SmartSearch = <DataType extends Record<string, unknown>>(
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const SmartSearch = <DataType extends object = any>(
   searchTerm: string | null | undefined,
   data: DataType[],
   columns: ColumnData<DataType>[]

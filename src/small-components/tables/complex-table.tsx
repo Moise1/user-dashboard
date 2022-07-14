@@ -22,8 +22,8 @@ interface Props<RecordType> {
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
 }
-
-export const ComplexTable = <RecordType extends Record<string, unknown>>(props: Props<RecordType>) => {
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
   const { uiIdentifier, defaultVisibleColumns, allColumnData, columnList, data, hideWhenEmpty, loadingData } = props;
   const dispatch = useAppDispatch();
 

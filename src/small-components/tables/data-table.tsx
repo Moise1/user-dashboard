@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 import { Dropdown, Menu, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
-import { TableRowSelection } from 'antd/lib/table/interface';
-import { SimpleColumnsType, SimpleTable } from './simple-table';
+import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
+import { SimpleTable } from './simple-table';
 
 export type DataTableKey = React.Key;
 
 interface Props<RecordType> {
-  columns: SimpleColumnsType[];
+  columns: ColumnType<RecordType>[];
 
   dataSource: RecordType[];
   selectedRows?: number;
@@ -34,8 +34,8 @@ interface Props<RecordType> {
   pageSizes?: number[];
   hidePagination?: boolean;
 }
-
-export const DataTable = <RecordType extends Record<string, unknown>>(props: Props<RecordType>) => {
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
 
   const {
     columns,

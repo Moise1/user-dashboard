@@ -7,7 +7,7 @@ import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice';
+//import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice'; //Inconsistent use of types
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { Links } from '../../links';
 
@@ -37,7 +37,16 @@ export const AutoOrderingConfiguration = () => {
     dispatch(getAutoOrdering());
   }, []);
 
-  const dataSource = [
+  type dataA = {
+    id: number,
+    name: string,
+    url: string,
+    isoCountry: eCountry,
+    fee: number,
+    enabled: boolean
+  }
+
+  const dataSource: dataA[] = [
     {
       id: 1,
       name: 'Amazon',
@@ -170,7 +179,7 @@ export const AutoOrderingConfiguration = () => {
 
   console.log(selectedRecord);
   //To not show the duplicated suppliers and to sort autoOrders data alphabetically
-  const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values());
+  const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values()) as dataA[];
   uniqueData.sort((a, b) => a.name.localeCompare(b.name));
 
   const tableColumns = [
@@ -183,7 +192,7 @@ export const AutoOrderingConfiguration = () => {
       title: t('AutoOrderingConfiguration.Free'),
       dataIndex: '',
       key: 'free',
-      render: (render: AutoOrderingData) => (
+      render: (render: dataA) => (
         <p className="fs-14">{render.fee === 0 ? <CheckOutlined className="free-icon" /> : ' '}</p>
       )
     },
@@ -191,13 +200,13 @@ export const AutoOrderingConfiguration = () => {
       title: t('AutoOrderingConfiguration.FeePercentage'),
       dataIndex: '',
       key: 'feepercentage',
-      render: (render: AutoOrderingData) => <p className="fs-14">{render.fee === 1 ? `${render.fee}%` : ' '} </p>
+      render: (render: dataA) => <p className="fs-14">{render.fee === 1 ? `${render.fee}%` : ' '} </p>
     },
     {
       title: t('AutoOrderingConfiguration.Status'),
       dataIndex: '',
       key: 'status',
-      render: (render: AutoOrderingData) => (
+      render: (render: dataA) => (
         <span className={render.enabled === true ? 'enableBtn' : 'disableBtn'}>
           {render.enabled === true ? 'Enabled' : 'Disabled'}
         </span>
