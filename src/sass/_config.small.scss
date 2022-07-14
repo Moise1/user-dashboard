@@ -56,7 +56,19 @@
       font-size: $font-small;
     }
 
+    .ant-form-item-label > label {
+      font-size: $font-small;
+    }
+
+    input::placeholder {
+      font-size: $font-small;
+    }
+
     span {
+      font-size: $font-medium;
+    }
+
+    .blue-input {
       font-size: $font-medium;
     }
   }
