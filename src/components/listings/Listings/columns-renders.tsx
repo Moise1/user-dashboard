@@ -34,19 +34,23 @@ export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
   } else {
     let url: string;
     if (platform.itemUrl instanceof Object) {
-      url = platform.itemUrl[channel.isoCountry];
+      url = platform.itemUrl[channel.isoCountry]
+        .replace('{sku}', channelItem)
+        .replace('{shopName}', channel.channelIdentifier);
     } else {
-      url = platform.itemUrl;
+      url = platform.itemUrl
+        .replace('{sku}', channelItem)
+        .replace('{shopName}', channel.channelIdentifier);
     }
-    return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{channelItem}</a>;
+    return <a target='_blank' rel='noreferrer' href={ApiURL + '/api/Sources/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id + '&isoCountry=' + row.channel.isoCountry}>{channelItem}</a>;
   }
 };
 
 export const RenderSource = (path: string, rowR: RecordType) => {
-  const row = rowR as { source: Source, id: number };
+  const row = rowR as { channel: Channel, source: Source, id: number };
   const source = row.source;
   if (!source)
     return t('Listings.UnknownSource');
   const url = 'https://' + source.baseUrl + '/' + path;
-  return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</a>;
+  return <a target='_blank' rel='noreferrer' href={ApiURL + '/api/Sources/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id + '&isoCountry=' + row.channel.isoCountry}>{source.name}</a>;
 };
