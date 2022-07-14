@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
@@ -35,6 +35,7 @@ import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { BookOutlined, CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
+import '../../sass/modal-datepicker.scss';
 import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
@@ -548,6 +549,25 @@ export const Dashboard = () => {
     setIsAffiliateModalVisible(false);
   };
 
+  const [popUpMobile, setPopUpMobile] = useState('horizontal');
+
+  const tabletScreen = window.matchMedia('(max-width: 1030px)');
+  const mobileScreen = window.matchMedia('(max-width: 750px)');
+
+  const setLayout = useMemo(() => {
+    if (tabletScreen.matches) {
+      setPopUpMobile('horizontal');
+      popUpMobile;
+    }
+    if (mobileScreen.matches) {
+      setPopUpMobile('vertical');
+      popUpMobile;
+    }
+    return popUpMobile;
+  }, [popUpMobile]);
+
+  console.log(setLayout);
+
   return (
     <Layout className="dashboard-container">
       <div className="general-section">
@@ -798,37 +818,41 @@ export const Dashboard = () => {
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
       <Modal
+        className="modal-datepicker"
         title=""
         key="salespickerModel"
         visible={isSalesModalVisible}
         onOk={salesModalOk}
         onCancel={handleSalesCancel}
-        width={600}
+        okText="Apply"
       >
         <DateRangePicker
+          className="range-datepicker"
           key="dpSales"
           onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={state}
-          direction="vertical"
+          direction={setLayout}
         />
       </Modal>
       <Modal
+        className="modal-datepicker"
         title=""
         key="affiliatePickerModal"
         visible={isAffiliateModalVisible}
         onOk={affiliateModalOk}
         onCancel={handleAffiliateCancel}
-        width={600}
+        okText="Apply"
       >
         <DateRangePicker
+          className="range-datepicker"
           key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={affiliateState}
-          direction="vertical"
+          direction={setLayout}
         />
       </Modal>
     </Layout>
