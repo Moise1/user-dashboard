@@ -1,5 +1,4 @@
-﻿import { Source } from '../../../redux/sources/sourceSlice';
-import { ColumnData } from '../../../small-components/tables/types/columns';
+﻿import { ColumnData } from '../../../small-components/tables/types/columns';
 import { RenderChannelItem, RenderSource } from './columns-renders';
 
 export enum ListingColumnId {

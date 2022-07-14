@@ -1,7 +1,8 @@
-﻿import { Platforms } from "../../../data/platforms";
-import { Channel } from "../../../redux/channels/channelsSlice";
+﻿import { Platforms } from '../../../data/platforms';
+import { Channel } from '../../../redux/channels/channelsSlice';
 import { t } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
+import { Source } from '../../../redux/sources/sourceSlice';
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
@@ -29,7 +30,7 @@ export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
       .replace('{asin}', row.asin ?? '')
       .replace('{sku}', channelItem)
       .replace('{shopName}', channel.channelIdentifier);
-    return <a target="_blank" rel="noreferrer" href={url}>{row.asin ?? ''}</a>;
+    return <a target='_blank' rel='noreferrer' href={url}>{row.asin ?? ''}</a>;
   } else {
     let url: string;
     if (platform.itemUrl instanceof Object) {
@@ -37,7 +38,7 @@ export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
     } else {
       url = platform.itemUrl;
     }
-    return <a target="_blank" rel="noreferrer" href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{channelItem}</a>;
+    return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{channelItem}</a>;
   }
 };
 
@@ -47,5 +48,5 @@ export const RenderSource = (path: string, rowR: RecordType) => {
   if (!source)
     return t('Listings.UnknownSource');
   const url = 'https://' + source.baseUrl + '/' + path;
-  return <a target="_blank" rel="noreferrer" href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</a>;
+  return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</a>;
 };
