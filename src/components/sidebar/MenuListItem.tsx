@@ -15,7 +15,7 @@ export const MenuListItem = (props: Props) => {
       <span className="dot-icon">
         <CircleDotIcon />
       </span>
-      <Link to={route as unknown as string}>{listName}</Link>
+      <Link to={route ? route : '#'}>{listName}</Link>
     </div>
   );
 };

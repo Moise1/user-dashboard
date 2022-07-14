@@ -45,6 +45,7 @@ import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
 import Modal from 'antd/lib/modal/Modal';
 import { getCurrency } from '../../utils/getCurrency';
+import { Links } from '../../links';
 
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
@@ -751,7 +752,9 @@ export const Dashboard = () => {
             <h4>
               <strong>Affiliate percentage: 10%</strong>
             </h4>
-            <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
+            <Link to={Links.AffiliateDashboard}>
+              <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
+            </Link>
           </div>
 
           <div className="affiliates-graph">

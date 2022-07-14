@@ -17,6 +17,7 @@ export { GetStarted } from './help/GetStarted';
 export { Catalog } from './catalog/Catalog';
 export { SourcesConfiguration } from './sources/sources-configuration';
 export { Dashboard } from './dashboard/Dashboard';
+export { AffiliateDashboard } from './dashboard/AffiliateDashboard';
 export { Templates } from './templates/Templates';
 export { ConfigureListingService } from './listing-service/ConfigureListingService';
 export { AutoOrdering } from './auto-ordering/AutoOrdering';

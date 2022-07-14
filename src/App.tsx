@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import { Switch, Route, withRouter, Redirect, RouteComponentProps} from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect, RouteComponentProps } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import {
   UserLogin,
@@ -21,6 +21,7 @@ import {
   Catalog,
   SourcesConfiguration,
   Dashboard,
+  AffiliateDashboard,
   Templates,
   AutoOrderingConfiguration,
   AutoOrdering,
@@ -40,7 +41,7 @@ import {
 import { ProtectedRoute } from './ProtectedRoute';
 import { Links } from './links';
 
-export const App = withRouter(({ history }: {history: RouteComponentProps['history']}) => {
+export const App = withRouter(({ history }: { history: RouteComponentProps['history'] }) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState(true);
   const [staticValue, setStaticValue] = useState(false);
@@ -78,6 +79,7 @@ export const App = withRouter(({ history }: {history: RouteComponentProps['histo
             <Route path={Links.Login} component={UserLogin} />
             <Route path={Links.Register} component={UserRegister} />
             <ProtectedRoute path={Links.Dashboard} component={Dashboard} />
+            <ProtectedRoute path={Links.AffiliateDashboard} component={AffiliateDashboard} />
             <ProtectedRoute path={Links.Products} component={Listings} />
             <ProtectedRoute path={Links.ProductsTerminated} component={Listings} />
             <ProtectedRoute path={Links.ProductsPending} component={Listings} />

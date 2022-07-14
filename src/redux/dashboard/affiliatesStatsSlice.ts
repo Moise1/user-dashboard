@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAffiliatesStats } from './affiliatesStatsThunk';
+import { getAffiliatesStats, getAffiliateDashboard } from './affiliatesStatsThunk';
 
-export interface AffiliatesStats{ 
-    quantity: number;
-    id: number;
+export interface AffiliatesStats {
+  quantity: number;
+  id: number;
 }
 
 const initialState = {
@@ -12,6 +12,11 @@ const initialState = {
   error: ''
 };
 
+const initialsState = {
+  affiliatesDashboard: [] as unknown[],
+  loading: false,
+  error: ''
+};
 
 
 export const affiliatesStatsSlice = createSlice({
@@ -34,4 +39,25 @@ export const affiliatesStatsSlice = createSlice({
   }
 });
 
-export const {reducer: affiliatesStatsReducer} = affiliatesStatsSlice;
+export const affiliatesDashboardSlice = createSlice({
+  name: 'dashboard-affiliates-stats',
+  initialState: initialsState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAffiliateDashboard.pending, (state) => {
+      state.loading = false;
+      state.error = '';
+    });
+    builder.addCase(getAffiliateDashboard.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.affiliatesDashboard = payload;
+    });
+    builder.addCase(getAffiliateDashboard.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = String(payload);
+    });
+  }
+});
+
+export const { reducer: affiliatesStatsReducer } = affiliatesStatsSlice;
+export const { reducer: affiliatesDashboardReducer } = affiliatesDashboardSlice;
