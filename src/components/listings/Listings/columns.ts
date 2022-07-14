@@ -40,14 +40,15 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
     dataIndex: 'imageUrl',
-    smartSearch: { ignore: true}
+    smartSearch: { ignore: true }
   },
   {
     id: ListingColumnId.ChannelItem,
     title: 'Listings.Column.ChannelItem',
     dataIndex: 'channelItem',
     width: 70,
-    render: RenderChannelItem
+    render: RenderChannelItem,
+    sorter: (a, b) => (a.channelItem as string).localeCompare(b.channelItem as string)
   },
   {
     id: ListingColumnId.Source,

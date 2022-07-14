@@ -2,6 +2,7 @@
 
 import { Layout, Spin } from 'antd';
 import Search from 'antd/lib/input/Search';
+import { TableRowSelection } from 'antd/lib/table/interface';
 import { useEffect, useState } from 'react';
 import { VisibleColumnsPopup } from '../../components/listings/Listings/visible-columns-popup';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
@@ -21,10 +22,11 @@ interface Props<RecordType> {
   data: RecordType[],
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
+  rowSelection?: TableRowSelection<RecordType>
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, columnList, data, hideWhenEmpty, loadingData } = props;
+  const { uiIdentifier, defaultVisibleColumns, allColumnData, columnList, data, hideWhenEmpty, loadingData, rowSelection } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
@@ -208,6 +210,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             rowClassName='table-row'
             pageSize={uiPreferences.pageSize}
             onPageSizeChanged={OnPageSizeChange}
+            rowSelection={rowSelection}
           />
         }
       </>}
