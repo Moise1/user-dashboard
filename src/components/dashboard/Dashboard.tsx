@@ -559,12 +559,14 @@ export const Dashboard = () => {
     if (tabletScreen.matches) {
       setPopUpMobile('horizontal');
       popUpMobile;
+      return 'horizontal';
     }
     if (mobileScreen.matches) {
       setPopUpMobile('vertical');
       popUpMobile;
+      return 'vertical';
     }
-    return popUpMobile;
+    return 'horizontal';
   }, [popUpMobile]);
 
   console.log(setLayout);
