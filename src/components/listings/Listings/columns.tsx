@@ -1,4 +1,7 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
+﻿import { Link } from 'react-router-dom';
+import { Source } from '../../../redux/sources/sourceSlice';
+import { ColumnData } from '../../../small-components/tables/types/columns';
+import { t } from '../../../utils/transShim';
 
 export enum ListingColumnId {
   Image = 1,
@@ -15,13 +18,14 @@ export enum ListingColumnId {
   ChannelItem= 12
 }
 
-export type ListingFieldValue = unknown;
+type FieldValue = unknown;
+type RecordType = Record<string, FieldValue>;
 
-export interface ListingColumnData extends ColumnData<Record<string, ListingFieldValue>> {
+export interface ListingColumnData extends ColumnData<RecordType> {
   id: ListingColumnId
 }
 
-const MultiTermFilter = (fieldValue: ListingFieldValue, searchTerm: string) => {
+const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
   const terms = searchTerm.trim().split(' ');
   for (const term of terms) {
     if (term.length == 0)
@@ -51,8 +55,12 @@ export const ListingsColumns: ListingColumnData[] = [
     title: 'Listings.Column.Source',
     dataIndex: 'sourcePath',
     width: 70,
-    render: (path: string) => {
-      return 'hola' + path;
+    render: (path: string, row: RecordType) => {
+      const source = row.source as Source;
+      if (!source)
+        return t('Listings.UnknownSource');
+      const url = 'https://' + source.baseUrl + '/' + path;
+      return <Link to={'/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</Link>;
     }
   },
   {

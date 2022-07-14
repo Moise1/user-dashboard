@@ -22,8 +22,10 @@ import { TerminatedListingsColumns } from './Listings/terminated-columns';
 
 import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
+import { getSources } from '../../redux/sources/sourcesThunk';
+import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 
-type ListingT = ActiveListing | PendingListing | TerminatedListings;//TODO: This is a disaster but I am tired of fixing all your type mess
+type ListingT = (ActiveListing | PendingListing | TerminatedListings) & {source?: Source};
 enum ListingTab {
   active, pending, terminated, import
 }
@@ -32,6 +34,13 @@ export const Listings = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const dispatch = useAppDispatch();
 
+  //ADDITIONAL DATA--------------------------------------------------------------------------
+  const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourcesState);
+  useEffect(() => {
+    dispatch(getSources());
+  }, [getSources]);
+  const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
+  //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
     if (useRouteMatch(Links.ProductsPending))
@@ -45,7 +54,7 @@ export const Listings = () => {
   //------------------------------------------------------------------------------------------
 
 
-  //DATA--------------------------------------------------------------------------
+  //DATA---------------------------------------------------------------------------------------
   useEffect(() => {
     switch (tab) {
       case ListingTab.active:
@@ -76,8 +85,14 @@ export const Listings = () => {
     }
   };
 
-  const { defaultVisibleColumns, hideWhenEmpty, listings, loading, columnList } = (() => {
+  const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList } = (() => {
     const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated } = useAppSelector((state) => state.listings as ListingsState);
+
+    const AddExtraData = (data: ListingT[] | null | undefined) => {
+      if (!data || !sourcesDic)
+        return data;
+      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId) } as ListingT));
+    };
 
     switch (tab) {
       default:
@@ -86,24 +101,24 @@ export const Listings = () => {
           defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
           columnList: ActiveListingsColumns,
           hideWhenEmpty: true,
-          listings: activeListings as ListingT[] | null | undefined,
-          loading: loadingActive
+          listings: AddExtraData(activeListings as ListingT[] | null | undefined),
+          loadingListings: loadingActive
         };
       case ListingTab.pending:
         return {
           defaultVisibleColumns: PendingListingsColumns,
           columnList: PendingListingsColumns,
           hideWhenEmpty: false,
-          listings: pendingListings as ListingT[] | null | undefined,
-          loading: loadingPending
+          listings: AddExtraData(pendingListings as ListingT[] | null | undefined),
+          loadingListings: loadingPending
         };
       case ListingTab.terminated:
         return {
           defaultVisibleColumns: TerminatedListingsColumns,
           columnList: TerminatedListingsColumns,
           hideWhenEmpty: false,
-          listings: terminatedListings as ListingT[] | null | undefined,
-          loading: loadingTerminated
+          listings: AddExtraData(terminatedListings as ListingT[] | null | undefined),
+          loadingListings: loadingTerminated
         };
     }
   })();
@@ -156,7 +171,7 @@ export const Listings = () => {
           columnList={columnList}
           defaultVisibleColumns={defaultVisibleColumns}
           hideWhenEmpty={hideWhenEmpty}
-          loadingData={loading}
+          loadingData={loadingListings || loadingSources}
         />
         {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
       </Fragment>
