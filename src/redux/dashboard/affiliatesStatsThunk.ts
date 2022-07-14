@@ -29,7 +29,7 @@ export const getAffiliateDashboard = createAsyncThunk(
   'dashboard-affiliates/getAffiliateDashboard',
   async ({ month, year }: DashboardProps, { rejectWithValue } /* destructured thunkAPI's prop */) => {
     try {
-      const res = await client.get(`/Dashboard/AffiliateDashboard?month=` + { month } + `&year=` + { year });
+      const res = await client.get(`/Dashboard/AffiliateDashboard?month=${month}&year=${year}`);
       return res.data.response_data;
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong ):');
