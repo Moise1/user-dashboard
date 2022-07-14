@@ -4,8 +4,6 @@ body {
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: auto;
-  margin: 0;
-  padding: 0;
   line-height: 1.5715;
   box-sizing: border-box;
   background: $secondary-bg;
@@ -14,7 +12,7 @@ body {
     width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
     width: -moz-available; /* WebKit-based browsers will ignore this. */
     width: fill-available;
-    margin: 0 !important;
+    margin-top: 0.5rem;
     padding: 0.3rem;
     background: $secondary-bg;
     .spinner {
