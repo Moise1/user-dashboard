@@ -604,7 +604,7 @@ export const Dashboard = () => {
             <Col className="products" xs={24} lg={10}>
               <h3>Total orders</h3>
               <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
-              <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" height={400} />
+              <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" />
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
@@ -612,7 +612,7 @@ export const Dashboard = () => {
                 {getCurrency()}
                 {totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}
               </h2>
-              <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
+              <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" />
             </Col>
           </Row>
         </div>
@@ -803,7 +803,7 @@ export const Dashboard = () => {
         visible={isSalesModalVisible}
         onOk={salesModalOk}
         onCancel={handleSalesCancel}
-        width={925}
+        width={600}
       >
         <DateRangePicker
           key="dpSales"
@@ -811,7 +811,7 @@ export const Dashboard = () => {
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={state}
-          direction="horizontal"
+          direction="vertical"
         />
       </Modal>
       <Modal
@@ -820,7 +820,7 @@ export const Dashboard = () => {
         visible={isAffiliateModalVisible}
         onOk={affiliateModalOk}
         onCancel={handleAffiliateCancel}
-        width={925}
+        width={600}
       >
         <DateRangePicker
           key="dpAffiliate"
@@ -828,7 +828,7 @@ export const Dashboard = () => {
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={affiliateState}
-          direction="horizontal"
+          direction="vertical"
         />
       </Modal>
     </Layout>
