@@ -64,7 +64,7 @@
   display: flex;
 
   .tokens-container {
-    padding-right: .4rem;
+    padding-right: 0.4rem;
     color: $primary-txt;
     display: flex;
     align-items: center;
@@ -74,7 +74,7 @@
     justify-content: center;
     .token-icon {
       width: 30px;
-    };
+    }
 
     .token-number {
       font-size: $font-medium;
@@ -274,8 +274,6 @@
   border-radius: 25px;
 }
 
-
-
 // Tablets and iPads screen
 
 @media only screen and (max-width: 1030px) {
@@ -294,7 +292,7 @@
       cursor: pointer;
       width: auto;
       border-radius: 8px;
-      padding: 12px;
+      padding: 10px;
       background: $light-primary;
       display: flex;
       flex-direction: column;
@@ -330,8 +328,11 @@
 }
 
 @media only screen and (max-width: 750px) {
-  .tokens {
+  .tokens-container {
     display: none !important;
+  }
+  .notifications-container {
+    width: 20% !important;
   }
   .top-bar-item {
     margin: 0 0.2rem;
