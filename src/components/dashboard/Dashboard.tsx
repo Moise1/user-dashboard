@@ -769,26 +769,29 @@ export const Dashboard = () => {
             <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
           </div>
 
-          <div className="affiliates-graph">
-            <div className="graph-cntrlers">
-              <div className="date-picker" onClick={() => setIsAffiliateModalVisible(true)}>
+          <div className="general-section">
+            <div className="charts-sales">
+              <h1>Affiliates chart</h1>
+              <div className="date-picker" onClick={() => setIsSalesModalVisible(true)}>
                 <h4>
                   <strong>From </strong>
                   {affiliateStartFrom} <strong> To </strong> {affiliateEndTo}
-                </h4>
+                </h4>{' '}
                 <CalendarOutlined />
               </div>
-            </div>
-            <div className="graph-container">
-              <h3>Total affiliates</h3>
-              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
-              <Chart
-                options={affiliateChartData}
-                series={affiliateChartData.series}
-                type="line"
-                width="100%"
-                height={400}
-              />
+              <Row className="general-cols" gutter={[0, 15]}>
+                <Col className="products" xs={24} lg={24}>
+                  <h3>Total affiliates</h3>
+                  <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+                  <Chart
+                    options={affiliateChartData}
+                    series={affiliateChartData.series}
+                    type="line"
+                    width="100%"
+                    height={400}
+                  />
+                </Col>
+              </Row>
             </div>
           </div>
         </div>

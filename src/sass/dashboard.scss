@@ -166,22 +166,16 @@
     }
   }
 
-  .graph-cntrlers {
+  .date-picker {
+    cursor: pointer;
     display: flex;
-    justify-content: space-between;
-    margin: 0 2rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    width: fit-content;
 
-    .date-picker {
-      cursor: pointer;
-      display: flex;
-      padding: 0.5rem 1rem;
-      margin: 1rem;
-      width: fit-content;
-
-      h4 {
-        margin: 0;
-        margin-right: 20px;
-      }
+    h4 {
+      margin: 0;
+      margin-right: 20px;
     }
 
     .selector {
@@ -214,10 +208,6 @@
         font-weight: 1000;
       }
     }
-  }
-
-  .graph-container {
-    margin: 1rem 2rem;
   }
 
   .other-services {
