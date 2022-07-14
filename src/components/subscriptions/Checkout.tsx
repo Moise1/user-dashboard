@@ -72,7 +72,7 @@ export const Checkout = (/*props: props*/) => {
     <Layout className="checkout-content">
       <div className="title-container">
         <h2>Checkout</h2>
-        <h3>Choose to add more to your current order</h3>
+        <h3>Listings amount</h3>
       </div>
 
       <div className="checkout-sections-container">
@@ -131,7 +131,6 @@ export const Checkout = (/*props: props*/) => {
             </div>
           </div>
         </div>
-
       </div>
     </Layout>
   );

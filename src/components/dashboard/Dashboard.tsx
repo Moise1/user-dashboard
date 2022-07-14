@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, Col, Input, Popconfirm, Row, List, Layout } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { Link } from 'react-router-dom';
@@ -35,6 +35,7 @@ import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
 import { BookOutlined, CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
+import '../../sass/modal-datepicker.scss';
 import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
@@ -549,6 +550,27 @@ export const Dashboard = () => {
     setIsAffiliateModalVisible(false);
   };
 
+  const [popUpMobile, setPopUpMobile] = useState('horizontal');
+
+  const tabletScreen = window.matchMedia('(max-width: 1030px)');
+  const mobileScreen = window.matchMedia('(max-width: 750px)');
+
+  const setLayout = useMemo(() => {
+    if (tabletScreen.matches) {
+      setPopUpMobile('horizontal');
+      popUpMobile;
+      return 'horizontal';
+    }
+    if (mobileScreen.matches) {
+      setPopUpMobile('vertical');
+      popUpMobile;
+      return 'vertical';
+    }
+    return 'horizontal';
+  }, [popUpMobile]);
+
+  console.log(setLayout);
+
   return (
     <Layout className="dashboard-container">
       <div className="general-section">
@@ -605,7 +627,7 @@ export const Dashboard = () => {
             <Col className="products" xs={24} lg={10}>
               <h3>Total orders</h3>
               <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
-              <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" height={400} />
+              <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" />
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
@@ -613,7 +635,7 @@ export const Dashboard = () => {
                 {getCurrency()}
                 {totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}
               </h2>
-              <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" height={400} />
+              <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" />
             </Col>
           </Row>
         </div>
@@ -774,7 +796,6 @@ export const Dashboard = () => {
 
           <div className="general-section">
             <div className="charts-sales">
-              <h1>Affiliates chart</h1>
               <div className="date-picker" onClick={() => setIsSalesModalVisible(true)}>
                 <h4>
                   <strong>From </strong>
@@ -782,19 +803,16 @@ export const Dashboard = () => {
                 </h4>{' '}
                 <CalendarOutlined />
               </div>
-              <Row className="general-cols" gutter={[0, 15]}>
-                <Col className="products" xs={24} lg={24}>
-                  <h3>Total affiliates</h3>
-                  <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
-                  <Chart
-                    options={affiliateChartData}
-                    series={affiliateChartData.series}
-                    type="line"
-                    width="100%"
-                    height={400}
-                  />
-                </Col>
-              </Row>
+
+              <h3>Total affiliates</h3>
+              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+              <Chart
+                options={affiliateChartData}
+                series={affiliateChartData.series}
+                type="line"
+                width="100%"
+                height={400}
+              />
             </div>
           </div>
         </div>
@@ -805,37 +823,41 @@ export const Dashboard = () => {
         <SocialIcon network="youtube" style={{ height: 30, width: 30 }} />
       </div>
       <Modal
+        className="modal-datepicker"
         title=""
         key="salespickerModel"
         visible={isSalesModalVisible}
         onOk={salesModalOk}
         onCancel={handleSalesCancel}
-        width={925}
+        okText="Apply"
       >
         <DateRangePicker
+          className="range-datepicker"
           key="dpSales"
           onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={state}
-          direction="horizontal"
+          direction={setLayout}
         />
       </Modal>
       <Modal
+        className="modal-datepicker"
         title=""
         key="affiliatePickerModal"
         visible={isAffiliateModalVisible}
         onOk={affiliateModalOk}
         onCancel={handleAffiliateCancel}
-        width={925}
+        okText="Apply"
       >
         <DateRangePicker
+          className="range-datepicker"
           key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}
           moveRangeOnFirstSelection={false}
           months={2}
           ranges={affiliateState}
-          direction="horizontal"
+          direction={setLayout}
         />
       </Modal>
     </Layout>
