@@ -114,6 +114,7 @@
   "Listings.Column.CreatedBy": "Creado por",
   "Listings.Column.Options": "Opciones",
   "Listings.Column.ChannelItem": "ID Producto",
+  "Listings.Value.UnknownSource": "Proveedor desconocido",
 
   "ListNow.Header": "Formas de publicar",
   "ListNow.BulkListing.Description": "Publique tantos productos como desee añadiendo direcciones URL de diferentes proveedores.",

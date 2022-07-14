@@ -12,6 +12,7 @@ export interface Channel {
   isoCountry: eCountry;
   name: string;
   userId: string;
+  channelIdentifier: string;
 }
 
 export interface ChannelsState {
