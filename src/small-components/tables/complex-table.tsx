@@ -18,16 +18,16 @@ interface Props<RecordType> {
   uiIdentifier: string;
   defaultVisibleColumns?: ColumnId[];
   allColumnData: ColumnData<RecordType>[];
-  //columnList: ColumnId[];
   data: RecordType[],
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
   onChangeVisibleRows?: (rows: RecordType[]) => void;
+  actionsDropdownMenu?: JSX.Element;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, /*columnList,*/ data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows } = props;
+  const { uiIdentifier, defaultVisibleColumns, allColumnData, data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows, actionsDropdownMenu } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
@@ -46,7 +46,6 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
     setUIPreferences(uiPreferencesS);
   }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize]);
 
-
   const SaveUIPreferences = (preferences: UITablePreference) => {
     setUIPreferences({ ...preferences, loading: false });
     dispatch(savePreferences({ uiIdentifier, data: preferences }));
@@ -62,7 +61,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, visibleColumnsList } = useMemo(() => {
+  const { columns, visibleColumnsList } = /*useMemo*/(() => {
 
     const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
 
@@ -75,7 +74,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
       visibleColumnsList
     };
 
-  }, [uiPreferences, defaultVisibleColumns, allColumnData]);
+  }/*, [uiPreferences, defaultVisibleColumns, allColumnData]*/)();
   //------------------------------------------------------------------------------------------
 
   //OMNISEARCH--------------------------------------------------------------------------------
@@ -209,6 +208,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             onPageSizeChanged={OnPageSizeChange}
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
+            actionsDropdownMenu={actionsDropdownMenu}
           />
         )}
       </>}

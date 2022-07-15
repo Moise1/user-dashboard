@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
 import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
@@ -34,7 +34,7 @@ interface Props<RecordType> {
 
   onChangeVisibleRows?: (rows: RecordType[]) => void;
 
-  actionsDropdownMenu?: Menu;
+  actionsDropdownMenu?: JSX.Element;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
@@ -61,25 +61,6 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
-  //const anyTable = (
-  //  <div className="selected-options">
-  //    <ul className="list">
-  //      <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-  //        Edit <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //      <div className="horizontal-divider" />
-  //      <li className="list-item">
-  //        Copy <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //      <div className="horizontal-divider" />
-  //      <li className="list-item">
-  //        Optimize <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //    </ul>
-  //  </div>
-  //);
-
- 
   return (
     <div className="data-table-container">
       {showTableInfo && (
@@ -88,7 +69,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
             <strong>{selectedRows}</strong> selected
           </p>
           {actionsDropdownMenu && (
-            <Dropdown overlay={<>actionsDropdownMenu</>} className="actions-dropdown">
+            <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
                 Bulk Action
                 <DownOutlined />

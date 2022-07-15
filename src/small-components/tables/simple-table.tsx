@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pagination, Table } from 'antd';
 import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/lib/table/interface';
 import { DataIndex } from 'rc-table/lib/interface';
@@ -139,11 +139,8 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     }
   };
 
-  const visibleRows = useMemo(() => {
-    const visibleRows = getData(dataSource, page, pageSize, sorter);
-    onChangeVisibleRows?.(visibleRows);
-    return visibleRows;
-  }, [dataSource, page, pageSize, sorter]);
+  const visibleRows = useMemo(() => getData(dataSource, page, pageSize, sorter), [JSON.stringify([dataSource, page, pageSize, sorter])]);
+  useEffect(() => onChangeVisibleRows?.(visibleRows), [JSON.stringify(visibleRows)]);
 
   return (
     <div className="data-table">

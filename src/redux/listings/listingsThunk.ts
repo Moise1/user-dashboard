@@ -3,7 +3,17 @@ import { client } from '../client';
 import { ActiveListing, PendingListing, TerminatedListings } from './listingsSlice';
 import unmap, { compArray } from './unmap';
 
-export const getListings = createAsyncThunk(
+export type ListingImageUrlList = { id: number, url: string }[];
+
+const loadActiveImagesFromCache = () => {
+  const imgS = localStorage.getItem('listings.active.images');
+  return (imgS ? JSON.parse(imgS) : []) as ListingImageUrlList;
+};
+export const saveActiveListingsImagesInCache = (data: ListingImageUrlList) => {
+  localStorage.setItem('listings.active.images', JSON.stringify(data));
+};
+
+export const getActiveListings = createAsyncThunk(
   'listings/getListings',
   async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
     try {
@@ -17,31 +27,15 @@ export const getListings = createAsyncThunk(
         rv.push(itm);
         status = iter.next();
       }
-      //const arrayLists = rv.map((item, key) => {
-      //  return { ...item, key };
-      //});
-      return rv;
+
+      return {
+        listings: rv, images: loadActiveImagesFromCache()
+      };
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong!!! ):');
     }
   }
 );
-
-//export const getListingsSource = createAsyncThunk(
-//  'sources/getListingsSource',
-//  async (_, { rejectWithValue } /* destructured thunkAPI's prop */) => {
-//    try {
-//      const res = await client.get('/SearchProduct/GetActiveListings');
-//      const array = [];
-//      for (const x in res.data.response_data.sources) {
-//        array.push(res.data.response_data.sources[x]);
-//      }
-//      return array;
-//    } catch (error) {
-//      return rejectWithValue('Sorry! Something went wrong ):');
-//    }
-//  }
-//);
 
 export const getPendingListings = createAsyncThunk(
   'listings/getPendingListing',
@@ -68,12 +62,11 @@ export const getTerminatedListings = createAsyncThunk(
   }
 );
 
-
-//export const getListingsImages = createAsyncThunk('SearchProduct/getListingsImages', async (ids: number[], thunkAPI) => {
-//  try {
-//    const res = await client.post('SearchProduct/getListingsImages', ids);
-//    return res.data.response_data;
-//  } catch (error) {
-//    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
-//  }
-//});
+export const getActiveListingsImages = createAsyncThunk('SearchProduct/getListingsImages', async (ids: number[], thunkAPI) => {
+  try {
+    const res = await client.post('SearchProduct/getListingsImages', ids);
+    return res.data.response_data as {channelListingMap: {[id: number]: string[]}};
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
+  }
+});
