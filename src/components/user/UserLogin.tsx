@@ -53,7 +53,7 @@ export const UserLogin = withRouter(({ history }: {history: RouteComponentProps[
           label={ (
             <div className="password-input-label">
               <span className="label-name">Password</span>
-              <Link to="/reset-password" className='alternative-link'>Forgot your password?</Link>
+              <Link to="/reset-password" className='alternative-link'>Forgot password?</Link>
             </div>
           )}
           name="password"

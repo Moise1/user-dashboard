@@ -2,11 +2,13 @@
 
 // Large screens and extra large screens
 .login-form-container {
-  width: 27%;
-  margin: 5% auto 0 auto;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
   background: $primary-light-bg-color;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   .alternative-link {
     text-decoration: underline;
   };
@@ -57,6 +59,6 @@
 // Small screen device
 @media only screen and (max-width: 750px) {
   .login-form-container {
-    width: 100%;
+    width: 90%;
   }
 }

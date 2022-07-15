@@ -1,94 +1,107 @@
 @import 'general.config';
 
 // Large screens and extra large screens
-.register-main-container {
-  .register-form-container {
-    position: absolute;
-    margin-top: 1rem;
-    z-index: 1;
-    width: 25%;
-    margin-left: 25%;
-    background: $primary-light-bg-color;
-    border-radius: 10px;
-    box-shadow: 0px 3px 6px #00000029;
+.register-form-container {
+  position: absolute;
+  margin-top: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-90%, -50%);
+  z-index: 1;
+  background: $primary-light-bg-color;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+  .alternative-link {
+    text-decoration: underline;
+  }
+  .register-form-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background: $dark-blue;
+    padding: 5px 17px;
+    .text-section > *,
     .alternative-link {
-      text-decoration: underline;
+      color: $primary-light-bg-color;
     }
-    .register-form-header {
-      border-top-right-radius: 10px;
-      border-top-left-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      background: $dark-blue;
-      padding: 5px 17px;
-      .text-section > *,
-      .alternative-link {
-        color: $primary-light-bg-color;
-      }
-      .logo {
-        width: 30px;
-        height: 30px;
-      }
-    }
-    .register-form {
-      padding: 5px 17px;
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus,
-      input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px white inset !important;
-        box-shadow: 0 0 0 30px white inset !important;
-      }
-
-      .checkbox,
-      .checkbox span a {
-        font-size: 0.9rem;
-      }
-      a {
-        color: $corporative-color;
-        &:hover {
-          color: $corporative-color;
-        }
-      }
-
-      .confirm-btn {
-        width: 100%;
-      }
+    .logo {
+      width: 30px;
+      height: 30px;
     }
   }
-
-  .sell-online-container {
-    height: 100vh;
-    background: $dark-blue;
-    margin-left: 30%;
-    clip-path: polygon(6% 67%, 100% 0, 100% 100%, 0% 100%);
-    .sell-online-contents {
-      width: 20%;
-      margin: 0 auto;
-      position: absolute;
-      right: 2rem;
-      top: 12rem;
+  .register-form {
+    padding: 5px 17px;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      box-shadow: 0 0 0 30px white inset !important;
     }
-    .title h1, p{
-      font-weight: 900;
-    };
-    .title > *,
-    .stats .ant-steps{
-      color:  $primary-light-bg-color !important;
-      .ant-steps-item-title{
-        color: $primary-light-bg-color !important;
-        font-weight: 900;
-      };
-      .ant-steps-icon-dot{
-        background:  $primary-light-bg-color !important;
+
+    .checkbox,
+    .checkbox span a {
+      font-size: 0.9rem;
+    }
+    a {
+      color: $corporative-color;
+      &:hover {
+        color: $corporative-color;
       }
-    } 
+    }
+
+    .confirm-btn {
+      width: 100%;
+    }
   }
 }
 
+.sell-online-container {
+  height: 100vh;
+  background: $dark-blue;
+  width: 70%;
+  right: 0;
+  position: absolute;
+  clip-path: polygon(6% 67%, 100% 0, 100% 100%, 0% 100%);
+  .sell-online-contents {
+    width: 50%;
+    margin-top: 5rem;
+    position: absolute;
+    right: 2rem;
+    top: 12rem;
+    .title h1,p {
+      font-size: 30px;
+      font-weight: 900;
+      width: 100%;
+    };
+    p {
+      font-size: 15px;
+    }
+
+    .title > *,
+    .stats .ant-steps {
+      color: $primary-light-bg-color !important;
+      .ant-steps-item-title {
+        color: $primary-light-bg-color !important;
+        font-weight: 900;
+        font-size: 18px;
+      }
+      .ant-steps-icon-dot {
+        background: $primary-light-bg-color !important;
+      }
+    }
+  }
+};
+
 // Small screen device
 @media only screen and (max-width: 750px) {
+  .sell-online-container{
+    display: none;
+  };
+
   .register-form-container {
-    width: 100%;
+    width: 90%;
+    transform: translate(-50%, -50%);
   }
 }

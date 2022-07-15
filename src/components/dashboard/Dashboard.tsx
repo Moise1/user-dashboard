@@ -657,7 +657,7 @@ export const Dashboard = () => {
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
               <h3>Listing Service</h3>
-              <QuestionCircleOutlined style={{ fontSize: '19px' }} />
+              <Link to={Links.Services}>Go to services</Link>
             </div>
             {listingServicesResult?.length ? (
               <List
