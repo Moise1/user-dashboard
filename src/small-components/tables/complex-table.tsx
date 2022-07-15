@@ -3,7 +3,7 @@
 import { Layout, Spin } from 'antd';
 import Search from 'antd/lib/input/Search';
 import { TableRowSelection } from 'antd/lib/table/interface';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { VisibleColumnsPopup } from '../../components/listings/Listings/visible-columns-popup';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { UIPreferencesState, UITablePreference, UITablePreferenceL } from '../../redux/ui-preferences/ui-preferences-state-slice';
@@ -62,7 +62,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, visibleColumnsList } = (() => {
+  const { columns, visibleColumnsList } = useMemo(() => {
 
     const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
 
@@ -75,7 +75,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
       visibleColumnsList
     };
 
-  })();
+  }, [uiPreferences, defaultVisibleColumns, allColumnData]);
   //------------------------------------------------------------------------------------------
 
   //OMNISEARCH--------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //------------------------------------------------------------------------------------------
   //FILTERING DATA----------------------------------------------------------------------------
   //const filteredData = data && omniSearch ? useTableSearch(omniSearch, data) : data;
-  const filteredData = SmartSearch(smartSearch, data, columns);
+  const filteredData = useMemo(() => SmartSearch(smartSearch, data, columns), [smartSearch, data, columns]);
   //------------------------------------------------------------------------------------------
 
 
@@ -200,7 +200,6 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
         {(!hideWhenEmpty || data.length > 0) && (
           <DataTable
             page='listing'
-            isListingsTable={true}
             columns={columns}
             dataSource={filteredData}
             totalItems={data.length}

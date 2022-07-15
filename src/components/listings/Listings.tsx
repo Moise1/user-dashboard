@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useMemo } from 'react';
-import { Layout } from 'antd';
+import { Layout} from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -141,6 +141,45 @@ export const Listings = () => {
 
   const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
 
+  //Bulk Menu-----------------------------------------------------------------
+
+  //const handleSingleListingModal = () => { };
+  //const handleBulkListingModal = () => { };
+  //const actionsDropdownMenu = useMemo(() =>
+  //  <Menu
+  //    items={[
+  //      {
+  //        type: 'group',
+  //        label: (
+  //          <div
+  //            className="action-option"
+  //            onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
+  //          >
+  //            Edit  <strong>{selectedRows}</strong> {page}(s)
+  //          </div>
+  //        )
+  //      },
+  //      {
+  //        type: 'group',
+  //        label: (
+  //          <div className="action-option">
+  //            Copy <strong>{selectedRows}</strong> {page}(s)
+  //          </div>
+  //        )
+  //      },
+  //      {
+  //        type: 'group',
+  //        label: (
+  //          <div className="action-option">
+  //            Optimize <strong>{selectedRows}</strong> {page}(s)
+  //          </div>
+  //        )
+  //      }
+  //    ]}
+  //  />
+  //  , [selectedRows, page]);
+  //--------------------------------------------------------------------------
+
   return (
     <Layout className="listings-container">
       <StatusBar>
@@ -171,6 +210,7 @@ export const Listings = () => {
           defaultVisibleColumns={defaultVisibleColumns}
           hideWhenEmpty={hideWhenEmpty}
           loadingData={loadingListings || loadingSources}
+          //actionsDropdownMenu={actionsDropdownMenu}
         />
         {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
       </Fragment>

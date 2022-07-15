@@ -13,8 +13,6 @@ interface Props<RecordType> {
   dataSource: RecordType[];
   selectedRows?: number;
   totalItems?: number;
-  handleSingleListingModal?: () => void;
-  handleBulkListingModal?: () => void;
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
@@ -35,6 +33,8 @@ interface Props<RecordType> {
   hidePagination?: boolean;
 
   onChangeVisibleRows?: (rows: RecordType[]) => void;
+
+  actionsDropdownMenu?: Menu;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
@@ -45,75 +45,41 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     rowSelection,
     selectedRows,
     totalItems,
-    handleBulkListingModal,
-    handleSingleListingModal,
     page,
     showTableInfo,
     onRow,
     rowClassName,
-    isListingsTable,
     currentPage,
     pageSize,
     pageSizes,
     onPageChange,
     onPageSizeChanged,
     hidePagination,
-    onChangeVisibleRows
+    onChangeVisibleRows,
+    actionsDropdownMenu
   } = props;
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
-  const anyTable = (
-    <div className="selected-options">
-      <ul className="list">
-        <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-          Edit <strong>{selectedRows}</strong> {page}(s)
-        </li>
-        <div className="horizontal-divider" />
-        <li className="list-item">
-          Copy <strong>{selectedRows}</strong> {page}(s)
-        </li>
-        <div className="horizontal-divider" />
-        <li className="list-item">
-          Optimize <strong>{selectedRows}</strong> {page}(s)
-        </li>
-      </ul>
-    </div>
-  );
+  //const anyTable = (
+  //  <div className="selected-options">
+  //    <ul className="list">
+  //      <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
+  //        Edit <strong>{selectedRows}</strong> {page}(s)
+  //      </li>
+  //      <div className="horizontal-divider" />
+  //      <li className="list-item">
+  //        Copy <strong>{selectedRows}</strong> {page}(s)
+  //      </li>
+  //      <div className="horizontal-divider" />
+  //      <li className="list-item">
+  //        Optimize <strong>{selectedRows}</strong> {page}(s)
+  //      </li>
+  //    </ul>
+  //  </div>
+  //);
 
-  const actionsDropdownMenu = (
-    <Menu
-      items={[
-        {
-          type: 'group',
-          label: (
-            <div
-              className="action-option"
-              onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
-            >
-              Edit  <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Copy <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Optimize <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        }
-      ]}
-    />
-  );
+ 
   return (
     <div className="data-table-container">
       {showTableInfo && (
@@ -121,16 +87,14 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
           <p className="total-selected">
             <strong>{selectedRows}</strong> selected
           </p>
-          {isListingsTable ? (
-            <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
+          {actionsDropdownMenu && (
+            <Dropdown overlay={<>actionsDropdownMenu</>} className="actions-dropdown">
               <Space>
                 Bulk Action
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : (
-            anyTable
-          )}
+          )};
           <p className="total-items">
             <strong>
               {totalItems ?? dataSource?.length ?? 0} {page} (s)
