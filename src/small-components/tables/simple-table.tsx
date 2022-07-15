@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Pagination, Table } from 'antd';
 import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/lib/table/interface';
 import { DataIndex } from 'rc-table/lib/interface';
@@ -18,6 +18,8 @@ interface Props<RecordType> {
   pageSizes?: number[];
   hidePagination?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
+
+  onChangeVisibleRows?: (rows: RecordType[]) => void;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const SimpleTable = <RecordType extends object = any>(props: Props<RecordType>) => {
@@ -32,7 +34,8 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     onPageSizeChanged,
     pageSizes,
     hidePagination,
-    rowSelection
+    rowSelection,
+    onChangeVisibleRows
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
@@ -116,7 +119,6 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
   };
 
   const [sorter, setSorter] = useState<SorterState[] | undefined>();
-  const [visibleRows, setVisibleRows] = useState<RecordType[] | undefined>();
   const onChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
@@ -137,22 +139,11 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     }
   };
 
-  useEffect(() => {
-    setVisibleRows(getData(dataSource, page, pageSize, sorter));
+  const visibleRows = useMemo(() => {
+    const visibleRows = getData(dataSource, page, pageSize, sorter);
+    onChangeVisibleRows?.(visibleRows);
+    return visibleRows;
   }, [dataSource, page, pageSize, sorter]);
-
-  //const pageOption = hidePagination ? false : {
-  //  className: 'pagination',
-  //  onChange: onPageChange,
-  //  total: dataSource?.length,
-  //  current: page,
-  //  pageSize: pageSize,
-  //  style: { paddingBottom: '25px' },
-  //  showSizeChanger: true,
-  //  onShowSizeChange: onShowPageSizeChange,
-  //  pageSizeOptions: pageSizeOptionArray,
-  //  position: ['bottomLeft']
-  //} as TablePaginationConfig;
 
   return (
     <div className="data-table">

@@ -33,6 +33,8 @@ interface Props<RecordType> {
   onPageSizeChanged?: (itemsPerPage: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
+
+  onChangeVisibleRows?: (rows: RecordType[]) => void;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
@@ -55,7 +57,8 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     pageSizes,
     onPageChange,
     onPageSizeChanged,
-    hidePagination
+    hidePagination,
+    onChangeVisibleRows
   } = props;
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
@@ -148,6 +151,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
         onPageChange={onPageChange}
         onPageSizeChanged={onPageSizeChanged}
         pageSizes={pageSizeOptionArray}
+        onChangeVisibleRows={onChangeVisibleRows}
       />
     </div>
   );

@@ -1,20 +1,19 @@
 ﻿import { Card, Checkbox, Col, Row } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { ColumnData, ColumnId } from '../../../small-components/tables/types/columns';
 import { t } from '../../../utils/transShim';
 import { PopupModal } from '../../modals/PopupModal';
-import { ListingsColumns, ListingColumnId } from './columns';
 
-interface Props {
+interface Props<RecordType> {
   onClose: () => void;
   isVisible: boolean;
-  allColumns: ListingColumnId[];
-  visibleColumns: ListingColumnId[];
-  onChange: (newVisible: ListingColumnId[]) => void;
+  allColumns: ColumnData<RecordType>[];
+  visibleColumns: ColumnId[];
+  onChange: (newVisible: ColumnId[]) => void;
 }
-
-export const VisibleColumnsPopup = (props: Props) => {
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const VisibleColumnsPopup = <RecordType extends object = any>(props: Props<RecordType>) => {
   const { isVisible, onClose, allColumns, visibleColumns, onChange } = props;
-  const dic = new Map(ListingsColumns.map(x => [x.id, x]));
 
   const handleCheckBox = (e: CheckboxChangeEvent) => {
     const newVisibleC = new Set<number>(visibleColumns);
@@ -25,16 +24,12 @@ export const VisibleColumnsPopup = (props: Props) => {
       newVisibleC.delete(value);
     }
 
-    const result = Array.from(newVisibleC) as ListingColumnId[];
+    const result = Array.from(newVisibleC) as ColumnId[];
     onChange(result);
   };
 
-  const ColumnRow = (id: ListingColumnId) => {
-    const col = dic.get(id);
-    if (!col)
-      return <></>;
-
-    const isVisible = visibleColumns.includes(id);
+  const ColumnRow = (col: ColumnData<RecordType>) => {
+    const isVisible = visibleColumns.includes(col.id);
 
     return (
       <li key={col.id}>
