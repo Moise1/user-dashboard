@@ -17,10 +17,17 @@ import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { SimpleTable } from '../../small-components/tables/simple-table';
 import moment from 'moment';
 import { Key } from 'antd/lib/table/interface';
-import { AutoListState, BulkListingError, BulkListingLog, eBulkListingStatus, BulkListingsDataToSave } from '../../redux/listings/autoListSlice';
+import {
+  AutoListState,
+  BulkListingError,
+  BulkListingLog,
+  eBulkListingStatus,
+  BulkListingsDataToSave
+} from '../../redux/listings/autoListSlice';
 import { getAutolist, saveAutolist } from '../../redux/listings/autoListThunk';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { SourcesState } from '../../redux/sources/sourceSlice';
+import { CheckOutlined, ExclamationCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 
 const { Item } = Form;
 const { Panel } = Collapse;
@@ -189,7 +196,9 @@ export const BulkListing = (/*props: props*/) => {
     Modal.error({
       title: 'Error details',
       content: ErrorDetail(errorCode),
-      onOk() { console.log(''); },
+      onOk() {
+        console.log('');
+      }
     });
   };
 
@@ -197,10 +206,15 @@ export const BulkListing = (/*props: props*/) => {
     Modal.error({
       title: 'Error details',
       content: (
-        <p>You can see this error on the &quot;Listings Created&quot; section, where you will also be able to edit the listing and retry. <br />
-          Please note that for certain sources, listings with variations are not supported</p>
+        <p>
+          You can see this error on the &quot;Listings Created&quot; section, where you will also be able to edit the
+          listing and retry. <br />
+          Please note that for certain sources, listings with variations are not supported
+        </p>
       ),
-      onOk() { console.log(''); },
+      onOk() {
+        console.log('');
+      }
     });
   };
 
@@ -211,7 +225,7 @@ export const BulkListing = (/*props: props*/) => {
       key: 'id'
     },
     {
-      title: 'Sent',
+      title: 'Status',
       dataIndex: 'status',
       key: 'status',
       render: (s: eBulkListingStatus) => {
@@ -224,40 +238,70 @@ export const BulkListing = (/*props: props*/) => {
       key: 'url'
     },
     {
-      title: 'Status',
+      title: 'Progress',
       dataIndex: 'channelListingStatus',
       key: 'channelListingStatus',
       render: (s: eChannelListingStatus, record: BulkListingLog) => {
         if (s && (s & eChannelListingStatus.Removed) != 0) {
-          return <span>Done</span>;
-        }
-        else if (record.status == eBulkListingStatus.ERROR) {
-          return <div className='div-danger' onClick={() => ShowModal(record.errorCode)}>Not published. Click for details.</div >;
-        }
-        else if (record.status == eBulkListingStatus.DONE && record.channelItem == null && record.channelListingStatus && record.channelListingStatus != eChannelListingStatus.PendingToReview && record.channelListingStatus != eChannelListingStatus.Removed) {
-          return <span>Listing <a href="/SearchProduct/PendingListings" target="_blank"><i className="fas fa-question-circle"></i></a>...</span>;
-        }
-        else if (record.status == eBulkListingStatus.INITIAL) {
-          return <span>Validating</span>;
-        }
-        else if (record.status == eBulkListingStatus.PROCESSING) {
-          return <span>Processing</span>;
-        }
-        else {
+          return <CheckOutlined />;
+        } else if (record.status == eBulkListingStatus.ERROR) {
+          return (
+            <div className="div-danger" onClick={() => ShowModal(record.errorCode)}>
+              <ExclamationCircleOutlined /> Not published. Click for details.
+            </div>
+          );
+        } else if (
+          record.status == eBulkListingStatus.DONE &&
+          record.channelItem == null &&
+          record.channelListingStatus &&
+          record.channelListingStatus != eChannelListingStatus.PendingToReview &&
+          record.channelListingStatus != eChannelListingStatus.Removed
+        ) {
+          return (
+            <span>
+              Listing{' '}
+              <a href="/SearchProduct/PendingListings" target="_blank">
+                <i className="fas fa-question-circle"></i>
+              </a>
+              ...
+            </span>
+          );
+        } else if (record.status == eBulkListingStatus.VALIDATING) {
+          return <LoadingOutlined />;
+        } else if (record.status == eBulkListingStatus.PROCESSING) {
+          return <LoadingOutlined />;
+        } else {
           if (!record.channelItem) {
-            if (record.status == eBulkListingStatus.DONE && record.channelListingStatus && record.channelListingStatus == eChannelListingStatus.PendingToReview) {
-              return <Tooltip title="Since you selected the option to review your listings before they are published, you need to verify this product on the Listings Created section for it to be submitted"><span>Pending Review</span></Tooltip>;
+            if (
+              record.status == eBulkListingStatus.DONE &&
+              record.channelListingStatus &&
+              record.channelListingStatus == eChannelListingStatus.PendingToReview
+            ) {
+              return (
+                <Tooltip title="Since you selected the option to review your listings before they are published, you need to verify this product on the Listings Created section for it to be submitted">
+                  <p>Pending Review</p>
+                </Tooltip>
+              );
+            } else {
+              return (
+                <Tooltip title="Your listing will be published according to the schedule defined">
+                  <p>Scheduled</p>
+                </Tooltip>
+              );
             }
-            else {
-              return <Tooltip title="Your listing will be published according to the schedule defined"><span>Scheduled</span></Tooltip>;
-            }
-          }
-          else {
+          } else {
             if (record.channelItem) {
-              return <span><strong>Published</strong></span>;
-            }
-            else {
-              return <div className='div-danger' onClick={() => PublishingError()}>Error publishing</div >;
+              return (
+                <span>
+                  <strong>Published</strong>
+                </span>
+              );
+            } else {
+              return (
+                <div className="div-danger" onClick={() => PublishingError()}>
+                  Error publishing
+                </div>
+              );
             }
           }
         }
@@ -280,7 +324,7 @@ export const BulkListing = (/*props: props*/) => {
           return moment(s).format('DD/MM/YY/ hh:mm');
         }
       }
-    },
+    }
   ];
 
   return (
@@ -381,7 +425,7 @@ export const BulkListing = (/*props: props*/) => {
             </Row>
             {autoList && autoList.summary && autoList.summary.requestId !== EmptyGuid() && (
               <Row>
-                <Col>
+                <Col sm={24}>
                   <div className="bulk-summary">
                     <div className={autoList.summary.notDone == 0 ? 'alert-success' : 'alert-danger'}>
                       <h4>
@@ -392,7 +436,9 @@ export const BulkListing = (/*props: props*/) => {
                       <Collapse>
                         {autoList.summary.duplicatedUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + autoList.summary.duplicatedUrls.length + ' duplicated products on your store.'}
+                            header={
+                              'View ' + autoList.summary.duplicatedUrls.length + ' duplicated products on your store.'
+                            }
                             key="1"
                           >
                             <p>
@@ -407,7 +453,11 @@ export const BulkListing = (/*props: props*/) => {
 
                         {autoList.summary.existingListingUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + autoList.summary.existingListingUrls.length + ' duplicated products on the list.'}
+                            header={
+                              'View ' +
+                              autoList.summary.existingListingUrls.length +
+                              ' duplicated products on the list.'
+                            }
                             key="2"
                           >
                             <p>
@@ -422,7 +472,9 @@ export const BulkListing = (/*props: props*/) => {
 
                         {autoList.summary.forbiddenWordsUrls?.length > 0 ? (
                           <Panel
-                            header={'View ' + autoList.summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'}
+                            header={
+                              'View ' + autoList.summary.forbiddenWordsUrls.length + ' titles contains forbidden words.'
+                            }
                             key="3"
                           >
                             <p>
@@ -436,7 +488,10 @@ export const BulkListing = (/*props: props*/) => {
                         )}
 
                         {autoList.summary.invalidSourceUrls?.length > 0 ? (
-                          <Panel header={'View ' + autoList.summary.invalidSourceUrls.length + ' invalid urls.'} key="4">
+                          <Panel
+                            header={'View ' + autoList.summary.invalidSourceUrls.length + ' invalid urls.'}
+                            key="4"
+                          >
                             <p>
                               {autoList.summary.invalidSourceUrls?.map((x: string, key: Key) => {
                                 return <p key={key}>{x}</p>;
@@ -448,7 +503,13 @@ export const BulkListing = (/*props: props*/) => {
                         )}
                       </Collapse>
 
-                      <p>{autoList.summary.noQuota > 0 ? <span>No quota remaining by {autoList.summary.noQuota}.</span> : ''}</p>
+                      <p>
+                        {autoList.summary.noQuota > 0 ? (
+                          <span>No quota remaining by {autoList.summary.noQuota}.</span>
+                        ) : (
+                          ''
+                        )}
+                      </p>
                     </div>
                   </div>
                 </Col>
@@ -464,7 +525,6 @@ export const BulkListing = (/*props: props*/) => {
                 </Col>
               </Row>
             )}
-
           </div>
           <div className="manual-list-content">
             <div className="container-manual-listing">
