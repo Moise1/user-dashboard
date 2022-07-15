@@ -550,26 +550,17 @@ export const Dashboard = () => {
     setIsAffiliateModalVisible(false);
   };
 
-  const [popUpMobile, setPopUpMobile] = useState('horizontal');
+  const [popUpMobile, setPopUpMobile] = useState<'horizontal' | 'vertical' | undefined>('horizontal');
 
-  const tabletScreen = window.matchMedia('(max-width: 1030px)');
-  const mobileScreen = window.matchMedia('(max-width: 750px)');
+  const mobileScreen = window.matchMedia('(max-width: 1000px)');
 
   const setLayout = useMemo(() => {
-    if (tabletScreen.matches) {
-      setPopUpMobile('horizontal');
-      popUpMobile;
-      return 'horizontal';
-    }
     if (mobileScreen.matches) {
       setPopUpMobile('vertical');
       popUpMobile;
-      return 'vertical';
     }
-    return 'horizontal';
-  }, [popUpMobile]);
-
-  console.log(setLayout);
+    return popUpMobile || undefined;
+  }, [popUpMobile!]);
 
   return (
     <Layout className="dashboard-container">
