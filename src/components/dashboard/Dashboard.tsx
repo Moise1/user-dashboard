@@ -32,7 +32,7 @@ import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
 import { getListingServices } from 'src/redux/dashboard/listingServicesThunk';
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { NoApiServer } from 'src/redux/dashboard/noApiServersSlice';
-import { BookOutlined, CalendarOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { CalendarOutlined, PlusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { getAffiliatesStats } from 'src/redux/dashboard/affiliatesStatsThunk';
 import '../../sass/dashboard.scss';
 import '../../sass/modal-datepicker.scss';
@@ -638,7 +638,7 @@ export const Dashboard = () => {
           <Col className="listing-service" xs={24} lg={10}>
             <div className="listing-service-title">
               <h3>Listing Service</h3>
-              <BookOutlined style={{ fontSize: '19px' }} />
+              <QuestionCircleOutlined style={{ fontSize: '19px' }} />
             </div>
             {listingServicesResult?.length ? (
               <List
@@ -668,7 +668,7 @@ export const Dashboard = () => {
           <Col className="no-api-server" xs={24} lg={10}>
             <div className="no-api-server-title">
               <h3>No API Server</h3>
-              <BookOutlined style={{ fontSize: '19px' }} />
+              <QuestionCircleOutlined style={{ fontSize: '19px' }} />
             </div>
             {noApiServersResult?.length ? (
               <List
@@ -731,8 +731,12 @@ export const Dashboard = () => {
             </PopupModal>
             <h3 className="tokens-title">Tokens - Title Optimization</h3>
             <div className="tokens-count">
-              <p>Not sure what to list? We can help you find good selling items.</p>
-              <p> We choose the best products and list them for you</p>
+              <p>
+                With each token we can optimize on title. We use our algorithm to choose the title the best keyword for
+                your product. As you know, optimizing your titles offers different benefits: Ranking higher on eBays
+                search results, we analyse sold items by category, boost your sales, save time, etc.
+              </p>
+
               <SuccessBtn handleConfirm={handleOpenModal}>
                 <strong>Get more tokens</strong>
               </SuccessBtn>
@@ -745,7 +749,7 @@ export const Dashboard = () => {
           <Col className="auto-ordering" xs={24} lg={10}>
             <div className="auto-ordering-title">
               <h3>Auto Ordering</h3>
-              <BookOutlined style={{ fontSize: '19px' }} />
+              <QuestionCircleOutlined style={{ fontSize: '19px' }} />
             </div>
             <div className="use-auto-ordering">
               <p>
@@ -767,7 +771,7 @@ export const Dashboard = () => {
         <div className="affiliates-contents">
           <div className="affiliates-title">
             <h3>Your affiliate link</h3>
-            <BookOutlined style={{ fontSize: '19px' }} />
+            <QuestionCircleOutlined style={{ fontSize: '19px' }} />
           </div>
           <div className="affiliates-benefits">
             <p>Get money each time your referrals purchase any service from us</p>
