@@ -66,40 +66,41 @@
   clip-path: polygon(6% 67%, 100% 0, 100% 100%, 0% 100%);
   .sell-online-contents {
     width: 50%;
-    margin-top: 5rem;
     position: absolute;
-    right: 2rem;
-    top: 12rem;
-    .title h1,p {
-      font-size: 30px;
-      font-weight: 900;
-      width: 100%;
-    };
+    left: 50%;
+    top: 38%;
+    .title h1,
     p {
-      font-size: 15px;
+      font-style: italic;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 20px;
     }
 
     .title > *,
-    .stats .ant-steps {
+    .stats {
       color: $primary-light-bg-color !important;
+      width: max-content;
       .ant-steps-item-title {
+        font-style: italic;
         color: $primary-light-bg-color !important;
-        font-weight: 900;
-        font-size: 18px;
+        font-weight: bold;
+        font-size: 30px;
       }
       .ant-steps-icon-dot {
         background: $primary-light-bg-color !important;
       }
     }
   }
-};
+}
 
 // Small screen device
 @media only screen and (max-width: 750px) {
-  .sell-online-container{
+  .sell-online-container {
     display: none;
-  };
-
+  }
   .register-form-container {
     width: 90%;
     transform: translate(-50%, -50%);
