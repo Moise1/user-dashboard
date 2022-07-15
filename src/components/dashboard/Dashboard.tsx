@@ -559,8 +559,8 @@ export const Dashboard = () => {
       setPopUpMobile('vertical');
       popUpMobile;
     }
-    return popUpMobile;
-  }, [popUpMobile]);
+    return popUpMobile || 'undefined';
+  }, [popUpMobile!]);
 
   return (
     <Layout className="dashboard-container">
