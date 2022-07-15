@@ -10,7 +10,7 @@ export type BulkListingsDataToSave = {
   listFrequencyMinutes: number;
   dontListUntil?: Date;
   listings: string[][];
-}
+};
 
 export type Autolist = {
   logs: BulkListingLog[];
@@ -27,13 +27,13 @@ export type Autolist = {
   Sources: null;
   summary: ListingsSummary;
   dontListUntil: null;
-}
+};
 
 export type AutoListState = {
-  autoList: Autolist | null,
+  autoList: Autolist | null;
   loading: boolean;
-  error: string
-}
+  error: string;
+};
 
 const initialState: AutoListState = {
   autoList: null,
@@ -51,7 +51,7 @@ export type BulkListingLog = {
   channelListingStatus: eChannelListingStatus;
   verifiedOn: Date;
   listedOn: Date;
-}
+};
 
 export type ListingsSummary = {
   requestId: string;
@@ -62,11 +62,11 @@ export type ListingsSummary = {
   invalidSourceUrls: string[];
   noQuota: number;
   notDone: number;
-}
+};
 
 export enum eBulkListingStatus {
   UNKNOWN = 0,
-  INITIAL = 1,
+  VALIDATING = 1,
   PROCESSING = 20,
   DONE = 200,
   ERROR = 400,
@@ -115,6 +115,5 @@ export const autoListSlice = createSlice({
     });
   }
 });
-
 
 export const { reducer: autoListReducer } = autoListSlice;
