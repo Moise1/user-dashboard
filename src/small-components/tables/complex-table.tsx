@@ -18,15 +18,16 @@ interface Props<RecordType> {
   uiIdentifier: string;
   defaultVisibleColumns?: ColumnId[];
   allColumnData: ColumnData<RecordType>[];
-  columnList: ColumnId[];
+  //columnList: ColumnId[];
   data: RecordType[],
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
-  rowSelection?: TableRowSelection<RecordType>
+  rowSelection?: TableRowSelection<RecordType>;
+  onChangeVisibleRows?: (rows: RecordType[]) => void;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, columnList, data, hideWhenEmpty, loadingData, rowSelection } = props;
+  const { uiIdentifier, defaultVisibleColumns, allColumnData, /*columnList,*/ data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
@@ -61,19 +62,16 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, allVisibleColumns, allColumnsList, visibleColumnsList } = (() => {
+  const { columns, visibleColumnsList } = (() => {
 
-    const allColumns = columnList.map(x => allColumnData.find(y => y.id == x)).filter(x => !!x) as ColumnData<RecordType>[];
     const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
 
-    const columns = allColumns
-      .filter(x => columnList.includes(x.id) && (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
+    const columns = allColumnData
+      .filter(x => (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
       .map(x => ({ ...x, title: typeof(x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
 
     return {
       columns,
-      allVisibleColumns: allColumns.filter(x => !!columns.find(y => y.id == x.id)),
-      allColumnsList: columnList,
       visibleColumnsList
     };
 
@@ -86,7 +84,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //------------------------------------------------------------------------------------------
   //FILTERING DATA----------------------------------------------------------------------------
   //const filteredData = data && omniSearch ? useTableSearch(omniSearch, data) : data;
-  const filteredData = SmartSearch(smartSearch, data, allVisibleColumns);
+  const filteredData = SmartSearch(smartSearch, data, columns);
   //------------------------------------------------------------------------------------------
 
 
@@ -161,15 +159,15 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
   return (
     <div className='complex-table'>
-      {visibleColumnsList &&
+      {visibleColumnsList && (
         <VisibleColumnsPopup
           isVisible={visibleColumnsPopupOpened}
           onClose={CloseVisibleColumnsPopup}
-          allColumns={allColumnsList}
+          allColumns={allColumnData}
           visibleColumns={visibleColumnsList}
           onChange={SaveVisibleColumns}
         />
-      }
+      )}
       {/*{selectedRowKeys.length > 1 ? (*/}
       {/*  <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkListingModal}>*/}
       {/*    <BulkEditListings selectedItems={selectedRowKeys.length} />*/}
@@ -199,7 +197,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
         </Layout>
       )}
       {!loading && <>
-        {(!hideWhenEmpty || data.length > 0) &&
+        {(!hideWhenEmpty || data.length > 0) && (
           <DataTable
             page='listing'
             isListingsTable={true}
@@ -211,8 +209,9 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             pageSize={uiPreferences.pageSize}
             onPageSizeChanged={OnPageSizeChange}
             rowSelection={rowSelection}
+            onChangeVisibleRows={onChangeVisibleRows}
           />
-        }
+        )}
       </>}
     </div>
   );

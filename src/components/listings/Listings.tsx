@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useMemo } from 'react';
 import { Layout } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
@@ -53,9 +53,7 @@ export const Listings = () => {
     return ListingTab.active;
   })();
   //------------------------------------------------------------------------------------------
-
-
-  //DATA---------------------------------------------------------------------------------------
+  //DATA--------------------------------------------------------------------------------------
   useEffect(() => {
     switch (tab) {
       case ListingTab.active:
@@ -141,6 +139,7 @@ export const Listings = () => {
   }, [tab]);
   //--------------------------------------------------------------------------
 
+  const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
 
   return (
     <Layout className="listings-container">
@@ -168,8 +167,7 @@ export const Listings = () => {
         <ComplexTable
           uiIdentifier={'listings_' + tab}
           data={listings ?? []}
-          allColumnData={ListingsColumns}
-          columnList={columnList}
+          allColumnData={filteredColumns}
           defaultVisibleColumns={defaultVisibleColumns}
           hideWhenEmpty={hideWhenEmpty}
           loadingData={loadingListings || loadingSources}
