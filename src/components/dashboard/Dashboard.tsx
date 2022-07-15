@@ -550,7 +550,7 @@ export const Dashboard = () => {
     setIsAffiliateModalVisible(false);
   };
 
-  const [popUpMobile, setPopUpMobile] = useState(String);
+  const [popUpMobile, setPopUpMobile] = useState<string>('undefined');
 
   const mobileScreen = window.matchMedia('(max-width: 1000px)');
 
