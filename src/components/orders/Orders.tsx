@@ -20,6 +20,9 @@ import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDr
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
 import { AppContext } from '../../contexts/AppContext';
+import { ComplexTable } from '../../small-components/tables/complex-table';
+import { /*ActiveListingsColumns,*/ ActiveListingsColumnsVisibleByDefault } from './orders/active-columns';
+import { OrdersColumns } from './orders/columns';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
@@ -306,6 +309,15 @@ export const Orders = () => {
                 }
               };
             }}
+          />
+
+          <ComplexTable
+            uiIdentifier={'orders'}
+            data={searchedArray.length > 0 ? searchedArray : order}
+            allColumnData={OrdersColumns}
+            defaultVisibleColumns={ActiveListingsColumnsVisibleByDefault}
+            hideWhenEmpty={true}
+            loadingData={loading}
           />
         </>
       )}

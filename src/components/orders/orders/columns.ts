@@ -1,7 +1,7 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
 import { RenderChannelItem, RenderSource } from './columns-renders';
 
-export enum ListingColumnId {
+export enum OrderColumnId {
   Image = 1,
   Source = 2,
   Id = 3,
@@ -19,8 +19,8 @@ export enum ListingColumnId {
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
 
-export interface ListingColumnData extends ColumnData<RecordType> {
-  id: ListingColumnId
+export interface OrderColumnData extends ColumnData<RecordType> {
+  id: OrderColumnId
 }
 
 const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
@@ -35,75 +35,75 @@ const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
   return true;
 };
 
-export const ListingsColumns: ListingColumnData[] = [
+export const OrdersColumns: OrderColumnData[] = [
   {
-    id: ListingColumnId.Image,
-    title: 'Listings.Column.Img',
+    id: OrderColumnId.Image,
+    title: 'Orders.Column.Img',
     dataIndex: 'imageUrl',
     smartSearch: { ignore: true}
   },
   {
-    id: ListingColumnId.ChannelItem,
-    title: 'Listings.Column.ChannelItem',
+    id: OrderColumnId.ChannelItem,
+    title: 'Orders.Column.ChannelItem',
     dataIndex: 'channelItem',
     width: 70,
     render: RenderChannelItem
   },
   {
-    id: ListingColumnId.Source,
-    title: 'Listings.Column.Source',
+    id: OrderColumnId.Source,
+    title: 'Orders.Column.Source',
     dataIndex: 'sourcePath',
     width: 70,
     render: RenderSource
   },
   {
-    id: ListingColumnId.Id,
-    title: 'Listings.Column.Id',
+    id: OrderColumnId.Id,
+    title: 'Orders.Column.Id',
     dataIndex: 'id'
   },
   {
-    id: ListingColumnId.Title,
-    title: 'Listings.Column.Title',
+    id: OrderColumnId.Title,
+    title: 'Orders.Column.Title',
     dataIndex: 'title',
     smartSearch: {
       customFilter: MultiTermFilter
     }
   },
   {
-    id: ListingColumnId.SellPrice,
-    title: 'Listings.Column.Sell',
+    id: OrderColumnId.SellPrice,
+    title: 'Orders.Column.Sell',
     dataIndex: 'channelPrice'
   },
   {
-    id: ListingColumnId.CostPrice,
-    title: 'Listings.Column.Cost',
+    id: OrderColumnId.CostPrice,
+    title: 'Orders.Column.Cost',
     dataIndex: 'sourcePrice'
   },
   {
-    id: ListingColumnId.Profit,
-    title: 'Listings.Column.Profit',
+    id: OrderColumnId.Profit,
+    title: 'Orders.Column.Profit',
     dataIndex: 'profit'
   },
   {
-    id: ListingColumnId.Markup,
-    title: 'Listings.Column.Markup',
+    id: OrderColumnId.Markup,
+    title: 'Orders.Column.Markup',
     dataIndex: 'markup'
   },
   {
-    id: ListingColumnId.Stock,
-    title: 'Listings.Column.Stock',
+    id: OrderColumnId.Stock,
+    title: 'Orders.Column.Stock',
     dataIndex: 'stock',
     smartSearch: { ignore: true }
   },
   {
-    id: ListingColumnId.Options,
-    title: 'Listings.Column.Options',
+    id: OrderColumnId.Options,
+    title: 'Orders.Column.Options',
     dataIndex: 'options',
     smartSearch: { ignore: true }
   },
   {
-    id: ListingColumnId.CreatedOn,
-    title: 'Listings.Column.CreatedOn',
+    id: OrderColumnId.CreatedOn,
+    title: 'Orders.Column.CreatedOn',
     dataIndex: 'createdOn',
     smartSearch: { ignore: true }
   }
