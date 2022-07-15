@@ -559,7 +559,7 @@ export const Dashboard = () => {
       setPopUpMobile('vertical');
       popUpMobile;
     }
-    return popUpMobile || undefined;
+    return popUpMobile;
   }, [popUpMobile!]);
 
   return (
