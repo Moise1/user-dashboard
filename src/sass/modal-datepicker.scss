@@ -14,11 +14,6 @@
     }
     .rdrCalendarWrapper,
     .rdrDateRangeWrapper {
-      .rdrMonths {
-        .rdrMonth {
-          width: 100% !important;
-        }
-      }
       .rdrDateDisplayWrapper {
         //Background of the inputs
         background-color: transparent !important;
@@ -64,6 +59,14 @@
         width: 100%;
         .rdrStaticRanges {
           flex-direction: row !important;
+        }
+      }
+      .rdrCalendarWrapper,
+      .rdrDateRangeWrapper {
+        .rdrMonths {
+          .rdrMonth {
+            width: 100% !important;
+          }
         }
       }
     }

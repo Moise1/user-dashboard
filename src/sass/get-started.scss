@@ -2,13 +2,6 @@
 
 // Large screen sizes
 .main-container {
-  .back-to-dashboard {
-    width: 15vw;
-    color: $corporative-color;
-    &:hover {
-      color: $corporative-color;
-    }
-  }
   .get-started-container {
     margin: 1rem 0 0 0;
     padding: 1rem;
@@ -121,10 +114,6 @@
 // tablet screen size
 
 @media only screen and (max-width: 1030px) {
-  .back-to-dashboard {
-    width: 30vw;
-  }
-
   .intro-area {
     .description-area {
       margin-top: 20rem;
