@@ -35,13 +35,13 @@ export const OrderContent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(orderNumber));
+    dispatch(processOrders([orderNumber as unknown as number]));
   };
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(orderNumber));
+    dispatch(manuallyDispatch([orderNumber as unknown as number]));
   };
   const handleStopOrder = () => {
-    dispatch(stopOrder(orderNumber));
+    dispatch(stopOrder([orderNumber as unknown as number]));
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
 
@@ -228,7 +228,7 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <WarningBtn handleConfirm={handleManuallyDispatch}>
+              <WarningBtn handleConfirm={handleStopOrder}>
                 <HandStopOrderIcon />
                 <span>{t('OrderTable.Stop')} order</span>
               </WarningBtn>
@@ -253,7 +253,7 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <SuccessBtn handleConfirm={handleStopOrder}>
+              <SuccessBtn handleConfirm={handleManuallyDispatch}>
                 <CheckIcon />
                 <span>{t('OrderButtons.MarkAsDispatched')}</span>
               </SuccessBtn>

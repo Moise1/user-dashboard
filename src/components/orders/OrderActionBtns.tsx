@@ -1,5 +1,5 @@
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from '../../small-components/StatusBar';
 import { t } from '../../utils/transShim';
 import '../../sass/orders.scss';
@@ -10,32 +10,39 @@ import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
 import { OrderData } from 'src/redux/orders/orderSlice';
 interface props {
-  orderNumber: { [key: string]: OrderData };
+  orders: OrderData[];
   // channelId: number;
-  selectedRows: number;
+  selectedRows: React.Key[];
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
-  const { orderNumber, selectedRows } = typeBtnProps;
+  const { orders, selectedRows } = typeBtnProps;
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
-    selectedRows > 0 && setDisabled(false);
-    selectedRows == 0 && setDisabled(true);
+    selectedRows.length > 0 && setDisabled(false);
+    selectedRows.length == 0 && setDisabled(true);
   });
   const dispatch = useAppDispatch();
+
+  const selectedOrderIds = selectedRows.map((x) => {
+    console.log(x);
+    console.log(orders[x as unknown as number]);
+    return orders[x as unknown as number].id;
+  });
+
 
   // const { orderNumber, channelId } = typeBtnProps;
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(orderNumber.id));
+    dispatch(processOrders(selectedOrderIds));
   };
 
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(orderNumber.id));
+    dispatch(manuallyDispatch(selectedOrderIds));
   };
 
   const handleStopOrder = () => {
-    dispatch(stopOrder(orderNumber.id));
+    dispatch(stopOrder(selectedOrderIds));
   };
 
   return (
@@ -43,25 +50,25 @@ export const OrderActionBtns = (typeBtnProps: props) => {
       <ConfirmBtn handleConfirm={handleProcessOrders} disabled={disabled}>
         <ProcessOrderIcon />
         <span>
-          {t('OrderTable.Process')} {selectedRows > 0 ? selectedRows : ''} orders{' '}
+          {t('OrderTable.Process')} {selectedRows.length > 0 ? selectedRows.length : ''} orders{' '}
         </span>
       </ConfirmBtn>
 
-      <WarningBtn handleConfirm={handleManuallyDispatch} disabled={disabled}>
+      <WarningBtn handleConfirm={handleStopOrder} disabled={disabled}>
         <HandStopOrderIcon />
         <span>
-          {t('OrderTable.Stop')} {selectedRows > 0 ? selectedRows : ''} orders
+          {t('OrderTable.Stop')} {selectedRows.length > 0 ? selectedRows.length : ''} orders
         </span>
       </WarningBtn>
 
       <DangerBtn disabled={disabled}>
         <TrashIcon />
         <span>
-          {t('OrderTable.Delete')} {selectedRows > 0 ? selectedRows : ''} orders{' '}
+          {t('OrderTable.Delete')} {selectedRows.length > 0 ? selectedRows.length : ''} orders{' '}
         </span>
       </DangerBtn>
 
-      <SuccessBtn handleConfirm={handleStopOrder} disabled={disabled}>
+      <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={disabled}>
         <CheckIcon />
         <span>{t('OrderButtons.MarkAsDispatched')}</span>
       </SuccessBtn>

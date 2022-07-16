@@ -1,19 +1,14 @@
 import '../../sass/orders.scss';
 import '../../sass/medium-button.scss';
-import { t } from 'src/utils/transShim';
-import { useState, useMemo, useEffect, useContext } from 'react';
-import { CheckIcon } from '../common/Icons';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { useState, useEffect, useContext } from 'react';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
 import { /*DataTable,*/ DataTableKey } from '../../small-components/tables/data-table';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';
-import { determineStatus } from '../../utils/determineStatus';
 import { OrderContent } from 'src/small-components/OrderContent';
-import { Card, Checkbox, Row, Col, Layout, Spin } from 'antd';
-import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
+import { Layout, Spin } from 'antd';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
@@ -27,9 +22,8 @@ export const Orders = () => {
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
   const [selectedRecord, setSelectedRecord] = useState({});
-  const [orderNumber] = useState(selectedRecord && selectedRecord);
+  //const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState([]);
-  const [showColumns, setShowColumns] = useState<boolean>(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
@@ -48,99 +42,6 @@ export const Orders = () => {
     handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
   };
-
-  const tableColumns = [
-    {
-      title: t('OrderTable.Image'),
-      dataIndex: '',
-      key: '1',
-      visible: true,
-      render: (record: OrderData) => (
-        <div className="order-img-container">
-          <img src={record.imageUrl} alt="image" className="record-img" />
-        </div>
-      )
-    },
-    {
-      title: t('OrderTable.Reference'),
-      dataIndex: 'reference',
-      key: '2',
-      visible: false
-    },
-    {
-      title: t('OrderTable.Item'),
-      dataIndex: 'channelItem',
-      key: '3',
-      visible: true
-    },
-    {
-      title: t('OrderTable.Source'),
-      dataIndex: '',
-      key: '4',
-      visible: true,
-      render: (record: OrderData) => <p>{record.sourceId === 1 ? ' Amazon ' : ' - '}</p>
-    },
-    {
-      title: t('OrderTable.Title'),
-      dataIndex: '',
-      key: '5',
-      visible: true,
-      render: (record: OrderData) => <p>{record.title}</p>
-    },
-    {
-      title: t('OrderTable.Quantity'),
-      dataIndex: 'quantity',
-      key: '6',
-      visible: true
-    },
-    {
-      title: t('OrderTable.Sold'),
-      dataIndex: 'channelPrice',
-      key: '7',
-      visible: true
-    },
-    {
-      title: t('OrderTable.Cost'),
-      dataIndex: '',
-      key: '8',
-      visible: true,
-      render: (record: OrderData) => <p>{record.sourcePrice ? `£${record.sourcePrice}` : ' - '}</p>
-    },
-    {
-      title: t('OrderTable.Fees'),
-      dataIndex: '',
-      key: '9',
-      visible: true,
-      render: (record: OrderData) => <p>{record.fees ? `£${record.fees}` : ' - '}</p>
-    },
-    {
-      title: t('OrderTable.Profit'),
-      dataIndex: '',
-      key: '10',
-      visible: true,
-      render: (record: OrderData) => <p>{record.profit ? `${record.profit}£` : ' - '}</p>
-    },
-    {
-      title: t('OrderTable.Margin'),
-      dataIndex: '',
-      key: '11',
-      visible: true,
-      render: (record: OrderData) => <p>{record.margin ? `${record.margin}%` : ' - '}</p>
-    },
-    {
-      title: t('OrderTable.DateOfOrder'),
-      dataIndex: 'date',
-      key: '12',
-      visible: true
-    },
-    {
-      title: t('OrderTable.Status'),
-      dataIndex: '',
-      key: '13',
-      visible: true,
-      render: (record: OrderData) => determineStatus(record.status)
-    }
-  ];
 
   const { channelId: newChannel } = useContext(AppContext);
 
@@ -161,33 +62,12 @@ export const Orders = () => {
   }, [getOrders, newChannel]);
 
   //How many columns to show
-  const [columns, setColumns] = useState(tableColumns);
-  const visibleCols = useMemo(() => columns.filter((col) => col.visible === true), [columns]);
   const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
     setSelectedRowKeys(selectedRowKeys);
   };
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange
-  };
-  const handleCheckBox = (e: CheckboxChangeEvent): void => {
-    const cloneColumns = columns.map((col) => {
-      if (col.key === e.target.value) {
-        return { ...col, visible: e.target.checked };
-      } else {
-        return col;
-      }
-    });
-    setColumns(cloneColumns);
-  };
-  const handleClose = () => {
-    setColumns(tableColumns);
-    setShowColumns(!showColumns);
-  };
-  const handleApplyChanges = () => setShowColumns(!showColumns);
-  const handleCancelChanges = () => {
-    setColumns(tableColumns);
-    setShowColumns(!showColumns);
   };
 
   return (
@@ -196,38 +76,6 @@ export const Orders = () => {
         <Spin />
       ) : (
         <>
-          <PopupModal open={showColumns} handleClose={handleClose} width={900}>
-            <h5 className="cols-display-title">Select columns to display</h5>
-            <p className="description">Display columns in the order table that suit your interests.</p>
-            <Card className="listings-card">
-              <Row className="listings-cols">
-                <Col>
-                  <ul className="cols-list">
-                    {columns.map((col) => (
-                      <li key={col.key}>
-                        <Checkbox className="checkbox" checked={col.visible} value={col.key} onChange={handleCheckBox}>
-                          {col.title}
-                        </Checkbox>
-                      </li>
-                    ))}
-                  </ul>
-                </Col>
-                <Col>
-                  <div className="cols-amount">
-                    <p>Amount of columns on your orders table</p>
-                    <h3>{visibleCols.length}</h3>
-                  </div>
-                </Col>
-              </Row>
-              <div className="show-columns-action-btns">
-                <CancelBtn handleClose={handleCancelChanges}>{t('Button.Cancel')}</CancelBtn>
-                <ShowVisibleColBtn handleClose={handleApplyChanges}>
-                  <CheckIcon />
-                  {t('Button.ApplyChanges')}
-                </ShowVisibleColBtn>
-              </div>
-            </Card>
-          </PopupModal>
           {selectedRowKeys.length > 1 ? (
             <PopupModal open={bulkEditOpen} width={900} handleClose={handleBulkOrderModal}>
               <BulkEditListings selectedItems={selectedRowKeys.length} />
@@ -244,8 +92,8 @@ export const Orders = () => {
           <PopupModal open={orderDetailsOpen} width={900} handleClose={handleSingleOrderDetailModal}>
             <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
-         
-          <OrderActionBtns orderNumber={orderNumber} selectedRows={selectedRowKeys.length} />
+
+          <OrderActionBtns orders={order} selectedRows={selectedRowKeys} />
 
           <ComplexTable
             uiIdentifier={'orders'}

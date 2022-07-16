@@ -26,9 +26,9 @@ export const getOrders = createAsyncThunk(
 
 export const processOrders = createAsyncThunk(
   'sales/processOrder',
-  async (orderLineId: OrderData | number, thunkAPI) => {
+  async (orderLineIds: OrderData | number[], thunkAPI) => {
     try {
-      const res = await client.post('/Sales/ProcessOrderLine', { orderLineId });
+      const res = await client.post('/Sales/ProcessOrderLine', { orderLineIds });
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -38,9 +38,9 @@ export const processOrders = createAsyncThunk(
 
 export const manuallyDispatch = createAsyncThunk(
   'sales/manuallyDispatch',
-  async (orderLineId: OrderData | number, thunkAPI) => {
+  async (orderLineIds: OrderData | number[], thunkAPI) => {
     try {
-      const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineId });
+      const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineIds });
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
@@ -48,9 +48,9 @@ export const manuallyDispatch = createAsyncThunk(
   }
 );
 
-export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineId: OrderData | number, thunkAPI) => {
+export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineIds: OrderData | number[], thunkAPI) => {
   try {
-    const res = await client.post('/Sales/StopOrderLine', { orderLineId });
+    const res = await client.post('/Sales/StopOrderLine', { orderLineIds });
     return res;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
