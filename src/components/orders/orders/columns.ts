@@ -1,19 +1,21 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderSource } from './columns-renders';
+import { determineStatus } from '../../../utils/determineStatus';
+import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
 
 export enum OrderColumnId {
   Image = 1,
-  Source = 2,
-  Id = 3,
-  Title = 4,
-  SellPrice = 5,
-  CostPrice = 6,
-  Profit = 7,
-  Markup = 8,
-  Stock = 9,
-  Options = 10,
-  CreatedOn = 11,
-  ChannelItem= 12
+  Reference = 2,
+  ChannelItem = 3,
+  Source = 4,
+  Title = 5,
+  Quantity = 6,
+  Sold = 7,
+  Cost = 8,
+  Fees = 9,
+  Profit = 10,
+  Margin = 11,
+  DateOfOrder = 12,
+  Status = 13,
 }
 
 type FieldValue = unknown;
@@ -38,73 +40,73 @@ const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
 export const OrdersColumns: OrderColumnData[] = [
   {
     id: OrderColumnId.Image,
-    title: 'Orders.Column.Img',
+    title: 'OrderTable.Image',
     dataIndex: 'imageUrl',
-    smartSearch: { ignore: true}
+    smartSearch: { ignore: true },
+    render: RenderImage
   },
   {
     id: OrderColumnId.ChannelItem,
-    title: 'Orders.Column.ChannelItem',
+    title: 'OrderTable.ChannelItem',
     dataIndex: 'channelItem',
     width: 70,
     render: RenderChannelItem
   },
   {
     id: OrderColumnId.Source,
-    title: 'Orders.Column.Source',
+    title: 'OrderTable.Source',
     dataIndex: 'sourcePath',
     width: 70,
     render: RenderSource
   },
   {
-    id: OrderColumnId.Id,
-    title: 'Orders.Column.Id',
-    dataIndex: 'id'
-  },
-  {
     id: OrderColumnId.Title,
-    title: 'Orders.Column.Title',
+    title: 'OrderTable.Title',
     dataIndex: 'title',
     smartSearch: {
       customFilter: MultiTermFilter
     }
   },
   {
-    id: OrderColumnId.SellPrice,
-    title: 'Orders.Column.Sell',
+    id: OrderColumnId.Quantity,
+    title: 'OrderTable.Quantity',
+    dataIndex: 'quantity'
+  },
+  {
+    id: OrderColumnId.Sold,
+    title: 'OrderTable.Sold',
     dataIndex: 'channelPrice'
   },
   {
-    id: OrderColumnId.CostPrice,
-    title: 'Orders.Column.Cost',
+    id: OrderColumnId.Cost,
+    title: 'OrderTable.Cost',
     dataIndex: 'sourcePrice'
   },
   {
+    id: OrderColumnId.Fees,
+    title: 'OrderTable.Fees',
+    dataIndex: 'fees'
+  },
+  {
     id: OrderColumnId.Profit,
-    title: 'Orders.Column.Profit',
+    title: 'OrderTable.Profit',
     dataIndex: 'profit'
   },
   {
-    id: OrderColumnId.Markup,
-    title: 'Orders.Column.Markup',
-    dataIndex: 'markup'
+    id: OrderColumnId.Margin,
+    title: 'OrderTable.Margin',
+    dataIndex: 'margin'
   },
   {
-    id: OrderColumnId.Stock,
-    title: 'Orders.Column.Stock',
-    dataIndex: 'stock',
+    id: OrderColumnId.DateOfOrder,
+    title: 'OrderTable.DateOfOrder',
+    dataIndex: 'date',
     smartSearch: { ignore: true }
   },
   {
-    id: OrderColumnId.Options,
-    title: 'Orders.Column.Options',
-    dataIndex: 'options',
-    smartSearch: { ignore: true }
-  },
-  {
-    id: OrderColumnId.CreatedOn,
-    title: 'Orders.Column.CreatedOn',
-    dataIndex: 'createdOn',
-    smartSearch: { ignore: true }
+    id: OrderColumnId.Status,
+    title: 'OrderTable.Status',
+    dataIndex: 'status',
+    render: (status: number) => determineStatus(status)
   }
 ];

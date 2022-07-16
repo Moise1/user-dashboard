@@ -23,11 +23,13 @@ interface Props<RecordType> {
   loadingData?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
   onChangeVisibleRows?: (rows: RecordType[]) => void;
+  onRow?: (record: RecordType) => { onClick: () => void };
   actionsDropdownMenu?: JSX.Element;
+  selectedRows?: number;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows, actionsDropdownMenu } = props;
+  const { uiIdentifier, defaultVisibleColumns, allColumnData, data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows, onRow, actionsDropdownMenu, selectedRows } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
@@ -67,7 +69,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
     const columns = allColumnData
       .filter(x => (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
-      .map(x => ({ ...x, title: typeof(x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
+      .map(x => ({ ...x, title: typeof (x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
 
     return {
       columns,
@@ -209,6 +211,8 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
             actionsDropdownMenu={actionsDropdownMenu}
+            onRow={onRow}
+            selectedRows={selectedRows}
           />
         )}
       </>}

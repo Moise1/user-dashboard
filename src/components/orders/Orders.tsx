@@ -6,22 +6,20 @@ import { CheckIcon } from '../common/Icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
-import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
+import { /*DataTable,*/ DataTableKey } from '../../small-components/tables/data-table';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';
 import { determineStatus } from '../../utils/determineStatus';
 import { OrderContent } from 'src/small-components/OrderContent';
-import { Card, Checkbox, Row, Col, Layout, Input, Spin } from 'antd';
+import { Card, Checkbox, Row, Col, Layout, Spin } from 'antd';
 import { ShowVisibleColBtn, CancelBtn } from '../../small-components/ActionBtns';
-import { TableActionBtns } from '../../small-components/TableActionBtns';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { OrdersAdvancedSearch } from 'src/small-components/OrderAdvancedSearchDrawers';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
 import moment from 'moment';
 import { AppContext } from '../../contexts/AppContext';
 import { ComplexTable } from '../../small-components/tables/complex-table';
-import { /*ActiveListingsColumns,*/ ActiveListingsColumnsVisibleByDefault } from './orders/active-columns';
+import { /*AllColumns,*/ ColumnsVisibleByDefault } from './orders/active-columns';
 import { OrdersColumns } from './orders/columns';
 
 export const Orders = () => {
@@ -31,10 +29,7 @@ export const Orders = () => {
   const [selectedRecord, setSelectedRecord] = useState({});
   const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState([]);
-  const [searchedArray, setSearchedArray] = useState<OrderData[]>([]);
-  const [searchKey, setSearchKey] = useState<string>('');
   const [showColumns, setShowColumns] = useState<boolean>(false);
-  const [searchFilterKey, setSearchFilterKey] = useState<DataTableKey[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
@@ -194,28 +189,7 @@ export const Orders = () => {
     setColumns(tableColumns);
     setShowColumns(!showColumns);
   };
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const handleSideDrawer = () => setDrawerOpen(!drawerOpen);
-  console.log(searchFilterKey);
-  // //For Searching
-  useEffect(() => {
-    if (order.length) {
-      setSearchedArray(
-        order?.filter(
-          (e: OrderData) =>
-            e.channelItem === String(searchKey) ||
-            e.title === String(searchKey) ||
-            e.reference === String(searchKey) ||
-            String(e.fees) === String(searchKey) ||
-            String(e.profit) === String(searchKey) ||
-            String(e.sold) === String(searchKey)
-        )
-      );
-      setSearchFilterKey(order?.filter((e: OrderData) => e.channelItem === String(searchKey)));
-    }
-  }, [searchKey, orders]);
 
-  console.log('The selectedRecord is', selectedRecord);
   return (
     <Layout className="orders-container">
       {loading ? (
@@ -270,37 +244,18 @@ export const Orders = () => {
           <PopupModal open={orderDetailsOpen} width={900} handleClose={handleSingleOrderDetailModal}>
             <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
-          <div className="search-options-area">
-            <Input
-              autoFocus
-              placeholder="Search....."
-              onChange={(e) => {
-                setSearchKey(e.target.value ? e.target.value : '');
-              }}
-            ></Input>
-            <OrdersAdvancedSearch
-              visible={drawerOpen}
-              onClose={handleSideDrawer}
-              order={order}
-              setSearchKey={setSearchKey}
-              setSearchedArray={setSearchedArray}
-              setSearchFilterKey={setSearchFilterKey}
-            />
-            <TableActionBtns showColumns handleShowColumns={handleClose} handleSideDrawer={handleSideDrawer}>
-              {t('Table.AdvancedSearch')}
-            </TableActionBtns>
-          </div>
+         
           <OrderActionBtns orderNumber={orderNumber} selectedRows={selectedRowKeys.length} />
-          <DataTable
-            page="order"
-            columns={visibleCols}
-            dataSource={searchedArray.length > 0 ? searchedArray : order}
+
+          <ComplexTable
+            uiIdentifier={'orders'}
+            data={order}
+            allColumnData={OrdersColumns}
+            defaultVisibleColumns={ColumnsVisibleByDefault}
+            hideWhenEmpty={true}
+            loadingData={loading}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
-            rowClassName="table-row"
-            //Below the props are for pagination
-            totalItems={order.length}
-            //
             onRow={(record) => {
               return {
                 onClick: () => {
@@ -309,15 +264,6 @@ export const Orders = () => {
                 }
               };
             }}
-          />
-
-          <ComplexTable
-            uiIdentifier={'orders'}
-            data={searchedArray.length > 0 ? searchedArray : order}
-            allColumnData={OrdersColumns}
-            defaultVisibleColumns={ActiveListingsColumnsVisibleByDefault}
-            hideWhenEmpty={true}
-            loadingData={loading}
           />
         </>
       )}

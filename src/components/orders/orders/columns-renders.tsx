@@ -50,3 +50,9 @@ export const RenderSource = (path: string, rowR: RecordType) => {
   const url = 'https://' + source.baseUrl + '/' + path;
   return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</a>;
 };
+
+export const RenderImage = (imageUrl: string) => {
+  return <div className="order-img-container">
+    <img src={imageUrl} alt="image" className="record-img" />
+  </div>;
+};

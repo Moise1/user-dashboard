@@ -65,9 +65,9 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     <div className="data-table-container">
       {showTableInfo && (
         <div className="table-info">
-          <p className="total-selected">
+          {selectedRows ? <p className="total-selected">
             <strong>{selectedRows}</strong> selected
-          </p>
+          </p> : null}
           {actionsDropdownMenu && (
             <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
@@ -75,7 +75,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
                 <DownOutlined />
               </Space>
             </Dropdown>
-          )};
+          )}
           <p className="total-items">
             <strong>
               {totalItems ?? dataSource?.length ?? 0} {page} (s)
