@@ -11,12 +11,12 @@ import { stopOrder } from '../../redux/orders/orderThunk';
 import { OrderData } from 'src/redux/orders/orderSlice';
 interface props {
   orders: OrderData[];
-  // channelId: number;
+  channelOAuthId: number[];
   selectedRows: React.Key[];
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
-  const { orders, selectedRows } = typeBtnProps;
+  const { orders, channelOAuthId, selectedRows } = typeBtnProps;
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
     selectedRows.length > 0 && setDisabled(false);
@@ -24,9 +24,7 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   });
   const dispatch = useAppDispatch();
 
-  const selectedOrderIds = selectedRows.map((x) => {
-    console.log(x);
-    console.log(orders[x as unknown as number]);
+  const selectedOrderIds: number[] = selectedRows.map((x) => {
     return orders[x as unknown as number].id;
   });
 
@@ -34,15 +32,15 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   // const { orderNumber, channelId } = typeBtnProps;
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(selectedOrderIds));
+    dispatch(processOrders({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(selectedOrderIds));
+    dispatch(manuallyDispatch({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   const handleStopOrder = () => {
-    dispatch(stopOrder(selectedOrderIds));
+    dispatch(stopOrder({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   return (

@@ -111,7 +111,6 @@ export const BulkListing = (/*props: props*/) => {
       listFrequencyMinutes: listFrequencyMinutes as number,
       listings: listing
     };
-    console.log(listing);
     onSave(value);
   };
 

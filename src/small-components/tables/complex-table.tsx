@@ -35,7 +35,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //UI----------------------------------------------------------------------------------------}
   const uiPreferencesS = (() => {
     const preferences = useAppSelector((state) => state.UIPreferences as UIPreferencesState)?.tablePreferences?.[uiIdentifier];
-    return { columns: preferences?.columns, pageSize: preferences?.pageSize ?? 10, loading: preferences?.loading ?? false };
+    return { columns: preferences?.columns, pageSize: preferences?.pageSize ?? 10, pageNumber: preferences?.pageNumber ?? 1, loading: preferences?.loading ?? false };
   })();
 
   const [uiPreferences, setUIPreferences] = useState<UITablePreferenceL>(uiPreferencesS);
@@ -46,7 +46,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
   useEffect(() => {
     setUIPreferences(uiPreferencesS);
-  }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize]);
+  }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize, uiPreferencesS?.pageNumber]);
 
   const SaveUIPreferences = (preferences: UITablePreference) => {
     setUIPreferences({ ...preferences, loading: false });
@@ -60,7 +60,14 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const SaveVisibleColumns = (columns: ColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
-  const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
+  const OnPageSizeChange = (pageSize: number, pageNumber: number) => {
+    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
+  };
+  //------------------------------------------------------------------------------------------
+  ///PAGE Number--------------------------------------------------------------------------------
+  const OnPageNumberChange = (pageSize: number, pageNumber: number) => {
+    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
+  };
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
   const { columns, visibleColumnsList } = /*useMemo*/(() => {
@@ -208,6 +215,8 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             rowClassName='table-row'
             pageSize={uiPreferences.pageSize}
             onPageSizeChanged={OnPageSizeChange}
+            onPageChange={OnPageNumberChange}
+            currentPage={uiPreferences.pageNumber}
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
             actionsDropdownMenu={actionsDropdownMenu}

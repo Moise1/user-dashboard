@@ -26,10 +26,15 @@ export const getOrders = createAsyncThunk(
 
 export const processOrders = createAsyncThunk(
   'sales/processOrder',
-  async (orderLineIds: OrderData | number[], thunkAPI) => {
+  async ({ orderLineIds, channelOAuthId }: { orderLineIds: number[], channelOAuthId: number[] }, thunkAPI) => {
     try {
-      const res = await client.post('/Sales/ProcessOrderLine', { orderLineIds });
-      return res;
+      const res = await client.post('/Sales/ProcessOrderLine', { orderLineIds, channelOAuthId });
+      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+        ...item,
+        date: new Date(item?.date),
+        key
+      }));
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
     }
@@ -38,20 +43,30 @@ export const processOrders = createAsyncThunk(
 
 export const manuallyDispatch = createAsyncThunk(
   'sales/manuallyDispatch',
-  async (orderLineIds: OrderData | number[], thunkAPI) => {
+  async ({ orderLineIds, channelOAuthId }: { orderLineIds: number[], channelOAuthId: number[] }, thunkAPI) => {
     try {
-      const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineIds });
-      return res;
+      const res = await client.post('/Sales/ManuallyDispatchOrderLine', { orderLineIds, channelOAuthId });
+      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+        ...item,
+        date: new Date(item?.date),
+        key
+      }));
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
     }
   }
 );
 
-export const stopOrder = createAsyncThunk('sales/stopOrder', async (orderLineIds: OrderData | number[], thunkAPI) => {
+export const stopOrder = createAsyncThunk('sales/stopOrder', async ({ orderLineIds, channelOAuthId }: { orderLineIds: number[], channelOAuthId: number[] }, thunkAPI) => {
   try {
-    const res = await client.post('/Sales/StopOrderLine', { orderLineIds });
-    return res;
+    const res = await client.post('/Sales/StopOrderLine', { orderLineIds, channelOAuthId });
+    const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+      ...item,
+      date: new Date(item?.date),
+      key
+    }));
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue('Sorry! Something went wrong ):');
   }

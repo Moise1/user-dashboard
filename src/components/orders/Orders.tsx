@@ -85,6 +85,7 @@ export const Orders = () => {
               <OrderContent
                 orderProgress={status}
                 data={selectedRecord}
+                channelOAuthId={[newChannel]}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
               />
             </PopupModal>
@@ -93,7 +94,7 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
 
-          <OrderActionBtns orders={order} selectedRows={selectedRowKeys} />
+          <OrderActionBtns orders={order} channelOAuthId={[newChannel]} selectedRows={selectedRowKeys} />
 
           <ComplexTable
             uiIdentifier={'orders'}

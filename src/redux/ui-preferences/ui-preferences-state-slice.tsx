@@ -6,6 +6,7 @@ export type UIIdentifier = string;
 export interface UITablePreference {
   columns?: number[];
   pageSize?: number;
+  pageNumber?: number;
 }
 export interface UITablePreferenceL extends UITablePreference {
   loading: boolean;

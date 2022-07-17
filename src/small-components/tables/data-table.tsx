@@ -26,9 +26,9 @@ interface Props<RecordType> {
   isListingsTable?: boolean;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageSize: number, pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageSize: number, pageNumber: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
 

@@ -5,17 +5,6 @@ import { Link } from 'react-router-dom';
 import miniAlert from 'mini-alert';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  PointElement
-} from 'chart.js';
 import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
@@ -169,8 +158,7 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, BarElement, LineElement);
-
+  
   const salesDateChange = async (value: number, dateString: [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(

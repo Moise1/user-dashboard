@@ -12,9 +12,9 @@ interface Props<RecordType> {
   rowClassName?: string;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageSize: number, pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageSize: number, pageNumber: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
@@ -31,7 +31,7 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     pageSize: cPageSize,
     onRow,
     rowClassName,
-    onPageSizeChanged,
+    onPageSizeChanged: cOnPageSizeChanged,
     pageSizes,
     hidePagination,
     rowSelection,
@@ -39,12 +39,9 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
-  const [sCurrentPage, setCurrentPage] = useState<number>(1);
-  const page = cCurrentPage ?? sCurrentPage;
+  const [currentPage, setCurrentPage] = useState<number>(cCurrentPage ?? 1);
 
-  const [sPageSize, setPageSize] = useState<number>(pageSizeOptionArray[0]);
-  const pageSize = cPageSize ?? sPageSize;
-
+  const [pageSize, setPageSize] = useState<number>(cPageSize ?? pageSizeOptionArray[0]);
   type SorterState = {
     dataIndex: DataIndex,
     order: SortOrder
@@ -107,15 +104,14 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     return sort(dataSource, sorter)?.slice((currentPage! - 1) * currentPageSize!, currentPage! * currentPageSize!);
   };
 
-  const onPageChange = (page: number) => {
+  const onPageChange = (page: number, pageSize: number) => {
     setCurrentPage(page);
-    cOnPageChange?.(page);
+    cOnPageChange?.(pageSize, page);
   };
 
   const onShowPageSizeChange = (current: number, pageSize: number) => {
-    setCurrentPage(current);
     setPageSize(pageSize);
-    onPageSizeChanged?.(pageSize);
+    cOnPageSizeChanged?.(pageSize, current);
   };
 
   const [sorter, setSorter] = useState<SorterState[] | undefined>();
@@ -139,7 +135,7 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     }
   };
 
-  const visibleRows = useMemo(() => getData(dataSource, page, pageSize, sorter), [JSON.stringify([dataSource, page, pageSize, sorter])]);
+  const visibleRows = useMemo(() => getData(dataSource, currentPage, pageSize, sorter), [JSON.stringify([dataSource, currentPage, pageSize, sorter])]);
   useEffect(() => onChangeVisibleRows?.(visibleRows), [JSON.stringify(visibleRows)]);
 
   return (
@@ -158,7 +154,7 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
         className="pagination"
         onChange={onPageChange}
         total={dataSource?.length}
-        current={page}
+        current={currentPage}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
         showSizeChanger
