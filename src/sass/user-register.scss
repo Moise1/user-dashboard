@@ -3,7 +3,6 @@
 // Large screens and extra large screens
 .register-form-container {
   position: absolute;
-  margin-top: 1rem;
   top: 50%;
   left: 50%;
   transform: translate(-90%, -50%);
@@ -20,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     background: $dark-blue;
-    padding: 5px 17px;
+    padding: 20px 17px;
     .text-section > *,
     .alternative-link {
       color: $primary-light-bg-color;
@@ -31,7 +30,7 @@
     }
   }
   .register-form {
-    padding: 5px 17px;
+    padding: 20px 17px;
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
@@ -65,18 +64,20 @@
   position: absolute;
   clip-path: polygon(6% 67%, 100% 0, 100% 100%, 0% 100%);
   .sell-online-contents {
-    width: 50%;
     position: absolute;
     left: 50%;
     top: 38%;
-    .title h1,
-    p {
+    .title h1 {
       font-style: italic;
       font-size: 40px;
       font-weight: bold;
     }
-    p {
-      font-size: 20px;
+    h2 {
+      margin-top: -1rem;
+      margin-bottom: 3rem;
+      font-style: italic;
+      font-size: 30px;
+      font-weight: bold;
     }
 
     .title > *,
@@ -91,6 +92,9 @@
       }
       .ant-steps-icon-dot {
         background: $primary-light-bg-color !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
       }
     }
   }
