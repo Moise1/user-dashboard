@@ -30,22 +30,28 @@ export interface NewCatalogProduct {
   title: string;
 }
 
-
 export interface selectedProductDetailData
 {
-  channelPrice?: number;
-  competition?: number;
-  id?: number;
-  imageUrl: string;
-  options: number;
-  priority: number;
-  profit: number;
-  quantityListed: number;
-  sold: number;
+  id: number;
   sourceId: number;
+  imageUrl: string;
   sourcePrice: number;
   title: string;
   url: string;
+  profit: number;
+  channelPrice: number;
+  sold: number;
+  competition: number;
+  options: number;
+  priority: number;
+  quantityListed: number;
+  [key: string]: number | string | boolean | null;
+  page: number;
+  totalResults: number;
+  pageSize: number;
+  sessionId: number;
+  option: number;
+  productId:number;
 }
 
 const initialState = {
@@ -53,7 +59,6 @@ const initialState = {
   loading: false,
   error: ''
 };
-
 
 const searchInitialState = {
   catalogSearchedProducts: [] as CatalogProduct[],

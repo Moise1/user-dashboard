@@ -27,6 +27,7 @@ export type ElementEventType =
   | React.MouseEvent;
 
 export const Catalog = () => {
+
   const { Meta } = Card;
   const dispatch = useAppDispatch();
   const { sources } = useAppSelector((state) => state.sources);
@@ -35,7 +36,6 @@ export const Catalog = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
-  const [productId, setProductId] = useState<number>(0);
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
   const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
   const [className, setClassName] = useState<string>('product-card');
@@ -44,19 +44,25 @@ export const Catalog = () => {
   const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
   const [sessionId] = useState<number>(0);
   const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<selectedProductDetailData>({
-    channelPrice: 0,
-    competition: 0,
     id: 0,
+    sourceId: 0,
     imageUrl: '',
+    sourcePrice: 0,
+    url: '',
+    profit: 0,
+    title: '',
+    channelPrice: 0,
+    sold: 0,
+    competition: 0,
     options: 0,
     priority: 0,
-    profit: 0,
     quantityListed: 0,
-    sold: 0,
-    sourceId: 0,
-    sourcePrice: 0,
-    title: '',
-    url: ''
+    page: 0,
+    totalResults: 0,
+    pageSize: 0,
+    sessionId: 0,
+    option: 0,
+    productId: 0
   });
 
   //States for ListTheProductFunctionaity
@@ -84,15 +90,18 @@ export const Catalog = () => {
     setSelectedProductDataDetail(allCatalogProducts?.filter((d) => d.id === id)[0]);
     setModalOpen(!modalOpen);
   };
+
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
+  const [cardElementProductDetail, setCardElementProductDetail] = useState<
+    (EventTarget & HTMLDivElement) | (EventTarget & SVGElement) | (EventTarget & HTMLSpanElement) | (EventTarget & Element) | undefined
+  >();
 
   const handleSelectProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
+    setCardElementProductDetail(cardElement);
     const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
-    setProductId(JSON.parse(cardElement.id));
     if (cardElement.classList.contains('selected-product-card')) {
-      setProductId(0);
       cardElement.classList.remove('selected-product-card');
       setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
     } else {
@@ -103,9 +112,10 @@ export const Catalog = () => {
 
   const removeSelectedProduct = (e: ElementEventType): void => {
     const cardElement = e.currentTarget;
-    const selectedProductData = allCatalogProducts.filter((d) => d.id === JSON.parse(cardElement.id))[0];
-    console.log(selectedProductData);
+    const CardElementDetail = document.getElementById(cardElement.id);
+    cardElement?.classList.remove('selected-product-card');
     setAllProducts((prevState) => [...prevState].filter((d) => d.id !== JSON.parse(cardElement.id)));
+    CardElementDetail?.classList.remove('selected-product-card');
   };
 
   const handleSelectAllProducts = (): void => {
@@ -116,6 +126,9 @@ export const Catalog = () => {
   const handleClearAllSelectedProducts = (): void => {
     setClassName('product-card');
     setAllProducts([]);
+    for (let i = 0; i < allProducts.length; i++) {
+      document.getElementById(JSON.stringify(allProducts[i].id))?.classList.remove('selected-product-card');
+    }
   };
 
   const getSourceName = (id: number) => {
@@ -229,18 +242,21 @@ export const Catalog = () => {
             title={
               <div className="modal-title">
                 <h5>{selectedProductDataDetail.title}</h5>
-                <h1 className="source"> By : {selectedProductDataDetail?.id}</h1>
+                <h1 className="source"> By :{getSourceName(selectedProductDataDetail?.sourceId)}
+                </h1>
               </div>
             }
           >
             <ProductDetails
-              productId={productId}
               selectedProductDataDetail={selectedProductDataDetail}
               channelPrice={selectedProductDataDetail?.channelPrice}
               imageUrl={selectedProductDataDetail?.imageUrl}
               profit={selectedProductDataDetail?.profit}
               sourcePrice={selectedProductDataDetail?.sourcePrice}
               handleClose={() => setModalOpen(false)}
+              setAllProducts={setAllProducts}
+              cardElementProductDetail={cardElementProductDetail}
+              allCatalogProducts={allCatalogProducts}
             />
           </PopupModal>
           <PopupModal
@@ -263,7 +279,9 @@ export const Catalog = () => {
             bodyStyle={{ height: 500, overflow: 'scroll' }}
             closable={false}
           >
-            <AllProducts removeProduct={removeSelectedProduct} className={className}>
+            <AllProducts removeProduct={removeSelectedProduct} className={className}
+              getSourceName={getSourceName}
+            >
               {allProducts}
             </AllProducts>
           </PopupModal>
