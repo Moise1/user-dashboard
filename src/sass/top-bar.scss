@@ -43,28 +43,13 @@
     margin-left: 1rem;
   }
 }
-.action-btns {
-  display: flex !important;
-  height: auto !important;
-  justify-content: space-between;
-  align-items: center;
-  .disabled {
-    background: rgba($light-primary, 0.2);
-    color: $primary-bg;
-    border-radius: 8px;
-    &:hover {
-      background: rgba($light-primary, 0.2);
-      color: $primary-bg;
-    }
-  }
-}
 
 .top-bar-item {
   margin: 0 1rem;
   display: flex;
 
   .tokens-container {
-    padding-right: .4rem;
+    padding-right: 0.4rem;
     color: $primary-txt;
     display: flex;
     align-items: center;
@@ -74,7 +59,7 @@
     justify-content: center;
     .token-icon {
       width: 30px;
-    };
+    }
 
     .token-number {
       font-size: $font-medium;
@@ -118,11 +103,6 @@
   .store-list-container {
     max-width: auto;
     margin-right: 0.2rem;
-  }
-
-  .action-btns {
-    display: flex;
-    justify-content: space-between;
   }
   .logo-container {
     display: flex;
@@ -182,7 +162,7 @@
     }
     .upgrade-btn {
       border-radius: 20px;
-      color: white;
+      color: $primary-light-bg-color;
       background: $primary 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       opacity: 1;
@@ -274,8 +254,6 @@
   border-radius: 25px;
 }
 
-
-
 // Tablets and iPads screen
 
 @media only screen and (max-width: 1030px) {
@@ -294,7 +272,7 @@
       cursor: pointer;
       width: auto;
       border-radius: 8px;
-      padding: 12px;
+      padding: 10px;
       background: $light-primary;
       display: flex;
       flex-direction: column;
@@ -330,8 +308,11 @@
 }
 
 @media only screen and (max-width: 750px) {
-  .tokens {
+  .tokens-container {
     display: none !important;
+  }
+  .notifications-container {
+    width: 20% !important;
   }
   .top-bar-item {
     margin: 0 0.2rem;

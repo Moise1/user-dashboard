@@ -75,8 +75,8 @@ export const Catalog = () => {
   const [checkDate, setCheckDate] = useState<boolean>(false);
   //Dates
   let myDate: Date;
-  const [newDate, setNewDate] = useState<Date>((new Date()));
-  const [publishNow, setPublishNow] = useState<Date | undefined>((new Date()));
+  const [newDate, setNewDate] = useState<Date>(new Date());
+  const [publishNow, setPublishNow] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
     dispatch(getCatalogProducts({ sessionId }));
@@ -132,9 +132,8 @@ export const Catalog = () => {
   };
 
   const getSourceName = (id: number) => {
-    return sources?.map((x: { id: number; name: string; }) => {
-      if (x.id === id)
-        return x.name;
+    return sources?.map((x: { id: number; name: string }) => {
+      if (x.id === id) return x.name;
     });
   };
 
@@ -148,7 +147,7 @@ export const Catalog = () => {
 
   const handleSetFrequencyData = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFrequencyData(Number(event.target.value));
-    newDate ? setNewDate(newDate) : setNewDate((new Date()));
+    newDate ? setNewDate(newDate) : setNewDate(new Date());
   };
 
   const dateOnChange: DatePickerProps['onChange'] = (dateString) => {
@@ -164,14 +163,16 @@ export const Catalog = () => {
   };
 
   useEffect(() => {
-    setProducts(allProducts.map((e: CatalogProduct) => {
-      const { sourceId, title } = e;
-      newDate && setPublishNow(newDate);
-      if (!checkDate === true && frequencyData == undefined) setPublishNow(undefined);
-      return { sourceId, title, publishNow };
-    }));
+    setProducts(
+      allProducts.map((e: CatalogProduct) => {
+        const { sourceId, title } = e;
+        newDate && setPublishNow(newDate);
+        if (!checkDate === true && frequencyData == undefined) setPublishNow(undefined);
+        return { sourceId, title, publishNow };
+      })
+    );
 
-    if ((frequencyData && newDate) && changeState) {
+    if (frequencyData && newDate && changeState) {
       setPublishNow(newDate);
       for (let i = 0; i <= allProducts.length; i++) {
         if (allProducts.length > 0) {
@@ -199,6 +200,14 @@ export const Catalog = () => {
         <Spin />
       ) : (
         <>
+          <a
+            href="https://hustlegotreal.com/en/listing-service/"
+            target="_blank"
+            className="list-link"
+            rel="noreferrer"
+          >
+            Not sure what to list? We do it for you.
+          </a>
           <div className="actions-section">
             <div className="view-clear-all">
               <span className="all-selected-products" onClick={handleAllProductsModal}>
@@ -213,14 +222,7 @@ export const Catalog = () => {
                 )}
               </div>
             </div>
-            <a
-              href="https://hustlegotreal.com/en/listing-service/"
-              target="_blank"
-              className="list-link"
-              rel="noreferrer"
-            >
-              Not sure what to list? We do it for you.
-            </a>
+
             <div className="filters-container">
               <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
             </div>
@@ -294,74 +296,77 @@ export const Catalog = () => {
             <div className="catalog-list-modal">
               <h1> Listing Settings </h1>
               <Divider />
-              {listProductLoading
-                ?
+              {listProductLoading ? (
                 <div style={{ minWidth: '100%' }}>
                   <Spin style={{ margin: '30% 50%' }} />
                 </div>
-                :
-                (
-                  <>
-                    <div className="under-sections">
-                      <div className="section-option-container">
-                        <div className="section-option">
-                          <div className="section-title-container">
-                            <h2>Optimize the titles of the products?</h2>
-                          </div>
-                          <div className="section-switch">
-                            <Switch onChange={() => setOptimizeTitle(!optimizeTitle)} />
-                          </div>
+              ) : (
+                <>
+                  <div className="under-sections">
+                    <div className="section-option-container">
+                      <div className="section-option">
+                        <div className="section-title-container">
+                          <h2>Optimize the titles of the products?</h2>
                         </div>
-                        <div className="section-explanation">
-                          <ul>
-                            <li>Rank higher on eBay{"'"}s search results.</li>
-                            <li>We analyse sold items by category.</li>
-                            <li>Boost your sales.</li>
-                            <li>Get your listings in front of more potential buyers.</li>
-                            <li>Save time, we do the hard work for you.</li>
-                          </ul>
-                          <p>Cost: {allProducts.length} token(s) </p>
+                        <div className="section-switch">
+                          <Switch onChange={() => setOptimizeTitle(!optimizeTitle)} />
                         </div>
                       </div>
-                      <div className="section-option-container">
-                        <div className="section-option">
-                          <div className="section-title-container">
-                            <h2>Choose the frequency of the listings?</h2>
-                          </div>
-                          <div className="section-switch">
-                            <Switch onChange={() => setFrequency(!frequency)} />
-                          </div>
-                        </div>
-                        {frequency && (
-                          <div className="section-explanation">
-                            <div className="frequency-container">
-                              <div className="select-date-container">
-                                <h3>Select the date</h3>
-                                <DatePicker className="date-picker" onChange={dateOnChange} />
-                              </div>
-                              <Divider className="divider" type="vertical" />
-                              <div className="listings-frequency-container">
-                                <h3>Listings frequency</h3>
-                                <p>The system will automatically list an item every X minutes.</p>
-                                <Input className="blue-input" type="number" value={frequencyData} onChange={handleSetFrequencyData} />
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="checkbox-section">
-                        <Checkbox onChange={needReviewsOnChange} />
-                        <p>
-                          Review listings individually before publishing. Your listings will appear under Pending listings
-                          section.
-                        </p>
-                      </div>
-                      <div className="list-button">
-                        <SuccessBtn handleConfirm={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
+                      <div className="section-explanation">
+                        <ul>
+                          <li>Rank higher on eBay{"'"}s search results.</li>
+                          <li>We analyse sold items by category.</li>
+                          <li>Boost your sales.</li>
+                          <li>Get your listings in front of more potential buyers.</li>
+                          <li>Save time, we do the hard work for you.</li>
+                        </ul>
+                        <p>Cost: {allProducts.length} token(s) </p>
                       </div>
                     </div>
-                  </>
-                )}
+                    <div className="section-option-container">
+                      <div className="section-option">
+                        <div className="section-title-container">
+                          <h2>Choose the frequency of the listings?</h2>
+                        </div>
+                        <div className="section-switch">
+                          <Switch onChange={() => setFrequency(!frequency)} />
+                        </div>
+                      </div>
+                      {frequency && (
+                        <div className="section-explanation">
+                          <div className="frequency-container">
+                            <div className="select-date-container">
+                              <h3>Select the date</h3>
+                              <DatePicker className="date-picker" onChange={dateOnChange} />
+                            </div>
+                            <Divider className="divider" type="vertical" />
+                            <div className="listings-frequency-container">
+                              <h3>Listings frequency</h3>
+                              <p>The system will automatically list an item every X minutes.</p>
+                              <Input
+                                className="blue-input"
+                                type="number"
+                                value={frequencyData}
+                                onChange={handleSetFrequencyData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="checkbox-section">
+                      <Checkbox onChange={needReviewsOnChange} />
+                      <p>
+                        Review listings individually before publishing. Your listings will appear under Pending listings
+                        section.
+                      </p>
+                    </div>
+                    <div className="list-button">
+                      <SuccessBtn handleConfirm={listTheProducts}>List {allProducts.length} product(s)</SuccessBtn>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </PopupModal>
           <div className="catalog-cards">
@@ -429,7 +434,9 @@ export const Catalog = () => {
             <div className="pagination-addall-container">
               <div className="adall-container">
                 {!!allProducts.length && (
-                  <SuccessBtn handleConfirm={() => setListProductModal(!listProductsModal)}>List {allProducts.length} product(s)</SuccessBtn>
+                  <SuccessBtn handleConfirm={() => setListProductModal(!listProductsModal)}>
+                    List {allProducts.length} product(s)
+                  </SuccessBtn>
                 )}
                 <ConfirmBtn handleConfirm={handleSelectAllProducts}>{t('selectAll')}</ConfirmBtn>
               </div>

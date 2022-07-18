@@ -1,0 +1,74 @@
+@import 'general.config';
+
+.modal-datepicker {
+  width: fit-content !important;
+  .range-datepicker {
+    width: fit-content;
+    .rdrDefinedRangesWrapper {
+      //Left section more little
+      width: 120px;
+      .rdrInputRanges {
+        //Unusable selectors
+        display: none;
+      }
+    }
+    .rdrCalendarWrapper,
+    .rdrDateRangeWrapper {
+      .rdrDateDisplayWrapper {
+        //Background of the inputs
+        background-color: transparent !important;
+        .rdrDateDisplay {
+          .rdrDateInput {
+            //Same styles that the actual selector
+            color: $primary-txt !important;
+            border-radius: 7px !important;
+            box-shadow: 0px 3px 6px rgb(0 0 0 / 16%) !important;
+            border: none !important;
+            outline: none !important;
+            align-items: center !important;
+            max-width: 500px !important;
+          }
+        }
+      }
+      .rdrDay {
+        .rdrInRange,
+        .rdrStartEdge,
+        .rdrEndEdge {
+          //Background of the selected dates
+          color: $light-blue !important;
+        }
+      }
+    }
+  }
+  .ant-modal-footer {
+    .ant-btn-primary {
+      //Success button stylized
+      color: white !important;
+      border-radius: 15px !important;
+      background-color: $green;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .modal-datepicker {
+    .range-datepicker {
+      display: grid !important;
+      .rdrDefinedRangesWrapper {
+        overflow: auto;
+        width: 100%;
+        .rdrStaticRanges {
+          flex-direction: row !important;
+        }
+      }
+      .rdrCalendarWrapper,
+      .rdrDateRangeWrapper {
+        .rdrMonths {
+          .rdrMonth {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
-﻿import { TableColumnId } from './columns';
+﻿import { ListingColumnId } from './columns';
 
 
 export const TerminatedListingsColumns = [
   //TableColumnId.ChannelItem,
-  TableColumnId.CreatedOn,
+  ListingColumnId.CreatedOn,
   //TableColumnId.Status,
-  TableColumnId.Title,
+  ListingColumnId.Title,
 ];

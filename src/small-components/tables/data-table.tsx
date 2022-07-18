@@ -1,20 +1,18 @@
 import { ReactNode } from 'react';
-import { Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
-import { TableRowSelection } from 'antd/lib/table/interface';
+import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
 import { SimpleTable } from './simple-table';
 
 export type DataTableKey = React.Key;
 
-interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
+interface Props<RecordType> {
+  columns: ColumnType<RecordType>[];
 
-  dataSource: T[];
+  dataSource: RecordType[];
   selectedRows?: number;
   totalItems?: number;
-  handleSingleListingModal?: () => void;
-  handleBulkListingModal?: () => void;
   page?: string;
   loading?: boolean | ReactNode;
   showTableInfo?: boolean;
@@ -23,19 +21,23 @@ interface Props<T> {
   setRulesPerPage?: (rulesPerPage: number) => void;
   setListingsPerPage?: (listingsPerPage: number) => void;
   rowClassName?: string;
-  onRow?: (record: T) => { onClick: () => void };
-  rowSelection?: TableRowSelection<T>;
+  onRow?: (record: RecordType) => { onClick: () => void };
+  rowSelection?: TableRowSelection<RecordType>;
   isListingsTable?: boolean;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageNumber: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
-}
 
-export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) => {
+  onChangeVisibleRows?: (rows: RecordType[]) => void;
+
+  actionsDropdownMenu?: JSX.Element;
+}
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
 
   const {
     columns,
@@ -43,90 +45,36 @@ export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) =>
     rowSelection,
     selectedRows,
     totalItems,
-    handleBulkListingModal,
-    handleSingleListingModal,
     page,
     showTableInfo,
     onRow,
     rowClassName,
-    isListingsTable,
     currentPage,
     pageSize,
     pageSizes,
     onPageChange,
     onPageSizeChanged,
-    hidePagination
+    hidePagination,
+    onChangeVisibleRows,
+    actionsDropdownMenu
   } = props;
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
-  const anyTable = (
-    <div className="selected-options">
-      <ul className="list">
-        <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-          Edit <strong>{selectedRows}</strong> {page}(s)
-        </li>
-        <div className="horizontal-divider" />
-        <li className="list-item">
-          Copy <strong>{selectedRows}</strong> {page}(s)
-        </li>
-        <div className="horizontal-divider" />
-        <li className="list-item">
-          Optimize <strong>{selectedRows}</strong> {page}(s)
-        </li>
-      </ul>
-    </div>
-  );
-
-  const actionsDropdownMenu = (
-    <Menu
-      items={[
-        {
-          type: 'group',
-          label: (
-            <div
-              className="action-option"
-              onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
-            >
-              Edit  <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Copy <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Optimize <strong>{selectedRows}</strong> {page}(s)
-            </div>
-          )
-        }
-      ]}
-    />
-  );
   return (
     <div className="data-table-container">
       {showTableInfo && (
         <div className="table-info">
-          <p className="total-selected">
+          {selectedRows ? <p className="total-selected">
             <strong>{selectedRows}</strong> selected
-          </p>
-          {isListingsTable ? (
+          </p> : null}
+          {actionsDropdownMenu && (
             <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
                 Bulk Action
                 <DownOutlined />
               </Space>
             </Dropdown>
-          ) : (
-            anyTable
           )}
           <p className="total-items">
             <strong>
@@ -148,6 +96,7 @@ export const DataTable = <T extends Record<string, unknown>>(props: Props<T>) =>
         onPageChange={onPageChange}
         onPageSizeChanged={onPageSizeChanged}
         pageSizes={pageSizeOptionArray}
+        onChangeVisibleRows={onChangeVisibleRows}
       />
     </div>
   );

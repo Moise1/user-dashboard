@@ -25,6 +25,7 @@ import { deleteAutoOrderingReducer } from '../auto-ordering/autoOrderingSlice';
 import { channelConfigurationReducer } from '../channel-configuration/channels-configuration-slice';
 import { accountConfigurationReducer } from '../account-configuration/account-configuration-slice';
 import { affiliatesStatsReducer } from '../dashboard/affiliatesStatsSlice';
+import { affiliatesDashboardReducer } from '../dashboard/affiliatesStatsSlice';
 import { newChannelReducer } from '../new-channel/newChannelSlice';
 import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
 import { autoListReducer } from '../listings/autoListSlice';
@@ -61,6 +62,7 @@ export const allReducers = combineReducers({
   noApiServers: noApiServersReducer,
   deleteAutoOrders: deleteAutoOrderingReducer,
   affiliatesStats: affiliatesStatsReducer,
+  affiliatesDashboard: affiliatesDashboardReducer,
   linkAccount: newChannelReducer,
   managedServers: getManagedServersReducer,
   newChannel: newChannelReducer,

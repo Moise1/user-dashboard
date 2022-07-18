@@ -1,24 +1,28 @@
-import { ReactNode, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pagination, Table } from 'antd';
-import { TableRowSelection } from 'antd/lib/table/interface';
+import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/lib/table/interface';
+import { DataIndex } from 'rc-table/lib/interface';
+import { isArray, isBoolean, isFunction } from 'util';
 
-interface Props<T> {
-  columns: { title: ReactNode; dataIndex: string; key: string; visible?: boolean }[];
-  dataSource: T[];
-  onRow?: (record: T) => { onClick: () => void };
+interface Props<RecordType> {
+  columns: ColumnType<RecordType>[];
+  dataSource: RecordType[];
+  onRow?: (record: RecordType) => { onClick: () => void };
 
   rowClassName?: string;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageSize: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
-  rowSelection?: TableRowSelection<T>;
-}
+  rowSelection?: TableRowSelection<RecordType>;
 
-export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) => {
+  onChangeVisibleRows?: (rows: RecordType[]) => void;
+}
+//eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export const SimpleTable = <RecordType extends object = any>(props: Props<RecordType>) => {
   const {
     columns,
     dataSource,
@@ -27,22 +31,79 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
     pageSize: cPageSize,
     onRow,
     rowClassName,
-    onPageSizeChanged,
+    onPageSizeChanged: cOnPageSizeChanged,
     pageSizes,
     hidePagination,
-    rowSelection
+    rowSelection,
+    onChangeVisibleRows
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
   const [sCurrentPage, setCurrentPage] = useState<number>(1);
-  const page = cCurrentPage ?? sCurrentPage;
+  const currentPage = cCurrentPage ?? sCurrentPage;
 
   const [sPageSize, setPageSize] = useState<number>(pageSizeOptionArray[0]);
   const pageSize = cPageSize ?? sPageSize;
+  type SorterState = {
+    dataIndex: DataIndex,
+    order: SortOrder
+  };
+  const sort = (dataSource: RecordType[], sorter: SorterState[] | undefined) => {
+    if (!sorter || sorter.length == 0)
+      return dataSource;
 
+    type AntdSorterTypeObject = {
+      compare?: CompareFn<RecordType>;
+      /** Config multiple sorter order priority */
+      multiple?: number;
+    };
+    type AntdSorterType = (boolean | CompareFn<RecordType> | AntdSorterTypeObject);
+    type functionF = {
+      f: AntdSorterType,
+      o: SortOrder
+    }
+    const allSorters: functionF[] = [];
 
-  const getData = (dataSource: T[], currentPage: number, currentPageSize: number) => {
-    return dataSource?.slice((currentPage! - 1) * currentPageSize!, currentPage! * currentPageSize!);
+    for (const s of sorter) {
+      const c = columns.find(x => x.dataIndex == s.dataIndex);
+      if (c && c.sorter && !isBoolean(c.sorter))
+        allSorters.push({ f: c.sorter, o: s.order });
+    }
+
+    allSorters.sort((aa: functionF, bb: functionF) => {
+      const a = aa.f;
+      if (isFunction(a)) {
+        return 1;
+      }
+      const b = bb.f;
+      if (isFunction(b)) {
+        return -1;
+      }
+      return ((a as AntdSorterTypeObject).multiple ?? 0) - ((b as AntdSorterTypeObject).multiple ?? 0);
+    });
+
+    const multipleSort = (compFunctions: functionF[]) => {
+      return (a: RecordType, b: RecordType) => {
+        for (const ff of compFunctions) {
+
+          const f = ff.f;
+          const func = (isFunction(f) ? f : (f as AntdSorterTypeObject).compare) as CompareFn<RecordType>;
+
+          const result = (ff.o === 'descend') ? -1 * func(a, b, ff.o) : func(a, b, ff.o);
+          if (result !== 0) {
+            return result;
+          }
+        }
+        return 0;
+      };
+    };
+
+    dataSource.sort(multipleSort(allSorters));
+    return dataSource;
+  };
+
+  const getData = (dataSource: RecordType[], currentPage: number, currentPageSize: number, sorter: SorterState[] | undefined) => {
+    return sort(dataSource, sorter)?.slice((currentPage! - 1) * currentPageSize!, currentPage! * currentPageSize!);
   };
 
   const onPageChange = (page: number) => {
@@ -51,27 +112,53 @@ export const SimpleTable = <T extends Record<string, unknown>>(props: Props<T>) 
   };
 
   const onShowPageSizeChange = (current: number, pageSize: number) => {
-    setCurrentPage(current);
     setPageSize(pageSize);
-    onPageSizeChanged?.(pageSize);
+    cOnPageSizeChanged?.(pageSize);
+    if (currentPage != current)
+      onPageChange?.(current);
   };
+
+  const [sorter, setSorter] = useState<SorterState[] | undefined>();
+  const onChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<RecordType> | SorterResult<RecordType>[]
+  ) => {
+    if (sorter) {
+      const sorterA = isArray(sorter) ? sorter : [sorter];
+      setSorter(
+        sorterA
+          .filter(x => !!x && x.column?.dataIndex && x.order)
+          .map(x => (
+            {
+              dataIndex: x!.column!.dataIndex!,
+              order: x!.order!
+            } as SorterState)
+          )
+      );
+    }
+  };
+
+  const visibleRows = useMemo(() => getData(dataSource, currentPage, pageSize, sorter), [JSON.stringify([dataSource, currentPage, pageSize, sorter])]);
+  useEffect(() => onChangeVisibleRows?.(visibleRows), [JSON.stringify(visibleRows)]);
 
   return (
     <div className="data-table">
       <Table
         className="table"
         columns={columns}
-        dataSource={getData(dataSource, page, pageSize)}
+        dataSource={visibleRows}
         pagination={false}
         rowClassName={rowClassName}
         onRow={onRow}
         rowSelection={rowSelection}
+        onChange={onChange}
       />
       {!hidePagination && <Pagination
         className="pagination"
         onChange={onPageChange}
         total={dataSource?.length}
-        current={page}
+        current={currentPage}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
         showSizeChanger

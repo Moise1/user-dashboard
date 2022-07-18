@@ -7,6 +7,7 @@ export interface PlatformIndo {
   domain: { [iso: number]: string };
   itemUrl: string | { [iso: number]: string };
   internalUrl: string | { [iso: number]: string };
+  useInternalInList: boolean,//For products page
   identifierName: string;
   identifierLabel: string | { [iso: number]: string };
   titleLength: number;
@@ -50,6 +51,7 @@ export const Platforms: {
       [eCountry.AU]: 'https://www.ebay.com.au/itm/{id}',
       [eCountry.IT]: 'https://www.ebay.it/itm/{id}'
     },
+    useInternalInList: false,
     internalUrl: {},
     titleLength: 80,
     usesAsin: false,
@@ -86,6 +88,7 @@ export const Platforms: {
       [eCountry.IT]: 'it'
     },
     itemUrl: 'https://{shopName}/admin/products/{id}',
+    useInternalInList: false,
     internalUrl: {},
     identifierName: 'id',
     identifierLabel: 'https://{shopName}/admin/products/{id}',
@@ -133,6 +136,7 @@ export const Platforms: {
       [eCountry.AU]: 'https://www.ebay.com.au/itm/{id}',
       [eCountry.IT]: 'https://www.ebay.it/itm/{id}'
     },
+    useInternalInList: false,
     internalUrl: {},
     identifierLabel: {
       [eCountry.UK]: 'https://www.ebay.co.uk/itm/{id}',
@@ -187,6 +191,7 @@ export const Platforms: {
       [eCountry.AU]: 'https://www.amazon.com.au/dp/{id}',
       [eCountry.IT]: 'https://www.amazon.it/dp/{id}'
     },
+    useInternalInList: true,
     internalUrl: {
       [eCountry.UK]: 'https://sellercentral.amazon.co.uk/inventory/ref=xx_invmgr_dnav_xx?asin={asin}&sku={sku}',
       [eCountry.US]: 'https://sellercentral.amazon.com/inventory/ref=xx_invmgr_dnav_xx?asin={asin}&sku={sku}',

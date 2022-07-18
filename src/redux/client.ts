@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 export const url = 'https://hgrapi.hustlegotreal.com';
+//export const url = 'https://localhost:5001';
 export const client = axios.create({
   baseURL: `${url}/api`,
   validateStatus: (status) => (status >= 200 && status <= 404) || status <= 500

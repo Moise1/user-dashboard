@@ -19,7 +19,7 @@ import { eCountry } from '../../types/eCountry';
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
   const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
-  const { listingSource, sourcesLoading } = useAppSelector((state) => state.listingSource);
+  const { sources } = useAppSelector((state) => state.sources);
   const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
   const criteriaOptions = [
     { value: 'hgr', label: 'No preferences' },
@@ -34,7 +34,7 @@ export const ConfigureListingService = () => {
   const [minProfit, setMinProfit] = useState<number>();
   const [maxProfit, setMaxProfit] = useState<number>();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [sources, setSources] = useState([]);
+  const [sourceList, setSourceList] = useState([]);
   const [showFlags] = useState<boolean>(true);
   const SourceLabel = (c: Source) => {
     return (
@@ -67,13 +67,13 @@ export const ConfigureListingService = () => {
     };
   };
   const options = channels.map(CreateValue);
-  const SourceOptions = listingSource.map(SourceValue);
+  const SourceOptions = sources.map(SourceValue);
   const [selectedService, setSelectedService] = useState<ListingService>(listingServicesResult[0]);
   const [isDisabled, setIsDisabled] = useState(selectedService.startedOn ? true : false);
 
   useEffect(() => {
     dispatch(getListingServices());
-  }, [ getListingServices]);
+  }, [getListingServices]);
 
   const info = () => {
     Modal.info({
@@ -133,7 +133,7 @@ export const ConfigureListingService = () => {
     const filtered = SourceOptions?.filter((x: { site: string }) => {
       if (x.site == eCountry[chanel[0]?.isoCountry as unknown as number]) return x;
     });
-    setSources(filtered);
+    setSourceList(filtered);
     setSelectedListing((prev) => ({ ...prev, channelOAuthId: chanel[0]?.id }));
   };
 
@@ -212,7 +212,7 @@ export const ConfigureListingService = () => {
   };
 
   useEffect(() => {
-    setSources(SourceOptions);
+    setSourceList(SourceOptions);
     if (listingServicesResult[0].channelOAuthId && listingServicesResult[0].channelOAuthId != 0) {
       setShowPreference(true);
       onAccountChange(listingServicesResult[0].channelOAuthId);
@@ -297,7 +297,7 @@ export const ConfigureListingService = () => {
     }
   ];
 
-  return loading && sourcesLoading ? (
+  return loading ? (
     <Spin />
   ) : (
     <div className="configure-listingservice-container">
@@ -341,7 +341,7 @@ export const ConfigureListingService = () => {
                         disabled={isDisabled}
                         onChange={(value: string) => onSourceChange(value)}
                       >
-                        {sources.length > 0 ? sources : SourceOptions}
+                        {sourceList.length > 0 ? sourceList : SourceOptions}
                       </MultipleSelector>
                     </div>
                   </div>

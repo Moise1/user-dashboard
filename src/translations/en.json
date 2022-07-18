@@ -157,6 +157,7 @@
   "Listings.Column.CreatedOn": "Created On",
   "Listings.Column.CreatedBy": "Created By",
   "Listings.Column.ChannelItem": "Product ID",
+  "Listings.Value.UnknownSource": "Unknown Supplier",
 
   "ListNow.Header": "Ways to publish",
   "ListNow.BulkListing.Description": "List as many items as you want by adding urls from different suppliers.",
@@ -339,7 +340,7 @@
 
   "VisibleColumnsPopup.Title": "Select columns to display",
   "VisibleColumnsPopup.Description": "Display columns in the listing table that suit your interests.",
-  "VisibleColumnsPopup.Amount": "Amount of columns on your listings table",
+  "VisibleColumnsPopup.Amount": "Amount of columns on the table",
 
   "WeListForYou.Name": "We Publish For You",
 

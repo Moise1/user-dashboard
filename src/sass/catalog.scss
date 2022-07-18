@@ -71,12 +71,7 @@
     justify-content: space-between;
     align-items: center;
     padding: $spacer;
-    .list-link {
-      font-weight: normal;
-      &:hover {
-        color: $corporative-color;
-      }
-    }
+
     .view-clear-all {
       display: flex;
       column-gap: 5rem;
@@ -93,7 +88,6 @@
 
     .all-selected-products,
     .clear-all {
-      font-size: $font-medium;
       cursor: pointer;
       margin-bottom: 0 !important;
     }

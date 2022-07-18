@@ -1488,3 +1488,4 @@ export const ExternalLinkSvg = () => (
     </g>
   </svg>
 );
+

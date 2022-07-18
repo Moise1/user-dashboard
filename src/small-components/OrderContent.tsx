@@ -23,11 +23,12 @@ import { useEffect } from 'react';
 interface Props {
   orderProgress: number;
   data: { [key: string]: OrderData };
+  channelOAuthId: number[];
   OrderDetailsModalOpen: () => void;
 }
 
 export const OrderContent = (props: Props) => {
-  const { orderProgress, data, OrderDetailsModalOpen } = props;
+  const { orderProgress, data, channelOAuthId, OrderDetailsModalOpen } = props;
   const { id } = data;
   const [orderNumber] = useState(id);
   const orderStatus = useAppSelector((state) => state.orderProgress.states);
@@ -35,13 +36,13 @@ export const OrderContent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(orderNumber));
+    dispatch(processOrders({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
   };
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(orderNumber));
+    dispatch(manuallyDispatch({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
   };
   const handleStopOrder = () => {
-    dispatch(stopOrder(orderNumber));
+    dispatch(stopOrder({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
 
@@ -228,7 +229,7 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <WarningBtn handleConfirm={handleManuallyDispatch}>
+              <WarningBtn handleConfirm={handleStopOrder}>
                 <HandStopOrderIcon />
                 <span>{t('OrderTable.Stop')} order</span>
               </WarningBtn>
@@ -253,7 +254,7 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <SuccessBtn handleConfirm={handleStopOrder}>
+              <SuccessBtn handleConfirm={handleManuallyDispatch}>
                 <CheckIcon />
                 <span>{t('OrderButtons.MarkAsDispatched')}</span>
               </SuccessBtn>

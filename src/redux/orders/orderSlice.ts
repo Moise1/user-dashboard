@@ -92,14 +92,6 @@ export const orderSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
-  }
-});
-
-export const processOrdersSlice = createSlice({
-  name: 'processOrders',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
     builder.addCase(processOrders.pending, (state) => {
       state.loading = true;
       state.error = '';
@@ -112,14 +104,6 @@ export const processOrdersSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
-  }
-});
-
-export const manuallyDispatchSlice = createSlice({
-  name: 'manuallyDispatch',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
     builder.addCase(manuallyDispatch.pending, (state) => {
       state.loading = true;
       state.error = '';
@@ -132,14 +116,6 @@ export const manuallyDispatchSlice = createSlice({
       state.loading = false;
       state.error = String(payload);
     });
-  }
-});
-
-export const stopOrderSlice = createSlice({
-  name: 'stopOrder',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
     builder.addCase(stopOrder.pending, (state) => {
       state.loading = true;
       state.error = '';

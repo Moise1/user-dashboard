@@ -13,7 +13,7 @@ body {
     width: -moz-available; /* WebKit-based browsers will ignore this. */
     width: fill-available;
     margin-top: 0.5rem;
-    padding: 0.3rem;
+    padding: .3rem;
     background: $secondary-bg;
     .spinner {
       position: absolute;
@@ -69,10 +69,6 @@ body {
   color: $corporative-color;
   border-radius: 8px !important;
 
-  svg {
-    margin-bottom: 5px !important;
-    margin-left: 1px !important;
-  }
   &:hover {
     color: $corporative-color;
     border-color: $corporative-color !important;

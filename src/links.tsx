@@ -1,5 +1,6 @@
 ﻿export const Links = {
   Dashboard: '/dashboard',
+  AffiliateDashboard: '/affiliate-dashboard',
   Products: '/products',
   ProductsPending: '/products/pending',
   ProductsTerminated: '/products/terminated',

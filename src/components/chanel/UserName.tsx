@@ -6,7 +6,8 @@ import { createNewChannel, getShopifyLinkAccount } from 'src/redux/new-channel/n
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { popupWindow } from './NewChannel';
 import { store } from '../../redux/store';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { getChannels } from 'src/redux/channels/channelsThunk';
 
 interface props {
   step: number;
@@ -60,6 +61,10 @@ export const UserName = (props: props) => {
     );
 
   };
+
+  useEffect(() =>{
+    dispatch(getChannels());
+  }, [createNewChannel]);
 
   return (
     <div className="username-form-container">
