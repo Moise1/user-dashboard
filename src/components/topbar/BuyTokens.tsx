@@ -1,11 +1,15 @@
-import { Card, Button } from 'antd';
+import { Card, Button, Form } from 'antd';
+import { buyTokens } from 'src/redux/tokens/tokensThunk';
 import tokenCoin from '../../assets/tokenCoin.png';
+import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/buy-tokens.scss';
 
 export const BuyTokens = () => {
+  const dispatch = useAppDispatch();
   const data = [
     {
       id: 1,
+      sku: 'sku_I3tks3dfom0Npg',
       coin: tokenCoin,
       tokens: 30,
       euros: 11.99,
@@ -14,6 +18,7 @@ export const BuyTokens = () => {
     },
     {
       id: 2,
+      sku: 'sku_I3tpbfFR7yaQFo',
       coin: tokenCoin,
       tokens: 150,
       euros: 44.99,
@@ -22,6 +27,7 @@ export const BuyTokens = () => {
     },
     {
       id: 3,
+      sku: 'sku_1HTm4VBVFd6MOE2R4lu1AKx8',
       coin: tokenCoin,
       tokens: 600,
       euros: 144.99,
@@ -29,6 +35,10 @@ export const BuyTokens = () => {
       buyText: 'Buy Now'
     }
   ];
+
+  const onFinish = (sku: string) => {
+    dispatch(buyTokens(sku));
+  };
   return (
     <div className="buy-tokens-container">
       <div className="text-container">
@@ -51,22 +61,39 @@ export const BuyTokens = () => {
       <div className="cards-container">
         {data.map((d) => (
           <Card key={d.id} className="card">
-            <div className="card-info">
-              <p className="tokens-count">
-                <strong>{d.tokens} Tokens</strong>
-              </p>
-              <img src={d.coin} alt="coin img" className="coin" />
-              <p className="euros-amount">
-                <span>&euro;</span>
-                {d.euros}
-              </p>
-              <p className="cents-amount">{d.cents} cent/token</p>
-
-              <Button className="buy-btn">{d.buyText}</Button>
-            </div>
+            <Form onFinish={() => onFinish(d.sku)}>
+              <div className="card-info">
+                <p className="tokens-count">
+                  <strong>{d.tokens} Tokens</strong>
+                </p>
+                <img src={d.coin} alt="coin img" className="coin" />
+                <p className="euros-amount">
+                  <span>&euro;</span>
+                  {d.euros}
+                </p>
+                <p className="cents-amount">{d.cents} cent/token</p>
+                <Button className="buy-btn" htmlType='submit'>{d.buyText}</Button>
+              </div>
+            </Form>
           </Card>
         ))}
       </div>
     </div>
   );
 };
+
+// async function OnClick(sku) {
+//   var stripe = Stripe("pk_live_9ZqUQknYIUpCPmPb9cjOsup4");
+//   $.ajax({
+//       type: "POST",
+//       url: 'Catalog/CreateCheckoutSession?price='+ sku,
+//       dataType: 'json',
+//       success: function (response) {
+//           console.log(response);
+//           stripe.redirectToCheckout({
+//               sessionId: response.checkoutSessionId
+//           });
+//       }
+//   })
+//   //const response = await rq.postJson<>(this.props.createCheckoutSessionUrl + '?price=' + sku, null);
+// }

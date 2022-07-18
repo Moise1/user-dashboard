@@ -1,4 +1,4 @@
-﻿import { ColumnType } from "antd/lib/table";
+﻿import { ColumnType } from 'antd/lib/table';
 
 export type ColumnId = number;
 //export type RecordField = number | string |boolean | Date | Record<string, any>;
