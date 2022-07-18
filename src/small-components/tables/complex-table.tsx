@@ -25,7 +25,6 @@ interface Props<RecordType> {
   onChangeVisibleRows?: (rows: RecordType[]) => void;
   onRow?: (record: RecordType) => { onClick: () => void };
   actionsDropdownMenu?: JSX.Element;
-  selectedRows?: number;
 
   currentPage?: number;
   onPageChange?: (page: number) => void;
@@ -45,7 +44,6 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
     onChangeVisibleRows,
     onRow,
     actionsDropdownMenu,
-    selectedRows,
 
     currentPage,
     onPageChange,
@@ -248,14 +246,12 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             onPageSizeChanged={OnPageSizeChange}
             onPageChange={OnPageNumberChange}
             currentPage={currentPage}
+            pageSizes={pageSizes}
 
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
             actionsDropdownMenu={actionsDropdownMenu}
             onRow={onRow}
-            selectedRows={selectedRows}
-
-            pageSizes={pageSizes}
           />
         )}
       </>}

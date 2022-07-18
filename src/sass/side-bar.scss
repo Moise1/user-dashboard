@@ -3,282 +3,287 @@
 // Large and extra large screens
 
 .chevron-left {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .ant-drawer-body {
-    padding: 0;
+  padding: 0;
 }
 
 .ant-menu-item .ant-menu-title-content {
-    padding-left: 26px;
+  padding-left: 26px;
 }
 
 .ant-menu-item::after {
-    border-right: 0px !important;
+  border-right: 0px !important;
 }
 
 .ant-menu-submenu-title .ant-menu-title-content {
-    padding-left: 26px;
+  padding-left: 26px;
 }
 
 .ant-menu.ant-menu-sub {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .ant-menu-title-content {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .ant-menu-title-content a {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .toggle-mode {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .ant-menu-submenu-popup,
 .ant-tooltip {
-    display: none;
+  display: none;
 }
 
 .ant-layout-sider-collapsed {
-    .anticon-pushpin {
-        display: none !important;
-    }
+  .anticon-pushpin {
+    display: none !important;
+  }
 }
 
 .sider {
-    margin-top: -0.3rem;
-    border-top: none;
+  margin-top: -0.3rem;
+  border-top: none;
+  border-right: none !important;
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+  position: fixed;
+  left: 0;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-icon > path:first-child {
+    display: none;
+  }
+
+  .ant-layout-sider-children {
+    background: $primary-bg;
+  }
+
+  .side-menu-container,
+  .ant-menu-root {
+    background: $primary-bg;
+  }
+
+  .ant-layout-sider-children {
+    overflow: scroll;
+  }
+
+  .ant-menu-inline {
     border-right: none !important;
-    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
-    position: fixed;
-    left: 0;
-    height: 100%;
-    z-index: 2;
-    overflow: hidden;
+  }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+  .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    border-right: none !important;
+  }
 
-    .sidebar-icon > path:first-child {
-        display: none;
-    }
-
-    .ant-layout-sider-children {
-        background: $primary-bg;
-    }
-
-    .side-menu-container,
-    .ant-menu-root {
-        background: $primary-bg;
-    }
-
-    .ant-layout-sider-children {
-        overflow: scroll;
-    }
-
-    .ant-menu-inline {
-        border-right: none !important;
-    }
-
-    .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
-        width: 80%;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        align-items: center;
-        border-right: none !important;
-    }
-
-    .menu-item,
-    .ant-menu-submenu:not(.secondary-subemenu) {
-        color: $primary-txt;
-        width: 90% !important;
-        margin: auto !important;
-        margin-top: 10px !important;
-        border-radius: 10px !important;
-
-        .ant-menu-submenu-vertical {
-            border-radius: 10px;
-        }
-
-        &:hover {
-            .ant-menu-submenu-arrow,
-            .ant-menu-submenu-title {
-                color: $primary-bg;
-            }
-        }
-    }
+  .menu-item,
+  .ant-menu-submenu:not(.secondary-subemenu) {
+    color: $primary-txt;
+    width: 90% !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    border-radius: 10px !important;
 
     .ant-menu-submenu-vertical {
-        padding-left: 0.3rem;
+      border-radius: 10px;
     }
 
-    .sidebar-icon,
-    .logout-icon {
-        margin-left: -0.3rem;
+    &:hover {
+      .ant-menu-submenu-arrow,
+      .ant-menu-submenu-title {
+        color: $primary-bg;
+      }
     }
+  }
 
-    .logout-txt {
-        color: $red;
-    }
+  .ant-menu-submenu-vertical {
+    padding-left: 0.3rem;
+  }
 
+  .sidebar-icon,
+  .logout-icon {
+    margin-left: -0.3rem;
+  }
+
+  .logout-txt {
+    color: $red;
+  }
+
+  .sidebar-icon > * {
+    stroke: $primary !important;
+  }
+
+  .menu-item:hover,
+  .submenu-item:hover,
+  .ant-menu-item-selected,
+  .ant-menu-submenu-active {
     .sidebar-icon > * {
-        stroke: $primary !important;
+      stroke: $primary-bg !important;
     }
 
-    .menu-item:hover,
-    .submenu-item:hover,
-    .ant-menu-item-selected,
-    .ant-menu-submenu-active {
-        .sidebar-icon > * {
-            stroke: $primary-bg !important;
-        }
+    .ant-menu-submenu-arrow {
+      color: $primary-bg;
+    }
+  }
 
-        .ant-menu-submenu-arrow {
-            color: $primary-bg;
-        }
+  .menu-item a:hover,
+  .submenu-item a:hover,
+  .ant-menu-item-selected a,
+  .ant-menu-submenu-active a {
+    .sidebar-icon > * {
+      stroke: $primary-bg !important;
     }
 
-    .menu-item a:hover,
-    .submenu-item a:hover,
-    .ant-menu-item-selected a,
-    .ant-menu-submenu-active a {
-        .sidebar-icon > * {
-            stroke: $primary-bg !important;
-        }
-
-        .ant-menu-submenu-arrow {
-            color: $primary-bg;
-        }
+    .ant-menu-submenu-arrow {
+      color: $primary-bg;
     }
+  }
 
-    .menu-item:hover,
-    .ant-menu-submenu-vertical:hover,
-    .ant-menu-submenu-inline:hover,
-    .ant-menu-item-selected {
-        color: $primary-bg !important;
-        background: $light-primary !important;
-    }
+  .menu-item:hover,
+  .ant-menu-submenu-vertical:hover,
+  .ant-menu-submenu-inline:hover,
+  .ant-menu-item-selected {
+    color: $primary-bg !important;
+    background: $light-primary !important;
+  }
 
+  .ant-menu-sub {
     .ant-menu-item-selected a {
-        color: $primary-bg !important;
-        background: $light-primary !important;
+      color: $light-primary !important;
+      background: none !important;
     }
+  }
 
-    .menu-item a:hover,
-    .ant-menu-submenu-vertical a:hover,
-    .ant-menu-submenu-inline a:hover,
-    .ant-menu-submenu-active a {
-        color: $primary-bg !important;
-    }
+  .ant-menu-item-selected a {
+    color: $primary-bg !important;
+    background: $light-primary !important;
+  }
 
-    .ant-menu-submenu-selected {
-        color: $light-primary !important;
-        background: none !important;
-    }
+  .menu-item a:hover,
+  .ant-menu-submenu-vertical a:hover,
+  .ant-menu-submenu-inline a:hover,
+  .ant-menu-submenu-active a {
+    color: $primary-bg !important;
+  }
 
-    .ant-menu-submenu-inline a:hover, .ant-menu-submenu-active a {
-        color: $light-primary !important;
-        background: none !important;
+  .ant-menu-submenu-inline a:hover,
+  .ant-menu-submenu-active a {
+    color: $light-primary !important;
+    background: none !important;
+  }
+
+  .menu-list {
+    color: $gray;
+
+    &:hover {
+      font-weight: $bold !important;
     }
+  }
+
+  .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+    background: transparent !important;
+    font-weight: $bold;
 
     .menu-list {
-        color: $gray;
+      font-weight: $bold;
+    }
+  }
+  // Hover transitions
+  .ant-menu-inline.ant-menu-root .ant-menu-item,
+  .ant-menu-inline.ant-menu-root .ant-menu-submenu-title,
+  .ant-menu-title-content,
+  .ant-menu-submenu,
+  .ant-menu-submenu-inline,
+  .ant-menu-submenu-expand-icon,
+  .ant-menu-submenu-arrow,
+  .ant-menu-submenu-arrow::after,
+  .ant-menu-submenu-arrow::before,
+  .ant-menu-submenu .ant-menu-submenu-inline .submenu-item,
+  .ant-menu-title-content,
+  .ant-menu-title-content a {
+    transition: none !important;
+  }
 
-        &:hover {
-            font-weight: $bold !important;
-        }
+  .ant-menu-submenu-title:active {
+    background: none !important;
+  }
+
+  .side-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    margin: 3rem auto;
+    padding-bottom: 1rem;
+
+    .menu-container {
+      .list-submenu-item {
+        margin-bottom: 2rem;
+      }
     }
 
-    .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
-        background: transparent !important;
-        font-weight: $bold;
-
-        .menu-list {
-            font-weight: $bold;
-        }
-    }
-    // Hover transitions
-    .ant-menu-inline.ant-menu-root .ant-menu-item,
-    .ant-menu-inline.ant-menu-root .ant-menu-submenu-title,
-    .ant-menu-title-content,
-    .ant-menu-submenu,
-    .ant-menu-submenu-inline,
-    .ant-menu-submenu-expand-icon,
-    .ant-menu-submenu-arrow,
-    .ant-menu-submenu-arrow::after,
-    .ant-menu-submenu-arrow::before,
-    .ant-menu-submenu .ant-menu-submenu-inline .submenu-item,
-    .ant-menu-title-content {
-        transition: none !important;
+    .sidebar-overhead {
+      .logo-container,
+      .quota-container {
+        display: none;
+      }
     }
 
-    .ant-menu-submenu-title:active {
-        background: none !important;
+    .sidebar-control-btns {
+      position: absolute;
+      right: 5%;
+      top: 1%;
+
+      .pin-icon {
+        cursor: pointer;
+      }
     }
-
-    .side-menu-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow-y: scroll;
-        margin: 3rem auto;
-
-        .menu-container {
-            .list-submenu-item {
-                margin-bottom: 2rem;
-            }
-        }
-
-        .sidebar-overhead {
-            .logo-container,
-            .quota-container {
-                display: none;
-            }
-        }
-
-        .sidebar-control-btns {
-            position: absolute;
-            right: 5%;
-            top: 1%;
-
-            .pin-icon {
-                cursor: pointer;
-            }
-        }
-    }
+  }
 }
 // Tablets screens
 @media only screen and (max-width: 1030px) {
+  .sider {
+    display: none;
+  }
+
+  .ant-drawer-content-wrapper {
+    width: 30vw !important;
+
     .sider {
-        display: none;
+      display: block;
+      filter: none;
+      position: static;
     }
-
-    .ant-drawer-content-wrapper {
-        width: 30vw !important;
-
-        .sider {
-            display: block;
-            filter: none;
-            position: static;
-        }
-    }
+  }
 }
 
 @media only screen and (max-width: 750px) {
-    .ant-drawer-content-wrapper {
-        width: 90% !important;
-        min-width: 250px;
-    }
+  .ant-drawer-content-wrapper {
+    width: 90% !important;
+    min-width: 250px;
+  }
 
-    .side-menu-container {
-        padding: 1rem;
-    }
+  .side-menu-container {
+    padding: 1rem;
+  }
 }

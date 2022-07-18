@@ -2,6 +2,8 @@ import { Col, Row, Divider } from 'antd';
 import { CancelBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
 import '../../sass/product-details.scss';
+import { CatalogProduct } from '../../redux/catalog/catalogSlice';
+import { useEffect, useState } from 'react';
 
 interface Props {
   imageUrl?: string;
@@ -9,27 +11,60 @@ interface Props {
   profit?: number;
   sourcePrice?: number;
   handleClose: () => void;
-  productId?: unknown;
-  selectedProductDataDetail?: {
-    channelPrice?: number;
-    competition?: number;
-    id?: number;
-    imageUrl: string;
-    options: number;
-    priority: number;
-    profit: number;
-    quantityListed: number;
-    sold: number;
+  selectedProductDataDetail: {
+    id: number;
     sourceId: number;
+    imageUrl: string;
     sourcePrice: number;
     title: string;
     url: string;
+    profit: number;
+    channelPrice: number;
+    sold: number;
+    competition: number;
+    options: number;
+    priority: number;
+    quantityListed: number;
+    [key: string]: number | string | boolean | null;
+    page: number;
+    totalResults: number;
+    pageSize: number;
+    sessionId: number;
+    option: number;
+    productId: number;
   }
-
+  setAllProducts: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
+  cardElementProductDetail: (EventTarget & HTMLDivElement) | (EventTarget & SVGElement) | (EventTarget & HTMLSpanElement) | (EventTarget & Element) | undefined;
+  allCatalogProducts: CatalogProduct[];
 }
 export const ProductDetails = (props: Props) => {
-  const { imageUrl, profit, sourcePrice, channelPrice, handleClose, selectedProductDataDetail, productId } = props;
-  console.log(selectedProductDataDetail);
+
+  const { imageUrl, profit, sourcePrice, channelPrice, handleClose, selectedProductDataDetail
+    , setAllProducts, cardElementProductDetail, allCatalogProducts
+  } = props;
+
+  console.log('Delete this variable', cardElementProductDetail, allCatalogProducts);
+  const [limit, setLimit] = useState<number>(1);
+  const [cardInfo, setCardInfo] = useState<
+    (EventTarget & HTMLDivElement) | (EventTarget & SVGElement) | (EventTarget & HTMLSpanElement) | (EventTarget & Element) | null
+  >();
+  useEffect(() => {
+    setLimit(1);
+    setCardInfo(document.getElementById(JSON.stringify(selectedProductDataDetail.id)));
+  }, [selectedProductDataDetail, cardInfo]);
+
+  const addToSelection = () => {
+    setLimit(limit + 1);
+    limit == 1 && setAllProducts((prevState) => [...prevState, selectedProductDataDetail]);
+    cardInfo?.classList.add('selected-product-card');
+    // allCatalogProducts.filter((d) => d.id === selectedProductDataDetail.id);
+  };
+
+  const removeToSelection = () => {
+    cardInfo?.classList.remove('selected-product-card');
+    setAllProducts((prevState) => [...prevState].filter((d) => d.id !== selectedProductDataDetail.id));
+  };
+
   return (
     <div className="product-details">
       <Row gutter={[32, 0]}>
@@ -72,10 +107,14 @@ export const ProductDetails = (props: Props) => {
           <Divider />
           <div className="action-btns">
             {
-              productId !== 0 ?
-                <SuccessBtn>{t('RemoveFromSelection')}</SuccessBtn>
+              document.getElementById(JSON.stringify(selectedProductDataDetail.id))?.classList.contains('selected-product-card') ?
+                <SuccessBtn
+                  handleConfirm={removeToSelection}
+                >{t('RemoveFromSelection')}</SuccessBtn>
                 :
-                <SuccessBtn>{t('AddToSelection')}</SuccessBtn>
+                <SuccessBtn
+                  handleConfirm={addToSelection}
+                >{t('AddToSelection')}</SuccessBtn>
             }
             <CancelBtn handleClose={handleClose}>{t('Button.Cancel')}</CancelBtn>
           </div>

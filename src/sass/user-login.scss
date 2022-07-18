@@ -1,18 +1,64 @@
 @import 'general.config';
 
-// Large screens and extra large screens 
+// Large screens and extra large screens
 .login-form-container {
-  width: 30%;
-  margin: 5% auto 0 auto;
-  .login-form-title {
-    text-align: center;
-    margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+  background: $primary-light-bg-color;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .alternative-link {
+    text-decoration: underline;
+  };
+  .login-form-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background: $dark-blue;
+    padding: 5px 17px;
+    .text-section > *,
+    .alternative-link {
+      color: $primary-light-bg-color;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .login-form {
+    margin-top: 2rem;
+    padding: 0 17px;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      box-shadow:  0 0 0 30px white inset !important;
+    }
+    .password-input-label {
+      display: flex;
+      align-items: center;
+      column-gap: 8rem;
+      .label-name {
+        font-weight: 600; 
+        font-size: 16px;
+      }
+      .alternative-link {
+        font-size: $font-small;
+      }
+    }
+    .confirm-btn {
+      width: 100%;
+    }
   }
 }
 
 // Small screen device
-@media only screen and (max-width: 750px){
-  .login-form-container{
-    width: 100%;
+@media only screen and (max-width: 750px) {
+  .login-form-container {
+    width: 90%;
   }
 }

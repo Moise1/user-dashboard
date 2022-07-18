@@ -12,10 +12,9 @@ export const getOrders = createAsyncThunk(
   async ({ channelOAuthIds }: { channelOAuthIds: OrderData['channelOAuthIds'] }, thunkAPI) => {
     try {
       const res = await client.post('/Sales/Search', { channelOAuthIds });
-      const data = res.data.response_data.orders.map((item: OrderData, key: number): unknown => ({
+      const data = res.data.response_data.orders.map((item: OrderData): unknown => ({
         ...item,
-        date: new Date(item?.date),
-        key
+        date: new Date(item?.date)
       }));
       return data;
     } catch (error) {

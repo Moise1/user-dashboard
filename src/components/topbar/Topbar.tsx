@@ -8,7 +8,6 @@ import Logo from '../../assets/logoHGR.png';
 import { t } from 'src/utils/transShim';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from './BuyTokens';
-import { DeleteAccount } from '../user/DeleteAccount';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { getNotifications } from '../../redux/notifications/notificationsThunk';
 import { AppContext } from '../../contexts/AppContext';
@@ -24,20 +23,15 @@ export const Topbar = withRouter((props: Props) => {
   const { showMobileSider, history } = props;
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState<boolean>(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(false);
 
   const { tokens } = useAppSelector((state) => state.user);
 
   const { quota } = useAppSelector((state) => state.user);
 
   const { notifications } = useAppSelector((state) => state.notifications);
-  const handleCheck = () => setChecked(!checked);
   const handleOpenModal = () => setOpen(!open);
 
-  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal);
-  const handleCancel = () => setOpenDeleteModal(!openDeleteModal);
-  const handleDelete = () => setOpenDeleteModal(!openDeleteModal);
+  
 
   const routeChange = (route: string) => {
     history.push(route);
@@ -56,15 +50,7 @@ export const Topbar = withRouter((props: Props) => {
 
   return (
     <div className="top-bar">
-      <PopupModal open={openDeleteModal}>
-        <DeleteAccount
-          checked={checked}
-          handleCheck={handleCheck}
-          handleCancel={handleCancel}
-          handleDelete={handleDelete}
-        />
-      </PopupModal>
-
+      
       <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
         <BuyTokens />
       </PopupModal>
@@ -109,7 +95,7 @@ export const Topbar = withRouter((props: Props) => {
         </div>
       </div>
       <div className="top-bar-item">
-        <div onClick={handleDeleteModal} className="notifications-container">
+        <div  className="notifications-container">
           <Badge count={notifications?.length} className="notifications">
             <img src={bell} alt="" />
           </Badge>
