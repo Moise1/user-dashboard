@@ -22,6 +22,7 @@ export const Orders = () => {
   const { orders } = useAppSelector((state) => state);
   const { status, loading } = useAppSelector((state) => state.orders);
   const [selectedRecord, setSelectedRecord] = useState({});
+  const [currentPage, setCurrentPage] = useState<number>(1);
   //const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
@@ -42,6 +43,8 @@ export const Orders = () => {
     handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
   };
+
+  const handlePageChange = (currentPage: number) => setCurrentPage(currentPage);
 
   const { channelId: newChannel } = useContext(AppContext);
 
@@ -105,6 +108,8 @@ export const Orders = () => {
             loadingData={loading}
             rowSelection={rowSelection}
             selectedRows={selectedRowKeys.length}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
             onRow={(record) => {
               return {
                 onClick: () => {

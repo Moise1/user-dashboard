@@ -12,9 +12,9 @@ interface Props<RecordType> {
   rowClassName?: string;
 
   currentPage?: number;
-  onPageChange?: (pageSize: number, pageNumber: number) => void;
+  onPageChange?: (pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (pageSize: number, pageNumber: number) => void;
+  onPageSizeChanged?: (pageSize: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
@@ -106,14 +106,16 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     return sort(dataSource, sorter)?.slice((currentPage! - 1) * currentPageSize!, currentPage! * currentPageSize!);
   };
 
-  const onPageChange = (page: number, pageSize: number) => {
+  const onPageChange = (page: number) => {
     setCurrentPage(page);
-    cOnPageChange?.(pageSize, page);
+    cOnPageChange?.(page);
   };
 
   const onShowPageSizeChange = (current: number, pageSize: number) => {
     setPageSize(pageSize);
-    cOnPageSizeChanged?.(pageSize, current);
+    cOnPageSizeChanged?.(pageSize);
+    if (currentPage != current)
+      onPageChange?.(current);
   };
 
   const [sorter, setSorter] = useState<SorterState[] | undefined>();

@@ -26,16 +26,43 @@ interface Props<RecordType> {
   onRow?: (record: RecordType) => { onClick: () => void };
   actionsDropdownMenu?: JSX.Element;
   selectedRows?: number;
+
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
+  pageSize?: number;
+  onPageSizeChanged?: (itemsPerPage: number) => void;
+  pageSizes?: number[];
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows, onRow, actionsDropdownMenu, selectedRows } = props;
+  const {
+    uiIdentifier,
+    defaultVisibleColumns,
+    allColumnData, data,
+    hideWhenEmpty,
+    loadingData,
+    rowSelection,
+    onChangeVisibleRows,
+    onRow,
+    actionsDropdownMenu,
+    selectedRows,
+
+    currentPage,
+    onPageChange,
+    onPageSizeChanged,
+    pageSizes
+  } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
   const uiPreferencesS = (() => {
     const preferences = useAppSelector((state) => state.UIPreferences as UIPreferencesState)?.tablePreferences?.[uiIdentifier];
-    return { columns: preferences?.columns, pageSize: preferences?.pageSize ?? 10, pageNumber: preferences?.pageNumber ?? 1, loading: preferences?.loading ?? false };
+    return {
+      columns: preferences?.columns,
+      pageSize: preferences?.pageSize ?? 10,
+      pageNumber: currentPage ?? 1,
+      loading: preferences?.loading ?? false
+    };
   })();
 
   const [uiPreferences, setUIPreferences] = useState<UITablePreferenceL>(uiPreferencesS);
@@ -61,15 +88,15 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const SaveVisibleColumns = (columns: ColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
-  const OnPageSizeChange = (pageSize: number, pageNumber: number) => {
-    setUIPreferences(prev => ({ ...prev, pageSize, pageNumber, loading: false }));
-    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
+  const OnPageSizeChange = (pageSize: number) => {
+    setUIPreferences(prev => ({ ...prev, pageSize, loading: false }));
+    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
+    onPageSizeChanged?.(pageSize);
   };
   //------------------------------------------------------------------------------------------
   ///PAGE Number--------------------------------------------------------------------------------
-  const OnPageNumberChange = (pageSize: number, pageNumber: number) => {
-    setUIPreferences(prev => ({ ...prev, pageSize, pageNumber, loading: false }));
-    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
+  const OnPageNumberChange = (pageNumber: number) => {
+    onPageChange?.(pageNumber);
   };
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
@@ -216,15 +243,19 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             totalItems={data.length}
             showTableInfo={true}
             rowClassName='table-row'
+
             pageSize={uiPreferences.pageSize}
             onPageSizeChanged={OnPageSizeChange}
             onPageChange={OnPageNumberChange}
-            currentPage={uiPreferences.pageNumber}
+            currentPage={currentPage}
+
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
             actionsDropdownMenu={actionsDropdownMenu}
             onRow={onRow}
             selectedRows={selectedRows}
+
+            pageSizes={pageSizes}
           />
         )}
       </>}
