@@ -2,20 +2,42 @@
 
 // Large screens and extra large screens
 .register-form-container {
-  width: 30%;
-  margin: 2% auto 0 auto;
-  .register-form-title {
-    text-align: center;
-    margin-bottom: 2rem;
+  position: absolute;
+  margin-top: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-90%, -50%);
+  z-index: 1;
+  background: $primary-light-bg-color;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+  .alternative-link {
+    text-decoration: underline;
+  }
+  .register-form-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background: $dark-blue;
+    padding: 5px 17px;
+    .text-section > *,
+    .alternative-link {
+      color: $primary-light-bg-color;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
   }
   .register-form {
-    .ant-input,
-    #basic_password,
-    .ant-form-item-has-error {
-      background: $transparent;
-      &:focus {
-        background: $transparent;
-      }
+    padding: 5px 17px;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+      box-shadow: 0 0 0 30px white inset !important;
     }
 
     .checkbox,
@@ -28,12 +50,59 @@
         color: $corporative-color;
       }
     }
+
+    .confirm-btn {
+      width: 100%;
+    }
+  }
+}
+
+.sell-online-container {
+  height: 100vh;
+  background: $dark-blue;
+  width: 70%;
+  right: 0;
+  position: absolute;
+  clip-path: polygon(6% 67%, 100% 0, 100% 100%, 0% 100%);
+  .sell-online-contents {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    .title h1,
+    p {
+      font-style: italic;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 20px;
+    }
+
+    .title > *,
+    .stats {
+      color: $primary-light-bg-color !important;
+      width: max-content;
+      .ant-steps-item-title {
+        font-style: italic;
+        color: $primary-light-bg-color !important;
+        font-weight: bold;
+        font-size: 30px;
+      }
+      .ant-steps-icon-dot {
+        background: $primary-light-bg-color !important;
+      }
+    }
   }
 }
 
 // Small screen device
 @media only screen and (max-width: 750px) {
+  .sell-online-container {
+    display: none;
+  }
   .register-form-container {
-    width: 100%;
+    width: 90%;
+    transform: translate(-50%, -50%);
   }
 }
