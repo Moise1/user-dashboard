@@ -384,7 +384,7 @@ export const Catalog = () => {
                             <div className="product-info-area">
                               <div className="header">
                                 <p className="product-title">
-                                  {d?.title.length > 20 ? `${d?.title.substring(0, 70)} ...` : d?.title}
+                                  {d?.title.length > 20 ? `${d?.title.substring(0, 50)} ...` : d?.title}
                                 </p>
                                 <p className="source">
                                   by &nbsp;

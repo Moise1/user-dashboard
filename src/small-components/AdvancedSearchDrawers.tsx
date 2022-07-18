@@ -165,8 +165,8 @@ export const CatalogFilters = (props: Props) => {
               <Input
                 className="blue-input"
                 name="profitFrom"
-                onChange={catalogAdvancedSearchOnChange}
                 value={catalogFormInput.profitFrom}
+                onChange={catalogAdvancedSearchOnChange}
               />
             </Form.Item>
 
@@ -174,8 +174,8 @@ export const CatalogFilters = (props: Props) => {
               <Input
                 className="blue-input"
                 name="priceTo"
-                onChange={catalogAdvancedSearchOnChange}
                 value={catalogFormInput.priceTo}
+                onChange={catalogAdvancedSearchOnChange}
               />
             </Form.Item>
 
@@ -183,8 +183,8 @@ export const CatalogFilters = (props: Props) => {
               <Input
                 className="blue-input"
                 name="profitTo"
-                onChange={catalogAdvancedSearchOnChange}
                 value={catalogFormInput.profitTo}
+                onChange={catalogAdvancedSearchOnChange}
               />
             </Form.Item>
           </div>
@@ -214,8 +214,8 @@ export const CatalogFilters = (props: Props) => {
           <Form.Item label="Order By" name="orderBy">
             <Selector
               size="large"
-              onChange={ordersChangeHandler}
               placeHolder="Default"
+              onChange={ordersChangeHandler}
               dropdownRender={(menu: ReactNode) => <div className="dropdown-content mb-5">{menu}</div>}
             >
               {orders.map((x) => {
