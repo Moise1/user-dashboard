@@ -1,5 +1,5 @@
-import React, { useEffect, Fragment, useMemo } from 'react';
-import { Layout} from 'antd';
+import React, { useEffect, Fragment, useMemo, useState } from 'react';
+import { Layout } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -28,6 +28,10 @@ import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 
 enum ListingTab {
   active, pending, terminated, import
+}
+type Selection = {
+  listings: ListingT[],
+  keys: number[]
 }
 
 export const Listings = () => {
@@ -89,7 +93,7 @@ export const Listings = () => {
     //return (() => {
     const AddExtraData = (data: ListingT[] | null | undefined) => {
       if (!data || !sourcesDic) return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel } as ListingT));
+      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
     };
     const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
       if (!data || !activeListingsImages) return data;
@@ -154,9 +158,13 @@ export const Listings = () => {
 
   const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
 
+  //Row Selection
+  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
+  const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
+  //
   //Bulk Menu-----------------------------------------------------------------
-  //const handleSingleListingModal = () => { };
-  //const handleBulkListingModal = () => { };
+  //const handleSingleListingModal = () => { console.log('x'); };
+  //const handleBulkListingModal = () => { console.log('y'); };
   //const actionsDropdownMenu = useMemo(() =>
   //  <Menu
   //    items={[
@@ -165,9 +173,9 @@ export const Listings = () => {
   //        label: (
   //          <div
   //            className="action-option"
-  //            onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
+  //            onClick={selectedRows?.internalKeys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
   //          >
-  //            Edit  <strong>{selectedRows}</strong> {page}(s)
+  //            Edit  <strong>{selectedRows}</strong>
   //          </div>
   //        )
   //      },
@@ -175,7 +183,7 @@ export const Listings = () => {
   //        type: 'group',
   //        label: (
   //          <div className="action-option">
-  //            Copy <strong>{selectedRows}</strong> {page}(s)
+  //            Copy <strong>{selectedRows}</strong>
   //          </div>
   //        )
   //      },
@@ -183,13 +191,13 @@ export const Listings = () => {
   //        type: 'group',
   //        label: (
   //          <div className="action-option">
-  //            Optimize <strong>{selectedRows}</strong> {page}(s)
+  //            Optimize <strong>{selectedRows}</strong>
   //          </div>
   //        )
   //      }
   //    ]}
   //  />
-  //  , [selectedRows, page]);
+  //, [selectedRows?.internalKeys?.length]);
   //--------------------------------------------------------------------------
   //Load images for active listings-------------------------------------------
 
@@ -237,8 +245,12 @@ export const Listings = () => {
           defaultVisibleColumns={defaultVisibleColumns}
           hideWhenEmpty={hideWhenEmpty}
           loadingData={loadingListings || loadingSources}
-          //actionsDropdownMenu={actionsDropdownMenu}
           onChangeVisibleRows={onChangeVisibleRows}
+          //actionsDropdownMenu={actionsDropdownMenu}
+          rowSelection={{
+            selectedRowKeys: selectedRows?.keys,
+            onChange: onSelectChange
+          }}
         />
         {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
       </Fragment>

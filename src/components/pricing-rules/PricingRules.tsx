@@ -178,7 +178,6 @@ export const PricingRules = () => {
             columns={columns}
             totalItems={rules.length}
             rowSelection={rowSelection}
-            selectedRows={selectedRowKeys.length}
           />
         )}
       </div>
