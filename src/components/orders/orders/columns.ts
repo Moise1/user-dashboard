@@ -1,4 +1,5 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
+﻿import moment from 'antd/node_modules/moment';
+import { ColumnData } from '../../../small-components/tables/types/columns';
 import { determineStatus } from '../../../utils/determineStatus';
 import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
 
@@ -101,7 +102,8 @@ export const OrdersColumns: OrderColumnData[] = [
     id: OrderColumnId.DateOfOrder,
     title: 'OrderTable.DateOfOrder',
     dataIndex: 'date',
-    smartSearch: { ignore: true }
+    smartSearch: { ignore: true },
+    render: (date: Date) => moment(date).format('DD/MM/YY/ hh:mm')
   },
   {
     id: OrderColumnId.Status,

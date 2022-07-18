@@ -50,11 +50,12 @@ export type OrderData = {
   sold: string;
   cost: string;
   fees: number;
-  profit?: number;
+  profit?: number;//Calculated in local
   margin?: number;
   status: string;
   sourcePrice: number;
   channelPrice: number;
+  key: number;//Calculated in local
 }
 
 const initialState = {

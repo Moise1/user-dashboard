@@ -19,7 +19,7 @@ export enum ListingColumnId {
   ChannelItem= 12
 }
 
-export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { source?: Source, channel?: Channel };
+export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { key:number, source?: Source, channel?: Channel };
 type WithChannelItem = { channelItem: string };
 
 export interface ListingColumnData extends ColumnData<ListingT> {

@@ -1,21 +1,5 @@
 import dataoneimg from '../../assets/data1img.png';
 
-export const orderHeadingData = [
-  'OrderTable.Item',
-  'OrderTable.Sale',
-  'OrderTable.Source',
-  'OrderTable.Title',
-  'OrderTable.QTY',
-  'OrderTable.Sold',
-  'OrderTable.Cost',
-  'OrderTable.Fees',
-  'OrderTable.Profit',
-  'OrderTable.Margin',
-  'OrderTable.OrderedOn',
-  'OrderTable.State',
-  'OrderTable.Options'
-];
-
 export interface OrderItems {
   id: number;
   img: JSX.Element;
