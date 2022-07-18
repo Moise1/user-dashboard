@@ -16,10 +16,10 @@ export const tokensSlice = createSlice({
       state.loading = true;
       state.error = '';
     });
-    builder.addCase(buyTokens.fulfilled, (state, { payload }) => {
+    builder.addCase(buyTokens.fulfilled, (state) => {
       state.loading = false;
     });
-    builder.addCase(buyTokens.rejected, (state, { payload }) => {
+    builder.addCase(buyTokens.rejected, (state) => {
       state.loading = false;
     //   state.error = String(payload);
     });
