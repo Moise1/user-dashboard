@@ -47,7 +47,7 @@
   display: flex !important;
   height: auto !important;
   justify-content: space-between;
-
+  align-items: center;
   .disabled {
     background: rgba($light-primary, 0.2);
     color: $primary-bg;

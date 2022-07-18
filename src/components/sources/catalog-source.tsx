@@ -16,7 +16,7 @@ interface Props {
 }
 export const CatalogSource = ({ handleClose, getSourcesData, sources }: Props) => {
   const dispatch = useAppDispatch();
-  const onSearch = (value: string) => console.log('searched value', value);
+
   const [addedSources, setAddedSources] = useState<Source[]>([]);
   const [pendingSources, setPendingSources] = useState<Source[]>(sources);
 
@@ -32,10 +32,20 @@ export const CatalogSource = ({ handleClose, getSourcesData, sources }: Props) =
     setAddedSources((prevState) => prevState.filter((s) => s.id !== id));
   };
 
-  const cancelFiltering = () => {
-    setAddedSources([]);
+  // const cancelFiltering = () => {
+  //   setAddedSources([]);
+  //   setPendingSources(
+  //     sources
+  //   );
+  // };
+
+  const onSearch = (value: string) => {
     setPendingSources(
-      sources
+      sources.filter((c: Source) => {
+        if (c.name.toLowerCase().includes(value.toLowerCase())) {
+          return c;
+        }
+      })
     );
   };
 
@@ -80,8 +90,9 @@ export const CatalogSource = ({ handleClose, getSourcesData, sources }: Props) =
       </div>
       <Divider />
       <div className="action-btns">
-        <SuccessBtn>{t('AddSources')}</SuccessBtn>
-        <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Button.Cancel')}</CancelBtn>
+        <SuccessBtn handleClose={handleClose}>{t('AddSources')}</SuccessBtn>
+        {/* <CancelBtn handleClose={handleClose} cancelFiltering={cancelFiltering}>{t('Button.Cancel')}</CancelBtn> */}
+        <CancelBtn handleClose={handleClose}>{t('Button.Cancel')}</CancelBtn>
       </div>
     </div>
   );
