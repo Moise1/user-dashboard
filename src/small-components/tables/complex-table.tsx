@@ -49,8 +49,8 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize, uiPreferencesS?.pageNumber]);
 
   const SaveUIPreferences = (preferences: UITablePreference) => {
-    setUIPreferences({ ...preferences, loading: false });
     dispatch(savePreferences({ uiIdentifier, data: preferences }));
+    console.log(uiPreferences);
   };
   //------------------------------------------------------------------------------------------
   ///POPUP VISIBLE COLUMNS--------------------------------------------------------------------
@@ -61,11 +61,15 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
   const OnPageSizeChange = (pageSize: number, pageNumber: number) => {
+    console.log(pageSize + '--' + pageNumber);
+    setUIPreferences(prev => ({ ...prev, pageSize, pageNumber, loading: false }));
     SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
   };
   //------------------------------------------------------------------------------------------
   ///PAGE Number--------------------------------------------------------------------------------
   const OnPageNumberChange = (pageSize: number, pageNumber: number) => {
+    console.log(pageSize + '--' + pageNumber);
+    setUIPreferences(prev => ({ ...prev, pageSize, pageNumber, loading: false }));
     SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize, pageNumber });
   };
   //------------------------------------------------------------------------------------------

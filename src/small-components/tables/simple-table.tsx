@@ -39,9 +39,11 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
   } = props;
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
-  const [currentPage, setCurrentPage] = useState<number>(cCurrentPage ?? 1);
+  const [sCurrentPage, setCurrentPage] = useState<number>(1);
+  const currentPage = cCurrentPage ?? sCurrentPage;
 
-  const [pageSize, setPageSize] = useState<number>(cPageSize ?? pageSizeOptionArray[0]);
+  const [sPageSize, setPageSize] = useState<number>(pageSizeOptionArray[0]);
+  const pageSize = cPageSize ?? sPageSize;
   type SorterState = {
     dataIndex: DataIndex,
     order: SortOrder
