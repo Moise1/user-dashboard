@@ -94,7 +94,7 @@ export const Listings = () => {
     const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
       if (!data || !activeListingsImages) return data;
       for (const d of data) {
-        const ud = activeListingsImages[d.id];
+        const ud = activeListingsImages[d.channelListingId];
         if (ud && !ud.loading && ud.url) {
           (d as ActiveListing | PendingListing).imageUrl = ud.url;
         }
@@ -199,8 +199,8 @@ export const Listings = () => {
 
     const imgToLoad: number[] = [];
     for (const r of rows) {
-      if (!r.imageUrl && !(activeListingsImages ?? {})[r.id]?.loading) {
-        imgToLoad.push(r.id);
+      if (!r.imageUrl && !(activeListingsImages ?? {})[r.channelListingId]?.loading) {
+        imgToLoad.push(r.channelListingId);
       }
     }
     if (imgToLoad.length > 0)
