@@ -2,7 +2,8 @@
 import { ActiveListing, PendingListing, TerminatedListings } from '../../../redux/listings/listingsSlice';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
+import { RenderChannelItem, RenderImage, RenderPrice, RenderSource } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost } from './columns-sorter';
 
 export enum ListingColumnId {
   Image = 1,
@@ -20,7 +21,6 @@ export enum ListingColumnId {
 }
 
 export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { key:number, source?: Source, channel?: Channel };
-type WithChannelItem = { channelItem: string };
 
 export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
@@ -52,14 +52,15 @@ export const ListingsColumns: ListingColumnData[] = [
     dataIndex: 'channelItem',
     width: 70,
     render: RenderChannelItem,
-    sorter: (a, b) => ((a as WithChannelItem).channelItem as string).localeCompare((b as WithChannelItem).channelItem as string)
+    sorter: SorterChanelItem
   },
   {
     id: ListingColumnId.Source,
     title: 'Listings.Column.Source',
     dataIndex: 'sourcePath',
     width: 70,
-    render: RenderSource
+    render: RenderSource,
+    sorter: SorterSource
   },
   {
     id: ListingColumnId.Id,
@@ -72,17 +73,22 @@ export const ListingsColumns: ListingColumnData[] = [
     dataIndex: 'title',
     smartSearch: {
       customFilter: MultiTermFilter
-    }
+    },
+    sorter: SorterTitle
   },
   {
     id: ListingColumnId.SellPrice,
     title: 'Listings.Column.Sell',
-    dataIndex: 'channelPrice'
+    dataIndex: 'channelPrice',
+    render: RenderPrice,
+    sorter: SorterSell
   },
   {
     id: ListingColumnId.CostPrice,
     title: 'Listings.Column.Cost',
-    dataIndex: 'sourcePrice'
+    dataIndex: 'sourcePrice',
+    render: RenderPrice,
+    sorter: SorterCost
   },
   {
     id: ListingColumnId.Profit,
