@@ -1,4 +1,5 @@
 ﻿import moment from 'antd/node_modules/moment';
+import { OrderData } from '../../../redux/orders/orderSlice';
 import { ColumnData } from '../../../small-components/tables/types/columns';
 import { determineStatus } from '../../../utils/determineStatus';
 import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
@@ -109,6 +110,6 @@ export const OrdersColumns: OrderColumnData[] = [
     id: OrderColumnId.Status,
     title: 'OrderTable.Status',
     dataIndex: 'status',
-    render: (status: number) => determineStatus(status)
+    render: (status: number, record: RecordType) => determineStatus(status, record as unknown as OrderData)
   }
 ];

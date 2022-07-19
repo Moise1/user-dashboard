@@ -15,6 +15,13 @@ interface props {
 
 export const OrderActionBtns = (typeBtnProps: props) => {
   const { channelOAuthId, selectedOrderIds } = typeBtnProps;
+  //const processDisabled  = !selectedorder || notConfigured
+  //  || (!Utils.HasValue(order?.status) && order.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
+  //  || (order.status != AutoOrderingState.AutoorderingDisabled
+  //    && order.status != AutoOrderingState.GoingToBuyError
+  //    && order.status != AutoOrderingState.PermanentError
+  //  );
+
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
     selectedOrderIds.length > 0 && setDisabled(false);

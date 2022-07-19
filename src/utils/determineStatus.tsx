@@ -1,26 +1,6 @@
 // import { SuccessBtn,WarningBtn, CancelBtn } from '../components/small-components/ActionBtns';
-import { SuccessBtn, WarningBtn, ProgressBtn, DangerBtn } from '../small-components/ActionBtns';
-
-export const determineStatus = (statusValue: string | number) => {
-  switch (statusValue) {
-    case 0:
-      return <WarningBtn>A.O Disabled</WarningBtn>;
-    case 1:
-      return <ProgressBtn>In Progress</ProgressBtn>;
-    case 1000:
-      return <SuccessBtn>Checkout </SuccessBtn>;
-    case 2000:
-      return <SuccessBtn>Dispatched</SuccessBtn>;
-    case 2100:
-      return <SuccessBtn>Manually Dispatched</SuccessBtn>;
-    case 3000:
-    case 3100:
-    case 3200:
-      return <DangerBtn>View Error</DangerBtn>;
-    default:
-      break;
-  }
-};
+import { OrderData } from '../redux/orders/orderSlice';
+import { SuccessBtn, WarningBtn, ProgressBtn, DangerBtn, CancelBtn } from '../small-components/ActionBtns';
 
 export enum OrderStatus {
   Unkown = 0,
@@ -56,3 +36,36 @@ export enum AutoOrderingState {
   PermanentError = 3100, //Unrecoverable error, possibly need user action
   GoingToBuyError = 3200//Just before clicking, an unexpected error happened so we don't know if it has been bought or not
 }
+
+
+export const determineStatus = (statusValue: string | number, order: OrderData) => {
+
+  switch (statusValue) {
+    case AutoOrderingState.AutoorderingDisabled:
+      switch (order.storeStatus) {
+        default:
+          if (order.sourceAOEnabled) {
+            if (order.sourceAOConfigured) {
+              return <WarningBtn>Paused</WarningBtn>;
+            } else {
+              return <WarningBtn>A.O Disabled</WarningBtn>;
+            }
+          } else {
+            return <WarningBtn>No Autoordering</WarningBtn>;
+          }
+        case OrderStatus.Shipped:
+          return <SuccessBtn>Dispatched</SuccessBtn>;
+
+        case OrderStatus.Cancelled:
+          return <CancelBtn>Cancelled</CancelBtn>;
+      }
+    default://Including case OrderStatus.TemporaryError
+      return <ProgressBtn>In Progress</ProgressBtn>;
+    case AutoOrderingState.Completed:
+    case AutoOrderingState.ManuallyDispatched:
+      return <SuccessBtn>Manually Dispatched</SuccessBtn>;
+    case AutoOrderingState.GoingToBuyError:
+    case AutoOrderingState.PermanentError:
+      return <DangerBtn>View Error</DangerBtn>;
+  }
+};
