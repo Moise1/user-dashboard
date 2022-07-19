@@ -80,7 +80,7 @@ export const Topbar = withRouter((props: Props) => {
           key: '2',
           label: (
             <div>
-              <Link to="/check-alert" className="alternative-link">
+              <Link to="/configure-no-api-server" className="alternative-link no-api-alert">
                 There &apos;s an alert about <strong>NO API Server.</strong> Click here to check it.
               </Link>
             </div>

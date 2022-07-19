@@ -30,6 +30,7 @@ import { newChannelReducer } from '../new-channel/newChannelSlice';
 import { PriceWarriorReducer } from '../price-warrior/priceWarriorSlice';
 import { autoListReducer } from '../listings/autoListSlice';
 import { UIPreferences } from '../ui-preferences/ui-preferences-state-slice';
+import {tokensReducer} from '../tokens/tokensSlice';
 
 export const allReducers = combineReducers({
   user: userReducer,
@@ -66,5 +67,6 @@ export const allReducers = combineReducers({
   linkAccount: newChannelReducer,
   managedServers: getManagedServersReducer,
   newChannel: newChannelReducer,
-  UIPreferences: UIPreferences
+  UIPreferences: UIPreferences,
+  buyTokens: tokensReducer
 });

@@ -1,11 +1,12 @@
-import { Card, Button, Form } from 'antd';
+import { Card, Button, Form, Spin } from 'antd';
 import { buyTokens } from 'src/redux/tokens/tokensThunk';
 import tokenCoin from '../../assets/tokenCoin.png';
-import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import {BillingPeriod} from '../../utils/billingPeriod';
 import '../../sass/buy-tokens.scss';
 
 export const BuyTokens = () => {
+  const {loading} = useAppSelector((state) => state.buyTokens);
   const dispatch = useAppDispatch();
   const data = [
     {
@@ -76,6 +77,11 @@ export const BuyTokens = () => {
         </ul>
       </div>
       <div className="cards-container">
+        {loading && <Spin 
+          tip="Please wait..." 
+          spinning={loading} 
+          style={{position: 'absolute', left: '45%', top: '5%'}}/>
+        }
         {data.map((d) => (
           <Card key={d.id} className="card">
             <Form onFinish={() => onFinish(d.sku, d.productId)}>
