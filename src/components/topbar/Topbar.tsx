@@ -61,8 +61,18 @@ export const Topbar = withRouter((props: Props) => {
                   .join(' , ')}
               </strong>
               . &nbsp;
-              <Link to="/install">Install and connect the extension</Link> or{' '}
-              <Link to="/we-connect">We connect it for you.</Link>
+              <a 
+                href={`${Links.HGRChromeExtension}`}
+                target="_blank" rel="noreferrer"
+              >
+                Install and connect the extension
+              </a> or{' '}
+              <a 
+                href={`${Links.NoAPIServer}`}
+                target="_blank" rel="noreferrer"
+              >
+                We connect it for you.
+              </a>
             </p>
           )
         },
