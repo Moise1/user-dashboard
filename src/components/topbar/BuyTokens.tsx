@@ -2,6 +2,7 @@ import { Card, Button, Form } from 'antd';
 import { buyTokens } from 'src/redux/tokens/tokensThunk';
 import tokenCoin from '../../assets/tokenCoin.png';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import {BillingPeriod} from '../../utils/billingPeriod';
 import '../../sass/buy-tokens.scss';
 
 export const BuyTokens = () => {
@@ -9,6 +10,7 @@ export const BuyTokens = () => {
   const data = [
     {
       id: 1,
+      productId: 21,
       sku: 'sku_I3tks3dfom0Npg',
       coin: tokenCoin,
       tokens: 30,
@@ -18,6 +20,7 @@ export const BuyTokens = () => {
     },
     {
       id: 2,
+      productId: 22,
       sku: 'sku_I3tpbfFR7yaQFo',
       coin: tokenCoin,
       tokens: 150,
@@ -27,7 +30,8 @@ export const BuyTokens = () => {
     },
     {
       id: 3,
-      sku: 'sku_1HTm4VBVFd6MOE2R4lu1AKx8',
+      productId: 33,
+      sku: 'price_1HTm4VBVFd6MOE2R4lu1AKx8',
       coin: tokenCoin,
       tokens: 600,
       euros: 144.99,
@@ -36,8 +40,21 @@ export const BuyTokens = () => {
     }
   ];
 
-  const onFinish = (sku: string) => {
-    dispatch(buyTokens(sku));
+  const redirectUrl = 'https://app.hustlegotreal.com/catalog/PaymentConfirmation';
+  const onFinish = (sku: string, productId: number) => {
+    const data = {
+      lineItems: [
+        {
+          platformProductId: sku,
+          quantity: 1
+        }
+      ],
+      mode: 'payment',
+      successUrl: `${redirectUrl}?success=true&bp=${BillingPeriod.Unique}&pid=${productId}`,
+      cancelUrl: `${redirectUrl}?success=false&bp=${BillingPeriod.Unique}&pid=${productId}`,
+      upgradingSubscription: false
+    };
+    dispatch(buyTokens(data));
   };
   return (
     <div className="buy-tokens-container">
@@ -61,7 +78,7 @@ export const BuyTokens = () => {
       <div className="cards-container">
         {data.map((d) => (
           <Card key={d.id} className="card">
-            <Form onFinish={() => onFinish(d.sku)}>
+            <Form onFinish={() => onFinish(d.sku, d.productId)}>
               <div className="card-info">
                 <p className="tokens-count">
                   <strong>{d.tokens} Tokens</strong>
@@ -72,7 +89,9 @@ export const BuyTokens = () => {
                   {d.euros}
                 </p>
                 <p className="cents-amount">{d.cents} cent/token</p>
-                <Button className="buy-btn" htmlType='submit'>{d.buyText}</Button>
+                <Button className="buy-btn" htmlType="submit">
+                  {d.buyText}
+                </Button>
               </div>
             </Form>
           </Card>
