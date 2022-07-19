@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useMemo, useState } from 'react';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -90,7 +90,6 @@ export const Listings = () => {
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
     const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
 
-    //return (() => {
     const AddExtraData = (data: ListingT[] | null | undefined) => {
       if (!data || !sourcesDic) return data;
       return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
@@ -136,7 +135,6 @@ export const Listings = () => {
           activeListingsImages: undefined
         };
     }
-    //}, [tab, activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages]);
   })();
 
   useEffect(() => {
@@ -163,41 +161,41 @@ export const Listings = () => {
   const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
   //
   //Bulk Menu-----------------------------------------------------------------
-  //const handleSingleListingModal = () => { console.log('x'); };
-  //const handleBulkListingModal = () => { console.log('y'); };
-  //const actionsDropdownMenu = useMemo(() =>
-  //  <Menu
-  //    items={[
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div
-  //            className="action-option"
-  //            onClick={selectedRows?.internalKeys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
-  //          >
-  //            Edit  <strong>{selectedRows}</strong>
-  //          </div>
-  //        )
-  //      },
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div className="action-option">
-  //            Copy <strong>{selectedRows}</strong>
-  //          </div>
-  //        )
-  //      },
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div className="action-option">
-  //            Optimize <strong>{selectedRows}</strong>
-  //          </div>
-  //        )
-  //      }
-  //    ]}
-  //  />
-  //, [selectedRows?.internalKeys?.length]);
+  const handleSingleListingModal = () => { console.log('x'); };
+  const handleBulkListingModal = () => { console.log('y'); };
+  const actionsDropdownMenu = useMemo(() => (
+    <Menu
+      items={[
+        {
+          type: 'group',
+          label: (
+            <div
+              className="action-option"
+              onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
+            >
+              Edit  <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className="action-option">
+              Copy <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className="action-option">
+              Optimize <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        }
+      ]}
+    />)
+  , [selectedRows?.keys?.length]);
   //--------------------------------------------------------------------------
   //Load images for active listings-------------------------------------------
 
@@ -246,7 +244,7 @@ export const Listings = () => {
           hideWhenEmpty={hideWhenEmpty}
           loadingData={loadingListings || loadingSources}
           onChangeVisibleRows={onChangeVisibleRows}
-          //actionsDropdownMenu={actionsDropdownMenu}
+          actionsDropdownMenu={selectedRows?.keys?.length > 0 ? actionsDropdownMenu : undefined}
           rowSelection={{
             selectedRowKeys: selectedRows?.keys,
             onChange: onSelectChange
