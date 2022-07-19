@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pagination, Table } from 'antd';
 import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/lib/table/interface';
 import { DataIndex } from 'rc-table/lib/interface';
@@ -12,9 +12,9 @@ interface Props<RecordType> {
   rowClassName?: string;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageSize: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
@@ -31,7 +31,7 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     pageSize: cPageSize,
     onRow,
     rowClassName,
-    onPageSizeChanged,
+    onPageSizeChanged: cOnPageSizeChanged,
     pageSizes,
     hidePagination,
     rowSelection,
@@ -40,11 +40,10 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
 
   const [sCurrentPage, setCurrentPage] = useState<number>(1);
-  const page = cCurrentPage ?? sCurrentPage;
+  const currentPage = cCurrentPage ?? sCurrentPage;
 
   const [sPageSize, setPageSize] = useState<number>(pageSizeOptionArray[0]);
   const pageSize = cPageSize ?? sPageSize;
-
   type SorterState = {
     dataIndex: DataIndex,
     order: SortOrder
@@ -113,9 +112,10 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
   };
 
   const onShowPageSizeChange = (current: number, pageSize: number) => {
-    setCurrentPage(current);
     setPageSize(pageSize);
-    onPageSizeChanged?.(pageSize);
+    cOnPageSizeChanged?.(pageSize);
+    if (currentPage != current)
+      onPageChange?.(current);
   };
 
   const [sorter, setSorter] = useState<SorterState[] | undefined>();
@@ -139,11 +139,8 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
     }
   };
 
-  const visibleRows = useMemo(() => {
-    const visibleRows = getData(dataSource, page, pageSize, sorter);
-    onChangeVisibleRows?.(visibleRows);
-    return visibleRows;
-  }, [dataSource, page, pageSize, sorter]);
+  const visibleRows = useMemo(() => getData(dataSource, currentPage, pageSize, sorter), [JSON.stringify([dataSource, currentPage, pageSize, sorter])]);
+  useEffect(() => onChangeVisibleRows?.(visibleRows), [JSON.stringify(visibleRows)]);
 
   return (
     <div className="data-table">
@@ -161,7 +158,7 @@ export const SimpleTable = <RecordType extends object = any>(props: Props<Record
         className="pagination"
         onChange={onPageChange}
         total={dataSource?.length}
-        current={page}
+        current={currentPage}
         pageSize={pageSize}
         style={{ paddingBottom: '25px' }}
         showSizeChanger

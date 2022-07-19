@@ -54,3 +54,17 @@ export const RenderSource = (path: string, rowR: RecordType) => {
   const url = 'https://' + source.baseUrl + '/' + path;
   return <a target='_blank' rel='noreferrer' href={ApiURL + '/api/Sources/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id + '&isoCountry=' + row.channel.isoCountry}>{source.name}</a>;
 };
+
+export const RenderImage = (imageUrl?: string) => {
+  if (!imageUrl) {
+    return <div className="record-img"></div>;
+  }
+  return <div className="record-img"><img src={imageUrl} /></div>;
+};
+
+export const RenderPrice = (price: number) => {
+  return price.toLocaleString(
+    undefined,
+    {minimumFractionDigits: 2 }
+  );
+};

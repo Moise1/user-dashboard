@@ -8,34 +8,40 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
-import { OrderData } from 'src/redux/orders/orderSlice';
 interface props {
-  orderNumber: { [key: string]: OrderData };
-  // channelId: number;
-  selectedRows: number;
+  channelOAuthId: number[];
+  selectedOrderIds: number[];
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
-  const { orderNumber, selectedRows } = typeBtnProps;
+  const { channelOAuthId, selectedOrderIds } = typeBtnProps;
+  //const processDisabled  = !selectedorder || notConfigured
+  //  || (!Utils.HasValue(order?.status) && order.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
+  //  || (order.status != AutoOrderingState.AutoorderingDisabled
+  //    && order.status != AutoOrderingState.GoingToBuyError
+  //    && order.status != AutoOrderingState.PermanentError
+  //  );
+
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
-    selectedRows > 0 && setDisabled(false);
-    selectedRows == 0 && setDisabled(true);
+    selectedOrderIds.length > 0 && setDisabled(false);
+    selectedOrderIds.length == 0 && setDisabled(true);
   });
   const dispatch = useAppDispatch();
+
 
   // const { orderNumber, channelId } = typeBtnProps;
 
   const handleProcessOrders = () => {
-    dispatch(processOrders(orderNumber.id));
+    dispatch(processOrders({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch(orderNumber.id));
+    dispatch(manuallyDispatch({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   const handleStopOrder = () => {
-    dispatch(stopOrder(orderNumber.id));
+    dispatch(stopOrder({ orderLineIds: selectedOrderIds, channelOAuthId: channelOAuthId }));
   };
 
   return (
@@ -43,25 +49,25 @@ export const OrderActionBtns = (typeBtnProps: props) => {
       <ConfirmBtn handleConfirm={handleProcessOrders} disabled={disabled}>
         <ProcessOrderIcon />
         <span>
-          {t('OrderTable.Process')} {selectedRows > 0 ? selectedRows : ''} orders{' '}
+          {t('OrderButtons.Process')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </ConfirmBtn>
 
-      <WarningBtn handleConfirm={handleManuallyDispatch} disabled={disabled}>
+      <WarningBtn handleConfirm={handleStopOrder} disabled={disabled}>
         <HandStopOrderIcon />
         <span>
-          {t('OrderTable.Stop')} {selectedRows > 0 ? selectedRows : ''} orders
+          {t('OrderButtons.Stop')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders
         </span>
       </WarningBtn>
 
       <DangerBtn disabled={disabled}>
         <TrashIcon />
         <span>
-          {t('OrderTable.Delete')} {selectedRows > 0 ? selectedRows : ''} orders{' '}
+          {t('OrderButtons.Delete')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </DangerBtn>
 
-      <SuccessBtn handleConfirm={handleStopOrder} disabled={disabled}>
+      <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={disabled}>
         <CheckIcon />
         <span>{t('OrderButtons.MarkAsDispatched')}</span>
       </SuccessBtn>

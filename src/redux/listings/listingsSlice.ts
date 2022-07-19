@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { MiniSettings } from '../../types/mini-settings';
-import { getListings, getPendingListings, getTerminatedListings } from './listingsThunk';
+import { getActiveListings, getActiveListingsImages, getPendingListings, getTerminatedListings, ListingImageUrlList, saveActiveListingsImagesInCache } from './listingsThunk';
 
 export type ActiveListing = {
   id: number;
@@ -36,6 +36,8 @@ export type ActiveListing = {
   buyBoxPrice?: number;
   origin: eChannelListingOrigin;
   variationAtributes: ChannelListingVariationAttributeOption[];
+
+  imageUrl?: string;
 }
 export type ChannelListingVariationAttributeOption = {
   id: number;
@@ -128,6 +130,8 @@ export type ListingsSource = {
   batchId: string;
 }
 
+export type ActiveListingsImagesDictionary = { [id: number]: {loading: boolean, url: string} };
+
 export type ListingsState = {
   activeListings: ActiveListing[] | null;
   loadingActive: boolean;
@@ -138,6 +142,7 @@ export type ListingsState = {
   terminatedListings: TerminatedListings[] | null;
   loadingTerminated: boolean;
 
+  activeListingsImages?: ActiveListingsImagesDictionary;
 }
 
 const initialState: ListingsState = {
@@ -146,9 +151,9 @@ const initialState: ListingsState = {
   terminatedListings: null,
   loadingActive: false,
   loadingTerminated: false,
-  loadingPending: false
+  loadingPending: false,
+  activeListingsImages: {} as ActiveListingsImagesDictionary
 };
-
 
 export const listingsSlice = createSlice({
   name: 'listings',
@@ -156,14 +161,24 @@ export const listingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     //ACTIVE
-    builder.addCase(getListings.pending, (state) => {
+    builder.addCase(getActiveListings.pending, (state) => {
       state.loadingActive = true;
     });
-    builder.addCase(getListings.fulfilled, (state, { payload }) => {
+    builder.addCase(getActiveListings.fulfilled, (state, { payload }) => {
       state.loadingActive = false;
-      state.activeListings = payload;
+      state.activeListings = payload.listings;
+      const imgDic: ActiveListingsImagesDictionary = {};
+      for (const idimg of payload.images) {
+        if (!idimg || !idimg.id || !idimg.url)
+          continue;
+        imgDic[idimg.id] = {
+          loading: false,
+          url: idimg.url
+        };
+      }
+      state.activeListingsImages = imgDic;
     });
-    builder.addCase(getListings.rejected, (state) => {
+    builder.addCase(getActiveListings.rejected, (state) => {
       state.loadingActive = false;
     });
 
@@ -191,19 +206,36 @@ export const listingsSlice = createSlice({
       state.loadingTerminated = false;
     });
 
-    //Load Image
-    //builder.addCase(getListingsImages.pending, (state) => {
-    //  state.loading = true;
-    //  state.error = '';
-    //});
-    //builder.addCase(getListingsImages.fulfilled, (state, { payload }) => {
-    //  state.loading = false;
-    //  state.terminatedListings = [...payload.listings];
-    //});
-    //builder.addCase(getListingsImages.rejected, (state, { payload }) => {
-    //  state.loading = false;
-    //  state.error = String(payload);
-    //});
+    // Load Image
+    builder.addCase(getActiveListingsImages.pending, (state, { meta }) => {
+      state.activeListingsImages = state.activeListingsImages ?? [];
+      for (const d of meta.arg) {
+        state.activeListingsImages[d] = {
+          ...(state.activeListingsImages[d] ?? { url: undefined }),
+          loading: true
+        };
+      }
+    });
+    builder.addCase(getActiveListingsImages.fulfilled, (state, { payload }) => {
+      const alls: ListingImageUrlList = [];
+      state.activeListingsImages = state.activeListingsImages ?? [];
+      for (const d in payload?.channelListingMap) {
+        const id = parseInt(d);
+        const url = payload?.channelListingMap[d]?.[0];
+        alls.push({ id, url });
+        state.activeListingsImages[id] = { loading: false, url };
+      }
+      saveActiveListingsImagesInCache(alls);
+    });
+    builder.addCase(getActiveListingsImages.rejected, (state, { meta }) => {
+      state.activeListingsImages = state.activeListingsImages ?? [];
+      for (const d of meta.arg) {
+        state.activeListingsImages[d] = {
+          ...(state.activeListingsImages[d] ?? { url: undefined }),
+          loading: false
+        };
+      }
+    });
   }
 });
 

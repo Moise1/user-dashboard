@@ -1,5 +1,9 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderSource } from './columns-renders';
+﻿import { Channel } from '../../../redux/channels/channelsSlice';
+import { ActiveListing, PendingListing, TerminatedListings } from '../../../redux/listings/listingsSlice';
+import { Source } from '../../../redux/sources/sourceSlice';
+import { ColumnData } from '../../../small-components/tables/types/columns';
+import { RenderChannelItem, RenderImage, RenderPrice, RenderSource } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost } from './columns-sorter';
 
 export enum ListingColumnId {
   Image = 1,
@@ -16,14 +20,13 @@ export enum ListingColumnId {
   ChannelItem= 12
 }
 
-type FieldValue = unknown;
-type RecordType = Record<string, FieldValue>;
+export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { key:number, source?: Source, channel?: Channel };
 
-export interface ListingColumnData extends ColumnData<RecordType> {
+export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
 }
 
-const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
+const MultiTermFilter = (fieldValue: unknown, searchTerm: string) => {
   const terms = searchTerm.trim().split(' ');
   for (const term of terms) {
     if (term.length == 0)
@@ -40,7 +43,8 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
     dataIndex: 'imageUrl',
-    smartSearch: { ignore: true }
+    smartSearch: { ignore: true },
+    render: RenderImage
   },
   {
     id: ListingColumnId.ChannelItem,
@@ -48,14 +52,15 @@ export const ListingsColumns: ListingColumnData[] = [
     dataIndex: 'channelItem',
     width: 70,
     render: RenderChannelItem,
-    sorter: (a, b) => (a.channelItem as string).localeCompare(b.channelItem as string)
+    sorter: SorterChanelItem
   },
   {
     id: ListingColumnId.Source,
     title: 'Listings.Column.Source',
     dataIndex: 'sourcePath',
     width: 70,
-    render: RenderSource
+    render: RenderSource,
+    sorter: SorterSource
   },
   {
     id: ListingColumnId.Id,
@@ -68,17 +73,22 @@ export const ListingsColumns: ListingColumnData[] = [
     dataIndex: 'title',
     smartSearch: {
       customFilter: MultiTermFilter
-    }
+    },
+    sorter: SorterTitle
   },
   {
     id: ListingColumnId.SellPrice,
     title: 'Listings.Column.Sell',
-    dataIndex: 'channelPrice'
+    dataIndex: 'channelPrice',
+    render: RenderPrice,
+    sorter: SorterSell
   },
   {
     id: ListingColumnId.CostPrice,
     title: 'Listings.Column.Cost',
-    dataIndex: 'sourcePrice'
+    dataIndex: 'sourcePrice',
+    render: RenderPrice,
+    sorter: SorterCost
   },
   {
     id: ListingColumnId.Profit,

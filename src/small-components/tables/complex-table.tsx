@@ -18,22 +18,49 @@ interface Props<RecordType> {
   uiIdentifier: string;
   defaultVisibleColumns?: ColumnId[];
   allColumnData: ColumnData<RecordType>[];
-  //columnList: ColumnId[];
   data: RecordType[],
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
   onChangeVisibleRows?: (rows: RecordType[]) => void;
+  onRow?: (record: RecordType) => { onClick: () => void };
+  actionsDropdownMenu?: JSX.Element;
+
+  currentPage?: number;
+  onPageChange?: (page: number) => void;
+  pageSize?: number;
+  onPageSizeChanged?: (itemsPerPage: number) => void;
+  pageSizes?: number[];
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const ComplexTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-  const { uiIdentifier, defaultVisibleColumns, allColumnData, /*columnList,*/ data, hideWhenEmpty, loadingData, rowSelection, onChangeVisibleRows } = props;
+  const {
+    uiIdentifier,
+    defaultVisibleColumns,
+    allColumnData, data,
+    hideWhenEmpty,
+    loadingData,
+    rowSelection,
+    onChangeVisibleRows,
+    onRow,
+    actionsDropdownMenu,
+
+    currentPage,
+    onPageChange,
+    onPageSizeChanged,
+    pageSizes
+  } = props;
   const dispatch = useAppDispatch();
 
   //UI----------------------------------------------------------------------------------------}
   const uiPreferencesS = (() => {
     const preferences = useAppSelector((state) => state.UIPreferences as UIPreferencesState)?.tablePreferences?.[uiIdentifier];
-    return { columns: preferences?.columns, pageSize: preferences?.pageSize ?? 10, loading: preferences?.loading ?? false };
+    return {
+      columns: preferences?.columns,
+      pageSize: preferences?.pageSize ?? 10,
+      pageNumber: currentPage ?? 1,
+      loading: preferences?.loading ?? false
+    };
   })();
 
   const [uiPreferences, setUIPreferences] = useState<UITablePreferenceL>(uiPreferencesS);
@@ -44,12 +71,12 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
   useEffect(() => {
     setUIPreferences(uiPreferencesS);
-  }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize]);
-
+  }, [uiPreferencesS?.columns, uiPreferencesS?.pageSize, uiPreferencesS?.pageNumber]);
 
   const SaveUIPreferences = (preferences: UITablePreference) => {
     setUIPreferences({ ...preferences, loading: false });
     dispatch(savePreferences({ uiIdentifier, data: preferences }));
+    console.log(uiPreferences);
   };
   //------------------------------------------------------------------------------------------
   ///POPUP VISIBLE COLUMNS--------------------------------------------------------------------
@@ -59,23 +86,32 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const SaveVisibleColumns = (columns: ColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
-  const OnPageSizeChange = (pageSize: number) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
+  const OnPageSizeChange = (pageSize: number) => {
+    setUIPreferences(prev => ({ ...prev, pageSize, loading: false }));
+    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
+    onPageSizeChanged?.(pageSize);
+  };
+  //------------------------------------------------------------------------------------------
+  ///PAGE Number--------------------------------------------------------------------------------
+  const OnPageNumberChange = (pageNumber: number) => {
+    onPageChange?.(pageNumber);
+  };
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, visibleColumnsList } = useMemo(() => {
+  const { columns, visibleColumnsList } = /*useMemo*/(() => {
 
     const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
 
     const columns = allColumnData
       .filter(x => (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
-      .map(x => ({ ...x, title: typeof(x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
+      .map(x => ({ ...x, title: typeof (x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
 
     return {
       columns,
       visibleColumnsList
     };
 
-  }, [uiPreferences, defaultVisibleColumns, allColumnData]);
+  }/*, [uiPreferences, defaultVisibleColumns, allColumnData]*/)();
   //------------------------------------------------------------------------------------------
 
   //OMNISEARCH--------------------------------------------------------------------------------
@@ -205,10 +241,17 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
             totalItems={data.length}
             showTableInfo={true}
             rowClassName='table-row'
+
             pageSize={uiPreferences.pageSize}
             onPageSizeChanged={OnPageSizeChange}
+            onPageChange={OnPageNumberChange}
+            currentPage={currentPage}
+            pageSizes={pageSizes}
+
             rowSelection={rowSelection}
             onChangeVisibleRows={onChangeVisibleRows}
+            actionsDropdownMenu={actionsDropdownMenu}
+            onRow={onRow}
           />
         )}
       </>}

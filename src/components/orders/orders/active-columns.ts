@@ -1,16 +1,18 @@
-﻿import { ListingColumnId } from './columns';
+﻿import { OrderColumnId } from './columns';
 
-export const ActiveListingsColumns = [
-  ListingColumnId.Image,
-  ListingColumnId.ChannelItem,
-  ListingColumnId.Source,
-  ListingColumnId.Title,
-  ListingColumnId.SellPrice,
-  ListingColumnId.CostPrice,
-  ListingColumnId.Profit,
-  ListingColumnId.Markup,
-  ListingColumnId.Stock,
-  ListingColumnId.CreatedOn,
+export const AllColumns = [
+  OrderColumnId.Image,
+  OrderColumnId.ChannelItem,
+  OrderColumnId.Source,
+  OrderColumnId.Title,
+  OrderColumnId.Quantity,
+  OrderColumnId.Sold,
+  OrderColumnId.Cost,
+  OrderColumnId.Fees,
+  OrderColumnId.Profit,
+  OrderColumnId.Margin,
+  OrderColumnId.DateOfOrder,
+  OrderColumnId.Status
   //TableColumnId.CreatedBy,
   //TableColumnId.Notes,
   //TableColumnId.MonitorPrice,
@@ -23,15 +25,17 @@ export const ActiveListingsColumns = [
   //TableColumnId.AlsoOn,
 ];
 
-export const ActiveListingsColumnsVisibleByDefault = [
-  ListingColumnId.Image,
-  ListingColumnId.ChannelItem,
-  ListingColumnId.Source,
-  ListingColumnId.Title,
-  ListingColumnId.SellPrice,
-  ListingColumnId.CostPrice,
-  ListingColumnId.Profit,
-  ListingColumnId.Markup,
-  ListingColumnId.Stock,
-  ListingColumnId.CreatedOn
+export const ColumnsVisibleByDefault = [
+  OrderColumnId.Image,
+  //OrderColumnId.ChannelItem,
+  //OrderColumnId.Source,
+  OrderColumnId.Title,
+  OrderColumnId.Quantity,
+  OrderColumnId.Sold,
+  OrderColumnId.Cost,
+  OrderColumnId.Fees,
+  OrderColumnId.Profit,
+  OrderColumnId.Margin,
+  OrderColumnId.DateOfOrder,
+  OrderColumnId.Status
 ];

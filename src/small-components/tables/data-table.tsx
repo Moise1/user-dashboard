@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
 import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
@@ -11,7 +11,7 @@ interface Props<RecordType> {
   columns: ColumnType<RecordType>[];
 
   dataSource: RecordType[];
-  selectedRows?: number;
+  //selectedRows?: number;
   totalItems?: number;
   page?: string;
   loading?: boolean | ReactNode;
@@ -26,15 +26,15 @@ interface Props<RecordType> {
   isListingsTable?: boolean;
 
   currentPage?: number;
-  onPageChange?: (page: number) => void;
+  onPageChange?: (pageNumber: number) => void;
   pageSize?: number;
-  onPageSizeChanged?: (itemsPerPage: number) => void;
+  onPageSizeChanged?: (pageNumber: number) => void;
   pageSizes?: number[];
   hidePagination?: boolean;
 
   onChangeVisibleRows?: (rows: RecordType[]) => void;
 
-  actionsDropdownMenu?: Menu;
+  actionsDropdownMenu?: JSX.Element;
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
@@ -43,7 +43,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     columns,
     dataSource,
     rowSelection,
-    selectedRows,
+    //selectedRows,
     totalItems,
     page,
     showTableInfo,
@@ -60,41 +60,23 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
   } = props;
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
+  const selectedRows = rowSelection?.selectedRowKeys?.length ?? 0;
 
-  //const anyTable = (
-  //  <div className="selected-options">
-  //    <ul className="list">
-  //      <li className="list-item" onClick={selectedRows! > 1 ? handleBulkListingModal : handleSingleListingModal}>
-  //        Edit <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //      <div className="horizontal-divider" />
-  //      <li className="list-item">
-  //        Copy <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //      <div className="horizontal-divider" />
-  //      <li className="list-item">
-  //        Optimize <strong>{selectedRows}</strong> {page}(s)
-  //      </li>
-  //    </ul>
-  //  </div>
-  //);
-
- 
   return (
     <div className="data-table-container">
       {showTableInfo && (
         <div className="table-info">
-          <p className="total-selected">
+          {selectedRows ? <p className="total-selected">
             <strong>{selectedRows}</strong> selected
-          </p>
+          </p> : null}
           {actionsDropdownMenu && (
-            <Dropdown overlay={<>actionsDropdownMenu</>} className="actions-dropdown">
+            <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
                 Bulk Action
                 <DownOutlined />
               </Space>
             </Dropdown>
-          )};
+          )}
           <p className="total-items">
             <strong>
               {totalItems ?? dataSource?.length ?? 0} {page} (s)

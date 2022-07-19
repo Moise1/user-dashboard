@@ -1,26 +1,29 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderSource } from './columns-renders';
+﻿import { OrderData } from '../../../redux/orders/orderSlice';
+import { ColumnData } from '../../../small-components/tables/types/columns';
+import { determineStatus } from '../../../utils/determineStatus';
+import { RenderChannelItem, RenderDate, RenderImage, RenderSource } from './columns-renders';
 
-export enum ListingColumnId {
+export enum OrderColumnId {
   Image = 1,
-  Source = 2,
-  Id = 3,
-  Title = 4,
-  SellPrice = 5,
-  CostPrice = 6,
-  Profit = 7,
-  Markup = 8,
-  Stock = 9,
-  Options = 10,
-  CreatedOn = 11,
-  ChannelItem= 12
+  Reference = 2,
+  ChannelItem = 3,
+  Source = 4,
+  Title = 5,
+  Quantity = 6,
+  Sold = 7,
+  Cost = 8,
+  Fees = 9,
+  Profit = 10,
+  Margin = 11,
+  DateOfOrder = 12,
+  Status = 13,
 }
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
 
-export interface ListingColumnData extends ColumnData<RecordType> {
-  id: ListingColumnId
+export interface OrderColumnData extends ColumnData<RecordType> {
+  id: OrderColumnId
 }
 
 const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
@@ -35,76 +38,77 @@ const MultiTermFilter = (fieldValue: FieldValue, searchTerm: string) => {
   return true;
 };
 
-export const ListingsColumns: ListingColumnData[] = [
+export const OrdersColumns: OrderColumnData[] = [
   {
-    id: ListingColumnId.Image,
-    title: 'Listings.Column.Img',
+    id: OrderColumnId.Image,
+    title: 'OrderTable.Image',
     dataIndex: 'imageUrl',
-    smartSearch: { ignore: true}
+    smartSearch: { ignore: true },
+    render: RenderImage
   },
   {
-    id: ListingColumnId.ChannelItem,
-    title: 'Listings.Column.ChannelItem',
+    id: OrderColumnId.ChannelItem,
+    title: 'OrderTable.ChannelItem',
     dataIndex: 'channelItem',
     width: 70,
     render: RenderChannelItem
   },
   {
-    id: ListingColumnId.Source,
-    title: 'Listings.Column.Source',
+    id: OrderColumnId.Source,
+    title: 'OrderTable.Source',
     dataIndex: 'sourcePath',
     width: 70,
     render: RenderSource
   },
   {
-    id: ListingColumnId.Id,
-    title: 'Listings.Column.Id',
-    dataIndex: 'id'
-  },
-  {
-    id: ListingColumnId.Title,
-    title: 'Listings.Column.Title',
+    id: OrderColumnId.Title,
+    title: 'OrderTable.Title',
     dataIndex: 'title',
     smartSearch: {
       customFilter: MultiTermFilter
     }
   },
   {
-    id: ListingColumnId.SellPrice,
-    title: 'Listings.Column.Sell',
+    id: OrderColumnId.Quantity,
+    title: 'OrderTable.Quantity',
+    dataIndex: 'quantity'
+  },
+  {
+    id: OrderColumnId.Sold,
+    title: 'OrderTable.Sold',
     dataIndex: 'channelPrice'
   },
   {
-    id: ListingColumnId.CostPrice,
-    title: 'Listings.Column.Cost',
+    id: OrderColumnId.Cost,
+    title: 'OrderTable.Cost',
     dataIndex: 'sourcePrice'
   },
   {
-    id: ListingColumnId.Profit,
-    title: 'Listings.Column.Profit',
+    id: OrderColumnId.Fees,
+    title: 'OrderTable.Fees',
+    dataIndex: 'fees'
+  },
+  {
+    id: OrderColumnId.Profit,
+    title: 'OrderTable.Profit',
     dataIndex: 'profit'
   },
   {
-    id: ListingColumnId.Markup,
-    title: 'Listings.Column.Markup',
-    dataIndex: 'markup'
+    id: OrderColumnId.Margin,
+    title: 'OrderTable.Margin',
+    dataIndex: 'margin'
   },
   {
-    id: ListingColumnId.Stock,
-    title: 'Listings.Column.Stock',
-    dataIndex: 'stock',
-    smartSearch: { ignore: true }
+    id: OrderColumnId.DateOfOrder,
+    title: 'OrderTable.DateOfOrder',
+    dataIndex: 'date',
+    smartSearch: { ignore: true },
+    render: RenderDate
   },
   {
-    id: ListingColumnId.Options,
-    title: 'Listings.Column.Options',
-    dataIndex: 'options',
-    smartSearch: { ignore: true }
-  },
-  {
-    id: ListingColumnId.CreatedOn,
-    title: 'Listings.Column.CreatedOn',
-    dataIndex: 'createdOn',
-    smartSearch: { ignore: true }
+    id: OrderColumnId.Status,
+    title: 'OrderTable.Status',
+    dataIndex: 'status',
+    render: (status: number, record: RecordType) => determineStatus(status, record as unknown as OrderData)
   }
 ];
