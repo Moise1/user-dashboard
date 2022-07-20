@@ -56,12 +56,13 @@
           .tokens-count,
           .euros-amount {
             color: $primary-bg;
-          }
+          };
 
+         
           .euros-amount span,
           .cents-amount {
-            color: rgba($primary-bg, 0.7);
-          }
+            color: $primary-bg;
+          };
 
           .buy-btn {
             background: $primary-bg;
