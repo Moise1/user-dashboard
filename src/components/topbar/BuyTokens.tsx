@@ -42,6 +42,8 @@ export const BuyTokens = () => {
   ];
 
   const redirectUrl = 'https://app.hustlegotreal.com/catalog/PaymentConfirmation';
+  const cancelUrl = 'https://newweb.hustlegotreal.net/dashboard';
+
   const onFinish = (sku: string, productId: number) => {
     const data = {
       lineItems: [
@@ -52,7 +54,7 @@ export const BuyTokens = () => {
       ],
       mode: 'payment',
       successUrl: `${redirectUrl}?success=true&bp=${BillingPeriod.Unique}&pid=${productId}`,
-      cancelUrl: `${redirectUrl}?success=false&bp=${BillingPeriod.Unique}&pid=${productId}`,
+      cancelUrl,
       upgradingSubscription: false
     };
     dispatch(buyTokens(data));
