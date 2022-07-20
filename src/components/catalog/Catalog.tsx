@@ -196,6 +196,15 @@ export const Catalog = () => {
 
   return (
     <Layout className="catalog-container">
+      <SearchOptions showSearchInput={false} />
+      <CatalogFilters
+        visible={drawerOpen}
+        onClose={handleSideDrawer}
+        openSourceModal={handleSourceModal}
+        setAllCatalogProducts={setAllCatalogProducts}
+        suppliersCount={sourcesIds}
+        setSourcesIds={setSourcesIds}
+      />
       {loading ? (
         <Spin />
       ) : (
@@ -227,14 +236,7 @@ export const Catalog = () => {
               <FiltersBtn handleSideDrawer={handleSideDrawer}>{t('filters')}</FiltersBtn>
             </div>
           </div>
-          <SearchOptions showSearchInput={false} />
-          <CatalogFilters
-            visible={drawerOpen}
-            onClose={handleSideDrawer}
-            openSourceModal={handleSourceModal}
-            setAllCatalogProducts={setAllCatalogProducts}
-            suppliersCount={sourcesIds}
-          />
+
           <PopupModal
             open={modalOpen}
             handleClose={() => setModalOpen(false)}
@@ -384,7 +386,7 @@ export const Catalog = () => {
                             <div className="product-info-area">
                               <div className="header">
                                 <p className="product-title">
-                                  {d?.title.length > 20 ? `${d?.title.substring(0, 70)} ...` : d?.title}
+                                  {d?.title.length > 20 ? `${d?.title.substring(0, 50)} ...` : d?.title}
                                 </p>
                                 <p className="source">
                                   by &nbsp;
