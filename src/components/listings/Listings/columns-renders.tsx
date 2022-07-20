@@ -61,3 +61,10 @@ export const RenderImage = (imageUrl?: string) => {
   }
   return <div className="record-img"><img src={imageUrl} /></div>;
 };
+
+export const RenderPrice = (price: number) => {
+  return price.toLocaleString(
+    undefined,
+    {minimumFractionDigits: 2 }
+  );
+};

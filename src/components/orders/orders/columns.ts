@@ -1,7 +1,7 @@
-﻿import moment from 'antd/node_modules/moment';
+﻿import { OrderData } from '../../../redux/orders/orderSlice';
 import { ColumnData } from '../../../small-components/tables/types/columns';
 import { determineStatus } from '../../../utils/determineStatus';
-import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
+import { RenderChannelItem, RenderDate, RenderImage, RenderSource } from './columns-renders';
 
 export enum OrderColumnId {
   Image = 1,
@@ -103,12 +103,12 @@ export const OrdersColumns: OrderColumnData[] = [
     title: 'OrderTable.DateOfOrder',
     dataIndex: 'date',
     smartSearch: { ignore: true },
-    render: (date: Date) => moment(date).format('DD/MM/YY/ hh:mm')
+    render: RenderDate
   },
   {
     id: OrderColumnId.Status,
     title: 'OrderTable.Status',
     dataIndex: 'status',
-    render: (status: number) => determineStatus(status)
+    render: (status: number, record: RecordType) => determineStatus(status, record as unknown as OrderData)
   }
 ];
