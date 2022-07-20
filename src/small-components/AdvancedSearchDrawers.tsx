@@ -14,6 +14,7 @@ interface Props extends AdvancedSearchProps {
   setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
   suppliersCount: number[];
   setAllCatalogProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
+  setSourcesIds?: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 interface catalogInputFieldTypes {
@@ -55,16 +56,12 @@ export const CatalogFilters = (props: Props) => {
       value: '6'
     }
   ];
-  const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount } = props;
+  const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount, setSourcesIds } = props;
   const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProduct);
   const [sessionId] = useState<number>(0);
   const dispatch = useAppDispatch();
 
   const [form] = Form.useForm();
-
-  useEffect(() => {
-    setAllCatalogProducts?.(catalogSearchedProducts);
-  }, [catalogSearchedProducts]);
 
   const catalogInputIntialTypes: catalogInputFieldTypes = {
     titleContains: ' ',
@@ -75,6 +72,18 @@ export const CatalogFilters = (props: Props) => {
   };
 
   const [catalogFormInput, setCatalogFormInput] = useState(catalogInputIntialTypes);
+
+  const onReset = () => {
+    form.resetFields();
+    setCatalogFormInput(catalogInputIntialTypes);
+    setSourcesIds?.([]);
+  };
+
+  useEffect(() => {
+    setAllCatalogProducts?.(catalogSearchedProducts);
+  }, [catalogSearchedProducts]);
+
+
   const catalogAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCatalogFormInput({
@@ -93,9 +102,6 @@ export const CatalogFilters = (props: Props) => {
     setOptions(e.target.value);
   };
 
-  const onReset = () => {
-    form.resetFields();
-  };
 
   const handleFilterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const { titleContains } = catalogFormInput;
