@@ -49,11 +49,11 @@ export const OrderContent = (props: Props) => {
   const notConfigured = !data?.sourceAOConfigured && false;
 
   const btnProcessDisabled = !data || notConfigured
-    || (!data.status && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+    || ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
     || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
 
   const btnDispatchDisabled = !data || notConfigured
-    || (!data.status && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+    || ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
     || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
 
   const cantBeStoped = !data || notConfigured
@@ -65,46 +65,46 @@ export const OrderContent = (props: Props) => {
     // dispatch(loadProgressOfOrder(iddd));
     dispatch(loadProgressOfOrder(data?.id));
     setOrderProgressStatus(orderStatus);
-  }, []);
+  }, [data?.id]);
 
   console.log(orderProgressStatus);
 
   //To check status, working on it -Suleman Ahmad-
-  // let statusText: string;
-  // let orderProgressBar = 1;
-  // orderProgressStatus.map((curr: any) => {
-  //   if (curr.status == AutoOrderingState.AutoorderingDisabled) {
-  //     orderProgressBar = 0;
-  //     statusText = 'Paused';
-  //   } else if (curr.status == AutoOrderingState.ManuallyDispatched) {
-  //     orderProgressBar = 0;
-  //     statusText = 'Manually dispatched';
-  //   } else if (curr.status == AutoOrderingState.AutoorderingPrepared) {
-  //     orderProgressBar = 1;
-  //     statusText = 'Waiting to start';
-  //   } else if (
-  //     (curr.status > AutoOrderingState.AutoorderingPrepared && curr.status < AutoOrderingState.CompletedAutoOrder) ||
-  //     curr.status == AutoOrderingState.TemporaryError
-  //   ) {
-  //     //Processing
-  //     orderProgressBar = 2;
-  //     statusText = 'Checking out';
-  //   } else if (curr.status >= AutoOrderingState.CompletedAutoOrder && curr.status < AutoOrderingState.Completed) {
-  //     //LastSteps
-  //     orderProgressBar = 3;
-  //     statusText = 'Last steps';
-  //   } else if (curr.status >= AutoOrderingState.Completed && curr.status < AutoOrderingState.TemporaryError) {
-  //     //Completed
-  //     orderProgressBar = 4;
-  //     statusText = 'Completed';
-  //   } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
-  //     //Error
-  //     orderProgressBar = 0;
-  //     statusText = 'Error';
-  //   }
-  //   const percent = orderProgress * 25;
-  //   console.log(orderProgressBar, statusText, percent);
-  // });
+  let statusText: string;
+  let orderProgressBar = 1;
+  orderProgressStatus?.map((curr: { status: number }) => {
+    if (curr.status == AutoOrderingState.AutoorderingDisabled) {
+      orderProgressBar = 0;
+      statusText = 'Paused';
+    } else if (curr.status == AutoOrderingState.ManuallyDispatched) {
+      orderProgressBar = 0;
+      statusText = 'Manually dispatched';
+    } else if (curr.status == AutoOrderingState.AutoorderingPrepared) {
+      orderProgressBar = 1;
+      statusText = 'Waiting to start';
+    } else if (
+      (curr.status > AutoOrderingState.AutoorderingPrepared && curr.status < AutoOrderingState.CompletedAutoOrder) ||
+      curr.status == AutoOrderingState.TemporaryError
+    ) {
+      //Processing
+      orderProgressBar = 2;
+      statusText = 'Checking out';
+    } else if (curr.status >= AutoOrderingState.CompletedAutoOrder && curr.status < AutoOrderingState.Completed) {
+      //LastSteps
+      orderProgressBar = 3;
+      statusText = 'Last steps';
+    } else if (curr.status >= AutoOrderingState.Completed && curr.status < AutoOrderingState.TemporaryError) {
+      //Completed
+      orderProgressBar = 4;
+      statusText = 'Completed';
+    } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
+      //Error
+      orderProgressBar = 0;
+      statusText = 'Error';
+    }
+    const percent = orderProgress * 25;
+    console.log(orderProgressBar, statusText, percent);
+  });
 
   return (
     <div className="order-state-progress-modal">

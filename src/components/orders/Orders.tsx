@@ -24,6 +24,7 @@ export const Orders = () => {
   const [order, setOrder] = useState<OrderData[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
   const [selectedOrder, setSelectedOrder] = useState<OrderData>();
+  const [selectedOrders, setSelectedOrders] = useState([]);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -47,7 +48,7 @@ export const Orders = () => {
   const { channelId: newChannel } = useContext(AppContext);
 
   useEffect(() => {
-    const orderList: OrderData[] = orders.orders.map((l: OrderData) => {
+    const orderList: OrderData[] = orders.orders?.map((l: OrderData) => {
       let item: OrderData = {
         ...l, key: l.id,
         profit: (l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - l.fees).toFixed(2),
@@ -73,8 +74,10 @@ export const Orders = () => {
     dispatch(getOrders({ channelOAuthIds: [newChannel as number] }));
   }, [getOrders, newChannel]);
 
-  const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
+  //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+  const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: any) => {
     setSelectedRowKeys(selectedRowKeys as number[]);
+    setSelectedOrders(selectedRows);
   };
   const rowSelection = {
     selectedRowKeys,
@@ -105,7 +108,7 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedOrder} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
 
-          <OrderActionBtns channelOAuthId={[newChannel]} selectedOrderIds={selectedRowKeys} />
+          <OrderActionBtns channelOAuthId={[newChannel]} selectedOrderIds={selectedRowKeys} orderList={selectedOrders} />
 
           <ComplexTable
             uiIdentifier={'orders'}
@@ -120,6 +123,7 @@ export const Orders = () => {
             onRow={(record) => {
               return {
                 onClick: () => {
+                  console.log(record);
                   setSelectedOrder(record as OrderData);
                   handleSingleOrderModal();
                 }
