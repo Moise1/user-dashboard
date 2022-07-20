@@ -9,9 +9,7 @@
   "PendingListings": "Pending Products",
   "PendingListingsShort": "Pending",
   "TerminatedListings": "Terminated Products",
-
-
-
+  "ImportListings": "Import products",
 
   "BulkListing.Name": "Bulk Publish",
 
@@ -168,7 +166,6 @@
   "Listnow.WeListForYou.Description": "No idea what to publish? We will pick the best selling items for you!",
   "Listnow.WeListForYou.Title": "Don't know what to publish? We can do it for you",
 
-
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
   "Menu.OurServices": "Services",
@@ -305,12 +302,6 @@
   "VisibleColumnsPopup.Amount": "Amount of columns on the table",
 
   "WeListForYou.Name": "We Publish For You",
-
-
-
-
-
-
 
   "selectAll": "Select All",
   "filters": "Filters",

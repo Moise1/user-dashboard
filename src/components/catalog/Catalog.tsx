@@ -281,7 +281,7 @@ export const Catalog = () => {
             bodyStyle={{ height: 500, overflow: 'scroll' }}
             closable={false}
           >
-            <AllProducts removeProduct={removeSelectedProduct} className={className}
+            <AllProducts  removeProduct={removeSelectedProduct} className={className}
               getSourceName={getSourceName}
             >
               {allProducts}

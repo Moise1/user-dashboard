@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useMemo, useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Checkbox, Form, Layout, Menu } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -10,7 +10,12 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import {  ActiveListing, ActiveListingsImagesDictionary, ListingsState, PendingListing, } from 'src/redux/listings/listingsSlice';
+import {
+  ActiveListing,
+  ActiveListingsImagesDictionary,
+  ListingsState,
+  PendingListing
+} from 'src/redux/listings/listingsSlice';
 import '../../sass/listings.scss';
 import '../../sass/tables/complex-table.scss';
 import { ReactUtils } from '../../utils/react-utils';
@@ -25,16 +30,87 @@ import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
+import { ConfirmBtn } from 'src/small-components/ActionBtns';
+import Spreadsheet from 'react-spreadsheet';
+
+//Import listings
+
+const { Item } = Form;
+
+const data = [
+  [{ value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }],
+  [{ value: '' }, { value: '' }]
+];
 
 enum ListingTab {
-  active, pending, terminated, import
+  active,
+  pending,
+  terminated,
+  import
 }
 type Selection = {
-  listings: ListingT[],
-  keys: number[]
-}
+  listings: ListingT[];
+  keys: number[];
+};
 
 export const Listings = () => {
+  const [variationMode, setVariationMode] = useState<boolean>(false);
+  const [toRelist, setToRelist] = useState<boolean>(false);
+  const [fromOtherPlatform, setFromOtherPlatform] = useState<boolean>(false);
+
+  let columnsNames: string[];
+
+  if (variationMode) {
+    if (toRelist) {
+      if (fromOtherPlatform) {
+        columnsNames = [
+          'Identifier',
+          'Variation sku',
+          'Variation attributes',
+          'Source URL',
+          'Source variation (optional)',
+          'Source warehouse (optional)'
+        ];
+      } else {
+        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL'];
+      }
+    } else {
+      if (fromOtherPlatform) {
+        columnsNames = [
+          'Identifier',
+          'Variation sku',
+          'Variation attributes',
+          'Source URL',
+          'Source variation (optional)',
+          'Source warehouse (optional)'
+        ];
+      } else {
+        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL', 'Markup'];
+      }
+    }
+  } else {
+    if (toRelist) {
+      if (fromOtherPlatform) {
+        columnsNames = ['Identifier', 'Source URL', 'Source variation (optional)', 'Source warehouse (optional)'];
+      } else {
+        columnsNames = ['Identifier', 'Source URL'];
+      }
+    } else {
+      if (fromOtherPlatform) {
+        columnsNames = [
+          'Identifier',
+          'Source URL',
+          'Source variation (optional)',
+          'Source warehouse (optional)',
+          'Markup'
+        ];
+      } else {
+        columnsNames = ['Identifier', 'Source URL', 'Markup'];
+      }
+    }
+  }
+
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const dispatch = useAppDispatch();
 
@@ -43,16 +119,13 @@ export const Listings = () => {
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
-  const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
+  const sourcesDic = sources ? new Map<number, Source>(sources.map((x) => [x.id, x])) : null;
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
-    if (useRouteMatch(Links.ProductsPending))
-      return ListingTab.pending;
-    if (useRouteMatch(Links.ProductsTerminated))
-      return ListingTab.terminated;
-    //if (useRouteMatch(Links.ProductsImport))
-    //return ListingTab.import;
+    if (useRouteMatch(Links.ProductsPending)) return ListingTab.pending;
+    if (useRouteMatch(Links.ProductsTerminated)) return ListingTab.terminated;
+    if (useRouteMatch(Links.ProductsImport)) return ListingTab.import;
     return ListingTab.active;
   })();
   //------------------------------------------------------------------------------------------
@@ -84,15 +157,28 @@ export const Listings = () => {
       case ListingTab.terminated:
         history.push(Links.ProductsTerminated);
         break;
+      case ListingTab.import:
+        history.push(Links.ProductsImport);
+        break;
     }
   };
 
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
-    const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
+    const {
+      activeListings,
+      loadingActive,
+      terminatedListings,
+      pendingListings,
+      loadingPending,
+      loadingTerminated,
+      activeListingsImages
+    } = useAppSelector((state) => state.listings as ListingsState);
 
     const AddExtraData = (data: ListingT[] | null | undefined) => {
       if (!data || !sourcesDic) return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
+      return data.map(
+        (x) => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT)
+      );
     };
     const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
       if (!data || !activeListingsImages) return data;
@@ -138,8 +224,7 @@ export const Listings = () => {
   })();
 
   useEffect(() => {
-    if (listings)
-      return;
+    if (listings) return;
     switch (tab) {
       case ListingTab.active:
         dispatch(getActiveListings());
@@ -154,54 +239,64 @@ export const Listings = () => {
   }, [tab]);
   //--------------------------------------------------------------------------
 
-  const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
+  const filteredColumns = useMemo(
+    () => ListingsColumns.filter((x) => columnList.includes(x.id)),
+    [ListingsColumns, columnList]
+  );
 
   //Row Selection
-  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
-  const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
+  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys: [] });
+  const onSelectChange = (keys: React.Key[], rows: ListingT[]) =>
+    setSelectedRows({ listings: rows, keys: keys as number[] });
   //
   //Bulk Menu-----------------------------------------------------------------
-  const handleSingleListingModal = () => { console.log('x'); };
-  const handleBulkListingModal = () => { console.log('y'); };
-  const actionsDropdownMenu = useMemo(() => (
-    <Menu
-      items={[
-        {
-          type: 'group',
-          label: (
-            <div
-              className="action-option"
-              onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
-            >
-              Edit  <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Copy <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Optimize <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        }
-      ]}
-    />)
-  , [selectedRows?.keys?.length]);
+  const handleSingleListingModal = () => {
+    console.log('x');
+  };
+  const handleBulkListingModal = () => {
+    console.log('y');
+  };
+  const actionsDropdownMenu = useMemo(
+    () => (
+      <Menu
+        items={[
+          {
+            type: 'group',
+            label: (
+              <div
+                className="action-option"
+                onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
+              >
+                Edit <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          },
+          {
+            type: 'group',
+            label: (
+              <div className="action-option">
+                Copy <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          },
+          {
+            type: 'group',
+            label: (
+              <div className="action-option">
+                Optimize <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          }
+        ]}
+      />
+    ),
+    [selectedRows?.keys?.length]
+  );
   //--------------------------------------------------------------------------
   //Load images for active listings-------------------------------------------
 
   const onChangeVisibleRows = (rows: ListingT[]) => {
-    if (tab != ListingTab.active)
-      return;
+    if (tab != ListingTab.active) return;
 
     const imgToLoad: number[] = [];
     for (const r of rows) {
@@ -209,8 +304,7 @@ export const Listings = () => {
         imgToLoad.push(r.channelListingId);
       }
     }
-    if (imgToLoad.length > 0)
-      dispatch(getActiveListingsImages(imgToLoad));
+    if (imgToLoad.length > 0) dispatch(getActiveListingsImages(imgToLoad));
   };
   //--------------------------------------------------------------------------
   return (
@@ -234,24 +328,48 @@ export const Listings = () => {
           className={tab === ListingTab.terminated ? 'active-tab' : ''}
           id={ListingTab.terminated.toString()}
         />
-      </StatusBar>
-      <Fragment>
-        <ComplexTable
-          uiIdentifier={'listings_' + tab}
-          data={(listings ?? []) as ListingT[]}
-          allColumnData={filteredColumns}
-          defaultVisibleColumns={defaultVisibleColumns}
-          hideWhenEmpty={hideWhenEmpty}
-          loadingData={loadingListings || loadingSources}
-          onChangeVisibleRows={onChangeVisibleRows}
-          actionsDropdownMenu={selectedRows?.keys?.length > 0 ? actionsDropdownMenu : undefined}
-          rowSelection={{
-            selectedRowKeys: selectedRows?.keys,
-            onChange: onSelectChange
-          }}
+        <StatusBtn
+          title={`${t('ImportListings')}`}
+          changeTab={handleChangeTab}
+          className={tab === ListingTab.import ? 'active-tab' : ''}
+          id={ListingTab.import.toString()}
         />
-        {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
-      </Fragment>
+      </StatusBar>
+      {tab === ListingTab.import ? (
+        <div className="import-listings">
+          <Checkbox onChange={() => setVariationMode(!variationMode)}>variations</Checkbox>
+          <Checkbox onChange={() => setToRelist(!toRelist)}>relist</Checkbox>
+          <Checkbox onChange={() => setFromOtherPlatform(!fromOtherPlatform)}>other platform</Checkbox>
+          <Spreadsheet data={data} columnLabels={columnsNames} className="spreadsheet" />
+
+          <Button>Add 10 rows</Button>
+          <div className="table-container">
+            <div className="button-container">
+              <Item>
+                <ConfirmBtn>List items</ConfirmBtn>
+              </Item>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Fragment>
+          <ComplexTable
+            uiIdentifier={'listings_' + tab}
+            data={(listings ?? []) as ListingT[]}
+            allColumnData={filteredColumns}
+            defaultVisibleColumns={defaultVisibleColumns}
+            hideWhenEmpty={hideWhenEmpty}
+            loadingData={loadingListings || loadingSources}
+            onChangeVisibleRows={onChangeVisibleRows}
+            actionsDropdownMenu={selectedRows?.keys?.length > 0 ? actionsDropdownMenu : undefined}
+            rowSelection={{
+              selectedRowKeys: selectedRows?.keys,
+              onChange: onSelectChange
+            }}
+          />
+          {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
+        </Fragment>
+      )}
     </Layout>
   );
 };

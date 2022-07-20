@@ -4,6 +4,7 @@
   Products: '/products',
   ProductsPending: '/products/pending',
   ProductsTerminated: '/products/terminated',
+  ProductsImport: '/products/import',
   PublishNow: '/list-now',
   ManualPublish: '/manual-publish',
   BulkPublish: '/bulk-publish',
@@ -31,5 +32,7 @@
   Register: '/register',
   PriceWarrior: '/price-warrior-configuration',
   ListingService: 'https://hustlegotreal.com/en/listing-service/',
+  HGRChromeExtension: 'https://chrome.google.com/webstore/detail/hgr-non-api/gmdcbkoddgblpnemlconaekpmhgapbcb',
+  NoAPIServer: 'https://hustlegotreal.com/en/no-api-server/',
   AutoOrderConfigurationQuery: '/auto-ordering-configuration-query' //<--What's this?
 };

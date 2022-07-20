@@ -75,7 +75,7 @@ export const UserRegister = withRouter(({ history }: { history: RouteComponentPr
             <Checkbox className="checkbox">
               I accept the{' '}
               <span>
-                <a href="#">Terms</a> and <a href="#">Conditions</a>
+                <a href="#">Terms and Conditions</a>
               </span>
             </Checkbox>
           </Form.Item>
@@ -95,11 +95,11 @@ export const UserRegister = withRouter(({ history }: { history: RouteComponentPr
         <div className="sell-online-contents">
           <div className="title">
             <h1>Sell Online</h1>
-            <p>without stock</p>
+            <h2>Without stock</h2>
 
             <div className="stats">
-              <Steps progressDot current={0}  direction="vertical">
-                <Step title="Over 150 suppliers"  />
+              <Steps progressDot current={0} direction="vertical">
+                <Step title="Over 150 suppliers" />
                 <Step title="5 countries supported" />
                 <Step title="Other feature" />
                 <Step title="Other feature" />
