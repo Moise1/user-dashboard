@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Source } from '../sources/sourceSlice';
 import {
   getOrders,
   processOrders,
@@ -15,7 +16,7 @@ export type OrderData = {
   sourceId: number;
   sourceItem: string;
   channelItem: string;
-  channelShipping: string;
+  channelShipping: number;
   channelCurrency: string;
   sourceCurrencyId: null;
   shippingAddressId: number;
@@ -50,11 +51,24 @@ export type OrderData = {
   sold: string;
   cost: string;
   fees: number;
-  profit?: number;
+  profit?: number | string;//Calculated in local
   margin?: number;
-  status: string;
+  status: number | string;
   sourcePrice: number;
   channelPrice: number;
+  key: number; //Calculated in local
+    //Calculated in client:
+  sourceAOConfigured: boolean;
+  sourceAOEnabled: boolean;
+  sourceUrl: string;
+  sourceName: string;
+}
+
+
+export interface LoadResponse {
+  orders: OrderData[];
+  sourcesEnabled: Set<number>;
+  sources: { [key: number]: Source };
 }
 
 const initialState = {

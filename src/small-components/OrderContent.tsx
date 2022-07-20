@@ -20,17 +20,18 @@ import amazonOrder from '../../src/assets/amazon-order-ss.png';
 import { loadProgressOfOrder } from '../redux/orders/orderThunk';
 import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
+import moment from 'moment';
+import { AutoOrderingState, OrderStatus } from '../utils/determineStatus';
 interface Props {
   orderProgress: number;
-  data: { [key: string]: OrderData };
+  data: OrderData | undefined;
   channelOAuthId: number[];
   OrderDetailsModalOpen: () => void;
 }
 
 export const OrderContent = (props: Props) => {
   const { orderProgress, data, channelOAuthId, OrderDetailsModalOpen } = props;
-  const { id } = data;
-  const [orderNumber] = useState(id);
+  const [orderNumber] = useState(data?.id);
   const orderStatus = useAppSelector((state) => state.orderProgress.states);
   const [orderProgressStatus, setOrderProgressStatus] = useState([]);
   const dispatch = useAppDispatch();
@@ -45,10 +46,24 @@ export const OrderContent = (props: Props) => {
     dispatch(stopOrder({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
+  const notConfigured = !data?.sourceAOConfigured && false;
+
+  const btnProcessDisabled = !data || notConfigured
+    || (!data.status && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+    || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+
+  const btnDispatchDisabled = !data || notConfigured
+    || (!data.status && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+    || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+
+  const cantBeStoped = !data || notConfigured
+    || (data?.storeStatus == OrderStatus.Shipped || data?.storeStatus == OrderStatus.Cancelled)
+    || data?.status < AutoOrderingState.AutoorderingPrepared
+    || (data?.status > AutoOrderingState.CompletedAutoOrder && data.status != AutoOrderingState.TemporaryError);
 
   useEffect(() => {
     // dispatch(loadProgressOfOrder(iddd));
-    dispatch(loadProgressOfOrder(id));
+    dispatch(loadProgressOfOrder(data?.id));
     setOrderProgressStatus(orderStatus);
   }, []);
 
@@ -133,7 +148,7 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{data.date}</p>
+                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
                     <span>Order was selected for purchase</span>
                   </div>
                 </div>
@@ -159,7 +174,7 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{data.date}</p>
+                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
                     <span>Order was selected for purchase</span>
                   </div>
                 </div>
@@ -181,12 +196,12 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{data.date}</p>
+                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
                   </div>
                 </div>
                 <div className="progress-order mt-4 mb-3 mb-lg-0">
                   <h2 className="mb-0">
-                    Progress: <h2 className="fw-400">in checkout</h2>{' '}
+                    Progress: <span className="fw-400">in checkout</span>{' '}
                   </h2>
                   {/* Add progress bar from ant design*/}
                   {/* <ProgressBar now={now} label={`${now}%`} /> */}
@@ -229,13 +244,14 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <WarningBtn handleConfirm={handleStopOrder}>
+
+              <WarningBtn handleConfirm={handleStopOrder} disabled={cantBeStoped || data?.cancelRequested}>
                 <HandStopOrderIcon />
-                <span>{t('OrderTable.Stop')} order</span>
+                <span>{!cantBeStoped && data?.cancelRequested ? <>Stop requested</> : <>Stop Order</>}</span>
               </WarningBtn>
-              <ConfirmBtn handleConfirm={handleProcessOrders}>
+              <ConfirmBtn handleConfirm={handleProcessOrders} disabled={btnProcessDisabled}>
                 <ProcessOrderIcon />
-                <span>{t('OrderTable.Process')} order</span>
+                <span>{t('OrderButtons.Process')} order</span>
               </ConfirmBtn>
             </div>
 
@@ -254,13 +270,13 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <SuccessBtn handleConfirm={handleManuallyDispatch}>
+              <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={btnDispatchDisabled}>
                 <CheckIcon />
                 <span>{t('OrderButtons.MarkAsDispatched')}</span>
               </SuccessBtn>
-              <DangerBtn className="mr-3">
+              <DangerBtn className="mr-3" disabled={true}>
                 <TrashIcon />
-                <span> {t('OrderTable.Delete')} order</span>
+                <span> {t('OrderButtons.Delete')} order</span>
               </DangerBtn>
             </div>
             {/* <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">

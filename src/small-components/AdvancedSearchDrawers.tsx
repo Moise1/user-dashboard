@@ -1,6 +1,6 @@
 import moment from 'moment';
-import { useEffect, useState, ReactNode } from 'react';
-import { Space, Button, Form, Input, Checkbox, Radio, DatePicker, DatePickerProps } from 'antd';
+import React, { useEffect, useState, ReactNode } from 'react';
+import { Space, Form, Input, Checkbox, Radio, DatePicker, DatePickerProps, Button } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { AdvancedSearch, AdvancedSearchProps } from './AdvancedSearch';
 import { SuccessBtn, TransparentBtn } from './ActionBtns';
@@ -9,14 +9,12 @@ import { getCatalogProductsSearching } from '../redux/catalog/catalogThunk';
 import { useAppDispatch, useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Selector, SelectorValue } from '../small-components/form/selector';
 import '../sass/advanced-search.scss';
-
 interface Props extends AdvancedSearchProps {
   openSourceModal?: () => void;
-  // catalogData?: CatalogProduct[];
   setAllProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
   suppliersCount: number[];
   setAllCatalogProducts?: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
-
+  setSourcesIds?: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 interface catalogInputFieldTypes {
@@ -31,51 +29,61 @@ export const CatalogFilters = (props: Props) => {
   const orders = [
     {
       label: 'Default',
-      value: '0',
+      value: '0'
     },
     {
       label: 'Source Price Asc',
-      value: '1',
+      value: '1'
     },
     {
       label: 'Source Price Desc',
-      value: '2',
+      value: '2'
     },
     {
       label: 'Profit Asc',
-      value: '3',
+      value: '3'
     },
     {
       label: 'Profit Desc',
-      value: '4',
+      value: '4'
     },
     {
       label: 'Title Asc',
-      value: '5',
+      value: '5'
     },
     {
       label: 'Title Desc',
-      value: '6',
+      value: '6'
     }
   ];
-
-  const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount } = props;
+  const { visible, onClose, openSourceModal, setAllCatalogProducts, suppliersCount, setSourcesIds } = props;
   const { catalogSearchedProducts } = useAppSelector((state) => state.catalogSearchProduct);
   const [sessionId] = useState<number>(0);
   const dispatch = useAppDispatch();
+
+  const [form] = Form.useForm();
+
+  const catalogInputIntialTypes: catalogInputFieldTypes = {
+    titleContains: ' ',
+    priceFrom: undefined,
+    priceTo: undefined,
+    profitFrom: undefined,
+    profitTo: undefined
+  };
+
+  const [catalogFormInput, setCatalogFormInput] = useState(catalogInputIntialTypes);
+
+  const onReset = () => {
+    form.resetFields();
+    setCatalogFormInput(catalogInputIntialTypes);
+    setSourcesIds?.([]);
+  };
+
   useEffect(() => {
     setAllCatalogProducts?.(catalogSearchedProducts);
   }, [catalogSearchedProducts]);
 
-  const catalogInputIntialTypes: catalogInputFieldTypes = {
-    titleContains: '',
-    priceFrom: undefined,
-    priceTo: undefined,
-    profitFrom: undefined,
-    profitTo: undefined,
-  };
 
-  const [catalogFormInput, setCatalogFormInput] = useState(catalogInputIntialTypes);
   const catalogAdvancedSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCatalogFormInput({
@@ -94,20 +102,15 @@ export const CatalogFilters = (props: Props) => {
     setOptions(e.target.value);
   };
 
-  const clearFilterHandler = () => {
-    console.log('i was click ');
-    setCatalogFormInput({ ...catalogInputIntialTypes });
-    console.log('The values after clear filter ', catalogFormInput);
-  };
 
-  const handleFilterSubmit = () => {
+  const handleFilterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const { titleContains } = catalogFormInput;
     const { priceFrom } = catalogFormInput;
     const { priceTo } = catalogFormInput;
     const { profitFrom } = catalogFormInput;
     const { profitTo } = catalogFormInput;
-    dispatch(getCatalogProductsSearching(
-      {
+    dispatch(
+      getCatalogProductsSearching({
         sessionId,
         titleContains,
         priceFrom,
@@ -116,10 +119,10 @@ export const CatalogFilters = (props: Props) => {
         profitTo,
         options,
         order,
-        suppliersCount,
-
-      }
-    ));
+        suppliersCount
+      })
+    );
+    e.preventDefault();
   };
 
   return (
@@ -130,7 +133,9 @@ export const CatalogFilters = (props: Props) => {
       visible={visible}
       extra={
         <Space>
-          <Button className="clear-filters" onClick={onClose}>Close filters</Button>
+          <Button className="clear-filters" onClick={onClose}>
+            Close filters
+          </Button>
         </Space>
       }
     >
@@ -141,37 +146,51 @@ export const CatalogFilters = (props: Props) => {
         <Button className="supplier-one" onClick={openSourceModal}>
           {suppliersCount.length} suppliers
         </Button>
-        <Form layout="vertical" className="advanced-search-form" onFinish={handleFilterSubmit}>
+        <Form
+          form={form}
+          layout="vertical"
+          className="advanced-search-form"
+          name="control-hooks"
+          id="catalog"
+          onFinish={handleFilterSubmit}
+          initialValues={{
+            remember: true
+          }}
+        >
           <div className="catalog-filters-inputs">
-            <Form.Item label="Min source price">
-              <Input className="blue-input"
+            <Form.Item label="Min source price" name="priceFrom">
+              <Input
+                className="blue-input"
                 name="priceFrom"
-                defaultValue={catalogFormInput.priceFrom}
+                value={catalogFormInput.priceFrom}
                 onChange={catalogAdvancedSearchOnChange}
               />
             </Form.Item>
 
-            <Form.Item label="Min Profit">
-              <Input className="blue-input"
+            <Form.Item label="Min Profit" name="profitFrom">
+              <Input
+                className="blue-input"
                 name="profitFrom"
+                value={catalogFormInput.profitFrom}
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogFormInput.profitFrom}
               />
             </Form.Item>
 
-            <Form.Item label="Max source price">
-              <Input className="blue-input"
+            <Form.Item label="Max source price" name="priceTo">
+              <Input
+                className="blue-input"
                 name="priceTo"
+                value={catalogFormInput.priceTo}
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogFormInput.priceTo}
               />
             </Form.Item>
 
-            <Form.Item label="Max Profit">
-              <Input className="blue-input"
+            <Form.Item label="Max Profit" name="profitTo">
+              <Input
+                className="blue-input"
                 name="profitTo"
+                value={catalogFormInput.profitTo}
                 onChange={catalogAdvancedSearchOnChange}
-                defaultValue={catalogFormInput.profitTo}
               />
             </Form.Item>
           </div>
@@ -181,41 +200,41 @@ export const CatalogFilters = (props: Props) => {
               <strong>Amazon Prime</strong>
             </p>
             <div className="checkboxes">
-              <Radio.Group onChange={onOptionsChange} value={options}>
-                <Radio value={0}>Only Prime</Radio>
-                <Radio value={1}>All Items</Radio>
-              </Radio.Group>
+              <Form.Item name="amazonPrime">
+                <Radio.Group onChange={onOptionsChange} value={options} name="amazonPrime">
+                  <Radio value={0}>Only Prime</Radio>
+                  <Radio value={1}>All Items</Radio>
+                </Radio.Group>
+              </Form.Item>
             </div>
           </div>
 
-          <Form.Item label="Title">
-            <Input className="blue-input" placeholder="Contains..." name="titleContains"
-              defaultValue={catalogFormInput.titleContains}
+          <Form.Item label="Title" name="titleContains">
+            <Input
+              className="blue-input"
+              name="titleContains"
+              value={catalogFormInput.titleContains}
               onChange={catalogAdvancedSearchOnChange}
             />
           </Form.Item>
-          <Form.Item label="Order By">
+          <Form.Item label="Order By" name="orderBy">
             <Selector
               size="large"
-              onChange={ordersChangeHandler}
               placeHolder="Default"
-              dropdownRender={(menu: ReactNode) => (
-                <div className="dropdown-content mb-5">
-                  {menu}
-                </div>
-              )}
+              onChange={ordersChangeHandler}
+              dropdownRender={(menu: ReactNode) => <div className="dropdown-content mb-5">{menu}</div>}
             >
-              {orders.map(x => { return { value: x.value, label: x.label }; })}
+              {orders.map((x) => {
+                return { value: x.value, label: x.label };
+              })}
             </Selector>
           </Form.Item>
 
           <div className="action-btns">
-            <TransparentBtn htmlType='submit'
-              handleClick={clearFilterHandler}
-            >Clear filters</TransparentBtn>
-            <SuccessBtn htmlType='submit'
-              handleClick={handleFilterSubmit}
-            > Apply filters</SuccessBtn>
+            <TransparentBtn handleClick={onReset} htmlType="button">
+              Clear filters
+            </TransparentBtn>
+            <SuccessBtn htmlType="submit"> Apply filters</SuccessBtn>
           </div>
         </Form>
       </div>

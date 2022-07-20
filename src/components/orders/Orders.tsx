@@ -3,7 +3,7 @@ import '../../sass/medium-button.scss';
 import { useState, useEffect, useContext } from 'react';
 import { OrderActionBtns } from './OrderActionBtns';
 import { OrderData } from '../../redux/orders/orderSlice';
-import { /*DataTable,*/ DataTableKey } from '../../small-components/tables/data-table';
+import { DataTableKey } from '../../small-components/tables/data-table';
 import { getOrders } from 'src/redux/orders/orderThunk';
 import { PopupModal } from '../modals/PopupModal';
 import { BulkEditListings } from '../listings/BulkEditListings';
@@ -11,21 +11,19 @@ import { OrderContent } from 'src/small-components/OrderContent';
 import { Layout, Spin } from 'antd';
 import { useAppSelector, useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import OrderDetailsContent from 'src/small-components/OrderDetailsContent';
-import moment from 'moment';
 import { AppContext } from '../../contexts/AppContext';
 import { ComplexTable } from '../../small-components/tables/complex-table';
-import { /*AllColumns,*/ ColumnsVisibleByDefault } from './orders/active-columns';
+import { ColumnsVisibleByDefault } from './orders/active-columns';
 import { OrdersColumns } from './orders/columns';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
-  const { orders } = useAppSelector((state) => state);
-  const { status, loading } = useAppSelector((state) => state.orders);
-  const [selectedRecord, setSelectedRecord] = useState({});
+  const { orders, status, loading } = useAppSelector((state) => state.orders);
   const [currentPage, setCurrentPage] = useState<number>(1);
   //const [orderNumber] = useState(selectedRecord && selectedRecord);
-  const [order, setOrder] = useState([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
+  const [order, setOrder] = useState<OrderData[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<OrderData>();
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -49,24 +47,34 @@ export const Orders = () => {
   const { channelId: newChannel } = useContext(AppContext);
 
   useEffect(() => {
-    setOrder(
-      orders?.orders.length &&
-      orders?.orders.map((item: OrderData): unknown => ({
-        ...item,
-        profit: item.channelPrice - item.channelPrice - item.fees,
-        margin: (item.profit! / item.channelPrice) * 100,
-        date: moment(item.date).format('DD/MM/YY/ hh:mm')
-      }))
-    );
-  }, [orders.orders]);
+    const orderList: OrderData[] = orders.orders.map((l: OrderData) => {
+      let item: OrderData = {
+        ...l, key: l.id,
+        profit: (l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - l.fees).toFixed(2),
+        sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId),
+        sourceAOEnabled: orders.sourcesEnabled?.includes(l.sourceId)
+      }; //Assuming channel and source uses same currency
+      //const totalTaxes = (l.channelTax ?? 0) + (l.channelVAT ?? 0) + (l.channelPaymentTaxes ?? 0) + l.fees;
+      //l.profit = l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - totalTaxes;
+      //l.sourceAOConfigured = orders.orders.sourcesEnabled.includes(l.sourceId);
+      const source = orders.sources[l.sourceId];
+      if (source) {
+        item = {
+          ...item, sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
+          sourceName: source.name,
+        };
+      }
+      return item;
+    });
+    setOrder(orderList);
+  }, [orders]);
 
   useEffect(() => {
     dispatch(getOrders({ channelOAuthIds: [newChannel as number] }));
   }, [getOrders, newChannel]);
 
-  //How many columns to show
   const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
-    setSelectedRowKeys(selectedRowKeys);
+    setSelectedRowKeys(selectedRowKeys as number[]);
   };
   const rowSelection = {
     selectedRowKeys,
@@ -87,33 +95,32 @@ export const Orders = () => {
             <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleOrderModal}>
               <OrderContent
                 orderProgress={status}
-                data={selectedRecord}
+                data={selectedOrder}
                 channelOAuthId={[newChannel]}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
               />
             </PopupModal>
           )}
           <PopupModal open={orderDetailsOpen} width={900} handleClose={handleSingleOrderDetailModal}>
-            <OrderDetailsContent data={selectedRecord} OrderContentModalOpen={handleOrderContentOpen} />
+            <OrderDetailsContent data={selectedOrder} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
 
-          <OrderActionBtns orders={order} channelOAuthId={[newChannel]} selectedRows={selectedRowKeys} />
+          <OrderActionBtns channelOAuthId={[newChannel]} selectedOrderIds={selectedRowKeys} />
 
           <ComplexTable
             uiIdentifier={'orders'}
             data={order}
             allColumnData={OrdersColumns}
             defaultVisibleColumns={ColumnsVisibleByDefault}
-            hideWhenEmpty={true}
+            hideWhenEmpty={false}
             loadingData={loading}
             rowSelection={rowSelection}
-            selectedRows={selectedRowKeys.length}
             currentPage={currentPage}
             onPageChange={handlePageChange}
             onRow={(record) => {
               return {
                 onClick: () => {
-                  setSelectedRecord(record);
+                  setSelectedOrder(record as OrderData);
                   handleSingleOrderModal();
                 }
               };

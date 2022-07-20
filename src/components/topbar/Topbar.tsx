@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-import { Progress, Badge } from 'antd';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { Progress, Badge, Menu, Dropdown } from 'antd';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import coinIcon from '../../assets/token.svg';
 import bell from '../../assets/bell-icon.svg';
 import { StoreList } from '../../small-components/StoreList';
@@ -25,13 +25,11 @@ export const Topbar = withRouter((props: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { tokens } = useAppSelector((state) => state.user);
-
   const { quota } = useAppSelector((state) => state.user);
+  const { channels } = useAppSelector((state) => state.channels);
 
-  const { notifications } = useAppSelector((state) => state.notifications);
+  // const { notifications } = useAppSelector((state) => state.notifications);
   const handleOpenModal = () => setOpen(!open);
-
-  
 
   const routeChange = (route: string) => {
     history.push(route);
@@ -48,9 +46,52 @@ export const Topbar = withRouter((props: Props) => {
     dispatch(getUserToken());
   }, [getNotifications, channelId, getUserToken, getUserQuota]);
 
+  const notificationsMenu = (
+    <Menu
+      items={[
+        {
+          key: '1',
+          label: (
+            <p>
+              Your NO API extension is not connected to{' '}
+              <strong>
+                {channels
+                  .map(({ name }: { name: string }) => name)
+                  .slice(0, 4)
+                  .join(' , ')}
+              </strong>
+              . &nbsp;
+              <a 
+                href={`${Links.HGRChromeExtension}`}
+                target="_blank" rel="noreferrer"
+              >
+                Install and connect the extension
+              </a> or{' '}
+              <a 
+                href={`${Links.NoAPIServer}`}
+                target="_blank" rel="noreferrer"
+              >
+                We connect it for you.
+              </a>
+            </p>
+          )
+        },
+        {
+          key: '2',
+          label: (
+            <div>
+              <Link to="/configure-no-api-server" className="alternative-link no-api-alert">
+                There &apos;s an alert about <strong>NO API Server.</strong> Click here to check it.
+              </Link>
+            </div>
+          )
+        }
+      ]}
+    />
+  );
+
   return (
     <div className="top-bar">
-      
       <PopupModal open={open} width={800} style={{ top: 20 }} bodyStyle={{ height: 600 }} handleClose={handleOpenModal}>
         <BuyTokens />
       </PopupModal>
@@ -94,12 +135,20 @@ export const Topbar = withRouter((props: Props) => {
           <span className="tokens">tokens </span>
         </div>
       </div>
-      <div className="top-bar-item">
-        <div  className="notifications-container">
-          <Badge count={notifications?.length} className="notifications">
+      <div className="top-bar-item notifications-container">
+        <Dropdown
+          arrow
+          placement="bottom"
+          overlay={notificationsMenu}
+          overlayStyle={{
+            width: '20vw',
+            position: 'fixed'
+          }}
+        >
+          <Badge count={1} className="notifications-badge">
             <img src={bell} alt="" />
           </Badge>
-        </div>
+        </Dropdown>
       </div>
       <StoreList />
     </div>

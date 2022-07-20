@@ -2,14 +2,14 @@ import { CloseIcon } from '../../small-components/CloseIcon';
 import { CatalogProduct } from 'src/redux/catalog/catalogSlice';
 import { ElementEventType } from './Catalog';
 import '../../sass/all-products.scss';
-
 interface Props {
   children: CatalogProduct[];
   removeProduct: (e: ElementEventType) => void;
   className: string;
+  getSourceName:(id: number) => unknown;
 }
 
-export const AllProducts = ({ children, removeProduct, className }: Props) => {
+export const AllProducts = ({ children, removeProduct, className, getSourceName }: Props) => {
   return (
     <div className="selected-products-modal">
       {children.length ? (
@@ -20,9 +20,9 @@ export const AllProducts = ({ children, removeProduct, className }: Props) => {
               <div className="header">
                 <p
                   className="title">
-                  {c?.title.length > 20 ? `${c?.title.substring(0, 35)} ...` : c?.title}
+                  {c?.title.length > 20 ? `${c?.title.substring(0, 28)} ...` : c?.title}
                 </p>
-                <p className="source">by {c.sourceId}</p>
+                <p className="source">by {getSourceName(c.sourceId)}</p>
               </div>
               <div className="transaction-details">
                 <div>

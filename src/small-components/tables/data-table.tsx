@@ -11,7 +11,7 @@ interface Props<RecordType> {
   columns: ColumnType<RecordType>[];
 
   dataSource: RecordType[];
-  selectedRows?: number;
+  //selectedRows?: number;
   totalItems?: number;
   page?: string;
   loading?: boolean | ReactNode;
@@ -43,7 +43,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     columns,
     dataSource,
     rowSelection,
-    selectedRows,
+    //selectedRows,
     totalItems,
     page,
     showTableInfo,
@@ -60,6 +60,7 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
   } = props;
 
   const pageSizeOptionArray = pageSizes ?? [10, 20, 50, 100];
+  const selectedRows = rowSelection?.selectedRowKeys?.length ?? 0;
 
   return (
     <div className="data-table-container">

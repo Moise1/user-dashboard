@@ -1,6 +1,7 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
+﻿import { OrderData } from '../../../redux/orders/orderSlice';
+import { ColumnData } from '../../../small-components/tables/types/columns';
 import { determineStatus } from '../../../utils/determineStatus';
-import { RenderChannelItem, RenderImage, RenderSource } from './columns-renders';
+import { RenderChannelItem, RenderDate, RenderImage, RenderSource } from './columns-renders';
 
 export enum OrderColumnId {
   Image = 1,
@@ -101,12 +102,13 @@ export const OrdersColumns: OrderColumnData[] = [
     id: OrderColumnId.DateOfOrder,
     title: 'OrderTable.DateOfOrder',
     dataIndex: 'date',
-    smartSearch: { ignore: true }
+    smartSearch: { ignore: true },
+    render: RenderDate
   },
   {
     id: OrderColumnId.Status,
     title: 'OrderTable.Status',
     dataIndex: 'status',
-    render: (status: number) => determineStatus(status)
+    render: (status: number, record: RecordType) => determineStatus(status, record as unknown as OrderData)
   }
 ];

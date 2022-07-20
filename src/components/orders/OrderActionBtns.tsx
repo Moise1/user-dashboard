@@ -1,5 +1,5 @@
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StatusBar } from '../../small-components/StatusBar';
 import { t } from '../../utils/transShim';
 import '../../sass/orders.scss';
@@ -8,25 +8,26 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
-import { OrderData } from 'src/redux/orders/orderSlice';
 interface props {
-  orders: OrderData[];
   channelOAuthId: number[];
-  selectedRows: React.Key[];
+  selectedOrderIds: number[];
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
-  const { orders, channelOAuthId, selectedRows } = typeBtnProps;
+  const { channelOAuthId, selectedOrderIds } = typeBtnProps;
+  //const processDisabled  = !selectedorder || notConfigured
+  //  || (!Utils.HasValue(order?.status) && order.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
+  //  || (order.status != AutoOrderingState.AutoorderingDisabled
+  //    && order.status != AutoOrderingState.GoingToBuyError
+  //    && order.status != AutoOrderingState.PermanentError
+  //  );
+
   const [disabled, setDisabled] = useState<boolean>(true);
   useEffect(() => {
-    selectedRows.length > 0 && setDisabled(false);
-    selectedRows.length == 0 && setDisabled(true);
+    selectedOrderIds.length > 0 && setDisabled(false);
+    selectedOrderIds.length == 0 && setDisabled(true);
   });
   const dispatch = useAppDispatch();
-
-  const selectedOrderIds: number[] = selectedRows.map((x) => {
-    return orders[x as unknown as number].id;
-  });
 
 
   // const { orderNumber, channelId } = typeBtnProps;
@@ -48,21 +49,21 @@ export const OrderActionBtns = (typeBtnProps: props) => {
       <ConfirmBtn handleConfirm={handleProcessOrders} disabled={disabled}>
         <ProcessOrderIcon />
         <span>
-          {t('OrderTable.Process')} {selectedRows.length > 0 ? selectedRows.length : ''} orders{' '}
+          {t('OrderButtons.Process')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </ConfirmBtn>
 
       <WarningBtn handleConfirm={handleStopOrder} disabled={disabled}>
         <HandStopOrderIcon />
         <span>
-          {t('OrderTable.Stop')} {selectedRows.length > 0 ? selectedRows.length : ''} orders
+          {t('OrderButtons.Stop')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders
         </span>
       </WarningBtn>
 
       <DangerBtn disabled={disabled}>
         <TrashIcon />
         <span>
-          {t('OrderTable.Delete')} {selectedRows.length > 0 ? selectedRows.length : ''} orders{' '}
+          {t('OrderButtons.Delete')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </DangerBtn>
 

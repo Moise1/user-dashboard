@@ -1,5 +1,5 @@
-import React, { useEffect, Fragment, useMemo } from 'react';
-import { Layout} from 'antd';
+import React, { useEffect, Fragment, useMemo, useState } from 'react';
+import { Layout, Menu } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -28,6 +28,10 @@ import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 
 enum ListingTab {
   active, pending, terminated, import
+}
+type Selection = {
+  listings: ListingT[],
+  keys: number[]
 }
 
 export const Listings = () => {
@@ -86,15 +90,14 @@ export const Listings = () => {
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
     const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
 
-    //return (() => {
     const AddExtraData = (data: ListingT[] | null | undefined) => {
       if (!data || !sourcesDic) return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel } as ListingT));
+      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
     };
     const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
       if (!data || !activeListingsImages) return data;
       for (const d of data) {
-        const ud = activeListingsImages[d.id];
+        const ud = activeListingsImages[d.channelListingId];
         if (ud && !ud.loading && ud.url) {
           (d as ActiveListing | PendingListing).imageUrl = ud.url;
         }
@@ -132,7 +135,6 @@ export const Listings = () => {
           activeListingsImages: undefined
         };
     }
-    //}, [tab, activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages]);
   })();
 
   useEffect(() => {
@@ -154,42 +156,46 @@ export const Listings = () => {
 
   const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
 
+  //Row Selection
+  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
+  const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
+  //
   //Bulk Menu-----------------------------------------------------------------
-  //const handleSingleListingModal = () => { };
-  //const handleBulkListingModal = () => { };
-  //const actionsDropdownMenu = useMemo(() =>
-  //  <Menu
-  //    items={[
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div
-  //            className="action-option"
-  //            onClick={selectedRows! === 1 ? handleSingleListingModal : handleBulkListingModal}
-  //          >
-  //            Edit  <strong>{selectedRows}</strong> {page}(s)
-  //          </div>
-  //        )
-  //      },
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div className="action-option">
-  //            Copy <strong>{selectedRows}</strong> {page}(s)
-  //          </div>
-  //        )
-  //      },
-  //      {
-  //        type: 'group',
-  //        label: (
-  //          <div className="action-option">
-  //            Optimize <strong>{selectedRows}</strong> {page}(s)
-  //          </div>
-  //        )
-  //      }
-  //    ]}
-  //  />
-  //  , [selectedRows, page]);
+  const handleSingleListingModal = () => { console.log('x'); };
+  const handleBulkListingModal = () => { console.log('y'); };
+  const actionsDropdownMenu = useMemo(() => (
+    <Menu
+      items={[
+        {
+          type: 'group',
+          label: (
+            <div
+              className="action-option"
+              onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
+            >
+              Edit  <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className="action-option">
+              Copy <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        },
+        {
+          type: 'group',
+          label: (
+            <div className="action-option">
+              Optimize <strong>{selectedRows?.keys?.length}</strong>
+            </div>
+          )
+        }
+      ]}
+    />)
+  , [selectedRows?.keys?.length]);
   //--------------------------------------------------------------------------
   //Load images for active listings-------------------------------------------
 
@@ -199,8 +205,8 @@ export const Listings = () => {
 
     const imgToLoad: number[] = [];
     for (const r of rows) {
-      if (!r.imageUrl && !(activeListingsImages ?? {})[r.id]?.loading) {
-        imgToLoad.push(r.id);
+      if (!r.imageUrl && !(activeListingsImages ?? {})[r.channelListingId]?.loading) {
+        imgToLoad.push(r.channelListingId);
       }
     }
     if (imgToLoad.length > 0)
@@ -237,8 +243,12 @@ export const Listings = () => {
           defaultVisibleColumns={defaultVisibleColumns}
           hideWhenEmpty={hideWhenEmpty}
           loadingData={loadingListings || loadingSources}
-          //actionsDropdownMenu={actionsDropdownMenu}
           onChangeVisibleRows={onChangeVisibleRows}
+          actionsDropdownMenu={selectedRows?.keys?.length > 0 ? actionsDropdownMenu : undefined}
+          rowSelection={{
+            selectedRowKeys: selectedRows?.keys,
+            onChange: onSelectChange
+          }}
         />
         {tab == ListingTab.active && listings?.length == 0 && <ListNow />}
       </Fragment>

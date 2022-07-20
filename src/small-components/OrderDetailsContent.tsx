@@ -5,14 +5,12 @@ import { IconArrowModal, CrossModalIcon } from '../components/common/Icons';
 import { t } from '../utils/transShim';
 import '../sass/order-state-modal.scss';
 import { useAppSelector, useAppDispatch } from '../custom-hooks/reduxCustomHooks';
-import { loadAddressFromOrderLine, orderDataType } from '../redux/orders/orderThunk';
+import { loadAddressFromOrderLine } from '../redux/orders/orderThunk';
 import { Spin } from 'antd';
+import { OrderData } from '../redux/orders/orderSlice';
 
 interface Props {
-  data: {
-    [key: string]: orderDataType;
-    imageUrl?: string | undefined;
-  };
+  data: OrderData | undefined;
   OrderContentModalOpen: () => void;
 }
 
@@ -36,10 +34,10 @@ const OrderDetailsContent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadAddressFromOrderLine(data.id));
+    dispatch(loadAddressFromOrderLine(data?.id));
     setOrderBillingAddress(ordersAddress.billingAddress);
     setOrderShippingAddress(ordersAddress.shippingAddress);
-  }, [dispatch, orderBillingAddress, orderShippingAddress, data.id]);
+  }, [dispatch, orderBillingAddress, orderShippingAddress, data?.id]);
 
   return (
     <div className="modal-first">
@@ -275,7 +273,7 @@ const OrderDetailsContent = (props: Props) => {
                           <Input
                             className="blue-input"
                             type="text"
-                            value={JSON.stringify(data.reference)}
+                            value={JSON.stringify(data?.reference)}
                             disabled
                           />
                         </Form.Item>
@@ -283,7 +281,7 @@ const OrderDetailsContent = (props: Props) => {
                       <div className="large-input mt-2">
                         <h3 className="heading-details">{t('OrderDetails.DateOfOrder')} </h3>
                         <Form.Item>
-                          <Input className="blue-input" type="text" value={JSON.stringify(data.date)} disabled />
+                          <Input className="blue-input" type="text" value={JSON.stringify(data?.date)} disabled />
                         </Form.Item>
                       </div>
 
@@ -293,7 +291,7 @@ const OrderDetailsContent = (props: Props) => {
                           <Input
                             className="blue-input"
                             type="text"
-                            value={JSON.stringify(data.channelItem)}
+                            value={JSON.stringify(data?.channelItem)}
                             disabled
                           />
                         </Form.Item>
@@ -302,12 +300,12 @@ const OrderDetailsContent = (props: Props) => {
                       <div className="large-input mt-2">
                         <h3 className="heading-details mt-4 mt-xl-0">{t('OrderDetails.NameOfProduct')}</h3>
                         <Form.Item>
-                          <Input className="blue-input" type="text" value={JSON.stringify(data.title)} disabled />
+                          <Input className="blue-input" type="text" value={JSON.stringify(data?.title)} disabled />
                         </Form.Item>
                       </div>
                     </div>
                     <div className="col-6 d-flex justify-content-center">
-                      <img src={data.imageUrl} className="product-img" />
+                      <img src={data?.imageUrl} className="product-img" />
                     </div>
                     <div className="col-12 mt-4">
                       <div className="sourceurl">
@@ -332,7 +330,7 @@ const OrderDetailsContent = (props: Props) => {
                             <Input
                               className="blue-input"
                               type="text"
-                              value={JSON.stringify(data.quantity)}
+                              value={JSON.stringify(data?.quantity)}
                               disabled
                             />
                           </Form.Item>
@@ -344,7 +342,7 @@ const OrderDetailsContent = (props: Props) => {
                             <Input
                               className="blue-input"
                               type="text"
-                              value={JSON.stringify(data.channelPrice)}
+                              value={JSON.stringify(data?.channelPrice)}
                               disabled
                             />
                           </Form.Item>
@@ -356,7 +354,7 @@ const OrderDetailsContent = (props: Props) => {
                             <Input
                               className="blue-input"
                               type="text"
-                              value={JSON.stringify(data.sourcePrice) ? JSON.stringify(data.sourcePrice) : ' - '}
+                              value={JSON.stringify(data?.sourcePrice) ? JSON.stringify(data?.sourcePrice) : ' - '}
                               disabled
                             />
                           </Form.Item>
@@ -365,7 +363,7 @@ const OrderDetailsContent = (props: Props) => {
                         <div className="small-input ">
                           <h3 className="heading-details">{t('OrderDetails.Fees')}</h3>
                           <Form.Item>
-                            <Input className="blue-input" type="text" value={JSON.stringify(data.fees)} disabled />
+                            <Input className="blue-input" type="text" value={JSON.stringify(data?.fees)} disabled />
                           </Form.Item>
 
                         </div>
@@ -375,7 +373,7 @@ const OrderDetailsContent = (props: Props) => {
                             <Input
                               className="blue-input"
                               type="text"
-                              value={JSON.stringify(data.quantity)}
+                              value={JSON.stringify(data?.quantity)}
                               disabled
                             />
                           </Form.Item>
@@ -387,7 +385,7 @@ const OrderDetailsContent = (props: Props) => {
                             <Input
                               className="blue-input"
                               type="text"
-                              value={JSON.stringify(data.quantity)}
+                              value={JSON.stringify(data?.quantity)}
                               disabled
                             />
                           </Form.Item>
