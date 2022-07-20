@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { client } from '../client';
-import { SourceSettingData } from './source-configuration-slice';
+import { SourceSettingData } from './types';
 
 export const getSourceConfiguration = createAsyncThunk('SourceConfiguration/Get', async (_, thunkAPI) => {
   try {

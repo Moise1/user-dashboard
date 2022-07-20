@@ -10,14 +10,14 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import {  ActiveListing, ActiveListingsImagesDictionary, ListingsState, PendingListing, } from 'src/redux/listings/listingsSlice';
+import {  ActiveListingsImagesDictionary, ListingsState } from 'src/redux/listings/listingsSlice';
 import '../../sass/listings.scss';
 import '../../sass/tables/complex-table.scss';
 import { ReactUtils } from '../../utils/react-utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './Listings/active-columns';
-import { ListingsColumns, ListingT } from './Listings/columns';
+import { ListingsColumns } from './Listings/columns';
 import { PendingListingsColumns } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
 
@@ -25,6 +25,8 @@ import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
+import { ActiveListingExtended, ListingT } from './Listings/types';
+//import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -35,15 +37,19 @@ type Selection = {
 }
 
 export const Listings = () => {
-  const selectedChannel = ReactUtils.GetSelectedChannel();
   const dispatch = useAppDispatch();
 
   //ADDITIONAL DATA--------------------------------------------------------------------------
+  const selectedChannel = ReactUtils.GetSelectedChannel();
   const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourcesState);
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
   const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
+  //const { computedConfiguration:{settings: computedConfiguration, loading: loadingComputedConfiguration } } = useAppSelector((state) => state.sourceConfiguration as SourceConfigurationState);
+  //useEffect(() => {
+  //  dispatch(getComputedSourceConfiguration());
+  //}, [getComputedSourceConfiguration]);
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
@@ -88,53 +94,82 @@ export const Listings = () => {
   };
 
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
-    const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
 
-    const AddExtraData = (data: ListingT[] | null | undefined) => {
-      if (!data || !sourcesDic) return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
-    };
-    const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
-      if (!data || !activeListingsImages) return data;
-      for (const d of data) {
-        const ud = activeListingsImages[d.channelListingId];
-        if (ud && !ud.loading && ud.url) {
-          (d as ActiveListing | PendingListing).imageUrl = ud.url;
-        }
+    //This first only return informatinio depending of the active tab
+    const data1 = (() => {
+      const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
+
+      switch (tab) {
+        default:
+        case ListingTab.active:
+          return {
+            defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
+            columnList: ActiveListingsColumns,
+            hideWhenEmpty: true,
+            listings: activeListings as ListingT[],
+            loadingListings: loadingActive,
+            activeListingsImages: activeListingsImages
+          };
+        case ListingTab.pending:
+          return {
+            defaultVisibleColumns: PendingListingsColumns,
+            columnList: PendingListingsColumns,
+            hideWhenEmpty: false,
+            listings: pendingListings as ListingT[],
+            loadingListings: loadingPending,
+            activeListingsImages: undefined
+          };
+        case ListingTab.terminated:
+          return {
+            defaultVisibleColumns: TerminatedListingsColumns,
+            columnList: TerminatedListingsColumns,
+            hideWhenEmpty: false,
+            listings: terminatedListings as ListingT[],
+            loadingListings: loadingTerminated,
+            activeListingsImages: undefined
+          };
       }
-      return data;
-    };
+    })();
 
-    switch (tab) {
-      default:
-      case ListingTab.active:
-        return {
-          defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
-          columnList: ActiveListingsColumns,
-          hideWhenEmpty: true,
-          listings: AddImages(AddExtraData(activeListings as ListingT[] | null | undefined), activeListingsImages),
-          loadingListings: loadingActive,
-          activeListingsImages
+    const listings =
+      //We use memo here to avoid recalculating constantly. data 1 is outside this memo so we can 
+      //use JSON.stringify only in data1.listings, otherwiese we would be forced to stringinfy activelistings, pendinglistings and terminatedListings
+      useMemo(() => {
+        const AddExtraData = (data: ListingT[] | null | undefined) => {
+          if (!data || !sourcesDic) return data;
+          return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
         };
-      case ListingTab.pending:
-        return {
-          defaultVisibleColumns: PendingListingsColumns,
-          columnList: PendingListingsColumns,
-          hideWhenEmpty: false,
-          listings: AddExtraData(pendingListings as ListingT[] | null | undefined),
-          loadingListings: loadingPending,
-          activeListingsImages: undefined
+
+        const ExtendActive = (listings: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
+          if (!listings) return listings;
+
+          for (const al of listings) {
+            const l = al as ActiveListingExtended;//Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
+            //l.profit = l.channelPrice - l.sourcePrice - (l.channelPrice * settings.feePercentage) / 100;
+
+            if (activeListingsImages) {//Images
+              const ud = activeListingsImages[l.channelListingId];
+              if (ud && !ud.loading && ud.url) {
+                l.imageUrl = ud.url;
+              }
+            }
+          }
+
+          return listings;
         };
-      case ListingTab.terminated:
-        return {
-          defaultVisibleColumns: TerminatedListingsColumns,
-          columnList: TerminatedListingsColumns,
-          hideWhenEmpty: false,
-          listings: AddExtraData(terminatedListings as ListingT[] | null | undefined),
-          loadingListings: loadingTerminated,
-          activeListingsImages: undefined
-        };
-    }
+
+        switch (tab) {
+          default:
+          case ListingTab.active:
+            return ExtendActive(AddExtraData(data1.listings), data1.activeListingsImages);
+          case ListingTab.pending:
+            return AddExtraData(data1.listings);
+          case ListingTab.terminated:
+            return AddExtraData(data1.listings);
+        }
+      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages]) as ListingT[] | null | undefined;
+
+    return {...data1, listings};
   })();
 
   useEffect(() => {

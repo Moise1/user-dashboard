@@ -1,9 +1,7 @@
-﻿import { Channel } from '../../../redux/channels/channelsSlice';
-import { ActiveListing, PendingListing, TerminatedListings } from '../../../redux/listings/listingsSlice';
-import { Source } from '../../../redux/sources/sourceSlice';
-import { ColumnData } from '../../../small-components/tables/types/columns';
+﻿import { ColumnData } from '../../../small-components/tables/types/columns';
 import { RenderChannelItem, RenderImage, RenderPrice, RenderSource } from './columns-renders';
 import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost } from './columns-sorter';
+import { ListingT } from './types';
 
 export enum ListingColumnId {
   Image = 1,
@@ -19,8 +17,6 @@ export enum ListingColumnId {
   CreatedOn = 11,
   ChannelItem= 12
 }
-
-export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { key:number, source?: Source, channel?: Channel };
 
 export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId

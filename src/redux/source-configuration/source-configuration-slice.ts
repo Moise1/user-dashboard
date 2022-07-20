@@ -1,18 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SettingData, SettingValue, SourceSettingKey } from '../../types/settings';
 import { getSourceConfiguration, saveSourceSetting } from './sources.coonfiguration-thunk';
-
-export interface SourceSettingData extends SettingData {
-  key: SourceSettingKey;
-  value: SettingValue;
-  sourceId: number;
-}
-
-export interface SavingSetting {
-  loading: boolean;
-  success: boolean;
-  data: SourceSettingData;
-}
+import { ComputedSettingsData, SavingSetting, SourceSettingData } from './types';
 
 export interface SourceConfigurationState {
   get: {
@@ -20,6 +8,10 @@ export interface SourceConfigurationState {
     settings?: SourceSettingData[];
   };
   saving: SavingSetting[],
+  computedConfiguration: {
+    loading: boolean;
+    settings?: ComputedSettingsData;
+  }
 }
 
 const initialState: SourceConfigurationState = {
@@ -27,7 +19,10 @@ const initialState: SourceConfigurationState = {
     loading: false,
     settings:[]
   },
-  saving: []
+  saving: [],
+  computedConfiguration: {
+    loading:false
+  }
 };
 
 export const sourceSlice = createSlice({

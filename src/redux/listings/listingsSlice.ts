@@ -36,9 +36,8 @@ export type ActiveListing = {
   buyBoxPrice?: number;
   origin: eChannelListingOrigin;
   variationAtributes: ChannelListingVariationAttributeOption[];
-
-  imageUrl?: string;
 }
+
 export type ChannelListingVariationAttributeOption = {
   id: number;
   channelListingId: number;

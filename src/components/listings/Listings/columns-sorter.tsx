@@ -1,18 +1,19 @@
-﻿import { Source } from "../../../redux/sources/sourceSlice";
+﻿import { Source } from '../../../redux/sources/sourceSlice';
+import { ListingT } from './types';
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
 type WithChannelItem = { channelItem: string };
 type WithSource = { source: Source };
 type WithTitle = { title: string };
-type WithSell = { sell: number };
-type WithCost = { cost: number };
+type WithSell = { channelPrice: number };
+type WithCost = { sourcePrice: number };
 
 const CompareString = (a?: string, b?: string) => (a ?? '').localeCompare(b ?? '');
 const CompareNumber = (a?: number, b?: number) => (a ?? 0) - (b ?? 0);
 
-export const SorterChanelItem = (a: RecordType, b: RecordType) => CompareString((a as WithChannelItem).channelItem, (b as WithChannelItem).channelItem)
-export const SorterSource = (a: RecordType, b: RecordType) => CompareString((a as WithSource).source?.name, (b as WithSource).source?.name);
-export const SorterTitle = (a: RecordType, b: RecordType) => CompareString((a as WithTitle).title, (b as WithTitle).title);
-export const SorterSell = (a: RecordType, b: RecordType) => CompareNumber((a as WithSell).sell, (b as WithSell).sell);
-export const SorterCost = (a: RecordType, b: RecordType) => CompareNumber((a as WithCost).cost, (b as WithCost).cost);
+export const SorterChanelItem = (a: ListingT, b: ListingT) => CompareString((a as WithChannelItem).channelItem, (b as WithChannelItem).channelItem);
+export const SorterSource = (a: ListingT, b: ListingT) => CompareString((a as WithSource).source?.name, (b as WithSource).source?.name);
+export const SorterTitle = (a: ListingT, b: ListingT) => CompareString((a as WithTitle).title, (b as WithTitle).title);
+export const SorterSell = (a: ListingT, b: ListingT) => CompareNumber((a as WithSell).channelPrice, (b as WithSell).channelPrice);
+export const SorterCost = (a: ListingT, b: ListingT) => CompareNumber((a as WithCost).sourcePrice, (b as WithCost).sourcePrice);
