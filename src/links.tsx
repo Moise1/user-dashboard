@@ -4,6 +4,7 @@
   Products: '/products',
   ProductsPending: '/products/pending',
   ProductsTerminated: '/products/terminated',
+  ProductsImport: '/products/import',
   PublishNow: '/list-now',
   ManualPublish: '/manual-publish',
   BulkPublish: '/bulk-publish',

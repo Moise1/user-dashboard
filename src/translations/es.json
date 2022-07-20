@@ -5,6 +5,7 @@
   "PendingListings": "Productos Pendientes",
   "PendingListingsShort": "Pendientes",
   "TerminatedListings": "Productos Terminados",
+  "ImportListings": "Importar productos",
 
   "BulkListing.Name": "Publicar masivamente",
 
@@ -210,8 +211,5 @@
 
   "WeListForYou.Name": "Publicamos por ti",
 
-
-
   "search": "Buscar..."
-
 }
