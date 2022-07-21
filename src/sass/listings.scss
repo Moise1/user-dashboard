@@ -16,6 +16,11 @@
     }
   }
   .import-listings {
+    .checkboxes-section {
+      .checkboxes {
+        display: grid;
+      }
+    }
     .spreadsheet {
       width: 100%;
 

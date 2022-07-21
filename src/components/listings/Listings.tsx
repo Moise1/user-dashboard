@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useMemo, useState } from 'react';
-import { Button, Checkbox, Form, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -25,23 +25,11 @@ import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './
 import { ListingsColumns, ListingT } from './Listings/columns';
 import { PendingListingsColumns } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
-
 import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
-import { ConfirmBtn } from 'src/small-components/ActionBtns';
-import Spreadsheet from 'react-spreadsheet';
-
-//Import listings
-
-const { Item } = Form;
-
-const data = [
-  [{ value: '' }, { value: '' }],
-  [{ value: '' }, { value: '' }],
-  [{ value: '' }, { value: '' }]
-];
+import { ImportListings } from './ImportListings';
 
 enum ListingTab {
   active,
@@ -55,62 +43,6 @@ type Selection = {
 };
 
 export const Listings = () => {
-  const [variationMode, setVariationMode] = useState<boolean>(false);
-  const [toRelist, setToRelist] = useState<boolean>(false);
-  const [fromOtherPlatform, setFromOtherPlatform] = useState<boolean>(false);
-
-  let columnsNames: string[];
-
-  if (variationMode) {
-    if (toRelist) {
-      if (fromOtherPlatform) {
-        columnsNames = [
-          'Identifier',
-          'Variation sku',
-          'Variation attributes',
-          'Source URL',
-          'Source variation (optional)',
-          'Source warehouse (optional)'
-        ];
-      } else {
-        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL'];
-      }
-    } else {
-      if (fromOtherPlatform) {
-        columnsNames = [
-          'Identifier',
-          'Variation sku',
-          'Variation attributes',
-          'Source URL',
-          'Source variation (optional)',
-          'Source warehouse (optional)'
-        ];
-      } else {
-        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL', 'Markup'];
-      }
-    }
-  } else {
-    if (toRelist) {
-      if (fromOtherPlatform) {
-        columnsNames = ['Identifier', 'Source URL', 'Source variation (optional)', 'Source warehouse (optional)'];
-      } else {
-        columnsNames = ['Identifier', 'Source URL'];
-      }
-    } else {
-      if (fromOtherPlatform) {
-        columnsNames = [
-          'Identifier',
-          'Source URL',
-          'Source variation (optional)',
-          'Source warehouse (optional)',
-          'Markup'
-        ];
-      } else {
-        columnsNames = ['Identifier', 'Source URL', 'Markup'];
-      }
-    }
-  }
-
   const selectedChannel = ReactUtils.GetSelectedChannel();
   const dispatch = useAppDispatch();
 
@@ -336,21 +268,7 @@ export const Listings = () => {
         />
       </StatusBar>
       {tab === ListingTab.import ? (
-        <div className="import-listings">
-          <Checkbox onChange={() => setVariationMode(!variationMode)}>variations</Checkbox>
-          <Checkbox onChange={() => setToRelist(!toRelist)}>relist</Checkbox>
-          <Checkbox onChange={() => setFromOtherPlatform(!fromOtherPlatform)}>other platform</Checkbox>
-          <Spreadsheet data={data} columnLabels={columnsNames} className="spreadsheet" />
-
-          <Button>Add 10 rows</Button>
-          <div className="table-container">
-            <div className="button-container">
-              <Item>
-                <ConfirmBtn>List items</ConfirmBtn>
-              </Item>
-            </div>
-          </div>
-        </div>
+        <ImportListings />
       ) : (
         <Fragment>
           <ComplexTable
