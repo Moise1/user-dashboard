@@ -20,10 +20,17 @@
     padding: 1rem;
     border-radius: 1rem;
     .explanation-section {
+      padding: 0.5rem;
     }
     .checkboxes-section {
+      margin-bottom: 0.5rem;
       .checkboxes {
         display: grid;
+        .variations-section {
+          .variations-mode-explanation {
+            padding: 1rem;
+          }
+        }
       }
     }
     .spreadsheet {

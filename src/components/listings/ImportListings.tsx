@@ -48,11 +48,15 @@ export const ImportListings = () => {
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
         columnsNames = [skuName, 'Variation sku', 'Variation attributes', 'Source URL'];
         data = [
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }]
@@ -72,11 +76,15 @@ export const ImportListings = () => {
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
         columnsNames = [skuName, 'Variation sku', 'Variation attributes', 'Source URL', 'Markup (optional)'];
         data = [
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
@@ -90,11 +98,15 @@ export const ImportListings = () => {
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
         columnsNames = [skuName, 'Source URL'];
         data = [
+          [{ value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }]
@@ -112,11 +124,15 @@ export const ImportListings = () => {
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
         columnsNames = [skuName, 'Source URL', 'Markup (optional)'];
         data = [
+          [{ value: '' }, { value: '' }, { value: '' }],
+          [{ value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }]
@@ -155,6 +171,18 @@ export const ImportListings = () => {
             {variationMode && (
               <div className="variations-mode-explanation">
                 <p>If you wish to import variations, there are two more fields you will need to specify.</p>
+                <ul>
+                  <li>
+                    Variation sku: This ID corresponds to the label used to distinguish between variations that have the
+                    same item ID.
+                  </li>
+                  <li>Variation attribute: It is used to specify the value of the attribute/s of the variation.</li>
+                </ul>
+                <p>Example</p>
+                <p>Variation attributes : {'"Color": "Red"'}</p>
+                <p>If the variation has more than one attribute you can separate them with a comma.</p>
+                <p>Example</p>
+                <p>Variation attributes : {'"Color": "Red" , "Size": "Small"'}</p>
               </div>
             )}
           </div>
