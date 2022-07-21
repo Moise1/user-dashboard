@@ -16,6 +16,11 @@
     }
   }
   .import-listings {
+    background-color: $primary-bg;
+    padding: 1rem;
+    border-radius: 1rem;
+    .explanation-section {
+    }
     .checkboxes-section {
       .checkboxes {
         display: grid;

@@ -3,24 +3,42 @@ import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Button, Checkbox, Form } from 'antd';
 import { useState } from 'react';
 import '../../sass/listings.scss';
-
-//Import listings
+import { Channel } from 'src/redux/channels/channelsSlice';
+import { useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 
 const { Item } = Form;
 
 export const ImportListings = () => {
+  //Get channels and selected channel
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+  const selectedChannel = localStorage.getItem('channelId');
+  const channel = channels.filter(function (data) {
+    return data.id.toString() == selectedChannel;
+  })[0];
+
+  //Checkboxes modes
+
   const [variationMode, setVariationMode] = useState<boolean>(false);
   const [toRelist, setToRelist] = useState<boolean>(false);
   const [fromOtherPlatform, setFromOtherPlatform] = useState<boolean>(false);
 
+  //Columns and data for the spreadsheet
+
   let columnsNames: string[];
   let [data] = useState<Matrix<{ value: string }>>([]);
+  let skuName = channel.name + ' Identifier';
+
+  if (channel.channelId === 4) {
+    skuName = 'SKU';
+  }
+
+  //Conditions for the columns
 
   if (variationMode) {
     if (toRelist) {
       if (fromOtherPlatform) {
         columnsNames = [
-          'Identifier',
+          skuName,
           'Variation sku',
           'Variation attributes',
           'Source URL',
@@ -33,7 +51,7 @@ export const ImportListings = () => {
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
-        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL'];
+        columnsNames = [skuName, 'Variation sku', 'Variation attributes', 'Source URL'];
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
@@ -43,7 +61,7 @@ export const ImportListings = () => {
     } else {
       if (fromOtherPlatform) {
         columnsNames = [
-          'Identifier',
+          skuName,
           'Variation sku',
           'Variation attributes',
           'Source URL',
@@ -57,7 +75,7 @@ export const ImportListings = () => {
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
-        columnsNames = ['Identifier', 'Variation sku', 'Variation attributes', 'Source URL', 'Markup (optional)'];
+        columnsNames = [skuName, 'Variation sku', 'Variation attributes', 'Source URL', 'Markup (optional)'];
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }],
@@ -68,14 +86,14 @@ export const ImportListings = () => {
   } else {
     if (toRelist) {
       if (fromOtherPlatform) {
-        columnsNames = ['Identifier', 'Source URL', 'Source variation (optional)', 'Source warehouse (optional)'];
+        columnsNames = [skuName, 'Source URL', 'Source variation (optional)', 'Source warehouse (optional)'];
         data = [
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
-        columnsNames = ['Identifier', 'Source URL'];
+        columnsNames = [skuName, 'Source URL'];
         data = [
           [{ value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }],
@@ -85,7 +103,7 @@ export const ImportListings = () => {
     } else {
       if (fromOtherPlatform) {
         columnsNames = [
-          'Identifier',
+          skuName,
           'Source URL',
           'Source variation (optional)',
           'Source warehouse (optional)',
@@ -97,7 +115,7 @@ export const ImportListings = () => {
           [{ value: '' }, { value: '' }, { value: '' }, { value: '' }, { value: '' }]
         ];
       } else {
-        columnsNames = ['Identifier', 'Source URL', 'Markup (optional)'];
+        columnsNames = [skuName, 'Source URL', 'Markup (optional)'];
         data = [
           [{ value: '' }, { value: '' }, { value: '' }],
           [{ value: '' }, { value: '' }, { value: '' }],
@@ -129,6 +147,7 @@ export const ImportListings = () => {
           have not.
         </p>
       </div>
+
       <div className="checkboxes-section">
         <div className="checkboxes">
           <div className="variations-section">
