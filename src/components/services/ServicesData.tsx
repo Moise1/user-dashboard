@@ -90,7 +90,7 @@ export const AllServicesData: ServiceData[] = [
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image:
       'https://lh3.googleusercontent.com/Zgk-AtBUU6Oh-UDi4up49vsdfCN87NdAMOdWBi0jmB6E6DWnm6P0aaabmekWGSv_YskB2UxbiLCbEqiRnd5_MG2rMQ=w128-h128-e365-rj-sc0x00ffffff',
-    slug: '/services/vero-checker'
+    slug: 'vero-checker'
   },
   {
     id: 6,

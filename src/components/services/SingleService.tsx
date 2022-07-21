@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Row, Col, Divider, Spin } from 'antd';
-import '../../sass/services/service.scss';
+import { useParams } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
 import { Key, ReactChild, ReactFragment, ReactPortal, useEffect, useState } from 'react';
 import { AllServicesData, ServiceData } from './ServicesData';
+import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import { getServices } from 'src/redux/subscriptions/subsThunk';
+import '../../sass/services/service.scss';
 
 type LocationProps = {
   location: {
@@ -21,10 +24,15 @@ type LocationProps = {
   };
 };
 
-export const SingleService = ({ location }: LocationProps) => {
 
+export const SingleService = ({ location }: LocationProps) => {
+  
+  const {slug}: {slug: string} = useParams();
   const [data, setData] = useState<ServiceData>();
   const [loading, setLoading] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const { services } = useAppSelector((state) => state.services);
+  const [servicePrice, setServicePrice] = useState<number | null>(null);
 
   useEffect(() => {
     if (location.state == undefined) {
@@ -37,6 +45,33 @@ export const SingleService = ({ location }: LocationProps) => {
       setLoading(false);
     }
   }, []);
+
+  useEffect(()=>{
+    dispatch(getServices());
+    switch (slug) {
+      case 'price-warrior':
+        break;
+      case 'private-supplier': 
+        setServicePrice(services[1].prices[0].price);
+        break;
+      case 'no-api-server':
+        setServicePrice(services[3].prices[3].price);
+        break;
+      case 'auto-ordering':
+        break;
+      case 'vero-checker':
+        break;
+      case 'listing-service': 
+        break;
+
+      case 'title-optimization':
+        break;
+
+      default:
+        break;
+    }
+
+  }, [slug]);
 
   return loading ? (
     <Spin />
@@ -93,7 +128,7 @@ export const SingleService = ({ location }: LocationProps) => {
                     <div className="service-rate-container">
                       <div className="rate-details">
                         <span className="euro">€</span>
-                        <h1 className="monthly-rate">{data?.price}</h1>
+                        <h1 className="monthly-rate">{servicePrice ?? null}</h1>
                       </div>
                       <div className="type-payment">
                         <h4>One off payment</h4>

@@ -42,7 +42,6 @@ export const EditTemplate = () => {
   const handleChange = (content: string) => setCurrentTemplate(content);
 
   const handleUpdate = () => {
-    // console.log('NEW TEMPLATE ===>', JSON.stringify(currentTemplate));
     // const formattedResult = currentTemplate
     //   .replace(/<!--[\s\S]*?-->/gm, '') // comments
     //   .replace(/\s+/g, '') // leading and trailing whitespace
