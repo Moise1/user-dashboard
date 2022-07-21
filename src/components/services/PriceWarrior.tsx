@@ -20,7 +20,15 @@ export const PriceWarrior = () => {
   const [minMarkup] = useState<number>(priceWarrior?.settings?.markup);
   const [undercutBy] = useState<number>(priceWarrior?.settings?.undercutBy);
   const [threshold] = useState<number>(priceWarrior?.settings?.threshold);
-  const [data, setData] = useState<PWSetting>({ active: active as unknown as boolean, repricing: repricing as unknown as boolean, markup: minMarkup, threshold: threshold, undercutBy: undercutBy });
+
+  
+  const [data, setData] = useState<PWSetting>({ 
+    active: active as unknown as boolean,
+    repricing: repricing as unknown as boolean,
+    markup: minMarkup, 
+    threshold: threshold, 
+    undercutBy: undercutBy
+  });
 
 
   const onPriceWarriorChange = (value: SelectorValue) => {

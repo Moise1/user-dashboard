@@ -15,20 +15,20 @@ type LocationProps = {
       paragraphs: string[];
       bulletPoints: string[];
       image: string;
-      link: string;
+      slug: string;
     };
     pathname: string;
   };
 };
 
-export const AllServices = ({ location }: LocationProps) => {
+export const SingleService = ({ location }: LocationProps) => {
 
   const [data, setData] = useState<ServiceData>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (location.state == undefined) {
-      const newState = AllServicesData.filter((s: ServiceData) => s.link == location.pathname);
+      const newState = AllServicesData.filter((s: ServiceData) => s.slug == location.pathname);
       setData(newState[0]);
       setLoading(false);
     }

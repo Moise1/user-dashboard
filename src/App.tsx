@@ -26,7 +26,7 @@ import {
   AutoOrderingConfiguration,
   AutoOrdering,
   ConfigureListingService,
-  AllServices,
+  SingleService,
   PriceWarrior,
   EditTemplate,
   ConfigureNoapi,
@@ -93,7 +93,7 @@ export const App = withRouter(({ history }: { history: RouteComponentProps['hist
             <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />
             <ProtectedRoute path={Links.NewChannel} component={NewChannel} />
             <ProtectedRoute exact path={Links.Services} component={Services} />
-            <ProtectedRoute exact path={Links.Services + '/:slug'} component={AllServices} />
+            <ProtectedRoute path={Links.ServicesSlug} component={SingleService} />
             <ProtectedRoute path={Links.Subscriptions} component={Subscriptions} />
             <ProtectedRoute path={Links.OurServices} component={OurServices} />
             <ProtectedRoute path={Links.Checkout} component={Checkout} />
@@ -105,7 +105,7 @@ export const App = withRouter(({ history }: { history: RouteComponentProps['hist
             <ProtectedRoute path={Links.ConfigureListingService} component={ConfigureListingService} />
             <ProtectedRoute path={Links.GetStarted} component={GetStarted} />
             <ProtectedRoute path={Links.Catalog} component={Catalog} />
-            <ProtectedRoute path={Links.PriceWarrior} component={PriceWarrior} />
+            <ProtectedRoute path={Links.PriceWarriorConfig} component={PriceWarrior} />
             <ProtectedRoute exact path={Links.Templates} component={Templates} />
             <ProtectedRoute path={Links.EditTemplate} component={EditTemplate} />
             <ProtectedRoute path={Links.AutoOrderConfiguration} component={AutoOrderingConfiguration} />

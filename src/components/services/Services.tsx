@@ -1,8 +1,8 @@
 import { Card } from 'antd';
-import '../../sass/services/services.scss';
 import { Layout } from 'antd';
 import { AllServicesData } from './ServicesData';
 import { Link } from 'react-router-dom';
+import '../../sass/services/services.scss';
 
 export const Services = () => {
   return (
@@ -14,7 +14,7 @@ export const Services = () => {
             <div className="card-info">
               <h1 className="service-title">{s.title}</h1>
               <p>{s.shortDescription}</p>
-              <Link to={{ pathname: s.link, state: s }}>Read more</Link>
+              <Link to={{ pathname: `/services/${s.slug}`, state: s }}>Read more</Link>
             </div>
           </Card>
         ))}
