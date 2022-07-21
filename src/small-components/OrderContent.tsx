@@ -22,6 +22,7 @@ import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
 import moment from 'moment';
 import { AutoOrderingState, OrderStatus } from '../utils/determineStatus';
+
 interface Props {
   orderProgress: number;
   data: OrderData | undefined;
@@ -72,6 +73,8 @@ export const OrderContent = (props: Props) => {
   //To check status, working on it -Suleman Ahmad-
   let statusText: string;
   let orderProgressBar = 1;
+  let hasError = false;
+
   orderProgressStatus?.map((curr: { status: number }) => {
     if (curr.status == AutoOrderingState.AutoorderingDisabled) {
       orderProgressBar = 0;
@@ -101,6 +104,7 @@ export const OrderContent = (props: Props) => {
       //Error
       orderProgressBar = 0;
       statusText = 'Error';
+      hasError = true;
     }
     const percent = orderProgress * 25;
     console.log(orderProgressBar, statusText, percent);
@@ -139,6 +143,15 @@ export const OrderContent = (props: Props) => {
                   </span>
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                     <h4 className="mb-1">
+                      {hasError && 'Error'}
+                      {/*{!hasError && orderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}*/}
+                      {/*{!hasError && orderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}*/}
+                      {/*{!hasError && orderProgress >= 1 && 'Start order'}*/}
+                      {/*{' '}{orderProgress == 1 &&*/}
+                      {/*  <span className="ml-2">*/}
+                      {/*    {svgDoing}*/}
+                      {/*  </span>*/}
+                      {/*}*/}
                       {t('OrderDetails.StartOrder')}
                       {orderProgress === 1 ? (
                         <span className="ml-2">
