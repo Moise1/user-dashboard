@@ -29,13 +29,14 @@ import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
 import { ProductQuota } from 'src/redux/user/userSlice';
-import { DateRangePicker, Range } from 'react-date-range';
+import { Range } from 'react-date-range';
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
-import Modal from 'antd/lib/modal/Modal';
+import Modal from 'antd/es/modal/Modal';
 import { getCurrency } from '../../utils/getCurrency';
 import { Links } from '../../links';
+import { DatePicker } from '../../small-components/date-picker';
 
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
@@ -605,14 +606,14 @@ export const Dashboard = () => {
           <Row className="general-cols" gutter={[0, 15]}>
             <Col className="products" xs={24} lg={10}>
               <h3>Total orders</h3>
-              <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
+              <h2>{totalOrders ? totalOrders.toLocaleString() : '0'}</h2>
               <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" />
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
               <h2>
                 {getCurrency()}
-                {totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}
+                {totalProfit ? totalProfit.toLocaleString({ maximumFractionDigits: 0 }) : '0'}
               </h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" />
             </Col>
@@ -788,7 +789,7 @@ export const Dashboard = () => {
               </div>
 
               <h3>Total affiliates</h3>
-              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+              <h2>{totalAffiliates ? totalAffiliates.toLocaleString() : '0'}</h2>
               <Chart
                 options={affiliateChartData}
                 series={affiliateChartData.series}
@@ -814,7 +815,7 @@ export const Dashboard = () => {
         onCancel={handleSalesCancel}
         okText="Apply"
       >
-        <DateRangePicker
+        <DatePicker
           className="range-datepicker"
           key="dpSales"
           onChange={(item) => setState([item.selection])}
@@ -833,7 +834,7 @@ export const Dashboard = () => {
         onCancel={handleAffiliateCancel}
         okText="Apply"
       >
-        <DateRangePicker
+        <DatePicker
           className="range-datepicker"
           key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}

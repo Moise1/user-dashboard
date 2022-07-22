@@ -6,6 +6,9 @@ export interface ActiveListingExtended extends ActiveListing {
   //Calculated in local:
   imageUrl?: string;
   profit?: number;
+  markup?: number;
+  monitorStock?: boolean;
+  monitorPrice?: boolean;
 }
 
 export type ListingT = (ActiveListingExtended | PendingListing | TerminatedListings) & { key: number, source?: Source, channel?: Channel };

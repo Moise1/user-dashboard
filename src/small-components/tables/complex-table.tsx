@@ -1,8 +1,8 @@
 ﻿//This table will include search, advanced search, columns customization, etc.
 
 import { Layout, Spin } from 'antd';
-import Search from 'antd/lib/input/Search';
-import { TableRowSelection } from 'antd/lib/table/interface';
+import Search from 'antd/es/input/Search';
+import { TableRowSelection } from 'antd/es/table/interface';
 import { useEffect, useState, useMemo } from 'react';
 import { VisibleColumnsPopup } from '../../components/listings/Listings/visible-columns-popup';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';

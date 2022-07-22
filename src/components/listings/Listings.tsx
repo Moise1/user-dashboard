@@ -26,7 +26,8 @@ import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './Listings/types';
-//import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
+import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
+import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -46,10 +47,10 @@ export const Listings = () => {
     dispatch(getSources());
   }, [getSources]);
   const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
-  //const { computedConfiguration:{settings: computedConfiguration, loading: loadingComputedConfiguration } } = useAppSelector((state) => state.sourceConfiguration as SourceConfigurationState);
-  //useEffect(() => {
-  //  dispatch(getComputedSourceConfiguration());
-  //}, [getComputedSourceConfiguration]);
+  const { settings: computedConfiguration, loading: loadingComputedConfiguration } = useAppSelector((state) => (state.sourcesConfiguration as SourceConfigurationState)?.computedConfiguration ?? {});
+  useEffect(() => {
+    dispatch(getComputedConfiguration());
+  }, [getComputedConfiguration]);
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
@@ -107,7 +108,7 @@ export const Listings = () => {
             columnList: ActiveListingsColumns,
             hideWhenEmpty: true,
             listings: activeListings as ListingT[],
-            loadingListings: loadingActive,
+            loadingListings: loadingActive || loadingComputedConfiguration,
             activeListingsImages: activeListingsImages
           };
         case ListingTab.pending:
@@ -145,9 +146,18 @@ export const Listings = () => {
 
           for (const al of listings) {
             const l = al as ActiveListingExtended;//Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
-            //l.profit = l.channelPrice - l.sourcePrice - (l.channelPrice * settings.feePercentage) / 100;
 
-            if (activeListingsImages) {//Images
+            //Calculated fields-------------------
+            const settings = computedConfiguration?.[l.sourceId];
+            if (settings) {
+              l.profit = l.channelPrice - l.sourcePrice - (l.channelPrice * settings.feePercentage) / 100;
+              l.markup = l.overrides.markup ?? settings.markup;
+              l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
+              l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
+            }
+
+            //Images-------------------
+            if (activeListingsImages) {
               const ud = activeListingsImages[l.channelListingId];
               if (ud && !ud.loading && ud.url) {
                 l.imageUrl = ud.url;
@@ -167,7 +177,7 @@ export const Listings = () => {
           case ListingTab.terminated:
             return AddExtraData(data1.listings);
         }
-      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages]) as ListingT[] | null | undefined;
+      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages, computedConfiguration]) as ListingT[] | null | undefined;
 
     return {...data1, listings};
   })();

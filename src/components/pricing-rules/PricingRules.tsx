@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { Form, Input, Spin, Popconfirm } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-// import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+// import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { getRules, createRule, deleteRule, updateRule } from '../../redux/pricing-rules/rulesThunk';
 import { StatusBar } from '../../small-components/StatusBar';
 import { DataTable, DataTableKey } from '../../small-components/tables/data-table';

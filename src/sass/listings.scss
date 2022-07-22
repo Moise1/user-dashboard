@@ -12,6 +12,24 @@
             max-height: 25px;
         }
     }
+
+    .stock-cell, .stock-cell span {
+        white-space: nowrap;
+        font-size: 0.8rem;
+
+        .icon {
+            font-size: 1rem;
+            vertical-align: middle;
+        }
+    }
+
+    .inStockIcon {
+        color: #25ae88;
+    }
+
+    .outStockIcon {
+        color: #D75A4A;
+    }
 }
 
 

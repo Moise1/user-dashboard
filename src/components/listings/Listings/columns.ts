@@ -1,6 +1,6 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderImage, RenderPrice, RenderSource } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost } from './columns-sorter';
+import { RenderChannelItem, RenderDate, RenderImage, RenderMarkup, RenderPrice, RenderSource, RenderStock } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock } from './columns-sorter';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -89,18 +89,24 @@ export const ListingsColumns: ListingColumnData[] = [
   {
     id: ListingColumnId.Profit,
     title: 'Listings.Column.Profit',
-    dataIndex: 'profit'
+    dataIndex: 'profit',
+    render: RenderPrice,
+    sorter: SorterProfit
   },
   {
     id: ListingColumnId.Markup,
     title: 'Listings.Column.Markup',
-    dataIndex: 'markup'
+    dataIndex: 'markup',
+    render: RenderMarkup,
+    sorter: SorterMarkup
   },
   {
     id: ListingColumnId.Stock,
     title: 'Listings.Column.Stock',
-    dataIndex: 'stock',
-    smartSearch: { ignore: true }
+    dataIndex: 'sourceQuantity',
+    smartSearch: { ignore: true },
+    render: RenderStock,
+    sorter: SorterStock
   },
   {
     id: ListingColumnId.Options,
@@ -112,6 +118,7 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.CreatedOn,
     title: 'Listings.Column.CreatedOn',
     dataIndex: 'createdOn',
-    smartSearch: { ignore: true }
+    smartSearch: { ignore: true },
+    render: RenderDate
   }
 ];

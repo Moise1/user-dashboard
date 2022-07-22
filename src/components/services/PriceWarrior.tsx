@@ -4,7 +4,7 @@ import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import '../../sass/services/price-warrior-configuration.scss';
 import { SimpleTable } from 'src/small-components/tables/simple-table';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
-import Input from 'antd/lib/input/Input';
+import Input from 'antd/es/input/Input';
 import React, { useEffect, useState } from 'react';
 import { getPriceWarrior, UpdateSettings } from '../../redux/price-warrior/PriceWarriorThunk';
 import { PWListing, PWSetting } from '../../redux/price-warrior/priceWarriorSlice';
