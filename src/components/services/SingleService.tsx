@@ -7,7 +7,8 @@ import { Key, ReactChild, ReactFragment, ReactPortal, useEffect, useState } from
 import { AllServicesData, ServiceData } from './ServicesData';
 import { useAppDispatch, useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
 import { getServices } from 'src/redux/subscriptions/subsThunk';
-import '../../sass/services/service.scss';
+import '../../sass/services/single-service.scss';
+import { WarningBtn } from 'src/small-components/ActionBtns';
 
 type LocationProps = {
   location: {
@@ -24,6 +25,21 @@ type LocationProps = {
   };
 };
 
+
+interface ServiceObj {
+  id: number;
+  name: string;
+  productOrder: number;
+  prices: Array<{
+    id: number,
+    platformId: number, 
+    billingPeriod: number, 
+    currencyId: number, 
+    price: number,
+    platformProductId: string,
+    productId: number
+  }>
+}
 
 export const SingleService = ({ location }: LocationProps) => {
   
@@ -73,6 +89,20 @@ export const SingleService = ({ location }: LocationProps) => {
 
   }, [slug]);
 
+  const listingServices = services.filter((obj: ServiceObj) => obj.name.startsWith('We list'));
+  const listingServiceCard = () =>{
+    return listingServices.map((item: ServiceObj) => (
+      <div className="single-listing-service" key={item.id}>
+       
+        <p className="title">{item.name}</p>
+        <div className="prices">
+          <WarningBtn>{`€ ${[...new Set(item.prices.map(item => item.price))][1]}`}</WarningBtn>
+          <WarningBtn>{`£ ${[...new Set(item.prices.map(item => item.price))][0]}`}</WarningBtn>
+        </div>
+      </div>
+    ));
+  };
+  
   return loading ? (
     <Spin />
   ) : (
@@ -124,8 +154,9 @@ export const SingleService = ({ location }: LocationProps) => {
                   <div className="service-cost">
                     <h4 className="cost-title">Cost of this service</h4>
                   </div>
+                  {slug === 'listing-service' && listingServiceCard()}
                   <div className="service-cost-details">
-                    <div className="service-rate-container">
+                    {slug !== 'listing-service' && (<div className="service-rate-container">
                       <div className="rate-details">
                         <span className="euro">€</span>
                         <h1 className="monthly-rate">{servicePrice ?? null}</h1>
@@ -136,21 +167,25 @@ export const SingleService = ({ location }: LocationProps) => {
                       <div className="what-includes">
                         <p>Includes development of the integration with your desired supplier</p>
                       </div>
-                    </div>
-                    <Divider className="divider" type="vertical" />
-                    <div className="service-rate-container">
-                      <div className="rate-details">
-                        <span className="euro">€</span>
-                        <h1 className="monthly-rate">50</h1>
-                        <h4 className="frequency">/mo</h4>
-                      </div>
-                      <div className="type-payment">
-                        <h4>Manteinance fee</h4>
-                      </div>
-                      <div className="what-includes">
-                        <p>To ensure that the integration keeps working even if your supplier changes the website.</p>
-                      </div>
-                    </div>
+                    </div>)}
+                    {slug === 'private-supplier' && ( 
+                      <>
+                        <Divider className="divider" type="vertical" />
+                        <div className="service-rate-container">
+                          <div className="rate-details">
+                            <span className="euro">€</span>
+                            <h1 className="monthly-rate">50</h1>
+                            <h4 className="frequency">/mo</h4>
+                          </div>
+                          <div className="type-payment">
+                            <h4>Manteinance fee</h4>
+                          </div>
+                          <div className="what-includes">
+                            <p>To ensure that the integration keeps working even if your supplier changes the website.</p>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

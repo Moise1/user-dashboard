@@ -2,7 +2,7 @@ import { Card } from 'antd';
 import { Layout } from 'antd';
 import { AllServicesData } from './ServicesData';
 import { Link } from 'react-router-dom';
-import '../../sass/services/services.scss';
+import '../../sass/services/all-services.scss';
 
 export const Services = () => {
   return (

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Row, Col, Divider } from 'antd';
-import '../../sass/services/service.scss';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
 import Logo from '../../assets/logoHGR.png';
+import '../../sass/services/single-service.scss';
 
 export const PrivateSupplier = () => {
   return (

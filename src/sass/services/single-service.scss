@@ -4,7 +4,24 @@
 .main-container {
   .back-to-services {
     display: flex;
-  }
+  };
+  .single-listing-service{
+    display: flex;
+    margin: 1rem 0;
+    background: $primary;
+    padding: 1.5rem;
+    .title{
+      color: $corporative-color-dark !important;
+    };
+    .prices{
+      display: flex;
+      column-gap: 10px;
+      .warning-btn{
+        font-weight: bold;
+        min-width: 100px;
+      }
+    }
+  };
   .service-main-container {
     margin: 1rem 0 0 0;
     padding: 1rem;
