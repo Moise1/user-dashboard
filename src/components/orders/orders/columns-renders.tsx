@@ -3,7 +3,7 @@ import { Channel } from '../../../redux/channels/channelsSlice';
 import { t } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
-import moment from 'antd/node_modules/moment';
+import moment from 'moment';
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;

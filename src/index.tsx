@@ -20,7 +20,7 @@ import en_GB from 'antd/es/locale/en_GB';
 import es_ES from 'antd/es/locale/es_ES';
 import 'moment/locale/es';
 import 'moment/locale/en-gb';
-//import moment from 'antd/node_modules/moment';
+//import moment from 'moment';
 import { ConfigProvider } from 'antd';
 
 const locales: Record<string, Record<string, string>> = {
