@@ -216,7 +216,7 @@
         @include product-card;
         border: 2px solid $light-primary;
         &:before {
-          content: url('../assets/catalog-imgs/circle-check.svg');
+          content: url('../assets/icons/circle-check.svg');
           position: absolute;
           top: -0.9rem;
           left: -0.8rem;

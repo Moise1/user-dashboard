@@ -1,18 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SettingData, SettingValue, SourceSettingKey } from '../../types/settings';
-import { getSourceConfiguration, saveSourceSetting } from './sources.coonfiguration-thunk';
-
-export interface SourceSettingData extends SettingData {
-  key: SourceSettingKey;
-  value: SettingValue;
-  sourceId: number;
-}
-
-export interface SavingSetting {
-  loading: boolean;
-  success: boolean;
-  data: SourceSettingData;
-}
+import { getComputedConfiguration, getSourceConfiguration, saveSourceSetting } from './sources.coonfiguration-thunk';
+import { ComputedSettingsData, SavingSetting, SourceSettingData } from './types';
 
 export interface SourceConfigurationState {
   get: {
@@ -20,6 +8,10 @@ export interface SourceConfigurationState {
     settings?: SourceSettingData[];
   };
   saving: SavingSetting[],
+  computedConfiguration: {
+    loading: boolean;
+    settings?: { [id: number]: ComputedSettingsData };
+  }
 }
 
 const initialState: SourceConfigurationState = {
@@ -27,7 +19,10 @@ const initialState: SourceConfigurationState = {
     loading: false,
     settings:[]
   },
-  saving: []
+  saving: [],
+  computedConfiguration: {
+    loading:false
+  }
 };
 
 export const sourceSlice = createSlice({
@@ -86,6 +81,20 @@ export const sourceSlice = createSlice({
         prv.loading = false;
         prv.success = false;
       }
+    });
+
+    //Computed Settings
+    builder.addCase(getComputedConfiguration.pending, (state) => {
+      if (!state.computedConfiguration) state.computedConfiguration = {loading:true};
+      state.computedConfiguration.loading = true;
+    });
+    builder.addCase(getComputedConfiguration.fulfilled, (state, { payload }) => {
+      state.computedConfiguration.loading = false;
+      state.computedConfiguration.settings = payload.settings;
+      state.saving = [];
+    });
+    builder.addCase(getComputedConfiguration.rejected, (state) => {
+      state.computedConfiguration.loading = false;
     });
   }
 });

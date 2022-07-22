@@ -3,11 +3,11 @@ import { Channel } from '../../../redux/channels/channelsSlice';
 import { t } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
+import { ActiveListingExtended, ListingT } from './types';
+import { CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
+import moment from 'moment';
 
-type FieldValue = unknown;
-type RecordType = Record<string, FieldValue>;
-
-export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
+export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
   const channel = row.channel;
   if (!channel)
@@ -46,7 +46,7 @@ export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
   }
 };
 
-export const RenderSource = (path: string, rowR: RecordType) => {
+export const RenderSource = (path: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, source: Source, id: number };
   const source = row.source;
   if (!source)
@@ -65,6 +65,41 @@ export const RenderImage = (imageUrl?: string) => {
 export const RenderPrice = (price: number) => {
   return price.toLocaleString(
     undefined,
-    {minimumFractionDigits: 2 }
+    { minimumFractionDigits: 2, maximumFractionDigits:2 }
   );
+};
+
+export const RenderMarkup = (markup: number) => {
+  return '+' + markup + '%';
+};
+
+export const RenderStock = (sourceQuantity: number, dataR: ListingT) => {
+  if (sourceQuantity === undefined || sourceQuantity === null) return '';
+
+  const data = dataR as ActiveListingExtended;
+
+  const Icon = (monitorStock: boolean, value: number) => {
+    if (!monitorStock) {
+      return (
+        <img
+          className="stockIcon check"
+          title="Monitor Stock is disabled"
+          src={'/images/other/disconected_20.png'}
+        />
+      );
+    }
+
+    if (value) return <CheckCircleFilled className='inStockIcon icon' />;
+    else return <CloseCircleFilled className= 'outStockIcon icon' />;
+  };
+
+  return (
+    <span className="stock-cell">
+      {Icon(data.monitorStock ?? true, sourceQuantity)} <span>({data.channelQuantity})</span>
+    </span>
+  );
+};
+
+export const RenderDate = (date: string | Date) => {
+  return moment.utc(date).local().format('LL HH:mm');
 };

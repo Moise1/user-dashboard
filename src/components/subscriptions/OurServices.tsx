@@ -1,6 +1,6 @@
 import { createRef, useState, useEffect, useMemo } from 'react';
 import { Card, Carousel, Space, Layout, Spin } from 'antd';
-import { CarouselRef } from 'antd/lib/carousel';
+import { CarouselRef } from 'antd/es/carousel';
 import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getServices } from 'src/redux/subscriptions/subsThunk';

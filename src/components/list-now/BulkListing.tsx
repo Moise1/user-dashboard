@@ -16,7 +16,7 @@ import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { SimpleTable } from '../../small-components/tables/simple-table';
 import moment from 'moment';
-import { Key } from 'antd/lib/table/interface';
+import { Key } from 'antd/es/table/interface';
 import {
   AutoListState,
   BulkListingError,

@@ -1,9 +1,7 @@
-﻿import { Channel } from '../../../redux/channels/channelsSlice';
-import { ActiveListing, PendingListing, TerminatedListings } from '../../../redux/listings/listingsSlice';
-import { Source } from '../../../redux/sources/sourceSlice';
-import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderImage, RenderPrice, RenderSource } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost } from './columns-sorter';
+﻿import { ColumnData } from '../../../small-components/tables/types/columns';
+import { RenderChannelItem, RenderDate, RenderImage, RenderMarkup, RenderPrice, RenderSource, RenderStock } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock } from './columns-sorter';
+import { ListingT } from './types';
 
 export enum ListingColumnId {
   Image = 1,
@@ -19,8 +17,6 @@ export enum ListingColumnId {
   CreatedOn = 11,
   ChannelItem= 12
 }
-
-export type ListingT = (ActiveListing | PendingListing | TerminatedListings) & { key:number, source?: Source, channel?: Channel };
 
 export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
@@ -93,18 +89,24 @@ export const ListingsColumns: ListingColumnData[] = [
   {
     id: ListingColumnId.Profit,
     title: 'Listings.Column.Profit',
-    dataIndex: 'profit'
+    dataIndex: 'profit',
+    render: RenderPrice,
+    sorter: SorterProfit
   },
   {
     id: ListingColumnId.Markup,
     title: 'Listings.Column.Markup',
-    dataIndex: 'markup'
+    dataIndex: 'markup',
+    render: RenderMarkup,
+    sorter: SorterMarkup
   },
   {
     id: ListingColumnId.Stock,
     title: 'Listings.Column.Stock',
-    dataIndex: 'stock',
-    smartSearch: { ignore: true }
+    dataIndex: 'sourceQuantity',
+    smartSearch: { ignore: true },
+    render: RenderStock,
+    sorter: SorterStock
   },
   {
     id: ListingColumnId.Options,
@@ -116,6 +118,7 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.CreatedOn,
     title: 'Listings.Column.CreatedOn',
     dataIndex: 'createdOn',
-    smartSearch: { ignore: true }
+    smartSearch: { ignore: true },
+    render: RenderDate
   }
 ];
