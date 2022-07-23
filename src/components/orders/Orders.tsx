@@ -122,7 +122,6 @@ export const Orders = () => {
             onRow={(record) => {
               return {
                 onClick: () => {
-                  console.log(record);
                   setSelectedOrder(record as OrderData);
                   handleSingleOrderModal();
                 }

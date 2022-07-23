@@ -35,11 +35,6 @@ export const OrderContent = (props: Props) => {
   const [orderNumber] = useState(order?.id);
   const { orderProgress } = useAppSelector((state) => state.orderProgress);
   const dispatch = useAppDispatch();
-  const [lastId, setLastId] = useState<number>(-1);
-
-  if (lastId != order?.id && order?.id) {
-    setLastId(order?.id);
-  }
 
   const handleProcessOrders = () => {
     dispatch(processOrders({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
@@ -67,12 +62,10 @@ export const OrderContent = (props: Props) => {
     || (order?.status > AutoOrderingState.CompletedAutoOrder && order.status != AutoOrderingState.TemporaryError);
 
   useEffect(() => {
-    console.log(order?.id);
     // dispatch(loadProgressOfOrder(iddd));
     dispatch(loadProgressOfOrder(order?.id));
   }, [order?.id]);
 
-  console.log(orderProgress);
   let OrderProgress = 1;
   let states = orderProgress?.states;
   let lastState = states[states.length - 1];
@@ -128,7 +121,6 @@ export const OrderContent = (props: Props) => {
   let dateStart: Date | undefined = order?.date;
   let dateProgress: Date | undefined;
   let dateFinish: Date | undefined;
-  console.log(states);
   if (states)
     for (let i = 0; i < states.length; i++) {
       const ls = states[i];
