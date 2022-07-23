@@ -13,6 +13,7 @@ export interface Source {
   bulkAllowed: boolean;
   privateSupplier: boolean;
   listingServiceAllowed: number;
+  hasAutoOrder: boolean;
 }
 
 export interface SourcesState {

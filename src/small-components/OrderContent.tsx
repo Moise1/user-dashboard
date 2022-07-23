@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { Progress, Spin } from 'antd';
 import { OrderData } from 'src/redux/orders/orderSlice';
 import {
   LastStepOrderIcon,
@@ -16,26 +16,30 @@ import { useAppDispatch, useAppSelector } from '../custom-hooks/reduxCustomHooks
 import { processOrders } from '../redux/orders/orderThunk';
 import { manuallyDispatch } from '../redux/orders/orderThunk';
 import { stopOrder } from '../redux/orders/orderThunk';
-import amazonOrder from '../../src/assets/amazon-order-ss.png';
 import { loadProgressOfOrder } from '../redux/orders/orderThunk';
 import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
 import moment from 'moment';
 import { AutoOrderingState, OrderStatus } from '../utils/determineStatus';
+import { AutoOrderingError } from '../components/orders/data/auto-ordering-error';
+import { OrderProgressStatus } from '../components/orders/data/progress';
 
 interface Props {
-  orderProgress: number;
-  data: OrderData | undefined;
+  order: OrderData | undefined;
   channelOAuthId: number[];
   OrderDetailsModalOpen: () => void;
 }
 
 export const OrderContent = (props: Props) => {
-  const { orderProgress, data, channelOAuthId, OrderDetailsModalOpen } = props;
-  const [orderNumber] = useState(data?.id);
-  const orderStatus = useAppSelector((state) => state.orderProgress.states);
-  const [orderProgressStatus, setOrderProgressStatus] = useState([]);
+  const { order, channelOAuthId, OrderDetailsModalOpen } = props;
+  const [orderNumber] = useState(order?.id);
+  const { orderProgress } = useAppSelector((state) => state.orderProgress);
   const dispatch = useAppDispatch();
+  const [lastId, setLastId] = useState<number>(-1);
+
+  if (lastId != order?.id && order?.id) {
+    setLastId(order?.id);
+  }
 
   const handleProcessOrders = () => {
     dispatch(processOrders({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
@@ -47,72 +51,249 @@ export const OrderContent = (props: Props) => {
     dispatch(stopOrder({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
-  const notConfigured = !data?.sourceAOConfigured && false;
+  const notConfigured = !order?.sourceAOConfigured && false;
 
-  const btnProcessDisabled = !data || notConfigured
-    || ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
-    || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+  const btnProcessDisabled = !order || notConfigured
+    || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
+    || (order?.status != AutoOrderingState.AutoorderingDisabled && order.status != AutoOrderingState.GoingToBuyError && order.status != AutoOrderingState.PermanentError);
 
-  const btnDispatchDisabled = !data || notConfigured
-    || ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
-    || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+  const btnDispatchDisabled = !order || notConfigured
+    || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
+    || (order?.status != AutoOrderingState.AutoorderingDisabled && order.status != AutoOrderingState.GoingToBuyError && order.status != AutoOrderingState.PermanentError);
 
-  const cantBeStoped = !data || notConfigured
-    || (data?.storeStatus == OrderStatus.Shipped || data?.storeStatus == OrderStatus.Cancelled)
-    || data?.status < AutoOrderingState.AutoorderingPrepared
-    || (data?.status > AutoOrderingState.CompletedAutoOrder && data.status != AutoOrderingState.TemporaryError);
+  const cantBeStoped = !order || notConfigured
+    || (order?.storeStatus == OrderStatus.Shipped || order?.storeStatus == OrderStatus.Cancelled)
+    || order?.status < AutoOrderingState.AutoorderingPrepared
+    || (order?.status > AutoOrderingState.CompletedAutoOrder && order.status != AutoOrderingState.TemporaryError);
 
   useEffect(() => {
+    console.log(order?.id);
     // dispatch(loadProgressOfOrder(iddd));
-    dispatch(loadProgressOfOrder(data?.id));
-    setOrderProgressStatus(orderStatus);
-  }, [data?.id]);
+    dispatch(loadProgressOfOrder(order?.id));
+  }, [order?.id]);
 
-  console.log(orderProgressStatus);
+  console.log(orderProgress);
+  let OrderProgress = 1;
+  let states = orderProgress?.states;
+  let lastState = states[states.length - 1];
+  const dlu = orderProgress.lastStatusUpdate ?? new Date(orderProgress.lastStatusUpdate);
+  if (!!orderProgress.lastStatus && (!lastState || lastState.date <= dlu)) {
+    const nls: OrderProgressStatus = {
+      id: lastState?.id ?? 9999999,
+      date: dlu,
+      status: orderProgress?.lastStatus,
+      error: lastState?.error,
+      errorMessage: lastState?.errorMessage
+    };
+    lastState = nls;
+    states = [...states, nls];
+  }
 
-  //To check status, working on it -Suleman Ahmad-
-  let statusText: string;
-  let orderProgressBar = 1;
   let hasError = false;
+  const lastStatusUpdate = orderProgress?.lastStatusUpdate;
+  //To check status, working on it -Suleman Ahmad-
+  let statusText = '';
 
-  orderProgressStatus?.map((curr: { status: number }) => {
-    if (curr.status == AutoOrderingState.AutoorderingDisabled) {
-      orderProgressBar = 0;
-      statusText = 'Paused';
-    } else if (curr.status == AutoOrderingState.ManuallyDispatched) {
-      orderProgressBar = 0;
-      statusText = 'Manually dispatched';
-    } else if (curr.status == AutoOrderingState.AutoorderingPrepared) {
-      orderProgressBar = 1;
-      statusText = 'Waiting to start';
-    } else if (
-      (curr.status > AutoOrderingState.AutoorderingPrepared && curr.status < AutoOrderingState.CompletedAutoOrder) ||
-      curr.status == AutoOrderingState.TemporaryError
-    ) {
-      //Processing
-      orderProgressBar = 2;
-      statusText = 'Checking out';
-    } else if (curr.status >= AutoOrderingState.CompletedAutoOrder && curr.status < AutoOrderingState.Completed) {
-      //LastSteps
-      orderProgressBar = 3;
-      statusText = 'Last steps';
-    } else if (curr.status >= AutoOrderingState.Completed && curr.status < AutoOrderingState.TemporaryError) {
-      //Completed
-      orderProgressBar = 4;
-      statusText = 'Completed';
-    } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
-      //Error
-      orderProgressBar = 0;
-      statusText = 'Error';
-      hasError = true;
+  if (!lastState || lastState.status == AutoOrderingState.AutoorderingDisabled) {//Paused
+    OrderProgress = 0;
+    statusText = 'Paused';
+  } else if (lastState.status == AutoOrderingState.ManuallyDispatched) {
+    OrderProgress = 0;
+    statusText = 'Manually dispatched';
+  }
+  else if (lastState.status == AutoOrderingState.AutoorderingPrepared) {//Starting
+    OrderProgress = 1;
+    statusText = 'Waiting to start';
+  }
+  else if ((lastState.status > AutoOrderingState.AutoorderingPrepared && lastState.status < AutoOrderingState.CompletedAutoOrder) || lastState.status == AutoOrderingState.TemporaryError) {//Processing
+    OrderProgress = 2;
+    statusText = 'Checking out';
+  }
+  else if (lastState.status >= AutoOrderingState.CompletedAutoOrder && lastState.status < AutoOrderingState.Completed) {//LastSteps
+    OrderProgress = 3;
+    statusText = 'Last steps';
+  }
+  else if (lastState.status >= AutoOrderingState.Completed && lastState.status < AutoOrderingState.TemporaryError) {//Completed
+    OrderProgress = 4;
+    statusText = 'Completed';
+  }
+  else /*if (lastState.status > AutoOrderingState.TemporaryError)*/ {//Error
+    OrderProgress = 0;
+    statusText = 'Error';
+    hasError = true;
+  }
+
+  const percent = OrderProgress * 25;
+
+  let dateStart: Date | undefined = order?.date;
+  let dateProgress: Date | undefined;
+  let dateFinish: Date | undefined;
+  console.log(states);
+  if (states)
+    for (let i = 0; i < states.length; i++) {
+      const ls = states[i];
+      if (!ls || ls.status == AutoOrderingState.AutoorderingDisabled) {//Paused
+        dateStart = lastStatusUpdate;
+      }
+      else if (ls.status == AutoOrderingState.AutoorderingPrepared) {//Starting
+        dateStart = lastStatusUpdate;
+      }
+      else if ((ls.status > AutoOrderingState.AutoorderingPrepared && ls.status < AutoOrderingState.CompletedAutoOrder) || ls.status == AutoOrderingState.TemporaryError) {//Processing
+        dateProgress = ls.date;
+      }
+      else if (ls.status >= AutoOrderingState.CompletedAutoOrder && ls.status < AutoOrderingState.Completed) {//LastSteps
+        dateFinish = ls.date;
+      }
+      else if (ls.status >= AutoOrderingState.Completed && ls.status < AutoOrderingState.TemporaryError) {//Completed
+        dateFinish = ls.date;
+      }
+      else /*if (lastState.status > AutoOrderingState.TemporaryError)*/ {//Error
+        dateStart = lastStatusUpdate;
+      }
     }
-    const percent = orderProgress * 25;
-    console.log(orderProgressBar, statusText, percent);
-  });
+  else {
+    dateFinish = lastStatusUpdate;
+  }
+  const configurableButNotConfigured = !!order?.sourceAOEnabled && notConfigured;
+
+  const ErrorToMessage = (error: AutoOrderingError, status: AutoOrderingState) => {
+    if (status == AutoOrderingState.GoingToBuyError) {
+      return 'Due to an error we cannot determine if the product has been bought. We recommend you to check it in ' + order?.sourceName + '. If it has not been bought, click Process, if it has been bought, click Mark as Dispatched.';
+    }
+    switch (error) {
+      default:
+      case AutoOrderingError.Unknown:
+        return '';
+      case AutoOrderingError.Login:
+        return 'Wrong user or password.';
+      case AutoOrderingError.TwoFA:
+        return <>Two factor authentification problem. <a href="https://hustlegotreal.com/en/amazon-key-auto-ordering">Click here to know how to configure this</a></>;
+      case AutoOrderingError.Verification:
+        return 'The store is asking to verify your account by using an email or phone. Disable that settting.';
+      case AutoOrderingError.UserActionRequired:
+        return 'User action required. The supplier needs some extra details from you.';
+      case AutoOrderingError.Captcha:
+        return 'The system was unable to solve the captcha.';
+      case AutoOrderingError.Suspended:
+        return 'The supplier has suspended your account.';
+      case AutoOrderingError.HighPrice:
+        return 'The final price was higher than expected, leaving a negative profit. Operation cancelled.';
+      case AutoOrderingError.OutOfStock:
+        return 'Item was out of stock.';
+      case AutoOrderingError.Timeout:
+        return 'The page is not responding.';
+      case AutoOrderingError.UnknownJavascriptError:
+        return 'Unexpected error.';
+      case AutoOrderingError.InvalidShippingAddress:
+        return 'Invalid address. You can modify it in order details and process it again.';
+      case AutoOrderingError.Payment:
+        return 'There was a problem with your payment.';
+      case AutoOrderingError.NoGiftCards:
+        return 'No gift carts. Add more giftCards and try it again or change the configuration to allow credit and debit card payments.';
+      case AutoOrderingError.InvalidCard:
+        return 'Invalid card.';
+      case AutoOrderingError.NoCard:
+        return 'No credit or debit card found.';
+      case AutoOrderingError.CardVerification:
+        return 'Invalid card.';
+      case AutoOrderingError.NoBillingAddress:
+        return <>No billing address configured for {order?.sourceName}.
+          {(() => {
+            switch (order?.sourceId) {
+              /*Saleyee*/
+              case 221:
+              case 222:
+              case 223:
+              case 224:
+                return <> Change it <a href="https://www.saleyee.com/user/addresses/billaddresses.html" target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Dropshiptraders UK*/
+              case 185:
+                return <> Change it <a href="https://www.dropship-traders.co.uk/my-account/edit-address/billing/" target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Robert Dyas UK*/
+              case 10:
+                return <> Change it <a href="https://www.robertdyas.co.uk/customer/address/" target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Costway UK*/
+              case 59:
+                return <> Change it <a href="https://www.costway.co.uk/customer/address/" target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              default:
+                return <> Change it on <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target='_blank' rel='noreferrer'> Auto Ordering settings</a> or on {order?.sourceName} settings.</>;
+            }
+          })()}
+
+        </>;
+      case AutoOrderingError.ImportedWithError:
+        return 'Problem importing the order';
+      case AutoOrderingError.MaxBuyLimit:
+        return 'Supplier doesn\'t allow you to buy more of this item.';
+      case AutoOrderingError.MinBuyLimit:
+        return 'Supplier requires to buy more quantity of this item.';
+      case AutoOrderingError.WrongGiftFrom:
+        return 'Wrong gift "From" field. Visit source settings to fix it.';
+      case AutoOrderingError.WrongGiftMessage:
+        return 'Wrong gift "Message" field. Visit source settings to fix it.';
+      case AutoOrderingError.InvalidBillingAddress:
+        return <>Invalid billing address for {order?.sourceName}. Your billing address has some error or it is not completed.
+          {(() => {
+            switch (order?.sourceId) {
+              /*Saleyee*/
+              case 221:
+              case 222:
+              case 223:
+              case 224:
+                return <> Change it <a href='https://www.saleyee.com/user/addresses/billaddresses.html' target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Dropshiptraders UK*/
+              case 185:
+                return <> Change it <a href='https://www.dropship-traders.co.uk/my-account/edit-address/billing/' target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Robert Dyas UK*/
+              case 10:
+                return <> Change it <a href='https://www.robertdyas.co.uk/customer/address/' target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              /*Costway UK*/
+              case 59:
+                return <> Change it <a href='https://www.costway.co.uk/customer/address/' target='_blank' rel='noreferrer'>clicking here</a></>;
+
+              default:
+                return <> Change it on <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target='_blank' rel='noreferrer'> Auto Ordering settings</a> or on {order?.sourceName} settings.</>;
+            }
+          })()}
+
+        </>;
+      case AutoOrderingError.NoPaypal:
+        return 'Paypal method is selected but there is no paypal account configured in the supplier';
+      case AutoOrderingError.NoWallet:
+        return 'Not enough funds in the wallet';
+    }
+  };
 
   return (
     <div className="order-state-progress-modal">
       <div className="flex-sm-row order-state-header">
+        <div className="d-flex justify-content-between" style={{ flexGrow: 1 }}>
+          <div>
+            <h2 className="head-part-one mr-2 mr-lg-5">Order State Process</h2>
+            {configurableButNotConfigured &&
+              <span className="account-label-style" style={{ marginTop: -2, marginLeft: 10 }}>
+                <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId}>
+                  <button className="btn mark-dispatch-modal-btn-style">
+                    <span className="ml-1 ml-lg-2">Configure Autoordering for this supplier</span>
+                  </button>
+                </a>
+              </span>
+            }
+          </div>
+          {!!order?.hgrTrackingNumber &&
+            <div style={{ marginTop: 7, marginRight: 10 }}>
+              <h1 className="source-url" style={{ display: 'inline-block', marginRight: 5 }}>Tracking Id:</h1>
+              <a href={'https://www.velocipacker.com/tracking/' + order.hgrTrackingNumber} target='_blank' rel='noreferrer' >{order.hgrTrackingNumber}</a>
+            </div>
+          }
+        </div>
         <h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>
         <span
           className="close-modal-icon"
@@ -136,24 +317,18 @@ export const OrderContent = (props: Props) => {
                 {/* START ORDER  */}
                 <div className="d-flex">
                   <span className="d-flex flex-column align-items-center">
-                    <span className={`${orderProgress <= 3 ? 'start-order-active-svg' : ''}`}>
+                    <span className='start-order-active-svg'>
                       <RoundCircleCycleIcon />
                     </span>
-                    <span className={`${orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}></span>
+                    <span className={`${OrderProgress > 1 ? 'h-blue-line' : 'disabled-line'}`}></span>
                   </span>
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                     <h4 className="mb-1">
                       {hasError && 'Error'}
-                      {/*{!hasError && orderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}*/}
-                      {/*{!hasError && orderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}*/}
-                      {/*{!hasError && orderProgress >= 1 && 'Start order'}*/}
-                      {/*{' '}{orderProgress == 1 &&*/}
-                      {/*  <span className="ml-2">*/}
-                      {/*    {svgDoing}*/}
-                      {/*  </span>*/}
-                      {/*}*/}
-                      {t('OrderDetails.StartOrder')}
-                      {orderProgress === 1 ? (
+                      {!hasError && OrderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}
+                      {!hasError && OrderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}
+                      {!hasError && OrderProgress >= 1 && t('OrderDetails.StartOrder')}
+                      {OrderProgress === 1 ? (
                         <span className="ml-2">
                           <OrderProcessRoundedIcon />
                         </span>
@@ -161,69 +336,68 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
-                    <span>Order was selected for purchase</span>
+                    <p className="mb-0">{moment(dateStart).format('DD MMM YY hh:mm A')}</p>
+                    <span>{hasError && ErrorToMessage(lastState.error, lastState.status)}</span>
                   </div>
                 </div>
                 {/* CHECKOUT  */}
                 <div className="d-flex">
                   <span className="d-flex flex-column align-items-center">
-                    <span className={`${orderProgress > 1 && orderProgress <= 3 ? 'order-checkout-icon' : ''}`}>
+                    <span className={`${OrderProgress > 1 ? 'order-checkout-icon' : ''}`}>
                       <OrderCheckoutIcon />
                     </span>
                     <span
-                      className={`${orderProgress > 1 && orderProgress <= 3 ? 'h-blue-line' : 'disabled-line'}`}
+                      className={`${OrderProgress > 2 ? 'h-blue-line' : 'disabled-line'}`}
                     ></span>
                   </span>
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                    <h4 className="mb-1">
-                      {' '}
-                      Checkout{' '}
-                      {orderProgress === 2 ? (
+                    <h4 className={'mb-1' + (OrderProgress < 2 ? ' disabled' : '')}>
+                      Checkout
+                      {' '}{OrderProgress == 2 &&
                         <span className="ml-2">
                           <OrderProcessRoundedIcon />
                         </span>
-                      ) : (
-                        ''
-                      )}
+                      }
                     </h4>
-                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
-                    <span>Order was selected for purchase</span>
+                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && moment(dateProgress).format('DD MMM YY hh:mm A'))}</p>
+                    <span></span>
                   </div>
                 </div>
                 {/* LAST STEP  */}
+
                 <div className="d-flex">
                   <span className="d-flex flex-column align-items-center">
-                    <span className={`${orderProgress === 3 ? 'last-step-order-icon' : ''}`}>
+                    <span className={OrderProgress > 2 ? 'last-step-order-icon' : ''}>
                       <LastStepOrderIcon />
                     </span>
                   </span>
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                    <h4 className="mb-1">
-                      Last steps
-                      {orderProgress === 3 ? (
+                    <h4 className={'mb-1' + (OrderProgress < 3 ? ' disabled' : '')}>
+                      {OrderProgress <= 3 && 'Last steps'}
+                      {OrderProgress > 3 && 'Completed'}
+                      {' '}{OrderProgress == 3 &&
                         <span className="ml-2">
                           <OrderProcessRoundedIcon />
                         </span>
-                      ) : (
-                        ''
-                      )}
+                      }
                     </h4>
-                    <p className="mb-0">{moment(data?.date.toString()).format('DD MMM YY hh:mm A')}</p>
+                    <p className="mb-0">{OrderProgress > 2 && moment(dateFinish).format('DD MMM YY hh:mm A')}</p>
                   </div>
                 </div>
                 <div className="progress-order mt-4 mb-3 mb-lg-0">
                   <h2 className="mb-0">
-                    Progress: <span className="fw-400">in checkout</span>{' '}
+                    Progress: <span className="fw-400">{statusText}</span>{' '}
                   </h2>
                   {/* Add progress bar from ant design*/}
-                  {/* <ProgressBar now={now} label={`${now}%`} /> */}
+                  <Progress percent={percent} status="active" />
                 </div>
               </div>
             </div>
-            <div className="col-12 col-lg-7" style={{ backgroundColor: '#f2f8ff' }}>
-              <div className="img-order-container">
-                <img className="img-order" src={amazonOrder} alt="amazonOrder" />
+            <div className="col-12 col-lg-7">
+              <div className="p-4 bg-InputLight amazon-order-ss ml-auto br-10">
+                <a href={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} target="_blank" rel="noreferrer">
+                  <img className="w-100 h-100 ml-auto" src={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} alt="Progress image" onError={(event) => event.currentTarget.style.display = 'none'} />
+                </a>
               </div>
             </div>
           </>
@@ -258,9 +432,9 @@ export const OrderContent = (props: Props) => {
                   </div>
                 </Button> */}
 
-              <WarningBtn handleConfirm={handleStopOrder} disabled={cantBeStoped || data?.cancelRequested}>
+              <WarningBtn handleConfirm={handleStopOrder} disabled={cantBeStoped || order?.cancelRequested}>
                 <HandStopOrderIcon />
-                <span>{!cantBeStoped && data?.cancelRequested ? <>Stop requested</> : <>Stop Order</>}</span>
+                <span>{!cantBeStoped && order?.cancelRequested ? <>Stop requested</> : <>Stop Order</>}</span>
               </WarningBtn>
               <ConfirmBtn handleConfirm={handleProcessOrders} disabled={btnProcessDisabled}>
                 <ProcessOrderIcon />

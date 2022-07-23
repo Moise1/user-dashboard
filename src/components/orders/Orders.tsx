@@ -18,7 +18,7 @@ import { OrdersColumns } from './orders/columns';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
-  const { orders, status, loading } = useAppSelector((state) => state.orders);
+  const { orders, loading } = useAppSelector((state) => state.orders);
   const [currentPage, setCurrentPage] = useState<number>(1);
   //const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState<OrderData[]>([]);
@@ -53,7 +53,6 @@ export const Orders = () => {
         ...l, key: l.id,
         profit: (l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - l.fees).toFixed(2),
         sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId),
-        sourceAOEnabled: orders.sourcesEnabled?.includes(l.sourceId)
       }; //Assuming channel and source uses same currency
       //const totalTaxes = (l.channelTax ?? 0) + (l.channelVAT ?? 0) + (l.channelPaymentTaxes ?? 0) + l.fees;
       //l.profit = l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - totalTaxes;
@@ -63,6 +62,7 @@ export const Orders = () => {
         item = {
           ...item, sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
           sourceName: source.name,
+          sourceAOEnabled: source.hasAutoOrder
         };
       }
       return item;
@@ -97,8 +97,7 @@ export const Orders = () => {
           ) : (
             <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleOrderModal}>
               <OrderContent
-                orderProgress={status}
-                data={selectedOrder}
+                order={selectedOrder}
                 channelOAuthId={[newChannel]}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
               />
