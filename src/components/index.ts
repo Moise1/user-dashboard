@@ -33,4 +33,5 @@ export { ConfigureNoapi } from './NoApi/ConfigureNoapi';
 export { PriceWarrior } from './services/PriceWarrior';
 export { PrivateSupplier } from './services/PrivateSupplier';
 export { OurServices } from './subscriptions/OurServices';
+export { BuyNow } from './orders/BuyNow';
 

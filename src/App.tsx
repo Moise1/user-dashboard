@@ -36,7 +36,8 @@ import {
   ManualPublish,
   BulkListing,
   ListNow,
-  AccountConfiguration
+  AccountConfiguration,
+  BuyNow
 } from './components';
 import { ProtectedRoute } from './ProtectedRoute';
 import { Links } from './links';
@@ -87,6 +88,7 @@ export const App = withRouter(({ history }: { history: RouteComponentProps['hist
             <ProtectedRoute path={Links.ManualPublish} component={ManualPublish} />
             <ProtectedRoute path={Links.BulkPublish} component={BulkListing} />
             <ProtectedRoute path={Links.Orders} component={Orders} />
+            <ProtectedRoute path={Links.BuyNow} component={BuyNow} />
             <ProtectedRoute path={Links.SourcesSettings + '/:id?'} component={SourcesConfiguration} />
             <ProtectedRoute path={Links.ChannelSettings} component={ChannelConfiguration} />
             <ProtectedRoute path={Links.AccountSettings} component={AccountConfiguration} />

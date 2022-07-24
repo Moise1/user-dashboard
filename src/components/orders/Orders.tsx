@@ -15,6 +15,7 @@ import { AppContext } from '../../contexts/AppContext';
 import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ColumnsVisibleByDefault } from './orders/active-columns';
 import { OrdersColumns } from './orders/columns';
+import { ReactUtils } from '../../utils/react-utils';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +33,9 @@ export const Orders = () => {
   const handleBulkOrderModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleOrderModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSingleOrderDetailModal = () => setOrderDetailsOpen(!orderDetailsOpen);
+  const selectedChannel = ReactUtils.GetSelectedChannel();
 
+  localStorage.setItem('selectedChannel', JSON.stringify(selectedChannel));
   const handleOrderDetailsOpen = () => {
     handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
@@ -60,7 +63,8 @@ export const Orders = () => {
       const source = orders.sources[l.sourceId];
       if (source) {
         item = {
-          ...item, sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
+          ...item,
+          sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
           sourceName: source.name,
           sourceAOEnabled: source.hasAutoOrder
         };

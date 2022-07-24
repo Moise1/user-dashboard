@@ -193,7 +193,7 @@
   "OrderButtons.Stop": "Stop",
   "OrderButtons.Process": "Process",
 
-  "OrderTable.ChannelItem": "Store Id",
+  "OrderTable.ChannelItem": "Channel Item",
   "OrderTable.DateOfOrder": "Date of order",
   "OrderTable.Cost": "Cost",
   "OrderTable.Fees": "Fees",
@@ -205,6 +205,8 @@
   "OrderTable.Status": "Status",
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
+  "OrderTable.Reference": "Reference",
+  "OrderTable.Value.UnknownSource": "Unknown Supplier",
 
   "OrderDetails.OrderState": "Order State",
   "OrderDetails.AOEnabled": "AO Enabled",

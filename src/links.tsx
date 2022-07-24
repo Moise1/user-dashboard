@@ -9,6 +9,7 @@
   ManualPublish: '/manual-publish',
   BulkPublish: '/bulk-publish',
   Orders: '/orders',
+  BuyNow: '/BuyNow',
   SourcesSettings: '/suppliers',
   ChannelSettings: '/channel-configuration',
   AccountSettings: '/account-configuration',

@@ -47,6 +47,12 @@ export const OrdersColumns: OrderColumnData[] = [
     render: RenderImage
   },
   {
+    id: OrderColumnId.Reference,
+    title: 'OrderTable.Reference',
+    dataIndex: 'reference',
+    width: 70
+  },
+  {
     id: OrderColumnId.ChannelItem,
     title: 'OrderTable.ChannelItem',
     dataIndex: 'channelItem',
@@ -56,7 +62,7 @@ export const OrdersColumns: OrderColumnData[] = [
   {
     id: OrderColumnId.Source,
     title: 'OrderTable.Source',
-    dataIndex: 'sourcePath',
+    dataIndex: 'sourceName',
     width: 70,
     render: RenderSource
   },

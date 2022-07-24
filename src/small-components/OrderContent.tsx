@@ -286,7 +286,7 @@ export const OrderContent = (props: Props) => {
             </div>
           }
         </div>
-        <h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>
+        {/*<h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>*/}
         <span
           className="close-modal-icon"
           onClick={() => {
@@ -328,7 +328,7 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{moment(dateStart).format('DD MMM YY hh:mm A')}</p>
+                    <p className="mb-0">{moment(dateStart).format('DD/MM/YY HH:mm')}</p>
                     <span>{hasError && ErrorToMessage(lastState.error, lastState.status)}</span>
                   </div>
                 </div>
@@ -351,7 +351,7 @@ export const OrderContent = (props: Props) => {
                         </span>
                       }
                     </h4>
-                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && moment(dateProgress).format('DD MMM YY hh:mm A'))}</p>
+                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && moment(dateProgress).format('DD/MM/YY HH:mm'))}</p>
                     <span></span>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export const OrderContent = (props: Props) => {
                         </span>
                       }
                     </h4>
-                    <p className="mb-0">{OrderProgress > 2 && moment(dateFinish).format('DD MMM YY hh:mm A')}</p>
+                    <p className="mb-0">{OrderProgress > 2 && moment(dateFinish).format('DD/MM/YY HH:mm')}</p>
                   </div>
                 </div>
                 <div className="progress-order mt-4 mb-3 mb-lg-0">
@@ -381,7 +381,7 @@ export const OrderContent = (props: Props) => {
                     Progress: <span className="fw-400">{statusText}</span>{' '}
                   </h2>
                   {/* Add progress bar from ant design*/}
-                  <Progress percent={percent} status="active" />
+                  <Progress percent={percent} status={percent == 100 ? 'success' : 'active'} />
                 </div>
               </div>
             </div>
