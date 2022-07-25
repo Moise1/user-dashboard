@@ -53,12 +53,12 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
-  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
-  const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
+  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('L'));
+  const [endTo, setEndTo] = useState<string>(moment.utc().format('L'));
   const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(
-    moment.utc().add(-7, 'months').format('DD MMM YYYY')
+    moment.utc().add(-7, 'months').format('L')
   );
-  const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
+  const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('L'));
   const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
   const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
 
@@ -484,8 +484,8 @@ export const Dashboard = () => {
       const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
       const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
-      setStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
-      setEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+      setStartFrom(moment.utc(startDate).local().format('L'));
+      setEndTo(moment.utc(endDate).local().format('L'));
 
       if (diffDays < 3) {
         setSelectedPeriod(6);
@@ -515,8 +515,8 @@ export const Dashboard = () => {
       const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
       const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
-      setAffiliateStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
-      setAffiliateEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+      setAffiliateStartFrom(moment.utc(startDate).local().format('L'));
+      setAffiliateEndTo(moment.utc(endDate).local().format('L'));
 
       if (diffDays < 31) {
         setAffiliatePeriod(3);
@@ -695,7 +695,7 @@ export const Dashboard = () => {
                         </Link>
                         <div className="next-payment">
                           <h5>
-                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('L')}
                           </h5>
                         </div>
                       </div>
