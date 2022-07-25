@@ -1,14 +1,13 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
 import { t } from '../../../utils/transShim';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { ReactUtils } from '../../../utils/react-utils';
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
 
 export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
-  console.log(localStorage.getItem('channelId'));
   const row = rowR as { channel: Channel, asin?: string, id: number };
 
   const selectedChannel = localStorage.getItem('selectedChannel');
@@ -65,4 +64,4 @@ export const RenderImage = (imageUrl: string) => {
   </div>;
 };
 
-export const RenderDate = (date: Date) => moment(date).format('DD/MM/YY HH:mm');
+export const RenderDate = (date: Date) => ReactUtils.GetFormattedDateTime(date);

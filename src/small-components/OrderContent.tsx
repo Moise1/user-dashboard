@@ -19,10 +19,10 @@ import { stopOrder } from '../redux/orders/orderThunk';
 import { loadProgressOfOrder } from '../redux/orders/orderThunk';
 import { CrossModalIcon } from '../components/common/Icons';
 import { useEffect } from 'react';
-import moment from 'moment';
 import { AutoOrderingState, OrderStatus } from '../utils/determineStatus';
 import { AutoOrderingError } from '../components/orders/data/auto-ordering-error';
 import { OrderProgressStatus } from '../components/orders/data/progress';
+import { ReactUtils } from '../utils/react-utils';
 
 interface Props {
   order: OrderData | undefined;
@@ -328,7 +328,7 @@ export const OrderContent = (props: Props) => {
                         ''
                       )}
                     </h4>
-                    <p className="mb-0">{moment(dateStart).format('DD/MM/YY HH:mm')}</p>
+                    <p className="mb-0">{ReactUtils.GetFormattedDateTime(dateStart)}</p>
                     <span>{hasError && ErrorToMessage(lastState.error, lastState.status)}</span>
                   </div>
                 </div>
@@ -351,7 +351,7 @@ export const OrderContent = (props: Props) => {
                         </span>
                       }
                     </h4>
-                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && moment(dateProgress).format('DD/MM/YY HH:mm'))}</p>
+                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && ReactUtils.GetFormattedDateTime(dateProgress))}</p>
                     <span></span>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export const OrderContent = (props: Props) => {
                         </span>
                       }
                     </h4>
-                    <p className="mb-0">{OrderProgress > 2 && moment(dateFinish).format('DD/MM/YY HH:mm')}</p>
+                    <p className="mb-0">{OrderProgress > 2 && ReactUtils.GetFormattedDateTime(dateFinish)}</p>
                   </div>
                 </div>
                 <div className="progress-order mt-4 mb-3 mb-lg-0">
