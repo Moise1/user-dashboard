@@ -28,6 +28,7 @@ import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './Listings/types';
 import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
 import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
+import { ePlatform } from '../../types/ePlatform';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -104,8 +105,8 @@ export const Listings = () => {
         default:
         case ListingTab.active:
           return {
-            defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
-            columnList: ActiveListingsColumns,
+            defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault[selectedChannel?.channelId ?? ePlatform.eBay],
+            columnList: ActiveListingsColumns[selectedChannel?.channelId ?? ePlatform.eBay],
             hideWhenEmpty: true,
             listings: activeListings as ListingT[],
             loadingListings: loadingActive || loadingComputedConfiguration,
@@ -154,6 +155,7 @@ export const Listings = () => {
               l.markup = l.overrides.markup ?? settings.markup;
               l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
               l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
+              //l.productNotes
             }
 
             //Images-------------------

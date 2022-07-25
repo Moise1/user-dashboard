@@ -1,6 +1,6 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderChannelItem, RenderDate, RenderImage, RenderMarkup, RenderPrice, RenderSource, RenderStock } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock } from './columns-sorter';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderSource, RenderStock } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock } from './columns-sorter';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -15,7 +15,10 @@ export enum ListingColumnId {
   Stock = 9,
   Options = 10,
   CreatedOn = 11,
-  ChannelItem= 12
+  ChannelItem = 12,
+  Notes = 13,
+  MonitorPrice = 14,
+  MonitorStock = 15
 }
 
 export interface ListingColumnData extends ColumnData<ListingT> {
@@ -83,14 +86,14 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.CostPrice,
     title: 'Listings.Column.Cost',
     dataIndex: 'sourcePrice',
-    render: RenderPrice,
+    render: RenderCostOrProfit,
     sorter: SorterCost
   },
   {
     id: ListingColumnId.Profit,
     title: 'Listings.Column.Profit',
     dataIndex: 'profit',
-    render: RenderPrice,
+    render: RenderCostOrProfit,
     sorter: SorterProfit
   },
   {
@@ -119,6 +122,30 @@ export const ListingsColumns: ListingColumnData[] = [
     title: 'Listings.Column.CreatedOn',
     dataIndex: 'createdOn',
     smartSearch: { ignore: true },
-    render: RenderDate
+    render: RenderDate,
+    sorter: SorterCreatedOn
+  },
+  {
+    id: ListingColumnId.Notes,
+    title: 'Listings.Column.Notes',
+    dataIndex: 'productNotes',
+    smartSearch: { customFilter: MultiTermFilter },
+    sorter: SorterNotes
+  },
+  {
+    id: ListingColumnId.MonitorPrice,
+    title: 'Listings.Column.MonitorPrice',
+    dataIndex: 'monitorPrice',
+    smartSearch: { ignore: true },
+    render: RenderBoolean,
+    sorter: SorterMonitorPrice
+  },
+  {
+    id: ListingColumnId.MonitorStock,
+    title: 'Listings.Column.MonitorStock',
+    dataIndex: 'monitorStock',
+    smartSearch: { ignore: true },
+    render: RenderBoolean,
+    sorter: SorterMonitorStock
   }
 ];

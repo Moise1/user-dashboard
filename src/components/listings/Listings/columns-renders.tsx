@@ -4,8 +4,8 @@ import { t } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
-import { CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
-import moment from 'moment';
+import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { ReactUtils } from '../../../utils/react-utils';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -62,10 +62,23 @@ export const RenderImage = (imageUrl?: string) => {
   return <div className="record-img"><img src={imageUrl} /></div>;
 };
 
+export const RenderCostOrProfit = (price: number, dataR: ListingT) => {
+  const data = dataR as ActiveListingExtended;
+
+  if (!data.monitorPrice || !data.monitorStock) {
+    return <ApiFilled className='icon' />;
+  }
+
+  return price.toLocaleString(
+    undefined,
+    { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+  );
+};
+
 export const RenderPrice = (price: number) => {
   return price.toLocaleString(
     undefined,
-    { minimumFractionDigits: 2, maximumFractionDigits:2 }
+    { minimumFractionDigits: 2, maximumFractionDigits: 2 }
   );
 };
 
@@ -80,13 +93,7 @@ export const RenderStock = (sourceQuantity: number, dataR: ListingT) => {
 
   const Icon = (monitorStock: boolean, value: number) => {
     if (!monitorStock) {
-      return (
-        <img
-          className="stockIcon check"
-          title="Monitor Stock is disabled"
-          src={'/images/other/disconected_20.png'}
-        />
-      );
+      return <ApiFilled className="icon" />;
     }
 
     if (value) return <CheckCircleFilled className='inStockIcon icon' />;
@@ -100,6 +107,13 @@ export const RenderStock = (sourceQuantity: number, dataR: ListingT) => {
   );
 };
 
-export const RenderDate = (date: string | Date) => {
-  return moment.utc(date).local().format('LL HH:mm');
+export const RenderDate = (date: string | Date | undefined) => {
+  return ReactUtils.GetFormattedDateTime(date);
+};
+
+export const RenderBoolean = (value: boolean | undefined) => {
+  if (value) {
+    return <CheckOutlined className="icon" />;
+  }
+  return <CloseOutlined className="icon" />;
 };
