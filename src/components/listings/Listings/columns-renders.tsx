@@ -5,7 +5,7 @@ import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
 import { CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
-import moment from 'moment';
+import { ReactUtils } from '../../../utils/react-utils';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -101,5 +101,5 @@ export const RenderStock = (sourceQuantity: number, dataR: ListingT) => {
 };
 
 export const RenderDate = (date: string | Date) => {
-  return moment.utc(date).local().format('LL HH:mm');
+  return ReactUtils.GetFormattedDateTime(date);
 };

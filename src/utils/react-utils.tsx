@@ -11,11 +11,11 @@ export const ReactUtils = {
     return channels.find(x => x.id == selectedChannelId);
   },
 
-  GetFormattedDateTime: (date: Date | undefined) => {
-    return moment(date).format('DD/MM/YY HH:mm');
+  GetFormattedDateTime: (date: Date | string | undefined) => {
+    return moment(date).format('LT L');
   },
 
-  GetFormattedDate: (date: Date | undefined) => {
-    return moment(date).format('DD/MM/YYYY');
+  GetFormattedDate: (date: Date | string | undefined) => {
+    return moment(date).format('L');
   }
 };
