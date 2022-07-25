@@ -104,6 +104,7 @@ export const Orders = () => {
                 order={selectedOrder}
                 channelOAuthId={[newChannel]}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
+                handleSingleOrderModal={handleSingleOrderModal}
               />
             </PopupModal>
           )}

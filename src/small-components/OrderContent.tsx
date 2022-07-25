@@ -28,24 +28,29 @@ interface Props {
   order: OrderData | undefined;
   channelOAuthId: number[];
   OrderDetailsModalOpen: () => void;
+  handleSingleOrderModal: () => void;
 }
 
 export const OrderContent = (props: Props) => {
-  const { order, channelOAuthId, OrderDetailsModalOpen } = props;
+  const { order, channelOAuthId, OrderDetailsModalOpen, handleSingleOrderModal } = props;
   const [orderNumber] = useState(order?.id);
   const { orderProgress } = useAppSelector((state) => state.orderProgress);
   const dispatch = useAppDispatch();
 
-  const handleProcessOrders = () => {
-    dispatch(processOrders({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+  const handleProcessOrders = async () => {
+    await dispatch(processOrders({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+    handleSingleOrderModal();
   };
-  const handleManuallyDispatch = () => {
-    dispatch(manuallyDispatch({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+  const handleManuallyDispatch = async () => {
+    await dispatch(manuallyDispatch({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+    handleSingleOrderModal();
   };
-  const handleStopOrder = () => {
-    dispatch(stopOrder({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+  const handleStopOrder = async () => {
+    await dispatch(stopOrder({ orderLineIds: [orderNumber as unknown as number], channelOAuthId: channelOAuthId }));
+    handleSingleOrderModal();
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
+  const { updating } = useAppSelector((state) => state.orders);
   const notConfigured = !order?.sourceAOConfigured && false;
 
   const btnProcessDisabled = !order || notConfigured
@@ -68,7 +73,10 @@ export const OrderContent = (props: Props) => {
 
   let OrderProgress = 1;
   let states = orderProgress?.states;
-  let lastState = states[states.length - 1];
+  let lastState = undefined;
+  if (states != undefined && states != []) {
+    lastState = states[states.length - 1];
+  }
   const dlu = orderProgress.lastStatusUpdate ?? new Date(orderProgress.lastStatusUpdate);
   if (!!orderProgress.lastStatus && (!lastState || lastState.date <= dlu)) {
     const nls: OrderProgressStatus = {
@@ -296,120 +304,124 @@ export const OrderContent = (props: Props) => {
           <CrossModalIcon />
         </span>
       </div>
-      <div className="order-state-body-container flex-lg-row my-4">
-        {loading ? (
-          <Spin />
-        ) : (
-          <>
-            <div className="col-12 col-lg-5">
-              <div className="d-flex justify-content-between pb-3">
-                <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
-              </div>
-              <div className="time-line-here">
-                {/* START ORDER  */}
-                <div className="d-flex">
-                  <span className="d-flex flex-column align-items-center">
-                    <span className='start-order-active-svg'>
-                      <RoundCircleCycleIcon />
-                    </span>
-                    <span className={`${OrderProgress > 1 ? 'h-blue-line' : 'disabled-line'}`}></span>
-                  </span>
-                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                    <h4 className="mb-1">
-                      {hasError && 'Error'}
-                      {!hasError && OrderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}
-                      {!hasError && OrderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}
-                      {!hasError && OrderProgress >= 1 && t('OrderDetails.StartOrder')}
-                      {OrderProgress === 1 ? (
-                        <span className="ml-2">
-                          <OrderProcessRoundedIcon />
-                        </span>
-                      ) : (
-                        ''
-                      )}
-                    </h4>
-                    <p className="mb-0">{ReactUtils.GetFormattedDateTime(dateStart)}</p>
-                    <span>{hasError && ErrorToMessage(lastState.error, lastState.status)}</span>
-                  </div>
+      {updating ? (
+        <Spin />
+      ) : (<>
+        <div className="order-state-body-container flex-lg-row my-4">
+          {loading ? (
+            <Spin />
+          ) : (
+            <>
+              <div className="col-12 col-lg-5">
+                <div className="d-flex justify-content-between pb-3">
+                  <span className="history-text"> {t('OrderDetails.HISTORY')}</span>
                 </div>
-                {/* CHECKOUT  */}
-                <div className="d-flex">
-                  <span className="d-flex flex-column align-items-center">
-                    <span className={`${OrderProgress > 1 ? 'order-checkout-icon' : ''}`}>
-                      <OrderCheckoutIcon />
+                <div className="time-line-here">
+                  {/* START ORDER  */}
+                  <div className="d-flex">
+                    <span className="d-flex flex-column align-items-center">
+                      <span className='start-order-active-svg'>
+                        <RoundCircleCycleIcon />
+                      </span>
+                      <span className={`${OrderProgress > 1 ? 'h-blue-line' : 'disabled-line'}`}></span>
                     </span>
-                    <span
-                      className={`${OrderProgress > 2 ? 'h-blue-line' : 'disabled-line'}`}
-                    ></span>
-                  </span>
-                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                    <h4 className={'mb-1' + (OrderProgress < 2 ? ' disabled' : '')}>
-                      Checkout
-                      {' '}{OrderProgress == 2 &&
-                        <span className="ml-2">
-                          <OrderProcessRoundedIcon />
-                        </span>
-                      }
-                    </h4>
-                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && ReactUtils.GetFormattedDateTime(dateProgress))}</p>
-                    <span></span>
+                    <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                      <h4 className="mb-1">
+                        {hasError && 'Error'}
+                        {!hasError && OrderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}
+                        {!hasError && OrderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}
+                        {!hasError && OrderProgress >= 1 && t('OrderDetails.StartOrder')}
+                        {OrderProgress === 1 ? (
+                          <span className="ml-2">
+                            <OrderProcessRoundedIcon />
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                      </h4>
+                      <p className="mb-0">{ReactUtils.GetFormattedDateTime(dateStart)}</p>
+                      <span>{hasError && ErrorToMessage(lastState.error, lastState.status)}</span>
+                    </div>
                   </div>
-                </div>
-                {/* LAST STEP  */}
+                  {/* CHECKOUT  */}
+                  <div className="d-flex">
+                    <span className="d-flex flex-column align-items-center">
+                      <span className={`${OrderProgress > 1 ? 'order-checkout-icon' : ''}`}>
+                        <OrderCheckoutIcon />
+                      </span>
+                      <span
+                        className={`${OrderProgress > 2 ? 'h-blue-line' : 'disabled-line'}`}
+                      ></span>
+                    </span>
+                    <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                      <h4 className={'mb-1' + (OrderProgress < 2 ? ' disabled' : '')}>
+                        Checkout
+                        {' '}{OrderProgress == 2 &&
+                          <span className="ml-2">
+                            <OrderProcessRoundedIcon />
+                          </span>
+                        }
+                      </h4>
+                      <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && ReactUtils.GetFormattedDateTime(dateProgress))}</p>
+                      <span></span>
+                    </div>
+                  </div>
+                  {/* LAST STEP  */}
 
-                <div className="d-flex">
-                  <span className="d-flex flex-column align-items-center">
-                    <span className={OrderProgress > 2 ? 'last-step-order-icon' : ''}>
-                      <LastStepOrderIcon />
+                  <div className="d-flex">
+                    <span className="d-flex flex-column align-items-center">
+                      <span className={OrderProgress > 2 ? 'last-step-order-icon' : ''}>
+                        <LastStepOrderIcon />
+                      </span>
                     </span>
-                  </span>
-                  <div className="order-step-heading d-flex flex-column mt-2 ml-3">
-                    <h4 className={'mb-1' + (OrderProgress < 3 ? ' disabled' : '')}>
-                      {OrderProgress <= 3 && 'Last steps'}
-                      {OrderProgress > 3 && 'Completed'}
-                      {' '}{OrderProgress == 3 &&
-                        <span className="ml-2">
-                          <OrderProcessRoundedIcon />
-                        </span>
-                      }
-                    </h4>
-                    <p className="mb-0">{OrderProgress > 2 && ReactUtils.GetFormattedDateTime(dateFinish)}</p>
+                    <div className="order-step-heading d-flex flex-column mt-2 ml-3">
+                      <h4 className={'mb-1' + (OrderProgress < 3 ? ' disabled' : '')}>
+                        {OrderProgress <= 3 && 'Last steps'}
+                        {OrderProgress > 3 && 'Completed'}
+                        {' '}{OrderProgress == 3 &&
+                          <span className="ml-2">
+                            <OrderProcessRoundedIcon />
+                          </span>
+                        }
+                      </h4>
+                      <p className="mb-0">{OrderProgress > 2 && ReactUtils.GetFormattedDateTime(dateFinish)}</p>
+                    </div>
+                  </div>
+                  <div className="progress-order mt-4 mb-3 mb-lg-0">
+                    <h2 className="mb-0">
+                      Progress: <span className="fw-400">{statusText}</span>{' '}
+                    </h2>
+                    {/* Add progress bar from ant design*/}
+                    <Progress percent={percent} status={percent == 100 ? 'success' : 'active'} />
                   </div>
                 </div>
-                <div className="progress-order mt-4 mb-3 mb-lg-0">
-                  <h2 className="mb-0">
-                    Progress: <span className="fw-400">{statusText}</span>{' '}
-                  </h2>
-                  {/* Add progress bar from ant design*/}
-                  <Progress percent={percent} status={percent == 100 ? 'success' : 'active'} />
+              </div>
+              <div className="col-12 col-lg-7">
+                <div className="p-4 bg-InputLight amazon-order-ss ml-auto br-10">
+                  <a href={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} target="_blank" rel="noreferrer">
+                    <img className="w-100 h-100 ml-auto" src={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} alt="Progress image" onError={(event) => event.currentTarget.style.display = 'none'} />
+                  </a>
                 </div>
               </div>
-            </div>
-            <div className="col-12 col-lg-7">
-              <div className="p-4 bg-InputLight amazon-order-ss ml-auto br-10">
-                <a href={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} target="_blank" rel="noreferrer">
-                  <img className="w-100 h-100 ml-auto" src={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} alt="Progress image" onError={(event) => event.currentTarget.style.display = 'none'} />
-                </a>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="row">
-        <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
-          <div className="row">
-            <div className="go-back-details-container col">
-              <div onClick={OrderDetailsModalOpen} className="go-back-details">
-                <span> {t('OrderDetails.OrderDetails')}</span>
-              </div>
-              <LeftBackArrowIcon />
-            </div>
-          </div>
+            </>
+          )}
+        </div>
 
-          {/* Buttons to stop,process,dispatch,delete an order */}
-          <div className="modal-buttons-block">
-            <div className="modal-button-row-mt5">
-              {/* <Button className="process-btn action-btn">
+        <div className="row">
+          <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
+            <div className="row">
+              <div className="go-back-details-container col">
+                <div onClick={OrderDetailsModalOpen} className="go-back-details">
+                  <span> {t('OrderDetails.OrderDetails')}</span>
+                </div>
+                <LeftBackArrowIcon />
+              </div>
+            </div>
+
+            {/* Buttons to stop,process,dispatch,delete an order */}
+            <div className="modal-buttons-block">
+              <div className="modal-button-row-mt5">
+                {/* <Button className="process-btn action-btn">
                   <ProcessOrderIcon />
                   <div className="btn-text">
                     <span>{t('OrderTable.Process')}</span>
@@ -424,18 +436,18 @@ export const OrderContent = (props: Props) => {
                   </div>
                 </Button> */}
 
-              <WarningBtn handleConfirm={handleStopOrder} disabled={cantBeStoped || order?.cancelRequested}>
-                <HandStopOrderIcon />
-                <span>{!cantBeStoped && order?.cancelRequested ? <>Stop requested</> : <>Stop Order</>}</span>
-              </WarningBtn>
-              <ConfirmBtn handleConfirm={handleProcessOrders} disabled={btnProcessDisabled}>
-                <ProcessOrderIcon />
-                <span>{t('OrderButtons.Process')} order</span>
-              </ConfirmBtn>
-            </div>
+                <WarningBtn handleConfirm={handleStopOrder} disabled={cantBeStoped || order?.cancelRequested}>
+                  <HandStopOrderIcon />
+                  <span>{!cantBeStoped && order?.cancelRequested ? <>Stop requested</> : <>Stop Order</>}</span>
+                </WarningBtn>
+                <ConfirmBtn handleConfirm={handleProcessOrders} disabled={btnProcessDisabled}>
+                  <ProcessOrderIcon />
+                  <span>{t('OrderButtons.Process')} order</span>
+                </ConfirmBtn>
+              </div>
 
-            <div className="modal-button-row-mt5 ">
-              {/* <Button className="process-btn action-btn">
+              <div className="modal-button-row-mt5 ">
+                {/* <Button className="process-btn action-btn">
                   <ProcessOrderIcon />
                   <div className="btn-text">
                     <span>{t('OrderTable.Process')}</span>
@@ -449,16 +461,16 @@ export const OrderContent = (props: Props) => {
                     <span>Orders</span>
                   </div>
                 </Button> */}
-              <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={btnDispatchDisabled}>
-                <CheckIcon />
-                <span>{t('OrderButtons.MarkAsDispatched')}</span>
-              </SuccessBtn>
-              <DangerBtn className="mr-3" disabled={true}>
-                <TrashIcon />
-                <span> {t('OrderButtons.Delete')} order</span>
-              </DangerBtn>
-            </div>
-            {/* <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
+                <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={btnDispatchDisabled}>
+                  <CheckIcon />
+                  <span>{t('OrderButtons.MarkAsDispatched')}</span>
+                </SuccessBtn>
+                <DangerBtn className="mr-3" disabled={true}>
+                  <TrashIcon />
+                  <span> {t('OrderButtons.Delete')} order</span>
+                </DangerBtn>
+              </div>
+              {/* <div className="d-flex delete-btn-parent  justify-content-around  mt-lg-2 align-items-center">
                      <button className="btn delete-order-modal-btn-style mr-0 mr-lg-3">
                         <TrashIcon />
                         <span className="ml-1 ml-lg-2"> {t('OrderButtons.DeleteOrders')}</span>
@@ -468,9 +480,10 @@ export const OrderContent = (props: Props) => {
                         <span className="ml-1 ml-lg-2"> {t('OrderButtons.MarkAsDispatched')}</span>
                       </button>
                     </div> */}
+            </div>
           </div>
         </div>
-      </div>
+      </>)}
     </div>
   );
 };

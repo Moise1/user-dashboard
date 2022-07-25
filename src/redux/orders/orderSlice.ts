@@ -57,7 +57,7 @@ export type OrderData = {
   sourcePrice: number;
   channelPrice: number;
   key: number; //Calculated in local
-    //Calculated in client:
+  //Calculated in client:
   sourceAOConfigured: boolean;
   sourceAOEnabled: boolean;
   sourceUrl: string;
@@ -74,12 +74,14 @@ export interface LoadResponse {
 const initialState = {
   orders: <unknown>[],
   loading: false,
+  updating: false,
   error: ''
 };
 
 const initiallState = {
   ordersAddress: <unknown>{},
   loading: false,
+  updating: false,
   error: ''
 };
 
@@ -107,39 +109,39 @@ export const orderSlice = createSlice({
       state.error = String(payload);
     });
     builder.addCase(processOrders.pending, (state) => {
-      state.loading = true;
+      state.updating = true;
       state.error = '';
     });
     builder.addCase(processOrders.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.orders = payload;
     });
     builder.addCase(processOrders.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.error = String(payload);
     });
     builder.addCase(manuallyDispatch.pending, (state) => {
-      state.loading = true;
+      state.updating = true;
       state.error = '';
     });
     builder.addCase(manuallyDispatch.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.orders = payload;
     });
     builder.addCase(manuallyDispatch.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.error = String(payload);
     });
     builder.addCase(stopOrder.pending, (state) => {
-      state.loading = true;
+      state.updating = true;
       state.error = '';
     });
     builder.addCase(stopOrder.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.orders = payload;
     });
     builder.addCase(stopOrder.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.updating = false;
       state.error = String(payload);
     });
   }
