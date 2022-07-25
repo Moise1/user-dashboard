@@ -4,30 +4,14 @@
 .main-container {
   .back-to-services {
     display: flex;
-  };
-  .single-listing-service{
-    display: flex;
-    margin: 1rem 0;
-    background: $primary;
-    padding: 1.5rem;
-    .title{
-      color: $corporative-color-dark !important;
-    };
-    .prices{
-      display: flex;
-      column-gap: 10px;
-      .warning-btn{
-        font-weight: bold;
-        min-width: 100px;
-      }
-    }
-  };
+  }
+
   .service-main-container {
     margin: 1rem 0 0 0;
     padding: 1rem;
-    height: auto;
-    background: $primary-bg;
-
+    height: 100vh;
+    // background: $primary-bg;
+    position: relative;
     .service-area {
       width: 100%;
       margin: 1rem auto 0 auto;
@@ -75,7 +59,7 @@
             justify-content: center;
 
             .cost-title {
-              color: white;
+              color: $corporative-color-dark;
               margin: 0;
             }
           }
@@ -107,6 +91,57 @@
               }
             }
           }
+        }
+      }
+      .services-carousel-container {
+        width: 65%;
+        margin: 5rem auto;
+        .carousel {
+          .slick-list .slick-track {
+            display: flex;
+            column-gap: 1rem;
+          }
+          .listing-service {
+            background: $corporative-color-dark !important;
+            border-radius: 10px;
+            height: 200px;
+            .ant-card-body {
+              padding: 0;
+            }
+
+            .title {
+              margin-bottom: 1rem;
+              text-align: center;
+              background: $light-blue;
+              color: $corporative-color-dark !important;
+              top: 0;
+              left: 0;
+              padding: 0.4em;
+              width: 100%;
+              border-top-left-radius: 10px;
+              border-top-right-radius: 10px;
+              text-align: center;
+            }
+            .prices {
+              height: auto;
+              .price-section{
+                height: 40px;
+              }
+              .price-item {
+                font-weight: bold;
+                text-align: center;
+              }
+            }
+          }
+        }
+        .control-btns-container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          justify-content: space-between;
+          width: 75%;
         }
       }
     }
