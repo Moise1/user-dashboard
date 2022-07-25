@@ -48,18 +48,33 @@ export const OrderContent = (props: Props) => {
   const { loading } = useAppSelector((state) => state.orderProgress);
   const notConfigured = !order?.sourceAOConfigured && false;
 
-  const btnProcessDisabled = !order || notConfigured
-    || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
-    || (order?.status != AutoOrderingState.AutoorderingDisabled && order.status != AutoOrderingState.GoingToBuyError && order.status != AutoOrderingState.PermanentError);
+  const btnProcessDisabled =
+    !order ||
+    notConfigured ||
+    ((order.status === null || order.status === undefined) &&
+      order?.storeStatus != OrderStatus.Shipped &&
+      order.storeStatus != OrderStatus.Cancelled) ||
+    (order?.status != AutoOrderingState.AutoorderingDisabled &&
+      order.status != AutoOrderingState.GoingToBuyError &&
+      order.status != AutoOrderingState.PermanentError);
 
-  const btnDispatchDisabled = !order || notConfigured
-    || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
-    || (order?.status != AutoOrderingState.AutoorderingDisabled && order.status != AutoOrderingState.GoingToBuyError && order.status != AutoOrderingState.PermanentError);
+  const btnDispatchDisabled =
+    !order ||
+    notConfigured ||
+    ((order.status === null || order.status === undefined) &&
+      order?.storeStatus != OrderStatus.Shipped &&
+      order.storeStatus != OrderStatus.Cancelled) ||
+    (order?.status != AutoOrderingState.AutoorderingDisabled &&
+      order.status != AutoOrderingState.GoingToBuyError &&
+      order.status != AutoOrderingState.PermanentError);
 
-  const cantBeStoped = !order || notConfigured
-    || (order?.storeStatus == OrderStatus.Shipped || order?.storeStatus == OrderStatus.Cancelled)
-    || order?.status < AutoOrderingState.AutoorderingPrepared
-    || (order?.status > AutoOrderingState.CompletedAutoOrder && order.status != AutoOrderingState.TemporaryError);
+  const cantBeStoped =
+    !order ||
+    notConfigured ||
+    order?.storeStatus == OrderStatus.Shipped ||
+    order?.storeStatus == OrderStatus.Cancelled ||
+    order?.status < AutoOrderingState.AutoorderingPrepared ||
+    (order?.status > AutoOrderingState.CompletedAutoOrder && order.status != AutoOrderingState.TemporaryError);
 
   useEffect(() => {
     // dispatch(loadProgressOfOrder(iddd));
@@ -68,7 +83,7 @@ export const OrderContent = (props: Props) => {
 
   let OrderProgress = 1;
   let states = orderProgress?.states;
-  let lastState = states[states.length - 1];
+  let lastState = states[states.length];
   const dlu = orderProgress.lastStatusUpdate ?? new Date(orderProgress.lastStatusUpdate);
   if (!!orderProgress.lastStatus && (!lastState || lastState.date <= dlu)) {
     const nls: OrderProgressStatus = {
@@ -87,30 +102,38 @@ export const OrderContent = (props: Props) => {
   //To check status, working on it -Suleman Ahmad-
   let statusText = '';
 
-  if (!lastState || lastState.status == AutoOrderingState.AutoorderingDisabled) {//Paused
+  if (!lastState || lastState.status == AutoOrderingState.AutoorderingDisabled) {
+    //Paused
     OrderProgress = 0;
     statusText = 'Paused';
   } else if (lastState.status == AutoOrderingState.ManuallyDispatched) {
     OrderProgress = 0;
     statusText = 'Manually dispatched';
-  }
-  else if (lastState.status == AutoOrderingState.AutoorderingPrepared) {//Starting
+  } else if (lastState.status == AutoOrderingState.AutoorderingPrepared) {
+    //Starting
     OrderProgress = 1;
     statusText = 'Waiting to start';
-  }
-  else if ((lastState.status > AutoOrderingState.AutoorderingPrepared && lastState.status < AutoOrderingState.CompletedAutoOrder) || lastState.status == AutoOrderingState.TemporaryError) {//Processing
+  } else if (
+    (lastState.status > AutoOrderingState.AutoorderingPrepared &&
+      lastState.status < AutoOrderingState.CompletedAutoOrder) ||
+    lastState.status == AutoOrderingState.TemporaryError
+  ) {
+    //Processing
     OrderProgress = 2;
     statusText = 'Checking out';
-  }
-  else if (lastState.status >= AutoOrderingState.CompletedAutoOrder && lastState.status < AutoOrderingState.Completed) {//LastSteps
+  } else if (
+    lastState.status >= AutoOrderingState.CompletedAutoOrder &&
+    lastState.status < AutoOrderingState.Completed
+  ) {
+    //LastSteps
     OrderProgress = 3;
     statusText = 'Last steps';
-  }
-  else if (lastState.status >= AutoOrderingState.Completed && lastState.status < AutoOrderingState.TemporaryError) {//Completed
+  } else if (lastState.status >= AutoOrderingState.Completed && lastState.status < AutoOrderingState.TemporaryError) {
+    //Completed
     OrderProgress = 4;
     statusText = 'Completed';
-  }
-  else /*if (lastState.status > AutoOrderingState.TemporaryError)*/ {//Error
+  } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
+    //Error
     OrderProgress = 0;
     statusText = 'Error';
     hasError = true;
@@ -124,22 +147,26 @@ export const OrderContent = (props: Props) => {
   if (states)
     for (let i = 0; i < states.length; i++) {
       const ls = states[i];
-      if (!ls || ls.status == AutoOrderingState.AutoorderingDisabled) {//Paused
+      if (!ls || ls.status == AutoOrderingState.AutoorderingDisabled) {
+        //Paused
         dateStart = lastStatusUpdate;
-      }
-      else if (ls.status == AutoOrderingState.AutoorderingPrepared) {//Starting
+      } else if (ls.status == AutoOrderingState.AutoorderingPrepared) {
+        //Starting
         dateStart = lastStatusUpdate;
-      }
-      else if ((ls.status > AutoOrderingState.AutoorderingPrepared && ls.status < AutoOrderingState.CompletedAutoOrder) || ls.status == AutoOrderingState.TemporaryError) {//Processing
+      } else if (
+        (ls.status > AutoOrderingState.AutoorderingPrepared && ls.status < AutoOrderingState.CompletedAutoOrder) ||
+        ls.status == AutoOrderingState.TemporaryError
+      ) {
+        //Processing
         dateProgress = ls.date;
-      }
-      else if (ls.status >= AutoOrderingState.CompletedAutoOrder && ls.status < AutoOrderingState.Completed) {//LastSteps
+      } else if (ls.status >= AutoOrderingState.CompletedAutoOrder && ls.status < AutoOrderingState.Completed) {
+        //LastSteps
         dateFinish = ls.date;
-      }
-      else if (ls.status >= AutoOrderingState.Completed && ls.status < AutoOrderingState.TemporaryError) {//Completed
+      } else if (ls.status >= AutoOrderingState.Completed && ls.status < AutoOrderingState.TemporaryError) {
+        //Completed
         dateFinish = ls.date;
-      }
-      else /*if (lastState.status > AutoOrderingState.TemporaryError)*/ {//Error
+      } /*if (lastState.status > AutoOrderingState.TemporaryError)*/ else {
+        //Error
         dateStart = lastStatusUpdate;
       }
     }
@@ -150,7 +177,11 @@ export const OrderContent = (props: Props) => {
 
   const ErrorToMessage = (error: AutoOrderingError, status: AutoOrderingState) => {
     if (status == AutoOrderingState.GoingToBuyError) {
-      return 'Due to an error we cannot determine if the product has been bought. We recommend you to check it in ' + order?.sourceName + '. If it has not been bought, click Process, if it has been bought, click Mark as Dispatched.';
+      return (
+        'Due to an error we cannot determine if the product has been bought. We recommend you to check it in ' +
+        order?.sourceName +
+        '. If it has not been bought, click Process, if it has been bought, click Mark as Dispatched.'
+      );
     }
     switch (error) {
       default:
@@ -159,7 +190,12 @@ export const OrderContent = (props: Props) => {
       case AutoOrderingError.Login:
         return 'Wrong user or password.';
       case AutoOrderingError.TwoFA:
-        return <>Two factor authentification problem. <a href="https://hustlegotreal.com/en/amazon-key-auto-ordering">Click here to know how to configure this</a></>;
+        return (
+          <>
+            Two factor authentification problem.{' '}
+            <a href="https://hustlegotreal.com/en/amazon-key-auto-ordering">Click here to know how to configure this</a>
+          </>
+        );
       case AutoOrderingError.Verification:
         return 'The store is asking to verify your account by using an email or phone. Disable that settting.';
       case AutoOrderingError.UserActionRequired:
@@ -189,38 +225,90 @@ export const OrderContent = (props: Props) => {
       case AutoOrderingError.CardVerification:
         return 'Invalid card.';
       case AutoOrderingError.NoBillingAddress:
-        return <>No billing address configured for {order?.sourceName}.
-          {(() => {
-            switch (order?.sourceId) {
-              /*Saleyee*/
-              case 221:
-              case 222:
-              case 223:
-              case 224:
-                return <> Change it <a href="https://www.saleyee.com/user/addresses/billaddresses.html" target='_blank' rel='noreferrer'>clicking here</a></>;
+        return (
+          <>
+            No billing address configured for {order?.sourceName}.
+            {(() => {
+              switch (order?.sourceId) {
+                /*Saleyee*/
+                case 221:
+                case 222:
+                case 223:
+                case 224:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a
+                        href="https://www.saleyee.com/user/addresses/billaddresses.html"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Dropshiptraders UK*/
-              case 185:
-                return <> Change it <a href="https://www.dropship-traders.co.uk/my-account/edit-address/billing/" target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Dropshiptraders UK*/
+                case 185:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a
+                        href="https://www.dropship-traders.co.uk/my-account/edit-address/billing/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Robert Dyas UK*/
-              case 10:
-                return <> Change it <a href="https://www.robertdyas.co.uk/customer/address/" target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Robert Dyas UK*/
+                case 10:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a href="https://www.robertdyas.co.uk/customer/address/" target="_blank" rel="noreferrer">
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Costway UK*/
-              case 59:
-                return <> Change it <a href="https://www.costway.co.uk/customer/address/" target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Costway UK*/
+                case 59:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a href="https://www.costway.co.uk/customer/address/" target="_blank" rel="noreferrer">
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              default:
-                return <> Change it on <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target='_blank' rel='noreferrer'> Auto Ordering settings</a> or on {order?.sourceName} settings.</>;
-            }
-          })()}
-
-        </>;
+                default:
+                  return (
+                    <>
+                      {' '}
+                      Change it on{' '}
+                      <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target="_blank" rel="noreferrer">
+                        {' '}
+                        Auto Ordering settings
+                      </a>{' '}
+                      or on {order?.sourceName} settings.
+                    </>
+                  );
+              }
+            })()}
+          </>
+        );
       case AutoOrderingError.ImportedWithError:
         return 'Problem importing the order';
       case AutoOrderingError.MaxBuyLimit:
-        return 'Supplier doesn\'t allow you to buy more of this item.';
+        return "Supplier doesn't allow you to buy more of this item.";
       case AutoOrderingError.MinBuyLimit:
         return 'Supplier requires to buy more quantity of this item.';
       case AutoOrderingError.WrongGiftFrom:
@@ -228,34 +316,86 @@ export const OrderContent = (props: Props) => {
       case AutoOrderingError.WrongGiftMessage:
         return 'Wrong gift "Message" field. Visit source settings to fix it.';
       case AutoOrderingError.InvalidBillingAddress:
-        return <>Invalid billing address for {order?.sourceName}. Your billing address has some error or it is not completed.
-          {(() => {
-            switch (order?.sourceId) {
-              /*Saleyee*/
-              case 221:
-              case 222:
-              case 223:
-              case 224:
-                return <> Change it <a href='https://www.saleyee.com/user/addresses/billaddresses.html' target='_blank' rel='noreferrer'>clicking here</a></>;
+        return (
+          <>
+            Invalid billing address for {order?.sourceName}. Your billing address has some error or it is not completed.
+            {(() => {
+              switch (order?.sourceId) {
+                /*Saleyee*/
+                case 221:
+                case 222:
+                case 223:
+                case 224:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a
+                        href="https://www.saleyee.com/user/addresses/billaddresses.html"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Dropshiptraders UK*/
-              case 185:
-                return <> Change it <a href='https://www.dropship-traders.co.uk/my-account/edit-address/billing/' target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Dropshiptraders UK*/
+                case 185:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a
+                        href="https://www.dropship-traders.co.uk/my-account/edit-address/billing/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Robert Dyas UK*/
-              case 10:
-                return <> Change it <a href='https://www.robertdyas.co.uk/customer/address/' target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Robert Dyas UK*/
+                case 10:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a href="https://www.robertdyas.co.uk/customer/address/" target="_blank" rel="noreferrer">
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              /*Costway UK*/
-              case 59:
-                return <> Change it <a href='https://www.costway.co.uk/customer/address/' target='_blank' rel='noreferrer'>clicking here</a></>;
+                /*Costway UK*/
+                case 59:
+                  return (
+                    <>
+                      {' '}
+                      Change it{' '}
+                      <a href="https://www.costway.co.uk/customer/address/" target="_blank" rel="noreferrer">
+                        clicking here
+                      </a>
+                    </>
+                  );
 
-              default:
-                return <> Change it on <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target='_blank' rel='noreferrer'> Auto Ordering settings</a> or on {order?.sourceName} settings.</>;
-            }
-          })()}
-
-        </>;
+                default:
+                  return (
+                    <>
+                      {' '}
+                      Change it on{' '}
+                      <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId} target="_blank" rel="noreferrer">
+                        {' '}
+                        Auto Ordering settings
+                      </a>{' '}
+                      or on {order?.sourceName} settings.
+                    </>
+                  );
+              }
+            })()}
+          </>
+        );
       case AutoOrderingError.NoPaypal:
         return 'Paypal method is selected but there is no paypal account configured in the supplier';
       case AutoOrderingError.NoWallet:
@@ -269,7 +409,7 @@ export const OrderContent = (props: Props) => {
         <div className="d-flex justify-content-between" style={{ flexGrow: 1 }}>
           <div>
             <h2 className="head-part-one mr-2 mr-lg-5">Order State Process</h2>
-            {configurableButNotConfigured &&
+            {configurableButNotConfigured && (
               <span className="account-label-style" style={{ marginTop: -2, marginLeft: 10 }}>
                 <a href={'/AutoOrderingConfiguration?s=' + order?.sourceId}>
                   <button className="btn mark-dispatch-modal-btn-style">
@@ -277,14 +417,22 @@ export const OrderContent = (props: Props) => {
                   </button>
                 </a>
               </span>
-            }
+            )}
           </div>
-          {!!order?.hgrTrackingNumber &&
+          {!!order?.hgrTrackingNumber && (
             <div style={{ marginTop: 7, marginRight: 10 }}>
-              <h1 className="source-url" style={{ display: 'inline-block', marginRight: 5 }}>Tracking Id:</h1>
-              <a href={'https://www.velocipacker.com/tracking/' + order.hgrTrackingNumber} target='_blank' rel='noreferrer' >{order.hgrTrackingNumber}</a>
+              <h1 className="source-url" style={{ display: 'inline-block', marginRight: 5 }}>
+                Tracking Id:
+              </h1>
+              <a
+                href={'https://www.velocipacker.com/tracking/' + order.hgrTrackingNumber}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {order.hgrTrackingNumber}
+              </a>
             </div>
-          }
+          )}
         </div>
         {/*<h1 className="modal-title">{t('OrderDetails.OrderState')}</h1>*/}
         <span
@@ -309,7 +457,7 @@ export const OrderContent = (props: Props) => {
                 {/* START ORDER  */}
                 <div className="d-flex">
                   <span className="d-flex flex-column align-items-center">
-                    <span className='start-order-active-svg'>
+                    <span className="start-order-active-svg">
                       <RoundCircleCycleIcon />
                     </span>
                     <span className={`${OrderProgress > 1 ? 'h-blue-line' : 'disabled-line'}`}></span>
@@ -317,8 +465,14 @@ export const OrderContent = (props: Props) => {
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                     <h4 className="mb-1">
                       {hasError && 'Error'}
-                      {!hasError && OrderProgress < 1 && lastState?.status == AutoOrderingState.ManuallyDispatched && 'Manually dispatched'}
-                      {!hasError && OrderProgress < 1 && lastState?.status != AutoOrderingState.ManuallyDispatched && 'Paused'}
+                      {!hasError &&
+                        OrderProgress < 1 &&
+                        lastState?.status == AutoOrderingState.ManuallyDispatched &&
+                        'Manually dispatched'}
+                      {!hasError &&
+                        OrderProgress < 1 &&
+                        lastState?.status != AutoOrderingState.ManuallyDispatched &&
+                        'Paused'}
                       {!hasError && OrderProgress >= 1 && t('OrderDetails.StartOrder')}
                       {OrderProgress === 1 ? (
                         <span className="ml-2">
@@ -338,20 +492,20 @@ export const OrderContent = (props: Props) => {
                     <span className={`${OrderProgress > 1 ? 'order-checkout-icon' : ''}`}>
                       <OrderCheckoutIcon />
                     </span>
-                    <span
-                      className={`${OrderProgress > 2 ? 'h-blue-line' : 'disabled-line'}`}
-                    ></span>
+                    <span className={`${OrderProgress > 2 ? 'h-blue-line' : 'disabled-line'}`}></span>
                   </span>
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                     <h4 className={'mb-1' + (OrderProgress < 2 ? ' disabled' : '')}>
-                      Checkout
-                      {' '}{OrderProgress == 2 &&
+                      Checkout{' '}
+                      {OrderProgress == 2 && (
                         <span className="ml-2">
                           <OrderProcessRoundedIcon />
                         </span>
-                      }
+                      )}
                     </h4>
-                    <p className="mb-0">{OrderProgress > 1 && (dateProgress !== undefined && ReactUtils.GetFormattedDateTime(dateProgress))}</p>
+                    <p className="mb-0">
+                      {OrderProgress > 1 && dateProgress !== undefined && ReactUtils.GetFormattedDateTime(dateProgress)}
+                    </p>
                     <span></span>
                   </div>
                 </div>
@@ -366,12 +520,12 @@ export const OrderContent = (props: Props) => {
                   <div className="order-step-heading d-flex flex-column mt-2 ml-3">
                     <h4 className={'mb-1' + (OrderProgress < 3 ? ' disabled' : '')}>
                       {OrderProgress <= 3 && 'Last steps'}
-                      {OrderProgress > 3 && 'Completed'}
-                      {' '}{OrderProgress == 3 &&
+                      {OrderProgress > 3 && 'Completed'}{' '}
+                      {OrderProgress == 3 && (
                         <span className="ml-2">
                           <OrderProcessRoundedIcon />
                         </span>
-                      }
+                      )}
                     </h4>
                     <p className="mb-0">{OrderProgress > 2 && ReactUtils.GetFormattedDateTime(dateFinish)}</p>
                   </div>
@@ -387,8 +541,17 @@ export const OrderContent = (props: Props) => {
             </div>
             <div className="col-12 col-lg-7">
               <div className="p-4 bg-InputLight amazon-order-ss ml-auto br-10">
-                <a href={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} target="_blank" rel="noreferrer">
-                  <img className="w-100 h-100 ml-auto" src={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'} alt="Progress image" onError={(event) => event.currentTarget.style.display = 'none'} />
+                <a
+                  href={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    className="w-100 h-100 ml-auto"
+                    src={'/sales/GetOrderImage/' + order?.id + '/' + (lastState?.id ?? 0) + '.png'}
+                    alt="Progress image"
+                    onError={(event) => (event.currentTarget.style.display = 'none')}
+                  />
                 </a>
               </div>
             </div>

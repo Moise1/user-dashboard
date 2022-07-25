@@ -8,7 +8,7 @@ import facebook from '../../assets/social-media/facebook.png';
 import { LeftOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
 import { useEffect } from 'react';
-import { useAppDispatch/*, useAppSelector */} from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch /*, useAppSelector */ } from '../../custom-hooks/reduxCustomHooks';
 import { getAffiliateDashboard } from '../../redux/dashboard/affiliatesStatsThunk';
 
 export const AffiliateDashboard = () => {
@@ -19,7 +19,6 @@ export const AffiliateDashboard = () => {
     dispatch(getAffiliateDashboard({ month: 11, year: 2021 }));
   }, [getAffiliateDashboard]);
 
-  //console.log(affiliateDashboard);
   return (
     <div className="main-container">
       <Link to={Links.Dashboard} className="back-to-dashboard">
@@ -31,7 +30,7 @@ export const AffiliateDashboard = () => {
       <div className="get-started-container">
         <Row className="intro-area">
           <Col className="intro-vid-container" xs={24} md={24} lg={8}>
-            <h1>Affiliate percentage: { } %</h1>
+            <h1>Affiliate percentage: {} %</h1>
             <div className="get-started-vid">
               <iframe
                 className="intro-vid"
