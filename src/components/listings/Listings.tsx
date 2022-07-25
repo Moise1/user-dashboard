@@ -155,6 +155,7 @@ export const Listings = () => {
               l.markup = l.overrides.markup ?? settings.markup;
               l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
               l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
+              //l.productNotes
             }
 
             //Images-------------------

@@ -4,7 +4,7 @@ import { t } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
-import { CloseCircleFilled, CheckCircleFilled, ApiFilled } from '@ant-design/icons';
+import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { ReactUtils } from '../../../utils/react-utils';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
@@ -107,6 +107,13 @@ export const RenderStock = (sourceQuantity: number, dataR: ListingT) => {
   );
 };
 
-export const RenderDate = (date: string | Date) => {
+export const RenderDate = (date: string | Date | undefined) => {
   return ReactUtils.GetFormattedDateTime(date);
+};
+
+export const RenderBoolean = (value: boolean | undefined) => {
+  if (value) {
+    return <CheckOutlined className="icon" />;
+  }
+  return <CloseOutlined className="icon" />;
 };

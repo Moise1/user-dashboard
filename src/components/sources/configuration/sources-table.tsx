@@ -121,7 +121,7 @@ export const SourcesTable = () => {
             default:
               return value;
             case ColumnStyle.Outlined:
-              return value == '1' ? <CheckOutlined style={{ fontSize: '19px' }} /> : (value == '0' ? <CloseOutlined /> : '');
+              return value == '1' ? <CheckOutlined /> : (value == '0' ? <CloseOutlined /> : '');
             case ColumnStyle.BusinessPayment:
             case ColumnStyle.BusinessReturn:
             case ColumnStyle.BusinessShipping:
