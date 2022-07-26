@@ -51,7 +51,7 @@ export const OrderContent = (props: Props) => {
   };
   const { loading } = useAppSelector((state) => state.orderProgress);
   const { updating } = useAppSelector((state) => state.orders);
-  const notConfigured = !order?.sourceAOConfigured && false;
+  const notConfigured = !order?.sourceAOConfigured;
 
   const btnProcessDisabled = !order || notConfigured
     || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
