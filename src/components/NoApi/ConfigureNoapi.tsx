@@ -39,7 +39,7 @@ export const ConfigureNoapi = () => {
         'errorRetries': 0
       }
     ];
-  console.log(newArray);
+
   const handleOptionChange = (value: SelectorValue) => {
     setChannelSelected(value);
   };

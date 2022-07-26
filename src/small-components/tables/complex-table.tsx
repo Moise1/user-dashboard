@@ -6,7 +6,11 @@ import { TableRowSelection } from 'antd/es/table/interface';
 import { useEffect, useState, useMemo } from 'react';
 import { VisibleColumnsPopup } from '../../components/listings/Listings/visible-columns-popup';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { UIPreferencesState, UITablePreference, UITablePreferenceL } from '../../redux/ui-preferences/ui-preferences-state-slice';
+import {
+  UIPreferencesState,
+  UITablePreference,
+  UITablePreferenceL
+} from '../../redux/ui-preferences/ui-preferences-state-slice';
 import { getPreferences, savePreferences } from '../../redux/ui-preferences/ui-preferences-state-thunk';
 import { t } from '../../utils/transShim';
 import { TableActionBtns } from '../TableActionBtns';
@@ -18,7 +22,7 @@ interface Props<RecordType> {
   uiIdentifier: string;
   defaultVisibleColumns?: ColumnId[];
   allColumnData: ColumnData<RecordType>[];
-  data: RecordType[],
+  data: RecordType[];
   hideWhenEmpty?: boolean;
   loadingData?: boolean;
   rowSelection?: TableRowSelection<RecordType>;
@@ -37,7 +41,8 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const {
     uiIdentifier,
     defaultVisibleColumns,
-    allColumnData, data,
+    allColumnData,
+    data,
     hideWhenEmpty,
     loadingData,
     rowSelection,
@@ -54,7 +59,9 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
   //UI----------------------------------------------------------------------------------------}
   const uiPreferencesS = (() => {
-    const preferences = useAppSelector((state) => state.UIPreferences as UIPreferencesState)?.tablePreferences?.[uiIdentifier];
+    const preferences = useAppSelector((state) => state.UIPreferences as UIPreferencesState)?.tablePreferences?.[
+      uiIdentifier
+    ];
     return {
       columns: preferences?.columns,
       pageSize: preferences?.pageSize ?? 10,
@@ -76,18 +83,18 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const SaveUIPreferences = (preferences: UITablePreference) => {
     setUIPreferences({ ...preferences, loading: false });
     dispatch(savePreferences({ uiIdentifier, data: preferences }));
-    console.log(uiPreferences);
   };
   //------------------------------------------------------------------------------------------
   ///POPUP VISIBLE COLUMNS--------------------------------------------------------------------
   const [visibleColumnsPopupOpened, setVisibleColumnsPopupOpened] = useState<boolean>(false);
   const CloseVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(false);
   const OpenVisibleColumnsPopup = () => setVisibleColumnsPopupOpened(true);
-  const SaveVisibleColumns = (columns: ColumnId[]) => SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
+  const SaveVisibleColumns = (columns: ColumnId[]) =>
+    SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, columns });
   //------------------------------------------------------------------------------------------
   ///PAGE SIZE--------------------------------------------------------------------------------
   const OnPageSizeChange = (pageSize: number) => {
-    setUIPreferences(prev => ({ ...prev, pageSize, loading: false }));
+    setUIPreferences((prev) => ({ ...prev, pageSize, loading: false }));
     SaveUIPreferences({ ...{ ...uiPreferences, loading: undefined }, pageSize });
     onPageSizeChanged?.(pageSize);
   };
@@ -98,20 +105,19 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   };
   //------------------------------------------------------------------------------------------
   //COLUMNS-----------------------------------------------------------------------------------
-  const { columns, visibleColumnsList } = /*useMemo*/(() => {
-
-    const visibleColumnsList = (!uiPreferences.columns || uiPreferences.columns.length == 0) ? defaultVisibleColumns : uiPreferences.columns;
+  const { columns, visibleColumnsList } = /*useMemo*/ (() => {
+    const visibleColumnsList =
+      !uiPreferences.columns || uiPreferences.columns.length == 0 ? defaultVisibleColumns : uiPreferences.columns;
 
     const columns = allColumnData
-      .filter(x => (!visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id)))
-      .map(x => ({ ...x, title: typeof (x.title) === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
+      .filter((x) => !visibleColumnsList || visibleColumnsList.length == 0 || visibleColumnsList.includes(x.id))
+      .map((x) => ({ ...x, title: typeof x.title === 'string' ? t(x.title) : x.title, key: x.id.toString() }));
 
     return {
       columns,
       visibleColumnsList
     };
-
-  }/*, [uiPreferences, defaultVisibleColumns, allColumnData]*/)();
+  })(/*, [uiPreferences, defaultVisibleColumns, allColumnData]*/);
   //------------------------------------------------------------------------------------------
 
   //OMNISEARCH--------------------------------------------------------------------------------
@@ -122,7 +128,6 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //const filteredData = data && omniSearch ? useTableSearch(omniSearch, data) : data;
   const filteredData = useMemo(() => SmartSearch(smartSearch, data, columns), [smartSearch, data, columns]);
   //------------------------------------------------------------------------------------------
-
 
   //const { filteredData } = useTableSearch({ searchTxt, listings });
 
@@ -190,11 +195,10 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //  }
   //};
 
-
   const loading = loadingData || uiPreferences.loading;
 
   return (
-    <div className='complex-table'>
+    <div className="complex-table">
       {visibleColumnsList && (
         <VisibleColumnsPopup
           isVisible={visibleColumnsPopupOpened}
@@ -214,47 +218,51 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
       {/*  </PopupModal>*/}
       {/*)}*/}
 
-      <div className='search-options-area'>
-        <Search autoFocus placeholder='Search.....' onChange={(e) => OnChangeSmartSearch(e.target.value)} />
+      <div className="search-options-area">
+        <Search autoFocus placeholder="Search....." onChange={(e) => OnChangeSmartSearch(e.target.value)} />
         {/*<ListingsAdvancedSearch*/}
         {/*  visible={drawerOpen}*/}
         {/*  onClose={handleSideDrawer}*/}
         {/*  closable*/}
         {/*  setSearchTxt={setSearchTxt}*/}
         {/*/>*/}
-        <TableActionBtns showColumns={!uiPreferences.loading} handleShowColumns={OpenVisibleColumnsPopup} handleSideDrawer={() => ({})}>
+        <TableActionBtns
+          showColumns={!uiPreferences.loading}
+          handleShowColumns={OpenVisibleColumnsPopup}
+          handleSideDrawer={() => ({})}
+        >
           {t('Table.AdvancedSearch')}
         </TableActionBtns>
       </div>
 
       {loading && (
-        <Layout className='listings-container'>
+        <Layout className="listings-container">
           <Spin />
         </Layout>
       )}
-      {!loading && <>
-        {(!hideWhenEmpty || data.length > 0) && (
-          <DataTable
-            page='listing'
-            columns={columns}
-            dataSource={filteredData}
-            totalItems={data.length}
-            showTableInfo={true}
-            rowClassName='table-row'
-
-            pageSize={uiPreferences.pageSize}
-            onPageSizeChanged={OnPageSizeChange}
-            onPageChange={OnPageNumberChange}
-            currentPage={currentPage}
-            pageSizes={pageSizes}
-
-            rowSelection={rowSelection}
-            onChangeVisibleRows={onChangeVisibleRows}
-            actionsDropdownMenu={actionsDropdownMenu}
-            onRow={onRow}
-          />
-        )}
-      </>}
+      {!loading && (
+        <>
+          {(!hideWhenEmpty || data.length > 0) && (
+            <DataTable
+              page="listing"
+              columns={columns}
+              dataSource={filteredData}
+              totalItems={data.length}
+              showTableInfo={true}
+              rowClassName="table-row"
+              pageSize={uiPreferences.pageSize}
+              onPageSizeChanged={OnPageSizeChange}
+              onPageChange={OnPageNumberChange}
+              currentPage={currentPage}
+              pageSizes={pageSizes}
+              rowSelection={rowSelection}
+              onChangeVisibleRows={onChangeVisibleRows}
+              actionsDropdownMenu={actionsDropdownMenu}
+              onRow={onRow}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };
