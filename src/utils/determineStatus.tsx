@@ -43,10 +43,6 @@ export const determineStatus = (statusValue: string | number, order: OrderData) 
   switch (statusValue) {
     case AutoOrderingState.AutoorderingDisabled:
       switch (order.storeStatus) {
-        case OrderStatus.Shipped:
-          return <SuccessBtn>Dispatched</SuccessBtn>;
-        case OrderStatus.Cancelled:
-          return <CancelBtn>Cancelled</CancelBtn>;
         default:
           if (order.sourceAOEnabled) {
             if (order.sourceAOConfigured) {
@@ -57,6 +53,11 @@ export const determineStatus = (statusValue: string | number, order: OrderData) 
           } else {
             return <WarningBtn>No Autoordering</WarningBtn>;
           }
+        case OrderStatus.Shipped:
+          return <SuccessBtn>Dispatched</SuccessBtn>;
+
+        case OrderStatus.Cancelled:
+          return <CancelBtn>Cancelled</CancelBtn>;
       }
     default://Including case OrderStatus.TemporaryError
       return <ProgressBtn>In Progress</ProgressBtn>;
