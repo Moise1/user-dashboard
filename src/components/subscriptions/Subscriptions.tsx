@@ -46,8 +46,6 @@ export const Subscriptions = () => {
 
   const { quota } = useAppSelector((state) => state.user);
 
-  console.log(quota);
-
   const parentToChild = (value: number, billing: number, type: number): void => {
     localStorage.setItem('productId', value.toString());
     localStorage.setItem('billing', billing.toString());

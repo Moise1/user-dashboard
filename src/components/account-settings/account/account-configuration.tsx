@@ -151,13 +151,10 @@ export const AccountConfiguration = () => {
         break;
       }
     }
-
-    console.log(model);
   };
   const onChange = (e: RadioChangeEvent) => {
     setIAMBusiness(e.target.value as unknown as boolean);
     SaveSetting(eAccountSettings.IAmBusiness, e.target.value);
-    console.log(iAmBusiness);
   };
   const InitializeModel = () => {
     settings?.map((x) => {
@@ -260,9 +257,8 @@ export const AccountConfiguration = () => {
   const savingSetting = new Map(savingSettingsState?.map((x) => [x.data.key, x]));
 
   const OnButtonClick = async () => {
-    console.log(model);
     const rp = await dispatch(saveAccountSetting(model));
-    console.log(rp);
+
     if (rp.payload?.success) {
       dispatch(getAccountConfiguration());
       toastAlert('Account successfully updated', 'success');
