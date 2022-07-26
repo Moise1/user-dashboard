@@ -48,7 +48,7 @@ export const PaymentMethod = (/*props: props*/) => {
   };
 
   const GetSuccesUrl = () => {
-    const location = window.location;
+    //const location = window.location;
     //const baseUrl = location.protocol + '//' + location.host;
 
     let successUrl = subscriptionConfiguration.successUrl;
