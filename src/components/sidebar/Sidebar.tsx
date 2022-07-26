@@ -1,4 +1,4 @@
-import { CSSProperties, useContext, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
@@ -18,8 +18,6 @@ import { MenuListItem } from './MenuListItem';
 import { actions } from '../../redux/user/userSlice';
 import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import Logo from '../../assets/logoHGR.png';
-import { Switch } from '../../small-components/Switch';
-import { AppContext } from '../../contexts/AppContext';
 import { persistor } from 'src/redux/store';
 import { MobileSiderDrawer } from '../../small-components/MobileSiderDrawer';
 import { LeftOutlined, PushpinOutlined } from '@ant-design/icons';
@@ -45,19 +43,20 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 export const Sidebar = (props: Props) => {
   const { collapsed, staticValue, togglestatic, className, setCollapsed, mobileSiderVisible, closeMobileSider } = props;
-  const [isDark, setIsDark] = useState<boolean>(false);
   const [openKeys, setOpenKeys] = useState<string[]>(['sub1']);
-
+  /* 
   const { setTheme } = useContext(AppContext);
+  const [isDark, setIsDark] = useState<boolean>(false); */
+
   const dispatch = useAppDispatch();
   const rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   const history = useHistory();
 
-  const handleThemeChange = () => {
+  /*   const handleThemeChange = () => {
     setIsDark(!isDark);
     isDark === false ? setTheme('dark') : setTheme('light');
   };
-
+ */
   const handleMouseEnter = () => {
     if (staticValue) {
       return;
@@ -87,13 +86,7 @@ export const Sidebar = (props: Props) => {
   };
 
   const handleLogout = () => {
-    const keysToRemove = [
-      'root',
-      'Authorization',
-      'globalTheme',
-      'isAuthenticated',
-      'newChannelSuccess'
-    ];
+    const keysToRemove = ['root', 'Authorization', 'globalTheme', 'isAuthenticated', 'newChannelSuccess'];
     dispatch(actions.logout());
     keysToRemove.forEach((key) => localStorage.removeItem(key));
     persistor.purge();
@@ -106,20 +99,15 @@ export const Sidebar = (props: Props) => {
     { id: 7, listName: t('Menu.SourcesTable'), route: Links.SourcesSettings },
     { id: 8, listName: t('Menu.PricingRules'), route: Links.PricingRules },
     { id: 9, listName: t('Menu.BrowserExtensions'), route: Links.BrowserExtension },
-    { id: 10, listName: t('Menu.Subscriptions'), route:Links.Subscriptions },
+    { id: 10, listName: t('Menu.Subscriptions'), route: Links.Subscriptions },
     { id: 13, listName: t('Menu.VaProfiles'), route: Links.VaProfiles },
     { id: 14, listName: t('Menu.Templates'), route: Links.Templates },
     {
       id: 15,
       listName: t('Menu.AutoOrderingConfiguration'),
       route: Links.AutoOrderConfiguration
-    },
-    // {
-    //   id: 20,
-    //   listName: t('Menu.AutoOrderingConfiguration'),
-    //   onClick: () => routeChange(Links.AutoOrderConfiguration)
-    // },
-    {
+    }
+    /*{
       id: 26,
       listName: (
         <>
@@ -133,7 +121,7 @@ export const Sidebar = (props: Props) => {
           />
         </>
       )
-    }
+    }*/
   ];
 
   const helpListArray = [
@@ -193,7 +181,7 @@ export const Sidebar = (props: Props) => {
       '4',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      <Link to={Links.Products} > {t('Menu.Listings')} </Link>,
+      <Link to={Links.Products}> {t('Menu.Listings')} </Link>,
       <ListingsIcon />,
       undefined
     ),
@@ -201,7 +189,7 @@ export const Sidebar = (props: Props) => {
       '5',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      <Link to={Links.Orders} > {t('Menu.Orders')} </Link>,
+      <Link to={Links.Orders}> {t('Menu.Orders')} </Link>,
       <OrdersIcon />,
       undefined
     ),
@@ -219,7 +207,7 @@ export const Sidebar = (props: Props) => {
       '17',
       'menu-item',
       { fontSize: '18px', fontWeight: 'bold' },
-      <Link to={Links.Services} > {t('Menu.Services')} </Link>,
+      <Link to={Links.Services}> {t('Menu.Services')} </Link>,
       <ServiceIcon />,
       undefined
     ),
@@ -240,45 +228,42 @@ export const Sidebar = (props: Props) => {
       t('Menu.Logout'),
       <LogoutIcon />,
       undefined,
-      handleLogout,
+      handleLogout
     )
   ];
-
 
   const siderMenu = (
     <div className="side-menu-container">
       {
-        (
-          <div className="sidebar-overhead">
-            <div className="logo-container">
-              <img className="logo" src={Logo} alt="logo" />
-              <h1 className="logo-text">HGR</h1>
-            </div>
-
-            <div className="quota-container">
-              <div className="quota">
-                <strong className="quota-text">
-                  <p>{t('Topbar.Quota')}: &nbsp;</p>
-                </strong>
-                <span className="quota-progress">45% (12/13)</span>
-              </div>
-
-              <button type="button" className="update-btn">
-                {t('Topbar.Upgrade')}
-              </button>
-            </div>
-            <div className="sidebar-control-btns">
-              {staticValue || mobileScreenSize.matches ? (
-                <LeftOutlined
-                  style={{ fontSize: '19px' }}
-                  onClick={mobileScreenSize.matches ? closeMobileSider : togglestatic}
-                />
-              ) : (
-                !mobileScreenSize.matches && <PushpinOutlined style={{ fontSize: '19px' }} onClick={togglestatic} />
-              )}
-            </div>
+        <div className="sidebar-overhead">
+          <div className="logo-container">
+            <img className="logo" src={Logo} alt="logo" />
+            <h1 className="logo-text">HGR</h1>
           </div>
-        )
+
+          <div className="quota-container">
+            <div className="quota">
+              <strong className="quota-text">
+                <p>{t('Topbar.Quota')}: &nbsp;</p>
+              </strong>
+              <span className="quota-progress">45% (12/13)</span>
+            </div>
+
+            <button type="button" className="update-btn">
+              {t('Topbar.Upgrade')}
+            </button>
+          </div>
+          <div className="sidebar-control-btns">
+            {staticValue || mobileScreenSize.matches ? (
+              <LeftOutlined
+                style={{ fontSize: '19px' }}
+                onClick={mobileScreenSize.matches ? closeMobileSider : togglestatic}
+              />
+            ) : (
+              !mobileScreenSize.matches && <PushpinOutlined style={{ fontSize: '19px' }} onClick={togglestatic} />
+            )}
+          </div>
+        </div>
       }
       <Menu
         className="menu-container"
