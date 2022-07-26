@@ -53,9 +53,10 @@ export const Orders = () => {
   useEffect(() => {
     const orderList: OrderData[] = orders.orders?.map((l: OrderData) => {
       let item: OrderData = {
-        ...l, key: l.id,
+        ...l,
+        key: l.id,
         profit: (l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - l.fees).toFixed(2),
-        sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId),
+        sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId)
       }; //Assuming channel and source uses same currency
       //const totalTaxes = (l.channelTax ?? 0) + (l.channelVAT ?? 0) + (l.channelPaymentTaxes ?? 0) + l.fees;
       //l.profit = l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - totalTaxes;
@@ -112,7 +113,11 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedOrder} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
 
-          <OrderActionBtns channelOAuthId={[newChannel]} selectedOrderIds={selectedRowKeys} orderList={selectedOrders} />
+          <OrderActionBtns
+            channelOAuthId={[newChannel]}
+            selectedOrderIds={selectedRowKeys}
+            orderList={selectedOrders}
+          />
 
           <ComplexTable
             uiIdentifier={'orders'}
