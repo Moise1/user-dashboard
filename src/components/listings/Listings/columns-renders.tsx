@@ -1,6 +1,6 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
-import { t } from '../../../utils/transShim';
+import { t, TTag } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
@@ -176,7 +176,7 @@ export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: num
           onClick={ReactUtils.OnClickNoPropagate}
         >
           <span className="glyphicon glyphicon-ok"></span>
-          {t('Listings.Value.Lowest')}
+          <TTag lKey='Listings.Value.Lowest' />
         </a>
       </div>
     );
@@ -206,15 +206,13 @@ export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: num
       hasRules = HGRUtils.GetMarkupFromPricingRules(sourcePrice, pricingRules) != null;
     }
 
-    const iRules = hasRules ? ' (' + t('Listings.Value.IgnoreRules') + ')' : '';
-   
     const menu = (<Menu
       items={[
         {
           key: '1',
           label: (
             <a href="#" onClick={(e) => BeatPrice(e)}>
-              {'Beat' + iRules}
+              {hasRules ? <TTag lKey='Listings.Value.BeatIgnoreRules' /> : <TTag lKey='istings.Value.Beat' />}
             </a>
           )
         },
@@ -222,7 +220,7 @@ export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: num
           key: '2',
           label: (
             <a href="#" onClick={(e) => MatchPrice(e)}>
-              {'Match' + iRules}
+              {hasRules ? <TTag lKey='Listings.Value.MatchIgnoreRules' /> : <TTag lKey='Listings.Value.Match' />}
             </a>
           )
         }
