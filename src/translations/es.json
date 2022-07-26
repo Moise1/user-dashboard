@@ -134,6 +134,7 @@
   "Listings.Column.Watchers": "Seguidores",
   "Listings.Column.UnsoldDays": "Días sin vender",
   "Listings.Value.Always": "Siempre",
+  "Listings.Value.IgnoreRules": "Ignorar reglas",
   "Listings.Value.Lowest": "El mas bajo",
   "Listings.Value.UnknownSource": "Proveedor desconocido",
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getRules, createRule, updateRule, deleteRule } from './rulesThunk';
 
-export interface Rule {
+export interface PriceRule {
   id: number;
   userId?: string;
   sourceId: number | string;
@@ -15,7 +15,7 @@ export interface Rule {
 }
 
 const initialState = {
-  rules: [] as Rule[],
+  rules: [] as PriceRule[],
   ruleCreated: false,
   ruleUpdated: false,
   ruleDeleted: false,
