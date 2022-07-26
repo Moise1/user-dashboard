@@ -9,6 +9,13 @@ export interface ActiveListingExtended extends ActiveListing {
   markup?: number;
   monitorStock?: boolean;
   monitorPrice?: boolean;
+  monitorPriceDecrease?: boolean;
+  monitorPriceDecreasePercentage?: number;
+  ignoreRules?: boolean;
+  unsoldDays?: number;
+  outOfStockDays?: number;
+  variationsText?: string;
+  dispatchDays?: number;
 }
 
 export type ListingT = (ActiveListingExtended | PendingListing | TerminatedListings) & { key: number, source?: Source, channel?: Channel };

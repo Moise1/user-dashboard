@@ -14,6 +14,20 @@ type WithCreatedOn = { createdOn?: string | Date };
 type WithNotes = { productNotes?: string };
 type WithMonitorPrice = { monitorPrice?: boolean };
 type WithMonitorStock = { monitorStock?: boolean };
+type WithMonitorPriceDecrease = { monitorPriceDecrease?: boolean };
+type WithMonitorPriceDecreasePecentage = { monitorPriceDecreasePercentage?: number };
+type WithIgnoreRules = { ignoreRules?: boolean };
+type WithUnsoldDays = { unsoldDays?: number };
+type WithOutOfStockDays = { outOfStockDays?: number };
+type WithWatches = { watches?: number };
+type WithEndsOn = { endsOn?: Date | string };
+type WithVariationText = { variationsText?: string };
+type WithDispatchDays = { dispatchDays?: number };
+type WithQuantitySold = { quantitySold?: number };
+type WithViews = { views?: number };
+type WithAsin = { asin?: string };
+type WithBuyBox = { buyBoxPrice?: string };
+type WithLowestPrice = { lowestPrice?: number, isLowestPrice?: boolean };
 
 const CompareString = (a?: string, b?: string) => (a ?? '').localeCompare(b ?? '');
 const CompareNumber = (a?: number, b?: number) => (a ?? 0) - (b ?? 0);
@@ -46,4 +60,20 @@ export const SorterCreatedOn = (a: ListingT, b: ListingT) => CompareDate((a as W
 export const SorterNotes = (a: ListingT, b: ListingT) => CompareString((a as WithNotes).productNotes, (b as WithNotes).productNotes);
 export const SorterMonitorPrice = (a: ListingT, b: ListingT) => CompareBooleans((a as WithMonitorPrice).monitorPrice, (b as WithMonitorPrice).monitorPrice);
 export const SorterMonitorStock = (a: ListingT, b: ListingT) => CompareBooleans((a as WithMonitorStock).monitorStock, (b as WithMonitorStock).monitorStock);
+export const SorterMonitorPriceDecrease = (a: ListingT, b: ListingT) => CompareBooleans((a as WithMonitorPriceDecrease).monitorPriceDecrease, (b as WithMonitorPriceDecrease).monitorPriceDecrease);
+export const SorterMonitorPriceDecreasePercentage = (a: ListingT, b: ListingT) => CompareNumber((a as WithMonitorPriceDecreasePecentage).monitorPriceDecreasePercentage, (b as WithMonitorPriceDecreasePecentage).monitorPriceDecreasePercentage);
+export const SorterIgnoreRules = (a: ListingT, b: ListingT) => CompareBooleans((a as WithIgnoreRules).ignoreRules, (b as WithIgnoreRules).ignoreRules);
+export const SorterUnsoldDays = (a: ListingT, b: ListingT) => CompareNumber((a as WithUnsoldDays).unsoldDays, (b as WithUnsoldDays).unsoldDays);
+export const SorterOutOfStockDays = (a: ListingT, b: ListingT) => CompareNumber((a as WithOutOfStockDays).outOfStockDays, (b as WithOutOfStockDays).outOfStockDays);
+export const SorterWatches = (a: ListingT, b: ListingT) => CompareNumber((a as WithWatches).watches, (b as WithWatches).watches);
+export const SorterEndsOn = (a: ListingT, b: ListingT) => CompareDate((a as WithEndsOn).endsOn, (b as WithEndsOn).endsOn);
+export const SorterVariation = (a: ListingT, b: ListingT) => CompareString((a as WithVariationText).variationsText, (b as WithVariationText).variationsText);
+export const SorterDispatchDays = (a: ListingT, b: ListingT) => CompareNumber((a as WithDispatchDays).dispatchDays, (b as WithDispatchDays).dispatchDays);
+export const SorterQuantitySold = (a: ListingT, b: ListingT) => CompareNumber((a as WithQuantitySold).quantitySold, (b as WithQuantitySold).quantitySold);
+export const SorterViews = (a: ListingT, b: ListingT) => CompareNumber((a as WithViews).views, (b as WithViews).views);
+export const SorterAsin = (a: ListingT, b: ListingT) => CompareString((a as WithAsin).asin, (b as WithAsin).asin);
+export const SorterBuyBox = (a: ListingT, b: ListingT) => CompareString((a as WithBuyBox).buyBoxPrice, (b as WithBuyBox).buyBoxPrice);
+export const SorterLowestPrice = (a: ListingT, b: ListingT) => CompareNumber((a as WithLowestPrice).isLowestPrice ? 0 : (a as WithLowestPrice).lowestPrice, (b as WithLowestPrice).isLowestPrice ? 0 : (b as WithLowestPrice).lowestPrice);
+
+
 

@@ -29,6 +29,7 @@ import { ActiveListingExtended, ListingT } from './Listings/types';
 import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
 import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
 import { ePlatform } from '../../types/ePlatform';
+import { isString } from 'util';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -155,7 +156,31 @@ export const Listings = () => {
               l.markup = l.overrides.markup ?? settings.markup;
               l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
               l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
-              //l.productNotes
+              l.monitorPriceDecrease = l.overrides.monitorPriceDecrease ?? settings.monitorPriceDecrease;
+              l.monitorPriceDecreasePercentage = l.overrides.monitorPriceDecreasePercentage ?? settings.monitorPriceDecreasePercentage;
+              l.ignoreRules = l.overrides.ignoreRules ?? settings.ignoreRules;
+              l.variationsText = (() => {
+                const GetVariationSKU = (data: ListingT) => {
+                  const cis = (data as { channelItem: string }).channelItem.split('#');
+                  return (cis.length == 2) ? cis[1] : '';
+                };
+                const value = l.variationAtributes;
+                if (!value || value.length == 0)
+                  return GetVariationSKU(al);
+                const ops = value.map((x) => x.option).join(', ');
+                return (ops && ops.trim().length > 0) ? ops : GetVariationSKU(al);
+              })();
+              l.unsoldDays = (() => {
+                const d = l.lastTimeSold ?? l.createdOn;
+                const ld = isString(d) ? new Date(d) : d;
+                return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
+              })();
+              l.outOfStockDays = (() => {
+                const d = l.lastTimeInStock ?? l.createdOn;
+                const ld = isString(d) ? new Date(d) : d;
+                return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
+              })();
+              l.dispatchDays = l.overrides.dispatchDays ?? settings.dispatchDays;
             }
 
             //Images-------------------
