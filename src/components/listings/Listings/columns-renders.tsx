@@ -46,6 +46,32 @@ export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   }
 };
 
+export const RenderAmazonSku = (channelItem: string, rowR: ListingT) => {
+  if (channelItem == null) return '';
+
+  const { channel, asin } = rowR as { channel: Channel, asin: string };
+
+  const url = (() => {
+    const infoChannel = Platforms[channel.channelId];
+    if (infoChannel && infoChannel.itemUrl) {
+      const baseUrl = (infoChannel.internalUrl instanceof Object) ? infoChannel.internalUrl[channel.isoCountry] : infoChannel.internalUrl;
+
+      return baseUrl
+        .replace('{asin}', asin ?? '')
+        .replace('{sku}', channelItem)
+        .replace('{shopName}', channel.channelIdentifier);
+    } else {
+      return '';
+    }
+  })();
+
+  return (
+    <a href={url} target="_blank" rel='noreferrer' >
+      {channelItem}
+    </a>
+  );
+};
+
 export const RenderSource = (path: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, source: Source, id: number };
   const source = row.source;
@@ -112,8 +138,126 @@ export const RenderDate = (date: string | Date | undefined) => {
 };
 
 export const RenderBoolean = (value: boolean | undefined) => {
-  if (value) {
-    return <CheckOutlined className="icon" />;
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {value && <CheckOutlined className="icon" />}
+      {!value && <CloseOutlined className="icon" />}
+    </div>
+  );
+};
+
+export const RenderPercentage = (value: number | undefined) => {
+  if (value == null)
+    return '';
+  return value + '%';
+};
+
+export const RenderMonitorPriceDecreasePercentage = (value: number | undefined) => {
+  if (value == null)
+    return '';
+  if (value == 0)
+    return <div style={{ textAlign: 'center' }}>{t('Listings.Value.Always')}</div>;
+  return <div style={{ textAlign: 'center' }}>{value + '%'}</div>;
+};
+
+export const RenderLowestPrice = (lowestPrice: number | undefined, rowR: ListingT) => {
+  const { isLowestPrice, channelPrice, asin /*, sourcePrice, sourceId, ignoreRules, id*/  } = rowR as ActiveListingExtended;
+
+  const RenderIsLowestPrice = () => {
+    return (
+      <div className="bestPrice">
+        <a
+          href={'https://www.amazon.co.uk/gp/offer-listing/' + asin}
+          target="_blank"
+          rel='noreferrer'
+          onClick={ReactUtils.OnClickNoPropagate}
+        >
+          <span className="glyphicon glyphicon-ok"></span>
+          {t('Listings.Value.Lowest')}
+        </a>
+      </div>
+    );
+  };
+
+  //const SetPrice = (newPrice: number) => {
+  //  if (newPrice && this.props.onSetPrice) {
+  //    this.props.onSetPrice(id, newPrice);
+  //  }
+  //}
+
+  //const BeatPrice=(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=> {
+  //  e.stopPropagation();
+  //  e.preventDefault();
+  //  SetPrice((lowestPrice ?? 0) - 0.01);
+  //}
+
+  //const MatchPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  //  e.stopPropagation();
+  //  e.preventDefault();
+  //  SetPrice(lowestPrice);
+  //}
+
+
+  //const RenderDropDown = () => {
+  //  let hasRules = false;
+  //  if (sourcePrice && sourceId && !ignoreRules) {
+  //    hasRules =
+  //      this.props.channelData.GetMarkupFromPricingRules(sourcePrice, sourceId) != null;
+  //  }
+
+  //  const iRules = hasRules ? ' (Ignore rules)' : '';
+
+  //  return (
+  //    <div className="dropdown">
+  //      <a
+  //        href="#"
+  //        className="dropdown-toggle"
+  //        data-toggle="dropdown"
+  //        aria-haspopup="true"
+  //        aria-expanded="true"
+  //        onClick={ReactUtils.OnClickNoPropagate}
+  //      >
+  //        &nbsp;<span className="caret"></span>
+  //      </a>
+  //      <ul className="dropdown-menu">
+  //        <li>
+  //          <a href="#" onClick={(e) => BeatPrice(e)}>
+  //            {'Beat' + iRules}
+  //          </a>
+  //        </li>
+  //        <li>
+  //          <a href="#" onClick={(e) => MatchPrice(e)}>
+  //            {'Match' + iRules}
+  //          </a>
+  //        </li>
+  //      </ul>
+  //    </div>
+  //  );
+  //}
+
+  const RenderIsNotLowestPrice = () => {
+    return (
+      <div className="bestPrice">
+        <a
+          href={
+            'https://www.amazon.co.uk/gp/offer-listing/' + asin + '?ref=myi_lowprice_offer'
+          }
+          target="_blank"
+          rel='noreferrer'
+          onClick={ReactUtils.OnClickNoPropagate}
+        >
+          {lowestPrice}
+        </a>
+        {/*RenderDropDown()*/}
+      </div>
+    );
+  };
+
+  if (isLowestPrice || (channelPrice ?? 0) <= (lowestPrice ?? -1)) {
+    return RenderIsLowestPrice();
+  } else if (lowestPrice) {
+    return RenderIsNotLowestPrice();
+  } else {
+    return '-';
   }
-  return <CloseOutlined className="icon" />;
 };

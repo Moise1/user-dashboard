@@ -12,10 +12,15 @@ export const ReactUtils = {
   },
 
   GetFormattedDateTime: (date: Date | string | undefined) => {
-    return moment(date).format('LT L');
+    return moment(date).format('L LT');
   },
 
   GetFormattedDate: (date: Date | string | undefined) => {
     return moment(date).format('L');
+  },
+
+  OnClickNoPropagate: (e: React.MouseEvent) => {
+    e.stopPropagation();
+    return false;
   }
 };
