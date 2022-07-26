@@ -24,7 +24,7 @@ export const PaymentMethod = (/*props: props*/) => {
   const [currencyId] = useState(localStorage.getItem('currencyId'));
   const [platformProductId] = useState(localStorage.getItem('platformProductId'));
   const [stripePlatformProductId] = useState(localStorage.getItem('stripePlatformProductId'));
-  const { products, loading } = useAppSelector((state) => state.subscriptions);
+  const { /*products,*/ loading } = useAppSelector((state) => state.subscriptions);
   const [loadings, setLoadings] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<number>();
   const { subscriptionConfiguration } = useAppSelector((state) => state.subscriptionConfiguration);
@@ -48,8 +48,8 @@ export const PaymentMethod = (/*props: props*/) => {
   };
 
   const GetSuccesUrl = () => {
-    const location = window.location;
-    const baseUrl = location.protocol + '//' + location.host;
+    //const location = window.location;
+    //const baseUrl = location.protocol + '//' + location.host;
 
     let successUrl = subscriptionConfiguration.successUrl;
     successUrl = successUrl ?? 'https://app.hustlegotreal.com/Home';
