@@ -38,7 +38,6 @@ interface Props<RecordType> {
 }
 //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export const DataTable = <RecordType extends object = any>(props: Props<RecordType>) => {
-
   const {
     columns,
     dataSource,
@@ -66,9 +65,11 @@ export const DataTable = <RecordType extends object = any>(props: Props<RecordTy
     <div className="data-table-container">
       {showTableInfo && (
         <div className="table-info">
-          {selectedRows ? <p className="total-selected">
-            <strong>{selectedRows}</strong> selected
-          </p> : null}
+          {selectedRows ? (
+            <p className="total-selected">
+              <strong>{selectedRows}</strong> selected
+            </p>
+          ) : null}
           {actionsDropdownMenu && (
             <Dropdown overlay={actionsDropdownMenu} className="actions-dropdown">
               <Space>
