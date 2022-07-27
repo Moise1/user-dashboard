@@ -1,6 +1,6 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
 import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels } from './columns-sorter';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy } from './columns-sorter';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -176,6 +176,13 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     smartSearch: { ignore: true },
     render: RenderDate,
     sorter: SorterCreatedOn
+  },
+  {
+    id: ListingColumnId.CreatedBy,
+    title: 'Listings.Column.CreatedBy',
+    dataIndex: 'createdByName',
+    smartSearch: { ignore: true },
+    sorter: SorterCreatedBy
   },
   {
     id: ListingColumnId.Notes,
