@@ -1,6 +1,6 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
-import { t, TTag } from '../../../utils/transShim';
+import { TTag } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
@@ -8,6 +8,7 @@ import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOu
 import { ReactUtils } from '../../../utils/react-utils';
 import { HGRUtils } from '../../../utils/hgr-utils';
 import { Dropdown, Menu } from 'antd';
+import { shopLogo } from '../../../utils/shopLogo';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -78,7 +79,7 @@ export const RenderSource = (path: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, source: Source, id: number };
   const source = row.source;
   if (!source)
-    return t('Listings.UnknownSource');
+    return <TTag lKey='Listings.UnknownSource'/>;
   const url = 'https://' + source.baseUrl + '/' + path;
   return <a target='_blank' rel='noreferrer' href={ApiURL + '/api/Sources/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id + '&isoCountry=' + row.channel.isoCountry}>{source.name}</a>;
 };
@@ -158,7 +159,7 @@ export const RenderMonitorPriceDecreasePercentage = (value: number | undefined) 
   if (value == null)
     return '';
   if (value == 0)
-    return <div style={{ textAlign: 'center' }}>{t('Listings.Value.Always')}</div>;
+    return <div style={{ textAlign: 'center' }}><TTag lKey='Listings.Value.Always'/></div>;
   return <div style={{ textAlign: 'center' }}>{value + '%'}</div>;
 };
 
@@ -262,4 +263,13 @@ export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: num
   } else {
     return '-';
   }
+};
+
+export const RenderOtherChannels = (otherChannels: Channel[]) => {
+  if (!otherChannels)
+    return '';
+
+  return <>
+    {otherChannels.map(cs => shopLogo(cs.channelId, cs.name))}
+  </>;
 };

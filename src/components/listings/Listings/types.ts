@@ -18,6 +18,7 @@ export interface ActiveListingExtended extends ActiveListing {
   variationsText?: string;
   dispatchDays?: number;
   pricingRules: PriceRule[];
+  otherChannels: Channel[];
 }
 
 export type ListingT = (ActiveListingExtended | PendingListing | TerminatedListings) & { key: number, source?: Source, channel?: Channel };

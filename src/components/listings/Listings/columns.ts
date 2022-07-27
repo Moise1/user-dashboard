@@ -1,6 +1,6 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox } from './columns-sorter';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels } from './columns-sorter';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -273,5 +273,13 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     dataIndex: 'dispatchDays',
     smartSearch: { ignore: true },
     sorter: SorterDispatchDays
+  },
+  {
+    id: ListingColumnId.OtherChannels,
+    title: 'Listings.Column.OtherChannels',
+    dataIndex: 'otherChannels',
+    smartSearch: { ignore: true },
+    render: RenderOtherChannels,
+    sorter: SorterOtherChannels
   }
 ];

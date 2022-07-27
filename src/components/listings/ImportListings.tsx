@@ -3,18 +3,13 @@ import Spreadsheet, { Matrix } from 'react-spreadsheet';
 import { Button, Checkbox, Form } from 'antd';
 import { useState } from 'react';
 import '../../sass/listings.scss';
-import { Channel } from 'src/redux/channels/channelsSlice';
-import { useAppSelector } from 'src/custom-hooks/reduxCustomHooks';
+import { ReactUtils } from '../../utils/react-utils';
 
 const { Item } = Form;
 
 export const ImportListings = () => {
   //Get channels and selected channel
-  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
-  const selectedChannel = localStorage.getItem('channelId');
-  const channel = channels.filter(function (data) {
-    return data.id.toString() == selectedChannel;
-  })[0];
+  const channel = ReactUtils.GetSelectedChannel()
 
   //Checkboxes modes
 
@@ -26,9 +21,9 @@ export const ImportListings = () => {
 
   let columnsNames: string[];
   let [data] = useState<Matrix<{ value: string }>>([]);
-  let skuName = channel.name + ' Identifier';
+  let skuName = channel?.name + ' Identifier';
 
-  if (channel.channelId === 4) {
+  if (channel?.channelId === 4) {
     skuName = 'SKU';
   }
 
