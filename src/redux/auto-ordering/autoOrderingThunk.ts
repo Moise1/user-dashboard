@@ -38,6 +38,7 @@ export const saveAutoOrdering = createAsyncThunk(
 export const getAutoOrdering = createAsyncThunk('sales/getAutoOrder', async () => {
   try {
     const res = await client.get('/SourceConfiguration/GetActiveAutoOrdering');
+    console.log('AUTO ORDERING DATA', res.data);
     return res.data.response_data;
   } catch (error) {
     console.log('The error is ', error);

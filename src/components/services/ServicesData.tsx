@@ -5,7 +5,7 @@ export interface ServiceData {
   paragraphs: string[];
   bulletPoints: string[];
   image: string;
-  link: string;
+  slug: string;
   currency?: string;
   price?: string;
 }
@@ -26,7 +26,7 @@ export const AllServicesData: ServiceData[] = [
       'Price Warrior will update automatically, and you will have access to a report showing the status of all the listings being managed by Price Warrior.'
     ],
     image: '/static/media/price_warrior.a2c44660.png',
-    link: '/services/price-warrior',
+    slug: 'price-warrior',
     currency: '€',
     price: '17.99'
   },
@@ -43,7 +43,7 @@ export const AllServicesData: ServiceData[] = [
     ],
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image: '/static/media/logoHGR.27d62745.png',
-    link: '/services/private-supplier',
+    slug: 'private-supplier',
     currency: '£',
     price: '200'
   },
@@ -61,7 +61,7 @@ export const AllServicesData: ServiceData[] = [
       'Avoid ebay bans'
     ],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/services/no-api-server',
+    slug: 'no-api-server',
     currency: '€',
     price: '15.99'
   },
@@ -73,7 +73,7 @@ export const AllServicesData: ServiceData[] = [
     paragraphs: ['After purchasing the order, it will be marked as dispatched on your store.'],
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/services/auto-ordering',
+    slug: 'auto-ordering',
     currency: '',
     price: ''
   },
@@ -90,7 +90,7 @@ export const AllServicesData: ServiceData[] = [
     bulletPoints: ['feature 1', 'feature 2', 'feature 3'],
     image:
       'https://lh3.googleusercontent.com/Zgk-AtBUU6Oh-UDi4up49vsdfCN87NdAMOdWBi0jmB6E6DWnm6P0aaabmekWGSv_YskB2UxbiLCbEqiRnd5_MG2rMQ=w128-h128-e365-rj-sc0x00ffffff',
-    link: '/services/vero-checker'
+    slug: 'vero-checker'
   },
   {
     id: 6,
@@ -108,7 +108,7 @@ export const AllServicesData: ServiceData[] = [
       'The team will process your order and email you as soon as your listings are published.'
     ],
     image: 'https://hustlegotreal.com/wp-content/uploads/2021/04/NO-API-SERVER.png',
-    link: '/services/listing-service'
+    slug: 'listing-service'
   },
   {
     id: 7,
@@ -126,6 +126,6 @@ export const AllServicesData: ServiceData[] = [
       'Save time, we do the hard work for you.'
     ],
     image: '/static/media/token.3697bb2f.svg',
-    link: '/services/title-optimization'
+    slug: 'title-optimization'
   }
 ];
