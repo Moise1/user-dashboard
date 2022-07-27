@@ -19,6 +19,7 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
 import moment from 'moment';
+import { toastAlert } from '../../utils/toastAlert';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -163,8 +164,12 @@ export const Catalog = () => {
   const listTheProducts = async () => {
     setChangeState(true);
     const rs = await dispatch(listProducts({ products, needsReview, optimizeTitle }));
-    if (rs) {
-      listProductsModal;
+    setListProductModal(!listProductsModal);
+    if (rs.payload.success) {
+      toastAlert('Listing Successfully', 'success');
+    }
+    else {
+      toastAlert(rs.payload, 'error');
     }
   };
 
