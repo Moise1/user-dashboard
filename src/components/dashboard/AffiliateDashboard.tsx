@@ -1,71 +1,105 @@
 import { Link } from 'react-router-dom';
 import { CalendarOutlined, LeftOutlined, RiseOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
-import { getAffiliateDashboard } from '../../redux/dashboard/affiliatesStatsThunk';
+import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/affiliate-dashboard.scss';
+import { AffiliatesDashboardStats } from 'src/redux/dashboard/affiliatesStatsSlice';
 
-import { SimpleTable } from 'src/small-components/tables/simple-table';
+import { Spin } from 'antd';
+import { DataTable } from 'src/small-components/tables/data-table';
 
 export const AffiliateDashboard = () => {
-  //const { affiliateDashboard } = useAppSelector((state) => state.affiliateDashboard);
-  const dispatch = useAppDispatch();
+  const { affiliatesDashboard, loading } = useAppSelector(
+    (state) => state.affiliatesDashboard as AffiliatesDashboardStats
+  );
 
-  useEffect(() => {
-    dispatch(getAffiliateDashboard({ month: 11, year: 2021 }));
-  }, [getAffiliateDashboard]);
+  console.log(affiliatesDashboard);
 
   const affColumns = [
     {
       title: 'Email',
-      dataIndex: 'email'
+      dataIndex: 'email',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'Registred on',
-      dataIndex: 'registredOn'
+      dataIndex: 'registredOn',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'Total revenue',
       dataIndex: 'totalRevenue',
-      rowClassName: 'totalRevenue'
+      rowClassName: 'totalRevenue',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'Subscription',
-      dataIndex: 'subscriptionRevenue'
+      dataIndex: 'subscriptionRevenue',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'We list for you',
-      dataIndex: 'wlfRevenue'
+      dataIndex: 'wlfRevenue',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'Tokens',
-      dataIndex: 'tokensRevenue'
+      dataIndex: 'tokensRevenue',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     },
     {
       title: 'No api server',
-      dataIndex: 'noapiRevenue'
-    }
-  ];
-
-  const affData = [
-    {
-      email: 'testing@hustlegotreal.com',
-      registredOn: '22/07/2022',
-      totalRevenue: '+$443',
-      subscriptionRevenue: '+$210',
-      wlfRevenue: '+$0',
-      tokensRevenue: '+$44',
-      noapiRevenue: '+$4'
-    },
-    {
-      email: 'example@hustlegotreal.com',
-      registredOn: '12/07/2022',
-      totalRevenue: '+$222',
-      subscriptionRevenue: '+$11',
-      wlfRevenue: '+$22',
-      tokensRevenue: '+$0',
-      noapiRevenue: '+$0'
+      dataIndex: 'noapiRevenue',
+      render: (value: string, record: AffiliatesDashboardStats) =>
+        value ? (
+          <div className="template-name">
+            <h4>{record.noApiServerCommission}</h4>
+          </div>
+        ) : (
+          ''
+        )
     }
   ];
 
@@ -123,7 +157,15 @@ export const AffiliateDashboard = () => {
 
           <div className="table-stats">
             <h2>Revenue of your referrals</h2>
-            <SimpleTable columns={affColumns} dataSource={affData} />
+            {loading ? (
+              <Spin />
+            ) : (
+              <DataTable
+                dataSource={affiliatesDashboard}
+                columns={affColumns}
+                totalItems={affiliatesDashboard.length}
+              />
+            )}
           </div>
         </div>
       </div>
