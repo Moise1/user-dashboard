@@ -1,5 +1,5 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice } from './columns-renders';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice } from './columns-renders';
 import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox } from './columns-sorter';
 import { ListingT } from './types';
 
@@ -54,7 +54,7 @@ const MultiTermFilter = (fieldValue: unknown, searchTerm: string) => {
   return true;
 };
 
-export const ListingsColumns: ListingColumnData[] = [
+export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumnData[] => [
   {
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
@@ -124,7 +124,7 @@ export const ListingsColumns: ListingColumnData[] = [
     id: ListingColumnId.AmazonLowestPrice,
     title: 'Listings.Column.LowestPrice',
     dataIndex: 'lowestPrice',
-    render: RenderLowestPrice,
+    render: RenderLowestPrice(onSetPrice),
     sorter: SorterLowestPrice
   },
   {

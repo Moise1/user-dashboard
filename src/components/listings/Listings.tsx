@@ -17,7 +17,7 @@ import { ReactUtils } from '../../utils/react-utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './Listings/active-columns';
-import { ListingsColumns } from './Listings/columns';
+import { GenerateListingsColumns } from './Listings/columns';
 import { PendingListingsColumns } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
 
@@ -181,6 +181,7 @@ export const Listings = () => {
                 return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
               })();
               l.dispatchDays = l.overrides.dispatchDays ?? settings.dispatchDays;
+              l.pricingRules = [];
             }
 
             //Images-------------------
@@ -225,13 +226,16 @@ export const Listings = () => {
     }
   }, [tab]);
   //--------------------------------------------------------------------------
+  const onSetNewPrice = (row: ListingT, newPrice: number) => {
+    console.log('y' + row.id + 'z' + newPrice);//TODO: Do this
+  };
+  const ListingsColuns = GenerateListingsColumns(onSetNewPrice);
+  const filteredColumns = useMemo(() => ListingsColuns.filter(x => columnList.includes(x.id)), [ListingsColuns, columnList]);
 
-  const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
-
-  //Row Selection
+  //Row Selection-------------------------------------------------------------
   const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
   const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
-  //
+  //--------------------------------------------------------------------------
   //Bulk Menu-----------------------------------------------------------------
   const handleSingleListingModal = () => { console.log('x'); };
   const handleBulkListingModal = () => { console.log('y'); };
