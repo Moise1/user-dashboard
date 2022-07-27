@@ -26,6 +26,8 @@ export function t(key: string, values?: Record<string, TransValueTypeValue>): Tr
   return v;
 }
 
+export const TTag = (props: { lKey: string, values?: Record<string, TransValueTypeValue> }) => <>{t(props.lKey, props.values)}</>;
+
 export function tm(key: string) {
   return <FormattedMessage id={key} defaultMessage="Translation missing for {key}" description="Welcome message" />;
 }

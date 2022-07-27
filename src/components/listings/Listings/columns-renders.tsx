@@ -1,11 +1,13 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
-import { t } from '../../../utils/transShim';
+import { t, TTag } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
-import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined, DownOutlined } from '@ant-design/icons';
 import { ReactUtils } from '../../../utils/react-utils';
+import { HGRUtils } from '../../../utils/hgr-utils';
+import { Dropdown, Menu } from 'antd';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -160,8 +162,9 @@ export const RenderMonitorPriceDecreasePercentage = (value: number | undefined) 
   return <div style={{ textAlign: 'center' }}>{value + '%'}</div>;
 };
 
-export const RenderLowestPrice = (lowestPrice: number | undefined, rowR: ListingT) => {
-  const { isLowestPrice, channelPrice, asin /*, sourcePrice, sourceId, ignoreRules, id*/  } = rowR as ActiveListingExtended;
+export type FnOnSetPrice = (row: ListingT, newPrice: number) => void;
+export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: number | undefined, rowR: ListingT) => {
+  const { isLowestPrice, channelPrice, asin , sourcePrice, sourceId, ignoreRules, pricingRules  } = rowR as ActiveListingExtended;
 
   const RenderIsLowestPrice = () => {
     return (
@@ -173,67 +176,66 @@ export const RenderLowestPrice = (lowestPrice: number | undefined, rowR: Listing
           onClick={ReactUtils.OnClickNoPropagate}
         >
           <span className="glyphicon glyphicon-ok"></span>
-          {t('Listings.Value.Lowest')}
+          <TTag lKey='Listings.Value.Lowest' />
         </a>
       </div>
     );
   };
+  
+  const SetPrice = (newPrice: number) => {
+    if (newPrice && onSetPrice) {
+      onSetPrice(rowR, newPrice);
+    }
+  };
 
-  //const SetPrice = (newPrice: number) => {
-  //  if (newPrice && this.props.onSetPrice) {
-  //    this.props.onSetPrice(id, newPrice);
-  //  }
-  //}
+  const BeatPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    SetPrice((lowestPrice ?? channelPrice) - 0.01);
+  };
 
-  //const BeatPrice=(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=> {
-  //  e.stopPropagation();
-  //  e.preventDefault();
-  //  SetPrice((lowestPrice ?? 0) - 0.01);
-  //}
+  const MatchPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    SetPrice(lowestPrice ?? channelPrice);
+  };
 
-  //const MatchPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-  //  e.stopPropagation();
-  //  e.preventDefault();
-  //  SetPrice(lowestPrice);
-  //}
+  const RenderDropDown = () => {
+    let hasRules = false;
+    if (sourcePrice && sourceId && !ignoreRules) {
+      hasRules = HGRUtils.GetMarkupFromPricingRules(sourcePrice, pricingRules) != null;
+    }
 
+    const menu = (<Menu
+      items={[
+        {
+          key: '1',
+          label: (
+            <a href="#" onClick={(e) => BeatPrice(e)}>
+              {hasRules ? <TTag lKey='Listings.Value.BeatIgnoreRules' /> : <TTag lKey='istings.Value.Beat' />}
+            </a>
+          )
+        },
+        {
+          key: '2',
+          label: (
+            <a href="#" onClick={(e) => MatchPrice(e)}>
+              {hasRules ? <TTag lKey='Listings.Value.MatchIgnoreRules' /> : <TTag lKey='Listings.Value.Match' />}
+            </a>
+          )
+        }
+      ]}
+    />);
 
-  //const RenderDropDown = () => {
-  //  let hasRules = false;
-  //  if (sourcePrice && sourceId && !ignoreRules) {
-  //    hasRules =
-  //      this.props.channelData.GetMarkupFromPricingRules(sourcePrice, sourceId) != null;
-  //  }
-
-  //  const iRules = hasRules ? ' (Ignore rules)' : '';
-
-  //  return (
-  //    <div className="dropdown">
-  //      <a
-  //        href="#"
-  //        className="dropdown-toggle"
-  //        data-toggle="dropdown"
-  //        aria-haspopup="true"
-  //        aria-expanded="true"
-  //        onClick={ReactUtils.OnClickNoPropagate}
-  //      >
-  //        &nbsp;<span className="caret"></span>
-  //      </a>
-  //      <ul className="dropdown-menu">
-  //        <li>
-  //          <a href="#" onClick={(e) => BeatPrice(e)}>
-  //            {'Beat' + iRules}
-  //          </a>
-  //        </li>
-  //        <li>
-  //          <a href="#" onClick={(e) => MatchPrice(e)}>
-  //            {'Match' + iRules}
-  //          </a>
-  //        </li>
-  //      </ul>
-  //    </div>
-  //  );
-  //}
+    return (
+      <Dropdown arrow overlay={menu}>
+        <span>
+          {' '}
+          <DownOutlined />
+        </span>
+      </Dropdown>
+    );
+  };
 
   const RenderIsNotLowestPrice = () => {
     return (
@@ -248,7 +250,7 @@ export const RenderLowestPrice = (lowestPrice: number | undefined, rowR: Listing
         >
           {lowestPrice}
         </a>
-        {/*RenderDropDown()*/}
+        {RenderDropDown()}
       </div>
     );
   };

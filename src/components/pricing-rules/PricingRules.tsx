@@ -8,7 +8,7 @@ import { DataTable, DataTableKey } from '../../small-components/tables/data-tabl
 import { Layout } from 'antd';
 import { ConfirmBtn, TransparentBtn } from '../../small-components/ActionBtns';
 import { AppContext } from '../../contexts/AppContext';
-import { Rule } from '../../redux/pricing-rules/rulesSlice';
+import { PriceRule } from '../../redux/pricing-rules/rulesSlice';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import '../../sass/pricing-rules.scss';
 import { Selector } from '../../small-components/form/selector';
@@ -32,7 +32,7 @@ export const PricingRules = () => {
     dispatch(getRules());
   }, [getRules, channelId]);
 
-  const onFinish = async (values: Rule) => {
+  const onFinish = async (values: PriceRule) => {
     const source = sources.filter((s: Source) => s.name === values.sourceId);
     await dispatch(
       createRule({
@@ -43,12 +43,12 @@ export const PricingRules = () => {
     dispatch(getRules());
   };
 
-  const removeRecord = async (id: Rule['id']) => {
+  const removeRecord = async (id: PriceRule['id']) => {
     await dispatch(deleteRule({ id, active: true }));
     dispatch(getRules());
   };
 
-  const updateStatus = async (id: Rule['id'], active: Rule['active']) => {
+  const updateStatus = async (id: PriceRule['id'], active: PriceRule['active']) => {
     await dispatch(updateRule({ id, active: !active }));
     dispatch(getRules());
   };
@@ -96,7 +96,7 @@ export const PricingRules = () => {
       title: 'Status',
       dataIndex: 'active',
       key: 'active',
-      render: (value: boolean, record: Rule) =>
+      render: (value: boolean, record: PriceRule) =>
         value ? (
           <TransparentBtn className="status-btn enabled" handleClick={() => updateStatus(record.id, record.active)}>
             Enabled
@@ -112,7 +112,7 @@ export const PricingRules = () => {
       title: 'Delete',
       dataIndex: '',
       key: '',
-      render: (record: Rule) => {
+      render: (record: PriceRule) => {
         return (
           <Popconfirm title="Sure to delete this record?" onConfirm={() => removeRecord(record.id)}>
             <CloseIcon className="remove-rule" />
