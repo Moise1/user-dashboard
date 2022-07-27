@@ -14,7 +14,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Markup,
     ListingColumnId.Stock,
     ListingColumnId.CreatedOn,
-    //ListingColumnId.CreatedBy,
+    ListingColumnId.CreatedBy,
     ListingColumnId.Notes,
     ListingColumnId.MonitorPrice,
     ListingColumnId.MonitorStock,
@@ -27,7 +27,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Watchers,
     ListingColumnId.EndingOn,
     ListingColumnId.DispatchDays,
-    //ListingColumnId.OtherChannels
+    ListingColumnId.OtherChannels
   ],
   [ePlatform.eBayNoApi]: [
     ListingColumnId.Image,
@@ -41,7 +41,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Markup,
     ListingColumnId.Stock,
     ListingColumnId.CreatedOn,
-    //ListingColumnId.CreatedBy,
+    ListingColumnId.CreatedBy,
     ListingColumnId.Notes,
     ListingColumnId.MonitorPrice,
     ListingColumnId.MonitorStock,
@@ -55,7 +55,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Watchers,
     ListingColumnId.EndingOn,
     ListingColumnId.DispatchDays,
-    //ListingColumnId.OtherChannels
+    ListingColumnId.OtherChannels
   ],
   [ePlatform.Shopify]: [
     ListingColumnId.Image,
@@ -68,7 +68,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Markup,
     ListingColumnId.Stock,
     ListingColumnId.CreatedOn,
-    //ListingColumnId.CreatedBy,
+    ListingColumnId.CreatedBy,
     ListingColumnId.Notes,
     ListingColumnId.MonitorPrice,
     ListingColumnId.MonitorStock,
@@ -77,7 +77,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.IgnoreRules,
     ListingColumnId.UnsoldDays,
     ListingColumnId.OutOfStockDays,
-    //ListingColumnId.OtherChannels
+    ListingColumnId.OtherChannels
   ],
   [ePlatform.Amazon]: [
     ListingColumnId.Image,
@@ -93,7 +93,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.Markup,
     ListingColumnId.Stock,
     ListingColumnId.CreatedOn,
-    //ListingColumnId.CreatedBy,
+    ListingColumnId.CreatedBy,
     ListingColumnId.Notes,
     ListingColumnId.MonitorPrice,
     ListingColumnId.MonitorStock,
@@ -102,7 +102,7 @@ export const ActiveListingsColumns = {
     ListingColumnId.IgnoreRules,
     ListingColumnId.UnsoldDays,
     ListingColumnId.OutOfStockDays,
-    //ListingColumnId.OtherChannels
+    ListingColumnId.OtherChannels
   ]
 };
 

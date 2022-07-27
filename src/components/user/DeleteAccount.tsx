@@ -3,7 +3,7 @@ import { Checkbox, Form } from 'antd';
 import { CancelBtn, ConfirmBtn } from '../../small-components/ActionBtns';
 import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHooks';
 import { getChannels } from 'src/redux/channels/channelsThunk';
-import { Channel } from 'src/redux/channels/channelsSlice';
+import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { shopLogo } from 'src/utils/shopLogo';
 import { countryFlag } from 'src/utils/countryFlag';
 import '../../sass/top-bar.scss';
@@ -18,10 +18,10 @@ interface Props {
 
 export const DeleteAccount: FC<Props> = (props: Props) => {
   const { checked, handleCancel, handleCheck, handleDelete, selectedChannelId } = props;
-  const {channels} = useAppSelector((state) => state.channels);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
   const dispatch = useAppDispatch();
 
-  const {name, isoCountry, channelId} = channels.find((c: Channel) => c.id === selectedChannelId);
+  const { name, isoCountry, channelId } = channels?.find((c: Channel) => c.id === selectedChannelId) ?? {};
 
   useEffect(() => {
     dispatch(getChannels());
