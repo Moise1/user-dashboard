@@ -1,4 +1,5 @@
 ﻿import { isString } from 'util';
+import { Channel } from '../../../redux/channels/channelsSlice';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ListingT } from './types';
 
@@ -28,6 +29,8 @@ type WithViews = { views?: number };
 type WithAsin = { asin?: string };
 type WithBuyBox = { buyBoxPrice?: string };
 type WithLowestPrice = { lowestPrice?: number, isLowestPrice?: boolean };
+type WithOtherChannels = { otherChannels: Channel[] };
+type WithCreatedBy = { createdByName: string };
 
 const CompareString = (a?: string, b?: string) => (a ?? '').localeCompare(b ?? '');
 const CompareNumber = (a?: number, b?: number) => (a ?? 0) - (b ?? 0);
@@ -74,6 +77,6 @@ export const SorterViews = (a: ListingT, b: ListingT) => CompareNumber((a as Wit
 export const SorterAsin = (a: ListingT, b: ListingT) => CompareString((a as WithAsin).asin, (b as WithAsin).asin);
 export const SorterBuyBox = (a: ListingT, b: ListingT) => CompareString((a as WithBuyBox).buyBoxPrice, (b as WithBuyBox).buyBoxPrice);
 export const SorterLowestPrice = (a: ListingT, b: ListingT) => CompareNumber((a as WithLowestPrice).isLowestPrice ? 0 : (a as WithLowestPrice).lowestPrice, (b as WithLowestPrice).isLowestPrice ? 0 : (b as WithLowestPrice).lowestPrice);
-
-
+export const SorterOtherChannels = (a: ListingT, b: ListingT) => CompareNumber((a as WithOtherChannels).otherChannels?.length ?? 0, (b as WithOtherChannels).otherChannels?.length ?? 0);
+export const SorterCreatedBy = (a: ListingT, b: ListingT) => CompareString((a as WithCreatedBy).createdByName, (b as WithCreatedBy).createdByName);
 

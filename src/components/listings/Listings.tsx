@@ -30,6 +30,7 @@ import { getComputedConfiguration } from '../../redux/source-configuration/sourc
 import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
 import { ePlatform } from '../../types/ePlatform';
 import { isString } from 'util';
+import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -53,6 +54,7 @@ export const Listings = () => {
   useEffect(() => {
     dispatch(getComputedConfiguration());
   }, [getComputedConfiguration]);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
@@ -146,6 +148,12 @@ export const Listings = () => {
         const ExtendActive = (listings: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
           if (!listings) return listings;
 
+          const channelsDic: { [id: number]: Channel } | null = channels ? {} : null;
+          if (channelsDic)
+            for (const c of channels) {
+              channelsDic[c.id] = c;
+            }
+
           for (const al of listings) {
             const l = al as ActiveListingExtended;//Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
 
@@ -182,6 +190,13 @@ export const Listings = () => {
               })();
               l.dispatchDays = l.overrides.dispatchDays ?? settings.dispatchDays;
               l.pricingRules = [];
+              if (channelsDic) {
+                l.otherChannels = [];
+                for (const o of l.otherChannelOAuthsIds ?? []) {
+                  const c = channelsDic[o];
+                  if(c) l.otherChannels.push(c);
+                }
+              }
             }
 
             //Images-------------------
