@@ -8,10 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { loadBusinessPolicies, loadShipping, refreshBusinessPolicies, } from '../../redux/channel-configuration/channels-configuration-thunk';
 import { SettingDataBag, SettingInput } from './setting-input';
 import { ReactUtils } from '../../utils/react-utils';
-import { Platforms } from '../../data/platforms';
+import { ePlatform, Platforms } from '../../data/platforms';
 import { getTemplates } from '../../redux/templates/templatesThunk';
 import { TemplateState } from '../../redux/templates/templatesSlice';
-import { ePlatform } from '../../types/ePlatform';
 import { SettingData, SettingExtra, SettingInfo, SettingKey, SettingSectionId, SettingSectionsInfo, SettingValue } from '../../types/settings';
 import { ChannelConfigurationState } from '../../redux/channel-configuration/channels-configuration-slice';
 

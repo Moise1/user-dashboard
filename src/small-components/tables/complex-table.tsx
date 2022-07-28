@@ -12,7 +12,7 @@ import {
   UITablePreferenceL
 } from '../../redux/ui-preferences/ui-preferences-state-slice';
 import { getPreferences, savePreferences } from '../../redux/ui-preferences/ui-preferences-state-thunk';
-import { t } from '../../utils/transShim';
+import { t, TTag } from '../../utils/transShim';
 import { TableActionBtns } from '../TableActionBtns';
 import { DataTable } from './data-table';
 import { SmartSearch } from './filter-data';
@@ -231,7 +231,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
           handleShowColumns={OpenVisibleColumnsPopup}
           handleSideDrawer={() => ({})}
         >
-          {t('Table.AdvancedSearch')}
+          <TTag lKey='Table.AdvancedSearch' />
         </TableActionBtns>
       </div>
 

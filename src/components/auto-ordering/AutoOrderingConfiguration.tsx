@@ -12,8 +12,8 @@ import { Links } from '../../links';
 // import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
 import { getSources } from 'src/redux/sources/sourcesThunk';
 import { Source } from 'src/redux/sources/sourceSlice';
-import { eCountry } from '../../types/eCountry';
 import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
+import { eCountry } from '../../data/countries';
 
 export const AutoOrderingConfiguration = () => {
 
