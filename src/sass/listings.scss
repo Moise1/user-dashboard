@@ -30,143 +30,156 @@
     .outStockIcon {
         color: #D75A4A;
     }
-}
+    // Extra large screens
 
-
-
-
-// Extra large screens
-
-.actions-dropdown {
-  margin-left: 1rem;
-  margin-top: -0.5rem;
-};
-
-
-.action-option {
-  color: $black;
-  cursor: pointer;
-}
-.listings-container {
-  .status-bar {
-    margin-top: $spacer;
-  }
-}
-
-
-
-.listings-card {
-  .listings-cols {
-    display: flex !important;
-    justify-content: space-between;
-    height: auto;
-    .cols-list {
-      list-style: none;
-      -moz-column-count: 2;
-      -moz-column-gap: 5rem;
-      -webkit-column-count: 2;
-      -webkit-column-gap: 5rem;
-      column-count: 2;
-      column-gap: 5rem;
-      li {
-        margin-bottom: 0.5rem;
-      }
+    .actions-dropdown {
+        margin-left: 1rem;
+        margin-top: -0.5rem;
     }
 
-    .cols-amount {
-      display: block;
-      p,
-      h3 {
-        text-align: center;
-        color: $corporative-color;
-      }
-    }
-  }
-  .show-columns-action-btns {
-    display: flex;
-    justify-content: flex-end;
-    & > * {
-      margin-left: 1rem;
-    }
-  }
-}
-
-.cols-display-title,
-.description {
-  color: $corporative-color;
-  text-align: center;
-}
-
-.table-info {
-  display: flex;
-  background: $primary-bg;
-  margin-top: 1rem;
-  padding: 1rem;
-  .selected-options {
-    margin-left: 2rem;
-    .total-selected {
-      color: $corporative-color;
-    }
-    .list {
-      list-style-type: none;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      background: $secondary-bg;
-      padding: 0.2rem 2rem;
-      border-radius: 16px;
-      .horizontal-divider {
-        display: none;
-      }
-      .list-item {
-        margin-left: 0.9rem;
+    .action-option {
+        color: $black;
         cursor: pointer;
+    }
+
+    .listings-container {
+        .status-bar {
+            margin-top: $spacer;
+        }
+    }
+
+
+
+    .listings-card {
+        .listings-cols {
+            display: flex !important;
+            justify-content: space-between;
+            height: auto;
+
+            .cols-list {
+                list-style: none;
+                -moz-column-count: 2;
+                -moz-column-gap: 5rem;
+                -webkit-column-count: 2;
+                -webkit-column-gap: 5rem;
+                column-count: 2;
+                column-gap: 5rem;
+
+                li {
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            .cols-amount {
+                display: block;
+
+                p,
+                h3 {
+                    text-align: center;
+                    color: $corporative-color;
+                }
+            }
+        }
+
+        .show-columns-action-btns {
+            display: flex;
+            justify-content: flex-end;
+
+            & > * {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .cols-display-title,
+    .description {
         color: $corporative-color;
-        &:nth-last-child(-n + 2):before {
-          content: '|';
-          margin-right: 0.2rem;
-        }
-      }
+        text-align: center;
     }
-  }
 
-  .total-items {
-    margin-left: auto;
-  }
+    .table-info {
+        display: flex;
+        background: $primary-bg;
+        margin-top: 1rem;
+        padding: 1rem;
+
+        .selected-options {
+            margin-left: 2rem;
+
+            .total-selected {
+                color: $corporative-color;
+            }
+
+            .list {
+                list-style-type: none;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                background: $secondary-bg;
+                padding: 0.2rem 2rem;
+                border-radius: 16px;
+
+                .horizontal-divider {
+                    display: none;
+                }
+
+                .list-item {
+                    margin-left: 0.9rem;
+                    cursor: pointer;
+                    color: $corporative-color;
+
+                    &:nth-last-child(-n + 2):before {
+                        content: '|';
+                        margin-right: 0.2rem;
+                    }
+                }
+            }
+        }
+
+        .total-items {
+            margin-left: auto;
+        }
+    }
+    // Phone and tablets screen size.
+    @media only screen and (max-width: 750px) {
+        .advanced-search-btn span,
+        .view-columns-btn span {
+            display: none !important;
+        }
+
+        .total-selected {
+            display: none;
+        }
+
+        .table-info {
+            place-items: center;
+        }
+
+        .selected-options {
+            width: 100%;
+            margin: 0 !important;
+
+            .list {
+                place-items: center;
+                justify-content: space-between !important;
+
+                .list-item {
+                    &:nth-last-child(-n + 2):before {
+                        content: '' !important;
+                    }
+                }
+
+                .horizontal-divider {
+                    display: block !important;
+                    width: 4vw;
+                    margin-bottom: 0.3rem;
+                    border-top: 1px solid $primary-txt;
+                }
+            }
+        }
+    }
 }
 
-// Phone and tablets screen size.
-@media only screen and (max-width: 750px) {
-  .advanced-search-btn span,
-  .view-columns-btn span {
-    display: none !important;
-  }
 
-  .total-selected {
-    display: none;
-  }
-  .table-info {
-    place-items: center;
-  }
-  .selected-options {
-    width: 100%;
-    margin: 0 !important;
-    .list {
-      place-items: center;
-      justify-content: space-between !important;
-      .list-item {
-        &:nth-last-child(-n + 2):before {
-          content: '' !important;
-        }
-      }
 
-      .horizontal-divider {
-        display: block !important;
-        width: 4vw;
-        margin-bottom: 0.3rem;
-        border-top: 1px solid $primary-txt;
-      }
-    }
-  }
-}

@@ -6,6 +6,32 @@ export interface AffiliatesStats {
   id: number;
 }
 
+export interface AffiliatesDashboardStats {
+  affiliatesDashboard: AffiliatesDashboardStats[];
+  loading: boolean;
+  catalogTokensCommission: string;
+  catalogTokensCount: string;
+  noApiServerCommission: string;
+  noApiServerCount: string;
+  percentageCatalog: string;
+  percentageConversion: string;
+  percentageLinked: string;
+  percentageListed: string;
+  percentageNoApiServer: string;
+  percentageReferral: string;
+  percentageWeListForYou: string;
+  referralsLinked: string;
+  referralsListed: string;
+  revenueBySignup: string;
+  totalCommission: string;
+  totalReferralsCommission: string;
+  totalReferralsCount: string;
+  totalSignups: string;
+  totalSignupsThisMonth: string;
+  weListForYouCommission: string;
+  weListForYouCount: string;
+}
+
 const initialState = {
   affiliatesStats: [] as AffiliatesStats[],
   loading: false,
@@ -13,7 +39,7 @@ const initialState = {
 };
 
 const initialsState = {
-  affiliatesDashboard: [] as unknown[],
+  affiliatesDashboard: [] as AffiliatesDashboardStats[],
   loading: false,
   error: ''
 };

@@ -160,9 +160,12 @@ export const Catalog = () => {
     setPublishNow(newDate);
   };
 
-  const listTheProducts = () => {
+  const listTheProducts = async () => {
     setChangeState(true);
-    dispatch(listProducts({ products, needsReview, optimizeTitle }));
+    const rs = await dispatch(listProducts({ products, needsReview, optimizeTitle }));
+    if (rs) {
+      listProductsModal;
+    }
   };
 
   useEffect(() => {

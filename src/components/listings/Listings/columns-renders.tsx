@@ -1,11 +1,13 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
-import { t } from '../../../utils/transShim';
+import { t, TTag } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
 import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
-import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined, DownOutlined } from '@ant-design/icons';
 import { ReactUtils } from '../../../utils/react-utils';
+import { HGRUtils } from '../../../utils/hgr-utils';
+import { Dropdown, Menu } from 'antd';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -44,6 +46,32 @@ export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
     }
     return <a target='_blank' rel='noreferrer' href={ApiURL + '/api/Sources/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id + '&isoCountry=' + row.channel.isoCountry}>{channelItem}</a>;
   }
+};
+
+export const RenderAmazonSku = (channelItem: string, rowR: ListingT) => {
+  if (channelItem == null) return '';
+
+  const { channel, asin } = rowR as { channel: Channel, asin: string };
+
+  const url = (() => {
+    const infoChannel = Platforms[channel.channelId];
+    if (infoChannel && infoChannel.itemUrl) {
+      const baseUrl = (infoChannel.internalUrl instanceof Object) ? infoChannel.internalUrl[channel.isoCountry] : infoChannel.internalUrl;
+
+      return baseUrl
+        .replace('{asin}', asin ?? '')
+        .replace('{sku}', channelItem)
+        .replace('{shopName}', channel.channelIdentifier);
+    } else {
+      return '';
+    }
+  })();
+
+  return (
+    <a href={url} target="_blank" rel='noreferrer' >
+      {channelItem}
+    </a>
+  );
 };
 
 export const RenderSource = (path: string, rowR: ListingT) => {
@@ -112,8 +140,126 @@ export const RenderDate = (date: string | Date | undefined) => {
 };
 
 export const RenderBoolean = (value: boolean | undefined) => {
-  if (value) {
-    return <CheckOutlined className="icon" />;
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {value && <CheckOutlined className="icon" />}
+      {!value && <CloseOutlined className="icon" />}
+    </div>
+  );
+};
+
+export const RenderPercentage = (value: number | undefined) => {
+  if (value == null)
+    return '';
+  return value + '%';
+};
+
+export const RenderMonitorPriceDecreasePercentage = (value: number | undefined) => {
+  if (value == null)
+    return '';
+  if (value == 0)
+    return <div style={{ textAlign: 'center' }}>{t('Listings.Value.Always')}</div>;
+  return <div style={{ textAlign: 'center' }}>{value + '%'}</div>;
+};
+
+export type FnOnSetPrice = (row: ListingT, newPrice: number) => void;
+export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: number | undefined, rowR: ListingT) => {
+  const { isLowestPrice, channelPrice, asin , sourcePrice, sourceId, ignoreRules, pricingRules  } = rowR as ActiveListingExtended;
+
+  const RenderIsLowestPrice = () => {
+    return (
+      <div className="bestPrice">
+        <a
+          href={'https://www.amazon.co.uk/gp/offer-listing/' + asin}
+          target="_blank"
+          rel='noreferrer'
+          onClick={ReactUtils.OnClickNoPropagate}
+        >
+          <span className="glyphicon glyphicon-ok"></span>
+          <TTag lKey='Listings.Value.Lowest' />
+        </a>
+      </div>
+    );
+  };
+  
+  const SetPrice = (newPrice: number) => {
+    if (newPrice && onSetPrice) {
+      onSetPrice(rowR, newPrice);
+    }
+  };
+
+  const BeatPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    SetPrice((lowestPrice ?? channelPrice) - 0.01);
+  };
+
+  const MatchPrice = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    SetPrice(lowestPrice ?? channelPrice);
+  };
+
+  const RenderDropDown = () => {
+    let hasRules = false;
+    if (sourcePrice && sourceId && !ignoreRules) {
+      hasRules = HGRUtils.GetMarkupFromPricingRules(sourcePrice, pricingRules) != null;
+    }
+
+    const menu = (<Menu
+      items={[
+        {
+          key: '1',
+          label: (
+            <a href="#" onClick={(e) => BeatPrice(e)}>
+              {hasRules ? <TTag lKey='Listings.Value.BeatIgnoreRules' /> : <TTag lKey='istings.Value.Beat' />}
+            </a>
+          )
+        },
+        {
+          key: '2',
+          label: (
+            <a href="#" onClick={(e) => MatchPrice(e)}>
+              {hasRules ? <TTag lKey='Listings.Value.MatchIgnoreRules' /> : <TTag lKey='Listings.Value.Match' />}
+            </a>
+          )
+        }
+      ]}
+    />);
+
+    return (
+      <Dropdown arrow overlay={menu}>
+        <span>
+          {' '}
+          <DownOutlined />
+        </span>
+      </Dropdown>
+    );
+  };
+
+  const RenderIsNotLowestPrice = () => {
+    return (
+      <div className="bestPrice">
+        <a
+          href={
+            'https://www.amazon.co.uk/gp/offer-listing/' + asin + '?ref=myi_lowprice_offer'
+          }
+          target="_blank"
+          rel='noreferrer'
+          onClick={ReactUtils.OnClickNoPropagate}
+        >
+          {lowestPrice}
+        </a>
+        {RenderDropDown()}
+      </div>
+    );
+  };
+
+  if (isLowestPrice || (channelPrice ?? 0) <= (lowestPrice ?? -1)) {
+    return RenderIsLowestPrice();
+  } else if (lowestPrice) {
+    return RenderIsNotLowestPrice();
+  } else {
+    return '-';
   }
-  return <CloseOutlined className="icon" />;
 };

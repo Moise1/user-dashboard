@@ -16,19 +16,19 @@
   }
 }
 
-.listings.advanced-form-container, .catalog.advanced-form-container{
+.listings.advanced-form-container,
+.catalog.advanced-form-container {
   margin: 1rem 2rem;
-};
+}
 
 .advanced-search-form {
   height: auto;
-  [title="Min source price"],
-  [title="Max source price"],
-  [title="Min Profit"], 
-  [title="Max Profit"],
-  [title="Title"], 
-  [title="Order By"]
-  {
+  [title='Min source price'],
+  [title='Max source price'],
+  [title='Min Profit'],
+  [title='Max Profit'],
+  [title='Title'],
+  [title='Order By'] {
     font-weight: $bold;
   }
   .catalog-filters-inputs,
