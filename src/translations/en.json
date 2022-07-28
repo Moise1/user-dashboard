@@ -171,6 +171,7 @@
   "Listings.Column.Variation": "Variation",
   "Listings.Column.Views": "Views",
   "Listings.Column.Watchers": "Watchers",
+  "Listings.Column.OtherChannels": "Also on",
   "Listings.Column.OutOfStockDays": "Out of Stock Days",
   "Listings.Column.UnsoldDays": "Unsold days",
   "Listings.Value.Always": "Always",
@@ -315,6 +316,11 @@
   "AutoOrderingConfiguration.Free": "Free",
   "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
+  "AutoOrderingConfiguration.Enable/DisableAuto-ordering": "Enable/Disable Auto-ordering",
+  "AutoOrderingConfiguration.Markasshippedonyourstore":"Mark as shipped on your store",
+  "AutoOrderingConfiguration.Settrackingnumber":"Set tracking number",
+  "AutoOrderingConfiguration.AccountConfiguration":"Account Configuration",
+
 
   "Table.ShowColumns": "Show Columns",
   "Table.AdvancedSearch": "Advanced Search",

@@ -4,6 +4,10 @@ import { ActiveListing, PendingListing, TerminatedListings } from './listingsSli
 import unmap, { compArray } from './unmap';
 
 export type ListingImageUrlList = { id: number, url: string }[];
+export type ProductSourceChannelOauthId = {
+  channelOauthId: number;
+  productSourecIds: number[];
+};
 
 const loadActiveImagesFromCache = () => {
   const imgS = localStorage.getItem('listings.active.images');
@@ -29,7 +33,7 @@ export const getActiveListings = createAsyncThunk(
       }
 
       return {
-        listings: rv, images: loadActiveImagesFromCache()
+        listings: rv, images: loadActiveImagesFromCache(), others: res.data.response_data?.otherPsId as ProductSourceChannelOauthId[]
       };
     } catch (error) {
       return rejectWithValue('Sorry! Something went wrong!!! ):');

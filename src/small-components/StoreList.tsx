@@ -2,7 +2,7 @@ import { ReactNode, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { t } from '../utils/transShim';
 import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
-import { Channel } from 'src/redux/channels/channelsSlice';
+import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
 import { shopLogo } from '../utils/shopLogo';
 import { countryFlag } from '../utils/countryFlag';
@@ -11,7 +11,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
-  const { channels }: {channels:Channel[]} = useAppSelector((state) => state.channels);
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels as ChannelsState);
   const { channelId, setChannelId } = useContext(AppContext);
 
   if (channels.length > 0 && !channels.find(x => x.id == channelId)) {

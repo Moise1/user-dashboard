@@ -16,6 +16,7 @@ export interface AutoOrderingData {
 
 const autoOrderingIntialState = {
   configureStore: <unknown>{},
+  suppliers:<AutoOrderingData>[],
   loading: false,
   error: ''
 };
@@ -51,7 +52,7 @@ export const getAutoOrderingSlice = createSlice({
     });
     builder.addCase(getAutoOrdering.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.configureStore = payload;
+      state.suppliers = payload;
     });
     builder.addCase(getAutoOrdering.rejected, (state, { payload }) => {
       state.loading = false;

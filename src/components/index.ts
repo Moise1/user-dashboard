@@ -6,7 +6,7 @@ export { Sidebar } from './sidebar/Sidebar';
 export { Orders } from './orders/Orders';
 export { Listings } from './listings/Listings';
 export { Services } from './services/Services';
-export { AllServices } from './services/AllServices';
+export { SingleService } from './services/SingleService';
 export { Subscriptions } from './subscriptions/Subscriptions';
 export { PricingRules } from './pricing-rules/PricingRules';
 export { BrowserExtensions } from './browser-extensions/BrowserExtensions';

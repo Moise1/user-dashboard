@@ -1,12 +1,10 @@
-import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { eCountry } from '../types/eCountry';
+import { ReactUtils } from './react-utils';
 
 export const getCurrency = () => {
-  const channelId = localStorage.getItem('channelId');
-  const { channels } = useAppSelector((state) => state.channels);
-  const channel = channels?.filter((x: { id: number }) => x.id as unknown as string == channelId);
+  const selectedChannel = ReactUtils.GetSelectedChannel();
 
-  switch (channel[0].isoCountry) {
+  switch (selectedChannel?.isoCountry) {
     case eCountry.US:
       return '\u0024';
     case eCountry.UK:
