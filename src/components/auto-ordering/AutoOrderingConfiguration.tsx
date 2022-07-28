@@ -3,18 +3,24 @@ import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
 import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
-import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 //import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice'; //Inconsistent use of types
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { Links } from '../../links';
+// import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
+import { getSources } from 'src/redux/sources/sourcesThunk';
+import { Source } from 'src/redux/sources/sourceSlice';
+import { eCountry } from '../../types/eCountry';
+import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
 
 export const AutoOrderingConfiguration = () => {
+
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.getAutoOrdering);
+  const { loading, suppliers } = useAppSelector((state) => state.getAutoOrdering);
+  const { sources } = useAppSelector((state) => state.sources);
   const [selectedRowKeys, setSelectedRowKeys] = useState<DataTableKey[]>([]);
   const [selectedRecord, setSelectedRecord] = useState({});
 
@@ -35,182 +41,86 @@ export const AutoOrderingConfiguration = () => {
 
   useEffect(() => {
     dispatch(getAutoOrdering());
+    dispatch(getSources());
   }, []);
 
-  type dataA = {
-    id: number,
-    name: string,
-    url: string,
-    isoCountry: eCountry,
-    fee: number,
-    enabled: boolean
-  }
+  const channelId = localStorage.getItem('channelId');
+  const { channels } = useAppSelector((state) => state.channels);
+  const channel = channels?.filter((x: { id: number }) => x.id as unknown as string == channelId);
 
-  const dataSource: dataA[] = [
-    {
-      id: 1,
-      name: 'Amazon',
-      url: 'www.amazon.co.uk',
-      isoCountry: eCountry.UK,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 30,
-      name: 'Amazon',
-      url: 'www.amazon.com',
-      isoCountry: eCountry.US,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 140,
-      name: 'Amazon',
-      url: 'www.amazon.com.au',
-      isoCountry: eCountry.AU,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 141,
-      name: 'Amazon',
-      url: 'www.amazon.de',
-      isoCountry: eCountry.DE,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 3,
-      name: 'Costco',
-      url: 'www.costco.co.uk',
-      isoCountry: eCountry.UK,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 78,
-      name: 'Costco',
-      url: 'www.costco.com',
-      isoCountry: eCountry.US,
-      fee: 1,
-      enabled: true
-    },
-    {
-      id: 10,
-      name: 'Robert Dyas',
-      url: 'www.robertdyas.co.uk',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 5,
-      name: 'UK Banggood',
-      url: 'uk.banggood.com',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 56,
-      name: 'US Banggood',
-      url: 'us.banggood.com',
-      isoCountry: eCountry.US,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 57,
-      name: 'Banggood Com',
-      url: 'www.banggood.com',
-      isoCountry: eCountry.US,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 70,
-      name: 'Banggood Com',
-      url: 'www.banggood.com',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 59,
-      name: 'Costway',
-      url: 'www.costway.co.uk',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 31,
-      name: 'Walmart',
-      url: 'www.walmart.com',
-      isoCountry: eCountry.US,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 221,
-      name: 'SaleYee',
-      url: 'www.saleyee.com',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 222,
-      name: 'SaleYee',
-      url: 'www.saleyee.com',
-      isoCountry: eCountry.US,
-      fee: 0,
-      enabled: true
-    },
-    {
-      id: 185,
-      name: 'Dropship Traders',
-      url: 'www.dropship-traders.co.uk',
-      isoCountry: eCountry.UK,
-      fee: 0,
-      enabled: false
-    }
-  ];
+  let newSources: Source[] = [];
+  const sourcesChannel = () => {
+    return newSources = sources.map((s: Source) => {
+      if (s.site === eCountry[channel[0]?.isoCountry] && s.hasAutoOrder === true) {
+        return s;
+      }
+    });
+  };
 
-  console.log(selectedRecord);
-  //To not show the duplicated suppliers and to sort autoOrders data alphabetically
-  const uniqueData = Array.from(dataSource.reduce((map, obj) => map.set(obj.name, obj), new Map()).values()) as dataA[];
-  uniqueData.sort((a, b) => a.name.localeCompare(b.name));
+  sourcesChannel();
+
+  const emptySource: Source[] = [];
+
+  console.log('The selectedRecord', selectedRecord);
+  console.log('The supplier', suppliers);
+
+  // To not show the duplicated suppliers and to sort autoOrders data alphabetically
+  // const uniqueData = Array.from(newSources.reduce((map:Source, obj:Source) => map.set(obj.id, obj), new Map()).values()) as Source[];
+
+  let uniqueElements: Source[] = [];
+
+  uniqueElements = newSources.filter((v, i, a) => a.indexOf(v) === i);
+  console.log('The uniqueElements', uniqueElements);
+
+  newSources.sort((a, b) => a.name.localeCompare(b.name));
+  console.log('New sources after sort', newSources);
+
+  const [newSourcez, setNewSourcez] = useState<unknown>('Enabled');
+  const getStatus = (id: number) => {
+    return suppliers.map((x: AutoOrderingData) => {
+      console.log('The sourceId, supplierId', id, x.id);
+      if (x.sourceId === id) {
+        setNewSourcez('Enabled');
+      }
+      else {
+        setNewSourcez('');
+      }
+    });
+  };
+  console.log('first', newSourcez, emptySource);
 
   const tableColumns = [
     {
       title: t('AutoOrderingConfiguration.Supplier'),
-      dataIndex: 'name',
-      key: 'name'
+      dataIndex: '',
+      key: 'name',
+      render: (render: Source) => (
+        <p className="fs-14">{render.name}</p>
+      )
     },
     {
       title: t('AutoOrderingConfiguration.Free'),
       dataIndex: '',
       key: 'free',
-      render: (render: dataA) => (
-        <p className="fs-14">{render.fee === 0 ? <CheckOutlined className="free-icon" /> : ' '}</p>
+      render: (render: Source) => (
+        <p className="fs-14">{render.autoOrderingFee === 0 || render.autoOrderingFee === null ? <CheckOutlined className="free-icon" /> : ' '}</p>
       )
     },
     {
       title: t('AutoOrderingConfiguration.FeePercentage'),
       dataIndex: '',
       key: 'feepercentage',
-      render: (render: dataA) => <p className="fs-14">{render.fee === 1 ? `${render.fee}%` : ' '} </p>
+      render: (render: Source) => <p className='fs-14'>
+        {render.autoOrderingFee === 1 ? ` ${render.autoOrderingFee}%` : ''}
+      </p>
     },
     {
       title: t('AutoOrderingConfiguration.Status'),
       dataIndex: '',
-      key: 'status',
-      render: (render: dataA) => (
-        <span className={render.enabled === true ? 'enableBtn' : 'disableBtn'}>
-          {render.enabled === true ? 'Enabled' : 'Disabled'}
-        </span>
-      )
+      key: '',
+      render: (render: Source) => <p className='fs-14'>
+        {getStatus(render.id)}  {newSourcez == 'Enabled' && newSourcez}
+      </p>
     }
   ];
 
@@ -222,10 +132,11 @@ export const AutoOrderingConfiguration = () => {
         <>
           <div className="sources-table-container">
             <DataTable
+              currentPage={1}
               page="autoordering"
               columns={tableColumns}
-              dataSource={uniqueData}
-              totalItems={uniqueData?.length}
+              dataSource={newSources}
+              totalItems={newSources?.length}
               rowClassName="table-row"
               rowSelection={rowSelection}
               onRow={(record) => {

@@ -39,7 +39,7 @@ export const ConfigureListingService = () => {
   const SourceLabel = (c: Source) => {
     return (
       <>
-        {showFlags && countryFlag(eCountry[c.site])}
+        {showFlags && countryFlag(eCountry[(c.site as unknown as number)])}
         {c.name}
       </>
     );

@@ -292,6 +292,11 @@
   "AutoOrderingConfiguration.Free": "Free",
   "AutoOrderingConfiguration.FeePercentage": "%Fee",
   "AutoOrderingConfiguration.Status": "Status",
+  "AutoOrderingConfiguration.Enable/DisableAuto-ordering": "Enable/Disable Auto-ordering",
+  "AutoOrderingConfiguration.Markasshippedonyourstore":"Mark as shipped on your store",
+  "AutoOrderingConfiguration.Settrackingnumber":"Set tracking number",
+  "AutoOrderingConfiguration.AccountConfiguration":"Account Configuration",
+
 
   "Table.ShowColumns": "Show Columns",
   "Table.AdvancedSearch": "Advanced Search",
