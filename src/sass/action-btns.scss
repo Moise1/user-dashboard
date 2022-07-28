@@ -5,6 +5,7 @@
   display: grid;
   row-gap: 1rem;
   height: 25vh;
+  cursor:pointer;
 }
 
 // buttons' containers.
@@ -38,7 +39,8 @@
 .cancel-btn,
 .danger-btn,
 .delete-btn,
-.warning-btn {
+.warning-btn
+{
   @include action-btn;
 }
 
@@ -52,7 +54,7 @@
   }
 }
 .redirection-link {
-  min-width: 170px;
+    min-width: 170px;
 }
 .showVisibleCol-btn {
   border-radius: 8% !important;

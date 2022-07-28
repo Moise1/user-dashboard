@@ -5,9 +5,9 @@ import { useAppSelector } from '../custom-hooks/reduxCustomHooks';
 import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { AppContext } from '../contexts/AppContext';
 import { shopLogo } from '../utils/shopLogo';
-import { countryFlag } from '../utils/countryFlag';
 import { Selector, SelectorData, SelectorValue } from './form/selector';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Countries } from '../data/countries';
 
 export const StoreList = () => {
   const [showFlags] = useState<boolean>(true);
@@ -22,7 +22,7 @@ export const StoreList = () => {
   const CreateLabel = (c: Channel) => {
     return <>
       {showFlags && shopLogo(c.channelId)}
-      {showFlags && countryFlag(c.isoCountry)}
+      {showFlags && Countries[c.isoCountry].Flag}
       {c.name}
     </>;
   };

@@ -14,7 +14,6 @@ import { getChannelConfiguration, loadBusinessPolicies, loadShipping } from '../
 import { ColumnChannelAncestor, Columns, ColumnStyle } from '../configuration/columns';
 import { t } from '../../../utils/transShim';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { ePlatform } from '../../../types/ePlatform';
 import { getTemplates } from '../../../redux/templates/templatesThunk';
 import { TemplateState } from '../../../redux/templates/templatesSlice';
 import { SimpleTable } from '../../../small-components/tables/simple-table';
@@ -22,6 +21,7 @@ import { useHistory } from 'react-router';
 import { ChannelSettingKey, SettingValue } from '../../../types/settings';
 import { Links } from '../../../links';
 import { SourceSettingData } from '../../../redux/source-configuration/types';
+import { ePlatform } from '../../../data/platforms';
 
 type SourceTableData = { name: string, id: number, [key: number]: SettingValue };
 

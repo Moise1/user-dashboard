@@ -1,4 +1,4 @@
-﻿import { Platforms } from '../../../data/platforms';
+﻿import { ePlatform, Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
 import { TTag } from '../../../utils/transShim';
 import { url as ApiURL } from '../../../redux/client';
@@ -6,9 +6,13 @@ import { Source } from '../../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './types';
 import { CloseCircleFilled, CheckCircleFilled, ApiFilled, CheckOutlined, CloseOutlined, DownOutlined } from '@ant-design/icons';
 import { ReactUtils } from '../../../utils/react-utils';
-import { HGRUtils } from '../../../utils/hgr-utils';
 import { Dropdown, Menu } from 'antd';
 import { shopLogo } from '../../../utils/shopLogo';
+import { eChannelListingStatus } from '../../../redux/listings/listingsSlice';
+import { ListingsUtils } from '../../../utils/listings-utils';
+
+import { ErrorComponent } from './components/error';
+import { eCountry } from '../../../data/countries';
 
 export const RenderChannelItem = (channelItem: string, rowR: ListingT) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
@@ -204,7 +208,7 @@ export const RenderLowestPrice = (onSetPrice: FnOnSetPrice) => (lowestPrice: num
   const RenderDropDown = () => {
     let hasRules = false;
     if (sourcePrice && sourceId && !ignoreRules) {
-      hasRules = HGRUtils.GetMarkupFromPricingRules(sourcePrice, pricingRules) != null;
+      hasRules = ListingsUtils.GetMarkupFromPricingRules(sourcePrice, pricingRules) != null;
     }
 
     const menu = (<Menu
@@ -272,4 +276,20 @@ export const RenderOtherChannels = (otherChannels: Channel[]) => {
   return <>
     {otherChannels.map(cs => shopLogo(cs.channelId, cs.name))}
   </>;
+};
+
+export const RenderPendingStatus = (status: eChannelListingStatus, listing: ListingT) => {
+  return ListingsUtils.StatusToUI(status, listing.channel?.channelId ?? ePlatform.eBay);
+};
+
+export const RenderError = (error: string, listing: ListingT) => {
+  if (!error)
+    return <></>;
+
+  return <ErrorComponent
+    errrorMessage={error}
+    channelId={listing.channel?.channelId ?? ePlatform.eBay}
+    country={listing.channel?.isoCountry ?? eCountry.UK}
+    errorSourceInfo={''}
+  />;
 };

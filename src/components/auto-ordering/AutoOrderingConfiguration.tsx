@@ -3,13 +3,12 @@ import { Layout, Spin } from 'antd';
 import { t } from '../../utils/transShim';
 import '../../sass/popover.scss';
 import { useHistory } from 'react-router';
-import { eCountry } from '../../types/eCountry';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-//import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice'; //Inconsistent use of types
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { Links } from '../../links';
+import { eCountry } from '../../data/countries';
 
 export const AutoOrderingConfiguration = () => {
   const history = useHistory();

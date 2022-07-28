@@ -14,7 +14,6 @@ import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
 import { deleteChannel, getChannels } from '../../redux/channels/channelsThunk';
 import { getSales } from '../../redux/sales/salesThunk';
-import { countryFlag } from '../../utils/countryFlag';
 import { shopLogo } from '../../utils/shopLogo';
 import { Sale, ePeriod } from 'src/redux/sales/salesSlice';
 import { getNoApiServers } from 'src/redux/dashboard/noApiServersThunk';
@@ -34,9 +33,10 @@ import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
 import Modal from 'antd/es/modal/Modal';
-import { getCurrency } from '../../utils/getCurrency';
 import { Links } from '../../links';
 import { DatePicker } from '../../small-components/date-picker';
+import { Countries } from '../../data/countries';
+import { ReactUtils } from '../../utils/react-utils';
 
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
@@ -125,7 +125,7 @@ export const Dashboard = () => {
       render: (record: Channel) => (
         <>
           {shopLogo(record.channelId)}
-          {countryFlag(record.isoCountry)}
+          {Countries[record.isoCountry].Flag}
           {record.name}
         </>
       )
@@ -612,7 +612,7 @@ export const Dashboard = () => {
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
               <h2>
-                {getCurrency()}
+                {ReactUtils.GetCurrencySymbol()}
                 {totalProfit ? totalProfit.toLocaleString({ maximumFractionDigits: 0 }) : '0'}
               </h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" />

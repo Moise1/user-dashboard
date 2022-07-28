@@ -13,7 +13,7 @@ export type ActiveListing = {
   channelPrice: number;
   title: string;
   createdOn: Date;
-  status: number;
+  status: eChannelListingStatus;
   productSourceId: number;
   lastTimeInStock: Date;
   sourceQuantity: number;
@@ -65,17 +65,22 @@ export enum eChannelListingOrigin {
 
 export type PendingListing = {
   id: number;
-  categoryId: number;
   channelOAuthId: number;
-  createdById: number;
-  createdByName: string;
+  channelItem: string;
   createdOn: Date;
+  status: eChannelListingStatus;
+  title: string
+  createdById: number;
+  verifiedOn: Date;
+  createdByName: string;
+  errorMessage: string;
+  categoryId: number;
   imageUrl: string;
+  categoryName: string;
   path: string;
   sourceId: number;
-  status: number;
-  title: string;
-  pending: boolean;
+  dontListUntil: Date;
+  //Calculated in client
   channelListingId: number;
 }
 
@@ -204,6 +209,10 @@ export const listingsSlice = createSlice({
     builder.addCase(getPendingListings.fulfilled, (state, { payload }) => {
       state.loadingPending = false;
       state.pendingListings = payload;
+
+      for (const l of state.pendingListings) {
+        l.channelListingId = l.id;
+      }
     });
     builder.addCase(getPendingListings.rejected, (state) => {
       state.loadingPending = false;
