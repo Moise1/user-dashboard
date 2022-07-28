@@ -50,6 +50,7 @@ export const Dashboard = () => {
   const { sales } = useAppSelector((state) => state.sales);
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
+  const [percentageCommission, setPercentageCommission] = useState<number>(10);
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
@@ -87,6 +88,7 @@ export const Dashboard = () => {
         const affiliateRes = await client.get('/Dashboard/Affiliate');
         setProductQuota(quotaRes.data.response_data);
         setAffiliate(affiliateRes.data.response_data.affiliate);
+        setPercentageCommission(affiliateRes.data.response_data.percentageCommission);
       } catch (error) {
         if (error) console.log('Product quota data failed to load');
       }
@@ -159,7 +161,7 @@ export const Dashboard = () => {
     }, 1000);
   };
 
-  
+
   const salesDateChange = async (value: number, dateString: [string, string]) => {
     if (Array.isArray(dateString)) {
       await dispatch(
@@ -771,7 +773,7 @@ export const Dashboard = () => {
               </CopyToClipboard>
             </div>
             <h4>
-              <strong>Affiliate percentage: 10%</strong>
+              <strong>Affiliate percentage: {percentageCommission}%</strong>
             </h4>
             <Link to={Links.AffiliateDashboard}>
               <ConfirmBtn>Affiliate dashboard</ConfirmBtn>
