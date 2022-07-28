@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import '../../sass/tables/data-table.scss';
-import { ColumnType, TableRowSelection } from 'antd/lib/table/interface';
+import { ColumnType, TableRowSelection } from 'antd/es/table/interface';
 import { SimpleTable } from './simple-table';
 
 export type DataTableKey = React.Key;

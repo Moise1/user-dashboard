@@ -1,6 +1,6 @@
 import { createRef, useState, useEffect, useMemo } from 'react';
 import { Card, Divider, Carousel, Button, Space, Layout, Spin } from 'antd';
-import { CarouselRef } from 'antd/lib/carousel';
+import { CarouselRef } from 'antd/es/carousel';
 import { StatusBar } from '../../small-components/StatusBar';
 import { TransparentBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { getUserQuota } from 'src/redux/user/userThunk';
 
 export const Subscriptions = () => {
+
   const [slides, setSlides] = useState<number>(3);
   const [activeCurrency, setActiveCurrency] = useState<number>(1);
   const [currency, setCurrency] = useState('\u20AC');
@@ -45,8 +46,6 @@ export const Subscriptions = () => {
   }, [getUserQuota]);
 
   const { quota } = useAppSelector((state) => state.user);
-
-  console.log(quota);
 
   const parentToChild = (value: number, billing: number, type: number): void => {
     localStorage.setItem('productId', value.toString());

@@ -5,6 +5,7 @@
   "PendingListings": "Productos Pendientes",
   "PendingListingsShort": "Pendientes",
   "TerminatedListings": "Productos Terminados",
+  "ImportListings": "Importar productos",
 
   "BulkListing.Name": "Publicar masivamente",
 
@@ -101,19 +102,44 @@
 
   "Error.Saving.Configuration": "Error guardando preferencias",
 
-  "Listings.Column.Img": "Imagen",
-  "Listings.Column.Id": "HGR Id",
-  "Listings.Column.Source": "Fuente",
-  "Listings.Column.Title": "Titulo",
-  "Listings.Column.Sell": "Venta",
+  "Listings.Column.Asin": "Asin",
+  "Listings.Column.BuyBox": "Caja de compra",
+  "Listings.Column.ChannelItem": "ID Producto",
   "Listings.Column.Cost": "Coste",
-  "Listings.Column.Profit": "Ganancia",
-  "Listings.Column.Markup": "Markup",
-  "Listings.Column.Stock": "Stock",
   "Listings.Column.CreatedOn": "Creado en",
   "Listings.Column.CreatedBy": "Creado por",
+  "Listings.Column.DispatchDays": "Días de envío",
+  "Listings.Column.EndingOn": "Finaliza el",
+  "Listings.Column.Id": "HGR Id",
+  "Listings.Column.IgnoreRules": "Ignorar reglas de precio",
+  "Listings.Column.Img": "Imagen",
+  "Listings.Column.Sku": "Sku",
+  "Listings.Column.LowestPrice": "Precio mas bajo",
+  "Listings.Column.Markup": "Markup",
+  "Listings.Column.MonitorPrice": "Sincronizar precio",
+  "Listings.Column.MonitorPriceDecrease": "Sincronizar bajada de precio",
+  "Listings.Column.MonitorPriceDecreasePercentage": "Sincronizar bajada de precio: Porcentaje",
+  "Listings.Column.MonitorStock": "Sincronizar inventario",
+  "Listings.Column.Notes": "Notas",
   "Listings.Column.Options": "Opciones",
-  "Listings.Column.ChannelItem": "ID Producto",
+  "Listings.Column.OutOfStockDays": "Días sin unidades",
+  "Listings.Column.Profit": "Ganancia",
+  "Listings.Column.Sales": "Ventas",
+  "Listings.Column.Sell": "Venta",
+  "Listings.Column.Views": "Vistas",
+  "Listings.Column.Stock": "Unidades",
+  "Listings.Column.Source": "Fuente",
+  "Listings.Column.Title": "Titulo",
+  "Listings.Column.Variation": "Variación",
+  "Listings.Column.Watchers": "Seguidores",
+  "Listings.Column.OtherChannels": "También en",
+  "Listings.Column.UnsoldDays": "Días sin vender",
+  "Listings.Value.Always": "Siempre",
+  "Listings.Value.Beat": "Batir",
+  "Listings.Value.BeatIgnoreRules": "Batir (Ignorar reglas)",
+  "Listings.Value.Match": "Igualar",
+  "Listings.Value.MatchIgnoreRules": "Igualar (Ignorar reglas)",
+  "Listings.Value.Lowest": "El mas bajo",
   "Listings.Value.UnknownSource": "Proveedor desconocido",
 
   "ListNow.Header": "Formas de publicar",
@@ -210,8 +236,5 @@
 
   "WeListForYou.Name": "Publicamos por ti",
 
-
-
   "search": "Buscar..."
-
 }

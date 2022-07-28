@@ -1,5 +1,5 @@
 import { ProcessOrderIcon, HandStopOrderIcon, TrashIcon, CheckIcon } from '../common/Icons';
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import { StatusBar } from '../../small-components/StatusBar';
 import { t } from '../../utils/transShim';
 import '../../sass/orders.scss';
@@ -8,13 +8,17 @@ import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import { processOrders } from '../../redux/orders/orderThunk';
 import { manuallyDispatch } from '../../redux/orders/orderThunk';
 import { stopOrder } from '../../redux/orders/orderThunk';
+import { AutoOrderingState, OrderStatus } from '../../utils/determineStatus';
+import { OrderData } from '../../redux/orders/orderSlice';
+
 interface props {
   channelOAuthId: number[];
   selectedOrderIds: number[];
+  orderList: OrderData[];
 }
 
 export const OrderActionBtns = (typeBtnProps: props) => {
-  const { channelOAuthId, selectedOrderIds } = typeBtnProps;
+  const { channelOAuthId, selectedOrderIds, orderList } = typeBtnProps;
   //const processDisabled  = !selectedorder || notConfigured
   //  || (!Utils.HasValue(order?.status) && order.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
   //  || (order.status != AutoOrderingState.AutoorderingDisabled
@@ -22,13 +26,23 @@ export const OrderActionBtns = (typeBtnProps: props) => {
   //    && order.status != AutoOrderingState.PermanentError
   //  );
 
-  const [disabled, setDisabled] = useState<boolean>(true);
-  useEffect(() => {
-    selectedOrderIds.length > 0 && setDisabled(false);
-    selectedOrderIds.length == 0 && setDisabled(true);
-  });
   const dispatch = useAppDispatch();
 
+  const btnProcessDisabled = orderList.map((data: OrderData) => {
+    return ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+      || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+  });
+
+  const btnDispatchDisabled = orderList.map((data: OrderData) => {
+    return ((data.status === null || data.status === undefined) && data?.storeStatus != OrderStatus.Shipped && data.storeStatus != OrderStatus.Cancelled)
+      || (data?.status != AutoOrderingState.AutoorderingDisabled && data.status != AutoOrderingState.GoingToBuyError && data.status != AutoOrderingState.PermanentError);
+  });
+
+  const cantBeStoped = orderList.map((data: OrderData) => {
+    return (data?.storeStatus == OrderStatus.Shipped || data?.storeStatus == OrderStatus.Cancelled)
+      || data?.status < AutoOrderingState.AutoorderingPrepared
+      || (data?.status > AutoOrderingState.CompletedAutoOrder && data.status != AutoOrderingState.TemporaryError);
+  });
 
   // const { orderNumber, channelId } = typeBtnProps;
 
@@ -46,28 +60,28 @@ export const OrderActionBtns = (typeBtnProps: props) => {
 
   return (
     <StatusBar>
-      <ConfirmBtn handleConfirm={handleProcessOrders} disabled={disabled}>
+      <ConfirmBtn handleConfirm={handleProcessOrders} disabled={!btnProcessDisabled.includes(false)}>
         <ProcessOrderIcon />
         <span>
           {t('OrderButtons.Process')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </ConfirmBtn>
 
-      <WarningBtn handleConfirm={handleStopOrder} disabled={disabled}>
+      <WarningBtn handleConfirm={handleStopOrder} disabled={!cantBeStoped.includes(false)}>
         <HandStopOrderIcon />
         <span>
           {t('OrderButtons.Stop')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders
         </span>
       </WarningBtn>
 
-      <DangerBtn disabled={disabled}>
+      <DangerBtn disabled={true}>
         <TrashIcon />
         <span>
           {t('OrderButtons.Delete')} {selectedOrderIds.length > 0 ? selectedOrderIds.length : ''} orders{' '}
         </span>
       </DangerBtn>
 
-      <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={disabled}>
+      <SuccessBtn handleConfirm={handleManuallyDispatch} disabled={!btnDispatchDisabled.includes(false)}>
         <CheckIcon />
         <span>{t('OrderButtons.MarkAsDispatched')}</span>
       </SuccessBtn>

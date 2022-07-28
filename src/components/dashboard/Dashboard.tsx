@@ -8,7 +8,7 @@ import { SocialIcon } from 'react-social-icons';
 import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
-import { Channel } from '../../redux/channels/channelsSlice';
+import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
 import { DataTable } from '../../small-components/tables/data-table';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
@@ -29,20 +29,21 @@ import '../../sass/action-btns.scss';
 import { PopupModal } from '../modals/PopupModal';
 import { BuyTokens } from '../topbar/BuyTokens';
 import { ProductQuota } from 'src/redux/user/userSlice';
-import { DateRangePicker, Range } from 'react-date-range';
+import { Range } from 'react-date-range';
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { addDays } from 'date-fns';
-import Modal from 'antd/lib/modal/Modal';
+import Modal from 'antd/es/modal/Modal';
 import { getCurrency } from '../../utils/getCurrency';
 import { Links } from '../../links';
+import { DatePicker } from '../../small-components/date-picker';
 
 export const Dashboard = () => {
   //For pagination add by suleman ahmad
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   const dispatch = useAppDispatch();
-  const { channels } = useAppSelector((state) => state.channels);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
   const { listingServicesResult } = useAppSelector((state) => state.listingServices);
@@ -52,12 +53,12 @@ export const Dashboard = () => {
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
-  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('DD MMM YYYY'));
-  const [endTo, setEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
+  const [startFrom, setStartFrom] = useState<string>(moment.utc().add(-7, 'months').format('L'));
+  const [endTo, setEndTo] = useState<string>(moment.utc().format('L'));
   const [affiliateStartFrom, setAffiliateStartFrom] = useState<string>(
-    moment.utc().add(-7, 'months').format('DD MMM YYYY')
+    moment.utc().add(-7, 'months').format('L')
   );
-  const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('DD MMM YYYY'));
+  const [affiliateEndTo, setAffiliateEndTo] = useState<string>(moment.utc().format('L'));
   const [isSalesModalVisible, setIsSalesModalVisible] = useState(false);
   const [isAffiliateModalVisible, setIsAffiliateModalVisible] = useState(false);
 
@@ -483,8 +484,8 @@ export const Dashboard = () => {
       const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
       const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
-      setStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
-      setEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+      setStartFrom(moment.utc(startDate).local().format('L'));
+      setEndTo(moment.utc(endDate).local().format('L'));
 
       if (diffDays < 3) {
         setSelectedPeriod(6);
@@ -514,8 +515,8 @@ export const Dashboard = () => {
       const from = moment.utc(startDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
       const to = moment.utc(endDate).local().format('YYYY-MM-DD') + 'T00:00:00.000Z';
 
-      setAffiliateStartFrom(moment.utc(startDate).local().format('DD MMM YYYY'));
-      setAffiliateEndTo(moment.utc(endDate).local().format('DD MMM YYYY'));
+      setAffiliateStartFrom(moment.utc(startDate).local().format('L'));
+      setAffiliateEndTo(moment.utc(endDate).local().format('L'));
 
       if (diffDays < 31) {
         setAffiliatePeriod(3);
@@ -605,14 +606,14 @@ export const Dashboard = () => {
           <Row className="general-cols" gutter={[0, 15]}>
             <Col className="products" xs={24} lg={10}>
               <h3>Total orders</h3>
-              <h2>{totalOrders ? totalOrders.toLocaleString('en') : '0'}</h2>
+              <h2>{totalOrders ? totalOrders.toLocaleString() : '0'}</h2>
               <Chart options={orderChartData} series={orderChartData.series} type="line" width="100%" />
             </Col>
             <Col className="products" xs={24} lg={10}>
               <h3>Total profit</h3>
               <h2>
                 {getCurrency()}
-                {totalProfit ? totalProfit.toLocaleString('en', { maximumFractionDigits: 0 }) : '0'}
+                {totalProfit ? totalProfit.toLocaleString({ maximumFractionDigits: 0 }) : '0'}
               </h2>
               <Chart options={profitChartData} series={profitChartData.series} type="line" width="100%" />
             </Col>
@@ -694,7 +695,7 @@ export const Dashboard = () => {
                         </Link>
                         <div className="next-payment">
                           <h5>
-                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('DD/MM/YYYY')}
+                            {s.cancelled && 'Canceled'}. Ends on {moment(s.nextPayment).format('L')}
                           </h5>
                         </div>
                       </div>
@@ -788,7 +789,7 @@ export const Dashboard = () => {
               </div>
 
               <h3>Total affiliates</h3>
-              <h2>{totalAffiliates ? totalAffiliates.toLocaleString('en') : '0'}</h2>
+              <h2>{totalAffiliates ? totalAffiliates.toLocaleString() : '0'}</h2>
               <Chart
                 options={affiliateChartData}
                 series={affiliateChartData.series}
@@ -814,7 +815,7 @@ export const Dashboard = () => {
         onCancel={handleSalesCancel}
         okText="Apply"
       >
-        <DateRangePicker
+        <DatePicker
           className="range-datepicker"
           key="dpSales"
           onChange={(item) => setState([item.selection])}
@@ -833,7 +834,7 @@ export const Dashboard = () => {
         onCancel={handleAffiliateCancel}
         okText="Apply"
       >
-        <DateRangePicker
+        <DatePicker
           className="range-datepicker"
           key="dpAffiliate"
           onChange={(item) => setAffiliateState([item.selection])}

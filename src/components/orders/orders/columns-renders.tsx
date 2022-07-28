@@ -1,19 +1,20 @@
 ﻿import { Platforms } from '../../../data/platforms';
 import { Channel } from '../../../redux/channels/channelsSlice';
 import { t } from '../../../utils/transShim';
-import { url as ApiURL } from '../../../redux/client';
-import { Source } from '../../../redux/sources/sourceSlice';
-import moment from 'antd/node_modules/moment';
+import { Link } from 'react-router-dom';
+import { ReactUtils } from '../../../utils/react-utils';
 
 type FieldValue = unknown;
 type RecordType = Record<string, FieldValue>;
 
 export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
   const row = rowR as { channel: Channel, asin?: string, id: number };
-  const channel = row.channel;
+
+  const selectedChannel = localStorage.getItem('selectedChannel');
+  const channel = (selectedChannel ? JSON.parse(selectedChannel) : null) as Channel;
+
   if (!channel)
     return channelItem;
-
   const platform = Platforms[channel.channelId];
 
   if (!platform)
@@ -39,17 +40,22 @@ export const RenderChannelItem = (channelItem: string, rowR: RecordType) => {
     } else {
       url = platform.itemUrl;
     }
-    return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{channelItem}</a>;
+    url = url.replace('{id}', channelItem ?? '');
+    return <Link target='_blank' rel='noreferrer' to={{
+      pathname: '/BuyNow',
+      search: '?sourceUrl=' + encodeURI(url)
+    }}>{channelItem}</Link>;
   }
 };
 
-export const RenderSource = (path: string, rowR: RecordType) => {
-  const row = rowR as { source: Source, id: number };
-  const source = row.source;
-  if (!source)
-    return t('Listings.UnknownSource');
-  const url = 'https://' + source.baseUrl + '/' + path;
-  return <a target='_blank' rel='noreferrer' href={ApiURL + '/ChannelListing/BuyNow?sourceUrl=' + encodeURI(url) + '&channelListingId=' + row.id}>{source.name}</a>;
+export const RenderSource = (sourceName: string, rowR: RecordType) => {
+  if (sourceName == undefined || sourceName == '')
+    return t('OrderTable.Value.UnknownSource');
+  const url = rowR.sourceUrl as unknown as string;
+  return <Link target='_blank' rel='noreferrer' to={{
+    pathname: '/BuyNow',
+    search: '?sourceUrl=' + encodeURI(url)
+  }} > {sourceName}</ Link>;
 };
 
 export const RenderImage = (imageUrl: string) => {
@@ -58,4 +64,4 @@ export const RenderImage = (imageUrl: string) => {
   </div>;
 };
 
-export const RenderDate = (date:Date) => moment(date).format('DD/MM/YY hh:mm');
+export const RenderDate = (date: Date) => ReactUtils.GetFormattedDateTime(date);

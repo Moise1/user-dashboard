@@ -10,14 +10,14 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import {  ActiveListing, ActiveListingsImagesDictionary, ListingsState, PendingListing, } from 'src/redux/listings/listingsSlice';
+import {  ActiveListingsImagesDictionary, ListingsState } from 'src/redux/listings/listingsSlice';
 import '../../sass/listings.scss';
 import '../../sass/tables/complex-table.scss';
 import { ReactUtils } from '../../utils/react-utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './Listings/active-columns';
-import { ListingsColumns, ListingT } from './Listings/columns';
+import { GenerateListingsColumns } from './Listings/columns';
 import { PendingListingsColumns } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
 
@@ -25,6 +25,12 @@ import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ListNow } from '../list-now/ListNow';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { Source, SourcesState } from '../../redux/sources/sourceSlice';
+import { ActiveListingExtended, ListingT } from './Listings/types';
+import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
+import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
+import { ePlatform } from '../../types/ePlatform';
+import { isString } from 'util';
+import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -35,15 +41,20 @@ type Selection = {
 }
 
 export const Listings = () => {
-  const selectedChannel = ReactUtils.GetSelectedChannel();
   const dispatch = useAppDispatch();
 
   //ADDITIONAL DATA--------------------------------------------------------------------------
+  const selectedChannel = ReactUtils.GetSelectedChannel();
   const { sources, loading: loadingSources } = useAppSelector((state) => state.sources as SourcesState);
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
   const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
+  const { settings: computedConfiguration, loading: loadingComputedConfiguration } = useAppSelector((state) => (state.sourcesConfiguration as SourceConfigurationState)?.computedConfiguration ?? {});
+  useEffect(() => {
+    dispatch(getComputedConfiguration());
+  }, [getComputedConfiguration]);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
@@ -88,53 +99,130 @@ export const Listings = () => {
   };
 
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
-    const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
 
-    const AddExtraData = (data: ListingT[] | null | undefined) => {
-      if (!data || !sourcesDic) return data;
-      return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
-    };
-    const AddImages = (data: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
-      if (!data || !activeListingsImages) return data;
-      for (const d of data) {
-        const ud = activeListingsImages[d.channelListingId];
-        if (ud && !ud.loading && ud.url) {
-          (d as ActiveListing | PendingListing).imageUrl = ud.url;
-        }
+    //This first only return informatinio depending of the active tab
+    const data1 = (() => {
+      const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
+
+      switch (tab) {
+        default:
+        case ListingTab.active:
+          return {
+            defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault[selectedChannel?.channelId ?? ePlatform.eBay],
+            columnList: ActiveListingsColumns[selectedChannel?.channelId ?? ePlatform.eBay],
+            hideWhenEmpty: true,
+            listings: activeListings as ListingT[],
+            loadingListings: loadingActive || loadingComputedConfiguration,
+            activeListingsImages: activeListingsImages
+          };
+        case ListingTab.pending:
+          return {
+            defaultVisibleColumns: PendingListingsColumns,
+            columnList: PendingListingsColumns,
+            hideWhenEmpty: false,
+            listings: pendingListings as ListingT[],
+            loadingListings: loadingPending,
+            activeListingsImages: undefined
+          };
+        case ListingTab.terminated:
+          return {
+            defaultVisibleColumns: TerminatedListingsColumns,
+            columnList: TerminatedListingsColumns,
+            hideWhenEmpty: false,
+            listings: terminatedListings as ListingT[],
+            loadingListings: loadingTerminated,
+            activeListingsImages: undefined
+          };
       }
-      return data;
-    };
+    })();
 
-    switch (tab) {
-      default:
-      case ListingTab.active:
-        return {
-          defaultVisibleColumns: ActiveListingsColumnsVisibleByDefault,
-          columnList: ActiveListingsColumns,
-          hideWhenEmpty: true,
-          listings: AddImages(AddExtraData(activeListings as ListingT[] | null | undefined), activeListingsImages),
-          loadingListings: loadingActive,
-          activeListingsImages
+    const listings =
+      //We use memo here to avoid recalculating constantly. data 1 is outside this memo so we can 
+      //use JSON.stringify only in data1.listings, otherwiese we would be forced to stringinfy activelistings, pendinglistings and terminatedListings
+      useMemo(() => {
+        const AddExtraData = (data: ListingT[] | null | undefined) => {
+          if (!data || !sourcesDic) return data;
+          return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
         };
-      case ListingTab.pending:
-        return {
-          defaultVisibleColumns: PendingListingsColumns,
-          columnList: PendingListingsColumns,
-          hideWhenEmpty: false,
-          listings: AddExtraData(pendingListings as ListingT[] | null | undefined),
-          loadingListings: loadingPending,
-          activeListingsImages: undefined
+
+        const ExtendActive = (listings: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
+          if (!listings) return listings;
+
+          const channelsDic: { [id: number]: Channel } | null = channels ? {} : null;
+          if (channelsDic)
+            for (const c of channels) {
+              channelsDic[c.id] = c;
+            }
+
+          for (const al of listings) {
+            const l = al as ActiveListingExtended;//Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
+
+            //Calculated fields-------------------
+            const settings = computedConfiguration?.[l.sourceId];
+            if (settings) {
+              l.profit = l.channelPrice - l.sourcePrice - (l.channelPrice * settings.feePercentage) / 100;
+              l.markup = l.overrides.markup ?? settings.markup;
+              l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
+              l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
+              l.monitorPriceDecrease = l.overrides.monitorPriceDecrease ?? settings.monitorPriceDecrease;
+              l.monitorPriceDecreasePercentage = l.overrides.monitorPriceDecreasePercentage ?? settings.monitorPriceDecreasePercentage;
+              l.ignoreRules = l.overrides.ignoreRules ?? settings.ignoreRules;
+              l.variationsText = (() => {
+                const GetVariationSKU = (data: ListingT) => {
+                  const cis = (data as { channelItem: string }).channelItem.split('#');
+                  return (cis.length == 2) ? cis[1] : '';
+                };
+                const value = l.variationAtributes;
+                if (!value || value.length == 0)
+                  return GetVariationSKU(al);
+                const ops = value.map((x) => x.option).join(', ');
+                return (ops && ops.trim().length > 0) ? ops : GetVariationSKU(al);
+              })();
+              l.unsoldDays = (() => {
+                const d = l.lastTimeSold ?? l.createdOn;
+                const ld = isString(d) ? new Date(d) : d;
+                return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
+              })();
+              l.outOfStockDays = (() => {
+                const d = l.lastTimeInStock ?? l.createdOn;
+                const ld = isString(d) ? new Date(d) : d;
+                return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
+              })();
+              l.dispatchDays = l.overrides.dispatchDays ?? settings.dispatchDays;
+              l.pricingRules = [];
+              if (channelsDic) {
+                l.otherChannels = [];
+                for (const o of l.otherChannelOAuthsIds ?? []) {
+                  const c = channelsDic[o];
+                  if(c) l.otherChannels.push(c);
+                }
+              }
+            }
+
+            //Images-------------------
+            if (activeListingsImages) {
+              const ud = activeListingsImages[l.channelListingId];
+              if (ud && !ud.loading && ud.url) {
+                l.imageUrl = ud.url;
+              }
+            }
+          }
+
+          return listings;
         };
-      case ListingTab.terminated:
-        return {
-          defaultVisibleColumns: TerminatedListingsColumns,
-          columnList: TerminatedListingsColumns,
-          hideWhenEmpty: false,
-          listings: AddExtraData(terminatedListings as ListingT[] | null | undefined),
-          loadingListings: loadingTerminated,
-          activeListingsImages: undefined
-        };
-    }
+
+        switch (tab) {
+          default:
+          case ListingTab.active:
+            return ExtendActive(AddExtraData(data1.listings), data1.activeListingsImages);
+          case ListingTab.pending:
+            return AddExtraData(data1.listings);
+          case ListingTab.terminated:
+            return AddExtraData(data1.listings);
+        }
+      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages, computedConfiguration]) as ListingT[] | null | undefined;
+
+    return {...data1, listings};
   })();
 
   useEffect(() => {
@@ -153,13 +241,16 @@ export const Listings = () => {
     }
   }, [tab]);
   //--------------------------------------------------------------------------
+  const onSetNewPrice = (row: ListingT, newPrice: number) => {
+    console.log('y' + row.id + 'z' + newPrice);//TODO: Do this
+  };
+  const ListingsColuns = GenerateListingsColumns(onSetNewPrice);
+  const filteredColumns = useMemo(() => ListingsColuns.filter(x => columnList.includes(x.id)), [ListingsColuns, columnList]);
 
-  const filteredColumns = useMemo(() => ListingsColumns.filter(x => columnList.includes(x.id)), [ListingsColumns, columnList]);
-
-  //Row Selection
+  //Row Selection-------------------------------------------------------------
   const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
   const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
-  //
+  //--------------------------------------------------------------------------
   //Bulk Menu-----------------------------------------------------------------
   const handleSingleListingModal = () => { console.log('x'); };
   const handleBulkListingModal = () => { console.log('y'); };

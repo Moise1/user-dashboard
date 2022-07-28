@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { ListingService } from 'src/redux/dashboard/listingServicesSlice';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/listing-service/configure-listing-service.scss';
-import { Channel } from 'src/redux/channels/channelsSlice';
+import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { MultipleSelector } from 'src/small-components/form/multipleSelector';
 import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import { Input, Radio, RadioChangeEvent, Row, Spin, Modal } from 'antd';
@@ -20,7 +20,7 @@ export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
   const { listingServicesResult, loading } = useAppSelector((state) => state.listingServices);
   const { sources } = useAppSelector((state) => state.sources);
-  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels as ChannelsState);
   const criteriaOptions = [
     { value: 'hgr', label: 'No preferences' },
     { value: 'user', label: 'Set up my preferences' }

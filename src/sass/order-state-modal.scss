@@ -22,6 +22,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .bg-InputLight {
+    background-color: #f2f8ff;
+  }
+
+  .amazon-order-ss {
+    width: 466px;
+    height: 354px;
+  }
 }
 
 .modal-title {
@@ -77,6 +86,7 @@
     cursor: pointer;
   }
 }
+
 .disabled-line {
   background-color: #7e7373;
   margin: 7px 0;
@@ -101,6 +111,7 @@
 .order-checkout-icon line {
   stroke: $corporative-color;
 }
+
 .last-step-order-icon #Path_315 {
   fill: $corporative-color;
 }
@@ -162,6 +173,7 @@
   color: $corporative-color;
   cursor: pointer;
 }
+
 .modal-buttons-block {
   display: block;
   flex-direction: row-reverse;
@@ -201,6 +213,7 @@
     display: block;
     width: 70%;
   }
+
   Button {
     margin-bottom: 0.5rem;
   }

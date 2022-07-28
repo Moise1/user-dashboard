@@ -9,9 +9,7 @@
   "PendingListings": "Pending Products",
   "PendingListingsShort": "Pending",
   "TerminatedListings": "Terminated Products",
-
-
-
+  "ImportListings": "Import products",
 
   "BulkListing.Name": "Bulk Publish",
 
@@ -143,20 +141,45 @@
   "Account.PaymentMethod.PremiumSuppliers": "Premium Suppliers",
   "Account.PaymentMethod.Description.VAOCP": "View auto ordering commission payments",
 
+  "Listings.Column.Asin": "Asin",
+  "Listings.Column.BuyBox": "Buy Box",
+  "Listings.Column.ChannelItem": "Product ID",
   "Listings.Column.Cost": "Cost",
-  "Listings.Column.Img": "Image",
-  "Listings.Column.Id": "HGR Id",
-  "Listings.Column.Markup": "Markup",
-  "Listings.Column.Profit": "Profit",
-  "Listings.Column.Sell": "Sell",
-  "Listings.Column.Source": "Source",
-  "Listings.Column.Stock": "Stock",
-  "Listings.Column.Title": "Title",
-  "Listings.Column.Options": "Options",
-  "Listings.Column.Status": "Status",
   "Listings.Column.CreatedOn": "Created On",
   "Listings.Column.CreatedBy": "Created By",
-  "Listings.Column.ChannelItem": "Product ID",
+  "Listings.Column.DispatchDays": "Dispatch days",
+  "Listings.Column.EndingOn": "Ending On",
+  "Listings.Column.Id": "HGR Id",
+  "Listings.Column.IgnoreRules": "Ignore Pricing Rules",
+  "Listings.Column.Img": "Image",
+  "Listings.Column.Sku": "Sku",
+  "Listings.Column.LowestPrice": "Lowest Price",
+  "Listings.Column.Markup": "Markup",
+  "Listings.Column.MonitorPrice": "Monitor price",
+  "Listings.Column.MonitorPriceDecrease": "Monitor price decrease",
+  "Listings.Column.MonitorPriceDecreasePercentage": "Monitor price decrease: Percentage",
+  "Listings.Column.MonitorStock": "Monitor stock",
+  "Listings.Column.Notes": "Notes",
+  "Listings.Column.Options": "Options",
+  "Listings.Column.Profit": "Profit",
+  "Listings.Column.Sales": "Sales",
+  "Listings.Column.Sell": "Sell",
+  "Listings.Column.Source": "Source",
+  "Listings.Column.Status": "Status",
+  "Listings.Column.Stock": "Stock",
+  "Listings.Column.Title": "Title",
+  "Listings.Column.Variation": "Variation",
+  "Listings.Column.Views": "Views",
+  "Listings.Column.Watchers": "Watchers",
+  "Listings.Column.OtherChannels": "Also on",
+  "Listings.Column.OutOfStockDays": "Out of Stock Days",
+  "Listings.Column.UnsoldDays": "Unsold days",
+  "Listings.Value.Always": "Always",
+  "Listings.Value.Beat": "Beat",
+  "Listings.Value.BeatIgnoreRules": "Beat (Ignore rules)",
+  "Listings.Value.Match": "Match",
+  "Listings.Value.MatchIgnoreRules": "Match (Ignore rules)",
+  "Listings.Value.Lowest": "Lowest",
   "Listings.Value.UnknownSource": "Unknown Supplier",
 
   "ListNow.Header": "Ways to publish",
@@ -167,7 +190,6 @@
   "Listnow.WeListForYou.Button": "For only £9.99",
   "Listnow.WeListForYou.Description": "No idea what to publish? We will pick the best selling items for you!",
   "Listnow.WeListForYou.Title": "Don't know what to publish? We can do it for you",
-
 
   "Menu.BrowserExtensions": "Browser Extensions",
   "Menu.Subscriptions": "Subscriptions",
@@ -196,7 +218,7 @@
   "OrderButtons.Stop": "Stop",
   "OrderButtons.Process": "Process",
 
-  "OrderTable.ChannelItem": "Store Id",
+  "OrderTable.ChannelItem": "Channel Item",
   "OrderTable.DateOfOrder": "Date of order",
   "OrderTable.Cost": "Cost",
   "OrderTable.Fees": "Fees",
@@ -208,6 +230,8 @@
   "OrderTable.Status": "Status",
   "OrderTable.Source": "Source",
   "OrderTable.Title": "Title",
+  "OrderTable.Reference": "Reference",
+  "OrderTable.Value.UnknownSource": "Unknown Supplier",
 
   "OrderDetails.OrderState": "Order State",
   "OrderDetails.AOEnabled": "AO Enabled",
@@ -310,12 +334,6 @@
   "VisibleColumnsPopup.Amount": "Amount of columns on the table",
 
   "WeListForYou.Name": "We Publish For You",
-
-
-
-
-
-
 
   "selectAll": "Select All",
   "filters": "Filters",

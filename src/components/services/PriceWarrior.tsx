@@ -1,14 +1,14 @@
 import { Form, Spin } from 'antd';
-import '../../sass/services/service.scss';
 import { Selector, SelectorValue } from 'src/small-components/form/selector';
-import '../../sass/services/price-warrior-configuration.scss';
 import { SimpleTable } from 'src/small-components/tables/simple-table';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
-import Input from 'antd/lib/input/Input';
+import Input from 'antd/es/input/Input';
 import React, { useEffect, useState } from 'react';
 import { getPriceWarrior, UpdateSettings } from '../../redux/price-warrior/PriceWarriorThunk';
 import { PWListing, PWSetting } from '../../redux/price-warrior/priceWarriorSlice';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import '../../sass/services/price-warrior-configuration.scss';
+import '../../sass/services/single-service.scss';
 
 const { Item } = Form;
 
@@ -20,7 +20,15 @@ export const PriceWarrior = () => {
   const [minMarkup] = useState<number>(priceWarrior?.settings?.markup);
   const [undercutBy] = useState<number>(priceWarrior?.settings?.undercutBy);
   const [threshold] = useState<number>(priceWarrior?.settings?.threshold);
-  const [data, setData] = useState<PWSetting>({ active: active as unknown as boolean, repricing: repricing as unknown as boolean, markup: minMarkup, threshold: threshold, undercutBy: undercutBy });
+
+  
+  const [data, setData] = useState<PWSetting>({ 
+    active: active as unknown as boolean,
+    repricing: repricing as unknown as boolean,
+    markup: minMarkup, 
+    threshold: threshold, 
+    undercutBy: undercutBy
+  });
 
 
   const onPriceWarriorChange = (value: SelectorValue) => {

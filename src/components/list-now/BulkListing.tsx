@@ -15,8 +15,7 @@ import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { UserAssistant } from '../../redux/va-profiles/vaProfilesSlice';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { SimpleTable } from '../../small-components/tables/simple-table';
-import moment from 'moment';
-import { Key } from 'antd/lib/table/interface';
+import { Key } from 'antd/es/table/interface';
 import {
   AutoListState,
   BulkListingError,
@@ -28,6 +27,7 @@ import { getAutolist, saveAutolist } from '../../redux/listings/autoListThunk';
 import { getSources } from '../../redux/sources/sourcesThunk';
 import { SourcesState } from '../../redux/sources/sourceSlice';
 import { CheckOutlined, ExclamationCircleOutlined, LoadingOutlined } from '@ant-design/icons';
+import { ReactUtils } from '../../utils/react-utils';
 
 const { Item } = Form;
 const { Panel } = Collapse;
@@ -311,7 +311,7 @@ export const BulkListing = (/*props: props*/) => {
       dataIndex: 'createdOn',
       key: 'createdOn',
       render: (s: Date) => {
-        return moment(s).format('DD/MM/YY/ hh:mm');
+        return ReactUtils.GetFormattedDateTime(s);
       }
     },
     {
@@ -320,7 +320,7 @@ export const BulkListing = (/*props: props*/) => {
       key: 'listedOn',
       render: (s: Date, record: BulkListingLog) => {
         if (record.verifiedOn && record.channelItem) {
-          return moment(s).format('DD/MM/YY/ hh:mm');
+          return ReactUtils.GetFormattedDateTime(s);
         }
       }
     }

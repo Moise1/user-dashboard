@@ -68,7 +68,7 @@ $input-background-secondary: #f2f8ff;
 $font-xl: 1.4rem;
 $font-large: 1.2rem;
 $font-medium: 1rem;
-$font-small: 0.8rem;
+$font-small: 0.9rem;
 
 // Spacers & margins
 
@@ -178,11 +178,11 @@ span {
 .blue-input {
   @include custom-input($secondary-bg);
   border: none; //Added by suleman
-};
+}
 
 .auth-input {
   @include custom-input($primary-light-bg-color);
-};
+}
 
 @mixin custom-btn-styles($bg-color: null, $color: null) {
   margin: 1rem 0;

@@ -2,6 +2,13 @@
 
 // Large and extra large screens
 
+li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:hover{
+  background: rgb(159, 179, 234)
+};
+.alternative-link.no-api-alert{ 
+  font-weight: normal;
+};
+
 .redirect-link {
   display: flex;
   column-gap: 0.5rem;

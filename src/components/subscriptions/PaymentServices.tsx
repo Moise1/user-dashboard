@@ -24,11 +24,10 @@ export const PaymentMethod = (/*props: props*/) => {
   const [currencyId] = useState(localStorage.getItem('currencyId'));
   const [platformProductId] = useState(localStorage.getItem('platformProductId'));
   const [stripePlatformProductId] = useState(localStorage.getItem('stripePlatformProductId'));
-  const { products, loading } = useAppSelector((state) => state.subscriptions);
+  const { /*products,*/ loading } = useAppSelector((state) => state.subscriptions);
   const [loadings, setLoadings] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<number>();
   const { subscriptionConfiguration } = useAppSelector((state) => state.subscriptionConfiguration);
-  console.log({ products });
 
   const setReturnUrl = (url: string, returnUrl: string): string => {
     let paramsStart = url.indexOf('?');
@@ -49,9 +48,9 @@ export const PaymentMethod = (/*props: props*/) => {
   };
 
   const GetSuccesUrl = () => {
-    const location = window.location;
-    const baseUrl = location.protocol + '//' + location.host;
-    console.log(baseUrl);
+    //const location = window.location;
+    //const baseUrl = location.protocol + '//' + location.host;
+
     let successUrl = subscriptionConfiguration.successUrl;
     successUrl = successUrl ?? 'https://app.hustlegotreal.com/Home';
     successUrl = setReturnUrl(successUrl as string, 'https://app.hustlegotreal.com/Home');
@@ -73,11 +72,10 @@ export const PaymentMethod = (/*props: props*/) => {
   };
 
   const handleStripe = async () => {
-
     setLoadings(true);
     const request: CreateCheckoutSessionRequest = {
       lineItems: [{ platformProductId: stripePlatformProductId ?? '', quantity: 1 }],
-      mode: billingId as unknown as number < 3 ? 'subscription' : 'payment',
+      mode: (billingId as unknown as number) < 3 ? 'subscription' : 'payment',
       successUrl: GetSuccesUrl(),
       cancelUrl: GetCancelUrl(),
       upgradingSubscription: subscriptionConfiguration.upgrade as unknown as boolean
@@ -100,11 +98,9 @@ export const PaymentMethod = (/*props: props*/) => {
   const finishPayment = () => {
     if (selectedMethod === 1) {
       handlePayPal();
-    }
-    else if (selectedMethod === 2) {
+    } else if (selectedMethod === 2) {
       handleStripe();
-    }
-    else {
+    } else {
       toastAlert('Please select a payment method', 'error');
     }
   };
@@ -128,7 +124,13 @@ export const PaymentMethod = (/*props: props*/) => {
                   <Radio className="card-payment-section" value="2" name="paymentMethod" onClick={() => setValue(2)}>
                     <h3>Credit card</h3>
                   </Radio>
-                  <Radio className="card-payment-section" autoFocus value="1" name="paymentMethod" onClick={() => setValue(1)}>
+                  <Radio
+                    className="card-payment-section"
+                    autoFocus
+                    value="1"
+                    name="paymentMethod"
+                    onClick={() => setValue(1)}
+                  >
                     <h3>Paypal</h3>
                   </Radio>
                 </div>

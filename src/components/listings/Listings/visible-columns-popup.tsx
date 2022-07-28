@@ -1,5 +1,5 @@
 ﻿import { Card, Checkbox, Col, Row } from 'antd';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { ColumnData, ColumnId } from '../../../small-components/tables/types/columns';
 import { t } from '../../../utils/transShim';
 import { PopupModal } from '../../modals/PopupModal';

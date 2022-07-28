@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pagination, Table } from 'antd';
-import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/lib/table/interface';
+import { ColumnType, CompareFn, FilterValue, SorterResult, SortOrder, TablePaginationConfig, TableRowSelection } from 'antd/es/table/interface';
 import { DataIndex } from 'rc-table/lib/interface';
 import { isArray, isBoolean, isFunction } from 'util';
 

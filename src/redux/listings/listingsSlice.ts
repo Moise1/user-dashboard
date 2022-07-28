@@ -37,8 +37,10 @@ export type ActiveListing = {
   origin: eChannelListingOrigin;
   variationAtributes: ChannelListingVariationAttributeOption[];
 
-  imageUrl?: string;
+  //Calculated in client
+  otherChannelOAuthsIds: number[];
 }
+
 export type ChannelListingVariationAttributeOption = {
   id: number;
   channelListingId: number;
@@ -167,6 +169,19 @@ export const listingsSlice = createSlice({
     builder.addCase(getActiveListings.fulfilled, (state, { payload }) => {
       state.loadingActive = false;
       state.activeListings = payload.listings;
+
+      const othersDic: { [ps: number]: number[] } = {};
+      for (const oc of payload.others) {
+        for (const psId of oc.productSourecIds) {
+          if (!othersDic[psId]) othersDic[psId] = [];
+          othersDic[psId].push(oc.channelOauthId);
+        }
+      }
+      for (const l of state.activeListings) {
+        const o = othersDic[l.productSourceId];
+        l.otherChannelOAuthsIds = o ? o : [];
+      }
+
       const imgDic: ActiveListingsImagesDictionary = {};
       for (const idimg of payload.images) {
         if (!idimg || !idimg.id || !idimg.url)

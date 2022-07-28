@@ -7,8 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { saveAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import '../../sass/switch.scss';
 import '../../sass/auto-ordering.scss';
-// import hand from '../../assets/hand.svg';
-// import copy from '../../assets/copy.svg';
+// import hand from '../../assets/icons/hand.svg';
+// import copy from '../../assets/icons/copy.svg';
 // import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useLocation } from 'react-router-dom';
 import { Selector, SelectorValue } from '../../small-components/form/selector';

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHo
 import { getNoApiServers, getManagedServers, updateManagedServers } from 'src/redux/dashboard/noApiServersThunk';
 import { ConfirmBtn } from 'src/small-components/ActionBtns';
 import '../../sass/no-api/configure-noapi.scss';
-import { Channel } from 'src/redux/channels/channelsSlice';
+import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { Selector, SelectorValue } from 'src/small-components/form/selector';
 import { EyeOutlined } from '@ant-design/icons';
 import { Input, Alert, Breadcrumb } from 'antd';
@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 export const ConfigureNoapi = () => {
   const dispatch = useAppDispatch();
-  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels);
+  const { channels }: { channels: Channel[] } = useAppSelector((state) => state.channels as ChannelsState);
   const { manageServerResult } = useAppSelector((state) => state.managedServers);
   console.log('all the states are', manageServerResult);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
@@ -39,7 +39,7 @@ export const ConfigureNoapi = () => {
         'errorRetries': 0
       }
     ];
-  console.log(newArray);
+
   const handleOptionChange = (value: SelectorValue) => {
     setChannelSelected(value);
   };

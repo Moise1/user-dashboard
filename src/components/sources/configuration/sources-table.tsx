@@ -7,7 +7,7 @@ import '../../../sass/popover.scss';
 import { getSources } from '../../../redux/sources/sourcesThunk';
 import { SourcesState } from '../../../redux/sources/sourceSlice';
 import { getSourceConfiguration } from '../../../redux/source-configuration/sources.coonfiguration-thunk';
-import { SourceConfigurationState, SourceSettingData } from '../../../redux/source-configuration/source-configuration-slice';
+import { SourceConfigurationState } from '../../../redux/source-configuration/source-configuration-slice';
 import { ReactUtils } from '../../../utils/react-utils';
 import { ChannelConfigurationState } from '../../../redux/channel-configuration/channels-configuration-slice';
 import { getChannelConfiguration, loadBusinessPolicies, loadShipping } from '../../../redux/channel-configuration/channels-configuration-thunk';
@@ -21,6 +21,7 @@ import { SimpleTable } from '../../../small-components/tables/simple-table';
 import { useHistory } from 'react-router';
 import { ChannelSettingKey, SettingValue } from '../../../types/settings';
 import { Links } from '../../../links';
+import { SourceSettingData } from '../../../redux/source-configuration/types';
 
 type SourceTableData = { name: string, id: number, [key: number]: SettingValue };
 
@@ -120,7 +121,7 @@ export const SourcesTable = () => {
             default:
               return value;
             case ColumnStyle.Outlined:
-              return value == '1' ? <CheckOutlined style={{ fontSize: '19px' }} /> : (value == '0' ? <CloseOutlined /> : '');
+              return value == '1' ? <CheckOutlined /> : (value == '0' ? <CloseOutlined /> : '');
             case ColumnStyle.BusinessPayment:
             case ColumnStyle.BusinessReturn:
             case ColumnStyle.BusinessShipping:

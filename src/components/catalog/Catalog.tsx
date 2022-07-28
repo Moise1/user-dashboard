@@ -19,6 +19,7 @@ import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
 import moment from 'moment';
+import { toastAlert } from '../../utils/toastAlert';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -27,7 +28,6 @@ export type ElementEventType =
   | React.MouseEvent;
 
 export const Catalog = () => {
-
   const { Meta } = Card;
   const dispatch = useAppDispatch();
   const { sources } = useAppSelector((state) => state.sources);
@@ -94,7 +94,11 @@ export const Catalog = () => {
   const handleSourceModal = () => setSourceModalOpen(!sourceModalOpen);
   const handleAllProductsModal = () => setAllProductsModalOpen(!allProductsModalOpen);
   const [cardElementProductDetail, setCardElementProductDetail] = useState<
-    (EventTarget & HTMLDivElement) | (EventTarget & SVGElement) | (EventTarget & HTMLSpanElement) | (EventTarget & Element) | undefined
+    | (EventTarget & HTMLDivElement)
+    | (EventTarget & SVGElement)
+    | (EventTarget & HTMLSpanElement)
+    | (EventTarget & Element)
+    | undefined
   >();
 
   const handleSelectProduct = (e: ElementEventType): void => {
@@ -157,9 +161,16 @@ export const Catalog = () => {
     setPublishNow(newDate);
   };
 
-  const listTheProducts = () => {
+  const listTheProducts = async () => {
     setChangeState(true);
-    dispatch(listProducts({ products, needsReview, optimizeTitle }));
+    const rs = await dispatch(listProducts({ products, needsReview, optimizeTitle }));
+    setListProductModal(!listProductsModal);
+    if (rs.payload.success) {
+      toastAlert('Listing Successfully', 'success');
+    }
+    else {
+      toastAlert(rs.payload, 'error');
+    }
   };
 
   useEffect(() => {
@@ -226,9 +237,6 @@ export const Catalog = () => {
                 <span className="clear-all" onClick={handleClearAllSelectedProducts}>
                   Clear all
                 </span>
-                {!!allProducts.length && (
-                  <SuccessBtn className="list-btn-mobile">List {allProducts.length} product(s)</SuccessBtn>
-                )}
               </div>
             </div>
 
@@ -244,8 +252,7 @@ export const Catalog = () => {
             title={
               <div className="modal-title">
                 <h5>{selectedProductDataDetail.title}</h5>
-                <h1 className="source"> By :{getSourceName(selectedProductDataDetail?.sourceId)}
-                </h1>
+                <h1 className="source"> By :{getSourceName(selectedProductDataDetail?.sourceId)}</h1>
               </div>
             }
           >
@@ -281,9 +288,7 @@ export const Catalog = () => {
             bodyStyle={{ height: 500, overflow: 'scroll' }}
             closable={false}
           >
-            <AllProducts removeProduct={removeSelectedProduct} className={className}
-              getSourceName={getSourceName}
-            >
+            <AllProducts removeProduct={removeSelectedProduct} className={className} getSourceName={getSourceName}>
               {allProducts}
             </AllProducts>
           </PopupModal>

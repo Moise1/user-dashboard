@@ -15,15 +15,17 @@ import { AppContext } from '../../contexts/AppContext';
 import { ComplexTable } from '../../small-components/tables/complex-table';
 import { ColumnsVisibleByDefault } from './orders/active-columns';
 import { OrdersColumns } from './orders/columns';
+import { ReactUtils } from '../../utils/react-utils';
 
 export const Orders = () => {
   const dispatch = useAppDispatch();
-  const { orders, status, loading } = useAppSelector((state) => state.orders);
+  const { orders, loading } = useAppSelector((state) => state.orders);
   const [currentPage, setCurrentPage] = useState<number>(1);
   //const [orderNumber] = useState(selectedRecord && selectedRecord);
   const [order, setOrder] = useState<OrderData[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([]);
   const [selectedOrder, setSelectedOrder] = useState<OrderData>();
+  const [selectedOrders, setSelectedOrders] = useState([]);
   //For Modal
   const [bulkEditOpen, setBulkEditOpen] = useState<boolean>(false);
   const [singleEditOpen, setSingleEditOpen] = useState<boolean>(false);
@@ -31,7 +33,9 @@ export const Orders = () => {
   const handleBulkOrderModal = () => setBulkEditOpen(!bulkEditOpen);
   const handleSingleOrderModal = () => setSingleEditOpen(!singleEditOpen);
   const handleSingleOrderDetailModal = () => setOrderDetailsOpen(!orderDetailsOpen);
+  const selectedChannel = ReactUtils.GetSelectedChannel();
 
+  localStorage.setItem('selectedChannel', JSON.stringify(selectedChannel));
   const handleOrderDetailsOpen = () => {
     handleSingleOrderModal();
     setOrderDetailsOpen(!orderDetailsOpen);
@@ -47,12 +51,12 @@ export const Orders = () => {
   const { channelId: newChannel } = useContext(AppContext);
 
   useEffect(() => {
-    const orderList: OrderData[] = orders.orders.map((l: OrderData) => {
+    const orderList: OrderData[] = orders.orders?.map((l: OrderData) => {
       let item: OrderData = {
-        ...l, key: l.id,
+        ...l,
+        key: l.id,
         profit: (l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - l.fees).toFixed(2),
-        sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId),
-        sourceAOEnabled: orders.sourcesEnabled?.includes(l.sourceId)
+        sourceAOConfigured: orders.sourcesEnabled?.includes(l.sourceId)
       }; //Assuming channel and source uses same currency
       //const totalTaxes = (l.channelTax ?? 0) + (l.channelVAT ?? 0) + (l.channelPaymentTaxes ?? 0) + l.fees;
       //l.profit = l.channelPrice * l.quantity + l.channelShipping - l.sourcePrice - totalTaxes;
@@ -60,8 +64,10 @@ export const Orders = () => {
       const source = orders.sources[l.sourceId];
       if (source) {
         item = {
-          ...item, sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
+          ...item,
+          sourceUrl: 'https://' + source.baseUrl + '/' + l.sourcePath,
           sourceName: source.name,
+          sourceAOEnabled: source.hasAutoOrder
         };
       }
       return item;
@@ -73,8 +79,10 @@ export const Orders = () => {
     dispatch(getOrders({ channelOAuthIds: [newChannel as number] }));
   }, [getOrders, newChannel]);
 
-  const onSelectChange = (selectedRowKeys: DataTableKey[]) => {
+  //eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+  const onSelectChange = (selectedRowKeys: DataTableKey[], selectedRows: any) => {
     setSelectedRowKeys(selectedRowKeys as number[]);
+    setSelectedOrders(selectedRows);
   };
   const rowSelection = {
     selectedRowKeys,
@@ -94,10 +102,10 @@ export const Orders = () => {
           ) : (
             <PopupModal open={singleEditOpen} width={900} handleClose={handleSingleOrderModal}>
               <OrderContent
-                orderProgress={status}
-                data={selectedOrder}
+                order={selectedOrder}
                 channelOAuthId={[newChannel]}
                 OrderDetailsModalOpen={handleOrderDetailsOpen}
+                handleSingleOrderModal={handleSingleOrderModal}
               />
             </PopupModal>
           )}
@@ -105,7 +113,11 @@ export const Orders = () => {
             <OrderDetailsContent data={selectedOrder} OrderContentModalOpen={handleOrderContentOpen} />
           </PopupModal>
 
-          <OrderActionBtns channelOAuthId={[newChannel]} selectedOrderIds={selectedRowKeys} />
+          <OrderActionBtns
+            channelOAuthId={[newChannel]}
+            selectedOrderIds={selectedRowKeys}
+            orderList={selectedOrders}
+          />
 
           <ComplexTable
             uiIdentifier={'orders'}

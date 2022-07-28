@@ -44,7 +44,6 @@
 
 .success-btn,
 .redirection-link {
-  min-width: 170px;
   background: $green;
   &:hover,
   &:focus {
@@ -56,7 +55,6 @@
   min-width: 170px;
 }
 .showVisibleCol-btn {
-  max-width: 170px !important;
   border-radius: 8% !important;
   background: $green;
   color: #fff;
@@ -85,7 +83,6 @@
 
 .danger-btn,
 .delete-btn {
-  min-width: 170px;
   background: $red;
   &:hover,
   &:focus {
@@ -95,17 +92,15 @@
 }
 
 .warning-btn {
-  min-width: 170px;
-  background: $yellow;
+  background: $orange;
   &:hover,
   &:focus {
-    background: $yellow;
+    background: $orange;
     color: $primary-bg;
   }
 }
 
 .progress-btn {
-  min-width: 170px;
   background: $light-blue;
   color: #fff !important;
   border-radius: 8px;
@@ -119,7 +114,6 @@
 
 //need for buttons
 .cancel-btn {
-  min-width: 170px;
   color: #fff !important;
   background: $red !important;
   &:hover,
