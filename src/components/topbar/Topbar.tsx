@@ -14,6 +14,7 @@ import { AppContext } from '../../contexts/AppContext';
 import '../../sass/top-bar.scss';
 import { Links } from '../../links';
 import { getUserToken, getUserQuota } from 'src/redux/user/userThunk';
+import { ChannelsState } from '../../redux/channels/channelsSlice';
 
 interface Props extends RouteComponentProps {
   showMobileSider: () => void;
@@ -26,7 +27,7 @@ export const Topbar = withRouter((props: Props) => {
 
   const { tokens } = useAppSelector((state) => state.user);
   const { quota } = useAppSelector((state) => state.user);
-  const { channels } = useAppSelector((state) => state.channels);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
 
   // const { notifications } = useAppSelector((state) => state.notifications);
   const handleOpenModal = () => setOpen(!open);

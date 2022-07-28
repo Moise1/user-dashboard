@@ -1,105 +1,60 @@
 import { Link } from 'react-router-dom';
 import { CalendarOutlined, LeftOutlined, RiseOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-import { useAppSelector } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/affiliate-dashboard.scss';
-import { AffiliatesDashboardStats } from 'src/redux/dashboard/affiliatesStatsSlice';
 
-import { Spin } from 'antd';
 import { DataTable } from 'src/small-components/tables/data-table';
+import { getAffiliateDashboard } from 'src/redux/dashboard/affiliatesStatsThunk';
 
 export const AffiliateDashboard = () => {
-  const { affiliatesDashboard, loading } = useAppSelector(
-    (state) => state.affiliatesDashboard as AffiliatesDashboardStats
-  );
+  const dispatch = useAppDispatch();
 
-  console.log(affiliatesDashboard);
+  const AffiliateDashboard = dispatch(getAffiliateDashboard({ month: 7, year: 2022 }));
+
+  console.log(AffiliateDashboard);
 
   const affColumns = [
     {
       title: 'Email',
-      dataIndex: 'email',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'email'
     },
     {
       title: 'Registred on',
-      dataIndex: 'registredOn',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'registredOn'
     },
     {
       title: 'Total revenue',
       dataIndex: 'totalRevenue',
-      rowClassName: 'totalRevenue',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      rowClassName: 'totalRevenue'
     },
     {
       title: 'Subscription',
-      dataIndex: 'subscriptionRevenue',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'subscriptionRevenue'
     },
     {
       title: 'We list for you',
-      dataIndex: 'wlfRevenue',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'wlfRevenue'
     },
     {
       title: 'Tokens',
-      dataIndex: 'tokensRevenue',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'tokensRevenue'
     },
     {
       title: 'No api server',
-      dataIndex: 'noapiRevenue',
-      render: (value: string, record: AffiliatesDashboardStats) =>
-        value ? (
-          <div className="template-name">
-            <h4>{record.noApiServerCommission}</h4>
-          </div>
-        ) : (
-          ''
-        )
+      dataIndex: 'noapiRevenue'
+    }
+  ];
+
+  const affDummyData = [
+    {
+      email: 'test@gmail.com',
+      registredOn: '22/07/2022',
+      totalRevenue: '+$225',
+      subscriptionRevenue: '+$21',
+      wlfRevenue: '+$55',
+      tokensRevenue: '+$20',
+      noapiRevenue: '+$0'
     }
   ];
 
@@ -157,15 +112,8 @@ export const AffiliateDashboard = () => {
 
           <div className="table-stats">
             <h2>Revenue of your referrals</h2>
-            {loading ? (
-              <Spin />
-            ) : (
-              <DataTable
-                dataSource={affiliatesDashboard}
-                columns={affColumns}
-                totalItems={affiliatesDashboard.length}
-              />
-            )}
+
+            <DataTable dataSource={affDummyData} columns={affColumns} />
           </div>
         </div>
       </div>

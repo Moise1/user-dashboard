@@ -6,14 +6,15 @@ export interface Source {
   id: number;
   baseUrl: string;
   name: string;
-  site: number;
+  site:  string | number;
   recommended: boolean;
   catalogAllowed: boolean;
   manualAllowed: boolean;
   bulkAllowed: boolean;
   privateSupplier: boolean;
   listingServiceAllowed: number;
-  hasAutoOrder: boolean;
+  autoOrderingFee:null| number;
+  hasAutoOrder:boolean;
 }
 
 export interface SourcesState {

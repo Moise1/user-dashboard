@@ -8,7 +8,7 @@ import { SocialIcon } from 'react-social-icons';
 import moment from 'moment';
 import { CloseIcon } from '../../small-components/CloseIcon';
 import { ConfirmBtn, SuccessBtn } from '../../small-components/ActionBtns';
-import { Channel } from '../../redux/channels/channelsSlice';
+import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
 import { DataTable } from '../../small-components/tables/data-table';
 import { SearchInput } from '../../small-components/TableActionBtns';
 import { client } from '../../redux/client';
@@ -43,7 +43,7 @@ export const Dashboard = () => {
   const [postPerPage, setPostPerPage] = useState<number>(2);
   const [searchedChannels, setSearchedChannels] = useState<Channel[]>([]);
   const dispatch = useAppDispatch();
-  const { channels } = useAppSelector((state) => state.channels);
+  const { channels } = useAppSelector((state) => state.channels as ChannelsState);
   const { affiliatesStats } = useAppSelector((state) => state.affiliatesStats);
   const { noApiServersResult } = useAppSelector((state) => state.noApiServers);
   const { listingServicesResult } = useAppSelector((state) => state.listingServices);

@@ -1,7 +1,6 @@
-import React, { ReactNode, useState, useRef } from 'react';
-import { Form, Input, Button, Alert, Select, Spin, Layout } from 'antd';
+import React, { ReactNode, useState, useEffect, useRef } from 'react';
+import { Form, Input, Button, Alert, Select, Spin, Layout, Switch } from 'antd';
 import { t } from '../../utils/transShim';
-import { Switch } from '../../small-components/Switch';
 import { dummyUsers } from '../../dummy-data/dummyData';
 import { ConfirmBtn } from '../../small-components/ActionBtns';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
@@ -14,13 +13,16 @@ import '../../sass/auto-ordering.scss';
 import { useLocation } from 'react-router-dom';
 import { Selector, SelectorValue } from '../../small-components/form/selector';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { getSourceConfiguration } from 'src/redux/source-configuration/sources.coonfiguration-thunk';
+import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
+import { getSources } from 'src/redux/sources/sourcesThunk';
 
 export interface rawSettingInterface {
   key: number;
   value: string | number | undefined;
 }
-
 interface rawSettingValuesTypes {
+  first?: string;
   alias?: string | number | undefined;
   userName?: string | number | undefined;
   userPassword?: string | number | undefined;
@@ -35,6 +37,7 @@ interface rawSettingValuesTypes {
   provinceCountry?: string | number | undefined;
   country?: string | number | undefined;
   cardNumber?: string | number | undefined;
+  cvcNumber?: string | number | undefined;
   giftMessage?: string | number | undefined;
   giftFrom?: string | number | undefined;
   ip?: string | number | undefined;
@@ -43,29 +46,44 @@ interface rawSettingValuesTypes {
   credentialsPassword?: string | number | undefined;
   oPayment?: string | number | undefined;
   oGift?: string | number | undefined;
+  saleyeePaymentPassword?: string | number | undefined;
+  year?: string | number | undefined;
+  month?: string | number | undefined;
+  cardName?: string | number | undefined;
 }
-
 type LocationProps = {
   state: {
-    name: Location;
-    fee: number;
+    name: string;
+    autoOrderingFee: number | null;
+    id: number;
   };
 };
-
 export const AutoOrdering = () => {
-  const { loading } = useAppSelector((state) => state.saveAutoOrdering);
-  const deleteLoading = useAppSelector((state) => state.deleteAutoOrders.loading);
-  const location = useLocation() as unknown as LocationProps;
-  const { name, fee } = location.state;
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    getSourceConfiguration();
+    dispatch(getSources());
+  }, []);
+
+  const { loading } = useAppSelector((state) => state.saveAutoOrdering);
+  const deleteLoading = useAppSelector((state) => state.deleteAutoOrders.loading);
+  const { sources } = useAppSelector((state) => state.sources);
+  const location = useLocation() as unknown as LocationProps;
+  const { name, autoOrderingFee, id } = location.state;
+  const {
+    get: { settings },
+  } = useAppSelector((state) => state.sourcesConfiguration as SourceConfigurationState);
+
   //For API
   const [channelOAuthId] = useState(590881);
   const [supplierId] = useState(-1);
-  const [sourceId] = useState(1);
-
+  const [sourceId] = useState(id);
+  console.log(sources);
   const rawSettingIntialValues: rawSettingValuesTypes = {
-    alias: '',
+    first: ' ',
+    alias: ' ',
     userName: ' ',
     userPassword: ' ',
     otp: ' ',
@@ -79,6 +97,7 @@ export const AutoOrdering = () => {
     provinceCountry: ' ',
     country: ' ',
     cardNumber: ' ',
+    cvcNumber: ' ',
     giftMessage: ' ',
     giftFrom: ' ',
     ip: ' ',
@@ -86,36 +105,43 @@ export const AutoOrdering = () => {
     credentialsUserName: ' ',
     credentialsPassword: ' ',
     oPayment: ' ',
-    oGift: ' '
+    oGift: ' ',
+    saleyeePaymentPassword: ' ',
+    year: ' ',
+    month: ' ',
+    cardName: ' ',
   };
 
   const [rawSettings, setRawSetting] = useState<rawSettingInterface[]>([
-    { key: 1, value: rawSettingIntialValues.alias },
-    { key: 2, value: rawSettingIntialValues.userName },
-    { key: 3, value: rawSettingIntialValues.userPassword },
-    { key: 4, value: rawSettingIntialValues.otp },
-    { key: 5, value: rawSettingIntialValues.phone },
-    { key: 6, value: rawSettingIntialValues.firstName },
-    { key: 7, value: rawSettingIntialValues.lastName },
-    { key: 8, value: rawSettingIntialValues.streetLine1 },
-    { key: 9, value: rawSettingIntialValues.streetLine2 },
-    { key: 10, value: rawSettingIntialValues.postCode },
-    { key: 11, value: rawSettingIntialValues.townCity },
-    { key: 12, value: rawSettingIntialValues.provinceCountry },
-    { key: 13, value: rawSettingIntialValues.country },
-    { key: 14, value: rawSettingIntialValues.cardNumber },
-    { key: 15, value: rawSettingIntialValues.giftMessage },
-    { key: 16, value: rawSettingIntialValues.giftFrom },
-    { key: 17, value: rawSettingIntialValues.ip },
-    { key: 18, value: rawSettingIntialValues.port },
-    { key: 19, value: rawSettingIntialValues.credentialsUserName },
-    { key: 20, value: rawSettingIntialValues.credentialsPassword },
+    { key: 1, value: rawSettingIntialValues.first },
+    { key: 8, value: rawSettingIntialValues.alias },
+    { key: 5, value: rawSettingIntialValues.userName },
+    { key: 6, value: rawSettingIntialValues.userPassword },
+    { key: 7, value: rawSettingIntialValues.otp },
+    { key: 4, value: rawSettingIntialValues.phone },
+    { key: 12, value: rawSettingIntialValues.firstName },
+    { key: 10, value: rawSettingIntialValues.lastName },
+    { key: 11, value: rawSettingIntialValues.streetLine1 },
+    { key: 13, value: rawSettingIntialValues.streetLine2 },
+    { key: 17, value: rawSettingIntialValues.postCode },
+    { key: 15, value: rawSettingIntialValues.townCity },
+    { key: 16, value: rawSettingIntialValues.provinceCountry },
+    { key: 14, value: rawSettingIntialValues.country },
+    { key: 2, value: rawSettingIntialValues.cardNumber },
+    { key: 22, value: rawSettingIntialValues.giftMessage },
+    { key: 23, value: rawSettingIntialValues.giftFrom },
+    { key: 26, value: rawSettingIntialValues.ip },
+    { key: 27, value: rawSettingIntialValues.port },
+    { key: 29, value: rawSettingIntialValues.credentialsUserName },
+    { key: 30, value: rawSettingIntialValues.credentialsPassword },
     { key: 21, value: rawSettingIntialValues.oPayment },
-    { key: 22, value: rawSettingIntialValues.oGift }
+    { key: 22, value: rawSettingIntialValues.oGift },
+    { key: 32, value: rawSettingIntialValues.saleyeePaymentPassword },
+    { key: 3, value: rawSettingIntialValues.cvcNumber },
+    { key: 19, value: rawSettingIntialValues.month },
+    { key: 20, value: rawSettingIntialValues.year }
   ]);
-
   const { Option } = Select;
-
   const [accountConfig, setAccountConfig] = useState<string>(''); //Value for account
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [disable, setDisabled] = useState<boolean>(false); //For disabling the selector 
@@ -124,10 +150,10 @@ export const AutoOrdering = () => {
   const [showAccConfig] = useState<boolean>(true); //For opening the accountConfig
   const [showEnabledAccount, setShowEnabledAccount] = useState<boolean>(false); //To display enabled accounts
   const showAccounts = (): void => setShowEnabledAccount(!showEnabledAccount); //To display enabled accounts
-  const [trackingNo, setTrackingNo] = useState<boolean>(false); //To display Tracking number
+  const [trackingNo, setTrackingNo] = useState<boolean>(true); //To display Tracking number
   const trackingNoHandler = (): void => setTrackingNo(!trackingNo);
   const [enableDisable, setEnableDisable] = useState<string>('Enable'); //EnableDisable
-  const [enableDisablePhoneNo, setEnableDisablePhoneNo] = useState<string>('Set customers phone number'); //EnableDisablePhoneNumber
+  const [enableDisablePhoneNo, setEnableDisablePhoneNo] = useState<string>('Replace customers phone number'); //EnableDisablePhoneNumber
   const toggleEnableDisable = (): void => {
     enableDisable == 'Enable' ? setEnableDisable('Disabled') : setEnableDisable('Enable');
     enableDisable == 'Enable' ? setDisabled(true) : setDisabled(false);
@@ -231,40 +257,54 @@ export const AutoOrdering = () => {
   const credentialsUserPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[19].value = e.target.value;
   };
-  const paymentHandler = (e: string) => {
-    rawSettings[20].value = e;
+  const cvcHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[20].value = e.target.value;
   };
-  const giftHandler = (e: string) => {
-    rawSettings[21].value = e;
+  const monthHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[21].value = e.target.value;
+  };
+  const yearHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[22].value = e.target.value;
+  };
+  const cardNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[23].value = e.target.value;
+  };
+  const saleyeePaymentPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[24].value = e.target.value;
   };
 
   //Save Button Handler
   const saveAutoOrderHandler = () => {
     setRawSetting([
-      { key: 1, value: rawSettingIntialValues.alias },
-      { key: 2, value: rawSettingIntialValues.userName },
-      { key: 3, value: rawSettingIntialValues.userPassword },
-      { key: 4, value: rawSettingIntialValues.otp },
-      { key: 5, value: rawSettingIntialValues.phone },
-      { key: 6, value: rawSettingIntialValues.firstName },
-      { key: 7, value: rawSettingIntialValues.lastName },
-      { key: 8, value: rawSettingIntialValues.streetLine1 },
-      { key: 9, value: rawSettingIntialValues.streetLine2 },
-      { key: 10, value: rawSettingIntialValues.postCode },
-      { key: 11, value: rawSettingIntialValues.townCity },
-      { key: 12, value: rawSettingIntialValues.provinceCountry },
-      { key: 13, value: rawSettingIntialValues.country },
-      { key: 14, value: rawSettingIntialValues.cardNumber },
-      { key: 15, value: rawSettingIntialValues.giftMessage },
-      { key: 16, value: rawSettingIntialValues.giftFrom },
-      { key: 17, value: rawSettingIntialValues.ip },
-      { key: 18, value: rawSettingIntialValues.port },
-      { key: 19, value: rawSettingIntialValues.credentialsUserName },
-      { key: 20, value: rawSettingIntialValues.credentialsPassword },
+      { key: 8, value: rawSettingIntialValues.alias },
+      { key: 5, value: rawSettingIntialValues.userName },
+      { key: 6, value: rawSettingIntialValues.userPassword },
+      { key: 7, value: rawSettingIntialValues.otp },
+      { key: 4, value: rawSettingIntialValues.phone },
+      { key: 12, value: rawSettingIntialValues.firstName },
+      { key: 10, value: rawSettingIntialValues.lastName },
+      { key: 11, value: rawSettingIntialValues.streetLine1 },
+      { key: 13, value: rawSettingIntialValues.streetLine2 },
+      { key: 17, value: rawSettingIntialValues.postCode },
+      { key: 15, value: rawSettingIntialValues.townCity },
+      { key: 16, value: rawSettingIntialValues.provinceCountry },
+      { key: 14, value: rawSettingIntialValues.country },
+      { key: 2, value: rawSettingIntialValues.cardNumber },
+      { key: 22, value: rawSettingIntialValues.giftMessage },
+      { key: 23, value: rawSettingIntialValues.giftFrom },
+      { key: 26, value: rawSettingIntialValues.ip },
+      { key: 27, value: rawSettingIntialValues.port },
+      { key: 29, value: rawSettingIntialValues.credentialsUserName },
+      { key: 30, value: rawSettingIntialValues.credentialsPassword },
       { key: 21, value: rawSettingIntialValues.oPayment },
-      { key: 22, value: rawSettingIntialValues.oGift }
+      { key: 22, value: rawSettingIntialValues.oGift },
+      { key: 32, value: rawSettingIntialValues.saleyeePaymentPassword },
+      { key: 3, value: rawSettingIntialValues.cvcNumber },
+      { key: 19, value: rawSettingIntialValues.month },
+      { key: 20, value: rawSettingIntialValues.year }
     ]);
-    dispatch(saveAutoOrdering({ channelOAuthId, supplierId, sourceId, rawSettings }));
+    console.log('The rawSetting', rawSettings);
+    dispatch(saveAutoOrdering({ channelOAuthId, rawSettings, sourceId, supplierId }));
   };
 
   const btnDisabler = () => {
@@ -274,6 +314,8 @@ export const AutoOrdering = () => {
       return true;
     }
   };
+  console.log('setting', settings);
+  console.log('fee', autoOrderingFee);
   return (
     <Layout className="orders-container">
       {loading || deleteLoading ? (
@@ -284,45 +326,45 @@ export const AutoOrdering = () => {
           <div className="auto-ordering-container">
             <div className="auto-ordering-left">
               <p className="auto-ordering-p">
-                {fee === 1
+                {autoOrderingFee === 1
                   ? 'The cost of this service is 1% of every sale you make. Billed monthly.'
                   : `${name} autoordering is free`}
               </p>
-              {fee === 1 && (
+              {autoOrderingFee === 1 && (
                 <a href="#" className="auto-ordering-a">
-                  Configure password
+                  Configure Payment
                 </a>
               )}
               <div className={accountConfig ? 'adjusted-main-container' : 'main-container'}>
                 <div className="auto-ordering mt-22">
                   <div className="setting-list-item">
-                    <h2>{t('SourceConfigInputs.EnableDisableAutoOrdering')}</h2>
+                    <h2>{t('AutoOrderingConfiguration.Enable/DisableAuto-ordering')}</h2>
                     <p className="auto-ordering-p-secondary">
                       Disabling auto-ordering will require you to manually process new orders.
                     </p>
                   </div>
-                  <Switch onChange={showAccounts} className="switch" />
+                  <Switch onChange={showAccounts} />
                 </div>
 
                 <div className="auto-ordering mt-22">
                   <div className="setting-list-item">
-                    <h2>{t('SourceConfigInputs.MarkAsShippedOnYourStore')}</h2>
+                    <h2>{t('AutoOrderingConfiguration.Markasshippedonyourstore')}</h2>
                     <p className="auto-ordering-p-secondary">
                       If you disable this, after purchasing the product it wont be marked as shipped in your store
                     </p>
                   </div>
-                  <Switch onChange={trackingNoHandler} className="switch" />
+                  <Switch onChange={trackingNoHandler} defaultChecked />
                 </div>
                 {trackingNo && (
                   <>
                     <div className="auto-ordering mt-22">
                       <div className="setting-list-item">
-                        <h2>{t('SourceConfigInputs.SetTrackingNumber')}</h2>
+                        <h2>{t('AutoOrderingConfiguration.Settrackingnumber')}</h2>
                         <p className="auto-ordering-p-secondary">
                           If you disable this, a generated tracking number wont be set in your store
                         </p>
                       </div>
-                      <Switch className="switch" />
+                      <Switch className="switch" defaultChecked />
                     </div>
                   </>
                 )}
@@ -340,7 +382,7 @@ export const AutoOrdering = () => {
                     </div>
                     <div className="select-account  mt-2">
                       <h3 className="account-config" style={{ color: '#262e80' }}>
-                        {t('SourceConfigInputs.AccountConfiguration')} :
+                        {t('AutoOrderingConfiguration.AccountConfiguration')} :
                         <span className="account-alias">{accountData?.alias}</span>
                       </h3>
                       <Selector
@@ -378,11 +420,14 @@ export const AutoOrdering = () => {
                 <div className="account-details">
                   {showAccConfig && accountConfig && (
                     <>
-                      <Alert
-                        className="mtb-20 alert-text "
-                        message="Account must be prime or business prime"
-                        type="info"
-                      />
+                      {
+                        name == 'Amazon ' &&
+                        <Alert
+                          className="mtb-20 alert-text "
+                          message="Account must be prime or business prime"
+                          type="info"
+                        />
+                      }
                       <Alert
                         className="mtb-20 alert-text"
                         message="We strongly encourage you NOT to use this account for your personal purchases. Our system is connected to this account and any manual intervention could cause issues with your orders."
@@ -395,9 +440,9 @@ export const AutoOrdering = () => {
                             Orders will only be placed using enabled account. This account wont be used if disabled
                           </p>
                         </div>
-                        <Switch onChange={toggleEnableDisable} className="switch" />
+                        <Switch onChange={toggleEnableDisable} defaultChecked />
                       </div>
-                      {/* <fieldset disabled={!activeAccount}> */}
+
                       <Form className="form" layout="vertical">
                         <Form.Item label="Alias" name="alias">
                           <Input
@@ -427,21 +472,23 @@ export const AutoOrdering = () => {
                             />
                           </Form.Item>
                         </div>
-                        <Form.Item label="OTP Code (2FA)" name="otp">
-                          <a href="#" className="auto-ordering-a ">
-                            Obtain your otp
-                          </a>
-                          <Input
-                            defaultValue={rawSettingIntialValues.otp}
-                            name="otp"
-                            className="blue-input  "
-                            onChange={userOtpHandler}
-                          />
-                          {/* <CopyToClipboard text="" onCopy={() => setCopied(true)}>
+                        {
+                          name == 'Amazon ' &&
+                          <Form.Item label="OTP Code (2FA)" name="otp">
+                            <a href="#" className="auto-ordering-a ">
+                              Obtain your otp
+                            </a>
+                            <Input
+                              defaultValue={rawSettingIntialValues.otp}
+                              name="otp"
+                              className="blue-input  "
+                              onChange={userOtpHandler}
+                            />
+                            {/* <CopyToClipboard text="" onCopy={() => setCopied(true)}>
                           <img src={copy} alt="copy-icon" className="copy-icon" />
                         </CopyToClipboard> */}
-                        </Form.Item>
-
+                          </Form.Item>
+                        }
                         <Form.Item label="Phone" name="phone">
                           <Input
                             defaultValue={rawSettingIntialValues.phone}
@@ -458,137 +505,333 @@ export const AutoOrdering = () => {
                               By default it will be your phone number.
                             </p>
                           </div>
-                          <Switch onChange={toggleEnableDisablePhoneNo} className="switch" />
+                          <Switch onChange={toggleEnableDisablePhoneNo} className="switch" defaultChecked />
                         </div>
                       </Form>
-                      <h2 className="mt-2 heading-style">Billing Address</h2>
-                      <Form className="form mt-4" layout="vertical">
-                        <div className="platfrom-creds">
-                          <Form.Item label="First name" name="firstName">
-                            <Input
-                              name="firstName"
-                              defaultValue={rawSettingIntialValues.firstName}
-                              className="blue-input"
-                              onChange={userFirstNameHandler}
-                            />
-                          </Form.Item>
+                      {
+                        (name == 'VidaXL B2B') &&
+                        (
+                          <>
+                            <h2 className="heading-style">Payment method</h2>
+                            <Form.Item name="No" className="mt-4 paymentSelector">
+                              <p>
+                                Wallet is the only available payment method for VidaXL B2B. More methods will be added in the future.
+                              </p>
+                              <Select defaultValue="No" >
+                                <Option value="No">Wallet </Option>
+                              </Select>
+                            </Form.Item>
+                          </>
+                        )
+                      }
+                      {
+                        (name == 'Amazon ' || name == 'VidaXL'
+                          || name === 'Banggood COM' || name === 'Banggood UK' || name === 'Banggood '
+                        ) &&
+                        (
+                          <>
+                            {
+                              (name === 'VidaXL') &&
+                              (
+                                <Form className="form" layout="vertical">
+                                  <Form.Item label="Contact email" name="giftFrom">
+                                    <Input
+                                      defaultValue={rawSettingIntialValues.giftFrom}
+                                      name="giftFrom"
+                                      className="blue-input"
+                                      onChange={giftFromHandler}
+                                    />
+                                  </Form.Item>
+                                </Form>
+                              )
+                            }
+                            <h2 className="mt-2 heading-style">Billing Address</h2>
+                            <Form className="form mt-4" layout="vertical">
+                              <div className="platfrom-creds">
+                                <Form.Item label="First name" name="firstName">
+                                  <Input
+                                    name="firstName"
+                                    defaultValue={rawSettingIntialValues.firstName}
+                                    className="blue-input"
+                                    onChange={userFirstNameHandler}
+                                  />
+                                </Form.Item>
 
-                          <Form.Item label="Last name(s)" name="lastName">
-                            <Input
-                              defaultValue={rawSettingIntialValues.lastName}
-                              name="lastName"
-                              className="blue-input ml-1rem "
-                              onChange={userLastNameHandler}
-                            />
-                          </Form.Item>
-                        </div>
-                        <Form.Item label="Street Line 1" name="streetLine1">
-                          <Input
-                            defaultValue={rawSettingIntialValues.streetLine1}
-                            name="streetLine1"
-                            className="blue-input"
-                            onChange={streetLine1Handler}
-                          />
-                        </Form.Item>
+                                <Form.Item label="Last name(s)" name="lastName">
+                                  <Input
+                                    defaultValue={rawSettingIntialValues.lastName}
+                                    name="lastName"
+                                    className="blue-input ml-1rem "
+                                    onChange={userLastNameHandler}
+                                  />
+                                </Form.Item>
+                              </div>
+                              <Form.Item label="Street Line 1" name="streetLine1">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.streetLine1}
+                                  name="streetLine1"
+                                  className="blue-input"
+                                  onChange={streetLine1Handler}
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Street Line 2 (optional)" name="streetLine2">
-                          <Input
-                            defaultValue={rawSettingIntialValues.streetLine2}
-                            name="streetLine2"
-                            className="blue-input"
-                            onChange={streetLine2Handler}
-                          />
-                        </Form.Item>
+                              <Form.Item label="Street Line 2 (optional)" name="streetLine2">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.streetLine2}
+                                  name="streetLine2"
+                                  className="blue-input"
+                                  onChange={streetLine2Handler}
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Post Code" name="postCode">
-                          <Input
-                            defaultValue={rawSettingIntialValues.postCode}
-                            name="postCode"
-                            className="blue-input"
-                            onChange={postCodeHandler}
-                          />
-                        </Form.Item>
+                              <Form.Item label="Post Code" name="postCode">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.postCode}
+                                  name="postCode"
+                                  className="blue-input"
+                                  onChange={postCodeHandler}
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Town/City" name="townCity">
-                          <Input
-                            defaultValue={rawSettingIntialValues.townCity}
-                            name="townCity"
-                            className="blue-input"
-                            onChange={townCityHandler}
-                          />
-                        </Form.Item>
+                              <Form.Item label="Town/City" name="townCity">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.townCity}
+                                  name="townCity"
+                                  className="blue-input"
+                                  onChange={townCityHandler}
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Province/Country (if applicable)" name="provinceCountry">
-                          <Input
-                            defaultValue={rawSettingIntialValues.provinceCountry}
-                            name="provinceCountry"
-                            className="blue-input"
-                            onChange={provinceCountryHandler}
-                          />
-                        </Form.Item>
+                              <Form.Item label="Province/Country (if applicable)" name="provinceCountry">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.provinceCountry}
+                                  name="provinceCountry"
+                                  className="blue-input"
+                                  onChange={provinceCountryHandler}
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Country" name="country">
-                          <Input
-                            defaultValue={rawSettingIntialValues.country}
-                            name="country"
-                            className="blue-input"
-                            onChange={countryHandler}
-                          />
-                        </Form.Item>
-                      </Form>
+                              <Form.Item label="Country" name="country">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.country}
+                                  name="country"
+                                  className="blue-input"
+                                  onChange={countryHandler}
+                                />
+                              </Form.Item>
+                            </Form>
+                          </>
+                        )}
+                      {
+                        (name == 'Amazon ') &&
+                        (
+                          <>
+                            <h2 className="heading-style">Payment</h2>
+                            <Form.Item label="Use gift card " name="No" className="mt-4 paymentSelector">
+                              <Select defaultValue="No">
+                                <Option value="No">No </Option>
+                                <Option value="If Possible">If Possible</Option>
+                                <Option value="Ignore bank cards, use gift cards only">
+                                  Ignore bank cards, use gift cards only
+                                </Option>
+                              </Select>
+                            </Form.Item>
 
-                      <h2 className="heading-style">Payment</h2>
-                      <Form.Item label="Use gift card " name="No" className="mt-4 paymentSelector">
-                        <Select defaultValue="No" onChange={paymentHandler}>
-                          <Option value="No">No </Option>
-                          <Option value="If Possible">If Possible</Option>
-                          <Option value="Ignore bank cards, use gift cards only">
-                            Ignore bank cards, use gift cards only
-                          </Option>
-                        </Select>
-                      </Form.Item>
+                            <h2 className="heading-style">Card</h2>
+                            <Form.Item label="Card number" name="cardNumber" className="mt-4">
+                              <Input
+                                onChange={cardNumberHandler}
+                                defaultValue={rawSettingIntialValues.cardNumber}
+                                name="cardNumber"
+                                className="blue-input"
+                                placeholder="0000 0000 0000 0000"
+                              />
+                            </Form.Item>
 
-                      <h2 className="heading-style">Card</h2>
-                      <Form.Item label="Card number" name="cardNumber" className="mt-4">
-                        <Input
-                          onChange={cardNumberHandler}
-                          defaultValue={rawSettingIntialValues.cardNumber}
-                          name="cardNumber"
-                          className="blue-input"
-                          placeholder="0000 0000 0000 0000"
-                        />
-                      </Form.Item>
+                            <h2 className="heading-style">Gift</h2>
+                            <Form.Item label="Mark as gift" className="giftSelector" name="No">
+                              <Select defaultValue="No" >
+                                <Option value="No">No</Option>
+                                <Option value="Yes">Yes</Option>
+                              </Select>
+                            </Form.Item>
 
-                      <h2 className="heading-style">Gift</h2>
-                      <Form.Item label="Mark as gift" className="giftSelector" name="No">
-                        <Select defaultValue="No" onChange={giftHandler}>
-                          <Option value="No">No</Option>
-                          <Option value="Yes">Yes</Option>
-                        </Select>
-                      </Form.Item>
+                            <Form className="form" layout="vertical">
+                              <Form.Item label="Gift Message" name="giftMessage">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.giftMessage}
+                                  name="giftMessage"
+                                  className="blue-input"
+                                  onChange={giftMessageHandler}
+                                />
+                              </Form.Item>
 
-                      <Form className="form" layout="vertical">
-                        <Form.Item label="Gift Message" name="giftMessage">
-                          <Input
-                            defaultValue={rawSettingIntialValues.giftMessage}
-                            name="giftMessage"
-                            className="blue-input"
-                            onChange={giftMessageHandler}
-                          />
-                        </Form.Item>
+                              <Form.Item label="Gift From" name="giftFrom">
+                                <Input
+                                  defaultValue={rawSettingIntialValues.giftFrom}
+                                  name="giftFrom"
+                                  className="blue-input"
+                                  onChange={giftFromHandler}
+                                />
+                              </Form.Item>
+                            </Form>
+                          </>
+                        )
+                      }
+                      {(name === 'JD Williams' || name === 'Costco ' || name === 'Costway' || name === 'Robert Dyas' ||
+                        name === 'SaleYee' || name === 'Walmart' || name === 'Zavvi' || name === 'VidaXL'
+                      ) && (
+                        <>
+                          <h1>Payment</h1>
+                          {name === 'SaleYee'
+                              && (
+                                <>
+                                  <h3>SaleYee payment password</h3>
+                                  <Form.Item name="saleyeePaymentPassword" className="mt-4">
+                                    <Input
+                                      onChange={saleyeePaymentPasswordHandler}
+                                      defaultValue={rawSettingIntialValues.saleyeePaymentPassword}
+                                      name="saleyeePaymentPassword"
+                                      className="blue-input"
+                                      placeholder="0000 0000 0000 0000"
+                                    />
+                                  </Form.Item>
+                                </>
+                              )
+                          }
+                          <h4 className="heading-style">Card</h4>
+                          {
+                            (name === 'Costco ' || name === 'Walmart' || name === 'Zavvi' || name === 'JD Williams') ?
+                              <h4>Last 4 digits of your card number (Card must be saved previously on {name})</h4>
+                              :
+                              <h4>Card number</h4>
+                          }
+                          <>
+                            <Form className="form mt-4" layout="vertical">
+                              <Form.Item name="cardNumber" className="mt-4">
+                                <Input
+                                  onChange={cardNumberHandler}
+                                  defaultValue={rawSettingIntialValues.cardNumber}
+                                  name="cardNumber"
+                                  className="blue-input"
+                                  placeholder="0000 0000 0000 0000"
+                                />
+                              </Form.Item>
+                              <Form.Item name="cvcNumber" label="CVV" className="mt-4">
+                                <Input
+                                  onChange={cvcHandler}
+                                  defaultValue={rawSettingIntialValues.cvcNumber}
+                                  name="cvcNumber"
+                                  className="blue-input"
+                                  placeholder="0000 0000 0000 0000"
+                                />
+                              </Form.Item>
+                            </Form>
+                          </>
+                        </>
+                      )
+                      }
+                      {(name === 'Costway' || name === 'Robert Dyas'
+                        || name === 'SaleYee' || name === 'VidaXL'
+                      ) &&
+                        (
+                          <>
+                            <Form className="form mt-4" layout="vertical">
+                              <Form.Item name="cardName" label="Complete name that appears in the card" className="mt-4">
+                                <Input
+                                  onChange={cardNameHandler}
+                                  defaultValue={rawSettingIntialValues.cardName}
+                                  name="cardName"
+                                  className="blue-input"
+                                  placeholder="0000 0000 0000 0000"
+                                />
+                              </Form.Item>
 
-                        <Form.Item label="Gift From" name="giftFrom">
-                          <Input
-                            defaultValue={rawSettingIntialValues.giftFrom}
-                            name="giftFrom"
-                            className="blue-input"
-                            onChange={giftFromHandler}
-                          />
-                        </Form.Item>
-                      </Form>
+                              <div className="platfrom-creds">
+                                <Form.Item label='Month' name="month">
+                                  <Input
+                                    defaultValue={rawSettingIntialValues.month}
+                                    className="blue-input"
+                                    name="month"
+                                    onChange={monthHandler}
+                                  />
+                                </Form.Item>
 
-                      {/* </fieldset> */}
-                      <h2 className="heading-style">Proxy</h2>
+                                <Form.Item label='Year' name="year">
+                                  <Input
+                                    defaultValue={rawSettingIntialValues.year}
+                                    className="blue-input ml-1rem "
+                                    name="year"
+                                    onChange={yearHandler}
+                                  />
+                                </Form.Item>
+                              </div>
+                            </Form>
+                          </>
+                        )
+                      }
+                      {
+                        (name === 'SaleYee') &&
+                        (
+                          <>
+                            <h1>Other Options</h1>
+                            <div className="auto-ordering mt-22">
+                              <div className="setting-list-item">
+                                <h2>Return Protection Service</h2>
+                                <p className="auto-ordering-p-secondary">
+                                  Enabling protection services could increse order&apos;s cost.
+                                </p>
+                              </div>
+                              <Switch onChange={showAccounts} className="switch" />
+                            </div>
+
+                            <div className="auto-ordering mt-22">
+                              <div className="setting-list-item">
+                                <h2>Logistics Protection Service</h2>
+                                <p className="auto-ordering-p-secondary">
+                                  Enabling protection services could increse order&apos;s cost.
+                                </p>
+                              </div>
+                              <Switch onChange={showAccounts} className="switch" />
+                            </div>
+                          </>
+                        )
+                      }
+                      {
+                        (name === 'Banggood COM' || name === 'Banggood UK' || name === 'Banggood ')
+                        &&
+                        (
+                          <>
+                            <h2 className="heading-style">Payment</h2>
+                            <Form.Item label="Use Banggood Com points" name="No" className="mt-4 paymentSelector">
+                              <Select defaultValue="No" >
+                                <Option value="No">No</Option>
+                                <Option value="Yes">Yes</Option>
+                              </Select>
+                            </Form.Item>
+
+                            <Form.Item label="Payment method" className="giftSelector" name="No">
+                              <Select defaultValue="Card" >
+                                <Option value="Card">Card</Option>
+                                <Option value="Paypal">Paypal</Option>
+                              </Select>
+                            </Form.Item>
+
+                            <h2 className="heading-style">Card</h2>
+                            <h4>Last 4 digits of your card number (Card must be saved previously on Banggood Com)</h4>
+
+                            <Form.Item name="cardNumber">
+                              <Input
+                                defaultValue={rawSettingIntialValues.cardNumber}
+                                name="cardNumber"
+                                className="blue-input"
+                                onChange={cardNumberHandler}
+                              />
+                            </Form.Item>
+                          </>
+                        )
+                      }
+                      <h1>Proxy</h1>
                       <div className="disable-account mt-4">
                         <div className="disable-account-text">
                           <h2>Custom proxy</h2>
