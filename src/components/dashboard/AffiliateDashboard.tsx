@@ -1,18 +1,21 @@
 import { Link } from 'react-router-dom';
 import { CalendarOutlined, LeftOutlined, RiseOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
-import { useAppDispatch } from '../../custom-hooks/reduxCustomHooks';
+import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/affiliate-dashboard.scss';
 
 import { DataTable } from 'src/small-components/tables/data-table';
 import { getAffiliateDashboard } from 'src/redux/dashboard/affiliatesStatsThunk';
+import { useEffect } from 'react';
+import { Spin } from 'antd';
 
 export const AffiliateDashboard = () => {
   const dispatch = useAppDispatch();
+  const { affiliatesDashboard, loading } = useAppSelector((state) => state.affiliatesDashboard);
 
-  const AffiliateDashboard = dispatch(getAffiliateDashboard({ month: 7, year: 2022 }));
-
-  console.log(AffiliateDashboard);
+  useEffect(() => {
+    dispatch(getAffiliateDashboard({ month: 7, year: 2021 }));
+  }, [getAffiliateDashboard]);
 
   const affColumns = [
     {
@@ -21,42 +24,46 @@ export const AffiliateDashboard = () => {
     },
     {
       title: 'Registred on',
-      dataIndex: 'registredOn'
+      dataIndex: 'createdOn'
     },
     {
       title: 'Total revenue',
       dataIndex: 'totalRevenue',
-      rowClassName: 'totalRevenue'
+      rowClassName: 'totalRevenue',
+      render: (totalRevenue: string) => <>&#163;{totalRevenue} </>
     },
-    {
-      title: 'Subscription',
-      dataIndex: 'subscriptionRevenue'
-    },
+    //{
+    //  title: 'Subscription',
+    //  dataIndex: 'subscriptionRevenue'
+    //},
     {
       title: 'We list for you',
-      dataIndex: 'wlfRevenue'
+      dataIndex: 'weListForYouRevenue',
+      render: (weListForYouRevenue: string) => <>&#163;{weListForYouRevenue} </>
     },
     {
       title: 'Tokens',
-      dataIndex: 'tokensRevenue'
+      dataIndex: 'tokensRevenue',
+      render: (tokensRevenue: string) => <>&#163;{tokensRevenue} </>
     },
     {
       title: 'No api server',
-      dataIndex: 'noapiRevenue'
+      dataIndex: 'noApiRevenue',
+      render: (noApiRevenue: string) => <>&#163;{noApiRevenue} </>
     }
   ];
 
-  const affDummyData = [
-    {
-      email: 'test@gmail.com',
-      registredOn: '22/07/2022',
-      totalRevenue: '+$225',
-      subscriptionRevenue: '+$21',
-      wlfRevenue: '+$55',
-      tokensRevenue: '+$20',
-      noapiRevenue: '+$0'
-    }
-  ];
+  //const affDummyData = [
+  //  {
+  //    email: 'test@gmail.com',
+  //    registredOn: '22/07/2022',
+  //    totalRevenue: '+$225',
+  //    subscriptionRevenue: '+$21',
+  //    wlfRevenue: '+$55',
+  //    tokensRevenue: '+$20',
+  //    noapiRevenue: '+$0'
+  //  }
+  //];
 
   return (
     <div className="affiliate-dashboard-container">
@@ -112,8 +119,11 @@ export const AffiliateDashboard = () => {
 
           <div className="table-stats">
             <h2>Revenue of your referrals</h2>
-
-            <DataTable dataSource={affDummyData} columns={affColumns} />
+            {loading ? (
+              <Spin />
+            ) : (
+              <DataTable dataSource={affiliatesDashboard.userWiseHistory} columns={affColumns} />
+            )}
           </div>
         </div>
       </div>
