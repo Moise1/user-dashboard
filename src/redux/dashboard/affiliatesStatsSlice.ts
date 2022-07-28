@@ -7,29 +7,30 @@ export interface AffiliatesStats {
 }
 
 export interface AffiliatesDashboardStats {
-  affiliatesDashboard: AffiliatesDashboardStats[];
   loading: boolean;
-  catalogTokensCommission: string;
-  catalogTokensCount: string;
-  noApiServerCommission: string;
-  noApiServerCount: string;
-  percentageCatalog: string;
-  percentageConversion: string;
-  percentageLinked: string;
-  percentageListed: string;
-  percentageNoApiServer: string;
-  percentageReferral: string;
-  percentageWeListForYou: string;
-  referralsLinked: string;
-  referralsListed: string;
-  revenueBySignup: string;
-  totalCommission: string;
-  totalReferralsCommission: string;
-  totalReferralsCount: string;
-  totalSignups: string;
-  totalSignupsThisMonth: string;
-  weListForYouCommission: string;
-  weListForYouCount: string;
+  catalogTokensCommission: number;
+  catalogTokensCount: number;
+  history: [{ day: Date }, { signups: number }];
+  noApiServerCommission: number;
+  noApiServerCount: number;
+  percentageCatalog: number;
+  percentageComission: number;
+  percentageConversion: number;
+  percentageLinked: number;
+  percentageListed: number;
+  percentageNoApiServer: number;
+  percentageReferral: number;
+  percentageWeListForYou: number;
+  referralsLinked: number;
+  referralsListed: number;
+  revenueBySignup: number;
+  totalCommission: number;
+  totalReferralsCommission: number;
+  totalReferralsCount: number;
+  totalSignups: number;
+  totalSignupsThisMonth: number;
+  weListForYouCommission: number;
+  weListForYouCount: number;
 }
 
 const initialState = {
@@ -39,7 +40,7 @@ const initialState = {
 };
 
 const initialsState = {
-  affiliatesDashboard: [] as AffiliatesDashboardStats[],
+  affiliatesDashboard: {} as AffiliatesDashboardStats,
   loading: false,
   error: ''
 };
