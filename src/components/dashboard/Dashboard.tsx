@@ -50,7 +50,7 @@ export const Dashboard = () => {
   const { sales } = useAppSelector((state) => state.sales);
   const [, setIsCopied] = useState<boolean>(false);
   const [affiliate, setAffiliate] = useState<string>('');
-  const [percentageCommission, setPercentageCommission] = useState<number>(10);
+  const [percentageCommission, setPercentageCommission] = useState(10);
   const [productQuota, setProductQuota] = useState<ProductQuota>();
   const [selectedPeriod, setSelectedPeriod] = useState<number>(4);
   const [affiliatePeriod, setAffiliatePeriod] = useState<number>(4);
@@ -160,7 +160,6 @@ export const Dashboard = () => {
       setIsCopied(false);
     }, 1000);
   };
-
 
   const salesDateChange = async (value: number, dateString: [string, string]) => {
     if (Array.isArray(dateString)) {
