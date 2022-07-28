@@ -426,6 +426,7 @@ export const OrderContent = (props: Props) => {
           </>
         )}
       </div>
+      (!updating &&
       <div className="row">
         <div className="col-12 d-flex flex-column-reverse flex-lg-row justify-content-between ">
           <div className="row">
