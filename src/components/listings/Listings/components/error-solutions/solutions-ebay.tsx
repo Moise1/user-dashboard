@@ -44,46 +44,32 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
   const Error640 = () => <p key="_640"><TTag lKey='Error.Solution.eBay.Error640' /></p>;
   const Error717 = () => <p key="_717"><TTag lKey='Error.Solution.eBay.Error717'/></p>;
   const Error21919067 = () => <p key="_21919067"><TTag lKey='Error.Solution.eBay.Error21919067' /></p>;
-  const Error21919188 = () => (
-    <p key="_21919188">You are about to exceed your eBay listing limit. Contact eBay to increase your limit.</p>
-  );
-  const Error21920061 = () => (
-    <p key="_21920061">
-      You have entered an incorrect Attribute for your variation. In order to fix your listing you have to change
-      the attribute and choose another one instead. Once you have done this, please Save changes and click Retry
-      for your listing to get published.
-    </p>
-  );
+  const Error21919188 = () => <p key="_21919188"><TTag lKey='Error.Solution.eBay.Error21919188' /></p>;
+  const Error21920061 = () => <p key="_21920061"><TTag lKey="Error.Solution.eBay.Error21920061"/></p>;
   const Error121 = (site: eCountry) => {
     const domain = Platforms[ePlatform.eBay].domain[site];
     const ebayLink1 = 'https://fundinginstrument.ebay.' + domain + '/piapp/apmentry';
-    const ebayLink2 =
-      'https://my.ebay.' +
-      domain +
-      '/ws/eBayISAPI.dll?MyEbay&CurrentPage=MyeBayPayPalAccounts&FClassic=true&ssPageName=STRK%3AME%3AMAPPX';
+    const ebayLink2 = 'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyEbay&CurrentPage=MyeBayPayPalAccounts&FClassic=true&ssPageName=STRK%3AME%3AMAPPX';
     return (
       <>
         <p key="_121_1">
-          In order to fix it, you can do the following:
+          <TTag lKey="Error.Solution.eBay.Error21920061.1"/>
           <ol>
             <li key="1">
-              Access your eBay account and introduce your billing details. If you are not able to find the
-              section, please contact eBay via the chat on their site and request them to send you the
-              link to complete your billing details.
+              <TTag lKey="Error.Solution.eBay.Error21920061.2"/>
             </li>
             <li key="2">
-              Once you have updated this information, come back to My Listings section in HGR and click on
-              Retry on the listings that are currently showing this error.
+              <TTag lKey="Error.Solution.eBay.Error21920061.3" />
             </li>
           </ol>
         </p>
         <p key="121_2">
-          You can also visit:{' '}
+          <TTag lKey="Error.Solution.eBay.Error120.5.1" />
           <a href={ebayLink1} rel="noreferrer" target='_blank'>
             {ebayLink1}
           </a>
           <br />
-          or{' '}
+          <TTag lKey="Error.Solution.eBay.Error21920061.4" />
           <a href={ebayLink2} rel="noreferrer" target='_blank'>
             {ebayLink2}
           </a>
@@ -105,63 +91,42 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         <p key="_21917158_1">
           <ol>
             <li key="1">
-              Go to your{' '}
-              <a rel="noreferrer" target='_blank'
-                href={
-                  'https://my.ebay.' +
-                  domain +
-                  '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBaySellerAccounts&gbh=1&ssPageName=STRK:ME:LNLK'
-                }
-              >
-                Seller Account
-              </a>{' '}
-              in My eBay
+              <TTag lKey="Error.Solution.eBay.Error21917158.1"/>
+              <a rel="noreferrer" target='_blank' href={'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBaySellerAccounts&gbh=1&ssPageName=STRK:ME:LNLK'}>
+                <TTag lKey="Error.Solution.eBay.Error21917158.2" />
+              </a>
+              <TTag lKey="Error.Solution.eBay.Error21917158.3" />
             </li>
-            <li key="2">
-              Look for <b>Payment methods for seller fees</b> and select <b>Change</b>.
-            </li>
-            <li key="3">From the dropdown menu, choose your preferred payment method.</li>
-            <li key="4">
-              Enter your information. For direct debit or card payment, select <b>Save</b>. For PayPal,
-              select <b>Continue</b>.
-            </li>
+            <li key="2"><TTag lKey="Error.Solution.eBay.Error21917158.4"/></li>
+            <li key="3"><TTag lKey="Error.Solution.eBay.Error21917158.5" /></li>
+            <li key="4"><TTag lKey="Error.Solution.eBay.Error21917158.6" /></li>
           </ol>
         </p>
-        <p key="_21917158_2">
-          If you choose direct debit or credit card, you’ll need to enter your bank or card details. If your
-          card is declined during verification, while making payment, or at some other time, you should
-          contact your card issuer.
-        </p>
-        <p key="_21917158_3">You usually can’t use a pre-paid credit card to verify your account.</p>
-        <p key="_21917158_4">
-          If you choose to pay by PayPal, you’ll be redirected to the PayPal site to complete the process.
-        </p>
+        <p key="_21917158_2"><TTag lKey="Error.Solution.eBay.Error21917158.7" /></p>
+        <p key="_21917158_3"><TTag lKey="Error.Solution.eBay.Error21917158.8" /></p>
+        <p key="_21917158_4"><TTag lKey="Error.Solution.eBay.Error21917158.9" /></p>
       </>
     );
   };
   const Error354 = (site: eCountry) => {
     const domain = Platforms[ePlatform.eBay].domain[site];
-    const ebaylink =
-      'https://my.ebay.' +
-      domain +
-      '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBayPayPalAccounts&gbh=1&ssPageName=STRK:ME:LNLK';
+    const ebaylink = 'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBayPayPalAccounts&gbh=1&ssPageName=STRK:ME:LNLK';
 
     return (
       <p key="_354">
-        You need to set up a billing method before you start selling:
+        <TTag lKey="Error.Solution.eBay.Error354.1"/>
         <ol>
           <li key="1">
-            Access your eBay account and introduce your billing details{' '}
+            <TTag lKey="Error.Solution.eBay.Error354.2" />
             <a rel="noreferrer" target='_blank' href={ebaylink}>
-              here
+              <TTag lKey="Error.Solution.eBay.Error354.3" />
             </a>
-            .
+            <TTag lKey="Error.Solution.eBay.Error354.4" />
           </li>
           <li key="2">
-            Access your HGR account and introduce your payment method, this information is required to start
-            listing. You can do so{' '}
+            <TTag lKey="Error.Solution.eBay.Error354.5" />
             <a href="/ChannelConfiguration#business">
-              here
+              <TTag lKey="Error.Solution.eBay.Error354.3" />
             </a>
           </li>
         </ol>
@@ -170,22 +135,13 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
   };
   const Error21916328 = (error: string) => {
     if (error.indexOf('InternationalReturnsAcceptedOption') >= 0) {
-      return (
-        <p key="_21916328">
-          Make sure that you accept International returns if you are opted into the GSP and sell
-          internationally. Please review your return policy and update it accordingly on eBay.
-        </p>
-      );
+      return <p key="_21916328"><TTag lKey="Error.Solution.eBay.Error21916328" /></p>;
     }
     return <></>;
   };
   const Error21919301 = (error: string) => {
     if (Contains(error, 'ISBN')) {
-      return (
-        <p key="_21919301">
-          Fix this listing, you must enter the ISBN in the field provided and click on Retry.
-        </p>
-      );
+      return <p key="_21919301"><TTag lKey="Error.Solution.eBay.Error21919301"/></p>;
     }
 
     return <></>;
@@ -193,7 +149,7 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
   const Error21916503 = () => (
     <p>
       <TTag lKey='Error.Solution.eBay.Error21916503.1'/>
-      <a href="/SourceConfiguration">S<TTag lKey='Error.Solution.eBay.Error21916503.2' /></a>
+      <a href="/SourceConfiguration"><TTag lKey='Error.Solution.eBay.Error21916503.2' /></a>
       <TTag lKey='Error.Solution.eBay.Error21916503.3' />
     </p>
   );
@@ -211,12 +167,11 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
   };
   const Error21915469 = () => (
     <p key="_21915469">
-      Please make sure that you enter your location city under{' '}
-      <a href="/ChannelConfiguration#Business"> Settings &gt; Channel &gt; Business</a>. It is a mandatory field
-      that you haven’t filled in.
+      <TTag lKey="Error.Solution.eBay.Error21915469.1" />
+      <a href="/ChannelConfiguration#Business"><TTag lKey="Error.Solution.eBay.Error21915469.2" /></a>
+      <TTag lKey="Error.Solution.eBay.Error21915469.3" />
     </p>
   );
-
 
   const solution: JSX.Element[] = [];
   if (errorSourceInfo) {
@@ -295,13 +250,13 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
           <p key="_x">
             <ol>
               <li key="1">
-                Click <b>Edit Listing</b>
+                <TTag lKey="Error.Solution.eBay.old.7"/>
               </li>
               <li key="2">
-                Change <b>Delivery</b> field
+                <TTag lKey="Error.Solution.eBay.old.8" />
               </li>
               <li key="3">
-                Click <b>Save and Retry</b>
+                <TTag lKey="Error.Solution.eBay.old.9" />
               </li>
             </ol>
           </p>
@@ -312,33 +267,18 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
       solution.push(<p key="_y"><TTag lKey='Error.Solution.eBay.old.1'/></p>);
     }
     if (Contains(error, 'Your location is missing')) {
-      solution.push(
-        <p key="_z">
-          Review your account settings and make sure that the location has been set. After that, you can
-          click on Retry.
-        </p>
-      );
+      solution.push(<p key="_z"><TTag lKey="Error.Solution.eBay.old.10"/></p>);
     }
     if (Contains(error, 'The MPN is missing')) {
       solution.push(<p key="_xx"><TTag lKey='Error.Solution.eBay.old.2'/></p>);
     }
     if (Contains(error, 'Item specifics missing')) {
-      solution.push(
-        <p key="_xy">
-          Edit your listing and make sure that all the mandatory specifics have been filled in. After
-          that, click on Retry.
-        </p>
-      );
+      solution.push(<p key="_xy"><TTag lKey="Error.Solution.eBay.old.11"/></p>);
     }
     if (
       Contains(error, "Unable to obtain product information: We couldn't find any price in the product page.")
     ) {
-      solution.push(
-        <p key="_xz">
-          The item that you are trying to list is out of stock. If you still want to list it, you can
-          manually list it using the extension instead.
-        </p>
-      );
+      solution.push(<p key="_xz"><TTag lKey="Error.Solution.eBay.old.12"/></p>);
     }
     if (
       Contains(
@@ -346,7 +286,7 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         'The item specific Type is missing. Add Type to this listing, enter a valid value and then try again.'
       )
     ) {
-      solution.push(<p key="_yx">You must enter the Type in the field provided and click on Retry.</p>);
+      solution.push(<p key="_yx"><TTag lKey="Error.Solution.eBay.old.13" /></p>);
     }
     if (Contains(error, 'his listing would cause you to exceed the amount you can list')) {
       const domain = Platforms[ePlatform.eBay].domain[site];
@@ -357,40 +297,33 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
       solution.push(
         <>
           <p key="_yz1">
-            This error simply means that the item you are trying to list will cause you to exceed the
-            limit of quantity or total items value eBay allows you to list for that particular month.
+            <TTag lKey="Error.Solution.eBay.old.14" />
           </p>
           <p key="_zx2">
-            You will need to reduce the quantity or price(s) of the item you want to list to be within
-            the limit allowed by eBay for that month to be able to successfully list it.
+            <TTag lKey="Error.Solution.eBay.old.15"/>
           </p>
           <p key="_zy3">
-            Another option is also to request to be allowed to list more. To do so, simply go{' '}
+            <TTag lKey="Error.Solution.eBay.old.16" />
             <a href={ebaylink} target="_blank" rel="noreferrer">
-                here
+              <TTag lKey="Error.Solution.eBay.Error354.3"/>
             </a>
-            .
+            <TTag lKey="Error.Solution.eBay.Error354.4"/>
           </p>
           <p key="_zz4">
-            You can visit your{' '}
+            <TTag lKey="Error.Solution.eBay.old.17" />
             <a href={ebayLink2} target="_blank" rel="noreferrer">
-                eBay seller dashboard
-            </a>{' '}
-            to see your current selling limit.
+              <TTag lKey="Error.Solution.eBay.old.18" />
+            </a>
+            <TTag lKey="Error.Solution.eBay.old.19" />
           </p>
         </>
       );
     }
     if (Contains(error, 'Invalid token. You must relink your account.')) {
-      solution.push(
-        <p key="_ax">
-          Your eBay account has been removed, perhaps you changed your password on eBay. In order to fix
-          this, you have to relink your eBay account to HGR.
-        </p>
-      );
+      solution.push(<p key="_ax"><TTag lKey="Error.Solution.eBay.old.20"/></p>);
     }
     if (Contains(error, 'Sorry, something went wrong. Please wait a moment and try again.')) {
-      solution.push(<p key="_ay">This error was returned by eBay. To solve this click on retry.</p>);
+      solution.push(<p key="_ay"><TTag lKey="Error.Solution.eBay.old.21"/></p>);
     }
     if (
       Contains(
@@ -403,23 +336,13 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
 
     //Our errors
     if (Contains(error, 'Ignored because it was out of stock')) {
-      solution.push(
-        <p key="_aa">
-          The item that you are trying to list is out of stock. If you still want to list it, you can
-          manually list it using the extension instead.
-        </p>
-      );
+      solution.push(<p key="_aa"><TTag lKey="Error.Solution.eBay.old.12"/></p>);
     }
     if (Contains(error, 'Object reference not set to an instance of an object.')) {
-      solution.push(<p key="_bx">Please email us at contact@hustlegotreal.com and we will help you.</p>);
+      solution.push(<p key="_bx"><TTag lKey="Error.Solution.eBay.old.22" /></p>);
     }
     if (Contains(error, 'Product is in VeRO list')) {
-      solution.push(
-        <p key="_by">
-          The item that you are trying to list is on the VeRO list. If you still want to list it, you can
-          manually list it using the extension instead.
-        </p>
-      );
+      solution.push(<p key="_by"><TTag lKey="Error.Solution.eBay.old.23" /></p>);
     }
     if (Contains(error, 'his item can only be sold domestically')) {
       solution.push(<p key="_bz"><TTag lKey='Error.Solution.eBay.old.3'/></p>);
@@ -456,8 +379,7 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         solution.push(
           <>
             <p key="_120">
-              The email provided in your settings is not a valid PayPal Account. eBay requires one method to
-              pay, in case you have selected PayPal, you must save it in channel settings business.
+              <TTag lKey="Error.Solution.eBay.Warning21919158"/>
             </p>
           </>
         );
@@ -468,13 +390,13 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
             <p>
               <ol>
                 <li key="1">
-                  Click <b>Edit Listing</b>
+                  <TTag lKey="Error.Solution.eBay.old.7"/>
                 </li>
                 <li key="2">
-                  Change <b>Delivery</b> field
+                  <TTag lKey="Error.Solution.eBay.old.8" />
                 </li>
                 <li key="3">
-                  Click <b>Save and Retry</b>
+                  <TTag lKey="Error.Solution.eBay.old.9" />
                 </li>
               </ol>
             </p>
@@ -491,34 +413,19 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         solution.push(<p><TTag lKey='Error.Solution.eBay.old.1'/></p>);
       }
       if (Contains(error, 'Your location is missing')) {
-        solution.push(
-          <p>
-            Review your account settings and make sure that the location has been set. After that, you can click
-            on Retry.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.10"/></p>);
       }
       if (Contains(error, 'The ISBN field is missing')) {
-        solution.push(<p>You must enter the ISBN in the field provided and click on Retry.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.Error21919301"/></p>);
       }
       if (Contains(error, 'The MPN is missing')) {
         solution.push(<p><TTag lKey='Error.Solution.eBay.old.2'/></p>);
       }
       if (Contains(error, 'Item specifics missing')) {
-        solution.push(
-          <p>
-            Edit your listing and make sure that all the mandatory specifics have been filled in. After that,
-            click on Retry.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.11"/></p>);
       }
       if (Contains(error, "Unable to obtain product information: We couldn't find any price in the product page.")) {
-        solution.push(
-          <p>
-            The item that you are trying to list is out of stock. If you still want to list it, you can manually
-            list it using the extension instead.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.12"/></p>);
       }
       if (
         Contains(
@@ -526,35 +433,25 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
           'The item specific Type is missing. Add Type to this listing, enter a valid value and then try again.'
         )
       ) {
-        solution.push(<p>You must enter the Type in the field provided and click on Retry.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.13"/></p>);
       }
       if (Contains(error, 'Ignored because it was out of stock')) {
-        solution.push(
-          <p>
-            The item that you are trying to list is out of stock. If you still want to list it, you can manually
-            list it using the extension instead.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.12" /></p>);
       }
       if (Contains(error, 'Object reference not set to an instance of an object.')) {
-        solution.push(<p>Please email us at contact@hustlegotreal.com and we will help you.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.22" /></p>);
       }
       if (Contains(error, 'Product is in VeRO list')) {
-        solution.push(
-          <p>
-            The item that you are trying to list is on the VeRO list. If you still want to list it, you can
-            manually list it using the extension instead.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.23" /></p>);
       }
       if (Contains(error, 'Index was out of range. Must be non-negative and less than the size of the collection')) {
-        solution.push(<p>Review your listing and edit the this field. Once you have done this, click Retry.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.24"/></p>);
       }
       if (Contains(error, 'his listing is for an item you already have on eBay')) {
         solution.push(<p><TTag lKey='Error.Solution.eBay.old.6'/></p>);
       }
       if (Contains(error, 'his listing would cause you to exceed your listing limit')) {
-        solution.push(<p>You are about to exceed your eBay listing limit. Contact eBay to increase your limit.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.Error21919188"/></p>);
       }
       if (Contains(error, 'his listing would cause you to exceed the amount you can list')) {
         const domain = Platforms[ePlatform.eBay].domain[site];
@@ -565,26 +462,24 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         solution.push(
           <>
             <p key="1">
-              This error simply means that the item you are trying to list will cause you to exceed the limit
-              of quantity or total items value eBay allows you to list for that particular month.
+              <TTag lKey="Error.Solution.eBay.old.14"/>
             </p>
             <p key="2">
-              You will need to reduce the quantity or price(s) of the item you want to list to be within the
-              limit allowed by eBay for that month to be able to successfully list it.
+              <TTag lKey="Error.Solution.eBay.old.15" />
             </p>
             <p key="3">
-              Another option is also to request to be allowed to list more. To do so, simply go{' '}
+              <TTag lKey="Error.Solution.eBay.old.16" />
               <a rel="noreferrer" target='_blank' href={ebaylink}>
-                here
+                <TTag lKey="Error.Solution.eBay.Error354.3"/>
               </a>
-              .
+              <TTag lKey="Error.Solution.eBay.Error354.4" />
             </p>
             <p key="4">
-              You can visit your{' '}
+              <TTag lKey="Error.Solution.eBay.old.17" />
               <a rel="noreferrer" target='_blank' href={ebayLink2}>
-                eBay seller dashboard
-              </a>{' '}
-              to see your current selling limit.
+                <TTag lKey="Error.Solution.eBay.old.18" />
+              </a>
+              <TTag lKey="Error.Solution.eBay.old.19" />
             </p>
           </>
         );
@@ -593,15 +488,10 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         solution.push(<p><TTag lKey='Error.Solution.eBay.old.3'/></p>);
       }
       if (Contains(error, 'Invalid token. You must relink your account.')) {
-        solution.push(
-          <p>
-            Your eBay account has been removed, perhaps you changed your password on eBay. In order to fix this,
-            you have to relink your eBay account to HGR.
-          </p>
-        );
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.20"/></p>);
       }
       if (Contains(error, 'Sorry, something went wrong. Please wait a moment and try again.')) {
-        solution.push(<p>This error was returned by eBay. To solve this click on retry.</p>);
+        solution.push(<p><TTag lKey="Error.Solution.eBay.old.21" /></p>);
       }
       if (
         Contains(
@@ -648,40 +538,23 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
 
         solution.push(
           <>
-            <p key="1">
+            <p key="_21917158_1">
               <ol>
                 <li key="1">
-                  Go to your{' '}
-                  <a rel="noreferrer" target='_blank'
-                    href={
-                      'https://my.ebay.' +
-                      domain +
-                      '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBaySellerAccounts&gbh=1&ssPageName=STRK:ME:LNLK'
-                    }
-                  >
-                    Seller Account
-                  </a>{' '}
-                  in My eBay
+                  <TTag lKey="Error.Solution.eBay.Error21917158.1" />
+                  <a rel="noreferrer" target='_blank' href={'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBaySellerAccounts&gbh=1&ssPageName=STRK:ME:LNLK'}>
+                    <TTag lKey="Error.Solution.eBay.Error21917158.2" />
+                  </a>
+                  <TTag lKey="Error.Solution.eBay.Error21917158.3" />
                 </li>
-                <li key="2">
-                  Look for <b>Payment methods for seller fees</b> and select <b>Change</b>.
-                </li>
-                <li key="3">From the dropdown menu, choose your preferred payment method.</li>
-                <li key="4">
-                  Enter your information. For direct debit or card payment, select <b>Save</b>. For
-                  PayPal, select <b>Continue</b>.
-                </li>
+                <li key="2"><TTag lKey="Error.Solution.eBay.Error21917158.4" /></li>
+                <li key="3"><TTag lKey="Error.Solution.eBay.Error21917158.5" /></li>
+                <li key="4"><TTag lKey="Error.Solution.eBay.Error21917158.6" /></li>
               </ol>
             </p>
-            <p key="2">
-              If you choose direct debit or credit card, you’ll need to enter your bank or card details. If
-              your card is declined during verification, while making payment, or at some other time, you
-              should contact your card issuer.
-            </p>
-            <p key="3">You usually can’t use a pre-paid credit card to verify your account.</p>
-            <p key="4">
-              If you choose to pay by PayPal, you’ll be redirected to the PayPal site to complete the process.
-            </p>
+            <p key="_21917158_2"><TTag lKey="Error.Solution.eBay.Error21917158.7" /></p>
+            <p key="_21917158_3"><TTag lKey="Error.Solution.eBay.Error21917158.8" /></p>
+            <p key="_21917158_4"><TTag lKey="Error.Solution.eBay.Error21917158.9" /></p>
           </>
         );
       }
@@ -691,27 +564,23 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
         Contains(error, 'lectionner au moins un mode de paiement.')
       ) {
         const domain = Platforms[ePlatform.eBay].domain[site];
-        const ebaylink =
-          'https://my.ebay.' +
-          domain +
-          '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBayPayPalAccounts&gbh=1&ssPageName=STRK:ME:LNLK';
+        const ebaylink = 'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBayPayPalAccounts&gbh=1&ssPageName=STRK:ME:LNLK';
 
         solution.push(
-          <p>
-            You need to set up a billing method before you start selling:
+          <p key="_354">
+            <TTag lKey="Error.Solution.eBay.Error354.1" />
             <ol>
               <li key="1">
-                Access your eBay account and introduce your billing details{' '}
+                <TTag lKey="Error.Solution.eBay.Error354.2" />
                 <a rel="noreferrer" target='_blank' href={ebaylink}>
-                  here
+                  <TTag lKey="Error.Solution.eBay.Error354.3" />
                 </a>
-                .
+                <TTag lKey="Error.Solution.eBay.Error354.4" />
               </li>
               <li key="2">
-                Access your HGR account and introduce your payment method, this information is required to
-                start listing. You can do so{' '}
+                <TTag lKey="Error.Solution.eBay.Error354.5" />
                 <a href="/ChannelConfiguration#business">
-                  here
+                  <TTag lKey="Error.Solution.eBay.Error354.3" />
                 </a>
               </li>
             </ol>
