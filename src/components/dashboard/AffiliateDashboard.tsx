@@ -12,7 +12,7 @@ import { useAppDispatch /*, useAppSelector */ } from '../../custom-hooks/reduxCu
 import { getAffiliateDashboard } from '../../redux/dashboard/affiliatesStatsThunk';
 
 export const AffiliateDashboard = () => {
-  //const { affiliateDashboard } = useAppSelector((state) => state.affiliateDashboard);
+  /*const { affiliateDashboard } = useAppSelector((state) => state.affiliateDashboard);*/
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const AffiliateDashboard = () => {
       <div className="get-started-container">
         <Row className="intro-area">
           <Col className="intro-vid-container" xs={24} md={24} lg={8}>
-            <h1>Affiliate percentage: {} %</h1>
+            <h2>Affiliate percentage: {} %</h2>
             <div className="get-started-vid">
               <iframe
                 className="intro-vid"

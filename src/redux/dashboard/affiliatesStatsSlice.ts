@@ -18,7 +18,6 @@ const initialsState = {
   error: ''
 };
 
-
 export const affiliatesStatsSlice = createSlice({
   name: 'dashboard-affiliates-stats',
   initialState: initialState,
