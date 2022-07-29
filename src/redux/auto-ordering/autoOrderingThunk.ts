@@ -22,7 +22,8 @@ export const saveAutoOrdering = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const res = await client.post('/SourceConfiguration/SaveAutoOrdering', {
+      console.log('The payload',channelOAuthId,supplierId,sourceId,rawSettings);
+      const res = await client.post('/AutoOrderingConfiguration/SaveAutoOrdering', {
         channelOAuthId,
         supplierId,
         sourceId,
