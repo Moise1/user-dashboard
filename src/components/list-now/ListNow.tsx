@@ -9,10 +9,6 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import '../../sass/list-now/list-now.scss';
 import { Links } from '../../links';
 
-export interface state {
-  platform: platformType;
-}
-
 export interface channel {
   id: number;
   channelId: number;

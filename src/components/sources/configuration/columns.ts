@@ -1,4 +1,5 @@
-﻿import { ePlatform } from '../../../types/ePlatform';
+﻿
+import { ePlatform } from '../../../data/platforms';
 import { ChannelSettingKey, SourceSettingKey } from '../../../types/settings';
 
 export type ColumnChannelAncestor = { Field: ChannelSettingKey, Value: string }

@@ -10,7 +10,7 @@ import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { Links } from '../../links';
 import { getSources } from 'src/redux/sources/sourcesThunk';
 import { Source } from 'src/redux/sources/sourceSlice';
-import { eCountry } from '../../types/eCountry';
+import { eCountry } from '../../data/countries';
 
 export const AutoOrderingConfiguration = () => {
 

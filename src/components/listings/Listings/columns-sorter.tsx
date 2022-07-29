@@ -31,6 +31,8 @@ type WithBuyBox = { buyBoxPrice?: string };
 type WithLowestPrice = { lowestPrice?: number, isLowestPrice?: boolean };
 type WithOtherChannels = { otherChannels: Channel[] };
 type WithCreatedBy = { createdByName: string };
+type WithError = { errorMessage: string };
+type WithStatus = { status: number };
 
 const CompareString = (a?: string, b?: string) => (a ?? '').localeCompare(b ?? '');
 const CompareNumber = (a?: number, b?: number) => (a ?? 0) - (b ?? 0);
@@ -79,4 +81,6 @@ export const SorterBuyBox = (a: ListingT, b: ListingT) => CompareString((a as Wi
 export const SorterLowestPrice = (a: ListingT, b: ListingT) => CompareNumber((a as WithLowestPrice).isLowestPrice ? 0 : (a as WithLowestPrice).lowestPrice, (b as WithLowestPrice).isLowestPrice ? 0 : (b as WithLowestPrice).lowestPrice);
 export const SorterOtherChannels = (a: ListingT, b: ListingT) => CompareNumber((a as WithOtherChannels).otherChannels?.length ?? 0, (b as WithOtherChannels).otherChannels?.length ?? 0);
 export const SorterCreatedBy = (a: ListingT, b: ListingT) => CompareString((a as WithCreatedBy).createdByName, (b as WithCreatedBy).createdByName);
+export const SorterError = (a: ListingT, b: ListingT) => CompareString((a as WithError).errorMessage, (b as WithError).errorMessage);
+export const SorterStatus = (a: ListingT, b: ListingT) => CompareNumber((a as WithStatus).status, (b as WithStatus).status);
 

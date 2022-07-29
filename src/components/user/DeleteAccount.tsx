@@ -5,8 +5,8 @@ import {useAppSelector, useAppDispatch} from '../../custom-hooks/reduxCustomHook
 import { getChannels } from 'src/redux/channels/channelsThunk';
 import { Channel, ChannelsState } from 'src/redux/channels/channelsSlice';
 import { shopLogo } from 'src/utils/shopLogo';
-import { countryFlag } from 'src/utils/countryFlag';
 import '../../sass/top-bar.scss';
+import { Countries, eCountry } from '../../data/countries';
 
 interface Props {
   checked: boolean;
@@ -33,7 +33,7 @@ export const DeleteAccount: FC<Props> = (props: Props) => {
       <p className="danger-text">Please note that if this account has listings, they will be removed.</p>
       <div className="linked-store">
         {shopLogo(channelId)}
-        {countryFlag(isoCountry)}
+        {Countries[isoCountry ?? eCountry.UK].Flag}
         {name}
       </div>
       <div className="confirm">
