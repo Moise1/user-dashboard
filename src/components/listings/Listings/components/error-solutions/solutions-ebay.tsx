@@ -90,16 +90,16 @@ export const TryGetSolutionEbay = (site: eCountry, error: string, errorSourceInf
       <>
         <p key="_21917158_1">
           <ol>
-            <li key="1">
+            <li key="_21917158_1_1">
               <TTag lKey="Error.Solution.eBay.Error21917158.1"/>
               <a rel="noreferrer" target='_blank' href={'https://my.ebay.' + domain + '/ws/eBayISAPI.dll?MyeBay&CurrentPage=MyeBaySellerAccounts&gbh=1&ssPageName=STRK:ME:LNLK'}>
                 <TTag lKey="Error.Solution.eBay.Error21917158.2" />
               </a>
               <TTag lKey="Error.Solution.eBay.Error21917158.3" />
             </li>
-            <li key="2"><TTag lKey="Error.Solution.eBay.Error21917158.4"/></li>
-            <li key="3"><TTag lKey="Error.Solution.eBay.Error21917158.5" /></li>
-            <li key="4"><TTag lKey="Error.Solution.eBay.Error21917158.6" /></li>
+            <li key="_21917158_1_2"><TTag lKey="Error.Solution.eBay.Error21917158.4"/></li>
+            <li key="_21917158_1_3"><TTag lKey="Error.Solution.eBay.Error21917158.5" /></li>
+            <li key="_21917158_1_4"><TTag lKey="Error.Solution.eBay.Error21917158.6" /></li>
           </ol>
         </p>
         <p key="_21917158_2"><TTag lKey="Error.Solution.eBay.Error21917158.7" /></p>

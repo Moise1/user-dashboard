@@ -282,14 +282,21 @@ export const RenderPendingStatus = (status: eChannelListingStatus, listing: List
   return ListingsUtils.StatusToUI(status, listing.channel?.channelId ?? ePlatform.eBay);
 };
 
-export const RenderError = (error: string, listing: ListingT) => {
-  if (!error)
-    return <></>;
+export type FnOnRetry = (row: ListingT) => void;
+export const RenderError = (onRetry: FnOnRetry) => (error: string, listing: ListingT) => {
+  if (!error) {
+    return (() => <></>)();//Looks stupid but if we don't do like this react cries
+  }
 
-  return <ErrorComponent
-    errrorMessage={error}
-    channelId={listing.channel?.channelId ?? ePlatform.eBay}
-    country={listing.channel?.isoCountry ?? eCountry.UK}
-    errorSourceInfo={''}
-  />;
+  const { channel, errorSourceInfo } = listing as { channel: Channel, errorSourceInfo: string };
+
+  return (() => (
+    <ErrorComponent
+      errrorMessage={error}
+      channelId={channel?.channelId ?? ePlatform.eBay}
+      country={channel?.isoCountry ?? eCountry.UK}
+      errorSourceInfo={errorSourceInfo}
+      onRetry={() => onRetry(listing)}
+    />
+  ))();//Looks stupid but if we don't do like this react cries
 };

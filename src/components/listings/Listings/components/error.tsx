@@ -14,16 +14,15 @@ interface Props {
   channelId: ePlatform;
   country: eCountry;
   errorSourceInfo: string;
+  onRetry: () => void;
 }
 
 export const ErrorComponent = (props: Props) => {
-  const { errrorMessage, channelId, country, errorSourceInfo } = props;
+  const { errrorMessage, channelId, country, errorSourceInfo, onRetry } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const RenderErrorMessage = () => {
     const ar = errrorMessage?.split('\n') ?? [];
-
-
     const solution = (() => {
       switch (channelId) {
         case ePlatform.eBay:
@@ -56,9 +55,9 @@ export const ErrorComponent = (props: Props) => {
         {ar.map((x, i) => {
           const potentialHtml = x; //.replace("\"\"","\"")
 
-          return <p key={i} style={externalStyle}>
+          return <div key={i} style={externalStyle}>
             <SafeHtmlWrapper html={potentialHtml} />
-          </p>;
+          </div>;
         })}
         {solution && RenderSolution(solution)}
       </>
@@ -86,13 +85,13 @@ export const ErrorComponent = (props: Props) => {
         }
         footer={
           <Row justify="space-between">
-            <Col flex="none">
+            <Col flex="none" key="a">
               <Button className='confirm-btn'>
                 <TTag lKey='Listings.Button.Edit' />
               </Button>
             </Col>
-            <Col flex="none">
-              <Button className='confirm-btn'>
+            <Col flex="none" key="b">
+              <Button className='confirm-btn' onClick={() => onRetry()}>
                 <TTag lKey='Listings.Button.Retry' />
               </Button>
             </Col>

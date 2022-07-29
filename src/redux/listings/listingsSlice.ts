@@ -74,6 +74,7 @@ export type PendingListing = {
   verifiedOn: Date;
   createdByName: string;
   errorMessage: string;
+  errorSourceInfo: string;
   categoryId: number;
   imageUrl: string;
   categoryName: string;

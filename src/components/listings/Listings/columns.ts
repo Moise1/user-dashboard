@@ -1,5 +1,5 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels, RenderPendingStatus, RenderError } from './columns-renders';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels, RenderPendingStatus, RenderError, FnOnRetry } from './columns-renders';
 import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy, SorterStatus, SorterError } from './columns-sorter';
 import { ListingStatusFilter, MultiTermFilter } from './smart-search-filters';
 import { ListingT } from './types';
@@ -45,7 +45,7 @@ export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
 }
 
-export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumnData[] => [
+export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice, onRetryPending: FnOnRetry): ListingColumnData[] => [
   {
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
@@ -181,7 +181,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.Error',
     dataIndex: 'errorMessage',
     smartSearch: { ignore: true },
-    render: RenderError,
+    render: RenderError(onRetryPending),
     sorter: SorterError
   },
   {

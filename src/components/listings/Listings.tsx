@@ -244,7 +244,10 @@ export const Listings = () => {
   const onSetNewPrice = (row: ListingT, newPrice: number) => {
     console.log('y' + row.id + 'z' + newPrice);//TODO: Do this
   };
-  const ListingsColuns = GenerateListingsColumns(onSetNewPrice);
+  const onRetryPending = (row: ListingT) => {
+    console.log('z' + row.id);
+  };
+  const ListingsColuns = GenerateListingsColumns(onSetNewPrice, onRetryPending);
   const filteredColumns = useMemo(() => ListingsColuns.filter(x => columnList.includes(x.id)), [ListingsColuns, columnList]);
 
   //Row Selection-------------------------------------------------------------
