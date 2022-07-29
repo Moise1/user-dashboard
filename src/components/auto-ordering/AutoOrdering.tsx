@@ -22,46 +22,46 @@ export interface rawSettingInterface {
   value: string | number | undefined;
 }
 interface rawSettingValuesTypes {
-  first?: string;
-  alias?: string | number | undefined;
-  userName?: string | number | undefined;
-  userPassword?: string | number | undefined;
-  otp?: string | number | undefined;
-  phone?: string | number | undefined;
-  firstName?: string | number | undefined;
-  lastName?: string | number | undefined;
-  streetLine1?: string | number | undefined;
-  streetLine2?: string | number | undefined;
-  postCode?: string | number | undefined;
-  townCity?: string | number | undefined;
-  provinceCountry?: string | number | undefined;
-  country?: string | number | undefined;
-  cardNumber?: string | number | undefined;
-  cvcNumber?: string | number | undefined;
-  giftMessage?: string | number | undefined;
-  giftFrom?: string | number | undefined;
-  ip?: string | number | undefined;
-  port?: string | number | undefined;
-  credentialsUserName?: string | number | undefined;
-  credentialsPassword?: string | number | undefined;
+  first?: string | number | undefined; //1
+  alias?: string | number | undefined; //8
+  userName?: string | number | undefined; //5
+  userPassword?: string | number | undefined; //6
+  otp?: string | number | undefined; //7
+  phone?: string | number | undefined; //4
+  firstName?: string | number | undefined; //12
+  lastName?: string | number | undefined; //10
+  streetLine1?: string | number | undefined; //11
+  streetLine2?: string | number | undefined; //13
+  postCode?: string | number | undefined; //17
+  townCity?: string | number | undefined; //15
+  provinceCountry?: string | number | undefined; //16
+  country?: string | number | undefined; //14
+  cardNumber?: string | number | undefined; //2
+  cvcNumber?: string | number | undefined; //3
+  giftMessage?: string | number | undefined; //22
+  giftFrom?: string | number | undefined; //23
+  ip?: string | number | undefined;  //26
+  port?: string | number | undefined; //27
+  credentialsUserName?: string | number | undefined; //29
+  credentialsPassword?: string | number | undefined; //30
+  saleyeePaymentPassword?: string | number | undefined; //32
+  year?: string | number | undefined;  //20
+  month?: string | number | undefined; //19
+  completeName?: string | number | undefined; //18
+  cardName?: string | number | undefined;
   oPayment?: string | number | undefined;
   oGift?: string | number | undefined;
-  saleyeePaymentPassword?: string | number | undefined;
-  year?: string | number | undefined;
-  month?: string | number | undefined;
-  cardName?: string | number | undefined;
 }
+
 type LocationProps = {
   state: {
+    id: number;
     name: string;
     autoOrderingFee: number | null;
-    id: number;
   };
 };
 export const AutoOrdering = () => {
-
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     getSourceConfiguration();
     dispatch(getSources());
@@ -76,13 +76,12 @@ export const AutoOrdering = () => {
     get: { settings },
   } = useAppSelector((state) => state.sourcesConfiguration as SourceConfigurationState);
 
-  //For API
   const [channelOAuthId] = useState(590881);
-  const [supplierId] = useState(-1);
+  const [supplierId] = useState(909);
   const [sourceId] = useState(id);
   console.log(sources);
   const rawSettingIntialValues: rawSettingValuesTypes = {
-    first: ' ',
+    first: '1',
     alias: ' ',
     userName: ' ',
     userPassword: ' ',
@@ -104,12 +103,13 @@ export const AutoOrdering = () => {
     port: ' ',
     credentialsUserName: ' ',
     credentialsPassword: ' ',
-    oPayment: ' ',
-    oGift: ' ',
     saleyeePaymentPassword: ' ',
     year: ' ',
     month: ' ',
     cardName: ' ',
+    completeName: ' ',
+    oPayment: ' ',
+    oGift: ' ',
   };
 
   const [rawSettings, setRawSetting] = useState<rawSettingInterface[]>([
@@ -128,19 +128,22 @@ export const AutoOrdering = () => {
     { key: 16, value: rawSettingIntialValues.provinceCountry },
     { key: 14, value: rawSettingIntialValues.country },
     { key: 2, value: rawSettingIntialValues.cardNumber },
+    { key: 3, value: rawSettingIntialValues.cvcNumber },
     { key: 22, value: rawSettingIntialValues.giftMessage },
     { key: 23, value: rawSettingIntialValues.giftFrom },
     { key: 26, value: rawSettingIntialValues.ip },
     { key: 27, value: rawSettingIntialValues.port },
     { key: 29, value: rawSettingIntialValues.credentialsUserName },
     { key: 30, value: rawSettingIntialValues.credentialsPassword },
-    { key: 21, value: rawSettingIntialValues.oPayment },
-    { key: 22, value: rawSettingIntialValues.oGift },
     { key: 32, value: rawSettingIntialValues.saleyeePaymentPassword },
-    { key: 3, value: rawSettingIntialValues.cvcNumber },
+    { key: 20, value: rawSettingIntialValues.year },
     { key: 19, value: rawSettingIntialValues.month },
-    { key: 20, value: rawSettingIntialValues.year }
+    { key: 18, value: rawSettingIntialValues.completeName },
+    { key: 0, value: rawSettingIntialValues.cardName },
+    { key: 0, value: rawSettingIntialValues.oPayment },
+    { key: 0, value: rawSettingIntialValues.oGift },
   ]);
+
   const { Option } = Select;
   const [accountConfig, setAccountConfig] = useState<string>(''); //Value for account
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -197,80 +200,80 @@ export const AutoOrdering = () => {
   };
 
   const aliasHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    rawSettings[0].value = e.target.value;
+    rawSettings[1].value = e.target.value;
     setAliasEnableDisable(!aliasBtnEnableDisable);
   };
   const userNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    rawSettings[1].value = e.target.value;
-  };
-  const userPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[2].value = e.target.value;
   };
-  const userOtpHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const userPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[3].value = e.target.value;
   };
-  const userPhoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const userOtpHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[4].value = e.target.value;
   };
-  const userFirstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const userPhoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[5].value = e.target.value;
   };
-  const userLastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const userFirstNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[6].value = e.target.value;
   };
-  const streetLine1Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const userLastNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[7].value = e.target.value;
   };
-  const streetLine2Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const streetLine1Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[8].value = e.target.value;
   };
-  const postCodeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const streetLine2Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[9].value = e.target.value;
   };
-  const townCityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const postCodeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[10].value = e.target.value;
   };
-  const provinceCountryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const townCityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[11].value = e.target.value;
   };
-  const countryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const provinceCountryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[12].value = e.target.value;
   };
-  const cardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const countryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[13].value = e.target.value;
   };
-  const giftMessageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const cardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[14].value = e.target.value;
   };
-  const giftFromHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const cvcHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[15].value = e.target.value;
   };
-  const ipHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const giftMessageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[16].value = e.target.value;
   };
-  const portHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const giftFromHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[17].value = e.target.value;
   };
-  const credentialsUserNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const ipHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[18].value = e.target.value;
   };
-  const credentialsUserPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const portHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[19].value = e.target.value;
   };
-  const cvcHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const credentialsUserNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[20].value = e.target.value;
   };
-  const monthHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const credentialsUserPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[21].value = e.target.value;
   };
-  const yearHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const saleyeePaymentPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[22].value = e.target.value;
   };
-  const cardNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const monthHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[23].value = e.target.value;
   };
-  const saleyeePaymentPasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const yearHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     rawSettings[24].value = e.target.value;
+  };
+  const cardNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rawSettings[25].value = e.target.value;
   };
 
   //Save Button Handler
@@ -304,7 +307,7 @@ export const AutoOrdering = () => {
       { key: 20, value: rawSettingIntialValues.year }
     ]);
     console.log('The rawSetting', rawSettings);
-    dispatch(saveAutoOrdering({ channelOAuthId, rawSettings, sourceId, supplierId }));
+    dispatch(saveAutoOrdering({ channelOAuthId, sourceId, supplierId, rawSettings }));
   };
 
   const btnDisabler = () => {
@@ -475,7 +478,7 @@ export const AutoOrdering = () => {
                         {
                           name == 'Amazon ' &&
                           <Form.Item label="OTP Code (2FA)" name="otp">
-                            <a href="#" className="auto-ordering-a ">
+                            <a href="https://hustlegotreal.com/en/amazon-key-auto-ordering/" className="auto-ordering-a ">
                               Obtain your otp
                             </a>
                             <Input
