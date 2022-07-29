@@ -1,21 +1,32 @@
 import { Link } from 'react-router-dom';
-import { CalendarOutlined, LeftOutlined, RiseOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
+import { LeftOutlined, RiseOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import '../../sass/affiliate-dashboard.scss';
 
 import { DataTable } from 'src/small-components/tables/data-table';
 import { getAffiliateDashboard } from 'src/redux/dashboard/affiliatesStatsThunk';
-import { useEffect } from 'react';
-import { Spin } from 'antd';
+import { useEffect, useState } from 'react';
+import { DatePicker, Spin } from 'antd';
+import { Moment } from 'moment';
 
 export const AffiliateDashboard = () => {
   const dispatch = useAppDispatch();
   const { affiliatesDashboard, loading } = useAppSelector((state) => state.affiliatesDashboard);
-
+  const [year, setYear] = useState(7);
+  const [month, setMonth] = useState(2021);
   useEffect(() => {
-    dispatch(getAffiliateDashboard({ month: 7, year: 2021 }));
-  }, [getAffiliateDashboard]);
+    dispatch(getAffiliateDashboard({ month: month, year: year }));
+  }, [getAffiliateDashboard, month, year]);
+
+  const handleDatePickerChange = (date: Moment | null, dateString: string) => {
+    if (dateString != '') {
+      const dates = dateString.split('-');
+      setMonth(dates[1] as unknown as number);
+      setYear(dates[0] as unknown as number);
+      //dispatch(getAffiliateDashboard({ month: month, year: year}));
+    }
+  };
 
   const affColumns = [
     {
@@ -81,11 +92,7 @@ export const AffiliateDashboard = () => {
 
         <div className="info-section">
           <div className="date-picker">
-            <h4>
-              <strong>From </strong>
-              11-01-02 <strong> To </strong> 11-01-02
-            </h4>
-            <CalendarOutlined />
+            <DatePicker onChange={handleDatePickerChange} picker="month" />
           </div>
           <div className="general-stats">
             <div className="general-stat">
@@ -122,7 +129,7 @@ export const AffiliateDashboard = () => {
             {loading ? (
               <Spin />
             ) : (
-              <DataTable dataSource={affiliatesDashboard.userWiseHistory} columns={affColumns} />
+              <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={affColumns} />
             )}
           </div>
         </div>
