@@ -13,25 +13,34 @@ import { Moment } from 'moment';
 export const AffiliateDashboard = () => {
   const dispatch = useAppDispatch();
   const { affiliatesDashboard, loading } = useAppSelector((state) => state.affiliatesDashboard);
-  const [year, setYear] = useState(7);
-  const [month, setMonth] = useState(2021);
+  const [year, setYear] = useState(0);
+  const [month, setMonth] = useState(0);
+
   useEffect(() => {
     dispatch(getAffiliateDashboard({ month: month, year: year }));
   }, [getAffiliateDashboard, month, year]);
+
+  useEffect(() => {
+    dispatch(getAffiliateDashboard({ month: month, year: year }));
+  }, [getAffiliateDashboard]);
 
   const handleDatePickerChange = (date: Moment | null, dateString: string) => {
     if (dateString != '') {
       const dates = dateString.split('-');
       setMonth(dates[1] as unknown as number);
       setYear(dates[0] as unknown as number);
-      //dispatch(getAffiliateDashboard({ month: month, year: year}));
     }
   };
 
   const affColumns = [
     {
       title: 'Email',
-      dataIndex: 'email'
+      dataIndex: 'email',
+      render: (email: string) => (
+        <>
+          {email.substring(0, 5)} ******{email.substring(25, 20)}
+        </>
+      )
     },
     {
       title: 'Registred on',
@@ -39,9 +48,9 @@ export const AffiliateDashboard = () => {
     },
     {
       title: 'Total revenue',
-      dataIndex: 'totalRevenue',
-      rowClassName: 'totalRevenue',
-      render: (totalRevenue: string) => <>&#163;{totalRevenue} </>
+      dataIndex: 'totalCommission',
+      rowClassName: 'totalCommission',
+      render: (totalCommission: string) => <>+&#163;{totalCommission} </>
     },
     //{
     //  title: 'Subscription',
@@ -49,32 +58,38 @@ export const AffiliateDashboard = () => {
     //},
     {
       title: 'We list for you',
-      dataIndex: 'weListForYouRevenue',
-      render: (weListForYouRevenue: string) => <>&#163;{weListForYouRevenue} </>
+      dataIndex: 'weListForYouCommission',
+      render: (weListForYouCommission: string) => <>+&#163;{weListForYouCommission} </>
     },
     {
       title: 'Tokens',
-      dataIndex: 'tokensRevenue',
-      render: (tokensRevenue: string) => <>&#163;{tokensRevenue} </>
+      dataIndex: 'tokensCommission',
+      render: (tokensCommission: string) => <>+&#163;{tokensCommission} </>
     },
     {
       title: 'No api server',
-      dataIndex: 'noApiRevenue',
-      render: (noApiRevenue: string) => <>&#163;{noApiRevenue} </>
+      dataIndex: 'noApiCommission',
+      render: (noApiCommission: string) => <>+&#163;{noApiCommission} </>
     }
   ];
 
-  //const affDummyData = [
-  //  {
-  //    email: 'test@gmail.com',
-  //    registredOn: '22/07/2022',
-  //    totalRevenue: '+$225',
-  //    subscriptionRevenue: '+$21',
-  //    wlfRevenue: '+$55',
-  //    tokensRevenue: '+$20',
-  //    noapiRevenue: '+$0'
-  //  }
-  //];
+  const registerColumns = [
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      render: (email: string) => (
+        <>
+          {email.substring(0, 5)} ******{email.substring(25, 20)}
+        </>
+      )
+    },
+    {
+      title: 'Registred on',
+      dataIndex: 'createdOn'
+    }
+  ];
+
+  console.log(affiliatesDashboard);
 
   return (
     <div className="affiliate-dashboard-container">
@@ -85,51 +100,63 @@ export const AffiliateDashboard = () => {
         Back to dashboard
       </Link>
       <div className="affiliate-dashboard">
-        <div className="commission-perc-container">
-          <h2 className="com-title">Your commission:</h2>
-          <h2 className="commission">20%</h2>
+        <div className="general-stats">
+          <div className="general-stat">
+            <h4>% Commission:</h4>
+            <h3 className="stat-content">20%</h3>
+          </div>
+          <div className="general-stat">
+            <h4>Accumulative revenue</h4>
+            <h3 className="stat-content">£24522</h3>
+          </div>
+          <div className="general-stat">
+            <h4>Registers performance</h4>
+            <h5>Total registers: {affiliatesDashboard.totalSignups}</h5>
+            <h5>Registers with store: {affiliatesDashboard.referralsLinked}</h5>
+            <h5>Registers with products: {affiliatesDashboard.referralsListed}</h5>
+          </div>
         </div>
 
         <div className="info-section">
-          <div className="date-picker">
+          <div className="month-selector">
             <DatePicker onChange={handleDatePickerChange} picker="month" />
           </div>
-          <div className="general-stats">
-            <div className="general-stat">
-              <div className="general-stat-header">
-                <h4 className="general-stat-title">Total registers</h4>
+          <div className="stats">
+            <div className="stat">
+              <div className="stat-header">
+                <h4 className="stat-title">Registers</h4>
                 <UserOutlined />
               </div>
-              <h3 className="general-stat-content">42</h3>
+              <h3 className="stat-content">{loading ? <Spin /> : affiliatesDashboard.totalSignupsThisMonth}</h3>
             </div>
-            <div className="general-stat">
-              <div className="general-stat-header">
-                <h4 className="general-stat-title">% of listed registers</h4>
-              </div>
-              <h3 className="general-stat-content">16%</h3>
-            </div>
-            <div className="general-stat">
-              <div className="general-stat-header">
-                <h4 className="general-stat-title">Total Revenue</h4>
+
+            <div className="stat">
+              <div className="stat-header">
+                <h4 className="stat-title">Revenue</h4>
                 <RiseOutlined />
               </div>
-              <h3 className="general-stat-content">$41200</h3>
+              <h3 className="stat-content">£{loading ? <Spin /> : affiliatesDashboard.totalCommission}</h3>
             </div>
-            <div className="general-stat">
-              <div className="general-stat-header">
-                <h4 className="general-stat-title">Revenue by register</h4>
+            <div className="stat">
+              <div className="stat-header">
+                <h4 className="stat-title">Revenue by register</h4>
                 <UserAddOutlined />
               </div>
-              <h3 className="general-stat-content">$34</h3>
+              <h3 className="stat-content">£{loading ? <Spin /> : affiliatesDashboard.revenueBySignup}</h3>
             </div>
           </div>
 
           <div className="table-stats">
             <h2>Revenue of your referrals</h2>
+            {loading ? <Spin /> : <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={affColumns} />}
+          </div>
+          <div className="table-registers">
+            <h2>Your registered users</h2>
+            <h2>Your registered users</h2>
             {loading ? (
               <Spin />
             ) : (
-              <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={affColumns} />
+              <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={registerColumns} />
             )}
           </div>
         </div>

@@ -8,6 +8,7 @@ export interface AffiliatesStats {
 
 export interface AffiliatesDashboardStats {
   loading: boolean;
+  Email: string;
   catalogTokensCommission: number;
   catalogTokensCount: number;
   history: [{ day: Date }, { signups: number }];

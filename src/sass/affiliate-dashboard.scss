@@ -1,68 +1,59 @@
 @import 'general.config';
 
 .affiliate-dashboard-container {
+  .stat-content {
+    font-weight: bold;
+  }
+
   .affiliate-dashboard {
     width: 100%;
     background: $primary-bg;
     border-radius: $spacer;
 
-    .date-picker {
-      cursor: pointer;
-      display: flex;
-      padding: 0.5rem 1rem;
-      margin: 1rem;
-      width: fit-content;
+    .month-selector {
+      margin: $spacer;
     }
-    .commission-perc-container {
+    .general-stats {
       margin-top: $spacer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      justify-items: center;
       padding: 1rem;
-      width: fit-content;
-      border-radius: 1rem;
-
-      .com-title {
-        color: $gray;
-      }
-      .commission {
-        color: $light-blue;
-        font-weight: bold;
-        margin-left: 10px;
+      display: flex;
+      width: 100%;
+      .general-stat {
+        background: $dark-blue;
+        display: grid;
+        align-items: center;
+        box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+        border-radius: $spacer;
+        padding: $spacer;
+        margin: $spacer;
+        h3,
+        h4,
+        h5 {
+          color: white;
+        }
       }
     }
 
     .info-section {
-      .general-stats {
+      .stats {
         display: flex;
 
-        .general-stat {
-          background: $dark-blue;
-          width: 15%;
-          display: grid;
-          align-items: center;
+        .stat {
           box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
           border-radius: $spacer;
+          background: $primary-bg;
+          margin-left: $spacer;
           padding: $spacer;
-          margin: $spacer;
-          .general-stat-header {
+          .stat-header {
             display: flex;
             span {
-              color: white;
               margin-left: 20px;
             }
-            .general-stat-title {
-              color: white;
-            }
-          }
-          .general-stat-content {
-            font-weight: bold;
-            color: white;
           }
         }
       }
       .table-stats {
+        margin-top: 1rem;
         .data-table {
           .totalRevenue {
             color: $green;
