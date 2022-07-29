@@ -4,7 +4,13 @@
   .stat-content {
     font-weight: bold;
   }
-
+  .first-section {
+    display: flex;
+    .pie-chart {
+      max-width: 20%;
+      padding: $spacer;
+    }
+  }
   .affiliate-dashboard {
     width: 100%;
     background: $primary-bg;

@@ -9,6 +9,9 @@ import { getAffiliateDashboard } from 'src/redux/dashboard/affiliatesStatsThunk'
 import { useEffect, useState } from 'react';
 import { DatePicker, Spin } from 'antd';
 import { Moment } from 'moment';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart, ArcElement } from 'chart.js';
+Chart.register(ArcElement);
 
 export const AffiliateDashboard = () => {
   const dispatch = useAppDispatch();
@@ -89,6 +92,22 @@ export const AffiliateDashboard = () => {
     }
   ];
 
+  const data = {
+    labels: ['dasdasdas', 'asdasdasd', 'asdas'],
+    datasets: [
+      {
+        label: 'Referrals performance',
+        data: [
+          affiliatesDashboard.totalSignups,
+          affiliatesDashboard.referralsLinked,
+          affiliatesDashboard.referralsListed
+        ],
+        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+        hoverOffset: 4
+      }
+    ]
+  };
+
   console.log(affiliatesDashboard);
 
   return (
@@ -100,20 +119,23 @@ export const AffiliateDashboard = () => {
         Back to dashboard
       </Link>
       <div className="affiliate-dashboard">
-        <div className="general-stats">
-          <div className="general-stat">
-            <h4>% Commission:</h4>
-            <h3 className="stat-content">20%</h3>
-          </div>
-          <div className="general-stat">
-            <h4>Accumulative revenue</h4>
-            <h3 className="stat-content">£24522</h3>
-          </div>
-          <div className="general-stat">
-            <h4>Registers performance</h4>
-            <h5>Total registers: {affiliatesDashboard.totalSignups}</h5>
-            <h5>Registers with store: {affiliatesDashboard.referralsLinked}</h5>
-            <h5>Registers with products: {affiliatesDashboard.referralsListed}</h5>
+        <div className="first-section">
+          <div className="pie-chart">{loading ? <Spin /> : <Doughnut data={data} />}</div>
+          <div className="general-stats">
+            <div className="general-stat">
+              <h4>% Commission:</h4>
+              <h3 className="stat-content">20%</h3>
+            </div>
+            <div className="general-stat">
+              <h4>Accumulative revenue</h4>
+              <h3 className="stat-content">£24522</h3>
+            </div>
+            <div className="general-stat">
+              <h4>Registers performance</h4>
+              <h5>Total registers: {affiliatesDashboard.totalSignups}</h5>
+              <h5>Registers with store: {affiliatesDashboard.referralsLinked}</h5>
+              <h5>Registers with products: {affiliatesDashboard.referralsListed}</h5>
+            </div>
           </div>
         </div>
 
