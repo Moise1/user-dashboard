@@ -297,7 +297,6 @@ export const Catalog = () => {
             handleClose={() => setListProductModal(!listProductsModal)}
             width={600}
             style={{ overflowY: 'scroll' }}
-            bodyStyle={{ height: 530 }}
             closable={false}
           >
             <div className="catalog-list-modal">
@@ -336,7 +335,7 @@ export const Catalog = () => {
                           <h2>Choose the frequency of the listings?</h2>
                         </div>
                         <div className="section-switch">
-                          <Switch onChange={() => setFrequency(!frequency)} />
+                          <Switch checked={frequency} onChange={() => setFrequency(!frequency)} />
                         </div>
                       </div>
                       {frequency && (
