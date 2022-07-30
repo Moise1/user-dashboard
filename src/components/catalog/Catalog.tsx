@@ -298,6 +298,7 @@ export const Catalog = () => {
             width={600}
             style={{ overflowY: 'scroll' }}
             closable={false}
+            footer={null}
           >
             <div className="catalog-list-modal">
               <h1> Listing Settings </h1>
