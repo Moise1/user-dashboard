@@ -22,7 +22,8 @@ export const saveAutoOrdering = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const res = await client.post('/SourceConfiguration/SaveAutoOrdering', {
+      console.log('The payload',channelOAuthId,supplierId,sourceId,rawSettings);
+      const res = await client.post('/AutoOrderingConfiguration/SaveAutoOrdering', {
         channelOAuthId,
         supplierId,
         sourceId,
@@ -37,8 +38,8 @@ export const saveAutoOrdering = createAsyncThunk(
 
 export const getAutoOrdering = createAsyncThunk('sales/getAutoOrder', async () => {
   try {
-    const res = await client.get('/SourceConfiguration/GetActiveAutoOrdering');
-    return res.data.response_data;
+    const res = await client.get('/AutoOrderingConfiguration/GetAutoOrdering');
+    return res.data.response_data.suppliers;
   } catch (error) {
     console.log('The error is ', error);
   }

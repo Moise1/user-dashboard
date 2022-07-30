@@ -1,4 +1,4 @@
-﻿import { ePlatform } from './ePlatform';
+﻿import { ePlatform } from '../data/platforms';
 
 export type SettingSectionId = number;
 export type SettingKey = number;

@@ -1,6 +1,7 @@
 ﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy } from './columns-sorter';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels, RenderPendingStatus, RenderError, FnOnRetry } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy, SorterStatus, SorterError } from './columns-sorter';
+import { ListingStatusFilter, MultiTermFilter } from './smart-search-filters';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -35,26 +36,16 @@ export enum ListingColumnId {
   AmazonAsin = 29,
   AmazonSku = 30,
   AmazonLowestPrice = 31,
-  AmazonBuyBox = 32
+  AmazonBuyBox = 32,
+  PendingStatus = 33,
+  Error = 34
 }
 
 export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
 }
 
-const MultiTermFilter = (fieldValue: unknown, searchTerm: string) => {
-  const terms = searchTerm.trim().split(' ');
-  for (const term of terms) {
-    if (term.length == 0)
-      continue;
-    if ((fieldValue as string)?.toLocaleLowerCase?.().indexOf?.(term) < 0) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumnData[] => [
+export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice, onRetryPending: FnOnRetry): ListingColumnData[] => [
   {
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
@@ -176,6 +167,22 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     smartSearch: { ignore: true },
     render: RenderDate,
     sorter: SorterCreatedOn
+  },
+  {
+    id: ListingColumnId.PendingStatus,
+    title: 'Listings.Column.Status',
+    dataIndex: 'status',
+    smartSearch: { customFilter: ListingStatusFilter },
+    render: RenderPendingStatus,
+    sorter: SorterStatus
+  },
+  {
+    id: ListingColumnId.Error,
+    title: 'Listings.Column.Error',
+    dataIndex: 'errorMessage',
+    smartSearch: { ignore: true },
+    render: RenderError(onRetryPending),
+    sorter: SorterError
   },
   {
     id: ListingColumnId.CreatedBy,

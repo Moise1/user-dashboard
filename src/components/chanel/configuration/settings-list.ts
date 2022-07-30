@@ -1,5 +1,6 @@
-﻿import { Ancestor, ChannelSettingKey, SettingExtra, SettingInfo, SettingType } from '../../../types/settings';
-import { ePlatform } from '../../../types/ePlatform';
+﻿import { ePlatform } from '../../../data/platforms';
+import { Ancestor, ChannelSettingKey, SettingExtra, SettingInfo, SettingType } from '../../../types/settings';
+
 import { ChannelSettingSection } from './sections';
 
 export interface ChannelSettingAncestor extends Ancestor {

@@ -4,8 +4,17 @@ export const PendingListingsColumns = [
   ListingColumnId.Id,
   ListingColumnId.Image,
   ListingColumnId.Title,
-  //TableColumnId.Status,
-  //TableColumnId.Error,
+  ListingColumnId.PendingStatus,
+  ListingColumnId.Error,
   ListingColumnId.CreatedOn,
-  //TableColumnId.CreatedBy,
+  ListingColumnId.CreatedBy,
+];
+
+export const PendingListingsColumnsVisibleByDefault = [
+  ListingColumnId.Id,
+  ListingColumnId.Image,
+  ListingColumnId.Title,
+  ListingColumnId.PendingStatus,
+  ListingColumnId.Error,
+  ListingColumnId.CreatedOn,
 ];

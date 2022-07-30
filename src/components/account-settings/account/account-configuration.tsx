@@ -20,10 +20,10 @@ import { AccountSetting, AccountSettings } from '../configuration/settings';
 import { AccountSettingSections, AccountSettingSection } from '../configuration/sections';
 import { SettingDataBag, AccountSettingInput } from '../../../small-components/settings/account-setting-input';
 import { ReactUtils } from '../../../utils/react-utils';
-import { Platforms } from '../../../data/platforms';
+import { ePlatform, Platforms } from '../../../data/platforms';
 import { toastAlert } from '../../../utils/toastAlert';
 import { Link } from 'react-router-dom';
-import { ePlatform } from '../../../types/ePlatform';
+
 
 export const AccountConfiguration = () => {
   const selectedChannel = ReactUtils.GetSelectedChannel();

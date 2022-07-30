@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { getUserQuota } from 'src/redux/user/userThunk';
 
 export const Subscriptions = () => {
+
   const [slides, setSlides] = useState<number>(3);
   const [activeCurrency, setActiveCurrency] = useState<number>(1);
   const [currency, setCurrency] = useState('\u20AC');

@@ -49,7 +49,6 @@
     }
 
 
-
     .listings-card {
         .listings-cols {
             display: flex !important;
@@ -141,6 +140,13 @@
             margin-left: auto;
         }
     }
+
+    .errorF{
+        color:red;
+        font-weight:normal;
+        font-size:0.8rem;
+    }
+
     // Phone and tablets screen size.
     @media only screen and (max-width: 750px) {
         .advanced-search-btn span,

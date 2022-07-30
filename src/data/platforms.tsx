@@ -1,5 +1,11 @@
-﻿import { ePlatform } from '../types/ePlatform';
-import { eCountry } from '../types/eCountry';
+﻿import { eCountry } from './countries';
+
+export enum ePlatform {
+  eBay = 1,
+  Shopify = 2,
+  eBayNoApi = 3,
+  Amazon = 4
+}
 
 export interface PlatformIndo {
   name: string;//Example: "eBay No Api"

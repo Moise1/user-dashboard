@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { eCountry } from '../../data/countries';
 import { getSources } from './sourcesThunk';
 
 
@@ -6,14 +7,15 @@ export interface Source {
   id: number;
   baseUrl: string;
   name: string;
-  site: number;
+  site: keyof typeof eCountry;
   recommended: boolean;
   catalogAllowed: boolean;
   manualAllowed: boolean;
   bulkAllowed: boolean;
   privateSupplier: boolean;
   listingServiceAllowed: number;
-  hasAutoOrder: boolean;
+  autoOrderingFee:null| number;
+  hasAutoOrder:boolean;
 }
 
 export interface SourcesState {
