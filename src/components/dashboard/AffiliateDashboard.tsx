@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import { DatePicker, Divider, Spin } from 'antd';
 import { Moment } from 'moment';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement } from 'chart.js';
-Chart.register(ArcElement);
+import { Chart, ArcElement, Tooltip } from 'chart.js';
+Chart.register(ArcElement, Tooltip);
 
 export const AffiliateDashboard = () => {
   const dispatch = useAppDispatch();
