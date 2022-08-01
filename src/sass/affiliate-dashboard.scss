@@ -14,6 +14,8 @@
     .pie-chart-section {
       display: flex;
       .pie-chart {
+        height: 50%;
+        width: 50%;
         padding: $spacer;
         margin: $spacer;
       }
@@ -26,6 +28,7 @@
         min-width: 200px;
         h5 {
           color: white;
+          margin: 0;
         }
         .total-registers {
           border-radius: 10px 10px 0px 0px;
@@ -44,6 +47,7 @@
       }
     }
     .general-stats-container {
+      min-width: 40%;
       display: grid;
       align-content: center;
     }
@@ -123,6 +127,62 @@
           .totalRevenue {
             color: $green;
             font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .pie-chart-section {
+        display: grid;
+        .pie-chart {
+          width: 250px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .general-stats {
+        display: grid;
+        padding: 1rem !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .pie-chart-section {
+        display: flex;
+        .stats-pie-chart {
+          position: relative;
+        }
+        .pie-chart {
+          width: 200px;
+        }
+      }
+      display: grid;
+      .general-stats {
+        display: flex;
+        .general-stat {
+          .circle-with-text {
+            width: 100px;
+            height: 100px;
+            .circle-with-text2 {
+              width: 80px;
+              height: 80px;
+            }
           }
         }
       }
