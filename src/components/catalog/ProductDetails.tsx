@@ -2,8 +2,8 @@ import { Col, Row, Divider } from 'antd';
 import { CancelBtn, SuccessBtn } from '../../small-components/ActionBtns';
 import { t } from '../../utils/transShim';
 import '../../sass/product-details.scss';
-import { CatalogProduct } from '../../redux/catalog/catalogSlice';
 import { useEffect, useState } from 'react';
+import { Product } from './Types';
 
 interface Props {
   imageUrl?: string;
@@ -11,31 +11,10 @@ interface Props {
   profit?: number;
   sourcePrice?: number;
   handleClose: () => void;
-  selectedProductDataDetail: {
-    id: number;
-    sourceId: number;
-    imageUrl: string;
-    sourcePrice: number;
-    title: string;
-    url: string;
-    profit: number;
-    channelPrice: number;
-    sold: number;
-    competition: number;
-    options: number;
-    priority: number;
-    quantityListed: number;
-    [key: string]: number | string | boolean | null;
-    page: number;
-    totalResults: number;
-    pageSize: number;
-    sessionId: number;
-    option: number;
-    productId: number;
-  }
-  setAllProducts: React.Dispatch<React.SetStateAction<CatalogProduct[]>>;
+  selectedProductDataDetail: Product;
+  setAllProducts: React.Dispatch<React.SetStateAction<Product[]>>;
   cardElementProductDetail: (EventTarget & HTMLDivElement) | (EventTarget & SVGElement) | (EventTarget & HTMLSpanElement) | (EventTarget & Element) | undefined;
-  allCatalogProducts: CatalogProduct[];
+  allCatalogProducts: Product[];
 }
 export const ProductDetails = (props: Props) => {
 
