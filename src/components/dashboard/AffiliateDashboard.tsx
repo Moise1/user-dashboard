@@ -93,7 +93,7 @@ export const AffiliateDashboard = () => {
   ];
 
   const data = {
-    labels: ['dasdasdas', 'asdasdasd', 'asdas'],
+    labels: ['totalSignups', 'referralsLinked', 'referralsListed'],
     datasets: [
       {
         label: 'Referrals performance',
@@ -102,8 +102,8 @@ export const AffiliateDashboard = () => {
           affiliatesDashboard.referralsLinked,
           affiliatesDashboard.referralsListed
         ],
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-        hoverOffset: 4
+        backgroundColor: ['#262e80', '#3a66ce', '#5e84db'],
+        hoverOffset: 5
       }
     ]
   };
@@ -173,7 +173,6 @@ export const AffiliateDashboard = () => {
             {loading ? <Spin /> : <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={affColumns} />}
           </div>
           <div className="table-registers">
-            <h2>Your registered users</h2>
             <h2>Your registered users</h2>
             {loading ? (
               <Spin />
