@@ -1,6 +1,5 @@
 import {  Form, Drawer, Input, Checkbox } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { useState } from 'react';
 import '../../../sass/advanced-search.scss';
 import { t } from '../../../utils/transShim';
 import { ColumnData, FieldType } from '../types/columns';
