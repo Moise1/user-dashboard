@@ -90,7 +90,7 @@ export const AffiliateDashboard = () => {
   ]; */
 
   const data = {
-    labels: ['totalSignups', 'referralsLinked', 'referralsListed'],
+    labels: ['Registers', 'Registers with store', 'Registers with products'],
     datasets: [
       {
         label: 'Referrals performance',
@@ -139,18 +139,29 @@ export const AffiliateDashboard = () => {
               </div>
             </div>
           </div>
-          <div className="general-stats">
-            <div className="general-stat">
-              <h4>% Commission:</h4>
-              <h3 className="stat-content">20%</h3>
-            </div>
-            <div className="general-stat">
-              <h4>Accumulative revenue</h4>
-              <h3 className="stat-content">£{affiliatesDashboard.totalCommissionTillDate}</h3>
+          <div className="general-stats-container">
+            <div className="general-stats">
+              <div className="general-stat">
+                <h4>Your commission</h4>
+                <div className="circle-with-text">
+                  <div className="circle-with-text2">
+                    <h3 className="general-stat-content">20%</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="general-stat">
+                <h4>Total revenue</h4>
+                <div className="circle-with-text">
+                  <div className="circle-with-text2">
+                    <h3 className="general-stat-content">£{affiliatesDashboard.totalCommissionTillDate}</h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
+        <Divider />
+        <h2 className="main-title">Revenue by month</h2>
         <div className="info-section">
           <div className="month-selector">
             <DatePicker onChange={handleDatePickerChange} picker="month" />

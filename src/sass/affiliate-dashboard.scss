@@ -9,10 +9,9 @@
   }
   .first-section {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
+    height: 100%;
     .pie-chart-section {
-      width: 50%;
       display: flex;
       .pie-chart {
         padding: $spacer;
@@ -44,11 +43,43 @@
         }
       }
     }
+    .general-stats-container {
+      display: grid;
+      align-content: center;
+    }
     .general-stats {
-      margin-top: $spacer;
-      padding: 1rem;
-      width: 50%;
+      justify-content: space-around;
+      align-items: center;
+      display: flex;
+      box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+      padding: $spacer * 3;
+      border-radius: $spacer;
       .general-stat {
+        text-align: center;
+        padding: 1rem;
+        .circle-with-text {
+          height: 150px;
+          width: 150px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100%;
+          display: flex;
+          background-color: $secondary;
+          .circle-with-text2 {
+            height: 120px;
+            width: 120px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            text-align: center;
+            display: flex;
+            background-color: white;
+          }
+          .general-stat-content {
+            margin: 0;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
