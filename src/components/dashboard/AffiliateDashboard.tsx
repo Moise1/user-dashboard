@@ -7,7 +7,7 @@ import '../../sass/affiliate-dashboard.scss';
 import { DataTable } from 'src/small-components/tables/data-table';
 import { getAffiliateDashboard } from 'src/redux/dashboard/affiliatesStatsThunk';
 import { useEffect, useState } from 'react';
-import { DatePicker, Spin } from 'antd';
+import { DatePicker, Divider, Spin } from 'antd';
 import { Moment } from 'moment';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
@@ -46,19 +46,16 @@ export const AffiliateDashboard = () => {
       )
     },
     {
-      title: 'Registred on',
-      dataIndex: 'createdOn'
-    },
-    {
       title: 'Total revenue',
       dataIndex: 'totalCommission',
       rowClassName: 'totalCommission',
       render: (totalCommission: string) => <>+&#163;{totalCommission} </>
     },
-    //{
-    //  title: 'Subscription',
-    //  dataIndex: 'subscriptionRevenue'
-    //},
+    {
+      title: 'Subscription Commission',
+      dataIndex: 'subscriptionCommission',
+      render: (subscriptionCommission: string) => <>+&#163;{subscriptionCommission} </>
+    },
     {
       title: 'We list for you',
       dataIndex: 'weListForYouCommission',
@@ -76,7 +73,7 @@ export const AffiliateDashboard = () => {
     }
   ];
 
-  const registerColumns = [
+  /*   const registerColumns = [
     {
       title: 'Email',
       dataIndex: 'email',
@@ -90,7 +87,7 @@ export const AffiliateDashboard = () => {
       title: 'Registred on',
       dataIndex: 'createdOn'
     }
-  ];
+  ]; */
 
   const data = {
     labels: ['totalSignups', 'referralsLinked', 'referralsListed'],
@@ -119,8 +116,29 @@ export const AffiliateDashboard = () => {
         Back to dashboard
       </Link>
       <div className="affiliate-dashboard">
+        <h2 className="main-title">Overview</h2>
         <div className="first-section">
-          <div className="pie-chart">{loading ? <Spin /> : <Doughnut data={data} />}</div>
+          <div className="pie-chart-section">
+            <div className="pie-chart">
+              <Doughnut data={data} />
+            </div>
+            <div className="stats-pie-chart">
+              <div className="total-registers">
+                <h5>Total registers: {affiliatesDashboard.totalSignups}</h5>
+              </div>
+              <div className="registers-w-store">
+                <h5>
+                  Registers with store: {affiliatesDashboard.referralsLinked} ({affiliatesDashboard.percentageLinked}%)
+                </h5>
+              </div>
+              <div className="registers-w-products">
+                <h5>
+                  Registers with products: {affiliatesDashboard.referralsListed} ({affiliatesDashboard.percentageListed}
+                  %)
+                </h5>
+              </div>
+            </div>
+          </div>
           <div className="general-stats">
             <div className="general-stat">
               <h4>% Commission:</h4>
@@ -128,13 +146,7 @@ export const AffiliateDashboard = () => {
             </div>
             <div className="general-stat">
               <h4>Accumulative revenue</h4>
-              <h3 className="stat-content">£24522</h3>
-            </div>
-            <div className="general-stat">
-              <h4>Registers performance</h4>
-              <h5>Total registers: {affiliatesDashboard.totalSignups}</h5>
-              <h5>Registers with store: {affiliatesDashboard.referralsLinked}</h5>
-              <h5>Registers with products: {affiliatesDashboard.referralsListed}</h5>
+              <h3 className="stat-content">£{affiliatesDashboard.totalCommissionTillDate}</h3>
             </div>
           </div>
         </div>
@@ -149,7 +161,7 @@ export const AffiliateDashboard = () => {
                 <h4 className="stat-title">Registers</h4>
                 <UserOutlined />
               </div>
-              <h3 className="stat-content">{loading ? <Spin /> : affiliatesDashboard.totalSignupsThisMonth}</h3>
+              <h3 className="stat-content">{affiliatesDashboard.totalSignupsThisMonth}</h3>
             </div>
 
             <div className="stat">
@@ -157,29 +169,30 @@ export const AffiliateDashboard = () => {
                 <h4 className="stat-title">Revenue</h4>
                 <RiseOutlined />
               </div>
-              <h3 className="stat-content">£{loading ? <Spin /> : affiliatesDashboard.totalCommission}</h3>
+              <h3 className="stat-content">£{affiliatesDashboard.totalCommission}</h3>
             </div>
             <div className="stat">
               <div className="stat-header">
                 <h4 className="stat-title">Revenue by register</h4>
                 <UserAddOutlined />
               </div>
-              <h3 className="stat-content">£{loading ? <Spin /> : affiliatesDashboard.revenueBySignup}</h3>
+              <h3 className="stat-content">£{affiliatesDashboard.revenueBySignup}</h3>
             </div>
           </div>
 
           <div className="table-stats">
-            <h2>Revenue of your referrals</h2>
-            {loading ? <Spin /> : <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={affColumns} />}
+            <h2 className="main-title">Revenue of your referrals</h2>
+            {loading ? <Spin /> : <DataTable dataSource={affiliatesDashboard?.affiliateHistory} columns={affColumns} />}
           </div>
-          <div className="table-registers">
+          <Divider />
+          {/*           <div className="table-registers">
             <h2>Your registered users</h2>
             {loading ? (
               <Spin />
             ) : (
               <DataTable dataSource={affiliatesDashboard?.userWiseHistory} columns={registerColumns} />
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

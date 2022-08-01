@@ -1,15 +1,55 @@
 @import 'general.config';
 
 .affiliate-dashboard-container {
+  .main-title {
+    padding: $spacer;
+  }
   .stat-content {
     font-weight: bold;
   }
   .first-section {
     display: flex;
-    .pie-chart {
-      max-width: 20%;
-      padding: $spacer;
-      margin: $spacer;
+    width: 100%;
+    justify-content: space-between;
+    .pie-chart-section {
+      width: 50%;
+      display: flex;
+      .pie-chart {
+        padding: $spacer;
+        margin: $spacer;
+      }
+      .stats-pie-chart {
+        height: 100%;
+        align-items: end;
+        display: grid;
+        align-content: center;
+        padding: 1rem;
+        min-width: 200px;
+        h5 {
+          color: white;
+        }
+        .total-registers {
+          border-radius: 10px 10px 0px 0px;
+          background-color: $primary;
+          padding: 0.5rem;
+        }
+        .registers-w-store {
+          background-color: $dark-blue;
+          padding: 0.5rem;
+        }
+        .registers-w-products {
+          background-color: $light-blue;
+          padding: 0.5rem;
+          border-radius: 0px 0px 10px 10px;
+        }
+      }
+    }
+    .general-stats {
+      margin-top: $spacer;
+      padding: 1rem;
+      width: 50%;
+      .general-stat {
+      }
     }
   }
   .affiliate-dashboard {
@@ -20,40 +60,27 @@
     .month-selector {
       margin: $spacer;
     }
-    .general-stats {
-      margin-top: $spacer;
-      padding: 1rem;
-      display: flex;
-      width: 100%;
-      .general-stat {
-        background: $dark-blue;
-        display: grid;
-        align-items: center;
-        box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
-        border-radius: $spacer;
-        padding: $spacer;
-        margin: $spacer;
-        h3,
-        h4,
-        h5 {
-          color: white;
-        }
-      }
-    }
 
     .info-section {
       .stats {
         display: flex;
 
         .stat {
+          display: grid;
+          align-items: center;
           box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
           border-radius: $spacer;
-          background: $primary-bg;
-          margin-left: $spacer;
+          padding: $spacer;
+          margin: $spacer;
+          h3,
+          h4 {
+            color: $primary;
+          }
           padding: $spacer;
           .stat-header {
             display: flex;
             span {
+              color: $primary;
               margin-left: 20px;
             }
           }
