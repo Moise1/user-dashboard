@@ -247,7 +247,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
               page="listing"
               columns={columns}
               dataSource={filteredData}
-              totalItems={data.length}
+              totalItems={data?.length}
               showTableInfo={true}
               rowClassName="table-row"
               pageSize={uiPreferences.pageSize}
