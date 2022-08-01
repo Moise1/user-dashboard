@@ -13,10 +13,12 @@ import {
 } from '../../redux/ui-preferences/ui-preferences-state-slice';
 import { getPreferences, savePreferences } from '../../redux/ui-preferences/ui-preferences-state-thunk';
 import { t, TTag } from '../../utils/transShim';
+import { AdvancedFilter, AdvancedSearch } from './complex-table-components/advanced-search';
 import { TableActionBtns } from '../TableActionBtns';
 import { DataTable } from './data-table';
-import { SmartSearch } from './filter-data';
+import { SmartSearchFilter } from './complex-table-components/smart-search-filter';
 import { ColumnData, ColumnId } from './types/columns';
+import { AdvancedSearchFilter } from './complex-table-components/advanced-search-filter';
 
 interface Props<RecordType> {
   uiIdentifier: string;
@@ -124,9 +126,15 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   const [smartSearch, setSmartSearch] = useState<string | null>(null);
   const OnChangeSmartSearch = (value: string) => setSmartSearch(value);
   //------------------------------------------------------------------------------------------
+  //ADVANCED SEARCH---------------------------------------------------------------------------
+  const [advancedSearchVisible, setAdvancedSearchVisible] = useState<boolean>(false);
+  const [advancedFilter, setAdvancedFilter] = useState<AdvancedFilter[]>([]);
+  const OpenAdvancedSearch = () => setAdvancedSearchVisible(true);
+  let filteredData = useMemo(() => AdvancedSearchFilter(advancedFilter, data, allColumnData), [advancedFilter, data, allColumnData]);
+  //------------------------------------------------------------------------------------------
   //FILTERING DATA----------------------------------------------------------------------------
   //const filteredData = data && omniSearch ? useTableSearch(omniSearch, data) : data;
-  const filteredData = useMemo(() => SmartSearch(smartSearch, data, columns), [smartSearch, data, columns]);
+  filteredData = useMemo(() => SmartSearchFilter(smartSearch, filteredData, allColumnData), [smartSearch, filteredData, allColumnData]);
   //------------------------------------------------------------------------------------------
 
   //const { filteredData } = useTableSearch({ searchTxt, listings });
@@ -194,6 +202,7 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
   //    ));
   //  }
   //};
+  
 
   const loading = loadingData || uiPreferences.loading;
 
@@ -220,16 +229,18 @@ export const ComplexTable = <RecordType extends object = any>(props: Props<Recor
 
       <div className="search-options-area">
         <Search autoFocus placeholder="Search....." onChange={(e) => OnChangeSmartSearch(e.target.value)} />
-        {/*<ListingsAdvancedSearch*/}
-        {/*  visible={drawerOpen}*/}
-        {/*  onClose={handleSideDrawer}*/}
-        {/*  closable*/}
-        {/*  setSearchTxt={setSearchTxt}*/}
-        {/*/>*/}
+        <AdvancedSearch
+          visible={advancedSearchVisible}
+          onClose={() => setAdvancedSearchVisible(false)}
+          closable
+          columns={allColumnData}
+          currentFilter={advancedFilter}
+          onChangeFilter={setAdvancedFilter}
+        />
         <TableActionBtns
           showColumns={!uiPreferences.loading}
           handleShowColumns={OpenVisibleColumnsPopup}
-          handleSideDrawer={() => ({})}
+          handleSideDrawer={OpenAdvancedSearch}
         >
           <TTag lKey='Table.AdvancedSearch' />
         </TableActionBtns>

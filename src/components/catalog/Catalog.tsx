@@ -9,7 +9,6 @@ import { ProductDetails } from './ProductDetails';
 import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/catalog-source';
 import { t } from '../../utils/transShim';
-import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
 import { getCatalogProducts, listProducts, GetListingStatus } from '../../redux/catalog/catalogThunk';
 import { NewCatalogProduct } from '../../redux/catalog/catalogSlice';
@@ -22,6 +21,7 @@ import moment from 'moment';
 import { toastAlert } from '../../utils/toastAlert';
 import { CatalogStatus } from '../../small-components/CatalogStatus';
 import { Product } from './Types';
+import { CatalogFilters } from './catalog-filters';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
