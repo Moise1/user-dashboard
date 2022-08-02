@@ -6,6 +6,34 @@ export interface AffiliatesStats {
   id: number;
 }
 
+export interface AffiliatesDashboardStats {
+  loading: boolean;
+  Email: string;
+  catalogTokensCommission: number;
+  catalogTokensCount: number;
+  history: [{ day: Date }, { signups: number }];
+  noApiServerCommission: number;
+  noApiServerCount: number;
+  percentageCatalog: number;
+  percentageComission: number;
+  percentageConversion: number;
+  percentageLinked: number;
+  percentageListed: number;
+  percentageNoApiServer: number;
+  percentageReferral: number;
+  percentageWeListForYou: number;
+  referralsLinked: number;
+  referralsListed: number;
+  revenueBySignup: number;
+  totalCommission: number;
+  totalReferralsCommission: number;
+  totalReferralsCount: number;
+  totalSignups: number;
+  totalSignupsThisMonth: number;
+  weListForYouCommission: number;
+  weListForYouCount: number;
+}
+
 const initialState = {
   affiliatesStats: [] as AffiliatesStats[],
   loading: false,
@@ -13,11 +41,10 @@ const initialState = {
 };
 
 const initialsState = {
-  affiliatesDashboard: [] as unknown[],
+  affiliatesDashboard: {} as AffiliatesDashboardStats,
   loading: false,
   error: ''
 };
-
 
 export const affiliatesStatsSlice = createSlice({
   name: 'dashboard-affiliates-stats',

@@ -1,0 +1,201 @@
+@import 'general.config';
+
+.affiliate-dashboard-container {
+  .main-title {
+    padding: $spacer;
+  }
+  .stat-content {
+    font-weight: bold;
+  }
+  .first-section {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    .pie-chart-section {
+      display: flex;
+      .pie-chart {
+        height: 50%;
+        width: 50%;
+        padding: $spacer;
+        margin: $spacer;
+      }
+      .stats-pie-chart {
+        height: 100%;
+        align-items: end;
+        display: grid;
+        align-content: center;
+        padding: 1rem;
+        min-width: 200px;
+        h5 {
+          color: white;
+          margin: 0;
+        }
+        .total-registers {
+          border-radius: 10px 10px 0px 0px;
+          background-color: $primary;
+          padding: 0.5rem;
+        }
+        .registers-w-store {
+          background-color: $dark-blue;
+          padding: 0.5rem;
+        }
+        .registers-w-products {
+          background-color: $light-blue;
+          padding: 0.5rem;
+          border-radius: 0px 0px 10px 10px;
+        }
+      }
+    }
+    .general-stats-container {
+      min-width: 40%;
+      display: grid;
+      align-content: center;
+    }
+    .general-stats {
+      justify-content: space-around;
+      align-items: center;
+      display: flex;
+      box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+      padding: $spacer * 3;
+      border-radius: $spacer;
+      .general-stat {
+        text-align: center;
+        padding: 1rem;
+        .circle-with-text {
+          height: 150px;
+          width: 150px;
+          justify-content: center;
+          align-items: center;
+          border-radius: 100%;
+          display: flex;
+          background-color: $secondary;
+          .circle-with-text2 {
+            height: 120px;
+            width: 120px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            text-align: center;
+            display: flex;
+            background-color: white;
+          }
+          .general-stat-content {
+            margin: 0;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  .affiliate-dashboard {
+    width: 100%;
+    background: $primary-bg;
+    border-radius: $spacer;
+
+    .month-selector {
+      margin: $spacer;
+    }
+
+    .info-section {
+      .stats {
+        display: flex;
+
+        .stat {
+          display: grid;
+          align-items: center;
+          box-shadow: rgba(149, 157, 165, 0.2) 3px 3px 12px;
+          border-radius: $spacer;
+          padding: $spacer;
+          margin: $spacer;
+          h3,
+          h4 {
+            color: $primary;
+          }
+          padding: $spacer;
+          .stat-header {
+            display: flex;
+            span {
+              color: $primary;
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+      .table-stats {
+        margin-top: 1rem;
+        .data-table {
+          .totalRevenue {
+            color: $green;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .pie-chart-section {
+        display: grid;
+        .pie-chart {
+          width: 250px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .general-stats {
+        display: grid;
+        padding: 1rem !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .affiliate-dashboard-container {
+    .first-section {
+      .pie-chart-section {
+        display: grid;
+        justify-items: center;
+        .stats-pie-chart {
+          position: relative;
+          min-width: 0 !important;
+          max-width: 300px;
+          align-items: center;
+        }
+        .pie-chart {
+          width: fit-content;
+        }
+      }
+      display: grid;
+      .general-stats {
+        display: flex;
+        .general-stat {
+          .circle-with-text {
+            width: 100px;
+            height: 100px;
+            .circle-with-text2 {
+              width: 80px;
+              height: 80px;
+            }
+          }
+        }
+      }
+    }
+
+    .info-section {
+      .stats {
+        overflow-y: auto;
+      }
+    }
+  }
+}
