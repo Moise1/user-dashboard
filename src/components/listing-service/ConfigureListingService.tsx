@@ -11,10 +11,11 @@ import { SimpleTable } from 'src/small-components/tables/simple-table';
 import { useEffect, useState } from 'react';
 import { Source } from '../../redux/sources/sourceSlice';
 import { getListingServices, addListingService } from '../../redux/dashboard/listingServicesThunk';
-import { countryFlag } from '../../utils/countryFlag';
+
 import { shopLogo } from '../../utils/shopLogo';
 import { toastAlert } from '../../utils/toastAlert';
-import { eCountry } from '../../types/eCountry';
+import { Countries, eCountry } from '../../data/countries';
+
 
 export const ConfigureListingService = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ export const ConfigureListingService = () => {
   const SourceLabel = (c: Source) => {
     return (
       <>
-        {showFlags && countryFlag(eCountry[(c.site as unknown as number)])}
+        {showFlags && Countries[eCountry[c.site]].Flag}
         {c.name}
       </>
     );
@@ -55,7 +56,7 @@ export const ConfigureListingService = () => {
     return (
       <>
         {showFlags && shopLogo(c.channelId)}
-        {showFlags && countryFlag(c.isoCountry)}
+        {showFlags && Countries[c.isoCountry].Flag}
         {c.name}
       </>
     );

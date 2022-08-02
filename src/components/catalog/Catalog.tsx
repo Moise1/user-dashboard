@@ -9,10 +9,9 @@ import { ProductDetails } from './ProductDetails';
 import { AllProducts } from './AllProducts';
 import { CatalogSource } from '../sources/catalog-source';
 import { t } from '../../utils/transShim';
-import { CatalogFilters } from '../../small-components/AdvancedSearchDrawers';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-import { getCatalogProducts, listProducts } from '../../redux/catalog/catalogThunk';
-import { CatalogProduct, selectedProductDetailData, NewCatalogProduct } from '../../redux/catalog/catalogSlice';
+import { getCatalogProducts, listProducts, GetListingStatus } from '../../redux/catalog/catalogThunk';
+import { NewCatalogProduct } from '../../redux/catalog/catalogSlice';
 import { getSources } from 'src/redux/sources/sourcesThunk';
 import type { DatePickerProps } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -20,6 +19,9 @@ import { SearchOutlined } from '@ant-design/icons';
 import '../../sass/catalog.scss';
 import moment from 'moment';
 import { toastAlert } from '../../utils/toastAlert';
+import { CatalogStatus } from '../../small-components/CatalogStatus';
+import { Product } from './Types';
+import { CatalogFilters } from './catalog-filters';
 
 export type ElementEventType =
   | React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -37,17 +39,18 @@ export const Catalog = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [sourceModalOpen, setSourceModalOpen] = useState<boolean>(false);
   const [allProductsModalOpen, setAllProductsModalOpen] = useState<boolean>(false);
-  const [allProducts, setAllProducts] = useState<CatalogProduct[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [className, setClassName] = useState<string>('product-card');
   const [sourcesIds, setSourcesIds] = useState<number[]>([]);
   const [frequency, setFrequency] = useState<boolean>(false); //To display the crediential form
-  const [allCatalogProducts, setAllCatalogProducts] = useState<CatalogProduct[]>([]);
+  const [allCatalogProducts, setAllCatalogProducts] = useState<Product[]>([]);
   const [sessionId] = useState<number>(0);
-  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<selectedProductDetailData>({
+  const [selectedProductDataDetail, setSelectedProductDataDetail] = useState<Product>({
     id: 0,
     sourceId: 0,
     imageUrl: '',
     sourcePrice: 0,
+    sourceName: '',
     url: '',
     profit: 0,
     title: '',
@@ -62,7 +65,10 @@ export const Catalog = () => {
     pageSize: 0,
     sessionId: 0,
     option: 0,
-    productId: 0
+    productId: 0,
+    hiddenInCart: true,
+    beingSend: true,
+    batchId: ''
   });
 
   //States for ListTheProductFunctionaity
@@ -166,7 +172,11 @@ export const Catalog = () => {
     const rs = await dispatch(listProducts({ products, needsReview, optimizeTitle }));
     setListProductModal(!listProductsModal);
     if (rs.payload.success) {
-      toastAlert('Listing Successfully', 'success');
+      toastAlert('Listing started successfully', 'success');
+      console.log(rs.payload.batchId);
+      const batchId: string = rs.payload.batchId;
+      const status = await dispatch(GetListingStatus({ batchIds: [batchId] }));
+      console.log(status);
     }
     else {
       toastAlert(rs.payload, 'error');
@@ -175,7 +185,7 @@ export const Catalog = () => {
 
   useEffect(() => {
     setProducts(
-      allProducts.map((e: CatalogProduct) => {
+      allProducts.map((e: Product) => {
         const { sourceId, title } = e;
         newDate && setPublishNow(newDate);
         if (!checkDate === true && frequencyData == undefined) setPublishNow(undefined);
@@ -297,8 +307,8 @@ export const Catalog = () => {
             handleClose={() => setListProductModal(!listProductsModal)}
             width={600}
             style={{ overflowY: 'scroll' }}
-            bodyStyle={{ height: 530 }}
             closable={false}
+            footer={null}
           >
             <div className="catalog-list-modal">
               <h1> Listing Settings </h1>
@@ -336,7 +346,7 @@ export const Catalog = () => {
                           <h2>Choose the frequency of the listings?</h2>
                         </div>
                         <div className="section-switch">
-                          <Switch onChange={() => setFrequency(!frequency)} />
+                          <Switch checked={frequency} onChange={() => setFrequency(!frequency)} />
                         </div>
                       </div>
                       {frequency && (
@@ -378,7 +388,7 @@ export const Catalog = () => {
           </PopupModal>
           <div className="catalog-cards">
             <div className="cards-container-catalog">
-              {allCatalogProducts.map((d: CatalogProduct) => (
+              {allCatalogProducts.map((d: Product) => (
                 <>
                   <Card className={className} onClick={handleSelectProduct} key={d.id} id={JSON.stringify(d.id)}>
                     <Meta
@@ -398,29 +408,7 @@ export const Catalog = () => {
                                   {getSourceName(d.sourceId)}
                                 </p>
                               </div>
-                              <div className="transaction-details">
-                                <div>
-                                  <p className="transaction-type">Sell</p>
-                                  <p className="transaction-amount sell">
-                                    <span>&pound;</span>
-                                    {d.channelPrice}
-                                  </p>
-                                </div>
-                                <div>
-                                  <p className="transaction-type">Cost</p>
-                                  <p className="transaction-amount cost">
-                                    <span>&pound;</span>
-                                    {d.sourcePrice}
-                                  </p>
-                                </div>
-                                <div>
-                                  <p className="transaction-type">Profit</p>
-                                  <p className="transaction-amount profit">
-                                    <span>&pound;</span>
-                                    {d.profit}
-                                  </p>
-                                </div>
-                              </div>
+                              <CatalogStatus data={d} />
                             </div>
                           </div>
                         </>

@@ -2,8 +2,8 @@
 
 
 export const TerminatedListingsColumns = [
-  //TableColumnId.ChannelItem,
+  ListingColumnId.ChannelItem,
   ListingColumnId.CreatedOn,
-  //TableColumnId.Status,
+  ListingColumnId.PendingStatus,
   ListingColumnId.Title,
 ];

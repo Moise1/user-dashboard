@@ -3,12 +3,12 @@
 
 // Extra big screens;
 .ant-spin-spinning {
-  margin-top: 20%;
+    margin-top: 20%;
 }
 
 .ant-spin-spinnings {
-  margin: 0 auto;
-  width: 100%;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .carousel-container {
@@ -92,6 +92,7 @@
                 width: 100%;
                 position: relative;
                 min-height: 95px;
+
                 .twenty-off,
                 .forty-off {
                     position: absolute;
@@ -150,10 +151,10 @@
     }
 
     .control-btns-container {
-        width: 75%;
-        left: 14.5%;
-        top: 60%;
-        position: absolute;
+        width: 85%;
+        left: 8.5%;
+        top: 70%;
+        position: relative;
         display: flex;
         justify-content: space-between;
     }
@@ -178,45 +179,49 @@
     }
 }
 
+.subscriptions-container {
+    padding: 0px !important;
+}
+
 @media only screen and (max-width: 750px) {
-  .subscriptions-container {
-    .ant-spin-spinning {
-      margin-top: 90%;
-    }
+    .subscriptions-container {
+        .ant-spin-spinning {
+            margin-top: 90%;
+        }
 
-    .status-bar {
-      display: flex;
-      flex-direction: column;
-      place-items: center;
-    }
+        .status-bar {
+            display: flex;
+            flex-direction: column;
+            place-items: center;
+        }
 
-    .slick-slide.slick-active.slick-current {
-      margin: 0 auto !important;
+        .slick-slide.slick-active.slick-current {
+            margin: 0 auto !important;
 
-      .subscription {
-        padding-bottom: 1rem !important;
-        width: 100% !important;
-      }
-    }
+            .subscription {
+                padding-bottom: 1rem !important;
+                width: 100% !important;
+            }
+        }
 
-    .control-btns-container {
-      top: 75%;
-      left: 10%;
-      width: 82%;
-    }
+        .control-btns-container {
+            top: 75%;
+            left: 10%;
+            width: 82%;
+        }
 
-    .slick-list {
-      width: 60vw !important;
-      margin-left: -9rem !important;
-    }
+        .slick-list {
+            width: 60vw !important;
+            margin-left: -9rem !important;
+        }
 
-    .twenty-off,
-    .forty-off {
-      margin-top: -20px;
-    }
+        .twenty-off,
+        .forty-off {
+            margin-top: -20px;
+        }
 
-    .frequency {
-      right: 10%;
+        .frequency {
+            right: 10%;
+        }
     }
-  }
 }

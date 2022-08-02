@@ -18,7 +18,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Links } from '../../links';
 import { ActiveListingsColumns, ActiveListingsColumnsVisibleByDefault } from './Listings/active-columns';
 import { GenerateListingsColumns } from './Listings/columns';
-import { PendingListingsColumns } from './Listings/pending-columns';
+import { PendingListingsColumns, PendingListingsColumnsVisibleByDefault } from './Listings/pending-columns';
 import { TerminatedListingsColumns } from './Listings/terminated-columns';
 
 import { ComplexTable } from '../../small-components/tables/complex-table';
@@ -28,9 +28,9 @@ import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './Listings/types';
 import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
 import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
-import { ePlatform } from '../../types/ePlatform';
 import { isString } from 'util';
 import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
+import { ePlatform } from '../../data/platforms';
 
 enum ListingTab {
   active, pending, terminated, import
@@ -117,7 +117,7 @@ export const Listings = () => {
           };
         case ListingTab.pending:
           return {
-            defaultVisibleColumns: PendingListingsColumns,
+            defaultVisibleColumns: PendingListingsColumnsVisibleByDefault,
             columnList: PendingListingsColumns,
             hideWhenEmpty: false,
             listings: pendingListings as ListingT[],
@@ -244,7 +244,10 @@ export const Listings = () => {
   const onSetNewPrice = (row: ListingT, newPrice: number) => {
     console.log('y' + row.id + 'z' + newPrice);//TODO: Do this
   };
-  const ListingsColuns = GenerateListingsColumns(onSetNewPrice);
+  const onRetryPending = (row: ListingT) => {
+    console.log('z' + row.id);
+  };
+  const ListingsColuns = GenerateListingsColumns(onSetNewPrice, onRetryPending);
   const filteredColumns = useMemo(() => ListingsColuns.filter(x => columnList.includes(x.id)), [ListingsColuns, columnList]);
 
   //Row Selection-------------------------------------------------------------

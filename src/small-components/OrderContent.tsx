@@ -55,7 +55,16 @@ export const OrderContent = (props: Props) => {
 
   const btnProcessDisabled = !order || notConfigured
     || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)
-    || (order?.status != AutoOrderingState.AutoorderingDisabled && order.status != AutoOrderingState.GoingToBuyError && order.status != AutoOrderingState.PermanentError);
+    || (
+      order?.status != AutoOrderingState.AutoorderingDisabled
+      && order.status != AutoOrderingState.GoingToBuyError
+      && order.status != AutoOrderingState.PermanentError
+      && (
+        order.status != AutoOrderingState.ManuallyDispatched
+        || order.storeStatus == OrderStatus.Shipped
+        || order.storeStatus == OrderStatus.Cancelled
+      )
+    );
 
   const btnDispatchDisabled = !order || notConfigured
     || ((order.status === null || order.status === undefined) && order?.storeStatus != OrderStatus.Shipped && order.storeStatus != OrderStatus.Cancelled)

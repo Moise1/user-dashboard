@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 import { AccountSetting, AccountSettings, AccountSettingExtra, SettingType } from '../../components/account-settings/configuration/settings';
 import { eAccountSettings, SavingSetting, SettingsValue } from '../../redux/account-configuration/account-configuration-slice';
-import { countries, CountriesOption } from '../../data/countries';
+import { CountriesRelation, CountriesOption } from '../../data/countries';
 import { businessTypes, BusinessTypes } from '../../data/businessTypes';
 import { Account } from '../../redux/account-configuration/account-configuration-slice';
 import '../../sass/settings/settings.scss';
@@ -26,7 +26,7 @@ interface SettingDataBagData<T> {
 
 export interface SettingDataBag {
   refreshBussiness?: SettingDataBagData<boolean>;
-  countries?: SettingDataBagData<CountriesOption>;
+  countries?: SettingDataBagData<CountriesOption[]>;
   businessTypes?: SettingDataBagData<BusinessTypes>;
   selectedAccount?: Account | undefined;
 }
@@ -257,7 +257,7 @@ export const AccountSettingInput = (props: Props) => {
     for (const e of extra ?? []) {
       switch (e) {
         case AccountSettingExtra.CountriesList:
-          AA({ data: countries });
+          AA({ data: CountriesRelation });
           break;
         case AccountSettingExtra.BusinessTypeList:
           AA({ data: businessTypes });

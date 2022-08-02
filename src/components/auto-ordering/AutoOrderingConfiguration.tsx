@@ -6,14 +6,11 @@ import { useHistory } from 'react-router';
 import { CheckOutlined } from '@ant-design/icons';
 import { DataTable, DataTableKey } from '../../small-components/tables/data-table';
 import { useAppDispatch, useAppSelector } from '../../custom-hooks/reduxCustomHooks';
-//import { AutoOrderingData } from '../../redux/auto-ordering/autoOrderingSlice'; //Inconsistent use of types
 import { getAutoOrdering } from '../../redux/auto-ordering/autoOrderingThunk';
 import { Links } from '../../links';
-// import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
 import { getSources } from 'src/redux/sources/sourcesThunk';
 import { Source } from 'src/redux/sources/sourceSlice';
-import { eCountry } from '../../types/eCountry';
-import { AutoOrderingData } from 'src/redux/auto-ordering/autoOrderingSlice';
+import { eCountry } from '../../data/countries';
 
 export const AutoOrderingConfiguration = () => {
 
@@ -62,32 +59,28 @@ export const AutoOrderingConfiguration = () => {
   const emptySource: Source[] = [];
 
   console.log('The selectedRecord', selectedRecord);
-  console.log('The supplier', suppliers);
 
   // To not show the duplicated suppliers and to sort autoOrders data alphabetically
   // const uniqueData = Array.from(newSources.reduce((map:Source, obj:Source) => map.set(obj.id, obj), new Map()).values()) as Source[];
 
-  let uniqueElements: Source[] = [];
+  const uniqueElements = newSources.filter((v, i, a) => a.indexOf(v) === i);
+  delete uniqueElements[1]; uniqueElements;
+  uniqueElements.sort((a, b) => a.name.localeCompare(b.name));
 
-  uniqueElements = newSources.filter((v, i, a) => a.indexOf(v) === i);
-  console.log('The uniqueElements', uniqueElements);
-
-  newSources.sort((a, b) => a.name.localeCompare(b.name));
-  console.log('New sources after sort', newSources);
-
-  const [newSourcez, setNewSourcez] = useState<unknown>('Enabled');
   const getStatus = (id: number) => {
-    return suppliers.map((x: AutoOrderingData) => {
-      console.log('The sourceId, supplierId', id, x.id);
-      if (x.sourceId === id) {
-        setNewSourcez('Enabled');
+    for (let i = 0; i < suppliers.length; i++) {
+      if (suppliers.length !== 0) {
+        if (suppliers[i].sourceId == id) {
+          return 'Enabled';
+        }
+        else {
+          return 'Disabled';
+        }
       }
-      else {
-        setNewSourcez('');
-      }
-    });
+    }
+    if (suppliers.length === 0) return 'Disabled';
   };
-  console.log('first', newSourcez, emptySource);
+
 
   const tableColumns = [
     {
@@ -95,7 +88,7 @@ export const AutoOrderingConfiguration = () => {
       dataIndex: '',
       key: 'name',
       render: (render: Source) => (
-        <p className="fs-14">{render.name}</p>
+        <p className="fs-14">{render?.name}</p>
       )
     },
     {
@@ -103,7 +96,7 @@ export const AutoOrderingConfiguration = () => {
       dataIndex: '',
       key: 'free',
       render: (render: Source) => (
-        <p className="fs-14">{render.autoOrderingFee === 0 || render.autoOrderingFee === null ? <CheckOutlined className="free-icon" /> : ' '}</p>
+        <p className="fs-14">{render?.autoOrderingFee === 0 || render?.autoOrderingFee === null ? <CheckOutlined className="free-icon" /> : ' '}</p>
       )
     },
     {
@@ -111,19 +104,19 @@ export const AutoOrderingConfiguration = () => {
       dataIndex: '',
       key: 'feepercentage',
       render: (render: Source) => <p className='fs-14'>
-        {render.autoOrderingFee === 1 ? ` ${render.autoOrderingFee}%` : ''}
+        {render?.autoOrderingFee === 1 ? ` ${render?.autoOrderingFee}%` : ''}
       </p>
     },
     {
       title: t('AutoOrderingConfiguration.Status'),
       dataIndex: '',
       key: '',
-      render: (render: Source) => <p className='fs-14'>
-        {getStatus(render.id)}  {newSourcez == 'Enabled' && newSourcez}
+      render: (render: Source) => <p className={getStatus(render?.id) === 'Enabled' ? 'green-bg' : 'red-bg'}
+      >
+        {render?.id && getStatus(render?.id)}
       </p>
     }
   ];
-
   return (
     <Layout className="sources-container">
       {loading ? (
@@ -135,8 +128,9 @@ export const AutoOrderingConfiguration = () => {
               currentPage={1}
               page="autoordering"
               columns={tableColumns}
-              dataSource={newSources}
-              totalItems={newSources?.length}
+              dataSource={uniqueElements.length > 1 ? uniqueElements : emptySource}
+              totalItems={uniqueElements.length ? uniqueElements.length : emptySource.length}
+              pageSize={10}
               rowClassName="table-row"
               rowSelection={rowSelection}
               onRow={(record) => {

@@ -1,11 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCatalogProducts,getCatalogProductsSearching ,listProducts} from './catalogThunk';
+import { BulkStatus, Product } from '../../components/catalog/Types';
+import { getCatalogProducts, getCatalogProductsSearching, listProducts } from './catalogThunk';
+
+export enum eChannel {
+  Invalid = 0,
+  Ebay = 1,
+  Shopify = 2,
+  EbayNoApi = 3,
+  AmazonNoApi = 4
+}
+
+export interface NewCatalogProduct {
+  publishNow: Date | undefined;
+  sourceId: number;
+  title: string;
+}
 
 export interface CatalogProduct {
   id: number;
   sourceId: number;
   imageUrl: string;
   sourcePrice: number;
+  sourceName: string;
   title: string;
   url: string;
   profit: number;
@@ -15,23 +31,19 @@ export interface CatalogProduct {
   sold: number;
   priority: number;
   quantityListed: number;
-  [key: string]: number | string | boolean | null;
+  [key: string]: number | string | boolean | null | undefined | BulkStatus;
   page: number;
   totalResults: number;
   pageSize: number;
   sessionId: number;
   option: number;
-  productId:number;
+  productId: number;
+  hiddenInCart: boolean;
+  beingSend: boolean;
+  batchId: string;
 }
 
-export interface NewCatalogProduct {
-  publishNow:Date | undefined;
-  sourceId: number;
-  title: string;
-}
-
-export interface selectedProductDetailData
-{
+export interface selectedProductDetailData {
   id: number;
   sourceId: number;
   imageUrl: string;
@@ -45,30 +57,30 @@ export interface selectedProductDetailData
   options: number;
   priority: number;
   quantityListed: number;
-  [key: string]: number | string | boolean | null;
+  [key: string]: number | string | boolean | null | undefined | BulkStatus;
   page: number;
   totalResults: number;
   pageSize: number;
   sessionId: number;
   option: number;
-  productId:number;
+  productId: number;
 }
 
 const initialState = {
-  catalogProducts: [] as CatalogProduct[],
+  catalogProducts: [] as Product[],
   loading: false,
   error: ''
 };
 
 const searchInitialState = {
-  catalogSearchedProducts: [] as CatalogProduct[],
+  catalogSearchedProducts: [] as Product[],
   loading: false,
   error: ''
 };
 
 const listProduct = {
-  listProductLoading:false,
-  error:''
+  listProductLoading: false,
+  error: ''
 };
 
 export const catalogSlice = createSlice({
@@ -122,7 +134,7 @@ export const listProductSlice = createSlice({
     });
     builder.addCase(listProducts.fulfilled, (state, { payload }) => {
       state.listProductLoading = false;
-      console.log('The payload from catalog list products',payload);
+      console.log('The payload from catalog list products', payload);
     });
     builder.addCase(listProducts.rejected, (state, { payload }) => {
       state.listProductLoading = false;
@@ -132,5 +144,5 @@ export const listProductSlice = createSlice({
 });
 
 export const { reducer: catalogProductsReducer } = catalogSlice;
-export const {reducer: catalogSearchProductReducer} = catalogSearchSlice;
-export const {reducer: listProductsReducers} = listProductSlice;
+export const { reducer: catalogSearchProductReducer } = catalogSearchSlice;
+export const { reducer: listProductsReducers } = listProductSlice;

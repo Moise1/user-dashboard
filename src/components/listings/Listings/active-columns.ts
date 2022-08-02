@@ -1,4 +1,5 @@
-﻿import { ePlatform } from '../../../types/ePlatform';
+﻿
+import { ePlatform } from '../../../data/platforms';
 import { ListingColumnId } from './columns';
 
 export const ActiveListingsColumns = {

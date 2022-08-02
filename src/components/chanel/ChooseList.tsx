@@ -26,9 +26,9 @@ export const ChooseList = (props: props) => {
         <Col className="list-card" xs={10} lg={20}>
           <img src={catalog_icon} alt="icon" className={`${list == 'catalog' ? 'filter-white' : ''}`} />
           <div className="card-info">
-            <h5>{t('cata')}</h5>
+            <h5>{t('Catalog.Name')}</h5>
             <p>
-              {t('catapara')}{' '}
+              {t('ListNow.Catalog.Description')}{' '}
               <span className="arrow-container">
                 <Link to="/catalog">
                   <ArrowRightOutlined style={{ fontSize: '19px' }} />
@@ -42,9 +42,9 @@ export const ChooseList = (props: props) => {
           <img src={manual_icon} alt="icon" />
 
           <div className="card-info">
-            <h5>{t('manual')}</h5>
+            <h5>{t('ListNow.ManualListing.Name')}</h5>
             <p>
-              {t('manualpara')}{' '}
+              {t('ListNow.ManualListing.Description')}{' '}
               <span className="arrow-container">
                 <Link to="/manual-publish">
                   <ArrowRightOutlined style={{ fontSize: '19px' }} />
@@ -58,9 +58,9 @@ export const ChooseList = (props: props) => {
           <img src={bulk_icon} alt="icon" className={`${list == 'bulk' ? 'filter-white' : ''}`} />
 
           <div className="card-info">
-            <h5>{t('bulk')}</h5>
+            <h5>{t('BulkListing.Name')}</h5>
             <p>
-              {t('bulkpara')}{' '}
+              {t('ListNow.BulkListing.Description')}{' '}
               <span className="arrow-container">
                 <Link to="/bulk-publish">
                   <ArrowRightOutlined style={{ fontSize: '19px' }} />
@@ -73,16 +73,16 @@ export const ChooseList = (props: props) => {
         <Col className="list-card" xs={10} lg={20}>
           <img src={we_icon} alt="icon" />
           <div className="card-info we-list">
-            <h5>{t('welist')}</h5>
+            <h5>{t('WeListForYou.Name')}</h5>
             <p>
-              {t('welistpara')}
+              {t('Listnow.WeListForYou.Description')}
               <span className="arrow-container">
                 <a href={`${Links.ListingService}`}>
                   <ArrowRightOutlined style={{ fontSize: '19px' }} />
                 </a>
               </span>
             </p>
-            <SuccessBtn>{t('btnlist')}</SuccessBtn>
+            <SuccessBtn>{t('Listnow.WeListForYou.Button')}</SuccessBtn>
           </div>
         </Col>
       </Row>

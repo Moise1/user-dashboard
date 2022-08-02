@@ -1,9 +1,9 @@
 import { CloseIcon } from '../../small-components/CloseIcon';
-import { CatalogProduct } from 'src/redux/catalog/catalogSlice';
 import { ElementEventType } from './Catalog';
 import '../../sass/all-products.scss';
+import { Product } from './Types';
 interface Props {
-  children: CatalogProduct[];
+  children: Product[];
   removeProduct: (e: ElementEventType) => void;
   className: string;
   getSourceName:(id: number) => unknown;

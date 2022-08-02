@@ -8,6 +8,11 @@ import { Links } from '../links';
 export type TransValue = string | ReactNode;
 export type TransValueTypeValue = PrimitiveType | ReactNode;
 
+const AcceptedTags = {
+  'b': (x: string) => <b>{x}</b>,
+  'i': (x: string) => <i>{x}</i>
+};
+
 export function t(key: string, values?: Record<string, TransValueTypeValue>): TransValue {
   if(!key) {
     return '';
@@ -20,17 +25,13 @@ export function t(key: string, values?: Record<string, TransValueTypeValue>): Tr
       description: '', // Description should be a string literal
       defaultMessage: '{errorKey}' // Message should be a string literal
     },
-    { ...values, key, errorKey: <span className="missingTranslation">{key}</span> } // Values should be an object literal, but not necessarily every value inside
+    { ...values, key, errorKey: <span className="missingTranslation">{key}</span>, ...AcceptedTags } // Values should be an object literal, but not necessarily every value inside
   );
 
   return v;
 }
 
-export const TTag = (props: { lKey: string, values?: Record<string, TransValueTypeValue> }) => <>{t(props.lKey, props.values)}</>;
-
-export function tm(key: string) {
-  return <FormattedMessage id={key} defaultMessage="Translation missing for {key}" description="Welcome message" />;
-}
+export const TTag = (props: { lKey: string, values?: Record<string, TransValueTypeValue> }) => <FormattedMessage id={props.lKey} description='' defaultMessage='{errorKey}' values={{ ...props.values, key: props.lKey, errorKey: <span className="missingTranslation">{props.lKey}</span>, ...AcceptedTags }} />;
 
 export interface TransPlatformValues extends Record <string, TransValueTypeValue> {
   channel_platform_name: TransValueTypeValue,
@@ -55,3 +56,4 @@ export const TransUtils = {
     };
   }
 };
+

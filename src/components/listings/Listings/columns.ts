@@ -1,6 +1,7 @@
-﻿import { ColumnData } from '../../../small-components/tables/types/columns';
-import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels } from './columns-renders';
-import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy } from './columns-sorter';
+﻿import { ColumnData, FieldType } from '../../../small-components/tables/types/columns';
+import { RenderBoolean, RenderChannelItem, RenderCostOrProfit, RenderDate, RenderImage, RenderMarkup,  RenderPrice,  RenderMonitorPriceDecreasePercentage,  RenderSource, RenderStock, RenderAmazonSku, RenderLowestPrice, FnOnSetPrice, RenderOtherChannels, RenderPendingStatus, RenderError, FnOnRetry } from './columns-renders';
+import { SorterChanelItem, SorterSource, SorterTitle, SorterSell, SorterCost, SorterProfit, SorterMarkup, SorterStock, SorterCreatedOn, SorterNotes, SorterMonitorPrice, SorterMonitorStock, SorterMonitorPriceDecrease, SorterMonitorPriceDecreasePercentage, SorterIgnoreRules, SorterUnsoldDays, SorterOutOfStockDays, SorterWatches, SorterEndsOn, SorterVariation, SorterDispatchDays, SorterQuantitySold, SorterViews, SorterAsin, SorterLowestPrice, SorterBuyBox, SorterOtherChannels, SorterCreatedBy, SorterStatus, SorterError } from './columns-sorter';
+import { ListingStatusFilter, MultiTermFilter } from './smart-search-filters';
 import { ListingT } from './types';
 
 export enum ListingColumnId {
@@ -13,7 +14,7 @@ export enum ListingColumnId {
   Profit = 7,
   Markup = 8,
   Stock = 9,
-  Options = 10,
+  Error = 10,
   CreatedOn = 11,
   ChannelItem = 12,
   Notes = 13,
@@ -35,31 +36,21 @@ export enum ListingColumnId {
   AmazonAsin = 29,
   AmazonSku = 30,
   AmazonLowestPrice = 31,
-  AmazonBuyBox = 32
+  AmazonBuyBox = 32,
+  PendingStatus = 33,
 }
 
 export interface ListingColumnData extends ColumnData<ListingT> {
   id: ListingColumnId
 }
 
-const MultiTermFilter = (fieldValue: unknown, searchTerm: string) => {
-  const terms = searchTerm.trim().split(' ');
-  for (const term of terms) {
-    if (term.length == 0)
-      continue;
-    if ((fieldValue as string)?.toLocaleLowerCase?.().indexOf?.(term) < 0) {
-      return false;
-    }
-  }
-  return true;
-};
-
-export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumnData[] => [
+export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice, onRetryPending: FnOnRetry): ListingColumnData[] => [
   {
     id: ListingColumnId.Image,
     title: 'Listings.Column.Img',
     dataIndex: 'imageUrl',
     smartSearch: { ignore: true },
+    advancedSearch: { ignore: true },
     render: RenderImage
   },
   {
@@ -95,13 +86,17 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
   {
     id: ListingColumnId.Id,
     title: 'Listings.Column.Id',
-    dataIndex: 'id'
+    dataIndex: 'id',
+    advancedSearch: { type: FieldType.Number }
   },
   {
     id: ListingColumnId.Title,
     title: 'Listings.Column.Title',
     dataIndex: 'title',
     smartSearch: {
+      customFilter: MultiTermFilter
+    },
+    advancedSearch: {
       customFilter: MultiTermFilter
     },
     sorter: SorterTitle
@@ -117,6 +112,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     id: ListingColumnId.SellPrice,
     title: 'Listings.Column.Sell',
     dataIndex: 'channelPrice',
+    advancedSearch: { type: FieldType.Number },
     render: RenderPrice,
     sorter: SorterSell
   },
@@ -124,6 +120,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     id: ListingColumnId.AmazonLowestPrice,
     title: 'Listings.Column.LowestPrice',
     dataIndex: 'lowestPrice',
+    advancedSearch: { type: FieldType.Number },
     render: RenderLowestPrice(onSetPrice),
     sorter: SorterLowestPrice
   },
@@ -132,12 +129,14 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.BuyBox',
     dataIndex: 'buyBoxPrice',
     render: RenderPrice,
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterBuyBox
   },
   {
     id: ListingColumnId.CostPrice,
     title: 'Listings.Column.Cost',
     dataIndex: 'sourcePrice',
+    advancedSearch: { type: FieldType.Number },
     render: RenderCostOrProfit,
     sorter: SorterCost
   },
@@ -145,6 +144,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     id: ListingColumnId.Profit,
     title: 'Listings.Column.Profit',
     dataIndex: 'profit',
+    advancedSearch: { type: FieldType.Number },
     render: RenderCostOrProfit,
     sorter: SorterProfit
   },
@@ -152,6 +152,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     id: ListingColumnId.Markup,
     title: 'Listings.Column.Markup',
     dataIndex: 'markup',
+    advancedSearch: { type: FieldType.Number },
     render: RenderMarkup,
     sorter: SorterMarkup
   },
@@ -160,22 +161,34 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.Stock',
     dataIndex: 'sourceQuantity',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     render: RenderStock,
     sorter: SorterStock
-  },
-  {
-    id: ListingColumnId.Options,
-    title: 'Listings.Column.Options',
-    dataIndex: 'options',
-    smartSearch: { ignore: true }
   },
   {
     id: ListingColumnId.CreatedOn,
     title: 'Listings.Column.CreatedOn',
     dataIndex: 'createdOn',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Date },
     render: RenderDate,
     sorter: SorterCreatedOn
+  },
+  {
+    id: ListingColumnId.PendingStatus,
+    title: 'Listings.Column.Status',
+    dataIndex: 'status',
+    smartSearch: { customFilter: ListingStatusFilter },
+    render: RenderPendingStatus,
+    sorter: SorterStatus
+  },
+  {
+    id: ListingColumnId.Error,
+    title: 'Listings.Column.Error',
+    dataIndex: 'errorMessage',
+    smartSearch: { ignore: true },
+    render: RenderError(onRetryPending),
+    sorter: SorterError
   },
   {
     id: ListingColumnId.CreatedBy,
@@ -196,6 +209,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.MonitorPrice',
     dataIndex: 'monitorPrice',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Boolean },
     render: RenderBoolean,
     sorter: SorterMonitorPrice
   },
@@ -204,6 +218,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.MonitorStock',
     dataIndex: 'monitorStock',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Boolean },
     render: RenderBoolean,
     sorter: SorterMonitorStock
   },
@@ -212,6 +227,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.MonitorPriceDecrease',
     dataIndex: 'monitorPriceDecrease',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Boolean },
     render: RenderBoolean,
     sorter: SorterMonitorPriceDecrease
   },
@@ -220,6 +236,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.MonitorPriceDecreasePercentage',
     dataIndex: 'monitorPriceDecreasePercentage',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     render: RenderMonitorPriceDecreasePercentage,
     sorter: SorterMonitorPriceDecreasePercentage
   },
@@ -228,6 +245,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.IgnoreRules',
     dataIndex: 'ignoreRules',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Boolean },
     render: RenderBoolean,
     sorter: SorterIgnoreRules
   },
@@ -236,6 +254,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.UnsoldDays',
     dataIndex: 'unsoldDays',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterUnsoldDays
   },
   {
@@ -243,6 +262,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.OutOfStockDays',
     dataIndex: 'outOfStockDays',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterOutOfStockDays
   },
   {
@@ -250,6 +270,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.Sales',
     dataIndex: 'quantitySold',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterQuantitySold
   },
   {
@@ -257,6 +278,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.Watchers',
     dataIndex: 'watches',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterWatches
   },
   {
@@ -264,6 +286,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.Views',
     dataIndex: 'views',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterViews
   },
   {
@@ -271,6 +294,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.EndingOn',
     dataIndex: 'endsOn',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Date },
     render: RenderDate,
     sorter: SorterEndsOn
   },
@@ -279,6 +303,7 @@ export const GenerateListingsColumns = (onSetPrice: FnOnSetPrice): ListingColumn
     title: 'Listings.Column.DispatchDays',
     dataIndex: 'dispatchDays',
     smartSearch: { ignore: true },
+    advancedSearch: { type: FieldType.Number },
     sorter: SorterDispatchDays
   },
   {

@@ -1,5 +1,27 @@
 @import 'general.config';
 
+.green-bg
+{
+  background-color: green !important;
+  width: 25%;
+  padding: 3px;
+  color: white;
+  margin: 0px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.red-bg
+{
+  background-color: red !important;
+  width: 25%;
+  padding: 3px;
+  color: white;
+  margin: 0px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .popover__title {
   font-size: 12px;
   color: $primary-bg;

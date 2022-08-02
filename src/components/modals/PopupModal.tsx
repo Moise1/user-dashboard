@@ -10,15 +10,16 @@ interface Props {
   handleClose?: () => void;
   title?: ReactNode;
   closable?: boolean;
+  footer?: React.ReactNode
 }
 
 export const PopupModal: FC<Props> = (props: Props) => {
-  const { open, children, width, style, bodyStyle, handleClose, title, closable } = props;
+  const { open, children, width, style, bodyStyle, handleClose, title, closable, footer } = props;
   return (
     <Modal
       title={title}
       visible={open}
-      footer={null}
+      footer={footer}
       width={width}
       style={style}
       bodyStyle={bodyStyle}

@@ -1,7 +1,7 @@
 import { createRef, Key, ReactChild, ReactFragment, ReactPortal, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Divider, Spin, Carousel, Card, Space } from 'antd';
-import { CarouselRef } from 'antd/lib/carousel';
+import { CarouselRef } from 'antd/es/carousel';
 import { useParams } from 'react-router-dom';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Links } from '../../links';
