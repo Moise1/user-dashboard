@@ -164,12 +164,16 @@
   .affiliate-dashboard-container {
     .first-section {
       .pie-chart-section {
-        display: flex;
+        display: grid;
+        justify-items: center;
         .stats-pie-chart {
           position: relative;
+          min-width: 0 !important;
+          max-width: 300px;
+          align-items: center;
         }
         .pie-chart {
-          width: 200px;
+          width: fit-content;
         }
       }
       display: grid;
@@ -185,6 +189,12 @@
             }
           }
         }
+      }
+    }
+
+    .info-section {
+      .stats {
+        overflow-y: auto;
       }
     }
   }
