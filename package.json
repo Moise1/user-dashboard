@@ -30,6 +30,7 @@
     "apexcharts": "^3.35.3",
     "axios": "^0.25.0",
     "chart.js": "^3.8.2",
+    "ckeditor4-react": "^4.0.0",
     "country-flag-icons": "^1.4.26",
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
@@ -70,8 +71,6 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.43.4",
     "scheduler": "^0.22.0",
-    "suneditor": "^2.43.11",
-    "suneditor-react": "^3.4.0",
     "typescript": "^4.4.3",
     "use-persisted-state": "^0.3.3",
     "web-vitals": "^1.0.1"

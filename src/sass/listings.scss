@@ -1,6 +1,13 @@
 @import 'general.config';
 
 .listings-container {
+    .retry-all-btn {
+        width: 10%;
+      }
+    
+      .ant-space-item.retry-icon-text-container {
+        width: 100% !important;
+      }
     .record-img {
         height: 25px;
         display: flex;

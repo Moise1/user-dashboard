@@ -1,4 +1,4 @@
-﻿import moment from 'antd/node_modules/moment';
+﻿import moment from 'moment';
 import { OrderData } from '../../../redux/orders/orderSlice';
 import { ColumnData } from '../../../small-components/tables/types/columns';
 import { determineStatus } from '../../../utils/determineStatus';
