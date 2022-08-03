@@ -3762,6 +3762,19 @@ cjs-module-lexer@^0.6.0:
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-0.6.0.tgz#4186fcca0eae175970aee870b9fe2d6cf8d5655f"
   integrity sha512-uc2Vix1frTfnuzxxu1Hp4ktSvM3QaI4oXl4ZUqL1wjTu/BGki9TrCWoqLTg/drR1KwAEarXuRFCG2Svr1GxPFw==
 
+ckeditor4-integrations-common@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-integrations-common/-/ckeditor4-integrations-common-1.0.0.tgz#a8afc33b94877b4d01362c7c73aa9eec162b2d20"
+  integrity sha512-OAoQT/gYrHkg0qgzf6MS/rndYhq3SScLVQ3rtXQeuCE8ju7nFHg3qZ7WGA2XpFxcZzsMP6hhugXqdel5vbcC3g==
+
+ckeditor4-react@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-react/-/ckeditor4-react-4.0.0.tgz#3465b27f5e12ad140b7fd05fe81894eab66f6c65"
+  integrity sha512-3IWCcAGIdi0XkU6Vy/7jU2DhAo9FHymsCthxohDS4zlDwUN4cPBdkivIFiwHtdLg96qbGFilLc6EwbNGuqnsWA==
+  dependencies:
+    ckeditor4-integrations-common "^1.0.0"
+    prop-types "^15.8.1"
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -12712,16 +12725,6 @@ stylehacks@^4.0.0:
     browserslist "^4.0.0"
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
-
-suneditor-react@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/suneditor-react/-/suneditor-react-3.4.0.tgz#9f4d8c706c6c8760e7081473a004cd3d06894885"
-  integrity sha512-2GkqZtrfrcF+1ujsm9ZwCOM78YghS2Dw/rJm/Pl5xEqVMtfjxCHviWBVlyuEFfPSbq5rfSp3N69nMyIV1wV/Nw==
-
-suneditor@^2.43.11:
-  version "2.43.11"
-  resolved "https://registry.yarnpkg.com/suneditor/-/suneditor-2.43.11.tgz#9a2d23a198304968fca63ae9916665b7134d5c7c"
-  integrity sha512-+2eYNzQuyNAc7SmtzhAUjBqe4RP465j7cmr6h9FV3llKNBQ3/DOp2B+s0FuR0cxFos7tGZ1Y3Nmawuhu9WhI0w==
 
 supports-color@8.1.1, supports-color@^8.0.0:
   version "8.1.1"

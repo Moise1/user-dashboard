@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useMemo, useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Progress, Space, Card } from 'antd';
 import { StatusBar } from '../../small-components/StatusBar';
 import { StatusBtn } from '../../small-components/StatusBtn';
 import { t } from '../../utils/transShim';
@@ -10,7 +10,7 @@ import {
   getPendingListings,
   getTerminatedListings
 } from 'src/redux/listings/listingsThunk';
-import {  ActiveListingsImagesDictionary, ListingsState } from 'src/redux/listings/listingsSlice';
+import { ActiveListingsImagesDictionary, ListingsState } from 'src/redux/listings/listingsSlice';
 import '../../sass/listings.scss';
 import '../../sass/tables/complex-table.scss';
 import { ReactUtils } from '../../utils/react-utils';
@@ -28,19 +28,26 @@ import { Source, SourcesState } from '../../redux/sources/sourceSlice';
 import { ActiveListingExtended, ListingT } from './Listings/types';
 import { getComputedConfiguration } from '../../redux/source-configuration/sources.coonfiguration-thunk';
 import { SourceConfigurationState } from '../../redux/source-configuration/source-configuration-slice';
-import { isString } from 'util';
+// import { ePlatform } from '../../utils/ePlatform';
 import { Channel, ChannelsState } from '../../redux/channels/channelsSlice';
-import { ePlatform } from '../../data/platforms';
+import { PopupModal } from '../modals/PopupModal';
+import { ReloadOutlined } from '@ant-design/icons';
+import { SuccessBtn, ResetBtn } from 'src/small-components/ActionBtns';
+import { ePlatform } from 'src/data/platforms';
 
 enum ListingTab {
-  active, pending, terminated, import
+  active,
+  pending,
+  terminated,
+  import
 }
 type Selection = {
-  listings: ListingT[],
-  keys: number[]
-}
+  listings: ListingT[];
+  keys: number[];
+};
 
 export const Listings = () => {
+  const [openRetryModal, setOpenRetryModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   //ADDITIONAL DATA--------------------------------------------------------------------------
@@ -49,8 +56,10 @@ export const Listings = () => {
   useEffect(() => {
     dispatch(getSources());
   }, [getSources]);
-  const sourcesDic = sources ? new Map<number, Source>(sources.map(x => ([x.id, x]))) : null;
-  const { settings: computedConfiguration, loading: loadingComputedConfiguration } = useAppSelector((state) => (state.sourcesConfiguration as SourceConfigurationState)?.computedConfiguration ?? {});
+  const sourcesDic = sources ? new Map<number, Source>(sources.map((x) => [x.id, x])) : null;
+  const { settings: computedConfiguration, loading: loadingComputedConfiguration } = useAppSelector(
+    (state) => (state.sourcesConfiguration as SourceConfigurationState)?.computedConfiguration ?? {}
+  );
   useEffect(() => {
     dispatch(getComputedConfiguration());
   }, [getComputedConfiguration]);
@@ -58,10 +67,8 @@ export const Listings = () => {
   //-----------------------------------------------------------------------------------------
   //TAB--------------------------------------------------------------------------------------
   const tab = (() => {
-    if (useRouteMatch(Links.ProductsPending))
-      return ListingTab.pending;
-    if (useRouteMatch(Links.ProductsTerminated))
-      return ListingTab.terminated;
+    if (useRouteMatch(Links.ProductsPending)) return ListingTab.pending;
+    if (useRouteMatch(Links.ProductsTerminated)) return ListingTab.terminated;
     //if (useRouteMatch(Links.ProductsImport))
     //return ListingTab.import;
     return ListingTab.active;
@@ -99,10 +106,17 @@ export const Listings = () => {
   };
 
   const { defaultVisibleColumns, hideWhenEmpty, listings, loadingListings, columnList, activeListingsImages } = (() => {
-
     //This first only return informatinio depending of the active tab
     const data1 = (() => {
-      const { activeListings, loadingActive, terminatedListings, pendingListings, loadingPending, loadingTerminated, activeListingsImages } = useAppSelector((state) => state.listings as ListingsState);
+      const {
+        activeListings,
+        loadingActive,
+        terminatedListings,
+        pendingListings,
+        loadingPending,
+        loadingTerminated,
+        activeListingsImages
+      } = useAppSelector((state) => state.listings as ListingsState);
 
       switch (tab) {
         default:
@@ -137,15 +151,20 @@ export const Listings = () => {
     })();
 
     const listings =
-      //We use memo here to avoid recalculating constantly. data 1 is outside this memo so we can 
+      //We use memo here to avoid recalculating constantly. data 1 is outside this memo so we can
       //use JSON.stringify only in data1.listings, otherwiese we would be forced to stringinfy activelistings, pendinglistings and terminatedListings
       useMemo(() => {
         const AddExtraData = (data: ListingT[] | null | undefined) => {
           if (!data || !sourcesDic) return data;
-          return data.map(x => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT));
+          return data.map(
+            (x) => ({ ...x, source: sourcesDic.get(x.sourceId), channel: selectedChannel, key: x.id } as ListingT)
+          );
         };
 
-        const ExtendActive = (listings: ListingT[] | null | undefined, activeListingsImages?: ActiveListingsImagesDictionary) => {
+        const ExtendActive = (
+          listings: ListingT[] | null | undefined,
+          activeListingsImages?: ActiveListingsImagesDictionary
+        ) => {
           if (!listings) return listings;
 
           const channelsDic: { [id: number]: Channel } | null = channels ? {} : null;
@@ -155,7 +174,7 @@ export const Listings = () => {
             }
 
           for (const al of listings) {
-            const l = al as ActiveListingExtended;//Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
+            const l = al as ActiveListingExtended; //Actually it is not, it is a ActiveListing, but... javascript. It will work without needing of creating a new object
 
             //Calculated fields-------------------
             const settings = computedConfiguration?.[l.sourceId];
@@ -165,27 +184,27 @@ export const Listings = () => {
               l.monitorStock = l.overrides.monitorStock ?? settings.monitorStock;
               l.monitorPrice = l.overrides.monitorPrice ?? settings.monitorPrice;
               l.monitorPriceDecrease = l.overrides.monitorPriceDecrease ?? settings.monitorPriceDecrease;
-              l.monitorPriceDecreasePercentage = l.overrides.monitorPriceDecreasePercentage ?? settings.monitorPriceDecreasePercentage;
+              l.monitorPriceDecreasePercentage =
+                l.overrides.monitorPriceDecreasePercentage ?? settings.monitorPriceDecreasePercentage;
               l.ignoreRules = l.overrides.ignoreRules ?? settings.ignoreRules;
               l.variationsText = (() => {
                 const GetVariationSKU = (data: ListingT) => {
                   const cis = (data as { channelItem: string }).channelItem.split('#');
-                  return (cis.length == 2) ? cis[1] : '';
+                  return cis.length == 2 ? cis[1] : '';
                 };
                 const value = l.variationAtributes;
-                if (!value || value.length == 0)
-                  return GetVariationSKU(al);
+                if (!value || value.length == 0) return GetVariationSKU(al);
                 const ops = value.map((x) => x.option).join(', ');
-                return (ops && ops.trim().length > 0) ? ops : GetVariationSKU(al);
+                return ops && ops.trim().length > 0 ? ops : GetVariationSKU(al);
               })();
               l.unsoldDays = (() => {
                 const d = l.lastTimeSold ?? l.createdOn;
-                const ld = isString(d) ? new Date(d) : d;
+                const ld = typeof d === 'string' ? new Date(d) : d;
                 return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
               })();
               l.outOfStockDays = (() => {
                 const d = l.lastTimeInStock ?? l.createdOn;
-                const ld = isString(d) ? new Date(d) : d;
+                const ld = typeof d === 'string' ? new Date(d) : d;
                 return Math.floor((new Date().getTime() - ld.getTime()) / 86400000);
               })();
               l.dispatchDays = l.overrides.dispatchDays ?? settings.dispatchDays;
@@ -194,7 +213,7 @@ export const Listings = () => {
                 l.otherChannels = [];
                 for (const o of l.otherChannelOAuthsIds ?? []) {
                   const c = channelsDic[o];
-                  if(c) l.otherChannels.push(c);
+                  if (c) l.otherChannels.push(c);
                 }
               }
             }
@@ -220,14 +239,16 @@ export const Listings = () => {
           case ListingTab.terminated:
             return AddExtraData(data1.listings);
         }
-      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages, computedConfiguration]) as ListingT[] | null | undefined;
+      }, [tab, JSON.stringify(data1.listings), data1.activeListingsImages, computedConfiguration]) as
+        | ListingT[]
+        | null
+        | undefined;
 
-    return {...data1, listings};
+    return { ...data1, listings };
   })();
 
   useEffect(() => {
-    if (listings)
-      return;
+    if (listings) return;
     switch (tab) {
       case ListingTab.active:
         dispatch(getActiveListings());
@@ -242,60 +263,70 @@ export const Listings = () => {
   }, [tab]);
   //--------------------------------------------------------------------------
   const onSetNewPrice = (row: ListingT, newPrice: number) => {
-    console.log('y' + row.id + 'z' + newPrice);//TODO: Do this
+    console.log('y' + row.id + 'z' + newPrice); //TODO: Do this
   };
   const onRetryPending = (row: ListingT) => {
     console.log('z' + row.id);
   };
   const ListingsColuns = GenerateListingsColumns(onSetNewPrice, onRetryPending);
-  const filteredColumns = useMemo(() => ListingsColuns.filter(x => columnList.includes(x.id)), [ListingsColuns, columnList]);
+  const filteredColumns = useMemo(
+    () => ListingsColuns.filter((x) => columnList.includes(x.id)),
+    [ListingsColuns, columnList]
+  );
 
   //Row Selection-------------------------------------------------------------
-  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys:[] });
-  const onSelectChange = (keys: React.Key[], rows: ListingT[]) => setSelectedRows({ listings: rows, keys: keys as number[] });
+  const [selectedRows, setSelectedRows] = useState<Selection>({ listings: [], keys: [] });
+  const onSelectChange = (keys: React.Key[], rows: ListingT[]) =>
+    setSelectedRows({ listings: rows, keys: keys as number[] });
   //--------------------------------------------------------------------------
   //Bulk Menu-----------------------------------------------------------------
-  const handleSingleListingModal = () => { console.log('x'); };
-  const handleBulkListingModal = () => { console.log('y'); };
-  const actionsDropdownMenu = useMemo(() => (
-    <Menu
-      items={[
-        {
-          type: 'group',
-          label: (
-            <div
-              className="action-option"
-              onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
-            >
-              Edit  <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Copy <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        },
-        {
-          type: 'group',
-          label: (
-            <div className="action-option">
-              Optimize <strong>{selectedRows?.keys?.length}</strong>
-            </div>
-          )
-        }
-      ]}
-    />)
-  , [selectedRows?.keys?.length]);
+  const handleSingleListingModal = () => {
+    console.log('x');
+  };
+  const handleBulkListingModal = () => {
+    console.log('y');
+  };
+  const actionsDropdownMenu = useMemo(
+    () => (
+      <Menu
+        items={[
+          {
+            type: 'group',
+            label: (
+              <div
+                className="action-option"
+                onClick={selectedRows?.keys?.length === 1 ? handleSingleListingModal : handleBulkListingModal}
+              >
+                Edit <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          },
+          {
+            type: 'group',
+            label: (
+              <div className="action-option">
+                Copy <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          },
+          {
+            type: 'group',
+            label: (
+              <div className="action-option">
+                Optimize <strong>{selectedRows?.keys?.length}</strong>
+              </div>
+            )
+          }
+        ]}
+      />
+    ),
+    [selectedRows?.keys?.length]
+  );
   //--------------------------------------------------------------------------
   //Load images for active listings-------------------------------------------
 
   const onChangeVisibleRows = (rows: ListingT[]) => {
-    if (tab != ListingTab.active)
-      return;
+    if (tab != ListingTab.active) return;
 
     const imgToLoad: number[] = [];
     for (const r of rows) {
@@ -303,12 +334,45 @@ export const Listings = () => {
         imgToLoad.push(r.channelListingId);
       }
     }
-    if (imgToLoad.length > 0)
-      dispatch(getActiveListingsImages(imgToLoad));
+    if (imgToLoad.length > 0) dispatch(getActiveListingsImages(imgToLoad));
   };
+
+  const handleOpenRetryModal = () => setOpenRetryModal(!openRetryModal);
+  const handleCloseRetryModal = () => setOpenRetryModal(!openRetryModal);
+  const cardStyles = {
+    mainCard: {
+      display: 'grid',
+      placeItems: 'center',
+      rowGap: 10
+    },
+    iconTitle: {
+      display: 'grid',
+      placeItems: 'center',
+      rowGap: 15
+    }
+  };
+
   //--------------------------------------------------------------------------
   return (
     <Layout className="listings-container">
+      <SuccessBtn className="retry-all-btn" handleConfirm={handleOpenRetryModal}>
+        Retry All
+      </SuccessBtn>
+      <PopupModal open={openRetryModal} handleClose={handleCloseRetryModal}>
+        <Card bodyStyle={cardStyles.mainCard} bordered={false}>
+          <div style={cardStyles.iconTitle} className="retry-icon-text">
+            <ReloadOutlined />
+            <p>
+              <strong>Retrying listings</strong>
+            </p>
+            <Progress showInfo={false} percent={40} strokeColor="#228b22" />
+            <Space>
+              <ResetBtn>Cancel</ResetBtn>
+              <SuccessBtn>Confirm</SuccessBtn>
+            </Space>
+          </div>
+        </Card>
+      </PopupModal>
       <StatusBar>
         <StatusBtn
           title={`${t('ActiveListings')}`}

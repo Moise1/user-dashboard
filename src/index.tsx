@@ -12,7 +12,6 @@ import moment from 'moment';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'mini-alert/miniAlert.css';
-import 'suneditor/dist/css/suneditor.min.css';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import en_US from 'antd/es/locale/en_US';
